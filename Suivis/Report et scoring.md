@@ -56,8 +56,7 @@ Points confirmés lors du dernier audit (2026-06-10) :
 - Le glossaire a été enrichi : **357 termes** dans la base.
 - `npm run validate:content` passe : 16 cours, 62 leçons canoniques, 8 simulateurs, 266 marqueurs `[[..]]` / `{{..}}` résolus dynamiquement.
 - `npm run build` passe : serveur + client OK, assets WebP présents dans `dist/`.
-- Le projet a déjà un `.gitignore` qui couvre `node_modules`, `dist`, `.env`, SQLite et logs.
-- Le dossier n'est toutefois pas initialisé en dépôt Git (`git status --short` échoue hors repo).
+- Le projet a un `.gitignore` qui couvre `node_modules`, `dist`, `.env`, SQLite et logs, et le dépôt Git est désormais initialisé : `master` suit `origin/master`, commit initial `e5b37e0 Initialisation du projet`.
 - Le build client est désormais découpé : `index-*.js` ≈ 95 kB (28 kB gzip), `react-vendor` ≈ 232 kB (74 kB gzip), `lessons` et `glossary` séparés.
 
 Points bloquants ou fragiles :
@@ -455,7 +454,7 @@ Commandes de vérification :
 - `npm run validate:content` : **exit 0**, warnings (leçons sans quiz).
 - `npm run lint` : **exit 0**, 0 erreur, 15 warnings Fast Refresh.
 - `npm run build` : **exit 0**, entry client ≈ 100 kB, vendor React ≈ 232 kB.
-- `git status --short` : KO, `vc-premium-platform` n'est pas un dépôt Git.
+- `git status --short --branch` : OK depuis validation du 2026-06-11, dépôt Git initialisé et branche `master` suivie par `origin/master`.
 
 Fichiers modifiés / créés :
 

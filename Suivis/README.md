@@ -79,7 +79,7 @@ Audit local courant (juin 2026) :
 - `npm run validate:content` : OK, avec warnings éditoriaux (23/62 leçons canon `data/lessons.json` sans quiz) ;
 - `npm run lint` : OK, 0 erreur, 15 warnings Fast Refresh ;
 - `npm run build` : OK, build serveur + client ;
-- pas de dossier `.git` dans `vc-premium-platform` à cette date, malgré un `.gitignore` présent.
+- Git : OK, dépôt initialisé ; `master` suit `origin/master`, remote `origin` configuré, commit initial `e5b37e0 Initialisation du projet`.
 
 Évolutions depuis (2026-06-09) — **à valider en local**, le sandbox d'outillage ne pouvant pas monter le dossier « VC SITE » (espace dans le nom) :
 

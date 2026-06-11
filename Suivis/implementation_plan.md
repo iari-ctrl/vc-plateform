@@ -111,6 +111,7 @@ La structure est en plein essor, avec **62 leçons canoniques / 16 cours** dans 
 ## Plan d'action proposé (prochaines phases)
 
 ### Phase 0 — Décisions d'architecture (bloquant pour la production de contenu)
+#### [DONE] Version Control / baseline Git : dépôt initialisé et vérifié le 2026-06-11 ; `master` suit `origin/master`, commit initial `e5b37e0`.
 #### [DECIDE] Mode de rendu : CSR (actuel) vs prérendu/SSG (hybride recommandé). Conditionne SEO + authoring.
 #### [DECIDE] Modèle de contenu / workflow d'authoring (`data/*.json` + Prisma + CMS), avec `locale`.
 #### [VERIFY] Valider la Phase 1 i18n en local : `npm run build` + `npm run test --workspace client`.

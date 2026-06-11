@@ -26,6 +26,7 @@ Le projet est aujourd'hui plus proche d'un atelier pédagogique fonctionnel que 
 - l'**architecture bilingue FR/EN est amorcée** : la Phase 1 (routing localisé `/fr` `/en`) est implémentée dans `client/src/i18n/` ;
 - un **premier harnais de tests (Vitest) et un pipeline CI** existent désormais, ainsi qu'un lot de durcissement sécurité/qualité ;
 - un **pipeline d'écriture des parcours** est en place (`docs/parcours/` + `data/parcours/*.lessons.json`), avec deux parcours rédigés de bout en bout.
+- le dépôt Git est initialisé et rattaché à `origin/master`, avec une baseline initiale versionnée.
 
 La priorité n'est plus d'ajouter des features. Deux décisions d'architecture conditionnent la suite (mode de rendu CSR/SSR, modèle de contenu/authoring) ; ensuite, l'étape utile reste de rendre l'écriture, la validation et l'itération pédagogique confortables.
 
@@ -148,9 +149,13 @@ Travaux du jour (intégration des études de cas & ergonomie de la Bibliothèque
 | `npm run lint --workspace client` | OK, 0 erreur, warnings existants uniquement |
 | `npm run build --workspace client` | OK, sans erreurs TypeScript ni avertissement bundler |
 | Routes locales Vite | OK, `/fr/simulators/power-law-portfolio` et `/fr/courses/construction-portefeuille-loi-puissance` répondent 200 |
+| `git status --short --branch` | OK, `master...origin/master`, dépôt propre avant mise à jour documentaire |
+| `git branch -vv` | OK, `master` pointe sur `e5b37e0` et suit `origin/master` |
+| `git remote -v` | OK, remote `origin` configuré vers GitHub |
 
 Travaux du jour (rétractation du catalogue parcours & restauration routage) :
 
+- **Validation Git / baseline** : dépôt Git présent, branche `master` liée à `origin/master`, commit initial `e5b37e0 Initialisation du projet`, aucun écart local avant validation des documents de suivi.
 - **Rétractation des familles de parcours sur `/paths`** (`ParcoursPage.tsx`) : transformation des en-têtes de chaque famille (« Découvrir », « Réussir un entretien », « Lever des fonds », etc.) en boutons interactifs accessibles. Ajout d'un état local `collapsedFamilies`, icône `ChevronDown` pivotant à 90°, et animation accordéon fluide via `grid-rows-[0fr]/[1fr]` sur la grille de cartes de parcours.
 - **Rétractation des chapitres (cours) dans les rayons legacy** (`PathDetailPage.tsx`) : les titres de cours deviennent des boutons interactifs avec chevrons rotatifs ; le lien d'accès direct au cours est déplacé à droite pour éviter les navigations involontaires. Même animation accordéon.
 - **Restauration de l'aiguillage `/paths/:slug`** (`ParcoursOrSubjectPage.tsx` + `App.tsx`) : la route `/paths/:slug` achemine désormais vers `PathDetailPage` pour les slugs de rayons legacy (ex: `analyse-de-startup`) et vers `ParcoursDetailPage` pour les slugs de nouveaux parcours (ex: `le-vc-sans-bullshit`). Les deux pages sont importées via `lazy` pour préserver le découpage des bundles.
@@ -341,7 +346,7 @@ Prochaine étape design utile :
 | SEO faible | Moyen | SPA sans prérendu ; `hreflang`/`canonical` i18n différés au pré-lancement |
 | Tests minimaux | Moyen | Harnais Vitest + CI en place, mais calculateurs et API non couverts |
 | Garde JWT inopérante | Moyen | Identifiée dans l'audit, correction dans le lot sécurité différé |
-| Git absent | Moyen | Pas de suivi fiable des éditions |
+| Baseline Git récente | Faible | Dépôt initialisé et rattaché à `origin/master` ; conserver un status propre et des commits fréquents |
 | Dette production | Faible à moyen | Acceptable tant que l'objectif reste atelier/prototype |
 
 ---

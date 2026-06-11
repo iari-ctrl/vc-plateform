@@ -536,7 +536,7 @@ La transition vers la **VC Intelligence Platform** repose sur un cadre d'exécut
 
 > [!WARNING]
 > **Risques Techniques Majeurs :**
-> - **Version Control (T1)** : Toujours vérifier Git et figer une baseline avant de modifier l'architecture.
+> - **Version Control (T1)** : Baseline Git validée le 2026-06-11 (`master` suit `origin/master`, commit initial `e5b37e0`). Avant toute modification structurante, vérifier un `git status` propre et figer un commit de référence.
 > - **Divergence JSON/CMS (T2)** : L'extension du CMS est gelée pour les nouveaux piliers. L'authoring (thèses, atlas) se fait d'abord dans `/data/*.json`. Ne pas accumuler de la dette d'état dans SQLite.
 > - **Validation (T3/T8)** : Ne jamais ajouter de contenu sans schéma Zod et validation pre-build (`validate-content.mjs`).
 > - **Fausse Intelligence (T4)** : Ne pas simuler de tableaux de bord de données vides ou fausses. Si l'information n'est pas "decision-grade", on ne publie pas.
