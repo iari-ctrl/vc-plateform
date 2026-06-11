@@ -1,0 +1,190 @@
+// VC Premium Experience — data model
+// SQLite for the prototype; swap `provider`/`url` for Postgres to scale.
+// Complex/nested content (lesson bodies, quizzes, takeaways) is stored as JSON
+// strings in `data` columns, while frequently-queried fields are denormalised
+// into typed columns for search and listing.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────── Users & identity ───────────────────────────
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         String    @default("user") // "user" | "admin"
+  createdAt    DateTime  @default(now())
+
+  profile      Profile?
+  answers      OnboardingAnswer[]
+  notes        Note[]
+  bookmarks    Bookmark[]
+  progress     Progress[]
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profileType String?  // learning profile id, e.g. "futur-analyste"
+  scores      String?  // JSON: per-profile score breakdown
+  timeBudget  String?  // "low" | "medium" | "high"
+  updatedAt   DateTime @updatedAt
+}
+
+model OnboardingAnswer {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questionN   String
+  optionIndex Int
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ─────────────────────────── Personal artefacts ─────────────────────────
+
+model Note {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind        String   @default("note") // "note" | "quote" | "highlight"
+  body        String
+  sourceType  String?  // "lesson" | "case" | "blog"
+  sourceId    String?
+  sourceTitle String?
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemType  String   // "lesson" | "course" | "path" | "glossary" | "case" | "blog" | "simulator"
+  itemId    String
+  title     String
+  href      String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, itemType, itemId])
+  @@index([userId])
+}
+
+model Progress {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId  String
+  courseId  String?
+  pathId    String?
+  status    String   @default("reading") // "reading" | "done"
+  percent   Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+}
+
+// ─────────────────────────── Editable content ───────────────────────────
+
+model LearningPath {
+  id        String  @id
+  slug      String  @unique
+  order     Int     @default(0)
+  title     String
+  level     String
+  data      String  // JSON of the full path object
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Course {
+  id        String  @id
+  slug      String  @unique
+  pathId    String
+  order     Int     @default(0)
+  title     String
+  level     String
+  data      String
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Lesson {
+  id         String  @id
+  slug       String  @unique
+  courseId   String
+  order      Int     @default(0)
+  title      String
+  searchText String
+  data       String
+  updatedAt  DateTime @updatedAt @default(now())
+
+  quizzes    Quiz[]
+}
+
+model Quiz {
+  id          String  @id @default(cuid())
+  lessonId    String
+  lesson      Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  order       Int     @default(0)
+  question    String
+  data        String  // JSON: options + explanation
+
+  @@index([lessonId])
+}
+
+model GlossaryTerm {
+  id         String  @id
+  slug       String  @unique
+  term       String
+  category   String
+  searchText String
+  data       String
+  updatedAt  DateTime @updatedAt @default(now())
+}
+
+model CaseStudy {
+  id         String  @id
+  slug       String  @unique
+  title      String
+  kind       String
+  searchText String
+  data       String
+  updatedAt  DateTime @updatedAt @default(now())
+}
+
+model BlogPost {
+  id         String  @id
+  slug       String  @unique
+  title      String
+  category   String
+  date       String
+  searchText String
+  data       String
+  updatedAt  DateTime @updatedAt @default(now())
+}
+
+model Simulator {
+  id        String  @id
+  slug      String  @unique
+  title     String
+  category  String
+  data      String
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  count Int    @default(0)
+}

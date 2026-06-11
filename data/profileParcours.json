@@ -1,0 +1,55 @@
+{
+  "_doc": "Table d'aiguillage : sortie du test ikigai (profil + timeBudget) → parcours recommandé. Le timeBudget ne change pas le parcours mais sa calibration (voir timeCalibration).",
+  "byProfile": {
+    "debutant-curieux": {
+      "primary": "p-decouvrir-vc",
+      "then": ["p-semaine-vc", "p-cap-table"],
+      "express": "p-decouvrir-vc"
+    },
+    "entrepreneur-levee": {
+      "primary": "p-preseed",
+      "then": ["p-seed", "p-serie-a", "p-term-sheet"],
+      "express": "p-express-lever",
+      "note": "Le stade réel du fondateur (pré-seed/seed/A) devrait, à terme, raffiner le primary."
+    },
+    "futur-analyste": {
+      "primary": "p-stage",
+      "then": ["p-entretien-analyst", "p-market-sizing"],
+      "express": "p-express-entretien"
+    },
+    "analyst-progression": {
+      "primary": "p-meilleur-analyst",
+      "then": ["p-passer-associate", "p-unit-economics"],
+      "express": "p-cap-table"
+    },
+    "associate-progression": {
+      "primary": "p-passer-associate",
+      "then": ["p-passer-principal", "p-mener-un-tour", "p-term-sheet", "p-levee-fonds-lp"],
+      "express": "p-term-sheet"
+    },
+    "principal-mindset": {
+      "primary": "p-penser-gp",
+      "then": ["p-passer-principal", "p-carry", "p-levee-fonds-lp"],
+      "express": "p-carry"
+    }
+  },
+  "byArchetype": {
+    "architecte": {
+      "label": "L'Architecte de Thèse",
+      "bundle": ["p-penser-gp", "p-passer-principal", "p-carry", "p-term-sheet"]
+    },
+    "batisseur": {
+      "label": "Le Bâtisseur d'Infrastructure",
+      "bundle": ["p-semaine-vc", "p-seed", "p-entretien-analyst"]
+    },
+    "operateur": {
+      "label": "L'Opérateur-Investisseur",
+      "bundle": ["p-passer-associate", "p-preseed", "p-cap-table"]
+    }
+  },
+  "timeCalibration": {
+    "low": { "show": ["coeur"], "cadence": "L'essentiel, une session courte par semaine" },
+    "medium": { "show": ["coeur", "pratique"], "cadence": "Rythme standard, 4 à 6 semaines" },
+    "high": { "show": ["coeur", "bonus", "pratique", "respiration"], "cadence": "Immersion, tout débloqué" }
+  }
+}

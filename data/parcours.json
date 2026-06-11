@@ -1,0 +1,2545 @@
+[
+  {
+    "id": "p-decouvrir-vc",
+    "slug": "le-vc-sans-bullshit",
+    "family": "decouvrir",
+    "roadmap": "now",
+    "title": "Le VC sans bullshit",
+    "hook": "En 1 h, comprends comment l'argent passe de l'épargne aux fondateurs — et pourquoi 9 startups sur 10 doivent mourir pour que le métier marche.",
+    "kanji": "発",
+    "accent": "#D28236",
+    "goal": "Nommer les acteurs (LP, GP, business angel), comprendre la loi de puissance et la grammaire des stades.",
+    "forWhom": [
+      "Curieux",
+      "Étudiants",
+      "Reconvertis qui explorent"
+    ],
+    "level": "debutant",
+    "entryLevel": "debutant",
+    "time": {
+      "coreHours": 1.2,
+      "withBonusHours": 1.5,
+      "sessions": 9,
+      "cadence": "9 épisodes courts, ~1 h 20"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "debutant-curieux"
+    ],
+    "milestone": {
+      "type": "quiz",
+      "label": "Quiz éclair",
+      "description": "Un quiz de fin pour ancrer le vocabulaire. Pas de livrable.",
+      "evaluation": [
+        "auto"
+      ]
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "ld-power-law"
+        },
+        "label": "9 startups sur 10 vont mourir (la loi de puissance)",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "ld-what-is-vc"
+        },
+        "label": "C'est quoi le VC, vraiment",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "ld-money-flow"
+        },
+        "label": "Le voyage de l'argent : LP, GP, business angel",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "ld-stages"
+        },
+        "label": "La grammaire des stades : pré-seed → Série C",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "ld-vc-job"
+        },
+        "label": "Le vrai job (et les mythes qui vont avec)",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 6,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "ld-roles"
+        },
+        "label": "Qui fait quoi (et qui gagne quoi)",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "bonus",
+        "ref": {
+          "kind": "lesson",
+          "id": "ld-fund-lifecycle"
+        },
+        "label": "Un fonds naît et meurt aussi",
+        "status": "existant"
+      },
+      {
+        "order": 8,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-europe-vs-valley"
+        },
+        "label": "L'Europe n'est pas une Silicon Valley ratée",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Distinguer LP, GP et business angel",
+      "Expliquer la loi de puissance avec ses mots",
+      "Situer une startup du pré-seed à la Série C",
+      "Comprendre le quotidien d'un VC et les responsabilités par grade"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-semaine-vc",
+    "slug": "une-semaine-dans-la-peau-d-un-vc",
+    "family": "decouvrir",
+    "roadmap": "next",
+    "title": "Une semaine dans la peau d'un VC",
+    "hook": "Sourcing, screening, comité, accompagnement : à quoi ressemble vraiment la semaine, loin du mythe du « gros chèque ».",
+    "kanji": "業",
+    "accent": "#267A8C",
+    "goal": "Démystifier le métier au quotidien et les rôles d'un fonds.",
+    "forWhom": [
+      "Curieux",
+      "Futurs candidats"
+    ],
+    "level": "debutant",
+    "entryLevel": "debutant",
+    "time": {
+      "coreHours": 0.75,
+      "withBonusHours": 1.25,
+      "sessions": 4,
+      "cadence": "Une session courte"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "debutant-curieux",
+      "futur-analyste"
+    ],
+    "milestone": {
+      "type": "none",
+      "label": "—",
+      "description": "Parcours de compréhension, sans livrable."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-vc-week"
+        },
+        "label": "Une semaine type",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-roles"
+        },
+        "label": "Qui fait quoi : analyst → partner",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "bonus",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-sourcing"
+        },
+        "label": "Comment naît un pipeline",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "respiration",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-myth-vc-mise"
+        },
+        "label": "Mythe démonté : « le VC mise »",
+        "status": "a-produire",
+        "note": "Court épisode anti-mythe, ton fun."
+      }
+    ],
+    "outcomes": [
+      "Décrire une semaine type d'investisseur",
+      "Distinguer les responsabilités par échelon"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-stage",
+    "slug": "decrocher-un-stage-en-vc",
+    "family": "entretien",
+    "roadmap": "next",
+    "title": "Décrocher un stage en VC",
+    "hook": "Construis la candidature ciblée + la mini-analyse de startup qui te font sortir de la pile.",
+    "kanji": "門",
+    "accent": "#5A4FA0",
+    "goal": "Une candidature ciblée sur un fonds + une analyse de startup auto-produite — le différenciateur au recrutement.",
+    "forWhom": [
+      "Étudiants Bac+4/5",
+      "Reconvertis"
+    ],
+    "level": "debutant",
+    "entryLevel": "debutant",
+    "time": {
+      "coreHours": 3.5,
+      "withBonusHours": 4.5,
+      "sessions": 5,
+      "cadence": "Sur une à deux semaines"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "futur-analyste",
+      "debutant-curieux"
+    ],
+    "milestone": {
+      "type": "analysis",
+      "label": "Mini-analyse de startup",
+      "description": "Une analyse d'1 page d'une startup du portefeuille d'un fonds cible, à joindre à ta candidature."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-career-breaking-in"
+        },
+        "label": "Les portes d'entrée du venture en France",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-thesis-anatomy"
+        },
+        "label": "Comprendre une thèse de fonds pour la cibler",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-team-market"
+        },
+        "label": "Lire une startup en 4 piliers",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "bonus",
+        "ref": {
+          "kind": "course",
+          "id": "c-mathematiques-vc"
+        },
+        "label": "Mathématiques du VC : les calculs utiles au recrutement",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "pratique",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-mini-analyse-gabarit"
+        },
+        "label": "Écrire ta mini-analyse (gabarit + exemple)",
+        "status": "a-produire"
+      },
+      {
+        "order": 6,
+        "type": "respiration",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-cafe-reseau"
+        },
+        "label": "Le café-réseau quand on n'a pas de réseau",
+        "status": "a-produire"
+      },
+      {
+        "order": 7,
+        "type": "bonus",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-career-levels"
+        },
+        "label": "Les niveaux du métier",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Cibler un fonds par sa thèse",
+      "Produire une analyse de startup d'1 page",
+      "Aborder un café-réseau sans réseau préexistant"
+    ],
+    "prerequisites": [
+      "Avoir complété le parcours [Le VC sans bullshit](/paths/le-vc-sans-bullshit)",
+      "Avoir un profil professionnel (ex: LinkedIn) clair et à jour"
+    ]
+  },
+  {
+    "id": "p-entretien-analyst",
+    "slug": "reussir-l-entretien-analyst",
+    "family": "entretien",
+    "roadmap": "now",
+    "title": "Réussir l'entretien Analyst",
+    "hook": "Passe le case study et le deal memo : une reco invest/pass claire, défendable, en temps contraint.",
+    "kanji": "観",
+    "accent": "#4C6B8A",
+    "goal": "Produire un deal memo (1 page ou 4 slides) avec recommandation et risques hiérarchisés.",
+    "forWhom": [
+      "Candidats analyst",
+      "Étudiants en process"
+    ],
+    "level": "intermediaire",
+    "entryLevel": "intermediaire",
+    "time": {
+      "coreHours": 7,
+      "withBonusHours": 10,
+      "sessions": 13,
+      "cadence": "Sur 3 à 5 semaines"
+    },
+    "timeFit": [
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "futur-analyste"
+    ],
+    "milestone": {
+      "type": "deal-memo",
+      "label": "Deal memo + mock complet",
+      "description": "Un mock en 3 manches (fit · case study chronométré · pitch & technique) qui aboutit à un deal memo d'1 page : reco invest/pass, marché en bottom-up, 3 risques hiérarchisés. Conseil intégré : parler à 2–3 personnes du secteur avant de conclure, comme en vraie DD.",
+      "evaluation": [
+        "auto",
+        "peer"
+      ],
+      "rubricId": "rubric-mock-analyst"
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-process"
+        },
+        "label": "La carte de l'entonnoir",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-grille"
+        },
+        "label": "La grille de l'investisseur : équipe · marché · produit · traction · moat",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-market-sizing"
+        },
+        "label": "Dimensionner un marché (TAM / SAM / SOM)",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 4,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-read-startup"
+        },
+        "label": "Lire une startup + unit economics",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-technical"
+        },
+        "label": "Les questions techniques : cap table, dilution, returns",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "pratique",
+        "ref": {
+          "kind": "course",
+          "id": "c-mathematiques-vc"
+        },
+        "label": "Réviser les mathématiques du VC",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 7,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "pre-post-money"
+        },
+        "label": "Simuler pre/post-money",
+        "status": "existant"
+      },
+      {
+        "order": 8,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "dilution"
+        },
+        "label": "Simuler la dilution",
+        "status": "existant"
+      },
+      {
+        "order": 9,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-deal-memo"
+        },
+        "label": "Le deal memo : structure d'une reco",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 10,
+        "type": "pratique",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-case-study"
+        },
+        "label": "Le case study : la méthode en 5 temps",
+        "status": "existant"
+      },
+      {
+        "order": 11,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-pitch"
+        },
+        "label": "« Pitch me a company »",
+        "status": "existant"
+      },
+      {
+        "order": 12,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-fit"
+        },
+        "label": "Le fit : why VC / why this fund / why you",
+        "status": "existant"
+      },
+      {
+        "order": 13,
+        "type": "bonus",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-reverse-questions"
+        },
+        "label": "Tes questions à poser",
+        "status": "existant"
+      },
+      {
+        "order": 14,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-fund-research"
+        },
+        "label": "Faire ses devoirs sur le fonds",
+        "status": "existant"
+      },
+      {
+        "order": 15,
+        "type": "bonus",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-jour-j"
+        },
+        "label": "Les 48 h, le jour J, le suivi",
+        "status": "existant"
+      },
+      {
+        "order": 16,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-power-law-portfolio"
+        },
+        "label": "Cas : anatomie d'un portefeuille power-law",
+        "status": "existant"
+      },
+      {
+        "order": 17,
+        "type": "pratique",
+        "ref": {
+          "kind": "milestone",
+          "id": "lea-mock"
+        },
+        "label": "Le mock complet (jalon)",
+        "status": "existant",
+        "keystone": true
+      }
+    ],
+    "outcomes": [
+      "Dimensionner un marché en top-down et bottom-up",
+      "Structurer un deal memo défendable",
+      "Tenir une reco invest/pass en temps contraint"
+    ],
+    "prerequisites": [
+      "Avoir complété le parcours [Le VC sans bullshit](/paths/le-vc-sans-bullshit)",
+      "Connaître les concepts de base d’une entreprise (revenu, marge, profit)"
+    ]
+  },
+  {
+    "id": "p-entretien-associate",
+    "slug": "reussir-l-entretien-associate",
+    "family": "entretien",
+    "roadmap": "next",
+    "title": "Réussir l'entretien Associate",
+    "hook": "Mène une DD complète et défends ton mémo en comité simulé. On te jugera sur le jugement, pas l'exécution.",
+    "kanji": "決",
+    "accent": "#9A6A3C",
+    "goal": "Mener une due diligence complète et défendre un mémo en IC simulé.",
+    "forWhom": [
+      "Candidats associate",
+      "Analysts qui montent"
+    ],
+    "level": "avance",
+    "entryLevel": "avance",
+    "time": {
+      "coreHours": 8,
+      "withBonusHours": 11,
+      "sessions": 8,
+      "cadence": "Sur 4 à 6 semaines"
+    },
+    "timeFit": [
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "associate-progression",
+      "futur-analyste"
+    ],
+    "milestone": {
+      "type": "ic-sim",
+      "label": "Deal memo + IC simulé",
+      "description": "Un deal memo complet, puis un passage en comité d'investissement simulé."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-dd-process"
+        },
+        "label": "DD en pratique",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-thesis-anatomy"
+        },
+        "label": "Construire une thèse",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-defending-thesis"
+        },
+        "label": "Défendre une thèse face au comité",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-economics"
+        },
+        "label": "Term sheet : les termes économiques",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-control"
+        },
+        "label": "Term sheet : les termes de contrôle",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "bonus",
+        "ref": {
+          "kind": "course",
+          "id": "c-mathematiques-vc"
+        },
+        "label": "Mathématiques du VC appliquées au deal",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "waterfall"
+        },
+        "label": "Simuler une waterfall / liquidation pref",
+        "status": "existant"
+      },
+      {
+        "order": 8,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-liquidation-preference"
+        },
+        "label": "Cas : le piège de la valo flatteuse",
+        "status": "existant"
+      },
+      {
+        "order": 9,
+        "type": "pratique",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-ic-simulation"
+        },
+        "label": "Simulation de comité d'investissement",
+        "status": "a-produire"
+      },
+      {
+        "order": 10,
+        "type": "bonus",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-pourquoi-ce-fonds"
+        },
+        "label": "« Pourquoi ce fonds » : ta thèse perso",
+        "status": "a-produire"
+      }
+    ],
+    "outcomes": [
+      "Mener une DD priorisée de bout en bout",
+      "Défendre une thèse en comité",
+      "Lire une term sheet économie + contrôle"
+    ],
+    "prerequisites": [
+      "Avoir réussi le parcours [Entretien Analyst](/paths/reussir-l-entretien-analyst)",
+      "Maîtriser les mathématiques du VC ([[pre-money|Pre-money]], [[pre-money|Post-money]], [[dilution|Dilution]])"
+    ]
+  },
+  {
+    "id": "p-entretien-principal",
+    "slug": "entretien-principal-poste-senior",
+    "family": "entretien",
+    "roadmap": "later",
+    "title": "Entretien Principal / poste senior",
+    "hook": "Montre que tu raisonnes à l'échelle du fonds : thèse propriétaire, construction de portefeuille, ce que tu apporterais.",
+    "kanji": "道",
+    "accent": "#5A4FA0",
+    "goal": "Penser fonds : thèse propriétaire et construction de portefeuille.",
+    "forWhom": [
+      "Candidats principal",
+      "Investisseurs seniors en mobilité"
+    ],
+    "level": "avance",
+    "entryLevel": "avance",
+    "time": {
+      "coreHours": 6,
+      "withBonusHours": 8,
+      "sessions": 6,
+      "cadence": "Sur 3 à 4 semaines"
+    },
+    "timeFit": [
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "principal-mindset",
+      "associate-progression"
+    ],
+    "milestone": {
+      "type": "thesis",
+      "label": "Note de thèse + plan de portefeuille",
+      "description": "Une thèse propriétaire écrite + un plan de construction de portefeuille."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-reserves"
+        },
+        "label": "Réserves & follow-on",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-triage"
+        },
+        "label": "Triage : stars, walking dead, pertes",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fees-carry"
+        },
+        "label": "Fees & carried interest",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fund-metrics"
+        },
+        "label": "DPI / TVPI / IRR / MOIC",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "fund-returns"
+        },
+        "label": "Simuler DPI/TVPI/MOIC",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "bonus",
+        "ref": {
+          "kind": "course",
+          "id": "c-mathematiques-vc"
+        },
+        "label": "Revoir les maths du VC de bout en bout",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "coeur",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-these-proprietaire"
+        },
+        "label": "Écrire une thèse propriétaire",
+        "status": "a-produire"
+      },
+      {
+        "order": 8,
+        "type": "bonus",
+        "ref": {
+          "kind": "case",
+          "id": "cs-power-law-portfolio"
+        },
+        "label": "Cas : portefeuille power-law",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Raisonner construction de portefeuille",
+      "Articuler une thèse propriétaire",
+      "Lire les métriques de fonds sans confusion"
+    ],
+    "prerequisites": [
+      "Expérience préalable en Venture Capital ou M&A",
+      "Maîtrise avancée de la construction de portefeuille et des métriques de fonds ([[moic|MOIC]], [[irr|IRR]], [[dpi|DPI]])"
+    ]
+  },
+  {
+    "id": "p-preseed",
+    "slug": "preparer-ma-preseed",
+    "family": "levee",
+    "roadmap": "next",
+    "title": "Préparer ma pré-seed",
+    "perspective": "both",
+    "hook": "De l'idée au premier chèque : narratif, bon instrument (SAFE/BSA-AIR), combien lever (~1–1,5 M€) sans trop te diluer (~20 %).",
+    "kanji": "種",
+    "accent": "#B5544E",
+    "goal": "Un one-liner + mini-deck + le bon instrument, avec montant et dilution cohérents.",
+    "forWhom": [
+      "Fondateurs au tout début",
+      "Porteurs de projet"
+    ],
+    "level": "tous",
+    "entryLevel": "debutant",
+    "time": {
+      "coreHours": 4,
+      "withBonusHours": 5,
+      "sessions": 6,
+      "cadence": "Sur une à deux semaines"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "entrepreneur-levee"
+    ],
+    "milestone": {
+      "type": "deck",
+      "label": "One-liner + mini-deck",
+      "description": "Un one-liner, un mini-deck (5 slides) et une fourchette montant/valorisation."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-founder-narrative"
+        },
+        "label": "Comprendre le VC pour mieux lever",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lf-instruments"
+        },
+        "label": "BSA-AIR, OC ou priced ?",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lf-dilution"
+        },
+        "label": "Lever sans se faire diluer bêtement",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "fundraising-scenario"
+        },
+        "label": "Ton scénario de levée",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "dilution"
+        },
+        "label": "Ta dilution",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-dilution-journey"
+        },
+        "label": "Cas : la dilution d'un fondateur seed→C",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Choisir entre SAFE, BSA-AIR et priced round",
+      "Calibrer montant et dilution en pré-seed",
+      "Présenter un mini-deck crédible"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-seed",
+    "slug": "preparer-ma-seed",
+    "family": "levee",
+    "roadmap": "now",
+    "title": "Préparer ma seed",
+    "perspective": "both",
+    "hook": "Un deck qui tient, une cap table post-tour maîtrisée, un process de levée que tu pilotes (et pas l'inverse).",
+    "kanji": "募",
+    "accent": "#B5544E",
+    "goal": "Un deck seed + une cap table post-tour, avec les repères 2026 en tête.",
+    "forWhom": [
+      "Fondateurs avec traction",
+      "Équipes en préparation de levée"
+    ],
+    "level": "intermediaire",
+    "entryLevel": "intermediaire",
+    "time": {
+      "coreHours": 6,
+      "withBonusHours": 7.5,
+      "sessions": 7,
+      "cadence": "Sur 2 à 4 semaines"
+    },
+    "timeFit": [
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "entrepreneur-levee"
+    ],
+    "milestone": {
+      "type": "deck",
+      "label": "Deck seed + cap table",
+      "description": "Un deck investisseur et une cap table post-tour. Repère 2026 : ~2,5–3,5 M€ sur ~12–15 M€ post-money, 20–25 % de dilution.",
+      "evaluation": [
+        "auto",
+        "peer"
+      ],
+      "rubricId": "rubric-deck-seed"
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-founder-narrative"
+        },
+        "label": "Le narratif & la préparation",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lf-dataroom"
+        },
+        "label": "Les erreurs mortelles de data room",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lf-instruments"
+        },
+        "label": "Priced round vs BSA-AIR à ce stade",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "pre-post-money"
+        },
+        "label": "Pre/post-money",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "ownership"
+        },
+        "label": "Ownership & cap table",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lf-liquidation"
+        },
+        "label": "Comprendre la préférence de liquidation",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-liquidation-preference"
+        },
+        "label": "Cas : la valo flatteuse qui appauvrit",
+        "status": "existant"
+      },
+      {
+        "order": 8,
+        "type": "bonus",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-process-levee"
+        },
+        "label": "Gérer le process : calendrier, FOMO",
+        "status": "a-produire"
+      }
+    ],
+    "outcomes": [
+      "Connaître les repères chiffrés d'une seed 2026",
+      "Construire un deck et une cap table post-tour",
+      "Lire une term sheet de seed"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-serie-a",
+    "slug": "preparer-ma-serie-a",
+    "family": "levee",
+    "roadmap": "next",
+    "title": "Préparer ma Série A",
+    "perspective": "both",
+    "hook": "« La seed d'aujourd'hui ressemble à l'ancienne Série A. » ARR ~2,5 M€, board, et une term sheet qui se négocie ligne à ligne.",
+    "kanji": "階",
+    "accent": "#B5544E",
+    "goal": "Négocier une term sheet ligne à ligne et maîtriser une cap table multi-tours.",
+    "forWhom": [
+      "Fondateurs en croissance",
+      "CEO en préparation de Série A"
+    ],
+    "level": "avance",
+    "entryLevel": "avance",
+    "time": {
+      "coreHours": 8,
+      "withBonusHours": 10,
+      "sessions": 8,
+      "cadence": "Sur 4 à 6 semaines"
+    },
+    "timeFit": [
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "entrepreneur-levee",
+      "associate-progression"
+    ],
+    "milestone": {
+      "type": "negotiation",
+      "label": "Négo simulée + cap table multi-tours",
+      "description": "Une négociation de term sheet simulée et une cap table sur plusieurs tours."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-attentes-serie-a"
+        },
+        "label": "Les attentes en Série A : métriques, board",
+        "status": "a-produire"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-economics"
+        },
+        "label": "Term sheet : économie",
+        "status": "existant",
+        "keystone": true,
+        "prereqNote": "Clé pour la négociation qui suit."
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-control"
+        },
+        "label": "Term sheet : contrôle",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "waterfall"
+        },
+        "label": "Waterfall & liquidation pref",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "dilution"
+        },
+        "label": "Dilution multi-tours",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-dilution-journey"
+        },
+        "label": "Cas : dilution seed→C",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-founder-narrative"
+        },
+        "label": "Négocier sans casser la relation",
+        "status": "existant",
+        "note": "Compléter avec des tactiques de négociation."
+      },
+      {
+        "order": 8,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lf-board"
+        },
+        "label": "Le board, la gouvernance et le contrôle en SAS",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Négocier une term sheet économie + contrôle",
+      "Modéliser une cap table multi-tours",
+      "Aborder la gouvernance de board"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-mener-un-tour",
+    "slug": "mener-un-tour-de-table",
+    "family": "levee",
+    "roadmap": "next",
+    "title": "Mener un tour de table",
+    "hook": "De l'autre côté de la table : comment un VC structure un tour, fixe son ownership cible, syndique et rédige la term sheet.",
+    "kanji": "階",
+    "accent": "#9A6A3C",
+    "perspective": "investor",
+    "goal": "Structurer et mener un tour côté fonds : ownership cible, syndication, term sheet.",
+    "forWhom": [
+      "Analysts",
+      "Associates",
+      "Investisseurs qui veulent mener"
+    ],
+    "level": "avance",
+    "entryLevel": "avance",
+    "time": {
+      "coreHours": 5,
+      "withBonusHours": 6,
+      "sessions": 5,
+      "cadence": "À ton rythme"
+    },
+    "timeFit": [
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "associate-progression",
+      "principal-mindset"
+    ],
+    "milestone": {
+      "type": "term-sheet",
+      "label": "Term sheet + cible d'ownership",
+      "description": "Rédiger une term sheet et définir une cible d'ownership pour un tour donné.",
+      "evaluation": [
+        "auto",
+        "peer"
+      ]
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-economics"
+        },
+        "label": "L'économie du tour",
+        "status": "existant",
+        "keystone": true,
+        "prereqNote": "Maîtriser cette étape avant la rédaction de la term sheet."
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lmv-pre-post-ownership"
+        },
+        "label": "Pre/post-money et ownership cible",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-control"
+        },
+        "label": "Contrôle & gouvernance",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "ownership"
+        },
+        "label": "Définir l'ownership cible",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lmv-returns-waterfall"
+        },
+        "label": "Returns et liquidation preference",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "waterfall"
+        },
+        "label": "Liquidation preference",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-stages"
+        },
+        "label": "Structurer par stade",
+        "status": "existant"
+      },
+      {
+        "order": 8,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-liquidation-preference"
+        },
+        "label": "Cas : la valo flatteuse",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Fixer une cible d'ownership",
+      "Structurer et syndiquer un tour",
+      "Rédiger une term sheet côté investisseur"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-levee-fonds-lp",
+    "slug": "lever-son-fonds-lps-institutions",
+    "family": "levee",
+    "roadmap": "now",
+    "title": "Lever son fonds VC (LPs & Institutions)",
+    "hook": "Du premier pitch à la due diligence opérationnelle : comment convaincre fonds de fonds, assureurs et family offices de financer ta thèse.",
+    "kanji": "盟",
+    "accent": "#C5A85C",
+    "goal": "Maîtriser le process de levée d'un fonds VC (PPM, data room, pitch GP) et comprendre les attentes et la due diligence des Limited Partners (LPs).",
+    "forWhom": [
+      "GPs émergents en création de fonds",
+      "Principals et investisseurs seniors",
+      "LPs ou curieux de l'économie profonde du venture"
+    ],
+    "perspective": "investor",
+    "level": "avance",
+    "entryLevel": "avance",
+    "time": {
+      "coreHours": 4.7,
+      "withBonusHours": 6.2,
+      "sessions": 8,
+      "cadence": "Sur 2 à 3 semaines"
+    },
+    "timeFit": [
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "principal-mindset",
+      "associate-progression"
+    ],
+    "milestone": {
+      "type": "lp-pitch",
+      "label": "Pitch deck de fonds (PPM) + note de thèse",
+      "description": "Structurer le pitch deck de ton fonds et rédiger ta note d'intention à destination des Limited Partners.",
+      "evaluation": [
+        "auto",
+        "peer"
+      ]
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-actors"
+        },
+        "label": "Qui finance les fonds : la chaîne des LPs",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fund-lifecycle"
+        },
+        "label": "Le cycle de vie du fonds : appeler, suivre et liquider",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fees-carry"
+        },
+        "label": "La structure 2 & 20 et l'alignement d'intérêts",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fund-metrics"
+        },
+        "label": "Comment les LPs jugent les GPs : DPI, TVPI & IRR",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 5,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "management-fees"
+        },
+        "label": "Modéliser le budget opérationnel du fonds",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "fund-returns"
+        },
+        "label": "Simuler la waterfall et le retour aux LPs",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 7,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "llp-pitch"
+        },
+        "label": "Le pitch GP : articuler son track-record et sa thèse",
+        "status": "existant"
+      },
+      {
+        "order": 8,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "llp-process"
+        },
+        "label": "Le process de levée : PPM, data room et due diligence LP",
+        "status": "existant"
+      },
+      {
+        "order": 9,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "llp-france"
+        },
+        "label": "Trouver et convaincre des LPs en France",
+        "status": "existant"
+      },
+      {
+        "order": 10,
+        "type": "bonus",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-reserves"
+        },
+        "label": "L'allocation des réserves : rassurer les LPs sur le follow-on",
+        "status": "existant"
+      },
+      {
+        "order": 11,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-europe-vs-valley"
+        },
+        "label": "Cas : Le VC européen et le rôle pivot des LPs publics",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Distinguer les contraintes et attentes des différents LPs (assureurs, fonds de fonds, family offices)",
+      "Calculer le budget de gestion d'un fonds et modéliser le retour LP (waterfall)",
+      "Structurer un Pitch Deck GP et un Private Placement Memorandum (PPM) convaincant",
+      "Anticiper la due diligence opérationnelle et les vérifications de références menées par les LPs",
+      "Cibler les LPs clés en France (Bpifrance, family offices) et maîtriser les leviers de négociation spécifiques"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-meilleur-analyst",
+    "slug": "devenir-un-meilleur-analyst",
+    "family": "grade",
+    "roadmap": "later",
+    "title": "Devenir un meilleur Analyst",
+    "hook": "Du sourcing propre au jugement propriétaire : pattern matching, DD priorisée, un mémo qu'on lit vraiment.",
+    "kanji": "理",
+    "accent": "#267A8C",
+    "goal": "Passer de l'exécution propre au jugement propriétaire.",
+    "forWhom": [
+      "Analysts en poste"
+    ],
+    "level": "intermediaire",
+    "entryLevel": "intermediaire",
+    "time": {
+      "coreHours": 5,
+      "withBonusHours": 6,
+      "sessions": 5,
+      "cadence": "À ton rythme"
+    },
+    "timeFit": [
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "analyst-progression"
+    ],
+    "milestone": {
+      "type": "memo",
+      "label": "Mémo d'investissement",
+      "description": "Un mémo sur un deal réel ou fictif, qu'un partner lirait jusqu'au bout."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-screening"
+        },
+        "label": "Screening & pattern matching",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-team-market"
+        },
+        "label": "Lire équipe & marché",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-traction-unit-economics"
+        },
+        "label": "Traction & unit economics",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "course",
+          "id": "c-mathematiques-vc"
+        },
+        "label": "Mathématiques du VC pour mieux analyser",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-dd-process"
+        },
+        "label": "DD priorisée",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "pratique",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-ecrire-memo"
+        },
+        "label": "Écrire un mémo qu'on lit (gabarit)",
+        "status": "a-produire"
+      },
+      {
+        "order": 7,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-power-law-portfolio"
+        },
+        "label": "Cas : portefeuille power-law",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Reconnaître des patterns entre deals",
+      "Prioriser une DD",
+      "Écrire un mémo lisible et défendable"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-passer-associate",
+    "slug": "passer-associate",
+    "family": "grade",
+    "roadmap": "later",
+    "title": "Passer Associate",
+    "hook": "Porter ses convictions, mener une DD complète, comprendre la structuration de deals.",
+    "kanji": "決",
+    "accent": "#9A6A3C",
+    "goal": "Du jugement propre à la conviction portée.",
+    "forWhom": [
+      "Analysts seniors visant associate"
+    ],
+    "level": "avance",
+    "entryLevel": "avance",
+    "time": {
+      "coreHours": 6,
+      "withBonusHours": 7,
+      "sessions": 6,
+      "cadence": "À ton rythme"
+    },
+    "timeFit": [
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "associate-progression"
+    ],
+    "milestone": {
+      "type": "thesis",
+      "label": "Thèse + DD défendue",
+      "description": "Une thèse construite et une DD complète présentée."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-thesis-anatomy"
+        },
+        "label": "Construire une thèse",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-defending-thesis"
+        },
+        "label": "Défendre une thèse",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-dd-process"
+        },
+        "label": "DD complète",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-economics"
+        },
+        "label": "Structuration : économie",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-control"
+        },
+        "label": "Structuration : contrôle",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "waterfall"
+        },
+        "label": "Waterfall",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-liquidation-preference"
+        },
+        "label": "Cas : valo flatteuse",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Porter une conviction en comité",
+      "Mener une DD complète",
+      "Comprendre la structuration d'un deal"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-passer-principal",
+    "slug": "passer-principal",
+    "family": "grade",
+    "roadmap": "later",
+    "title": "Passer Principal",
+    "hook": "Négo, board, follow-on, penser fonds : acquérir le droit de signer.",
+    "kanji": "道",
+    "accent": "#5A4FA0",
+    "goal": "Penser comme un décideur, pas un exécutant.",
+    "forWhom": [
+      "Associates visant principal"
+    ],
+    "level": "avance",
+    "entryLevel": "avance",
+    "time": {
+      "coreHours": 6,
+      "withBonusHours": 7,
+      "sessions": 6,
+      "cadence": "À ton rythme"
+    },
+    "timeFit": [
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "principal-mindset",
+      "associate-progression"
+    ],
+    "milestone": {
+      "type": "portfolio-plan",
+      "label": "Plan de réserves + thèse",
+      "description": "Un plan de réserves/follow-on et une thèse propriétaire."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-control"
+        },
+        "label": "Termes de contrôle & gouvernance",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-reserves"
+        },
+        "label": "Réserves & follow-on",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-triage"
+        },
+        "label": "Triage de portefeuille",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "fund-returns"
+        },
+        "label": "Fund returns",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-power-law-portfolio"
+        },
+        "label": "Cas : power-law",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Piloter follow-on et réserves",
+      "Gérer la gouvernance d'un board",
+      "Raisonner à l'échelle du fonds"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-penser-gp",
+    "slug": "penser-comme-un-gp",
+    "family": "grade",
+    "roadmap": "next",
+    "title": "Penser comme un GP",
+    "hook": "Économie d'un fonds, relation LP, portefeuille en loi de puissance et Monte Carlo : la mécanique qui fait — ou défait — un millésime.",
+    "kanji": "算",
+    "accent": "#B0894A",
+    "goal": "Maîtriser fund economics, relation LP et construction de portefeuille.",
+    "forWhom": [
+      "Principals",
+      "Émergents GPs",
+      "LPs curieux"
+    ],
+    "level": "avance",
+    "entryLevel": "avance",
+    "time": {
+      "coreHours": 6,
+      "withBonusHours": 7.5,
+      "sessions": 6,
+      "cadence": "À ton rythme"
+    },
+    "timeFit": [
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "principal-mindset"
+    ],
+    "milestone": {
+      "type": "fund-model",
+      "label": "Mini-modèle de fonds + note LP",
+      "description": "Un modèle simple de retour de fonds et une note d'intention LP."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fees-carry"
+        },
+        "label": "Fees, carry, waterfall",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fund-metrics"
+        },
+        "label": "DPI / TVPI / IRR / MOIC",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-reserves"
+        },
+        "label": "Stratégie de réserves",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-triage"
+        },
+        "label": "Triage & construction de portefeuille",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-power-law-portfolio"
+        },
+        "label": "Construction de portefeuille en loi de puissance",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "fund-returns"
+        },
+        "label": "Simuler DPI/TVPI/MOIC",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-power-law-portfolio"
+        },
+        "label": "Cas : power-law",
+        "status": "existant"
+      },
+      {
+        "order": 8,
+        "type": "bonus",
+        "ref": {
+          "kind": "case",
+          "id": "cs-europe-vs-valley"
+        },
+        "label": "Cas : le VC européen",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Décomposer 2 & 20 et la waterfall",
+      "Lire un fonds comme un LP",
+      "Construire un portefeuille en loi de puissance",
+      "Utiliser Monte Carlo comme outil de jugement sous incertitude"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-term-sheet",
+    "slug": "decoder-une-term-sheet",
+    "family": "maitriser",
+    "roadmap": "next",
+    "title": "Décoder une term sheet",
+    "hook": "Liquidation pref, anti-dilution, pro-rata, vesting : en 1 h, tu lis une term sheet ligne à ligne sans trembler.",
+    "kanji": "契",
+    "accent": "#9A6A3C",
+    "goal": "Lire et comprendre chaque clause d'une term sheet et son effet sur la cap table.",
+    "forWhom": [
+      "Fondateurs en levée",
+      "Associates",
+      "Curieux du juridique"
+    ],
+    "level": "intermediaire",
+    "entryLevel": "intermediaire",
+    "time": {
+      "coreHours": 1.1,
+      "withBonusHours": 1.6,
+      "sessions": 2,
+      "cadence": "Une à deux sessions"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "associate-progression",
+      "entrepreneur-levee"
+    ],
+    "milestone": {
+      "type": "read",
+      "label": "Lire une vraie TS",
+      "description": "Décortiquer une term sheet annotée."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-economics"
+        },
+        "label": "Les termes économiques",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-ts-control"
+        },
+        "label": "Les termes de contrôle",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lts-standard-francais"
+        },
+        "label": "Le standard français : Galion & France Invest",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "waterfall"
+        },
+        "label": "Simuler une liquidation pref",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-liquidation-preference"
+        },
+        "label": "Cas : la valo flatteuse",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Distinguer termes économiques et de contrôle",
+      "Modéliser une liquidation preference",
+      "Maîtriser les spécificités des standards de marché français (Galion / France Invest)"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-cap-table",
+    "slug": "lire-un-cap-table-sans-paniquer",
+    "family": "maitriser",
+    "roadmap": "next",
+    "title": "Lire un cap table sans paniquer",
+    "hook": "Dilution, pool d'options, waterfall : la cap table démystifiée en 45 minutes, simulateurs à l'appui.",
+    "kanji": "表",
+    "accent": "#267A8C",
+    "goal": "Lire et construire une cap table simple, comprendre la dilution composée.",
+    "forWhom": [
+      "Fondateurs",
+      "Analysts",
+      "Débutants motivés"
+    ],
+    "level": "intermediaire",
+    "entryLevel": "debutant",
+    "time": {
+      "coreHours": 0.75,
+      "withBonusHours": 1,
+      "sessions": 1,
+      "cadence": "Une session"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "entrepreneur-levee",
+      "futur-analyste"
+    ],
+    "milestone": {
+      "type": "read",
+      "label": "Construire une cap table",
+      "description": "Bâtir une cap table simple et la lire."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-stages"
+        },
+        "label": "Les stades et leurs tours",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lmv-pre-post-ownership"
+        },
+        "label": "Pre/post-money et ownership cible",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lmv-dilution-cap-table"
+        },
+        "label": "Dilution, cap table et option pool",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "ownership"
+        },
+        "label": "Ownership & cap table",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "dilution"
+        },
+        "label": "La dilution qui se compose",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "respiration",
+        "ref": {
+          "kind": "case",
+          "id": "cs-dilution-journey"
+        },
+        "label": "Cas : 100 % deviennent 28 %",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Lire une cap table",
+      "Comprendre la dilution composée"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-carry",
+    "slug": "le-carry-enfin-clair",
+    "family": "maitriser",
+    "roadmap": "next",
+    "title": "Le carry, enfin clair",
+    "hook": "2 & 20, hurdle, waterfall, J-curve : comment un fonds gagne de l'argent — et pour qui — en 1 h.",
+    "kanji": "報",
+    "accent": "#B0894A",
+    "goal": "Décomposer la rémunération d'un fonds et lire ses métriques de performance.",
+    "forWhom": [
+      "Futurs GPs",
+      "Principals",
+      "LPs",
+      "Curieux de fund economics"
+    ],
+    "level": "avance",
+    "entryLevel": "intermediaire",
+    "time": {
+      "coreHours": 1,
+      "withBonusHours": 1.25,
+      "sessions": 1,
+      "cadence": "Une session"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "principal-mindset"
+    ],
+    "milestone": {
+      "type": "read",
+      "label": "Lire un relevé de fonds",
+      "description": "Interpréter DPI/TVPI/IRR comme un LP."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fees-carry"
+        },
+        "label": "2 & 20 et la waterfall",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lmv-returns-waterfall"
+        },
+        "label": "MOIC, IRR, DPI/TVPI et waterfall",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 3,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "fund-returns"
+        },
+        "label": "DPI / TVPI / MOIC",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fund-metrics"
+        },
+        "label": "Les métriques, sans confusion",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Expliquer 2 & 20",
+      "Lire DPI, TVPI, IRR, MOIC"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-market-sizing",
+    "slug": "dimensionner-un-marche",
+    "family": "maitriser",
+    "roadmap": "next",
+    "title": "Dimensionner un marché (TAM/SAM/SOM)",
+    "hook": "Top-down ou bottom-up : estimer un marché et défendre le « why now » en 45 minutes.",
+    "kanji": "観",
+    "accent": "#4C6B8A",
+    "goal": "Estimer un marché en top-down et bottom-up et juger le timing.",
+    "forWhom": [
+      "Candidats analyst",
+      "Fondateurs",
+      "Curieux"
+    ],
+    "level": "intermediaire",
+    "entryLevel": "intermediaire",
+    "time": {
+      "coreHours": 0.75,
+      "withBonusHours": 1,
+      "sessions": 1,
+      "cadence": "Une session"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "futur-analyste"
+    ],
+    "milestone": {
+      "type": "exercise",
+      "label": "Sizer un marché",
+      "description": "Estimer TAM/SAM/SOM d'un cas donné."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lmv-market-sizing"
+        },
+        "label": "TAM/SAM/SOM, top-down & bottom-up",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-team-market"
+        },
+        "label": "Lire un marché et son timing",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Estimer un marché en deux méthodes",
+      "Défendre un « why now »"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-unit-economics",
+    "slug": "unit-economics-rule-of-40",
+    "family": "maitriser",
+    "roadmap": "later",
+    "title": "Unit economics & Rule of 40",
+    "hook": "CAC, LTV, marge, Rule of 40 : lire la santé d'une boîte derrière le pitch, en 45 minutes.",
+    "kanji": "算",
+    "accent": "#3E7C6A",
+    "goal": "Lire les unit economics et appliquer la Rule of 40.",
+    "forWhom": [
+      "Analysts",
+      "Fondateurs",
+      "Operators"
+    ],
+    "level": "intermediaire",
+    "entryLevel": "intermediaire",
+    "time": {
+      "coreHours": 0.75,
+      "withBonusHours": 1,
+      "sessions": 1,
+      "cadence": "Une session"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "analyst-progression",
+      "futur-analyste"
+    ],
+    "milestone": {
+      "type": "exercise",
+      "label": "Diagnostiquer une boîte",
+      "description": "Lire les unit economics d'un cas et juger via la Rule of 40."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-traction-unit-economics"
+        },
+        "label": "Traction & unit economics",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lmv-unit-economics"
+        },
+        "label": "La Rule of 40 en pratique",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Lire CAC, LTV et marges",
+      "Appliquer la Rule of 40"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-express-entretien",
+    "slug": "l-entretien-vc-en-1h",
+    "family": "express",
+    "roadmap": "next",
+    "title": "L'entretien VC en 1 h",
+    "hook": "Ce qu'on te demandera vraiment, condensé : rôles, lecture de startup, mini-case. Avant un café avec un fonds.",
+    "kanji": "速",
+    "accent": "#4C6B8A",
+    "goal": "Un aperçu express de ce qu'attend un entretien VC.",
+    "forWhom": [
+      "Candidats pressés",
+      "Avant un premier contact"
+    ],
+    "level": "debutant",
+    "entryLevel": "debutant",
+    "time": {
+      "coreHours": 1,
+      "withBonusHours": 1,
+      "sessions": 1,
+      "cadence": "Une session"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "futur-analyste",
+      "debutant-curieux"
+    ],
+    "milestone": {
+      "type": "none",
+      "label": "—",
+      "description": "Aperçu express, sans livrable."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-roles"
+        },
+        "label": "Qui fait quoi dans un fonds",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-team-market"
+        },
+        "label": "Lire une startup vite",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "bonus",
+        "ref": {
+          "kind": "course",
+          "id": "c-mathematiques-vc"
+        },
+        "label": "Mathématiques du VC si l'entretien devient technique",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-mini-case-express"
+        },
+        "label": "Mini-case express",
+        "status": "a-produire"
+      }
+    ],
+    "outcomes": [
+      "Savoir ce qu'on te demandera",
+      "Lire une startup en express"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-express-lever",
+    "slug": "lever-en-1h-l-essentiel",
+    "family": "express",
+    "roadmap": "next",
+    "title": "Lever en 1 h : l'essentiel",
+    "perspective": "both",
+    "hook": "Narratif, instrument, combien lever : le strict nécessaire avant ton premier rendez-vous investisseur.",
+    "kanji": "速",
+    "accent": "#B5544E",
+    "goal": "L'essentiel d'une levée en une session.",
+    "forWhom": [
+      "Fondateurs pressés",
+      "Avant un premier RDV investisseur"
+    ],
+    "level": "debutant",
+    "entryLevel": "debutant",
+    "time": {
+      "coreHours": 1,
+      "withBonusHours": 1,
+      "sessions": 1,
+      "cadence": "Une session"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [
+      "entrepreneur-levee"
+    ],
+    "milestone": {
+      "type": "none",
+      "label": "—",
+      "description": "Aperçu express, sans livrable."
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-founder-narrative"
+        },
+        "label": "Le narratif en express",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-founder-instruments"
+        },
+        "label": "SAFE ou priced, vite",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "fundraising-scenario"
+        },
+        "label": "Ton scénario de levée",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Cadrer un narratif",
+      "Choisir un instrument rapidement"
+    ],
+    "prerequisites": [
+      "Aucun pré-requis particulier."
+    ]
+  }
+]

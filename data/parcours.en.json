@@ -1,0 +1,40 @@
+{
+  "_doc": "EN locale override. Merged by id with data/parcours.json: only the fields present here are translated; anything missing falls back to fr. This file is the worked example of the i18n mechanism (décision n°5) — not a full translation.",
+  "locale": "en",
+  "overrides": {
+    "p-decouvrir-vc": {
+      "title": "VC, no bullshit",
+      "hook": "In 1 hour, understand how money flows from savings to founders — and why 9 startups out of 10 must die for the model to work.",
+      "goal": "Name the players (LP, GP, business angel), grasp the power law and the grammar of stages.",
+      "outcomes": [
+        "Tell LP, GP and business angel apart",
+        "Explain the power law in your own words",
+        "Place a startup from pre-seed to Series C"
+      ]
+    },
+    "p-entretien-analyst": {
+      "title": "Ace the Analyst interview",
+      "hook": "Pass the case study and the deal memo: a clear, defensible invest/pass call under time pressure."
+    },
+    "p-levee-fonds-lp": {
+      "title": "Raise a VC Fund (LPs & Institutions)",
+      "hook": "From the first pitch to operational due diligence: how to convince fund of funds, insurers, and family offices to back your thesis.",
+      "goal": "Master the VC fundraising process (PPM, data room, GP pitch) and understand the expectations and due diligence of Limited Partners (LPs).",
+      "outcomes": [
+        "Differentiate the constraints and expectations of various LPs (insurers, fund of funds, family offices)",
+        "Compute a fund's management budget and model LP returns (waterfall)",
+        "Structure a convincing GP Pitch Deck and Private Placement Memorandum (PPM)",
+        "Anticipate operational due diligence and LP reference checks",
+        "Target key LPs in the French ecosystem (Bpifrance, family offices) and learn how to convince them"
+      ]
+    },
+    "p-term-sheet": {
+      "title": "Decode a Term Sheet",
+      "outcomes": [
+        "Differentiate economic and control terms",
+        "Model a liquidation preference",
+        "Master the specificities of French market standards (Galion / France Invest)"
+      ]
+    }
+  }
+}

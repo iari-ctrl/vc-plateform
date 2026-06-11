@@ -1,0 +1,106 @@
+import { Link, useNavigate } from '@/i18n/routing';
+import { ArrowRight, RotateCcw, LogOut, UserPlus, Shield, Sun, Moon, Target } from 'lucide-react';
+import { profileById } from '@/content';
+import { t } from '@/content/parcours';
+import { recommendedPaths, TIME_LABEL } from '@/lib/ikigai';
+import { KanjiSeal, Fleuron } from '@/components/ornaments/Ornaments';
+import { IkigaiCahierSummary } from '@/components/ikigai/IkigaiCahierSummary';
+import { SectionHeading } from '@/components/ui/primitives';
+import { useAuth } from '@/context/AuthContext';
+import { useUserData } from '@/context/UserDataContext';
+import { useUI } from '@/context/UIContext';
+import { useTheme } from '@/context/ThemeContext';
+import { initials } from '@/lib/utils';
+import { usePageMeta } from '@/lib/seo';
+
+export default function ProfilePage() {
+  usePageMeta('Mon profil', 'Votre profil d’apprentissage, vos préférences et votre compte.');
+  const { user, isAuthed, isAdmin, logout } = useAuth();
+  const { profile } = useUserData();
+  const { openAuth } = useUI();
+  const { theme, toggle } = useTheme();
+  const navigate = useNavigate();
+
+  const learningProfile = profile ? profileById(profile.profileType) : undefined;
+  const recPaths = learningProfile ? recommendedPaths(learningProfile, profile?.timeBudget) : [];
+
+  return (
+    <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+      <SectionHeading eyebrow="Votre espace" title="Mon profil" />
+
+      <div className="mt-8 space-y-6">
+        {/* Account */}
+        <div className="premium-card p-7">
+          <p className="eyebrow mb-4">Compte</p>
+          {isAuthed ? (
+            <div className="flex flex-wrap items-center gap-4">
+              <span className="grid h-14 w-14 place-items-center rounded-full bg-[color:var(--secondary)] font-mono text-sm font-semibold text-[color:var(--on-secondary)]">{initials(user!.name)}</span>
+              <div className="flex-1">
+                <p className="font-headline text-headline-sm font-semibold">{user!.name}</p>
+                <p className="text-sm text-surface-variant">{user!.email}</p>
+              </div>
+              {isAdmin && <Link to="/admin" className="btn-ghost"><Shield size={15} /> Administration</Link>}
+              <button onClick={async () => { await logout(); navigate('/'); }} className="btn-quiet text-error"><LogOut size={15} /> Déconnexion</button>
+            </div>
+          ) : (
+            <div className="flex flex-wrap items-center gap-4">
+              <span className="grid h-14 w-14 place-items-center rounded-full bg-surface-container text-surface-variant"><UserPlus size={22} /></span>
+              <div className="flex-1">
+                <p className="font-medium">Vous explorez en mode invité</p>
+                <p className="text-sm text-surface-variant">Votre profil et vos notes sont conservés sur cet appareil. Créez un espace pour les synchroniser.</p>
+              </div>
+              <button onClick={() => openAuth()} className="btn-foil !py-2.5">Créer mon espace</button>
+            </div>
+          )}
+        </div>
+
+        {/* Learning profile */}
+        {learningProfile ? (
+          <div className="premium-card p-7" style={{ borderColor: `color-mix(in srgb, ${learningProfile.accent} 35%, transparent)` }}>
+            <p className="eyebrow mb-4">Profil d’apprentissage</p>
+            <div className="flex flex-wrap items-center gap-4">
+              <KanjiSeal kanji={learningProfile.kanji} accent={learningProfile.accent} size={56} />
+              <div className="flex-1">
+                <h3 className="font-headline text-headline-md font-semibold" style={{ color: learningProfile.accent }}>{learningProfile.name}</h3>
+                <p className="text-sm text-surface-variant">{learningProfile.tag} · {TIME_LABEL[profile?.timeBudget ?? 'medium']}</p>
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-surface-variant">{learningProfile.description}</p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link to="/profile-result" className="btn-ghost !py-2.5">Voir le détail <ArrowRight size={15} /></Link>
+              <Link to="/onboarding" className="btn-quiet"><RotateCcw size={14} /> Refaire le test</Link>
+            </div>
+            {recPaths[0] && (
+              <p className="mt-4 text-sm text-surface-variant">Parcours recommandé : <Link to={`/paths/${recPaths[0].slug}`} className="gold-link">{t(recPaths[0].title)}</Link></p>
+            )}
+          </div>
+        ) : (
+          <div className="premium-card p-7 text-center">
+            <Fleuron className="text-base" />
+            <h3 className="mt-2 font-headline text-headline-sm font-semibold">Pas encore de profil</h3>
+            <p className="mt-1.5 text-sm text-surface-variant">Faites le test d’orientation pour révéler votre profil d’apprentissage.</p>
+            <Link to="/onboarding" className="btn-foil mt-4 !py-2.5"><Target size={15} /> Faire le test</Link>
+          </div>
+        )}
+
+        {/* Mon cahier Ikigai */}
+        <IkigaiCahierSummary />
+
+        {/* Preferences */}
+        <div className="premium-card p-7">
+          <p className="eyebrow mb-4">Préférences</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-medium">Apparence</p>
+              <p className="text-sm text-surface-variant">Thème {theme === 'dark' ? 'sombre' : 'clair'}</p>
+            </div>
+            <button onClick={toggle} className="btn-ghost !py-2.5">
+              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+              {theme === 'dark' ? 'Mode clair' : 'Mode sombre'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

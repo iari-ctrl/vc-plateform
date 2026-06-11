@@ -1,0 +1,54 @@
+[
+  {
+    "id": "bp-ikigai-decennie",
+    "slug": "ou-sera-votre-centre-de-gravite-dans-une-decennie",
+    "title": "Où sera votre centre de gravité dans une décennie ?",
+    "subtitle": "L'ikigai n'est pas un point fixe — et le VC, par sa temporalité, vous force à le savoir",
+    "author": "L'équipe VC Premium",
+    "date": "2026-05-12",
+    "readMin": 7,
+    "category": "Réflexion",
+    "excerpt": "Le capital-risque raisonne en décennies. Cette temporalité longue est aussi un miroir : elle vous oblige à demander non pas qui vous êtes, mais qui vous deviendrez.",
+    "tags": ["ikigai", "carrière", "temps-long"],
+    "body": "## Un centre de gravité, pas une destination\n\nOn présente souvent l'ikigai comme un point à atteindre : l'intersection parfaite de ce qu'on aime, ce dans quoi on est bon, ce dont le monde a besoin, et ce pour quoi on peut être payé. C'est une erreur de lecture. **L'ikigai n'est pas un point fixe à atteindre. C'est un centre de gravité qui se déplace avec vous.**\n\n## La temporalité du venture comme révélateur\n\nLe capital-risque, par sa temporalité longue — dix ans par fonds — force précisément à se demander : *où sera ce centre dans une décennie ?* On n'investit pas pour le trimestre. On parie sur des entreprises qui mettront sept à dix ans à révéler leur résultat. Cette patience structurelle est un miroir : elle vous oblige à penser votre propre trajectoire à la même échelle.\n\n## Ce que cela change pour vous\n\nSi vous abordez le VC en vous demandant seulement « est-ce que ce métier me convient aujourd'hui ? », vous posez la mauvaise question. La bonne : « la version de moi dans dix ans aura-t-elle grandi à travers ce métier ? ». Le venture récompense ceux qui composent — leur jugement, leur réseau, leurs convictions — sur de longues durées. Comme un portefeuille, une carrière se construit en loi de puissance : quelques décisions structurantes font l'essentiel du résultat.\n\nC'est pourquoi notre plateforme commence par l'introspection avant les cours. Apprendre le VC sans savoir pourquoi vous l'apprenez, c'est optimiser une trajectoire sans en connaître la direction."
+  },
+  {
+    "id": "bp-no-paywall",
+    "slug": "pourquoi-nous-ne-bloquons-aucun-chapitre",
+    "title": "Pourquoi nous ne bloquons aucun chapitre",
+    "subtitle": "La liberté responsable comme principe de design",
+    "author": "L'équipe VC Premium",
+    "date": "2026-04-28",
+    "readMin": 5,
+    "category": "Manifeste",
+    "excerpt": "Aucun mur d'authentification, aucune progression imposée. Voici pourquoi nous faisons le pari de la curiosité plutôt que du contrôle.",
+    "tags": ["produit", "ux", "philosophie"],
+    "body": "## Le pari de la liberté\n\nLa plupart des plateformes d'apprentissage enferment : inscription obligatoire, chapitres verrouillés, progression linéaire imposée. Nous faisons le pari inverse. Vous pouvez explorer librement les parcours, lire les cours, utiliser le dictionnaire, parcourir les études de cas et tester les simulateurs — **sans créer de compte**.\n\n## Orienter sans verrouiller\n\nLes recommandations existent pour guider, jamais pour enfermer. Aucun parcours n'impose de validation pour accéder au contenu suivant. Vous pouvez commencer par n'importe quel sujet selon votre besoin du moment. La progression est un repère, pas une contrainte.\n\n## À quoi sert alors le compte ?\n\nL'authentification devient utile uniquement quand elle apporte une valeur claire : sauvegarder votre progression, conserver vos notes et citations, enregistrer vos favoris, retrouver votre profil d'introspection, synchroniser votre tableau de bord entre appareils. Tant que vous n'êtes pas connecté, vos préférences restent stockées localement, sur votre appareil.\n\n## La conviction sous-jacente\n\nNous croyons qu'un apprenant en confiance, libre et autonome apprend mieux qu'un apprenant contraint. Le capital-risque est un métier de discernement ; notre plateforme doit valoriser le vôtre dès la première seconde."
+  },
+  {
+    "id": "bp-three-risks",
+    "slug": "l-art-de-formuler-les-trois-risques",
+    "title": "L'art de formuler les trois risques",
+    "subtitle": "La discipline qui sépare l'analyste mûr du débutant",
+    "author": "L'équipe VC Premium",
+    "date": "2026-03-30",
+    "readMin": 6,
+    "category": "Méthode",
+    "excerpt": "Avant de plonger dans une due diligence, un bon investisseur écrit les trois risques qui décideront du résultat. Voici pourquoi cette contrainte est si puissante.",
+    "tags": ["due-diligence", "méthode", "analyse"],
+    "body": "## La tentation de tout vérifier\n\nFace à un dossier, le réflexe du débutant est de tout examiner : le marché, le produit, l'équipe, les chiffres, le juridique, la concurrence. Le résultat est une analyse plate où rien n'est hiérarchisé — et souvent une décision repoussée indéfiniment.\n\n## La contrainte des trois risques\n\nLe praticien mûr commence autrement. Il écrit : *si cet investissement échoue dans cinq ans, ce sera probablement à cause de l'une de ces trois choses.* Puis il dirige son énergie de due diligence vers ces trois risques, et seulement vers eux.\n\nCette contrainte force trois disciplines : **hiérarchiser** (tous les risques ne se valent pas), **expliciter** (un risque nommé peut être traité), et **décider** (une fois les trois risques réduits autant que possible, on tranche).\n\n## Le lien avec le pre-mortem\n\nFormuler les trois risques, c'est un pre-mortem appliqué à l'analyse : imaginer l'échec pour mieux le prévenir. En comité, présenter soi-même ces trois risques — avant que les autres ne les soulèvent — est le signe d'un jugement mûr. Un mémo qui ne montre que des arguments favorables inspire la méfiance ; un mémo qui nomme ses propres faiblesses inspire la confiance.\n\n## Un exercice pour vous\n\nPrenez n'importe quelle entreprise que vous admirez. Écrivez les trois risques qui auraient pu la tuer à ses débuts. Vous venez de faire le travail le plus important d'un investisseur."
+  },
+  {
+    "id": "bp-reading-actively",
+    "slug": "lire-le-vc-comme-un-praticien",
+    "title": "Lire le VC comme un praticien",
+    "subtitle": "Surligner, citer, relier : l'apprentissage actif au service du jugement",
+    "author": "L'équipe VC Premium",
+    "date": "2026-02-18",
+    "readMin": 5,
+    "category": "Méthode",
+    "excerpt": "Le savoir VC n'est utile que relié. Comment transformer la lecture passive en carnet de convictions personnelles.",
+    "tags": ["apprentissage", "notes", "knowledge-graph"],
+    "body": "## Le savoir isolé ne sert à rien\n\nConnaître la définition d'une liquidation preference ne vaut rien tant qu'on ne l'a pas reliée à un cas concret, à une term sheet, à une décision. Le capital-risque est un métier de **connexions** : entre un terme et un cours, un cas et une thèse, une métrique et une décision.\n\n## L'apprentissage actif\n\nC'est pourquoi notre plateforme vous invite à lire activement. Surlignez un passage qui vous marque. Citez-le directement dans votre carnet de notes, automatiquement rattaché au cours ou au cas en cours de lecture. Reliez les termes entre eux. Chaque note devient un nœud de votre propre graphe de connaissances.\n\n## Vers un graphe de connaissances\n\nLes tags et les connexions entre contenus ne sont pas décoratifs : ils préparent une logique de knowledge graph. À mesure que vous lisez, reliez et annotez, vous construisez une carte personnelle du capital-risque — celle qui vous servira en entretien, en comité, ou face à un fondateur.\n\n## Le carnet comme outil professionnel\n\nLe *commonplace book* — le carnet de citations et de réflexions — est un outil ancien des esprits sérieux. En VC, il devient le lieu où vos convictions se forment, se confrontent et mûrissent. Lire, c'est écrire en pensant."
+  }
+]

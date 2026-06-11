@@ -1,0 +1,1946 @@
+[
+  {
+    "id": "l-vc-definition",
+    "slug": "le-capital-risque-vraiment",
+    "courseId": "c-what-is-vc",
+    "order": 1,
+    "title": "Le capital-risque, vraiment",
+    "kicker": "Fondations",
+    "readMin": 9,
+    "summary": "Avant tout vocabulaire, une définition honnête : le VC est un pari sur des entreprises qui n'existent pas encore vraiment.",
+    "body": "## Une classe d'actifs à part\n\nLe capital-risque — *venture capital* — n'est pas du financement comme un autre. C'est l'apport de fonds propres à de jeunes entreprises non cotées, à fort potentiel et à fort risque, en échange d'une participation au capital. L'investisseur ne prête pas : il devient copropriétaire, et son sort est lié à celui de l'entreprise.\n\nTrois caractéristiques le définissent et conditionnent tout le reste :\n\n- **Long** : un fonds vit en moyenne dix ans. On n'investit pas pour le trimestre prochain mais pour la décennie.\n- **Illiquide** : une fois investi, le capital est immobilisé. Il n'existe pas de marché quotidien pour revendre ses parts d'une startup.\n- **Asymétrique** : la grande majorité des investissements échouent ou stagnent. Quelques-uns remboursent tout le reste, et davantage.\n\n## Un métier, pas seulement de l'argent\n\nDire « j'ai de l'argent à placer » ne fait pas de vous un VC. Le métier consiste à **trouver** des entreprises avant les autres, à **juger** sous incertitude radicale — souvent sans chiffres fiables — à **convaincre** les meilleurs fondateurs de vous accepter à leur table, puis à **accompagner** sur le temps long.\n\nLe capital-risque finance ce que la dette ne peut pas financer : des entreprises sans actifs tangibles, sans historique, dont la valeur repose sur une promesse. C'est précisément pour cela qu'il prend des parts plutôt que des intérêts.\n\n## Pourquoi l'Europe, pourquoi maintenant\n\nNé aux États-Unis après la Seconde Guerre mondiale avec [[georges-doriot|Georges Doriot]] et l'ARD, le capital-risque a mis quarante ans à trouver son équilibre en Europe. En 2026, l'écosystème européen est dense mais fragmenté : chaque marché — Paris, Londres, Berlin, Stockholm, Amsterdam — danse à son propre rythme réglementaire et culturel. Comprendre le VC, c'est d'abord comprendre cette géographie.",
+    "keyTakeaways": [
+      "Le VC échange du capital contre des parts, pas contre des intérêts.",
+      "Trois traits le définissent : long, illiquide, asymétrique.",
+      "C'est un métier de jugement et de relation, pas seulement d'argent."
+    ],
+    "glossaryRefs": [
+      "venture-capital",
+      "equity",
+      "georges-doriot",
+      "illiquidite"
+    ],
+    "quiz": [
+      {
+        "question": "Qu'est-ce qui distingue fondamentalement le VC d'un prêt bancaire ?",
+        "options": [
+          {
+            "text": "Le VC prend une participation au capital plutôt que de prêter avec intérêts",
+            "correct": true
+          },
+          {
+            "text": "Le VC exige toujours des garanties personnelles",
+            "correct": false
+          },
+          {
+            "text": "Le VC finance uniquement des entreprises rentables",
+            "correct": false
+          }
+        ],
+        "explanation": "Le capital-risque apporte des fonds propres (equity) : l'investisseur devient copropriétaire et partage le risque, contrairement à un créancier."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Loi de puissance et concentration des retours",
+        "kind": "lesson",
+        "ref": "l-power-law"
+      }
+    ]
+  },
+  {
+    "id": "l-power-law",
+    "slug": "la-loi-de-puissance",
+    "courseId": "c-what-is-vc",
+    "order": 2,
+    "title": "La loi de puissance",
+    "kicker": "Mathématique du risque",
+    "readMin": 8,
+    "summary": "Une poignée d'investissements génère l'essentiel des retours. Cette asymétrie n'est pas un accident : c'est le cœur du métier.",
+    "body": "## 10 % qui font 90 %\n\nDans un portefeuille de capital-risque, les retours ne se distribuent pas normalement. Ils suivent une **loi de puissance** (*power law*) : une fraction minuscule des investissements produit la quasi-totalité de la valeur. Il n'est pas rare qu'un seul deal rapporte plus que tous les autres réunis.\n\nCette réalité a une conséquence contre-intuitive : **le risque n'est pas de perdre, c'est de rater**. Perdre la totalité d'un investissement coûte 1×. Rater l'entreprise qui aurait fait 100× coûte, en réalité, infiniment plus.\n\n## Conséquences pour le métier\n\n- **On ne cherche pas à éviter l'échec, on cherche l'exceptionnel.** Un VC qui n'a aucune perte n'a probablement pas pris assez de risque.\n- **Chaque investissement doit pouvoir « rendre le fonds ».** On se demande non pas « combien puis-je perdre ? » mais « si tout se passe bien, est-ce que cela peut faire 10× ou plus ? ».\n- **La construction de portefeuille découle de cette loi.** On diversifie assez pour attraper l'aberration, mais on concentre ses réserves sur les gagnantes.\n\n## Le piège du raisonnement linéaire\n\nLa plupart des erreurs d'investissement viennent d'un raisonnement linéaire appliqué à un monde exponentiel. Un dossier « raisonnable », qui promet un rendement modeste et sûr, est souvent **disqualifiant** en VC : il occupe une ligne de portefeuille sans pouvoir produire l'aberration qui justifie la classe d'actifs.",
+    "keyTakeaways": [
+      "Les retours suivent une loi de puissance, pas une distribution normale.",
+      "Le vrai risque est de manquer l'exceptionnel, pas de perdre.",
+      "Chaque deal doit pouvoir, seul, rendre le fonds."
+    ],
+    "glossaryRefs": [
+      "power-law",
+      "fund-returner",
+      "moic"
+    ],
+    "quiz": [
+      {
+        "question": "Selon la loi de puissance, quel est le principal risque d'un VC ?",
+        "options": [
+          {
+            "text": "Manquer l'investissement exceptionnel (10×–100×)",
+            "correct": true
+          },
+          {
+            "text": "Avoir trop de pertes dans le portefeuille",
+            "correct": false
+          },
+          {
+            "text": "Investir dans des entreprises déjà rentables",
+            "correct": false
+          }
+        ],
+        "explanation": "Puisque quelques deals font l'essentiel des retours, manquer ces aberrations coûte bien plus cher que perdre des investissements modestes."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Pourquoi la moyenne ment en VC",
+        "kind": "lesson",
+        "ref": "lpl-average-lies"
+      },
+      {
+        "label": "Power law & construction de portefeuille",
+        "kind": "simulator",
+        "ref": "power-law"
+      }
+    ]
+  },
+  {
+    "id": "l-fund-lifecycle",
+    "slug": "le-cycle-de-vie-d-un-fonds",
+    "courseId": "c-what-is-vc",
+    "order": 3,
+    "title": "Le cycle de vie d'un fonds",
+    "kicker": "Temps long",
+    "readMin": 7,
+    "summary": "Dix ans, trois temps : investir, accompagner, sortir. Cette horloge contraint chaque décision d'un GP.",
+    "body": "## Une entité fermée de dix ans\n\nUn fonds de capital-risque est généralement structuré comme une entité fermée d'une durée de **dix ans**, souvent prolongeable d'un ou deux ans. Les investisseurs (les [[lp|Limited Partners]]) s'engagent dès le départ ; le gérant (le [[gp|General Partner]]) appelle ce capital progressivement.\n\n## Les trois phases\n\n1. **Période d'investissement (années 1–4/5)** : le fonds déploie sa *dry powder* dans de nouvelles entreprises. C'est la phase où l'on prend des positions.\n2. **Période d'accompagnement (années 5–7)** : on cesse les nouveaux deals et l'on réserve du capital pour soutenir les meilleures lignes via des [[follow-on|follow-on]].\n3. **Période de liquidation (années 8–10+)** : on organise les sorties — revente industrielle, [[secondary|secondary]] ou [[ipo|IPO]] — pour rendre le capital et les plus-values aux LPs.\n\n## Pourquoi cela change tout\n\nCette temporalité impose une discipline de fer. Un GP ne peut pas se permettre d'investir tard dans une entreprise dont la sortie n'arrivera qu'après la fin du fonds. Le calendrier du fonds détermine **quand** on peut investir, **combien** on garde en réserve, et **avec quelle urgence** on pousse vers la liquidité. Le temps long du VC n'est pas un luxe : c'est une contrainte structurelle.",
+    "keyTakeaways": [
+      "Un fonds vit ~10 ans, divisé en investir / accompagner / sortir.",
+      "Le capital est appelé progressivement, pas versé d'un coup.",
+      "Le calendrier du fonds contraint chaque décision d'investissement."
+    ],
+    "glossaryRefs": [
+      "lp",
+      "gp",
+      "dry-powder",
+      "follow-on",
+      "j-curve"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-actors",
+    "slug": "qui-finance-qui",
+    "courseId": "c-ecosystem",
+    "order": 1,
+    "title": "Qui finance qui",
+    "kicker": "Cartographie",
+    "readMin": 8,
+    "summary": "LPs, fonds de fonds, GPs, business angels : le voyage de l'argent depuis l'épargne institutionnelle jusqu'aux fondateurs.",
+    "body": "## La chaîne du capital\n\nDans le capital-risque, l'argent effectue un voyage en plusieurs étapes. À la source, les **Limited Partners** ([[lp|LPs]]) : fonds de pension, assureurs, family offices, fondations, et institutions publiques comme le Fonds Européen d'Investissement (EIF) ou Bpifrance. Ils confient leur capital sans gérer eux-mêmes les investissements.\n\nCe capital est remis à des **General Partners** ([[gp|GPs]]) qui gèrent un fonds. Les GPs prennent les décisions, sélectionnent les startups, négocient et accompagnent. Entre les deux, on trouve parfois des **fonds de fonds**, qui investissent dans plusieurs fonds pour diversifier.\n\n## Les autres financeurs des startups\n\n- **Business angels** : des particuliers fortunés qui investissent leur propre argent, souvent au tout début.\n- **Family offices** : structures gérant le patrimoine de familles fortunées.\n- **Accélérateurs et incubateurs** : petits chèques contre accompagnement intensif.\n- **Venture debt** : de la dette spécialisée pour startups déjà financées en equity.\n\n## L'alignement d'incitations\n\nLe cœur de l'écosystème, c'est la relation LP / GP. Le GP touche des [[management-fees|management fees]] pour fonctionner, mais l'essentiel de son gain vient du [[carry|carried interest]] : une part des plus-values, qui n'arrive que si le fonds performe. C'est ce mécanisme qui aligne — imparfaitement — les intérêts du gérant et de ses investisseurs.",
+    "keyTakeaways": [
+      "Les LPs fournissent le capital ; les GPs l'investissent et décident.",
+      "Business angels, family offices et fonds de fonds peuplent la chaîne.",
+      "Fees + carry alignent (imparfaitement) GP et LPs."
+    ],
+    "glossaryRefs": [
+      "lp",
+      "gp",
+      "business-angel",
+      "management-fees",
+      "carry",
+      "fund-of-funds"
+    ],
+    "quiz": [
+      {
+        "question": "Qui prend les décisions d'investissement dans un fonds ?",
+        "options": [
+          {
+            "text": "Le General Partner (GP)",
+            "correct": true
+          },
+          {
+            "text": "Le Limited Partner (LP)",
+            "correct": false
+          },
+          {
+            "text": "Le fonds de fonds",
+            "correct": false
+          }
+        ],
+        "explanation": "Les LPs apportent le capital mais délèguent toute la gestion ; ce sont les GPs qui sélectionnent, décident et accompagnent."
+      }
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-stages",
+    "slug": "la-grammaire-des-stades",
+    "courseId": "c-ecosystem",
+    "order": 2,
+    "title": "La grammaire des stades",
+    "kicker": "Vocabulaire",
+    "readMin": 9,
+    "summary": "Pre-seed, seed, Series A, B, C : moins des montants que des stades de maturité et de risque validé.",
+    "body": "## Des étapes de risque, pas des montants\n\nLes tours de financement portent des noms qu'on croit connaître. En réalité, ils décrivent moins des montants que des **stades de validation du risque**.\n\n- **Pre-seed** : on valide le risque fondateur et le concept. Financé par des [[business-angel|angels]] ou micro-fonds, souvent via un [[safe|SAFE]] ou un BSA-AIR.\n- **Seed** : on amorce le produit et les premiers signaux commerciaux (le MVP, les premiers clients).\n- **Series A** : on démontre le [[pmf|product-market fit]] et l'on commence à passer à l'échelle.\n- **Series B / C** : on finance l'expansion, l'internationalisation, la domination de marché.\n\n## Ce qui se déplace à chaque tour\n\nÀ chaque tour, trois choses bougent : la **valorisation** monte (en principe), le **risque** spécifique diminue, et la [[cap-table|cap table]] se rééquilibre. Les premiers investisseurs subissent une [[dilution|dilution]], mais sur une valeur qui — si tout va bien — croît plus vite que leur part ne diminue.\n\n## Où commence vraiment une Series A en 2026 ?\n\nLes seuils dérivent avec le temps et le marché. Ce qu'on appelait un seed il y a dix ans ressemble à un pre-seed aujourd'hui. La leçon : ne jamais raisonner sur le nom du tour, mais sur **ce qui a été prouvé** et **ce qui reste à prouver**.",
+    "keyTakeaways": [
+      "Les tours décrivent des stades de risque, pas des montants fixes.",
+      "À chaque tour : valorisation ↑, risque spécifique ↓, cap table rééquilibrée.",
+      "Raisonner sur ce qui est prouvé, pas sur le nom du tour."
+    ],
+    "glossaryRefs": [
+      "pre-seed",
+      "seed",
+      "series-a",
+      "pmf",
+      "safe",
+      "cap-table",
+      "dilution"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-vc-week",
+    "slug": "une-semaine-de-vc",
+    "courseId": "c-vc-job",
+    "order": 1,
+    "title": "Une semaine de VC",
+    "kicker": "Le quotidien",
+    "readMin": 8,
+    "summary": "Le métier réel, heure par heure : sourcing, calls fondateurs, mémos, comité d'investissement, et beaucoup de lecture.",
+    "body": "## Le rythme réel\n\nLe mythe : un VC déjeune, écoute des pitchs et signe des chèques. La réalité est plus artisanale. Une semaine type alterne entre quatre activités.\n\n- **Sourcing** : entretenir un réseau, suivre des secteurs, repérer des entreprises avant qu'elles ne soient « chaudes ».\n- **Évaluation** : calls fondateurs, lectures de [[pitch-deck|decks]], appels de référence, modélisation de [[cap-table|cap tables]].\n- **Écriture** : rédiger des [[deal-memo|deal memos]] pour le comité, clarifier sa propre pensée.\n- **Accompagnement** : aider les sociétés du portefeuille — recrutement, intros, prochaines levées.\n\n## Le comité d'investissement\n\nUne fois par semaine ou par quinzaine, l'équipe se réunit en [[ic|comité d'investissement]]. C'est là que les convictions sont mises à l'épreuve. Un junior présente un mémo ; les seniors attaquent la thèse. La décision finale repose rarement sur les chiffres seuls — elle repose sur la qualité de l'argumentation et la conviction.\n\n## La part invisible\n\nL'essentiel du travail d'un VC ne produit rien de visible : on lit, on rencontre, on dit non des dizaines de fois pour chaque oui. La patience et la discipline de jugement comptent plus que la rapidité. C'est un métier où l'on est jugé sur dix ans, pas sur dix jours.",
+    "keyTakeaways": [
+      "Quatre activités : sourcing, évaluation, écriture, accompagnement.",
+      "Le comité d'investissement teste les convictions, pas que les chiffres.",
+      "On dit non bien plus souvent qu'on dit oui."
+    ],
+    "glossaryRefs": [
+      "deal-memo",
+      "ic",
+      "pitch-deck",
+      "cap-table"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-roles",
+    "slug": "les-roles-dans-un-fonds",
+    "courseId": "c-vc-job",
+    "order": 2,
+    "title": "Les rôles dans un fonds",
+    "kicker": "Hiérarchie",
+    "readMin": 7,
+    "summary": "Analyst, associate, principal, partner : ce que chaque échelon décide, produit et signe.",
+    "body": "## Une échelle de responsabilité et de signature\n\nLes titres varient d'un fonds à l'autre, mais la logique reste : à mesure qu'on monte, on passe de l'**exécution** à la **décision**, et l'on acquiert progressivement le droit de signer.\n\n- **Analyst** : sourcing, screening, recherche de marché, modélisation. Produit la matière première.\n- **Associate** : mène des due diligences, rédige des mémos, suit des participations. Pivot opérationnel.\n- **Principal** : peut « leader » un deal, siège à des boards, porte des convictions devant le comité.\n- **Partner / GP** : décide, engage la responsabilité du fonds, lève auprès des LPs, détient le [[carry|carry]].\n\n## La vraie ligne de fracture\n\nLa frontière la plus importante n'est pas entre analyst et associate, mais entre **ceux qui exécutent** et **ceux qui décident**. Devenir principal, c'est cesser de seulement préparer la décision pour commencer à l'assumer — y compris en cas d'échec.\n\n## Ce qui distingue un futur partner\n\nUn bon junior produit des analyses propres. Un futur partner développe **un jugement propriétaire** : il voit ce que les autres ne voient pas, défend des convictions impopulaires, et construit un réseau qui lui appartient. La compétence technique ouvre la porte ; le jugement et la relation décident de la trajectoire.",
+    "keyTakeaways": [
+      "On passe de l'exécution (analyst) à la décision (partner).",
+      "La vraie fracture : préparer la décision vs l'assumer.",
+      "Le jugement propriétaire distingue un futur partner."
+    ],
+    "glossaryRefs": [
+      "carry",
+      "gp",
+      "ic"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-sourcing",
+    "slug": "l-art-du-sourcing",
+    "courseId": "c-deal-flow",
+    "order": 1,
+    "title": "L'art du sourcing",
+    "kicker": "Pipeline",
+    "readMin": 8,
+    "summary": "Trouver avant les autres. Le sourcing inbound, outbound, et la vraie source d'avantage : la réputation.",
+    "body": "## Le sourcing, première compétence\n\nUn fonds ne peut financer que ce qu'il voit. Le **deal flow** — le flux de dossiers — est donc la matière première du métier. On distingue :\n\n- **Inbound** : les dossiers qui viennent à vous (réputation, marque, réseau).\n- **Outbound** : les entreprises que vous allez chercher proactivement, avant qu'elles ne lèvent.\n- **Réseau** : warm intros par d'autres fondateurs, investisseurs, operators.\n\n## Quantité contre qualité\n\nVoir beaucoup de dossiers ne sert à rien si ce sont les mauvais. Les meilleurs fonds ne maximisent pas le volume : ils maximisent l'accès aux **meilleurs** dossiers. Or les meilleurs fondateurs ont le choix de leurs investisseurs. D'où une vérité dérangeante : **le sourcing et la réputation sont la même chose**.\n\n## Construire un avantage de sourcing\n\nUn avantage durable vient rarement d'un outil. Il vient d'une **thèse claire** qui attire les bons fondateurs, d'un **réseau** qu'on cultive sur des années, et d'une **réputation** d'investisseur utile et droit. Le scoring automatisé et les bases de données aident à ne rien manquer ; ils ne remplacent pas la raison pour laquelle un fondateur vous choisit.",
+    "keyTakeaways": [
+      "Le deal flow est la matière première du métier.",
+      "Maximiser l'accès aux meilleurs dossiers, pas le volume.",
+      "Sourcing et réputation sont indissociables."
+    ],
+    "glossaryRefs": [
+      "deal-flow",
+      "thesis-driven",
+      "warm-intro"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-screening",
+    "slug": "screening-et-filtrage",
+    "courseId": "c-deal-flow",
+    "order": 2,
+    "title": "Screening & filtrage",
+    "kicker": "Tri",
+    "readMin": 7,
+    "summary": "Passer de mille dossiers à dix conversations sérieuses sans tuer la sérendipité.",
+    "body": "## Filtrer sans s'aveugler\n\nUn fonds reçoit bien plus de dossiers qu'il ne peut en étudier. Le **screening** consiste à passer rapidement de centaines de dossiers à une poignée méritant un vrai temps. Le danger : un filtre trop rigide rejette précisément les aberrations qui font la loi de puissance.\n\n## Les questions de premier filtre\n\n- L'entreprise **correspond-elle à la thèse** et au stade du fonds ?\n- Le marché peut-il être **assez grand** pour produire un fund-returner ?\n- L'équipe a-t-elle une raison crédible d'être **celle qui gagne** ?\n- Y a-t-il un **« pourquoi maintenant »** convaincant ?\n\n## L'équilibre clé\n\nLe screening efficace est asymétrique : on rejette vite ce qui ne peut clairement pas faire 10×, mais on accorde le bénéfice du doute à ce qui *pourrait* être exceptionnel, même si le dossier est rugueux. Beaucoup de licornes avaient un deck médiocre. La discipline consiste à filtrer sur le **potentiel** plus que sur la **présentation**.",
+    "keyTakeaways": [
+      "Screening = passer de centaines de dossiers à une poignée.",
+      "Un filtre trop rigide tue les aberrations recherchées.",
+      "Filtrer sur le potentiel, pas sur la qualité du deck."
+    ],
+    "glossaryRefs": [
+      "deal-flow",
+      "thesis-driven",
+      "power-law",
+      "fund-returner"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-team-market",
+    "slug": "equipe-et-marche",
+    "courseId": "c-startup-analysis",
+    "order": 1,
+    "title": "Équipe & marché",
+    "kicker": "Les deux piliers",
+    "readMin": 9,
+    "summary": "Au stade précoce, on parie sur des gens et sur une vague. Comment lire l'un et l'autre.",
+    "body": "## Au début, c'est l'équipe\n\nPlus le stade est précoce, moins il y a de chiffres, et plus l'**équipe** pèse. On cherche : une compréhension non triviale du problème (*founder-market fit*), une capacité d'exécution démontrée, une vélocité d'apprentissage, et la rare combinaison d'**obsession** et de **lucidité**.\n\nLes signaux faibles comptent : la clarté avec laquelle un fondateur explique son marché, la qualité des personnes qu'il a su recruter, l'honnêteté avec laquelle il parle de ses risques.\n\n## Puis vient le marché\n\nUn grand fondateur sur un petit marché reste contraint par la taille du marché. On évalue donc :\n\n- **TAM / SAM / SOM** : la taille totale adressable, ce qu'on peut servir, ce qu'on peut capter.\n- **La dynamique** : le marché grandit-il ? Pourquoi maintenant ([[why-now|why now]]) ?\n- **La structure** : winner-take-most ou fragmenté ? Effets de réseau ?\n\n## La synthèse\n\nLa question d'investissement la plus utile n'est pas « est-ce une bonne entreprise ? » mais « **si cette équipe a raison sur ce marché, est-ce que cela peut devenir énorme ?** ». On cherche la conjonction d'une équipe rare et d'un marché capable d'absorber une réussite démesurée.",
+    "keyTakeaways": [
+      "Plus c'est précoce, plus l'équipe pèse dans la décision.",
+      "Évaluer le marché : TAM/SAM/SOM, dynamique, structure.",
+      "La bonne question : si l'équipe a raison, est-ce que ça peut être énorme ?"
+    ],
+    "glossaryRefs": [
+      "founder-market-fit",
+      "tam-sam-som",
+      "why-now",
+      "pmf"
+    ],
+    "quiz": [
+      {
+        "question": "Au stade pre-seed, sur quoi repose principalement la décision ?",
+        "options": [
+          {
+            "text": "L'équipe et le founder-market fit",
+            "correct": true
+          },
+          {
+            "text": "L'EBITDA et la rentabilité actuelle",
+            "correct": false
+          },
+          {
+            "text": "Le multiple de revenu comparable",
+            "correct": false
+          }
+        ],
+        "explanation": "Sans données fiables au pre-seed, c'est la qualité de l'équipe et son adéquation au marché qui portent l'essentiel du jugement."
+      }
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-traction-unit-economics",
+    "slug": "traction-et-unit-economics",
+    "courseId": "c-startup-analysis",
+    "order": 2,
+    "title": "Traction & unit economics",
+    "kicker": "Les chiffres qui comptent",
+    "readMin": 10,
+    "summary": "Quand les chiffres apparaissent, savoir lesquels racontent une vérité : croissance, rétention, et l'économie d'une unité.",
+    "body": "## La traction n'est pas la croissance brute\n\nLa croissance impressionne ; la **rétention** révèle. Une entreprise qui acquiert vite mais perd vite ses clients remplit un seau percé. On regarde donc d'abord la **rétention nette** (NRR) et les cohortes : les clients restent-ils, et dépensent-ils plus avec le temps ?\n\n## Les unit economics\n\nLes [[unit-economics|unit economics]] décrivent l'économie d'une seule unité (un client, une transaction). Les indicateurs clés :\n\n- **CAC** : coût d'acquisition d'un client.\n- **LTV** : valeur générée par ce client sur sa durée de vie.\n- **Ratio LTV/CAC** : au-dessus de 3, sain en général ; en dessous de 1, on perd de l'argent à chaque vente.\n- **Payback** : en combien de mois récupère-t-on le coût d'acquisition ?\n\n## Le Rule of 40 et la brûlure\n\nPour les entreprises plus avancées, le [[rule-of-40|Rule of 40]] résume l'arbitrage croissance/rentabilité : la somme du taux de croissance et de la marge opérationnelle devrait dépasser 40 %. On surveille aussi le [[burn-rate|burn rate]] et le [[burn-multiple|burn multiple]] : combien on brûle pour générer un euro de revenu nouveau. Une croissance achetée trop cher n'est pas de la traction — c'est un mirage financé par le cash des investisseurs.",
+    "keyTakeaways": [
+      "La rétention révèle plus que la croissance brute.",
+      "LTV/CAC > 3 et payback court = unit economics sains.",
+      "Rule of 40 et burn multiple jugent l'efficacité de la croissance."
+    ],
+    "glossaryRefs": [
+      "unit-economics",
+      "cac",
+      "ltv",
+      "rule-of-40",
+      "burn-rate",
+      "burn-multiple",
+      "nrr"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-dd-process",
+    "slug": "la-due-diligence-priorisee",
+    "courseId": "c-due-diligence",
+    "order": 1,
+    "title": "La due diligence priorisée",
+    "kicker": "Enquête",
+    "readMin": 9,
+    "summary": "La DD n'est pas un audit exhaustif : c'est une enquête sur ce qui peut tuer l'investissement, dans un temps contraint.",
+    "body": "## Vérifier ce qui compte\n\nLa [[dd|due diligence]] est souvent mal comprise. Ce n'est pas un audit comptable destiné à tout vérifier — c'est une **enquête priorisée** sur les hypothèses qui, si elles sont fausses, font échouer l'investissement. On commence donc par formuler les **trois risques majeurs**, puis on dirige l'énergie vers eux.\n\n## Les grands chantiers\n\n- **Commerciale** : le marché est-il réel ? Les clients confirment-ils la valeur ? La traction est-elle organique ?\n- **Technique / produit** : la technologie tient-elle ? Quelle dette technique, quelle défensibilité ?\n- **Équipe** : appels de référence, dynamique des fondateurs, capacité à recruter.\n- **Juridique / cap table** : [[cap-table|cap table]] propre, propriété intellectuelle, contrats clés, clauses dangereuses.\n\n## Le piège de la sur-analyse\n\nEn VC précoce, on n'aura jamais assez de données pour être certain. La DD parfaite n'existe pas ; pire, l'excès d'analyse devient une manière élégante de ne jamais décider. Le bon praticien sait quand la DD a suffisamment **réduit l'incertitude sur les risques qui comptent**, et accepte d'investir avec un inconfort résiduel. Décider sous incertitude est le métier.",
+    "keyTakeaways": [
+      "Formuler les trois risques majeurs avant de creuser.",
+      "Couvrir commercial, technique, équipe, juridique/cap table.",
+      "La sur-analyse est une fuite : décider sous incertitude est le métier."
+    ],
+    "glossaryRefs": [
+      "dd",
+      "cap-table",
+      "deal-memo"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-thesis-anatomy",
+    "slug": "anatomie-d-une-these",
+    "courseId": "c-thesis",
+    "order": 1,
+    "title": "Anatomie d'une thèse",
+    "kicker": "Structure",
+    "readMin": 8,
+    "summary": "Une thèse articule où va le monde, pourquoi maintenant, et pourquoi vous. Falsifiable ou rien.",
+    "body": "## Qu'est-ce qu'une thèse ?\n\nUne [[thesis-driven|thèse d'investissement]] n'est pas un slogan sectoriel (« nous croyons à l'IA »). C'est une **hypothèse structurée et falsifiable** sur l'avenir. Elle répond à trois questions :\n\n1. **Où va le monde ?** Quel changement structurel est en cours ?\n2. **Pourquoi maintenant ?** Qu'est-ce qui rend ce changement possible aujourd'hui et pas avant ([[why-now|why now]]) ?\n3. **Pourquoi nous ?** Quel avantage avons-nous pour gagner sur ce terrain ?\n\n## Falsifiable, donc utile\n\nUne bonne thèse peut être **démentie**. Si aucun fait ne pourrait jamais la contredire, ce n'est pas une thèse, c'est une croyance. On écrit donc explicitement : « cette thèse est fausse si… ». Cela permet d'apprendre, de mettre à jour, et de ne pas s'accrocher par ego.\n\n## Top-down et bottom-up\n\nUne thèse **top-down** part d'une vision macro et cherche les entreprises qui l'incarnent. Une thèse **bottom-up** part d'observations répétées sur le terrain qui finissent par dessiner un pattern. Les meilleurs investisseurs font les deux : la macro donne la direction, le terrain donne la conviction et le timing.",
+    "keyTakeaways": [
+      "Une thèse répond à : où va le monde, pourquoi maintenant, pourquoi nous.",
+      "Une thèse doit être falsifiable pour être utile.",
+      "Combiner top-down (direction) et bottom-up (conviction)."
+    ],
+    "glossaryRefs": [
+      "thesis-driven",
+      "why-now"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-defending-thesis",
+    "slug": "defendre-une-these",
+    "courseId": "c-thesis",
+    "order": 2,
+    "title": "Défendre une thèse",
+    "kicker": "Comité",
+    "readMin": 7,
+    "summary": "Devant le comité, une conviction se gagne par l'anticipation du contre-argument, pas par l'enthousiasme.",
+    "body": "## Le comité n'est pas un public\n\nEn [[ic|comité d'investissement]], on ne « vend » pas un deal — on le **soumet à l'épreuve**. Les seniors cherchent les failles. Une thèse bien défendue n'est pas celle qui esquive les objections : c'est celle qui les a **déjà anticipées**.\n\n## Le pre-mortem\n\nUn outil puissant : imaginer que l'investissement a échoué dans cinq ans, et écrire pourquoi. Ce **pre-mortem** force à expliciter les risques que l'enthousiasme masque. On présente ensuite ces risques soi-même, avant que d'autres ne les soulèvent — c'est le signe d'un jugement mûr.\n\n## Conviction et humilité\n\nLa meilleure posture combine **conviction** (j'ai une thèse claire et je l'assume) et **humilité épistémique** (voici ce qui me ferait changer d'avis). Un mémo qui ne présente que des arguments favorables inspire la méfiance. Un mémo qui dit « voici les trois raisons d'investir, voici les trois raisons de ne pas le faire, et voici pourquoi je penche » inspire la confiance.",
+    "keyTakeaways": [
+      "Le comité teste la thèse ; ne pas esquiver les objections.",
+      "Le pre-mortem rend les risques explicites avant le vote.",
+      "Allier conviction assumée et humilité épistémique."
+    ],
+    "glossaryRefs": [
+      "ic",
+      "deal-memo",
+      "thesis-driven"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-ts-economics",
+    "slug": "les-termes-economiques",
+    "courseId": "c-term-sheets",
+    "order": 1,
+    "title": "Les termes économiques",
+    "kicker": "Argent",
+    "readMin": 10,
+    "summary": "Valorisation, liquidation preference, anti-dilution, pool d'options : qui touche quoi, et quand.",
+    "body": "## La term sheet déplace du risque\n\nUne [[term-sheet|term sheet]] est un document non contraignant qui fixe les conditions d'un investissement. Chaque clause **déplace du risque ou du pouvoir**. On distingue les termes *économiques* (qui touche combien) et les termes de *contrôle* (qui décide). Commençons par l'argent.\n\n## La liquidation preference\n\nLa [[liquidation-preference|liquidation preference]] détermine qui est payé en premier lors d'une sortie. Une préférence **1× non-participating** signifie que l'investisseur récupère sa mise avant tout le monde, ou convertit en actions ordinaires si c'est plus avantageux — mais pas les deux. Une préférence **participating** (« double-dip ») lui donne sa mise *puis* sa part du reste : bien plus dure pour les fondateurs. Le multiple (1×, 2×…) amplifie l'effet.\n\n## Anti-dilution et pool d'options\n\nL'[[anti-dilution|anti-dilution]] protège l'investisseur si un tour futur se fait à une valorisation plus basse (*down round*). La version **weighted average** est douce et standard ; le **full ratchet** est brutal et rare. Enfin, le **pool d'options** (ESOP) réservé aux employés est souvent créé *avant* le tour, ce qui dilue les fondateurs et non les nouveaux investisseurs — un point de négociation classique.\n\n## Le réflexe du praticien\n\nNe jamais lire une clause isolément. Toujours se demander : **dans tel scénario de sortie, qui touche quoi ?** Une valorisation flatteuse assortie d'une préférence participating 2× peut rapporter moins, aux fondateurs, qu'une valorisation plus basse avec des termes propres.",
+    "keyTakeaways": [
+      "Termes économiques (qui touche quoi) vs termes de contrôle (qui décide).",
+      "Liquidation preference participating ≫ non-participating pour l'investisseur.",
+      "Toujours simuler la sortie : qui touche quoi, dans quel scénario ?"
+    ],
+    "glossaryRefs": [
+      "term-sheet",
+      "liquidation-preference",
+      "anti-dilution",
+      "esop",
+      "cap-table"
+    ],
+    "quiz": [
+      {
+        "question": "Une liquidation preference 1× « participating » signifie que l'investisseur :",
+        "options": [
+          {
+            "text": "Récupère sa mise PUIS partage le reste au prorata",
+            "correct": true
+          },
+          {
+            "text": "Récupère uniquement sa mise, sans plus",
+            "correct": false
+          },
+          {
+            "text": "Renonce à toute priorité de paiement",
+            "correct": false
+          }
+        ],
+        "explanation": "Le caractère « participating » (double-dip) donne à l'investisseur sa préférence puis une part du reliquat — moins favorable aux fondateurs qu'une préférence non-participating."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Simulateur de dilution",
+        "kind": "simulator",
+        "ref": "dilution"
+      }
+    ]
+  },
+  {
+    "id": "l-ts-control",
+    "slug": "les-termes-de-controle",
+    "courseId": "c-term-sheets",
+    "order": 2,
+    "title": "Les termes de contrôle",
+    "kicker": "Pouvoir",
+    "readMin": 8,
+    "summary": "Board, droits de véto, pro-rata, vesting : la gouvernance compte parfois plus que les pourcentages.",
+    "body": "## Le contrôle ne suit pas la propriété\n\nUne erreur fréquente : croire que celui qui détient le plus d'actions décide. En réalité, les **termes de contrôle** distribuent le pouvoir indépendamment de la part. On peut détenir 15 % et disposer d'un droit de véto déterminant.\n\n## Les leviers de contrôle\n\n- **Composition du board** : combien de sièges pour les fondateurs, les investisseurs, les indépendants ? Le board décide des sujets majeurs.\n- **Protective provisions** : liste de décisions nécessitant l'accord des investisseurs (nouvelle levée, vente, budget, embauche de dirigeants).\n- **Pro-rata** : le droit (pas l'obligation) de réinvestir pour maintenir sa part aux tours suivants — précieux pour suivre les gagnantes.\n- **Vesting fondateurs** : les parts des fondateurs s'acquièrent dans le temps ; un fondateur qui part tôt ne garde pas tout.\n\n## L'équilibre sain\n\nUn bon term sheet protège l'investisseur sans paralyser l'entreprise. Trop de droits de véto transforment chaque décision en négociation et étouffent la vélocité qui fait justement la valeur d'une startup. Les meilleurs investisseurs cherchent l'alignement durable plutôt que le contrôle maximal — parce qu'ils savent qu'ils auront besoin du fondateur motivé pendant dix ans.",
+    "keyTakeaways": [
+      "Le contrôle se distribue indépendamment du pourcentage détenu.",
+      "Board, protective provisions, pro-rata et vesting sont les leviers clés.",
+      "Trop de contrôle paralyse la vélocité qui crée la valeur."
+    ],
+    "glossaryRefs": [
+      "board-seat",
+      "pro-rata",
+      "vesting",
+      "term-sheet"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-reserves",
+    "slug": "reserves-et-follow-on",
+    "courseId": "c-portfolio",
+    "order": 1,
+    "title": "Réserves & follow-on",
+    "kicker": "Allocation",
+    "readMin": 8,
+    "summary": "L'argent gardé pour réinvestir vaut souvent plus que l'argent du premier chèque. Doubler sur les gagnantes.",
+    "body": "## La moitié invisible du fonds\n\nUn fonds ne déploie pas tout son capital dans des premiers tickets. Il garde des **réserves** pour des [[follow-on|follow-on]] : réinvestir dans ses meilleures lignes lors des tours suivants. Souvent, 40 à 60 % du fonds est réservé à cet usage.\n\n## Pourquoi doubler sur les gagnantes\n\nLa loi de puissance impose une discipline : on **concentre** ses réserves sur les entreprises qui sur-performent, pas sur celles qui peinent. Réinvestir dans une gagnante à un stade plus avancé réduit le risque par unité de capital, tout en augmentant l'exposition à l'aberration qui rend le fonds.\n\n## Le pro-rata et le signaling\n\nExercer son [[pro-rata|pro-rata]] permet de maintenir sa part. Mais attention au **signaling risk** : si un investisseur historique ne suit pas un tour, les nouveaux investisseurs s'interrogent. Ne pas réinvestir envoie un signal — parfois injuste, toujours coûteux. La gestion des réserves est donc autant un art relationnel qu'un calcul financier.",
+    "keyTakeaways": [
+      "40–60 % du fonds est souvent réservé au follow-on.",
+      "Concentrer les réserves sur les gagnantes, pas les retardataires.",
+      "Ne pas suivre un tour envoie un signal coûteux (signaling risk)."
+    ],
+    "glossaryRefs": [
+      "follow-on",
+      "pro-rata",
+      "dry-powder",
+      "power-law"
+    ],
+    "furtherReading": [
+      {
+        "label": "Comment le simulateur tire les portefeuilles",
+        "kind": "lesson",
+        "ref": "lpl-simulator-engine"
+      }
+    ]
+  },
+  {
+    "id": "l-triage",
+    "slug": "le-triage-du-portefeuille",
+    "courseId": "c-portfolio",
+    "order": 2,
+    "title": "Le triage du portefeuille",
+    "kicker": "Discipline",
+    "readMin": 7,
+    "summary": "Stars, walking dead, pertes : où mettre son temps et son capital, et où accepter de lâcher.",
+    "body": "## Trois catégories\n\nAvec le temps, un portefeuille se trie de lui-même en trois groupes :\n\n- **Les stars** : peu nombreuses, elles feront l'essentiel du retour. Elles méritent capital et temps.\n- **Les walking dead** : ni mortes ni gagnantes, elles consomment de l'attention sans promesse de retour démesuré.\n- **Les pertes** : il faut savoir les reconnaître et tourner la page.\n\n## Le piège de l'attention\n\nLe biais naturel pousse à passer du temps sur les entreprises **en difficulté** — par culpabilité, par espoir, par relation. Or c'est souvent une erreur d'allocation : le temps d'un investisseur est rare, et les stars ont elles aussi besoin de soutien pour devenir énormes. La discipline consiste à **sur-investir son temps là où le potentiel est le plus grand**.\n\n## Accepter la mort\n\nLaisser mourir une ligne n'est pas un échec moral ; c'est la conséquence assumée de la loi de puissance. Un portefeuille sans pertes est un portefeuille qui n'a pas pris assez de risque. La maturité d'un investisseur se mesure aussi à sa capacité à dire stop avec dignité, sans s'acharner.",
+    "keyTakeaways": [
+      "Un portefeuille se trie en stars, walking dead et pertes.",
+      "Le biais pousse à sur-investir le temps sur les sociétés en difficulté.",
+      "Accepter la mort de certaines lignes fait partie du métier."
+    ],
+    "glossaryRefs": [
+      "power-law",
+      "follow-on"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "lpl-average-lies",
+    "slug": "pourquoi-la-moyenne-ment-en-vc",
+    "courseId": "c-power-law-portfolio",
+    "order": 1,
+    "title": "Pourquoi la moyenne ment en VC",
+    "kicker": "Power law",
+    "readMin": 11,
+    "summary": "Un portefeuille VC ne se comprend pas par son scénario moyen. Une poignée d'outliers déplace toute la distribution et peut masquer un scénario médian beaucoup plus fragile.",
+    "body": "## Le mauvais réflexe : chercher le rendement moyen\n\nDans beaucoup de classes d'actifs, raisonner sur la moyenne est un réflexe acceptable. Si les résultats se distribuent autour d'un centre stable, la moyenne raconte quelque chose de proche de l'expérience typique. En venture capital, c'est précisément ce qui casse.\n\nLes retours ne suivent pas une loi normale. Ils suivent une [[power-law|loi de puissance]] : beaucoup de lignes rendent peu ou rien, quelques lignes rendent correctement, et une poignée d'outliers produit l'essentiel du retour du fonds.\n\nC'est le fameux cas du deal qui rend le fonds. Une seule société peut rembourser tout le véhicule, parfois plusieurs fois, pendant que la majorité du portefeuille détruit du capital ou rend un multiple modeste.\n\n## Moyenne contre médiane\n\nLa conséquence contre-intuitive est simple : **la moyenne peut mentir sur l'expérience probable**.\n\nImagine un fonds dont les simulations donnent un TVPI moyen de 3×. Cela semble confortable. Mais si la médiane est à 1,2×, cela veut dire qu'un scénario sur deux finit autour de 1,2× ou moins. La moyenne est tirée vers le haut par quelques tirages où une société devient énorme.\n\nCe n'est pas une anomalie statistique. C'est le métier. Le VC achète une exposition à une queue de distribution très épaisse. Le problème n'est donc pas seulement de savoir si la stratégie peut produire 3× en moyenne. Il faut savoir **à quelle fréquence**, **dans quels scénarios**, et **avec quelle dépendance à une ou deux positions**.\n\n## Ce que cache un chiffre unique\n\nUn TVPI unique donne une illusion de précision. Il ne dit pas :\n\n- combien de scénarios rendent moins que le capital ;\n- quelle part des scénarios dépasse 2× ou 3× ;\n- combien le résultat dépend de la meilleure ligne ;\n- si le fonds a assez d'ownership pour qu'un gros exit compte vraiment ;\n- si la taille de marché rend plausible le fund returner nécessaire.\n\nC'est pour cela que le simulateur Power Law ne cherche pas à afficher un verdict unique. Il montre la distribution entière. La question devient alors : quelle forme prend le risque ? Où est le downside ? À quel point l'upside est-il concentré ? Qu'est-ce qui change quand on bouge le nombre de lignes, l'ownership ou les réserves ?\n\n## Le vrai message de la power law\n\nLa loi de puissance ne dit pas seulement que certains deals sont meilleurs que d'autres. Elle dit que la structure même du portefeuille doit être construite pour ne pas manquer l'extrême.\n\nUn portefeuille trop petit peut ne jamais attraper l'outlier. Un portefeuille trop dilué peut l'attraper sans que cela compte au niveau du fonds. Un fonds qui ne garde pas de réserves peut voir sa meilleure société grossir tout en perdant l'ownership qui aurait changé le millésime.\n\nLa moyenne rassure. La distribution instruit.",
+    "keyTakeaways": [
+      "En VC, la moyenne peut être tirée par quelques outliers et décrire un scénario que la plupart des tirages ne vivent pas.",
+      "La médiane raconte l'expérience typique ; l'écart moyenne-médiane révèle la force de la queue de distribution.",
+      "Un bon simulateur de portefeuille doit montrer dispersion, probabilités et concentration, pas seulement un TVPI unique."
+    ],
+    "glossaryRefs": [
+      "power-law",
+      "fund-returner",
+      "tvpi",
+      "moic",
+      "portfolio-construction"
+    ],
+    "quiz": [
+      {
+        "question": "Pourquoi la moyenne peut-elle être trompeuse dans un portefeuille VC ?",
+        "options": [
+          {
+            "text": "Parce que quelques outliers peuvent tirer la moyenne très au-dessus du scénario médian",
+            "correct": true
+          },
+          {
+            "text": "Parce que tous les deals ont exactement le même multiple de sortie",
+            "correct": false
+          },
+          {
+            "text": "Parce que le TVPI ne peut jamais dépasser 1×",
+            "correct": false
+          }
+        ],
+        "explanation": "Dans une distribution en loi de puissance, quelques très gros gagnants déplacent la moyenne. La médiane et les percentiles sont indispensables pour comprendre le risque vécu par la majorité des scénarios."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Pourquoi utiliser Monte Carlo",
+        "kind": "lesson",
+        "ref": "lpl-why-monte-carlo"
+      },
+      {
+        "label": "Cas : anatomie d'un portefeuille power-law",
+        "kind": "case",
+        "ref": "cs-power-law-portfolio"
+      }
+    ]
+  },
+  {
+    "id": "lpl-why-monte-carlo",
+    "slug": "pourquoi-utiliser-monte-carlo-en-vc",
+    "courseId": "c-power-law-portfolio",
+    "order": 2,
+    "title": "Pourquoi utiliser Monte Carlo",
+    "kicker": "Incertitude",
+    "readMin": 12,
+    "summary": "Monte Carlo ne prédit pas le futur. Il transforme une stratégie de portefeuille en milliers de futurs plausibles pour rendre visibles dispersion, downside, upside et sensibilité aux leviers du GP.",
+    "body": "## Le problème : un fonds n'a qu'une vie\n\nUn GP ne peut pas lancer le même fonds 4 000 fois pour voir ce qui se passe. Dans la vraie vie, il n'y aura qu'un millésime, une séquence de deals, une conjoncture de sortie, et une poignée de décisions de follow-on.\n\nPourtant, quand on construit un portefeuille, on raisonne toujours sur des incertitudes répétées : combien de lignes vont échouer ? Combien vont devenir modestement correctes ? Combien auront une chance d'entrer dans la queue de distribution ? Que se passe-t-il si l'outlier arrive, mais que l'ownership à l'exit est trop faible ?\n\nMonte Carlo sert à explorer ces questions sans prétendre connaître le futur.\n\n## Ce que fait Monte Carlo\n\nUne simulation Monte Carlo prend des hypothèses, puis tire au sort beaucoup de scénarios compatibles avec ces hypothèses. Ici, chaque scénario est un portefeuille complet. Chaque ligne reçoit un sort : échec, sortie modeste ou outlier power law. Le fonds agrège ensuite les retours de toutes les lignes.\n\nAprès 4 000 tirages, on ne demande pas : quel est le bon chiffre ? On demande : **quelle distribution de résultats cette stratégie produit-elle ?**\n\nC'est la différence entre un modèle qui dit ce qui se passe en moyenne et un modèle qui montre la carte du risque.\n\n## Pourquoi c'est pertinent en VC\n\nMonte Carlo est particulièrement utile quand trois conditions sont réunies :\n\n- les résultats sont très dispersés ;\n- quelques événements rares dominent le total ;\n- les décisions portent sur des probabilités, pas sur des certitudes.\n\nC'est exactement le cas du venture capital. Le résultat d'un fonds dépend d'événements extrêmes : une société qui passe de 3× à 80×, une dilution évitée sur une gagnante, un follow-on placé au bon endroit. Ces événements ne se lisent pas bien dans un modèle linéaire.\n\nLa simulation permet donc de regarder le portefeuille comme un ensemble de futurs possibles. Elle rend visible la probabilité de ne pas rendre le capital, la chance de dépasser 2× ou 3×, et la dépendance du fonds à la meilleure ligne.\n\n## Ce n'est pas une boule de cristal\n\nLa limite est essentielle : Monte Carlo ne garantit pas que les hypothèses sont vraies. Si les taux de graduation, l'alpha de la queue ou le multiple maximum sont mal calibrés, la sortie du modèle sera propre mais trompeuse.\n\nSon utilité n'est donc pas de prédire le TVPI exact. Son utilité est de tester un raisonnement :\n\n- si je baisse le nombre de lignes, est-ce que j'augmente trop le risque de manquer l'outlier ?\n- si je monte les réserves, est-ce que je renforce vraiment les gagnants ou est-ce que je réduis trop les tickets initiaux ?\n- si mon ownership à l'exit tombe à 4 %, quel exit faut-il pour rendre le fonds ?\n- si le marché ne permet pas ce niveau d'exit, ma construction de portefeuille est-elle incohérente ?\n\nMonte Carlo devient alors un outil de jugement sous incertitude. Il ne remplace pas la thèse, le sourcing ou la qualité des deals. Il force simplement la stratégie à se confronter à sa propre distribution.",
+    "keyTakeaways": [
+      "Monte Carlo explore des milliers de scénarios plausibles ; il ne prédit pas le scénario qui arrivera.",
+      "La méthode est pertinente en VC parce que les retours sont dispersés, rares et dominés par les extrêmes.",
+      "Le bon usage consiste à tester la sensibilité d'une stratégie aux leviers contrôlables : lignes, ownership, réserves, dilution et graduation."
+    ],
+    "glossaryRefs": [
+      "power-law",
+      "portfolio-construction",
+      "tvpi",
+      "follow-on",
+      "fund-returner"
+    ],
+    "quiz": [
+      {
+        "question": "Quel est le bon usage de Monte Carlo dans le simulateur Power Law ?",
+        "options": [
+          {
+            "text": "Voir la distribution des résultats possibles et tester la sensibilité aux hypothèses",
+            "correct": true
+          },
+          {
+            "text": "Prédire exactement le TVPI futur du fonds",
+            "correct": false
+          },
+          {
+            "text": "Supprimer l'incertitude en remplaçant le jugement du GP",
+            "correct": false
+          }
+        ],
+        "explanation": "Monte Carlo ne promet pas le futur. Il rend visibles des milliers de futurs compatibles avec les hypothèses pour mieux comprendre dispersion, probabilités et dépendance aux outliers."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Comment le simulateur tire les portefeuilles",
+        "kind": "lesson",
+        "ref": "lpl-simulator-engine"
+      },
+      {
+        "label": "Power law & construction de portefeuille",
+        "kind": "simulator",
+        "ref": "power-law"
+      }
+    ]
+  },
+  {
+    "id": "lpl-simulator-engine",
+    "slug": "comment-le-simulateur-power-law-tire-les-portefeuilles",
+    "courseId": "c-power-law-portfolio",
+    "order": 3,
+    "title": "Comment le simulateur tire les portefeuilles",
+    "kicker": "Moteur",
+    "readMin": 14,
+    "summary": "Le simulateur lance 4 000 portefeuilles déterministes. Chaque ligne passe par un tirage échec, sortie modeste ou queue Pareto, puis le fonds applique dilution et follow-ons.",
+    "body": "## Les 9 curseurs ne sont pas décoratifs\n\nLe simulateur part des leviers que le GP peut réellement discuter : taille du fonds, nombre de lignes, réserves follow-on, ownership initial, dilution jusqu'à l'exit, taux d'échec, sorties modestes, pente de la queue et multiple maximum.\n\nCes paramètres décrivent une stratégie de portefeuille simplifiée. Ils répondent à trois questions :\n\n- combien de chances le fonds se donne-t-il d'attraper un outlier ?\n- quelle part de cet outlier gardera-t-il à l'exit ?\n- quelle taille d'outlier est réaliste dans le marché visé ?\n\nLes taux d'échec, de sorties modestes et de queue jouent le rôle de graduation rates simplifiés. Ils ne modélisent pas chaque tour de financement, mais ils traduisent l'idée qu'une startup doit franchir plusieurs seuils avant de devenir une vraie candidate au fund returner.\n\n## Le tirage par ligne\n\nPour chaque ligne, le simulateur tire un nombre uniforme. Ce tirage décide du sort de la société.\n\n- Si le tirage tombe dans le taux d'échec, le multiple vaut 0×.\n- S'il tombe dans la zone des sorties modestes, le multiple est tiré uniformément entre 0,3× et 3×.\n- S'il tombe dans la queue power law, le multiple vient d'une distribution de Pareto tronquée.\n\nLa queue commence à 3×, puis utilise la formule : m = 3 × (1 - u)^(-1/α), plafonnée au multiple maximum.\n\nLe paramètre α contrôle l'épaisseur de la queue. Plus α est bas, plus les outliers extrêmes deviennent fréquents et violents. Le multiple maximum évite de raconter des histoires impossibles : aucun modèle ne devrait produire des exits au-delà de ce que la taille de marché peut absorber.\n\n## Agréger au niveau du fonds\n\nUne fois les multiples tirés, le simulateur convertit les lignes en retour de fonds.\n\nLe capital non réservé est divisé entre les lignes initiales. Chaque check initial reçoit le multiple de sortie, puis subit la dilution : le multiple effectif devient m × (1 - dilution). Cela modélise la perte de valeur quand le fonds ne défend pas son pro-rata ou se fait diluer sur les tours suivants.\n\nLes réserves follow-on sont traitées différemment. Elles sont déployées dans les lignes de la queue, donc dans les gagnants, à parts égales. Le rendement appliqué est √m : un follow-on plus tardif capte moins d'upside que le check initial, mais il concentre le capital sur une ligne déjà plus prouvée. Dans ce modèle, le follow-on ne subit pas de dilution supplémentaire, car il représente un pro-rata défendu.\n\nSi aucune ligne n'est défendable, la réserve est restituée à 1×. Autrement dit, le fonds ne prétend pas investir ses réserves dans des gagnants qui n'existent pas.\n\n## Pourquoi le résultat est reproductible\n\nLe générateur aléatoire est seedé. À paramètres égaux, le simulateur donne les mêmes résultats. C'est important pour un outil pédagogique : deux utilisateurs qui regardent la même stratégie doivent discuter du même résultat, et les tests automatisés doivent pouvoir vérifier que le moteur ne dérive pas.\n\nLa reproductibilité ne rend pas le futur certain. Elle rend l'expérience stable.\n\n## Les limites à garder en tête\n\nLe moteur est volontairement pédagogique. Il ne modélise pas les frais, le carry, le recyclage, le timing des cash-flows, la corrélation entre deals, ni les cycles de marché. Les multiples sont i.i.d. : chaque ligne est tirée indépendamment.\n\nCes simplifications sont acceptables tant que l'on comprend l'objet du simulateur : rendre visible la logique power law et la sensibilité de la construction de portefeuille. Pour une décision réelle d'investissement ou de levée de fonds, il faudrait compléter par un modèle de cash-flow, une thèse de marché et des hypothèses de sortie beaucoup plus contextualisées.",
+    "keyTakeaways": [
+      "Chaque run simule un portefeuille complet ; chaque ligne devient échec, sortie modeste ou outlier Pareto.",
+      "La dilution réduit le check initial, tandis que les réserves sont concentrées sur les gagnants avec un rendement en racine carrée du multiple.",
+      "Le moteur est déterministe à paramètres égaux : c'est un outil stable pour apprendre, comparer et tester."
+    ],
+    "glossaryRefs": [
+      "power-law",
+      "follow-on",
+      "reserve-funds",
+      "pro-rata",
+      "dilution",
+      "portfolio-construction"
+    ],
+    "quiz": [
+      {
+        "question": "Dans le simulateur, que signifie un α plus bas dans la queue Pareto ?",
+        "options": [
+          {
+            "text": "Une queue plus épaisse, donc des outliers plus extrêmes",
+            "correct": true
+          },
+          {
+            "text": "Un taux d'échec automatiquement plus élevé",
+            "correct": false
+          },
+          {
+            "text": "Une suppression des sorties modestes",
+            "correct": false
+          }
+        ],
+        "explanation": "L'alpha contrôle la pente de la queue. Plus il est bas, plus la distribution donne du poids aux multiples extrêmes."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Lire TVPI, concentration et fund returner math",
+        "kind": "lesson",
+        "ref": "lpl-read-results"
+      },
+      {
+        "label": "Réserves & follow-on",
+        "kind": "lesson",
+        "ref": "l-reserves"
+      }
+    ]
+  },
+  {
+    "id": "lpl-read-results",
+    "slug": "lire-tvpi-concentration-fund-returner-math",
+    "courseId": "c-power-law-portfolio",
+    "order": 4,
+    "title": "Lire TVPI, concentration et fund returner math",
+    "kicker": "Lecture",
+    "readMin": 11,
+    "summary": "Les sorties du simulateur se lisent comme un diagnostic : distribution du TVPI, probabilités de seuil, concentration des retours et cohérence du fund returner.",
+    "body": "## Commencer par la médiane, pas par la moyenne\n\nLe premier réflexe est de comparer TVPI médian et TVPI moyen. Si la moyenne est beaucoup plus haute que la médiane, la stratégie dépend fortement de quelques scénarios extrêmes. C'est normal en VC, mais il faut le voir.\n\nLa médiane répond : dans le scénario central, que se passe-t-il ? La moyenne répond : que vaut l'espérance si l'on accepte que quelques très gros gagnants dominent tout ? Les deux chiffres sont utiles, mais ils ne racontent pas la même histoire.\n\n## Lire les percentiles\n\nLes percentiles donnent une lecture plus honnête du risque.\n\n- P10 montre un cas défavorable : 10 % des simulations finissent en dessous.\n- P90 montre un cas favorable : 10 % des simulations finissent au-dessus.\n- L'écart P10-P90 raconte la dispersion de la stratégie.\n\nUn fonds peut avoir une bonne moyenne et un P10 très faible. Cela signifie que l'upside existe, mais que le downside reste dur. Pour un LP, un GP ou un candidat en entretien, c'est souvent plus instructif qu'un seul multiple cible.\n\n## Lire les probabilités de seuil\n\nLes probabilités cumulées répondent à une question très concrète : quelle fraction des scénarios dépasse un seuil donné ?\n\nP(TVPI ≥ 1×) mesure la probabilité de rendre au moins le capital. P(TVPI ≥ 2×) commence à ressembler à un bon fonds brut. P(TVPI ≥ 3×) entre dans le territoire d'une vraie surperformance. P(TVPI ≥ 5×) montre la puissance, mais aussi la rareté, des scénarios exceptionnels.\n\nCes probabilités sont utiles parce qu'elles évitent le langage flou. Dire qu'une stratégie vise 3× ne suffit pas. Il faut savoir si ce 3× apparaît dans 8 %, 25 % ou 45 % des simulations.\n\n## Lire la concentration\n\nLa part de la meilleure ligne et la part du top 3 montrent à quel point le fonds dépend d'une ou deux positions. Une forte concentration n'est pas forcément mauvaise : c'est souvent le signe d'une vraie loi de puissance. Mais elle change la nature du risque.\n\nSi la meilleure ligne apporte la majorité du retour total, le fonds est très sensible à l'ownership final, au follow-on et au marché de sortie de cette société. Le GP doit alors se demander s'il a réellement les droits, les réserves et la discipline pour défendre cette ligne jusqu'au bout.\n\n## Le fund returner math\n\nLe calcul le plus utile est souvent le plus brutal : avec l'ownership à l'exit, quelle valeur de sortie une seule société doit-elle atteindre pour rendre 1× le fonds ?\n\nSi un fonds de 80 M€ possède 6 % à l'exit, il lui faut environ 1,33 Md€ d'exit pour récupérer 80 M€ sur une seule ligne. Si le marché visé ne peut raisonnablement pas produire ce niveau d'exit, la construction de portefeuille est incohérente : trop gros fonds, ownership trop faible, dilution trop forte, ou thèse de marché trop petite.\n\nCe test relie la stratégie de portefeuille au monde réel. Il empêche de se cacher derrière des multiples abstraits.\n\n## Lire les histogrammes\n\nLe premier histogramme montre la distribution des TVPI sur les 4 000 simulations. C'est la forme globale du fonds : combien de scénarios sont faibles, combien sont corrects, combien deviennent excellents.\n\nLe second histogramme montre la distribution des multiples par ligne. Il permet de voir la queue : beaucoup de zéros et de modestes sorties, puis quelques multiples très élevés. Les deux vues se complètent : l'une parle du fonds, l'autre parle des deals qui le composent.\n\nLa bonne lecture n'est pas de chercher le plus beau chiffre. C'est de demander si la forme de la distribution correspond à la stratégie que le GP croit déployer.",
+    "keyTakeaways": [
+      "Médiane, moyenne et percentiles doivent être lus ensemble pour distinguer scénario typique, espérance et dispersion.",
+      "Les probabilités de seuil transforment l'ambition de TVPI en fréquence de scénarios.",
+      "Le fund returner math teste la cohérence entre taille du fonds, ownership à l'exit et taille réaliste des exits."
+    ],
+    "glossaryRefs": [
+      "tvpi",
+      "fund-returner",
+      "power-law",
+      "portfolio-construction",
+      "moic"
+    ],
+    "quiz": [
+      {
+        "question": "Pourquoi le fund returner math est-il un test de cohérence utile ?",
+        "options": [
+          {
+            "text": "Il relie taille du fonds, ownership à l'exit et taille d'exit nécessaire pour rendre le fonds",
+            "correct": true
+          },
+          {
+            "text": "Il garantit qu'une société sortira forcément au montant calculé",
+            "correct": false
+          },
+          {
+            "text": "Il remplace l'analyse de marché et la diligence",
+            "correct": false
+          }
+        ],
+        "explanation": "Le calcul ne prédit rien. Il vérifie si la stratégie a besoin d'exits plausibles ou d'exits irréalistes pour fonctionner."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Power law & construction de portefeuille",
+        "kind": "simulator",
+        "ref": "power-law"
+      },
+      {
+        "label": "Lire les métriques d'un fonds",
+        "kind": "lesson",
+        "ref": "l-fund-metrics"
+      }
+    ]
+  },
+  {
+    "id": "l-fees-carry",
+    "slug": "fees-carry-et-waterfall",
+    "courseId": "c-fund-economics",
+    "order": 1,
+    "title": "Fees, carry & waterfall",
+    "kicker": "2 & 20",
+    "readMin": 10,
+    "summary": "Comment un GP est rémunéré, et dans quel ordre l'argent revient aux LPs. La fameuse structure 2 & 20.",
+    "body": "## La structure 2 & 20\n\nLe modèle économique classique d'un fonds tient en deux nombres : **2 & 20**.\n\n- **2 %** de [[management-fees|management fees]] par an sur le capital engagé : cela paie les salaires, les bureaux, le fonctionnement. Ce n'est pas du profit, c'est du carburant.\n- **20 %** de [[carry|carried interest]] : la part des plus-values qui revient au GP — mais seulement après que les LPs ont récupéré leur mise (et souvent un rendement minimum).\n\n## La waterfall et le hurdle\n\nLa [[waterfall|waterfall]] décrit l'ordre dans lequel l'argent d'une sortie est distribué :\n\n1. **Retour du capital** aux LPs (ils récupèrent d'abord ce qu'ils ont investi).\n2. **Hurdle / preferred return** : un rendement minimum (souvent ~8 %) avant tout carry.\n3. **Catch-up** : le GP rattrape pour atteindre sa part.\n4. **Split 80/20** du reste entre LPs et GP.\n\n## Pourquoi cela compte\n\nCette structure explique le comportement d'un GP. Les fees assurent la survie ; le carry crée la richesse — mais uniquement si le fonds performe vraiment. C'est ce qui pousse (en théorie) le GP à viser les grands retours plutôt que la sécurité. Un GP qui vit confortablement de ses seules fees sans jamais générer de carry n'a pas fait son métier.",
+    "keyTakeaways": [
+      "2 % de fees (carburant) + 20 % de carry (richesse conditionnelle).",
+      "La waterfall : capital → hurdle → catch-up → split 80/20.",
+      "Le carry n'arrive qu'après que les LPs sont remboursés."
+    ],
+    "glossaryRefs": [
+      "management-fees",
+      "carry",
+      "waterfall",
+      "hurdle-rate",
+      "lp",
+      "gp"
+    ],
+    "quiz": [
+      {
+        "question": "Dans la waterfall, qui est payé en premier ?",
+        "options": [
+          {
+            "text": "Les LPs récupèrent leur capital investi",
+            "correct": true
+          },
+          {
+            "text": "Le GP touche son carry de 20 %",
+            "correct": false
+          },
+          {
+            "text": "Les fees de gestion sont distribuées",
+            "correct": false
+          }
+        ],
+        "explanation": "La waterfall protège les LPs : ils récupèrent leur capital, puis le hurdle, avant que le GP ne perçoive son carried interest."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Simulateur de fund returns",
+        "kind": "simulator",
+        "ref": "fund-returns"
+      }
+    ]
+  },
+  {
+    "id": "l-fund-metrics",
+    "slug": "lire-les-metriques-d-un-fonds",
+    "courseId": "c-fund-economics",
+    "order": 2,
+    "title": "Lire les métriques d'un fonds",
+    "kicker": "DPI, TVPI, IRR",
+    "readMin": 12,
+    "summary": "Le langage par lequel on juge un GP : cash rendu, valeur latente, timing des flux et contexte de vintage.",
+    "body": "## Réalisé contre latent\n\nLes métriques d'un fonds répondent à deux questions différentes : **combien a-t-on réellement rendu ?** et **combien vaut encore le portefeuille sur le papier ?** La première question mesure la liquidité. La seconde mesure le potentiel restant, avec toute l'incertitude des valorisations privées.\n\n- **[[dpi|DPI]]** (Distributions to Paid-In) : distributions versées aux LPs / capital appelé. C'est le cash effectivement revenu.\n- **[[rvpi|RVPI]]** (Residual Value to Paid-In) : valeur résiduelle du portefeuille / capital appelé. C'est la partie encore latente.\n- **[[tvpi|TVPI]]** : DPI + RVPI. C'est la valeur totale, réalisée et latente, rapportée au capital appelé.\n- **[[moic|MOIC]]** : multiple brut de valeur. Il raconte le multiple, pas la vitesse.\n- **[[irr|IRR]]** : rendement annualisé. Il raconte le timing des flux, donc il peut être très sensible aux sorties précoces.\n\n## Exemple de lecture\n\nImaginons un fonds qui a appelé 40 M€ de capital. Il a déjà distribué 18 M€ aux LPs et conserve 70 M€ de valeur résiduelle dans le portefeuille.\n\n1. DPI = 18 / 40 = **0,45×**. Les LPs ont récupéré moins de la moitié du capital appelé.\n2. RVPI = 70 / 40 = **1,75×**. La plus grande partie de la valeur est encore latente.\n3. TVPI = 0,45 + 1,75 = **2,20×**. Le fonds semble créer beaucoup de valeur, mais environ 80 % de cette valeur dépend encore de futures sorties.\n\nLa lecture correcte n'est donc pas « excellent fonds » ni « mauvais fonds ». Elle est plus précise : le potentiel est élevé, mais le risque de conversion en cash reste central. La question suivante devient : quelle est la qualité des valorisations, quel est l'âge du fonds, et combien de sociétés peuvent encore sortir à bon prix ?\n\n## Le temps change le jugement\n\nDeux fonds peuvent afficher le même TVPI et raconter deux histoires opposées. Un TVPI de 2,5× avec un DPI de 1,4× est déjà très dérisqué. Un TVPI de 2,5× avec un DPI de 0,1× repose presque entièrement sur de la valeur résiduelle.\n\nL'IRR ajoute une autre couche : il récompense les distributions rapides. Un petit retour très tôt peut produire un IRR spectaculaire, alors qu'un multiple massif mais lent peut sembler moins impressionnant. C'est pour cela qu'il faut toujours replacer l'IRR dans la [[j-curve|J-curve]], l'âge du fonds et le [[vintage|vintage]].\n\n## Grille rapide\n\n- DPI bas + TVPI haut : valeur prometteuse, mais encore peu prouvée en cash.\n- DPI qui progresse : le fonds transforme la valeur latente en distributions, ce qui réduit le risque LP.\n- IRR très élevé dans un fonds jeune : signal intéressant, mais fragile tant que le DPI reste faible.\n- MOIC élevé avec IRR moyen : création de valeur réelle, mais sur un temps long.\n\n## Lire entre les chiffres\n\nUn LP expérimenté ne regarde jamais une seule métrique. Il croise DPI pour le réel, TVPI pour le potentiel, RVPI pour la part non encore réalisée, IRR pour le timing, et vintage pour le contexte de marché. Les chiffres mentent rarement, mais isolés, ils trompent souvent.",
+    "keyTakeaways": [
+      "DPI juge le cash rendu ; RVPI juge la valeur encore latente ; TVPI additionne les deux.",
+      "Un TVPI élevé n'est solide que si le DPI progresse et si les valorisations latentes sont crédibles.",
+      "IRR mesure le timing ; MOIC et TVPI mesurent un multiple, donc ils ne répondent pas à la même question.",
+      "Toujours replacer les métriques dans le vintage, l'âge du fonds et la phase de J-curve."
+    ],
+    "glossaryRefs": [
+      "dpi",
+      "tvpi",
+      "rvpi",
+      "moic",
+      "irr",
+      "j-curve",
+      "vintage"
+    ],
+    "quiz": [
+      {
+        "question": "Quelle métrique mesure le cash réellement distribué aux LPs ?",
+        "options": [
+          {
+            "text": "Le DPI",
+            "correct": true
+          },
+          {
+            "text": "Le RVPI",
+            "correct": false
+          },
+          {
+            "text": "Le TVPI",
+            "correct": false
+          }
+        ],
+        "explanation": "Le DPI rapporte les distributions déjà versées au capital appelé. C'est la métrique du cash effectivement rendu."
+      },
+      {
+        "question": "Un fonds affiche 0,45× de DPI et 1,75× de RVPI. Quelle lecture est la plus juste ?",
+        "options": [
+          {
+            "text": "La valeur est majoritairement latente, le cash rendu reste limité",
+            "correct": true
+          },
+          {
+            "text": "Le fonds a déjà remboursé tout son capital appelé",
+            "correct": false
+          },
+          {
+            "text": "L'IRR est nécessairement faible",
+            "correct": false
+          }
+        ],
+        "explanation": "Le TVPI est élevé, mais il vient surtout du RVPI. Le fonds doit encore convertir cette valeur résiduelle en distributions."
+      },
+      {
+        "question": "Pourquoi comparer deux IRR sans regarder le vintage et l'âge du fonds est risqué ?",
+        "options": [
+          {
+            "text": "Parce que le timing des flux et le contexte de marché peuvent amplifier la performance apparente",
+            "correct": true
+          },
+          {
+            "text": "Parce que l'IRR ignore totalement les distributions",
+            "correct": false
+          },
+          {
+            "text": "Parce que le vintage remplace toujours le DPI",
+            "correct": false
+          }
+        ],
+        "explanation": "L'IRR dépend fortement du calendrier des flux. Il doit être lu avec l'âge du fonds, la J-curve, le vintage et les multiples."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Lire TVPI, concentration et fund returner math",
+        "kind": "lesson",
+        "ref": "lpl-read-results"
+      },
+      {
+        "label": "Simulateur de fund returns (DPI/TVPI/MOIC)",
+        "kind": "simulator",
+        "ref": "fund-returns"
+      }
+    ]
+  },
+  {
+    "id": "l-founder-narrative",
+    "slug": "le-narratif-de-levee",
+    "courseId": "c-founder-raise",
+    "order": 1,
+    "title": "Le narratif de levée",
+    "kicker": "Côté fondateur",
+    "readMin": 8,
+    "summary": "Lever, c'est vendre une part du futur. Construire un récit crédible que le VC peut défendre en interne.",
+    "body": "## Penser comme l'autre côté de la table\n\nPour bien lever, un fondateur doit comprendre ce qu'un VC cherche : un dossier qui peut faire **10× ou plus**, porté par une équipe crédible, sur un marché capable d'absorber une réussite démesurée. Présenter une entreprise « solide et rentable bientôt » peut séduire une banque ; cela laisse souvent un VC indifférent.\n\n## L'anatomie d'un bon pitch\n\nUn [[pitch-deck|deck]] efficace raconte une histoire en quelques mouvements : le problème, pourquoi il devient urgent maintenant ([[why-now|why now]]), la solution, la preuve (traction), le marché, l'équipe, et ce que la levée permettra d'accomplir. La clarté prime sur la beauté.\n\n## Le mémo que le VC écrira pour vous\n\nUn fondateur avisé facilite le travail de l'investisseur : il lui donne les éléments pour défendre le deal **en interne**, devant le comité. Plus votre narratif est clair, plus le VC peut le porter avec conviction face à ses associés. Lever, ce n'est pas convaincre une personne — c'est armer un allié qui devra convaincre les autres.",
+    "keyTakeaways": [
+      "Le VC cherche du 10×+, pas une PME rentable.",
+      "Un deck raconte : problème, why now, solution, preuve, marché, équipe.",
+      "Armer le VC pour qu'il défende votre deal en interne."
+    ],
+    "glossaryRefs": [
+      "pitch-deck",
+      "why-now",
+      "deal-memo",
+      "pmf"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-founder-instruments",
+    "slug": "safe-priced-round-et-dilution",
+    "courseId": "c-founder-raise",
+    "order": 2,
+    "title": "SAFE, priced round & dilution",
+    "kicker": "Instruments",
+    "readMin": 9,
+    "summary": "Choisir le bon instrument et comprendre comment la dilution s'accumule sur plusieurs tours.",
+    "body": "## SAFE ou priced round ?\n\nAu tout début, on lève souvent via un [[safe|SAFE]] (ou son cousin français le BSA-AIR) : un instrument simple et rapide qui reporte la valorisation au tour suivant, moyennant un **cap** et/ou un **discount**. Il évite la lourdeur juridique d'un tour avec actions (*priced round*), mais empile des conversions futures qu'il faut suivre de près.\n\nLe **priced round** fixe une valorisation et émet des actions immédiatement. Plus lourd, mais plus clair sur la [[cap-table|cap table]].\n\n## La dilution s'accumule\n\nÀ chaque tour, les fondateurs cèdent une part. Une cession de 20 % au seed, puis 20 % en Series A, puis 15 % en Series B ne fait pas 55 % : les pourcentages se **composent** sur une base qui diminue. Le danger n'est pas un tour isolé, mais l'**empilement** sur la trajectoire complète — sans compter le pool d'options ([[esop|ESOP]]) qui dilue encore.\n\n## Négocier sans casser la relation\n\nUne levée crée une relation de dix ans. Sur-optimiser la valorisation d'un tour peut coûter cher plus tard : une valorisation trop haute crée la menace du *down round*, et des termes trop agressifs côté fondateur peuvent éloigner les meilleurs investisseurs. L'objectif n'est pas de gagner la négociation, mais de **construire un attelage durable**.",
+    "keyTakeaways": [
+      "SAFE/BSA-AIR : rapide, reporte la valorisation (cap + discount).",
+      "La dilution se compose sur plusieurs tours, plus l'ESOP.",
+      "Sur-optimiser un tour peut détruire de la valeur à long terme."
+    ],
+    "glossaryRefs": [
+      "safe",
+      "cap-table",
+      "dilution",
+      "esop",
+      "down-round",
+      "pre-money"
+    ],
+    "furtherReading": [
+      {
+        "label": "Simulateur de dilution",
+        "kind": "simulator",
+        "ref": "dilution"
+      }
+    ]
+  },
+  {
+    "id": "lmv-pre-post-ownership",
+    "slug": "pre-post-money-et-ownership",
+    "courseId": "c-mathematiques-vc",
+    "order": 1,
+    "title": "Pre/post-money et ownership",
+    "kicker": "La formule mère",
+    "readMin": 18,
+    "summary": "Poser un tour en trois lignes : pre-money, post-money, part investisseur, ownership cible et prix implicite.",
+    "body": "## La formule que tout le reste réutilise\n\nEn VC, beaucoup de calculs commencent par une égalité simple : **post-money = pre-money + montant investi**. La part de l'investisseur est ensuite : **montant investi / post-money**.\n\nExemple : une startup lève 4 M€ sur 12 M€ de [[pre-money|pre-money]]. La post-money vaut 16 M€. L'investisseur achète 4 / 16 = **25 %** de la société. Les actionnaires existants conservent 75 % de ce qu'ils détenaient avant le tour.\n\n## Lire l'ownership cible\n\nUn fonds ne raisonne pas seulement en ticket. Il raisonne en [[fund-returner|capacité à rendre le fonds]]. S'il investit 4 M€ et veut 15 % d'ownership, la post-money implicite est : 4 / 15 % = **26,7 M€**. La pre-money implicite est donc 22,7 M€.\n\nCe calcul permet de traduire une phrase floue (« on veut 12-15 % ») en valorisation réelle. En entretien, c'est souvent ce qu'on attend : passer du vocabulaire au chiffre.\n\n## Le piège classique\n\nNe divise jamais le montant investi par la pre-money pour calculer la part investisseur. 4 / 12 = 33 %, mais l'investisseur ne prend pas 33 % : il prend 4 / 16 = 25 %. La base correcte est toujours la post-money.\n\n## Réflexe entretien\n\nAnnonce la formule avant le résultat : « post = pre + investment ; ownership = investment / post ». Même si le chiffre final est simple, tu montres que ton raisonnement est propre.",
+    "keyTakeaways": [
+      "post-money = pre-money + montant investi.",
+      "Part investisseur = montant investi / post-money.",
+      "Une ownership cible se traduit directement en valorisation implicite."
+    ],
+    "glossaryRefs": [
+      "pre-money",
+      "valuation",
+      "fund-returner"
+    ],
+    "quiz": [
+      {
+        "question": "Une startup lève 5 M€ sur 15 M€ pre-money. Quelle part prend l'investisseur ?",
+        "options": [
+          {
+            "text": "25 %",
+            "correct": true
+          },
+          {
+            "text": "33 %",
+            "correct": false
+          },
+          {
+            "text": "20 %",
+            "correct": false
+          }
+        ],
+        "explanation": "La post-money vaut 20 M€. L'investisseur prend 5 / 20 = 25 %."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Pre-money / Post-money",
+        "kind": "simulator",
+        "ref": "pre-post-money"
+      },
+      {
+        "label": "Ownership & cap table",
+        "kind": "simulator",
+        "ref": "ownership"
+      }
+    ]
+  },
+  {
+    "id": "lmv-dilution-cap-table",
+    "slug": "dilution-cap-table-et-option-pool",
+    "courseId": "c-mathematiques-vc",
+    "order": 2,
+    "title": "Dilution, cap table et option pool",
+    "kicker": "Composer les pourcentages",
+    "readMin": 20,
+    "summary": "Comprendre pourquoi la dilution se compose tour après tour, et pourquoi l'ESOP pré-money change vraiment la répartition.",
+    "body": "## La dilution se compose\n\nLa [[dilution|dilution]] n'est pas une addition simple. Si un fondateur possède 60 %, puis subit 20 % de dilution au seed, il tombe à 48 %. S'il subit ensuite 25 % de dilution en Série A, il ne tombe pas à 23 % : il tombe à 48 % x 75 % = **36 %**.\n\nLa formule utile est : **part après = part avant x (1 - dilution du tour)**.\n\n## Lire une cap table sans paniquer\n\nUne [[cap-table|cap table]] raconte qui possède quoi avant et après le tour : fondateurs, salariés, investisseurs existants, nouveaux investisseurs. Le test n'est pas de connaître chaque ligne juridique ; c'est de voir qui est dilué, qui est protégé, et si les fondateurs restent suffisamment motivés.\n\n## L'option pool shuffle\n\nLe piège fréquent : créer ou augmenter l'[[esop|ESOP]] en pre-money. Si un investisseur demande un pool de 10 % avant son investissement, ce pool est supporté par les actionnaires existants, pas par le nouvel investisseur. La valorisation affichée peut donc être flatteuse tout en transférant plus de dilution aux fondateurs.\n\nExemple simplifié : fondateur à 50 %, tour de 25 % pour l'investisseur. Sans ESOP, il finit à 37,5 %. Avec un ESOP pré-money qui dilue les existants avant le tour, il finit plus bas. En entretien, l'important est de repérer le mécanisme, puis de poser la séquence : pool d'abord, investissement ensuite.\n\n## Le bon réflexe\n\nDemande toujours : la cap table est-elle calculée **fully diluted** ? Le pool est-il créé pre-money ou post-money ? Ces deux mots changent le vrai prix du deal.",
+    "keyTakeaways": [
+      "La dilution se compose : part après = part avant x (1 - dilution du tour).",
+      "Un ESOP pre-money dilue les actionnaires existants avant l'entrée du nouvel investisseur.",
+      "La question fully diluted / pre-money / post-money change le vrai prix du tour."
+    ],
+    "glossaryRefs": [
+      "dilution",
+      "cap-table",
+      "esop",
+      "pre-money"
+    ],
+    "quiz": [
+      {
+        "question": "Un fondateur possède 60 %, puis subit 20 % de dilution, puis 25 %. Quelle est sa part finale ?",
+        "options": [
+          {
+            "text": "36 %",
+            "correct": true
+          },
+          {
+            "text": "15 %",
+            "correct": false
+          },
+          {
+            "text": "45 %",
+            "correct": false
+          }
+        ],
+        "explanation": "La dilution se compose : 60 % x 80 % x 75 % = 36 %."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Simulateur de dilution",
+        "kind": "simulator",
+        "ref": "dilution"
+      },
+      {
+        "label": "Ownership & cap table",
+        "kind": "simulator",
+        "ref": "ownership"
+      }
+    ]
+  },
+  {
+    "id": "lmv-market-sizing",
+    "slug": "market-sizing-tam-sam-som",
+    "courseId": "c-mathematiques-vc",
+    "order": 3,
+    "title": "Market sizing : TAM, SAM, SOM",
+    "kicker": "Ordres de grandeur",
+    "readMin": 18,
+    "summary": "Construire un sizing bottom-up crédible, challenger les hypothèses et éviter le piège du 1 % d'un gros marché.",
+    "body": "## Les trois cercles\n\nLe [[tam-sam-som|TAM/SAM/SOM]] sert à passer d'un marché théorique à une opportunité réellement adressable.\n\n- **TAM** : toute la demande possible si le produit dominait le monde pertinent.\n- **SAM** : la demande réellement servable avec le produit, le prix, la géographie et le canal actuels.\n- **SOM** : la part capturable à horizon 3-5 ans.\n\n## Pourquoi le bottom-up gagne\n\nUn sizing top-down pur ressemble souvent à : « le marché vaut 10 Md€, donc 1 % suffit ». C'est rapide, mais paresseux. En VC early-stage, on préfère le bottom-up : nombre de clients réalistes x prix annuel x taux de pénétration.\n\nExemple : SaaS pour restaurants en France. 150 000 restaurants x 40 % adressables x 1 200 €/an = **72 M€ de SAM**. Si la société peut prendre 8 % en cinq ans, le SOM vaut environ **5,8 M€ d'ARR**.\n\n## Challenger sans te perdre\n\nUne bonne réponse donne un ordre de grandeur et montre sa sensibilité. Si le prix annuel tombe de 1 200 € à 600 €, le SAM tombe à 36 M€. Si le taux adressable est 25 % au lieu de 40 %, le SAM tombe à 45 M€. Tu ne cherches pas la précision comptable ; tu cherches la robustesse de l'opportunité.\n\n## Phrase utile en entretien\n\n« Je pars en bottom-up, puis je ferai une contre-vérification top-down. Mes hypothèses sont approximatives, donc je vais les rendre visibles. » Cette phrase rassure : tu n'essaies pas de deviner un chiffre magique, tu construis un raisonnement.",
+    "keyTakeaways": [
+      "TAM = tout, SAM = servable, SOM = capturable.",
+      "Le bottom-up est le standard : clients x prix x pénétration.",
+      "Un bon sizing montre la sensibilité aux hypothèses clés."
+    ],
+    "glossaryRefs": [
+      "tam-sam-som",
+      "arr"
+    ],
+    "quiz": [
+      {
+        "question": "Une boîte cible 60 000 clients à 1 200 €/an. Quel est son SAM ?",
+        "options": [
+          {
+            "text": "72 M€",
+            "correct": true
+          },
+          {
+            "text": "5 M€",
+            "correct": false
+          },
+          {
+            "text": "720 M€",
+            "correct": false
+          }
+        ],
+        "explanation": "60 000 x 1 200 € = 72 000 000 €, soit 72 M€ de SAM."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Dimensionner un marché en entretien",
+        "kind": "lesson",
+        "ref": "lea-market-sizing"
+      }
+    ]
+  },
+  {
+    "id": "lmv-unit-economics",
+    "slug": "unit-economics-cac-ltv-payback-rule-of-40",
+    "courseId": "c-mathematiques-vc",
+    "order": 4,
+    "title": "Unit economics : CAC, LTV, payback, Rule of 40",
+    "kicker": "Le moteur économique",
+    "readMin": 20,
+    "summary": "Lire si la croissance crée de la valeur : CAC, LTV, marge brute, payback, NRR, burn et Rule of 40.",
+    "body": "## Le test de base\n\nLes unit economics répondent à une question simple : chaque client gagné crée-t-il plus de valeur qu'il ne coûte ? En SaaS, le noyau est : [[cac|CAC]], [[ltv|LTV]], marge brute, payback et rétention.\n\nUn repère classique : **LTV/CAC > 3** et payback inférieur à 12-18 mois. Ce n'est pas une loi physique, mais un signal de répétabilité. Si une société achète sa croissance avec un CAC trop élevé et une rétention faible, elle remplit un seau percé.\n\n## Ne jamais lire la croissance seule\n\nUne croissance de 20 % par mois peut être excellente ou dangereuse. Si le [[nrr|NRR]] dépasse 100 %, la base client grossit même avant les nouveaux clients. Si le churn est élevé et que le CAC augmente, la croissance masque une fuite.\n\n## Rule of 40\n\nLa [[rule-of-40|Rule of 40]] additionne croissance annuelle et marge opérationnelle. 60 % de croissance avec -20 % de marge donne 40 : acceptable pour une scale-up. 25 % de croissance avec -40 % de marge donne -15 : le capital est mal converti.\n\n## Burn et runway\n\nLe [[burn-rate|burn]] et le [[runway|runway]] traduisent l'efficacité du capital en temps. Une société peut avoir de bons ratios unitaires mais trop peu de runway pour atteindre le prochain jalon. En entretien, relie toujours les métriques au stade : les attentes seed ne sont pas celles d'une Série B.",
+    "keyTakeaways": [
+      "LTV/CAC > 3 et payback < 12-18 mois sont des repères, pas des dogmes.",
+      "La croissance doit être lue avec la rétention, le CAC et la marge brute.",
+      "La Rule of 40 relie croissance et discipline économique."
+    ],
+    "glossaryRefs": [
+      "cac",
+      "ltv",
+      "gross-margin",
+      "nrr",
+      "rule-of-40",
+      "burn-rate",
+      "runway"
+    ],
+    "quiz": [
+      {
+        "question": "Une société croît de 55 % par an avec une marge opérationnelle de -10 %. Son score Rule of 40 est…",
+        "options": [
+          {
+            "text": "45",
+            "correct": true
+          },
+          {
+            "text": "65",
+            "correct": false
+          },
+          {
+            "text": "-45",
+            "correct": false
+          }
+        ],
+        "explanation": "Rule of 40 = croissance + marge opérationnelle = 55 + (-10) = 45."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Traction & unit economics",
+        "kind": "lesson",
+        "ref": "l-traction-unit-economics"
+      }
+    ]
+  },
+  {
+    "id": "lmv-returns-waterfall",
+    "slug": "returns-moic-irr-dpi-tvpi-waterfall",
+    "courseId": "c-mathematiques-vc",
+    "order": 5,
+    "title": "Returns, MOIC, IRR et waterfall",
+    "kicker": "Qui gagne quoi",
+    "readMin": 19,
+    "summary": "Passer du retour d'une ligne au retour d'un fonds : MOIC, IRR, DPI, TVPI et effet d'une liquidation preference.",
+    "body": "## MOIC et IRR ne racontent pas la même chose\n\nLe [[moic|MOIC]] mesure un multiple : 2x, 5x, 10x. Il ignore le temps. L'[[irr|IRR]] annualise le rendement et dépend fortement du calendrier des flux. 3x en 3 ans est très différent de 3x en 10 ans.\n\nRaccourci utile : si on te demande de comparer deux retours, demande toujours l'horizon. Sans durée, MOIC et IRR ne sont pas comparables.\n\n## DPI, TVPI et valeur latente\n\nAu niveau fonds, le [[dpi|DPI]] mesure le cash déjà rendu. Le [[tvpi|TVPI]] additionne cash rendu et valeur résiduelle. Un TVPI élevé avec DPI faible peut être prometteur, mais encore fragile : la valeur n'est pas convertie en distributions.\n\n## Waterfall et liquidation preference\n\nLa [[liquidation-preference|liquidation preference]] change la répartition à l'exit. Avec une préférence 1x non-participating, l'investisseur choisit généralement entre récupérer sa mise ou convertir en actions ordinaires si cela paie mieux. Avec des droits participating ou une seniority agressive, la [[exit-waterfall|waterfall]] peut transférer beaucoup de valeur aux investisseurs avant que les common reçoivent quelque chose.\n\n## Exemple rapide\n\nUn investisseur met 5 M€ pour 25 %. Exit à 12 M€. Sans préférence, il touche 3 M€. Avec une liquidation preference 1x, il touche 5 M€. À 40 M€ d'exit, sa conversion vaut 10 M€, donc il convertit. La préférence protège le downside ; elle change surtout les exits modestes.\n\n## Le lien avec l'ownership cible\n\nUn fonds vise une part suffisante parce qu'un gros exit doit compter au niveau du véhicule. Si le fonds fait 100 M€ et possède 5 % d'une sortie à 500 M€, il reçoit 25 M€ : très bien pour la ligne, mais pas forcément un fund returner. Les maths du VC relient toujours ticket, ownership, exit possible et taille du fonds.",
+    "keyTakeaways": [
+      "MOIC mesure le multiple ; IRR mesure le multiple annualisé dans le temps.",
+      "DPI = cash rendu ; TVPI = cash rendu + valeur latente.",
+      "La liquidation preference change surtout les exits modestes."
+    ],
+    "glossaryRefs": [
+      "moic",
+      "irr",
+      "dpi",
+      "tvpi",
+      "liquidation-preference",
+      "exit-waterfall",
+      "fund-returner"
+    ],
+    "quiz": [
+      {
+        "question": "Un investisseur met 5 M€ pour 25 %. Exit à 12 M€ avec liquidation preference 1x non-participating. Que choisit-il ?",
+        "options": [
+          {
+            "text": "Récupérer 5 M€ via la préférence",
+            "correct": true
+          },
+          {
+            "text": "Convertir pour toucher 3 M€",
+            "correct": false
+          },
+          {
+            "text": "Toucher 12 M€",
+            "correct": false
+          }
+        ],
+        "explanation": "Sa conversion vaut 25 % x 12 M€ = 3 M€. La préférence 1x lui rend 5 M€, donc elle est meilleure."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Fund returns : DPI / TVPI / MOIC",
+        "kind": "simulator",
+        "ref": "fund-returns"
+      },
+      {
+        "label": "Waterfall simplifiée",
+        "kind": "simulator",
+        "ref": "waterfall"
+      }
+    ]
+  },
+  {
+    "id": "l-career-levels",
+    "slug": "les-echelons-du-venture",
+    "courseId": "c-career",
+    "order": 1,
+    "title": "Les échelons du venture",
+    "kicker": "Trajectoire",
+    "readMin": 7,
+    "summary": "Ce que chaque niveau attend réellement, et comment on progresse de l'exécution vers la décision.",
+    "body": "## Une progression de responsabilité\n\nEntrer dans le venture, c'est entrer par l'**exécution** et progresser vers la **décision**. Les attentes par échelon :\n\n- **Analyst** : produire de la matière fiable — recherche de marché, sourcing, modèles. On juge votre rigueur et votre curiosité.\n- **Associate** : autonomie sur la DD et les mémos, suivi de participations. On juge votre jugement émergent et votre fiabilité.\n- **Principal** : porter des deals, siéger à des boards, défendre des convictions. On juge votre capacité à décider et à entraîner.\n- **Partner** : engager le fonds, lever auprès des LPs, détenir le [[carry|carry]]. On juge votre track record et votre réseau.\n\n## La transition critique\n\nLa marche la plus difficile est celle du **droit de signer** : passer de « je prépare la décision » à « j'assume la décision, succès ou échec ». Beaucoup d'excellents associates n'y accèdent jamais, non par manque de technique, mais par manque de **jugement propriétaire** et de conviction assumée.\n\n## Patience structurelle\n\nLe métier se juge sur des cycles de dix ans. Un investissement fait aujourd'hui ne révèle son résultat que dans une décennie. La progression de carrière épouse cette lenteur : la patience n'est pas une vertu accessoire, c'est une compétence centrale.",
+    "keyTakeaways": [
+      "On progresse de l'exécution (analyst) vers la décision (partner).",
+      "La marche clé : acquérir le droit de signer et l'assumer.",
+      "Le métier se juge sur dix ans ; la patience est une compétence."
+    ],
+    "glossaryRefs": [
+      "carry",
+      "gp",
+      "ic"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "l-career-breaking-in",
+    "slug": "entrer-dans-un-fonds",
+    "courseId": "c-career",
+    "order": 2,
+    "title": "Entrer dans un fonds",
+    "kicker": "Recrutement",
+    "readMin": 8,
+    "summary": "Comment on entre vraiment dans le venture, et comment préparer les entretiens spécifiques au métier.",
+    "body": "## Les portes d'entrée\n\nIl n'existe pas de voie unique vers le venture. Les profils fréquents : anciens fondateurs ou operators, consultants et banquiers (pour la rigueur analytique), experts sectoriels profonds, et profils techniques. Le point commun des bons candidats : une **compréhension réelle du métier** et un **angle propre** — une thèse, un réseau, une expertise que le fonds n'a pas.\n\n## Se rendre visible\n\nLe venture recrute beaucoup par réseau et réputation. Écrire publiquement (thèses, analyses), sourcer des deals utiles pour un fonds, ou aider des fondateurs : autant de moyens de **démontrer** plutôt que de revendiquer. Le scout-ing — repérer des startups pour un fonds — est une porte d'entrée classique.\n\n## Préparer l'entretien VC\n\nLes entretiens comportent souvent des exercices spécifiques :\n\n- **Stock pitch / deal memo** : présenter une startup que vous financeriez, et défendre la thèse.\n- **Market sizing** : estimer un marché à voix haute, en assumant ses hypothèses.\n- **Cas de cap table / dilution** : raisonner sur une structure de deal.\n- **« Pourquoi le venture, pourquoi nous »** : montrer que vous comprenez la thèse et la culture du fonds.\n\nLe meilleur entraînement : penser comme un investisseur au quotidien, sur de vraies entreprises, avant même d'en être un.",
+    "keyTakeaways": [
+      "Pas de voie unique ; ce qui compte, c'est un angle propre.",
+      "Démontrer (écrire, sourcer, scouter) plutôt que revendiquer.",
+      "Préparer deal memo, market sizing et cas de cap table."
+    ],
+    "glossaryRefs": [
+      "deal-memo",
+      "thesis-driven",
+      "scout",
+      "tam-sam-som"
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "lea-process",
+    "slug": "la-carte-de-l-entonnoir",
+    "courseId": "c-entretien-analyst",
+    "order": 1,
+    "title": "La carte de l'entonnoir",
+    "kicker": "Comprendre le jeu",
+    "readMin": 5,
+    "summary": "Les 3-4 tours d'un process analyst et ce que chacun teste vraiment — pour ne plus jamais jouer la mauvaise partition.",
+    "body": "## Un process analyst tient en 3 à 4 tours\n\nChaque tour teste une chose précise. Sache laquelle.\n\n- **Tour 1 — screening / fit.** Pourquoi le VC, pourquoi ce fonds, motivation solide ou opportuniste. *Ton job : une motivation informée, jamais générique.*\n- **Tour 2 — technique / analytique.** Ta tête d'investisseur : juger un business model, poser les bonnes questions, raisonner sous incertitude. *Ton job : penser à voix haute, structurer.*\n- **Tour 3 — case study** (take-home ou live, souvent 3e tour et +). Produire une reco défendable. *Ton job : une reco claire invest/pass + 3 risques.*\n- **Tour 4 — équipe / partners.** Culture, conviction long terme, parfois le salaire. *Ton job : être toi, poser de bonnes questions.*\n\n## Trois repères qui changent tout\n\n- Le **case apparaît dans ~70 %** des process et arrive **tard** — c'est souvent là que ça se joue.\n- Le **fit gate dès le tour 1** : un bon technicien mal motivé est éliminé avant de briller.\n- Le **technique pur (gros modèle Excel) est rare** en early-stage : on teste le jugement.\n\n> **Erreur fatale :** arriver au case sans format choisi (1-pager **ou** 4 slides). Tu perds 20 min sur la forme au lieu du fond.",
+    "keyTakeaways": [
+      "Chaque tour a un examinateur et un critère.",
+      "Fit d'abord, cerveau d'investisseur ensuite, livrable au bout.",
+      "Le case (~70 % des process) arrive tard : prépare-le."
+    ],
+    "glossaryRefs": [],
+    "quiz": [
+      {
+        "question": "À quel moment arrive généralement le case study dans un process VC ?",
+        "options": [
+          {
+            "text": "Tard, au 3e tour et au-delà",
+            "correct": true
+          },
+          {
+            "text": "Dès le premier appel de screening",
+            "correct": false
+          },
+          {
+            "text": "Il n'y en a jamais pour un analyst",
+            "correct": false
+          }
+        ],
+        "explanation": "Le case apparaît dans ~70 % des process et arrive tard : c'est souvent l'épreuve décisive."
+      }
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "lea-grille",
+    "slug": "la-grille-de-l-investisseur",
+    "courseId": "c-entretien-analyst",
+    "order": 2,
+    "title": "La grille de l'investisseur",
+    "kicker": "Le socle",
+    "readMin": 7,
+    "summary": "Équipe, Marché, Produit, Traction, Moat : la seule grille que tu réutiliseras à chaque question, chaque case, chaque pitch.",
+    "body": "## La grille universelle\n\nTout se lit avec : **Équipe · Marché · Produit · Traction · Moat** (+ Deal & Timing). Une seule faiblesse peut tuer un dossier.\n\n- **Équipe** — le facteur n°1 au début. Expertise du domaine, [[founder-market-fit|founder-market fit]], grit, et l'**agency** (« quoi qu'il arrive, ce fondateur trouvera un moyen »).\n- **Marché** — là où meurent la plupart des dossiers. Venture-scale : assez grand pour un [[fund-returner|fund-returner]] (souvent ≥ 1 Md€ de [[tam-sam-som|TAM]]). Petit/commoditisé/déclinant = pass par défaut. Soigne le [[why-now|why now]].\n- **Produit** — 10× mieux, pas 10 % mieux. Antidouleur, pas vitamine.\n- **Traction** — la barre monte par stade : pré-seed = signaux, seed = revenus + rétention, Série A = [[pmf|PMF]] prouvé.\n- **Moat** — « qu'est-ce qui empêche un concurrent bien financé de copier ? » Effets de réseau, donnée, régulation, switching costs, complexité. Nommable en une phrase.\n\n## Mini-exercice (corrigé) — livraison de repas bio, Lyon, pré-seed\n\nÉquipe : 2 ex-Deliveroo + 1 chef → fit fort. Marché : food delivery commoditisé et brûlé en capital → drapeau orange. Produit : « bio + local » marginal. Traction : 800 commandes/sem, rétention M3 35 % → correct. Moat : faible. **Verdict : pass** — on tue sur le marché et le moat, pas sur l'équipe.\n\n> **En entretien :** face à n'importe quelle boîte, déroule la grille à voix haute. Tu parais structuré et tu ne sèches jamais.",
+    "keyTakeaways": [
+      "Équipe, Marché, Produit, Traction, Moat — une faiblesse peut suffire.",
+      "Le marché est le tueur n°1 des dossiers.",
+      "Déroule la grille à voix haute sur toute question."
+    ],
+    "glossaryRefs": [
+      "founder-market-fit",
+      "fund-returner",
+      "tam-sam-som",
+      "why-now",
+      "pmf"
+    ],
+    "quiz": [
+      {
+        "question": "En early-stage, quel facteur pèse le plus dans la décision ?",
+        "options": [
+          {
+            "text": "L'équipe",
+            "correct": true
+          },
+          {
+            "text": "Un produit déjà fini",
+            "correct": false
+          },
+          {
+            "text": "La valorisation",
+            "correct": false
+          }
+        ],
+        "explanation": "Au pré-seed/seed, on parie d'abord sur les gens : expertise du domaine, grit, et l'agency du fondateur."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Lire une startup : équipe & marché",
+        "kind": "lesson",
+        "ref": "l-team-market"
+      }
+    ]
+  },
+  {
+    "id": "lea-market-sizing",
+    "slug": "dimensionner-un-marche",
+    "courseId": "c-entretien-analyst",
+    "order": 3,
+    "title": "Dimensionner un marché (TAM / SAM / SOM)",
+    "kicker": "Compétence testée en direct",
+    "readMin": 8,
+    "summary": "Sache dérouler un market sizing au tableau, en bottom-up, hypothèses annoncées — deux exemples chiffrés à l'appui.",
+    "body": "## Les trois cercles\n\n- **[[tam-sam-som|TAM]]** — toute la demande possible (blue sky).\n- **SAM** — la part servable avec ton produit, ton prix, ta géo, ton go-to-market.\n- **SOM** — ce que tu captures réalistement en 3-5 ans.\n\n## Deux méthodes — et laquelle privilégier\n\n- **Top-down** : macro (rapport) → filtres. Rapide, mais **les investisseurs s'en méfient** (facile à gonfler : « 1 % d'un marché de 100 Md€ »).\n- **Bottom-up** : 1 client × volume. **Le standard early-stage. Mène toujours en bottom-up**, contre-vérifie en top-down. Convergence à ±15 % = hypothèses solides.\n\n## Exemple 1 — SaaS pour restaurants, France\n\n~150 000 restaurants cibles × ~40 % adressables = 60 000 × 1 200 €/an = **72 M€ de SAM**. SOM à 5 ans (~8 %) ≈ **5,8 M€ d'ARR**. *Contrôle top-down : cohérent avec un segment FR de dizaines de M€.*\n\n## Exemple 2 — appli de coaching sportif B2C, Europe\n\n50 M d'utilisateurs cibles × 3 % de conversion payante = 1,5 M d'abonnés × 80 €/an = **120 M€ de SAM**. SOM à 3 ans (~5 %) ≈ 6 M€.\n\n## Les pièges qui te grillent\n\nTop-down seul · confondre TAM et SAM · hypothèses cachées (**annonce-les**) · oublier le why-now.\n\n> **Au tableau :** dis tes hypothèses, écris la formule, donne l'ordre de grandeur, puis challenge-toi (« si l'ARPU est 2× plus bas, le SAM tombe à 36 M€ — encore venture-scale ? »).",
+    "keyTakeaways": [
+      "TAM (tout) → SAM (servable) → SOM (3-5 ans).",
+      "Mène en bottom-up, contre-vérifie en top-down.",
+      "Annonce tes hypothèses à voix haute — c'est ce qu'on évalue."
+    ],
+    "glossaryRefs": [
+      "tam-sam-som",
+      "why-now",
+      "arr"
+    ],
+    "quiz": [
+      {
+        "question": "Quelle méthode de market sizing privilégier en early-stage ?",
+        "options": [
+          {
+            "text": "Bottom-up (et contre-vérifier en top-down)",
+            "correct": true
+          },
+          {
+            "text": "Top-down uniquement",
+            "correct": false
+          },
+          {
+            "text": "Aucune, on cite un rapport",
+            "correct": false
+          }
+        ],
+        "explanation": "Les investisseurs se méfient du top-down (facile à gonfler). Le bottom-up, ancré sur des unités réelles, est le standard."
+      }
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "lea-read-startup",
+    "slug": "lire-une-startup-unit-economics",
+    "courseId": "c-entretien-analyst",
+    "order": 4,
+    "title": "Lire une startup + unit economics",
+    "kicker": "Les chiffres qui comptent",
+    "readMin": 7,
+    "summary": "Du déclaratif au chiffré : les métriques qui comptent, la barre par stade, et le réflexe croissance + rétention.",
+    "body": "## La grille, mais avec des chiffres\n\nLes métriques que tu dois lire et commenter :\n\n- **Croissance** : MoM en early-stage (15-20 %/mois = fort en seed), YoY ensuite.\n- **Rétention** : la métrique reine. Des cohortes qui se stabilisent (≠ tendent vers zéro). En SaaS : [[nrr|NRR]] > 100 % = la base se densifie seule.\n- **Unit economics** : [[cac|CAC]], [[ltv|LTV]], ratio **LTV/CAC > 3**, **CAC payback < 12-18 mois**, [[gross-margin|marge brute]] (un « SaaS » à 40 % de marge n'en est pas vraiment un).\n- **Efficience du capital** : [[burn-rate|burn]], [[runway|runway]], [[rule-of-40|Rule of 40]] (croissance % + marge % ≥ 40).\n\n## La barre par stade\n\n| Stade | Ce qu'on attend | Repère 2026 |\n|---|---|---|\n| Pré-seed | Signaux de demande | waitlist, pilotes, beta actifs |\n| Seed | Revenus + rétention | ~0,1-0,5 M€ d'[[arr|ARR]] |\n| Série A | PMF prouvé | ~2,5 M€ d'ARR, LTV/CAC > 3 |\n\n> **Question piège :** « ça croît de 30 %/mois, tu fonces ? » → « ça dépend de la **rétention** et du **CAC** : une croissance dopée au paid non rentable avec churn élevé, c'est un seau percé. Montre-moi les cohortes. »",
+    "keyTakeaways": [
+      "Croissance ET rétention, jamais l'une sans l'autre.",
+      "LTV/CAC > 3, CAC payback < 18 mois.",
+      "La barre de traction monte à chaque stade."
+    ],
+    "glossaryRefs": [
+      "nrr",
+      "cac",
+      "ltv",
+      "gross-margin",
+      "burn-rate",
+      "runway",
+      "rule-of-40",
+      "arr",
+      "pmf"
+    ],
+    "quiz": [
+      {
+        "question": "Une croissance forte mais avec un churn élevé, c'est…",
+        "options": [
+          {
+            "text": "Un seau percé",
+            "correct": true
+          },
+          {
+            "text": "Un signal suffisant pour investir",
+            "correct": false
+          },
+          {
+            "text": "Sans importance au early-stage",
+            "correct": false
+          }
+        ],
+        "explanation": "Sans rétention, la croissance ne fait que remplir un seau percé. On regarde toujours les cohortes."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Traction & unit economics",
+        "kind": "lesson",
+        "ref": "l-traction-unit-economics"
+      }
+    ]
+  },
+  {
+    "id": "lea-technical",
+    "slug": "les-questions-techniques",
+    "courseId": "c-entretien-analyst",
+    "order": 5,
+    "title": "Les questions techniques",
+    "kicker": "Les calculs qui tombent",
+    "readMin": 7,
+    "summary": "Cap table, dilution, returns : pas de gros modèle, mais ces calculs-là tombent. Sache-les de tête.",
+    "body": "## Cap table & dilution — le calcul incontournable\n\n*« Une fondatrice détient 50 % avant une Série A. Elle lève 5 M€ sur une pre-money de 15 M€. Que devient sa part ? »*\n- Post-money = 15 + 5 = **20 M€**.\n- Part de l'investisseur = 5 / 20 = **25 %**.\n- Fondatrice = 50 % × (1 − 25 %) = **37,5 %**.\n- **Piège de l'[[esop|option pool]] :** créer un pool de 10 % en pre-money dilue les **actionnaires existants** → la fondatrice tombe sous 37,5 %.\n\nFormule clé : part de l'investisseur = montant ÷ post-money. Entraîne-toi sur les simulateurs `pre-post-money`, `ownership`, `dilution`.\n\n## Returns — le langage des fonds\n\n- **[[moic|MOIC]]** = combien de fois la mise. Simple, mais **ignore le temps**.\n- **[[irr|IRR]]** = rendement annualisé, **intègre le temps**. 3× en 3 ans ≫ 3× en 10 ans.\n- **[[dpi|DPI]]** (réalisé) et **[[tvpi|TVPI]]** (réalisé + latent).\n- Lien power-law : chaque ligne doit pouvoir « rendre le fonds » → ownership targets 10-20 % + [[follow-on|follow-on]].\n\n## Term sheet — niveau analyst (comprendre, pas négocier)\n\n[[liquidation-preference|Liquidation preference]] (1× non-participating = sain), [[anti-dilution|anti-dilution]], [[pro-rata|pro-rata]], [[vesting|vesting]]. Juste savoir **qui touche quoi**.\n\n> **Question piège :** « 30 % d'IRR ou un MOIC de 5× ? » → « ça dépend de l'horizon : 5× sur 10 ans ≈ 17 % d'IRR ; 30 % d'IRR sur 4 ans ≈ 2,9×. Sans la durée, on ne compare pas. »",
+    "keyTakeaways": [
+      "post-money = pre + montant ; part = montant / post-money.",
+      "Méfie-toi de l'option pool shuffle.",
+      "IRR intègre le temps, MOIC non."
+    ],
+    "glossaryRefs": [
+      "esop",
+      "dilution",
+      "moic",
+      "irr",
+      "dpi",
+      "tvpi",
+      "follow-on",
+      "liquidation-preference",
+      "anti-dilution",
+      "pro-rata",
+      "vesting"
+    ],
+    "quiz": [
+      {
+        "question": "Un fondateur détient 50 %, lève 4 M€ sur 12 M€ pre-money. Sa part après le tour ?",
+        "options": [
+          {
+            "text": "37,5 %",
+            "correct": true
+          },
+          {
+            "text": "50 %",
+            "correct": false
+          },
+          {
+            "text": "25 %",
+            "correct": false
+          }
+        ],
+        "explanation": "Post-money = 16 M€ ; l'investisseur prend 4/16 = 25 % ; le fondateur : 50 % × 0,75 = 37,5 %."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Ownership & cap table",
+        "kind": "simulator",
+        "ref": "ownership"
+      },
+      {
+        "label": "Fund returns : DPI / TVPI / MOIC",
+        "kind": "simulator",
+        "ref": "fund-returns"
+      }
+    ]
+  },
+  {
+    "id": "lea-deal-memo",
+    "slug": "le-deal-memo",
+    "courseId": "c-entretien-analyst",
+    "order": 6,
+    "title": "Le deal memo",
+    "kicker": "Le document roi",
+    "readMin": 8,
+    "summary": "La synthèse écrite d'une reco d'investissement — structure attendue et un exemple modèle entièrement déroulé.",
+    "body": "## Le document roi\n\nUne page (400-600 mots) en screening. La structure attendue :\n\n1. **Recommandation** (invest / pass) **en haut**, en une phrase.\n2. **L'entreprise** — quoi, pour qui, quel problème.\n3. **Le marché** — taille bottom-up, croissance, why-now.\n4. **L'équipe** — pourquoi eux.\n5. **La traction** — chiffres clés.\n6. **Business model & économie** — unit economics.\n7. **Les 3 risques** hiérarchisés + mitigations.\n8. **Le deal** — montant, stade, valo, ownership.\n\n**Ce que les correcteurs veulent :** une reco assumée, **zéro erreur grossière**, **3 risques hiérarchisés**, et idéalement la preuve que tu as **parlé à 2-3 personnes** du secteur.\n\n## Exemple modèle (~480 mots)\n\n**Recommandation : INVEST** (seed 800 k€, ownership ~10 %).\n\n**Entreprise.** *Atelier* édite un logiciel de conformité environnementale (CSRD) pour PME industrielles européennes — il automatise ce que des consultants font à la main.\n\n**Marché.** ~50 000 PME concernées. Bottom-up : 50 000 × 40 % × 8 000 €/an ≈ **160 M€ de SAM**, en forte croissance (vague réglementaire 2024-2027). *Why-now : l'obligation crée une demande non-discrétionnaire maintenant.*\n\n**Équipe.** CEO ex-directrice RSE (a vécu le problème), CTO ex-Pennylane. **Founder-market fit fort.**\n\n**Traction.** 18 clients payants en 9 mois, 22 k€ de [[mrr|MRR]], +25 %/mois, rétention logo 100 %.\n\n**Économie.** SaaS, ~80 % de marge, ACV 8 k€, CAC payback ~10 mois, [[ltv|LTV]]/[[cac|CAC]] ~4.\n\n**Risques.** (1) *Dépendance réglementaire* (report CSRD) → mitigé par l'élargissement à d'autres normes. (2) *Cycle de vente PME long* → canal expert-comptable. (3) *Concurrence des grands éditeurs* → fenêtre de 18 mois.\n\n**Deal.** Seed 800 k€, pre-money ~7 M€, ownership ~10 %.\n\n> *Pourquoi ça marche : reco en haut, marché bottom-up, 3 risques hiérarchisés + mitigations, why-now béton.*",
+    "keyTakeaways": [
+      "Reco en haut, jamais de suspense.",
+      "Marché en bottom-up, 3 risques hiérarchisés + mitigations.",
+      "Pas d'erreur grossière ; parle à des gens du secteur."
+    ],
+    "glossaryRefs": [
+      "deal-memo",
+      "mrr",
+      "ltv",
+      "cac",
+      "why-now",
+      "dd"
+    ],
+    "quiz": [
+      {
+        "question": "Que doit contenir la première ligne d'un deal memo ?",
+        "options": [
+          {
+            "text": "La recommandation invest / pass",
+            "correct": true
+          },
+          {
+            "text": "La biographie des fondateurs",
+            "correct": false
+          },
+          {
+            "text": "Les clauses juridiques",
+            "correct": false
+          }
+        ],
+        "explanation": "Pas de suspense : la reco en haut, en une phrase. Le correcteur doit savoir où tu vas en 5 secondes."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Due diligence en pratique",
+        "kind": "lesson",
+        "ref": "l-dd-process"
+      }
+    ]
+  },
+  {
+    "id": "lea-case-study",
+    "slug": "le-case-study",
+    "courseId": "c-entretien-analyst",
+    "order": 7,
+    "title": "Le case study",
+    "kicker": "L'épreuve reine",
+    "readMin": 7,
+    "summary": "Formats, méthode en 5 temps, et l'erreur fatale : ne pas trancher. On embauche des gens qui décident.",
+    "body": "## Les formats\n\nTake-home (quelques jours, memo ou deck) **ou** live (1-2 h). On te donne un [[pitch-deck|deck]] ou des données, on attend une reco **invest/pass**. Souvent : **1-pager OU 4 slides** — choisis **à l'avance** lequel tu maîtrises.\n\n## La méthode en 5 temps\n\n1. **Cadrer (5 min)** — stade, ticket, décision ? Pose tes hypothèses.\n2. **Dérouler la grille** — Équipe → Marché ([[tam-sam-som|sizing]] bottom-up) → Produit → Traction → Moat → Deal. Un constat + un risque par pilier.\n3. **Trancher** — reco claire. Si invest : à quelles conditions ; si pass : ce qui te ferait changer d'avis.\n4. **Hiérarchiser 3 risques** + mitigations.\n5. **Présenter (live)** — 5 min top-line : reco d'abord, 2-3 raisons, puis risques.\n\n**Ce qui distingue :** parler à 2-3 personnes du secteur (faisable même en 24 h), anticiper les contre-questions.\n\n> **Erreur fatale :** ne pas trancher. Un case sans reco nette = échec, même avec une analyse brillante. On embauche des gens qui **décident**.\n\n## Ton mock\n\n« Voici le deck d'Atelier (CSRD, seed 800 k€). 60 minutes. Rends un 1-pager : invest ou pass, pourquoi. » Chronomètre-toi. La grille d'évaluation est dans la leçon « Le mock complet ».",
+    "keyTakeaways": [
+      "Cadre → grille → tranche → 3 risques → présente reco d'abord.",
+      "Décider est non-négociable.",
+      "Choisis ton format de case à l'avance."
+    ],
+    "glossaryRefs": [
+      "pitch-deck",
+      "tam-sam-som",
+      "dd"
+    ],
+    "quiz": [
+      {
+        "question": "Quelle est l'erreur fatale en case study ?",
+        "options": [
+          {
+            "text": "Ne pas trancher (pas de reco nette)",
+            "correct": true
+          },
+          {
+            "text": "Rendre un livrable trop court",
+            "correct": false
+          },
+          {
+            "text": "Citer un concurrent",
+            "correct": false
+          }
+        ],
+        "explanation": "Une analyse brillante sans recommandation claire échoue : le métier consiste à décider."
+      }
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "lea-pitch",
+    "slug": "pitch-me-a-company",
+    "courseId": "c-entretien-analyst",
+    "order": 8,
+    "title": "« Pitch me a company »",
+    "kicker": "La question signature",
+    "readMin": 6,
+    "summary": "Présenter une startup que le fonds devrait financer — l'enjeu est de montrer que tu penses comme un investisseur.",
+    "body": "## L'enjeu\n\nPrésenter une startup que le fonds devrait financer. On teste si **tu penses comme un investisseur** et **communiques clair** — pas la boîte elle-même.\n\n## Sélection\n\n- Un secteur **que tu connais** (tu tiendras les follow-ups).\n- Une boîte qui **colle au fonds** : son **stade** et sa **[[thesis-driven|thèse]]**. (Pitcher une Série C à un fonds seed = élimination directe.)\n\n## Structure (2-3 min)\n\n1. **La thèse en une phrase** (« je crois X, donc Y devient inévitable »).\n2. **Problème** + pour qui.\n3. **Produit / UVP** — pourquoi 10× mieux.\n4. **Marché** — bottom-up + [[why-now|why-now]].\n5. **Équipe & traction**.\n6. **Risques** — assume-les + ce qui te ferait changer d'avis.\n\n## Prépare les follow-ups\n\n« Qu'est-ce qui te ferait changer d'avis ? » · « Pourquoi pas le concurrent X ? » · « Le moat dans 5 ans ? » · « À quelle valo tu n'investirais plus ? »\n\n> **Squelette :** *Thèse :* « l'électrification des flottes rend le pilotage de recharge critique. » → *Boîte :* logiciel B2B de recharge. → *Marché :* nb de flottes × budget énergie. → *Risque :* intégration native par les constructeurs.",
+    "keyTakeaways": [
+      "Thèse d'abord, puis problème / produit / marché / risques.",
+      "Colle au stade et à la thèse du fonds.",
+      "Prépare 4 follow-ups — c'est là qu'on te juge vraiment."
+    ],
+    "glossaryRefs": [
+      "thesis-driven",
+      "why-now",
+      "tam-sam-som"
+    ],
+    "quiz": [
+      {
+        "question": "Une boîte à « pitcher » en entretien doit surtout…",
+        "options": [
+          {
+            "text": "Coller au stade et à la thèse du fonds",
+            "correct": true
+          },
+          {
+            "text": "Être la plus connue possible",
+            "correct": false
+          },
+          {
+            "text": "Être déjà rentable",
+            "correct": false
+          }
+        ],
+        "explanation": "Pitcher hors du stade/thèse du fonds montre que tu n'as pas compris à qui tu parles : élimination directe."
+      }
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "lea-fit",
+    "slug": "le-fit-why-vc-why-fund-why-you",
+    "courseId": "c-entretien-analyst",
+    "order": 9,
+    "title": "Le fit : why VC / why this fund / why you",
+    "kicker": "Convaincre",
+    "readMin": 7,
+    "summary": "Le tour qu'on néglige et qui élimine le plus. Réponses-types, framework STAR, et ta thèse perso.",
+    "body": "## Le tour qui élimine le plus\n\n**« Why VC ? »** ✅ enthousiasme sincère pour l'**early-stage** (rencontrer des fondateurs, comprendre le scaling, parier sur l'avenir), relié à **ton parcours**. ❌ « c'est prestigieux », « j'aime la finance » → tu fizzles, et ils le savent.\n\n**« Why this fund ? »** ✅ cite leur **thèse**, 2-3 **boîtes du portefeuille** et pourquoi, leur stade/secteur, un **deal récent** ou un article d'un partner. Relie à **ton edge**. ❌ « vous êtes un top fonds » = pas préparé = pass.\n\n**« Why you ? »** ton **edge** (réseau, expertise sectorielle, expérience opérateur, analyse prouvée). **Montre** plutôt que dis (une analyse que tu as écrite). Faiblesse : une vraie, avec ta correction.\n\n**Comportemental — framework STAR(L) :** Situation, Tâche, **Action** (ce que **tu** as fait), **Résultat** (chiffré), **Learning**. Prépare 4-5 histoires réutilisables.\n\n**Ta thèse perso :** un secteur + un why-now + un type de boîte, en 3 phrases, falsifiable. Le plus fort signal de « cette personne pense déjà comme nous ».\n\n> **Modèle « why VC » :** « En stage chez [startup], j'ai vu [problème de scaling] de l'intérieur. J'ai adoré ce point de bascule où une idée devient une entreprise — et été frustré de ne voir qu'**une** boîte à la fois. Le VC me met du bon côté : rencontrer des dizaines de fondateurs, parier tôt, aider à construire. »",
+    "keyTakeaways": [
+      "Sincérité + spécificité battent tout.",
+      "Why this fund = leur thèse + des boîtes du portefeuille nommées.",
+      "Aie une thèse perso falsifiable en 3 phrases."
+    ],
+    "glossaryRefs": [
+      "thesis-driven"
+    ],
+    "quiz": [
+      {
+        "question": "Une bonne réponse à « why this fund ? » contient…",
+        "options": [
+          {
+            "text": "Leur thèse + des boîtes du portefeuille commentées",
+            "correct": true
+          },
+          {
+            "text": "« vous êtes les meilleurs »",
+            "correct": false
+          },
+          {
+            "text": "Le salaire que tu attends",
+            "correct": false
+          }
+        ],
+        "explanation": "Cette question teste si tu as fait tes devoirs. Du générique = pas préparé = pass."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Entrer dans le venture : les portes d'entrée",
+        "kind": "lesson",
+        "ref": "l-career-breaking-in"
+      }
+    ]
+  },
+  {
+    "id": "lea-reverse-questions",
+    "slug": "tes-questions-a-poser",
+    "courseId": "c-entretien-analyst",
+    "order": 10,
+    "title": "Tes questions à poser",
+    "kicker": "Bonus",
+    "readMin": 4,
+    "summary": "Tes questions parlent autant que tes réponses : taillées pour ce fonds, elles révèlent un cerveau d'investisseur.",
+    "body": "## Tes questions sont un test de plus\n\nTaillées pour **ce** fonds, révélant un cerveau d'investisseur. Jamais génériques, jamais agressives.\n\n**De bonnes questions :**\n- « Comment prenez-vous vos décisions — consensus, conviction d'un partner, droit de veto ? »\n- « Sur quelle thèse avez-vous le plus changé d'avis ces deux dernières années ? »\n- « Qu'est-ce qui fait qu'un analyst réussit vraiment chez vous à 12 mois ? »\n- « Quel deal avez-vous raté et qui vous a le plus appris ? »\n- « Sur [secteur du portefeuille], quelle est votre thèse contrariante ? »\n\n**À éviter :** générique (« c'est quoi vos valeurs ? ») = zéro préparation · interrogatoire agressif au mauvais moment. Les questions dures (turnover, « quel risque en m'embauchant ? ») se gardent pour **quand ils te veulent déjà**.\n\n> **Astuce :** prépare 3 questions par interlocuteur et **rebondis** sur ce qu'il dit. Une question qui suit la conversation vaut mieux qu'une question récitée.",
+    "keyTakeaways": [
+      "Spécifique, réfléchi, non-agressif.",
+      "Garde les questions dures pour quand ils te veulent.",
+      "Rebondis sur la conversation plutôt que réciter."
+    ],
+    "glossaryRefs": [],
+    "quiz": [
+      {
+        "question": "Quand poser les questions dures (turnover, pourquoi le poste est vacant) ?",
+        "options": [
+          {
+            "text": "Quand ils te veulent déjà",
+            "correct": true
+          },
+          {
+            "text": "Dès le premier appel",
+            "correct": false
+          },
+          {
+            "text": "Jamais",
+            "correct": false
+          }
+        ],
+        "explanation": "Les questions inconfortables se posent en position de force, pas quand tu cherches encore à décrocher le poste."
+      }
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "lea-fund-research",
+    "slug": "faire-ses-devoirs-sur-le-fonds",
+    "courseId": "c-entretien-analyst",
+    "order": 11,
+    "title": "Faire ses devoirs sur le fonds",
+    "kicker": "Le différenciateur",
+    "readMin": 6,
+    "summary": "Le différenciateur n°1 au recrutement français : arriver avec une analyse de startup que tu as écrite toi-même.",
+    "body": "## Recherche le fonds à fond\n\n- **Thèse & stade** : que financent-ils, à quel stade, quels secteurs, quel ticket (site, Dealroom, [[pitchbook|PitchBook]], leurs articles).\n- **Portfolio** : 5-6 boîtes, dont 2-3 que tu peux commenter (pourquoi un bon pari, où elles en sont).\n- **Deals récents** : leurs 3 derniers investissements → de quoi parler d'actualité.\n- **Les gens** : qui mène les deals, qui écrit, qui publie quoi. Lis leurs prises de position.\n\n## Le geste qui fait la différence\n\nArrive avec une **analyse de startup auto-produite** — une boîte de leur portefeuille décortiquée, ou une opportunité qu'ils pourraient financer. *C'est* le différenciateur au recrutement français : ça prouve que tu sais déjà faire le job. Une analyse d'une page vaut mille lignes de CV.\n\n## Cartographier l'écosystème FR (méthode, pas liste figée)\n\nSitue les fonds par **stade** et **thèse** — pré-seed/seed, seed/Série A, growth — avec la toile de fond du capital public ({{bpifrance|Bpifrance}}, {{eif|EIF}}). *Caveat : les stratégies bougent — vérifie toujours la thèse et le stade actuels sur le site du fonds.*\n\n> **Erreur fatale :** ne pas connaître 2-3 boîtes du portefeuille. C'est éliminatoire — ça dit « je n'ai pas pris 30 minutes pour vous ».",
+    "keyTakeaways": [
+      "Thèse + portfolio + deals récents + les gens.",
+      "Arrive avec une analyse que TU as écrite.",
+      "Connaître le portfolio n'est pas optionnel."
+    ],
+    "glossaryRefs": [
+      "pitchbook",
+      "thesis-driven",
+      "bpifrance",
+      "eif"
+    ],
+    "quiz": [
+      {
+        "question": "Le meilleur différenciateur à un entretien analyst en France ?",
+        "options": [
+          {
+            "text": "Une analyse de startup que tu as produite toi-même",
+            "correct": true
+          },
+          {
+            "text": "Un costume cher",
+            "correct": false
+          },
+          {
+            "text": "Mentionner un MBA",
+            "correct": false
+          }
+        ],
+        "explanation": "Une analyse auto-produite prouve que tu sais déjà faire le job : elle vaut mille lignes de CV."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Entrer dans le venture",
+        "kind": "lesson",
+        "ref": "l-career-breaking-in"
+      }
+    ]
+  },
+  {
+    "id": "lea-jour-j",
+    "slug": "48h-jour-j-suivi",
+    "courseId": "c-entretien-analyst",
+    "order": 12,
+    "title": "Les 48 h, le jour J, le suivi",
+    "kicker": "Bonus",
+    "readMin": 5,
+    "summary": "La logistique qui évite les autogoals : préparation, comportements gagnants le jour J, et le follow-up.",
+    "body": "## 48 h avant\n\nRelis tes notes sur le fonds, ta thèse perso, ton « pitch me a company », tes 4-5 histoires STAR, et refais **un** mock case chronométré. Choisis ton format de case (1-pager **ou** slides).\n\n## Le jour J\n\n- **Pense à voix haute** — on évalue le raisonnement, pas juste la réponse.\n- **Structure** (« trois points : un, deux, trois »). La clarté > l'exhaustivité.\n- **Tranche** — une reco nette, toujours.\n- **Contrôle le rambling** — 60-90 s par réponse, puis « tu veux que je creuse ? ».\n- **Assume ce que tu ignores** — « je ne connais pas ce chiffre, mais voilà comment je l'estimerais. » Mieux que bluffer.\n\n## Le suivi\n\nUn email court (< 24 h) qui **ajoute** quelque chose : un point creusé après coup, un article pertinent.\n\n## Mémo des erreurs fatales\n\nRéponses génériques · pas de reco dans le case · top-down-only sur le sizing · erreur pre/post-money · ne pas connaître le portfolio · rambling · bluffer un chiffre.",
+    "keyTakeaways": [
+      "Pense à voix haute, structure, tranche.",
+      "60-90 s par réponse, contrôle le rambling.",
+      "Relance en 24 h en ajoutant de la valeur."
+    ],
+    "glossaryRefs": [],
+    "quiz": [
+      {
+        "question": "Face à un chiffre que tu ignores en entretien, le mieux est de…",
+        "options": [
+          {
+            "text": "Expliquer comment tu l'estimerais",
+            "correct": true
+          },
+          {
+            "text": "Inventer un chiffre crédible",
+            "correct": false
+          },
+          {
+            "text": "Changer de sujet",
+            "correct": false
+          }
+        ],
+        "explanation": "Montrer ta méthode d'estimation prouve ton raisonnement ; bluffer un chiffre est un autogoal."
+      }
+    ],
+    "furtherReading": []
+  },
+  {
+    "id": "lea-mock",
+    "slug": "le-mock-complet",
+    "courseId": "c-entretien-analyst",
+    "order": 13,
+    "title": "Le mock complet",
+    "kicker": "Le jalon",
+    "readMin": 6,
+    "summary": "La répétition générale en 3 manches + la grille d'auto-évaluation. Prêt = tout en vert, chronométré, deux fois.",
+    "body": "## La répétition générale\n\nEn conditions réelles, chronométré, à voix haute (enregistre-toi). Trois manches, comme un vrai process.\n\n**Manche 1 — Fit (15 min).** Why VC ? Why ce fonds [choisis-en un vrai] ? Why you ? Ta thèse perso (3 phrases). Une histoire STAR d'échec.\n\n**Manche 2 — Case study (60 min, livrable).** « Atelier, SaaS de conformité CSRD pour PME, seed 800 k€. Rends un 1-pager : invest ou pass, pourquoi, et tes 3 risques. » Format imposé : 1 page.\n\n**Manche 3 — Pitch & technique (15 min).** Ton pitch-me-a-company + (a) « fondateur 50 %, lève 4 M€ sur 12 M€ pre — sa part ? » (37,5 %) ; (b) « 4× en 5 ans, quel IRR en gros ? » (≈ 32 %).\n\n## Grille d'auto-évaluation — « prêt » = tout en vert\n\n- **Grille d'analyse** : tu déroules Équipe/Marché/Produit/Traction/Moat sans y penser.\n- **Market sizing** : bottom-up, hypothèses annoncées, contre-vérif top-down.\n- **Recommandation** : invest/pass net + conditions.\n- **Risques** : 3 hiérarchisés + mitigations.\n- **Technique** : cap table & returns justes, option pool repéré.\n- **Fit** : why VC/fund/you spécifiques, thèse perso falsifiable.\n- **Communication** : structuré, tranché, < 90 s, pas de rambling.\n\n## Puis : la revue par les pairs\n\nRefais la Manche 2 devant quelqu'un (idéalement déjà dans le métier) avec cette grille. C'est la dernière marche : ce que tu crois clair ne l'est qu'une fois validé par un tiers.\n\n> **Le seuil « 100 % » :** prêt = tout en vert **en conditions chronométrées, deux fois de suite, dont une devant un pair.** Pas après une simple lecture.",
+    "keyTakeaways": [
+      "Trois manches : fit, case study, pitch & technique.",
+      "Prêt = tout en vert, chronométré, deux fois.",
+      "La revue par les pairs est la dernière marche."
+    ],
+    "glossaryRefs": [],
+    "furtherReading": [
+      {
+        "label": "Anatomie d'un portefeuille en loi de puissance",
+        "kind": "case",
+        "ref": "cs-power-law-portfolio"
+      }
+    ]
+  },
+  {
+    "id": "lf-dilution",
+    "slug": "lever-sans-se-faire-diluer",
+    "courseId": "c-founder-raise",
+    "order": 1,
+    "title": "Lever sans se faire diluer bêtement",
+    "kicker": "Dilution & Option Pool",
+    "readMin": 6,
+    "summary": "Comprendre les mathématiques de la dilution et éviter le piège de l'option pool pre-money.",
+    "body": "## Le grand malentendu de la valorisation\n\nBeaucoup de fondateurs fixent leur attention sur une seule métrique : la valorisation post-money. Pourtant, ce qui détermine réellement votre richesse à la fin, c'est le pourcentage de la société que vous conservez (l'ownership) et les conditions attachées aux actions.\n\nLa règle d'or d'une levée saine en seed est de viser **entre 15 % et 25 % de dilution**. Au-delà de 25 %, vous hypothéquez votre capacité à lever les tours suivants : les investisseurs futurs verront que l'équipe fondatrice n'est plus assez incitée au succès.\n\n## Le piège de l'option pool pre-money\n\nC'est la technique de négociation la plus classique. L'investisseur vous propose une belle valorisation, mais exige la création d'un pool de BSPCE (options pour les salariés) de 10 % à 15 % **avant** son entrée au capital (pre-money).\n\nConséquence mathématique : ce sont **uniquement les fondateurs et actionnaires historiques** qui subissent cette dilution. L'investisseur, lui, achètera ses actions sur une base déjà diluée par le pool, protégeant ainsi son pourcentage post-money.\n\n> **Le conseil pro :** Modélisez toujours la **cap table fully diluted** (en incluant tous les BSA, BSPCE, et convertibles) avant de signer. Ne négociez pas qu'une valorisation, négociez la taille exacte de l'option pool dont vous avez *réellement* besoin pour les 18 prochains mois.\n\n## Faites-vous accompagner\n\nN'essayez jamais de gérer votre table de capitalisation et la structuration de la levée seul sur un coin de table. **Engagez un avocat spécialisé en levée de fonds (VC) en France.** Un bon avocat coûte de l'argent, mais un mauvais montage financier vous coûtera votre entreprise. Ne prenez jamais un avocat généraliste.",
+    "keyTakeaways": [
+      "Visez entre 15 % et 25 % de dilution par tour.",
+      "Un option pool créé en pre-money dilue uniquement les fondateurs existants.",
+      "Le recours à un avocat spécialisé VC est indispensable pour structurer le tour."
+    ],
+    "glossaryRefs": [
+      "cap-table",
+      "pre-money"
+    ]
+  },
+  {
+    "id": "lf-instruments",
+    "slug": "bsa-air-vs-oc",
+    "courseId": "c-founder-raise",
+    "order": 2,
+    "title": "Le BSA-AIR vs l'Obligation Convertible",
+    "kicker": "Instruments de levée",
+    "readMin": 7,
+    "summary": "Pourquoi le BSA-AIR est devenu le standard français de l'amorçage à la place des obligations convertibles.",
+    "body": "## Le roi de l'amorçage français : le BSA-AIR\n\nEn France, l'instrument roi pour les levées early-stage (pre-seed, bridge) est le **BSA-AIR** (Bon de Souscription d'Actions - Accord d'Investissement Rapide). C'est l'équivalent philosophique du SAFE américain, mais adapté au droit des sociétés français (souvent en SAS).\n\nLe principe : l'investisseur vous donne de l'argent aujourd'hui, et recevra des actions plus tard, lors d'un événement de conversion (généralement la prochaine levée de fonds *priced round*). \n\n## Les paramètres clés à négocier\n\n- **La décote (Discount)** : En récompense du risque pris tôt, l'investisseur bénéficie d'une réduction (généralement 15 % à 20 %) sur le prix de l'action du prochain tour.\n- **Le Cap (Plafond de valorisation)** : C'est le prix maximum auquel l'investisseur convertira, même si votre startup explose. **C'est la protection de l'investisseur.**\n- **Le Floor (Plancher)** : C'est la protection du fondateur, garantissant une valorisation minimale de conversion pour éviter une dilution massive si le prochain tour se fait à basse valorisation.\n\n## BSA-AIR vs Obligation Convertible (OC)\n\nAvant le BSA-AIR, on utilisait beaucoup les obligations convertibles (OC). L'OC est une dette : elle a un taux d'intérêt et une date d'échéance. Si la startup ne lève pas, elle doit théoriquement rembourser l'OC (ce qui met l'entreprise en faillite).\n\nLe BSA-AIR n'est **pas une dette**. C'est une promesse de capital. Il n'y a pas d'intérêts et pas de remboursement exigible, ce qui soulage considérablement le bilan de la startup. Aujourd'hui, préférez toujours le BSA-AIR à l'OC pour vos premiers tours.\n\n> **Avertissement :** Le mécanisme de conversion des BSA-AIR peut être mathématiquement complexe (pre-money vs post-money conversion). **L'accompagnement par un cabinet d'avocats expert en Venture Capital est absolument indispensable** pour rédiger le contrat et calculer les impacts dilutifs.",
+    "keyTakeaways": [
+      "Le BSA-AIR n'est pas une dette, contrairement à l'OC.",
+      "Le Cap protège l'investisseur, le Floor protège le fondateur.",
+      "Ne rédigez jamais un BSA-AIR sans un avocat spécialisé."
+    ],
+    "glossaryRefs": [
+      "safe"
+    ]
+  },
+  {
+    "id": "lf-liquidation",
+    "slug": "preference-liquidation",
+    "courseId": "c-founder-raise",
+    "order": 3,
+    "title": "Comprendre la préférence de liquidation",
+    "kicker": "Conditions financières",
+    "readMin": 5,
+    "summary": "Comment protéger votre potentiel de gain lors de la vente de l'entreprise face à des clauses de sortie prédatrices.",
+    "body": "## La protection contre le downside\n\nLa préférence de liquidation est la clause la plus importante d'une Term Sheet après la valorisation. Elle définit qui est payé en premier lors d'une revente (exit) ou d'une liquidation de l'entreprise.\n\nImaginons qu'un fonds investit 2 M€ pour 20 % de la boîte. Si la boîte est revendue 5 M€, sans cette clause, le fonds toucherait 1 M€ (20 % de 5 M€) et perdrait de l'argent. La préférence de liquidation lui garantit de récupérer sa mise initiale avant que les fondateurs ne touchent le moindre euro.\n\n## Le standard français : 1x Non-Participating\n\nEn France, le standard sain est le **1x Non-Participating** (souvent formalisé par des Actions de Préférence - ADP).\n\nLors d'une revente, l'investisseur a le choix entre :\n1. **Récupérer 1 fois sa mise (1x)** : il prend ses 2 M€, et les fondateurs se partagent le reste.\n2. **Convertir en actions ordinaires (Non-Participating)** : il prend 20 % du prix de vente total, comme tout le monde.\n\nL'investisseur choisira l'option mathématiquement la plus avantageuse pour lui.\n\n## Les clauses toxiques à fuir\n\nMéfiez-vous des clauses de type **Participating** (le « double dip ») : l'investisseur récupère sa mise de 2 M€ **ET ENSUITE** prend 20 % du reste. C'est une hérésie en amorçage et cela ruine les fondateurs en cas de sortie moyenne.\n\n> **Le rôle de votre avocat :** Les termes juridiques d'une liquidation preference dans les statuts d'une SAS sont complexes (distribution de boni, dividendes prioritaires). **Votre avocat d'affaires** est le seul garde-fou capable de s'assurer que le *legal wording* correspond exactement au *business wording* de la Term Sheet (le fameux \"1x non-participating\").",
+    "keyTakeaways": [
+      "La préférence de liquidation garantit aux investisseurs de récupérer leur mise en priorité.",
+      "Le standard en France est le 1x non-participating.",
+      "Les clauses 'participating' sont toxiques pour les fondateurs en amorçage."
+    ],
+    "glossaryRefs": [
+      "liquidation-preference",
+      "term-sheet"
+    ]
+  },
+  {
+    "id": "lf-board",
+    "slug": "board-controle-sas",
+    "courseId": "c-founder-raise",
+    "order": 4,
+    "title": "Le board, la gouvernance et le contrôle en SAS",
+    "kicker": "Contrôle & Gouvernance",
+    "readMin": 6,
+    "summary": "Ce que vous cédez réellement lorsque vous acceptez des sièges au board et des matières réservées dans un pacte d'actionnaires.",
+    "body": "## Vous n'êtes plus seul maître à bord\n\nEn France, la forme juridique reine de la startup est la SAS (Société par Actions Simplifiée). Sa force est son extrême flexibilité statutaire. C'est le **Pacte d'Actionnaires** (et non la loi) qui va définir les règles du jeu entre vous et vos investisseurs.\n\n## Le Comité Stratégique (Board)\n\nDès la Série A (et parfois en Seed), les investisseurs demanderont la création d'un **Comité Stratégique**. En tant que fondateur, vous devez contrôler la majorité des sièges au début (ex: 2 fondateurs, 1 VC). \n\nL'investisseur principal prendra un siège (*Board Member*), et les investisseurs suiveurs demanderont souvent un rôle d'observateur (*Censeur* ou *Board Observer*), qui participe aux débats mais ne vote pas.\n\n## Les droits de veto (Matières réservées)\n\nC'est ici que se joue le vrai contrôle. Même avec la majorité au board, le Pacte d'Actionnaires inclura une liste de décisions (les **matières réservées**) nécessitant l'accord explicite des investisseurs (souvent une majorité qualifiée des Actions de Préférence).\n\nExemples de vetos classiques et acceptables :\n- Changer le business model de façon drastique.\n- Vendre l'entreprise ou fusionner (M&A).\n- Émettre de nouvelles actions (dilution de l'investisseur).\n- Emprunter au-delà d'un certain seuil.\n\n> **La ligne rouge :** Ne laissez jamais un investisseur exiger un droit de veto sur le budget opérationnel courant, l'embauche d'un directeur (hors C-level), ou le renvoi d'un salarié. \n\n> **Votre avocat est votre bouclier :** La négociation du Pacte d'Actionnaires est le moment où un bon avocat VC justifie ses honoraires. Chaque mot compte pour préserver votre liberté opérationnelle tout en rassurant les investisseurs.",
+    "keyTakeaways": [
+      "En SAS, le Pacte d'Actionnaires régit le pouvoir, pas la loi.",
+      "Le board d'amorçage doit rester contrôlé par les fondateurs.",
+      "Limitez les droits de veto aux décisions extraordinaires (fusion, vente, budget global)."
+    ],
+    "glossaryRefs": [
+      "board-seat"
+    ]
+  },
+  {
+    "id": "lf-dataroom",
+    "slug": "erreurs-data-room",
+    "courseId": "c-founder-raise",
+    "order": 5,
+    "title": "Les 5 erreurs mortelles de data room",
+    "kicker": "Due Diligence",
+    "readMin": 5,
+    "summary": "Comment une mauvaise préparation documentaire peut tuer votre levée de fonds avant la signature finale.",
+    "body": "## Qu'est-ce qu'une Data Room ?\n\nLorsqu'un fonds émet une Term Sheet, il conditionne son investissement à un **audit (Due Diligence)**. Pour cela, vous devez mettre à disposition une Data Room (un espace cloud sécurisé) contenant toute la vie juridique, financière et RH de l'entreprise.\n\n## Les erreurs qui tuent les deals\n\n1. **Cacher un cadavre dans le placard :** Un litige prud'homal, un redressement URSSAF, un cofondateur parti fâché avec des actions. L'audit le trouvera. Annoncez-le **avant** la Term Sheet.\n2. **La PI (Propriété Intellectuelle) non sécurisée :** C'est le motif d'abandon n°1 en deeptech/software. Si vos développeurs, freelances ou stagiaires n'ont pas signé de clause de cession de PI en bonne et due forme au profit de la SAS, le fonds n'investira pas.\n3. **L'enfer des contrats de travail :** Clauses de non-concurrence farfelues, périodes d'essai mal rompues, BSPCE promis par oral mais jamais émis par AG. C'est l'illustration d'une gestion amateur.\n4. **La cap table excel erronée :** Une cap table qui ne match pas avec les procès-verbaux d'Assemblée Générale ou le registre de mouvements de titres (Cerfa).\n5. **Le chaos du dossier :** Une data room non structurée, avec des fichiers nommés \"Scan-290.pdf\", montre un manque de rigueur qui fait fuir les investisseurs institutionnels.\n\n> **La préparation est juridique :** Une data room propre se prépare 3 mois avant la levée. Faites réaliser un audit à blanc (*vendor due diligence*) par **vos avocats et votre expert-comptable**. Ils identifieront et \"nettoieront\" les erreurs juridiques ou comptables avant que les avocats du fonds VC ne mettent le nez dedans.",
+    "keyTakeaways": [
+      "Révélez les problèmes avant que l'audit ne les découvre.",
+      "Assurez-vous que toute la PI est détenue par la société (et non par les créateurs).",
+      "Une data room bordélique fait douter de vos capacités de gestionnaire."
+    ],
+    "glossaryRefs": [
+      "term-sheet"
+    ]
+  }
+]

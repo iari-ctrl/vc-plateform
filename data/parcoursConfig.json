@@ -1,0 +1,29 @@
+{
+  "_doc": "Politiques transverses de la couche Parcours. Les valeurs par défaut s'appliquent quand un parcours ne surcharge pas le champ correspondant. Voir docs/parcours-apprentissage-conception.md §11.",
+  "i18n": {
+    "defaultLocale": "fr",
+    "locales": ["fr", "en"],
+    "overrideFiles": { "en": "parcours.en.json" },
+    "note": "Un champ texte est soit une chaîne (= locale par défaut), soit { fr, en }. Les fichiers de surcharge sont fusionnés par id de parcours ; un champ absent retombe sur le fr. Priorité projet : FR d'abord, EN ensuite, EMEA/Asie symbolique."
+  },
+  "gating": {
+    "default": "soft",
+    "lockable": true,
+    "note": "Soft = prérequis conseillés, aucun blocage. Lock = séquence imposée, activable par l'apprenant ou forcée sur un parcours technique. Les étapes keystone restent signalées « important pour la suite » dans les deux modes."
+  },
+  "milestoneEvaluation": {
+    "default": ["auto"],
+    "withDeliverableDefault": ["auto", "peer"],
+    "note": "Tout jalon à livrable s'auto-évalue (grille critériée + corrigé modèle) dès le départ, puis bascule en revue par les pairs au choix de l'apprenant. Les quiz restent en auto seul."
+  },
+  "perspective": {
+    "default": "investor",
+    "note": "Le site est investisseur-centré. La famille 'levee' est 'both' : un investisseur doit connaître les deux sièges de la table (décision n°1)."
+  },
+  "naming": {
+    "bibliotheque": "Toute la matière, librement navigable",
+    "rayons": "Regroupements thématiques (les ex-9 « parcours ») pour flâner par sujet",
+    "parcours": "Trajectoires par objectif (la couche neuve)",
+    "atomes": ["cours", "leçons", "cas", "simulateurs"]
+  }
+}

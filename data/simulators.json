@@ -1,0 +1,90 @@
+[
+  {
+    "id": "dilution",
+    "slug": "dilution",
+    "title": "Simulateur de dilution",
+    "subtitle": "Suivez votre part sur plusieurs tours",
+    "category": "Cap table",
+    "accent": "#9A6A3C",
+    "description": "Ajoutez des tours de financement et observez comment la part des fondateurs se dilue, tour après tour, ESOP compris. La dilution se compose : visualisez l'empilement.",
+    "relatedLessonIds": ["l-founder-instruments", "l-stages"],
+    "glossaryRefs": ["dilution", "cap-table", "esop", "pre-money"]
+  },
+  {
+    "id": "pre-post-money",
+    "slug": "valorisation-pre-post-money",
+    "title": "Pre-money / Post-money",
+    "subtitle": "Le triangle valorisation–montant–part",
+    "category": "Valorisation",
+    "accent": "#7C4680",
+    "description": "Entrez deux des trois variables — valorisation pre-money, montant levé, part cédée — et obtenez la troisième, plus le post-money et le prix par action implicite.",
+    "relatedLessonIds": ["l-founder-instruments", "l-stages"],
+    "glossaryRefs": ["pre-money", "dilution", "cap-table"]
+  },
+  {
+    "id": "ownership",
+    "slug": "ownership",
+    "title": "Ownership & cap table",
+    "subtitle": "Qui détient quoi, et combien ça vaut",
+    "category": "Cap table",
+    "accent": "#267A8C",
+    "description": "Construisez une cap table simple, répartissez les parts entre fondateurs, ESOP et investisseurs, et voyez la valeur de chaque ligne à une valorisation donnée.",
+    "relatedLessonIds": ["l-stages", "l-ts-control"],
+    "glossaryRefs": ["cap-table", "equity", "esop"]
+  },
+  {
+    "id": "waterfall",
+    "slug": "waterfall",
+    "title": "Waterfall simplifiée",
+    "subtitle": "Qui touche quoi à la sortie",
+    "category": "Deal",
+    "accent": "#1E2D38",
+    "description": "Modélisez une liquidation preference (multiple, participating ou non) et un produit de sortie, puis voyez la répartition entre l'investisseur préférentiel et les actions ordinaires.",
+    "relatedLessonIds": ["l-ts-economics"],
+    "glossaryRefs": ["liquidation-preference", "waterfall", "term-sheet"]
+  },
+  {
+    "id": "fund-returns",
+    "slug": "fund-returns",
+    "title": "Fund returns : DPI / TVPI / MOIC",
+    "subtitle": "Le verdict d'un fonds",
+    "category": "Fund economics",
+    "accent": "#B0894A",
+    "description": "Entrez le capital appelé, les distributions et la valeur résiduelle, et obtenez DPI, RVPI, TVPI et MOIC — réalisé vs latent, comme un LP les lit.",
+    "relatedLessonIds": ["l-fund-metrics", "l-fees-carry"],
+    "glossaryRefs": ["dpi", "tvpi", "rvpi", "moic"]
+  },
+  {
+    "id": "fundraising-scenario",
+    "slug": "scenario-de-levee",
+    "title": "Scénario de levée",
+    "subtitle": "Combien lever, à quelle valorisation",
+    "category": "Fundraising",
+    "accent": "#B5544E",
+    "description": "Définissez votre runway cible, votre burn et la dilution acceptable, et obtenez une fourchette de montant à lever et de valorisation cohérente — pour entrer dans une négociation informé.",
+    "relatedLessonIds": ["l-founder-narrative", "l-founder-instruments"],
+    "glossaryRefs": ["burn-rate", "dilution", "pre-money"]
+  },
+  {
+    "id": "management-fees",
+    "slug": "management-fees-simulator",
+    "title": "Frais de gestion & budget de fonds",
+    "subtitle": "Simuler le budget opérationnel d'un fonds",
+    "category": "Fund economics",
+    "accent": "#5A4FA0",
+    "description": "Déterminez comment la taille d'un fonds et le taux de frais de gestion annuel dictent le budget disponible pour recruter l'équipe (IR, Analystes, Partners) et faire fonctionner la structure.",
+    "relatedLessonIds": ["l-fees-carry"],
+    "glossaryRefs": ["management-fees", "gp", "lp"]
+  },
+  {
+    "id": "power-law",
+    "slug": "power-law-portfolio",
+    "title": "Power law & construction de portefeuille",
+    "subtitle": "Monte Carlo sur les retours d'un fonds",
+    "category": "Fund economics",
+    "accent": "#3E7A4E",
+    "description": "Simulez 4 000 portefeuilles tirés d'une distribution power law et mesurez la sensibilité du TVPI au nombre de lignes, à l'ownership, aux réserves follow-on et aux taux de graduation. L'outil rend visible ce que la moyenne cache : la dispersion, la concentration des retours et le fund returner math.",
+    "relatedLessonIds": ["lpl-average-lies", "lpl-why-monte-carlo", "lpl-simulator-engine", "lpl-read-results", "l-power-law", "l-reserves", "l-fund-metrics", "lmv-returns-waterfall"],
+    "glossaryRefs": ["power-law", "portfolio-construction", "follow-on", "reserve-funds", "tvpi", "moic"]
+  }
+]

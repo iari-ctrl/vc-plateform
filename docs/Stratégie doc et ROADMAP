@@ -1,0 +1,1576 @@
+# Document stratégique — VC Intelligence Platform  
+## Positionnement, architecture cible et plan d’implémentation complet
+
+Projet : plateforme de formation et d’intelligence VC  
+Vision cible : 80–90 % VC Intelligence / 10–20 % Learning & Development  
+État actuel : la couche formation a été amorcée, mais la couche VC Intelligence reste largement à construire  
+Objectif du document : fournir un plan directement exploitable pour repositionner, structurer et implémenter la plateforme
+
+---
+
+# 1. Résumé exécutif
+
+Le projet ne doit pas être interprété comme une simple plateforme de formation VC qui essaierait de devenir plus premium. Le bon cadrage est différent : il s’agit d’une plateforme de VC Intelligence en construction, dont seule la couche formation a été réellement travaillée à ce stade.
+
+La couche formation n’est donc pas une erreur. Elle constitue un socle utile pour :
+
+- aspirants VC ;
+- juniors ;
+- professionnels en repositionnement ;
+- CVC ou profils corporate découvrant les logiques du venture ;
+- utilisateurs qui ont besoin de structurer leurs bases avant d’accéder à des contenus plus professionnels.
+
+Mais cette couche doit représenter 10 à 20 % du projet final. Elle ne doit pas dominer l’identité produit.
+
+Le cœur de la plateforme doit être la VC Intelligence, soit 80 à 90 % de l’ambition finale :
+
+- research notes ;
+- thesis lab ;
+- market and ecosystem atlas ;
+- decision-grade case studies ;
+- investor playbooks ;
+- fund economics tools ;
+- frameworks ;
+- intelligence briefs ;
+- workspace de réflexion et de production.
+
+Le positionnement cible est clair :
+
+> Une plateforme de VC Intelligence pour professionnels du capital-risque, enrichie par une couche de formation structurée pour accélérer la montée en compétence des aspirants, juniors et professionnels en repositionnement.
+
+La priorité n’est pas d’ajouter des fonctionnalités au hasard. La priorité est de :
+
+1. finaliser proprement la couche formation ;
+2. repositionner l’interface autour de la VC Intelligence ;
+3. construire progressivement les piliers professionnels ;
+4. éviter de créer une plateforme large mais vide ;
+5. sécuriser l’architecture technique avant d’étendre les collections de contenu.
+
+---
+
+# 2. Vision produit
+
+## 2.1 Vision cible
+
+La plateforme doit devenir un environnement professionnel permettant de :
+
+- comprendre les marchés ;
+- analyser les écosystèmes ;
+- construire des thèses d’investissement ;
+- challenger des hypothèses ;
+- étudier des cas d’investissement ;
+- utiliser des outils de fund economics ;
+- structurer des notes et mémos ;
+- développer une pensée d’investisseur.
+
+La promesse centrale :
+
+> Transformer l’information VC en thèses, décisions, mémos et outils de réflexion.
+
+## 2.2 Ce que le produit doit être
+
+La plateforme doit être :
+
+- une plateforme d’intelligence VC ;
+- un espace de structuration de pensée ;
+- un outil de montée en compétence accélérée ;
+- une bibliothèque professionnelle ;
+- un poste de travail intellectuel pour investisseurs ;
+- une base de frameworks et de méthodes ;
+- un environnement de recherche et de décision.
+
+## 2.3 Ce que le produit ne doit pas être
+
+La plateforme ne doit pas devenir :
+
+- un simple MOOC VC ;
+- un blog startup ;
+- une base de données faible ;
+- un clone de PitchBook ;
+- un clone de CB Insights sans data moat ;
+- une plateforme founder/fundraising ;
+- une collection de contenus débutants ;
+- un dashboard artificiel avec des données inventées ;
+- une interface premium mais creuse.
+
+---
+
+# 3. Positionnement stratégique
+
+## 3.1 Positionnement recommandé
+
+VC Intelligence Platform  
+Une plateforme professionnelle pour analyser le venture capital, construire des thèses d’investissement, comprendre les dynamiques de marché et développer une expertise VC opérationnelle.
+
+## 3.2 Formulation courte
+
+> La plateforme qui aide à penser, analyser et décider comme un investisseur VC.
+
+## 3.3 Formulation longue
+
+> Une plateforme de VC Intelligence conçue pour les professionnels du capital-risque, CVC, analystes private markets et profils en montée en compétence, combinant research notes, thesis lab, atlas de marchés, cas décisionnels, outils de fund economics, frameworks et bibliothèque de formation structurée.
+
+## 3.4 Répartition cible
+
+| Couche | Poids cible | Rôle |
+|---|---:|---|
+| VC Intelligence | 80–90 % | Recherche, thèses, analyses, outils, cas, frameworks, workspace |
+| Learning & Development | 10–20 % | Formation, orientation, progression, réassurance, montée en compétence |
+
+## 3.5 Principe directeur
+
+La formation est une rampe d’accès.  
+La VC Intelligence est le cœur du produit.
+
+---
+
+# 4. Diagnostic de l’état actuel
+
+## 4.1 État actuel
+
+La plateforme actuelle est dominée par la formation parce que c’est la partie qui a été travaillée en premier.
+
+Elle comprend déjà :
+
+- parcours ;
+- leçons ;
+- glossary ;
+- simulateurs ;
+- cas pratiques ;
+- analyses éditoriales ;
+- onboarding ;
+- notes ;
+- bookmarks ;
+- CMS/admin ;
+- i18n partiel ;
+- validation ;
+- architecture full-stack.
+
+## 4.2 Lecture correcte de l’audit
+
+Le diagnostic “trop formation” reste exact au niveau de l’expérience actuelle, mais il doit être reformulé.
+
+La bonne lecture :
+
+> La plateforme actuelle donne une impression de learning platform parce que la couche VC Intelligence n’a pas encore été construite.
+
+Il ne faut donc pas supprimer la formation. Il faut :
+
+- la finaliser ;
+- la rendre cohérente ;
+- la ranger dans une Library ;
+- la taguer correctement ;
+- la rendre secondaire dans la navigation ;
+- l’utiliser comme socle de montée en compétence.
+
+## 4.3 Problèmes visibles aujourd’hui
+
+Les signaux qui donnent encore une impression trop learning/founder/career :
+
+- homepage trop orientée introspection ;
+- CTA principal trop orienté onboarding ;
+- parcours aspirants trop visibles ;
+- contenus entretien/stage trop exposés ;
+- contenus founder/fundraising trop présents ;
+- section “Analyses” trop éditoriale, pas assez intelligence ;
+- cas fictifs utiles pédagogiquement mais insuffisants comme preuve professionnelle ;
+- simulateurs présentés comme exercices plutôt que comme outils de décision ;
+- dashboard encore trop progression-centric.
+
+## 4.4 Actifs forts à conserver
+
+La plateforme possède déjà des actifs intéressants :
+
+- profondeur du glossaire ;
+- simulateurs fund economics ;
+- architecture JSON ;
+- validation ;
+- contenu sur thèses, term sheets, dilution, fund returns ;
+- cas pratiques ;
+- système de notes/bookmarks ;
+- structure de parcours ;
+- potentiel de Library professionnelle.
+
+Ces actifs doivent être conservés, mais repositionnés.
+
+---
+
+# 5. Benchmark stratégique
+
+## 5.1 PitchBook
+
+### Rôle
+
+Référence private markets data terminal.
+
+### Ce qu’il faut retenir
+
+- structuration de données ;
+- fiches entreprises ;
+- fiches investisseurs ;
+- deals ;
+- fonds ;
+- LPs ;
+- M&A ;
+- comparables ;
+- workflows de diligence.
+
+### Application au projet
+
+Ne pas copier PitchBook frontalement. La plateforme ne peut pas rivaliser sur la quantité de données propriétaires.
+
+À copier :
+
+- rigueur de structuration ;
+- fiches propres ;
+- logique de navigation professionnelle ;
+- hiérarchisation des informations ;
+- workflows orientés décision.
+
+À éviter :
+
+- prétention d’exhaustivité ;
+- faux terminal financier ;
+- données non maintenables.
+
+## 5.2 CB Insights
+
+### Rôle
+
+Référence intelligence, signaux, monitoring, research et market maps.
+
+### Ce qu’il faut retenir
+
+- briefings actionnables ;
+- signaux faibles ;
+- research orientée décision ;
+- monitoring de marchés ;
+- watchlists ;
+- market maps ;
+- contenus synthétiques à forte valeur.
+
+### Application au projet
+
+CB Insights est une référence forte pour la future section Intelligence.
+
+À copier :
+
+- logique de brief ;
+- orientation “what matters / why now / investor implications” ;
+- lecture par signaux ;
+- synthèse actionnable.
+
+À éviter :
+
+- dépendance à des flux de données massifs ;
+- sur-promesse prédictive.
+
+## 5.3 Dealroom
+
+### Rôle
+
+Référence pour les écosystèmes startups, scaleups, investisseurs, géographies et verticales.
+
+### Ce qu’il faut retenir
+
+- atlas d’écosystèmes ;
+- cartographie géographique ;
+- verticales ;
+- capital flows ;
+- investor mapping ;
+- benchmarks villes/pays.
+
+### Application au projet
+
+Dealroom est la référence principale pour le futur Atlas.
+
+À copier :
+
+- logique d’écosystème ;
+- lecture par marché ;
+- segmentation claire ;
+- pages structurées par géographie/verticale.
+
+À éviter :
+
+- atlas vide ;
+- carte décorative ;
+- fausse exhaustivité.
+
+## 5.4 Carta
+
+### Rôle
+
+Référence pour fund performance, equity, dilution, ownership, benchmarks de fonds.
+
+### Ce qu’il faut retenir
+
+- IRR ;
+- TVPI ;
+- DPI ;
+- LP checks ;
+- fund performance ;
+- dilution ;
+- ownership ;
+- benchmarks de vintage.
+
+### Application au projet
+
+Carta est une référence directe pour la partie Tools / Fund Economics.
+
+À copier :
+
+- pédagogie des métriques ;
+- clarté des benchmarks ;
+- visualisation simple ;
+- lien entre métriques et décision.
+
+À éviter :
+
+- données inventées ;
+- comparaison non sourcée ;
+- simulateurs sans contexte d’usage.
+
+## 5.5 Bessemer, a16z, First Round, Data-Driven VC, Sacra, The Information Pro
+
+### Ce qu’il faut retenir
+
+- Bessemer : thèses sectorielles et benchmarks ;
+- a16z : vision marché et puissance narrative ;
+- First Round : playbooks opérationnels ;
+- Data-Driven VC : stack VC, data, AI et operating system ;
+- Sacra : private company research ;
+- The Information Pro : modèle média premium + data + tools.
+
+### Application au projet
+
+La plateforme doit combiner :
+
+- profondeur intellectuelle ;
+- research exploitable ;
+- frameworks ;
+- outils ;
+- workspace ;
+- formation secondaire.
+
+---
+
+# 6. Architecture cible
+
+## 6.1 Architecture produit cible
+
+Navigation recommandée :
+
+1. Intelligence
+2. Thesis Lab
+3. Atlas
+4. Cases
+5. Tools
+6. Library
+7. Glossary
+8. Workspace
+
+## 6.2 Rôle de chaque section
+
+### Intelligence
+
+Surface principale de recherche et d’analyse.
+
+Contenus :
+
+- research notes ;
+- sector notes ;
+- market briefs ;
+- trend analysis ;
+- capital flow notes ;
+- risk notes ;
+- counter-thesis notes ;
+- weekly/monthly intelligence briefs à terme.
+
+### Thesis Lab
+
+Cœur différenciant de la plateforme.
+
+Contenus :
+
+- thèses d’investissement ;
+- contre-thèses ;
+- stress tests ;
+- falsification criteria ;
+- why now analysis ;
+- venture-scale assessment ;
+- links vers tools, cases, glossary.
+
+### Atlas
+
+Cartographie analytique des marchés et écosystèmes.
+
+Contenus :
+
+- vertical maps ;
+- ecosystem pages ;
+- geography pages ;
+- market maturity notes ;
+- investor landscape ;
+- regulation and exit context.
+
+### Cases
+
+Cas d’investissement orientés décision.
+
+Contenus :
+
+- cas réels sourcés ;
+- cas stylisés explicitement signalés ;
+- investment committee simulations ;
+- follow-on cases ;
+- reserve allocation cases ;
+- CVC cases.
+
+### Tools
+
+Outils professionnels.
+
+Contenus :
+
+- simulateurs ;
+- calculators ;
+- templates ;
+- fund economics tools ;
+- ownership tools ;
+- dilution tools ;
+- reserve tools.
+
+### Library
+
+Couche formation et développement.
+
+Contenus :
+
+- parcours ;
+- leçons ;
+- playbooks ;
+- fondamentaux ;
+- career content ;
+- founder-facing content secondaire ;
+- guides structurants.
+
+### Glossary
+
+Infrastructure de référence.
+
+Rôle :
+
+- connecter les contenus ;
+- clarifier les termes ;
+- renforcer la précision ;
+- soutenir la formation et l’intelligence.
+
+### Workspace
+
+Espace de travail personnel.
+
+Contenus :
+
+- notes ;
+- bookmarks ;
+- thesis drafts ;
+- saved research ;
+- saved frameworks ;
+- reading trails ;
+- memo drafts à terme.
+
+---
+
+# 7. Taxonomie de contenu
+
+## 7.1 Métadonnées recommandées
+
+Ajouter ou formaliser les champs suivants :
+
+### contentKind
+
+- fundamental ;
+- playbook ;
+- research-note ;
+- sector-note ;
+- thesis ;
+- atlas ;
+- case ;
+- framework ;
+- tool ;
+- reference.
+
+### audience
+
+- investor ;
+- aspiring-investor ;
+- junior-investor ;
+- cvc ;
+- founder-facing ;
+- all.
+
+### rigor
+
+- intro ;
+- practitioner ;
+- desk-reference.
+
+### status
+
+- draft ;
+- review ;
+- published ;
+- archived ;
+- needs-update.
+
+### evidenceLevel
+
+- conceptual ;
+- analytical ;
+- sourced ;
+- decision-grade ;
+- maintained-intelligence.
+
+## 7.2 Objectif de cette taxonomie
+
+Cette taxonomie permet de :
+
+- conserver la formation sans qu’elle domine ;
+- séparer les contenus aspirants, professionnels et founder-facing ;
+- filtrer les contenus par audience ;
+- éviter les suppressions brutales ;
+- préparer la recherche interne ;
+- préparer le Workspace ;
+- améliorer la crédibilité éditoriale ;
+- structurer les futures collections.
+
+## 7.3 Règle de gouvernance
+
+Aucun nouveau contenu professionnel ne doit être publié sans :
+
+- audience ;
+- contentKind ;
+- rigor ;
+- status ;
+- evidenceLevel ;
+- date de publication ;
+- date de mise à jour ;
+- liens vers glossary ;
+- liens vers contenus connexes.
+
+---
+
+# 8. Stratégie éditoriale
+
+## 8.1 Principe éditorial
+
+La plateforme doit passer d’une logique :
+
+> “apprendre le VC”
+
+à une logique :
+
+> “produire un raisonnement VC exploitable.”
+
+## 8.2 Système de preuve
+
+Chaque contenu VC Intelligence doit indiquer :
+
+- sources ;
+- hypothèses ;
+- limites ;
+- implications investisseur ;
+- signaux à surveiller ;
+- contre-arguments ;
+- degré de confiance ;
+- date de mise à jour.
+
+## 8.3 Ton éditorial
+
+Le ton doit être :
+
+- professionnel ;
+- analytique ;
+- précis ;
+- structuré ;
+- sobre ;
+- non promotionnel ;
+- non scolaire ;
+- non startup-bullshit.
+
+## 8.4 Ce qui doit disparaître du premier niveau de lecture
+
+À retirer de la vitrine principale :
+
+- formulations trop débutantes ;
+- titres trop rassurants ;
+- vocabulaire d’école ;
+- promesse de “découvrir le VC” comme angle principal ;
+- contenus de stage/entretien trop visibles ;
+- contenus founder/fundraising comme porte d’entrée.
+
+Ils peuvent rester dans la Library, mais pas dans la vitrine.
+
+---
+
+# 9. Piliers de contenu prioritaires
+
+## 9.1 Pilier 1 — Research / Intelligence
+
+Priorité : maximale.
+
+Objectif : créer une vraie surface d’intelligence.
+
+Formats :
+
+- market structure note ;
+- sector note ;
+- capital flow analysis ;
+- risk brief ;
+- trend memo ;
+- investment implication brief ;
+- counter-thesis.
+
+Premiers contenus recommandés :
+
+1. European Seed Market Structure  
+2. AI Infrastructure: Where Venture-Scale Value May Accrue  
+3. DPI Pressure and the New Fundraising Reality  
+4. CVC Strategic Investing: Financial Return vs Strategic Optionality  
+5. Africa-Europe VC Corridor: Opportunity or Narrative?
+
+Structure type :
+
+1. Executive summary  
+2. Why it matters  
+3. Market structure  
+4. Key signals  
+5. Investor implications  
+6. Risks  
+7. Counter-arguments  
+8. Sources  
+9. Related thesis  
+10. Related tools  
+11. Related glossary
+
+## 9.2 Pilier 2 — Thesis Lab
+
+Priorité : maximale.
+
+Objectif : créer le cœur différenciant.
+
+Premières thèses recommandées :
+
+1. AI Infrastructure Europe  
+2. Regulated Vertical SaaS  
+3. Climate Adaptation Infrastructure  
+4. Africa-Europe Fintech Rails  
+5. Defense, Security and Resilience Tech Europe
+
+Structure type :
+
+1. Thesis statement  
+2. Market context  
+3. Why now  
+4. Customer/problem shift  
+5. Value chain  
+6. Competitive landscape  
+7. Business model logic  
+8. Venture-scale potential  
+9. Key risks  
+10. Falsification criteria  
+11. What would change our mind  
+12. Related cases  
+13. Related tools  
+14. Related glossary terms
+
+## 9.3 Pilier 3 — Tools / Fund Economics
+
+Priorité : très élevée.
+
+Objectif : repositionner les simulateurs comme outils professionnels.
+
+Outils prioritaires :
+
+1. Dilution simulator  
+2. Waterfall simulator  
+3. DPI / TVPI / MOIC simulator  
+4. Management fees simulator  
+5. Carry simulator  
+6. Reserve allocation model  
+7. Follow-on decision model  
+8. Ownership target model  
+9. Exit scenario model  
+10. Fund construction model
+
+Chaque outil doit inclure :
+
+- cas d’usage professionnel ;
+- explication des inputs ;
+- explication des outputs ;
+- limites du modèle ;
+- lien vers contenus Library ;
+- lien vers Research/Thesis/Cases ;
+- possibilité de sauvegarde Workspace à terme.
+
+## 9.4 Pilier 4 — Cases
+
+Priorité : élevée.
+
+Objectif : transformer les cas pédagogiques en cas décisionnels.
+
+Premiers cas recommandés :
+
+1. Seed Investment Committee — stylized case  
+2. Series B Follow-on Decision — stylized case  
+3. Fund Reserve Allocation Case  
+4. CVC Strategic Investment Case  
+5. Public sourced case from a known startup/fund outcome
+
+Structure type :
+
+1. Context  
+2. Investment question  
+3. Market timing  
+4. Deal dynamics  
+5. Key risks  
+6. Decision options  
+7. Decision taken  
+8. Outcome or stylized outcome  
+9. Pattern extracted  
+10. Lessons for investors  
+11. Related thesis  
+12. Related tool  
+13. Related glossary
+
+## 9.5 Pilier 5 — Atlas
+
+Priorité : moyenne-haute, mais après Research et Thesis Lab.
+
+Objectif : cartographier les marchés et écosystèmes de manière analytique.
+
+Premières pages recommandées :
+
+1. European Seed Market  
+2. France VC Ecosystem  
+3. Africa-Europe Venture Corridor  
+4. AI Infrastructure Europe  
+5. Climate Tech Europe  
+6. Fintech Emerging Markets
+
+Structure type :
+
+1. Overview  
+2. Market maturity  
+3. Capital flows  
+4. Key actors  
+5. Investor landscape  
+6. Talent/regulation context  
+7. Exit pathways  
+8. Risks  
+9. Investor implications  
+10. Related research  
+11. Related theses  
+12. Related cases
+
+## 9.6 Pilier 6 — Library / Learning & Development
+
+Priorité : à finaliser avant extension massive.
+
+Objectif : fermer proprement la couche formation.
+
+Actions :
+
+- finaliser les parcours ;
+- corriger les redondances ;
+- taguer les contenus ;
+- améliorer les titres trop débutants ;
+- ranger career/founder-facing en secondaire ;
+- clarifier les niveaux ;
+- rendre les quiz moins centraux ;
+- lier les contenus fondamentaux aux contenus intelligence.
+
+La Library doit devenir :
+
+> une base de montée en compétence, pas la vitrine principale.
+
+---
+
+# 10. Partenariats et collaborations
+
+## 10.1 Position de principe
+
+Les partenariats sont utiles, mais pas immédiatement prioritaires.
+
+Il faut d’abord construire un standard éditorial interne. Sans cela, les collaborations risquent d’ajouter du bruit ou de donner une impression opportuniste.
+
+## 10.2 Quand lancer les partenariats
+
+Ne pas lancer les partenariats avant d’avoir :
+
+- 3 research notes solides ;
+- 2 thesis lab complets ;
+- 1 case decision-grade ;
+- 1 page claire de contribution ;
+- une charte éditoriale ;
+- une proposition de valeur claire.
+
+## 10.3 Partenaires pertinents
+
+### VC funds
+
+Utilité :
+
+- cas anonymisés ;
+- interviews ;
+- frameworks ;
+- validation terrain ;
+- distribution.
+
+Risque :
+
+- contenu promotionnel ;
+- biais ;
+- dépendance de marque.
+
+### CVC / corporate innovation teams
+
+Utilité :
+
+- cas d’usage réels ;
+- thèses sectorielles ;
+- strategic investing frameworks ;
+- besoins professionnels clairs.
+
+Risque :
+
+- contenu trop corporate ;
+- cycles longs.
+
+### Plateformes data / intelligence
+
+Utilité :
+
+- données ;
+- co-publications ;
+- crédibilité ;
+- sources.
+
+Risque :
+
+- coût ;
+- accès restreint ;
+- dépendance.
+
+### Experts indépendants
+
+Utilité :
+
+- deep dives ;
+- expert notes ;
+- thèses invitées ;
+- vertical expertise.
+
+Risque :
+
+- qualité variable ;
+- manque d’homogénéité.
+
+### Écoles / fellowships / programmes VC
+
+Utilité :
+
+- acquisition ;
+- crédibilité ;
+- terrain de test ;
+- couche Learning & Development.
+
+Risque :
+
+- renforcer l’image “formation” au détriment de la VC Intelligence.
+
+### Médias/newsletters VC
+
+Utilité :
+
+- distribution ;
+- co-publication ;
+- veille ;
+- audience qualifiée.
+
+Risque :
+
+- dilution média ;
+- moindre profondeur produit.
+
+## 10.4 Formats de collaboration recommandés
+
+- guest thesis ;
+- expert commentary ;
+- ecosystem briefing ;
+- anonymized investment case ;
+- co-authored research note ;
+- interview structurée ;
+- framework contribution ;
+- benchmark commentary ;
+- CVC playbook ;
+- data-supported insight.
+
+## 10.5 Règle stricte
+
+Aucune collaboration ne doit être publiée sans :
+
+- angle clair ;
+- standard éditorial ;
+- disclosure ;
+- sources ;
+- niveau de preuve ;
+- lien avec Research, Thesis, Cases ou Tools.
+
+---
+
+# 11. Risques techniques
+
+## 11.1 Version control
+
+Risque : critique.
+
+Aucune transformation importante ne doit être lancée sans :
+
+- baseline Git ;
+- branche de travail ;
+- commits propres ;
+- rollback possible ;
+- documentation d’état initial.
+
+Ordre d’action :
+
+1. vérifier état Git ;
+2. créer baseline ;
+3. taguer version initiale ;
+4. créer branche repositioning.
+
+## 11.2 Divergence JSON / CMS / SQLite
+
+Risque : très élevé.
+
+Le projet repose sur une tension entre :
+
+- JSON canonique ;
+- base SQLite/Prisma ;
+- CMS/admin ;
+- fallback client.
+
+Règle immédiate :
+
+- ne pas étendre le CMS aux nouveaux piliers ;
+- authoring des nouveaux contenus dans /data ;
+- validation stricte ;
+- seed contrôlé ;
+- documentation des sources de vérité.
+
+Décision recommandée :
+
+> JSON reste source de vérité jusqu’à refonte propre du CMS.
+
+## 11.3 Validation
+
+Risque : élevé si les nouveaux piliers contournent le système existant.
+
+Règle :
+
+Aucun nouveau fichier JSON ne doit être ajouté sans :
+
+- schéma ;
+- validation ;
+- cross-references ;
+- marker validation ;
+- prebuild check.
+
+Collections à prévoir :
+
+- theses.json ;
+- atlas.json ;
+- frameworks.json ;
+- research.json ou blog.json refactoré ;
+- cases enrichis ;
+- tools metadata.
+
+## 11.4 i18n
+
+Risque : dette de traduction.
+
+Décision :
+
+- FR-first ;
+- EN différé ;
+- ne traduire que les contenus pilotes vraiment stratégiques ;
+- ne pas promettre plateforme bilingue complète à court terme.
+
+## 11.5 Search / Command Palette
+
+Risque : invisibilité des nouveaux contenus.
+
+Chaque nouvelle collection doit être intégrée à :
+
+- recherche client ;
+- recherche serveur si applicable ;
+- Command Palette ;
+- related content ;
+- sitemap/SEO.
+
+## 11.6 Routes et legacy IA
+
+Risque : liens cassés et confusion navigation.
+
+Actions :
+
+- redirects propres ;
+- conservation des anciennes routes ;
+- mise à jour SideNav ;
+- mise à jour SEO ;
+- mise à jour Command Palette ;
+- mise à jour breadcrumbs.
+
+## 11.7 SEO / CSR
+
+Risque : faible découvrabilité des contenus Intelligence.
+
+Décision :
+
+- ne pas migrer SSR/SSG immédiatement ;
+- préparer les pages pour une future génération statique ;
+- soigner meta titles/descriptions ;
+- centraliser les loaders.
+
+## 11.8 Données et fausse intelligence
+
+Risque : crédibilité.
+
+Interdiction :
+
+- dashboards factices ;
+- données inventées ;
+- market maps non maintenues ;
+- claims non sourcés.
+
+Règle :
+
+> Mieux vaut une analyse structurelle solide qu’un faux terminal data.
+
+---
+
+# 12. Roadmap d’implémentation
+
+## Phase 0 — Sécurisation technique
+
+Objectif : stabiliser le projet avant toute transformation.
+
+Actions :
+
+1. vérifier Git ;
+2. créer baseline commit ;
+3. lancer validation ;
+4. lancer build ;
+5. documenter les erreurs ;
+6. identifier les divergences JSON/CMS/DB ;
+7. geler extension CMS ;
+8. créer branche repositioning ;
+9. documenter rollback ;
+10. établir checklist de release.
+
+Livrable :
+
+- état technique fiable ;
+- base de travail sécurisée.
+
+Priorité : absolue.
+
+---
+
+## Phase 1 — Finalisation de la couche formation
+
+Objectif : fermer proprement le socle Learning & Development.
+
+Actions :
+
+1. auditer tous les parcours ;
+2. identifier contenus incomplets ;
+3. corriger redondances ;
+4. taguer audience ;
+5. taguer rigor ;
+6. taguer contentKind ;
+7. ranger career content ;
+8. ranger founder-facing content ;
+9. améliorer titres trop débutants ;
+10. vérifier quiz/progression ;
+11. vérifier glossary markers ;
+12. vérifier liens internes.
+
+Livrable :
+
+- Library propre ;
+- formation stabilisée ;
+- contenu aspirant/pro clairement séparé.
+
+Critère de succès :
+
+> La formation devient un socle fiable, pas un chantier permanent.
+
+---
+
+## Phase 2 — Repositionnement visible
+
+Objectif : faire comprendre immédiatement que le produit cible est une VC Intelligence Platform.
+
+Actions :
+
+1. réécrire homepage ;
+2. modifier proposition de valeur ;
+3. changer CTA principal ;
+4. rendre ikigai optionnel ;
+5. renommer Analyses en Intelligence ;
+6. renommer Simulateurs en Tools ;
+7. renommer Dashboard en Workspace ;
+8. réordonner SideNav ;
+9. créer pages placeholder propres pour Thesis Lab et Atlas ;
+10. mettre à jour SEO/meta ;
+11. mettre à jour README ;
+12. vérifier routes et redirects.
+
+Livrable :
+
+- interface repositionnée ;
+- perception produit corrigée.
+
+Critère de succès :
+
+> Un professionnel VC comprend en moins de 10 secondes que la plateforme ne se limite pas à la formation.
+
+---
+
+## Phase 3 — Taxonomie et content infrastructure
+
+Objectif : rendre le corpus pilotable.
+
+Actions :
+
+1. ajouter contentKind ;
+2. ajouter audience ;
+3. ajouter rigor ;
+4. ajouter status ;
+5. ajouter evidenceLevel ;
+6. adapter validate-content ;
+7. adapter types ;
+8. adapter loaders ;
+9. ajouter filtres Library ;
+10. préparer related content ;
+11. préparer recherche ;
+12. documenter taxonomie.
+
+Livrable :
+
+- corpus structuré ;
+- base solide pour les nouveaux piliers.
+
+Critère de succès :
+
+> Chaque contenu peut être filtré, relié et repositionné sans bricolage.
+
+---
+
+## Phase 4 — Intelligence MVP
+
+Objectif : construire la première vraie surface VC Intelligence.
+
+Actions :
+
+1. créer template research note ;
+2. transformer blog/analyses en Research ;
+3. produire 3 notes solides ;
+4. intégrer sources et limites ;
+5. intégrer investor implications ;
+6. créer index Intelligence ;
+7. créer pages detail ;
+8. relier aux tools/glossary/cases ;
+9. intégrer recherche ;
+10. mettre à jour navigation.
+
+Livrable :
+
+- section Intelligence crédible.
+
+Critère de succès :
+
+> Au moins une note peut être partagée à un VC/CVC sans donner une impression scolaire.
+
+---
+
+## Phase 5 — Thesis Lab MVP
+
+Objectif : créer le cœur différenciant.
+
+Actions :
+
+1. créer schema theses ;
+2. créer template thesis ;
+3. produire 2 thèses complètes ;
+4. créer /theses index ;
+5. créer pages detail ;
+6. ajouter falsification criteria ;
+7. relier research ;
+8. relier tools ;
+9. relier cases ;
+10. relier glossary.
+
+Livrable :
+
+- Thesis Lab fonctionnel.
+
+Critère de succès :
+
+> Une thèse peut servir de base à une discussion d’investissement.
+
+---
+
+## Phase 6 — Tools repositioning
+
+Objectif : rendre les simulateurs immédiatement professionnels.
+
+Actions :
+
+1. renommer Simulators en Tools ;
+2. réécrire chaque description ;
+3. ajouter use cases professionnels ;
+4. ajouter limites ;
+5. ajouter exemples ;
+6. lier aux research notes ;
+7. lier aux cases ;
+8. lier aux thesis ;
+9. préparer sauvegarde Workspace ;
+10. créer Fund Economics Toolkit.
+
+Livrable :
+
+- tools repositionnés ;
+- utilité professionnelle claire.
+
+Critère de succès :
+
+> Les outils ne ressemblent plus à des exercices, mais à des supports de décision.
+
+---
+
+## Phase 7 — Cases decision-grade
+
+Objectif : renforcer la crédibilité et l’apprentissage par décision.
+
+Actions :
+
+1. créer template case ;
+2. requalifier cas fictifs en stylized ;
+3. créer un cas sourcé ;
+4. créer /cases index ;
+5. ajouter decision options ;
+6. ajouter pattern extracted ;
+7. ajouter investor implications ;
+8. relier aux thèses ;
+9. relier aux tools ;
+10. relier au glossary.
+
+Livrable :
+
+- section Cases crédible.
+
+Critère de succès :
+
+> Les cas servent à penser une décision, pas seulement à apprendre un concept.
+
+---
+
+## Phase 8 — Atlas MVP
+
+Objectif : structurer les marchés et écosystèmes.
+
+Actions :
+
+1. créer schema atlas ;
+2. créer template atlas ;
+3. produire 2 à 3 pages ;
+4. éviter toute prétention exhaustive ;
+5. relier aux research notes ;
+6. relier aux theses ;
+7. relier aux cases ;
+8. intégrer recherche ;
+9. intégrer navigation ;
+10. préparer future expansion.
+
+Livrable :
+
+- Atlas sobre mais dense.
+
+Critère de succès :
+
+> L’Atlas apporte une lecture structurelle du marché, pas une carte décorative.
+
+---
+
+## Phase 9 — Workspace artifact-first
+
+Objectif : transformer le dashboard en espace de production.
+
+Actions :
+
+1. renommer Dashboard en Workspace ;
+2. réduire logique progression ;
+3. afficher saved research ;
+4. afficher saved theses ;
+5. afficher notes ;
+6. afficher bookmarks ;
+7. afficher reading trails ;
+8. afficher saved tools ;
+9. préparer thesis drafts ;
+10. préparer memo drafts.
+
+Livrable :
+
+- workspace orienté production intellectuelle.
+
+Critère de succès :
+
+> L’utilisateur revient pour poursuivre un raisonnement, pas seulement terminer une leçon.
+
+---
+
+## Phase 10 — Partenariats pilotes
+
+Objectif : ajouter crédibilité et distribution.
+
+Actions :
+
+1. créer page Partner / Contribute ;
+2. créer charte éditoriale ;
+3. identifier 10 partenaires cibles ;
+4. prioriser VC/CVC/experts ;
+5. proposer formats précis ;
+6. obtenir une contribution thesis ;
+7. obtenir une interview structurée ;
+8. obtenir un cas anonymisé ;
+9. publier sous contrôle éditorial ;
+10. mesurer retours.
+
+Livrable :
+
+- premières collaborations qualitatives.
+
+Critère de succès :
+
+> Les partenaires renforcent l’intelligence, pas la décoration de marque.
+
+---
+
+# 13. Ordre d’exécution recommandé
+
+## Ordre strict
+
+1. Sécuriser Git / validation / build  
+2. Finaliser la couche formation  
+3. Repositionner homepage + navigation  
+4. Ajouter taxonomie  
+5. Relancer Intelligence / Research  
+6. Lancer Thesis Lab  
+7. Repositionner Tools  
+8. Améliorer Cases  
+9. Lancer Atlas  
+10. Transformer Workspace  
+11. Lancer partenariats  
+12. Étendre progressivement
+
+## Pourquoi cet ordre
+
+La formation doit être fermée avant que le projet ne s’éparpille.  
+La navigation doit annoncer la vision avant que tous les piliers ne soient complets.  
+La taxonomie doit précéder l’expansion.  
+Research et Thesis Lab doivent venir avant Atlas.  
+Tools doivent être repositionnés tôt car ils sont déjà forts.  
+Les partenariats doivent attendre un minimum de preuve éditoriale.
+
+---
+
+# 14. MVP recommandé
+
+## 14.1 MVP produit
+
+Le MVP ne doit pas être une plateforme complète.
+
+Il doit contenir :
+
+- homepage repositionnée ;
+- navigation VC Intelligence ;
+- Library propre ;
+- 3 research notes ;
+- 2 thesis lab ;
+- 5 tools repositionnés ;
+- 1 case decision-grade ;
+- glossary connecté ;
+- workspace minimal.
+
+## 14.2 MVP éditorial
+
+Contenus minimum :
+
+### Research
+
+1. European Seed Market Structure  
+2. AI Infrastructure VC Thesis  
+3. DPI Pressure and Fundraising Reality
+
+### Thesis Lab
+
+1. AI Infrastructure Europe  
+2. Regulated Vertical SaaS
+
+### Cases
+
+1. Seed Investment Committee — stylized  
+2. Follow-on Decision — stylized or sourced
+
+### Tools
+
+1. Dilution  
+2. Waterfall  
+3. DPI/TVPI/MOIC  
+4. Management Fees  
+5. Reserve Allocation
+
+## 14.3 MVP technique
+
+- validation active ;
+- schemas propres ;
+- routing propre ;
+- search minimum ;
+- SEO correct ;
+- no CMS extension ;
+- no fake data ;
+- no SSR migration.
+
+---
+
+# 15. KPI de succès
+
+## Produit
+
+- consultation Research ;
+- consultation Thesis Lab ;
+- usage Tools ;
+- sauvegardes Workspace ;
+- taux de retour ;
+- recherches internes ;
+- clics related content ;
+- notes créées.
+
+## Éditorial
+
+- nombre de contenus decision-grade ;
+- nombre de contenus sourcés ;
+- nombre de thèses complètes ;
+- nombre de cas exploitables ;
+- ratio VC Intelligence vs Learning ;
+- contenus à mettre à jour ;
+- contenus founder/career dépriorisés.
+
+## Technique
+
+- validation prebuild ;
+- erreurs cross-ref ;
+- stabilité build ;
+- couverture search ;
+- routes redirigées ;
+- absence de divergence critique ;
+- temps de maintenance contenu.
+
+## Marché
+
+- retours VC/CVC ;
+- partages qualifiés ;
+- contributions experts ;
+- demandes de partenariat ;
+- inscriptions professionnelles ;
+- utilisateurs revenant sur Workspace.
+
+---
+
+# 16. Ce qu’il ne faut pas faire
+
+Ne pas :
+
+- ouvrir tous les piliers trop vite ;
+- lancer un Atlas vide ;
+- créer de faux dashboards ;
+- inventer des données ;
+- copier PitchBook ;
+- copier CB Insights sans data moat ;
+- supprimer brutalement la formation ;
+- laisser la formation dominer la homepage ;
+- lancer les partenariats avant la preuve éditoriale ;
+- migrer SSR/SSG maintenant ;
+- refondre le CMS immédiatement ;
+- promettre bilingue complet ;
+- ajouter de l’IA sans cas d’usage clair ;
+- transformer la plateforme en blog ;
+- produire six rubriques minces au lieu de deux piliers forts.
+
+---
+
+# 17. Décision stratégique finale
+
+La plateforme doit assumer une architecture duale :
+
+## 1. Learning & Development Layer — 10 à 20 %
+
+Rôle :
+
+- socle ;
+- progression ;
+- formation ;
+- orientation ;
+- réassurance ;
+- montée en compétence.
+
+Statut :
+
+- à finaliser ;
+- à ranger ;
+- à rendre secondaire ;
+- à connecter aux contenus professionnels.
+
+## 2. VC Intelligence Layer — 80 à 90 %
+
+Rôle :
+
+- recherche ;
+- thèses ;
+- analyses ;
+- cas ;
+- outils ;
+- frameworks ;
+- workspace ;
+- décisions.
+
+Statut :
+
+- à construire ;
+- à mettre en avant ;
+- à rendre crédible ;
+- à maintenir.
+
+## Conclusion
+
+La bonne trajectoire n’est pas de transformer une formation VC en produit plus premium.
+
+La bonne trajectoire est de construire une VC Intelligence Platform dont la formation est un socle d’entrée, mais dont la valeur principale vient de la capacité à aider les utilisateurs à produire un raisonnement d’investisseur.
+
+La promesse finale :
+
+> Une plateforme pour apprendre les bases du venture quand c’est nécessaire, mais surtout pour analyser les marchés, construire des thèses, modéliser des décisions et penser comme un investisseur professionnel.

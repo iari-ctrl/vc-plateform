@@ -1,0 +1,33 @@
+name: CI
+
+# Garde-fou contenu + qualité. La validation bloque tout contenu cassé
+# (ids/slugs en double, relatedLessonIds ou marqueurs [[..]]/{{..}} introuvables,
+# schéma JSON invalide) avant le lint et le build.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Valider le contenu
+        # Passer à `npm run validate:content:strict` une fois les
+        # avertissements seeAlso résorbés (tolérance zéro).
+        run: npm run validate:content
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        # `npm run build` relance aussi la validation via le hook `prebuild`.
+        # `prisma generate` n'exige pas DATABASE_URL ; si le build serveur le
+        # réclame un jour, ajouter le secret au job.
+        run: npm run build
+      - name: Tests unitaires (client)
+        run: npm run test --workspace client

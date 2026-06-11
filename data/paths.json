@@ -1,0 +1,183 @@
+[
+  {
+    "id": "discover",
+    "slug": "decouvrir-le-capital-risque",
+    "order": 1,
+    "title": "Découvrir le capital-risque",
+    "subtitle": "Le point d'entrée",
+    "level": "debutant",
+    "accent": "#D28236",
+    "kanji": "発",
+    "durationHours": 4,
+    "summary": "Une initiation claire et exigeante : ce qu'est réellement le capital-risque, pourquoi il existe, qui sont les acteurs, et comment l'argent circule de l'épargne institutionnelle jusqu'aux fondateurs.",
+    "forWhom": ["Étudiants", "Stagiaires", "Curieux de l'écosystème"],
+    "outcomes": [
+      "Définir le capital-risque comme classe d'actifs et comme métier",
+      "Distinguer LP, GP, business angels et fonds de fonds",
+      "Comprendre la loi de puissance et le cycle de vie d'un fonds",
+      "Maîtriser la grammaire des stades : pre-seed à Series C"
+    ],
+    "courseIds": ["c-what-is-vc", "c-ecosystem"]
+  },
+  {
+    "id": "vc-craft",
+    "slug": "comprendre-le-metier-de-vc",
+    "order": 2,
+    "title": "Comprendre le métier de VC",
+    "subtitle": "Le quotidien réel",
+    "level": "debutant",
+    "accent": "#267A8C",
+    "kanji": "業",
+    "durationHours": 5,
+    "summary": "Au-delà du mythe : à quoi ressemble vraiment une semaine de venture capitalist. Sourcing, screening, conviction, comité d'investissement, accompagnement et la discipline du temps long.",
+    "forWhom": ["Futurs analystes", "Reconvertis", "Entrepreneurs curieux"],
+    "outcomes": [
+      "Décrire le pipeline sourcing → screening → DD → IC",
+      "Comprendre le rôle d'un analyst, associate, principal et partner",
+      "Saisir l'alignement d'incitations LP / GP",
+      "Lire un deal flow comme un praticien"
+    ],
+    "courseIds": ["c-vc-job", "c-deal-flow"]
+  },
+  {
+    "id": "startup-analysis",
+    "slug": "analyse-de-startup",
+    "order": 3,
+    "title": "Analyse de startup",
+    "subtitle": "L'œil de l'investisseur",
+    "level": "intermediaire",
+    "accent": "#4C6B8A",
+    "kanji": "観",
+    "durationHours": 6,
+    "summary": "Évaluer une jeune entreprise sans données suffisantes : équipe, marché, produit, traction, unit economics. Apprendre à formuler les trois risques qui comptent vraiment.",
+    "forWhom": ["Analystes", "Associates juniors", "Angels"],
+    "outcomes": [
+      "Structurer une due diligence en temps contraint",
+      "Lire des unit economics et le Rule of 40",
+      "Évaluer un marché : TAM, SAM, SOM et timing",
+      "Identifier les signaux faibles d'une équipe fondatrice"
+    ],
+    "courseIds": ["c-startup-analysis", "c-due-diligence"]
+  },
+  {
+    "id": "investment-thesis",
+    "slug": "these-d-investissement",
+    "order": 4,
+    "title": "Thèse d'investissement",
+    "subtitle": "Penser en convictions",
+    "level": "intermediaire",
+    "accent": "#7C4680",
+    "kanji": "論",
+    "durationHours": 4,
+    "summary": "Une thèse n'est pas un slogan : c'est une hypothèse falsifiable sur l'avenir. Construire, défendre et faire évoluer une thèse d'investissement devant un comité.",
+    "forWhom": ["Associates", "Principals", "Émergents GPs"],
+    "outcomes": [
+      "Formuler une thèse falsifiable en deux pages",
+      "Articuler thèse top-down et bottom-up",
+      "Défendre une conviction face au comité d'investissement",
+      "Anticiper le contre-argumentaire (pre-mortem)"
+    ],
+    "courseIds": ["c-thesis"]
+  },
+  {
+    "id": "term-sheets",
+    "slug": "term-sheets-et-structuration",
+    "order": 5,
+    "title": "Term sheets & structuration de deals",
+    "subtitle": "L'architecture juridique",
+    "level": "avance",
+    "accent": "#9A6A3C",
+    "kanji": "契",
+    "durationHours": 6,
+    "summary": "La term sheet est la grammaire du pouvoir et du risque. Liquidation preference, anti-dilution, pro-rata, board, vesting : comprendre chaque clause et son effet réel sur le cap table.",
+    "forWhom": ["Associates", "Principals", "Fondateurs en levée"],
+    "outcomes": [
+      "Lire et négocier une term sheet ligne par ligne",
+      "Modéliser l'effet d'une liquidation preference",
+      "Comprendre l'anti-dilution full ratchet vs weighted average",
+      "Distinguer termes économiques et termes de contrôle"
+    ],
+    "courseIds": ["c-term-sheets"]
+  },
+  {
+    "id": "portfolio",
+    "slug": "portfolio-management",
+    "order": 6,
+    "title": "Portfolio management",
+    "subtitle": "Après le chèque",
+    "level": "avance",
+    "accent": "#3E7C6A",
+    "kanji": "育",
+    "durationHours": 5,
+    "summary": "Le travail commence après l'investissement. Reserve allocation, follow-on, signaling risk, gestion des sociétés en difficulté, construction de portefeuille en loi de puissance et simulation Monte Carlo.",
+    "forWhom": ["Principals", "Partners", "Operators-investors"],
+    "outcomes": [
+      "Construire une stratégie de réserves et de follow-on",
+      "Lire une distribution Monte Carlo de retours de fonds",
+      "Comprendre le signaling risk d'un non-réinvestissement",
+      "Piloter un board en tant qu'investisseur",
+      "Gérer la triage entre stars, walking dead et pertes"
+    ],
+    "courseIds": ["c-portfolio", "c-power-law-portfolio"]
+  },
+  {
+    "id": "fund-economics",
+    "slug": "fund-economics",
+    "order": 7,
+    "title": "Fund economics",
+    "subtitle": "La machine financière",
+    "level": "avance",
+    "accent": "#B0894A",
+    "kanji": "算",
+    "durationHours": 5,
+    "summary": "Comment un fonds gagne de l'argent — et pour qui. Management fees, carried interest, hurdle, waterfall, J-curve, et les métriques qui jugent un GP : DPI, TVPI, IRR, MOIC.",
+    "forWhom": ["Émergents GPs", "LPs", "Principals"],
+    "outcomes": [
+      "Décomposer la structure 2 & 20 et la waterfall",
+      "Lire DPI, TVPI, RVPI, IRR et MOIC sans confusion",
+      "Comprendre la J-curve et le timing des distributions",
+      "Modéliser le fund return nécessaire pour rendre le fonds"
+    ],
+    "courseIds": ["c-fund-economics"]
+  },
+  {
+    "id": "founder-fundraising",
+    "slug": "levee-de-fonds-cote-entrepreneur",
+    "order": 8,
+    "title": "Levée de fonds côté entrepreneur",
+    "subtitle": "L'autre côté de la table",
+    "level": "tous",
+    "accent": "#B5544E",
+    "kanji": "募",
+    "durationHours": 4,
+    "summary": "Comprendre les VC pour mieux lever. Construire un narratif, choisir SAFE ou priced round, gérer la dilution sur plusieurs tours, et négocier sans détruire la relation.",
+    "forWhom": ["Fondateurs", "Operators", "Étudiants entrepreneurs"],
+    "outcomes": [
+      "Construire un pitch et un data room crédibles",
+      "Choisir entre SAFE, BSA-AIR et priced round",
+      "Anticiper la dilution sur seed → Series B",
+      "Négocier une term sheet de manière éclairée"
+    ],
+    "courseIds": ["c-founder-raise"]
+  },
+  {
+    "id": "career",
+    "slug": "devenir-analyst-associate-principal",
+    "order": 9,
+    "title": "Devenir analyst / associate / principal",
+    "subtitle": "La trajectoire",
+    "level": "tous",
+    "accent": "#5A4FA0",
+    "kanji": "道",
+    "durationHours": 5,
+    "summary": "Les trajectoires réelles vers le métier d'investisseur : ce que chaque échelon attend, comment on y entre, et ce qui distingue un bon junior d'un futur partner.",
+    "forWhom": ["Étudiants", "Stagiaires", "Reconvertis"],
+    "outcomes": [
+      "Comprendre les responsabilités par échelon",
+      "Construire un profil qui ouvre les portes des fonds",
+      "Préparer un entretien VC (case, deal memo, marché)",
+      "Cartographier les fonds européens par stade et thèse"
+    ],
+    "courseIds": ["c-career", "c-mathematiques-vc"]
+  }
+]

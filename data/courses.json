@@ -1,0 +1,350 @@
+[
+  {
+    "id": "c-what-is-vc",
+    "slug": "qu-est-ce-que-le-capital-risque",
+    "pathId": "discover",
+    "order": 1,
+    "title": "Qu'est-ce que le capital-risque ?",
+    "subtitle": "Classe d'actifs, métier, et état d'esprit",
+    "level": "debutant",
+    "durationMin": 65,
+    "summary": "Derrière l'acronyme VC se cache une classe d'actifs singulière : longue, illiquide, gouvernée par la loi de puissance. On part de l'histoire pour arriver à l'Europe de 2026.",
+    "tags": [
+      "fondations",
+      "histoire",
+      "power-law"
+    ],
+    "lessonIds": [
+      "l-vc-definition",
+      "l-power-law",
+      "l-fund-lifecycle"
+    ]
+  },
+  {
+    "id": "c-ecosystem",
+    "slug": "la-chaine-de-valeur",
+    "pathId": "discover",
+    "order": 2,
+    "title": "La chaîne de valeur du capital-risque",
+    "subtitle": "Qui finance qui, et pourquoi",
+    "level": "debutant",
+    "durationMin": 55,
+    "summary": "LPs, fonds de fonds, GPs, business angels, family offices. On suit le voyage de l'argent depuis l'épargne institutionnelle jusqu'au compte en banque d'une startup.",
+    "tags": [
+      "acteurs",
+      "lp-gp",
+      "europe"
+    ],
+    "lessonIds": [
+      "l-actors",
+      "l-stages"
+    ]
+  },
+  {
+    "id": "c-vc-job",
+    "slug": "le-metier-au-quotidien",
+    "pathId": "vc-craft",
+    "order": 1,
+    "title": "Le métier de VC au quotidien",
+    "subtitle": "Une semaine dans la vie d'un investisseur",
+    "level": "debutant",
+    "durationMin": 60,
+    "summary": "Le venture capital n'est pas qu'une affaire de chèques. C'est un métier de sourcing, de jugement sous incertitude, de relation et de patience structurelle.",
+    "tags": [
+      "métier",
+      "roles",
+      "incitations"
+    ],
+    "lessonIds": [
+      "l-vc-week",
+      "l-roles"
+    ]
+  },
+  {
+    "id": "c-deal-flow",
+    "slug": "deal-flow-et-screening",
+    "pathId": "vc-craft",
+    "order": 2,
+    "title": "Deal flow & screening",
+    "subtitle": "Trouver, filtrer, prioriser",
+    "level": "intermediaire",
+    "durationMin": 50,
+    "summary": "Un fonds voit des milliers de dossiers et n'en finance que quelques-uns. Comment naît un pipeline, comment on filtre sans tuer la sérendipité, et où se cache l'avantage.",
+    "tags": [
+      "sourcing",
+      "pipeline",
+      "screening"
+    ],
+    "lessonIds": [
+      "l-sourcing",
+      "l-screening"
+    ]
+  },
+  {
+    "id": "c-startup-analysis",
+    "slug": "lire-une-startup",
+    "pathId": "startup-analysis",
+    "order": 1,
+    "title": "Lire une startup",
+    "subtitle": "Équipe, marché, produit, traction",
+    "level": "intermediaire",
+    "durationMin": 70,
+    "summary": "Évaluer une entreprise qui n'a presque pas de données. Les quatre piliers d'analyse et l'art de formuler les trois risques qui décideront du résultat.",
+    "tags": [
+      "analyse",
+      "marché",
+      "équipe"
+    ],
+    "lessonIds": [
+      "l-team-market",
+      "l-traction-unit-economics"
+    ]
+  },
+  {
+    "id": "c-due-diligence",
+    "slug": "due-diligence",
+    "pathId": "startup-analysis",
+    "order": 2,
+    "title": "Due diligence en pratique",
+    "subtitle": "Vérifier sans paralyser",
+    "level": "intermediaire",
+    "durationMin": 55,
+    "summary": "La DD n'est pas un audit comptable : c'est une enquête priorisée sur ce qui peut tuer l'investissement. Commercial, technique, juridique, et le piège de la sur-analyse.",
+    "tags": [
+      "due-diligence",
+      "risque",
+      "process"
+    ],
+    "lessonIds": [
+      "l-dd-process"
+    ]
+  },
+  {
+    "id": "c-thesis",
+    "slug": "construire-une-these",
+    "pathId": "investment-thesis",
+    "order": 1,
+    "title": "Construire une thèse d'investissement",
+    "subtitle": "Une hypothèse falsifiable sur l'avenir",
+    "level": "intermediaire",
+    "durationMin": 60,
+    "summary": "Une thèse articule où va le monde, pourquoi maintenant, et pourquoi vous. On apprend à la rendre défendable, falsifiable, et vivante.",
+    "tags": [
+      "thèse",
+      "conviction",
+      "ic"
+    ],
+    "lessonIds": [
+      "l-thesis-anatomy",
+      "l-defending-thesis"
+    ]
+  },
+  {
+    "id": "c-term-sheets",
+    "slug": "anatomie-d-une-term-sheet",
+    "pathId": "term-sheets",
+    "order": 1,
+    "title": "Anatomie d'une term sheet",
+    "subtitle": "Économie et contrôle, ligne par ligne",
+    "level": "avance",
+    "durationMin": 81,
+    "summary": "Chaque clause d'une term sheet déplace du risque ou du pouvoir. Liquidation preference, anti-dilution, pro-rata, vesting, board : on décortique l'architecture du deal.",
+    "tags": [
+      "term-sheet",
+      "juridique",
+      "cap-table"
+    ],
+    "lessonIds": [
+      "l-ts-economics",
+      "l-ts-control",
+      "lts-standard-francais"
+    ]
+  },
+  {
+    "id": "c-portfolio",
+    "slug": "gerer-un-portefeuille",
+    "pathId": "portfolio",
+    "order": 1,
+    "title": "Gérer un portefeuille",
+    "subtitle": "Réserves, follow-on et triage",
+    "level": "avance",
+    "durationMin": 55,
+    "summary": "Construire un portefeuille en loi de puissance, allouer ses réserves, gérer le signaling risk, et accepter la mort de certaines lignes pour servir les gagnantes.",
+    "tags": [
+      "portfolio",
+      "follow-on",
+      "réserves"
+    ],
+    "lessonIds": [
+      "l-reserves",
+      "l-triage"
+    ]
+  },
+  {
+    "id": "c-power-law-portfolio",
+    "slug": "construction-portefeuille-loi-puissance",
+    "pathId": "portfolio",
+    "order": 2,
+    "title": "Construction de portefeuille en loi de puissance",
+    "subtitle": "Distribution, Monte Carlo et fund returner math",
+    "level": "avance",
+    "durationMin": 48,
+    "summary": "Pourquoi un portefeuille VC se lit comme une distribution de scénarios, comment Monte Carlo rend cette incertitude exploitable, et comment interpréter le simulateur Power Law sans confondre moyenne, médiane et outliers.",
+    "tags": [
+      "portfolio",
+      "power-law",
+      "monte-carlo",
+      "fund-economics"
+    ],
+    "lessonIds": [
+      "lpl-average-lies",
+      "lpl-why-monte-carlo",
+      "lpl-simulator-engine",
+      "lpl-read-results"
+    ]
+  },
+  {
+    "id": "c-fund-economics",
+    "slug": "economie-d-un-fonds",
+    "pathId": "fund-economics",
+    "order": 1,
+    "title": "L'économie d'un fonds",
+    "subtitle": "Fees, carry, waterfall et métriques",
+    "level": "avance",
+    "durationMin": 87,
+    "summary": "Comment un fonds gagne de l'argent, pour qui, et comment on le juge. La structure 2 & 20, la waterfall, la J-curve et le langage des métriques de performance.",
+    "tags": [
+      "fund-economics",
+      "carry",
+      "métriques"
+    ],
+    "lessonIds": [
+      "l-fees-carry",
+      "l-fund-metrics",
+      "llp-pitch",
+      "llp-process",
+      "llp-france"
+    ]
+  },
+  {
+    "id": "c-founder-raise",
+    "slug": "lever-des-fonds",
+    "pathId": "founder-fundraising",
+    "order": 1,
+    "title": "Lever des fonds, côté fondateur",
+    "subtitle": "Narratif, instruments et dilution",
+    "level": "tous",
+    "durationMin": 60,
+    "summary": "Pour mieux lever, il faut penser comme un VC. Construire un narratif, choisir le bon instrument, anticiper la dilution et négocier sans casser la relation.",
+    "tags": [
+      "fundraising",
+      "safe",
+      "dilution"
+    ],
+    "lessonIds": [
+      "l-founder-narrative",
+      "l-founder-instruments"
+    ]
+  },
+  {
+    "id": "c-career",
+    "slug": "entrer-dans-le-venture",
+    "pathId": "career",
+    "order": 1,
+    "title": "Entrer dans le venture",
+    "subtitle": "Analyst, associate, principal",
+    "level": "tous",
+    "durationMin": 45,
+    "summary": "Ce que chaque échelon attend réellement, comment on entre dans un fonds, et comment préparer les entretiens spécifiques au métier d'investisseur.",
+    "tags": [
+      "carrière",
+      "recrutement",
+      "entretien"
+    ],
+    "lessonIds": [
+      "l-career-levels",
+      "l-career-breaking-in"
+    ]
+  },
+  {
+    "id": "c-mathematiques-vc",
+    "slug": "mathematiques-du-vc",
+    "pathId": "career",
+    "order": 2,
+    "title": "Mathématiques du VC",
+    "subtitle": "Les calculs qui tombent en entretien",
+    "level": "intermediaire",
+    "durationMin": 95,
+    "summary": "Pre/post-money, dilution, market sizing, unit economics, returns et waterfall : les calculs simples mais décisifs qu'un candidat, analyste ou investisseur doit savoir poser sans se cacher derrière Excel.",
+    "tags": [
+      "mathématiques",
+      "entretien",
+      "dilution",
+      "returns"
+    ],
+    "lessonIds": [
+      "lmv-pre-post-ownership",
+      "lmv-dilution-cap-table",
+      "lmv-market-sizing",
+      "lmv-unit-economics",
+      "lmv-returns-waterfall"
+    ]
+  },
+  {
+    "id": "c-decouvrir-vc",
+    "slug": "le-vc-sans-bullshit-modules",
+    "pathId": "p-decouvrir-vc",
+    "order": 1,
+    "title": "Le VC sans bullshit",
+    "subtitle": "La découverte, en 7 épisodes bingeables",
+    "level": "debutant",
+    "durationMin": 60,
+    "summary": "Le registre « découverte » du parcours d'entrée : comment l'argent passe de l'épargne aux fondateurs, et pourquoi 9 startups sur 10 doivent mourir. Ton léger, un concept par épisode, mythes démontés.",
+    "tags": [
+      "découverte",
+      "fondations",
+      "power-law"
+    ],
+    "lessonIds": [
+      "ld-power-law",
+      "ld-what-is-vc",
+      "ld-money-flow",
+      "ld-stages",
+      "ld-vc-job",
+      "ld-roles",
+      "ld-fund-lifecycle"
+    ]
+  },
+  {
+    "id": "c-entretien-analyst",
+    "slug": "reussir-l-entretien-analyst-modules",
+    "pathId": "p-entretien-analyst",
+    "order": 1,
+    "title": "Réussir l'entretien Analyst",
+    "subtitle": "Les 13 modules, du screening au mock final",
+    "level": "intermediaire",
+    "durationMin": 420,
+    "summary": "Le curriculum complet de l'entretien analyst : la grille de l'investisseur, le market sizing, le deal memo, le case study, le fit, et un mock chronométré. Frameworks, exemples travaillés, checklists.",
+    "tags": [
+      "entretien",
+      "carrière",
+      "deal-memo",
+      "case-study"
+    ],
+    "lessonIds": [
+      "lea-process",
+      "lea-grille",
+      "lea-market-sizing",
+      "lea-read-startup",
+      "lea-technical",
+      "lea-deal-memo",
+      "lea-case-study",
+      "lea-pitch",
+      "lea-fit",
+      "lea-reverse-questions",
+      "lea-fund-research",
+      "lea-jour-j",
+      "lea-mock"
+    ]
+  }
+]

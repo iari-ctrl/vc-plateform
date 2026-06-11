@@ -1,0 +1,98 @@
+[
+  {
+    "id": "cs-power-law-portfolio",
+    "slug": "anatomie-d-un-portefeuille-power-law",
+    "title": "Anatomie d'un portefeuille en loi de puissance",
+    "subtitle": "Pourquoi une seule ligne peut sauver un fonds entier",
+    "kind": "fund",
+    "company": "Fonds early-stage fictif · 30 lignes",
+    "year": 2026,
+    "readMin": 11,
+    "summary": "On dissèque un portefeuille de 30 investissements pour montrer, chiffres à l'appui, comment la loi de puissance gouverne le résultat — et ce que cela implique pour l'allocation.",
+    "tags": ["power-law", "fund-economics", "portfolio"],
+    "glossaryRefs": ["power-law", "fund-returner", "moic", "tvpi", "follow-on"],
+    "sections": [
+      { "heading": "Le portefeuille", "body": "Un fonds de 50 M€ déploie sur 30 lignes au seed, ticket moyen ~1 M€, avec 40 % réservés au follow-on. Au terme de dix ans, la distribution des résultats illustre la loi de puissance : 18 lignes rendent moins de 1×, 9 rendent entre 1× et 5×, 2 font 12× et 25×, et une seule fait 60×." },
+      { "heading": "Le calcul qui surprend", "body": "La ligne à 60× transforme 2,5 M€ déployés (premier ticket + follow-on) en 150 M€ — soit trois fois la taille du fonds entier à elle seule. Sans elle, le fonds rend péniblement son capital. Avec elle, il atteint un TVPI net largement supérieur à 3×. La leçon : le résultat n'est pas la moyenne, c'est l'extrême." },
+      { "heading": "L'implication pour l'allocation", "body": "Si une seule ligne fait le fonds, deux erreurs deviennent fatales : (1) screener trop dur et rejeter l'aberration parce que son deck était rugueux ; (2) mal allouer ses réserves en suivant les retardataires plutôt que les stars. La construction de portefeuille consiste à se donner assez de chances d'attraper l'extrême, puis à concentrer le capital de suivi sur lui." },
+      { "heading": "Ce qu'un débutant doit retenir", "body": "Le VC n'est pas un métier de moyenne mais d'extrêmes. On accepte beaucoup de pertes pour ne pas manquer la ligne qui justifie tout. Cela change la façon de filtrer, de réinvestir, et même de définir le risque." }
+    ],
+    "takeaways": [
+      "Le résultat d'un fonds est dominé par sa meilleure ligne, pas par la moyenne.",
+      "Screener trop dur et mal allouer ses réserves sont les deux erreurs fatales.",
+      "On accepte les pertes pour ne pas manquer l'aberration."
+    ]
+  },
+  {
+    "id": "cs-liquidation-preference",
+    "slug": "le-piege-de-la-valorisation-flatteuse",
+    "title": "Le piège de la valorisation flatteuse",
+    "subtitle": "Comment une term sheet « généreuse » peut appauvrir un fondateur",
+    "kind": "deal",
+    "company": "Series B fictive · 80 M€ post-money",
+    "year": 2026,
+    "readMin": 9,
+    "summary": "Deux term sheets, une valorisation haute et une plus basse. On modélise la sortie pour révéler laquelle enrichit réellement le fondateur — et pourquoi les chiffres affichés trompent.",
+    "tags": ["term-sheet", "liquidation-preference", "negotiation"],
+    "glossaryRefs": ["liquidation-preference", "term-sheet", "cap-table", "pre-money"],
+    "sections": [
+      { "heading": "Les deux offres", "body": "Offre A : 80 M€ post-money, liquidation preference 2× participating. Offre B : 60 M€ post-money, 1× non-participating. La fondatrice est tentée par la valorisation la plus haute — un réflexe naturel et coûteux." },
+      { "heading": "Le scénario de sortie moyen", "body": "L'entreprise est revendue 120 M€, un bon résultat sans être spectaculaire. Avec l'offre A, l'investisseur récupère d'abord 2× sa mise puis participe au reste : sa préférence dévore une part disproportionnée du produit, laissant beaucoup moins aux ordinaires. Avec l'offre B, l'investisseur convertit simplement en ordinaire et touche sa part au prorata." },
+      { "heading": "Le verdict", "body": "Dans la majorité des scénarios de sortie réalistes (hors méga-exit), l'offre B « moins-disante » laisse davantage à la fondatrice et aux employés. La valorisation affichée n'est qu'un nombre ; ce sont les termes économiques qui déterminent qui touche quoi." },
+      { "heading": "La règle du praticien", "body": "Ne jamais lire une clause isolément. Toujours modéliser plusieurs scénarios de sortie et se demander : qui touche quoi, dans chaque cas ? Une term sheet se lit comme une distribution de probabilités, pas comme une affiche." }
+    ],
+    "takeaways": [
+      "Une valorisation élevée assortie d'une préférence participating peut appauvrir le fondateur.",
+      "Les termes économiques priment sur le nombre affiché.",
+      "Toujours modéliser plusieurs scénarios de sortie avant de signer."
+    ]
+  },
+  {
+    "id": "cs-dilution-journey",
+    "slug": "la-dilution-d-un-fondateur-du-seed-a-la-series-c",
+    "title": "La dilution d'un fondateur, du seed à la Series C",
+    "subtitle": "Comment 100 % deviennent 28 % — et pourquoi ce n'est pas un échec",
+    "kind": "startup",
+    "company": "SaaS B2B fictif · 4 tours",
+    "year": 2026,
+    "readMin": 10,
+    "summary": "On suit le cap table d'une fondatrice sur quatre tours pour montrer comment la dilution se compose, et pourquoi détenir moins d'une entreprise plus grande est souvent la bonne issue.",
+    "tags": ["dilution", "cap-table", "fundraising"],
+    "glossaryRefs": ["dilution", "cap-table", "pre-money", "esop", "safe"],
+    "sections": [
+      { "heading": "Le point de départ", "body": "La fondatrice détient 100 % au lancement. Elle lève en seed via un SAFE, puis en Series A, B et C via des priced rounds, en créant un pool d'options à chaque étape majeure." },
+      { "heading": "La composition de la dilution", "body": "Seed : -22 % (dont ESOP). Series A : -20 %. Series B : -16 %. Series C : -14 %. Ces pourcentages ne s'additionnent pas : ils se composent sur une base décroissante. Résultat : la fondatrice conserve ~28 % après la Series C." },
+      { "heading": "Le paradoxe de la valeur", "body": "28 % d'une entreprise valorisée 400 M€ valent infiniment plus que 100 % d'une entreprise qui n'a jamais levé et qui plafonne. La dilution n'est pas une perte si elle finance une création de valeur supérieure à la part cédée." },
+      { "heading": "Les leviers de contrôle de la dilution", "body": "On limite la dilution en levant juste ce dont on a besoin, en négociant la taille et le timing de l'ESOP, et en évitant les valorisations trop hautes qui menacent d'un down round. L'objectif n'est pas de minimiser la dilution, mais d'optimiser la valeur finale détenue." }
+    ],
+    "takeaways": [
+      "La dilution se compose ; elle ne s'additionne pas.",
+      "Détenir moins d'une entreprise plus grande est souvent la bonne issue.",
+      "On optimise la valeur finale détenue, pas le pourcentage."
+    ]
+  },
+  {
+    "id": "cs-europe-vs-valley",
+    "slug": "le-vc-europeen-contre-le-mythe-de-la-valley",
+    "title": "Le VC européen contre le mythe de la Valley",
+    "subtitle": "Pourquoi la fragmentation est devenue une force",
+    "kind": "market",
+    "company": "Écosystème européen",
+    "year": 2026,
+    "readMin": 8,
+    "summary": "Longtemps jugé frileux, le capital-risque européen a forgé un modèle distinct. On analyse ce qui le différencie structurellement de la Silicon Valley.",
+    "tags": ["europe", "market", "ecosystem"],
+    "glossaryRefs": ["venture-capital", "lp", "gp"],
+    "sections": [
+      { "heading": "Le retard historique", "body": "L'Europe a mis quarante ans à bâtir un écosystème comparable, freinée par un marché fragmenté, une moindre tolérance culturelle à l'échec, et un capital institutionnel plus prudent. Le récit dominant en a fait une faiblesse." },
+      { "heading": "La contrainte devenue avantage", "body": "Une startup américaine croît sur un marché unifié de 330 millions de consommateurs. Une startup européenne doit s'internationaliser dès le départ, à travers des langues, cultures et cadres réglementaires différents. Cette contrainte forge des fondateurs plus disciplinés dans l'allocation du capital et plus résilients." },
+      { "heading": "Les acteurs structurants", "body": "Le rôle du capital public et semi-public (EIF, Bpifrance) a été déterminant pour amorcer la classe d'actifs. À côté, une génération de fonds transfrontaliers a développé une expertise propre à la complexité européenne." },
+      { "heading": "Ce que cela change pour un investisseur", "body": "Investir en Europe, c'est accepter une géographie hétérogène comme donnée première : la thèse, le réseau et la lecture réglementaire comptent autant que l'analyse produit. Le mimétisme avec la Valley est une erreur de débutant." }
+    ],
+    "takeaways": [
+      "La fragmentation européenne forge des fondateurs disciplinés et résilients.",
+      "Le capital public a joué un rôle d'amorçage déterminant.",
+      "Copier la Valley est une erreur : l'Europe a sa propre logique."
+    ]
+  }
+]

@@ -1,0 +1,154 @@
+import { Router } from 'express';
+import { z } from 'zod';
+import { prisma } from '../lib/db.js';
+import { requireAdmin } from '../lib/auth.js';
+import { stripHtml } from '../lib/content.js';
+
+export const adminRouter = Router();
+adminRouter.use(requireAdmin);
+
+const slugify = (s: string) =>
+  s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);
+
+// ── Dashboard stats ─────────────────────────────────────────────────────
+adminRouter.get('/stats', async (_req, res) => {
+  const [paths, courses, lessons, glossary, cases, blog, simulators, users, notes] = await Promise.all([
+    prisma.learningPath.count(), prisma.course.count(), prisma.lesson.count(),
+    prisma.glossaryTerm.count(), prisma.caseStudy.count(), prisma.blogPost.count(),
+    prisma.simulator.count(), prisma.user.count(), prisma.note.count(),
+  ]);
+  res.json({ paths, courses, lessons, glossary, cases, blog, simulators, users, notes });
+});
+
+// ── Glossary CRUD ─────────────────────────────────────────────────────────
+const glossarySchema = z.object({
+  term: z.string().min(1),
+  slug: z.string().optional(),
+  latin: z.string().optional(),
+  category: z.string().min(1),
+  short: z.string().min(1),
+  definition: z.string().min(1),
+  example: z.string().optional(),
+  seeAlso: z.array(z.string()).default([]),
+  relatedLessonIds: z.array(z.string()).default([]),
+});
+
+adminRouter.get('/glossary', async (_req, res) => {
+  const rows = await prisma.glossaryTerm.findMany({ orderBy: { term: 'asc' } });
+  res.json(rows.map((r) => JSON.parse(r.data)));
+});
+
+adminRouter.post('/glossary', async (req, res) => {
+  const parsed = glossarySchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
+  const slug = parsed.data.slug || slugify(parsed.data.term);
+  const id = slug;
+  const obj = { id, ...parsed.data, slug };
+  const searchText = stripHtml([obj.term, obj.latin, obj.short, obj.definition, obj.example].filter(Boolean).join(' ')).toLowerCase();
+  try {
+    const row = await prisma.glossaryTerm.create({ data: { id, slug, term: obj.term, category: obj.category, searchText, data: JSON.stringify(obj) } });
+    res.status(201).json(JSON.parse(row.data));
+  } catch {
+    res.status(409).json({ error: 'Un terme avec ce slug existe déjà.' });
+  }
+});
+
+adminRouter.put('/glossary/:id', async (req, res) => {
+  const parsed = glossarySchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
+  const existing = await prisma.glossaryTerm.findUnique({ where: { id: req.params.id } });
+  if (!existing) return res.status(404).json({ error: 'Terme introuvable.' });
+  const slug = parsed.data.slug || existing.slug;
+  const obj = { id: existing.id, ...parsed.data, slug };
+  const searchText = stripHtml([obj.term, obj.latin, obj.short, obj.definition, obj.example].filter(Boolean).join(' ')).toLowerCase();
+  const row = await prisma.glossaryTerm.update({ where: { id: existing.id }, data: { slug, term: obj.term, category: obj.category, searchText, data: JSON.stringify(obj) } });
+  res.json(JSON.parse(row.data));
+});
+
+adminRouter.delete('/glossary/:id', async (req, res) => {
+  await prisma.glossaryTerm.delete({ where: { id: req.params.id } }).catch(() => null);
+  res.json({ ok: true });
+});
+
+// ── Blog CRUD ──────────────────────────────────────────────────────────────
+const blogSchema = z.object({
+  title: z.string().min(1),
+  slug: z.string().optional(),
+  subtitle: z.string().default(''),
+  author: z.string().default('L\'équipe VC Premium'),
+  date: z.string().default(new Date().toISOString().slice(0, 10)),
+  readMin: z.number().int().min(1).default(5),
+  category: z.string().default('Réflexion'),
+  excerpt: z.string().min(1),
+  tags: z.array(z.string()).default([]),
+  body: z.string().min(1),
+});
+
+adminRouter.get('/blog', async (_req, res) => {
+  const rows = await prisma.blogPost.findMany({ orderBy: { date: 'desc' } });
+  res.json(rows.map((r) => JSON.parse(r.data)));
+});
+
+adminRouter.post('/blog', async (req, res) => {
+  const parsed = blogSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
+  const slug = parsed.data.slug || slugify(parsed.data.title);
+  const id = `bp-${slug}`.slice(0, 60);
+  const obj = { id, ...parsed.data, slug };
+  const searchText = stripHtml([obj.title, obj.subtitle, obj.excerpt, obj.body].join(' ')).toLowerCase();
+  try {
+    const row = await prisma.blogPost.create({ data: { id, slug, title: obj.title, category: obj.category, date: obj.date, searchText, data: JSON.stringify(obj) } });
+    res.status(201).json(JSON.parse(row.data));
+  } catch {
+    res.status(409).json({ error: 'Un article avec ce slug existe déjà.' });
+  }
+});
+
+adminRouter.put('/blog/:id', async (req, res) => {
+  const parsed = blogSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
+  const existing = await prisma.blogPost.findUnique({ where: { id: req.params.id } });
+  if (!existing) return res.status(404).json({ error: 'Article introuvable.' });
+  const slug = parsed.data.slug || existing.slug;
+  const obj = { id: existing.id, ...parsed.data, slug };
+  const searchText = stripHtml([obj.title, obj.subtitle, obj.excerpt, obj.body].join(' ')).toLowerCase();
+  const row = await prisma.blogPost.update({ where: { id: existing.id }, data: { slug, title: obj.title, category: obj.category, date: obj.date, searchText, data: JSON.stringify(obj) } });
+  res.json(JSON.parse(row.data));
+});
+
+adminRouter.delete('/blog/:id', async (req, res) => {
+  await prisma.blogPost.delete({ where: { id: req.params.id } }).catch(() => null);
+  res.json({ ok: true });
+});
+
+// ── Case studies (list + update data) ───────────────────────────────────────
+adminRouter.get('/case-studies', async (_req, res) => {
+  const rows = await prisma.caseStudy.findMany({ orderBy: { title: 'asc' } });
+  res.json(rows.map((r) => JSON.parse(r.data)));
+});
+
+const caseSchema = z.object({
+  title: z.string().min(1),
+  subtitle: z.string().default(''),
+  kind: z.string().default('startup'),
+  company: z.string().default(''),
+  year: z.number().int().default(new Date().getFullYear()),
+  readMin: z.number().int().default(8),
+  summary: z.string().min(1),
+  tags: z.array(z.string()).default([]),
+  glossaryRefs: z.array(z.string()).default([]),
+  sections: z.array(z.object({ heading: z.string(), body: z.string() })).default([]),
+  takeaways: z.array(z.string()).default([]),
+});
+
+adminRouter.put('/case-studies/:id', async (req, res) => {
+  const parsed = caseSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
+  const existing = await prisma.caseStudy.findUnique({ where: { id: req.params.id } });
+  if (!existing) return res.status(404).json({ error: 'Étude de cas introuvable.' });
+  const obj = { id: existing.id, slug: existing.slug, ...parsed.data };
+  const searchText = stripHtml([obj.title, obj.subtitle, obj.summary, ...obj.sections.map((s) => s.heading + ' ' + s.body)].join(' ')).toLowerCase();
+  const row = await prisma.caseStudy.update({ where: { id: existing.id }, data: { title: obj.title, kind: obj.kind, searchText, data: JSON.stringify(obj) } });
+  res.json(JSON.parse(row.data));
+});

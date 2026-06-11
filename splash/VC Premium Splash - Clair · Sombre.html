@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VC Premium · Entrer — Clair ou Sombre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="brand.css" />
+  <style>
+    html, body { margin: 0; height: 100%; background: #ECEAE3; font-family: "Plus Jakarta Sans", sans-serif; overflow: hidden; }
+    #stage { position: fixed; inset: 0; display: grid; place-items: center; background: #ECEAE3; }
+    #scaler { width: 1440px; height: 900px; transform-origin: center center; }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="scaler"><div id="root"></div></div>
+  </div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="ornaments.jsx"></script>
+  <script type="text/babel" src="splash-atlas.jsx"></script>
+  <script type="text/babel" src="splash-constellation.jsx"></script>
+  <script type="text/babel" src="splash-duo.jsx"></script>
+
+  <script>
+    // Scale the fixed 1440×900 portal to fill the viewport (contain / letterbox).
+    function fit() {
+      var s = Math.min(window.innerWidth / 1440, window.innerHeight / 900);
+      var el = document.getElementById("scaler");
+      if (el) el.style.transform = "scale(" + s + ")";
+    }
+    window.addEventListener("resize", fit);
+    fit();
+  </script>
+
+  <script type="text/babel">
+    const { SplashDuo } = window;
+    // Default mode (incl. system "auto") is resolved inside SplashDuo via the
+    // "Mode par défaut" tweak.
+    ReactDOM.createRoot(document.getElementById("root")).render(<SplashDuo />);
+    requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+  </script>
+
+  <script>
+    // Entrance reveal — driven by timers, not the CSS animation timeline.
+    // Some preview frames freeze the rAF-based document timeline (so .rise /
+    // .fade keyframes never progress), yet style mutations still paint. We tween
+    // opacity + lift ourselves with setInterval/Date.now, honouring each
+    // element's --d delay, so the choreographed entrance plays everywhere.
+    // window.__playReveal(speed) (re)reveals every .rise/.fade element, scaling
+    // each element's --d delay by 1/speed so the copy stays in step with the
+    // compass intro. SplashDuo calls it on load and on every intro replay.
+    (function () {
+      function ms(v) { v = (v || "").trim(); if (v.endsWith("ms")) return parseFloat(v); if (v.endsWith("s")) return parseFloat(v) * 1000; return parseFloat(v) || 0; }
+      function reveal(el, speed) {
+        if (el.__revIv) { clearInterval(el.__revIv); el.__revIv = null; }
+        var cs = getComputedStyle(el);
+        var delay = ms(cs.animationDelay) / (speed || 1);
+        var small = el.classList.contains("rise-sm");
+        var fadeOnly = el.classList.contains("fade") && !el.classList.contains("rise") && !small;
+        var lift = fadeOnly ? 0 : (small ? 10 : 20);
+        var dur = fadeOnly ? 1100 : (small ? 700 : 900);
+        el.style.animation = "none";          // take over from the CSS keyframe
+        el.style.opacity = "0";
+        if (lift) el.style.transform = "translateY(" + lift + "px)";
+        el.__revTo = setTimeout(function () {
+          var start = Date.now();
+          el.__revIv = setInterval(function () {
+            var t = Math.min(1, (Date.now() - start) / dur);
+            var e = 1 - Math.pow(1 - t, 3);   // easeOutCubic
+            el.style.opacity = String(e);
+            if (lift) el.style.transform = "translateY(" + (lift * (1 - e)) + "px)";
+            if (t >= 1) { clearInterval(el.__revIv); el.__revIv = null; el.style.transform = lift ? "none" : el.style.transform; }
+          }, 16);
+        }, delay);
+      }
+      window.__playReveal = function (speed) {
+        document.querySelectorAll(".rise, .rise-sm, .fade").forEach(function (el) { reveal(el, speed || window.__introSpeed || 1); });
+      };
+      // initial play once the React tree has mounted its .rise/.fade nodes
+      var tries = 0;
+      var poll = setInterval(function () {
+        if (document.querySelectorAll(".rise, .rise-sm, .fade").length > 0) {
+          clearInterval(poll); window.__playReveal(window.__introSpeed || 1);
+        } else if (++tries > 60) clearInterval(poll);
+      }, 50);
+    })();
+  </script>
+</body>
+</html>

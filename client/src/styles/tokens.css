@@ -1,0 +1,102 @@
+/**
+ * VC Premium Experience — Design tokens
+ * Editorial luxury palette: gilded gold leaf, deep-sea navy, velvet plum on parchment.
+ */
+
+:root {
+  /* — Primary (gilded gold leaf) — */
+  --primary: #C5A85C;
+  --on-primary: #12131A;
+  --primary-container: #F6ECCB;
+  --on-primary-container: #4E3E18;
+  --primary-fixed: #FFEDC2;
+  --primary-fixed-dim: #E5CD8B;
+
+  /* — Secondary (deep-sea navy) — */
+  --secondary: #1E2D38;
+  --on-secondary: #FDFCF7;
+  --secondary-container: #D1DFE8;
+  --on-secondary-container: #132029;
+
+  /* — Tertiary (velvet plum) — */
+  --tertiary: #5A455C;
+  --on-tertiary: #FDFCF7;
+  --tertiary-container: #EADCEB;
+  --on-tertiary-container: #2A172C;
+
+  /* — Semantic states (danger / success) — */
+  --error: #B5544E;
+  --on-error: #FFFFFF;
+  --success: #3E7C6A;
+  --on-success: #FFFFFF;
+
+  /* — Surfaces (parchment & silk paper) — */
+  --background: #FDFCF7;
+  --on-background: #12131A;
+  --surface: #FDFCF7;
+  --on-surface: #12131A;
+  --surface-dim: #DDDCD6;
+  --surface-bright: #FFFFFF;
+  --surface-container-lowest: #FFFFFF;
+  --surface-container-low: #F7F5EE;
+  --surface-container: #F1EFE6;
+  --surface-container-high: #EAE6DB;
+  --surface-container-highest: #E0DBD0;
+  --on-surface-variant: #565042;
+
+  /* — Lines & contours — */
+  --outline: #8B8370;
+  --outline-variant: #D9D2C2;
+
+  /* — Layout — */
+  --radius: 1.25rem;
+  --topbar-h: 4.5rem;
+  --sidebar-w: 16rem;
+  --sidebar-rail: 5rem;
+  --content-max: 75rem;
+}
+
+.dark {
+  /* Premium dark mode: deep ink with soft golden accents */
+  --background: #0D0E12;
+  --on-background: #F4F2EB;
+  --surface: #0D0E12;
+  --on-surface: #F4F2EB;
+  --surface-dim: #07080A;
+  --surface-bright: #17181D;
+  --surface-container-lowest: #050608;
+  --surface-container-low: #131419;
+  --surface-container: #1A1C22;
+  --surface-container-high: #22242B;
+  --surface-container-highest: #2D3039;
+  --on-surface-variant: #A49F93;
+  --outline: #6E685B;
+  --outline-variant: #3F3C34;
+  --primary: #D1B875;
+  --on-primary: #0D0E12;
+  --primary-container: #332B14;
+  --on-primary-container: #EAD69C;
+  --secondary: #8E9FB0;
+  --on-secondary: #0D0E12;
+  --secondary-container: #25323D;
+  --on-secondary-container: #D1DFE8;
+  --tertiary: #A68AA9;
+  --on-tertiary: #0D0E12;
+  --tertiary-container: #3A2A3C;
+  --on-tertiary-container: #EADCEB;
+  --error: #E5928B;
+  --on-error: #2A0F0C;
+  --success: #7FBBA8;
+  --on-success: #0C1F19;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
