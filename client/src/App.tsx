@@ -18,9 +18,14 @@ const GlossaryPage = lazy(() => import('@/pages/GlossaryPage'));
 const CaseStudyPage = lazy(() => import('@/pages/CaseStudyPage'));
 const SimulatorsPage = lazy(() => import('@/pages/SimulatorsPage'));
 const SimulatorPage = lazy(() => import('@/pages/SimulatorPage'));
+const AntiPortfolioPage = lazy(() => import('@/pages/AntiPortfolioPage'));
+const AntiPortfolioEntryPage = lazy(() => import('@/pages/AntiPortfolioEntryPage'));
+const MemoLibraryPage = lazy(() => import('@/pages/MemoLibraryPage'));
+const MemoPage = lazy(() => import('@/pages/MemoPage'));
 const BlogPage = lazy(() => import('@/pages/BlogPage'));
 const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'));
 const NotesPage = lazy(() => import('@/pages/NotesPage'));
+const DecisionJournalPage = lazy(() => import('@/pages/DecisionJournalPage'));
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
 const SearchPage = lazy(() => import('@/pages/SearchPage'));
 const AdminPage = lazy(() => import('@/pages/admin/AdminPage'));
@@ -79,9 +84,14 @@ export default function App() {
           <Route path="cases/:slug" element={<CaseStudyPage />} />
           <Route path="simulators" element={<SimulatorsPage />} />
           <Route path="simulators/:slug" element={<SimulatorPage />} />
+          <Route path="anti-portfolio" element={<AntiPortfolioPage />} />
+          <Route path="anti-portfolio/:slug" element={<AntiPortfolioEntryPage />} />
+          <Route path="memos" element={<MemoLibraryPage />} />
+          <Route path="memos/:slug" element={<MemoPage />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="blog/:slug" element={<BlogPostPage />} />
           <Route path="notes" element={<NotesPage />} />
+          <Route path="journal" element={<DecisionJournalPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="admin" element={<AdminPage />} />

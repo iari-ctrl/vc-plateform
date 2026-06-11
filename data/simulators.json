@@ -86,5 +86,16 @@
     "description": "Simulez 4 000 portefeuilles tirés d'une distribution power law et mesurez la sensibilité du TVPI au nombre de lignes, à l'ownership, aux réserves follow-on et aux taux de graduation. L'outil rend visible ce que la moyenne cache : la dispersion, la concentration des retours et le fund returner math.",
     "relatedLessonIds": ["lpl-average-lies", "lpl-why-monte-carlo", "lpl-simulator-engine", "lpl-read-results", "l-power-law", "l-reserves", "l-fund-metrics", "lmv-returns-waterfall"],
     "glossaryRefs": ["power-law", "portfolio-construction", "follow-on", "reserve-funds", "tvpi", "moic"]
+  },
+  {
+    "id": "secondaries",
+    "slug": "secondaries-continuation-fund",
+    "title": "Secondaries & continuation fund",
+    "subtitle": "Le prix de la liquidité avant l'exit",
+    "category": "Fund economics",
+    "accent": "#2E6E62",
+    "description": "Deux faces de la liquidité forcée : la vente secondaire LP-led (décote sur la NAV contre du DPI immédiat, avec le point mort vendre/conserver) et le continuation fund GP-led (carry cristallisé, second carry, frais du nouveau véhicule et conflit d'intérêts structurel). L'outil chiffre l'arbitrage que la pression DPI impose aux LPs.",
+    "relatedLessonIds": ["l-fund-metrics", "l-fund-lifecycle", "l-fees-carry"],
+    "glossaryRefs": ["secondary", "continuation-fund", "dpi", "tvpi", "rvpi"]
   }
 ]

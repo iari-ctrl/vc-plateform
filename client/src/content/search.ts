@@ -10,9 +10,11 @@ import { CASE_STUDIES } from './caseStudies';
 import { BLOG } from './blog';
 import { PARCOURS, t } from './parcours';
 import { SIMULATORS } from './simulators';
+import { ANTI_PORTFOLIO } from './antiPortfolio';
+import { MEMOS } from './memos';
 
 export interface SearchHit {
-  type: 'course' | 'lesson' | 'glossary' | 'case' | 'blog' | 'path' | 'simulator';
+  type: 'course' | 'lesson' | 'glossary' | 'case' | 'blog' | 'path' | 'simulator' | 'anti-portfolio' | 'memo';
   id: string;
   slug: string;
   title: string;
@@ -50,6 +52,12 @@ export function searchLocal(query: string): SearchHit[] {
   for (const s of SIMULATORS)
     if (has(s.title, s.subtitle, s.description))
       hits.push({ type: 'simulator', id: s.id, slug: s.slug, title: s.title, excerpt: s.subtitle, href: `/simulators/${s.slug}` });
+  for (const a of ANTI_PORTFOLIO)
+    if (has(a.company, a.title, a.subtitle, a.summary, a.passes.map((p) => p.fund).join(' ')))
+      hits.push({ type: 'anti-portfolio', id: a.id, slug: a.slug, title: a.title, excerpt: a.summary, href: `/anti-portfolio/${a.slug}` });
+  for (const m of MEMOS)
+    if (has(m.company, m.title, m.fund, m.author, m.summary))
+      hits.push({ type: 'memo', id: m.id, slug: m.slug, title: m.title, excerpt: m.whyItMatters, href: `/memos/${m.slug}` });
 
   return hits.slice(0, 40);
 }

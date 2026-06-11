@@ -1,5 +1,5 @@
 import { Link } from '@/i18n/routing';
-import { ArrowRight, BookOpen, NotebookPen, Bookmark, Compass, Play, Target } from 'lucide-react';
+import { ArrowRight, BookOpen, NotebookPen, Bookmark, Compass, Crosshair, Play, Target } from 'lucide-react';
 import { LESSONS, lessonById, courseById, profileById } from '@/content';
 import { PARCOURS, lessonIdsForParcours, t } from '@/content/parcours';
 import { recommendedPaths } from '@/lib/ikigai';
@@ -9,13 +9,15 @@ import { KanjiSeal, Fleuron } from '@/components/ornaments/Ornaments';
 import { useUserData } from '@/context/UserDataContext';
 import { useAuth } from '@/context/AuthContext';
 import { plainText } from '@/lib/markdown';
+import { isDue } from '@/lib/decisionJournal';
 import { formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 
 export default function DashboardPage() {
   usePageMeta('Tableau de bord', 'Votre progression, vos recommandations et vos notes — votre centre de contrôle d’apprentissage.');
-  const { profile, progress, notes, bookmarks } = useUserData();
+  const { profile, progress, notes, bookmarks, journal } = useUserData();
   const { user } = useAuth();
+  const dueJournal = journal.filter((e) => isDue(e)).length;
 
   const learningProfile = profile ? profileById(profile.profileType) : undefined;
   const progressList = Object.values(progress);
@@ -159,6 +161,24 @@ export default function DashboardPage() {
                 <Bookmark size={18} className="text-surface-variant" />
                 <p className="mt-3 font-headline text-display-sm font-semibold leading-none">{bookmarks.length}</p>
                 <p className="mt-1 text-xs text-surface-variant">favoris enregistrés</p>
+              </Link>
+              <Link
+                to="/journal"
+                className="premium-card premium-card-hover col-span-2 flex items-center gap-4 p-5"
+                style={dueJournal > 0 ? { borderColor: 'color-mix(in srgb, var(--primary) 40%, transparent)' } : undefined}
+              >
+                <Crosshair size={18} className={dueJournal > 0 ? 'text-[color:var(--primary)]' : 'text-surface-variant'} />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold">Journal de décisions</span>
+                  <span className="block text-xs text-surface-variant">
+                    {dueJournal > 0
+                      ? `${dueJournal} prédiction${dueJournal > 1 ? 's' : ''} à confronter au réel`
+                      : journal.length > 0
+                        ? `${journal.length} prédiction${journal.length > 1 ? 's' : ''} consignée${journal.length > 1 ? 's' : ''}`
+                        : 'Consignez une prédiction datée, revenez la juger'}
+                  </span>
+                </span>
+                <ArrowRight size={15} className="shrink-0 text-surface-variant" />
               </Link>
             </div>
           </Reveal>

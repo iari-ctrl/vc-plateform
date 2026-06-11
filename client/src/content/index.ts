@@ -16,5 +16,7 @@ export * from './glossary';
 export * from './caseStudies';
 export * from './blog';
 export * from './simulators';
+export * from './antiPortfolio';
+export * from './memos';
 export * from './ikigai';
 export * from './labels';

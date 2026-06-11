@@ -97,6 +97,100 @@ meRouter.delete('/bookmarks/:itemType/:itemId', async (req, res) => {
   res.json({ ok: true });
 });
 
+// ── Decision journal ───────────────────────────────────────────────────────
+type DecisionRow = {
+  id: string; statement: string; rationale: string | null; confidence: number; category: string;
+  reviewAt: Date; status: string; outcome: string | null; resolutionNote: string | null;
+  resolvedAt: Date | null; links: string | null; createdAt: Date;
+};
+
+/** DB row → API shape: links JSON parsed, dates as ISO strings, no null noise. */
+function serializeDecision(d: DecisionRow) {
+  return {
+    id: d.id,
+    statement: d.statement,
+    rationale: d.rationale ?? undefined,
+    confidence: d.confidence,
+    category: d.category,
+    reviewAt: d.reviewAt.toISOString(),
+    status: d.status,
+    outcome: d.outcome ?? undefined,
+    resolutionNote: d.resolutionNote ?? undefined,
+    resolvedAt: d.resolvedAt?.toISOString(),
+    links: parseJson(d.links) ?? [],
+    createdAt: d.createdAt.toISOString(),
+  };
+}
+
+meRouter.get('/journal', async (req, res) => {
+  const entries = await prisma.decisionEntry.findMany({ where: { userId: req.user!.id }, orderBy: { createdAt: 'desc' } });
+  res.json(entries.map(serializeDecision));
+});
+
+const decisionLink = z.object({
+  type: z.string().min(1),
+  id: z.string().min(1),
+  title: z.string().min(1),
+  href: z.string().min(1),
+});
+
+// Optional resolution fields are accepted at creation so guest entries migrate
+// intact on first login.
+const decisionBody = z.object({
+  statement: z.string().min(1, 'Prédiction vide.'),
+  rationale: z.string().optional(),
+  confidence: z.number().int().min(1).max(99),
+  category: z.enum(['deal', 'marche', 'fonds', 'these', 'carriere', 'autre']).default('autre'),
+  reviewAt: z.string().datetime({ offset: true }).or(z.string().datetime()),
+  links: z.array(decisionLink).max(12).default([]),
+  status: z.enum(['open', 'resolved']).default('open'),
+  outcome: z.enum(['correct', 'incorrect', 'void']).optional(),
+  resolutionNote: z.string().optional(),
+  resolvedAt: z.string().datetime({ offset: true }).or(z.string().datetime()).optional(),
+  createdAt: z.string().datetime({ offset: true }).or(z.string().datetime()).optional(),
+});
+
+meRouter.post('/journal', async (req, res) => {
+  const parsed = decisionBody.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Données invalides.' });
+  const { links, reviewAt, resolvedAt, createdAt, ...rest } = parsed.data;
+  const entry = await prisma.decisionEntry.create({
+    data: {
+      ...rest,
+      userId: req.user!.id,
+      reviewAt: new Date(reviewAt),
+      resolvedAt: resolvedAt ? new Date(resolvedAt) : undefined,
+      createdAt: createdAt ? new Date(createdAt) : undefined,
+      links: JSON.stringify(links),
+    },
+  });
+  res.status(201).json(serializeDecision(entry));
+});
+
+const decisionResolveBody = z.object({
+  outcome: z.enum(['correct', 'incorrect', 'void']),
+  resolutionNote: z.string().optional(),
+  resolvedAt: z.string().datetime({ offset: true }).or(z.string().datetime()).optional(),
+});
+
+meRouter.put('/journal/:id', async (req, res) => {
+  const parsed = decisionResolveBody.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Données invalides.' });
+  const { outcome, resolutionNote, resolvedAt } = parsed.data;
+  const { count } = await prisma.decisionEntry.updateMany({
+    where: { id: req.params.id, userId: req.user!.id },
+    data: { status: 'resolved', outcome, resolutionNote, resolvedAt: new Date(resolvedAt ?? Date.now()) },
+  });
+  if (!count) return res.status(404).json({ error: 'Prédiction introuvable.' });
+  const entry = await prisma.decisionEntry.findUnique({ where: { id: req.params.id } });
+  res.json(entry ? serializeDecision(entry) : { ok: true });
+});
+
+meRouter.delete('/journal/:id', async (req, res) => {
+  await prisma.decisionEntry.deleteMany({ where: { id: req.params.id, userId: req.user!.id } });
+  res.json({ ok: true });
+});
+
 // ── Progress ───────────────────────────────────────────────────────────────
 meRouter.get('/progress', async (req, res) => {
   const progress = await prisma.progress.findMany({ where: { userId: req.user!.id } });

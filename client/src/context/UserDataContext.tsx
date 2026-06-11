@@ -2,13 +2,14 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { api } from '@/lib/api';
 import { storage, STORAGE_KEYS } from '@/lib/storage';
 import { useAuth } from './AuthContext';
-import type { Bookmark, Note, ProgressEntry, UserProfile } from '@/content/types';
+import type { Bookmark, DecisionJournalEntry, DecisionOutcome, Note, ProgressEntry, UserProfile } from '@/content/types';
 
 interface UserDataCtx {
   profile: UserProfile | null;
   notes: Note[];
   bookmarks: Bookmark[];
   progress: Record<string, ProgressEntry>;
+  journal: DecisionJournalEntry[];
   loading: boolean;
   saveProfile: (p: UserProfile) => Promise<void>;
   clearProfile: () => Promise<void>;
@@ -18,6 +19,9 @@ interface UserDataCtx {
   toggleBookmark: (b: Bookmark) => Promise<void>;
   setProgress: (p: ProgressEntry) => Promise<void>;
   getProgress: (lessonId: string) => ProgressEntry | undefined;
+  addJournalEntry: (e: Omit<DecisionJournalEntry, 'id' | 'createdAt' | 'status'>) => Promise<void>;
+  resolveJournalEntry: (id: string, outcome: DecisionOutcome, resolutionNote?: string) => Promise<void>;
+  deleteJournalEntry: (id: string) => Promise<void>;
 }
 
 const Ctx = createContext<UserDataCtx | null>(null);
@@ -33,6 +37,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   const [notes, setNotes] = useState<Note[]>([]);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [progress, setProgressState] = useState<Record<string, ProgressEntry>>({});
+  const [journal, setJournal] = useState<DecisionJournalEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const prevUserId = useRef<string | null>(null);
 
@@ -49,6 +54,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
     setNotes(storage.get<Note[]>(STORAGE_KEYS.notes, []));
     setBookmarks(storage.get<Bookmark[]>(STORAGE_KEYS.bookmarks, []));
     setProgressState(storage.get<Record<string, ProgressEntry>>(STORAGE_KEYS.progress, {}));
+    setJournal(storage.get<DecisionJournalEntry[]>(STORAGE_KEYS.journal, []));
   }, []);
 
   // ── Load on auth change ────────────────────────────────────────────────────
@@ -65,17 +71,19 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         if (becameAuthed) await migrateGuestData();
 
         try {
-          const [srvProfile, srvNotes, srvBookmarks, srvProgress] = await Promise.all([
+          const [srvProfile, srvNotes, srvBookmarks, srvProgress, srvJournal] = await Promise.all([
             api.get<UserProfile | null>('/me/profile'),
             api.get<Note[]>('/me/notes'),
             api.get<Bookmark[]>('/me/bookmarks'),
             api.get<ProgressEntry[]>('/me/progress'),
+            api.get<DecisionJournalEntry[]>('/me/journal'),
           ]);
           if (!active) return;
           setProfile(srvProfile);
           setNotes(srvNotes);
           setBookmarks(srvBookmarks);
           setProgressState(Object.fromEntries(srvProgress.map((p) => [p.lessonId, p])));
+          setJournal(srvJournal);
         } catch {
           if (active) loadLocal();
         }
@@ -98,17 +106,20 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
     const localBookmarks = storage.get<Bookmark[]>(STORAGE_KEYS.bookmarks, []);
     const localProgress = storage.get<Record<string, ProgressEntry>>(STORAGE_KEYS.progress, {});
     const localProfile = storage.get<UserProfile | null>(STORAGE_KEYS.profile, null);
+    const localJournal = storage.get<DecisionJournalEntry[]>(STORAGE_KEYS.journal, []);
     try {
       await Promise.all([
         ...localNotes.map((n) => api.post('/me/notes', n).catch(() => null)),
         ...localBookmarks.map((b) => api.post('/me/bookmarks', b).catch(() => null)),
         ...Object.values(localProgress).map((p) => api.put('/me/progress', p).catch(() => null)),
+        ...localJournal.map((e) => api.post('/me/journal', e).catch(() => null)),
         localProfile ? api.put('/me/profile', localProfile).catch(() => null) : Promise.resolve(),
       ]);
       // Clear local copies now that they live on the server.
       storage.remove(STORAGE_KEYS.notes);
       storage.remove(STORAGE_KEYS.bookmarks);
       storage.remove(STORAGE_KEYS.progress);
+      storage.remove(STORAGE_KEYS.journal);
     } catch {
       /* best-effort */
     }
@@ -200,6 +211,50 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
 
   const getProgress = useCallback((lessonId: string) => progress[lessonId], [progress]);
 
+  const addJournalEntry = useCallback(
+    async (e: Omit<DecisionJournalEntry, 'id' | 'createdAt' | 'status'>) => {
+      if (authed) {
+        const created = await api.post<DecisionJournalEntry>('/me/journal', e);
+        setJournal((cur) => [created, ...cur]);
+      } else {
+        const entry: DecisionJournalEntry = { ...e, id: uid(), createdAt: new Date().toISOString(), status: 'open' };
+        setJournal((cur) => {
+          const next = [entry, ...cur];
+          storage.set(STORAGE_KEYS.journal, next);
+          return next;
+        });
+      }
+    },
+    [authed],
+  );
+
+  const resolveJournalEntry = useCallback(
+    async (id: string, outcome: DecisionOutcome, resolutionNote?: string) => {
+      const resolvedAt = new Date().toISOString();
+      setJournal((cur) => {
+        const next = cur.map((e) =>
+          e.id === id ? { ...e, status: 'resolved' as const, outcome, resolutionNote, resolvedAt } : e,
+        );
+        if (!authed) storage.set(STORAGE_KEYS.journal, next);
+        return next;
+      });
+      if (authed) await api.put(`/me/journal/${id}`, { outcome, resolutionNote, resolvedAt }).catch(() => null);
+    },
+    [authed],
+  );
+
+  const deleteJournalEntry = useCallback(
+    async (id: string) => {
+      setJournal((cur) => {
+        const next = cur.filter((e) => e.id !== id);
+        if (!authed) storage.set(STORAGE_KEYS.journal, next);
+        return next;
+      });
+      if (authed) await api.del(`/me/journal/${id}`).catch(() => null);
+    },
+    [authed],
+  );
+
   // Persist whole local snapshot when profile changes in guest mode (covers edge cases).
   useEffect(() => {
     if (!authed && ready && !loading) persistLocal(profile, notes, bookmarks, progress);
@@ -208,10 +263,11 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<UserDataCtx>(
     () => ({
-      profile, notes, bookmarks, progress, loading,
+      profile, notes, bookmarks, progress, journal, loading,
       saveProfile, clearProfile, addNote, deleteNote, isBookmarked, toggleBookmark, setProgress, getProgress,
+      addJournalEntry, resolveJournalEntry, deleteJournalEntry,
     }),
-    [profile, notes, bookmarks, progress, loading, saveProfile, clearProfile, addNote, deleteNote, isBookmarked, toggleBookmark, setProgress, getProgress],
+    [profile, notes, bookmarks, progress, journal, loading, saveProfile, clearProfile, addNote, deleteNote, isBookmarked, toggleBookmark, setProgress, getProgress, addJournalEntry, resolveJournalEntry, deleteJournalEntry],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

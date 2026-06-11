@@ -33,6 +33,7 @@ export const STORAGE_KEYS = {
   notes: 'notes',
   bookmarks: 'bookmarks',
   progress: 'progress',
+  journal: 'decision-journal',
   highlights: 'highlights',
   onboardingSeen: 'onboarding-seen',
   // ── Ikigai "cahier d'introspection" ──

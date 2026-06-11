@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   Map, Library, BookA, Briefcase, FlaskConical, Newspaper, LayoutDashboard, NotebookPen,
-  Search, Sun, Moon, LogIn, LogOut, Shield, User, Menu, X, type LucideIcon,
+  Search, Sun, Moon, LogIn, LogOut, Shield, User, Menu, X, Ghost, ScrollText, Crosshair, type LucideIcon,
 } from 'lucide-react';
 import { Link, NavLink, useNavigate, isLinkActive } from '@/i18n/routing';
 import { LocaleSwitcher } from '@/i18n/LocaleSwitcher';
@@ -19,12 +19,15 @@ const PRIMARY: Item[] = [
   { to: '/bibliotheque', label: 'Bibliothèque', icon: Library },
   { to: '/glossary', label: 'Dictionnaire', icon: BookA },
   { to: '/simulators', label: 'Simulateurs', icon: FlaskConical },
+  { to: '/anti-portfolio', label: 'Anti-portfolio', icon: Ghost },
+  { to: '/memos', label: 'Memo library', icon: ScrollText },
   { to: '/blog', label: 'Analyses', icon: Newspaper },
 ];
 
 const PERSONAL: Item[] = [
   { to: '/dashboard', label: 'Tableau de bord', icon: LayoutDashboard },
   { to: '/notes', label: 'Notes & favoris', icon: NotebookPen },
+  { to: '/journal', label: 'Journal de décisions', icon: Crosshair },
 ];
 
 /**

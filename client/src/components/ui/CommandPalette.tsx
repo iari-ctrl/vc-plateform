@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from '@/i18n/routing';
-import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft } from 'lucide-react';
+import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft, Ghost, ScrollText } from 'lucide-react';
 import { api } from '@/lib/api';
 import type { SearchHit } from '@/content/search';
 import { useAuth } from '@/context/AuthContext';
@@ -14,6 +14,8 @@ const TYPE_META: Record<SearchHit['type'], { label: string; icon: typeof Search 
   blog: { label: 'Analyse', icon: Newspaper },
   path: { label: 'Parcours', icon: Route },
   simulator: { label: 'Simulateur', icon: FlaskConical },
+  'anti-portfolio': { label: 'Anti-portfolio', icon: Ghost },
+  memo: { label: 'Memo annoté', icon: ScrollText },
 };
 
 export function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {

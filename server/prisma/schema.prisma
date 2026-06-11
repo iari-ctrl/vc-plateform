@@ -28,6 +28,7 @@ model User {
   notes        Note[]
   bookmarks    Bookmark[]
   progress     Progress[]
+  decisions    DecisionEntry[]
 }
 
 model Profile {
@@ -93,6 +94,26 @@ model Progress {
   updatedAt DateTime @updatedAt
 
   @@unique([userId, lessonId])
+  @@index([userId])
+}
+
+
+model DecisionEntry {
+  id             String    @id @default(cuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  statement      String
+  rationale      String?
+  confidence     Int       // stated probability, 50–99 (%)
+  category       String    @default("autre") // "deal" | "marche" | "fonds" | "these" | "carriere" | "autre"
+  reviewAt       DateTime
+  status         String    @default("open") // "open" | "resolved"
+  outcome        String?   // "correct" | "incorrect" | "void"
+  resolutionNote String?
+  resolvedAt     DateTime?
+  links          String?   // JSON: [{ type, id, title, href }]
+  createdAt      DateTime  @default(now())
+
   @@index([userId])
 }
 

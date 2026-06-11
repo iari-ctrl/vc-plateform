@@ -105,6 +105,99 @@ export interface BlogPost {
   body: string;
 }
 
+// ── Anti-portfolio (pass analysis) ───────────────────────────────────────────
+/** A recurring decision error, used to classify passes across entries. */
+export interface AntiPortfolioPattern {
+  id: string;
+  label: string;
+  glyph: string;
+  accent: string;
+  description: string;
+  antidote: string;
+}
+
+export interface AntiPortfolioEntry {
+  id: string;
+  slug: string;
+  company: string;
+  title: string;
+  subtitle: string;
+  /** Funds (and partners, when public) that passed. */
+  passes: { fund: string; partner?: string; year: number; stage: string }[];
+  sector: string;
+  patternIds: string[];
+  readMin: number;
+  summary: string;
+  /** Public quote about the pass, when one exists. */
+  quote?: { text: string; author: string; source: string };
+  /** Verifiable, public information available at decision time. */
+  knownAtTheTime: { date: string; fact: string }[];
+  /** The stated reason for the pass. */
+  statedReason: string;
+  /** True when the reason is publicly documented (vs. reconstructed). */
+  reasonIsPublic: boolean;
+  /** Markdown — the signal that was there and missable. */
+  missedSignal: string;
+  /** Markdown — the honest ex-ante case FOR the pass (steelman). */
+  steelman: string;
+  /** What the company became. */
+  outcome: string;
+  /** Estimated cost of the pass — always framed as an estimate. */
+  costEstimate?: string;
+  takeaways: string[];
+  glossaryRefs: string[];
+  relatedMemoIds?: string[];
+  sources: { label: string; url: string }[];
+}
+
+// ── Annotated memo library ───────────────────────────────────────────────────
+/** Decision-logic move an annotation points at. */
+export type MemoAnnotationTag =
+  | 'these' | 'marche' | 'traction' | 'equipe' | 'risque' | 'deal' | 'concurrence' | 'verdict';
+
+export interface MemoBlock {
+  /** Short excerpt from the memo (translated). Kept brief — the original is linked. */
+  excerpt: string;
+  /** True when the passage is condensed/paraphrased rather than quoted. */
+  isParaphrase?: boolean;
+  /** Markdown — what the investor is doing here, decision-wise. */
+  note: string;
+  tag: MemoAnnotationTag;
+}
+
+export interface MemoSection {
+  heading: string;
+  blocks: MemoBlock[];
+}
+
+export interface InvestmentMemo {
+  id: string;
+  slug: string;
+  company: string;
+  title: string;
+  fund: string;
+  author: string;
+  date: string;
+  stage: string;
+  amount?: string;
+  outcome: string;
+  whyItMatters: string;
+  /** Link to the original, publicly published memo. */
+  sourceUrl: string;
+  /** Provenance — why this document is legitimately public. */
+  sourceNote: string;
+  readMin: number;
+  summary: string;
+  /** Markdown — the world at the time the memo was written. */
+  context: string;
+  sections: MemoSection[];
+  /** What a practitioner should copy. */
+  lessons: string[];
+  glossaryRefs: string[];
+  relatedAntiPortfolioIds?: string[];
+  tags: string[];
+}
+
 export interface Simulator {
   id: string;
   slug: string;
@@ -273,4 +366,40 @@ export interface ProgressEntry {
   pathId?: string;
   status: 'reading' | 'done';
   percent: number;
+}
+
+// ── Decision journal (Workspace calibration tool) ────────────────────────────
+export type DecisionCategory = 'deal' | 'marche' | 'fonds' | 'these' | 'carriere' | 'autre';
+
+/** How a resolved prediction turned out. `void` = unverifiable / premise gone. */
+export type DecisionOutcome = 'correct' | 'incorrect' | 'void';
+
+/** Pointer to any content on the platform (lesson, memo, anti-portfolio…). */
+export interface DecisionLink {
+  type: string;
+  id: string;
+  title: string;
+  href: string;
+}
+
+export interface DecisionJournalEntry {
+  id: string;
+  /** The falsifiable claim — specific, dated, checkable. */
+  statement: string;
+  /** Evidence and reasoning available at prediction time (the ex-ante case). */
+  rationale?: string;
+  /** Stated probability the claim is true, in % (50–99). */
+  confidence: number;
+  category: DecisionCategory;
+  /** ISO — when the prediction was made (the "dated" part). */
+  createdAt: string;
+  /** ISO — when to come back and confront it with reality. */
+  reviewAt: string;
+  status: 'open' | 'resolved';
+  outcome?: DecisionOutcome;
+  /** The lesson drawn at review time. */
+  resolutionNote?: string;
+  resolvedAt?: string;
+  /** Content this prediction is grounded in. */
+  links: DecisionLink[];
 }
