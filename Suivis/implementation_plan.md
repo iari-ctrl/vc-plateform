@@ -1,6 +1,6 @@
 # Analyse & Plan d'Amélioration — VC Premium Platform
 
-Dernière mise à jour : 2026-06-11
+Dernière mise à jour : 2026-06-12
 
 J'ai parcouru l'ensemble du dépôt : monorepo full-stack (client React 19 / Vite, serveur Express + Prisma + SQLite, contenu canonique JSON partagé). Le produit a une **identité forte** — premium éditorial, métaphore ikigai, et un **langage cartographique « atlas d'explorateur »** (boussole, sceaux de cire, carte interactive des parcours, monstres marins, 404 *Terra Incognita*) qui rend la navigation vivante sans trahir le sérieux. Le portail d'entrée clair/sombre, le mode sombre photographique de l'accueil, le cahier Ikigai et le glossaire sont maintenant à la hauteur de cette promesse.
 
@@ -16,13 +16,13 @@ Le point le plus structurant est le **triangle JSON ↔ base ↔ CMS** : robuste
 
 * **Intégrité du contenu (priorité haute).** `npm run validate:content` est opérationnel : schémas Zod stricts sur les JSON, unicité des ids/slugs, toutes les relations croisées, marqueurs `[[..]]`/`{{..}}` — exit 0. Warning éditorial courant : 23/62 leçons canoniques sans quiz. ✅ FAIT.
 * **Glossaire VC enrichi et audité.** Le glossaire final contient désormais 357 termes, pilotés par un registre canonique de 433 entrées (`add`/`update`/`merge` appliqués, `skip` conservés hors injection). Les audits des ressources PitchBook, SEC et Schoenherr sont couverts : les termes principaux sont présents comme entrées finales ou alias. Le contrôle custom `npm run validate:glossary` vérifie slugs uniques, `id === slug`, `seeAlso`, `relatedLessonIds`, marqueurs `[[slug|label]]` et collisions d'aliases. ✅ FAIT (2026-06-07).
-* **Divergence CMS ↔ JSON.** Le CMS écrit **uniquement en base** ; un `db:reset` re-seed depuis `data/` et **efface** les entrées créées via l'admin. **Proposition :** soit un bouton admin « Exporter vers JSON », soit afficher un bandeau « cette entrée n'est pas encore versionnée ». *(À faire)*
-* **Recherche.** `searchText` est dénormalisé (bien), mais la recherche reste un LIKE/substring sans ranking ni tolérance aux fautes. **Proposition :** SQLite **FTS5**, scoring simple (titre > corps), surlignage des correspondances. *(À faire)*
+* **Divergence CMS ↔ JSON.** Le CMS écrit **uniquement en base**. Le re-seed n'est **plus destructif** : `seed.ts` préserve le contenu éditable (glossaire/blog/cas) sauf `db:seed -- --force`, et `npm run content:export` réexporte les éditions DB vers les JSON sources. ✅ FAIT (2026-06-12). **Reste :** un bandeau admin « cette entrée n'est pas encore versionnée dans /data ». *(À faire)*
+* **Recherche.** `searchText` est dénormalisé (bien), mais la recherche reste un LIKE/substring sans ranking ni tolérance aux fautes ; un rate-limit (60/min) protège désormais `/api/search`. **Proposition :** SQLite **FTS5**, scoring simple (titre > corps), surlignage des correspondances. *(À faire)*
 * **Migrations.** Le projet utilise `prisma db push` (sans historique). OK pour le proto ; **passer à `prisma migrate`** avant la prod. *(Phase 5)*
-* **Sécurité.** Cookie JWT httpOnly : bien. Lot partiel appliqué (2026-06-09) : auth cookie-only (token hors body, `Bearer` retiré), mot de passe ≥ 8 à l'inscription, rate-limiter 20/15 min sur login/register, CORS localhost limité au dev, garde `safeHttpUrl()` + markdown sans `innerHTML`. **Reste pour la prod (lot 🔴 différé) :** `secure: true` derrière HTTPS, helmet, en-têtes CSP/HSTS, protection CSRF, et **corriger la garde JWT notée inopérante**. *(Phase 6)*
-* **Tests (harnais en place).** Vitest couvre 25 tests sur 7 fichiers (i18n, utils, ikigai, simulateurs) + une suite ciblée Power Law de 11 tests ; étape CI (`client/vitest.config.ts`, `.github/workflows/ci.yml`). **Reste, par ordre de rentabilité :** élargir les calculateurs non couverts et ajouter quelques tests d'**API**. *(À faire)*
-* **i18n FR/EN — Phase 1 implémentée (2026-06-09).** Module `client/src/i18n/` (config/routing/guards/useLocale/LocaleSwitcher + `routing.test.ts`), `App.tsx` sous `/:locale`, redirection racine crawler-safe, sélecteur FR/EN (TopBar + SideNav), ~27 fichiers migrés ; marqueurs `[[..]]`/`{{..}}` inchangés (slugs canoniques). Amorce corpus EN : `data/parcours.en.json`. **Reste :** Phase 2 (i18n du chrome, dictionnaire maison local retenu), Phase 4 (base `locale` + clé composite), Phase 5 (`hreflang` — couplé au rendu). Voir `i18n_architecture_FR-EN.md`. *(À faire)*
-* **Taille du bundle.** Le découpage par routes et collections est maintenant effectif : `index-*.js` ≈ **95 kB (28 kB gzip)**, `react-vendor` ≈ **232 kB (74 kB gzip)**, `lessons` ≈ **49 kB** et `glossary` ≈ **40 kB** en chunks séparés. **Reste :** audit CSS/fonts, preloads critiques et stratégie de prérendu. *(Phase 4)*
+* **Sécurité.** Cookie JWT httpOnly : bien. Lot du 2026-06-09 : auth cookie-only (token hors body, `Bearer` retiré), mot de passe ≥ 8 à l'inscription, rate-limiter 20/15 min sur login/register, CORS localhost limité au dev, garde `safeHttpUrl()` + markdown sans `innerHTML`. Lot du 2026-06-12 : **garde JWT corrigée** (longueur min. + blocklist en prod, fail-fast), `attachUser` retiré du global (monté sur `/me`, `/admin`, `/auth/me`), rate-limit `/api/search`, comptes de démo gatés hors prod, **wrapper async `ah()`** sur tous les handlers (une rejection ne tue plus le process Express 4). ✅. **Reste pour la prod (lot 🔴 différé) :** `secure: true` derrière HTTPS, helmet, en-têtes CSP/HSTS, protection CSRF, rotation JWT longue durée. *(Phase 6)*
+* **Tests (harnais étendu).** Vitest côté client : 59 tests sur 10 fichiers (i18n, utils, ikigai, simulateurs, Power Law). **Côté serveur (nouveau, 2026-06-12) :** 10 tests d'intégration sur 3 fichiers (register/login/logout, `/me/profile`, isolation des données par `userId`) avec base SQLite jetable ✅. Étape CI dédiée. **Reste, par ordre de rentabilité :** élargir aux routes API restantes (admin, notes, journal) et aux calculateurs non couverts. *(À faire)*
+* **i18n FR/EN — Phase 1 implémentée (2026-06-09).** Module `client/src/i18n/` (config/routing/guards/useLocale/LocaleSwitcher + `routing.test.ts`), `App.tsx` sous `/:locale`, redirection racine crawler-safe, sélecteur FR/EN (TopBar + SideNav), ~27 fichiers migrés ; marqueurs `[[..]]`/`{{..}}` inchangés (slugs canoniques). Amorce corpus EN : `data/parcours.en.json`. Le **sélecteur EN est masqué** (`EN_ENABLED=false`) et `<html lang>` reste `fr` sous `/en` tant que le contenu n'est pas traduit. **Reste :** Phase 2 (i18n du chrome, dictionnaire maison local retenu), Phase 4 (base `locale` + clé composite), Phase 5 (`hreflang` — couplé au rendu). Voir `i18n_architecture_FR-EN.md`. *(À faire)*
+* **Taille du bundle.** Le découpage par routes et collections est effectif. Le glossaire **et** les leçons sont en outre **scindés index/contenu** : seul l'index léger est eager, les définitions/corps arrivent en chunks lazy. `react-vendor` ≈ **232 kB (74 kB gzip)** ; le chunk `lessons` eager passe de **~176 kB à ~32 kB** (corps ~143 kB en lazy `lessons.bodies`), le glossaire idem (`glossary.defs` ~154 kB en lazy). Scripts `split-glossary.mjs` + `split-lessons.mjs` câblés via `npm run split:content` (`predev`/`prebuild`). ✅ FAIT (2026-06-12). **Reste :** audit CSS/fonts, preloads critiques et stratégie de prérendu. *(Phase 4)*
 * **Assets.** Fonds photographiques de la splash désormais en WebP (~118 Ko total vs ~3,4 Mo en PNG — **✅ FAIT 2026-06-01**). Aucun PNG résiduel dans `public/splash/`.
 
 ## 2. Front-end : performance, SEO, lecture
@@ -98,13 +98,24 @@ La structure est en plein essor, avec **62 leçons canoniques / 16 cours** dans 
 > - Simulateur Power Law relié en priorité à ces leçons ; glossaire et lectures liées mis à jour ✅
 > - Vérifications : `validate:content`, test Power Law, lint client, build client et routes locales 200 ✅
 >
+> **FAIT — Repo hygiene & suite des recommandations d'audit (2026-06-12) :**
+> - CI réparée : `ci.yml` sur `push` `main`/`master` (était `main` seul, inopérant sur ce dépôt `master`) ✅
+> - Robustesse Express 4 : wrapper async `ah()` sur tous les handlers (plus de crash process sur rejection) ✅
+> - Seed non destructif (préserve les éditions CMS sauf `--force`) + `content:export` (DB→JSON) ✅
+> - Garde JWT corrigée (longueur min. + blocklist en prod) ; `attachUser` scoping ; rate-limit `/api/search` ; comptes démo gatés hors prod ✅
+> - `DELETE /me/profile` (clearProfile serveur) ; `apiUp` re-sondé (intervalle + focus/online) ✅
+> - Sélecteur EN masqué (`EN_ENABLED=false`) ✅
+> - Perf : split des leçons (`lessons.index`/`lessons.bodies`), chunk eager 176→32 kB ✅
+> - Tests serveur (10 tests : auth/profil/isolation `userId`) ✅
+> - Lint : 2 derniers imports/args inutilisés nettoyés (4 warnings résiduels structurels) ✅
+>
 > **À DÉCIDER (avant production de contenu) :**
 > - **Mode de rendu** : CSR vs SSR/prerender (hybride SSG/ISR recommandé) — voir §2
 > - **Modèle de contenu / authoring** : figer `data/*.json` + Prisma + CMS, en intégrant la `locale`
 >
 > **À FAIRE — Phases 2/4/5 :**
 > - A — Crédibilité contenu : fusionner les fiches parcours dans `lessons.json` + seed, densifier formation + blog + études de cas
-> - B — Solidité technique / mise en prod : décision de rendu puis SEO/prérendu, sécurité auth (lot 🔴 : helmet/CSP/HSTS, garde JWT à corriger), Postgres + migrations, brancher Path/Course sur l'API, base `locale` (i18n Phase 4)
+> - B — Solidité technique / mise en prod : décision de rendu puis SEO/prérendu, sécurité auth (lot 🔴 restant : helmet/CSP/HSTS, cookie `secure`, CSRF — garde JWT déjà corrigée), Postgres + migrations, brancher Path/Course sur l'API, base `locale` (i18n Phase 4)
 > - C — Plaisir d'usage : dashboard journal de bord, transitions de pages, progression de lecture
 > - D — i18n : Phase 2 (chrome, dictionnaire maison local), Phase 5 (`hreflang`, couplé au rendu), corpus EN au fil de l'eau
 
@@ -141,7 +152,8 @@ La structure est en plein essor, avec **62 leçons canoniques / 16 cours** dans 
 
 ### Phase 6 — Mise en production
 #### [MODIFY] `server/prisma/schema.prisma` — `provider = "postgresql"` + `prisma migrate`.
-#### [MODIFY] `server/src/*` — helmet, rate-limit `/auth`, cookie `secure`, CSRF.
+#### [DONE] `server/src/*` — rate-limit `/auth` + `/search`, garde JWT (longueur + blocklist), wrapper async `ah()`, `attachUser` scoping (2026-06-12).
+#### [MODIFY] `server/src/*` — helmet, cookie `secure` derrière HTTPS, CSP/HSTS, CSRF, rotation JWT.
 
 ## Plan de vérification
 1. **Contenu** : `npm run validate:content` passe (zéro référence cassée), puis `npm run db:seed` affiche le récap attendu.
@@ -150,4 +162,4 @@ La structure est en plein essor, avec **62 leçons canoniques / 16 cours** dans 
 4. **SEO** : pages de contenu prérendues, balises meta + OG présentes dans le HTML servi.
 5. **Thèmes** : rendu correct en **clair et sombre** (hero + carte), `prefers-reduced-motion` respecté.
 6. **Portail** : splash lisible sur mobile portrait (390 px) et paysage court (640×360), toggle clair/sombre persistant sur `/home`.
-7. **Tests** : suite Vitest verte (calculateurs + intégrité contenu).
+7. **Tests** : suite Vitest verte côté client (calculateurs + intégrité contenu) **et** côté serveur (`npm run test --workspace server` : auth, profil, isolation `userId`).

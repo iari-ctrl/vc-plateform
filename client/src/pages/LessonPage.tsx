@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from '@/i18n/routing';
 import { useNavigate } from '@/i18n/navigation';
 import { ArrowLeft, ArrowRight, Check, Clock, Sparkles, BookMarked, ArrowUpRight } from 'lucide-react';
-import { lessonBySlug, lessonById, courseById, lessonsForCourse, simulatorBySlug, caseById, glossaryBySlug } from '@/content';
+import { loadLesson, lessonById, courseById, lessonsForCourse, simulatorBySlug, caseById, glossaryBySlug } from '@/content';
 import { parcoursById, parcoursForLesson, t, type Parcours } from '@/content/parcours';
 import type { Lesson, Course, Path } from '@/content/types';
 import { ActiveProse } from '@/components/reading/ActiveProse';
@@ -28,16 +28,40 @@ type LessonDetail = Lesson & {
 export default function LessonPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
+
+  // The bundled fallback resolves lazily: the reader payload (body/quiz) lives
+  // in its own chunk (see content/lessons.ts), fetched on demand instead of
+  // weighing down the initial bundle.
+  const [bundled, setBundled] = useState<LessonDetail | undefined>(undefined);
+  const [bundledReady, setBundledReady] = useState(false);
+  useEffect(() => {
+    let active = true;
+    setBundled(undefined);
+    setBundledReady(false);
+    if (!slug) {
+      setBundledReady(true);
+      return;
+    }
+    void loadLesson(slug).then((l) => {
+      if (!active) return;
+      setBundled(l as LessonDetail | undefined);
+      setBundledReady(true);
+    });
+    return () => {
+      active = false;
+    };
+  }, [slug]);
+
   const { item: lesson, pending } = useApiItem<LessonDetail>(
     slug ? `/content/lessons/${slug}` : null,
-    slug ? (lessonBySlug(slug) as LessonDetail | undefined) : undefined,
+    bundled,
   );
   const { progress, setProgress } = useUserData();
   const [readPct, setReadPct] = useState(0);
   const articleRef = useRef<HTMLDivElement>(null);
   const initialised = useRef(false);
 
-  usePageMeta(lesson?.title, lesson?.summary);
+  usePageMeta(lesson?.title, lesson?.summary, { type: 'article', image: 'lesson' });
 
   // Prefer the API-provided course/path/neighbours; fall back to the bundle.
   const course = lesson?.course ?? (lesson ? courseById(lesson.courseId) : undefined);
@@ -75,7 +99,9 @@ export default function LessonPage() {
     return () => window.removeEventListener('scroll', onScroll);
   }, [lesson?.id]);
 
-  if (pending) return <PageLoader />;
+  // Hold the loader while the lazy bundled copy is still resolving, so an
+  // offline visit doesn't flash a 404 before the chunk lands.
+  if (pending || (!lesson && !bundledReady)) return <PageLoader />;
   if (!lesson) return <NotFoundPage />;
 
   function complete() {

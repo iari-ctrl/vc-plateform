@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from '@/i18n/routing';
 import { ArrowLeft, ArrowRight, FlaskConical } from 'lucide-react';
 import { simulatorBySlug, lessonById } from '@/content';
-import { SIMULATOR_COMPONENTS } from '@/components/simulators/calculators';
+import { SIMULATOR_COMPONENTS } from '@/components/simulators';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { usePageMeta } from '@/lib/seo';
@@ -11,7 +11,7 @@ import NotFoundPage from './NotFoundPage';
 export default function SimulatorPage() {
   const { slug } = useParams();
   const sim = slug ? simulatorBySlug(slug) : undefined;
-  usePageMeta(sim?.title, sim?.description);
+  usePageMeta(sim?.title, sim?.description, { image: 'simulator' });
 
   if (!sim) return <NotFoundPage />;
   const Calculator = SIMULATOR_COMPONENTS[sim.id];

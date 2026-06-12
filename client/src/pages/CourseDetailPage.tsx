@@ -19,7 +19,7 @@ export default function CourseDetailPage() {
     slug ? courseBySlug(slug) : undefined
   );
   const { progress } = useUserData();
-  usePageMeta(course?.title, course?.summary);
+  usePageMeta(course?.title, course?.summary, { image: 'course' });
 
   if (pending) return <PageLoader />;
   if (!course) return <NotFoundPage />;

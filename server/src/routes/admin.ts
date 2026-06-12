@@ -1,3 +1,7 @@
+import { execFile } from 'node:child_process';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { promisify } from 'node:util';
 import { Router } from 'express';
 import { z } from 'zod';
 import { prisma } from '../lib/db.js';
@@ -7,6 +11,9 @@ import { ah } from '../lib/async-handler.js';
 
 export const adminRouter = Router();
 adminRouter.use(requireAdmin);
+
+// server/{src,dist}/routes/admin.* → repo root (../../..)
+const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const slugify = (s: string) =>
   s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -152,4 +159,38 @@ adminRouter.put('/case-studies/:id', ah(async (req, res) => {
   const searchText = stripHtml([obj.title, obj.subtitle, obj.summary, ...obj.sections.map((s) => s.heading + ' ' + s.body)].join(' ')).toLowerCase();
   const row = await prisma.caseStudy.update({ where: { id: existing.id }, data: { title: obj.title, kind: obj.kind, searchText, data: JSON.stringify(obj) } });
   res.json(JSON.parse(row.data));
+}));
+
+// ── Export : DB éditable → JSON canonique ────────────────────────────────────
+// Ferme la boucle d'édition. La DB n'est qu'un cache d'édition ; data/*.json est
+// l'unique source canonique. Cet endpoint exécute le MÊME script que
+// `npm run content:export` (aucune logique dupliquée) contre la DB en cours,
+// puis renvoie le diff git de data/ pour relecture avant commit.
+// `?dryRun=1` (ou body { dryRun: true }) n'écrit rien et signale le drift.
+const execFileP = promisify(execFile);
+const EXPORTED_FILES = ['data/glossary.json', 'data/caseStudies.json', 'data/blog.json'];
+
+const runCmd = async (cmd: string, args: string[]) => {
+  try {
+    const { stdout, stderr } = await execFileP(cmd, args, { cwd: repoRoot, maxBuffer: 32 * 1024 * 1024 });
+    return { code: 0, stdout, stderr };
+  } catch (err) {
+    const e = err as { code?: number; stdout?: string; stderr?: string };
+    return { code: e.code ?? 1, stdout: e.stdout ?? '', stderr: e.stderr ?? String(err) };
+  }
+};
+
+adminRouter.post('/export', ah(async (req, res) => {
+  const dryRun = req.query.dryRun === '1' || req.body?.dryRun === true;
+  const script = resolve(repoRoot, 'scripts/export-content.mjs');
+  const exp = await runCmd(process.execPath, [script, ...(dryRun ? ['--dry-run'] : [])]);
+  const diff = await runCmd('git', ['diff', '--', ...EXPORTED_FILES]);
+  const changed = diff.stdout.trim().length > 0 || (dryRun && exp.code !== 0);
+  res.json({
+    ok: dryRun ? true : exp.code === 0,
+    dryRun,
+    changed,
+    log: `${exp.stdout}${exp.stderr}`.trim(),
+    diff: diff.stdout,
+  });
 }));

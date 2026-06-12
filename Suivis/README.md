@@ -15,7 +15,7 @@ Une plateforme **full-stack** d'initiation, d'apprentissage et d'approfondisseme
 - **Introspection d'abord.** L'onboarding est un véritable **cahier d'introspection** ikigai (diagramme à 13 zones, deux niveaux de lecture *Découverte / Avancé*, trois archétypes, sept questions libres) qui précède le catalogue : *pourquoi* avant *quoi*. Il conserve le test d'orientation scoré et le profil d'apprentissage.
 - **Premium éditorial.** Entre école privée, memo d'investissement, knowledge base et carnet personnel — jamais un dashboard SaaS générique.
 - **Le compte est optionnel et utile.** Il ne sert qu'à *sauvegarder* : progression, notes, citations, favoris, profil, synchronisés entre appareils.
-- **Bilingue par conception (FR/EN).** Le routing localisé `/fr` `/en` est en place (Phase 1) ; le français reste la langue par défaut, avec repli FR pour les contenus EN non encore traduits. Voir [`i18n_architecture_FR-EN.md`](i18n_architecture_FR-EN.md).
+- **Bilingue par conception (FR/EN).** Le routing localisé `/fr` `/en` est en place (Phase 1) ; le français reste la langue par défaut, avec repli FR pour les contenus EN non encore traduits. Le sélecteur FR/EN est **masqué** tant que l'anglais n'est pas livré (drapeau `EN_ENABLED = false` dans `client/src/i18n/config.ts`) — sous `/en`, `<html lang>` reste `fr` pour ne pas mentir aux lecteurs d'écran / crawlers. Voir [`i18n_architecture_FR-EN.md`](i18n_architecture_FR-EN.md).
 
 ---
 
@@ -64,31 +64,46 @@ npm run dev
 | `npm run dev` | Client + serveur en parallèle |
 | `npm run dev:client` / `npm run dev:server` | Un seul des deux |
 | `npm run db:setup` | `prisma generate` + `db push` + seed |
+| `npm run db:seed` (`-- --force`) | (Re)peuple la base ; non destructif pour le contenu éditable sauf `--force` |
 | `npm run db:reset` | Réinitialise la base puis re-seed |
+| `npm run content:export` | Réexporte les éditions DB (glossaire, blog, cas) vers les JSON sources |
+| `npm run split:content` | Régénère les index/contenus scindés (`split:glossary` + `split:lessons`) |
 | `npm run build` | Build serveur (tsc) puis client (vite) |
-| `npm run test --workspace client` | Tests Vitest (routing i18n, `safeHttpUrl`, `computeProfile`) |
+| `npm run test --workspace client` | Tests Vitest client (routing i18n, `safeHttpUrl`, `computeProfile`, simulateurs…) |
+| `npm run test --workspace server` | Tests d'intégration serveur (auth, profil, isolation par `userId`) |
 | `npm run validate:content` | Vérifie que tous les liens dictionnaire `[[..]]` / `{{..}}` du contenu résolvent |
 | `npm run validate:glossary` | Contrôle custom du glossaire final (slugs uniques, `id === slug`, liens, aliases) |
 
-> Une **CI** (`.github/workflows/ci.yml`) enchaîne lint + build + tests à chaque push.
+> Une **CI** (`.github/workflows/ci.yml`) enchaîne validation du contenu → lint → build → tests client → tests serveur, à chaque push sur `main`/`master` et sur chaque PR.
 
 ### État vérifié
 
-Audit local courant (juin 2026) :
+Audit local courant (2026-06-12, exécuté sur la branche `chore/flux-c-repo-hygiene`) :
 
-- `npm run validate:content` : OK, avec warnings éditoriaux (23/62 leçons canon `data/lessons.json` sans quiz) ;
-- `npm run lint` : OK, 0 erreur, 15 warnings Fast Refresh ;
-- `npm run build` : OK, build serveur + client ;
-- Git : OK, dépôt initialisé ; `master` suit `origin/master`, remote `origin` configuré, commit initial `e5b37e0 Initialisation du projet`.
+- `npm run validate:content` : OK, avec un warning éditorial (23/62 leçons sans quiz — backlog contenu) ;
+- `npm run lint` : OK, 0 erreur, 4 warnings (uniquement `react-refresh/only-export-components`, structurels aux Context) ;
+- `npm run build` : OK, build serveur + client (validation contenu rejouée via le hook `prebuild`) ;
+- `npm run test --workspace client` : OK, 10 fichiers / 59 tests ;
+- `npm run test --workspace server` : OK, 3 fichiers / 10 tests (auth, profil, isolation des données par `userId`) ;
+- Git : dépôt initialisé ; `master` suit `origin/master`.
 
-Évolutions depuis (2026-06-09) — **à valider en local**, le sandbox d'outillage ne pouvant pas monter le dossier « VC SITE » (espace dans le nom) :
+Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 
-- **i18n Phase 1** : routing localisé `/fr` `/en` (`client/src/i18n/`), redirection racine crawler-safe, sélecteur FR/EN ;
+- **CI sur push** : `ci.yml` écoute désormais `branches: [main, master]` (était `main` seul, inopérant hors PR sur ce dépôt `master`).
+- **Crash async Express 4** : wrapper `ah()` (`server/src/lib/async-handler.ts`) appliqué à **tous** les handlers async (auth, content, me, admin, search) — une rejection est forwardée à l'error-handler central (→ 500) au lieu de tuer le process.
+- **Seed non destructif** : `server/prisma/seed.ts` ne réécrit plus le contenu éditable (glossaire, blog, études de cas) ; create-if-absent par défaut, écrasement uniquement avec `npm run db:seed -- --force`. Sens inverse DB→JSON via `npm run content:export`.
+- **Garde JWT durcie** : `getJwtSecretIssue()` vérifie une longueur minimale + une liste de valeurs interdites en production (fail-fast au démarrage).
+- **`clearProfile` côté serveur** : `DELETE /me/profile` supprime profil + réponses d'onboarding ; plus de résurrection de l'ancien ikigai au reload.
+- **`apiUp` re-sondé** : l'API qui démarre après le client (ou redevient joignable) est détectée — re-ping toutes les 15 s tant qu'elle est down, plus sur `window focus` / `online` ; restauration de session avant bascule de `apiUp` (`client/src/context/AuthContext.tsx`).
+- **Surface réduite** : `attachUser` retiré du global (monté sur `/me`, `/admin`, `/auth/me` seulement) ; rate-limit ajouté sur `/api/search` ; sélecteur EN masqué (`EN_ENABLED=false`).
+
+- **i18n Phase 1** : routing localisé `/fr` `/en` (`client/src/i18n/`), redirection racine crawler-safe, sélecteur FR/EN **présent mais masqué** jusqu'à la traduction du chrome et du contenu ;
 - **Sécurité / qualité** : auth cookie-only, mot de passe ≥ 8 + rate-limit auth, CORS dev-only, markdown sûr (`safeHttpUrl`), Error Boundary au niveau route, tokens `--error`/`--success` ;
-- **Tests** : harnais Vitest robuste (7 fichiers, 25 tests) + CI ;
+- **Tests** : harnais Vitest (client 10 fichiers / 59 tests · serveur 3 fichiers / 10 tests) + CI ;
 - **Couche Parcours branchée au client** : la **page `/paths` réunit la carte interactive (l'Atlas) et le catalogue des parcours** (trajectoires par objectif, étagères par famille, bandeau « Ton parcours » issu de l'ikigai) ; `/paths/:slug` est la « carte de voyage » d'un parcours (étapes typées cœur/bonus/pratique/respiration, curseur temps, jalon, bloc interactif de pré-requis liés au glossaire). La **Bibliothèque (`/bibliotheque`) présente les cours**, rangés par rayon (les 9 anciens *paths* deviennent ces rayons thématiques). Loader `client/src/content/parcours.ts`, pages `ParcoursPage` / `ParcoursDetailPage` / `ParcoursOrSubjectPage`. Voir [`docs/parcours-apprentissage-conception.md`](docs/parcours-apprentissage-conception.md).
-- **Contenu** : pipeline d'authoring `docs/parcours/` → `data/parcours/*.lessons.json` (2 parcours rédigés, dont le registre « entretien Analyst »). Les leçons drop-in (`ld-*`/`lea-*`) sont **servies côté client** par cohabitation (concaténées dans `LESSONS` via `content/lessons.ts`) et les 2 parcours phares pointent dessus. **Pas encore** fusionnées dans `data/lessons.json` ni seedées en base : côté **API/DB** elles restent absentes — le client les sert via le fallback bundle, donc `npm run db:seed` reste à faire pour aligner le serveur.
+- **Contenu** : pipeline d'authoring `docs/parcours/` → `data/parcours/*.lessons.json` (2 parcours rédigés, dont le registre « entretien Analyst »). Les leçons drop-in (`ld-*`/`lea-*`) sont **servies côté client** : `scripts/split-lessons.mjs` les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts` (cf. « Performance » ci-dessous), et les 2 parcours phares pointent dessus. **Pas encore** fusionnées dans `data/lessons.json` canonique ni seedées en base : côté **API/DB** elles restent absentes — le client les sert via le fallback bundle, donc `npm run db:seed` reste à faire pour aligner le serveur.
 - **Cours Power Law & Monte Carlo** : nouveau cours canonique `c-power-law-portfolio` dans le rayon Portfolio, avec 4 leçons (`lpl-*`) qui expliquent moyenne vs médiane, pertinence de Monte Carlo, moteur du simulateur Power Law et lecture TVPI/concentration/fund returner. Le simulateur Power Law référence maintenant ces leçons en premier.
+- **Performance / bundle** : le glossaire **et** les leçons sont découpés en un index léger (eager, hot path : popovers, recherche, liens) et un chunk lourd lazy (définitions / corps de leçon), via `scripts/split-glossary.mjs` + `scripts/split-lessons.mjs` (câblés dans `predev`/`prebuild` par `npm run split:content`). Le chunk eager `lessons` passe de ~176 kB à ~32 kB ; les corps (~143 kB) ne sont chargés que par le lecteur de leçon.
 
 ---
 
@@ -98,6 +113,8 @@ Audit local courant (juin 2026) :
 vc-premium-platform/
 ├── data/                     # Contenu canonique (JSON) — source de vérité partagée
 │   ├── paths.json  courses.json  lessons.json  glossary.json
+│   ├── glossary.index.json  glossary.defs.json   # glossaire scindé (index léger / défs lazy) — généré
+│   ├── lessons.index.json   lessons.bodies.json  # leçons scindées (index léger / corps lazy) — généré
 │   ├── caseStudies.json  blog.json  simulators.json  ikigai.json
 │   ├── parcours.json  parcours.en.json  parcoursConfig.json  profileParcours.json
 │   └── parcours/             # fiches de leçons drop-in par parcours (*.lessons.json)
@@ -120,10 +137,10 @@ vc-premium-platform/
     ├── prisma/seed.ts        # peuple la base depuis /data
     └── src/
         ├── routes/           # auth · content · me · admin · search
-        └── lib/              # db · auth (JWT) · env · content
+        └── lib/              # db · auth (JWT) · env · content · async-handler (wrapper async Express 4)
 ```
 
-Le build client est découpé par routes et par collections de contenu : l'entrée applicative pèse environ **100 kB** et le vendor React environ **232 kB** ; les collections lourdes (`lessons`, `glossary`, `ikigai`) restent dans des chunks séparés.
+Le build client est découpé par routes et par collections de contenu : le vendor React pèse environ **232 kB** ; les collections lourdes (`lessons`, `glossary`, `ikigai`) restent dans des chunks séparés. Le glossaire et les leçons sont en outre **scindés index/contenu** : seul l'index léger (`*.index.json`) est chargé sur le hot path, les définitions et les corps de leçon (`glossary.defs.json` / `lessons.bodies.json`) arrivent en chunks lazy à la demande.
 
 ### Pages (client)
 
@@ -170,6 +187,6 @@ Palette éditoriale de luxe — **feuille d'or doré** (`#C5A85C`), **bleu marin
 
 - **Décision d'architecture préalable :** trancher le **mode de rendu** (CSR actuel vs prérendu/SSG). Analyse menée : hybride recommandé — SSG/ISR pour l'éditorial (SEO, partage social), CSR pour l'app authentifiée. Le SEO concret (prérendu, OpenGraph par page, `hreflang` i18n) en découle et reste différé au pré-lancement.
 - Remplacer `provider = "sqlite"` par `postgresql` dans `prisma/schema.prisma` et ajuster `DATABASE_URL`. Pour l'i18n, ajouter `locale` aux modèles de contenu + `@@unique([slug, locale])` (i18n Phase 4).
-- Définir un vrai `JWT_SECRET` et passer le cookie en `secure: true` derrière HTTPS ; finaliser le durcissement (helmet, CSP/HSTS, **corriger la garde JWT**, contraste de l'or).
+- Définir un vrai `JWT_SECRET` (la garde production exige déjà longueur min. + blocklist) et passer le cookie en `secure: true` derrière HTTPS ; finaliser le durcissement (helmet, CSP/HSTS, contraste de l'or).
 - Servir le `client/dist` derrière un CDN ; héberger l'API séparément (Render, Fly, Railway…) ou en serverless.
 ```

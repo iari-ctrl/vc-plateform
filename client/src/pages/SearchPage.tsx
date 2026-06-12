@@ -11,7 +11,7 @@ import { usePageMeta } from '@/lib/seo';
 const TYPE_LABEL: Record<string, string> = { course: 'Cours', lesson: 'Leçon', glossary: 'Dictionnaire', case: 'Étude de cas', blog: 'Analyse', path: 'Parcours', simulator: 'Simulateur', 'anti-portfolio': 'Anti-portfolio', memo: 'Memo annoté' };
 
 export default function SearchPage() {
-  usePageMeta('Recherche');
+  usePageMeta('Recherche', undefined, { noindex: true });
   const [params, setParams] = useSearchParams();
   const { apiUp } = useAuth();
   const [q, setQ] = useState(params.get('q') ?? '');

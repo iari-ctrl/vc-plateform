@@ -16,7 +16,7 @@ export default function PathDetailPage() {
   const { slug } = useParams();
   const path = slug ? pathBySlug(slug) : undefined;
   const { progress } = useUserData();
-  usePageMeta(path?.title, path?.summary);
+  usePageMeta(path?.title, path?.summary, { image: 'path' });
 
   const [collapsedCourses, setCollapsedCourses] = useState<Record<string, boolean>>({});
 

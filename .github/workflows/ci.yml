@@ -18,10 +18,11 @@ jobs:
           node-version: '20'
           cache: npm
       - run: npm ci
-      - name: Valider le contenu
-        # Passer à `npm run validate:content:strict` une fois les
-        # avertissements seeAlso résorbés (tolérance zéro).
-        run: npm run validate:content
+      - name: Valider le contenu (strict)
+        # Tolérance zéro sur les avertissements d'intégrité (seeAlso/furtherReading
+        # sans cible, …). Les lacunes éditoriales (leçons sans quiz) restent des
+        # softWarnings non bloquantes — cf. scripts/validate-content.mjs.
+        run: npm run validate:content:strict
       - name: Lint
         run: npm run lint
       - name: Build
@@ -35,3 +36,24 @@ jobs:
         # `npm run build` ci-dessus a déjà lancé `prisma generate` ; le test
         # construit sa propre base SQLite jetable (cf. server/test/global-setup.ts).
         run: npm run test --workspace server
+
+  # Garde-fou anti-drift : prouve que le seed (JSON → DB) et l'export (DB → JSON)
+  # sont bien inverses l'un de l'autre. On seed une SQLite jetable depuis
+  # data/*.json puis on lance `content:export --dry-run` : si un fichier
+  # canonique changerait, le script sort en code 1 et le job échoue.
+  drift:
+    runs-on: ubuntu-latest
+    env:
+      # Chemin absolu pour que seed et export visent la même base, quel que soit le cwd.
+      DATABASE_URL: file:${{ github.workspace }}/server/prisma/drift.db
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Seed d'une SQLite jetable (generate + migrate deploy + seed)
+        run: npm run db:setup --workspace server
+      - name: Vérifier que seed et export sont inverses
+        run: npm run content:export -- --dry-run

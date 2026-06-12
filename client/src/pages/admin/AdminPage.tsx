@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { Shield, BookMarked, Newspaper, FileText, BarChart3, Plus, Save, Trash2, X, Loader2 } from 'lucide-react';
 import { api, ApiError } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
@@ -10,7 +11,7 @@ import { usePageMeta } from '@/lib/seo';
 type Tab = 'stats' | 'glossary' | 'blog' | 'cases';
 
 export default function AdminPage() {
-  usePageMeta('Administration');
+  usePageMeta('Administration', undefined, { noindex: true });
   const { isAuthed, isAdmin, apiUp, ready } = useAuth();
   const { openAuth } = useUI();
   const [tab, setTab] = useState<Tab>('stats');
@@ -128,6 +129,7 @@ interface GTerm { id: string; term: string; slug?: string; aliases?: string[]; l
 const blankTerm: GTerm = { id: '', term: '', aliases: [], category: '', short: '', definition: '', example: '', seeAlso: [], relatedLessonIds: [] };
 
 function GlossaryManager() {
+  const queryClient = useQueryClient();
   const [items, setItems] = useState<GTerm[]>([]);
   const [editing, setEditing] = useState<GTerm | null>(null);
   const [isNew, setIsNew] = useState(false);
@@ -138,6 +140,10 @@ function GlossaryManager() {
   const load = () => api.get<GTerm[]>('/admin/glossary').then(setItems).catch(() => {});
   useEffect(() => { void load(); }, []);
 
+  // Public pages read `/content/*` (not `/admin/*`); drop their cache so the
+  // edit shows on the site without a reload.
+  const refreshSite = () => void queryClient.invalidateQueries({ queryKey: ['api'] });
+
   async function save() {
     if (!editing) return;
     setBusy(true); setError(null);
@@ -146,6 +152,7 @@ function GlossaryManager() {
       if (isNew) await api.post('/admin/glossary', payload);
       else await api.put(`/admin/glossary/${editing.id}`, payload);
       await load();
+      refreshSite();
       setEditing(null);
       flash('Terme enregistré');
     } catch (e) { setError(e instanceof ApiError ? e.message : 'Erreur'); }
@@ -155,6 +162,7 @@ function GlossaryManager() {
   async function remove(id: string) {
     await api.del(`/admin/glossary/${id}`).catch(() => {});
     await load();
+    refreshSite();
     if (editing?.id === id) setEditing(null);
   }
 
@@ -191,6 +199,7 @@ interface BPost { id: string; title: string; slug?: string; subtitle: string; au
 const blankPost: BPost = { id: '', title: '', subtitle: '', author: 'L’équipe VC Premium', date: new Date().toISOString().slice(0, 10), readMin: 5, category: 'Réflexion', excerpt: '', tags: [], body: '' };
 
 function BlogManager() {
+  const queryClient = useQueryClient();
   const [items, setItems] = useState<BPost[]>([]);
   const [editing, setEditing] = useState<BPost | null>(null);
   const [isNew, setIsNew] = useState(false);
@@ -201,6 +210,10 @@ function BlogManager() {
   const load = () => api.get<BPost[]>('/admin/blog').then(setItems).catch(() => {});
   useEffect(() => { void load(); }, []);
 
+  // Public pages read `/content/*` (not `/admin/*`); drop their cache so the
+  // edit shows on the site (list + post detail) without a reload.
+  const refreshSite = () => void queryClient.invalidateQueries({ queryKey: ['api'] });
+
   async function save() {
     if (!editing) return;
     setBusy(true); setError(null);
@@ -208,11 +221,11 @@ function BlogManager() {
       const payload = { ...editing, readMin: Number(editing.readMin) || 5 };
       if (isNew) await api.post('/admin/blog', payload);
       else await api.put(`/admin/blog/${editing.id}`, payload);
-      await load(); setEditing(null); flash('Article enregistré');
+      await load(); refreshSite(); setEditing(null); flash('Article enregistré');
     } catch (e) { setError(e instanceof ApiError ? e.message : 'Erreur'); }
     finally { setBusy(false); }
   }
-  async function remove(id: string) { await api.del(`/admin/blog/${id}`).catch(() => {}); await load(); if (editing?.id === id) setEditing(null); }
+  async function remove(id: string) { await api.del(`/admin/blog/${id}`).catch(() => {}); await load(); refreshSite(); if (editing?.id === id) setEditing(null); }
 
   return (
     <ManagerLayout
@@ -243,6 +256,7 @@ function BlogManager() {
 interface CaseItem { id: string; slug: string; title: string; subtitle: string; kind: string; company: string; year: number; readMin: number; summary: string; tags: string[]; glossaryRefs: string[]; sections: { heading: string; body: string }[]; takeaways: string[] }
 
 function CaseManager() {
+  const queryClient = useQueryClient();
   const [items, setItems] = useState<CaseItem[]>([]);
   const [editing, setEditing] = useState<CaseItem | null>(null);
   const [busy, setBusy] = useState(false);
@@ -257,7 +271,10 @@ function CaseManager() {
     setBusy(true); setError(null);
     try {
       await api.put(`/admin/case-studies/${editing.id}`, { ...editing, year: Number(editing.year) || 2026, readMin: Number(editing.readMin) || 8 });
-      await load(); setEditing(null); flash('Étude de cas enregistrée');
+      await load();
+      // Public detail page reads `/content/*`; drop its cache so the edit shows.
+      void queryClient.invalidateQueries({ queryKey: ['api'] });
+      setEditing(null); flash('Étude de cas enregistrée');
     } catch (e) { setError(e instanceof ApiError ? e.message : 'Erreur'); }
     finally { setBusy(false); }
   }

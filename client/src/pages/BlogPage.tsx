@@ -6,8 +6,9 @@ import { usePageMeta } from '@/lib/seo';
 import type { BlogPost } from '@/content/types';
 
 export default function BlogPage() {
-  usePageMeta('Analyses & recherche', 'Articles, thèses et réflexions sur le capital-risque — penser le venture, pas seulement l’apprendre.');
-  const { data: posts } = useApiData<BlogPost[]>('/content/blog', BLOG);
+  usePageMeta('Analyses & recherche', 'Articles, thèses et réflexions sur le capital-risque — penser le venture, pas seulement l’apprendre.', { image: 'blog' });
+  // Editorial content changes rarely — hold the API copy fresh for 10 min.
+  const { data: posts } = useApiData<BlogPost[]>('/content/blog', BLOG, { staleTime: 10 * 60 * 1000 });
   const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
   const [featured, ...rest] = sorted;
 

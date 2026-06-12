@@ -27,10 +27,17 @@ const dataDir = join(root, 'data');
 const MIN_QUIZ_QUESTIONS = 1;
 
 // ── Tiny report harness ──────────────────────────────────────────────────────
+// Three tiers: errors (always fatal), warnings (integrity gaps — fatal under
+// --strict), and softWarnings (acknowledged content backlog, e.g. lessons still
+// missing a quiz — reported but never fatal, even strict). The soft tier lets
+// CI run --strict for zero-tolerance on integrity without blocking on content
+// that is simply not written yet.
 const errors = [];
 const warnings = [];
+const softWarnings = [];
 const err = (msg) => errors.push(msg);
 const warn = (msg) => warnings.push(msg);
+const soft = (msg) => softWarnings.push(msg);
 
 const readJson = (name) => {
   try {
@@ -524,7 +531,7 @@ for (const l of allLessons) {
   });
 }
 if (lessonsWithoutQuiz.length)
-  warn(`${lessonsWithoutQuiz.length}/${allLessons.length} leçon(s) sans quiz : ${lessonsWithoutQuiz.join(', ')}`);
+  soft(`${lessonsWithoutQuiz.length}/${allLessons.length} leçon(s) sans quiz : ${lessonsWithoutQuiz.join(', ')}`);
 
 // ── Glossary markers ([[..]] / {{..}}) ──────────────────────────────────────
 const MARKER = /(?:\[\[|\{\{)([^\]}|]+)(?:\|[^\]}]*)?(?:\]\]|\}\})/g;
@@ -563,8 +570,13 @@ console.log(`→ ${cases.length} études de cas · ${blog.length} articles · ${
 console.log(`→ ${markerCount} marqueur(s) [[..]] / {{..}} analysés`);
 
 if (warnings.length) {
-  console.warn(`\n⚠ ${warnings.length} avertissement(s) :`);
+  console.warn(`\n⚠ ${warnings.length} avertissement(s) d'intégrité :`);
   for (const w of warnings) console.warn(`   · ${w}`);
+}
+
+if (softWarnings.length) {
+  console.warn(`\n· ${softWarnings.length} lacune(s) de contenu (non bloquant, même en strict) :`);
+  for (const w of softWarnings) console.warn(`   · ${w}`);
 }
 
 if (errors.length) {
@@ -574,11 +586,13 @@ if (errors.length) {
   process.exit(1);
 }
 
-// Mode strict (CI) : les avertissements (seeAlso sans cible, quiz manquants)
-// deviennent bloquants. Activé via `--strict` ou VALIDATE_STRICT=1.
+// Mode strict (CI) : les avertissements d'intégrité (seeAlso sans cible,
+// furtherReading non résolu, …) deviennent bloquants. Les lacunes de contenu
+// (softWarnings : leçons sans quiz) restent tolérées — c'est un backlog éditorial,
+// pas un build cassé. Activé via `--strict` ou VALIDATE_STRICT=1.
 const strict = process.argv.includes('--strict') || process.env.VALIDATE_STRICT === '1';
 if (strict && warnings.length) {
-  console.error(`\n✗ Mode strict : ${warnings.length} avertissement(s) traité(s) comme erreur(s).`);
+  console.error(`\n✗ Mode strict : ${warnings.length} avertissement(s) d'intégrité traité(s) comme erreur(s).`);
   process.exit(1);
 }
 

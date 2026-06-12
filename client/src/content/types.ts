@@ -58,6 +58,13 @@ export interface Lesson {
   furtherReading?: FurtherReading[];
 }
 
+/** Light lesson entry (everything but the heavy reader payload) — eager on the
+ *  hot path; see `LessonBody` for the lazily-loaded remainder. */
+export type LessonIndexEntry = Omit<Lesson, 'body' | 'keyTakeaways' | 'quiz' | 'furtherReading'>;
+
+/** The heavy part of a lesson (reader payload), loaded lazily and keyed by slug. */
+export type LessonBody = Pick<Lesson, 'body' | 'keyTakeaways' | 'quiz' | 'furtherReading'>;
+
 export interface GlossaryTerm {
   id: string;
   term: string;

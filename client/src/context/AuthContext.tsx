@@ -16,32 +16,69 @@ interface AuthCtx {
 
 const Ctx = createContext<AuthCtx | null>(null);
 
+/** While the API is unreachable, retry the health ping this often. */
+const API_RETRY_MS = 15_000;
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
   const [user, setUser] = useState<AuthUser | null>(null);
   const [ready, setReady] = useState(false);
   const [apiUp, setApiUp] = useState(false);
 
+  // The API may come up *after* the client (dev server race, redeploy, laptop
+  // back online). A single mount-time ping would lock the app in guest mode
+  // until a reload, so while the API is down we re-ping on a light interval
+  // plus on window focus / network-online. Once it answers, the session is
+  // restored, `apiUp` flips (for offline-aware UI), and we invalidate the
+  // content queries so they refetch the live copy on their own — no reload.
   useEffect(() => {
     let active = true;
-    (async () => {
-      const up = await pingApi();
+    let up = false;
+    let checking = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    const check = async () => {
+      if (checking) return;
+      checking = true;
+      const nowUp = await pingApi();
       if (!active) return;
-      setApiUp(up);
-      if (up) {
+      if (nowUp && !up) {
+        // Came (back) up: restore the cookie session before flipping `apiUp`,
+        // so user-scoped queries fire with the user already in place.
         try {
           const { user } = await api.get<{ user: AuthUser | null }>('/auth/me');
           if (active) setUser(user);
         } catch {
           /* guest */
         }
+        // Content queries aren't gated on `apiUp` — they show the bundle and
+        // rely on this signal to refresh. Now that the API answers, drop their
+        // staleness so they fetch the live copy without a page reload.
+        if (active) void queryClient.invalidateQueries({ queryKey: ['api'] });
       }
-      if (active) setReady(true);
-    })();
+      if (!active) return;
+      up = nowUp;
+      setApiUp(nowUp);
+      setReady(true);
+      checking = false;
+      clearTimeout(timer);
+      if (!nowUp) timer = setTimeout(() => void check(), API_RETRY_MS);
+    };
+
+    const recheckIfDown = () => {
+      if (!up) void check();
+    };
+
+    void check();
+    window.addEventListener('focus', recheckIfDown);
+    window.addEventListener('online', recheckIfDown);
     return () => {
       active = false;
+      clearTimeout(timer);
+      window.removeEventListener('focus', recheckIfDown);
+      window.removeEventListener('online', recheckIfDown);
     };
-  }, []);
+  }, [queryClient]);
 
   const login = useCallback(async (email: string, password: string) => {
     const { user } = await api.post<{ user: AuthUser }>('/auth/login', { email, password });

@@ -62,7 +62,7 @@ const OUTCOME_META: Record<DecisionOutcome, { icon: typeof Check; color: string 
 };
 
 export default function DecisionJournalPage() {
-  usePageMeta('Journal de décisions', 'Prédictions datées, niveau de confiance, date de revue : l’outil de calibration de votre jugement d’investisseur.');
+  usePageMeta('Journal de décisions', 'Prédictions datées, niveau de confiance, date de revue : l’outil de calibration de votre jugement d’investisseur.', { noindex: true });
   const { journal, addJournalEntry, resolveJournalEntry, deleteJournalEntry } = useUserData();
 
   const [filter, setFilter] = useState<'all' | 'due' | 'open' | 'resolved'>('all');

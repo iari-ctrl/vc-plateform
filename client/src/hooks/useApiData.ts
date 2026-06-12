@@ -10,10 +10,18 @@ import { useAuth } from '@/context/AuthContext';
  * Backed by TanStack Query: the bundled `fallback` is seeded as stale initial
  * data so it shows immediately *and* triggers a background refetch, and results
  * are cached/deduped across mounts (e.g. navigating back to a list page).
+ *
+ * The query is *not* gated on `apiUp`. TanStack owns availability: a failed fetch
+ * leaves the seeded bundle on screen, and `AuthContext` invalidates `['api']`
+ * when the server (re)appears, so an API that starts after the client — or drops
+ * then returns — refreshes on its own, no reload.
+ *
+ * `staleTime` defaults to the client-wide policy (a few minutes — fine for
+ * editorial content); pass an override for content that changes faster/slower.
  */
-export function useApiData<T>(path: string | null, fallback: T) {
-  const { apiUp, ready } = useAuth();
-  const enabled = ready && apiUp && !!path;
+export function useApiData<T>(path: string | null, fallback: T, options?: { staleTime?: number }) {
+  const { ready } = useAuth();
+  const enabled = ready && !!path;
 
   const query = useQuery<T>({
     queryKey: ['api', path],
@@ -22,6 +30,7 @@ export function useApiData<T>(path: string | null, fallback: T) {
     // Seed the bundle and mark it stale so the API copy is fetched on mount.
     initialData: fallback,
     initialDataUpdatedAt: 0,
+    ...(options?.staleTime !== undefined && { staleTime: options.staleTime }),
   });
 
   // `?? fallback` keeps the bundled copy if the API ever answers with null.
@@ -37,9 +46,9 @@ export function useApiData<T>(path: string | null, fallback: T) {
  * undefined and `pending` stays true until the API resolves, so callers can show
  * a loader instead of flashing a 404. Once settled, `!item` means a genuine 404.
  */
-export function useApiItem<T>(path: string | null, fallback: T | undefined) {
-  const { apiUp, ready } = useAuth();
-  const enabled = ready && apiUp && !!path;
+export function useApiItem<T>(path: string | null, fallback: T | undefined, options?: { staleTime?: number }) {
+  const { ready } = useAuth();
+  const enabled = ready && !!path;
 
   const query = useQuery<T>({
     queryKey: ['api', path],
@@ -49,13 +58,15 @@ export function useApiItem<T>(path: string | null, fallback: T | undefined) {
     initialDataUpdatedAt: 0,
     // A missing item is a 404, not a transient failure — don't retry.
     retry: false,
+    ...(options?.staleTime !== undefined && { staleTime: options.staleTime }),
   });
 
   const item = query.data ?? fallback;
 
   // "Settled" = we've concluded what to show: auth isn't ready yet (can't fetch,
   // so we only know once a bundled copy exists), the query is disabled
-  // (offline / no path → the bundle is the final answer), or it has resolved.
+  // (no path → the bundle is the final answer), or it has resolved (success or
+  // error — an unreachable API errors out and leaves the bundle showing).
   const settled = !ready ? false : !enabled || query.isSuccess || query.isError;
 
   // Pending only when we have nothing to show yet and haven't settled.

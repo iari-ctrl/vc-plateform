@@ -1,6 +1,6 @@
 # Manuel d'Architecture et d'Édition — VC Intelligence Platform
 
-Dernière mise à jour : 2026-06-11
+Dernière mise à jour : 2026-06-12
 
 Ce document décrit l'architecture **full-stack** du projet, la **vision produit et le positionnement stratégique**, le cycle de vie du contenu (de la source canonique JSON jusqu'à l'écran), et un **guide d'édition pas-à-pas** pour un développeur qui veut ajouter du contenu, modifier le design, ou faire évoluer le code.
 
@@ -28,7 +28,9 @@ Le projet n'est pas une simple SPA : c'est un **monorepo npm workspaces** à deu
 vc-premium-platform/
 ├── data/                      # ← SOURCE DE VÉRITÉ du contenu (JSON)
 │   ├── paths.json (9 rayons)  courses.json (16)  lessons.json (51 leçons canoniques)
-│   ├── glossary.json (357)  caseStudies.json (4)  blog.json (4)
+│   ├── lessons.index.json  lessons.bodies.json   # leçons scindées (index léger / corps lazy) — GÉNÉRÉ, ne pas éditer
+│   ├── glossary.json (357)  glossary.index.json  glossary.defs.json   # glossaire scindé — GÉNÉRÉ
+│   ├── caseStudies.json (4)  blog.json (4)
 │   ├── simulators.json (8)  ikigai.json
 │   ├── parcours.json (22)  parcours.en.json  parcoursConfig.json  profileParcours.json
 │   └── parcours/              # 3 registres drop-in, 11 leçons additionnelles (*.lessons.json, ld-*/lea-*)
@@ -55,13 +57,14 @@ vc-premium-platform/
 │
 └── server/                    # API Express + Prisma
     ├── prisma/schema.prisma   # 15 modèles
-    ├── prisma/seed.ts         # peuple la base depuis /data
+    ├── prisma/seed.ts         # peuple la base depuis /data (non destructif sauf --force)
+    ├── test/                  # tests d'intégration (auth · profile · isolation)
     └── src/
         ├── routes/            # auth · content · me · admin · search
-        └── lib/               # db · auth (JWT) · env · content (lecture de /data)
+        └── lib/               # db · auth (JWT) · env · content (lecture de /data) · async-handler
 
-.github/workflows/ci.yml       # CI (lint + build + tests Vitest)
-client/vitest.config.ts        # harnais de tests (8 fichiers, 36 tests)
+.github/workflows/ci.yml       # CI (validate:content → lint → build → tests client → tests serveur ; push main/master + PR)
+client/vitest.config.ts        # harnais client (10 fichiers, 59 tests) ; serveur : server/test (3 fichiers, 10 tests)
 i18n_architecture_FR-EN.md     # ADR + plan de migration bilingue (FR/EN)
 docs/Stratégie doc et ROADMAP  # vision cible, benchmark, roadmap complète (doc directeur)
 docs/AUDIT-vc-intelligence.md  # diagnostic + 10 premières tâches d'exécution
@@ -69,6 +72,8 @@ docs/AUDIT-vc-intelligence.md  # diagnostic + 10 premières tâches d'exécution
 
 > [!NOTE]
 > Le client lit `data/` via l'alias Vite **`@data`** (ex. `import pathsJson from '@data/paths.json'` dans `client/src/content/paths.ts`). Chaque collection a son module (`paths.ts`, `courses.ts`, `lessons.ts`, etc.) afin que Rollup découpe le contenu par chunks. Le serveur lit les mêmes fichiers via `server/src/lib/content.ts` (chemin relatif `../../../data`). **Un seul fichier édité alimente les deux côtés.**
+>
+> **Collections scindées (glossaire & leçons).** Pour alléger le hot path, `glossary.json` et `lessons.json` (+ `data/parcours/*.lessons.json`) sont **dérivés** par `scripts/split-glossary.mjs` et `scripts/split-lessons.mjs` (câblés dans `predev`/`prebuild` via `npm run split:content`) en deux fichiers chacun : un **index léger** (`*.index.json`, importé en eager pour popovers / recherche / liens) et un **chunk lourd lazy** (`glossary.defs.json` / `lessons.bodies.json`, corps + quiz, chargé à la demande par `loadGlossaryTerm` / `loadLesson`). **Ne jamais éditer les fichiers générés** : on édite la source (`glossary.json`, `lessons.json`, `data/parcours/*.lessons.json`), le split se relance au prochain `dev`/`build`.
 
 ---
 
@@ -119,7 +124,7 @@ const { data: paths } = useApiData<Path[]>('/content/paths', PATHS); // PATHS = 
 - Si l'API est injoignable, on garde le fallback. Aucune page blanche.
 
 > [!TIP]
-> Le build client est découpé par routes et par collections de contenu : l'entrée applicative pèse environ **100 kB** et le vendor React environ **232 kB** ; les collections lourdes (`lessons`, `glossary`, `ikigai`) restent dans des chunks séparés.
+> Le build client est découpé par routes et par collections de contenu : le vendor React pèse environ **232 kB** ; les collections lourdes (`lessons`, `glossary`, `ikigai`) restent dans des chunks séparés. Le glossaire et les leçons sont en outre **scindés index/contenu** : seul l'index léger est eager, les définitions/corps (`glossary.defs.json` / `lessons.bodies.json`) arrivent en chunks lazy — le chunk `lessons` eager tombe ainsi de ~176 kB à ~32 kB.
 
 ### 2.2. Conséquences pratiques (importantes)
 
@@ -129,7 +134,21 @@ const { data: paths } = useApiData<Path[]>('/content/paths', PATHS); // PATHS = 
 | via le **CMS `/admin`** | la **base** uniquement (pas le JSON) | apparaît tout de suite via l'API ; **n'est PAS écrit dans `data/`** |
 
 > [!IMPORTANT]
-> Le **CMS écrit dans la base, jamais dans `data/`**. Un `npm run db:reset` re-seed depuis les JSON et **efface donc les entrées créées uniquement via le CMS**. Règle d'or : le CMS sert aux retouches rapides / brouillons ; **le contenu pérenne doit finir dans `data/*.json`** (puis `db:seed`).
+> Le **CMS écrit dans la base, jamais dans `data/`**. Depuis 2026-06-12, **`npm run db:seed` est non destructif** pour le contenu éditable (glossaire/blog/cas) : une ligne déjà en base est préservée — vos éditions CMS survivent à un re-seed. Seuls `npm run db:seed -- --force` et `npm run db:reset` réécrivent ces lignes depuis le JSON. Pour faire l'inverse (rapatrier les éditions CMS dans les JSON sources), lancez **`npm run content:export`**. Règle d'or inchangée : le CMS sert aux retouches rapides ; **le contenu pérenne doit finir dans `data/*.json`** (via `content:export` ou édition directe), versionné, puis re-seedé.
+
+### 2.2.c. La boucle d'édition canonique (export → commit → PR)
+
+`data/*.json` est l'**unique source canonique** ; la base SQLite n'est qu'un **cache d'édition**. Une édition CMS n'est « finie » que lorsqu'elle est revenue dans le JSON et committée. Le rituel ferme cette boucle :
+
+1. **Éditer** dans `/admin` (glossaire, blog, études de cas — les trois seules collections éditables, exactement celles couvertes par l'export).
+2. **Exporter** : `POST /api/admin/export` (réservé admin) exécute le script `content:export` contre la base en cours et renvoie `{ log, diff, changed }` — le `diff` git de `data/` à relire. L'éditeur n'a pas besoin de terminal. En CLI : `npm run content:export`. Ajoutez `?dryRun=1` (ou `{ dryRun: true }`) pour prévisualiser sans écrire.
+3. **Committer** le diff de `data/glossary.json` / `caseStudies.json` / `blog.json`, puis ouvrir une **PR**.
+
+> [!IMPORTANT]
+> **Sérialiseur canonique unique.** Le format de référence d'un fichier exporté est exactement la sortie de `JSON.stringify(payload, null, 2)` + `\n`, trié (`glossary` par `term`, `caseStudies` par `title`, `blog` par `date` puis `title`). Les `data/*.json` éditables sont normalisés à cette forme : ne les reformatez pas à la main. Toute divergence est rattrapée par l'export.
+
+> [!IMPORTANT]
+> **Garde-fou anti-drift (CI).** Le job `drift` ([.github/workflows/ci.yml](.github/workflows/ci.yml)) seed une SQLite jetable depuis `data/*.json` puis lance `content:export --dry-run` : si un fichier canonique changerait, le script sort en **code 1** et la CI échoue. C'est la preuve que **seed (JSON→DB) et export (DB→JSON) sont inverses**. Conséquence : si vous éditez en base sans exporter, ou si vous modifiez le sérialiseur, la CI vous le signale.
 
 ### 2.2.b. Cas particulier : glossaire VC
 Le glossaire final consommé par l'app reste [data/glossary.json](data/glossary.json), mais son chantier éditorial passe d'abord par [glossary-ingestion/canonical-glossary.json](glossary-ingestion/canonical-glossary.json).
@@ -144,13 +163,16 @@ Pour clôturer une passe glossaire : mettez le registre à jour, injectez seulem
 ### 2.3. Stockage côté serveur
 Chaque type de contenu a une table Prisma avec des **colonnes indexées** (slug, titre, `searchText`…) **+ un blob `data` JSON** qui porte l'objet complet (voir [schema.prisma](server/prisma/schema.prisma)). Les routes [content.ts](server/src/routes/content.ts) renvoient simplement `JSON.parse(row.data)`. C'est un compromis SQLite : requêtable pour les listes/la recherche, et trivialement migrable.
 
+> [!IMPORTANT]
+> **Gestion des erreurs async (Express 4).** Express 4 ne transmet **pas** une promesse rejetée à l'error-handler central — une rejection dans un handler `async` (erreur Prisma, `JSON.parse` sur un blob `data` corrompu, base verrouillée) deviendrait une *unhandled rejection* qui tue le process. Tous les handlers sont donc enveloppés dans **`ah()`** (`server/src/lib/async-handler.ts`), qui `catch`-forward la rejection vers `next` → error-handler (réponse 500). **Tout nouveau handler async doit être wrappé : `router.get('/x', ah(async (req, res) => { … }))`.**
+
 ---
 
 ## 3. Logique et composants principaux
 
 ### 3.1. État & persistance (React Context — `client/src/context/`)
 - **`ThemeProvider`** — clair/sombre, persistant (`localStorage`), respecte `prefers-color-scheme`.
-- **`AuthProvider`** — session JWT (cookie httpOnly), expose `isAuthed`, `isAdmin`, et surtout `apiUp` / `ready` (sondage de l'API) consommés par `useApiData`.
+- **`AuthProvider`** — session JWT (cookie httpOnly), expose `isAuthed`, `isAdmin`, et surtout `apiUp` / `ready` (sondage de l'API) consommés par `useApiData`. Le sondage est **répété** tant que l'API est injoignable (intervalle 15 s + événements `focus`/`online`) : une API qui démarre après le client ne laisse plus l'app bloquée en mode invité jusqu'au reload, et la session est restaurée avant de basculer `apiUp`.
 - **`UserDataProvider`** — profil, notes, favoris, progression, surlignages. **Mode invité** = `localStorage` ; **connecté** = API. À la première connexion, les données invité sont **migrées** vers le serveur.
 - **`UIProvider`** — palette de commande (⌘K), dialogues d'auth, états d'UI globaux.
 
@@ -172,11 +194,14 @@ L'arborescence évolue vers la cible VC Intelligence :
 ### 3.4. Routing bilingue FR/EN (`client/src/i18n/`)
 La Phase 1 de l'architecture i18n (voir [i18n_architecture_FR-EN.md](i18n_architecture_FR-EN.md)) est **implémentée**. Les URLs sont préfixées par la locale : `/fr/...` et `/en/...`, et `App.tsx` monte les routes sous `/:locale`.
 
-- **`config.ts`** — `LOCALES`, locale par défaut `fr`, détection (cookie → navigateur → `fr`), persistance. La préférence n'est écrite **qu'au clic explicite** du sélecteur (visiter un lien `/en` ne réécrit pas le choix).
+- **`config.ts`** — `LOCALES`, locale par défaut `fr`, détection (cookie → navigateur → `fr`), persistance. La préférence n'est écrite **qu'au clic explicite** du sélecteur (visiter un lien `/en` ne réécrit pas le choix). Contient aussi le drapeau **`EN_ENABLED`** (cf. ci-dessous).
 - **`routing.tsx`** — wrappers **`Link` / `NavLink` / `useNavigate`** qui **préfixent automatiquement la locale active**, plus `localizePath` / `swapLocalePath`. Couvert par `routing.test.ts`.
-- **`guards.tsx`** — `RootRedirect` (`/` → langue détectée ; **seul** redirect par détection, donc crawler-safe) et `LocaleBoundary` (valide `:locale`, redirige les liens legacy `/paths` → `/fr/paths`, pose `<html lang>` dynamiquement).
+- **`guards.tsx`** — `RootRedirect` (`/` → langue détectée ; **seul** redirect par détection, donc crawler-safe) et `LocaleBoundary` (valide `:locale`, redirige les liens legacy `/paths` → `/fr/paths`, pose `<html lang>` dynamiquement — **forcé à `fr` tant que `EN_ENABLED` est faux**, pour ne pas annoncer `lang="en"` sur un contenu français).
 - **`useLocale.ts`** — dérive la locale de `useLocation()` (fonctionne aussi pour la CommandPalette montée au-dessus des routes par `UIProvider`).
-- **`LocaleSwitcher.tsx`** — sélecteur FR/EN (vrais liens, clavier/crawl OK), branché dans **TopBar** et **SideNav** (rail + drawer mobile).
+- **`LocaleSwitcher.tsx`** — sélecteur FR/EN (vrais liens, clavier/crawl OK), branché dans **TopBar** et **SideNav** (rail + drawer mobile), mais **rendu uniquement si `EN_ENABLED` est vrai**.
+
+> [!IMPORTANT]
+> **Drapeau `EN_ENABLED` (`config.ts`).** Tant que le chrome et le contenu EN ne sont pas traduits, `EN_ENABLED = false` : le sélecteur de langue est **masqué** partout et `<html lang>` reste `fr` même sous `/en`. Le routing localisé continue de fonctionner (les URLs `/en/...` répondent), mais on n'expose pas aux utilisateurs un anglais qui retomberait en français. Pour réactiver l'anglais : passer ce drapeau à `true` une fois la Phase 2 (i18n du chrome) branchée.
 
 > [!IMPORTANT]
 > Pour tout nouveau lien interne, **importez `Link`/`NavLink`/`useNavigate` depuis `@/i18n/routing`**, pas depuis `react-router-dom`. Les sites d'appel gardent `to="/paths"` inchangé : le wrapper ajoute la locale. Les marqueurs `[[slug]]` / `{{slug}}` de `markdown.tsx` restent **inchangés** car les slugs sont **canoniques** (identiques FR/EN). Reste à faire : Phase 2 (i18n du chrome — dictionnaire maison local typé `{fr,en}` + hook `useT()`), Phase 4 (Prisma `locale` + `@@unique([slug, locale])`), Phase 5 (`hreflang`, couplée au choix de rendu).
@@ -242,9 +267,9 @@ Puis **ajoutez l'`id` de la leçon dans `lessonIds[]` du cours** (`data/courses.
 > [!NOTE]
 > **Pipeline d'authoring des parcours.** Pour un parcours entier, la rédaction se fait d'abord en Markdown dans [docs/parcours/](docs/parcours) (un doc de conception transverse `parcours-apprentissage-conception.md`, puis un doc par parcours, ex. `02-reussir-l-entretien-analyst.md`). Le contenu rédigé est ensuite porté en fiches de leçons **drop-in** dans `data/parcours/<parcours>.lessons.json` — un tableau d'objets au **schéma `Lesson` exact** (`data.lessons as Lesson[]`). Conventions d'`id` : `ld-*` = leçon *découverte* (parcours 01), `lea-*` = leçon *entretien analyst* (cours `c-entretien-analyst`) — choisies pour **cohabiter** avec les `l-*` sans les écraser.
 >
-> **État actuel du câblage (cohabitation client + serveur).** Ces fiches sont **servies au client** : `client/src/content/parcoursLessons.ts` les importe et `content/lessons.ts` les concatène dans `LESSONS`, donc `lessonById`/`lessonBySlug` et le lecteur les résolvent. Côté serveur, `server/src/lib/content.ts` charge aussi `data/parcours/*.lessons.json` et `server/prisma/seed.ts` seed `content.allLessons()`. Après `npm run db:seed`, les endpoints API `/content/lessons/:slug` résolvent donc les leçons drop-in comme les leçons de `data/lessons.json`.
+> **État actuel du câblage (cohabitation client + serveur).** Ces fiches sont **servies au client** : `scripts/split-lessons.mjs` fusionne `data/lessons.json` **et** `data/parcours/*.lessons.json` dans l'index/bodies générés, que `content/lessons.ts` expose (`LESSONS` + `loadLesson`), donc `lessonById`/`lessonBySlug` et le lecteur les résolvent. *(L'ancien `client/src/content/parcoursLessons.ts` a été supprimé : sa concaténation est désormais reprise par le script de split.)* Côté serveur, `server/src/lib/content.ts` charge aussi `data/parcours/*.lessons.json` et `server/prisma/seed.ts` seed `content.allLessons()`. Après `npm run db:seed`, les endpoints API `/content/lessons/:slug` résolvent donc les leçons drop-in comme les leçons de `data/lessons.json`.
 >
-> **Si vous ajoutez un nouveau registre drop-in :** le serveur l'auto-charge s'il respecte `data/parcours/*.lessons.json`, mais le client doit l'importer explicitement dans `client/src/content/parcoursLessons.ts`. Gardez ensuite les `steps` de `data/parcours.json` et les `lessonIds[]` des cours cohérents, puis lancez `npm run validate:content` et `npm run db:seed`.
+> **Si vous ajoutez un nouveau registre drop-in :** déposez simplement le fichier `data/parcours/<nom>.lessons.json` — **le serveur ET le client l'auto-chargent** (le split fait un glob sur `data/parcours/*.lessons.json`, plus aucun import manuel à ajouter). Attention aux `slug` en double : `split-lessons.mjs` échoue si deux leçons partagent un slug. Gardez ensuite les `steps` de `data/parcours.json` et les `lessonIds[]` des cours cohérents, puis lancez `npm run validate:content` et `npm run db:seed`.
 
 #### La mini-syntaxe Markdown du `body`
 Le rendu est assuré par [client/src/lib/markdown.tsx](client/src/lib/markdown.tsx). Sont supportés :
@@ -423,7 +448,7 @@ Connectez-vous avec `admin@vcpx.io` / `admin1234`. Le CMS ([AdminPage.tsx](clien
 | Études de cas | — | ✅ | — |
 | Parcours / cours / leçons / simulateurs | — | — | — (JSON + seed uniquement) |
 
-Les entrées sont validées par **zod** côté serveur, le `slug` est auto-généré depuis le titre si absent, et `searchText` est recalculé. Rappel §2.2 : **ces écritures vivent en base, pas dans `data/`.**
+Les entrées sont validées par **zod** côté serveur, le `slug` est auto-généré depuis le titre si absent, et `searchText` est recalculé. Rappel §2.2 : **ces écritures vivent en base, pas dans `data/`** — mais elles **survivent désormais à un `db:seed`** (non destructif). Pour les pérenniser dans le dépôt : `npm run content:export` → valider → committer le JSON.
 
 ### 4.8. ✅ Checklist « j'ai ajouté du contenu en JSON »
 1. JSON valide ? (virgules, guillemets — un `JSON.parse` qui casse fait planter le seed).
@@ -473,20 +498,23 @@ npm install            # installe client + server (workspaces)
 npm run db:setup       # prisma generate + db push + seed (à faire 1×)
 npm run dev            # client (Vite ~5173) + serveur (Express :4000) en parallèle
 
-npm run db:seed        # re-seed depuis data/*.json (après une édition JSON)
-npm run db:reset       # ⚠️ réinitialise la base puis re-seed (efface le CMS)
+npm run db:seed        # re-seed depuis data/*.json (non destructif ; -- --force pour écraser le CMS)
+npm run db:reset       # ⚠️ réinitialise la base puis re-seed --force (efface le CMS)
+npm run content:export # rapatrie les éditions CMS (glossaire/blog/cas) dans les data/*.json
+npm run split:content  # régénère les index/contenus scindés (glossaire + leçons)
 npm run build          # build serveur (tsc) puis client (vite)
 npm run lint           # eslint (client)
-npm run test --workspace client  # Vitest (i18n routing, safeHttpUrl, computeProfile)
+npm run test --workspace client  # Vitest client (i18n routing, safeHttpUrl, computeProfile, simulateurs)
+npm run test --workspace server  # tests d'intégration serveur (auth, profil, isolation userId)
 npm run validate:glossary # contrôle custom du glossaire final
 npm run validate:content  # vérifie que tous les [[..]]/{{..}} pointent vers un slug du glossaire
 ```
 
 > [!NOTE]
-> Un pipeline **CI** (`.github/workflows/ci.yml`) enchaîne validation contenu + lint + build + tests. Le harnais Vitest ([client/vitest.config.ts](client/vitest.config.ts)) couvre **36 tests sur 8 fichiers** (simulateurs, utils, i18n, ikigai) ; à étoffer en priorité sur l'**API**. Note : dans certains environnements d'outillage, le chemin « VC SITE » (espace dans le nom) peut nécessiter de lancer les vérifications directement en local.
+> Un pipeline **CI** (`.github/workflows/ci.yml`) enchaîne validation contenu → lint → build → tests client → tests serveur, sur chaque `push` `main`/`master` et chaque PR. Harnais Vitest : **client 59 tests sur 10 fichiers** (simulateurs, utils, i18n, ikigai) + **serveur 10 tests sur 3 fichiers** (auth, profil, isolation `userId`) ; à étoffer sur les routes API restantes.
 
 - Front-end : `http://localhost:5173` · API : `http://localhost:4000/api`.
-- Variables d'environnement serveur : le loader minimal lit `server/.env` si présent (`DATABASE_URL`, `JWT_SECRET`, `PORT`, `CLIENT_ORIGIN`). Un modèle existe dans `server/.env.example`. En prod : vrai `JWT_SECRET`, cookie `secure`, et `provider = "postgresql"` dans `schema.prisma`.
+- Variables d'environnement serveur : le loader minimal lit `server/.env` si présent (`DATABASE_URL`, `JWT_SECRET`, `PORT`, `CLIENT_ORIGIN`). Un modèle existe dans `server/.env.example`. En prod : vrai `JWT_SECRET`, cookie `secure`, et `provider = "postgresql"` dans `schema.prisma`. **En production, le serveur refuse de démarrer** si `JWT_SECRET` est trop court ou figure dans la blocklist (`getJwtSecretIssue` dans `server/src/lib/auth.ts`) — prévoyez un secret long et unique.
 
 > [!IMPORTANT]
 > Après une édition **de code ou de design**, Vite recharge à chaud (HMR) si `npm run dev` tourne. Après une édition **de `data/*.json` destinée à l'API**, lancez `npm run db:seed`.

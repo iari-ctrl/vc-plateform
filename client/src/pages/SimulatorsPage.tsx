@@ -4,7 +4,7 @@ import { SectionHeading, Reveal } from '@/components/ui/primitives';
 import { usePageMeta } from '@/lib/seo';
 
 export default function SimulatorsPage() {
-  usePageMeta('Simulateurs', 'Dilution, valorisation, waterfall, fund returns : manipulez la mécanique financière du venture.');
+  usePageMeta('Simulateurs', 'Dilution, valorisation, waterfall, fund returns : manipulez la mécanique financière du venture.', { image: 'simulator' });
   return (
     <div className="mx-auto max-w-[var(--content-max)] px-4 py-14 sm:px-6 lg:px-8">
       <Reveal>

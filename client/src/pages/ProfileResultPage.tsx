@@ -30,7 +30,7 @@ export default function ProfileResultPage() {
   const timeBudget = state.timeBudget ?? savedProfile?.timeBudget ?? 'medium';
   const profile = profileId ? profileById(profileId) : undefined;
 
-  usePageMeta(profile ? `Votre profil — ${profile.name}` : 'Votre profil');
+  usePageMeta(profile ? `Votre profil — ${profile.name}` : 'Votre profil', undefined, { noindex: true });
 
   if (!profile) {
     // On a fresh reload the router state is gone and an authed user's saved

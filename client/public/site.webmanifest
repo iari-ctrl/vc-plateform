@@ -1,0 +1,25 @@
+{
+  "name": "VC Premium Experience",
+  "short_name": "VC Premium",
+  "description": "Comprendre le capital-risque, tester son alignement avec le metier, puis apprendre selon son niveau.",
+  "lang": "fr",
+  "start_url": "/fr",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FDFCF7",
+  "theme_color": "#FDFCF7",
+  "icons": [
+    {
+      "src": "/pwa-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Design System - VC Premium Platform
 
-Dernière mise à jour : 2026-06-10
+Dernière mise à jour : 2026-06-12
 
 Objet : formaliser le système visuel et interactionnel de `vc-premium-platform` afin de garder une expérience cohérente pendant le travail éditorial, pédagogique et produit, en intégrant les derniers ajouts (i18n, auto-détection pédagogique, alignements UI).
 
@@ -46,7 +46,7 @@ Les primitives actuelles sont distribuées dans plusieurs fichiers :
 
 Le projet utilise Tailwind CSS v3 avec tokens CSS sémantiques. La règle de base : utiliser les tokens existants avant d'ajouter une couleur, une taille ou une ombre.
 
-Les collections JSON de contenu sont séparées par modules (`paths.ts`, `courses.ts`, `lessons.ts`, etc.) et le vendor React est isolé dans le build. Les surfaces visuelles chargées tôt doivent donc importer la collection exacte dont elles ont besoin, pas le barrel complet `@/content`.
+Les collections JSON de contenu sont séparées par modules (`paths.ts`, `courses.ts`, `lessons.ts`, etc.) et le vendor React est isolé dans le build. Les surfaces visuelles chargées tôt doivent donc importer la collection exacte dont elles ont besoin, pas le barrel complet `@/content`. Le glossaire et les leçons vont plus loin : seul l'**index léger** (`GLOSSARY`, `LESSONS`) est eager ; les définitions et corps complets se chargent à la demande (`loadGlossaryTerm`, `loadLesson`) — n'importez le contenu lourd que sur la page qui le rend réellement (lecteur de leçon, fiche de dictionnaire).
 
 ---
 
@@ -163,7 +163,7 @@ Règles de composition :
 ### Barre latérale (`SideNav` + `.glass-rail`)
 
 La navigation latérale desktop (`components/chrome/SideNav.tsx`) est un rail fixe qui s'élargit de `--sidebar-rail` (5rem) à `--sidebar-w` (16rem) **en overlay** au survol / focus clavier — le contenu, décalé seulement de `--sidebar-rail` (`PageShell`, qui remplace `MainLayout` avec des routes aplaties), ne bouge jamais.
-L'architecture de l'information (IA) de la `SideNav` et de la `TopBar` est désormais alignée, et toutes deux intègrent le sélecteur de langue `LocaleSwitcher` (FR/EN).
+L'architecture de l'information (IA) de la `SideNav` et de la `TopBar` est désormais alignée, et toutes deux **prévoient** le sélecteur de langue `LocaleSwitcher` (FR/EN). Celui-ci n'est rendu que si le drapeau `EN_ENABLED` (`client/src/i18n/config.ts`) est vrai ; il est **actuellement masqué** tant que l'anglais n'est pas livré.
 
 L'effet verre est piloté par l'attribut `data-open` (= `expanded`) et la classe `.glass-rail` (définie dans `global.css`), avec **deux états distincts** :
 

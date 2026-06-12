@@ -84,9 +84,11 @@ export default function GlossaryPage() {
   usePageMeta(
     activeTerm ? `${activeTerm.term} · Dictionnaire du capital-risque` : 'Dictionnaire du capital-risque',
     activeTerm?.short ?? 'Les termes du venture, définis avec clarté : définitions, exemples et liens vers les cours associés.',
+    { image: 'glossary', canonicalPath: activeTerm ? `/glossary/${activeTerm.slug}` : '/glossary' },
   );
 
-  const { data: terms } = useApiData<IndexedTerm[]>('/content/glossary', GLOSSARY);
+  // Editorial content changes rarely — hold the API copy fresh for 10 min.
+  const { data: terms } = useApiData<IndexedTerm[]>('/content/glossary', GLOSSARY, { staleTime: 10 * 60 * 1000 });
   const [defs, setDefs] = useState<Record<string, GlossaryDef> | null>(null);
   const [activeCategory, setActiveCategory] = useState('Tous');
   const [query, setQuery] = useState('');

@@ -118,6 +118,7 @@ export default function ParcoursPage() {
   usePageMeta(
     'Parcours · trajectoires par objectif',
     'Choisis une destination — décrocher un entretien, lever ta seed, comprendre le métier — et suis une colonne vertébrale qui compose la bibliothèque pour t’y mener.',
+    { image: 'path' },
   );
 
   const [mapCollapsed, setMapCollapsed] = useState(true);
@@ -167,11 +168,7 @@ export default function ParcoursPage() {
             <p className="text-sm text-surface-variant">
               <span className="font-medium text-foreground">La carte des parcours.</span> Chaque sceau est un parcours, placé du rivage des débutants à la haute citadelle des fonds. Survole-le pour révéler sa destination, clique pour mettre le cap — ou choisis ta route dans les étagères ci-dessous.
             </p>
-            <PathAtlas
-              className="mt-3"
-              collapsed={mapCollapsed}
-              onToggleCollapse={() => setMapCollapsed(!mapCollapsed)}
-            />
+            <PathAtlas className="mt-3" collapsed={mapCollapsed} />
           </div>
         </Reveal>
         <YourParcoursBanner />

@@ -45,7 +45,7 @@ export default function ParcoursDetailPage() {
   const { progress, profile } = useUserData();
   const [budget, setBudget] = useState<TimeBudget>((profile?.timeBudget as TimeBudget) ?? 'high');
 
-  usePageMeta(parcours ? t(parcours.title) : undefined, parcours ? t(parcours.hook) : undefined);
+  usePageMeta(parcours ? t(parcours.title) : undefined, parcours ? t(parcours.hook) : undefined, { image: 'path' });
 
   const lessonIds = useMemo(() => (parcours ? lessonIdsForParcours(parcours) : []), [parcours]);
   const done = lessonIds.filter((id) => progress[id]?.status === 'done').length;

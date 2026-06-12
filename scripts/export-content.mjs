@@ -41,6 +41,7 @@ const collections = [
   },
 ];
 
+let anyChanged = false;
 try {
   for (const collection of collections) {
     const rows = await collection.load();
@@ -49,12 +50,21 @@ try {
     const next = `${JSON.stringify(payload, null, 2)}\n`;
     const current = existsSync(target) ? readFileSync(target, 'utf8') : '';
     const changed = current !== next;
+    if (changed) anyChanged = true;
 
     if (!dryRun && changed) writeAtomic(target, next);
     console.log(`${changed ? dryRun ? 'DRY' : 'OK' : '--'} ${collection.file} - ${rows.length} row(s)${changed ? '' : ' (unchanged)'}`);
   }
 } finally {
   await prisma.$disconnect();
+}
+
+// Anti-drift gate: in --dry-run, a difference means the DB and the canonical
+// JSON have diverged (seed and export are no longer inverses). Fail so CI and
+// the curator notice. A normal run writes the files and exits 0.
+if (dryRun && anyChanged) {
+  console.error('\n✗ Drift détecté : data/*.json diffère de la DB. Lance `npm run content:export` puis commit.');
+  process.exitCode = 1;
 }
 
 function parseRow(label, id, data) {

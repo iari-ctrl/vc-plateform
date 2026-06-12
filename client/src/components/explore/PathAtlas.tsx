@@ -92,11 +92,9 @@ type Port = Parcours & { x: number; y: number; angle: number | null; r: number |
 export function PathAtlas({
   className,
   collapsed = false,
-  onToggleCollapse,
 }: {
   className?: string;
   collapsed?: boolean;
-  onToggleCollapse?: () => void;
 }) {
   const navigate = useNavigate();
   const { theme } = useTheme();

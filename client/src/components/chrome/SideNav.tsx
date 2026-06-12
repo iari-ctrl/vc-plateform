@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
-  Map, Library, BookA, Briefcase, FlaskConical, Newspaper, LayoutDashboard, NotebookPen,
+  Map, Library, BookA, FlaskConical, Newspaper, LayoutDashboard, NotebookPen,
   Search, Sun, Moon, LogIn, LogOut, Shield, User, Menu, X, Ghost, ScrollText, Crosshair, type LucideIcon,
 } from 'lucide-react';
 import { Link, NavLink } from '@/i18n/routing';

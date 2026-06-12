@@ -4,6 +4,7 @@ Document canonique fusionné — positionnement, architecture cible et roadmap
 
 Projet : `vc-platform`  
 Date de consolidation : 2026-06-11  
+Dernière mise à jour : 2026-06-12 (corpus simulateurs, workflow drop-in, seed non destructif, avancement Phase 0)  
 Sources fusionnées : `docs/Stratégie doc et ROADMAP` et `docs/AUDIT-vc-intelligence.md`  
 Règle d'arbitrage : en cas de contradiction, le document **Stratégie** prime sur l'audit. L'audit reste une archive historique.
 
@@ -67,7 +68,7 @@ L'audit du 2026-06-10 a correctement identifié l'effet produit dominant : l'exp
 | Leçons servables au total | 62 |
 | Études de cas | 4 |
 | Analyses / blog | 4 |
-| Simulateurs | 8 |
+| Simulateurs | 9 |
 | Termes de glossaire | 357 |
 | Étapes de parcours | 148, dont 10 `a-produire` |
 
@@ -75,7 +76,7 @@ Corrections par rapport à l'audit historique :
 
 - **Git** : le dépôt est initialisé, `master` suit `origin/master`, une baseline existe. Le risque critique relevé par l'audit est résolu ; le risque restant est de maintenir une discipline de branches, commits et rollback.
 - **Leçons drop-in** : elles ne sont plus seulement côté client. `server/src/lib/content.ts` charge `data/parcours/*.lessons.json`, et `server/prisma/seed.ts` utilise `content.allLessons()`. Après `npm run db:seed`, elles sont servies par l'API comme les leçons canoniques. Le sujet restant est le **workflow d'authoring** : quand garder un registre drop-in, quand replier dans `data/lessons.json`, comment synchroniser les références.
-- **Simulateurs** : le corpus actuel compte 8 simulateurs, pas 7.
+- **Simulateurs** : le corpus actuel compte 9 simulateurs.
 - **Familles de parcours** : les données actuelles exposent 6 familles (`decouvrir`, `entretien`, `levee`, `grade`, `maitriser`, `express`), le sur-mesure vivant dans `profileParcours.json`.
 
 Lecture correcte de l'état actuel :
@@ -999,7 +1000,7 @@ Règle maintenue :
 
 ### 13.2 Divergence JSON / CMS / SQLite
 
-Risque : très élevé.
+Risque : élevé (abaissé depuis « très élevé » au 2026-06-12).
 
 Le projet repose sur une tension entre :
 
@@ -1008,12 +1009,14 @@ Le projet repose sur une tension entre :
 - CMS/admin ;
 - fallback client.
 
+État corrigé (2026-06-12) : le `seed` est désormais **non destructif** pour le contenu éditable (glossaire/blog/cas) — il préserve les lignes déjà en base sauf `db:seed -- --force`. `npm run content:export` rapatrie les éditions CMS vers les JSON sources. La perte d'éditions CMS par re-seed accidentel est donc levée ; reste la discipline de versionnement (exporter → committer).
+
 Règle immédiate :
 
 - ne pas étendre le CMS aux nouveaux piliers ;
 - authoring des nouveaux contenus dans `/data` ;
 - validation stricte ;
-- seed contrôlé ;
+- seed contrôlé (non destructif par défaut) + `content:export` pour pérenniser les éditions CMS ;
 - documentation des sources de vérité.
 
 Décision recommandée :
@@ -1022,20 +1025,19 @@ Décision recommandée :
 
 ### 13.3 Leçons drop-in et pipeline d'authoring
 
-État corrigé : les leçons drop-in sont chargées côté client et côté serveur. Le risque n'est donc plus une divergence client/API structurelle, mais une gouvernance de contenu.
+État corrigé : les leçons drop-in sont chargées côté client et côté serveur, **sans import manuel**. Depuis le 2026-06-12, `client/src/content/parcoursLessons.ts` a été supprimé : `scripts/split-lessons.mjs` fait un glob sur `data/parcours/*.lessons.json` et les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts` ; côté serveur, `server/src/lib/content.ts` charge déjà ce même dossier. Déposer un fichier suffit donc à le servir des deux côtés. Le risque n'est plus une divergence client/API structurelle, mais une gouvernance de contenu.
 
 Risque restant :
 
-- double chargement d'un même id ;
-- oubli d'import côté client pour un nouveau registre ;
+- collision de `slug` (le split échoue désormais explicitement sur un slug dupliqué — à corriger avant build) ;
 - incohérence entre `parcours.steps[]`, `course.lessonIds[]`, glossaire et `furtherReading` ;
 - seed non relancé après ajout de contenu.
 
 Règle :
 
 - nouveau registre drop-in uniquement si son rôle est clair ;
-- importer explicitement côté client ;
-- vérifier `content.allLessons()` côté serveur ;
+- déposer le fichier dans `data/parcours/*.lessons.json` (auto-chargé client + serveur, plus aucun import à ajouter) ;
+- vérifier l'unicité des `slug` ; vérifier `content.allLessons()` côté serveur ;
 - lancer validation puis seed ;
 - replier dans `data/lessons.json` quand la leçon devient canonique.
 
@@ -1130,7 +1132,7 @@ Règle :
 
 Objectif : stabiliser le projet avant transformation.
 
-État : partiellement réalisé, car Git est en place. À compléter avant le repositionnement visible.
+État : largement avancé au 2026-06-12. Git est en place ; validation contenu, lint, build et tests (client + serveur) tournent en CI sur `push` `main`/`master` ; la divergence JSON/CMS est cadrée (seed non destructif + `content:export`). Restent surtout la checklist de release formalisée et la décision public/gated. À finaliser avant le repositionnement visible.
 
 Actions :
 

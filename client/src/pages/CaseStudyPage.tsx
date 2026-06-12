@@ -19,7 +19,7 @@ export default function CaseStudyPage() {
     slug ? `/content/case-studies/${slug}` : null,
     slug ? caseBySlug(slug) : undefined,
   );
-  usePageMeta(cs?.title, cs?.summary);
+  usePageMeta(cs?.title, cs?.summary, { type: 'article', image: 'case-study' });
 
   if (pending) return <PageLoader />;
   if (!cs) return <NotFoundPage />;

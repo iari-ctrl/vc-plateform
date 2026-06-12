@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useNavigate } from '@/i18n/navigation';
-import { ArrowLeft, ArrowRight, Compass, ClipboardList } from 'lucide-react';
+import { ArrowRight, Compass, ClipboardList } from 'lucide-react';
 import { IKIGAI } from '@/content';
-import { IkigaiAtlasDiagram, type RegionSelect } from '@/components/ikigai/IkigaiAtlasDiagram';
+import { IkigaiAtlasDiagram } from '@/components/ikigai/IkigaiAtlasDiagram';
 import { ReadingLevelLegend, StickyChapterHeader, ThreeModeSelector } from '@/components/ikigai/cahierUi';
 import {
   DimensionsSection,
@@ -16,49 +15,28 @@ import {
 } from '@/components/ikigai/CahierSections';
 import { Fleuron, FleuronDivider } from '@/components/ornaments/Ornaments';
 import { NightSkyBackdrop } from '@/components/ornaments/Illustrations';
-import { ProgressBar, Reveal } from '@/components/ui/primitives';
-import { computeProfile, suggestedArchetype, type OnboardingAnswer } from '@/lib/ikigai';
+import { Reveal } from '@/components/ui/primitives';
 import {
   getReadingMode,
   setReadingMode,
   getChosenArchetype,
   setChosenArchetype,
-  archiveProfile,
 } from '@/lib/ikigaiCahier';
-import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
-import type { IkigaiMode, OnboardingMode, IkigaiMyth } from '@/content/types';
+import { OrientationTest } from './onboarding/OrientationTest';
+import { MythCard } from './onboarding/MythCard';
+import { useIkigaiScrollPinning } from './onboarding/useIkigaiScrollPinning';
+import { useOnboardingMode } from './onboarding/useOnboardingMode';
+import type { IkigaiMode } from '@/content/types';
 
 type SectionKey = 'dims' | 'inters' | 'presque' | 'archetypes' | 'reflection';
-
-const prefersReduced = () =>
-  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export default function OnboardingPage() {
   usePageMeta(
     'Cahier Ikigai — introspection avant les cours',
     'Un cahier d’introspection inspiré de l’ikigai pour comprendre pourquoi le capital-risque vous attire, explorer 13 zones de sens et révéler votre profil d’apprentissage.',
   );
-  const navigate = useNavigate();
-  const { profile: savedProfile, saveProfile } = useUserData();
-
-  // Load onboardingMode from localStorage, default to 'editorial'
-  const [onboardingMode, setOnboardingModeState] = useState<OnboardingMode>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('onboardingMode');
-      if (saved === 'editorial' || saved === 'bref' || saved === 'interactif') {
-        return saved as OnboardingMode;
-      }
-    }
-    return 'editorial';
-  });
-
-  const setOnboardingMode = (m: OnboardingMode) => {
-    setOnboardingModeState(m);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('onboardingMode', m);
-    }
-  };
+  const [onboardingMode, setOnboardingMode] = useOnboardingMode();
 
   // The quiz phase + step live in the URL (`?test=1&q=N`) so the browser Back
   // button, refresh and shared links resume exactly where the user was.
@@ -97,192 +75,14 @@ export default function OnboardingPage() {
   const [activeDim, setActiveDim] = useState<string | null>(null);
   const [chosenArchetype, setChosen] = useState<string | null>(() => getChosenArchetype());
 
-  const pinContainerRef = useRef<HTMLDivElement>(null);
-  const scrollContentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-30% 0px -40% 0px',
-      threshold: 0,
-    };
-
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      // Only set activeDim via observer on mobile to avoid layout calculation conflicts
-      if (window.innerWidth >= 1024) return;
-
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          if (id === 'ikigai-section-rappel') {
-            setActiveDim(null);
-          } else if (id.startsWith('ikigai-dim-')) {
-            setActiveDim(id.replace('ikigai-dim-', ''));
-          } else if (id.startsWith('ikigai-inter-')) {
-            setActiveDim(id.replace('ikigai-inter-', ''));
-          } else if (id.startsWith('ikigai-presque-')) {
-            setActiveDim(id.replace('ikigai-presque-', ''));
-          }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
-
-    const targets = document.querySelectorAll(
-      '#ikigai-section-rappel, [id^="ikigai-dim-"], [id^="ikigai-inter-"], [id^="ikigai-presque-"]'
-    );
-    targets.forEach((target) => observer.observe(target));
-
-    return () => {
-      targets.forEach((target) => observer.unobserve(target));
-      observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const pinContainer = pinContainerRef.current;
-      const scrollContent = scrollContentRef.current;
-      if (!pinContainer || !scrollContent) return;
-
-      const isDesktop = window.innerWidth >= 1024;
-      if (!isDesktop) {
-        scrollContent.scrollTop = 0;
-        return;
-      }
-
-      const rect = pinContainer.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const totalScrollable = rect.height - viewportHeight;
-
-      if (totalScrollable <= 0) return;
-
-      const scrolledPastTop = -rect.top;
-      let progress = 0;
-      if (scrolledPastTop > 0) {
-        progress = Math.min(scrolledPastTop / totalScrollable, 1);
-      }
-
-      const contentHeight = scrollContent.scrollHeight;
-      const maxScroll = Math.max(0, contentHeight - viewportHeight);
-      
-      // Scroll the left column programmatically
-      scrollContent.scrollTop = progress * maxScroll;
-
-      // Find the active element closest to the middle of the viewport
-      const targets = scrollContent.querySelectorAll(
-        '#ikigai-section-rappel, [id^="ikigai-dim-"], [id^="ikigai-inter-"], [id^="ikigai-presque-"]'
-      );
-      let closestId = '';
-      let minDistance = Infinity;
-
-      targets.forEach((target) => {
-        const targetRect = target.getBoundingClientRect();
-        const targetCenter = targetRect.top + targetRect.height / 2;
-        const distance = Math.abs(targetCenter - viewportHeight / 2);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestId = target.id;
-        }
-      });
-
-      if (closestId) {
-        if (closestId === 'ikigai-section-rappel') {
-          setActiveDim(null);
-        } else if (closestId.startsWith('ikigai-dim-')) {
-          setActiveDim(closestId.replace('ikigai-dim-', ''));
-        } else if (closestId.startsWith('ikigai-inter-')) {
-          setActiveDim(closestId.replace('ikigai-inter-', ''));
-        } else if (closestId.startsWith('ikigai-presque-')) {
-          setActiveDim(closestId.replace('ikigai-presque-', ''));
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    
-    const resizeObserver = new ResizeObserver(() => {
-      handleScroll();
-    });
-    if (scrollContentRef.current) {
-      resizeObserver.observe(scrollContentRef.current);
-    }
-
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      resizeObserver.disconnect();
-    };
-  }, [modes]);
+  const { pinContainerRef, scrollContentRef, scrollTo, handleRegion } = useIkigaiScrollPinning({ modes, setActiveDim });
 
   const chooseArchetype = (id: string | null) => {
     setChosen(id);
     setChosenArchetype(id);
   };
 
-  function scrollTo(target: string, block: ScrollLogicalPosition = 'start') {
-    const el = document.getElementById(target);
-    if (!el) return;
-
-    const isDesktop = window.innerWidth >= 1024;
-    if (!isDesktop) {
-      el.scrollIntoView({ behavior: prefersReduced() ? 'auto' : 'smooth', block });
-      return;
-    }
-
-    const pinContainer = pinContainerRef.current;
-    const scrollContent = scrollContentRef.current;
-    if (!pinContainer || !scrollContent) {
-      el.scrollIntoView({ behavior: prefersReduced() ? 'auto' : 'smooth', block });
-      return;
-    }
-
-    const rect = pinContainer.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-    const totalScrollable = rect.height - viewportHeight;
-    const contentHeight = scrollContent.scrollHeight;
-    const maxScroll = Math.max(0, contentHeight - viewportHeight);
-
-    if (totalScrollable <= 0 || maxScroll <= 0) return;
-
-    let elementOffsetTop = 0;
-    let current: HTMLElement | null = el;
-    while (current && current !== scrollContent) {
-      elementOffsetTop += current.offsetTop;
-      current = current.offsetParent as HTMLElement;
-    }
-
-    let targetScrollTop = 0;
-    if (block === 'center') {
-      targetScrollTop = elementOffsetTop - (viewportHeight / 2) + (el.offsetHeight / 2);
-    } else {
-      targetScrollTop = elementOffsetTop;
-    }
-
-    targetScrollTop = Math.max(0, Math.min(targetScrollTop, maxScroll));
-    const progress = targetScrollTop / maxScroll;
-    const targetWindowScrollTop = window.scrollY + rect.top + progress * totalScrollable;
-
-    window.scrollTo({
-      top: targetWindowScrollTop,
-      behavior: prefersReduced() ? 'auto' : 'smooth',
-    });
-  }
-
-  function handleRegion(r: RegionSelect) {
-    if (r.kind === 'dimension') {
-      setActiveDim(r.id);
-      scrollTo(r.target, 'center');
-    } else {
-      scrollTo(r.target, 'start');
-    }
-  }
-
-  if (phase === 'quiz') return <OrientationTest onBack={exitQuiz} savedProfile={savedProfile} saveProfile={saveProfile} navigate={navigate} chosenArchetype={chosenArchetype} onSuggestArchetype={chooseArchetype} />;
+  if (phase === 'quiz') return <OrientationTest onBack={exitQuiz} chosenArchetype={chosenArchetype} onSuggestArchetype={chooseArchetype} />;
 
   return (
     <div className="mx-auto max-w-[var(--content-max)] px-4 py-12 sm:px-6 lg:px-8">
@@ -483,153 +283,5 @@ export default function OnboardingPage() {
         <span className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-surface-variant">生甲斐 × vc · édition personnelle</span>
       </footer>
     </div>
-  );
-}
-
-// ── Orientation test (scored MCQ → learning profile) ─────────────────────────
-function OrientationTest({
-  onBack,
-  savedProfile,
-  saveProfile,
-  navigate,
-  chosenArchetype,
-  onSuggestArchetype,
-}: {
-  onBack: () => void;
-  savedProfile: ReturnType<typeof useUserData>['profile'];
-  saveProfile: ReturnType<typeof useUserData>['saveProfile'];
-  navigate: ReturnType<typeof useNavigate>;
-  chosenArchetype: string | null;
-  onSuggestArchetype: (id: string | null) => void;
-}) {
-  const [params, setParams] = useSearchParams();
-  const [answers, setAnswers] = useState<Record<string, number>>({});
-  const questions = IKIGAI.questions;
-  const last = questions.length - 1;
-  const step = Math.min(Math.max(Number.parseInt(params.get('q') ?? '0', 10) || 0, 0), last);
-  const q = questions[step];
-
-  const goToStep = (n: number) =>
-    setParams((p) => {
-      p.set('q', String(Math.min(Math.max(n, 0), last)));
-      return p;
-    });
-
-  // Record the answer only — advancing is now an explicit action (Suivant /
-  // Voir mon résultat), so a mis-tap no longer skips a question.
-  function choose(optionIndex: number) {
-    setAnswers((cur) => ({ ...cur, [q.n]: optionIndex }));
-  }
-
-  function finish(finalAnswers: Record<string, number>) {
-    const list: OnboardingAnswer[] = Object.entries(finalAnswers).map(([questionN, optionIndex]) => ({ questionN, optionIndex }));
-    const result = computeProfile(list);
-    if (!result) return;
-    // Keep the previous result as history before overwriting it.
-    archiveProfile(savedProfile);
-    void saveProfile({ profileType: result.top.id, timeBudget: result.timeBudget, scores: result.scores });
-    // If the cahier doesn't have a chosen archetype yet, suggest one from the profile.
-    if (!chosenArchetype) {
-      const suggestion = suggestedArchetype(result.top.id);
-      if (suggestion) onSuggestArchetype(suggestion.id);
-    }
-    navigate('/profile-result', { state: { profileId: result.top.id, scores: result.scores, timeBudget: result.timeBudget } });
-  }
-
-  return (
-    <div className="mx-auto max-w-2xl px-4 py-14 sm:px-6 lg:px-8">
-      <div className="mb-8">
-        <div className="mb-2 flex items-center justify-between text-xs text-surface-variant">
-          <span className="font-mono">Question {step + 1} / {questions.length}</span>
-          <span>{Math.round(((step + 1) / questions.length) * 100)}%</span>
-        </div>
-        <ProgressBar value={((step + (answers[q.n] != null ? 1 : 0)) / questions.length) * 100} />
-      </div>
-
-      <div key={q.n} className="animate-fade-up">
-        <p className="eyebrow mb-2">{q.hint}</p>
-        <h2 className="font-headline text-headline-lg font-semibold leading-tight text-balance">{q.q}</h2>
-
-        <div className="mt-7 space-y-3">
-          {q.options.map((opt, i) => {
-            const selected = answers[q.n] === i;
-            return (
-              <button
-                key={i}
-                onClick={() => choose(i)}
-                className={`flex w-full items-center gap-4 rounded-xl border px-5 py-4 text-left transition-all ${
-                  selected
-                    ? 'border-[color:var(--primary)] bg-[color-mix(in_srgb,var(--primary)_10%,transparent)]'
-                    : 'border-outline-variant hover:border-[color-mix(in_srgb,var(--primary)_50%,transparent)] hover:bg-surface-container-low'
-                }`}
-              >
-                <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border font-mono text-xs ${selected ? 'border-[color:var(--primary)] text-[color:var(--primary)]' : 'border-outline-variant text-surface-variant'}`}>
-                  {String.fromCharCode(65 + i)}
-                </span>
-                <span className="text-[0.95rem] leading-snug">{opt.text}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="mt-8 flex items-center justify-between">
-        <button onClick={() => (step === 0 ? onBack() : goToStep(step - 1))} className="btn-quiet">
-          <ArrowLeft size={15} /> {step === 0 ? 'Retour au cahier' : 'Précédent'}
-        </button>
-        {answers[q.n] != null &&
-          (step < last ? (
-            <button onClick={() => goToStep(step + 1)} className="btn-ghost">
-              Suivant <ArrowRight size={15} />
-            </button>
-          ) : (
-            <button onClick={() => finish(answers)} className="btn-foil">
-              Voir mon résultat <ArrowRight size={15} />
-            </button>
-          ))}
-      </div>
-    </div>
-  );
-}
-
-function MythCard({ myth }: { myth: IkigaiMyth }) {
-  const [flipped, setFlipped] = useState(false);
-  return (
-    <button
-      onClick={() => setFlipped(!flipped)}
-      className={`relative h-64 w-full rounded-2xl border text-left transition-all duration-300 ${
-        flipped
-          ? 'border-[color:var(--primary)] bg-surface-container-low'
-          : 'border-outline-variant hover:border-[color-mix(in_srgb,var(--primary)_50%,transparent)] bg-surface-container-lowest shadow-editorial-xs'
-      }`}
-    >
-      <div
-        className="absolute inset-0 flex flex-col justify-between p-5"
-        style={{ display: flipped ? 'none' : 'flex' }}
-      >
-        <div>
-          <span className="font-mono text-[0.6rem] uppercase tracking-wider text-surface-variant">Idée reçue ({myth.fundExample})</span>
-          <h4 className="font-headline text-headline-sm font-semibold mt-1" style={{ color: 'var(--primary)' }}>
-            {myth.title}
-          </h4>
-          <p className="text-xs text-surface-variant mt-3 italic leading-relaxed">
-            « {myth.myth} »
-          </p>
-        </div>
-        <span className="text-[0.625rem] font-mono text-[color:var(--primary)] uppercase tracking-wider self-end">Découvrir la réalité →</span>
-      </div>
-      <div
-        className="absolute inset-0 flex flex-col justify-between p-5 animate-fade-in"
-        style={{ display: flipped ? 'flex' : 'none' }}
-      >
-        <div>
-          <span className="font-mono text-[0.6rem] uppercase tracking-wider text-[color:var(--primary)]">La réalité du terrain</span>
-          <p className="text-xs leading-relaxed text-foreground mt-2">
-            {myth.reality}
-          </p>
-        </div>
-        <span className="text-[0.625rem] font-mono text-surface-variant uppercase tracking-wider self-end">← Retour</span>
-      </div>
-    </button>
   );
 }

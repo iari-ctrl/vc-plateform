@@ -1,6 +1,6 @@
 # Bilan - VC Premium Platform
 
-Dernière mise à jour : 2026-06-11
+Dernière mise à jour : 2026-06-12
 
 Objet : état actuel synthétique de `vc-premium-platform`, avec les acquis, les limites connues et les prochaines priorités utiles pour sortir du prototype sans lancer une phase production complète.
 
@@ -162,6 +162,31 @@ Travaux du jour (rétractation du catalogue parcours & restauration routage) :
 - **Cours Power Law & Monte Carlo** : ajout de `c-power-law-portfolio` dans le rayon Portfolio, avec 4 leçons canoniques (`lpl-average-lies`, `lpl-why-monte-carlo`, `lpl-simulator-engine`, `lpl-read-results`) expliquant moyenne vs médiane, utilité de Monte Carlo, moteur déterministe du simulateur, TVPI, concentration et fund returner math.
 - **Intégration pédagogique du simulateur Power Law** : le simulateur référence désormais ces 4 leçons en priorité ; `p-penser-gp`, `paths.json`, les `furtherReading` et les termes de glossaire clés pointent vers ce nouveau bloc sans dupliquer les contenus existants.
 
+### 2026-06-12
+
+> Branche `chore/flux-c-repo-hygiene`. Cette fois les commandes ont bien tourné en local (le dossier « VC SITE » est monté).
+
+| Commande | Résultat |
+| --- | --- |
+| `npm run validate:content` | OK, 1 warning éditorial (23/62 leçons sans quiz) |
+| `npm run lint` | OK, 0 erreur, **4 warnings** (`react-refresh` structurels uniquement) |
+| `npm run build` | OK, build serveur + client |
+| `npm run test --workspace client` | OK, 10 fichiers / 59 tests |
+| `npm run test --workspace server` | OK, 3 fichiers / 10 tests (auth, profil, isolation `userId`) |
+
+Travaux du jour (lot « repo hygiene » + suite des recommandations d'audit) :
+
+- **CI réparée** : `ci.yml` écoute `branches: [main, master]` (était `main` seul → tout le garde-fou était inopérant hors PR sur ce dépôt `master`). Le pipeline enchaîne désormais validation contenu → lint → build → tests client → tests serveur.
+- **Robustesse serveur (Express 4)** : wrapper `ah()` (`server/src/lib/async-handler.ts`) appliqué à **tous** les handlers async — une rejection (Prisma, JSON corrompu, DB verrouillée) part à l'error-handler central (→ 500) au lieu de tuer le process Node.
+- **Seed non destructif** : `seed.ts` ne réécrit plus le contenu éditable (glossaire/blog/cas) ; create-if-absent par défaut, écrasement seulement avec `db:seed -- --force`. Sens inverse DB→JSON via `npm run content:export` (`scripts/export-content.mjs`). Comptes de démo gatés derrière `NODE_ENV !== 'production'`.
+- **Garde JWT durcie** : `getJwtSecretIssue()` vérifie longueur min. + blocklist en production (fail-fast au démarrage) — l'ancienne garde « inopérante » est corrigée.
+- **`DELETE /me/profile`** : `clearProfile` supprime maintenant profil + réponses d'onboarding côté serveur ; plus de résurrection de l'ancien ikigai au reload.
+- **`apiUp` re-sondé** : `AuthContext` re-ping l'API toutes les 15 s tant qu'elle est down, plus sur `window focus` / `online`, et restaure la session avant bascule — l'API qui démarre après le client ne laisse plus l'app bloquée en invité jusqu'au reload.
+- **Surface réduite** : `attachUser` monté sur `/me`, `/admin`, `/auth/me` seulement (plus en global) ; rate-limit ajouté sur `/api/search` ; sélecteur EN masqué (`EN_ENABLED=false`, `<html lang>` forcé `fr` sous `/en`).
+- **Perf bundle — split des leçons** : `scripts/split-lessons.mjs` scinde `lessons.json` + `data/parcours/*.lessons.json` en `lessons.index.json` (léger, eager) + `lessons.bodies.json` (corps/quiz, lazy). Le chunk eager `lessons` passe de **~176 kB à ~32 kB** ; les corps (~143 kB) ne sont chargés que par le lecteur de leçon. `LessonPage` résout son fallback hors-ligne en lazy. `content/parcoursLessons.ts` supprimé (fusion reprise par le script). Câblage `npm run split:content` dans `predev`/`prebuild`.
+- **Tests serveur (nouveaux)** : 10 tests d'intégration (register/login/logout, `/me/profile`, isolation des données par `userId`) avec base SQLite jetable — comblent le « zéro test serveur » de l'audit.
+- **Lint** : nettoyage des 2 derniers imports/args inutilisés (`Briefcase` dans `SideNav`, prop morte `onToggleCollapse` de `PathAtlas`).
+
 ---
 
 ## 3. Architecture actuelle
@@ -195,18 +220,19 @@ Cette architecture est cohérente pour un prototype avancé. Le point fragile es
 
 - `/data/*.json` est la source de vérité durable.
 - Le CMS `/admin` écrit en base, pas dans les JSON.
-- Un `db:reset` peut donc effacer les contenus créés uniquement via le CMS.
+- **Le seed ne détruit plus les éditions CMS** : depuis 2026-06-12, `seed.ts` est non destructif pour le contenu éditable (glossaire/blog/cas) — create-if-absent par défaut, écrasement seulement avec `db:seed -- --force`. Un `db:reset` (qui force) reste destructif, par conception.
+- **Le sens inverse est outillé** : `npm run content:export` réexporte les éditions DB vers les JSON sources, ce qui donne une boucle « éditer en CMS → exporter → valider → committer ».
 - Les pages Blog, CaseStudy et Lesson consomment déjà l'API avec fallback bundle.
 - Les pages PathDetail et CourseDetail restent encore sur le bundle statique, malgré des endpoints prêts côté serveur.
 - Le barrel `client/src/content/index.ts` a été allégé : les collections JSON sont importées par modules et les gros ensembles ne sont plus tirés dans l'entrée applicative.
 
 Risque principal :
 
-- une correction faite dans le CMS peut être visible localement via API mais absente de `/data`, donc non pérenne.
+- une correction faite dans le CMS peut être visible localement via API mais absente de `/data` si on oublie `content:export` ; le risque de perte par re-seed, lui, est levé.
 
 Priorité recommandée :
 
-- formaliser le workflow "édition CMS -> report JSON -> validation -> seed" ;
+- formaliser le workflow "édition CMS -> `content:export` -> validation -> commit -> seed" ;
 - ajouter un signal "non versionné dans `/data`" dans l'admin ;
 - brancher PathDetail et CourseDetail sur l'API avec fallback.
 
@@ -282,7 +308,7 @@ Acquis :
 - `npm run validate:content` opérationnel ;
 - `npm run lint` sans erreur ;
 - `npm run build` passe ;
-- build client découpé : `index-*.js` ≈ 100 kB, `react-vendor` ≈ 232 kB, chunks de contenu lourds (`lessons`, `glossary`) séparés ;
+- build client découpé : `react-vendor` ≈ 232 kB, chunks de contenu lourds séparés ; le glossaire et les leçons sont **scindés index/contenu** (index léger eager + corps/défs lazy) — le chunk `lessons` eager tombe de ~176 kB à ~32 kB ;
 - accessibilité des modales et suppressions durcie ;
 - `inert` sur la couche inactive du portail splash (lien invisible non focusable au clavier) ;
 - API de contenu publique structurée ;
@@ -291,10 +317,10 @@ Acquis :
 
 Limites :
 
-- harnais de tests en expansion : Vitest installé avec 25 tests sur 7 fichiers, plus la suite Power Law ciblée (11 tests) ; l'API backend n'est pas encore couverte ;
-- la garde JWT côté serveur est notée comme **inopérante** (à corriger dans le lot sécurité différé) ;
-- i18n Phase 1 compile côté client ; restent le chrome traduit, la base `locale` et `hreflang` ;
-- warnings Fast Refresh encore présents ;
+- harnais de tests : client 10 fichiers / 59 tests ; **API backend désormais couverte** (serveur 3 fichiers / 10 tests : auth, profil, isolation `userId`) — reste à étendre aux routes restantes ;
+- la garde JWT côté serveur est **corrigée** (longueur min. + blocklist en production, fail-fast au démarrage) ;
+- i18n Phase 1 compile côté client ; le sélecteur EN est **masqué** en attendant la traduction ; restent le chrome traduit, la base `locale` et `hreflang` ;
+- warnings Fast Refresh encore présents (4, structurels aux Context) ;
 - SQLite et `db push` restent adaptés au prototype, pas à une production durable ;
 - SEO / OpenGraph / prérendu non traités ;
 - CSS et fontes restent le plus gros poids visible après le découpage JS ; un audit performance dédié reste utile avant publication.
@@ -344,8 +370,8 @@ Prochaine étape design utile :
 | Mode de rendu non tranché | Élevé | CSR vs SSR/prerender à décider **avant** de produire le contenu (impacte SEO + authoring) |
 | Contenu à consolider | Élevé | 62 leçons canoniques dans `data/lessons.json` ; les leçons drop-in de parcours restent à fusionner côté seed/API |
 | SEO faible | Moyen | SPA sans prérendu ; `hreflang`/`canonical` i18n différés au pré-lancement |
-| Tests minimaux | Moyen | Harnais Vitest + CI en place, mais calculateurs et API non couverts |
-| Garde JWT inopérante | Moyen | Identifiée dans l'audit, correction dans le lot sécurité différé |
+| Tests partiels | Faible à moyen | Client 59 tests + serveur 10 tests (auth/profil/isolation) + CI ; reste à étendre la couverture API (admin, notes, journal…) |
+| ~~Garde JWT inopérante~~ | Résolu | Corrigée le 2026-06-12 : longueur min. + blocklist en production, fail-fast au démarrage |
 | Baseline Git récente | Faible | Dépôt initialisé et rattaché à `origin/master` ; conserver un status propre et des commits fréquents |
 | Dette production | Faible à moyen | Acceptable tant que l'objectif reste atelier/prototype |
 

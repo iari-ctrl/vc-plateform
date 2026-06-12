@@ -1,6 +1,6 @@
 # Report et scoring - VC Premium Platform
 
-Dernière mise à jour : 2026-06-11
+Dernière mise à jour : 2026-06-12
 
 Objet : conserver un historique lisible des avancées, corrections, points de vigilance et propositions d'enrichissement pour `vc-premium-platform`.
 
@@ -45,7 +45,18 @@ Travaux du jour (2026-06-11) — **compilés et validés** (`npm run build --wor
 - **Cours autonome Power Law & Monte Carlo** : ajout de `c-power-law-portfolio` dans le rayon Portfolio avec 4 leçons canoniques (`lpl-average-lies`, `lpl-why-monte-carlo`, `lpl-simulator-engine`, `lpl-read-results`). La séquence explique moyenne vs médiane, intérêt de Monte Carlo comme outil de jugement sous incertitude, moteur déterministe du simulateur Power Law, lecture TVPI/concentration/fund returner. Le simulateur Power Law référence ces leçons en premier ; le parcours `p-penser-gp` les expose comme étape de cœur.
 - **Liens pédagogiques enrichis** : mise à jour des `furtherReading` de `l-power-law`, `l-reserves`, `l-fund-metrics`, des `relatedLessonIds` glossaire (`power-law`, `fund-returner`, `portfolio-construction`, `reserve-funds`, `follow-on`, `tvpi`, `moic`) et résolution des liens `course`/`case`/`glossary` dans `LessonPage`.
 
-> Note de séquencement (issue des conversations) : garder design system tokenisé + tests/CI + Error Boundary (utiles tout de suite, peu de churn) ; **différer** le lot 🔴 (SSR/SEO, CSP/HSTS, garde JWT à corriger, contraste de l'or, interstitiel splash) jusqu'à un contenu réel et un déploiement. Priorité immédiate : les deux décisions d'architecture (rendu + modèle de contenu), puis une tranche verticale réelle.
+Travaux du jour (2026-06-12) — **compilés et validés** (branche `chore/flux-c-repo-hygiene`) :
+
+- **CI réparée** : `ci.yml` écoute `push` sur `main`/`master` (était `main` seul → tout le garde-fou était inopérant hors PR sur ce dépôt `master`). Pipeline : validation contenu → lint → build → tests client → tests serveur.
+- **Robustesse serveur (Express 4)** : wrapper async `ah()` (`server/src/lib/async-handler.ts`) sur **tous** les handlers — une rejection (Prisma, JSON corrompu, DB verrouillée) part à l'error-handler central (→ 500) au lieu de tuer le process Node.
+- **Seed non destructif** : `seed.ts` préserve le contenu éditable (glossaire/blog/cas) sauf `db:seed -- --force` ; `npm run content:export` réexporte les éditions DB → JSON. Comptes de démo gatés hors prod.
+- **Garde JWT corrigée** : longueur min. + blocklist en production, fail-fast au démarrage (`getJwtSecretIssue`).
+- **`DELETE /me/profile`** : `clearProfile` supprime profil + onboarding côté serveur ; **`apiUp` re-sondé** (intervalle 15 s + `focus`/`online`) ; `attachUser` retiré du global ; rate-limit `/api/search` ; sélecteur EN masqué (`EN_ENABLED=false`).
+- **Perf bundle** : split des leçons (`lessons.index`/`lessons.bodies`, scripts `split-lessons.mjs` + `split:content`) — chunk eager `lessons` de **~176 kB à ~32 kB**, corps en lazy.
+- **Tests serveur (nouveaux)** : 10 tests d'intégration (auth, profil, isolation `userId`).
+- Vérifs : `validate:content` OK, `lint` 0 erreur / **4 warnings**, `build` OK, **client 59 tests + serveur 10 tests** verts.
+
+> Note de séquencement (issue des conversations) : garder design system tokenisé + tests/CI + Error Boundary (utiles tout de suite, peu de churn) ; **différer** le lot 🔴 restant (SSR/SEO, CSP/HSTS, contraste de l'or, interstitiel splash) jusqu'à un contenu réel et un déploiement — la garde JWT, elle, est désormais corrigée. Priorité immédiate : les deux décisions d'architecture (rendu + modèle de contenu), puis une tranche verticale réelle.
 
 Points confirmés lors du dernier audit (2026-06-10) :
 
@@ -57,7 +68,7 @@ Points confirmés lors du dernier audit (2026-06-10) :
 - `npm run validate:content` passe : 16 cours, 62 leçons canoniques, 8 simulateurs, 266 marqueurs `[[..]]` / `{{..}}` résolus dynamiquement.
 - `npm run build` passe : serveur + client OK, assets WebP présents dans `dist/`.
 - Le projet a un `.gitignore` qui couvre `node_modules`, `dist`, `.env`, SQLite et logs, et le dépôt Git est désormais initialisé : `master` suit `origin/master`, commit initial `e5b37e0 Initialisation du projet`.
-- Le build client est désormais découpé : `index-*.js` ≈ 95 kB (28 kB gzip), `react-vendor` ≈ 232 kB (74 kB gzip), `lessons` et `glossary` séparés.
+- Le build client est désormais découpé : `react-vendor` ≈ 232 kB (74 kB gzip) ; le glossaire et les leçons sont **scindés index/contenu** (index léger eager + corps/défs lazy), le chunk `lessons` eager tombant de ~176 kB à ~32 kB.
 
 Points bloquants ou fragiles :
 
@@ -71,9 +82,9 @@ Points bloquants ou fragiles :
 - ~~Les fonds photographiques de la splash sont des PNG volumineux (~3,4 Mo).~~ **Corrigé 2026-06-01 — WebP ~97 % plus léger.**
 - SEO et partage social restent faibles car l'app est une SPA (CSR) sans prérendu. **Décision de rendu ouverte** (CSR vs SSG/SSR) à trancher avant production ; l'émission SEO/`hreflang` en découle. *(Différé pré-lancement.)*
 - Path/CourseDetailPage restent sur le bundle statique. *(Reste à brancher, endpoints déjà prêts.)*
-- ~~Aucune sécurité de durcissement.~~ **Lot partiel appliqué 2026-06-09** (auth cookie-only, mdp ≥ 8, **rate-limit fonctionnel**, CORS dev-only, `safeHttpUrl`). Reste le lot 🔴 : helmet, CSP/HSTS, **garde JWT notée inopérante à corriger**, CSRF.
-- ~~Aucun test.~~ **Harnais Vitest robuste en place (25 tests sur 7 fichiers) + CI (2026-06-09).** Couvre `utils`, `ikigai`, simulateurs, et routing i18n.
-- i18n Phase 1 compilée côté client ; restent le chrome traduit, la base `locale`, `hreflang` et le corpus EN.
+- ~~Aucune sécurité de durcissement.~~ **Lot 2026-06-09** (auth cookie-only, mdp ≥ 8, rate-limit, CORS dev-only, `safeHttpUrl`) **+ lot 2026-06-12** (garde JWT corrigée, `attachUser` scoping, rate-limit `/search`, wrapper async `ah()`, comptes démo hors prod). Reste le lot 🔴 : helmet, CSP/HSTS, cookie `secure`, CSRF, rotation JWT.
+- ~~Aucun test.~~ **Harnais Vitest : client 10 fichiers / 59 tests + serveur 3 fichiers / 10 tests (auth/profil/isolation `userId`) + CI.** Reste à étendre la couverture API (admin, notes, journal).
+- i18n Phase 1 compilée côté client ; le **sélecteur EN est masqué** (`EN_ENABLED=false`) en attendant la traduction ; restent le chrome traduit, la base `locale`, `hreflang` et le corpus EN.
 - Fiches `data/parcours/*.lessons.json` rédigées mais **pas encore fusionnées** dans `data/lessons.json` / le seed.
 
 ---
@@ -86,16 +97,16 @@ Points bloquants ou fragiles :
 | UX globale | 8.1 / 10 | Portail d'entrée premium, cahier Ikigai fort, atlas navigable (pan/zoom/recentrage), `DesignSystemShowcasePage` existante pour l'interface. |
 | Design / direction artistique | 8.6 / 10 | Identité atlas/carnet convaincante. Mode sombre rehaussé par ciel photographique. Portail splash à la hauteur. Barre latérale en verre dépoli. |
 | Contenu pédagogique | 7.8 / 10 | Très complet : **22 parcours, 16 cours, 62 leçons canoniques (+ leçons drop-in de parcours), 4 études de cas, 8 simulateurs, 357 termes au glossaire**. Le nouveau cours Power Law/Monte Carlo renforce le chaînage théorie → simulateur. Attention : 23 leçons canoniques n'ont pas encore de quiz. |
-| Technique front-end | 8.0 / 10 | Build OK (entry chunk ~100 kB, vendor React ~232 kB), lazy routes. Assets WebP. Routing i18n `/fr` `/en` en place. |
-| Back-end / API | 7.5 / 10 | Architecture fonctionnelle. **Rate-limiting en place** (100 req/15min API, 20/15min auth). Reste helmet/CSP, garde JWT inopérante, CSRF. |
-| Qualité / tests | 8.0 / 10 | Lint (0 erreur), validation contenu complète, **Vitest (25 tests sur 7 fichiers couvrant simulateurs/i18n/utils) + CI**. |
+| Technique front-end | 8.2 / 10 | Build OK (vendor React ~232 kB), lazy routes. Glossaire + leçons scindés index/contenu (chunk `lessons` eager 176→32 kB). Assets WebP. Routing i18n `/fr` `/en` en place. |
+| Back-end / API | 8.0 / 10 | Architecture fonctionnelle. Rate-limiting (auth + `/search`), **garde JWT corrigée**, **wrapper async `ah()`** (plus de crash sur rejection), `attachUser` scoping. Reste helmet/CSP, cookie `secure`, CSRF. |
+| Qualité / tests | 8.4 / 10 | Lint (0 erreur, 4 warnings), validation contenu complète, **Vitest client (59 tests) + serveur (10 tests : auth/profil/isolation) + CI**. |
 | Accessibilité | 8 / 10 | Focus trap + restauration modal, focus-visible inputs, aria-live toasts, role="alert" erreurs, ConfirmDialog, aria-labels simulateurs, `inert` splash. |
 | SEO / distribution | 4 / 10 | Meta client-side, pas de prérendu ni d'OpenGraph par page. Mode de rendu (CSR vs SSG/SSR) à trancher avant d'agir. |
-| i18n / bilinguisme | 5.5 / 10 | Architecture décidée (ADR) + Phase 1 (routing localisé) implémentée. Reste : chrome (Phase 2), base `locale` (Phase 4), `hreflang` (Phase 5), corpus EN. |
+| i18n / bilinguisme | 5.5 / 10 | Architecture décidée (ADR) + Phase 1 (routing localisé) implémentée ; sélecteur EN **masqué** (`EN_ENABLED=false`) tant que le contenu n'est pas traduit. Reste : chrome (Phase 2), base `locale` (Phase 4), `hreflang` (Phase 5), corpus EN. |
 | Robustesse contenu / CMS | 7 / 10 | Validation Zod + refs complète. Pages branchées sur l'API avec fallback. CMS à étendre à la `locale`. |
 | Performance assets | 8.2 / 10 | Fonds splash en WebP (~97 % de réduction). Entry JS/CSS optimisés. |
 
-Score global estimé : **8.2 / 10**
+Score global estimé : **8.3 / 10**
 
 Interprétation : très bonne base produit et éditoriale, déjà crédible pour une démo avancée et un portail premium. Avant lancement public, priorité aux garde-fous qualité, à la cohérence API/CMS et au SEO.
 
@@ -251,18 +262,19 @@ Actions recommandées :
 
 Problèmes / manques :
 
-- Cookie `secure: false` en dur pour le dev.
-- Pas de `helmet`.
-- (Le rate-limit a été correctement mis en place sur `/api/auth`).
-- Auth par cookie sans protection CSRF dédiée sur routes mutatives.
-- JWT secret par défaut possible si env absente.
+- Cookie `secure: false` en dur pour le dev. *(Reste à paramétrer selon `NODE_ENV`.)*
+- Pas de `helmet`. *(Reste.)*
+- ~~Le rate-limit~~ en place sur `/api/auth` **et `/api/search`** (2026-06-12). ✅
+- Auth par cookie sans protection CSRF dédiée sur routes mutatives. *(Reste.)*
+- ~~JWT secret par défaut possible si env absente.~~ **Corrigé (2026-06-12)** : `getJwtSecretIssue()` exige longueur min. + blocklist en prod, fail-fast au démarrage. ✅
+- ~~Rejection async non gérée tuant le process (Express 4).~~ **Corrigé (2026-06-12)** : wrapper `ah()` sur tous les handlers. ✅
 
-Actions recommandées :
+Actions recommandées (restantes) :
 
 - Paramétrer `secure` selon `NODE_ENV`.
-- Ajouter `helmet`, rate limit auth, politique CORS stricte en prod.
+- Ajouter `helmet`, en-têtes CSP/HSTS, politique CORS stricte en prod.
 - Ajouter protection CSRF ou stratégie explicite SameSite + token.
-- Refuser le démarrage prod avec secret par défaut.
+- Prévoir une rotation JWT (re-signature glissante quand il reste < 7 j) — `shouldRefreshToken` déjà branché dans `attachUser`.
 
 ---
 
@@ -359,7 +371,8 @@ Statut : **FAIT (2026-05-30).**
 
 - [x] Installer/configurer ESLint (0 erreur).
 - [x] Étendre `validate:content` (Zod + refs + quiz).
-- [ ] Tests unitaires sur calculateurs.
+- [~] Tests unitaires sur calculateurs (Power Law + secondaries couverts ; reste les autres).
+- [x] Tests d'intégration API serveur (auth, profil, isolation `userId`) — 2026-06-12.
 
 ### Phase 2 - Cohérence API / CMS
 
@@ -516,6 +529,32 @@ Fichiers créés / modifiés :
 - `data/glossary.json` : références croisées mises à jour pour les termes Power Law / fund returner / portfolio construction / reserves / TVPI / MOIC.
 - `client/src/pages/LessonPage.tsx`, `client/src/content/caseStudies.ts`, `scripts/validate-content.mjs` : résolution propre des `furtherReading` vers cours, cas et glossaire.
 
+### 2026-06-12 — Repo hygiene & suite des recommandations d'audit
+
+Commandes de vérification (branche `chore/flux-c-repo-hygiene`, exécutées en local) :
+
+- `npm run validate:content` : **exit 0**, 1 warning éditorial (23/62 leçons sans quiz).
+- `npm run lint` : **exit 0**, 0 erreur, **4 warnings** (`react-refresh` structurels).
+- `npm run build` : **exit 0**, serveur + client.
+- `npm run test --workspace client` : **10 fichiers / 59 tests** verts.
+- `npm run test --workspace server` : **3 fichiers / 10 tests** verts (auth, profil, isolation `userId`).
+
+Fichiers créés / modifiés :
+
+- `.github/workflows/ci.yml` : `push` sur `main`/`master` (+ tests serveur dans le pipeline).
+- `server/src/lib/async-handler.ts` : **[NOUVEAU]** wrapper `ah()` appliqué à tous les handlers (auth, content, me, admin, search).
+- `server/prisma/seed.ts` : seed non destructif (`seedEditable`, `--force`), comptes démo gatés hors prod.
+- `scripts/export-content.mjs` : **[NOUVEAU]** export DB → JSON (`npm run content:export`).
+- `server/src/lib/auth.ts` : `getJwtSecretIssue()` (longueur + blocklist) ; `shouldRefreshToken` (rotation glissante) ; `attachUser` scoping.
+- `server/src/app.ts` : `attachUser` monté sur `/me`/`/admin`/`/auth/me` ; rate-limit `/api/search`.
+- `server/src/routes/me.ts` : `DELETE /me/profile` (profil + onboarding).
+- `client/src/context/AuthContext.tsx` : `apiUp` re-sondé (intervalle 15 s + `focus`/`online`, restauration de session avant bascule).
+- `client/src/context/UserDataContext.tsx` : `clearProfile` appelle `DELETE /me/profile`.
+- `client/src/i18n/config.ts` + `SideNav`/`TopBar` : sélecteur EN masqué (`EN_ENABLED=false`).
+- `scripts/split-lessons.mjs` : **[NOUVEAU]** split leçons (`lessons.index.json` / `lessons.bodies.json`) ; `content/lessons.ts` lazy ; `content/parcoursLessons.ts` supprimé ; `package.json` (`split:content`).
+- `server/test/*` : **[NOUVEAU]** `auth.test.ts`, `profile.test.ts`, `isolation.test.ts`, `global-setup.ts`.
+- Lint : `Briefcase` (SideNav) + prop morte `onToggleCollapse` (PathAtlas) retirés.
+
 
 Fichiers créés / modifiés (repères) :
 
@@ -550,10 +589,11 @@ Recommandation actuelle :
 13. Brancher Path/Course sur l'API.
 14. i18n Phase 2 (chrome, dictionnaire maison local) puis corpus EN au fil de l'eau.
 15. Enrichir dashboard et lecture active ; densifier les contenus.
-16. Lot 🔴 différé (SSR/SEO, helmet/CSP/HSTS, **garde JWT à corriger**, contraste de l'or) — au pré-déploiement.
+16. Lot 🔴 différé (SSR/SEO, helmet/CSP/HSTS, cookie `secure`, CSRF, contraste de l'or) — au pré-déploiement. La **garde JWT est corrigée** (2026-06-12).
 17. ~~Accordéon familles sur `/paths` (catalogue `ParcoursPage`).~~ **FAIT (2026-06-11).**
 18. ~~Accordéon chapitres (cours) dans les rayons legacy `PathDetailPage`.~~ **FAIT (2026-06-11).**
 19. ~~Aiguilleur de route `/paths/:slug` (`ParcoursOrSubjectPage`).~~ **FAIT (2026-06-11).**
+20. ~~CI sur push, robustesse async serveur, seed non destructif, garde JWT, `apiUp` re-sondé, split leçons, tests serveur.~~ **FAIT (2026-06-12).**
 
 Priorité stratégique :
 
