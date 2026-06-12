@@ -2,30 +2,74 @@ import bcrypt from 'bcryptjs';
 import { prisma } from '../src/lib/db.js';
 import { content, stripHtml } from '../src/lib/content.js';
 
+// ── Seed mode ────────────────────────────────────────────────────────────
+// By default the seed is *non-destructive* for admin-editable content
+// (glossary, blog, case studies): a row that already exists in the DB is left
+// untouched so a curator's edits survive a re-seed. Pass `--force` to overwrite
+// those rows with the source JSON:  `npm run db:seed -- --force`.
+//
+// Use `npm run content:export` after admin edits when the DB version should
+// become the JSON source again.
+const FORCE = process.argv.includes('--force');
+const isProd = process.env.NODE_ENV === 'production';
+
+type SeedStat = { created: number; ignored: number; forced: number };
+const newStat = (): SeedStat => ({ created: 0, ignored: 0, forced: 0 });
+
+/**
+ * Create-if-absent / overwrite-only-with-`--force` for editable content.
+ * `existing` is the current DB row (or null); `create`/`update` perform the write.
+ */
+async function seedEditable(
+  existing: unknown | null,
+  create: () => Promise<unknown>,
+  update: () => Promise<unknown>,
+  stat: SeedStat,
+): Promise<void> {
+  if (!existing) {
+    await create();
+    stat.created++;
+  } else if (FORCE) {
+    await update();
+    stat.forced++;
+  } else {
+    stat.ignored++;
+  }
+}
+
+const summary = (label: string, s: SeedStat) =>
+  `   ${label.padEnd(13)} ${s.created} créés · ${s.ignored} ignorés (édités en DB) · ${s.forced} forcés`;
+
 async function main() {
-  console.log('→ Seeding VC Premium Experience database…');
+  console.log(`→ Seeding VC Premium Experience database…${FORCE ? '  [--force: overwrite CMS edits]' : ''}`);
 
   // ── Users ──────────────────────────────────────────────────────────────
-  const adminHash = await bcrypt.hash('admin1234', 10);
-  const demoHash = await bcrypt.hash('demo1234', 10);
+  // Demo / admin accounts are a development convenience only — never seed them
+  // into a production database (where real credentials must be the only ones).
+  if (isProd) {
+    console.log('   (production) comptes de démonstration non créés.');
+  } else {
+    const adminHash = await bcrypt.hash('admin1234', 10);
+    const demoHash = await bcrypt.hash('demo1234', 10);
 
-  await prisma.user.upsert({
-    where: { email: 'admin@vcpx.io' },
-    update: { role: 'admin', name: 'Curateur', passwordHash: adminHash },
-    create: { email: 'admin@vcpx.io', name: 'Curateur', role: 'admin', passwordHash: adminHash },
-  });
+    await prisma.user.upsert({
+      where: { email: 'admin@vcpx.io' },
+      update: { role: 'admin', name: 'Curateur', passwordHash: adminHash },
+      create: { email: 'admin@vcpx.io', name: 'Curateur', role: 'admin', passwordHash: adminHash },
+    });
 
-  const demo = await prisma.user.upsert({
-    where: { email: 'demo@vcpx.io' },
-    update: { name: 'Apprenant démo', passwordHash: demoHash },
-    create: { email: 'demo@vcpx.io', name: 'Apprenant démo', role: 'user', passwordHash: demoHash },
-  });
+    const demo = await prisma.user.upsert({
+      where: { email: 'demo@vcpx.io' },
+      update: { name: 'Apprenant démo', passwordHash: demoHash },
+      create: { email: 'demo@vcpx.io', name: 'Apprenant démo', role: 'user', passwordHash: demoHash },
+    });
 
-  await prisma.profile.upsert({
-    where: { userId: demo.id },
-    update: { profileType: 'futur-analyste', timeBudget: 'medium' },
-    create: { userId: demo.id, profileType: 'futur-analyste', timeBudget: 'medium' },
-  });
+    await prisma.profile.upsert({
+      where: { userId: demo.id },
+      update: { profileType: 'futur-analyste', timeBudget: 'medium' },
+      create: { userId: demo.id, profileType: 'futur-analyste', timeBudget: 'medium' },
+    });
+  }
 
   // ── Content (idempotent upserts) ─────────────────────────────────────────
   const tagCount = new Map<string, number>();
@@ -71,33 +115,46 @@ async function main() {
     }
   }
 
+  // ── Admin-editable content (non-destructive unless --force) ───────────────
+  const glossaryStat = newStat();
   for (const g of content.glossary()) {
     const searchText = stripHtml([g.term, g.latin, g.short, g.definition, g.example, ...(g.aliases ?? [])].filter(Boolean).join(' ')).toLowerCase();
-    await prisma.glossaryTerm.upsert({
-      where: { id: g.id },
-      update: { slug: g.slug, term: g.term, category: g.category, searchText, data: JSON.stringify(g) },
-      create: { id: g.id, slug: g.slug, term: g.term, category: g.category, searchText, data: JSON.stringify(g) },
-    });
+    const fields = { slug: g.slug, term: g.term, category: g.category, searchText, data: JSON.stringify(g) };
+    const existing = await prisma.glossaryTerm.findUnique({ where: { id: g.id } });
+    await seedEditable(
+      existing,
+      () => prisma.glossaryTerm.create({ data: { id: g.id, ...fields } }),
+      () => prisma.glossaryTerm.update({ where: { id: g.id }, data: fields }),
+      glossaryStat,
+    );
   }
 
+  const caseStat = newStat();
   for (const cs of content.caseStudies()) {
     bumpTags(cs.tags);
     const searchText = stripHtml([cs.title, cs.subtitle, cs.summary, ...cs.sections.map((s) => s.heading + ' ' + s.body)].join(' ')).toLowerCase();
-    await prisma.caseStudy.upsert({
-      where: { id: cs.id },
-      update: { slug: cs.slug, title: cs.title, kind: cs.kind, searchText, data: JSON.stringify(cs) },
-      create: { id: cs.id, slug: cs.slug, title: cs.title, kind: cs.kind, searchText, data: JSON.stringify(cs) },
-    });
+    const fields = { slug: cs.slug, title: cs.title, kind: cs.kind, searchText, data: JSON.stringify(cs) };
+    const existing = await prisma.caseStudy.findUnique({ where: { id: cs.id } });
+    await seedEditable(
+      existing,
+      () => prisma.caseStudy.create({ data: { id: cs.id, ...fields } }),
+      () => prisma.caseStudy.update({ where: { id: cs.id }, data: fields }),
+      caseStat,
+    );
   }
 
+  const blogStat = newStat();
   for (const b of content.blog()) {
     bumpTags(b.tags);
     const searchText = stripHtml([b.title, b.subtitle, b.excerpt, b.body].join(' ')).toLowerCase();
-    await prisma.blogPost.upsert({
-      where: { id: b.id },
-      update: { slug: b.slug, title: b.title, category: b.category, date: b.date, searchText, data: JSON.stringify(b) },
-      create: { id: b.id, slug: b.slug, title: b.title, category: b.category, date: b.date, searchText, data: JSON.stringify(b) },
-    });
+    const fields = { slug: b.slug, title: b.title, category: b.category, date: b.date, searchText, data: JSON.stringify(b) };
+    const existing = await prisma.blogPost.findUnique({ where: { id: b.id } });
+    await seedEditable(
+      existing,
+      () => prisma.blogPost.create({ data: { id: b.id, ...fields } }),
+      () => prisma.blogPost.update({ where: { id: b.id }, data: fields }),
+      blogStat,
+    );
   }
 
   for (const s of content.simulators()) {
@@ -125,6 +182,15 @@ async function main() {
     users: await prisma.user.count(),
   };
   console.log('✓ Seed complete', counts);
+  console.log('  Contenu éditable :');
+  console.log(summary('glossaire', glossaryStat));
+  console.log(summary('études de cas', caseStat));
+  console.log(summary('blog', blogStat));
+  const totalIgnored = glossaryStat.ignored + caseStat.ignored + blogStat.ignored;
+  if (totalIgnored > 0 && !FORCE) {
+    console.log(`  → ${totalIgnored} ligne(s) préservée(s). Relancer avec « npm run db:seed -- --force » pour écraser avec le JSON source.`);
+    console.log('  → Pour exporter ces éditions DB vers JSON : npm run content:export');
+  }
 }
 
 main()

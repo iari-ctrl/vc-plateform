@@ -38,7 +38,9 @@ export function searchLocal(query: string): SearchHit[] {
     if (has(l.title, l.kicker, l.summary, l.body))
       hits.push({ type: 'lesson', id: l.id, slug: l.slug, title: l.title, excerpt: l.summary, href: `/lessons/${l.slug}` });
   for (const g of GLOSSARY)
-    if (has(g.term, g.latin, g.short, g.definition))
+    // `definition` is no longer in the light index, so offline search matches
+    // term / latin / short (the concise summary) — enough for the palette.
+    if (has(g.term, g.latin, g.short))
       hits.push({ type: 'glossary', id: g.id, slug: g.slug, title: g.term, excerpt: g.short, href: `/glossary?term=${g.slug}` });
   for (const c of CASE_STUDIES)
     if (has(c.title, c.subtitle, c.summary))

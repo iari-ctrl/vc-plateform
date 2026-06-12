@@ -1,7 +1,7 @@
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { LOCALES, LOCALE_NAMES, LOCALE_SHORT, storeLocale } from './config';
+import { storeLocale } from './config';
 import { useLocale } from './useLocale';
-import { swapLocalePath } from './routing';
+import { swapLocalePath } from './navigation';
 import { cn } from '@/lib/utils';
 
 /**

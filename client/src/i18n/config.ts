@@ -7,6 +7,17 @@
 export const LOCALES = ['fr', 'en'] as const;
 export type Locale = (typeof LOCALES)[number];
 
+/**
+ * Feature flag — is the English experience shipped to users yet?
+ *
+ * The i18n plumbing (locale routing, cookie, `/en/…` URLs, the switcher) is all
+ * in place and kept working, but the *content* is still French-only, so we don't
+ * advertise EN: the switcher is hidden and `<html lang>` is forced to `fr` even
+ * under `/en` (cf. guards.tsx). Flip to `true` once EN content lands — no other
+ * code change is required to re-expose the switcher.
+ */
+export const EN_ENABLED = false;
+
 /** Default language, used as the fallback everywhere (cf. ADR §1: FR by default). */
 export const DEFAULT_LOCALE: Locale = 'fr';
 

@@ -75,6 +75,16 @@ export interface GlossaryTerm {
   relatedLessonIds: string[];
 }
 
+/** Light glossary entry (everything but the heavy `definition`/`example`) —
+ *  eager on the hot path; see `GlossaryDef` for the lazily-loaded remainder. */
+export type GlossaryIndexEntry = Omit<GlossaryTerm, 'definition' | 'example'>;
+
+/** The heavy part of a term, loaded lazily and keyed by slug. */
+export interface GlossaryDef {
+  definition: string;
+  example?: string;
+}
+
 export interface CaseStudy {
   id: string;
   slug: string;

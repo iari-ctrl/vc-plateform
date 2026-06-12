@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useNavigate } from '@/i18n/routing';
+import { useNavigate } from '@/i18n/navigation';
 import { ArrowLeft, ArrowRight, Compass, ClipboardList } from 'lucide-react';
 import { IKIGAI } from '@/content';
 import { IkigaiAtlasDiagram, type RegionSelect } from '@/components/ikigai/IkigaiAtlasDiagram';

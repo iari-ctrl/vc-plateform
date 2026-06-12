@@ -1,4 +1,5 @@
-import { Link, useNavigate } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
+import { useNavigate } from '@/i18n/navigation';
 import { ArrowRight, RotateCcw, LogOut, UserPlus, Shield, Sun, Moon, Target } from 'lucide-react';
 import { profileById } from '@/content';
 import { t } from '@/content/parcours';

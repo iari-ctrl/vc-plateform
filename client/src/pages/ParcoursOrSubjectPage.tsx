@@ -1,6 +1,5 @@
 import { lazy } from 'react';
 import { useParams } from 'react-router-dom';
-import { parcoursBySlug } from '@/content/parcours';
 import { pathBySlug } from '@/content';
 
 const ParcoursDetailPage = lazy(() => import('./ParcoursDetailPage'));

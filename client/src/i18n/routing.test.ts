@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { localizePath, swapLocalePath } from './routing';
+import { localizePath, swapLocalePath } from './navigation';
 
 describe('localizePath', () => {
   it('prefixes an absolute in-app path with the active locale', () => {

@@ -107,21 +107,31 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
     const localProgress = storage.get<Record<string, ProgressEntry>>(STORAGE_KEYS.progress, {});
     const localProfile = storage.get<UserProfile | null>(STORAGE_KEYS.profile, null);
     const localJournal = storage.get<DecisionJournalEntry[]>(STORAGE_KEYS.journal, []);
+
+    // Purge a collection's local copy *only* once the server has confirmed every
+    // write in it — a failed write keeps the data local so the next login
+    // retries it instead of silently losing it. (An empty collection trivially
+    // confirms, so its stale key is cleared.)
+    const allConfirmed = async (writes: Promise<unknown>[]) =>
+      (await Promise.allSettled(writes)).every((r) => r.status === 'fulfilled');
+
     try {
-      await Promise.all([
-        ...localNotes.map((n) => api.post('/me/notes', n).catch(() => null)),
-        ...localBookmarks.map((b) => api.post('/me/bookmarks', b).catch(() => null)),
-        ...Object.values(localProgress).map((p) => api.put('/me/progress', p).catch(() => null)),
-        ...localJournal.map((e) => api.post('/me/journal', e).catch(() => null)),
-        localProfile ? api.put('/me/profile', localProfile).catch(() => null) : Promise.resolve(),
+      const [notesOk, bookmarksOk, progressOk, journalOk] = await Promise.all([
+        allConfirmed(localNotes.map((n) => api.post('/me/notes', n))),
+        allConfirmed(localBookmarks.map((b) => api.post('/me/bookmarks', b))),
+        allConfirmed(Object.values(localProgress).map((p) => api.put('/me/progress', p))),
+        allConfirmed(localJournal.map((e) => api.post('/me/journal', e))),
       ]);
-      // Clear local copies now that they live on the server.
-      storage.remove(STORAGE_KEYS.notes);
-      storage.remove(STORAGE_KEYS.bookmarks);
-      storage.remove(STORAGE_KEYS.progress);
-      storage.remove(STORAGE_KEYS.journal);
+      // The profile is reloaded from the server right after, so (as before) its
+      // local key isn't purged here; push it best-effort.
+      if (localProfile) await api.put('/me/profile', localProfile).catch(() => null);
+
+      if (notesOk) storage.remove(STORAGE_KEYS.notes);
+      if (bookmarksOk) storage.remove(STORAGE_KEYS.bookmarks);
+      if (progressOk) storage.remove(STORAGE_KEYS.progress);
+      if (journalOk) storage.remove(STORAGE_KEYS.journal);
     } catch {
-      /* best-effort */
+      /* best-effort — keep local data on any unexpected failure */
     }
   }
 
@@ -137,7 +147,10 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
 
   const clearProfile = useCallback(async () => {
     setProfile(null);
-    if (!authed) storage.remove(STORAGE_KEYS.profile);
+    // Authenticated: tell the server to drop the profile + onboarding answers so
+    // "refaire le test" + reload doesn't resurrect the old profile from the DB.
+    if (authed) await api.del('/me/profile').catch(() => null);
+    else storage.remove(STORAGE_KEYS.profile);
   }, [authed]);
 
   const addNote = useCallback(

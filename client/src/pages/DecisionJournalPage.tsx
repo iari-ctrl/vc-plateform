@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   Check, X as XIcon, CircleSlash, Trash2, Plus, Link2, CalendarClock, AlarmClockCheck,
-  Crosshair, Gauge, UserPlus, Search as SearchIcon,
+  Crosshair, Gauge, Search as SearchIcon,
 } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useUserData } from '@/context/UserDataContext';
-import { useAuth } from '@/context/AuthContext';
-import { useUI } from '@/context/UIContext';
 import { SectionHeading, EmptyState } from '@/components/ui/primitives';
+import { GuestBanner } from '@/components/ui/GuestBanner';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import {
   CONFIDENCE_MIN, CONFIDENCE_MAX, MIN_SAMPLE, OUTCOME_LABEL,
@@ -65,8 +64,6 @@ const OUTCOME_META: Record<DecisionOutcome, { icon: typeof Check; color: string 
 export default function DecisionJournalPage() {
   usePageMeta('Journal de décisions', 'Prédictions datées, niveau de confiance, date de revue : l’outil de calibration de votre jugement d’investisseur.');
   const { journal, addJournalEntry, resolveJournalEntry, deleteJournalEntry } = useUserData();
-  const { isAuthed, apiUp } = useAuth();
-  const { openAuth } = useUI();
 
   const [filter, setFilter] = useState<'all' | 'due' | 'open' | 'resolved'>('all');
   const [pendingDelete, setPendingDelete] = useState<DecisionJournalEntry | null>(null);
@@ -98,13 +95,11 @@ export default function DecisionJournalPage() {
         description="Écrivez ce que vous croyez avant de savoir si c’est vrai : une prédiction datée, un niveau de confiance, une date de revue. Puis confrontez. C’est le seul instrument qui mesure si votre jugement s’améliore — pas votre mémoire, qui réécrit tout."
       />
 
-      {!isAuthed && apiUp && (
-        <div className="mt-8 flex items-center gap-4 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] px-6 py-4">
-          <UserPlus size={20} className="shrink-0 text-[color:var(--primary)]" />
-          <p className="flex-1 text-sm text-surface-variant">Vous travaillez en mode invité — votre journal est conservé sur cet appareil. Créez un espace pour le retrouver partout.</p>
-          <button onClick={() => openAuth('Créez un espace pour synchroniser votre journal de décisions entre vos appareils.')} className="btn-ghost shrink-0">Créer mon espace</button>
-        </div>
-      )}
+      <GuestBanner
+        className="mt-8"
+        message="Vous travaillez en mode invité — votre journal est conservé sur cet appareil. Créez un espace pour le retrouver partout."
+        reason="Créez un espace pour synchroniser votre journal de décisions entre vos appareils."
+      />
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
         {/* Left — form + entries */}

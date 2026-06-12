@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { MainLayout } from '@/layouts/MainLayout';
-import { detectLocale, isLocale } from './config';
+import { detectLocale, isLocale, EN_ENABLED } from './config';
 
 /**
  * Bare `/` → redirect once to the detected locale home (`/fr` or `/en`).
@@ -32,8 +32,9 @@ export function LocaleBoundary() {
     // Reflect the language of the page actually being viewed. We intentionally
     // do NOT persist a preference here — only the explicit switcher does — so a
     // shared `/en/…` link never silently overrides a visitor's own choice.
-    // `isLocale` inline (not the `valid` boolean) so TS narrows `locale` to a string.
-    if (isLocale(locale)) document.documentElement.lang = locale;
+    // While EN is not shipped (EN_ENABLED=false) the content is French even under
+    // `/en`, so we force `lang="fr"` to avoid lying to screen readers / crawlers.
+    if (isLocale(locale)) document.documentElement.lang = EN_ENABLED ? locale : 'fr';
   }, [locale]);
 
   if (!valid) {

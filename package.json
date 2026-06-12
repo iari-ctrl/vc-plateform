@@ -9,10 +9,12 @@
     "server"
   ],
   "scripts": {
+    "predev": "npm run split:glossary",
     "dev": "concurrently -n server,client -c magenta,cyan \"npm:dev:server\" \"npm:dev:client\"",
     "dev:client": "npm run dev --workspace client",
     "dev:server": "npm run dev --workspace server",
-    "prebuild": "npm run validate:content",
+    "split:glossary": "node scripts/split-glossary.mjs",
+    "prebuild": "npm run split:glossary && npm run validate:content",
     "build": "npm run build --workspace server && npm run build --workspace client",
     "db:setup": "npm run db:setup --workspace server",
     "db:seed": "npm run db:seed --workspace server",
@@ -22,6 +24,7 @@
     "validate:content": "node scripts/validate-content.mjs",
     "validate:glossary": "node scripts/validate-glossary.mjs",
     "validate:content:strict": "node scripts/validate-content.mjs --strict",
+    "content:export": "node scripts/export-content.mjs",
     "aliases:merge": "node scripts/merge-aliases.mjs"
   },
   "devDependencies": {

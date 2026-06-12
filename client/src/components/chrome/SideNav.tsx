@@ -4,8 +4,10 @@ import {
   Map, Library, BookA, Briefcase, FlaskConical, Newspaper, LayoutDashboard, NotebookPen,
   Search, Sun, Moon, LogIn, LogOut, Shield, User, Menu, X, Ghost, ScrollText, Crosshair, type LucideIcon,
 } from 'lucide-react';
-import { Link, NavLink, useNavigate, isLinkActive } from '@/i18n/routing';
+import { Link, NavLink } from '@/i18n/routing';
+import { useNavigate, isLinkActive } from '@/i18n/navigation';
 import { LocaleSwitcher } from '@/i18n/LocaleSwitcher';
+import { EN_ENABLED } from '@/i18n/config';
 import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
 import { useAuth } from '@/context/AuthContext';
@@ -90,7 +92,7 @@ function DesktopRail() {
           <div className="ornament-rule mx-1 mb-2" />
           <SearchButton expanded={expanded} />
           <ThemeButton expanded={expanded} />
-          {expanded && (
+          {EN_ENABLED && expanded && (
             <div className="flex items-center justify-between gap-2 px-3 py-1.5 animate-fade-in">
               <span className="whitespace-nowrap text-sm font-medium text-surface-variant">Langue</span>
               <LocaleSwitcher />
@@ -334,11 +336,15 @@ function MobileBar() {
               </button>
             )}
 
-            <div className="ornament-rule my-3" />
-            <div className="flex items-center justify-between px-1">
-              <span className="text-sm font-medium text-surface-variant">Langue</span>
-              <LocaleSwitcher />
-            </div>
+            {EN_ENABLED && (
+              <>
+                <div className="ornament-rule my-3" />
+                <div className="flex items-center justify-between px-1">
+                  <span className="text-sm font-medium text-surface-variant">Langue</span>
+                  <LocaleSwitcher />
+                </div>
+              </>
+            )}
           </nav>
         </div>
       )}

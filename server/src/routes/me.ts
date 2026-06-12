@@ -2,15 +2,16 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { prisma } from '../lib/db.js';
 import { requireAuth } from '../lib/auth.js';
+import { ah } from '../lib/async-handler.js';
 
 export const meRouter = Router();
 meRouter.use(requireAuth);
 
 // ── Profile & onboarding ──────────────────────────────────────────────────
-meRouter.get('/profile', async (req, res) => {
+meRouter.get('/profile', ah(async (req, res) => {
   const profile = await prisma.profile.findUnique({ where: { userId: req.user!.id } });
   res.json(profile ? { profileType: profile.profileType, timeBudget: profile.timeBudget, scores: parseJson(profile.scores) } : null);
-});
+}));
 
 const profileBody = z.object({
   profileType: z.string().min(1),
@@ -19,7 +20,7 @@ const profileBody = z.object({
   answers: z.array(z.object({ questionN: z.string(), optionIndex: z.number().int() })).optional(),
 });
 
-meRouter.put('/profile', async (req, res) => {
+meRouter.put('/profile', ah(async (req, res) => {
   const parsed = profileBody.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Données invalides.' });
   const { profileType, timeBudget, scores, answers } = parsed.data;
@@ -38,13 +39,25 @@ meRouter.put('/profile', async (req, res) => {
     });
   }
   res.json({ profileType: profile.profileType, timeBudget: profile.timeBudget, scores: parseJson(profile.scores) });
-});
+}));
+
+// Full reset of the orientation test: drop both the profile and the raw
+// onboarding answers so a future re-test starts clean (orphaned answers would
+// otherwise skew it). deleteMany is used so a missing row is a no-op, not a 404.
+meRouter.delete('/profile', ah(async (req, res) => {
+  const userId = req.user!.id;
+  await prisma.$transaction([
+    prisma.onboardingAnswer.deleteMany({ where: { userId } }),
+    prisma.profile.deleteMany({ where: { userId } }),
+  ]);
+  res.json({ ok: true });
+}));
 
 // ── Notes ──────────────────────────────────────────────────────────────────
-meRouter.get('/notes', async (req, res) => {
+meRouter.get('/notes', ah(async (req, res) => {
   const notes = await prisma.note.findMany({ where: { userId: req.user!.id }, orderBy: { createdAt: 'desc' } });
   res.json(notes);
-});
+}));
 
 const noteBody = z.object({
   kind: z.enum(['note', 'quote', 'highlight']).default('note'),
@@ -54,23 +67,23 @@ const noteBody = z.object({
   sourceTitle: z.string().optional(),
 });
 
-meRouter.post('/notes', async (req, res) => {
+meRouter.post('/notes', ah(async (req, res) => {
   const parsed = noteBody.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Données invalides.' });
   const note = await prisma.note.create({ data: { ...parsed.data, userId: req.user!.id } });
   res.status(201).json(note);
-});
+}));
 
-meRouter.delete('/notes/:id', async (req, res) => {
+meRouter.delete('/notes/:id', ah(async (req, res) => {
   await prisma.note.deleteMany({ where: { id: req.params.id, userId: req.user!.id } });
   res.json({ ok: true });
-});
+}));
 
 // ── Bookmarks ────────────────────────────────────────────────────────────
-meRouter.get('/bookmarks', async (req, res) => {
+meRouter.get('/bookmarks', ah(async (req, res) => {
   const bookmarks = await prisma.bookmark.findMany({ where: { userId: req.user!.id }, orderBy: { createdAt: 'desc' } });
   res.json(bookmarks);
-});
+}));
 
 const bookmarkBody = z.object({
   itemType: z.string().min(1),
@@ -79,7 +92,7 @@ const bookmarkBody = z.object({
   href: z.string().min(1),
 });
 
-meRouter.post('/bookmarks', async (req, res) => {
+meRouter.post('/bookmarks', ah(async (req, res) => {
   const parsed = bookmarkBody.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Données invalides.' });
   const { itemType, itemId, title, href } = parsed.data;
@@ -90,12 +103,12 @@ meRouter.post('/bookmarks', async (req, res) => {
     create: { userId, itemType, itemId, title, href },
   });
   res.status(201).json(bookmark);
-});
+}));
 
-meRouter.delete('/bookmarks/:itemType/:itemId', async (req, res) => {
+meRouter.delete('/bookmarks/:itemType/:itemId', ah(async (req, res) => {
   await prisma.bookmark.deleteMany({ where: { userId: req.user!.id, itemType: req.params.itemType, itemId: req.params.itemId } });
   res.json({ ok: true });
-});
+}));
 
 // ── Decision journal ───────────────────────────────────────────────────────
 type DecisionRow = {
@@ -122,10 +135,10 @@ function serializeDecision(d: DecisionRow) {
   };
 }
 
-meRouter.get('/journal', async (req, res) => {
+meRouter.get('/journal', ah(async (req, res) => {
   const entries = await prisma.decisionEntry.findMany({ where: { userId: req.user!.id }, orderBy: { createdAt: 'desc' } });
   res.json(entries.map(serializeDecision));
-});
+}));
 
 const decisionLink = z.object({
   type: z.string().min(1),
@@ -150,7 +163,7 @@ const decisionBody = z.object({
   createdAt: z.string().datetime({ offset: true }).or(z.string().datetime()).optional(),
 });
 
-meRouter.post('/journal', async (req, res) => {
+meRouter.post('/journal', ah(async (req, res) => {
   const parsed = decisionBody.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Données invalides.' });
   const { links, reviewAt, resolvedAt, createdAt, ...rest } = parsed.data;
@@ -165,7 +178,7 @@ meRouter.post('/journal', async (req, res) => {
     },
   });
   res.status(201).json(serializeDecision(entry));
-});
+}));
 
 const decisionResolveBody = z.object({
   outcome: z.enum(['correct', 'incorrect', 'void']),
@@ -173,7 +186,7 @@ const decisionResolveBody = z.object({
   resolvedAt: z.string().datetime({ offset: true }).or(z.string().datetime()).optional(),
 });
 
-meRouter.put('/journal/:id', async (req, res) => {
+meRouter.put('/journal/:id', ah(async (req, res) => {
   const parsed = decisionResolveBody.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Données invalides.' });
   const { outcome, resolutionNote, resolvedAt } = parsed.data;
@@ -184,18 +197,18 @@ meRouter.put('/journal/:id', async (req, res) => {
   if (!count) return res.status(404).json({ error: 'Prédiction introuvable.' });
   const entry = await prisma.decisionEntry.findUnique({ where: { id: req.params.id } });
   res.json(entry ? serializeDecision(entry) : { ok: true });
-});
+}));
 
-meRouter.delete('/journal/:id', async (req, res) => {
+meRouter.delete('/journal/:id', ah(async (req, res) => {
   await prisma.decisionEntry.deleteMany({ where: { id: req.params.id, userId: req.user!.id } });
   res.json({ ok: true });
-});
+}));
 
 // ── Progress ───────────────────────────────────────────────────────────────
-meRouter.get('/progress', async (req, res) => {
+meRouter.get('/progress', ah(async (req, res) => {
   const progress = await prisma.progress.findMany({ where: { userId: req.user!.id } });
   res.json(progress);
-});
+}));
 
 const progressBody = z.object({
   lessonId: z.string().min(1),
@@ -205,7 +218,7 @@ const progressBody = z.object({
   percent: z.number().int().min(0).max(100).default(0),
 });
 
-meRouter.put('/progress', async (req, res) => {
+meRouter.put('/progress', ah(async (req, res) => {
   const parsed = progressBody.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Données invalides.' });
   const { lessonId, courseId, pathId, status, percent } = parsed.data;
@@ -216,7 +229,7 @@ meRouter.put('/progress', async (req, res) => {
     create: { userId, lessonId, courseId, pathId, status, percent },
   });
   res.json(row);
-});
+}));
 
 function parseJson(s: string | null) {
   return s ? JSON.parse(s) : null;

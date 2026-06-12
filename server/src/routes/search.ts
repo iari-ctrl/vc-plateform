@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { prisma } from '../lib/db.js';
+import { ah } from '../lib/async-handler.js';
 
 export const searchRouter = Router();
 
@@ -12,7 +13,7 @@ interface Hit {
   href: string;
 }
 
-searchRouter.get('/', async (req, res) => {
+searchRouter.get('/', ah(async (req, res) => {
   const q = String(req.query.q ?? '').trim().toLowerCase();
   if (q.length < 2) return res.json({ q, hits: [] });
   const like = q;
@@ -63,4 +64,4 @@ searchRouter.get('/', async (req, res) => {
   }
 
   res.json({ q, hits });
-});
+}));

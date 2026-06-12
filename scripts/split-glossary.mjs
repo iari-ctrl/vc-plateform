@@ -1,0 +1,38 @@
+// Splits the glossary into a light index and the heavy definitions so the
+// lesson/article hot path (markdown auto-linker + popovers) ships only the
+// index, while full definitions load lazily on the dictionary page.
+//
+//   data/glossary.json  (source of truth, authored/validated)
+//     ├─→ data/glossary.index.json   every field except definition + example
+//     └─→ data/glossary.defs.json    { [slug]: { definition, example? } }
+//
+// Deterministic output (source order, 2-space indent) so re-runs don't churn
+// the diff. Wired into `prebuild`/`predev`; the outputs are also committed so
+// the IDE and a fresh checkout resolve the imports without a generate step.
+
+import { readFileSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+const dataDir = fileURLToPath(new URL('../data/', import.meta.url));
+const source = JSON.parse(readFileSync(`${dataDir}glossary.json`, 'utf8'));
+
+if (!Array.isArray(source)) {
+  console.error('split-glossary: data/glossary.json is not an array');
+  process.exit(1);
+}
+
+const index = [];
+const defs = {};
+
+for (const term of source) {
+  const { definition, example, ...light } = term;
+  index.push(light);
+  const def = { definition: definition ?? '' };
+  if (example !== undefined) def.example = example;
+  defs[term.slug] = def;
+}
+
+writeFileSync(`${dataDir}glossary.index.json`, JSON.stringify(index, null, 2) + '\n');
+writeFileSync(`${dataDir}glossary.defs.json`, JSON.stringify(defs, null, 2) + '\n');
+
+console.log(`split-glossary: ${index.length} terms → glossary.index.json + glossary.defs.json`);

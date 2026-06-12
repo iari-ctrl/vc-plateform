@@ -1,5 +1,5 @@
 import { Link } from '@/i18n/routing';
-import { ArrowRight, Compass, BookOpen, Sparkles, Lock, Unlock } from 'lucide-react';
+import { ArrowRight, Compass, BookOpen, Sparkles, Lock, Unlock, Play } from 'lucide-react';
 import { PARCOURS } from '@/content/parcours';
 import { SIMULATORS } from '@/content/simulators';
 import { BLOG } from '@/content/blog';
@@ -8,6 +8,7 @@ import { SectionHeading, Reveal } from '@/components/ui/primitives';
 import { Fleuron, FleuronDivider } from '@/components/ornaments/Ornaments';
 import { CompassRose, Constellation, InkStamp, WaxSeal, DropCap, NightSkyBackdrop } from '@/components/ornaments/Illustrations';
 import { usePageMeta } from '@/lib/seo';
+import { useResumeLesson } from '@/hooks/useResumeLesson';
 
 const STEPS = [
   { n: '01', icon: Compass, title: 'Comprendre qui vous êtes', text: 'Un onboarding introspectif inspiré de l’ikigai : pourquoi le capital-risque, et où se situe votre centre de gravité.' },
@@ -40,6 +41,7 @@ function DriftingSeals() {
 
 export default function HomePage() {
   usePageMeta(undefined, 'Comprendre le capital-risque, tester son alignement avec le métier, puis apprendre selon son niveau. Une plateforme éditoriale d’introspection et d’apprentissage.');
+  const resume = useResumeLesson();
 
   return (
     <>
@@ -82,6 +84,15 @@ export default function HomePage() {
                 </Link>
               </div>
               <p className="mt-5 text-xs text-surface-variant">Aucun compte requis. Aucun chapitre verrouillé.</p>
+              {resume && (
+                <Link
+                  to={`/lessons/${resume.slug}`}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-surface-variant transition-colors hover:border-[color:var(--primary)] hover:text-foreground"
+                >
+                  <Play size={13} className="shrink-0 text-[color:var(--primary)]" />
+                  Reprendre : <span className="font-medium text-foreground">{resume.title}</span>
+                </Link>
+              )}
             </div>
           </Reveal>
 

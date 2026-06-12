@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Search, Sun, Moon, Menu, X, LayoutDashboard, NotebookPen, User, Shield, LogOut, Compass } from 'lucide-react';
-import { Link, NavLink, useNavigate, isLinkActive } from '@/i18n/routing';
+import { Link, NavLink } from '@/i18n/routing';
+import { useNavigate, isLinkActive } from '@/i18n/navigation';
 import { LocaleSwitcher } from '@/i18n/LocaleSwitcher';
+import { EN_ENABLED } from '@/i18n/config';
 import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
 import { useAuth } from '@/context/AuthContext';
@@ -68,7 +70,7 @@ export function TopBar() {
             <Search size={17} />
           </button>
 
-          <LocaleSwitcher className="hidden sm:inline-flex" />
+          {EN_ENABLED && <LocaleSwitcher className="hidden sm:inline-flex" />}
 
           <button onClick={toggle} className="grid h-9 w-9 place-items-center rounded-full text-surface-variant transition-colors hover:bg-surface-container-low" aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}>
             {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
@@ -120,10 +122,12 @@ export function TopBar() {
               </button>
             )}
 
-            <div className="mt-3 flex items-center justify-between border-t border-outline-variant pt-4">
-              <span className="text-sm font-medium text-surface-variant">Langue</span>
-              <LocaleSwitcher />
-            </div>
+            {EN_ENABLED && (
+              <div className="mt-3 flex items-center justify-between border-t border-outline-variant pt-4">
+                <span className="text-sm font-medium text-surface-variant">Langue</span>
+                <LocaleSwitcher />
+              </div>
+            )}
           </nav>
         </div>
       )}

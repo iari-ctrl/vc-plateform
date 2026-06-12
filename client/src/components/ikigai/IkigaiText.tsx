@@ -1,9 +1,9 @@
 import { Fragment, useCallback, useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { ExternalLink, Pin } from 'lucide-react';
-import { glossaryBySlug } from '@/content';
+import { glossaryBySlug, loadGlossaryDefs } from '@/content';
 import { safeHttpUrl } from '@/lib/utils';
-import type { IkigaiMode } from '@/content/types';
+import type { GlossaryDef, IkigaiMode } from '@/content/types';
 
 /**
  * Inline glossary for the Ikigai cahier.
@@ -26,6 +26,7 @@ function GlossaryPopover({ slug, label }: { slug: string; label: string }) {
   const [open, setOpen] = useState(false);
   const [pinned, setPinned] = useState(false);
   const [position, setPosition] = useState<PopoverPosition | null>(null);
+  const [def, setDef] = useState<GlossaryDef | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const wrapRef = useRef<HTMLSpanElement>(null);
   const panelRef = useRef<HTMLSpanElement>(null);
@@ -92,6 +93,13 @@ function GlossaryPopover({ slug, label }: { slug: string; label: string }) {
 
   useEffect(() => () => clearTimeout(closeTimer.current), []);
 
+  // Pull the heavy definition lazily the first time the popover opens — the
+  // short preview shows immediately while the definitions chunk loads.
+  useEffect(() => {
+    if (!open || def) return;
+    void loadGlossaryDefs().then((all) => setDef(all[slug] ?? { definition: entry?.short ?? '' }));
+  }, [open, def, slug, entry]);
+
   if (!entry) return <>{label}</>;
 
   const popover = open && position && typeof document !== 'undefined'
@@ -115,15 +123,15 @@ function GlossaryPopover({ slug, label }: { slug: string; label: string }) {
             <span className="font-headline text-[0.95rem] font-semibold leading-tight text-foreground">{entry.term}</span>
             {pinned && <Pin size={12} className="shrink-0 text-[color:var(--primary)]" aria-hidden />}
           </span>
-          <span className="block text-[0.8rem] leading-relaxed text-surface-variant">{entry.definition}</span>
+          <span className="block text-[0.8rem] leading-relaxed text-surface-variant">{def ? def.definition : entry.short}</span>
           {entry.aliases && entry.aliases.length > 0 && (
             <span className="mt-2 block font-mono text-[0.64rem] leading-relaxed text-surface-variant/80">
               Alias : {entry.aliases.slice(0, 5).join(', ')}
             </span>
           )}
-          {entry.example && (
+          {def?.example && (
             <span className="mt-2 block font-headline text-[0.78rem] italic leading-relaxed text-surface-variant/90">
-              {entry.example}
+              {def.example}
             </span>
           )}
           {safeHttpUrl(entry.link) && (

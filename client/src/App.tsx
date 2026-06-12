@@ -80,6 +80,7 @@ export default function App() {
           <Route path="courses/:slug" element={<CourseDetailPage />} />
           <Route path="lessons/:slug" element={<LessonPage />} />
           <Route path="glossary" element={<GlossaryPage />} />
+          <Route path="glossary/:slug" element={<GlossaryPage />} />
           <Route path="cases" element={<Navigate to="../bibliotheque" replace />} />
           <Route path="cases/:slug" element={<CaseStudyPage />} />
           <Route path="simulators" element={<SimulatorsPage />} />

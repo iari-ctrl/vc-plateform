@@ -1,5 +1,6 @@
 import { Fragment, useCallback, useEffect, useId, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from 'react';
-import { Link, localizePath, useNavigate } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
+import { localizePath, useNavigate } from '@/i18n/navigation';
 import { useLocale } from '@/i18n/useLocale';
 import { ArrowUpRight } from 'lucide-react';
 import { glossaryBySlug, GLOSSARY } from '@/content';
@@ -345,17 +346,4 @@ export function Markdown({ source, className, glossaryPreview = false }: { sourc
       })}
     </div>
   );
-}
-
-/** Plain-text excerpt from markdown (for cards / previews). */
-export function plainText(source: string, max = 180): string {
-  const t = source
-    .replace(/\[\[[^\]|]+\|([^\]]+)\]\]/g, '$1')
-    .replace(/\[\[([^\]]+)\]\]/g, '$1')
-    .replace(/\{\{[^}|]+\|([^}]+)\}\}/g, '$1')
-    .replace(/\{\{([^}]+)\}\}/g, '$1')
-    .replace(/[#*_>-]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  return t.length > max ? t.slice(0, max).trimEnd() + '…' : t;
 }

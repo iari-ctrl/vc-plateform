@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { Link } from '@/i18n/routing';
 import { ArrowRight, BookOpen, ChevronDown, ChevronUp, ExternalLink, Search } from 'lucide-react';
-import { GLOSSARY, glossaryBySlug } from '@/content/glossary';
+import { GLOSSARY, glossaryBySlug, loadGlossaryDefs } from '@/content/glossary';
 import { lessonById } from '@/content/lessons';
 import { useApiData } from '@/hooks/useApiData';
 import { Markdown } from '@/lib/markdown';
 import { usePageMeta } from '@/lib/seo';
 import { safeHttpUrl } from '@/lib/utils';
-import type { GlossaryTerm } from '@/content/types';
+import type { GlossaryDef, GlossaryIndexEntry, GlossaryTerm } from '@/content/types';
 
 const ALPHABET = '0ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const DEFAULT_ANCHOR_OFFSET = 150;
@@ -59,10 +59,35 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+/** A glossary term whose heavy definition/example may not be loaded yet. */
+type IndexedTerm = GlossaryIndexEntry & Partial<GlossaryDef>;
+
+/** Placeholder shown in the expanded detail while the definitions chunk loads. */
+function DefinitionSkeleton() {
+  return (
+    <div className="mb-5 space-y-2.5">
+      <span className="sr-only">Chargement de la définition…</span>
+      {['100%', '94%', '97%', '72%'].map((w, i) => (
+        <div key={i} className="h-3.5 animate-pulse rounded bg-surface-container-high" style={{ width: w }} aria-hidden />
+      ))}
+    </div>
+  );
+}
+
 export default function GlossaryPage() {
-  usePageMeta('Dictionnaire du capital-risque', 'Les termes du venture, définis avec clarté : définitions, exemples et liens vers les cours associés.');
-  const { data: terms } = useApiData<GlossaryTerm[]>('/content/glossary', GLOSSARY);
   const [params, setParams] = useSearchParams();
+  const { slug: slugParam } = useParams();
+  // Deep-link by query (`?term=`) or path (`/glossary/:slug`); query wins so an
+  // in-page toggle overrides the URL the page was opened with.
+  const activeSlug = params.get('term') ?? slugParam ?? null;
+  const activeTerm = activeSlug ? glossaryBySlug(activeSlug) : undefined;
+  usePageMeta(
+    activeTerm ? `${activeTerm.term} · Dictionnaire du capital-risque` : 'Dictionnaire du capital-risque',
+    activeTerm?.short ?? 'Les termes du venture, définis avec clarté : définitions, exemples et liens vers les cours associés.',
+  );
+
+  const { data: terms } = useApiData<IndexedTerm[]>('/content/glossary', GLOSSARY);
+  const [defs, setDefs] = useState<Record<string, GlossaryDef> | null>(null);
   const [activeCategory, setActiveCategory] = useState('Tous');
   const [query, setQuery] = useState('');
   const [activeLetter, setActiveLetter] = useState('A');
@@ -73,9 +98,25 @@ export default function GlossaryPage() {
   const alphabetScrollerRef = useRef<HTMLDivElement>(null);
   const alphabetButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const scrollSpyFrame = useRef<number | null>(null);
-  const activeSlug = params.get('term');
 
-  const sortedTerms = useMemo(() => [...terms].sort((a, b) => a.term.localeCompare(b.term, 'fr')), [terms]);
+  // Heavy definitions load lazily; merge them in (preferring the server copy
+  // when the API already returned full terms) so the detail view and search
+  // have them once available.
+  useEffect(() => {
+    void loadGlossaryDefs().then(setDefs);
+  }, []);
+
+  const fullTerms = useMemo<GlossaryTerm[]>(
+    () =>
+      terms.map((t) =>
+        t.definition != null
+          ? (t as GlossaryTerm)
+          : { ...t, definition: defs?.[t.slug]?.definition ?? '', example: defs?.[t.slug]?.example },
+      ),
+    [terms, defs],
+  );
+
+  const sortedTerms = useMemo(() => [...fullTerms].sort((a, b) => a.term.localeCompare(b.term, 'fr')), [fullTerms]);
 
   const categories = useMemo(() => {
     return Array.from(new Set(sortedTerms.map((t) => t.category))).sort((a, b) => a.localeCompare(b, 'fr'));
@@ -186,10 +227,10 @@ export default function GlossaryPage() {
   }, [activeLetter, anchorOffset, isLetterFilterActive, visibleTerms.length]);
 
   useEffect(() => {
-    const activeTerm = activeSlug ? terms.find((t) => t.slug === activeSlug) : undefined;
-    if (!activeSlug || !activeTerm) return;
+    const target = activeSlug ? fullTerms.find((t) => t.slug === activeSlug) : undefined;
+    if (!activeSlug || !target) return;
     setExpandedSlugs((current) => new Set(current).add(activeSlug));
-    setActiveLetter(initialFor(activeTerm.term));
+    setActiveLetter(initialFor(target.term));
     setIsLetterFilterActive(true);
 
     const id = window.setTimeout(() => {
@@ -200,7 +241,7 @@ export default function GlossaryPage() {
     }, 80);
 
     return () => window.clearTimeout(id);
-  }, [activeSlug, terms]);
+  }, [activeSlug, fullTerms]);
 
   function toggleTerm(term: GlossaryTerm) {
     const isExpanded = expandedSlugs.has(term.slug);
@@ -258,7 +299,7 @@ export default function GlossaryPage() {
         <header className="mb-16 grid grid-cols-12 items-end gap-8">
           <div className="col-span-12 lg:col-span-9">
             <p className="mb-5 font-mono text-[0.625rem] font-semibold uppercase tracking-[0.3em] text-[color:var(--secondary)] dark:text-surface-variant">
-              Glossaire · {terms.length} entrées
+              Glossaire · {fullTerms.length} entrées
             </p>
             <h1 className="font-headline text-7xl leading-[0.95] text-foreground md:text-[5.5rem]">
               <span className="font-normal italic">Lexique</span> du{' '}
@@ -440,11 +481,15 @@ export default function GlossaryPage() {
                               <p className="mb-2 font-headline text-[0.625rem] uppercase tracking-[0.45em] text-[color-mix(in_srgb,var(--primary)_72%,transparent)] italic">
                                 Définition détaillée
                               </p>
-                              <Markdown
-                                source={term.definition}
-                                glossaryPreview
-                                className="mb-5 text-sm leading-relaxed text-surface-variant [&>p]:mb-3 [&>p:last-child]:mb-0 [&_ol]:mb-5 [&_ul]:mb-5"
-                              />
+                              {term.definition || defs ? (
+                                <Markdown
+                                  source={term.definition}
+                                  glossaryPreview
+                                  className="mb-5 text-sm leading-relaxed text-surface-variant [&>p]:mb-3 [&>p:last-child]:mb-0 [&_ol]:mb-5 [&_ul]:mb-5"
+                                />
+                              ) : (
+                                <DefinitionSkeleton />
+                              )}
 
                               {term.aliases && term.aliases.length > 0 && (
                                 <div className="mt-5">

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useNavigate } from '@/i18n/routing';
+import { useNavigate } from '@/i18n/navigation';
 import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft, Ghost, ScrollText } from 'lucide-react';
 import { api } from '@/lib/api';
 import type { SearchHit } from '@/content/search';

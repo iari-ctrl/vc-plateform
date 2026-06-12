@@ -8,7 +8,9 @@ import { ProgressRing, ProgressBar, SectionHeading, Reveal } from '@/components/
 import { KanjiSeal, Fleuron } from '@/components/ornaments/Ornaments';
 import { useUserData } from '@/context/UserDataContext';
 import { useAuth } from '@/context/AuthContext';
-import { plainText } from '@/lib/markdown';
+import { GuestBanner } from '@/components/ui/GuestBanner';
+import { useResumeLesson } from '@/hooks/useResumeLesson';
+import { plainText } from '@/lib/markdown-text';
 import { isDue } from '@/lib/decisionJournal';
 import { formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
@@ -24,11 +26,9 @@ export default function DashboardPage() {
   const doneCount = progressList.filter((p) => p.status === 'done').length;
   const globalPct = LESSONS.length ? Math.round((doneCount / LESSONS.length) * 100) : 0;
 
-  // Find a lesson to resume: most recently "reading", else first lesson of recommended path.
-  const reading = progressList.filter((p) => p.status === 'reading');
-  const resumeLesson = reading.length
-    ? lessonById(reading[reading.length - 1].lessonId)
-    : undefined;
+  // A started-but-unfinished lesson to resume; the card below falls back to a
+  // "first step" prompt when nothing is in progress.
+  const resumeLesson = useResumeLesson();
 
   const recPaths = learningProfile ? recommendedPaths(learningProfile, profile?.timeBudget) : PARCOURS.slice(0, 3);
   const suggestedLessons = learningProfile
@@ -59,6 +59,12 @@ export default function DashboardPage() {
           </div>
         </div>
       </Reveal>
+
+      <GuestBanner
+        className="mt-8"
+        message="Vous explorez en mode invité — votre progression et vos notes sont conservées sur cet appareil. Créez un espace pour les retrouver partout."
+        reason="Créez un espace pour synchroniser votre progression et vos notes entre vos appareils."
+      />
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
         {/* Left column */}

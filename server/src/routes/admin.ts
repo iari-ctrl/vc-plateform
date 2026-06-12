@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { prisma } from '../lib/db.js';
 import { requireAdmin } from '../lib/auth.js';
 import { stripHtml } from '../lib/content.js';
+import { ah } from '../lib/async-handler.js';
 
 export const adminRouter = Router();
 adminRouter.use(requireAdmin);
@@ -12,14 +13,14 @@ const slugify = (s: string) =>
     .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);
 
 // ── Dashboard stats ─────────────────────────────────────────────────────
-adminRouter.get('/stats', async (_req, res) => {
+adminRouter.get('/stats', ah(async (_req, res) => {
   const [paths, courses, lessons, glossary, cases, blog, simulators, users, notes] = await Promise.all([
     prisma.learningPath.count(), prisma.course.count(), prisma.lesson.count(),
     prisma.glossaryTerm.count(), prisma.caseStudy.count(), prisma.blogPost.count(),
     prisma.simulator.count(), prisma.user.count(), prisma.note.count(),
   ]);
   res.json({ paths, courses, lessons, glossary, cases, blog, simulators, users, notes });
-});
+}));
 
 // ── Glossary CRUD ─────────────────────────────────────────────────────────
 const glossarySchema = z.object({
@@ -34,12 +35,12 @@ const glossarySchema = z.object({
   relatedLessonIds: z.array(z.string()).default([]),
 });
 
-adminRouter.get('/glossary', async (_req, res) => {
+adminRouter.get('/glossary', ah(async (_req, res) => {
   const rows = await prisma.glossaryTerm.findMany({ orderBy: { term: 'asc' } });
   res.json(rows.map((r) => JSON.parse(r.data)));
-});
+}));
 
-adminRouter.post('/glossary', async (req, res) => {
+adminRouter.post('/glossary', ah(async (req, res) => {
   const parsed = glossarySchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
   const slug = parsed.data.slug || slugify(parsed.data.term);
@@ -52,9 +53,9 @@ adminRouter.post('/glossary', async (req, res) => {
   } catch {
     res.status(409).json({ error: 'Un terme avec ce slug existe déjà.' });
   }
-});
+}));
 
-adminRouter.put('/glossary/:id', async (req, res) => {
+adminRouter.put('/glossary/:id', ah(async (req, res) => {
   const parsed = glossarySchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
   const existing = await prisma.glossaryTerm.findUnique({ where: { id: req.params.id } });
@@ -64,12 +65,12 @@ adminRouter.put('/glossary/:id', async (req, res) => {
   const searchText = stripHtml([obj.term, obj.latin, obj.short, obj.definition, obj.example].filter(Boolean).join(' ')).toLowerCase();
   const row = await prisma.glossaryTerm.update({ where: { id: existing.id }, data: { slug, term: obj.term, category: obj.category, searchText, data: JSON.stringify(obj) } });
   res.json(JSON.parse(row.data));
-});
+}));
 
-adminRouter.delete('/glossary/:id', async (req, res) => {
+adminRouter.delete('/glossary/:id', ah(async (req, res) => {
   await prisma.glossaryTerm.delete({ where: { id: req.params.id } }).catch(() => null);
   res.json({ ok: true });
-});
+}));
 
 // ── Blog CRUD ──────────────────────────────────────────────────────────────
 const blogSchema = z.object({
@@ -85,12 +86,12 @@ const blogSchema = z.object({
   body: z.string().min(1),
 });
 
-adminRouter.get('/blog', async (_req, res) => {
+adminRouter.get('/blog', ah(async (_req, res) => {
   const rows = await prisma.blogPost.findMany({ orderBy: { date: 'desc' } });
   res.json(rows.map((r) => JSON.parse(r.data)));
-});
+}));
 
-adminRouter.post('/blog', async (req, res) => {
+adminRouter.post('/blog', ah(async (req, res) => {
   const parsed = blogSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
   const slug = parsed.data.slug || slugify(parsed.data.title);
@@ -103,9 +104,9 @@ adminRouter.post('/blog', async (req, res) => {
   } catch {
     res.status(409).json({ error: 'Un article avec ce slug existe déjà.' });
   }
-});
+}));
 
-adminRouter.put('/blog/:id', async (req, res) => {
+adminRouter.put('/blog/:id', ah(async (req, res) => {
   const parsed = blogSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
   const existing = await prisma.blogPost.findUnique({ where: { id: req.params.id } });
@@ -115,18 +116,18 @@ adminRouter.put('/blog/:id', async (req, res) => {
   const searchText = stripHtml([obj.title, obj.subtitle, obj.excerpt, obj.body].join(' ')).toLowerCase();
   const row = await prisma.blogPost.update({ where: { id: existing.id }, data: { slug, title: obj.title, category: obj.category, date: obj.date, searchText, data: JSON.stringify(obj) } });
   res.json(JSON.parse(row.data));
-});
+}));
 
-adminRouter.delete('/blog/:id', async (req, res) => {
+adminRouter.delete('/blog/:id', ah(async (req, res) => {
   await prisma.blogPost.delete({ where: { id: req.params.id } }).catch(() => null);
   res.json({ ok: true });
-});
+}));
 
 // ── Case studies (list + update data) ───────────────────────────────────────
-adminRouter.get('/case-studies', async (_req, res) => {
+adminRouter.get('/case-studies', ah(async (_req, res) => {
   const rows = await prisma.caseStudy.findMany({ orderBy: { title: 'asc' } });
   res.json(rows.map((r) => JSON.parse(r.data)));
-});
+}));
 
 const caseSchema = z.object({
   title: z.string().min(1),
@@ -142,7 +143,7 @@ const caseSchema = z.object({
   takeaways: z.array(z.string()).default([]),
 });
 
-adminRouter.put('/case-studies/:id', async (req, res) => {
+adminRouter.put('/case-studies/:id', ah(async (req, res) => {
   const parsed = caseSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
   const existing = await prisma.caseStudy.findUnique({ where: { id: req.params.id } });
@@ -151,4 +152,4 @@ adminRouter.put('/case-studies/:id', async (req, res) => {
   const searchText = stripHtml([obj.title, obj.subtitle, obj.summary, ...obj.sections.map((s) => s.heading + ' ' + s.body)].join(' ')).toLowerCase();
   const row = await prisma.caseStudy.update({ where: { id: existing.id }, data: { title: obj.title, kind: obj.kind, searchText, data: JSON.stringify(obj) } });
   res.json(JSON.parse(row.data));
-});
+}));

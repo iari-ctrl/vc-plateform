@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
 
@@ -6,39 +6,26 @@ import { useAuth } from '@/context/AuthContext';
  * Renders bundled content instantly, then overlays fresh data from the API when
  * the server is reachable. This keeps the app fully usable offline / as a guest,
  * while letting admin/CMS edits surface on the public site.
+ *
+ * Backed by TanStack Query: the bundled `fallback` is seeded as stale initial
+ * data so it shows immediately *and* triggers a background refetch, and results
+ * are cached/deduped across mounts (e.g. navigating back to a list page).
  */
 export function useApiData<T>(path: string | null, fallback: T) {
   const { apiUp, ready } = useAuth();
-  const [data, setData] = useState<T>(fallback);
-  const [loading, setLoading] = useState(false);
-  const fallbackRef = useRef(fallback);
-  fallbackRef.current = fallback;
+  const enabled = ready && apiUp && !!path;
 
-  useEffect(() => {
-    if (!ready) return;
-    if (!apiUp || !path) {
-      setData(fallbackRef.current);
-      return;
-    }
-    let active = true;
-    setLoading(true);
-    api
-      .get<T>(path)
-      .then((d) => {
-        if (active && d != null) setData(d);
-      })
-      .catch(() => {
-        if (active) setData(fallbackRef.current);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-    return () => {
-      active = false;
-    };
-  }, [path, apiUp, ready]);
+  const query = useQuery<T>({
+    queryKey: ['api', path],
+    queryFn: () => api.get<T>(path as string),
+    enabled,
+    // Seed the bundle and mark it stale so the API copy is fetched on mount.
+    initialData: fallback,
+    initialDataUpdatedAt: 0,
+  });
 
-  return { data, loading };
+  // `?? fallback` keeps the bundled copy if the API ever answers with null.
+  return { data: query.data ?? fallback, loading: query.isFetching };
 }
 
 /**
@@ -52,41 +39,25 @@ export function useApiData<T>(path: string | null, fallback: T) {
  */
 export function useApiItem<T>(path: string | null, fallback: T | undefined) {
   const { apiUp, ready } = useAuth();
-  const [item, setItem] = useState<T | undefined>(fallback);
-  const [settled, setSettled] = useState(false);
-  const fallbackRef = useRef(fallback);
-  fallbackRef.current = fallback;
+  const enabled = ready && apiUp && !!path;
 
-  useEffect(() => {
-    if (!ready) {
-      setItem(fallbackRef.current);
-      setSettled(false);
-      return;
-    }
-    if (!apiUp || !path) {
-      setItem(fallbackRef.current);
-      setSettled(true);
-      return;
-    }
-    let active = true;
-    setSettled(false);
-    setItem(fallbackRef.current);
-    api
-      .get<T>(path)
-      .then((d) => {
-        if (active && d != null) setItem(d);
-      })
-      .catch(() => {
-        if (active) setItem(fallbackRef.current);
-      })
-      .finally(() => {
-        if (active) setSettled(true);
-      });
-    return () => {
-      active = false;
-    };
-  }, [path, apiUp, ready]);
+  const query = useQuery<T>({
+    queryKey: ['api', path],
+    queryFn: () => api.get<T>(path as string),
+    enabled,
+    initialData: fallback,
+    initialDataUpdatedAt: 0,
+    // A missing item is a 404, not a transient failure — don't retry.
+    retry: false,
+  });
 
-  // Pending only when we have nothing to show yet and the API hasn't answered.
+  const item = query.data ?? fallback;
+
+  // "Settled" = we've concluded what to show: auth isn't ready yet (can't fetch,
+  // so we only know once a bundled copy exists), the query is disabled
+  // (offline / no path → the bundle is the final answer), or it has resolved.
+  const settled = !ready ? false : !enabled || query.isSuccess || query.isError;
+
+  // Pending only when we have nothing to show yet and haven't settled.
   return { item, pending: !settled && item == null };
 }

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react';
-import { Link, useNavigate } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
+import { useNavigate } from '@/i18n/navigation';
 import { ArrowRight, Compass as CompassIcon, LocateFixed, Minus, Plus } from 'lucide-react';
 import { IKIGAI } from '@/content/ikigai';
 import { PARCOURS, FAMILY_META, lessonIdsForParcours, t, type Parcours } from '@/content/parcours';

@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Link } from '@/i18n/routing';
-import { Trash2, Quote, Highlighter, StickyNote, Plus, Bookmark as BookmarkIcon, UserPlus } from 'lucide-react';
+import { Trash2, Quote, Highlighter, StickyNote, Plus, Bookmark as BookmarkIcon } from 'lucide-react';
 import { useUserData } from '@/context/UserDataContext';
-import { useAuth } from '@/context/AuthContext';
-import { useUI } from '@/context/UIContext';
 import { SectionHeading, EmptyState } from '@/components/ui/primitives';
+import { GuestBanner } from '@/components/ui/GuestBanner';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { IkigaiCahierSummary } from '@/components/ikigai/IkigaiCahierSummary';
 import { formatDateFr } from '@/lib/utils';
@@ -27,8 +26,6 @@ const FILTERS = [
 export default function NotesPage() {
   usePageMeta('Notes & favoris', 'Votre carnet de citations, surlignages et notes, et vos contenus enregistrés.');
   const { notes, bookmarks, addNote, deleteNote, toggleBookmark } = useUserData();
-  const { isAuthed, apiUp } = useAuth();
-  const { openAuth } = useUI();
   const [filter, setFilter] = useState('all');
   const [draft, setDraft] = useState('');
   const [pendingDelete, setPendingDelete] = useState<Note | null>(null);
@@ -46,13 +43,11 @@ export default function NotesPage() {
     <div className="mx-auto max-w-[var(--content-max)] px-4 py-14 sm:px-6 lg:px-8">
       <SectionHeading eyebrow="Le commonplace book" title="Notes & favoris" description="Vos citations, surlignages et réflexions, capturés au fil de la lecture. Le carnet de l’apprenant actif." />
 
-      {!isAuthed && apiUp && (
-        <div className="mt-8 flex items-center gap-4 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] px-6 py-4">
-          <UserPlus size={20} className="shrink-0 text-[color:var(--primary)]" />
-          <p className="flex-1 text-sm text-surface-variant">Vous travaillez en mode invité — vos notes sont conservées sur cet appareil. Créez un espace pour les retrouver partout.</p>
-          <button onClick={() => openAuth('Créez un espace pour synchroniser votre carnet entre vos appareils.')} className="btn-ghost shrink-0">Créer mon espace</button>
-        </div>
-      )}
+      <GuestBanner
+        className="mt-8"
+        message="Vous travaillez en mode invité — vos notes sont conservées sur cet appareil. Créez un espace pour les retrouver partout."
+        reason="Créez un espace pour synchroniser votre carnet entre vos appareils."
+      />
 
       <IkigaiCahierSummary className="mt-8" />
 

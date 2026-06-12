@@ -11,6 +11,7 @@ dist
 server/prisma/*.db
 server/prisma/*.db-journal
 server/prisma/dev.db*
+server/prisma/test.db*
 
 # Logs
 *.log

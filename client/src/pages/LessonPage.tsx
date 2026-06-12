@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link, useNavigate } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
+import { useNavigate } from '@/i18n/navigation';
 import { ArrowLeft, ArrowRight, Check, Clock, Sparkles, BookMarked, ArrowUpRight } from 'lucide-react';
 import { lessonBySlug, lessonById, courseById, lessonsForCourse, simulatorBySlug, caseById, glossaryBySlug } from '@/content';
 import { parcoursById, parcoursForLesson, t, type Parcours } from '@/content/parcours';
