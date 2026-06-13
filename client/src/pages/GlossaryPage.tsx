@@ -47,6 +47,18 @@ function initialFor(term: string) {
   return /^[A-Z]$/.test(initial) ? initial : '0';
 }
 
+/** Second character of the term, normalized like {@link initialFor} (non-letters → '0'). */
+function secondInitialFor(term: string) {
+  const second = term
+    .trim()
+    .charAt(1)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toUpperCase();
+
+  return /^[A-Z]$/.test(second) ? second : '0';
+}
+
 function matchesQuery(term: GlossaryTerm, query: string) {
   const q = query.trim().toLowerCase();
   if (!q) return true;
@@ -93,6 +105,7 @@ export default function GlossaryPage() {
   const [activeCategory, setActiveCategory] = useState('Tous');
   const [query, setQuery] = useState('');
   const [activeLetter, setActiveLetter] = useState('A');
+  const [activeSecondLetter, setActiveSecondLetter] = useState('');
   const [isLetterFilterActive, setIsLetterFilterActive] = useState(true);
   const [anchorOffset, setAnchorOffset] = useState(DEFAULT_ANCHOR_OFFSET);
   const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(new Set());
@@ -134,13 +147,25 @@ export default function GlossaryPage() {
     return Array.from(new Set(filteredTerms.map((term) => initialFor(term.term)))).sort((a, b) => ALPHABET.indexOf(a) - ALPHABET.indexOf(b));
   }, [filteredTerms]);
   const availableInitials = useMemo(() => new Set(availableLetters), [availableLetters]);
+  // Terms under the active first letter — the scope the second-letter filter refines.
+  const letterTerms = useMemo(
+    () => (isLetterFilterActive ? filteredTerms.filter((term) => initialFor(term.term) === activeLetter) : []),
+    [filteredTerms, activeLetter, isLetterFilterActive],
+  );
+  const availableSecondLetters = useMemo(
+    () =>
+      Array.from(new Set(letterTerms.map((term) => secondInitialFor(term.term)))).sort(
+        (a, b) => ALPHABET.indexOf(a) - ALPHABET.indexOf(b),
+      ),
+    [letterTerms],
+  );
   const visibleTerms = useMemo(() => {
     const termsForScope = isLetterFilterActive
-      ? filteredTerms.filter((term) => initialFor(term.term) === activeLetter)
+      ? letterTerms.filter((term) => !activeSecondLetter || secondInitialFor(term.term) === activeSecondLetter)
       : filteredTerms;
 
-    return termsForScope.sort((a, b) => a.term.localeCompare(b.term, 'fr', { sensitivity: 'base' }));
-  }, [filteredTerms, activeLetter, isLetterFilterActive]);
+    return [...termsForScope].sort((a, b) => a.term.localeCompare(b.term, 'fr', { sensitivity: 'base' }));
+  }, [letterTerms, filteredTerms, activeSecondLetter, isLetterFilterActive]);
   const anchorStyle = { '--glossary-anchor-offset': `${anchorOffset}px` } as CSSProperties;
 
   const updateAnchorOffset = useCallback(() => {
@@ -165,6 +190,16 @@ export default function GlossaryPage() {
       window.removeEventListener('resize', updateAnchorOffset);
     };
   }, [updateAnchorOffset]);
+
+  // The second-letter refinement only makes sense within one first letter.
+  useEffect(() => {
+    setActiveSecondLetter('');
+  }, [activeLetter, isLetterFilterActive]);
+
+  // Drop the refinement if a query/category change empties its bucket.
+  useEffect(() => {
+    if (activeSecondLetter && !availableSecondLetters.includes(activeSecondLetter)) setActiveSecondLetter('');
+  }, [availableSecondLetters, activeSecondLetter]);
 
   useEffect(() => {
     setActiveLetter((current) => {
@@ -233,6 +268,7 @@ export default function GlossaryPage() {
     if (!activeSlug || !target) return;
     setExpandedSlugs((current) => new Set(current).add(activeSlug));
     setActiveLetter(initialFor(target.term));
+    setActiveSecondLetter('');
     setIsLetterFilterActive(true);
 
     const id = window.setTimeout(() => {
@@ -264,6 +300,7 @@ export default function GlossaryPage() {
 
   function jumpToLetter(letter: string) {
     setActiveLetter(letter);
+    setActiveSecondLetter('');
     setIsLetterFilterActive(true);
     document.getElementById('glossary-results')?.scrollIntoView({
       behavior: prefersReducedMotion() ? 'auto' : 'smooth',
@@ -282,6 +319,7 @@ export default function GlossaryPage() {
     setActiveCategory('Tous');
     if (related) {
       setActiveLetter(initialFor(related.term));
+      setActiveSecondLetter('');
       setIsLetterFilterActive(true);
     }
     setExpandedSlugs((current) => new Set(current).add(slug));
@@ -415,13 +453,50 @@ export default function GlossaryPage() {
             </div>
           ) : (
             <div className="mb-12">
-              <div className="mb-6 flex items-baseline gap-6 border-b border-[color-mix(in_srgb,var(--outline)_12%,transparent)] pb-3">
+              <div className="mb-6 flex flex-wrap items-baseline gap-x-6 gap-y-3 border-b border-[color-mix(in_srgb,var(--outline)_12%,transparent)] pb-3">
                 <span className="font-headline text-6xl leading-none text-[color:var(--primary)]">
-                  {isLetterFilterActive ? activeLetter : 'Tous'}
+                  {!isLetterFilterActive
+                    ? 'Tous'
+                    : activeSecondLetter && activeSecondLetter !== '0'
+                      ? `${activeLetter}${activeSecondLetter.toLowerCase()}`
+                      : activeLetter}
                 </span>
                 <span className="font-headline text-[0.625rem] uppercase tracking-[0.45em] text-[color-mix(in_srgb,var(--primary)_72%,transparent)] italic">
                   {visibleTerms.length} entrée{visibleTerms.length > 1 ? 's' : ''}
                 </span>
+                {isLetterFilterActive && availableSecondLetters.length > 1 && (
+                  <div
+                    className="flex min-w-0 flex-1 items-center justify-end gap-3 self-center"
+                    role="group"
+                    aria-label="Filtrer par deuxième lettre"
+                  >
+                    <span className="shrink-0 font-headline text-[0.625rem] uppercase tracking-[0.35em] text-[color-mix(in_srgb,var(--primary)_72%,transparent)] italic">
+                      2ᵉ lettre
+                    </span>
+                    <div className="-mx-1 overflow-x-auto px-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                      <div className="flex min-w-max items-center gap-1">
+                        {availableSecondLetters.map((letter) => {
+                          const isActive = activeSecondLetter === letter;
+                          return (
+                            <button
+                              key={letter}
+                              type="button"
+                              onClick={() => setActiveSecondLetter(isActive ? '' : letter)}
+                              aria-pressed={isActive}
+                              className={`flex h-7 min-w-7 items-center justify-center rounded-full border px-1.5 font-headline text-sm leading-none transition-all ${
+                                isActive
+                                  ? 'border-[color-mix(in_srgb,var(--primary)_42%,transparent)] bg-[color-mix(in_srgb,var(--primary)_12%,transparent)] text-[color:var(--primary)] shadow-editorial-xs'
+                                  : 'cursor-pointer border-transparent text-surface-variant hover:border-[color-mix(in_srgb,var(--primary)_24%,transparent)] hover:bg-surface-container-low hover:text-[color:var(--primary)]'
+                              }`}
+                            >
+                              {letter}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {visibleTerms.length === 0 ? (

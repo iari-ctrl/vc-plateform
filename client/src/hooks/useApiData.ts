@@ -33,8 +33,14 @@ export function useApiData<T>(path: string | null, fallback: T, options?: { stal
     ...(options?.staleTime !== undefined && { staleTime: options.staleTime }),
   });
 
-  // `?? fallback` keeps the bundled copy if the API ever answers with null.
-  return { data: query.data ?? fallback, loading: query.isFetching };
+  // Keep the bundled copy if the API answers with null *or* an empty list while
+  // the bundle has content — an empty array (e.g. an un-seeded DB) must not blank
+  // a page that ships with editorial content.
+  const fresh = query.data;
+  const keepFallback =
+    fresh == null ||
+    (Array.isArray(fresh) && fresh.length === 0 && Array.isArray(fallback) && fallback.length > 0);
+  return { data: keepFallback ? fallback : fresh, loading: query.isFetching };
 }
 
 /**

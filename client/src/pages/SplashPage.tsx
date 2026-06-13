@@ -1,8 +1,18 @@
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type HTMLAttributes, type MouseEvent as ReactMouseEvent } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type HTMLAttributes,
+  type MouseEvent as ReactMouseEvent,
+  type RefObject,
+} from 'react';
 import { Link } from '@/i18n/routing';
 import { ArrowRight, Moon, Sun } from 'lucide-react';
 import { CompassIkigaiIntro } from '@/components/splash/CompassIkigaiIntro';
-import { Constellation, WaxSeal } from '@/components/ornaments/Illustrations';
+import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { Fleuron } from '@/components/ornaments/Ornaments';
 import { useTheme } from '@/context/ThemeContext';
 import { cn } from '@/lib/utils';
@@ -11,6 +21,12 @@ import '@/styles/splash.css';
 
 type SplashMode = 'light' | 'dark';
 
+// ── Mode transition ("Aube") timing ─────────────────────────────────────────
+// The dawn switch: the sky tips over, a horizon flare blooms, and the stars
+// light up one by one while the compass and title stay rooted in place.
+const DUR = 1600;
+
+// ── Kanji seals — unchanged from the current splash (do not touch) ───────────
 type Seal = {
   glyph: string;
   accent: string;
@@ -35,6 +51,35 @@ const DARK_SEALS: Seal[] = [
   { glyph: '論', accent: '#A68AA9', pos: { right: 110, top: 230 }, size: 40, motion: 'splash-float-slow', delay: '0.7s', depth: 24 },
   { glyph: '観', accent: '#3FB0C4', pos: { left: 150, bottom: 210 }, size: 38, motion: 'splash-float-x', delay: '1.4s', depth: 20 },
   { glyph: '業', accent: '#C5A85C', pos: { right: 150, bottom: 196 }, size: 44, motion: 'splash-float', delay: '2.1s', depth: 34 },
+];
+
+// ── Constellation + scattered night stars ────────────────────────────────────
+type StarPoint = { x: number; y: number; r: number; base: number; sd: string; td: string };
+
+const CONSTELLATION: [number, number, number][] = [
+  [12, 22, 1.6], [26, 14, 1.1], [38, 30, 2.1], [55, 18, 1.3], [70, 34, 1.7], [82, 20, 1.1], [90, 44, 1.9],
+  [64, 52, 1.2], [44, 58, 1.5], [20, 50, 1.2], [8, 66, 1.6], [33, 76, 1.1], [58, 78, 1.8], [78, 68, 1.2],
+];
+const LINKS: [number, number][] = [
+  [0, 1], [1, 3], [3, 5], [2, 3], [4, 6], [4, 7], [7, 8], [8, 9], [9, 10], [8, 11], [11, 12], [12, 13], [6, 13],
+];
+
+function rand(min: number, max: number) {
+  return min + Math.random() * (max - min);
+}
+
+// Built once per session so every star keeps a stable, individual twinkle rhythm
+// across re-renders (parallax updates re-render this subtree frequently).
+const STARS: StarPoint[] = [
+  ...CONSTELLATION.map(([x, y, r]) => ({ x, y, r, base: 0.9, sd: `${rand(0, 1.1).toFixed(2)}s`, td: `${rand(3, 6.2).toFixed(2)}s` })),
+  ...Array.from({ length: 26 }, () => ({
+    x: +rand(0, 100).toFixed(1),
+    y: +rand(0, 72).toFixed(1),
+    r: +rand(0.3, 0.85).toFixed(2),
+    base: 0.7,
+    sd: `${rand(0, 1.1).toFixed(2)}s`,
+    td: `${rand(3, 6.2).toFixed(2)}s`,
+  })),
 ];
 
 function isReducedMotion() {
@@ -123,19 +168,14 @@ function MemoCorners() {
   );
 }
 
-function DriftingSeals({ seals, mx, my }: { seals: Seal[]; mx: number; my: number }) {
+function DriftingSeals({ seals, variant, mx, my }: { seals: Seal[]; variant: 'light' | 'dark'; mx: number; my: number }) {
   return (
-    <div className="splash-seals" aria-hidden>
+    <div className={cn('splash-seals', `splash-seals-${variant}`)} aria-hidden>
       {seals.map((seal) => (
         <div
           key={seal.glyph}
           className="splash-seal-parallax"
-          style={
-            {
-              ...seal.pos,
-              transform: `translate3d(${mx * seal.depth}px, ${my * seal.depth}px, 0)`,
-            } as CSSProperties
-          }
+          style={{ ...seal.pos, transform: `translate3d(${mx * seal.depth}px, ${my * seal.depth}px, 0)` } as CSSProperties}
         >
           <div className={seal.motion} style={{ animationDelay: seal.delay }}>
             <WaxSeal glyph={seal.glyph} accent={seal.accent} size={seal.size} />
@@ -146,9 +186,36 @@ function DriftingSeals({ seals, mx, my }: { seals: Seal[]; mx: number; my: numbe
   );
 }
 
-function EnterCue({ dark, className }: { dark?: boolean; className?: string }) {
+function NightStars({ hostRef, revealed, transform }: { hostRef: RefObject<HTMLDivElement | null>; revealed: boolean; transform: string }) {
   return (
-    <Link to="/home" className={cn('splash-enter splash-rise', dark && 'is-dark', className)} style={{ '--d': '2.62s' } as CSSProperties}>
+    <div ref={hostRef} className={cn('splash-stars', revealed && 'reveal')} style={{ transform }} aria-hidden>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" className="splash-cl-svg">
+        <g className="splash-cl-lines" stroke="currentColor" strokeWidth="0.16">
+          {LINKS.map(([a, b], i) => (
+            <line key={i} x1={CONSTELLATION[a][0]} y1={CONSTELLATION[a][1]} x2={CONSTELLATION[b][0]} y2={CONSTELLATION[b][1]} />
+          ))}
+        </g>
+        <g fill="currentColor">
+          {STARS.map((s, i) => (
+            <circle
+              key={i}
+              cx={s.x}
+              cy={s.y}
+              r={s.r}
+              className="splash-star"
+              opacity={s.base}
+              style={{ '--sd': s.sd, '--td': s.td } as CSSProperties}
+            />
+          ))}
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function EnterCue() {
+  return (
+    <Link to="/home" className="splash-enter splash-rise" style={{ '--d': '2.62s' } as CSSProperties}>
       <span className="splash-enter-disc" aria-hidden>
         <span />
         <span />
@@ -159,65 +226,6 @@ function EnterCue({ dark, className }: { dark?: boolean; className?: string }) {
   );
 }
 
-function SplashAtlas({ active, mx, my }: { active: boolean; mx: number; my: number }) {
-  return (
-    <div className={cn('splash-layer splash-layer-light', active && 'is-active')} aria-hidden={!active} inert={!active}>
-      <div className="splash-photo-bg" style={{ transform: `scale(1.03) translate3d(${mx * -10}px, ${my * -8}px, 0)` }} />
-      <MemoCorners />
-      <div className="splash-constellation-wrap" style={{ transform: `translate3d(${mx * -14}px, ${my * -6}px, 0)` }} aria-hidden>
-        <Constellation className="splash-constellation splash-constellation-light" hue="var(--primary)" />
-      </div>
-      <DriftingSeals seals={LIGHT_SEALS} mx={mx} my={my} />
-
-      <div className="splash-layer-center">
-        <span className="splash-kicker splash-rise" style={{ '--d': '0.1s' } as CSSProperties}>
-          <Fleuron className="text-[0.8rem]" /> VC Premium Experience <Fleuron className="text-[0.8rem]" />
-        </span>
-
-        <div className="splash-focal splash-focal-light">
-          <CompassIkigaiIntro size={188} hue="#FFF3B0" speed={1} className="splash-compass" />
-        </div>
-
-        <h1 id={active ? 'splash-title' : undefined} className="splash-title splash-rise" style={{ '--d': '2.4s' } as CSSProperties}>
-          Comprendre le venture. <span>Vous comprendre.</span>
-        </h1>
-
-        <EnterCue />
-      </div>
-    </div>
-  );
-}
-
-function SplashConstellation({ active, mx, my }: { active: boolean; mx: number; my: number }) {
-  return (
-    <div className={cn('splash-layer splash-layer-dark', active && 'is-active')} aria-hidden={!active} inert={!active}>
-      <div className="splash-photo-bg" style={{ transform: `scale(1.03) translate3d(${mx * -10}px, ${my * -8}px, 0)` }} />
-      <div className="splash-night-veil" />
-      <div className="splash-constellation-wrap" style={{ transform: `translate3d(${mx * -16}px, ${my * -8}px, 0)` }} aria-hidden>
-        <Constellation className="splash-constellation splash-constellation-dark" hue="var(--primary)" />
-      </div>
-      <DriftingSeals seals={DARK_SEALS} mx={mx} my={my} />
-      <MemoCorners />
-
-      <div className="splash-layer-center">
-        <span className="splash-kicker splash-rise" style={{ '--d': '0.1s' } as CSSProperties}>
-          <Fleuron className="text-[0.8rem]" /> VC Premium Experience <Fleuron className="text-[0.8rem]" />
-        </span>
-
-        <div className="splash-focal splash-focal-dark">
-          <CompassIkigaiIntro size={158} hue="var(--primary)" speed={1} className="splash-compass" />
-        </div>
-
-        <h1 id={active ? 'splash-title' : undefined} className="splash-title splash-rise" style={{ '--d': '2.4s' } as CSSProperties}>
-          Comprendre le venture. <span>Vous comprendre.</span>
-        </h1>
-
-        <EnterCue dark />
-      </div>
-    </div>
-  );
-}
-
 export default function SplashPage() {
   usePageMeta('Entrer', 'Un portail visuel pour entrer dans VC Premium Experience, entre atlas vivant et ciel de navigation.');
 
@@ -225,17 +233,223 @@ export default function SplashPage() {
   // chosen at the portal carries into the app (and matches the in-app toggle).
   const { theme, toggle } = useTheme();
   const [bind, mx, my] = useParallax();
-  const dark = theme === 'dark';
+
+  const photoLightRef = useRef<HTMLDivElement>(null);
+  const photoDarkRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const starsRef = useRef<HTMLDivElement>(null);
+
+  // Drives the constellation reveal (lines drawing in + stars popping on) and the
+  // shooting-star loop. Starts already revealed when the portal opens in dark.
+  const [revealed, setRevealed] = useState(theme === 'dark');
+
+  // Latest mode, read inside async animation callbacks that may outlive a toggle.
+  const modeRef = useRef(theme);
+  modeRef.current = theme;
+  const anims = useRef<Animation[]>([]);
+  const starsTimer = useRef<number | null>(null);
+  const firstRun = useRef(true);
+
+  // ── Transition engine ──────────────────────────────────────────────────────
+  // Photo opacity/filter and the glow flare are driven imperatively (Web
+  // Animations API) so they never fight React's render — which only writes the
+  // parallax `transform` on these same elements.
+  const finishTo = useCallback((mode: SplashMode) => {
+    anims.current.forEach((a) => {
+      try {
+        a.cancel();
+      } catch {
+        /* already settled */
+      }
+    });
+    anims.current = [];
+    if (photoDarkRef.current) photoDarkRef.current.style.opacity = mode === 'dark' ? '1' : '0';
+    if (photoLightRef.current) photoLightRef.current.style.filter = '';
+    if (glowRef.current) glowRef.current.style.opacity = '0';
+  }, []);
+
+  const interrupt = useCallback(() => {
+    if (starsTimer.current != null) {
+      window.clearTimeout(starsTimer.current);
+      starsTimer.current = null;
+    }
+    if (!anims.current.length) return;
+    // Freeze the in-flight values onto inline styles before cancelling, so a
+    // rapid re-toggle resumes from where it was rather than snapping.
+    const dark = photoDarkRef.current;
+    const light = photoLightRef.current;
+    const snapOpacity = dark ? getComputedStyle(dark).opacity : '0';
+    const snapFilter = light ? getComputedStyle(light).filter : 'none';
+    anims.current.forEach((a) => {
+      try {
+        a.cancel();
+      } catch {
+        /* already settled */
+      }
+    });
+    anims.current = [];
+    if (dark) dark.style.opacity = snapOpacity;
+    if (light) light.style.filter = snapFilter === 'none' ? '' : snapFilter;
+    if (glowRef.current) glowRef.current.style.opacity = '0';
+  }, []);
+
+  const aube = useCallback(
+    (toDark: boolean) => {
+      const glow = glowRef.current;
+      const light = photoLightRef.current;
+      const dark = photoDarkRef.current;
+      if (!glow || !light || !dark) return;
+      const push = (a: Animation) => anims.current.push(a);
+
+      // Horizon flare that blooms then fades through the switch.
+      push(
+        glow.animate([{ opacity: 0 }, { opacity: toDark ? 0.95 : 0.8, offset: 0.42 }, { opacity: 0 }], {
+          duration: Math.round(DUR * 1.25),
+          easing: 'cubic-bezier(.4,0,.4,1)',
+        }),
+      );
+
+      if (toDark) {
+        push(
+          light.animate([{ filter: 'brightness(1) saturate(1)' }, { filter: 'brightness(0.45) saturate(0.7)' }], {
+            duration: DUR,
+            easing: 'cubic-bezier(.55,.05,.55,1)',
+            fill: 'forwards',
+          }),
+        );
+        const fade = dark.animate([{ opacity: 0 }, { opacity: 1 }], {
+          duration: DUR,
+          easing: 'cubic-bezier(.5,.05,.35,1)',
+          fill: 'forwards',
+        });
+        push(fade);
+        fade.finished.then(() => modeRef.current === 'dark' && finishTo('dark')).catch(() => {});
+        // Stars light up once the sky is half-turned.
+        starsTimer.current = window.setTimeout(() => setRevealed(true), Math.round(DUR * 0.5));
+      } else {
+        setRevealed(false);
+        push(
+          light.animate([{ filter: 'brightness(0.45) saturate(0.7)' }, { filter: 'brightness(1) saturate(1)' }], {
+            duration: Math.round(DUR * 1.05),
+            easing: 'cubic-bezier(.35,.1,.25,1)',
+            fill: 'forwards',
+          }),
+        );
+        const fade = dark.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: DUR,
+          easing: 'cubic-bezier(.5,.1,.35,1)',
+          fill: 'forwards',
+        });
+        push(fade);
+        fade.finished.then(() => modeRef.current === 'light' && finishTo('light')).catch(() => {});
+      }
+    },
+    [finishTo],
+  );
+
+  useLayoutEffect(() => {
+    interrupt();
+    if (firstRun.current) {
+      // First paint: settle to the opening mode without playing a transition.
+      firstRun.current = false;
+      finishTo(theme);
+      setRevealed(theme === 'dark');
+      return;
+    }
+    if (isReducedMotion()) {
+      finishTo(theme);
+      setRevealed(theme === 'dark');
+      return;
+    }
+    aube(theme === 'dark');
+  }, [theme, aube, finishTo, interrupt]);
+
+  // ── Shooting stars — occasional passes, dark mode only ─────────────────────
+  useEffect(() => {
+    if (theme !== 'dark' || isReducedMotion()) return undefined;
+    let timer: number;
+    let cancelled = false;
+
+    const spawn = () => {
+      const host = starsRef.current;
+      if (!host) return;
+      const el = document.createElement('div');
+      el.className = 'splash-shoot';
+      const ang = 16 + Math.random() * 24;
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      const rot = `rotate(${dir > 0 ? ang : 180 - ang}deg)`;
+      el.style.left = `${12 + Math.random() * 72}%`;
+      el.style.top = `${4 + Math.random() * 32}%`;
+      host.appendChild(el);
+      const dist = 300 + Math.random() * 280;
+      const a = el.animate(
+        [
+          { transform: `${rot} translateX(0) scaleX(0.3)`, opacity: 0 },
+          { opacity: 0.95, offset: 0.12 },
+          { transform: `${rot} translateX(${dist * 0.7}px) scaleX(1)`, opacity: 0.85, offset: 0.7 },
+          { transform: `${rot} translateX(${dist}px) scaleX(0.55)`, opacity: 0 },
+        ],
+        { duration: 850 + Math.random() * 650, easing: 'cubic-bezier(.25,.6,.45,1)' },
+      );
+      a.finished.then(() => el.remove()).catch(() => el.remove());
+    };
+
+    const loop = () => {
+      timer = window.setTimeout(() => {
+        if (!cancelled && !document.hidden) {
+          spawn();
+          // Now and then a second one follows in its wake.
+          if (Math.random() < 0.35) window.setTimeout(spawn, 220 + Math.random() * 480);
+        }
+        loop();
+      }, 3200 + Math.random() * 5800);
+    };
+    loop();
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [theme]);
 
   const onChange = (next: SplashMode) => {
     if (next !== theme) toggle();
   };
 
+  const photoTransform = `scale(1.04) translate3d(${mx * -10}px, ${my * -8}px, 0)`;
+  const starsTransform = `translate3d(${mx * -14}px, ${my * -6}px, 0)`;
+
   return (
-    <section className={cn('splash-portal', dark ? 'splash-dark' : 'splash-light')} aria-labelledby="splash-title">
+    <section className="splash-portal" data-mode={theme} aria-labelledby="splash-title">
       <div className="splash-stage" {...bind}>
-        <SplashAtlas active={!dark} mx={mx} my={my} />
-        <SplashConstellation active={dark} mx={mx} my={my} />
+        <div className="splash-photos" aria-hidden>
+          <div ref={photoLightRef} className="splash-photo splash-photo-light" style={{ transform: photoTransform }} />
+          <div ref={photoDarkRef} className="splash-photo splash-photo-dark" style={{ transform: photoTransform }} />
+        </div>
+
+        <NightStars hostRef={starsRef} revealed={revealed} transform={starsTransform} />
+        <div ref={glowRef} className="splash-glow" aria-hidden />
+
+        <DriftingSeals seals={LIGHT_SEALS} variant="light" mx={mx} my={my} />
+        <DriftingSeals seals={DARK_SEALS} variant="dark" mx={mx} my={my} />
+        <MemoCorners />
+
+        <div className="splash-content">
+          <span className="splash-kicker splash-rise" style={{ '--d': '0.1s' } as CSSProperties}>
+            <Fleuron className="text-[0.8rem]" /> VC Premium Experience <Fleuron className="text-[0.8rem]" />
+          </span>
+
+          <div className="splash-focal splash-rise" style={{ '--d': '0.18s' } as CSSProperties}>
+            <CompassIkigaiIntro size={188} hue="currentColor" speed={1} className="splash-compass" />
+          </div>
+
+          <h1 id="splash-title" className="splash-title splash-rise" style={{ '--d': '2.4s' } as CSSProperties}>
+            Comprendre le venture. <span>Vous comprendre.</span>
+          </h1>
+
+          <EnterCue />
+        </div>
+
         <ModeToggle mode={theme} onChange={onChange} />
       </div>
     </section>

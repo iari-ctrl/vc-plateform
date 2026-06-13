@@ -9,6 +9,13 @@ export const LEVEL_LABEL: Record<string, string> = {
   tous: 'Tous niveaux',
 };
 
+/** Nature d'un dossier « Décortiquer un écosystème ». JSON-free — usable from cards. */
+export const ECOSYSTEM_KIND_LABEL: Record<string, string> = {
+  geographie: 'Géographie',
+  secteur: 'Secteur',
+  these: 'Thèse transverse',
+};
+
 export function lessonHref(lesson: { slug: string }) {
   return `/lessons/${lesson.slug}`;
 }

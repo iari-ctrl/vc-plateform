@@ -5,7 +5,7 @@ import { useUserData } from '@/context/UserDataContext';
 
 interface Props {
   source: string;
-  sourceType: 'lesson' | 'case' | 'blog' | 'anti-portfolio' | 'memo';
+  sourceType: 'lesson' | 'case' | 'blog' | 'anti-portfolio' | 'memo' | 'ecosystem';
   sourceId: string;
   sourceTitle: string;
   className?: string;

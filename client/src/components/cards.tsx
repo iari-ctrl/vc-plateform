@@ -4,10 +4,10 @@ import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { LevelBadge, ProgressBar, ProgressRing } from '@/components/ui/primitives';
 import { lessonIdsForPath } from '@/content/courses';
 import { FAMILY_META, lessonIdsForParcours, t } from '@/content/parcours';
-import { LEVEL_LABEL } from '@/content/labels';
+import { ECOSYSTEM_KIND_LABEL, LEVEL_LABEL } from '@/content/labels';
 import { useUserData } from '@/context/UserDataContext';
 import { formatDateFr, pluralize } from '@/lib/utils';
-import type { BlogPost, CaseStudy, Course, Path, Simulator } from '@/content/types';
+import type { BlogPost, CaseStudy, Course, EcosystemDossier, Path, Simulator } from '@/content/types';
 import type { Parcours } from '@/content/parcours';
 
 function usePathProgress(pathId: string) {
@@ -184,10 +184,45 @@ export function BlogCard({ post, featured = false }: { post: BlogPost; featured?
         {post.title}
       </h3>
       <p className="mt-2 line-clamp-2 text-sm italic text-surface-variant">{post.subtitle}</p>
+      {post.books && post.books.length > 0 && (
+        <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-surface-variant">
+          <BookOpen size={13} />
+          {post.books.map((b) => `${b.title} — ${b.author}${b.year ? ` (${b.year})` : ''}`).join(' · ')}
+        </p>
+      )}
       <p className={`mt-3 flex-1 text-sm leading-relaxed text-surface-variant ${featured ? 'line-clamp-4' : 'line-clamp-3'}`}>{post.excerpt}</p>
       <div className="mt-5 flex items-center justify-between text-xs text-surface-variant">
         <span>{post.author}</span>
         <span className="inline-flex items-center gap-1.5"><Clock size={13} /> {post.readMin} min</span>
+      </div>
+    </Link>
+  );
+}
+
+export function EcosystemCard({ dossier, featured = false }: { dossier: EcosystemDossier; featured?: boolean }) {
+  return (
+    <Link
+      to={`/ecosystemes/${dossier.slug}`}
+      className={`premium-card premium-card-hover group flex flex-col p-6 ${featured ? 'md:p-8' : ''}`}
+      style={{ borderTopColor: `color-mix(in srgb, ${dossier.accent} 50%, transparent)`, borderTopWidth: 2 }}
+    >
+      <div className="flex items-center justify-between gap-3 text-xs text-surface-variant">
+        <span className="flex items-center gap-2">
+          <span className="chip" style={{ color: dossier.accent }}>{ECOSYSTEM_KIND_LABEL[dossier.kind] ?? dossier.kind}</span>
+          <span className="font-medium text-foreground">{dossier.name}</span>
+        </span>
+        <span>MAJ {formatDateFr(dossier.updatedAt)}</span>
+      </div>
+      <h3 className={`mt-4 font-headline font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)] ${featured ? 'text-display-sm' : 'text-headline-md'}`}>
+        {dossier.title}
+      </h3>
+      <p className="mt-2 line-clamp-2 text-sm italic text-surface-variant">{dossier.subtitle}</p>
+      <p className={`mt-3 flex-1 text-sm leading-relaxed text-surface-variant ${featured ? 'line-clamp-4' : 'line-clamp-3'}`}>{dossier.summary}</p>
+      <div className="mt-5 flex items-center justify-between text-xs text-surface-variant">
+        <span>
+          {pluralize(dossier.convictions.length, 'conviction')} · {pluralize(dossier.signals.length, 'signal', 'signaux')}
+        </span>
+        <span className="inline-flex items-center gap-1.5"><Clock size={13} /> {dossier.readMin} min</span>
       </div>
     </Link>
   );

@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { Link } from '@/i18n/routing';
-import { ArrowLeft, Clock } from 'lucide-react';
+import { ArrowLeft, BookOpen, Clock } from 'lucide-react';
 import { blogBySlug, BLOG } from '@/content';
 import type { BlogPost } from '@/content/types';
 import { ActiveProse } from '@/components/reading/ActiveProse';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
-import { BlogCard } from '@/components/cards';
+import { BlogCard, GlossaryRefList } from '@/components/cards';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { PageLoader } from '@/components/ui/primitives';
 import { useApiItem } from '@/hooks/useApiData';
@@ -42,6 +42,16 @@ export default function BlogPostPage() {
           <span>{formatDateFr(post.date)}</span>
           <span className="inline-flex items-center gap-1.5"><Clock size={14} /> {post.readMin} min</span>
         </div>
+        {post.books && post.books.length > 0 && (
+          <div className="mt-4 space-y-1.5">
+            {post.books.map((b) => (
+              <p key={b.title} className="inline-flex items-center gap-2 text-sm text-surface-variant">
+                <BookOpen size={15} className="shrink-0" />
+                <span><span className="font-medium italic text-foreground">{b.title}</span> — {b.author}{b.year ? ` (${b.year})` : ''}</span>
+              </p>
+            ))}
+          </div>
+        )}
       </header>
 
       <div className="mt-8">
@@ -51,6 +61,12 @@ export default function BlogPostPage() {
       {post.tags.length > 0 && (
         <div className="mt-8 flex flex-wrap gap-2">
           {post.tags.map((t) => <span key={t} className="chip">#{t}</span>)}
+        </div>
+      )}
+
+      {post.glossaryRefs && post.glossaryRefs.length > 0 && (
+        <div className="mt-8">
+          <GlossaryRefList slugs={post.glossaryRefs} title="Pour aller plus loin" />
         </div>
       )}
 

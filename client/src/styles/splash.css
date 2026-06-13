@@ -1,3 +1,11 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   Splash portal — single stage.
+   The compass, title and CTA stay rooted while the décor turns around them, so
+   switching light ⇄ dark plays the "Aube" transition (the sky tips over, a
+   horizon flare blooms, the stars light up one by one) instead of cross-fading
+   two whole layers. Photos carry no permanent veil — the landscape stays intact.
+   ════════════════════════════════════════════════════════════════════════════ */
+
 .splash-portal {
   --background: #eceae3;
   --on-background: #12131a;
@@ -7,6 +15,8 @@
   --mode-bg: rgb(255 255 255 / 0.52);
   --mode-border: rgb(18 19 26 / 0.12);
   --enter-idle: color-mix(in srgb, var(--primary) 12%, transparent);
+  --halo: 0 1px 16px rgb(255 251 242 / 0.62);
+  --t-dur: 1280ms;
   position: relative;
   isolation: isolate;
   display: grid;
@@ -17,7 +27,7 @@
   color: var(--on-background);
 }
 
-.splash-portal.splash-dark {
+.splash-portal[data-mode='dark'] {
   --background: #08090c;
   --on-background: #f4f2eb;
   --on-surface-variant: #a49f93;
@@ -26,6 +36,7 @@
   --mode-bg: rgb(18 20 26 / 0.58);
   --mode-border: rgb(244 242 235 / 0.16);
   --enter-idle: color-mix(in srgb, var(--primary) 10%, transparent);
+  --halo: 0 2px 22px rgb(5 6 10 / 0.65);
 }
 
 .splash-stage {
@@ -41,116 +52,172 @@
   inset: 0;
   z-index: 50;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.splash-layer {
-  --background: #eceae3;
-  --on-background: #12131a;
-  --on-surface-variant: #565042;
-  --outline-variant: #d9d2c2;
-  --primary: #c5a85c;
+/* ── Photos — no overlay, two stacked layers the transition drives ────────── */
+.splash-photos {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-  background: var(--background);
-  color: var(--on-background);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 850ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.splash-layer.is-active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.splash-layer-dark {
-  --background: #08090c;
-  --on-background: #f4f2eb;
-  --on-surface-variant: #a49f93;
-  --outline-variant: #3f3c34;
-  --primary: #d1b875;
-}
-
-.splash-photo-bg,
-.splash-night-veil,
-.splash-constellation-wrap,
-.splash-seals,
-.splash-memo,
-.splash-mode {
-  position: absolute;
-}
-
-.splash-photo-bg {
-  inset: -2%;
   z-index: 0;
+  animation: splash-photos-in 2.4s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+
+.splash-photo {
+  position: absolute;
+  inset: -2.5%;
   background-position: center;
   background-size: cover;
+  will-change: transform, opacity;
   transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
 }
 
-.splash-layer-light .splash-photo-bg {
+.splash-photo-light {
   background-image: url('/splash/bg-claire.webp');
   background-position: center top;
 }
 
-.splash-layer-dark .splash-photo-bg {
+.splash-photo-dark {
   background-image: url('/splash/bg-sombre.webp');
+  opacity: 0;
 }
 
-.splash-layer-light::before {
-  content: '';
+@keyframes splash-photos-in {
+  from {
+    transform: scale(1.045);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ── Horizon flare (the "Aube" transition glow) ───────────────────────────── */
+.splash-glow {
   position: absolute;
-  inset: 0;
-  z-index: 1;
+  left: 50%;
+  bottom: -12%;
+  z-index: 6;
+  width: 150vw;
+  height: 65vh;
+  transform: translateX(-50%);
+  background: radial-gradient(45% 55% at 50% 100%, rgb(255 178 84 / 0.85), rgb(255 140 40 / 0.25) 45%, transparent 72%);
+  opacity: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgb(253 252 247 / 0.18), rgb(236 234 227 / 0.24));
+  mix-blend-mode: screen;
 }
 
-.splash-night-veil {
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgb(8 9 12 / 0.3), rgb(8 9 12 / 0.52));
-}
-
-.splash-constellation-wrap {
+/* ── Constellation + scattered stars (dark sky) ───────────────────────────── */
+.splash-stars {
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  z-index: 3;
-  height: 560px;
+  z-index: 2;
+  height: 62vh;
   pointer-events: none;
-  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent);
-  mask-image: linear-gradient(to bottom, black 40%, transparent);
+  color: var(--primary);
+  opacity: 0;
+  transition: opacity calc(var(--t-dur) * 0.55) ease;
+  -webkit-mask-image: linear-gradient(to bottom, black 45%, transparent);
+  mask-image: linear-gradient(to bottom, black 45%, transparent);
   will-change: transform;
 }
 
-.splash-layer-light .splash-constellation-wrap {
-  height: 320px;
+.splash-portal[data-mode='dark'] .splash-stars {
   opacity: 0.55;
-  -webkit-mask-image: linear-gradient(to bottom, black, transparent);
-  mask-image: linear-gradient(to bottom, black, transparent);
 }
 
-.splash-layer-dark .splash-constellation-wrap {
-  opacity: 0.28;
-}
-
-.splash-constellation {
+.splash-cl-svg {
   display: block;
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
-.splash-seals {
-  inset: 0;
-  z-index: 4;
+.splash-cl-lines {
+  opacity: 0.38;
+}
+
+.splash-stars.reveal .splash-cl-lines {
+  animation: splash-lines-in 1.4s ease 0.5s backwards;
+}
+
+.splash-star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: splash-twinkle var(--td, 4.5s) ease-in-out var(--sd, 0s) infinite;
+}
+
+.splash-stars.reveal .splash-star {
+  animation:
+    splash-star-pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--sd, 0s) backwards,
+    splash-twinkle var(--td, 4.5s) ease-in-out calc(var(--sd, 0s) + 0.9s) infinite;
+}
+
+@keyframes splash-lines-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes splash-star-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+}
+
+@keyframes splash-twinkle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+/* ── Shooting stars — occasional passes, dark mode only ───────────────────── */
+.splash-shoot {
+  position: absolute;
   pointer-events: none;
+  opacity: 0;
+  width: 120px;
+  height: 1.6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgb(255 250 228 / 0.95));
+  filter: drop-shadow(0 0 5px rgb(255 244 206 / 0.75));
+}
+
+.splash-shoot::after {
+  content: '';
+  position: absolute;
+  right: -1.5px;
+  top: 50%;
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 999px;
+  background: #fffbef;
+  transform: translateY(-50%);
+  box-shadow: 0 0 8px 2px rgb(255 246 214 / 0.85);
+}
+
+/* ── Kanji seals — UNCHANGED: WaxSeal, two per-mode sets, cross-fade by mode ─ */
+.splash-seals {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t-dur) ease;
+}
+
+.splash-portal[data-mode='light'] .splash-seals-light,
+.splash-portal[data-mode='dark'] .splash-seals-dark {
+  opacity: 1;
 }
 
 .splash-seal-parallax {
@@ -160,23 +227,27 @@
   will-change: transform;
 }
 
+/* ── Corner memos ─────────────────────────────────────────────────────────── */
 .splash-memo {
+  position: absolute;
   top: 42px;
   z-index: 8;
   color: var(--on-surface-variant);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.6rem;
   letter-spacing: 0.22em;
   opacity: 0.86;
   text-transform: uppercase;
+  transition: color var(--t-dur) ease;
 }
 
-.splash-layer-light .splash-memo {
+.splash-portal[data-mode='light'] .splash-memo {
   text-shadow: 0 1px 10px rgb(255 251 242 / 0.7);
 }
 
 .splash-memo span {
   color: color-mix(in srgb, var(--primary) 82%, transparent);
+  transition: color var(--t-dur) ease;
 }
 
 .splash-memo-left {
@@ -187,7 +258,9 @@
   right: 48px;
 }
 
+/* ── "Choisissez votre lumière" toggle ────────────────────────────────────── */
 .splash-mode {
+  position: absolute;
   top: 30px;
   left: 50%;
   z-index: 40;
@@ -200,12 +273,13 @@
 
 .splash-mode-caption {
   color: var(--on-surface-variant);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.56rem;
   letter-spacing: 0.3em;
   opacity: 0.72;
   text-transform: uppercase;
   white-space: nowrap;
+  transition: color var(--t-dur) ease;
 }
 
 .splash-mode-track {
@@ -218,6 +292,7 @@
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14), 0 12px 36px -28px rgb(18 19 26 / 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  transition: background var(--t-dur) ease, border-color var(--t-dur) ease;
 }
 
 .splash-mode-button {
@@ -229,7 +304,7 @@
   background: transparent;
   color: var(--on-surface-variant);
   cursor: pointer;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.68rem;
   height: 32px;
   line-height: 1;
@@ -246,11 +321,12 @@
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4), 0 8px 22px -12px color-mix(in srgb, var(--primary) 72%, transparent);
 }
 
-.splash-layer-center {
-  position: relative;
+/* ── Rooted content ───────────────────────────────────────────────────────── */
+.splash-content {
+  position: absolute;
+  inset: 0;
   z-index: 10;
   display: flex;
-  height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -263,40 +339,40 @@
   align-items: center;
   gap: 12px;
   color: var(--on-surface-variant);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.66rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
+  transition: color var(--t-dur) ease;
 }
 
-.splash-layer-light .splash-kicker,
-.splash-layer-light .splash-title {
-  text-shadow: 0 1px 16px rgb(255 251 242 / 0.62);
+.splash-portal[data-mode='light'] .splash-kicker {
+  text-shadow: 0 1px 14px rgb(255 251 242 / 0.6);
 }
 
 .splash-focal {
   position: relative;
-  cursor: pointer;
-  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-
-.splash-focal-light {
   margin: 26px 0 22px;
+  cursor: pointer;
+  color: #fff3b0;
+  filter: drop-shadow(0 0 1.4px rgb(64 42 14 / 0.9)) drop-shadow(0 0 9px rgb(255 192 72 / 0.55));
+  transition: color var(--t-dur) ease, filter var(--t-dur) ease;
 }
 
-.splash-focal-dark {
-  margin: 30px 0 26px;
+.splash-portal[data-mode='dark'] .splash-focal {
+  color: var(--primary);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--primary) 30%, transparent));
 }
 
 .splash-compass {
-  position: relative;
   display: inline-block;
-  filter: drop-shadow(0 0 1.4px rgb(64 42 14 / 0.9)) drop-shadow(0 0 9px rgb(255 192 72 / 0.55));
+  /* Keep the original per-mode sizes (188 light / 158 dark) on one rooted
+     compass: scale instead of remounting, so the intro never replays on toggle. */
+  transition: transform var(--t-dur) ease;
 }
 
-.splash-layer-dark .splash-compass {
-  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--primary) 28%, transparent));
+.splash-portal[data-mode='dark'] .splash-compass {
+  transform: scale(0.84);
 }
 
 .splash-compass-svg {
@@ -314,7 +390,7 @@
   margin: 0;
   max-width: 18ch;
   color: var(--on-background);
-  font-family: "Newsreader", Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   /* Fluid: ≈2.1rem at the 1440 reference width, never below a readable size on
      phones, and allowed to grow a little on large displays. */
   font-size: clamp(1.6rem, 2.4vw, 2.6rem);
@@ -323,10 +399,13 @@
   letter-spacing: -0.01em;
   line-height: 1.05;
   text-wrap: balance;
+  text-shadow: var(--halo);
+  transition: color var(--t-dur) ease, text-shadow var(--t-dur) ease;
 }
 
 .splash-title span {
   color: var(--primary);
+  transition: color var(--t-dur) ease;
 }
 
 .splash-enter {
@@ -337,10 +416,6 @@
   gap: 16px;
   color: var(--on-surface-variant);
   text-decoration: none;
-}
-
-.splash-layer-dark .splash-enter {
-  margin-top: 36px;
 }
 
 .splash-enter-disc {
@@ -354,7 +429,13 @@
   background: var(--enter-idle);
   color: var(--primary);
   box-shadow: 0 2px 12px -4px color-mix(in srgb, var(--primary) 35%, transparent);
-  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms ease, color 300ms ease, box-shadow 300ms ease;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms ease, color var(--t-dur) ease,
+    border-color var(--t-dur) ease, box-shadow 300ms ease;
+}
+
+.splash-portal[data-mode='light'] .splash-enter-disc {
+  border-color: rgb(255 248 220 / 0.85);
+  color: rgb(255 248 220 / 0.85);
 }
 
 .splash-enter-disc span {
@@ -375,11 +456,15 @@
 
 .splash-enter-label {
   color: inherit;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.72rem;
   letter-spacing: 0.34em;
   text-transform: uppercase;
-  transition: color 220ms ease;
+  transition: color var(--t-dur) ease;
+}
+
+.splash-portal[data-mode='light'] .splash-enter-label {
+  text-shadow: 0 1px 10px rgb(255 251 242 / 0.65);
 }
 
 .splash-enter:hover .splash-enter-disc,
@@ -395,10 +480,10 @@
   color: var(--primary);
 }
 
+/* ── Page entry (~2s, everything visible) ─────────────────────────────────── */
 .splash-rise {
   opacity: 0;
-  animation: splash-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: var(--d, 0ms);
+  animation: splash-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms) forwards;
 }
 
 .splash-float {
@@ -425,7 +510,8 @@
 }
 
 @keyframes splash-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -434,7 +520,8 @@
 }
 
 @keyframes splash-float-x {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0);
   }
   50% {
@@ -443,7 +530,8 @@
 }
 
 @keyframes splash-compass-needle {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-7deg);
   }
   50% {
@@ -456,14 +544,16 @@
     opacity: 0.55;
     transform: scale(1);
   }
-  70%, 100% {
+  70%,
+  100% {
     opacity: 0;
     transform: scale(1.55);
   }
 }
 
 @keyframes splash-nudge {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
   }
   50% {
@@ -471,6 +561,7 @@
   }
 }
 
+/* ── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 760px) {
   .splash-memo,
   .splash-seals {
@@ -484,12 +575,8 @@
     letter-spacing: 0.28em;
   }
 
-  .splash-focal-light {
+  .splash-focal {
     margin: 18px 0 16px;
-  }
-
-  .splash-focal-dark {
-    margin: 20px 0 18px;
   }
 
   .splash-enter {
@@ -504,8 +591,7 @@
     display: none;
   }
 
-  .splash-focal-light,
-  .splash-focal-dark {
+  .splash-focal {
     margin: 10px 0;
   }
 
@@ -526,18 +612,35 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .splash-layer,
-  .splash-photo-bg,
-  .splash-constellation-wrap,
-  .splash-seal-parallax,
-  .splash-focal,
-  .splash-enter-disc,
-  .splash-mode-button {
-    transition-duration: 0.01ms !important;
+  .splash-photos {
+    animation: none;
   }
 
   .splash-rise {
     opacity: 1;
     animation: none;
+  }
+
+  .splash-star,
+  .splash-stars.reveal .splash-star,
+  .splash-cl-lines,
+  .splash-compass-needle,
+  .splash-enter svg,
+  .splash-enter-disc span {
+    animation: none !important;
+  }
+
+  .splash-shoot {
+    display: none !important;
+  }
+
+  .splash-photo,
+  .splash-stars,
+  .splash-seals,
+  .splash-seal-parallax,
+  .splash-focal,
+  .splash-enter-disc,
+  .splash-mode-button {
+    transition-duration: 0.01ms !important;
   }
 }

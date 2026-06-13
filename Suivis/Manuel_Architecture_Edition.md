@@ -30,7 +30,7 @@ vc-premium-platform/
 │   ├── paths.json (9 rayons)  courses.json (16)  lessons.json (51 leçons canoniques)
 │   ├── lessons.index.json  lessons.bodies.json   # leçons scindées (index léger / corps lazy) — GÉNÉRÉ, ne pas éditer
 │   ├── glossary.json (357)  glossary.index.json  glossary.defs.json   # glossaire scindé — GÉNÉRÉ
-│   ├── caseStudies.json (4)  blog.json (4)
+│   ├── caseStudies.json (4)  blog.json (8)
 │   ├── simulators.json (8)  ikigai.json
 │   ├── parcours.json (22)  parcours.en.json  parcoursConfig.json  profileParcours.json
 │   └── parcours/              # 3 registres drop-in, 11 leçons additionnelles (*.lessons.json, ld-*/lea-*)
@@ -433,7 +433,7 @@ La couche **Parcours** est une **trajectoire par objectif** posée *au-dessus* d
 
 ### 4.5. Étude de cas (`data/caseStudies.json`) & Analyse/blog (`data/blog.json`)
 - **Étude de cas** : `kind` ∈ `startup|fund|deal|market`, `sections[]` (`heading` + `body` markdown), `takeaways[]`, `glossaryRefs[]`.
-- **Analyse (blog)** : `category`, `author`, `date` (`YYYY-MM-DD`), `excerpt`, `body` (même markdown), `tags[]`. Le `body` accepte les liens `[[slug]]`.
+- **Analyse (blog)** : `category`, `author`, `date` (`YYYY-MM-DD`), `excerpt`, `body` (même markdown), `tags[]`. Le `body` accepte les liens `[[slug]]`. Deux champs **optionnels** servent le format « Lecture oblique » (analyses de livres, cf. §10.9 de `docs/STRATEGIE-vc-intelligence.md`) : `books[]` (`title`/`author`/`year?`, tableau pour les « duels de livres ») affiché sur la carte et l'en-tête de l'article, et `glossaryRefs[]` (mêmes ids que les études de cas) qui rend le bloc « Pour aller plus loin » en fin d'article. La catégorie `"Lecture oblique"` est filtrable sur `/blog`.
 
 ### 4.6. Simulateur (`data/simulators.json`)
 Le JSON ne décrit que la **fiche** (titre, `category`, `accent`, `description`, `relatedLessonIds`). **La logique de calcul est du code**, dans [client/src/components/simulators/calculators.tsx](client/src/components/simulators/calculators.tsx). Ajouter un *nouveau* simulateur = ajouter la fiche JSON **et** brancher un composant calculateur (mappé par `slug`).

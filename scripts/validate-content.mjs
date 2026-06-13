@@ -297,6 +297,50 @@ const blogSchema = z.object({
   excerpt: z.string(),
   tags: z.array(z.string()),
   body: nonEmpty,
+  books: z.array(z.object({
+    title: nonEmpty,
+    author: nonEmpty,
+    year: z.number().int().optional(),
+  }).strict()).optional(),
+  glossaryRefs: idList.optional(),
+}).strict();
+
+const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}/, 'date attendue au format ISO (YYYY-MM-DD)');
+
+const ecosystemSchema = z.object({
+  id: nonEmpty,
+  slug,
+  name: nonEmpty,
+  title: nonEmpty,
+  subtitle: z.string(),
+  kind: z.enum(['geographie', 'secteur', 'these']),
+  accent: z.string(),
+  author: z.string(),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+  readMin: z.number().nonnegative(),
+  summary: nonEmpty,
+  tags: z.array(z.string()),
+  these: nonEmpty,
+  sections: z.array(z.object({ heading: nonEmpty, body: nonEmpty }).strict()).min(1),
+  convictions: z.array(z.object({
+    statement: nonEmpty,
+    horizon: z.string().optional(),
+    strength: z.enum(['exploratoire', 'moyenne', 'forte']),
+    rationale: z.string().optional(),
+  }).strict()),
+  signals: z.array(z.object({
+    label: nonEmpty,
+    direction: z.enum(['haussier', 'baissier', 'incertain']),
+    note: z.string(),
+  }).strict()),
+  players: z.array(z.object({
+    name: nonEmpty,
+    role: z.string(),
+    note: z.string(),
+  }).strict()).optional(),
+  glossaryRefs: idList,
+  sources: z.array(z.object({ label: nonEmpty, url: nonEmpty }).strict()),
 }).strict();
 
 const simulatorSchema = z.object({
@@ -371,6 +415,7 @@ const lessons = check('lessons.json', z.array(lessonSchema), readJson('lessons.j
 const glossary = check('glossary.json', z.array(glossarySchema), readJson('glossary.json')) ?? [];
 const cases = check('caseStudies.json', z.array(caseStudySchema), readJson('caseStudies.json')) ?? [];
 const blog = check('blog.json', z.array(blogSchema), readJson('blog.json')) ?? [];
+const ecosystems = check('ecosystems.json', z.array(ecosystemSchema), readJson('ecosystems.json')) ?? [];
 const simulators = check('simulators.json', z.array(simulatorSchema), readJson('simulators.json')) ?? [];
 const ikigai = check('ikigai.json', ikigaiSchema, readJson('ikigai.json'));
 
@@ -405,6 +450,8 @@ assertUnique('caseStudies.json', cases, 'id');
 assertUnique('caseStudies.json', cases, 'slug');
 assertUnique('blog.json', blog, 'id');
 assertUnique('blog.json', blog, 'slug');
+assertUnique('ecosystems.json', ecosystems, 'id');
+assertUnique('ecosystems.json', ecosystems, 'slug');
 assertUnique('simulators.json', simulators, 'id');
 assertUnique('simulators.json', simulators, 'slug');
 
@@ -464,6 +511,12 @@ for (const g of glossary) {
 }
 for (const c of cases) {
   checkRefs(`caseStudies/${c.id}.glossaryRefs`, c.glossaryRefs, isGlossary, 'terme de glossaire');
+}
+for (const b of blog) {
+  if (b.glossaryRefs) checkRefs(`blog/${b.id}.glossaryRefs`, b.glossaryRefs, isGlossary, 'terme de glossaire');
+}
+for (const e of ecosystems) {
+  checkRefs(`ecosystems/${e.id}.glossaryRefs`, e.glossaryRefs, isGlossary, 'terme de glossaire');
 }
 for (const s of simulators) {
   checkRefs(`simulators/${s.id}.relatedLessonIds`, s.relatedLessonIds, (r) => lessonIds.has(r), 'leçon');
@@ -539,6 +592,7 @@ const MARKER_FILES = [
   'ikigai.json',
   'lessons.json',
   'blog.json',
+  'ecosystems.json',
   'caseStudies.json',
   'courses.json',
   'paths.json',
@@ -566,7 +620,7 @@ for (const file of MARKER_FILES) {
 console.log('Validation du contenu VC Premium');
 console.log(`→ ${parcours.length} parcours · ${paths.length} rayon(s) hérités · ${courses.length} cours · ${allLessons.length} leçons · ${glossary.length} termes`);
 console.log(`→ ${parcoursLessons.length} leçon(s) de parcours drop-in · ${parcoursLessonDocs.length} registre(s)`);
-console.log(`→ ${cases.length} études de cas · ${blog.length} articles · ${simulators.length} simulateurs`);
+console.log(`→ ${cases.length} études de cas · ${blog.length} articles · ${ecosystems.length} dossier(s) d'écosystème · ${simulators.length} simulateurs`);
 console.log(`→ ${markerCount} marqueur(s) [[..]] / {{..}} analysés`);
 
 if (warnings.length) {

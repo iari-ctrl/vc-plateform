@@ -15,6 +15,7 @@ export * from './lessons';
 export * from './glossary';
 export * from './caseStudies';
 export * from './blog';
+export * from './ecosystems';
 export * from './simulators';
 export * from './antiPortfolio';
 export * from './memos';

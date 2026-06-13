@@ -24,6 +24,8 @@ const MemoLibraryPage = lazy(() => import('@/pages/MemoLibraryPage'));
 const MemoPage = lazy(() => import('@/pages/MemoPage'));
 const BlogPage = lazy(() => import('@/pages/BlogPage'));
 const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'));
+const EcosystemsPage = lazy(() => import('@/pages/EcosystemsPage'));
+const EcosystemPage = lazy(() => import('@/pages/EcosystemPage'));
 const NotesPage = lazy(() => import('@/pages/NotesPage'));
 const DecisionJournalPage = lazy(() => import('@/pages/DecisionJournalPage'));
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
@@ -91,6 +93,8 @@ export default function App() {
           <Route path="memos/:slug" element={<MemoPage />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="blog/:slug" element={<BlogPostPage />} />
+          <Route path="ecosystemes" element={<EcosystemsPage />} />
+          <Route path="ecosystemes/:slug" element={<EcosystemPage />} />
           <Route path="notes" element={<NotesPage />} />
           <Route path="journal" element={<DecisionJournalPage />} />
           <Route path="profile" element={<ProfilePage />} />

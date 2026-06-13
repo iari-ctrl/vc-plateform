@@ -887,6 +887,34 @@ La plateforme possède déjà des actifs français (`BSA-AIR`, standard françai
 - secondaries / continuation fund calculator ;
 - decision journal template dans Workspace.
 
+### 10.9 Formats éditoriaux blog
+
+Trois formats à ajouter au backlog éditorial du blog, en complément des piliers existants.
+
+**Décortiquer un écosystème**
+
+Analyse longue d'un écosystème peu couvert en français : MENA, Afrique francophone, Asie du Sud-Est. Data-driven, sources publiques. Chaque analyse alimente la page Atlas correspondante (et inversement). L'angle différenciant est le vide éditorial francophone sur ces géographies, là où la couverture de la Silicon Valley est saturée.
+
+**Thèses prospectives datées**
+
+Prédictions explicites avec échéance, revisitées publiquement à date fixe. Le format prolonge le Thesis Lab (falsification criteria, « what would change our mind ») et le Decision Journal : la crédibilité se construit par la relecture assumée, y compris des erreurs. Cadence : revisite annuelle systématique de chaque thèse publiée.
+
+**Analyses de livres — « lectures obliques »**
+
+Livres oubliés ou inattendus, pas nécessairement liés au VC ou à l'investissement, qui donnent une grille de perception plutôt qu'une méthode. Exemples de corpus : *Seeing Like a State*, *Flatland*, *The Elephant in the Brain*, *La Société du spectacle*, *Éloge de la fuite*, *L'Étranger*, *Peau noire, masques blancs*, *Exit, Voice, and Loyalty* (Hirschman), Girard, Mauss, La Boétie, Calvino.
+
+Règles éditoriales :
+
+- **exhaustivité oblique plutôt qu'une idée unique** (arbitrage tranché en juin 2026) : chaque article extrait *toutes* les idées du livre transposables au VC et à la détection de pépites (talents, founder-market fit), structurées en sections autonomes, plutôt qu'une seule idée en format court. La contrainte « 4-5 min / une idée » est abandonnée au profit d'une lecture longue minée en profondeur ;
+- le pont inattendu vers la pratique VC est le payoff de chaque idée (ex. *Flatland* → cécité dimensionnelle → deals invisibles de l'anti-portfolio) ;
+- structure type par idée : thèse du livre, où elle bouscule le consensus, application à un cas réel (case study, anti-portfolio), limites de la thèse ;
+- variante « duel de livres » : deux ouvrages qui se contredisent sur la même question, arbitrage explicite (ex. *Talent* vs *Super Founders* sur la détection des fondateurs) — le schéma de données prévoit un tableau `books[]` par article pour porter ce cas ;
+- chaque article se conclut par un renvoi explicite vers un terme du glossaire, une leçon ou un cas (`glossaryRefs[]`) — le blog est la couche réflexion libre qui alimente la couche structurée, pas un silo.
+
+Fil rouge thématique prioritaire : founder-market fit et détection des profils brillants à fibre entrepreneuriale, sujet mal couvert en français et qui touche autant les investisseurs que les fondateurs.
+
+> **État d'implémentation (2026-06-12, complété 2026-06-13).** Le format « Lecture oblique » est livré dans le blog : nouvelle catégorie filtrable sur `/blog`, métadonnées livre (`books[]`) et renvoi glossaire de fin d'article (`glossaryRefs[]`) ajoutés au type `BlogPost`, au schéma Zod du validateur et au rendu (`BlogCard`, `BlogPostPage`). **Trois articles complets publiés, formant triptyque et gabarit éditorial** : *Voir comme un État, investir comme un planificateur* (`bp-voir-comme-un-etat`, *Seeing Like a State* de James C. Scott — 10 idées transposées, ~16 min), *La société du spectacle lève des fonds* (`bp-societe-du-spectacle`, Debord — 11 idées, ~18 min, dont une taxonomie de 8 logiques de levée et les parallèles avec le cycle IA actuel) et *Exit, Voice, Loyalty : la grammaire des départs* (`bp-exit-voice-loyalty`, Hirschman — 9 idées, ~14 min : la gouvernance comme voice, les fondateurs comme exits créatifs, l'attrition comme diligence). Structure commune par idée : « thèse → transposition → à retenir », garde-fous, grille de questions finale, marqueurs `[[..]]` et renvois vers cas / anti-portfolio. Un article reste à l'état de **squelette structuré à rédiger sur ce modèle** : *Flatland → cécité dimensionnelle* (8 idées). Ajuster son `readMin` à la rédaction.
+
 ---
 
 ## 11. Parcours utilisateurs clés

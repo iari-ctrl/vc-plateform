@@ -108,6 +108,13 @@ export interface CaseStudy {
   takeaways: string[];
 }
 
+/** Ouvrage analysé dans une « lecture oblique » (deux entrées pour un duel de livres). */
+export interface BookRef {
+  title: string;
+  author: string;
+  year?: number;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -120,6 +127,78 @@ export interface BlogPost {
   excerpt: string;
   tags: string[];
   body: string;
+  books?: BookRef[];
+  /** Renvoi de fin d'article vers la couche structurée (slugs du glossaire). */
+  glossaryRefs?: string[];
+}
+
+// ── Décortiquer un écosystème ────────────────────────────────────────────────
+/** Nature du terrain décortiqué : une géographie, un secteur, ou une thèse transverse. */
+export type EcosystemKind = 'geographie' | 'secteur' | 'these';
+
+/** Degré d'assurance d'une conviction — assumé et affiché, jamais implicite. */
+export type ConvictionStrength = 'exploratoire' | 'moyenne' | 'forte';
+
+/** Une conviction datée et falsifiable — l'unité de base du dossier. */
+export interface EcosystemConviction {
+  /** L'affirmation — spécifique, vérifiable, à échéance. */
+  statement: string;
+  /** Horizon de vérification (ex. "2030"). */
+  horizon?: string;
+  strength: ConvictionStrength;
+  /** Markdown — le raisonnement ex ante derrière la conviction. */
+  rationale?: string;
+}
+
+/** Lecture directionnelle d'un signal surveillé. */
+export type SignalDirection = 'haussier' | 'baissier' | 'incertain';
+
+/** Un indicateur concret qui confirmera ou invalidera la thèse. */
+export interface EcosystemSignal {
+  label: string;
+  direction: SignalDirection;
+  /** Ce que le signal dirait s'il se confirmait / s'inversait. */
+  note: string;
+}
+
+/** Acteur structurant de l'écosystème (fonds, startup, institution…). */
+export interface EcosystemPlayer {
+  name: string;
+  role: 'fonds' | 'startup' | 'institution' | 'corporate' | string;
+  note: string;
+}
+
+/**
+ * Dossier vivant sur un écosystème : une thèse assumée, des analyses
+ * structurées, des convictions datées et falsifiables, et les signaux qui
+ * les confirmeront ou les invalideront. Daté à la création ET à la révision.
+ */
+export interface EcosystemDossier {
+  id: string;
+  slug: string;
+  /** Nom court de l'écosystème (ex. "France", "IA appliquée"). */
+  name: string;
+  title: string;
+  subtitle: string;
+  kind: EcosystemKind;
+  accent: string;
+  author: string;
+  /** ISO — première publication du dossier. */
+  createdAt: string;
+  /** ISO — dernière révision (le dossier est un document vivant). */
+  updatedAt: string;
+  readMin: number;
+  summary: string;
+  tags: string[];
+  /** Markdown — la conviction centrale du dossier, assumée et datée. */
+  these: string;
+  /** Les analyses, section par section. */
+  sections: { heading: string; body: string }[];
+  convictions: EcosystemConviction[];
+  signals: EcosystemSignal[];
+  players?: EcosystemPlayer[];
+  glossaryRefs: string[];
+  sources: { label: string; url: string }[];
 }
 
 // ── Anti-portfolio (pass analysis) ───────────────────────────────────────────

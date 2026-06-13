@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { SectionHeading, EmptyState } from '@/components/ui/primitives';
 import { usePageMeta } from '@/lib/seo';
 
-const TYPE_LABEL: Record<string, string> = { course: 'Cours', lesson: 'Leçon', glossary: 'Dictionnaire', case: 'Étude de cas', blog: 'Analyse', path: 'Parcours', simulator: 'Simulateur', 'anti-portfolio': 'Anti-portfolio', memo: 'Memo annoté' };
+const TYPE_LABEL: Record<string, string> = { course: 'Cours', lesson: 'Leçon', glossary: 'Dictionnaire', case: 'Étude de cas', blog: 'Analyse', path: 'Parcours', simulator: 'Simulateur', 'anti-portfolio': 'Anti-portfolio', memo: 'Memo annoté', ecosystem: 'Écosystème' };
 
 export default function SearchPage() {
   usePageMeta('Recherche', undefined, { noindex: true });

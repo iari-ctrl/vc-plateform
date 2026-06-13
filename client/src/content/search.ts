@@ -12,9 +12,10 @@ import { PARCOURS, t } from './parcours';
 import { SIMULATORS } from './simulators';
 import { ANTI_PORTFOLIO } from './antiPortfolio';
 import { MEMOS } from './memos';
+import { ECOSYSTEMS } from './ecosystems';
 
 export interface SearchHit {
-  type: 'course' | 'lesson' | 'glossary' | 'case' | 'blog' | 'path' | 'simulator' | 'anti-portfolio' | 'memo';
+  type: 'course' | 'lesson' | 'glossary' | 'case' | 'blog' | 'path' | 'simulator' | 'anti-portfolio' | 'memo' | 'ecosystem';
   id: string;
   slug: string;
   title: string;
@@ -62,6 +63,9 @@ export function searchLocal(query: string): SearchHit[] {
   for (const m of MEMOS)
     if (has(m.company, m.title, m.fund, m.author, m.summary))
       hits.push({ type: 'memo', id: m.id, slug: m.slug, title: m.title, excerpt: m.whyItMatters, href: `/memos/${m.slug}` });
+  for (const e of ECOSYSTEMS)
+    if (has(e.name, e.title, e.subtitle, e.summary, e.tags.join(' ')))
+      hits.push({ type: 'ecosystem', id: e.id, slug: e.slug, title: e.title, excerpt: e.summary, href: `/ecosystemes/${e.slug}` });
 
   return hits.slice(0, 40);
 }

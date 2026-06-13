@@ -99,6 +99,7 @@ addRoute('/simulators', { changefreq: 'monthly', priority: '0.7' });
 addRoute('/anti-portfolio', { changefreq: 'monthly', priority: '0.7' });
 addRoute('/memos', { changefreq: 'monthly', priority: '0.7' });
 addRoute('/blog', { changefreq: 'weekly', priority: '0.7' });
+addRoute('/ecosystemes', { changefreq: 'weekly', priority: '0.7' });
 
 addCollection(readJson('paths.json', []), '/paths', { changefreq: 'monthly', priority: '0.7' });
 addCollection(readJson('parcours.json', []), '/paths', { changefreq: 'monthly', priority: '0.75' });
@@ -124,6 +125,16 @@ for (const post of readJson('blog.json', [])) {
     changefreq: 'monthly',
     priority: '0.7',
     lastmod: /^\d{4}-\d{2}-\d{2}$/.test(post.date ?? '') ? post.date : undefined,
+  });
+}
+
+// Dossiers d'écosystème — living documents: lastmod follows the latest revision.
+for (const dossier of readJson('ecosystems.json', [])) {
+  if (!dossier?.slug) continue;
+  addRoute(`/ecosystemes/${dossier.slug}`, {
+    changefreq: 'monthly',
+    priority: '0.7',
+    lastmod: /^\d{4}-\d{2}-\d{2}$/.test(dossier.updatedAt ?? '') ? dossier.updatedAt : undefined,
   });
 }
 
