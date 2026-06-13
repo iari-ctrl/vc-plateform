@@ -2,6 +2,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { NOINDEX_SEGMENTS, STATIC_ROUTES } from '../shared/routes.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dataDir = join(root, 'data');
@@ -89,17 +90,9 @@ function addCollection(rows, routePrefix, options = {}) {
   }
 }
 
-addRoute('/', { changefreq: 'weekly', priority: '1.0' });
-addRoute('/home', { changefreq: 'weekly', priority: '0.9' });
-addRoute('/onboarding', { changefreq: 'monthly', priority: '0.5' });
-addRoute('/paths', { changefreq: 'weekly', priority: '0.8' });
-addRoute('/bibliotheque', { changefreq: 'weekly', priority: '0.8' });
-addRoute('/glossary', { changefreq: 'weekly', priority: '0.8' });
-addRoute('/simulators', { changefreq: 'monthly', priority: '0.7' });
-addRoute('/anti-portfolio', { changefreq: 'monthly', priority: '0.7' });
-addRoute('/memos', { changefreq: 'monthly', priority: '0.7' });
-addRoute('/blog', { changefreq: 'weekly', priority: '0.7' });
-addRoute('/ecosystemes', { changefreq: 'weekly', priority: '0.7' });
+// Static top-level pages + crawl hints come from the shared route registry
+// (shared/routes.mjs) so the sitemap and the client stay in lockstep.
+for (const route of STATIC_ROUTES) addRoute(route.path, route);
 
 addCollection(readJson('paths.json', []), '/paths', { changefreq: 'monthly', priority: '0.7' });
 addCollection(readJson('parcours.json', []), '/paths', { changefreq: 'monthly', priority: '0.75' });
@@ -173,30 +166,16 @@ const sitemap = [
   '',
 ].join('\n');
 
+// The noindex set is shared with the client (shared/routes.mjs): the same
+// segments that get `Disallow:` here are what usePageMeta marks `noindex`.
+const disallowBlock = (prefix) => [...NOINDEX_SEGMENTS.map((segment) => `Disallow: ${prefix}/${segment}`), ''];
+
 const robots = [
   'User-agent: *',
   'Allow: /',
   '',
-  'Disallow: /admin',
-  'Disallow: /dashboard',
-  'Disallow: /notes',
-  'Disallow: /journal',
-  'Disallow: /profile',
-  'Disallow: /profile-result',
-  'Disallow: /search',
-  'Disallow: /design-system',
-  '',
-  ...LOCALES.flatMap((locale) => [
-    `Disallow: /${locale}/admin`,
-    `Disallow: /${locale}/dashboard`,
-    `Disallow: /${locale}/notes`,
-    `Disallow: /${locale}/journal`,
-    `Disallow: /${locale}/profile`,
-    `Disallow: /${locale}/profile-result`,
-    `Disallow: /${locale}/search`,
-    `Disallow: /${locale}/design-system`,
-    '',
-  ]),
+  ...disallowBlock(''),
+  ...LOCALES.flatMap((locale) => disallowBlock(`/${locale}`)),
   `Sitemap: ${absoluteUrl('/sitemap.xml')}`,
   '',
 ].join('\n');

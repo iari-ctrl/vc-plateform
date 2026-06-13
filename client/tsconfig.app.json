@@ -19,8 +19,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@data/*": ["../data/*"]
+      "@data/*": ["../data/*"],
+      "@shared/*": ["../shared/*"]
     }
   },
-  "include": ["src", "../data/*.json"]
+  "include": ["src", "../data/*.json", "../shared/*.d.mts"]
 }

@@ -14,10 +14,7 @@ import NotFoundPage from './NotFoundPage';
 export default function AntiPortfolioEntryPage() {
   const { slug } = useParams();
   const entry = slug ? antiPortfolioBySlug(slug) : undefined;
-  usePageMeta(entry ? `${entry.company} — anti-portfolio` : undefined, entry?.summary, {
-    type: 'article',
-    image: 'anti-portfolio',
-  });
+  usePageMeta(entry ? `${entry.company} — anti-portfolio` : undefined, entry?.summary, { type: 'article' });
 
   if (!entry) return <NotFoundPage />;
 

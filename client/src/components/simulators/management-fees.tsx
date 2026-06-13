@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
 import { calculateManagementFees } from '@/lib/simulators/management-fees';
 import { GlossaryPreview } from '@/lib/markdown';
-import { Callout, Panel, Slider, Stat } from './shared';
+import { Panel, Slider, Stat } from './shared';
 
 // ── 7. Management fees & budget simulator ────────────────────────────────────
 export function ManagementFeesSim({ accent }: { accent: string }) {
@@ -23,7 +23,6 @@ export function ManagementFeesSim({ accent }: { accent: string }) {
 
   const feasibleTeamSize = Math.max(0, Math.floor((annualBudgetInv * 0.70 * 1000) / avgSalary));
   const alertLevel = salaryPctInv > 100 ? 'error' : salaryPctInv > 70 ? 'warning' : 'ok';
-  const alertColor = alertLevel === 'error' ? 'var(--error)' : alertLevel === 'warning' ? '#B0894A' : accent;
 
   return (
     <Panel
@@ -50,13 +49,13 @@ export function ManagementFeesSim({ accent }: { accent: string }) {
             <Stat label="Budget annuel (Inv.)" value={formatCurrency(annualBudgetInv * 1e6)} accent={accent} hint={`Années 1-5 (${feeRate}%)`} />
             <Stat label="Budget annuel (Récolte)" value={formatCurrency(annualBudgetHarvest * 1e6)} hint={`Années 6-10 (${stepDownRate}%)`} />
             <Stat label="Frais cumulés (10 ans)" value={formatCurrency(totalFees * 1e6)} hint="Total sur la durée du fonds" />
-            <Stat label="Part du budget en salaires" value={formatPercent(salaryPctInv)} accent={alertColor} hint="Sur la période d'inv. (< 70%)" />
+            <Stat label="Part du budget en salaires" value={formatPercent(salaryPctInv)} accent={alertLevel === 'error' ? 'var(--error)' : alertLevel === 'warning' ? '#B0894A' : accent} hint="Sur la période d'inv. (< 70%)" />
           </div>
 
           <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-5">
             <p className="mb-3 text-xs text-surface-variant">Répartition du budget annuel (Période d'investissement)</p>
             <div className="flex h-3 overflow-hidden rounded-full">
-              <div style={{ width: `${Math.min(100, salaryPctInv)}%`, background: alertColor }} />
+              <div style={{ width: `${Math.min(100, salaryPctInv)}%`, background: alertLevel === 'error' ? 'var(--error)' : alertLevel === 'warning' ? '#B0894A' : accent }} />
               {remainingBudgetInv > 0 && <div style={{ width: `${(remainingBudgetInv / annualBudgetInv) * 100}%`, background: 'var(--surface-container-highest)' }} />}
             </div>
             <div className="mt-2 flex justify-between text-xs text-surface-variant">
@@ -66,21 +65,33 @@ export function ManagementFeesSim({ accent }: { accent: string }) {
           </div>
 
           {alertLevel === 'error' && (
-            <Callout tone="error" icon="⚠" title="Budget dépassé !">
-              Le coût de votre équipe ({formatCurrency(salaryCostM * 1e6)}/an) dépasse l'intégralité du budget de la période d'investissement ({formatCurrency(annualBudgetInv * 1e6)}/an).
-            </Callout>
+            <div className="rounded-xl border border-error/30 bg-error/10 p-4 text-sm text-error flex gap-3">
+              <span className="font-semibold text-lg leading-none">⚠</span>
+              <div>
+                <p className="font-semibold">Budget dépassé !</p>
+                <p className="mt-1 text-xs text-surface-variant">Le coût de votre équipe ({formatCurrency(salaryCostM * 1e6)}/an) dépasse l'intégralité du budget de la période d'investissement ({formatCurrency(annualBudgetInv * 1e6)}/an).</p>
+              </div>
+            </div>
           )}
 
           {alertLevel === 'warning' && (
-            <Callout tone="primary" icon="⚠" title="Marge opérationnelle faible">
-              Il vous reste seulement {formatCurrency(remainingBudgetInv * 1e6)}/an pour couvrir les frais de fonctionnement.
-            </Callout>
+            <div className="rounded-xl border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] p-4 text-sm text-foreground flex gap-3">
+              <span className="font-semibold text-lg leading-none">⚠</span>
+              <div>
+                <p className="font-semibold">Marge opérationnelle faible</p>
+                <p className="mt-1 text-xs text-surface-variant">Il vous reste seulement {formatCurrency(remainingBudgetInv * 1e6)}/an pour couvrir les frais de fonctionnement.</p>
+              </div>
+            </div>
           )}
 
           {alertLevel === 'ok' && (
-            <Callout icon="✓" title="Budget équilibré">
-              La structure dispose de {formatCurrency(remainingBudgetInv * 1e6)}/an de marge pour ses opérations.
-            </Callout>
+            <div className="rounded-xl border border-outline-variant bg-surface-container-low/60 p-4 text-sm text-surface-variant flex gap-3">
+              <span className="font-semibold text-lg leading-none text-foreground">✓</span>
+              <div>
+                <p className="font-semibold text-foreground">Budget équilibré</p>
+                <p className="mt-1 text-xs">La structure dispose de {formatCurrency(remainingBudgetInv * 1e6)}/an de marge pour ses opérations.</p>
+              </div>
+            </div>
           )}
 
         </>

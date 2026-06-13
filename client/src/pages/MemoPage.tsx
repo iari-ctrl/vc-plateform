@@ -43,7 +43,7 @@ function AnnotatedBlock({ block, memoTitle, memoId, index }: { block: MemoBlock;
 export default function MemoPage() {
   const { slug } = useParams();
   const memo = slug ? memoBySlug(slug) : undefined;
-  usePageMeta(memo?.title, memo?.summary, { type: 'article', image: 'memo' });
+  usePageMeta(memo?.title, memo?.summary, { type: 'article' });
 
   if (!memo) return <NotFoundPage />;
 

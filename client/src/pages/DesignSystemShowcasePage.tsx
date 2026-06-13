@@ -44,7 +44,6 @@ export default function DesignSystemShowcasePage() {
   usePageMeta(
     'Design System Showcase',
     'Découvrez le système de design de la plateforme VC Premium : couleurs, typographies, composants interactifs et ornements cartographiques.',
-    { noindex: true },
   );
 
   // Interactive states for demonstration

@@ -1,8 +1,10 @@
 # Report et scoring - VC Premium Platform
 
-Dernière mise à jour : 2026-06-12
+Dernière mise à jour : 2026-06-13
 
-Objet : conserver un historique lisible des avancées, corrections, points de vigilance et propositions d'enrichissement pour `vc-premium-platform`.
+Objet : conserver le **journal daté** des avancées et des vérifications de `vc-premium-platform`, et le **scoring** du produit.
+
+> **Périmètre des docs de suivi.** Ce document est le **journal + le scoring**. L'**état de synthèse, les risques, les priorités et le backlog prospectif** vivent dans [Bilan.md](Bilan.md). La **stratégie cible** est dans [docs/STRATEGIE-vc-intelligence.md](../docs/STRATEGIE-vc-intelligence.md).
 
 ---
 
@@ -117,6 +119,23 @@ Score global estimé : **8.3 / 10**
 
 Interprétation : très bonne base produit et éditoriale, déjà crédible pour une démo avancée et un portail premium. Avant lancement public, priorité aux garde-fous qualité, à la cohérence API/CMS et au SEO.
 
+> **Révision 2026-06-13 — re-scoring honnête vs l'ambition affichée (VC Intelligence).** Le tableau ci-dessus note le produit *comme une plateforme de formation premium* — un yardstick qui flatte. Mesuré contre la cible « VC Intelligence Platform » (`docs/STRATEGIE-vc-intelligence.md`) et **après lecture directe du contenu** (cf. §8, entrée « Audit indépendant ») :
+
+| Axe | vs MOOC premium | vs ambition VC Intelligence |
+| --- | ---: | ---: |
+| Clarté du positionnement | 8.5 | **4** — home/nav/meta disent encore « apprentissage » |
+| UX / UI | 8.1 | **6.5** — 2 portes (splash + home), double nav incohérente, densité faible pour un pro |
+| Crédibilité VC — substance | — | **8** — contenu lu : decision-grade, sourcé, point de vue assumé |
+| Crédibilité VC — 1re impression | — | **4.5** — ikigai / « test d'orientation » / vocab scolaire la sabotent avant lecture |
+| Potentiel premium | — | **7** |
+| Architecture technique | 8.0 | **7** — CSR vs stratégie public-first = vrai risque |
+| Profondeur contenu | 7.8 | **8** — forte et sourcée ; mais 0 Research note / 0 Thesis au format cible |
+| Scalabilité | — | **6** — SQLite + blob JSON + contenu bundle-only + CSR |
+| Différenciation | — | **6.5** — vrais différenciateurs (angle FR, anti-portfolio, journal) mais enterrés |
+| Potentiel business | — | **5.5** — 0 capture email / RSS / monétisation |
+
+> Score global **vs ambition : ~6 / 10** (contre 8.3 mesuré comme MOOC). **L'écart entre les deux chiffres EST le diagnostic** : le danger n'est pas l'échec mais de continuer à se mesurer au mauvais produit.
+
 ---
 
 ## 3. Avancées déjà mises en place
@@ -213,224 +232,16 @@ Statut : sain, assets optimisés, entry chunk réduit.
 
 ---
 
-## 4. Corrections prioritaires
+## 4. Suivi prospectif → centralisé dans `Bilan.md`
 
-### P0 - Rétablir le lint — FAIT (2026-05-30)
+Les corrections prioritaires, les propositions d'enrichissement (UX / produit / contenu) et le plan d'action phasé qui figuraient ici sont désormais regroupés dans **[Bilan.md](Bilan.md)** :
 
-- ESLint 9 (flat config), `typescript-eslint`, plugins hooks et react-refresh.
-- Résultat : **0 erreur, 15 warnings** (HMR advisories non bloquants).
+- état + risques + corrections techniques minimales : §3 à §9 ;
+- priorités & plan d'action : §10 (+ « Priorité selon l'objectif visé ») ;
+- backlog d'enrichissements (produit / technique / contenu) : §10bis ;
+- plan de vérification : §11bis.
 
-### P0 - Aligner pages détail et API — PARTIELLEMENT FAIT (2026-05-30)
-
-- `BlogPostPage`, `CaseStudyPage`, `LessonPage` branchées.
-- Restant : `PathDetailPage`, `CourseDetailPage`.
-
-### P0 - Étendre `validate:content` — FAIT (2026-05-30)
-
-Exit 0, avec warnings sur l'absence de quiz (environ 52 leçons sur 76 sans quiz).
-
-### P1 - Durcir accessibilité et interactions — FAIT (2026-05-30 + 2026-06-01)
-
-- Focus trap + restauration dans `Modal`.
-- ARIA live toasts, role="alert" erreurs auth.
-- `ConfirmDialog` sur suppressions.
-- Corrections inputs simulateurs.
-- État de sauvegarde Ikigai réinitialisé après modification.
-- `inert` sur couche splash inactive (2026-06-01).
-
-### P1 - Portail splash — FAIT (2026-06-01)
-
-- Responsive (clamp, inset:0, règles mobile).
-- Thème synchronisé (ThemeContext).
-- Accessibilité (inert).
-- WebP (−97 % sur les fonds).
-
-### P1 - Mode sombre premium sur /home — FAIT (2026-06-01)
-
-- `NightSkyBackdrop` hero + PathAtlas.
-- Tracés SVG conservés.
-- Mode clair inchangé.
-
-### P1 - SEO et partage social
-
-Problème :
-
-- `usePageMeta` modifie le title et la meta description côté client.
-- Sans prérendu, les pages de contenu restent faibles pour indexation et cartes sociales.
-
-Actions recommandées :
-
-- Ajouter prérendu statique des pages publiques de contenu.
-- Générer meta OpenGraph par parcours, leçon, article et étude de cas.
-- Ajouter canonical URL.
-- Prévoir images OG génériques puis spécifiques.
-
-### P1 - Sécurité production
-
-Problèmes / manques :
-
-- Cookie `secure: false` en dur pour le dev. *(Reste à paramétrer selon `NODE_ENV`.)*
-- Pas de `helmet`. *(Reste.)*
-- ~~Le rate-limit~~ en place sur `/api/auth` **et `/api/search`** (2026-06-12). ✅
-- Auth par cookie sans protection CSRF dédiée sur routes mutatives. *(Reste.)*
-- ~~JWT secret par défaut possible si env absente.~~ **Corrigé (2026-06-12)** : `getJwtSecretIssue()` exige longueur min. + blocklist en prod, fail-fast au démarrage. ✅
-- ~~Rejection async non gérée tuant le process (Express 4).~~ **Corrigé (2026-06-12)** : wrapper `ah()` sur tous les handlers. ✅
-
-Actions recommandées (restantes) :
-
-- Paramétrer `secure` selon `NODE_ENV`.
-- Ajouter `helmet`, en-têtes CSP/HSTS, politique CORS stricte en prod.
-- Ajouter protection CSRF ou stratégie explicite SameSite + token.
-- Prévoir une rotation JWT (re-signature glissante quand il reste < 7 j) — `shouldRefreshToken` déjà branché dans `attachUser`.
-
----
-
-## 5. Propositions d'enrichissement UX / produit
-
-### Dashboard : Journal de bord
-
-- Reprise de lecture principale avec temps restant.
-- Prochaine action recommandée.
-- Synthèse du cahier Ikigai.
-- Dernières notes / citations.
-- Progression par parcours.
-- "Aujourd'hui, 20 minutes utiles" : une micro-session proposée.
-
-### Lecture active
-
-- Sommaire automatique depuis les titres `##`.
-- Temps restant estimé.
-- Barre de progression par section.
-- Concepts rencontrés pendant la lecture.
-- Navigation précédent/suivant plus visible.
-- Mode "mémo" : résumé automatique des takeaways + notes personnelles.
-
-### Atelier VC
-
-- Deal memo builder.
-- Cap table builder avancé.
-- Conversion SAFE / BSA-AIR.
-- Option pool shuffle.
-- Stratégie de réserves.
-- Term sheet clause par clause.
-- Waterfall avec scénarios multiples.
-
-### Dictionnaire vivant
-
-- Rail alphabétique.
-- Terme du jour.
-- Graph de concepts reliés.
-- Filtres par catégorie, niveau et usage.
-- Bouton "Ajouter à mes notions à réviser".
-
-### CMS éditorial
-
-- États `draft`, `review`, `published`.
-- Preview avant publication.
-- Export JSON depuis la base.
-- Indicateur "non versionné dans /data".
-- Score de santé par contenu : relations, quiz, glossaire, longueur, liens.
-
----
-
-## 6. Propositions d'enrichissement contenu
-
-Priorité contenu :
-
-1. Densifier les parcours `tous` :
-   - `levee-de-fonds-cote-entrepreneur`
-   - `devenir-analyst-associate-principal`
-2. Viser 4 à 6 leçons par cours.
-3. Ajouter quiz aux 23 leçons canoniques qui en manquent.
-4. Ajouter cas réels européens.
-
-Thèmes à ajouter :
-
-- Marché secondaire et liquidité.
-- Fund formation.
-- Relations LP / GP.
-- EIF, Bpifrance, fonds publics et écosystème européen.
-- Construction de portefeuille.
-- Réserves et follow-on.
-- SAFE vs equity vs BSA-AIR.
-- Term sheet clause par clause.
-- Down rounds.
-- Gouvernance et board.
-- Sorties M&A / IPO / secondaire.
-- Impact de l'IA sur le métier VC.
-- Méthodes de valorisation : VC method, comparables, DCF, multiples.
-
-Études de cas à créer :
-
-- Cas européen de scale-up.
-- Cas de fonds.
-- Post-mortem d'échec.
-- Down round annoté.
-- Deal memo complet.
-
----
-
-## 7. Plan d'action recommandé
-
-### Phase 1 - Garde-fous
-
-Statut : **FAIT (2026-05-30).**
-
-- [x] Installer/configurer ESLint (0 erreur).
-- [x] Étendre `validate:content` (Zod + refs + quiz).
-- [~] Tests unitaires sur calculateurs (Power Law + secondaries couverts ; reste les autres).
-- [x] Tests d'intégration API serveur (auth, profil, isolation `userId`) — 2026-06-12.
-
-### Phase 2 - Cohérence API / CMS
-
-Statut : **PARTIELLEMENT FAIT (2026-05-30).**
-
-- [x] Brancher Blog, CaseStudy, Lesson sur l'API avec fallback bundle.
-- [ ] Brancher Path, Course (endpoints prêts).
-- [ ] Export JSON ou signal "non versionné".
-- [ ] Preview CMS.
-
-### Phase 3 - Accessibilité et UX critique
-
-Statut : **FAIT (2026-05-30 + 2026-06-01).**
-
-- [x] Focus trap + restauration focus dans `Modal`.
-- [x] ARIA live sur les toasts admin, role="alert" sur erreurs auth.
-- [x] `ConfirmDialog` sur suppressions notes et CMS.
-- [x] Corrections inputs simulateurs (aria-label).
-- [x] État de sauvegarde Ikigai réinitialisé après modification ou changement de mode.
-- [x] `inert` sur couche splash inactive.
-
-### Phase 3b - Portail splash et mode sombre premium
-
-Statut : **FAIT (2026-06-01).**
-
-- [x] Responsive splash (clamp, inset:0, mobile portrait + paysage).
-- [x] Accessibilité splash (`inert` sur couche inactive).
-- [x] Thème synchronisé (ThemeContext piloté par le toggle splash).
-- [x] Fonds WebP (~97 % de réduction).
-- [x] Ciel étoilé photographique sur hero + carte `/home` en sombre.
-- [x] `NightSkyBackdrop` composant réutilisable.
-
-### Phase 4 - SEO / performance
-
-Statut : partiellement fait.
-
-- Prérendu statique des pages publiques.
-- OpenGraph.
-- Chargement paresseux du contenu JSON : **fait pour le découpage par collection / route**.
-- Audit bundle principal.
-- Stratégie font-display / preloads critiques.
-
-### Phase 5 - Expérience enrichie
-
-Statut : à cadrer.
-
-- Dashboard "Journal de bord".
-- Lecture avec sommaire et concepts.
-- Atelier VC.
-- Dictionnaire vivant.
-- CMS éditorial avancé.
+Ce document conserve le **scoring** (§2), le **journal daté des avancées** (§1, §3) et l'**historique des vérifications** (§8).
 
 ---
 
@@ -487,6 +298,27 @@ Fichiers modifiés / créés :
 - `client/public/splash/bg-sombre.webp` : créé (q83, ~97 Ko).
 - `client/public/splash/bg-claire.png` : **supprimé**.
 - `client/public/splash/bg-sombre.png` : **supprimé**.
+
+### 2026-06-02 — Interactions front (carte navigable, verre dépoli, glossaire sticky)
+
+Commandes de vérification :
+
+- `npm run validate:content` : **exit 0**.
+- `npm run lint` : **0 erreur, 15 warnings** (Fast Refresh).
+- `npm run build` : **exit 0**.
+- `/paths`, `/onboarding`, `/glossary` : **HTTP 200** en dev local.
+
+Apport : `PathAtlas` navigable (pan, zoom molette / pinch, +/−, recentrage), boussole morphing Ikigai ; `SideNav` en verre dépoli à l'ouverture ; bandeau glossaire sticky (alphabet / domaines / recherche, lettre active) ; cahier Ikigai section `03.b` alignée sur `03`. (Détail dans §3 « Interactions front ».)
+
+### 2026-06-07 — Clôture du glossaire VC
+
+Commandes de vérification :
+
+- `npm run validate:glossary` : **OK** — 357 termes, slugs uniques, `id === slug`, `seeAlso` / `relatedLessonIds`, marqueurs `[[slug|label]]`, collisions d'aliases.
+- `npm run validate:content` : **exit 0**, warnings éditoriaux (leçons sans quiz).
+- `npm run build` : **exit 0**, serveur + client.
+
+Apport : glossaire final porté à **357 termes** (`data/glossary.json`) ; registre canonique à **433 entrées** (`glossary-ingestion/canonical-glossary.json`) — tous les `add` / `update` / `merge` retenus `applied`, `skip` hors injection ; audits PitchBook / SEC / Schoenherr couverts (entrées finales ou alias) ; contrôle custom `validate:glossary` câblé au workflow.
 
 ### 2026-06-10 — Intégration études de cas & navigation bibliothèque
 
@@ -577,34 +409,79 @@ Fichiers créés / modifiés (repères) :
 
 ---
 
-## 9. Décision de priorisation
+### 2026-06-13 — Espace « Décortiquer un écosystème » (dossiers, figures, skill)
 
-Recommandation actuelle :
+Commande de vérification (branche `chore/flux-c-repo-hygiene`, en local) :
 
-1. ~~Corriger le lint.~~ FAIT.
-2. ~~Étendre la validation contenu.~~ FAIT.
-3. ~~Brancher les pages détail sur l'API (Blog, Case, Lesson).~~ FAIT.
-4. ~~Corriger accessibilité modales / formulaires / suppressions.~~ FAIT.
-5. ~~Intégrer et corriger le portail splash.~~ FAIT.
-6. ~~Rehausser le mode sombre de l'accueil.~~ FAIT.
-7. ~~Premier harnais de tests + CI.~~ FAIT (2026-06-09).
-8. ~~Durcissement sécurité de base (auth cookie-only, rate-limit, CORS dev).~~ FAIT partiellement (2026-06-09).
-9. ~~i18n Phase 1 (routing localisé).~~ FAIT (2026-06-09).
-10. **Trancher le mode de rendu** (CSR vs SSG/SSR) — bloquant pour le SEO et l'authoring.
-11. **Figer le modèle de contenu / authoring** (`data/*.json` + Prisma + CMS, avec `locale`).
-12. Fusionner les fiches `data/parcours/*.lessons.json` dans `data/lessons.json` + seed ; synchroniser `parcours.json`.
-13. Brancher Path/Course sur l'API.
-14. i18n Phase 2 (chrome, dictionnaire maison local) puis corpus EN au fil de l'eau.
-15. Enrichir dashboard et lecture active ; densifier les contenus.
-16. Lot 🔴 différé (SSR/SEO, helmet/CSP/HSTS, cookie `secure`, CSRF, contraste de l'or) — au pré-déploiement. La **garde JWT est corrigée** (2026-06-12).
-17. ~~Accordéon familles sur `/paths` (catalogue `ParcoursPage`).~~ **FAIT (2026-06-11).**
-18. ~~Accordéon chapitres (cours) dans les rayons legacy `PathDetailPage`.~~ **FAIT (2026-06-11).**
-19. ~~Aiguilleur de route `/paths/:slug` (`ParcoursOrSubjectPage`).~~ **FAIT (2026-06-11).**
-20. ~~CI sur push, robustesse async serveur, seed non destructif, garde JWT, `apiUp` re-sondé, split leçons, tests serveur.~~ **FAIT (2026-06-12).**
+- `npm run validate:content` : **exit 0**, récap 62 leçons · 358 termes · 8 articles · **31 dossiers d'écosystème** · 9 simulateurs ; 1 lacune éditoriale non bloquante (23/62 leçons sans quiz).
 
-Priorité stratégique :
+Apport produit :
 
-- **Maintenant (le site n'est pas déployé, contenu de base en cours)** : trancher rendu + modèle de contenu, puis produire une tranche verticale réelle (un parcours complet). Ne pas optimiser perf/SEO/sécurité-déploiement contre des hypothèses.
-- Si objectif = démo impressionnante : dashboard + lecture active + contenu visible.
-- Si objectif = pré-production : décision de rendu + API détail + sécurité (lot 🔴) + SEO/i18n.
-- Si objectif = valeur long terme : atelier VC + CMS éditorial + densification des parcours + traductions EN.
+- **Nouvel espace `/ecosystemes`** (index + détail), distinct du blog, **100 % client** (`data/ecosystems.json`, type `EcosystemDossier`, **aucune table serveur**) — même pattern que les memos / l'anti-portfolio.
+- **Dossiers vivants arborescents** (`parentId` + `order`, profondeur illimitée) : un dossier-racine porte une **thèse falsifiable** + des **convictions datées à degré d'assurance explicite** (exploratoire / moyenne / forte) + des **signaux directionnels** ; un sous-dossier approfondit un point. 31 dossiers au total (3 racines + 28 sous-dossiers), 66 sections, 24 convictions.
+- **Figures natives theme-aware** (8 au total, 5 types : `bars`, `line`, `matrix`, `quadrant`, `taxonomy`) rendues en SVG/HTML **sans asset ni librairie de charting**.
+
+Fichiers créés / modifiés (repères) :
+
+- Données : `data/ecosystems.json` (**[NOUVEAU]**), `data/glossary.json` (terme `moat` ajouté, `split:content` rejoué).
+- Client : `client/src/pages/EcosystemsPage.tsx` + `EcosystemPage.tsx`, `client/src/content/ecosystems.ts` (loader : `rootEcosystems`, `childEcosystems`, `ecosystemAncestors`), `client/src/components/ecosystems/EcosystemFigures.tsx` (**[NOUVEAU]**, `EcosystemFigureView`), `client/src/content/types.ts` (types `EcosystemDossier` / `EcosystemFigure`), `client/src/App.tsx` (routes `ecosystemes` / `ecosystemes/:slug`, lazy).
+- Validation : `scripts/validate-content.mjs` (Zod strict : parent existant, absence de cycle, racine ⇒ thèse, `glossaryRefs`/marqueurs résolus, `discriminatedUnion` des figures).
+- Authoring : skill projet `.claude/skills/ecosystemes/SKILL.md` (**[NOUVEAU]** — méthodo recherche / rédaction / figures / validation).
+
+> Lecture stratégique : ce lot fait avancer concrètement le **Pilier 5 — Atlas** et le format « Décortiquer un écosystème » de la stratégie (voir `docs/STRATEGIE-vc-intelligence.md` §10.5 et §10.9), c'est-à-dire la couche **VC Intelligence** plutôt que la couche formation.
+
+---
+
+### 2026-06-13 — Audit indépendant (re-vérifié sur le code, hors discours des docs)
+
+Audit complet demandé (positionnement, UX/UI, parcours, contenu, fonctionnalités, technique, benchmark, scoring). **Consigne explicite : ne pas se fier aux docs de stratégie/scoring** (potentiellement périmés ou auto-complaisants) → tout re-vérifié sur le code exécuté et les données brutes.
+
+**Constat central (faits de code, pas de doc).** Le produit *est déjà* une plateforme d'intelligence VC par sa matière, mais sa vitrine se présente encore comme une école :
+
+- Home (`client/src/pages/HomePage.tsx`) : CTA principal = « Commencer l'introspection » (ikigai), 3 étapes formation. Inchangée vs Phase 2 de la stratégie.
+- Nav du haut (`client/src/components/chrome/TopBar.tsx`) : Parcours / Bibliothèque / Dictionnaire / Simulateurs / Analyses — **aucune entrée « Intelligence »**. Incohérence : `SideNav.tsx` expose en plus Anti-portfolio / Memos / Écosystèmes / Journal → les surfaces intelligence **n'existent pas dans la nav de la home** (`MainLayout` rend TopBar sur `/home`, SideNav ailleurs).
+- Dashboard (`client/src/pages/DashboardPage.tsx`) : anneau de progression « X/Y leçons » + « Reprendre la lecture » — toujours progression-centric.
+- Meta/OG par défaut (`client/index.html`, `client/src/lib/seo.ts`) : « plateforme d'introspection et d'apprentissage » = la carte sociale que voit un VC à qui on partage un lien.
+
+**Preuve doc-indépendante de l'ambition réelle = les données elles-mêmes** (prose lue, pas crue) :
+
+- Anti-portfolio (9) : structure decision-grade (`knownAtTheTime` daté, `missedSignal`, `steelman`, `costEstimate`, `sources` réelles). Ex. Airbnb : chronologie du connaissable, signal manqué formulé (dimensionner le produit vs le comportement débloqué), steelman crise 2008, sources Chesky/Wilson/BVP.
+- Écosystèmes (31, 3 racines) : thèse contrarian falsifiable, convictions datées à assurance explicite, sources institutionnelles FR (INSEE/DREES/CNSA/Libault). Ex. *Silver économie* : « une étiquette, pas un marché ».
+- Memos (5) : memos réels annotés (Sequoia/Bessemer/a16z), sourcés.
+
+→ Personne ne produit ça pour un MOOC. **Le problème n'est ni le contenu ni la technique : c'est l'emballage (vitrine + nav + meta).**
+
+**Comptes vérifiés sur `data/` (docs exacts) :** 358 termes · 31 écosystèmes (3 racines) · 9 anti-portfolio (+5 patterns) · 5 memos · 8 articles · 4 cas · 9 simulateurs · 51 leçons canoniques · 22 parcours · 16 cours.
+
+**Corrections apportées à mes propres affirmations d'audit (intégrité) :**
+
+- ❌ « anti-portfolio / memos / écosystèmes pas cherchables » → **faux**. `client/src/content/search.ts` les couvre (types `anti-portfolio` / `memo` / `ecosystem`). Seule la recherche **serveur** (`server/src/routes/search.ts`) les ignore → incohérence client/serveur, pas invisibilité. Rétrogradé de P1 à dette.
+- 🔧 « ~260 Ko qui plombent le bundle » → nuancé : `import json from '@data/...'` mais module de recherche lazy + chunk par route lazy → poids sur la route concernée / la 1re recherche, pas sur le chargement initial.
+- ✅ Confirmés sur le code : CSR pur (seul `react()` dans `client/vite.config.ts`, aucun prérendu) ; eco/anti-portfolio/memos **bundle-only** (aucune table Prisma) ; home/nav/dashboard/meta toujours « apprentissage ».
+
+**Recalibrage (précision utilisateur).** Site en construction ; formation développée en premier *par séquencement assumé* : on la boucle, puis on la met de côté pour basculer sur la couche VC intelligence. → Le qualificatif « manque de courage » est retiré. Réserve maintenue : **finir la formation ≠ la laisser parler au nom du produit** ; on peut séquencer le *contenu* sans séquencer la *vitrine* (home / meta / 1re impression).
+
+**Risque le plus coûteux maintenant que le contenu est jugé bon : CSR vs stratégie « public-first ».** Les unfurlers sociaux (LinkedIn/X/Slack) n'exécutent pas le JS → tout lien intelligence partagé affiche la carte par défaut « introspection/apprentissage ». Le prérendu éditorial (déjà §4 P1 « SEO ») **monte en criticité**.
+
+**Décision de design retenue avec l'utilisateur — nav différenciée formation vs intelligence.** Idée utilisateur : sidebar/contenu différents selon la zone parcourue. Verdict : bon instinct, **un seul piège** = deux modes étanches (switch « Formation ⇄ Intelligence ») qui casseraient la pollinisation croisée (leçon → cas, dossier → fondamental), cœur du différenciateur. **Pattern retenu = B + C, jamais A :**
+
+- **B — une seule nav primaire, deux zones groupées** : « Intelligence » en haut (Atlas / Cas & Memos / Analyses / Outils / Dictionnaire), « Apprendre les bases » en bas (repliable), « Espace » (Notes / Journal). La hiérarchie visuelle dit le 80/20 sans cloisonner. **Mettre la formation de côté plus tard = replier la zone basse (config, pas refonte).**
+- **C — rail secondaire contextuel dérivé du type de contenu** : sur leçon/parcours → sommaire cours + progression + suivant + quiz ; sur dossier/cas/memo → dossiers reliés + sources + convictions + « ce qui me ferait changer d'avis » + enregistrer dans l'Espace.
+- **3 conditions :** (1) le « mode » se **déduit** de la route/du contenu, jamais d'un état choisi par l'utilisateur (deep-links + futur partage le rendraient faux) ; (2) **présuppose la taxonomie** `contentKind` / `audience` dans les JSON (sinon hardcode de slugs → divergence) ; (3) entrée à froid penche Intelligence, formation à un clic.
+
+**Scoring revu — voir §2, bloc « Révision 2026-06-13 » (global vs ambition : ~6/10 contre 8.3 vs MOOC).**
+
+**Priorités issues de cet audit (ordre recommandé) :**
+
+1. **Taxonomie** `contentKind` / `audience` dans les JSON + `scripts/validate-content.mjs` (socle de la nav à zones, des rails contextuels et du futur filtrage de vitrine).
+2. **Nav primaire B** (deux zones groupées) + unifier `TopBar` / `SideNav`.
+3. **Repositionner la home + meta/OG par défaut** (vitrine ≠ école), même pendant que la formation se termine.
+4. **Rails contextuels C** au fil de l'étoffage de la couche intelligence.
+5. **POC prérendu éditorial** (débloque le partage social du bon contenu).
+6. Aligner la **recherche serveur** sur le client (eco / anti-portfolio / memos) — dette, pas P1.
+
+---
+
+## 9. Décision de priorisation → voir `Bilan.md` §10
+
+La liste de priorisation et le cadrage par objectif (Maintenant / démo / pré-production / valeur long terme) sont consolidés dans **[Bilan.md](Bilan.md)** §10 (« Priorités recommandées » + « Priorité selon l'objectif visé »).

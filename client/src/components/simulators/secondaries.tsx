@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { formatCurrency, formatMultiple, formatPercent } from '@/lib/utils';
+import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
 import { calculateSecondarySale, calculateContinuationFund } from '@/lib/simulators/secondaries';
 import { GlossaryPreview } from '@/lib/markdown';
-import { Callout, Field, Panel, Slider, Stat } from './shared';
+import { Field, Panel, Slider, Stat } from './shared';
 
 // ── 9. Secondaries & continuation fund ───────────────────────────────────────
 function SecondarySaleMode({ accent }: { accent: string }) {
@@ -36,7 +36,7 @@ function SecondarySaleMode({ accent }: { accent: string }) {
           <Slider label="Part de la NAV cédée" value={soldPct} min={5} max={100} step={5} format={(v) => formatPercent(v, 0)} onChange={setSoldPct} />
           <Slider label="Décote sur la NAV" value={discount} min={0} max={50} step={1} format={(v) => formatPercent(v, 0)} onChange={setDiscount} />
           <Slider label="Années avant la liquidité naturelle" value={years} min={1} max={8} step={1} format={(v) => `${v} an${v > 1 ? 's' : ''}`} onChange={setYears} />
-          <Slider label="Multiple attendu sur la NAV à l'exit" value={exitMultiple} min={0.5} max={4} step={0.1} format={(v) => formatMultiple(v, 1)} onChange={setExitMultiple} />
+          <Slider label="Multiple attendu sur la NAV à l'exit" value={exitMultiple} min={0.5} max={4} step={0.1} format={(v) => `${formatNumber(v, { maximumFractionDigits: 1 })}×`} onChange={setExitMultiple} />
           <Slider label="Taux d'actualisation du LP" value={rate} min={0} max={25} step={1} format={(v) => formatPercent(v, 0)} onChange={setRate} />
           <p className="text-[0.625rem] leading-relaxed text-surface-variant">
             Repères : les parts de fonds VC se traitent historiquement avec une décote de 15 à 40 % de la NAV selon le millésime, la qualité du portefeuille et le niveau des taux. Le multiple attendu sur la NAV traduit votre confiance dans les marks du GP : 1× = les marks se réalisent telles quelles.
@@ -58,21 +58,27 @@ function SecondarySaleMode({ accent }: { accent: string }) {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             <Stat label="Produit de la vente" value={formatCurrency(res.proceedsM * 1e6)} accent={accent} hint={`${formatPercent(100 - discount, 0)} de la NAV cédée`} />
             <Stat label="Valeur abandonnée" value={formatCurrency(res.haircutM * 1e6)} hint="la décote, en euros" />
-            <Stat label="DPI avant → après" value={`${formatMultiple(res.dpiBefore)} → ${formatMultiple(res.dpiAfter)}`} accent={accent} hint="cash réellement rendu" />
-            <Stat label="TVPI avant → après" value={`${formatMultiple(res.tvpiBefore)} → ${formatMultiple(res.tvpiAfter)}`} hint="aux marks actuelles" />
+            <Stat label="DPI avant → après" value={`${formatNumber(res.dpiBefore, { maximumFractionDigits: 2 })}× → ${formatNumber(res.dpiAfter, { maximumFractionDigits: 2 })}×`} accent={accent} hint="cash réellement rendu" />
+            <Stat label="TVPI avant → après" value={`${formatNumber(res.tvpiBefore, { maximumFractionDigits: 2 })}× → ${formatNumber(res.tvpiAfter, { maximumFractionDigits: 2 })}×`} hint="aux marks actuelles" />
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            <Stat label="Point mort (multiple d'exit)" value={formatMultiple(res.breakEvenMultiple)} accent={accent} hint="seuil d'indifférence vendre/conserver" />
-            <Stat label="Conserver (valeur actuelle)" value={formatCurrency(res.pvHoldM * 1e6)} hint={`exit à ${formatMultiple(exitMultiple, 1)} dans ${years} an${years > 1 ? 's' : ''}, actualisé`} />
+            <Stat label="Point mort (multiple d'exit)" value={`${formatNumber(res.breakEvenMultiple, { maximumFractionDigits: 2 })}×`} accent={accent} hint="seuil d'indifférence vendre/conserver" />
+            <Stat label="Conserver (valeur actuelle)" value={formatCurrency(res.pvHoldM * 1e6)} hint={`exit à ${formatNumber(exitMultiple, { maximumFractionDigits: 1 })}× dans ${years} an${years > 1 ? 's' : ''}, actualisé`} />
             <Stat label="Vendre (valeur actuelle)" value={formatCurrency(res.pvSellM * 1e6)} hint="cash immédiat" />
           </div>
 
-          <Callout icon={res.holdWins ? '⏳' : '✓'} iconColor={accent} title={res.holdWins ? 'Conserver domine — sur le papier' : 'Vendre domine'}>
-            {res.holdWins
-              ? `À ${formatMultiple(exitMultiple, 1)} attendu contre un point mort de ${formatMultiple(res.breakEvenMultiple)}, conserver vaut ${formatCurrency((res.pvHoldM - res.pvSellM) * 1e6)} de plus en valeur actuelle. C'est tout le dilemme de la pression DPI : la vente détruit de la valeur attendue, mais elle rend du cash mesurable aujourd'hui — et c'est ce cash que les LPs regardent avant de re-souscrire au fonds suivant.`
-              : `Le multiple attendu (${formatMultiple(exitMultiple, 1)}) est sous le point mort (${formatMultiple(res.breakEvenMultiple)}) : la décote coûte moins cher que d'attendre. Vendre rend ${formatCurrency(res.proceedsM * 1e6)} aujourd'hui et fait passer le DPI de ${formatMultiple(res.dpiBefore)} à ${formatMultiple(res.dpiAfter)}.`}
-          </Callout>
+          <div className="rounded-xl border border-outline-variant bg-surface-container-low/60 p-4 text-sm flex gap-3">
+            <span className="font-semibold text-lg leading-none" style={{ color: accent }}>{res.holdWins ? '⏳' : '✓'}</span>
+            <div>
+              <p className="font-semibold text-foreground">{res.holdWins ? 'Conserver domine — sur le papier' : 'Vendre domine'}</p>
+              <p className="mt-1 text-xs text-surface-variant">
+                {res.holdWins
+                  ? `À ${formatNumber(exitMultiple, { maximumFractionDigits: 1 })}× attendu contre un point mort de ${formatNumber(res.breakEvenMultiple, { maximumFractionDigits: 2 })}×, conserver vaut ${formatCurrency((res.pvHoldM - res.pvSellM) * 1e6)} de plus en valeur actuelle. C'est tout le dilemme de la pression DPI : la vente détruit de la valeur attendue, mais elle rend du cash mesurable aujourd'hui — et c'est ce cash que les LPs regardent avant de re-souscrire au fonds suivant.`
+                  : `Le multiple attendu (${formatNumber(exitMultiple, { maximumFractionDigits: 1 })}×) est sous le point mort (${formatNumber(res.breakEvenMultiple, { maximumFractionDigits: 2 })}×) : la décote coûte moins cher que d'attendre. Vendre rend ${formatCurrency(res.proceedsM * 1e6)} aujourd'hui et fait passer le DPI de ${formatNumber(res.dpiBefore, { maximumFractionDigits: 2 })}× à ${formatNumber(res.dpiAfter, { maximumFractionDigits: 2 })}×.`}
+              </p>
+            </div>
+          </div>
 
           <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-5">
             <p className="mb-3 text-xs text-surface-variant">Réalisé vs latent — avant et après la vente (sur le paid-in)</p>
@@ -89,8 +95,8 @@ function SecondarySaleMode({ accent }: { accent: string }) {
                       <div style={{ width: `${(row.rvpi / totalScale) * 100}%`, background: 'var(--surface-container-highest)' }} />
                     </div>
                     <div className="mt-1 flex justify-between text-[0.625rem] text-surface-variant">
-                      <span>{row.label} — DPI {formatMultiple(row.dpi)}</span>
-                      <span>RVPI {formatMultiple(row.rvpi)}</span>
+                      <span>{row.label} — DPI {formatNumber(row.dpi, { maximumFractionDigits: 2 })}×</span>
+                      <span>RVPI {formatNumber(row.rvpi, { maximumFractionDigits: 2 })}×</span>
                     </div>
                   </div>
                 );
@@ -135,7 +141,7 @@ function ContinuationFundMode({ accent }: { accent: string }) {
           <Slider label="Carried interest" value={carry} min={0} max={30} step={1} format={(v) => formatPercent(v, 0)} onChange={setCarry} />
           <Slider label="Frais du continuation fund" value={newFee} min={0} max={2.5} step={0.25} format={(v) => formatPercent(v, 2)} onChange={setNewFee} />
           <Slider label="Horizon du continuation fund" value={horizon} min={2} max={8} step={1} format={(v) => `${v} ans`} onChange={setHorizon} />
-          <Slider label="Multiple attendu sur la NAV à l'exit" value={exitMultiple} min={0.5} max={4} step={0.1} format={(v) => formatMultiple(v, 1)} onChange={setExitMultiple} />
+          <Slider label="Multiple attendu sur la NAV à l'exit" value={exitMultiple} min={0.5} max={4} step={0.1} format={(v) => `${formatNumber(v, { maximumFractionDigits: 1 })}×`} onChange={setExitMultiple} />
           <p className="text-[0.625rem] leading-relaxed text-surface-variant">
             Repères : les GP-led se traitent typiquement entre 80 et 100 % de la NAV (parfois avec prime sur un actif trophée). Les LPs existants ont le choix : sortir en cash au prix de transaction, ou rouler dans le nouveau véhicule. Le statu quo varie selon les deals — vérifiez toujours l'option par défaut.
           </p>
@@ -157,7 +163,7 @@ function ContinuationFundMode({ accent }: { accent: string }) {
             <Stat label="Prix de transaction" value={formatCurrency(res.transactionPriceM * 1e6)} accent={accent} hint={`${formatPercent(pricing, 0)} de la NAV`} />
             <Stat label="Cash aux LPs sortants" value={formatCurrency(res.cashToSellersM * 1e6)} hint={`récupèrent ${formatPercent(res.sellerRecoveryPct * 100, 0)} de la NAV, net`} />
             <Stat label="Montant roulé" value={formatCurrency(res.rolledM * 1e6)} hint={`${formatPercent(rollover, 0)} des LPs existants`} />
-            <Stat label="Multiple net du LP qui roule" value={formatMultiple(res.rollerNetMultiple)} accent={accent} hint={`à l'exit dans ${horizon} ans`} />
+            <Stat label="Multiple net du LP qui roule" value={`${formatNumber(res.rollerNetMultiple, { maximumFractionDigits: 2 })}×`} accent={accent} hint={`à l'exit dans ${horizon} ans`} />
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -167,9 +173,15 @@ function ContinuationFundMode({ accent }: { accent: string }) {
             <Stat label="Total GP sur l'opération" value={formatCurrency(res.gpTotalTakeM * 1e6)} accent={accent} hint="2 carries + frais" />
           </div>
 
-          <Callout tone="primary" icon="⚠" title="Le conflit d'intérêts structurel">
-            Le GP est des deux côtés de la table : vendeur (pour ses LPs existants) et acheteur (pour le nouveau véhicule). Il fixe le prix, encaisse {formatCurrency(res.crystallizedCarryM * 1e6)} de carry au closing, puis perçoit frais et second carry sur le même actif. C'est pourquoi l'ILPA recommande fairness opinion indépendante, validation par le LP Advisory Committee et délai suffisant pour l'élection des LPs.
-          </Callout>
+          <div className="rounded-xl border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] p-4 text-sm text-foreground flex gap-3">
+            <span className="font-semibold text-lg leading-none">⚠</span>
+            <div>
+              <p className="font-semibold">Le conflit d'intérêts structurel</p>
+              <p className="mt-1 text-xs text-surface-variant">
+                Le GP est des deux côtés de la table : vendeur (pour ses LPs existants) et acheteur (pour le nouveau véhicule). Il fixe le prix, encaisse {formatCurrency(res.crystallizedCarryM * 1e6)} de carry au closing, puis perçoit frais et second carry sur le même actif. C'est pourquoi l'ILPA recommande fairness opinion indépendante, validation par le LP Advisory Committee et délai suffisant pour l'élection des LPs.
+              </p>
+            </div>
+          </div>
 
           <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-5">
             <p className="mb-3 text-xs text-surface-variant">Répartition de la valeur d'exit du continuation fund ({formatCurrency(res.exitValueM * 1e6)})</p>

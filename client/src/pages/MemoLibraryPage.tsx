@@ -33,7 +33,6 @@ export default function MemoLibraryPage() {
   usePageMeta(
     'Memo library annotée',
     'Memos d’investissement réellement publiés — Bessemer, Sequoia, a16z — annotés bloc par bloc : la logique décisionnelle derrière chaque paragraphe.',
-    { image: 'memo' },
   );
 
   return (

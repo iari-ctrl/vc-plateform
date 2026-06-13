@@ -80,7 +80,7 @@ npm run dev
 
 Audit local courant (2026-06-12, exécuté sur la branche `chore/flux-c-repo-hygiene`) :
 
-- `npm run validate:content` : OK, avec un warning éditorial (23/62 leçons sans quiz — backlog contenu) ;
+- `npm run validate:content` : OK (récap au 2026-06-13 : 62 leçons · 358 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs), avec un warning éditorial (23/62 leçons sans quiz — backlog contenu) ;
 - `npm run lint` : OK, 0 erreur, 4 warnings (uniquement `react-refresh/only-export-components`, structurels aux Context) ;
 - `npm run build` : OK, build serveur + client (validation contenu rejouée via le hook `prebuild`) ;
 - `npm run test --workspace client` : OK, 10 fichiers / 59 tests ;
@@ -104,6 +104,7 @@ Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 - **Contenu** : pipeline d'authoring `docs/parcours/` → `data/parcours/*.lessons.json` (2 parcours rédigés, dont le registre « entretien Analyst »). Les leçons drop-in (`ld-*`/`lea-*`) sont **servies côté client** : `scripts/split-lessons.mjs` les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts` (cf. « Performance » ci-dessous), et les 2 parcours phares pointent dessus. **Pas encore** fusionnées dans `data/lessons.json` canonique ni seedées en base : côté **API/DB** elles restent absentes — le client les sert via le fallback bundle, donc `npm run db:seed` reste à faire pour aligner le serveur.
 - **Cours Power Law & Monte Carlo** : nouveau cours canonique `c-power-law-portfolio` dans le rayon Portfolio, avec 4 leçons (`lpl-*`) qui expliquent moyenne vs médiane, pertinence de Monte Carlo, moteur du simulateur Power Law et lecture TVPI/concentration/fund returner. Le simulateur Power Law référence maintenant ces leçons en premier.
 - **Performance / bundle** : le glossaire **et** les leçons sont découpés en un index léger (eager, hot path : popovers, recherche, liens) et un chunk lourd lazy (définitions / corps de leçon), via `scripts/split-glossary.mjs` + `scripts/split-lessons.mjs` (câblés dans `predev`/`prebuild` par `npm run split:content`). Le chunk eager `lessons` passe de ~176 kB à ~32 kB ; les corps (~143 kB) ne sont chargés que par le lecteur de leçon.
+- **Espace « Décortiquer un écosystème » (2026-06-13)** : `/ecosystemes` réunit des **analyses signées** sur des géographies, secteurs et thèses transverses. Dossiers vivants **arborescents** (`parentId` + `order`) avec thèse falsifiable, **convictions datées à degré d'assurance explicite** (exploratoire / moyenne / forte), signaux directionnels et **figures natives** (graphiques/schémas en SVG/HTML theme-aware, 5 types, sans asset ni librairie de charting). **100 % client** (`data/ecosystems.json`, aucune table serveur). 31 dossiers au lancement (3 racines + 28 sous-dossiers). Méthodo d'authoring : skill `.claude/skills/ecosystemes/SKILL.md`.
 
 ---
 
@@ -116,6 +117,7 @@ vc-premium-platform/
 │   ├── glossary.index.json  glossary.defs.json   # glossaire scindé (index léger / défs lazy) — généré
 │   ├── lessons.index.json   lessons.bodies.json  # leçons scindées (index léger / corps lazy) — généré
 │   ├── caseStudies.json  blog.json  simulators.json  ikigai.json
+│   ├── ecosystems.json       # dossiers « Décortiquer un écosystème » (arbre parentId/order, 100% client)
 │   ├── parcours.json  parcours.en.json  parcoursConfig.json  profileParcours.json
 │   └── parcours/             # fiches de leçons drop-in par parcours (*.lessons.json)
 │
@@ -144,7 +146,7 @@ Le build client est découpé par routes et par collections de contenu : le vend
 
 ### Pages (client)
 
-`Home` · `Onboarding` (ikigai) · `Résultat du profil` · `Dashboard` · `Parcours` (Atlas + catalogue par familles, sur `/paths`) · `Détail parcours` (carte de voyage, sur `/paths/:slug`) · `Bibliothèque` (les cours, lectures et études de cas, sur `/bibliotheque`) · `Détail rayon` · `Cours` · `Leçon` (lecture active) · `Dictionnaire` · `Études de cas` (détail) · `Simulateurs` (liste + 8 calculateurs) · `Analyses` (blog liste + article) · `Notes & favoris` · `Profil` · `Recherche` · `Administration (CMS)`.
+`Home` · `Onboarding` (ikigai) · `Résultat du profil` · `Dashboard` · `Parcours` (Atlas + catalogue par familles, sur `/paths`) · `Détail parcours` (carte de voyage, sur `/paths/:slug`) · `Bibliothèque` (les cours, lectures et études de cas, sur `/bibliotheque`) · `Détail rayon` · `Cours` · `Leçon` (lecture active) · `Dictionnaire` · `Études de cas` (détail) · `Simulateurs` (liste + 9 calculateurs) · `Analyses` (blog liste + article) · `Écosystèmes` (« Décortiquer un écosystème » : index + dossier, sur `/ecosystemes` et `/ecosystemes/:slug`) · `Notes & favoris` · `Profil` · `Recherche` · `Administration (CMS)`.
 
 > `/paths/:slug` route intelligemment : un slug de parcours → la carte de voyage ; tout autre slug (liens legacy des sujets) → l'ancien détail de rayon. Aucun lien existant n'est cassé.
 

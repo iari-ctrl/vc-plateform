@@ -16,7 +16,7 @@ import { formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 
 export default function DashboardPage() {
-  usePageMeta('Tableau de bord', 'Votre progression, vos recommandations et vos notes — votre centre de contrôle d’apprentissage.', { noindex: true });
+  usePageMeta('Tableau de bord', 'Votre progression, vos recommandations et vos notes — votre centre de contrôle d’apprentissage.');
   const { profile, progress, notes, bookmarks, journal } = useUserData();
   const { user } = useAuth();
   const dueJournal = journal.filter((e) => isDue(e)).length;

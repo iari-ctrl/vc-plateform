@@ -1,6 +1,6 @@
 # Manuel d'Architecture et d'Édition — VC Intelligence Platform
 
-Dernière mise à jour : 2026-06-12
+Dernière mise à jour : 2026-06-13
 
 Ce document décrit l'architecture **full-stack** du projet, la **vision produit et le positionnement stratégique**, le cycle de vie du contenu (de la source canonique JSON jusqu'à l'écran), et un **guide d'édition pas-à-pas** pour un développeur qui veut ajouter du contenu, modifier le design, ou faire évoluer le code.
 
@@ -38,8 +38,7 @@ vc-premium-platform/
 │   # theses.json · atlas.json · frameworks.json · research.json (ou blog.json refondu)
 ├── docs/
 │   ├── parcours/              # conception + rédaction des parcours (Markdown)
-│   ├── AUDIT-vc-intelligence.md          # audit & plan de repositionnement (2026-06-10)
-│   └── Stratégie doc et ROADMAP         # vision cible, benchmark, roadmap 10 phases
+│   └── STRATEGIE-vc-intelligence.md      # doc directeur : positionnement, architecture cible, roadmap (fusion stratégie + audit)
 ├── Suivis/                    # documents de suivi projet (Bilan, Report, Design System, ce Manuel)
 ├── glossary-ingestion/
 │   └── canonical-glossary.json (433)  # registre durable de préparation du glossaire
@@ -66,8 +65,7 @@ vc-premium-platform/
 .github/workflows/ci.yml       # CI (validate:content → lint → build → tests client → tests serveur ; push main/master + PR)
 client/vitest.config.ts        # harnais client (10 fichiers, 59 tests) ; serveur : server/test (3 fichiers, 10 tests)
 i18n_architecture_FR-EN.md     # ADR + plan de migration bilingue (FR/EN)
-docs/Stratégie doc et ROADMAP  # vision cible, benchmark, roadmap complète (doc directeur)
-docs/AUDIT-vc-intelligence.md  # diagnostic + 10 premières tâches d'exécution
+docs/STRATEGIE-vc-intelligence.md  # doc directeur : positionnement, architecture cible, roadmap (fusion stratégie + audit)
 ```
 
 > [!NOTE]
@@ -181,7 +179,7 @@ Toutes les clés sont préfixées `vcpx:` : `theme`, `profile`, `notes`, `bookma
 
 ### 3.3. Pages clés (`client/src/pages/`)
 L'arborescence évolue vers la cible VC Intelligence :
-- **Intelligence & Outils** : `ThesisLabPage`, `AtlasPage`, `ResearchPage` (à venir). `CaseStudyPage` (détail d'une étude de cas), `SimulatorsPage` / `SimulatorPage` (outils).
+- **Intelligence & Outils** : `ThesisLabPage`, `AtlasPage`, `ResearchPage` (à venir). `CaseStudyPage` (détail d'une étude de cas), `SimulatorsPage` / `SimulatorPage` (outils). **`EcosystemsPage`** (index « Décortiquer un écosystème », `/ecosystemes`) et **`EcosystemPage`** (détail d'un dossier, `/ecosystemes/:slug`) — première brique livrée de la couche Atlas / analyse signée (cf. §4.5bis).
 - **Library (Formation)** : **`ParcoursPage`** (catalogue des parcours, `/paths`), **`ParcoursDetailPage`** (carte de voyage d'un parcours, `/paths/:slug`), **`ParcoursOrSubjectPage`** (aiguilleur `/paths/:slug`). `PathsPage` (la **Bibliothèque**, `/bibliotheque`), `PathDetailPage` (détail d'un rayon), `CourseDetailPage`, `LessonPage` (lecture active).
 - **Core & Infrastructure** : `HomePage`, `OnboardingPage` (ikigai optionnel), `GlossaryPage`, `SearchPage`.
 - **Workspace** : `DashboardPage` (évolue vers un workspace artifact-first), `ProfileResultPage`, `NotesPage`, `ProfilePage`.
@@ -435,6 +433,17 @@ La couche **Parcours** est une **trajectoire par objectif** posée *au-dessus* d
 - **Étude de cas** : `kind` ∈ `startup|fund|deal|market`, `sections[]` (`heading` + `body` markdown), `takeaways[]`, `glossaryRefs[]`.
 - **Analyse (blog)** : `category`, `author`, `date` (`YYYY-MM-DD`), `excerpt`, `body` (même markdown), `tags[]`. Le `body` accepte les liens `[[slug]]`. Deux champs **optionnels** servent le format « Lecture oblique » (analyses de livres, cf. §10.9 de `docs/STRATEGIE-vc-intelligence.md`) : `books[]` (`title`/`author`/`year?`, tableau pour les « duels de livres ») affiché sur la carte et l'en-tête de l'article, et `glossaryRefs[]` (mêmes ids que les études de cas) qui rend le bloc « Pour aller plus loin » en fin d'article. La catégorie `"Lecture oblique"` est filtrable sur `/blog`.
 
+### 4.5bis. Dossier d'écosystème (`data/ecosystems.json`) — « Décortiquer un écosystème »
+
+Espace d'**analyse signée** (`/ecosystemes`), **100 % client** : tout vit dans `data/ecosystems.json` (type `EcosystemDossier` dans `client/src/content/types.ts`), **aucune table serveur** ni seed — même pattern que les memos / l'anti-portfolio.
+
+- **Arbre** via `parentId` + `order` (profondeur illimitée). Un **dossier-racine** (sans `parentId`) est le **seul listé sur l'index** et **doit** porter une `these` ; un **sous-dossier** peut omettre `these`/`convictions`/`signals`/`players`/`sources` (tous optionnels). Tri des frères : `order` croissant, puis révision la plus récente d'abord.
+- **Format éditorial** : thèse falsifiable + `convictions[]` **datées, à degré d'assurance explicite** (`strength` ∈ `exploratoire|moyenne|forte`, jamais implicite) + `signals[]` directionnels (`haussier|baissier|incertain`) qui confirmeront/invalideront la thèse. `kind` ∈ `geographie|secteur|these`. Dates ISO `YYYY-MM-DD`. Loader : `rootEcosystems()`, `childEcosystems(id)`, `ecosystemAncestors(d)` dans `client/src/content/ecosystems.ts`. La page de détail affiche : fil d'Ariane → thèse → sections (+ figures) → convictions → signaux → acteurs → « Approfondir » (enfants) → sources.
+- **Figures** (`section.figures[]`) : le renderer markdown maison ne gère ni image, ni HTML brut, ni tableau → les visuels sont des **figures structurées**, rendues en **SVG/HTML natif theme-aware** par `client/src/components/ecosystems/EcosystemFigures.tsx`, **sans aucun asset ni librairie de charting**. 5 types (union discriminée par `kind`) : `bars`, `line`, `matrix` (pastilles `none/low/mid/high`), `quadrant` (items en `x,y ∈ [0,1]`), `taxonomy`. Couleurs via tokens (`--on-surface(-variant)`, `--outline-variant`, `--surface-container*`) + `accent` du dossier. **Un nouveau type de figure = 3 éditions synchronisées** : l'union dans `types.ts`, le `z.discriminatedUnion` dans `scripts/validate-content.mjs`, le renderer dans `EcosystemFigures.tsx`.
+- ⚠️ **Pièges** : (1) **jamais de marqueur `[[slug]]`/`{{slug}}` dans le texte d'une figure** (titre/légende/labels/notes) — le validateur scanne tout le JSON et exigerait leur résolution → échec ; (2) `data/ecosystems.json` est un **round-trip exact** de `JSON.stringify(…, null, 2) + '\n'` → muter via un **petit script Node** jetable plutôt qu'à la main, pour zéro diff parasite.
+- **Validation** : `npm run validate:content` applique un Zod strict (parent existant, **absence de cycle**, racine ⇒ `these`, `glossaryRefs` + marqueurs `[[..]]` résolus contre le glossaire). Si le glossaire change : `npm run split:content`.
+- **Méthodo complète** (recherche sourcée, rédaction, figures, validation) : skill projet **`.claude/skills/ecosystemes/SKILL.md`** — à lire avant tout travail sur un dossier.
+
 ### 4.6. Simulateur (`data/simulators.json`)
 Le JSON ne décrit que la **fiche** (titre, `category`, `accent`, `description`, `relatedLessonIds`). **La logique de calcul est du code**, dans [client/src/components/simulators/calculators.tsx](client/src/components/simulators/calculators.tsx). Ajouter un *nouveau* simulateur = ajouter la fiche JSON **et** brancher un composant calculateur (mappé par `slug`).
 
@@ -454,7 +463,7 @@ Les entrées sont validées par **zod** côté serveur, le `slug` est auto-gén�
 1. JSON valide ? (virgules, guillemets — un `JSON.parse` qui casse fait planter le seed).
 2. `id` et `slug` **uniques** ; relations (`courseId`, `pathId`, `lessonIds`, `glossaryRefs`) pointant vers des entrées **existantes**.
 3. Champs cohérents avec `types.ts` **et** `content.ts`.
-4. `npm run db:seed` (ou `db:reset`) → vérifier le récap `✓ Seed complete { … }`.
+4. `npm run db:seed` (ou `db:reset`) → vérifier le récap `✓ Seed complete { … }`. **Exception : les dossiers d'écosystème (§4.5bis) sont 100 % client** — pas de seed ; on valide avec `npm run validate:content` puis on vérifie `/ecosystemes/<slug>` dans l'app.
 5. Recharger l'app. (En invité, le HMR Vite suffit pour le bundle ; pour l'API, le seed est obligatoire.)
 
 ---
@@ -560,7 +569,7 @@ L'onboarding est un **cahier d'introspection** éditorial : masthead, sections n
 
 ## 9. Gestion des risques et feuille de route technique
 
-La transition vers la **VC Intelligence Platform** repose sur un cadre d'exécution strict en 10 phases, documenté dans `docs/Stratégie doc et ROADMAP`. 
+La transition vers la **VC Intelligence Platform** repose sur un cadre d'exécution strict en 10 phases, documenté dans [`docs/STRATEGIE-vc-intelligence.md`](../docs/STRATEGIE-vc-intelligence.md). 
 
 > [!WARNING]
 > **Risques Techniques Majeurs :**

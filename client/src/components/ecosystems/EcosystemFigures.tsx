@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import type { EcosystemFigure, FigureRating } from '@/content/types';
-import { clamp, formatNumber } from '@/lib/utils';
 
 /**
  * Figures des dossiers d'écosystème — graphiques de données et schémas
@@ -182,15 +181,15 @@ function Taxonomy({ figure, accent }: { figure: Extract<EcosystemFigure, { kind:
 // ── Line — une trajectoire dans le temps ─────────────────────────────────────
 function Line({ figure, accent }: { figure: Extract<EcosystemFigure, { kind: 'line' }>; accent: string }) {
   const W = 320;
-  const H = 196;
+  const H = 188;
   const padX = 30;
-  const padTop = 38; // room for value + annotation above the peak
+  const padTop = 22;
   const padBottom = 30;
   const ys = figure.points.map((p) => p.y);
   const maxY = Math.max(...ys);
   const minY = Math.min(...ys, 0);
   const n = figure.points.length;
-  const px = (i: number) => padX + (i / (n - 1)) * (W - padX - 16);
+  const px = (i: number) => padX + (i / (n - 1)) * (W - padX - 12);
   const py = (y: number) => padTop + (1 - (y - minY) / (maxY - minY || 1)) * (H - padTop - padBottom);
   const line = figure.points.map((p, i) => `${px(i)},${py(p.y)}`).join(' ');
   const area = `${px(0)},${py(minY)} ${line} ${px(n - 1)},${py(minY)}`;
@@ -198,26 +197,29 @@ function Line({ figure, accent }: { figure: Extract<EcosystemFigure, { kind: 'li
   return (
     <FigureFrame title={figure.title} caption={figure.caption} source={figure.source} ariaLabel={figure.title}>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ height: 'auto' }} preserveAspectRatio="xMidYMid meet">
-        <line x1={padX} y1={py(minY)} x2={W - 14} y2={py(minY)} className="stroke-current text-outline-variant" strokeWidth={1} />
-        {figure.unit && (
-          <text x={padX} y={12} className="fill-current font-mono text-surface-variant" style={{ fontSize: 8.5 }}>en {figure.unit}</text>
-        )}
+        {/* baseline */}
+        <line x1={padX} y1={py(minY)} x2={W - 12} y2={py(minY)} className="stroke-current text-outline-variant" strokeWidth={1} />
         <polygon points={area} style={{ fill: accent, opacity: 0.1 }} />
         <polyline points={line} fill="none" style={{ stroke: accent }} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
-        {figure.points.map((p, i) => {
-          const x = px(i);
-          const y = py(p.y);
-          return (
-            <g key={i}>
-              <circle cx={x} cy={y} r={3} style={{ fill: accent }} />
-              <text x={clamp(x, 16, W - 16)} y={y - 6} textAnchor="middle" className="fill-current font-mono text-surface-variant" style={{ fontSize: 8 }}>{formatNumber(p.y)}</text>
-              {p.annotation && (
-                <text x={clamp(x, 30, W - 30)} y={y - 16} textAnchor="middle" className="font-mono font-medium" style={{ fontSize: 8.5, fill: accent }}>{p.annotation}</text>
-              )}
-              <text x={x} y={H - 9} textAnchor="middle" className="fill-current font-mono text-surface-variant" style={{ fontSize: 9 }}>{p.x}</text>
-            </g>
-          );
-        })}
+        {figure.points.map((p, i) => (
+          <g key={i}>
+            <circle cx={px(i)} cy={py(p.y)} r={3} style={{ fill: accent }} />
+            <text x={px(i)} y={H - 10} textAnchor="middle" className="fill-current font-mono text-surface-variant" style={{ fontSize: 9 }}>
+              {p.x}
+            </text>
+            {p.annotation && (
+              <text
+                x={Math.min(Math.max(px(i), 36), W - 36)}
+                y={py(p.y) - 9}
+                textAnchor="middle"
+                className="fill-current font-medium text-foreground"
+                style={{ fontSize: 9.5 }}
+              >
+                {p.annotation}
+              </text>
+            )}
+          </g>
+        ))}
       </svg>
     </FigureFrame>
   );
@@ -231,7 +233,6 @@ function Quadrant({ figure, accent }: { figure: Extract<EcosystemFigure, { kind:
   const plane = { x0: m, y0: 16, x1: W - m, y1: H - m };
   const mapX = (x: number) => plane.x0 + x * (plane.x1 - plane.x0);
   const mapY = (y: number) => plane.y1 - y * (plane.y1 - plane.y0);
-  const midX = (plane.x0 + plane.x1) / 2;
 
   return (
     <FigureFrame title={figure.title} caption={figure.caption} source={figure.source} ariaLabel={figure.title}>
@@ -246,12 +247,12 @@ function Quadrant({ figure, accent }: { figure: Extract<EcosystemFigure, { kind:
         <text x={plane.x1} y={H - 8} textAnchor="end" className="fill-current font-mono text-surface-variant" style={{ fontSize: 8.5 }}>{figure.xAxis[1]} →</text>
         <text x={10} y={plane.y1} className="fill-current font-mono text-surface-variant" style={{ fontSize: 8.5 }} transform={`rotate(-90 10 ${plane.y1})`}>← {figure.yAxis[0]}</text>
         <text x={10} y={plane.y0} textAnchor="end" className="fill-current font-mono text-surface-variant" style={{ fontSize: 8.5 }} transform={`rotate(-90 10 ${plane.y0})`}>{figure.yAxis[1]} →</text>
-        {/* items — labels anchor toward the plane centre so they never overflow */}
+        {/* items */}
         {figure.items.map((it, i) => {
-          const cx = mapX(clamp(it.x, 0, 1));
-          const cy = mapY(clamp(it.y, 0, 1));
+          const cx = mapX(Math.min(Math.max(it.x, 0), 1));
+          const cy = mapY(Math.min(Math.max(it.y, 0), 1));
           const hot = it.highlight ?? false;
-          const anchor = cx > midX ? 'end' : 'start';
+          const anchor = cx > plane.x1 - 60 ? 'end' : 'start';
           const dx = anchor === 'end' ? -7 : 7;
           return (
             <g key={i}>

@@ -11,7 +11,7 @@ import NotFoundPage from './NotFoundPage';
 export default function SimulatorPage() {
   const { slug } = useParams();
   const sim = slug ? simulatorBySlug(slug) : undefined;
-  usePageMeta(sim?.title, sim?.description, { image: 'simulator' });
+  usePageMeta(sim?.title, sim?.description);
 
   if (!sim) return <NotFoundPage />;
   const Calculator = SIMULATOR_COMPONENTS[sim.id];

@@ -1,8 +1,10 @@
 # Bilan - VC Premium Platform
 
-Dernière mise à jour : 2026-06-12
+Dernière mise à jour : 2026-06-13
 
 Objet : état actuel synthétique de `vc-premium-platform`, avec les acquis, les limites connues et les prochaines priorités utiles pour sortir du prototype sans lancer une phase production complète.
+
+> **Périmètre des docs de suivi.** Ce document porte l'**état de synthèse, les risques, les priorités et le backlog prospectif**. Le **journal daté des travaux/vérifications** et le **scoring** vivent dans [Report et scoring.md](Report%20et%20scoring.md). La **stratégie cible** (vision, piliers, roadmap) est dans [docs/STRATEGIE-vc-intelligence.md](../docs/STRATEGIE-vc-intelligence.md).
 
 ---
 
@@ -26,180 +28,44 @@ Le projet est aujourd'hui plus proche d'un atelier pédagogique fonctionnel que 
 - l'**architecture bilingue FR/EN est amorcée** : la Phase 1 (routing localisé `/fr` `/en`) est implémentée dans `client/src/i18n/` ;
 - un **premier harnais de tests (Vitest) et un pipeline CI** existent désormais, ainsi qu'un lot de durcissement sécurité/qualité ;
 - un **pipeline d'écriture des parcours** est en place (`docs/parcours/` + `data/parcours/*.lessons.json`), avec deux parcours rédigés de bout en bout.
+- un **espace d'analyse signée « Décortiquer un écosystème »** (`/ecosystemes`, 100 % client) publie des dossiers vivants arborescents avec thèse falsifiable, convictions datées à degré d'assurance explicite et **figures natives** (graphiques/schémas en SVG/HTML theme-aware, sans asset ni lib de charting) ;
 - le dépôt Git est initialisé et rattaché à `origin/master`, avec une baseline initiale versionnée.
 
 La priorité n'est plus d'ajouter des features. Deux décisions d'architecture conditionnent la suite (mode de rendu CSR/SSR, modèle de contenu/authoring) ; ensuite, l'étape utile reste de rendre l'écriture, la validation et l'itération pédagogique confortables.
+
+> **Note (audit indépendant, 2026-06-13 — cf. §2 et `Report et scoring.md` §8).** Ce résumé décrit le produit comme « destiné à apprendre le capital-risque » / « atelier pédagogique » : c'est précisément la **lentille learning-first** que l'audit pointe comme le décalage n°1. Par sa matière (anti-portfolio sourcé, 31 dossiers d'écosystème à thèses falsifiables, memos annotés), le produit vise déjà la **VC Intelligence** ; c'est la vitrine (home, nav, meta) qui ne le dit pas encore. Séquencement assumé : finir la formation d'abord — sans pour autant la laisser parler au nom du produit.
 
 ---
 
 ## 2. Vérifications effectuées
 
-### 2026-05-31
+Dernier état vérifié — **2026-06-13** (branche `chore/flux-c-repo-hygiene`, exécuté en local) :
 
 | Commande | Résultat |
 | --- | --- |
-| `npm run validate:content` | OK, 1 warning pédagogique |
-| `npm run lint` | OK, 0 erreur, 15 warnings Fast Refresh |
-| `npm run build` | OK, build serveur + client |
-| `git status --short` | KO, le dossier n'est pas un dépôt git |
-
-### 2026-06-01
-
-| Commande | Résultat |
-| --- | --- |
-| `npm run validate:content` | OK, avec warnings éditoriaux (~52/76 leçons sans quiz) |
-| `npm run lint` | OK, 0 erreur, 15 warnings Fast Refresh |
-| `npm run build` | OK, build serveur + client, assets WebP présents dans `dist/splash/` |
-| `git status --short` | KO, le dossier n'est toujours pas un dépôt git |
-
-Détail validation contenu (2026-06-01) :
-
-- 9 parcours ;
-- 12 cours ;
-- 76 leçons ;
-- 357 termes de glossaire ;
-- 4 études de cas ;
-- 4 articles ;
-- 6 simulateurs ;
-- 156 marqueurs `[[..]]` / `{{..}}` analysés ;
-- ~52 leçons sans quiz.
-
-Le warning principal reste éditorial : les leçons sans quiz ne cassent pas l'application, mais elles empêchent une vraie boucle pédagogique.
-
-### 2026-06-02
-
-| Commande | Résultat |
-| --- | --- |
-| `npm run validate:content` | OK, exit 0, avec warnings éditoriaux (~52/76 leçons sans quiz) |
-| `npm run lint` | OK, 0 erreur, 15 warnings Fast Refresh |
-| `npm run build` | OK, build serveur + client |
-| Contrôles client ciblés | OK, `npm run lint --workspace client` + `npm run build --workspace client` |
-| `/paths`, `/onboarding`, `/glossary` | OK, réponses HTTP 200 en dev local |
-| `git status --short` | KO, le dossier n'est toujours pas un dépôt git |
-
-Travaux du jour (front-end / interactions, sans impact contenu) :
-
-- carte des parcours (`PathAtlas`) rendue **navigable** : préhension (grab/pan), zoom molette centré sur le curseur, pinch tactile, boutons **+/−** et **recentrage**, avec bornage du zoom et de la translation ;
-- boussole de `PathAtlas` : morphing en quatre cercles Ikigai avec les mêmes couleurs que le diagramme `/onboarding`, et hover maintenu sur toute la surface des cercles ;
-- barre latérale (`SideNav`) : **effet verre dépoli à l'ouverture** — le rail replié reste intégré au fond, l'expansion déclenche un panneau translucide teinté, flou, voile lumineux et ombre portée ;
-- glossaire (`/glossary`) : alphabet + domaines + recherche en bandeau sticky, lettre active colorée au scroll/clic, offsets d'ancre dynamiques ;
-- cahier Ikigai : la section `03.b` reprend l'affichage éditorial de `03` (liste ouverte, numérotation romaine, formule, alerte/piège).
-
-### 2026-06-07
-
-| Commande | Résultat |
-| --- | --- |
-| `npm run validate:glossary` | OK, 357 termes, slugs uniques, `id === slug`, liens, marqueurs et aliases cohérents |
-| `npm run validate:content` | OK, avec warnings éditoriaux (~52/76 leçons sans quiz) |
-| `npm run build` | OK, build serveur + client |
-| Audit ressources glossaire | OK, 0 manquant sur les audits ciblés PitchBook / SEC / Schoenherr |
-
-Travaux du jour (clôture glossaire VC) :
-
-- glossaire final porté à **357 termes** dans `data/glossary.json` ;
-- registre canonique porté à **433 entrées** dans `glossary-ingestion/canonical-glossary.json` ;
-- tous les `add`, `update` et `merge` retenus sont `applied` ; les `skip` restent hors injection par choix éditorial ;
-- les ressources PitchBook, SEC et Schoenherr ont été auditées : les termes principaux sont présents comme entrées finales ou variantes d'alias ;
-- le contrôle custom `npm run validate:glossary` couvre les invariants spécifiques du glossaire : slugs uniques, `id === slug`, `seeAlso`, `relatedLessonIds`, marqueurs `[[slug|label]]` et collisions d'aliases.
-
-Le warning sur les leçons sans quiz reste un sujet éditorial séparé : il ne bloque ni le glossaire ni le build.
-
-### 2026-06-09
-
-> Note : le sandbox ne peut pas monter le dossier « VC SITE » (espace dans le nom), donc `npm run build` / `npm run test` n'ont pas été relancés ici. Les commandes ci-dessous restent à exécuter en local pour valider.
-
-Travaux du jour (trois chantiers, sur la base des conversations du projet) :
-
-- **i18n FR/EN — Phase 1 (routing localisé) implémentée.** Nouveau module `client/src/i18n/` : `config.ts` (locales, détection cookie → navigateur → `fr`, persistance), `routing.tsx` (`Link`/`NavLink`/`useNavigate` qui préfixent la locale + `localizePath`/`swapLocalePath`), `guards.tsx` (`RootRedirect` crawler-safe, `LocaleBoundary` qui valide `:locale`, redirige les liens legacy `/paths` → `/fr/paths` et pose `<html lang>`), `useLocale.ts`, `LocaleSwitcher.tsx`, `routing.test.ts`. `App.tsx` passe sous `/:locale`, `MainLayout` devient locale-aware, sélecteur FR/EN dans TopBar + SideNav, ~27 fichiers migrés. Les marqueurs `[[slug]]`/`{{slug}}` restent inchangés (slugs canoniques). Décisions §5 de l'ADR tranchées : slugs canoniques = oui, `/` redirige vers la langue préférée, préférence persistée seulement au clic explicite du sélecteur. Amorce du corpus EN : `data/parcours.en.json`. **Phase 2 (i18n du chrome)** retenue en **dictionnaire maison local** (sans dépendance), non encore réalisée.
-- **Lot de durcissement sécurité / qualité (12 correctifs).** CORS localhost limité au dev ; auth cookie-only (token retiré du body, `Bearer` retiré) ; mot de passe ≥ 8 à l'inscription + limiteur 20/15 min sur login/register ; markdown sûr (nœuds React, pas d'`innerHTML`) + garde `safeHttpUrl()` sur les liens externes ; tokens `--error`/`--success` + sweep ~9 fichiers, IA des deux navs alignée ; Error Boundary au niveau route ; graisse de police 300 inutilisée retirée ; parallaxe splash en `requestAnimationFrame` ; loader sur `/profile-result` ; quiz piloté par l'URL (`?test=1&q=N`) ; `<Routes>` imbriquées aplaties (route layout `PageShell`) ; **harnais Vitest robuste (7 fichiers, 25 tests) + étape CI** (`client/vitest.config.ts`, `.github/workflows/ci.yml`).
-- **Contenu — pipeline parcours.** Conception et rédaction dans `docs/parcours/` (`parcours-apprentissage-conception.md`, `01-le-vc-sans-bullshit.md`, `02-reussir-l-entretien-analyst.md`) ; fiches de leçons drop-in dans `data/parcours/*.lessons.json`. Le parcours « Réussir l'entretien Analyst » est rédigé en **13 leçons** (cours `c-entretien-analyst`, ids `lea-*`, toutes avec `keyTakeaways`/`quiz`/`glossaryRefs`/`furtherReading`, marqueurs vérifiés). Deux premiers parcours complets de bout en bout (conception → fiche données → contenu rédigé → leçons exploitables). Nouveaux fichiers de données : `parcours.json`, `parcours.en.json`, `parcoursConfig.json`, `profileParcours.json`.
-- **Dictionnaire vivant — détection automatique dans les cours.** Application de la règle produit « tout terme technique / sigle d'une leçon doit avoir un popover + redirection vers le dictionnaire ». `client/src/lib/markdown.tsx` détecte désormais automatiquement les termes du glossaire (matcher sur les 357 termes + alias, ~1256 clés) et enveloppe la **première occurrence** de chaque terme dans un popover ; les marqueurs manuels `[[..]]`/`{{..}}` restent prioritaires (pré-amorcés). Sigles reconnus **en respectant la casse** (`VC`/`VCs` oui, `vc` ou `MVC` non), phrases longues prioritaires, frontières Unicode. Popover simplifié = **terme + champ `short`**, panneau **entier cliquable** → `/glossary?term=slug` (plus de ligne « Voir dans le dictionnaire »). Portée : leçons (`LessonPage`) + définitions de `/glossary` ; études de cas / blog restent en balisage manuel. Avant le correctif : seulement 69 marqueurs posés alors que ~70 sigles non balisés apparaissaient déjà dans les 29 leçons. **Vérifs locales (workspace `client`) :** `tsc -b` OK, `eslint` 0 erreur, `vitest` 15/15, test comportemental du matcher sur données réelles OK.
-- **Simulateurs et parcours (Améliorations pédagogiques).** Refonte des 8 simulateurs (Option Pool Shuffle, Step-down, 1x non-participating, Power Law/Monte Carlo, etc.) pour adopter les formules de calcul standard du marché. Intégration de blocs pédagogiques explicatifs à droite des paramètres et remplacement des infobulles natives par le composant `GlossaryPreview` avec redirections cliquables vers les articles complets. Ajout systématique du bloc "Pré-requis" sur tous les parcours (`ParcoursDetailPage`) via une extension d'`InlineMarkdown` qui parse nativement les liens locaux et le glossaire. Mise à jour massive de la base (`data/parcours.json`) pour uniformiser "Aucun pré-requis particulier" ou ajouter des listes intelligentes et balisées.
-
-
-Séquencement décidé en conversation : garder le design system tokenisé, le harnais de tests/CI et l'Error Boundary (faible churn, utiles tout de suite) ; **différer** le lot 🔴 (SSR/SEO, en-têtes CSP/HSTS, garde JWT à corriger, contraste de l'or, interstitiel splash) jusqu'à ce qu'il y ait du contenu réel et un déploiement. Avant de produire en masse, trancher (a) le **mode de rendu** (CSR vs SSR/prerender) et (b) le **modèle de contenu/authoring**.
-
-Restes connus à intégrer : les `data/parcours/*.lessons.json` sont des fiches drop-in **pas encore fusionnées** dans `data/lessons.json` / le seed ; `parcours.json` de `p-entretien-analyst` (11 étapes) reste à synchroniser avec les 13 leçons.
-
-### 2026-06-10
-
-| Commande | Résultat |
-| --- | --- |
-| `npm run build` | OK, build serveur + client complet |
-| Contrôles client ciblés | OK, `npm run build --workspace client` sans erreurs |
-
-Travaux du jour (intégration des études de cas & ergonomie de la Bibliothèque) :
-
-- **Intégration des études de cas dans la Bibliothèque (`PathsPage.tsx`)** : regroupement des études de cas (`CASE_STUDIES`) en tant que troisième catégorie/section à part entière aux côtés de « Cours » et « Lectures ». Mappage dynamique des badges de parcours correspondants via le helper `parcoursForCase`.
-- **Rétractation interactive des chapitres** : remplacement des titres de chapitres statiques par des boutons interactifs équipés d'un chevron rotatif animé et d'un conteneur Grid CSS à hauteur animée (`grid-rows-[0fr]/[1fr]`), permettant de plier/déplier chaque catégorie de façon fluide.
-- **Simplification et nettoyage de la navigation** :
-  - Remplacement du paramètre d'état local par une dérivation directe depuis `searchParams.get('type')` dans `PathsPage.tsx` pour l'onglet actif.
-  - Ajout du helper `isLinkActive` dans `routing.tsx` pour isoler correctement les états de surbrillance active des boutons de menu en fonction des chemins localisés et des query parameters.
-  - Retrait des accès directs « Études de cas » (icônes/liens) dans `SideNav.tsx`, `TopBar.tsx`, et `Footer.tsx`.
-  - Retrait de l'onglet filtre spécifique « Études de cas » (les cas s'affichent par défaut dans l'onglet « Tout » en bas de la page).
-  - Mise à jour de la redirection `/cases` vers `/bibliotheque` dans `App.tsx` et retrait de l'import obsolète de `CaseStudiesPage`.
-  - Mise à jour du bouton retour de `CaseStudyPage.tsx` vers `/bibliotheque`.
-
-### 2026-06-11
-
-| Commande | Résultat |
-| --- | --- |
-| `npm run validate:content` | OK, avec warning éditorial restant sur 23/62 leçons canoniques sans quiz |
-| `npm run test --workspace client -- power-law` | OK, 11 tests Power Law |
-| `npm run lint --workspace client` | OK, 0 erreur, warnings existants uniquement |
-| `npm run build --workspace client` | OK, sans erreurs TypeScript ni avertissement bundler |
-| Routes locales Vite | OK, `/fr/simulators/power-law-portfolio` et `/fr/courses/construction-portefeuille-loi-puissance` répondent 200 |
-| `git status --short --branch` | OK, `master...origin/master`, dépôt propre avant mise à jour documentaire |
-| `git branch -vv` | OK, `master` pointe sur `e5b37e0` et suit `origin/master` |
-| `git remote -v` | OK, remote `origin` configuré vers GitHub |
-
-Travaux du jour (rétractation du catalogue parcours & restauration routage) :
-
-- **Validation Git / baseline** : dépôt Git présent, branche `master` liée à `origin/master`, commit initial `e5b37e0 Initialisation du projet`, aucun écart local avant validation des documents de suivi.
-- **Rétractation des familles de parcours sur `/paths`** (`ParcoursPage.tsx`) : transformation des en-têtes de chaque famille (« Découvrir », « Réussir un entretien », « Lever des fonds », etc.) en boutons interactifs accessibles. Ajout d'un état local `collapsedFamilies`, icône `ChevronDown` pivotant à 90°, et animation accordéon fluide via `grid-rows-[0fr]/[1fr]` sur la grille de cartes de parcours.
-- **Rétractation des chapitres (cours) dans les rayons legacy** (`PathDetailPage.tsx`) : les titres de cours deviennent des boutons interactifs avec chevrons rotatifs ; le lien d'accès direct au cours est déplacé à droite pour éviter les navigations involontaires. Même animation accordéon.
-- **Restauration de l'aiguillage `/paths/:slug`** (`ParcoursOrSubjectPage.tsx` + `App.tsx`) : la route `/paths/:slug` achemine désormais vers `PathDetailPage` pour les slugs de rayons legacy (ex: `analyse-de-startup`) et vers `ParcoursDetailPage` pour les slugs de nouveaux parcours (ex: `le-vc-sans-bullshit`). Les deux pages sont importées via `lazy` pour préserver le découpage des bundles.
-- **Cours Power Law & Monte Carlo** : ajout de `c-power-law-portfolio` dans le rayon Portfolio, avec 4 leçons canoniques (`lpl-average-lies`, `lpl-why-monte-carlo`, `lpl-simulator-engine`, `lpl-read-results`) expliquant moyenne vs médiane, utilité de Monte Carlo, moteur déterministe du simulateur, TVPI, concentration et fund returner math.
-- **Intégration pédagogique du simulateur Power Law** : le simulateur référence désormais ces 4 leçons en priorité ; `p-penser-gp`, `paths.json`, les `furtherReading` et les termes de glossaire clés pointent vers ce nouveau bloc sans dupliquer les contenus existants.
-
-### 2026-06-12
-
-> Branche `chore/flux-c-repo-hygiene`. Cette fois les commandes ont bien tourné en local (le dossier « VC SITE » est monté).
-
-| Commande | Résultat |
-| --- | --- |
-| `npm run validate:content` | OK, 1 warning éditorial (23/62 leçons sans quiz) |
-| `npm run lint` | OK, 0 erreur, **4 warnings** (`react-refresh` structurels uniquement) |
+| `npm run validate:content` | exit 0 ; récap : 51 leçons canoniques (+ 11 drop-in = 62 servables) · 358 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs ; 1 lacune éditoriale non bloquante (23/62 leçons sans quiz) |
+| `npm run lint` | OK, 0 erreur, 4 warnings (`react-refresh` structurels) |
 | `npm run build` | OK, build serveur + client |
 | `npm run test --workspace client` | OK, 10 fichiers / 59 tests |
 | `npm run test --workspace server` | OK, 3 fichiers / 10 tests (auth, profil, isolation `userId`) |
+| `npm run db:seed` | OK, contenu DB existant préservé (seed non destructif) |
+| Git | dépôt initialisé ; `master` suit `origin/master` |
 
-Travaux du jour (lot « repo hygiene » + suite des recommandations d'audit) :
+> **Historique daté complet** — chaque passe de vérification depuis le 2026-05-30 (commandes, résultats, fichiers touchés) : voir [Report et scoring.md](Report%20et%20scoring.md) §8. La synthèse de l'audit indépendant du 2026-06-13 (re-vérifié sur le code, hors discours des docs) reste ci-dessous.
 
-- **CI réparée** : `ci.yml` écoute `branches: [main, master]` (était `main` seul → tout le garde-fou était inopérant hors PR sur ce dépôt `master`). Le pipeline enchaîne désormais validation contenu → lint → build → tests client → tests serveur.
-- **Robustesse serveur (Express 4)** : wrapper `ah()` (`server/src/lib/async-handler.ts`) appliqué à **tous** les handlers async — une rejection (Prisma, JSON corrompu, DB verrouillée) part à l'error-handler central (→ 500) au lieu de tuer le process Node.
-- **Seed non destructif** : `seed.ts` ne réécrit plus le contenu éditable (glossaire/blog/cas) ; create-if-absent par défaut, écrasement seulement avec `db:seed -- --force`. Sens inverse DB→JSON via `npm run content:export` (`scripts/export-content.mjs`). Comptes de démo gatés derrière `NODE_ENV !== 'production'`.
-- **Garde JWT durcie** : `getJwtSecretIssue()` vérifie longueur min. + blocklist en production (fail-fast au démarrage) — l'ancienne garde « inopérante » est corrigée.
-- **`DELETE /me/profile`** : `clearProfile` supprime maintenant profil + réponses d'onboarding côté serveur ; plus de résurrection de l'ancien ikigai au reload.
-- **`apiUp` re-sondé** : `AuthContext` re-ping l'API toutes les 15 s tant qu'elle est down, plus sur `window focus` / `online`, et restaure la session avant bascule — l'API qui démarre après le client ne laisse plus l'app bloquée en invité jusqu'au reload.
-- **Surface réduite** : `attachUser` monté sur `/me`, `/admin`, `/auth/me` seulement (plus en global) ; rate-limit ajouté sur `/api/search` ; sélecteur EN masqué (`EN_ENABLED=false`, `<html lang>` forcé `fr` sous `/en`).
-- **Perf bundle — split des leçons** : `scripts/split-lessons.mjs` scinde `lessons.json` + `data/parcours/*.lessons.json` en `lessons.index.json` (léger, eager) + `lessons.bodies.json` (corps/quiz, lazy). Le chunk eager `lessons` passe de **~176 kB à ~32 kB** ; les corps (~143 kB) ne sont chargés que par le lecteur de leçon. `LessonPage` résout son fallback hors-ligne en lazy. `content/parcoursLessons.ts` supprimé (fusion reprise par le script). Câblage `npm run split:content` dans `predev`/`prebuild`.
-- **Tests serveur (nouveaux)** : 10 tests d'intégration (register/login/logout, `/me/profile`, isolation des données par `userId`) avec base SQLite jetable — comblent le « zéro test serveur » de l'audit.
-- **Lint** : nettoyage des 2 derniers imports/args inutilisés (`Briefcase` dans `SideNav`, prop morte `onToggleCollapse` de `PathAtlas`).
-- **Format éditorial « Lecture oblique » (analyses de livres).** Implémentation du format prévu §10.9 de `docs/STRATEGIE-vc-intelligence.md`. Le type `BlogPost` gagne deux champs optionnels — `books[]` (titre/auteur/année, tableau pour supporter les « duels de livres ») et `glossaryRefs[]` (renvoi de fin d'article vers la couche structurée). `BlogPage` ajoute des **filtres par catégorie** (la carte « à la une » ne s'affiche que sur la vue non filtrée) ; `BlogCard` et `BlogPostPage` affichent le(s) livre(s) analysé(s) et le bloc « Pour aller plus loin ». Le validateur (`scripts/validate-content.mjs`) accepte les nouveaux champs et vérifie que chaque `glossaryRefs` cible un terme existant. **Deux articles d'amorce seedés (squelettes à rédiger)** : `bp-flatland-cecite-dimensionnelle` (Flatland → cécité dimensionnelle → anti-portfolio, 8 idées) et `bp-exit-voice-loyalty` (Hirschman, 9 idées). `blog.json` passe de 4 à **6 articles**. Écart éditorial assumé vs le doc de stratégie : on extrait *toutes* les idées transposables au VC / à la détection de talents par livre, pas une seule. Vérifs locales : `tsc -b` OK, `validate:content` OK, `vitest` 59/59.
+### 2026-06-13 — Audit indépendant (synthèse ; détail dans `Report et scoring.md` §8)
 
-### 2026-06-13
+Audit complet re-vérifié **sur le code**, en se défiant des docs de suivi. Constat n°1 : le produit *est* déjà une plateforme d'intelligence VC par sa matière, mais la vitrine (home `HomePage.tsx`, nav `TopBar`/`SideNav` incohérentes, dashboard progression-centric, meta/OG « introspection/apprentissage ») le présente encore comme une école. Re-scoring honnête : **~6/10 vs l'ambition VC Intelligence** (contre 8.3 mesuré comme MOOC).
 
-| Commande | Résultat |
-| --- | --- |
-| `npm run validate:content` | OK, structure / références / marqueurs cohérents |
-| `npm run db:seed` | OK, 1 article créé, contenu DB existant préservé |
+Deltas factuels touchant ce Bilan :
 
-Travaux du jour :
+- **Recherche** : `client/src/content/search.ts` couvre déjà eco / anti-portfolio / memos ; seule la recherche **serveur** (`server/src/routes/search.ts`) les ignore → incohérence client/serveur (dette), pas invisibilité.
+- **Contenu bundle-only** : écosystèmes / anti-portfolio / memos n'ont **aucune table Prisma** (servis par le bundle client uniquement) — régime distinct du contenu API+fallback (leçons / glossaire / blog / cas).
+- **CSR vs public-first** : monte en criticité maintenant que le contenu est jugé bon — un lien intelligence partagé affiche la carte sociale par défaut « apprentissage » (unfurlers LinkedIn/X/Slack sans JS).
 
-- **Première « Lecture oblique » entièrement rédigée** : `bp-voir-comme-un-etat` — *Voir comme un État, investir comme un planificateur* (*Seeing Like a State*, James C. Scott, 1998). ~3 280 mots / 16 min. **10 idées transposées** au VC et à la détection de talents : lisibilité vs qualité du dossier (Airbnb 2008, eBay 1997) ; la carte qui refait le territoire / Goodhart (WeWork « community-adjusted EBITDA ») ; haut modernisme du plan (Quibi, Brasília, playbooks T2D3) ; les 4 ingrédients de la catastrophe appliqués à la gouvernance (premature scaling, fondateur sans alternative) ; mētis = théorisation du founder-market fit + détection en entretien ; forêt normalisée → monocultures de portefeuille (2021-2022), écosystèmes planifiés (Skolkovo), recrutement clone et « première rotation » ; noms de famille permanents → CV comme cadastre du talent (Theranos) ; grève du zèle → diligence du moteur informel, échec de l'« adult supervision » ; les 4 prescriptions de Scott = financement par étapes / réserves / équipe-plutôt-que-plan ; le retournement : grandir = devenir lisible, l'art est le séquencement mētis → cadastre. Plus garde-fous (« Limites de la grille ») et grille de 5 questions en conclusion. Marqueurs `[[..]]` vers le glossaire (data-room, startup-metrics, founder-market-fit, diligence-checklist, churn-rate, cap-table, kpi, board-of-directors, term-sheet, runway, deal-sourcing, portfolio-construction, power-law, management-team-diligence…), renvoi final vers les entrées anti-portfolio Airbnb/eBay, `glossaryRefs` ×5. Inséré en tête des articles du jour (article « à la une » de `/blog`). **Sert de gabarit éditorial pour rédiger les squelettes Flatland et Hirschman.** `blog.json` : 6 → **7 articles**.
-- **Deuxième « Lecture oblique » entièrement rédigée** : `bp-societe-du-spectacle` — *La société du spectacle lève des fonds* (*La Société du spectacle*, Guy Debord, 1967 + *Commentaires* 1988). ~3 530 mots / 18 min, même gabarit (thèse / transposition / à retenir ×11, limites, conclusion-grille). **11 idées transposées**, ancrées dans le contexte actuel (IA, méga-tours) : la startup et son double (Nikola, démo Gemini 2023, Juicero) ; être→avoir→paraître (AI-washing, Builder.ai) ; la valorisation comme « capital devenu image » (licornes, TVPI vs DPI, méga-tours-signal des labs IA) ; la tautologie du markup (« ce qui est marked-up est bon ») ; le fondateur-vedette (FTX/profil Sequoia, funnel qui sélectionne les compétences de scène) ; **une section dédiée aux 8 logiques des levées** (carburant, signal, validation, monnaie interne, rituel, poussée par l'offre, théâtre de structure — flat headline + ratchets/préférences —, levée-produit) ; temps pseudo-cyclique (hype cycles, effet vintage, demo day comme messe) ; la récupération (disruption orthodoxe, critique-devenue-catégorie) ; le spectaculaire intégré (fonds-médias, talking one's book, benchmarks IA détenus par les actionnaires) ; l'investisseur-spectateur (ratio de contact primaire) ; la situation construite comme protocole anti-spectacle (work trials vs entretiens, clients churnés, produit sans le fondateur). Renvois : étude de cas « Le piège de la valorisation flatteuse », anti-portfolio (erreur inverse), diptyque avec la lecture de Scott. Marqueurs `[[..]]` (valuation, dpi, tvpi, liquidation-preference, down-round, full-ratchet, cap-table, term-sheet, bridge…) tous validés, `glossaryRefs` ×5. `blog.json` : 7 → **8 articles** ; `db:seed` OK (1 créé, DB préservée).
-- **Troisième « Lecture oblique » rédigée — le squelette Hirschman devient un article complet** : `bp-exit-voice-loyalty` — *Exit, Voice, Loyalty : la grammaire des départs* (Hirschman, 1970). ~2 870 mots / 14 min, même gabarit. **9 idées transposées** : le triangle exit/voice/loyauté (chemins de fer nigérians) ; le VC comme classe d'actifs « voice » (illiquidité → la gouvernance est le seul canal ; 2021 comme expérience naturelle : logique d'exit des crossovers → vide de gouvernance, FTX sans board) ; l'entrepreneuriat comme exit (les huit de Shockley qui tentent la voice avant Fairchild, Xerox PARC, Eric Yuan→Zoom relié à l'entrée anti-portfolio `zoom-marche-sature-2012` ; grille de sourcing « cartographier les fuites » + question d'entretien sur la voice passée) ; l'attrition comme instrument de diligence (les sensibles à la qualité partent d'abord, regretted attrition, appels aux partis) ; le churn muet / monopole paresseux (suivre les exits de power users, pas les parts de marché) ; loyauté lucide vs captive (vesting/menottes vs conviction, loyauté à une thèse morte) ; les LPs enfermés (re-up comme vrai vote, érosion de la discipline GP sous ZIRP) ; le paradoxe de l'exit facile qui tue le redressement (Friedman/écoles, acqui-hires, write-off d'attention vs travail de board, RDA 1989 : BATNA du fondateur = voice musclée) ; la grammaire des flux appliquée à la startup / au fondateur / au fonds / à soi (decision journal comme voice contre soi-même). Limites (hybrides, silence ≠ loyauté, voice inégalement distribuée, départs banals) + conclusion en 6 questions. Renvois : anti-portfolio Zoom, étude de cas « Anatomie d'un portefeuille en loi de puissance », **triptyque Scott / Debord / Hirschman**. Date passée au 2026-06-13 (article à la une). Seed : suppression ciblée de la ligne squelette (`prisma db execute`) + re-seed non destructif (1 créé, 368 lignes préservées). `validate:content` OK. **Reste 1 squelette : Flatland.**
+Décision design retenue — **nav différenciée formation / intelligence = pattern B + C, jamais A** : une seule nav primaire à deux zones groupées (« Intelligence » en haut, « Apprendre les bases » repliable) + rail secondaire contextuel dérivé du type de contenu ; le « mode » se **déduit** de la route (jamais choisi par l'utilisateur), et **présuppose la taxonomie** `contentKind` / `audience`. Mettre la formation de côté plus tard = replier la zone basse (config, pas refonte).
+
+Priorités issues de l'audit (ordre) : 1) taxonomie `contentKind` / `audience` + validateur ; 2) nav primaire B + unifier `TopBar`/`SideNav` ; 3) repositionner home + meta/OG ; 4) rails contextuels C ; 5) POC prérendu éditorial ; 6) aligner recherche serveur (dette).
 
 ---
 
@@ -256,11 +122,12 @@ Priorité recommandée :
 
 Forces :
 
-- structure claire : parcours, cours, leçons, glossaire, cas, blog, simulateurs ;
+- structure claire : parcours, cours, leçons, glossaire, cas, blog, simulateurs, écosystèmes ;
 - dictionnaire vivant riche ;
 - marqueurs inline validés ;
 - cahier Ikigai très différenciant ;
-- premiers parcours déjà exploitables pour une démo.
+- premiers parcours déjà exploitables pour une démo ;
+- une couche d'**analyse signée** émerge (8 analyses dont 3 « lectures obliques » + 31 dossiers d'écosystème), socle de la bascule vers une VC Intelligence Platform.
 
 Limites :
 
@@ -380,6 +247,7 @@ Prochaine étape design utile :
 
 | Risque | Niveau | Commentaire |
 | --- | --- | --- |
+| Vitrine learning-first vs ambition intelligence | Élevé | Home / nav / meta disent « apprentissage » alors que la matière (anti-portfolio, écosystèmes, memos) vise la VC Intelligence ; cf. audit `Report et scoring.md` §8 |
 | Divergence CMS / JSON | Élevé | Le CMS ne persiste pas dans `/data` ; à étendre à la `locale` pour l'i18n |
 | Mode de rendu non tranché | Élevé | CSR vs SSR/prerender à décider **avant** de produire le contenu (impacte SEO + authoring) |
 | Contenu à consolider | Élevé | 62 leçons canoniques dans `data/lessons.json` ; les leçons drop-in de parcours restent à fusionner côté seed/API |
@@ -399,6 +267,8 @@ Prochaine étape design utile :
 - figer le **modèle de contenu et le workflow d'authoring** (`data/*.json` + Prisma + CMS), en tenant compte de la `locale` ;
 - valider la Phase 1 i18n en local (`npm run build`, `npm run test`) puis enchaîner la Phase 2 (chrome) ;
 - produire une **tranche verticale réelle** (un parcours complet : cours → leçons → glossaire → cas) avant d'optimiser perf/SEO.
+
+> **Mise à jour audit 2026-06-13.** En parallèle de la production de contenu, traiter la **vitrine** (sinon le produit reste perçu comme une école) : (1) taxonomie `contentKind`/`audience` dans les JSON + validateur ; (2) nav primaire à deux zones (B) + unification `TopBar`/`SideNav` ; (3) repositionner home + meta/OG ; puis (4) rails contextuels (C) et (5) POC prérendu éditorial. La décision « mode de rendu » ci-dessous devient critique car elle conditionne le **partage public** du contenu intelligence, pas seulement le SEO.
 
 ### P0 - Atelier éditorial
 
@@ -427,6 +297,40 @@ Prochaine étape design utile :
 - tests calculateurs ;
 - documentation de workflow d'édition.
 
+### Priorité selon l'objectif visé
+
+- **Maintenant (non déployé, contenu de base en cours)** : trancher rendu + modèle de contenu, puis produire une **tranche verticale réelle** (un parcours complet : cours → leçons → glossaire → cas). Ne pas optimiser perf / SEO / sécurité-déploiement contre des hypothèses.
+- **Démo impressionnante** : dashboard + lecture active + contenu visible.
+- **Pré-production** : décision de rendu + API détail (Path/Course) + sécurité (lot 🔴) + SEO / i18n.
+- **Valeur long terme** : atelier VC + CMS éditorial + densification des parcours + traductions EN.
+
+---
+
+## 10bis. Backlog d'enrichissements proposés
+
+> Propositions prospectives consolidées (issues de l'ex-`implementation_plan.md` et des ex-§5/§6 de `Report et scoring.md`). Aucune n'est engagée ; à arbitrer après les décisions P0. Recoupe la roadmap de [docs/STRATEGIE-vc-intelligence.md](../docs/STRATEGIE-vc-intelligence.md).
+
+### Produit / UX
+
+- **Dashboard « journal de bord »** : reprise de lecture (temps restant), prochaine action recommandée, synthèse Ikigai, dernières notes/citations, progression par parcours, micro-session « 20 minutes utiles ».
+- **Lecture active** : sommaire auto depuis les `##`, temps restant, barre de progression par section, concepts rencontrés, navigation prev/next plus visible, mode « mémo » (takeaways + notes), ornements `DropCap`/`FleuronDivider`/`InkStamp « Lu »`.
+- **Transitions de pages** : View Transitions API (peu coûteuse) pour renforcer l'effet « livre interactif ».
+- **`Reveal` au scroll** : révéler après un timeout max de sécurité, pour éviter qu'un contenu reste bloqué en `opacity-0` si l'`IntersectionObserver` ne se déclenche pas.
+- **Atelier VC** : deal memo builder, cap table builder avancé, conversion SAFE / BSA-AIR, option pool shuffle, stratégie de réserves, term sheet clause par clause, waterfall multi-scénarios.
+- **Dictionnaire vivant** : rail alphabétique, terme du jour, graphe de concepts reliés, filtres (catégorie / niveau / usage), « ajouter à mes notions à réviser ».
+- **CMS éditorial** : états `draft` / `review` / `published`, preview avant publication, export JSON depuis la base, indicateur « non versionné dans /data », score de santé par contenu (relations, quiz, glossaire, longueur, liens).
+
+### Technique
+
+- **Recherche** : passer le LIKE / substring actuel à SQLite **FTS5**, scoring simple (titre > corps), surlignage des correspondances (rate-limit 60/min déjà en place sur `/api/search`).
+- **SEO (lot différé, couplé au mode de rendu)** : prérendu statique des pages publiques (candidats `vite-plugin-ssg` / `react-snap` ; Astro si l'éditorial domine, Next.js pour unifier sous React), OpenGraph par parcours / leçon / article / cas, canonical URL, images OG génériques puis spécifiques.
+- **Sécurité production (lot 🔴 différé)** : cookie `secure` selon `NODE_ENV` derrière HTTPS, `helmet` + CSP / HSTS, CORS strict en prod, protection CSRF (ou SameSite + token), rotation JWT glissante (`shouldRefreshToken` déjà branché). La garde JWT (longueur + blocklist) est déjà corrigée.
+
+### Contenu
+
+- **Thèmes à combler** : marché secondaire & liquidité ; fund formation / relations LP / rôle BPI–EIF ; construction de portefeuille & réserves ; méthodes de valorisation (VC method, comparables, DCF, multiples) ; cap table & SAFE vs equity vs BSA-AIR ; term sheet clause par clause ; down rounds & gouvernance / board ; sorties (M&A / IPO / secondaire) ; spécificités européennes ; impact de l'IA sur le métier.
+- **Études de cas à créer** : cas européen de scale-up, cas de fonds, post-mortem d'échec, down round annoté, deal memo complet.
+
 ---
 
 ## 11. Ce qu'il ne faut pas prioriser maintenant
@@ -441,6 +345,20 @@ Prochaine étape design utile :
 - redesign global.
 
 Ces sujets sont légitimes, mais ils ne résolvent pas le problème immédiat : produire, relire, valider et améliorer des parcours d'apprentissage.
+
+---
+
+## 11bis. Plan de vérification
+
+Checklist de non-régression à rejouer avant un seed / déploiement (héritée de l'ex-`implementation_plan.md`) :
+
+1. **Contenu** : `npm run validate:content` exit 0 (zéro référence cassée), puis `npm run db:seed` affiche le récap attendu.
+2. **Régression** : `npm run build` propre + `npm run lint`.
+3. **Lecture / UX** : barre de progression, sommaire, prev/next testés sur une leçon ; Atlas utilisable au **clavier** et sur **mobile** (DevTools).
+4. **SEO** : pages de contenu prérendues, balises meta + OG présentes dans le HTML servi.
+5. **Thèmes** : rendu correct en **clair et sombre** (hero + carte), `prefers-reduced-motion` respecté.
+6. **Portail** : splash lisible sur mobile portrait (390 px) et paysage court (640×360), toggle clair/sombre persistant sur `/home`.
+7. **Tests** : suite Vitest verte côté client (calculateurs + intégrité contenu) **et** côté serveur (`npm run test --workspace server` : auth, profil, isolation `userId`).
 
 ---
 

@@ -24,7 +24,7 @@ const FILTERS = [
 ];
 
 export default function NotesPage() {
-  usePageMeta('Notes & favoris', 'Votre carnet de citations, surlignages et notes, et vos contenus enregistrés.', { noindex: true });
+  usePageMeta('Notes & favoris', 'Votre carnet de citations, surlignages et notes, et vos contenus enregistrés.');
   const { notes, bookmarks, addNote, deleteNote, toggleBookmark } = useUserData();
   const [filter, setFilter] = useState('all');
   const [draft, setDraft] = useState('');

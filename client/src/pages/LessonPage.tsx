@@ -61,7 +61,7 @@ export default function LessonPage() {
   const articleRef = useRef<HTMLDivElement>(null);
   const initialised = useRef(false);
 
-  usePageMeta(lesson?.title, lesson?.summary, { type: 'article', image: 'lesson' });
+  usePageMeta(lesson?.title, lesson?.summary, { type: 'article' });
 
   // Prefer the API-provided course/path/neighbours; fall back to the bundle.
   const course = lesson?.course ?? (lesson ? courseById(lesson.courseId) : undefined);

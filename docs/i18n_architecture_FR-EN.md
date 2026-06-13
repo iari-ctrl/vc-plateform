@@ -52,7 +52,7 @@ incrémental, fallback FR). Rien à déployer tant que le site n'est pas en lign
 - **−** Double corpus à maintenir — atténué par l'incrémental + fallback FR.
 - **−** Migration base (`locale` + clé composite) + reseed ; routes à adapter.
 - **−** Le CMS admin doit porter la `locale` (sinon divergence base ↔ JSON, déjà un angle mort
-  connu de `implementation_plan.md` §1).
+  connu — cf. `Suivis/Bilan.md` §4 « Source de vérité contenu »).
 
 ## 3. Plan de migration séquencé *(aucun déploiement requis)*
 

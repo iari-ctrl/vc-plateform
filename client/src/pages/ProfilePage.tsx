@@ -15,7 +15,7 @@ import { initials } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 
 export default function ProfilePage() {
-  usePageMeta('Mon profil', 'Votre profil d’apprentissage, vos préférences et votre compte.', { noindex: true });
+  usePageMeta('Mon profil', 'Votre profil d’apprentissage, vos préférences et votre compte.');
   const { user, isAuthed, isAdmin, logout } = useAuth();
   const { profile } = useUserData();
   const { openAuth } = useUI();

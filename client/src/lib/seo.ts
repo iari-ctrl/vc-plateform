@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { DEFAULT_LOCALE, LOCALES, isLocale, type Locale } from '@/i18n/config';
+import { DEFAULT_LOCALE, LOCALES, type Locale } from '@/i18n/config';
+import { cleanPath, currentLocale, localizePath, stripLocale } from '@/i18n/paths';
+import { isNoindexPath, ogImageKeyForPath } from '@/i18n/routes';
+import { plainText } from './markdown-text';
 
 const SITE_NAME = 'VC Premium Experience';
 const FALLBACK_SITE_URL = 'https://vcpx.io';
@@ -8,6 +11,9 @@ const DEFAULT_TITLE = `${SITE_NAME} — Comprendre, tester, apprendre le capital
 const DEFAULT_DESCRIPTION =
   "Comprendre le capital-risque, tester son alignement avec le métier, puis apprendre selon son niveau. Une plateforme éditoriale d'introspection et d'apprentissage.";
 
+// Open Graph image key → file. The presentation table; the page → key mapping
+// lives in the shared route registry (shared/routes.mjs) so pages no longer
+// hard-code their card — see `ogImageKeyForPath`.
 const OG_IMAGES = {
   default: '/og/default.png',
   lesson: '/og/lesson.png',
@@ -27,11 +33,12 @@ type OgType = 'website' | 'article';
 export interface PageMetaOptions {
   /** Open Graph type. Use `article` for long-form shareable content. */
   type?: OgType;
-  /** One of the bundled OG image keys, a public path, or an absolute URL. */
+  /** One of the bundled OG image keys, a public path, or an absolute URL.
+   *  Omit to derive the card from the route (cf. shared/routes.mjs). */
   image?: OgImageKey | string;
   /** In-app canonical path without locale, e.g. `/lessons/foo`. */
   canonicalPath?: string;
-  /** Prevent indexing for private or utility pages. */
+  /** Force the index policy. Omit to derive it from the route registry. */
   noindex?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
@@ -42,22 +49,21 @@ const OG_LOCALES: Record<Locale, string> = {
   en: 'en_US',
 };
 
-function plainText(value: string | undefined): string {
-  return (value ?? '')
-    .replace(/<[^>]*>/g, ' ')
-    .replace(/[#*_`[\]()>{}|~]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
+// --- pure text helpers -------------------------------------------------------
+
+/** Strip markup without truncating — SEO formats the full string itself. */
+const clean = (value: string | undefined): string => plainText(value, Infinity);
 
 function pageTitle(title: string | undefined): string {
-  const clean = plainText(title);
-  return clean ? `${clean} · ${SITE_NAME}` : DEFAULT_TITLE;
+  const text = clean(title);
+  return text ? `${text} · ${SITE_NAME}` : DEFAULT_TITLE;
 }
 
 function pageDescription(description: string | undefined): string {
-  return plainText(description) || DEFAULT_DESCRIPTION;
+  return clean(description) || DEFAULT_DESCRIPTION;
 }
+
+// --- pure URL helpers --------------------------------------------------------
 
 function siteUrl(): string {
   const configured = import.meta.env.VITE_SITE_URL?.trim();
@@ -80,46 +86,85 @@ function toAbsoluteUrl(pathOrUrl: string): string {
   }
 }
 
-function stripLocale(pathname: string): string {
-  const segments = pathname.split('/');
-  if (isLocale(segments[1])) {
-    const rest = `/${segments.slice(2).join('/')}`;
-    return rest === '/' ? '/' : rest.replace(/\/+$/, '');
-  }
-  return pathname === '/' ? '/' : pathname.replace(/\/+$/, '');
-}
-
-function currentLocale(pathname: string): Locale {
-  const first = pathname.split('/')[1];
-  return isLocale(first) ? first : DEFAULT_LOCALE;
-}
-
-function cleanPath(path: string): string {
-  const [pathname] = path.split(/[?#]/);
-  const normalized = pathname.startsWith('/') ? pathname : `/${pathname}`;
-  return normalized === '/' ? '/' : normalized.replace(/\/+$/, '');
-}
-
-function localizePath(path: string, locale: Locale): string {
-  const normalized = cleanPath(path);
-  const first = normalized.slice(1).split('/', 1)[0];
-  if (isLocale(first)) return normalized;
-  return normalized === '/' ? `/${locale}` : `/${locale}${normalized}`;
-}
-
-function resolveOgImage(image: PageMetaOptions['image']): string {
+function resolveOgImage(image: string | undefined): string {
   if (!image) return OG_IMAGES.default;
   return Object.prototype.hasOwnProperty.call(OG_IMAGES, image) ? OG_IMAGES[image as OgImageKey] : image;
 }
 
-function findMeta(attribute: 'name' | 'property', key: string): HTMLMetaElement | undefined {
-  return Array.from(document.head.querySelectorAll<HTMLMetaElement>('meta')).find(
-    (tag) => tag.getAttribute(attribute) === key,
-  );
+// --- pure meta model ---------------------------------------------------------
+
+interface MetaModel {
+  title: string;
+  titlePlain: string;
+  description: string;
+  locale: Locale;
+  unlocalizedPath: string;
+  canonicalUrl: string;
+  imageUrl: string;
+  type: OgType;
+  noindex: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
+/** The whole SEO computation, pure and testable — no DOM, no React. */
+function buildMetaModel(pathname: string, title: string | undefined, description: string | undefined, options: PageMetaOptions): MetaModel {
+  const { type = 'website', image, canonicalPath, noindex, publishedTime, modifiedTime } = options;
+  const locale = currentLocale(pathname);
+  const unlocalizedPath = cleanPath(canonicalPath ?? stripLocale(pathname));
+  const imageKey = image ?? ogImageKeyForPath(unlocalizedPath);
+
+  return {
+    title: pageTitle(title),
+    titlePlain: clean(title),
+    description: pageDescription(description),
+    locale,
+    unlocalizedPath,
+    canonicalUrl: toAbsoluteUrl(localizePath(unlocalizedPath, locale)),
+    imageUrl: toAbsoluteUrl(resolveOgImage(imageKey)),
+    type,
+    noindex: noindex ?? isNoindexPath(unlocalizedPath),
+    publishedTime,
+    modifiedTime,
+  };
+}
+
+interface MetaTag {
+  attr: 'name' | 'property';
+  key: string;
+  content?: string;
+}
+
+/** Flatten the model into the `<meta>` tags to upsert (undefined content removes). */
+function buildMetaTags(m: MetaModel): MetaTag[] {
+  return [
+    { attr: 'name', key: 'description', content: m.description },
+    { attr: 'name', key: 'robots', content: m.noindex ? 'noindex,nofollow' : undefined },
+    { attr: 'property', key: 'og:site_name', content: SITE_NAME },
+    { attr: 'property', key: 'og:type', content: m.type },
+    { attr: 'property', key: 'og:title', content: m.title },
+    { attr: 'property', key: 'og:description', content: m.description },
+    { attr: 'property', key: 'og:url', content: m.canonicalUrl },
+    { attr: 'property', key: 'og:image', content: m.imageUrl },
+    { attr: 'property', key: 'og:image:secure_url', content: m.imageUrl },
+    { attr: 'property', key: 'og:image:type', content: 'image/png' },
+    { attr: 'property', key: 'og:image:width', content: '1200' },
+    { attr: 'property', key: 'og:image:height', content: '630' },
+    { attr: 'property', key: 'og:image:alt', content: `${SITE_NAME} — ${m.titlePlain || 'capital-risque'}` },
+    { attr: 'property', key: 'og:locale', content: OG_LOCALES[m.locale] },
+    { attr: 'property', key: 'article:published_time', content: m.type === 'article' ? m.publishedTime : undefined },
+    { attr: 'property', key: 'article:modified_time', content: m.type === 'article' ? m.modifiedTime : undefined },
+    { attr: 'name', key: 'twitter:card', content: 'summary_large_image' },
+    { attr: 'name', key: 'twitter:title', content: m.title },
+    { attr: 'name', key: 'twitter:description', content: m.description },
+    { attr: 'name', key: 'twitter:image', content: m.imageUrl },
+  ];
+}
+
+// --- DOM application (impure) ------------------------------------------------
+
 function upsertMeta(attribute: 'name' | 'property', key: string, content: string | undefined): void {
-  const existing = findMeta(attribute, key);
+  const existing = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
   if (!content) {
     existing?.remove();
     return;
@@ -170,63 +215,30 @@ function setOpenGraphLocaleAlternates(locale: Locale): void {
   }
 }
 
+/** Write a computed model to the document head. */
+function applyMetaModel(m: MetaModel): void {
+  document.title = m.title;
+  for (const tag of buildMetaTags(m)) upsertMeta(tag.attr, tag.key, tag.content);
+  upsertCanonical(m.canonicalUrl);
+  setHreflang(m.unlocalizedPath);
+  setOpenGraphLocaleAlternates(m.locale);
+}
+
 /** Sets page-level SEO, social card, canonical and i18n alternate metadata. */
 export function usePageMeta(title?: string, description?: string, options: PageMetaOptions = {}) {
-  const location = useLocation();
-  const {
-    type = 'website',
-    image,
-    canonicalPath,
-    noindex = false,
-    publishedTime,
-    modifiedTime,
-  } = options;
+  const { pathname } = useLocation();
+  const { type, image, canonicalPath, noindex, publishedTime, modifiedTime } = options;
 
   useEffect(() => {
-    const locale = currentLocale(location.pathname);
-    const unlocalizedPath = cleanPath(canonicalPath ?? stripLocale(location.pathname));
-    const canonicalUrl = toAbsoluteUrl(localizePath(unlocalizedPath, locale));
-    const formattedTitle = pageTitle(title);
-    const formattedDescription = pageDescription(description);
-    const imageUrl = toAbsoluteUrl(resolveOgImage(image));
-
-    document.title = formattedTitle;
-
-    upsertMeta('name', 'description', formattedDescription);
-    upsertMeta('name', 'robots', noindex ? 'noindex,nofollow' : undefined);
-    upsertCanonical(canonicalUrl);
-    setHreflang(unlocalizedPath);
-
-    upsertMeta('property', 'og:site_name', SITE_NAME);
-    upsertMeta('property', 'og:type', type);
-    upsertMeta('property', 'og:title', formattedTitle);
-    upsertMeta('property', 'og:description', formattedDescription);
-    upsertMeta('property', 'og:url', canonicalUrl);
-    upsertMeta('property', 'og:image', imageUrl);
-    upsertMeta('property', 'og:image:secure_url', imageUrl);
-    upsertMeta('property', 'og:image:type', 'image/png');
-    upsertMeta('property', 'og:image:width', '1200');
-    upsertMeta('property', 'og:image:height', '630');
-    upsertMeta('property', 'og:image:alt', `${SITE_NAME} — ${plainText(title) || 'capital-risque'}`);
-    upsertMeta('property', 'og:locale', OG_LOCALES[locale]);
-    setOpenGraphLocaleAlternates(locale);
-
-    upsertMeta('property', 'article:published_time', type === 'article' ? publishedTime : undefined);
-    upsertMeta('property', 'article:modified_time', type === 'article' ? modifiedTime : undefined);
-
-    upsertMeta('name', 'twitter:card', 'summary_large_image');
-    upsertMeta('name', 'twitter:title', formattedTitle);
-    upsertMeta('name', 'twitter:description', formattedDescription);
-    upsertMeta('name', 'twitter:image', imageUrl);
-  }, [
-    canonicalPath,
-    description,
-    image,
-    location.pathname,
-    modifiedTime,
-    noindex,
-    publishedTime,
-    title,
-    type,
-  ]);
+    applyMetaModel(
+      buildMetaModel(pathname, title, description, {
+        type,
+        image,
+        canonicalPath,
+        noindex,
+        publishedTime,
+        modifiedTime,
+      }),
+    );
+  }, [pathname, title, description, type, image, canonicalPath, noindex, publishedTime, modifiedTime]);
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { formatCurrency, formatMultiple, formatPercent } from '@/lib/utils';
+import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
 import { GlossaryPreview } from '@/lib/markdown';
 import { Panel, Slider, Stat } from './shared';
 
@@ -32,7 +32,7 @@ export function PrePostSim({ accent }: { accent: string }) {
             <Stat label="Valorisation post-money" value={formatCurrency(post * 1e6)} accent={accent} hint="pre + montant levé" />
             <Stat label="Part de l’investisseur" value={formatPercent(investorPct)} hint="montant / post-money" />
             <Stat label="Part conservée" value={formatPercent(100 - investorPct)} hint="par les détenteurs existants" />
-            <Stat label="Multiple implicite" value={formatMultiple(post / Math.max(pre, 0.01))} hint="post / pre" />
+            <Stat label="Multiple implicite" value={`${formatNumber(post / Math.max(pre, 0.01), { maximumFractionDigits: 2 })}×`} hint="post / pre" />
           </div>
           <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-5">
             <p className="mb-3 text-xs text-surface-variant">Répartition post-money</p>

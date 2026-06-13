@@ -67,9 +67,10 @@ L'audit du 2026-06-10 a correctement identifié l'effet produit dominant : l'exp
 | Leçons drop-in (`data/parcours/*.lessons.json`) | 11 |
 | Leçons servables au total | 62 |
 | Études de cas | 4 |
-| Analyses / blog | 4 |
+| Analyses / blog | 8 |
+| Dossiers d'écosystème (`data/ecosystems.json`) | 31 (3 racines, 28 sous-dossiers) |
 | Simulateurs | 9 |
-| Termes de glossaire | 357 |
+| Termes de glossaire | 358 |
 | Étapes de parcours | 148, dont 10 `a-produire` |
 
 Corrections par rapport à l'audit historique :
@@ -78,6 +79,7 @@ Corrections par rapport à l'audit historique :
 - **Leçons drop-in** : elles ne sont plus seulement côté client. `server/src/lib/content.ts` charge `data/parcours/*.lessons.json`, et `server/prisma/seed.ts` utilise `content.allLessons()`. Après `npm run db:seed`, elles sont servies par l'API comme les leçons canoniques. Le sujet restant est le **workflow d'authoring** : quand garder un registre drop-in, quand replier dans `data/lessons.json`, comment synchroniser les références.
 - **Simulateurs** : le corpus actuel compte 9 simulateurs.
 - **Familles de parcours** : les données actuelles exposent 6 familles (`decouvrir`, `entretien`, `levee`, `grade`, `maitriser`, `express`), le sur-mesure vivant dans `profileParcours.json`.
+- **Couche VC Intelligence amorcée (2026-06-13)** : la couche d'**analyse signée** a commencé à se construire, ce qui nuance le diagnostic « apprentissage uniquement ». Le blog porte désormais 8 analyses (dont 3 « lectures obliques »), et surtout un **espace dédié « Décortiquer un écosystème »** (`/ecosystemes`, 100 % client, `data/ecosystems.json`) publie 31 dossiers vivants arborescents avec thèse falsifiable, convictions datées et figures natives — réalisation concrète du Pilier 5 (Atlas) et du format §10.9. Le centre de gravité reste à déplacer vers cette couche, mais elle n'est plus seulement théorique.
 
 Lecture correcte de l'état actuel :
 
@@ -826,6 +828,8 @@ Structure type :
 
 La spécificité française doit devenir un avantage, pas une note de bas de page. PitchBook, CB Insights et Carta sont largement US-centric ; leur angle mort porte sur les standards locaux, le droit français, les instruments type BSA-AIR, les pratiques de term sheet France vs US et les dynamiques Bpifrance/EIF/LPs publics.
 
+> **État d'implémentation (2026-06-13).** Une première brique de ce pilier est livrée sous la forme de l'espace **« Décortiquer un écosystème »** (`/ecosystemes`, 100 % client, `data/ecosystems.json` ; voir aussi §10.9). Plutôt que des fiches Atlas plates, les analyses sont des **dossiers vivants arborescents** (`parentId` + `order`) : un dossier-racine porte la thèse + les convictions datées + les signaux, et tout chapitre qui devient dense se ramifie en sous-dossiers (fil d'Ariane + section « Approfondir »). 31 dossiers au 2026-06-13, dont 3 racines — *France après l'hiver* (géographie), *IA appliquée Europe* (secteur), *Silver économie* (secteur, la plus profonde). La structure-type ci-dessus (overview → maturité → flux → acteurs → … → implications investisseur) sert de guide de rédaction, déclinée en sections + **figures natives** (bars / line / matrix / quadrant / taxonomy, rendues en SVG/HTML theme-aware sans asset ni lib de charting). **Reste à faire :** relier mutuellement l'Atlas `/paths` et les dossiers (renvois croisés), et étendre aux géographies du backlog (corridor Afrique-Europe, MENA, Asie du Sud-Est).
+
 ### 10.6 Pilier 6 — Library / Learning & Development
 
 Priorité : à finaliser avant extension massive.
@@ -894,6 +898,8 @@ Trois formats à ajouter au backlog éditorial du blog, en complément des pilie
 **Décortiquer un écosystème**
 
 Analyse longue d'un écosystème peu couvert en français : MENA, Afrique francophone, Asie du Sud-Est. Data-driven, sources publiques. Chaque analyse alimente la page Atlas correspondante (et inversement). L'angle différenciant est le vide éditorial francophone sur ces géographies, là où la couverture de la Silicon Valley est saturée.
+
+> **État d'implémentation (2026-06-13).** Ce format est livré non pas comme une catégorie du blog mais comme un **espace autonome** : `/ecosystemes`, 100 % client (`data/ecosystems.json`, type `EcosystemDossier`, aucune table serveur). Les analyses sont des **dossiers vivants arborescents** (`parentId` + `order`, profondeur illimitée) — un dossier-racine porte une **thèse falsifiable**, des **convictions datées à degré d'assurance explicite** (exploratoire / moyenne / forte) et des **signaux directionnels** (haussier / baissier / incertain) ; un sous-dossier approfondit un point dense. Chaque section peut porter des **figures natives** (5 types : `bars`, `line`, `matrix`, `quadrant`, `taxonomy`) rendues en SVG/HTML theme-aware, **sans asset ni librairie de charting** — contrainte du renderer markdown maison. Validation Zod stricte (`validate:content` : parent existant, absence de cycle, racine ⇒ thèse, `glossaryRefs`/marqueurs résolus) et **skill d'authoring** dédié (`.claude/skills/ecosystemes/SKILL.md`, qui impose le grounding des chiffres par recherche web + sources institutionnelles). **31 dossiers** au lancement, mais le premier lot vise des terrains proches (*France après l'hiver*, *IA appliquée Europe*, *Silver économie*) plutôt que les géographies MENA / Afrique / Asie listées ci-dessus, qui restent au backlog. Lien Atlas ↔ dossiers : à câbler.
 
 **Thèses prospectives datées**
 

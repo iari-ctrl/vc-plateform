@@ -1,4 +1,4 @@
-import { useCallback, useState, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export type SimulatorComponent = ({ accent }: { accent: string }) => ReactNode;
 
@@ -53,36 +53,4 @@ export function Panel({ inputs, results }: { inputs: ReactNode; results: ReactNo
       <div className="space-y-4">{results}</div>
     </div>
   );
-}
-
-type CalloutTone = 'primary' | 'error' | 'neutral';
-
-const calloutTones: Record<CalloutTone, string> = {
-  primary: 'border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] text-foreground',
-  error: 'border-error/30 bg-error/10 text-error',
-  neutral: 'border-outline-variant bg-surface-container-low/60',
-};
-
-/** Encadré icône + titre + corps, décliné par `tone` (alertes des simulateurs). */
-export function Callout({ tone = 'neutral', icon, iconColor, title, children }: { tone?: CalloutTone; icon: ReactNode; iconColor?: string; title: ReactNode; children: ReactNode }) {
-  return (
-    <div className={`rounded-xl border p-4 text-sm flex gap-3 ${calloutTones[tone]}`}>
-      <span className="font-semibold text-lg leading-none" style={iconColor ? { color: iconColor } : undefined}>{icon}</span>
-      <div>
-        <p className={`font-semibold ${tone === 'error' ? '' : 'text-foreground'}`}>{title}</p>
-        <p className="mt-1 text-xs text-surface-variant">{children}</p>
-      </div>
-    </div>
-  );
-}
-
-interface Identified { id: number }
-
-/** Liste de lignes éditables identifiées par `id` : update/remove/add mutualisés (dilution, cap table…). */
-export function useEditableList<T extends Identified>(initial: T[]) {
-  const [items, setItems] = useState<T[]>(initial);
-  const update = useCallback((id: number, patch: Partial<T>) => setItems((xs) => xs.map((x) => (x.id === id ? { ...x, ...patch } : x))), []);
-  const remove = useCallback((id: number) => setItems((xs) => xs.filter((x) => x.id !== id)), []);
-  const add = useCallback((item: T | ((xs: T[]) => T)) => setItems((xs) => [...xs, typeof item === 'function' ? (item as (xs: T[]) => T)(xs) : item]), []);
-  return { items, setItems, update, remove, add };
 }

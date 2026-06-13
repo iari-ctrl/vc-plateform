@@ -5,28 +5,21 @@ import {
   type To,
 } from 'react-router-dom';
 import { isLocale, type Locale } from './config';
+import { localizePath, stripLocale } from './paths';
 import { useLocale } from './useLocale';
 
 /**
  * Locale-aware navigation helpers shared between the routing components
  * (`Link`/`NavLink` in `routing.tsx`) and call sites. Kept in a plain module
  * (no component exports) so React Fast Refresh stays happy.
+ *
+ * The actual path math (`localizePath`, `stripLocale`, …) lives in `./paths`,
+ * the single source shared with SEO and the sitemap script. Re-exported here so
+ * existing `from './navigation'` call sites — including the `[[slug]]`/`{{slug}}`
+ * glossary markers in `lib/markdown.tsx` (cf. ADR §3: marqueurs inchangés) —
+ * keep working unchanged.
  */
-
-/**
- * Prefix an in-app absolute path with the active locale: `/paths` → `/fr/paths`.
- * Pass-throughs (untouched): relative paths, hashes, `mailto:`/`tel:`, absolute
- * URLs, and paths already starting with a locale segment. This is what lets every
- * call site keep writing `to="/paths"` — including the `[[slug]]`/`{{slug}}`
- * glossary markers in `lib/markdown.tsx`, which therefore work in both languages
- * with zero changes (cf. ADR §3: marqueurs inchangés).
- */
-export function localizePath(to: string, locale: Locale): string {
-  if (!to.startsWith('/')) return to;
-  const firstSegment = to.slice(1).split(/[/?#]/, 1)[0];
-  if (isLocale(firstSegment)) return to;
-  return to === '/' ? `/${locale}` : `/${locale}${to}`;
-}
+export { localizePath };
 
 export function localizeTo(to: To, locale: Locale): To {
   if (typeof to === 'string') return localizePath(to, locale);
@@ -73,14 +66,6 @@ export function useNavigate() {
  */
 export function isLinkActive(to: string, location: { pathname: string; search: string }): boolean {
   const [targetPath, targetQuery] = to.split('?');
-
-  const stripLocale = (path: string) => {
-    const segments = path.split('/');
-    if (segments[1] && isLocale(segments[1])) {
-      return '/' + segments.slice(2).join('/');
-    }
-    return path;
-  };
 
   const currentPathClean = stripLocale(location.pathname);
   const targetPathClean = stripLocale(targetPath);

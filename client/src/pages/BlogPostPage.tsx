@@ -19,7 +19,7 @@ export default function BlogPostPage() {
     slug ? `/content/blog/${slug}` : null,
     slug ? blogBySlug(slug) : undefined,
   );
-  usePageMeta(post?.title, post?.excerpt, { type: 'article', image: 'blog', publishedTime: post?.date });
+  usePageMeta(post?.title, post?.excerpt, { type: 'article', publishedTime: post?.date });
 
   if (pending) return <PageLoader />;
   if (!post) return <NotFoundPage />;

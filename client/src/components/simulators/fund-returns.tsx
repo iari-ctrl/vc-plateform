@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { formatMultiple, formatPercent } from '@/lib/utils';
+import { formatNumber, formatPercent } from '@/lib/utils';
 import { calculateFundReturns } from '@/lib/simulators/fund-returns';
 import { GlossaryPreview } from '@/lib/markdown';
 import { Field, Panel, Stat } from './shared';
@@ -30,10 +30,10 @@ export function FundReturnsSim({ accent }: { accent: string }) {
             </ul>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <Stat label="DPI" value={formatMultiple(dpi)} accent={accent} hint="cash rendu" />
-            <Stat label="RVPI" value={formatMultiple(rvpi)} hint="valeur latente" />
-            <Stat label="TVPI" value={formatMultiple(tvpi)} accent={accent} hint="DPI + RVPI" />
-            <Stat label="MOIC (brut)" value={formatMultiple(tvpi)} hint="multiple total" />
+            <Stat label="DPI" value={`${formatNumber(dpi, { maximumFractionDigits: 2 })}×`} accent={accent} hint="cash rendu" />
+            <Stat label="RVPI" value={`${formatNumber(rvpi, { maximumFractionDigits: 2 })}×`} hint="valeur latente" />
+            <Stat label="TVPI" value={`${formatNumber(tvpi, { maximumFractionDigits: 2 })}×`} accent={accent} hint="DPI + RVPI" />
+            <Stat label="MOIC (brut)" value={`${formatNumber(tvpi, { maximumFractionDigits: 2 })}×`} hint="multiple total" />
           </div>
           <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-5">
             <p className="mb-3 text-xs text-surface-variant">Réalisé vs latent (sur le TVPI)</p>

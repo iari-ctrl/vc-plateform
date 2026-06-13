@@ -54,7 +54,6 @@ export default function AntiPortfolioPage() {
   usePageMeta(
     'Anti-portfolio — analyse des passes',
     'Pourquoi les meilleurs fonds ont passé sur les plus grands winners : info disponible à l’époque, signal raté, contre-argument honnête. Sources publiques.',
-    { image: 'anti-portfolio' },
   );
   const [params, setParams] = useSearchParams();
   const activePattern = params.get('pattern');

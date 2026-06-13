@@ -7,7 +7,6 @@ import { ProgressBar } from '@/components/ui/primitives';
 import { useUserData } from '@/context/UserDataContext';
 import { computeProfile, suggestedArchetype, type OnboardingAnswer } from '@/lib/ikigai';
 import { archiveProfile } from '@/lib/ikigaiCahier';
-import { clamp } from '@/lib/utils';
 
 // ── Orientation test (scored MCQ → learning profile) ─────────────────────────
 export function OrientationTest({
@@ -25,12 +24,12 @@ export function OrientationTest({
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const questions = IKIGAI.questions;
   const last = questions.length - 1;
-  const step = clamp(Number.parseInt(params.get('q') ?? '0', 10) || 0, 0, last);
+  const step = Math.min(Math.max(Number.parseInt(params.get('q') ?? '0', 10) || 0, 0), last);
   const q = questions[step];
 
   const goToStep = (n: number) =>
     setParams((p) => {
-      p.set('q', String(clamp(n, 0, last)));
+      p.set('q', String(Math.min(Math.max(n, 0), last)));
       return p;
     });
 

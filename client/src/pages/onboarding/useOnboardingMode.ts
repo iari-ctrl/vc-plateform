@@ -1,18 +1,24 @@
 import { useState } from 'react';
-import { storage, STORAGE_KEYS } from '@/lib/storage';
 import type { OnboardingMode } from '@/content/types';
 
-const MODES: OnboardingMode[] = ['editorial', 'bref', 'interactif'];
+const ONBOARDING_MODE_KEY = 'onboardingMode';
 
 export function useOnboardingMode() {
   const [onboardingMode, setOnboardingModeState] = useState<OnboardingMode>(() => {
-    const saved = storage.get<OnboardingMode>(STORAGE_KEYS.onboardingMode, 'editorial');
-    return MODES.includes(saved) ? saved : 'editorial';
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(ONBOARDING_MODE_KEY);
+      if (saved === 'editorial' || saved === 'bref' || saved === 'interactif') {
+        return saved as OnboardingMode;
+      }
+    }
+    return 'editorial';
   });
 
   const setOnboardingMode = (m: OnboardingMode) => {
     setOnboardingModeState(m);
-    storage.set(STORAGE_KEYS.onboardingMode, m);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(ONBOARDING_MODE_KEY, m);
+    }
   };
 
   return [onboardingMode, setOnboardingMode] as const;

@@ -11,7 +11,7 @@ import { usePageMeta } from '@/lib/seo';
 type Tab = 'stats' | 'glossary' | 'blog' | 'cases';
 
 export default function AdminPage() {
-  usePageMeta('Administration', undefined, { noindex: true });
+  usePageMeta('Administration');
   const { isAuthed, isAdmin, apiUp, ready } = useAuth();
   const { openAuth } = useUI();
   const [tab, setTab] = useState<Tab>('stats');

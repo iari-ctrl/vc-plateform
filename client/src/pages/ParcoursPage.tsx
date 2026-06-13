@@ -118,7 +118,6 @@ export default function ParcoursPage() {
   usePageMeta(
     'Parcours · trajectoires par objectif',
     'Choisis une destination — décrocher un entretien, lever ta seed, comprendre le métier — et suis une colonne vertébrale qui compose la bibliothèque pour t’y mener.',
-    { image: 'path' },
   );
 
   const [mapCollapsed, setMapCollapsed] = useState(true);

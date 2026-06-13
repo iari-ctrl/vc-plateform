@@ -222,7 +222,6 @@ export default function PathsPage() {
   usePageMeta(
     'Bibliothèque · cours et lectures',
     'Le catalogue des cours, lectures et études de cas qui composent les parcours VC Premium. Les simulateurs restent dans leur espace dédié.',
-    { image: 'course' },
   );
 
   const [searchParams, setSearchParams] = useSearchParams();
