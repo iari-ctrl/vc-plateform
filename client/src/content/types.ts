@@ -168,15 +168,87 @@ export interface EcosystemPlayer {
   note: string;
 }
 
+// ── Figures (graphiques + schémas) ───────────────────────────────────────────
+/** Intensité qualitative d'une cellule de matrice comparative — rendue en pastilles. */
+export type FigureRating = 'none' | 'low' | 'mid' | 'high';
+
+/**
+ * Une figure attachée à une section : graphique de données ou schéma conceptuel,
+ * rendue en SVG natif theme-aware (aucun asset externe). Le contenu vit dans la
+ * donnée ; le composant n'est qu'un moteur de rendu. Union discriminée par `kind`.
+ */
+export type EcosystemFigure =
+  | {
+      /** Barres horizontales — comparaisons de grandeurs (financements, volumes…). */
+      kind: 'bars';
+      title: string;
+      caption?: string;
+      /** Unité affichée à côté des valeurs (ex. "Md€", "M$", "apps"). */
+      unit?: string;
+      source?: string;
+      bars: { label: string; value: number; valueLabel?: string; highlight?: boolean }[];
+    }
+  | {
+      /** Courbe — une trajectoire dans le temps (valorisation, dépenses cumulées…). */
+      kind: 'line';
+      title: string;
+      caption?: string;
+      unit?: string;
+      source?: string;
+      points: { x: string; y: number; annotation?: string }[];
+    }
+  | {
+      /** Matrice comparative — lignes × colonnes notées en pastilles. */
+      kind: 'matrix';
+      title: string;
+      caption?: string;
+      source?: string;
+      columns: string[];
+      rows: { label: string; cells: { rating: FigureRating; note?: string }[] }[];
+    }
+  | {
+      /** Carte de positionnement — items placés sur deux axes (x, y dans [0,1]). */
+      kind: 'quadrant';
+      title: string;
+      caption?: string;
+      source?: string;
+      /** Étiquettes des extrémités basse → haute de l'axe horizontal. */
+      xAxis: [string, string];
+      yAxis: [string, string];
+      items: { label: string; x: number; y: number; highlight?: boolean }[];
+    }
+  | {
+      /** Arborescence — une racine et ses familles, pour une taxonomie. */
+      kind: 'taxonomy';
+      title: string;
+      caption?: string;
+      source?: string;
+      root: string;
+      branches: { label: string; note?: string; items: string[]; highlight?: boolean }[];
+    };
+
+/** Une section d'analyse : prose markdown, plus d'éventuelles figures rendues à sa suite. */
+export interface EcosystemSection {
+  heading: string;
+  body: string;
+  figures?: EcosystemFigure[];
+}
+
 /**
  * Dossier vivant sur un écosystème : une thèse assumée, des analyses
  * structurées, des convictions datées et falsifiables, et les signaux qui
  * les confirmeront ou les invalideront. Daté à la création ET à la révision.
+ *
+ * Les dossiers forment un **arbre** : un dossier-racine (la synthèse d'un
+ * écosystème) ouvre sur des sous-dossiers d'approfondissement via `parentId`,
+ * eux-mêmes pouvant se ramifier à l'infini. Un dossier-racine porte la thèse
+ * centrale ; un sous-dossier peut se contenter de ses analyses (`these` et les
+ * collections de synthèse sont alors facultatives).
  */
 export interface EcosystemDossier {
   id: string;
   slug: string;
-  /** Nom court de l'écosystème (ex. "France", "IA appliquée"). */
+  /** Nom court de l'écosystème ou du sous-thème (ex. "France", "Le Japon"). */
   name: string;
   title: string;
   subtitle: string;
@@ -190,15 +262,19 @@ export interface EcosystemDossier {
   readMin: number;
   summary: string;
   tags: string[];
-  /** Markdown — la conviction centrale du dossier, assumée et datée. */
-  these: string;
-  /** Les analyses, section par section. */
-  sections: { heading: string; body: string }[];
-  convictions: EcosystemConviction[];
-  signals: EcosystemSignal[];
+  /** Id du dossier parent. Absent ⇒ dossier-racine (listé sur l'index). */
+  parentId?: string;
+  /** Rang parmi les frères et sœurs (croissant). À défaut, tri par date de révision. */
+  order?: number;
+  /** Markdown — la conviction centrale. Requise sur un dossier-racine, facultative en sous-dossier. */
+  these?: string;
+  /** Les analyses, section par section (chacune peut porter des figures). */
+  sections: EcosystemSection[];
+  convictions?: EcosystemConviction[];
+  signals?: EcosystemSignal[];
   players?: EcosystemPlayer[];
   glossaryRefs: string[];
-  sources: { label: string; url: string }[];
+  sources?: { label: string; url: string }[];
 }
 
 // ── Anti-portfolio (pass analysis) ───────────────────────────────────────────

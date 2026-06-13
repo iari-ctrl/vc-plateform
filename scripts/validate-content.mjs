@@ -307,6 +307,75 @@ const blogSchema = z.object({
 
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}/, 'date attendue au format ISO (YYYY-MM-DD)');
 
+// Figures attachées aux sections d'un dossier — graphiques de données ou schémas
+// conceptuels, rendus en SVG. Union discriminée par `kind` (cf. EcosystemFigure).
+const figureRating = z.enum(['none', 'low', 'mid', 'high']);
+const ecosystemFigure = z.discriminatedUnion('kind', [
+  z.object({
+    kind: z.literal('bars'),
+    title: nonEmpty,
+    caption: z.string().optional(),
+    unit: z.string().optional(),
+    source: z.string().optional(),
+    bars: z.array(z.object({
+      label: nonEmpty,
+      value: z.number(),
+      valueLabel: z.string().optional(),
+      highlight: z.boolean().optional(),
+    }).strict()).min(1),
+  }).strict(),
+  z.object({
+    kind: z.literal('line'),
+    title: nonEmpty,
+    caption: z.string().optional(),
+    unit: z.string().optional(),
+    source: z.string().optional(),
+    points: z.array(z.object({
+      x: nonEmpty,
+      y: z.number(),
+      annotation: z.string().optional(),
+    }).strict()).min(2),
+  }).strict(),
+  z.object({
+    kind: z.literal('matrix'),
+    title: nonEmpty,
+    caption: z.string().optional(),
+    source: z.string().optional(),
+    columns: z.array(nonEmpty).min(2),
+    rows: z.array(z.object({
+      label: nonEmpty,
+      cells: z.array(z.object({ rating: figureRating, note: z.string().optional() }).strict()).min(1),
+    }).strict()).min(1),
+  }).strict(),
+  z.object({
+    kind: z.literal('quadrant'),
+    title: nonEmpty,
+    caption: z.string().optional(),
+    source: z.string().optional(),
+    xAxis: z.tuple([nonEmpty, nonEmpty]),
+    yAxis: z.tuple([nonEmpty, nonEmpty]),
+    items: z.array(z.object({
+      label: nonEmpty,
+      x: z.number(),
+      y: z.number(),
+      highlight: z.boolean().optional(),
+    }).strict()).min(1),
+  }).strict(),
+  z.object({
+    kind: z.literal('taxonomy'),
+    title: nonEmpty,
+    caption: z.string().optional(),
+    source: z.string().optional(),
+    root: nonEmpty,
+    branches: z.array(z.object({
+      label: nonEmpty,
+      note: z.string().optional(),
+      items: z.array(nonEmpty),
+      highlight: z.boolean().optional(),
+    }).strict()).min(1),
+  }).strict(),
+]);
+
 const ecosystemSchema = z.object({
   id: nonEmpty,
   slug,
@@ -321,27 +390,38 @@ const ecosystemSchema = z.object({
   readMin: z.number().nonnegative(),
   summary: nonEmpty,
   tags: z.array(z.string()),
-  these: nonEmpty,
-  sections: z.array(z.object({ heading: nonEmpty, body: nonEmpty }).strict()).min(1),
+  // Hierarchy: `parentId` absent ⇒ dossier-racine ; `order` range les frères.
+  parentId: z.string().optional(),
+  order: z.number().int().optional(),
+  // `these` requise sur une racine, facultative en sous-dossier (cf. refine ci-dessous).
+  these: nonEmpty.optional(),
+  sections: z.array(z.object({
+    heading: nonEmpty,
+    body: nonEmpty,
+    figures: z.array(ecosystemFigure).optional(),
+  }).strict()).min(1),
   convictions: z.array(z.object({
     statement: nonEmpty,
     horizon: z.string().optional(),
     strength: z.enum(['exploratoire', 'moyenne', 'forte']),
     rationale: z.string().optional(),
-  }).strict()),
+  }).strict()).optional(),
   signals: z.array(z.object({
     label: nonEmpty,
     direction: z.enum(['haussier', 'baissier', 'incertain']),
     note: z.string(),
-  }).strict()),
+  }).strict()).optional(),
   players: z.array(z.object({
     name: nonEmpty,
     role: z.string(),
     note: z.string(),
   }).strict()).optional(),
   glossaryRefs: idList,
-  sources: z.array(z.object({ label: nonEmpty, url: nonEmpty }).strict()),
-}).strict();
+  sources: z.array(z.object({ label: nonEmpty, url: nonEmpty }).strict()).optional(),
+}).strict().refine((e) => e.parentId || (e.these && e.these.trim().length > 0), {
+  message: 'un dossier-racine (sans parentId) doit porter une thèse (these)',
+  path: ['these'],
+});
 
 const simulatorSchema = z.object({
   id: nonEmpty,
@@ -515,8 +595,23 @@ for (const c of cases) {
 for (const b of blog) {
   if (b.glossaryRefs) checkRefs(`blog/${b.id}.glossaryRefs`, b.glossaryRefs, isGlossary, 'terme de glossaire');
 }
+const ecosystemIds = new Set(ecosystems.map((e) => e.id));
 for (const e of ecosystems) {
   checkRefs(`ecosystems/${e.id}.glossaryRefs`, e.glossaryRefs, isGlossary, 'terme de glossaire');
+  if (e.parentId !== undefined) {
+    if (e.parentId === e.id) err(`ecosystems/${e.id}.parentId — un dossier ne peut pas être son propre parent`);
+    else if (!ecosystemIds.has(e.parentId)) err(`ecosystems/${e.id}.parentId — dossier parent introuvable : "${e.parentId}"`);
+  }
+}
+// Cycle detection — walk each chain up to the root; a revisited id means a loop.
+for (const e of ecosystems) {
+  const seen = new Set([e.id]);
+  let cur = e.parentId ? ecosystems.find((x) => x.id === e.parentId) : undefined;
+  while (cur) {
+    if (seen.has(cur.id)) { err(`ecosystems/${e.id} — cycle de parenté détecté via "${cur.id}"`); break; }
+    seen.add(cur.id);
+    cur = cur.parentId ? ecosystems.find((x) => x.id === cur.parentId) : undefined;
+  }
 }
 for (const s of simulators) {
   checkRefs(`simulators/${s.id}.relatedLessonIds`, s.relatedLessonIds, (r) => lessonIds.has(r), 'leçon');

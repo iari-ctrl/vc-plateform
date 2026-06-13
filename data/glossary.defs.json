@@ -50,6 +50,10 @@
     "definition": "Les actions ordinaires représentent l’ownership économique de base d’une société. Dans les startups, elles sont souvent émises aux founders et salariés, tandis que les investisseurs VC reçoivent des actions de préférence avec des droits économiques ou de contrôle supérieurs.",
     "example": "À l’exit, les détenteurs d’actions ordinaires reçoivent leur part après satisfaction des dettes et des préférences de liquidation."
   },
+  "moat": {
+    "definition": "Le moat — littéralement la « douve » d'un château fort — désigne l'avantage concurrentiel structurel qui empêche un concurrent de répliquer facilement une entreprise, et lui permet de défendre ses parts de marché et ses marges sur la durée. Popularisé par Warren Buffett, le concept est central en capital-risque : un fonds cherche moins une bonne idée qu'une défendabilité qui se renforce avec le temps. Les sources classiques d'un moat sont les effets de réseau, les coûts de changement (switching costs), les économies d'échelle, la marque, la propriété intellectuelle et les barrières réglementaires — ces dernières étant décisives en healthtech, où le marquage médical et le remboursement protègent l'acteur qui les a franchis.",
+    "example": "En santé numérique, décrocher un remboursement et un marquage CE constitue un moat réglementaire : un concurrent doit refaire tout le parcours clinique pour seulement exister sur le marché."
+  },
   "virtual-shares": {
     "definition": "Les actions virtuelles, ou phantom shares, donnent à un salarié ou dirigeant un droit économique similaire à l’equity sans lui transférer de véritables actions ni droits de vote. Elles sont souvent utilisées pour l’[[employee-equity|employee equity]] lorsque l’émission de titres réels serait trop lourde juridiquement ou fiscalement.",
     "example": "Un salarié reçoit des phantom shares qui paieront un bonus indexé sur la valeur de sortie si la société est vendue."

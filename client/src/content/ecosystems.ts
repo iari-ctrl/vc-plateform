@@ -6,6 +6,30 @@ export const ECOSYSTEMS = ecosystemsJson as unknown as EcosystemDossier[];
 export const ecosystemBySlug = (slug: string) => ECOSYSTEMS.find((e) => e.slug === slug);
 export const ecosystemById = (id: string) => ECOSYSTEMS.find((e) => e.id === id);
 
+/** Sibling order: explicit `order` first, then most-recently-revised. */
+const bySiblingOrder = (a: EcosystemDossier, b: EcosystemDossier) =>
+  (a.order ?? 0) - (b.order ?? 0) || b.updatedAt.localeCompare(a.updatedAt);
+
+/** Top-level dossiers (no parent) — what the index page lists. */
+export const rootEcosystems = () => ECOSYSTEMS.filter((e) => !e.parentId).sort(bySiblingOrder);
+
+/** Direct children of a dossier, in author order. */
+export const childEcosystems = (parentId: string) =>
+  ECOSYSTEMS.filter((e) => e.parentId === parentId).sort(bySiblingOrder);
+
+/** Ancestors from root → immediate parent, for breadcrumbs. Cycle-safe. */
+export const ecosystemAncestors = (dossier: EcosystemDossier): EcosystemDossier[] => {
+  const chain: EcosystemDossier[] = [];
+  const seen = new Set<string>([dossier.id]);
+  let current = dossier.parentId ? ecosystemById(dossier.parentId) : undefined;
+  while (current && !seen.has(current.id)) {
+    chain.unshift(current);
+    seen.add(current.id);
+    current = current.parentId ? ecosystemById(current.parentId) : undefined;
+  }
+  return chain;
+};
+
 /** Display labels + accents for conviction strength (always shown, never implied). */
 export const CONVICTION_STRENGTH_META: Record<ConvictionStrength, { label: string; accent: string }> = {
   exploratoire: { label: 'Exploratoire', accent: '#4C6B8A' },

@@ -199,7 +199,16 @@ export function BlogCard({ post, featured = false }: { post: BlogPost; featured?
   );
 }
 
-export function EcosystemCard({ dossier, featured = false }: { dossier: EcosystemDossier; featured?: boolean }) {
+export function EcosystemCard({ dossier, childCount = 0, featured = false }: { dossier: EcosystemDossier; childCount?: number; featured?: boolean }) {
+  const convictions = dossier.convictions?.length ?? 0;
+  const signals = dossier.signals?.length ?? 0;
+  // Adaptive meta: branch nodes advertise their sub-dossiers; leaves show their
+  // convictions/signals, falling back to the section count when they have none.
+  const meta = childCount > 0
+    ? pluralize(childCount, 'sous-dossier')
+    : convictions + signals > 0
+      ? `${pluralize(convictions, 'conviction')} · ${pluralize(signals, 'signal', 'signaux')}`
+      : pluralize(dossier.sections.length, 'partie');
   return (
     <Link
       to={`/ecosystemes/${dossier.slug}`}
@@ -219,9 +228,7 @@ export function EcosystemCard({ dossier, featured = false }: { dossier: Ecosyste
       <p className="mt-2 line-clamp-2 text-sm italic text-surface-variant">{dossier.subtitle}</p>
       <p className={`mt-3 flex-1 text-sm leading-relaxed text-surface-variant ${featured ? 'line-clamp-4' : 'line-clamp-3'}`}>{dossier.summary}</p>
       <div className="mt-5 flex items-center justify-between text-xs text-surface-variant">
-        <span>
-          {pluralize(dossier.convictions.length, 'conviction')} · {pluralize(dossier.signals.length, 'signal', 'signaux')}
-        </span>
+        <span>{meta}</span>
         <span className="inline-flex items-center gap-1.5"><Clock size={13} /> {dossier.readMin} min</span>
       </div>
     </Link>

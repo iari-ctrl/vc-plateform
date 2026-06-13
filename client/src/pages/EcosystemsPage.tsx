@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ECOSYSTEMS } from '@/content/ecosystems';
+import { rootEcosystems, childEcosystems } from '@/content/ecosystems';
 import { ECOSYSTEM_KIND_LABEL } from '@/content/labels';
 import { EcosystemCard } from '@/components/cards';
 import { SectionHeading, Reveal } from '@/components/ui/primitives';
@@ -12,8 +12,8 @@ export default function EcosystemsPage() {
   );
   const [kind, setKind] = useState('all');
 
-  // Living documents — most recently revised first.
-  const sorted = [...ECOSYSTEMS].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+  // Only top-level dossiers are listed; their deep-dives live one level down.
+  const sorted = rootEcosystems();
   const kinds = [...new Set(sorted.map((d) => d.kind))];
   const visible = kind === 'all' ? sorted : sorted.filter((d) => d.kind === kind);
   // The featured hero only makes sense on the unfiltered view.
@@ -47,14 +47,14 @@ export default function EcosystemsPage() {
 
       {featured && (
         <Reveal className="mt-8">
-          <EcosystemCard dossier={featured} featured />
+          <EcosystemCard dossier={featured} childCount={childEcosystems(featured.id).length} featured />
         </Reveal>
       )}
 
       <div className="mt-6 grid gap-5 md:grid-cols-2">
         {rest.map((dossier, i) => (
           <Reveal key={dossier.id} delay={(i % 2) * 70}>
-            <EcosystemCard dossier={dossier} />
+            <EcosystemCard dossier={dossier} childCount={childEcosystems(dossier.id).length} />
           </Reveal>
         ))}
       </div>

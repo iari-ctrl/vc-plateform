@@ -1,11 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { Link } from '@/i18n/routing';
-import { ArrowLeft, Clock, Compass, Crosshair, ExternalLink, Radar, Users } from 'lucide-react';
-import { ecosystemBySlug, ECOSYSTEMS, CONVICTION_STRENGTH_META, SIGNAL_DIRECTION_META } from '@/content/ecosystems';
+import { ChevronRight, Clock, Compass, Crosshair, ExternalLink, Layers, Radar, Users } from 'lucide-react';
+import {
+  ecosystemBySlug, childEcosystems, ecosystemAncestors, rootEcosystems,
+  CONVICTION_STRENGTH_META, SIGNAL_DIRECTION_META,
+} from '@/content/ecosystems';
 import { ECOSYSTEM_KIND_LABEL } from '@/content/labels';
 import { ActiveProse } from '@/components/reading/ActiveProse';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { EcosystemCard, GlossaryRefList } from '@/components/cards';
+import { EcosystemFigureView } from '@/components/ecosystems/EcosystemFigures';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
@@ -18,14 +22,35 @@ export default function EcosystemPage() {
 
   if (!dossier) return <NotFoundPage />;
 
-  const related = ECOSYSTEMS
-    .filter((d) => d.id !== dossier.id && (d.kind === dossier.kind || d.tags.some((t) => dossier.tags.includes(t))))
-    .slice(0, 2);
+  const ancestors = ecosystemAncestors(dossier);
+  const children = childEcosystems(dossier.id);
+  const convictions = dossier.convictions ?? [];
+  const signals = dossier.signals ?? [];
+  const players = dossier.players ?? [];
+  const sources = dossier.sources ?? [];
+  // "À décortiquer ensuite" only makes sense between top-level ecosystems;
+  // inside a tree, the breadcrumb (up) and sub-dossiers (down) carry navigation.
+  const related = dossier.parentId
+    ? []
+    : rootEcosystems()
+        .filter((d) => d.id !== dossier.id && (d.kind === dossier.kind || d.tags.some((t) => dossier.tags.includes(t))))
+        .slice(0, 2);
   const wasRevised = dossier.updatedAt !== dossier.createdAt;
 
   return (
     <article className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
-      <Link to="/ecosystemes" className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> Écosystèmes</Link>
+      {/* Breadcrumb — Écosystèmes › …ancêtres › dossier courant */}
+      <nav aria-label="Fil d'Ariane" className="mb-6 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm text-surface-variant">
+        <Link to="/ecosystemes" className="transition-colors hover:text-foreground">Écosystèmes</Link>
+        {ancestors.map((a) => (
+          <span key={a.id} className="flex items-center gap-x-1.5">
+            <ChevronRight size={14} className="shrink-0 opacity-60" />
+            <Link to={`/ecosystemes/${a.slug}`} className="transition-colors hover:text-foreground">{a.name}</Link>
+          </span>
+        ))}
+        <ChevronRight size={14} className="shrink-0 opacity-60" />
+        <span className="font-medium text-foreground">{dossier.name}</span>
+      </nav>
 
       <header>
         <div className="flex items-center justify-between gap-3">
@@ -46,28 +71,33 @@ export default function EcosystemPage() {
         </div>
       </header>
 
-      {/* La thèse — the dossier's central, dated claim */}
-      <section className="mt-8 rounded-2xl border-l-[3px] bg-surface-container-low/60 p-6 sm:p-7" style={{ borderLeftColor: dossier.accent }}>
-        <p className="eyebrow mb-4 flex items-center gap-2" style={{ color: dossier.accent }}><Compass size={14} /> La thèse</p>
-        <ActiveProse source={dossier.these} sourceType="ecosystem" sourceId={dossier.id} sourceTitle={dossier.title} />
-      </section>
+      {/* La thèse — central, dated claim (root dossiers; optional on sub-dossiers) */}
+      {dossier.these && (
+        <section className="mt-8 rounded-2xl border-l-[3px] bg-surface-container-low/60 p-6 sm:p-7" style={{ borderLeftColor: dossier.accent }}>
+          <p className="eyebrow mb-4 flex items-center gap-2" style={{ color: dossier.accent }}><Compass size={14} /> La thèse</p>
+          <ActiveProse source={dossier.these} sourceType="ecosystem" sourceId={dossier.id} sourceTitle={dossier.title} />
+        </section>
+      )}
 
       {/* Les analyses, section par section */}
       {dossier.sections.map((s) => (
         <section key={s.heading} className="mt-12">
           <h2 className="mb-4 font-headline text-headline-md font-semibold leading-tight">{s.heading}</h2>
           <ActiveProse source={s.body} sourceType="ecosystem" sourceId={dossier.id} sourceTitle={dossier.title} />
+          {s.figures?.map((fig, fi) => (
+            <EcosystemFigureView key={fi} figure={fig} accent={dossier.accent} />
+          ))}
         </section>
       ))}
 
       {/* Convictions — datées, falsifiables, avec degré d'assurance affiché */}
-      {dossier.convictions.length > 0 && (
+      {convictions.length > 0 && (
         <section className="mt-14">
           <FleuronDivider className="mb-8" />
           <p className="eyebrow mb-2 flex items-center gap-2"><Crosshair size={14} /> Convictions</p>
           <p className="mb-5 text-sm text-surface-variant">Des affirmations spécifiques, datées et falsifiables — avec leur degré d'assurance assumé. Le contraire d'une opinion : quelque chose qu'on pourra confronter à la réalité.</p>
           <div className="space-y-4">
-            {dossier.convictions.map((c, i) => {
+            {convictions.map((c, i) => {
               const meta = CONVICTION_STRENGTH_META[c.strength];
               return (
                 <div key={i} className="rounded-2xl border border-outline-variant p-5 sm:p-6">
@@ -89,13 +119,13 @@ export default function EcosystemPage() {
       )}
 
       {/* Signaux — ce qui confirmera ou invalidera la thèse */}
-      {dossier.signals.length > 0 && (
+      {signals.length > 0 && (
         <section className="mt-12">
           <p className="eyebrow mb-2 flex items-center gap-2"><Radar size={14} /> Ce que nous surveillons</p>
           <p className="mb-5 text-sm text-surface-variant">Les indicateurs concrets qui départageront les convictions ci-dessus — et la lecture qu'on en ferait.</p>
           <div className="overflow-hidden rounded-2xl border border-outline-variant">
             <dl className="divide-y divide-outline-variant">
-              {dossier.signals.map((s, i) => {
+              {signals.map((s, i) => {
                 const meta = SIGNAL_DIRECTION_META[s.direction];
                 return (
                   <div key={i} className="px-5 py-4">
@@ -115,11 +145,11 @@ export default function EcosystemPage() {
       )}
 
       {/* Acteurs structurants */}
-      {dossier.players && dossier.players.length > 0 && (
+      {players.length > 0 && (
         <section className="mt-12">
           <p className="eyebrow mb-5 flex items-center gap-2"><Users size={14} /> Les acteurs qui structurent le terrain</p>
           <div className="grid gap-4 sm:grid-cols-2">
-            {dossier.players.map((p) => (
+            {players.map((p) => (
               <div key={p.name} className="rounded-2xl border border-outline-variant p-5">
                 <div className="flex items-baseline justify-between gap-3">
                   <p className="font-headline text-headline-sm font-semibold leading-tight">{p.name}</p>
@@ -132,6 +162,20 @@ export default function EcosystemPage() {
         </section>
       )}
 
+      {/* Sous-dossiers — l'approfondissement, un cran plus bas dans l'arbre */}
+      {children.length > 0 && (
+        <section className="mt-14">
+          <FleuronDivider className="mb-8" />
+          <p className="eyebrow mb-2 flex items-center gap-2"><Layers size={14} /> Approfondir</p>
+          <p className="mb-5 text-sm text-surface-variant">Les éléments qui méritaient leur propre analyse sont décortiqués dans les sous-dossiers ci-dessous.</p>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {children.map((c) => (
+              <EcosystemCard key={c.id} dossier={c} childCount={childEcosystems(c.id).length} />
+            ))}
+          </div>
+        </section>
+      )}
+
       {dossier.tags.length > 0 && (
         <div className="mt-10 flex flex-wrap gap-2">
           {dossier.tags.map((t) => <span key={t} className="chip">#{t}</span>)}
@@ -139,11 +183,11 @@ export default function EcosystemPage() {
       )}
 
       {/* Sources */}
-      {dossier.sources.length > 0 && (
+      {sources.length > 0 && (
         <section className="mt-10">
           <p className="eyebrow mb-4">Sources</p>
           <ul className="space-y-2.5">
-            {dossier.sources.map((s, i) => (
+            {sources.map((s, i) => (
               <li key={i}>
                 <a href={s.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-start gap-2 text-sm leading-relaxed text-surface-variant transition-colors hover:text-[color:var(--primary)]">
                   <ExternalLink size={14} className="mt-0.5 shrink-0" />
@@ -166,7 +210,7 @@ export default function EcosystemPage() {
           <FleuronDivider className="mb-8" />
           <p className="eyebrow mb-5">À décortiquer ensuite</p>
           <div className="grid gap-5 sm:grid-cols-2">
-            {related.map((d) => <EcosystemCard key={d.id} dossier={d} />)}
+            {related.map((d) => <EcosystemCard key={d.id} dossier={d} childCount={childEcosystems(d.id).length} />)}
           </div>
         </section>
       )}

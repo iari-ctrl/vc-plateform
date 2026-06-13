@@ -256,6 +256,28 @@
     ]
   },
   {
+    "id": "moat",
+    "term": "Moat (avantage concurrentiel défendable)",
+    "slug": "moat",
+    "category": "Stratégie",
+    "short": "Barrière durable qui protège une entreprise de ses concurrents et soutient ses marges dans le temps.",
+    "seeAlso": [
+      "scalability",
+      "market-concentration",
+      "recurring-revenue",
+      "business-model"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "défendabilité",
+      "barrière à l'entrée",
+      "barrières à l'entrée",
+      "douve",
+      "avantage concurrentiel",
+      "defensibility"
+    ]
+  },
+  {
     "id": "virtual-shares",
     "term": "Actions virtuelles",
     "slug": "virtual-shares",

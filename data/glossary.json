@@ -281,6 +281,30 @@
     ]
   },
   {
+    "id": "moat",
+    "term": "Moat (avantage concurrentiel défendable)",
+    "slug": "moat",
+    "category": "Stratégie",
+    "short": "Barrière durable qui protège une entreprise de ses concurrents et soutient ses marges dans le temps.",
+    "definition": "Le moat — littéralement la « douve » d'un château fort — désigne l'avantage concurrentiel structurel qui empêche un concurrent de répliquer facilement une entreprise, et lui permet de défendre ses parts de marché et ses marges sur la durée. Popularisé par Warren Buffett, le concept est central en capital-risque : un fonds cherche moins une bonne idée qu'une défendabilité qui se renforce avec le temps. Les sources classiques d'un moat sont les effets de réseau, les coûts de changement (switching costs), les économies d'échelle, la marque, la propriété intellectuelle et les barrières réglementaires — ces dernières étant décisives en healthtech, où le marquage médical et le remboursement protègent l'acteur qui les a franchis.",
+    "example": "En santé numérique, décrocher un remboursement et un marquage CE constitue un moat réglementaire : un concurrent doit refaire tout le parcours clinique pour seulement exister sur le marché.",
+    "seeAlso": [
+      "scalability",
+      "market-concentration",
+      "recurring-revenue",
+      "business-model"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "défendabilité",
+      "barrière à l'entrée",
+      "barrières à l'entrée",
+      "douve",
+      "avantage concurrentiel",
+      "defensibility"
+    ]
+  },
+  {
     "id": "virtual-shares",
     "term": "Actions virtuelles",
     "slug": "virtual-shares",

@@ -12,7 +12,13 @@
     "updatedAt": "2026-06-12",
     "readMin": 9,
     "summary": "L'écosystème français a appris à lever. Il n'a pas encore appris à sortir. Ce dossier soutient que le centre de gravité de la French Tech bascule des montants levés vers la qualité des sorties — et que c'est ce critère, pas un autre, qui dira si la décennie est réussie.",
-    "tags": ["france", "french-tech", "exits", "late-stage", "souveraineté"],
+    "tags": [
+      "france",
+      "french-tech",
+      "exits",
+      "late-stage",
+      "souveraineté"
+    ],
     "these": "Pendant dix ans, l'écosystème français a été mesuré à l'aune d'un seul chiffre : les montants levés. Cette métrique a joué son rôle — elle a attiré le talent, légitimé le métier, construit un étage d'[[amorcage|amorçage]] dense et compétitif. Mais elle mesure un *input*, pas un résultat.\n\n**Notre conviction centrale : la décennie 2026-2036 de la French Tech se jugera sur les sorties.** Un écosystème de capital-risque n'est pas un système de financement, c'est un système de *recyclage* : du capital qui revient aux [[lp|LPs]], des fondateurs et des premiers salariés liquides qui réinvestissent et recommencent, des acquéreurs locaux qui ancrent la valeur. Tant que la boucle ne se referme pas — tant que le [[dpi|DPI]] des fonds français reste une promesse —, l'écosystème dépend structurellement de capital et d'acquéreurs étrangers pour son étage supérieur.\n\nLa bonne nouvelle : les ingrédients du basculement sont en place. Une génération de fondateurs aguerris issus des [[unicorn|licornes]] de la décennie passée, un étage d'amorçage profond, et quelques candidats crédibles à des sorties qui comptent. La question n'est plus « la France peut-elle produire des champions ? » mais « la France peut-elle les *réaliser* ? ».",
     "sections": [
       {
@@ -102,11 +108,29 @@
         "note": "Exemple du modèle qui monte : fonds early-stage français de taille critique, multi-générationnel, qui a construit sa marque sur la durée plutôt que sur le volume."
       }
     ],
-    "glossaryRefs": ["exit", "ipo", "unicorn", "growth-equity", "secondary", "dpi", "amorcage", "power-law"],
+    "glossaryRefs": [
+      "exit",
+      "ipo",
+      "unicorn",
+      "growth-equity",
+      "secondary",
+      "dpi",
+      "amorcage",
+      "power-law"
+    ],
     "sources": [
-      { "label": "Mission French Tech — panorama et programmes officiels", "url": "https://lafrenchtech.gouv.fr" },
-      { "label": "Dealroom — données de financement de l'écosystème français", "url": "https://dealroom.co" },
-      { "label": "France Digitale — baromètres annuels de l'écosystème", "url": "https://francedigitale.org" }
+      {
+        "label": "Mission French Tech — panorama et programmes officiels",
+        "url": "https://lafrenchtech.gouv.fr"
+      },
+      {
+        "label": "Dealroom — données de financement de l'écosystème français",
+        "url": "https://dealroom.co"
+      },
+      {
+        "label": "France Digitale — baromètres annuels de l'écosystème",
+        "url": "https://francedigitale.org"
+      }
     ]
   },
   {
@@ -122,7 +146,13 @@
     "updatedAt": "2026-06-12",
     "readMin": 8,
     "summary": "La course aux modèles de fondation est une course au capital que l'Europe ne peut gagner que par exception. Ce dossier soutient que la valeur VC européenne de l'IA se créera dans la couche application — en particulier dans les verticales réglementées où la conformité, la donnée propriétaire et la distribution comptent plus que la taille du modèle.",
-    "tags": ["ia", "europe", "vertical", "réglementation", "application"],
+    "tags": [
+      "ia",
+      "europe",
+      "vertical",
+      "réglementation",
+      "application"
+    ],
     "these": "Dans toute vague technologique, la question pour un investisseur n'est pas « la technologie est-elle réelle ? » mais « *où* la valeur va-t-elle se déposer ? ». Pour l'IA en Europe, notre réponse : **dans la couche application verticale, pas dans les modèles de fondation.**\n\nLa couche modèle est une course au capital dont la mise de départ se chiffre en milliards et se renouvelle à chaque génération — une structure de jeu qui favorise mécaniquement les acteurs disposant du coût du capital le plus bas et des plus grands parcs de calcul. L'Europe peut y maintenir une ou deux exceptions souveraines, pas un peloton.\n\nLa couche application, elle, obéit aux règles classiques du logiciel : distribution, donnée propriétaire, profondeur d'intégration dans le flux de travail. Et c'est précisément là que l'Europe a un droit de jouer singulier — des décennies d'industries réglementées (santé, finance, défense, industrie, juridique) où la barrière n'est pas le modèle mais l'accès : aux données, aux certifications, aux clients. Là où la conformité est un mur pour les généralistes américains, elle est un fossé défensif pour les spécialistes européens.",
     "sections": [
       {
@@ -206,11 +236,26 @@
         "note": "La thèse « donnée propriétaire réglementée » appliquée à la santé : l'accès fédéré aux données cliniques comme fossé, le modèle comme commodité."
       }
     ],
-    "glossaryRefs": ["series-a", "burn-multiple", "traction", "tam-sam-som", "corporate-venture-capital"],
+    "glossaryRefs": [
+      "series-a",
+      "burn-multiple",
+      "traction",
+      "tam-sam-som",
+      "corporate-venture-capital"
+    ],
     "sources": [
-      { "label": "AI Act — texte et calendrier d'application (Commission européenne)", "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" },
-      { "label": "Dealroom — données de financement IA en Europe", "url": "https://dealroom.co" },
-      { "label": "State of European Tech (Atomico) — chapitres IA", "url": "https://stateofeuropeantech.com" }
+      {
+        "label": "AI Act — texte et calendrier d'application (Commission européenne)",
+        "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+      },
+      {
+        "label": "Dealroom — données de financement IA en Europe",
+        "url": "https://dealroom.co"
+      },
+      {
+        "label": "State of European Tech (Atomico) — chapitres IA",
+        "url": "https://stateofeuropeantech.com"
+      }
     ]
   },
   {
@@ -224,8 +269,8 @@
     "author": "L'équipe VC Premium",
     "createdAt": "2026-06-13",
     "updatedAt": "2026-06-13",
-    "readMin": 25,
-    "summary": "Tout le monde connaît la courbe démographique. Pourtant le capital-risque se casse les dents sur les seniors depuis vingt ans. Ce dossier explique pourquoi — un TAM captif, un triangle décideur-utilisateur-payeur, une distribution introuvable — et cartographie ce qui s'investit vraiment : la productivité du care, les guichets institutionnels qui s'ouvrent, et la première génération à l'aise avec un smartphone qui atteindra le grand âge en 2031.",
+    "readMin": 13,
+    "summary": "Tout le monde connaît la courbe démographique. Pourtant le capital-risque se casse les dents sur les seniors depuis vingt ans. Ce dossier-racine pose la charpente — le mirage du TAM, les deux marchés que tout oppose, le triangle décideur-utilisateur-payeur — puis ouvre sur huit sous-dossiers qui décortiquent, chacun en profondeur, les terrains qui le méritent : les guichets solvables, la productivité du care, le miroir international, les trajectoires qui ont réussi.",
     "tags": [
       "silver-economie",
       "vieillissement",
@@ -235,7 +280,7 @@
       "france",
       "démographie"
     ],
-    "these": "On présente la silver économie comme un marché d'avenir depuis si longtemps qu'elle est devenue le plus vieux marché d'avenir du monde. Les rapports se suivent, avec la même pyramide des âges inversée et les mêmes centaines de milliards. Pendant ce temps, le capital-risque s'y casse les dents. À l'échelle mondiale, le secteur n'a produit qu'une poignée de [[unicorn|licornes]], beaucoup de gadgets primés dans les salons et quelques fonds thématiques qui peinent à rendre l'argent. Cette distance entre la certitude démographique et la pauvreté des résultats est le vrai sujet de ce dossier.\n\nNotre explication : **la silver économie n'est pas un marché.** C'est une étiquette démographique posée sur des marchés qui n'ont rien à voir entre eux, ni le payeur, ni le canal, ni l'économie unitaire. Les centaines de milliards du TAM existent, mais ils dorment dans les retraites, la santé socialisée et l'hébergement médicalisé, hors de portée d'une startup. La question utile n'est jamais « combien dépensent les seniors ». C'est « qui paie, et par où passe la vente ». Il y a trois réponses possibles — le senior ou son aidant, les institutions, l'État via le remboursement — et ce sont trois métiers différents.\n\nCe qui change maintenant, et qui rend la décennie plus intéressante que les vingt années de faux départs : la démographie cesse d'être un discours pour devenir un mur, pendant que le système commence enfin à payer. La génération 1946 aura 85 ans en 2031 et la pénurie de soignants est déjà là. En face, la télésurveillance médicale est remboursée, la cinquième branche existe, les assureurs apprennent à monétiser la prévention. Des guichets solvables s'ouvrent. C'est nouveau.\n\nD'où la conviction centrale du dossier : la valeur ira aux sociétés qui vendent au système — productivité du care, infrastructure administrative, monitoring remboursé — et non à celles qui revendent la démographie en B2C. Le senior n'est presque jamais le client. Il est le bénéficiaire d'un système qui, lui, achète.",
+    "these": "On présente la silver économie comme un marché d'avenir depuis si longtemps qu'elle est devenue le plus vieux marché d'avenir du monde. Les rapports se suivent, avec la même pyramide des âges inversée et les mêmes centaines de milliards. Pendant ce temps, le capital-risque s'y casse les dents. À l'échelle mondiale, le secteur n'a produit qu'une poignée de [[unicorn|licornes]], beaucoup de gadgets primés dans les salons et quelques fonds thématiques qui peinent à rendre l'argent. Cette distance entre la certitude démographique et la pauvreté des résultats est le vrai sujet de ce dossier.\n\nNotre explication : **la silver économie n'est pas un marché.** C'est une étiquette démographique posée sur des marchés qui n'ont rien à voir entre eux, ni le payeur, ni le canal, ni l'économie unitaire. Les centaines de milliards du TAM existent, mais ils dorment dans les retraites, la santé socialisée et l'hébergement médicalisé, hors de portée d'une startup. La question utile n'est jamais « combien dépensent les seniors ». C'est « qui paie, et par où passe la vente ». Il y a trois réponses possibles — le senior ou son aidant, les institutions, l'État via le remboursement — et ce sont trois métiers différents.\n\nCe qui change maintenant, et qui rend la décennie plus intéressante que les vingt années de faux départs : la démographie cesse d'être un discours pour devenir un mur, pendant que le système commence enfin à payer. La génération 1946 aura 85 ans en 2031 et la pénurie de soignants est déjà là. En face, la télésurveillance médicale est remboursée, la cinquième branche existe, les assureurs apprennent à monétiser la prévention. Des guichets solvables s'ouvrent. C'est nouveau.\n\nD'où la conviction centrale du dossier : la valeur ira aux sociétés qui vendent au système — productivité du care, infrastructure administrative, monitoring remboursé — et non à celles qui revendent la démographie en B2C. Le senior n'est presque jamais le client. Il est le bénéficiaire d'un système qui, lui, achète.\n\nLes trois sections qui suivent posent la charpente commune. Tout le reste — pourquoi le B2C échoue, comment se découpe vraiment la filière, quels guichets paient, ce que l'IA déplace, ce que font le Japon et les États-Unis, ce qu'enseignent les rares réussites — vit dans les sous-dossiers, parce que chacun méritait sa propre enquête.",
     "sections": [
       {
         "heading": "Le mirage du TAM : une dépense immense, mais captive",
@@ -246,44 +291,8 @@
         "body": "Le mot « senior » écrase deux populations que tout sépare. D'un côté les 60-75 ans, qu'on appelle parfois les jeunes vieux : solvables, connectés, en bonne santé pour la plupart. Ils voyagent, font du sport, rénovent leur maison. Et ils ont une particularité qui ruine les plans marketing depuis vingt ans : ils ne se considèrent pas comme des seniors. Un produit étiqueté « pour seniors » est rejeté par son propre cœur de cible. Ces marchés existent, mais ce sont des marchés généralistes avec une clientèle âgée, qui se gagnent avec du design universel et une marque grand public. Pas une catégorie à part.\n\nDe l'autre côté, le grand âge. À partir de 80 ans, et surtout à l'entrée en dépendance, tout change : l'utilisateur n'est plus celui qui décide ni celui qui paie, les produits relèvent du soin et de la coordination, la vente passe par des prescripteurs. C'est là que se trouvent l'urgence et les guichets institutionnels.\n\nIl faut encore mettre à part la longévité préventive — diagnostics poussés, cliniques spécialisées, optimisation de la santé des 45-65 ans aisés. Clientèle riche et volontaire, science encore inégale, payeur strictement privé. C'est de la santé haut de gamme, pas du grand âge.\n\nTrois objets, trois payeurs, trois canaux. Les confondre, c'est acheter un récit démographique plutôt qu'un marché."
       },
       {
-        "heading": "Dix branches sous une même étiquette",
-        "body": "Au moins dix branches cohabitent sous le mot « silver », sans partager ni payeur, ni cycle de vente, ni intensité capitalistique. Les passer en revue avec la même question — qui paie, et est-ce un métier pour du capital-risque ? — évite d'acheter la filière entière au prix de sa meilleure branche.\n\n**Santé et dispositifs médicaux.** Télésurveillance, monitoring, audition, vision, chutes. C'est le remboursement et les assureurs qui paient : revenus [[recurring-revenue|récurrents]], barrières réglementaires, cycles longs. La branche la plus naturellement compatible avec le VC.\n\n**Care et services à domicile.** L'APA et les départements paient, les familles complètent. Un marché immense aux marges fines, sous tarifs administrés. Investissable seulement en version tech-enabled très disciplinée, ou par le logiciel.\n\n**Logiciels métier du care.** Télégestion, tournées, facturation multi-payeurs, conformité. Les clients sont les opérateurs et les collectivités. TAM modeste en apparence, position structurante en réalité : le meilleur rapport défendabilité/capital de la filière.\n\n**Hébergement et habitat.** EHPAD, résidences services, adaptation du domicile. Attention à la frontière d'actifs : une résidence services est un projet immobilier avec une marque dessus, un rendement d'opérateur, pas un dossier de VC. Ce qui s'investit, c'est la couche logicielle et de services au-dessus des murs — et l'aging-in-place que MaPrimeAdapt' commence à financer.\n\n**Fintech et assurtech du vieillissement.** Décumulation du patrimoine, viager modernisé, protection contre la fraude des aînés (True Link l'a montré aux États-Unis), prévoyance. Le patrimoine est là, les produits datent : une branche étonnamment vide en Europe.\n\n**Lien social et cognition.** Le besoin est immense, la dépense introuvable — c'est tout le problème de cette branche. À n'aborder qu'adossé à un payeur institutionnel qui achète de la prévention.\n\n**Mobilité et autonomie physique.** Équipement, transport adapté, exosquelettes. Capital-intensif, cycles matériels lents. Des fenêtres ponctuelles plus que des plateformes.\n\n**Consommation et loisirs des 60-75.** Le jeune senior paie lui-même, et il paie bien. Mais on retombe sur la règle du design universel : ces marchés se gagnent en marque grand public, jamais en « marque senior ».\n\n**Emploi, transmission, aidants salariés.** Environ un actif sur six aide un proche. L'employeur devient un payeur, au titre de l'absentéisme et de la marque employeur. Branche jeune, B2B classique.\n\n**Robotique et matériel.** Le cimetière du dossier. On peut y revenir par l'angle de l'augmentation — l'outil qui rend une heure à un soignant — jamais par le compagnon.\n\nUne règle ressort de ce tour d'horizon : plus le revenu d'une branche se rapproche d'un payeur institutionnel récurrent, plus elle est investissable. Plus elle dépend d'une dépense nouvelle du senior lui-même, plus elle relève du design grand public — et moins l'étiquette « silver » veut dire quelque chose."
-      },
-      {
         "heading": "Le triangle décideur-utilisateur-payeur",
-        "body": "Qui décide, qui utilise, qui paie : au grand âge, ce sont trois personnes différentes. L'utilisateur est la personne âgée. Le décideur, le plus souvent, est un aidant familial — la France en compte environ 9 millions. Le payeur peut être la famille, l'assureur, le département, la Sécurité sociale. Le [[buyer-persona|persona acheteur]] réel de la plupart des produits du secteur, c'est la fille de 55 ans, prise entre ses enfants et ses parents, qui décide vite, culpabilise beaucoup, et achète de la tranquillité d'esprit plus que de l'usage.\n\nCe triangle a des conséquences produit très concrètes. Il faut deux onboardings, un pour convaincre l'aidant, un pour faire adopter par l'aîné. Les métriques d'usage mentent : un détecteur de chute « fonctionne » même si personne ne l'ouvre, parce qu'on vend une assurance, pas de l'engagement. Et le service client n'est pas un coût annexe, c'est le cœur du produit.\n\nIl a aussi une conséquence économique qu'on préfère taire : au grand âge, la durée de vie client est bornée. L'entrée en dépendance précède de quelques années le décès ou l'institution. Le [[churn-rate|churn]] n'est pas un défaut du produit, c'est la démographie, et la [[ltv|LTV]] est plafonnée par construction. Ce qui interdit tout [[cac|CAC]] élevé : les modèles qui survivent acquièrent leurs clients presque gratuitement, par flux prescripteur — caisse de retraite, assureur, hôpital, opérateur. Une raison de plus de s'adosser au système plutôt que de chasser le client un par un."
-      },
-      {
-        "heading": "Pourquoi le B2C senior a presque toujours échoué",
-        "body": "Le B2C senior est un cimetière, mais un cimetière instructif : sur ses trois causes de mortalité, deux sont en train de changer.\n\nLa première était l'adoption. Les générations arrivées au grand âge entre 2000 et 2020 n'avaient jamais touché un écran ; chaque produit devait franchir ce mur. Ce problème s'éteint tout seul. Les boomers arrivent équipés.\n\nLa deuxième est le stigmate, et elle ne s'éteindra pas. La téléassistance existe depuis quarante ans, son utilité saute aux yeux, sa pénétration reste faible : porter le « bouton pour vieux », c'est admettre un statut que tout le monde refuse. OXO l'a compris il y a trente ans avec ses épluche-légumes conçus pour des mains arthritiques et vendus comme de beaux objets. Le design universel gagne tous les marchés, l'étiquette « senior » les perd tous. Le stigmate ne se combat pas, il se contourne.\n\nLa troisième est la distribution. Il n'existe ni rayon, ni média, ni canal direct vers les seniors, et le plafond de LTV interdit de compenser à coups d'acquisition payante. On atteint le senior par prescription — médecin, pharmacien, famille, caisse — et ces canaux ne se louent pas. Ils se gagnent lentement.\n\nRestent les morts par excès de confiance technologique. Les robots compagnons en sont l'archétype : vingt ans de prototypes primés, pas de marché payant. Et Papa, l'exemple le plus cher — une marketplace de « petits-enfants à la demande », plus d'un milliard de valorisation, puis des défaillances documentées de qualité et de sécurité dans son réseau humain. Dans le care, la qualité de service n'est pas un paramètre d'exploitation. C'est le produit. Une marketplace légère ne la contrôle pas."
-      },
-      {
-        "heading": "Ce qui marche : vendre au système, pas au senior",
-        "body": "Les réussites du secteur se ressemblent : elles vont chercher la dépense là où elle existe déjà et cherche de l'efficacité, au lieu d'en créer une nouvelle chez un client réticent. Trois guichets concentrent l'essentiel.\n\nLes assureurs, mutuelles et caisses de retraite d'abord. Pour eux, la prévention se monétise : une chute évitée est un sinistre évité, un maintien à domicile repousse des prestations lourdes. Et le senior est déjà leur client. Ils achètent donc de la distribution de services, de l'engagement, du monitoring. Les cycles de vente sont longs, les pilotes s'enlisent parfois des années — mais une fois installé dans le parcours d'un payeur, on est très difficile à déloger, et les revenus sont [[recurring-revenue|récurrents]].\n\nLe remboursement ensuite. Depuis 2023, la télésurveillance médicale est entrée au droit commun pour cinq indications — insuffisance cardiaque, rénale, respiratoire, diabète, prothèses cardiaques. La France est l'un des premiers pays européens à offrir un revenu récurrent, national et solvable pour le suivi à distance, et les malades chroniques âgés en sont les premiers bénéficiaires. C'est l'embryon de ce que Medicare Advantage a été pour la vague agetech américaine : un mécanisme qui rend l'hospitalisation évitée partageable entre le payeur et l'innovateur.\n\nLes opérateurs enfin. Le scandale Orpea a fait passer la qualité et la transparence en EHPAD du registre marketing au registre réglementaire. Près de 600 000 résidents, des opérateurs sous pression, des départements qui exigent des comptes : il y a là un marché de logiciels métier, de conformité et de supervision qui n'existait pas à cette intensité il y a cinq ans."
-      },
-      {
-        "heading": "Le goulot n'est pas la demande, c'est la main-d'œuvre",
-        "body": "La vraie contrainte du secteur n'est ni la demande ni la technologie. C'est le bras humain. Le rapport El Khomri chiffrait dès 2019 à environ 350 000 les recrutements nécessaires en cinq ans dans les métiers du grand âge, et tout ce qui a suivi a confirmé la pénurie : postes vacants, turnover, pénibilité, salaires coincés par des tarifs administrés.\n\nPour un investisseur, ce goulot est le marché. Le segment le plus défendable de la décennie, c'est la productivité du care : optimiser les tournées, automatiser la facturation multi-payeurs et la télégestion, accélérer la formation, retenir les équipes. Un système en pénurie achète tout ce qui rend des heures à ses soignants, le ROI se démontre en quelques semaines, et l'acheteur est un opérateur ou une collectivité. Pas un senior.\n\nHonor raconte mieux que personne où mène cette logique. Partie comme « l'Uber du care à domicile », elle a constaté que le logiciel seul ne capturait ni la qualité ni la valeur. Elle a fini par lever massivement et racheter Home Instead, le réseau de franchises qu'elle équipait. La startup a acheté l'incumbent. La leçon vaut pour toute la branche : dans le care, le [[business-model|modèle]] tech-enabled a des marges plus faibles que le SaaS, mais une défendabilité bien supérieure, parce que la valeur naît dans l'opération. Quant aux robots qui remplaceraient les bras, ils restent un mirage à l'horizon d'un fonds. Ce qui s'investit aujourd'hui, c'est l'augmentation des soignants, pas leur remplacement."
-      },
-      {
-        "heading": "Ce que l'IA change vraiment",
-        "body": "L'IA change deux choses précises dans ce paysage, et la première est l'interface. Depuis vingt ans, on demandait au grand âge de s'adapter aux machines : écrans, applications, mots de passe. La voix inverse la charge. Une interface conversationnelle n'exige ni apprentissage, ni dextérité, ni bonne vue — pour la première fois, c'est la machine qui s'adapte au senior. À produit égal, nous pensons que les expériences vocales surperformeront les applications sur toute la population des 80 ans et plus, et que ce différentiel d'adoption est encore sous-évalué.\n\nLa deuxième est administrative, et c'est la moins visible. Le grand âge est une bureaucratie : dossiers APA, plans d'aide, coordination d'une dizaine d'intervenants, facturation multi-payeurs. Terrain idéal pour l'IA agentique, avec un acheteur clair — opérateurs, départements, caisses — et un ROI simple : chaque heure d'administratif automatisée est une heure de care rendue à un système en pénurie. C'est le point de rencontre des deux thèses les plus solides du dossier.\n\nLe monitoring prédictif — anticiper la chute, la dégradation, le passage aux urgences évitable — prolonge naturellement la télésurveillance remboursée et intéresse directement les payeurs.\n\nReste le companionship, la réponse de l'IA à l'isolement. Le besoin est réel et documenté. Le terrain est miné : dépendance affective, consentement de personnes vulnérables, qualité des réponses en situation de détresse. S'y aventurer sans garde-fous cliniques, c'est s'exposer à un risque Papa puissance dix."
-      },
-      {
-        "heading": "La France : un terrain réglementaire singulier",
-        "body": "La France a une particularité institutionnelle : depuis 2020, l'autonomie est la cinquième branche de la Sécurité sociale, pilotée par la CNSA avec un budget de l'ordre de 40 milliards d'euros. Le risque grand âge est institutionnalisé, l'infrastructure de paiement existe. Et la dépense est politiquement sanctuarisée — aucun gouvernement ne coupera frontalement dans le grand âge.\n\nLa grande loi, en revanche, est un mirage qui revient tous les deux ans. Annoncée depuis 2018, chiffrée par le rapport Libault en 2019 — autour de 9 milliards d'euros supplémentaires par an à l'horizon 2030 —, la loi de programmation grand âge a été repoussée à chaque exercice budgétaire. La loi « bien vieillir » de 2024 n'a rien programmé du tout. Il faut en tirer une règle simple : construire sur les flux qui existent, APA, télésurveillance, MaPrimeAdapt', tarifs EHPAD. Jamais sur un financement annoncé.\n\nMaPrimeAdapt', lancée en 2024 pour financer l'adaptation des logements, est d'ailleurs le signal le plus concret de la stratégie du « bien vieillir chez soi », et le marché de l'aging-in-place son premier bénéficiaire.\n\nLa comparaison américaine dit ce qui manque encore. Medicare Advantage donne aux assureurs américains un intérêt financier direct à éviter les hospitalisations ; c'est cette machine qui a financé la vague agetech US. L'Europe n'en a pas l'équivalent. La télésurveillance remboursée en est la première brique, et son extension — indications, tarifs — est sans doute la variable réglementaire la plus importante du secteur."
-      },
-      {
-        "heading": "Ailleurs : le laboratoire japonais, la machine américaine",
-        "body": "Si la silver économie était un marché homogène, le pays le plus vieux du monde serait sa Silicon Valley. Le Japon, où près de 30 % de la population a 65 ans ou plus et où plus d'un habitant sur dix a passé 80 ans, est effectivement le laboratoire le plus avancé. Ses leçons valent le détour précisément parce qu'elles sont contre-intuitives.\n\nPremière leçon : ce n'est pas la démographie qui a créé le marché japonais, c'est l'assurance. En 2000, le pays a créé la Kaigo Hoken, une assurance dépendance universelle et obligatoire — on cotise à partir de 40 ans, le reste à charge va de 10 à 30 % selon le revenu. Du jour au lendemain, un payeur national solvable existait, et un secteur privé entier s'est construit dessus : opérateurs de domicile et d'établissements, groupes diversifiés comme Nichii ou Benesse, et jusqu'aux assureurs devenus opérateurs. SOMPO, géant de l'assurance, est aujourd'hui l'un des premiers fournisseurs de care du pays et exploite la donnée de ses établissements pour la prévention. Le marché est né du guichet, pas de la pyramide des âges.\n\nDeuxième leçon, en creux : la robotique. Aucun pays n'a autant subventionné les robots de care — programmes du METI, exosquelettes, robots de transfert, le phoque thérapeutique Paro — avec la pénurie la plus aiguë et la culture la plus technophile du monde. Résultat documenté : adoption faible, abandons fréquents, substitution introuvable. Si les robots ne remplacent pas les soignants au Japon, croire qu'ils le feront ailleurs à l'horizon d'un fonds ne tient pas. Notre deuxième conviction repose là-dessus.\n\nLes États-Unis sont l'autre pôle. Pas d'assurance dépendance universelle, mais une machine à monétiser la prévention : Medicare Advantage met l'assureur en risque sur le coût total du patient, chaque hospitalisation évitée se partage, et depuis l'élargissement des prestations supplémentaires en 2019-2020, le capital-risque s'y est engouffré. C'est ce qui a financé Honor, Papa, Lively et toute la vague agetech américaine, avec l'AARP et ses quelque 38 millions de membres comme canal de distribution et comme lobby. Le leadership américain n'est ni culturel ni démographique. Il est contractuel.\n\nUn mot sur l'Europe du Nord : le Danemark et ses voisins achètent la « welfare tech » par la commande publique municipale, dans le cadre de stratégies nationales d'équipement. Petit marché, mais l'État y joue le rôle d'early adopter que la France réserve encore aux expérimentations.\n\nTrois modèles donc — assurance universelle au Japon, prévention monétisée aux États-Unis, commande publique chez les Nordiques. La France a construit le premier étage avec la cinquième branche et la télésurveillance, sans avoir encore choisi son mécanisme. C'est toute l'incertitude du terrain français, et toute son option."
-      },
-      {
-        "heading": "Trois trajectoires qui font école : Honor, Cera, Lively",
-        "body": "Trois entreprises condensent ce que le secteur enseigne. Deux courent encore, la troisième est allée au bout du cycle.\n\nHonor d'abord, déjà croisée plus haut, parce que sa trajectoire est devenue le manuel du secteur. Place de marché du care lancée en 2014, elle bute sur le problème de toutes les marketplaces du soin : la qualité est le produit, et on ne contrôle pas la qualité d'intervenants qu'on se contente de référencer. Plutôt que de s'entêter, elle lève 370 millions de dollars en Série E, passe le milliard de valorisation, et rachète en 2021 Home Instead — un réseau mondial d'environ un millier de franchises qu'elle était censée équiper. Le logiciel et la donnée au centre, les franchises comme distribution. Ce qu'on en retient : la valeur du care se capture dans l'opération ; les chemins « pure tech » et « opérateur » convergent, autant le décider tôt ; et le potentiel reste réel, parce qu'un réseau mondial de care est exactement l'actif sur lequel déployer de l'IA d'optimisation. Honor est mieux placée pour ça que n'importe quel éditeur.\n\nCera ensuite, le cas européen. Fondée en 2016 par un ancien du NHS, elle est devenue l'un des premiers fournisseurs de soins à domicile d'Europe : des dizaines de milliers d'interventions par jour, plusieurs centaines de millions de livres de revenus annuels, une valorisation rapportée au-delà du milliard de dollars. Presque tout est facturé au système public, NHS et collectivités. Son arme est une plateforme de données qui revendique de prédire et de réduire chutes et hospitalisations — autrement dit, elle vend au payeur de l'évitement de coûts, pas de l'aide à domicile. Ce qu'on en retient : le B2G passe à l'échelle quand on est l'opérateur, pas quand on vend du logiciel à des opérateurs publics. Et le modèle doit beaucoup à la structure britannique, où la commande publique externalise massivement le domicile là où la France administre les tarifs. La structure du payeur fait la startup. Son potentiel est porté par une politique nationale : plus le NHS pousse l'hôpital à domicile, plus Cera en devient l'infrastructure naturelle.\n\nGreatCall enfin, devenue Lively, pour le cycle complet. Fondée en 2006 autour du Jitterbug, un téléphone volontairement simplifié pour les aînés, elle construit près d'un million d'abonnés payants et environ 300 millions de dollars de chiffre d'affaires rentable, en attachant au matériel un service de réponse humaine 24/7. Puis elle se vend à Best Buy, environ 800 millions de dollars en 2018. C'est la nuance à notre règle du stigmate : un produit ouvertement « senior » peut gagner quand la simplicité est le bénéfice vendu, que l'acheteur est la famille et que le canal est le retail généraliste. C'est aussi la confirmation que la valeur se loge dans le revenu récurrent de service, pas dans le matériel. Et la [[exit|sortie]] elle-même est une leçon : ce sont les distributeurs et les payeurs qui achètent la confiance et la base installée du grand âge — exactement le profil d'acquéreur que ce dossier prédit pour l'Europe.\n\nDerrière ces trois, une génération monte et valide la thèse productivité : Birdie équipe les agences de domicile britanniques en logiciel métier, SafelyYou vend la détection de chute par vision aux résidences américaines, Sensi.AI l'intelligence audio du domicile aux agences de care. Aucune n'a encore l'échelle des précédentes. Toutes vendent au système, aucune au senior."
-      },
-      {
-        "heading": "Sorties : un marché d'acquéreurs étroit",
-        "body": "Une thèse se juge à sa sortie, et là-dessus il faut être lucide : le marché d'acquéreurs est étroit. Les acheteurs naturels sont les assureurs et institutions de prévoyance, pour qui le bien-vieillir est un relais de croissance ; les opérateurs de care, dont les bilans restent convalescents depuis 2022 ; les acteurs de la proximité comme La Poste ; les medtech et pharma pour le monitoring remboursé. Le précédent qui prouve la catégorie est américain — GreatCall rachetée par Best Buy pour environ 800 millions de dollars en 2018, suivie d'autres acquisitions santé du même distributeur. Les [[ipo|IPO]] dédiées resteront des exceptions.\n\nConséquence sur les multiples : beaucoup de sociétés du secteur sont des services tech-enabled, et un service ne se paie pas comme du logiciel. Il ne faut jamais payer des multiples SaaS pour des revenus d'opérateur, et il faut exiger un [[burn-multiple|burn multiple]] strict — le scénario de base ici est la construction patiente d'une rentabilité, pas l'hypercroissance subventionnée.\n\nPour le portefeuille, cela dessine une [[power-law|loi de puissance]] amortie : un secteur à médiane, où les [[exit|sorties]] se font entre 100 et 300 millions d'euros auprès d'acquéreurs stratégiques, plus qu'un secteur à outliers milliardaires. Ce n'est pas disqualifiant. Cela impose des valorisations d'entrée disciplinées, des montants calibrés, et une thèse de sortie écrite dès l'investissement — le rachat par un assureur ou un opérateur comme scénario de base, l'outlier comme bonus, jamais comme prérequis."
+        "body": "Qui décide, qui utilise, qui paie : au grand âge, ce sont trois personnes différentes. L'utilisateur est la personne âgée. Le décideur, le plus souvent, est un aidant familial — la France en compte environ 9 millions. Le payeur peut être la famille, l'assureur, le département, la Sécurité sociale. Le [[buyer-persona|persona acheteur]] réel de la plupart des produits du secteur, c'est la fille de 55 ans, prise entre ses enfants et ses parents, qui décide vite, culpabilise beaucoup, et achète de la tranquillité d'esprit plus que de l'usage.\n\nCe triangle a des conséquences produit très concrètes. Il faut deux onboardings, un pour convaincre l'aidant, un pour faire adopter par l'aîné. Les métriques d'usage mentent : un détecteur de chute « fonctionne » même si personne ne l'ouvre, parce qu'on vend une assurance, pas de l'engagement. Et le service client n'est pas un coût annexe, c'est le cœur du produit.\n\nIl a aussi une conséquence économique qu'on préfère taire : au grand âge, la durée de vie client est bornée. L'entrée en dépendance précède de quelques années le décès ou l'institution. Le [[churn-rate|churn]] n'est pas un défaut du produit, c'est la démographie, et la [[ltv|LTV]] est plafonnée par construction. Ce qui interdit tout [[cac|CAC]] élevé : les modèles qui survivent acquièrent leurs clients presque gratuitement, par flux prescripteur — caisse de retraite, assureur, hôpital, opérateur. Une raison de plus de s'adosser au système plutôt que de chasser le client un par un. C'est le fil rouge de tout le dossier, et l'objet du premier sous-dossier sur les guichets solvables."
       }
     ],
     "convictions": [
@@ -291,19 +300,13 @@
         "statement": "D'ici 2030, l'essentiel de la valeur VC créée sur le vieillissement en Europe viendra de sociétés vendant au système — assureurs, caisses, remboursement, opérateurs — et non du B2C senior direct.",
         "horizon": "2030",
         "strength": "forte",
-        "rationale": "Le B2C grand âge cumule une [[ltv|LTV]] plafonnée et une distribution introuvable, pendant que les guichets institutionnels viennent de s'ouvrir. C'est l'asymétrie la plus nette du dossier."
+        "rationale": "Le B2C grand âge cumule une [[ltv|LTV]] plafonnée et une distribution introuvable, pendant que les guichets institutionnels viennent de s'ouvrir. C'est l'asymétrie la plus nette du dossier, développée dans le sous-dossier sur les trois guichets."
       },
       {
         "statement": "Les sociétés qui augmentent la productivité et la rétention des intervenants du care surperformeront systématiquement celles qui visent à remplacer le care humain (robotique de substitution, companionship autonome).",
         "horizon": "2030",
         "strength": "forte",
         "rationale": "La pénurie de main-d'œuvre domine tout le secteur et achète du ROI immédiat. En face, la substitution bute sur la technique, l'éthique et l'acceptabilité — vingt ans de robots compagnons sans marché payant, y compris au Japon, forment une série d'échecs rarement aussi propre."
-      },
-      {
-        "statement": "La télésurveillance médicale remboursée produira au moins une société française valorisée plus de 300 M€ d'ici 2028.",
-        "horizon": "2028",
-        "strength": "moyenne",
-        "rationale": "Le droit commun de 2023 crée le revenu récurrent, national et solvable qui manquait à toute la catégorie. Conviction moyenne seulement, parce que les tarifs et les extensions d'indications restent des décisions administrées, donc politiques."
       },
       {
         "statement": "Aucune loi de programmation grand âge dotée de financements nouveaux massifs ne sera votée avant 2027 — toute thèse qui en dépend est non investissable aujourd'hui.",
@@ -316,12 +319,6 @@
         "horizon": "2032",
         "strength": "exploratoire",
         "rationale": "Ce sera la première génération du grand âge équipée, bancarisée en ligne et habituée à payer des abonnements. Exploratoire, parce que le stigmate et le réflexe d'épargne peuvent très bien survivre à l'alphabétisation numérique."
-      },
-      {
-        "statement": "À produit comparable, les interfaces vocales conversationnelles feront sauter le verrou d'adoption du numérique au grand âge, et les produits voice-first y surperformeront les applications.",
-        "horizon": "2029",
-        "strength": "exploratoire",
-        "rationale": "Pour la première fois, la machine s'adapte au senior plutôt que l'inverse. Exploratoire, parce que si la voix devient une couche standard de tous les produits, l'avantage se commoditise et ne différencie plus personne."
       }
     ],
     "signals": [
@@ -333,7 +330,7 @@
       {
         "label": "Vote (ou non) d'une loi de programmation grand âge et trajectoire budgétaire de la cinquième branche",
         "direction": "incertain",
-        "note": "Le serpent de mer du secteur. Un vote avec de vrais financements invaliderait notre quatrième conviction et ouvrirait des marchés entiers ; chaque report la confirme."
+        "note": "Le serpent de mer du secteur. Un vote avec de vrais financements invaliderait notre conviction sur le statu quo et ouvrirait des marchés entiers ; chaque report la confirme."
       },
       {
         "label": "M&A des assureurs, mutuelles et institutions de prévoyance sur l'agetech européenne",
@@ -385,7 +382,7 @@
       {
         "name": "Honor / Home Instead",
         "role": "startup",
-        "note": "Le cas d'école mondial : la pure tech du care devenue opérateur en rachetant l'incumbent qu'elle équipait. La preuve que dans le care, la valeur se capture dans l'opération."
+        "note": "Le cas d'école mondial : la pure tech du care devenue opérateur en rachetant l'incumbent qu'elle équipait. Décortiqué dans le sous-dossier sur les trajectoires."
       },
       {
         "name": "Best Buy Health (Lively, ex-GreatCall)",
@@ -406,10 +403,7 @@
       "churn-rate",
       "buyer-persona",
       "recurring-revenue",
-      "burn-multiple",
-      "strategic-acquisition",
-      "corporate-venture-capital",
-      "power-law"
+      "corporate-venture-capital"
     ],
     "sources": [
       {
@@ -425,25 +419,1528 @@
         "url": "https://www.cnsa.fr"
       },
       {
-        "label": "HAS — télésurveillance médicale : référentiels et indications",
+        "label": "Rapports Libault (2019) et El Khomri (2019) — grand âge et métiers",
+        "url": "https://sante.gouv.fr"
+      }
+    ]
+  },
+  {
+    "id": "eco-silver-b2c",
+    "slug": "silver-pourquoi-le-b2c-a-echoue",
+    "parentId": "eco-silver-economie",
+    "order": 1,
+    "name": "L'échec du B2C",
+    "title": "Pourquoi le B2C senior a presque toujours échoué",
+    "subtitle": "Trois causes de mortalité — l'adoption, le stigmate, la distribution — dont une seule s'éteint d'elle-même",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 6,
+    "summary": "Le B2C senior est un cimetière, mais un cimetière qui s'explique. Sur ses trois causes de mortalité, l'adoption numérique disparaît mécaniquement, le stigmate restera, et la distribution ne se loue toujours pas. Comprendre lesquelles changent et lesquelles persistent, c'est savoir où le B2C redeviendra possible — et où il ne le sera jamais.",
+    "tags": [
+      "b2c",
+      "adoption",
+      "stigmate",
+      "distribution",
+      "design-universel"
+    ],
+    "sections": [
+      {
+        "heading": "Adoption, stigmate, distribution",
+        "body": "La première cause de mortalité était l'adoption. Les générations arrivées au grand âge entre 2000 et 2020 n'avaient jamais touché un écran ; chaque produit devait franchir ce mur avant même de prouver son utilité. C'est la seule des trois causes qui s'éteint toute seule, et c'est important pour la suite : les boomers arrivent équipés, bancarisés en ligne, habitués aux abonnements.\n\nLa deuxième est le stigmate, et elle ne s'éteindra pas. La téléassistance existe depuis quarante ans, son utilité saute aux yeux, sa pénétration reste faible. La raison n'est pas le prix, c'est l'identité : porter le « bouton pour vieux », c'est admettre un statut que tout le monde refuse. OXO l'avait compris il y a trente ans avec ses épluche-légumes conçus pour des mains arthritiques et vendus comme de beaux objets de cuisine pour tous. Le design universel gagne tous les marchés, l'étiquette « senior » les perd tous. On ne combat pas le stigmate, on le contourne — en ne le nommant jamais.\n\nLa troisième est la distribution, et c'est la plus structurelle. Il n'existe ni rayon, ni média, ni canal direct vers les seniors, et le plafond de [[ltv|LTV]] décrit dans le dossier-racine interdit de compenser à coups d'acquisition payante. On atteint le senior par prescription — médecin, pharmacien, famille, caisse de retraite — et ces canaux ne se louent pas. Ils se gagnent lentement, ce qui ruine l'économie d'une startup pressée par son plan de [[traction]]."
+      },
+      {
+        "heading": "Le piège de la faisabilité : Papa et les robots",
+        "body": "À ces trois causes s'ajoute une erreur de raisonnement, la confusion entre ce qui est faisable et ce qui est demandé. Les robots compagnons en sont l'archétype absolu : vingt ans de prototypes primés dans les salons, des démonstrations attendrissantes, et aucun marché payant durable. La faisabilité technique avait été prise pour une preuve de demande.\n\nPapa est l'exemple le plus cher de la même erreur. L'idée — une marketplace de « petits-enfants à la demande » qui envoie des étudiants tenir compagnie aux aînés et les conduire à leurs rendez-vous — était séduisante, et les investisseurs l'ont portée au-delà du milliard de dollars de valorisation en 2021. Puis sont venues les défaillances documentées de qualité et de sécurité dans son réseau humain, et la valorisation s'est effondrée. La leçon dépasse Papa : dans le care, la qualité de service n'est pas un paramètre d'exploitation qu'on optimisera plus tard, c'est le produit lui-même. Une marketplace légère, qui se contente de mettre en relation sans contrôler l'acte, ne la maîtrise pas — et c'est précisément ce contrôle que les familles paient. C'est aussi ce qui pousse les modèles gagnants à devenir opérateurs, comme le montre le sous-dossier sur les trajectoires."
+      }
+    ],
+    "glossaryRefs": [
+      "ltv",
+      "traction"
+    ]
+  },
+  {
+    "id": "eco-silver-filiere",
+    "slug": "silver-la-filiere-en-dix-branches",
+    "parentId": "eco-silver-economie",
+    "order": 2,
+    "name": "La filière en dix branches",
+    "title": "Dix branches sous une même étiquette",
+    "subtitle": "Une carte de la filière, lue à travers la seule question qui compte pour un investisseur : qui paie ?",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 4,
+    "summary": "Au moins dix branches cohabitent sous le mot « silver », sans partager ni payeur, ni cycle de vente, ni intensité capitalistique. Ce dossier pose la boussole — suivez le payeur — et range les branches en deux familles. Chacune est ensuite décortiquée dans son propre sous-dossier : ce qu'elle recouvre, qui la finance, et ce qu'un investisseur peut raisonnablement en attendre.",
+    "tags": [
+      "filière",
+      "segmentation",
+      "payeur",
+      "cartographie"
+    ],
+    "these": "La tentation, face à la silver économie, est de traiter ses dix branches comme un seul marché. C'est l'erreur que ce dossier combat depuis le début, et la filière en est la démonstration la plus concrète. Notre grille : une branche ne vaut pour le capital-risque que dans la mesure où elle se rapproche d'un payeur institutionnel récurrent. Le reste relève du design grand public, où l'étiquette « senior » devient un handicap. Les dix sous-dossiers appliquent cette grille, branche par branche.",
+    "sections": [
+      {
+        "heading": "Suivez le payeur",
+        "body": "Dix branches au moins se réclament de la silver économie, et la tentation est de les additionner en un grand marché. Pour les départager, une seule question suffit, et c'est toujours la même : qui paie ? Plus une branche rapproche son revenu d'un payeur institutionnel récurrent — un assureur, l'assurance maladie, un opérateur, un employeur —, plus elle est compatible avec le capital-risque, parce que la dépense existe déjà et cherche du rendement. Plus elle dépend d'une dépense nouvelle qu'il faudrait arracher à un senior réticent ou à sa famille, plus elle relève du grand public, où l'étiquette « silver » se retourne contre le produit.\n\nCette boussole range les dix branches en deux familles. Elle ne dit pas qu'une famille est « bonne » et l'autre « mauvaise » — certaines des branches les plus difficiles cachent de vraies poches investissables. Elle dit où chercher en premier, et avec quel niveau de méfiance."
+      },
+      {
+        "heading": "Deux familles de branches",
+        "body": "La première famille vit d'un payeur institutionnel. La santé et les dispositifs médicaux se financent par le remboursement et les assureurs ; les logiciels métier du care, par les opérateurs et les collectivités ; la fintech et l'assurtech du vieillissement, par les assureurs et un senior solvable ; l'emploi et l'accompagnement des aidants salariés, par les employeurs. Quatre branches, quatre acheteurs rationnels qui ont déjà la dépense au bilan. C'est là que le capital-risque a le plus à faire, et ce sont les quatre premiers sous-dossiers.\n\nLa seconde famille suppose une dépense nouvelle du senior ou de sa famille, et c'est ce qui la fragilise : le care à domicile sous tarifs administrés, l'hébergement et l'habitat où guette le piège immobilier, le lien social sans payeur identifié, la mobilité capital-intensive, la consommation des jeunes seniors qui relève du grand public, et la robotique matérielle, cimetière du secteur. Plusieurs de ces branches recèlent des poches réelles — l'adaptation du domicile, l'augmentation des soignants — mais toujours à la condition de retrouver, quelque part, un payeur solvable. Les sous-dossiers ci-dessous prennent chaque branche à tour de rôle."
+      }
+    ],
+    "glossaryRefs": [
+      "recurring-revenue",
+      "tam-sam-som"
+    ]
+  },
+  {
+    "id": "eco-silver-guichets",
+    "slug": "silver-vendre-au-systeme",
+    "parentId": "eco-silver-economie",
+    "order": 3,
+    "name": "Les trois guichets",
+    "title": "Vendre au système plutôt qu'au senior",
+    "subtitle": "Trois guichets solvables — les assureurs, le remboursement, les opérateurs — où la dépense existe déjà et cherche de l'efficacité",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "Les réussites du secteur se ressemblent : elles vont chercher la dépense là où elle existe déjà, au lieu d'en créer une nouvelle chez un client réticent. Trois guichets concentrent l'essentiel des revenus solvables — les assureurs et caisses, le remboursement, les opérateurs de care. Chacun a sa logique d'achat, son cycle et ses pièges, détaillés dans les trois sous-dossiers ci-dessous.",
+    "tags": [
+      "b2b2c",
+      "guichets",
+      "assureurs",
+      "remboursement",
+      "opérateurs"
+    ],
+    "these": "Tout le dossier-racine converge ici. Si le senior n'est presque jamais le bon client, la question devient : à qui vendre ? La réponse tient en une règle d'investissement. On finance les sociétés dont l'acheteur a déjà la dépense au bilan et y cherche du rendement — un assureur qui veut éviter un sinistre, l'assurance maladie qui veut éviter une hospitalisation, un opérateur qui veut rendre des heures à ses soignants. On se méfie des sociétés qui doivent créer une ligne de dépense nouvelle chez un senior ou une famille qui n'avaient rien prévu. Les trois sous-dossiers qui suivent décortiquent chacun de ces guichets : sa logique, son cycle de vente, sa défendabilité, ses limites.",
+    "sections": [
+      {
+        "heading": "La même grammaire, trois portes",
+        "body": "Les trois guichets partagent une grammaire commune : la dépense existe, elle est récurrente, et l'acheteur est une organisation qui raisonne en retour sur investissement. Cela change tout pour une startup. Le cycle de vente est plus long que le B2C — des mois, parfois des années de pilotes — mais une fois la société installée dans le parcours d'un payeur, le fossé concurrentiel est réel et les revenus sont [[recurring-revenue|récurrents]]. La [[ltv|LTV]] cesse d'être plafonnée par la démographie d'un individu : elle est portée par un contrat institutionnel qui survit au client final.\n\nLes trois portes diffèrent par leur degré de maturité. Les assureurs apprennent encore à acheter de la prévention. Le remboursement vient d'ouvrir, brutalement et nationalement, avec la télésurveillance. Les opérateurs, eux, achètent sous la contrainte réglementaire née d'un scandale. Chacun mérite son enquête."
+      }
+    ],
+    "glossaryRefs": [
+      "recurring-revenue",
+      "ltv"
+    ]
+  },
+  {
+    "id": "eco-silver-guichets-assureurs",
+    "slug": "silver-les-assureurs",
+    "parentId": "eco-silver-guichets",
+    "order": 1,
+    "name": "Les assureurs",
+    "title": "Les assureurs et la prévention monétisée",
+    "subtitle": "Pour qui une chute évitée est un sinistre évité — et le senior, déjà un client",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "Assureurs, mutuelles, institutions de prévoyance et caisses de retraite forment le premier guichet. Pour eux, la prévention se monétise directement, et le senior est déjà au portefeuille. C'est le guichet le plus prometteur de la décennie — à condition d'absorber des cycles de vente longs et des pilotes qui s'enlisent.",
+    "tags": [
+      "assureurs",
+      "prévoyance",
+      "prévention",
+      "b2b2c"
+    ],
+    "sections": [
+      {
+        "heading": "Pourquoi la prévention leur rapporte",
+        "body": "Pour un assureur, la prévention n'est pas une posture, c'est un calcul. Une chute évitée est un sinistre évité. Un maintien à domicile réussi repousse des prestations de dépendance lourdes. Un malade chronique mieux suivi, c'est une hospitalisation de moins à rembourser. Là où le senior individuel ne voit qu'une dépense, l'assureur voit un investissement à retour mesurable — et il a déjà le client au portefeuille, ce qui règle d'un coup le problème de distribution qui tue le B2C.\n\nLes assureurs achètent donc trois choses : de la distribution de services de prévention à leurs assurés, de l'engagement pour que ces services soient réellement utilisés, et du monitoring qui transforme un contrat passif en relation active. C'est exactement ce que Withings, par exemple, peut leur apporter : une donnée physiologique grand public, collectée sans stigmate, qui intéresse l'assureur autant que le porteur."
+      },
+      {
+        "heading": "Le revers : des cycles longs et le risque du pilote éternel",
+        "body": "Le guichet a un coût, et il faut le regarder en face avant de l'investir. Vendre à un assureur prend du temps : comités, conformité, intégration aux systèmes existants, et cette tendance des grands groupes à lancer des pilotes qu'ils ne déploient jamais vraiment. Une startup peut brûler deux ans de trésorerie dans un « partenariat stratégique » qui ne dépasse jamais l'expérimentation. Le [[burn-multiple|burn multiple]] est l'instrument de discipline ici : tant que les pilotes ne se convertissent pas en déploiements facturés, la croissance est une illusion.\n\nLa parade tient en deux points. D'abord, ne signer des pilotes que payants et bornés dans le temps, avec un critère de conversion écrit. Ensuite, viser les assureurs qui ont déjà fait le choix stratégique du bien-vieillir — comme Malakoff Humanis — plutôt que ceux qui « explorent ». Une fois ce tri fait, le guichet assureur offre ce que le B2C ne donnera jamais : un acheteur rationnel, solvable, et qui rachète chaque année."
+      }
+    ],
+    "glossaryRefs": [
+      "burn-multiple",
+      "recurring-revenue"
+    ]
+  },
+  {
+    "id": "eco-silver-guichets-remboursement",
+    "slug": "silver-le-remboursement",
+    "parentId": "eco-silver-guichets",
+    "order": 2,
+    "name": "Le remboursement",
+    "title": "Le remboursement : la télésurveillance au droit commun",
+    "subtitle": "Depuis 2023, un revenu récurrent, national et solvable pour le suivi à distance — l'embryon européen du modèle américain",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 6,
+    "summary": "L'entrée de la télésurveillance médicale au droit commun en 2023 a créé en France ce qui manquait à toute la catégorie : un revenu récurrent, national et solvable pour le suivi à distance des malades chroniques, dont beaucoup sont âgés. C'est le guichet le plus net du secteur, et celui dont la trajectoire d'extension est la variable réglementaire la plus importante à surveiller.",
+    "tags": [
+      "remboursement",
+      "télésurveillance",
+      "santé",
+      "réglementation"
+    ],
+    "these": "C'est le seul endroit du secteur où un revenu solvable est tombé d'un coup, par décision publique, à l'échelle nationale. Notre conviction : ce guichet va structurer la santé du grand âge en France pour la décennie, et son extension progressive — nouvelles indications, tarifs revus — vaut plus, pour un investisseur du secteur, que n'importe quelle annonce de loi grand âge.",
+    "sections": [
+      {
+        "heading": "Ce que le droit commun a changé",
+        "body": "Jusqu'en 2023, la télésurveillance vivait d'expérimentations et de financements précaires. Son entrée au droit commun a changé de nature le marché : pour cinq familles de pathologies — insuffisance cardiaque, rénale, respiratoire, diabète, prothèses cardiaques implantables —, le suivi à distance est désormais remboursé selon un référentiel national. La France est l'un des premiers pays européens à offrir cela, et les premiers bénéficiaires sont les malades chroniques âgés, c'est-à-dire le cœur démographique du dossier.\n\nPour une startup, la différence est totale. Au lieu de convaincre un par un des établissements de payer sur leur budget propre, elle vend une solution adossée à un tarif opposable, le même partout. Le revenu devient [[recurring-revenue|récurrent]] et prévisible, la [[traction]] enfin lisible. C'est la condition qui manquait pour que des sociétés de monitoring atteignent une taille significative."
+      },
+      {
+        "heading": "L'analogie américaine, et ses limites",
+        "body": "Le parallèle s'impose avec Medicare Advantage, le mécanisme qui a financé la vague agetech américaine en mettant l'assureur en risque sur le coût total du patient — détaillé dans le sous-dossier sur les États-Unis. La télésurveillance remboursée en est l'embryon européen : un dispositif qui rend l'hospitalisation évitée partageable entre le payeur et l'innovateur.\n\nL'analogie a ses limites, et c'est ce qui borne la conviction. Les tarifs restent administrés, donc politiques : ils peuvent être revus à la baisse, et le périmètre des indications dépend de décisions publiques que personne ne maîtrise. Une société bâtie sur un seul tarif est exposée à un coup de rabot. La parade est la même que partout dans le secteur — viser des sociétés dont la valeur tient à la donnée, à l'intégration clinique et à la relation avec les patients, pas seulement au droit à facturer un acte."
+      }
+    ],
+    "convictions": [
+      {
+        "statement": "La télésurveillance médicale remboursée produira au moins une société française valorisée plus de 300 M€ d'ici 2028.",
+        "horizon": "2028",
+        "strength": "moyenne",
+        "rationale": "Le droit commun de 2023 crée le revenu récurrent, national et solvable qui manquait à toute la catégorie. Conviction moyenne seulement, parce que les tarifs et les extensions d'indications restent des décisions administrées, donc politiques."
+      }
+    ],
+    "glossaryRefs": [
+      "recurring-revenue",
+      "traction"
+    ]
+  },
+  {
+    "id": "eco-silver-guichets-operateurs",
+    "slug": "silver-les-operateurs",
+    "parentId": "eco-silver-guichets",
+    "order": 3,
+    "name": "Les opérateurs",
+    "title": "Les opérateurs de care après Orpea",
+    "subtitle": "Comment un scandale a transformé la qualité et la transparence d'argument marketing en obligation — et créé un marché de logiciels",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "Le scandale Orpea a fait passer la qualité et la transparence en EHPAD du registre marketing au registre réglementaire et politique. Près de 600 000 résidents, des opérateurs sous pression, des départements qui exigent des comptes : il y a là un marché de logiciels métier, de conformité et de supervision qui n'existait pas à cette intensité il y a cinq ans.",
+    "tags": [
+      "opérateurs",
+      "ehpad",
+      "conformité",
+      "logiciel"
+    ],
+    "sections": [
+      {
+        "heading": "Le scandale comme créateur de marché",
+        "body": "Avant 2022, la qualité en établissement se vendait — c'était un argument commercial parmi d'autres. Depuis le scandale Orpea et les révélations sur la maltraitance et l'optimisation au détriment des résidents, elle se contrôle. La nuance est capitale pour un investisseur : un argument marketing est optionnel, une obligation réglementaire crée une demande non discrétionnaire. Les départements, qui financent une partie de l'hébergement, exigent désormais des comptes, de la traçabilité, des indicateurs. Les opérateurs doivent les produire.\n\nC'est exactement le terrain d'un marché de logiciels métier : conformité, supervision, traçabilité des soins, coordination entre le domicile et l'établissement. Avec près de 600 000 résidents en EHPAD et un secteur sous surveillance, la demande est là, et elle ne dépend plus de l'humeur d'un acheteur — elle dépend de la loi. Le [[business-model|modèle]] est un SaaS B2B classique, vendu à des opérateurs, avec une défendabilité qui croît à mesure que le logiciel s'enfonce dans leurs processus réglementés."
+      },
+      {
+        "heading": "La contrainte : des acheteurs au bilan fragile",
+        "body": "Le revers est financier. Les grands opérateurs sortent essorés de la crise — Clariane, ex-Korian, est en convalescence, son bilan contraint, son appétit d'achat réduit. Vendre du logiciel à des clients qui comptent chaque euro impose un retour sur investissement démontrable vite et sans ambiguïté : moins de temps administratif, moins de risque réglementaire, moins de sinistres. Les pitchs « bien-être » sans ligne d'économie chiffrée ne passent pas.\n\nCette même fragilité a une conséquence côté sortie, traitée dans le sous-dossier sur la France et la sortie : les opérateurs sont des acquéreurs naturels du secteur, mais leurs moyens limités plafonnent les prix. On investit donc une société de logiciel d'opérateur en visant d'abord sa rentabilité propre, pas un rachat spéculatif par un Clariane qui n'en a plus les moyens."
+      }
+    ],
+    "glossaryRefs": [
+      "business-model"
+    ]
+  },
+  {
+    "id": "eco-silver-care",
+    "slug": "silver-la-productivite-du-care",
+    "parentId": "eco-silver-economie",
+    "order": 4,
+    "name": "La productivité du care",
+    "title": "Le goulot de la main-d'œuvre, ou pourquoi la pénurie est le marché",
+    "subtitle": "La contrainte qui domine toutes les autres n'est ni la demande ni la technologie : c'est le bras humain",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 7,
+    "summary": "Toute la silver économie opérationnelle bute sur un goulot : il manque des bras, et il en manquera de plus en plus. Pour un investisseur, ce goulot est le marché. Le segment le plus défendable de la décennie est la productivité du care — tout ce qui rend des heures à des soignants en pénurie — à condition d'accepter l'économie d'un service tech-enabled plutôt que celle d'un pur logiciel.",
+    "tags": [
+      "care",
+      "main-d'œuvre",
+      "productivité",
+      "tech-enabled",
+      "domicile"
+    ],
+    "these": "Notre conviction la plus forte sur le secteur tient en une phrase : on gagne en augmentant les soignants, on perd en voulant les remplacer. La pénurie de main-d'œuvre n'est pas un problème conjoncturel qu'une technologie résoudra ; c'est une contrainte structurelle qui transforme tout gain de productivité en valeur immédiatement achetée par le système. C'est là, plus que dans n'importe quel gadget pour senior, que se trouve le meilleur risque-rendement de la filière.",
+    "sections": [
+      {
+        "heading": "Un manque de bras structurel, pas conjoncturel",
+        "body": "Le rapport El Khomri chiffrait dès 2019 à environ 350 000 les recrutements nécessaires en cinq ans dans les métiers du grand âge. Rien depuis n'a démenti la pénurie : postes vacants, turnover élevé, pénibilité réelle, salaires coincés par des tarifs administrés. Et la démographie ne fait qu'aggraver l'équation, puisque la population à accompagner croît pendant que la population active stagne.\n\nCette contrainte a une vertu analytique : elle est le signal le plus fiable du secteur. Plus la pénurie s'aggrave, plus un système — opérateur de domicile, EHPAD, collectivité — achètera tout ce qui économise des heures. La demande n'a pas à être créée ni évangélisée ; elle est subie, urgente, et budgétée. C'est l'exact inverse du B2C senior."
+      },
+      {
+        "heading": "Ce qui s'achète : des heures rendues aux soignants",
+        "body": "Le marché concret de la productivité du care est moins glamour qu'un robot, mais bien plus solide. Optimiser les tournées et les plannings d'intervenants. Automatiser l'administratif qui dévore le temps : facturation multi-payeurs, télégestion, dossiers de prise en charge. Accélérer la formation et fluidifier le staffing dans un métier à fort turnover. Chacun de ces outils se vend sur un argument simple et chiffrable — voici les heures que vous récupérez, voici ce qu'elles valent. Le retour sur investissement se démontre en semaines, et l'acheteur est l'opérateur ou la collectivité, jamais le senior.\n\nUne génération de startups occupe déjà ce terrain : Birdie équipe les agences de domicile britanniques, SafelyYou vend la détection de chute par vision aux résidences américaines, Sensi.AI l'intelligence audio du domicile aux agences de care. Aucune ne « remplace » un soignant ; toutes lui rendent du temps ou de la sécurité. C'est la bonne lecture de l'angle technologique."
+      },
+      {
+        "heading": "Le prix à payer : l'économie du tech-enabled",
+        "body": "Il y a une contrepartie que l'investisseur doit accepter d'emblée. Beaucoup de ces modèles ne sont pas du SaaS pur : ils mêlent logiciel et opération, parce que dans le care la valeur naît dans l'exécution, pas dans le tableau de bord. Honor l'a appris jusqu'au bout, en passant de plateforme à opérateur — c'est l'objet du sous-dossier qui lui est consacré. Le [[business-model|modèle]] tech-enabled a des marges plus faibles que le logiciel, mais une défendabilité supérieure, car un concurrent ne reproduit pas une opération du jour au lendemain.\n\nConcrètement, cela veut dire ne jamais valoriser ces sociétés comme du SaaS, exiger un [[burn-multiple|burn multiple]] strict, et lire la marge brute en tendance plutôt qu'en photo. Quant à la substitution pure — les robots à la place des bras —, le sous-dossier japonais montre pourquoi elle reste un mirage à l'horizon d'un fonds. Ce qui s'investit aujourd'hui, c'est l'augmentation des soignants. Pas leur remplacement."
+      }
+    ],
+    "glossaryRefs": [
+      "business-model",
+      "burn-multiple"
+    ]
+  },
+  {
+    "id": "eco-silver-ia",
+    "slug": "silver-l-ia-dans-le-grand-age",
+    "parentId": "eco-silver-economie",
+    "order": 5,
+    "name": "Ce que l'IA change",
+    "title": "Ce que l'IA change vraiment dans le grand âge",
+    "subtitle": "La voix qui inverse enfin la charge d'adaptation, la bureaucratie comme terrain, et le champ de mines du companionship",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 6,
+    "summary": "L'IA change deux choses précises dans le grand âge — l'interface, enfin à la hauteur de l'utilisateur, et l'administratif, terrain idéal pour l'automatisation. Elle prolonge aussi le monitoring remboursé. Et elle ouvre un champ, le companionship, dont le besoin est immense et le risque éthique à la mesure.",
+    "tags": [
+      "ia",
+      "voix",
+      "agentique",
+      "monitoring",
+      "companionship"
+    ],
+    "these": "L'IA n'est pas, pour ce secteur, une promesse de substitution de plus. Son apport décisif est ailleurs : pour la première fois, la machine peut s'adapter au senior au lieu d'exiger l'inverse. Notre conviction : ce sont les interfaces vocales et l'automatisation administrative qui créeront la valeur, pas les compagnons artificiels — et la fenêtre d'avance va aux acteurs qui le comprennent maintenant.",
+    "sections": [
+      {
+        "heading": "La voix inverse la charge d'adaptation",
+        "body": "Depuis vingt ans, on demandait au grand âge de s'adapter aux machines : écrans tactiles, applications, mots de passe, parcours à plusieurs étapes. C'était le mur d'adoption décrit dans le sous-dossier sur l'échec du B2C. La voix le fait tomber. Une interface conversationnelle n'exige ni apprentissage, ni dextérité, ni bonne vue — on parle, la machine répond. Pour la première fois, c'est la technologie qui se plie à l'utilisateur.\n\nL'implication d'investissement est nette. À produit égal, une expérience pensée d'abord pour la voix surperformera une application sur toute la population des 80 ans et plus, et ce différentiel d'adoption est encore sous-évalué par le marché. La nuance, qui borne la conviction, est que la voix risque de devenir une couche standard de tous les produits : si c'est le cas, l'avantage se commoditise et ne différencie plus personne. La fenêtre est donc à l'avance, pas à la rente."
+      },
+      {
+        "heading": "La bureaucratie comme terrain, le monitoring comme prolongement",
+        "body": "Le grand âge est une bureaucratie : dossiers APA, plans d'aide, coordination d'une dizaine d'intervenants autour d'une même personne, facturation multi-payeurs. C'est un terrain idéal pour l'IA agentique, avec un acheteur clair — opérateurs, départements, caisses — et un retour sur investissement simple : chaque heure d'administratif automatisée est une heure de soin rendue à un système en pénurie. C'est le point de rencontre entre la thèse productivité du care et la vague IA, et sans doute la combinaison la plus solide du dossier.\n\nLe monitoring prédictif prolonge naturellement le guichet du remboursement : anticiper la chute, repérer la dégradation, éviter le passage aux urgences. Là, l'IA ne crée pas un nouveau marché, elle rend plus précieux un guichet qui existe déjà et que les payeurs financent."
+      },
+      {
+        "heading": "Le companionship : le besoin réel, le risque à sa mesure",
+        "body": "Reste la réponse de l'IA à l'isolement, le companionship. Le besoin est réel, documenté, massif — la solitude tue, littéralement, au grand âge. Mais le terrain est miné. Dépendance affective d'une personne vulnérable à une machine, consentement réel d'un utilisateur parfois désorienté, qualité des réponses dans une situation de détresse ou de crise suicidaire : aucune de ces questions n'est résolue.\n\nNotre position est prudente plutôt que fermée. Le companionship n'a de sens qu'adossé à un payeur institutionnel — une caisse, une mutuelle qui achète de la prévention de l'isolement — et entouré de garde-fous cliniques sérieux. S'y lancer en pur B2C, sans cadre, c'est s'exposer à un risque Papa puissance dix : le jour où une défaillance touche une personne vulnérable, ce n'est pas une métrique qui se dégrade, c'est la licence sociale d'exploiter qui disparaît."
+      }
+    ],
+    "convictions": [
+      {
+        "statement": "À produit comparable, les interfaces vocales conversationnelles feront sauter le verrou d'adoption du numérique au grand âge, et les produits voice-first y surperformeront les applications.",
+        "horizon": "2029",
+        "strength": "exploratoire",
+        "rationale": "Pour la première fois, la machine s'adapte au senior plutôt que l'inverse. Exploratoire, parce que si la voix devient une couche standard de tous les produits, l'avantage se commoditise et ne différencie plus personne."
+      }
+    ],
+    "glossaryRefs": [
+      "traction"
+    ]
+  },
+  {
+    "id": "eco-silver-international",
+    "slug": "silver-le-miroir-international",
+    "parentId": "eco-silver-economie",
+    "order": 6,
+    "name": "Le miroir international",
+    "title": "Le miroir international : ce que le Japon et les États-Unis enseignent",
+    "subtitle": "Le pays le plus vieux du monde et le pays qui finance le mieux le vieillissement — deux leçons contre-intuitives sur la même question",
+    "kind": "geographie",
+    "accent": "#267A8C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 4,
+    "summary": "Si la silver économie était un marché homogène, le pays le plus vieux du monde serait sa Silicon Valley. Le Japon et les États-Unis offrent les deux laboratoires les plus avancés, et leurs leçons valent le détour parce qu'elles contredisent l'intuition : ce n'est ni la démographie ni la technologie qui crée le marché, c'est le mécanisme de paiement. Deux sous-dossiers détaillent chacun de ces modèles.",
+    "tags": [
+      "international",
+      "japon",
+      "états-unis",
+      "comparaison"
+    ],
+    "these": "La comparaison internationale tranche une question que le débat français laisse ouverte : qu'est-ce qui déclenche réellement un marché de la silver économie ? La réponse, vue du Japon comme des États-Unis, n'est pas la pyramide des âges ni le génie technologique. C'est l'existence d'un payeur mis en risque sur le bon résultat. Les deux sous-dossiers ci-dessous le montrent par deux chemins opposés.",
+    "sections": [
+      {
+        "heading": "Deux modèles, une même grammaire",
+        "body": "Le Japon a créé son marché par une assurance dépendance universelle ; les États-Unis, par un mécanisme qui rémunère la prévention. Deux chemins opposés — l'un public et universel, l'autre concurrentiel et contractuel — pour un même enseignement : le marché naît quand quelqu'un a un intérêt financier direct à ce que la personne âgée aille mieux ou coûte moins. Là où ce payeur existe, les startups prospèrent ; là où il manque, même la démographie la plus écrasante ne suffit pas.\n\nIl faut y ajouter un troisième modèle, plus discret : l'Europe du Nord, où le Danemark et ses voisins achètent la « welfare tech » par la commande publique municipale, dans le cadre de stratégies nationales d'équipement. Petit marché, mais l'État y joue le rôle d'early adopter que la France réserve encore à ses expérimentations. La France, justement, a posé le premier étage — cinquième branche, télésurveillance remboursée — sans avoir tranché entre ces modèles. C'est tout l'enjeu du sous-dossier qui lui est consacré."
+      }
+    ],
+    "glossaryRefs": []
+  },
+  {
+    "id": "eco-silver-intl-japon",
+    "slug": "silver-le-japon",
+    "parentId": "eco-silver-international",
+    "order": 1,
+    "name": "Le Japon",
+    "title": "Le Japon : le marché né de l'assurance, l'échec de la robotique",
+    "subtitle": "Le pays le plus vieux du monde prouve deux choses contre-intuitives à la fois",
+    "kind": "geographie",
+    "accent": "#267A8C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 6,
+    "summary": "Près de 30 % de la population a 65 ans ou plus, plus d'un habitant sur dix a passé 80 ans : le Japon est le laboratoire le plus avancé du secteur. Il enseigne deux choses qui dérangent l'intuition — que c'est l'assurance, et non la démographie, qui a créé son marché ; et que même le pays le plus robotisé du monde n'a pas fait fonctionner la substitution.",
+    "tags": [
+      "japon",
+      "kaigo-hoken",
+      "robotique",
+      "assurance-dépendance"
+    ],
+    "sections": [
+      {
+        "heading": "Le marché est né d'une loi, pas d'une pyramide des âges",
+        "body": "On croit volontiers que le marché japonais du grand âge existe parce que le Japon est vieux. C'est faux, ou du moins incomplet. Il existe parce qu'en 2000, le pays a créé la Kaigo Hoken, une assurance dépendance universelle et obligatoire : on cotise à partir de 40 ans, le reste à charge va de 10 à 30 % selon le revenu. Du jour au lendemain, un payeur national solvable existait pour les services aux personnes âgées dépendantes.\n\nUn secteur privé entier s'est alors construit sur ce guichet : opérateurs de domicile et d'établissements, groupes diversifiés comme Nichii ou Benesse, et jusqu'aux assureurs eux-mêmes devenus opérateurs. SOMPO, géant de l'assurance, est aujourd'hui l'un des premiers fournisseurs de care du pays, et il exploite la donnée de ses propres établissements pour faire de la prévention. C'est la démonstration la plus pure de la thèse du dossier : le marché naît du guichet. La pyramide des âges crée le besoin ; seul le mécanisme de paiement crée le marché."
+      },
+      {
+        "heading": "L'échec de la robotique, ou la leçon en creux",
+        "body": "Le Japon offre aussi le test grandeur nature le plus rigoureux qui soit sur une question qui obsède le secteur : peut-on remplacer les soignants par des machines ? Aucun pays n'a autant subventionné la robotique de care — programmes du METI, exosquelettes, robots de transfert, le phoque thérapeutique Paro devenu célèbre. Aucun n'a réuni de meilleures conditions : la pénurie de bras la plus aiguë, la culture la plus technophile, un soutien public massif.\n\nLe résultat est documenté, et il est sobre : adoption faible, abandons fréquents, substitution introuvable. Les robots aident à la marge, parfois ; ils ne remplacent pas le soin. La portée de ce constat dépasse le Japon. Si la substitution robotique ne fonctionne pas là, dans les meilleures conditions imaginables, l'idée qu'elle fonctionnera ailleurs à l'horizon d'un fonds ne tient pas. C'est le socle empirique de la conviction du dossier-racine sur la productivité du care : on investit l'augmentation des soignants, jamais leur remplacement."
+      }
+    ],
+    "glossaryRefs": []
+  },
+  {
+    "id": "eco-silver-intl-usa",
+    "slug": "silver-les-etats-unis",
+    "parentId": "eco-silver-international",
+    "order": 2,
+    "name": "Les États-Unis",
+    "title": "Les États-Unis : Medicare Advantage comme machine à financer",
+    "subtitle": "Pas d'assurance dépendance universelle, mais un mécanisme qui transforme la prévention en ligne de revenu",
+    "kind": "geographie",
+    "accent": "#267A8C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "Les États-Unis n'ont pas d'assurance dépendance universelle, mais ils ont la machine à financer le vieillissement la plus efficace du monde : Medicare Advantage met l'assureur en risque sur le coût total du patient, et chaque hospitalisation évitée devient partageable. C'est ce mécanisme, et non la culture ou la démographie, qui a financé toute la vague agetech américaine.",
+    "tags": [
+      "états-unis",
+      "medicare-advantage",
+      "prévention",
+      "agetech"
+    ],
+    "sections": [
+      {
+        "heading": "Mettre l'assureur en risque sur le bon résultat",
+        "body": "Le ressort américain n'est pas une assurance universelle, c'est un alignement d'intérêts. Avec Medicare Advantage, l'assureur reçoit un forfait par patient et assume le coût total de sa santé. Sa marge dépend donc directement de sa capacité à éviter les coûts lourds, l'hospitalisation au premier rang. Toute innovation qui maintient le patient âgé en bonne santé à domicile devient, pour lui, un investissement à retour immédiat — exactement la logique du guichet assureur français, mais industrialisée et généralisée.\n\nDepuis l'élargissement des prestations supplémentaires autorisées en 2019-2020, le capital-risque s'est engouffré dans cette brèche. C'est Medicare Advantage qui a financé Honor, Papa, Lively et l'essentiel de la vague agetech américaine, avec l'AARP et ses quelque 38 millions de membres comme canal de distribution et comme lobby. Le leadership américain du secteur n'est ni culturel ni démographique — les États-Unis sont plus jeunes que la France. Il est contractuel."
+      },
+      {
+        "heading": "Ce que l'Europe en retient",
+        "body": "La leçon pour un investisseur européen n'est pas d'attendre un Medicare Advantage qui ne viendra pas sous cette forme. C'est de chercher, dans chaque pays, l'embryon du même mécanisme : où un payeur est-il, ou peut-il être, mis en risque sur le coût total d'une personne âgée ? En France, la réponse émergente est la télésurveillance remboursée, traitée dans le guichet du remboursement — le premier endroit où l'hospitalisation évitée devient partageable. C'est moins large que Medicare Advantage, mais c'est la même idée, et c'est par là que la valeur passera. Le modèle américain ne s'importe pas ; sa grammaire, si."
+      }
+    ],
+    "glossaryRefs": []
+  },
+  {
+    "id": "eco-silver-trajectoires",
+    "slug": "silver-trajectoires",
+    "parentId": "eco-silver-economie",
+    "order": 7,
+    "name": "Les trajectoires",
+    "title": "Ce que les réussites enseignent",
+    "subtitle": "Trois entreprises qui ont marché — Honor, Cera, GreatCall — et la leçon que chacune impose",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 4,
+    "summary": "Trois entreprises condensent ce que le secteur enseigne. Deux courent encore et gardent un fort potentiel, la troisième est allée jusqu'au bout du cycle, jusqu'à la sortie. Aucune n'a vendu au senior : toutes ont vendu au système, par des chemins différents. Trois sous-dossiers les décortiquent une à une.",
+    "tags": [
+      "trajectoires",
+      "honor",
+      "cera",
+      "greatcall",
+      "apprentissages"
+    ],
+    "these": "On apprend plus d'un secteur par ses rares réussites que par ses nombreux échecs. Les trois trajectoires qui suivent ont en commun de confirmer la thèse du dossier — vendre au système, capturer la valeur dans l'opération, viser un acquéreur stratégique — mais chacune ajoute une nuance que les deux autres n'auraient pas révélée. Prises ensemble, elles forment le manuel pratique du secteur.",
+    "sections": [
+      {
+        "heading": "Trois chemins, une même thèse",
+        "body": "Honor montre que dans le care, la valeur se capture en possédant l'opération, pas en se contentant de l'équiper. Cera montre que le B2G passe à l'échelle quand on devient soi-même l'opérateur du payeur public, et que la structure du payeur fait la startup. GreatCall, devenue Lively, montre le cycle complet jusqu'à la sortie, et apporte la seule nuance sérieuse à la règle du stigmate.\n\nDerrière ces trois, une génération monte — Birdie, SafelyYou, Sensi.AI — et valide la thèse productivité du care sans avoir encore l'échelle des aînées. Le point commun de toutes, anciennes et nouvelles : aucune ne vend au senior. Chaque sous-dossier ci-dessous prend l'une des trois et en tire la leçon investissable."
+      }
+    ],
+    "glossaryRefs": []
+  },
+  {
+    "id": "eco-silver-traj-honor",
+    "slug": "silver-honor",
+    "parentId": "eco-silver-trajectoires",
+    "order": 1,
+    "name": "Honor",
+    "title": "Honor : posséder l'opération",
+    "subtitle": "La marketplace du care qui a fini par racheter l'incumbent qu'elle prétendait équiper",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "Honor est le cas d'école mondial du secteur. Partie en 2014 comme place de marché du care à domicile, elle a buté sur la réalité de toutes les marketplaces du soin — la qualité est le produit, et on ne contrôle pas ce qu'on se contente de référencer — puis a fait le choix radical de devenir opérateur, en rachetant Home Instead. Son potentiel reste entier.",
+    "tags": [
+      "honor",
+      "home-instead",
+      "opérateur",
+      "marketplace"
+    ],
+    "sections": [
+      {
+        "heading": "De la plateforme à l'opérateur",
+        "body": "Honor démarre en 2014 sur une promesse séduisante : être la plateforme technologique du care à domicile, mettre en relation aidants professionnels et familles, et laisser le logiciel optimiser le reste. Elle se heurte vite au problème décrit dans le sous-dossier sur l'échec du B2C : dans le soin, la qualité ne se sous-traite pas à un algorithme de mise en relation. On ne contrôle pas la qualité d'intervenants qu'on se contente de référencer, et c'est cette qualité que les familles paient.\n\nPlutôt que de s'entêter, Honor change de nature. Elle lève massivement — une Série E de 370 millions de dollars, une valorisation au-delà du milliard — et rachète en 2021 Home Instead, un réseau mondial d'environ un millier d'agences franchisées qu'elle était censée équiper. La startup a acheté l'incumbent. Le logiciel et la donnée passent au centre, mais désormais adossés à une opération réelle, contrôlée, à grande échelle."
+      },
+      {
+        "heading": "La leçon et le potentiel",
+        "body": "La leçon est devenue un principe du secteur : les chemins « pure tech » et « opérateur » finissent par converger dans le care, autant le décider tôt. Vouloir rester une couche logicielle au-dessus d'un soin qu'on ne maîtrise pas, c'est laisser la valeur — et le risque qualité — à d'autres. C'est aussi pourquoi tant de modèles gagnants du secteur sont des services tech-enabled, avec l'économie que cela implique, traitée dans le sous-dossier sur la productivité du care.\n\nLe potentiel d'Honor reste élevé, et pour une raison précise : un réseau mondial de care est exactement l'actif sur lequel déployer de l'IA d'optimisation — planification, prévention, administratif. Honor possède à la fois la donnée et l'opération, ce qu'aucun éditeur de logiciel pur ne peut prétendre. Dans une vague IA qui récompense ceux qui ont les deux, c'est une position rare."
+      }
+    ],
+    "glossaryRefs": [
+      "business-model"
+    ]
+  },
+  {
+    "id": "eco-silver-traj-cera",
+    "slug": "silver-cera",
+    "parentId": "eco-silver-trajectoires",
+    "order": 2,
+    "name": "Cera",
+    "title": "Cera : l'opérateur né du payeur public",
+    "subtitle": "Comment on passe à l'échelle en facturant le NHS plutôt qu'en vendant du logiciel aux opérateurs",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "Cera est le cas européen. Fondée en 2016 par un ancien du NHS, elle est devenue l'un des premiers fournisseurs de soins à domicile d'Europe en facturant presque exclusivement le système public. Elle enseigne que le B2G passe à l'échelle quand on est l'opérateur, et que la structure du payeur d'un pays fait — ou défait — la startup.",
+    "tags": [
+      "cera",
+      "nhs",
+      "b2g",
+      "royaume-uni",
+      "domicile"
+    ],
+    "sections": [
+      {
+        "heading": "Devenir l'opérateur du payeur public",
+        "body": "Cera ne vend pas du logiciel à des opérateurs de care : elle est l'opérateur, et elle facture le payeur public — NHS et collectivités. À partir de 2016, elle monte en puissance jusqu'à des dizaines de milliers d'interventions par jour, plusieurs centaines de millions de livres de revenus annuels, et une valorisation rapportée au-delà du milliard de dollars. Son arme est une plateforme de données qui revendique de prédire et de réduire chutes et hospitalisations. Autrement dit, elle ne vend pas « de l'aide à domicile » au sens classique : elle vend au payeur de l'évitement de coûts, mesuré.\n\nLa leçon est précieuse parce qu'elle contredit un réflexe d'investisseur. On imagine volontiers vendre du logiciel à des opérateurs publics, en SaaS, sans toucher à l'opération. Cera montre l'inverse : dans le B2G du care, c'est en devenant l'opérateur qu'on passe à l'échelle, parce que c'est la seule façon de capter à la fois le revenu de l'acte et la valeur de la donnée."
+      },
+      {
+        "heading": "La structure du payeur fait la startup",
+        "body": "Cera n'aurait pas pu naître identique en France, et c'est le point le plus instructif. Son modèle repose sur une particularité britannique : la commande publique externalise massivement le soin à domicile à des opérateurs privés. La France, elle, administre les tarifs et passe par les départements et un tissu associatif dense — un terrain de jeu tout autre. La même idée d'entreprise donnerait, des deux côtés de la Manche, deux sociétés très différentes.\n\nPour un investisseur, cela impose une discipline : avant d'évaluer une société de care, comprendre la structure du payeur de son pays. C'est elle qui détermine s'il faut être opérateur ou éditeur, à qui l'on vend, et à quelle vitesse on peut grandir. Le potentiel de Cera, enfin, est porté par une politique nationale : plus le NHS pousse l'« hôpital à domicile » pour désengorger ses lits, plus Cera en devient l'infrastructure naturelle."
+      }
+    ],
+    "glossaryRefs": [
+      "recurring-revenue"
+    ]
+  },
+  {
+    "id": "eco-silver-traj-lively",
+    "slug": "silver-greatcall-lively",
+    "parentId": "eco-silver-trajectoires",
+    "order": 3,
+    "name": "GreatCall / Lively",
+    "title": "GreatCall, devenue Lively : le cycle complet jusqu'à la sortie",
+    "subtitle": "Le seul exemple ouvertement « senior » qui a gagné — et qui nuance la règle du stigmate",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "GreatCall a fait le chemin complet, jusqu'à la sortie : près d'un million d'abonnés payants, un service rentable, puis un rachat par Best Buy pour environ 800 millions de dollars en 2018. Elle est la seule grande réussite ouvertement « senior » du secteur, et la nuance qu'elle apporte à la règle du stigmate est aussi précieuse que la règle elle-même.",
+    "tags": [
+      "greatcall",
+      "lively",
+      "best-buy",
+      "sortie",
+      "stigmate"
+    ],
+    "sections": [
+      {
+        "heading": "Un produit ouvertement senior, et pourtant gagnant",
+        "body": "Fondée en 2006 autour du Jitterbug — un téléphone mobile volontairement simplifié, gros boutons, menus épurés, explicitement destiné aux aînés —, GreatCall a construit près d'un million d'abonnés payants et un chiffre d'affaires de l'ordre de 300 millions de dollars, rentable. La clé n'était pas le matériel mais le service attaché : une ligne de réponse humaine, disponible 24 heures sur 24, qui transformait un téléphone en filet de sécurité.\n\nCela contredit en apparence la règle du stigmate énoncée dans le sous-dossier sur l'échec du B2C. La nuance est précise, et c'est elle qu'il faut retenir : un produit ouvertement « senior » peut gagner quand la simplicité elle-même est le bénéfice vendu, quand l'acheteur est la famille plutôt que l'aîné, et quand le canal est un retail généraliste qui normalise l'achat. Hors de ces conditions, le stigmate reprend ses droits."
+      },
+      {
+        "heading": "La sortie comme enseignement",
+        "body": "La fin de l'histoire est aussi instructive que le début. En 2018, GreatCall est rachetée par Best Buy pour environ 800 millions de dollars, et devient Lively. Le distributeur poursuivra ensuite avec d'autres acquisitions dans la santé du grand âge. Deux leçons en découlent.\n\nD'abord, c'est le revenu récurrent de service, pas le matériel, qui a créé la valeur et attiré l'acquéreur : on rachetait une base d'abonnés payants et une relation de confiance, pas un téléphone. Ensuite, et c'est le plus important pour un investisseur européen, le profil de l'acquéreur — un distributeur grand public qui achète la confiance et la base installée du grand âge — est exactement celui que le sous-dossier sur la France et la sortie prédit pour l'Europe. GreatCall a prouvé la catégorie côté [[exit|sortie]] ; reste à savoir si l'Europe produira ses propres Best Buy."
+      }
+    ],
+    "glossaryRefs": [
+      "exit",
+      "recurring-revenue"
+    ]
+  },
+  {
+    "id": "eco-silver-france-sortie",
+    "slug": "silver-la-france-et-la-sortie",
+    "parentId": "eco-silver-economie",
+    "order": 8,
+    "name": "La France et la sortie",
+    "title": "La France : terrain réglementaire et stratégie de sortie",
+    "subtitle": "Une cinquième branche solide, une grande loi fantôme, et un marché d'acquéreurs étroit qui impose sa discipline",
+    "kind": "geographie",
+    "accent": "#267A8C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 7,
+    "summary": "La France a institutionnalisé le risque autonomie sans avoir choisi son mécanisme de financement de l'innovation. Le résultat est un terrain singulier : des flux solvables sur lesquels bâtir, une grande loi qu'il ne faut jamais attendre, et un marché d'acquéreurs étroit qui commande une discipline d'entrée stricte. C'est le sous-dossier des règles du jeu, du financement à la sortie.",
+    "tags": [
+      "france",
+      "réglementation",
+      "cnsa",
+      "sorties",
+      "valorisation"
+    ],
+    "these": "Deux idées commandent l'investissement silver en France, l'une à l'entrée, l'autre à la sortie. À l'entrée : construire sur les flux qui existent déjà, jamais sur un financement public annoncé. À la sortie : accepter que le secteur soit à médiane plutôt qu'à outliers, et donc discipliner les valorisations d'entrée en conséquence. Qui tient ces deux lignes peut très bien réussir ; qui parie sur la grande loi ou sur une licorne improbable se prépare une déception.",
+    "sections": [
+      {
+        "heading": "Une cinquième branche solide, une loi qui ne vient jamais",
+        "body": "La France a une particularité institutionnelle forte : depuis 2020, l'autonomie est la cinquième branche de la Sécurité sociale, pilotée par la CNSA avec un budget de l'ordre de 40 milliards d'euros. Le risque grand âge est institutionnalisé, l'infrastructure de paiement existe, et la dépense est politiquement sanctuarisée — aucun gouvernement ne coupera frontalement dans le grand âge.\n\nLa grande loi, en revanche, est un mirage qui revient tous les deux ans. Annoncée depuis 2018, chiffrée par le rapport Libault en 2019 — autour de 9 milliards d'euros supplémentaires par an à l'horizon 2030 —, la loi de programmation grand âge a été repoussée à chaque exercice budgétaire. La loi « bien vieillir » de 2024 n'a rien programmé du tout. La règle qui en découle est simple et tient toute la stratégie d'entrée : on construit sur les flux qui existent — APA, télésurveillance remboursée, MaPrimeAdapt', tarifs des établissements — et jamais sur un financement annoncé. MaPrimeAdapt', lancée en 2024 pour l'adaptation des logements, est d'ailleurs le signal le plus concret de la stratégie du « bien vieillir chez soi », et le marché de l'aging-in-place son premier bénéficiaire."
+      },
+      {
+        "heading": "Un marché d'acquéreurs étroit",
+        "body": "Une thèse se juge à sa sortie, et là-dessus la lucidité s'impose : le marché d'acquéreurs est étroit. Les acheteurs naturels sont les assureurs et institutions de prévoyance, pour qui le bien-vieillir est un relais de croissance ; les opérateurs de care, dont les bilans restent convalescents depuis 2022, comme le rappelle le sous-dossier sur les opérateurs ; les acteurs de la proximité comme La Poste ; les medtech et pharma pour le monitoring remboursé. Le précédent qui prouve la catégorie est américain — GreatCall rachetée par Best Buy, raconté dans sa propre fiche. Les [[ipo|IPO]] dédiées resteront des exceptions.\n\nLa conséquence sur les multiples est directe : beaucoup de sociétés du secteur sont des services tech-enabled, et un service ne se paie pas comme du logiciel. Il ne faut jamais payer des multiples SaaS pour des revenus d'opérateur, et il faut exiger un [[burn-multiple|burn multiple]] strict — le scénario de base ici est la construction patiente d'une rentabilité, pas l'hypercroissance subventionnée."
+      },
+      {
+        "heading": "Une loi de puissance amortie",
+        "body": "Tout cela dessine, pour un portefeuille, un profil particulier. La silver économie est un secteur à médiane plutôt qu'à outliers : les [[exit|sorties]] s'y font plus volontiers entre 100 et 300 millions d'euros, auprès d'acquéreurs stratégiques, qu'au-delà du milliard. La [[power-law|loi de puissance]] qui régit le capital-risque y joue de façon amortie — moins de chances de décrocher le gros lot qui paie le fonds entier, mais aussi, potentiellement, moins de zéros si l'on a investi des modèles adossés à des payeurs solvables.\n\nCe n'est pas disqualifiant, c'est cadrant. Cela impose des valorisations d'entrée disciplinées, des montants calibrés sur des sorties réalistes, et une thèse de sortie écrite dès le premier chèque — le rachat par un assureur ou un opérateur comme scénario de base, l'outlier milliardaire comme bonus, jamais comme prérequis. Le secteur ne récompense pas les paris démesurés ; il récompense la discipline."
+      }
+    ],
+    "convictions": [
+      {
+        "statement": "Les sorties agetech françaises se concentreront dans une fourchette de 100 à 300 M€ auprès d'acquéreurs stratégiques (assureurs, opérateurs, distributeurs), les sorties au-delà du milliard restant exceptionnelles d'ici 2030.",
+        "horizon": "2030",
+        "strength": "moyenne",
+        "rationale": "Le marché d'acquéreurs est étroit et ses bilans sont contraints, et l'essentiel des modèles sont des services tech-enabled qui ne se paient pas en multiples de logiciel. Conviction moyenne car une réussite IA-care ou une consolidation européenne inattendue pourrait créer l'outlier qui dément la règle."
+      }
+    ],
+    "glossaryRefs": [
+      "ipo",
+      "exit",
+      "burn-multiple",
+      "power-law"
+    ]
+  },
+  {
+    "id": "eco-silver-br-sante",
+    "slug": "silver-branche-sante-dispositifs",
+    "parentId": "eco-silver-filiere",
+    "order": 1,
+    "name": "Santé & dispositifs",
+    "title": "Santé et dispositifs médicaux du vieillissement",
+    "subtitle": "La branche la plus mûre et la plus bancable de la silver économie — parce que, dans la santé, le payeur existe déjà",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 9,
+    "summary": "La healthtech réunit trois métiers que seule la blouse blanche rapproche : le dispositif médical, la santé numérique, le diagnostic. Le vieillissement en est le premier client, parce que c'est lui qui remplit les lits et les lignes de remboursement. D'où une évidence pour l'investisseur : de toutes les branches de la silver économie, c'est ici que le payeur institutionnel est déjà en place. La contrepartie tient en deux mots — validation clinique et cycles longs.",
+    "tags": [
+      "healthtech",
+      "santé",
+      "dispositifs-médicaux",
+      "remboursement",
+      "maladies-chroniques"
+    ],
+    "sections": [
+      {
+        "heading": "La healthtech, trois métiers sous une même blouse",
+        "body": "Le mot healthtech recouvre des entreprises qui n'ont presque rien en commun, sinon qu'elles opèrent toutes sous contrainte médicale. On y trouve d'abord le dispositif au sens strict : appareils auditifs, capteurs de glycémie, prothèses, implants, détecteurs de chute — du matériel marqué CE, parfois implanté, dont la défaillance se mesure en vies. On y trouve ensuite la santé numérique, plus récente et plus disputée : des logiciels qui deviennent eux-mêmes des dispositifs médicaux, la télésurveillance des maladies chroniques, la télémédecine, les thérapies numériques délivrées sur ordonnance. On y trouve enfin, à la lisière, le diagnostic et tout ce qui touche à la biologie — un monde de capital long, plus proche de la biotech que du logiciel.\n\nCe qui fait de la healthtech une classe d'actifs à part, et non un sous-genre du SaaS, tient à quelques traits qu'il faut accepter d'emblée. La barrière réglementaire est réelle : on ne vend pas un dispositif médical sans marquage, sans données cliniques, parfois sans essai. Elle coûte cher et prend du temps, mais elle protège — une fois franchie, elle tient les concurrents à distance bien mieux qu'une fonctionnalité. C'est un [[moat|moat]] que peu de secteurs offrent. Le revers est connu : les cycles sont longs, la validation consomme du capital avant le moindre euro de chiffre d'affaires, et le [[burn-rate|burn]] d'amorçage ressemble davantage à celui de la deep tech qu'à celui d'une application grand public.\n\nSurtout, la healthtech a un payeur. C'est sa particularité la plus précieuse, et le fil qui la relie à tout le reste de ce dossier : dans la santé, ce n'est presque jamais l'utilisateur qui sort la carte bleue. C'est un assureur, une caisse, un hôpital, l'État via le remboursement. La vente est donc un travail de preuve médico-économique adressé à une institution, pas une conquête de consommateur. Cela change tout — le cycle de vente, la nature des [[recurring-revenue|revenus récurrents]], et jusqu'à la forme de la sortie.",
+        "figures": [
+          {
+            "kind": "taxonomy",
+            "title": "La healthtech, trois familles",
+            "caption": "Un même statut réglementaire, trois métiers, trois intensités capitalistiques. L'intersection avec le grand âge se concentre dans la colonne du milieu.",
+            "root": "Healthtech",
+            "branches": [
+              {
+                "label": "Dispositif médical (MedTech)",
+                "note": "Matériel marqué CE, parfois implanté.",
+                "items": [
+                  "Audition, vision",
+                  "Capteurs : glycémie, chute, rythme",
+                  "Prothèses, implants"
+                ]
+              },
+              {
+                "label": "Santé numérique (Digital Health)",
+                "note": "Le logiciel devient lui-même dispositif.",
+                "items": [
+                  "Télésurveillance des chroniques",
+                  "Télémédecine",
+                  "Thérapies numériques (DTx)"
+                ],
+                "highlight": true
+              },
+              {
+                "label": "Diagnostic & biologie",
+                "note": "Capital long, proche de la biotech.",
+                "items": [
+                  "Diagnostic in vitro",
+                  "Imagerie assistée par IA",
+                  "Génomique, biomarqueurs"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Le vieillissement, premier client de la healthtech",
+        "body": "Si la healthtech a un moteur démographique, c'est le grand âge. Les dépenses de santé se concentrent dans les dernières années de vie, et elles changent de nature avec l'âge : on quitte le soin ponctuel et curatif pour la gestion au long cours de plusieurs maladies chroniques à la fois — diabète, insuffisance cardiaque, BPCO, troubles cognitifs. Cette polypathologie est précisément ce que le système hospitalier gère le plus mal et le plus cher. Tout ce qui permet de la suivre à domicile, d'éviter une décompensation et l'hospitalisation qui s'ensuit, attaque la part la plus lourde de la dépense.\n\nC'est ce qui place cette branche à part dans la silver économie. Ailleurs dans la filière, le drame est toujours le même : la dépense existe, mais aucun payeur solvable n'est en face, et il faut l'arracher à un senior réticent. Ici, le payeur préexiste — il s'appelle assurance maladie, complémentaire, ou hôpital mis sous tension par le coût du séjour. La question « qui paie », qui hante le reste du dossier, trouve dans la santé sa réponse la plus nette. Voilà pourquoi la santé et les dispositifs forment la branche la plus naturellement compatible avec le capital-risque, et la première qu'on regarde.\n\nEncore faut-il viser le bon segment. L'audition en est l'exemple canonique : marché énorme, utilité incontestable, remboursement réel — la réforme du 100 % Santé a effacé le reste à charge sur l'audioprothèse et fait bondir l'équipement. Mais c'est un marché déjà consolidé mondialement autour de quelques fabricants, où la fenêtre d'un nouvel entrant se joue sur la puce ou sur le canal de distribution, jamais sur le concept. À l'autre bout, la télésurveillance des maladies chroniques est entrée dans le droit commun du remboursement en 2023 : c'est le segment neuf, là où un dispositif numérique se branche directement sur un forfait public. Entre les deux, une grille simple : plus un produit s'adosse à un payeur institutionnel et à une preuve médico-économique, plus il est défendable ; plus il dépend d'un achat discrétionnaire du senior, plus il glisse vers le grand public et ses déconvenues.",
+        "figures": [
+          {
+            "kind": "quadrant",
+            "title": "Où est le payeur : les segments de la healthtech du grand âge",
+            "caption": "Plus un segment combine un payeur institutionnel et une maturité de remboursement, plus il est compatible avec le capital-risque. La cible est le quart supérieur droit.",
+            "xAxis": [
+              "Achat discrétionnaire du senior",
+              "Payeur institutionnel"
+            ],
+            "yAxis": [
+              "Remboursement immature",
+              "Remboursement établi"
+            ],
+            "items": [
+              {
+                "label": "Télésurveillance chronique",
+                "x": 0.8,
+                "y": 0.78,
+                "highlight": true
+              },
+              {
+                "label": "Audioprothèse (100% Santé)",
+                "x": 0.68,
+                "y": 0.92
+              },
+              {
+                "label": "Capteurs de glycémie (CGM)",
+                "x": 0.74,
+                "y": 0.72
+              },
+              {
+                "label": "Thérapies numériques (DTx)",
+                "x": 0.6,
+                "y": 0.44
+              },
+              {
+                "label": "Détecteurs de chute",
+                "x": 0.42,
+                "y": 0.34
+              },
+              {
+                "label": "Wearables grand public",
+                "x": 0.18,
+                "y": 0.22
+              },
+              {
+                "label": "Robotique de compagnie",
+                "x": 0.24,
+                "y": 0.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "La meilleure promesse de la filière, et son prix",
+        "body": "La promesse pour le capital-risque est la plus solide de toute la silver économie : des [[recurring-revenue|revenus récurrents]] adossés à un remboursement ou à un assureur, et une barrière réglementaire qui protège une fois franchie. Withings illustre le bon positionnement — une donnée physiologique captée par un objet grand public, sans le stigmate du dispositif « pour seniors », qui sert autant le porteur que l'assureur et se branche directement sur la télésurveillance remboursée détaillée dans le sous-dossier sur le remboursement.\n\nLe prix est connu d'avance. Les cycles sont longs, la validation clinique brûle de la trésorerie avant le premier euro, et le marquage médical n'a rien d'une formalité — le règlement européen sur les dispositifs, le MDR, a même allongé et renchéri le parcours. On finance donc cette branche en sachant qu'elle exige du capital et de la patience, mais qu'au bout la défendabilité et la récurrence sont réelles, et que la sortie naturelle est le [[strategic-acquisition|rachat]] par un industriel du dispositif médical, parfois par un assureur. C'est une branche d'[[ma|acquéreurs]] industriels bien plus que d'introductions en Bourse.\n\nReste que la France et le reste du monde ne jouent pas la même partition. Le terrain français — ses atouts, ses freins, ses champions — et le miroir des modèles étrangers, de l'« app sur ordonnance » allemande à la gueule de bois américaine, méritaient chacun leur propre enquête. Ce sont les deux sous-dossiers qui suivent."
+      }
+    ],
+    "convictions": [
+      {
+        "statement": "La valeur healthtech du vieillissement se créera d'abord dans le monitoring des maladies chroniques adossé à un remboursement, et non dans les dispositifs grand public sans payeur institutionnel.",
+        "horizon": "2030",
+        "strength": "forte",
+        "rationale": "C'est le seul segment qui combine un payeur déjà solvable, une preuve médico-économique chiffrable (l'hospitalisation évitée) et une barrière réglementaire. Le grand public sans remboursement reste un marché de gadgets primés en salon."
+      },
+      {
+        "statement": "Les sorties de la branche resteront très majoritairement des rachats industriels (fabricants de dispositifs, assureurs), et non des introductions en Bourse — y compris pour les pépites françaises.",
+        "horizon": "2030",
+        "strength": "moyenne",
+        "rationale": "La consolidation mondiale du dispositif médical et la rareté des IPO healthtech rentables orientent la liquidité vers le [[ma|M&A]]. À intégrer dès l'entrée dans la modélisation des multiples de sortie."
+      },
+      {
+        "statement": "Le durcissement réglementaire européen (MDR) continuera de relever le ticket d'amorçage et d'éliminer les acteurs sous-capitalisés, au bénéfice des mieux financés.",
+        "horizon": "2028",
+        "strength": "moyenne",
+        "rationale": "Plus la barrière monte, plus elle protège ceux qui la franchissent ; mais elle exige un premier tour plus lourd. La conséquence logique est un secteur de moins de tickets, plus gros."
+      }
+    ],
+    "signals": [
+      {
+        "label": "Extensions du remboursement de la télésurveillance : indications couvertes, tarifs des forfaits, nombre de patients télésuivis",
+        "direction": "haussier",
+        "note": "La variable réglementaire qui ouvre ou ferme le principal guichet numérique du secteur. Trajectoire engagée depuis son entrée dans le droit commun en 2023."
+      },
+      {
+        "label": "Rythme des rachats de healthtech par les fabricants de dispositifs et les assureurs",
+        "direction": "haussier",
+        "note": "C'est la voie de sortie de la branche. Chaque acquisition recalibre les multiples d'entrée acceptables."
+      },
+      {
+        "label": "Délais et exigences d'évaluation clinique : HAS/CNEDIMTS en France, MDR en Europe",
+        "direction": "incertain",
+        "note": "Un raccourcissement accélérerait l'accès au marché ; un durcissement assécherait les acteurs sous-financés. À surveiller dans les deux sens."
+      },
+      {
+        "label": "Diffusion des capteurs physiologiques en continu (glycémie, rythme cardiaque) chez les plus de 65 ans",
+        "direction": "haussier",
+        "note": "Le proxy de la bascule du curatif vers le monitoring continu — la matière première de toute la télésurveillance."
+      }
+    ],
+    "players": [
+      {
+        "name": "Withings",
+        "role": "startup",
+        "note": "Le pont français entre santé connectée grand public et télésurveillance remboursée. Un design mainstream qui ne dit jamais « senior », et une donnée physiologique qui intéresse les payeurs."
+      },
+      {
+        "name": "Sonova / Demant / WSAudiology",
+        "role": "corporate",
+        "note": "Les consolidateurs mondiaux de l'audition. Ils illustrent le destin des branches bancables : un oligopole se forme tôt, et la sortie d'un nouvel entrant passe le plus souvent par eux."
+      },
+      {
+        "name": "Dexcom / Abbott",
+        "role": "corporate",
+        "note": "Les champions du capteur de glycémie en continu (CGM). La preuve qu'un dispositif de monitoring chronique peut devenir un marché de masse remboursé — le modèle que vise la télésurveillance."
+      },
+      {
+        "name": "Philips",
+        "role": "corporate",
+        "note": "Géant du dispositif médical et acquéreur actif de pépites logicielles — il a racheté le français Cardiologs (IA de l'électrocardiogramme). L'archétype de la sortie industrielle de la branche."
+      },
+      {
+        "name": "HAS / CNEDIMTS",
+        "role": "institution",
+        "note": "Le gardien français de l'évaluation et du remboursement des dispositifs. Sa doctrine détermine quels produits accèdent à un forfait, donc lesquels sont investissables."
+      },
+      {
+        "name": "Doctolib",
+        "role": "startup",
+        "note": "Moins un dispositif qu'une infrastructure de l'accès aux soins ; mais le plus gros actif healthtech français, et un canal potentiel vers les patients âgés et leurs médecins."
+      }
+    ],
+    "glossaryRefs": [
+      "moat",
+      "recurring-revenue",
+      "burn-rate",
+      "strategic-acquisition",
+      "exit",
+      "ma"
+    ],
+    "sources": [
+      {
+        "label": "HAS — évaluation des dispositifs médicaux et CNEDIMTS",
         "url": "https://www.has-sante.fr"
       },
       {
-        "label": "Rapports Libault (2019) et El Khomri (2019) — grand âge et métiers",
-        "url": "https://sante.gouv.fr"
+        "label": "Assurance maladie (ameli) — télésurveillance médicale et LATM",
+        "url": "https://www.ameli.fr"
       },
       {
-        "label": "Silver Valley — filière silver économie francilienne",
-        "url": "https://www.silvervalley.fr"
+        "label": "Snitem — panorama de l'industrie du dispositif médical",
+        "url": "https://www.snitem.fr"
       },
       {
-        "label": "AARP AgeTech Collaborative — le benchmark américain",
-        "url": "https://agetechcollaborative.org"
-      },
-      {
-        "label": "Dealroom — données de financement agetech",
-        "url": "https://dealroom.co"
+        "label": "Règlement (UE) 2017/745 relatif aux dispositifs médicaux (MDR)",
+        "url": "https://eur-lex.europa.eu"
       }
     ]
+  },
+  {
+    "id": "eco-silver-br-sante-france",
+    "slug": "silver-healthtech-francaise",
+    "parentId": "eco-silver-br-sante",
+    "order": 1,
+    "name": "La healthtech française",
+    "title": "La healthtech française : des atouts réels, une liquidité qui manque",
+    "subtitle": "Un système de remboursement qui devient un avantage, un marché domestique trop petit, des sorties trop rares",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 7,
+    "summary": "La France a une healthtech réelle : de la recherche clinique, des données de santé publiques parmi les plus riches du monde, du talent en IA, et surtout un appareil de remboursement qui passe lentement du statut d'obstacle à celui d'avantage. Restent deux fragilités tenaces — un marché domestique petit et fragmenté, et une liquidité d'étape tardive qui dépend encore des capitaux et des acquéreurs étrangers.",
+    "tags": [
+      "france",
+      "healthtech",
+      "remboursement",
+      "financement",
+      "souveraineté"
+    ],
+    "sections": [
+      {
+        "heading": "Des atouts que peu de pays cumulent",
+        "body": "On sous-estime ce que la France apporte à la healthtech, parce qu'on regarde surtout ce qui lui manque. Le pays aligne pourtant une combinaison rare : une recherche clinique académique de premier plan, un vivier d'ingénieurs et de chercheurs en IA que s'arrachent les fonds américains, et un accès aux données de santé — via le Système national des données de santé et le Health Data Hub — d'une profondeur que peu d'écosystèmes peuvent offrir. C'est sur ce socle que s'est construit un acteur comme Owkin, qui a fait de l'IA sur données biomédicales une thèse de financement internationale.\n\nSurtout, la France a quelque chose que les États-Unis n'ont pas sous cette forme : un payeur public et un appareil de remboursement. Longtemps vécu comme un labyrinthe qui retardait l'accès au marché, il devient un atout à mesure qu'il s'ouvre au numérique. Le 100 % Santé a fait exploser l'équipement auditif. La télésurveillance médicale est entrée dans le droit commun en 2023, avec un forfait qui rémunère à la fois l'opérateur et le fabricant du dispositif. Et la prise en charge anticipée numérique, le PECAN, offre depuis 2023 un remboursement accéléré et transitoire aux dispositifs médicaux numériques, le temps qu'ils fassent leurs preuves. Pour une startup, accéder à un forfait national solvable est un canal de distribution que nul budget marketing ne remplace.",
+        "figures": [
+          {
+            "kind": "bars",
+            "title": "Financement de la healthtech française en 2025",
+            "unit": "Md€",
+            "caption": "2,3 Md€ levés au total, en repli de 9 % sur un an, mais un capital-risque en hausse de 15 % à ~1 Md€. Surtout, le financement se tend : à peine une entreprise sur cinq a bouclé un tour en 2025, contre plus d'une sur trois en 2024.",
+            "source": "Panorama France HealthTech 2026 (données 2025), France Biotech & EY",
+            "bars": [
+              {
+                "label": "Capital-risque (fonds privés)",
+                "value": 1,
+                "valueLabel": "≈ 1,0",
+                "highlight": true
+              },
+              {
+                "label": "Refinancement sur les marchés (Bourse)",
+                "value": 1.3,
+                "valueLabel": "≈ 1,3"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Le marché domestique, et le trou de la sortie",
+        "body": "Les freins sont l'envers exact des atouts. Le payeur unique est solvable, mais son évaluation est lente : franchir la HAS et décrocher un remboursement pérenne se compte en années, et le PECAN n'achète qu'un sursis d'un an. L'achat hospitalier est éclaté entre des établissements qui comptent chaque euro. Et le marché français reste petit à l'échelle d'une thèse healthtech : une pépite qui veut grandir doit très tôt viser l'Allemagne, puis les États-Unis, où les tickets et les multiples sont d'un autre ordre.\n\nD'où la fragilité la plus sérieuse, qui n'est pas l'amorçage mais l'étage du dessus. La France finance ses débuts ; elle peine à financer le passage à l'échelle, et l'accès au capital s'est durci. En 2025, à peine une entreprise sur cinq déclarait avoir bouclé un tour — contre plus d'une sur trois un an plus tôt — et un tour prenait en moyenne dix mois entre les premiers contacts et la signature, pendant que quatre sociétés sur dix signalaient des tensions de trésorerie. Les grands tours de [[growth-equity|capital-développement]] partent souvent à des fonds anglo-saxons, et les [[exit|sorties]] d'envergure se comptent sur les doigts d'une main. Le scénario le plus fréquent reste le rachat par un industriel étranger : Philips absorbant Cardiologs en est l'exemple le plus net. La technologie est française, la valeur de sortie part ailleurs. C'est le vrai sujet de souveraineté du secteur, davantage que l'innovation elle-même."
+      }
+    ],
+    "convictions": [
+      {
+        "statement": "La contrainte qui décidera du sort de la healthtech française d'ici 2030 n'est ni l'innovation ni l'amorçage, mais l'accès au capital de croissance et la profondeur des acquéreurs domestiques.",
+        "horizon": "2030",
+        "strength": "moyenne",
+        "rationale": "Le talent et le deal flow d'amorçage existent ; ce qui manque, ce sont les tours tardifs et les acheteurs nationaux. Sans eux, la trajectoire par défaut reste le rachat précoce par un industriel étranger."
+      }
+    ],
+    "players": [
+      {
+        "name": "Doctolib",
+        "role": "startup",
+        "note": "Le plus gros actif healthtech français, devenu une infrastructure de l'accès aux soins. Sa Série G de 500 M€ en 2022 reste le dernier mégatour du secteur en France."
+      },
+      {
+        "name": "Withings",
+        "role": "startup",
+        "note": "Le pont entre l'objet grand public et la télésurveillance remboursée — le positionnement le plus enviable de la branche pour le grand âge."
+      },
+      {
+        "name": "Owkin",
+        "role": "startup",
+        "note": "L'IA sur données biomédicales, financée à l'international. La preuve que la profondeur des données de santé françaises peut porter une thèse mondiale."
+      },
+      {
+        "name": "Implicity",
+        "role": "startup",
+        "note": "Télésurveillance des dispositifs cardiaques implantables — exactement le segment remboursé et adossé au système que privilégie ce dossier."
+      },
+      {
+        "name": "Cardiologs (Philips)",
+        "role": "corporate",
+        "note": "L'IA française de lecture de l'électrocardiogramme, rachetée par Philips. L'archétype de la sortie : technologie française, acquéreur industriel étranger."
+      },
+      {
+        "name": "Bpifrance / France 2030",
+        "role": "institution",
+        "note": "Le bras public du financement : pivot de l'amorçage et de la dette d'innovation, mais qui ne comble pas, à lui seul, le trou du capital de croissance tardif."
+      }
+    ],
+    "glossaryRefs": [
+      "growth-equity",
+      "exit",
+      "strategic-acquisition"
+    ],
+    "sources": [
+      {
+        "label": "Panorama France HealthTech (France Biotech & EY)",
+        "url": "https://www.france-biotech.fr"
+      },
+      {
+        "label": "Health Data Hub — accès aux données de santé",
+        "url": "https://www.health-data-hub.fr"
+      },
+      {
+        "label": "HAS — PECAN et évaluation des dispositifs médicaux numériques",
+        "url": "https://www.has-sante.fr"
+      },
+      {
+        "label": "Bpifrance / France 2030 — stratégie santé numérique",
+        "url": "https://www.bpifrance.fr"
+      }
+    ]
+  },
+  {
+    "id": "eco-silver-br-sante-monde",
+    "slug": "silver-healthtech-comparatif-mondial",
+    "parentId": "eco-silver-br-sante",
+    "order": 2,
+    "name": "Le comparatif mondial",
+    "title": "La healthtech dans le monde : qui rembourse gagne",
+    "subtitle": "L'app sur ordonnance allemande, la machine américaine, le NHS britannique — et la gueule de bois de 2021",
+    "kind": "geographie",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 8,
+    "summary": "Le même enseignement que partout dans ce dossier, vérifié à l'échelle du monde : ce n'est ni la démographie ni la technologie qui fait le marché de la santé numérique, c'est le mécanisme de remboursement. L'Allemagne a inventé l'« app sur ordonnance », les États-Unis ont la machine de financement la plus puissante et la bulle la plus spectaculaire, le Royaume-Uni centralise mais avance lentement. La France a copié le meilleur de l'Allemagne ; il lui reste à le faire vivre.",
+    "tags": [
+      "international",
+      "allemagne",
+      "états-unis",
+      "diga",
+      "comparaison"
+    ],
+    "sections": [
+      {
+        "heading": "Trois façons de payer la santé numérique",
+        "body": "Comparer les écosystèmes healthtech par leur démographie ou leur génie technique mène à des conclusions fausses. La bonne grille est celle du payeur, et elle range le monde en quelques modèles.\n\nL'Allemagne a inventé le plus net. Depuis sa loi sur la santé numérique de 2019, un médecin peut prescrire une application thérapeutique remboursée par l'assurance maladie obligatoire — la fameuse « app sur ordonnance », ou DiGA. Le mécanisme est rapide : l'éditeur obtient un remboursement provisoire le temps de démontrer son bénéfice, à un prix qu'il fixe d'abord librement. Fin 2024, près de soixante-dix applications figuraient au répertoire et le cap du million de prescriptions était franchi. Le dispositif est imparfait — preuves cliniques discutées, dépenses encore modestes — mais c'est le premier guichet national pensé pour le logiciel médical, et c'est ce modèle que la France a directement transposé avec le PECAN.\n\nLes États-Unis tiennent l'autre extrême : pas d'assurance universelle, mais l'appareil de financement le plus puissant du monde. Un logiciel médical y passe par l'autorisation de la FDA, puis se vend à des assureurs privés et à Medicare — et c'est Medicare Advantage, en mettant l'assureur en risque sur le coût total du patient, qui a financé toute la vague, comme l'analyse le sous-dossier consacré aux États-Unis. Le Royaume-Uni, lui, a un payeur unique et centralisé, le NHS, capable d'imposer un standard d'un coup mais lent à l'achat, et dont l'évaluation par le NICE décourage les téméraires. À la marge, deux cas instructifs : la Chine, où des géants comme Ping An ont bâti des plateformes de santé à une échelle inconcevable ailleurs ; et Israël, dont la healthtech vit d'exportation faute de marché intérieur — l'exact symétrique du problème français.",
+        "figures": [
+          {
+            "kind": "matrix",
+            "title": "Quatre marchés de la healthtech, comparés",
+            "caption": "Une lecture qualitative de ce qui fait, ou non, un terrain favorable au capital-risque. La France rattrape son retard de remboursement numérique mais reste petite et peu liquide.",
+            "source": "Synthèse VC Premium — BfArM (DiGA), Rock Health, France Biotech, NHS/NICE",
+            "columns": [
+              "France",
+              "Allemagne",
+              "États-Unis",
+              "R.-U."
+            ],
+            "rows": [
+              {
+                "label": "Remboursement numérique accéléré",
+                "cells": [
+                  {
+                    "rating": "mid",
+                    "note": "PECAN, récent"
+                  },
+                  {
+                    "rating": "high",
+                    "note": "DiGA, pionnier"
+                  },
+                  {
+                    "rating": "mid",
+                    "note": "par payeur"
+                  },
+                  {
+                    "rating": "low"
+                  }
+                ]
+              },
+              {
+                "label": "Payeur mis en risque sur le résultat",
+                "cells": [
+                  {
+                    "rating": "mid"
+                  },
+                  {
+                    "rating": "mid"
+                  },
+                  {
+                    "rating": "high",
+                    "note": "Medicare Advantage"
+                  },
+                  {
+                    "rating": "mid"
+                  }
+                ]
+              },
+              {
+                "label": "Taille du marché domestique",
+                "cells": [
+                  {
+                    "rating": "mid"
+                  },
+                  {
+                    "rating": "high"
+                  },
+                  {
+                    "rating": "high"
+                  },
+                  {
+                    "rating": "mid"
+                  }
+                ]
+              },
+              {
+                "label": "Capital de croissance disponible",
+                "cells": [
+                  {
+                    "rating": "low"
+                  },
+                  {
+                    "rating": "mid"
+                  },
+                  {
+                    "rating": "high"
+                  },
+                  {
+                    "rating": "mid"
+                  }
+                ]
+              },
+              {
+                "label": "Profondeur des sorties (M&A, IPO)",
+                "cells": [
+                  {
+                    "rating": "low"
+                  },
+                  {
+                    "rating": "mid"
+                  },
+                  {
+                    "rating": "high"
+                  },
+                  {
+                    "rating": "low"
+                  }
+                ]
+              },
+              {
+                "label": "Vitesse d'accès au marché",
+                "cells": [
+                  {
+                    "rating": "low"
+                  },
+                  {
+                    "rating": "high"
+                  },
+                  {
+                    "rating": "mid"
+                  },
+                  {
+                    "rating": "low"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "La leçon américaine : la bulle, puis la facture",
+        "body": "Les États-Unis n'ont pas seulement le meilleur du secteur ; ils en ont aussi le pire, et c'est tout aussi instructif. La santé numérique a connu en 2021 une bulle d'une rare intensité : portée par la pandémie et l'argent bon marché, le financement a presque doublé en un an avant de retomber lourdement. Le symbole en restera le rachat de Livongo par Teladoc fin 2020 pour 18,5 milliards de dollars — la plus grosse [[ma|opération]] du secteur à l'époque. Deux ans plus tard, Teladoc passait plus de treize milliards de dépréciations sur cette seule acquisition. La même fièvre a emporté Babylon, un temps présentée comme la pépite de la télémédecine britannique, entrée en Bourse à plusieurs milliards puis effondrée jusqu'à la faillite.\n\nCe qui a survécu à la correction dessine en creux la thèse de ce dossier. Les modèles qui tiennent sont ceux dont le retour sur investissement était démontrable pour un payeur : la gestion des maladies chroniques qui évite des hospitalisations, les services adossés à Medicare Advantage. Les autres — promesses d'engagement sans preuve médico-économique, croissance financée à perte — ont vu leur valorisation revenir à la réalité. Le financement est d'ailleurs remonté depuis : 2025 a vu un net rebond aux États-Unis, mais concentré sur moins de sociétés, plus grosses, et plus de la moitié des montants captés par l'IA — un retour très sélectif, pas une nouvelle euphorie indifférenciée. La leçon de fond tient toujours : la santé numérique sans payeur en face est un château de cartes, même avec une démographie et une technologie irréprochables.",
+        "figures": [
+          {
+            "kind": "line",
+            "title": "Financement du capital-risque digital health aux États-Unis",
+            "unit": "Md$",
+            "caption": "Le pic de 2021, la longue normalisation de 2022-2024, puis un rebond très sélectif en 2025 — tiré par l'IA et concentré sur moins de sociétés, plus grosses.",
+            "source": "Rock Health (financement annuel, États-Unis)",
+            "points": [
+              {
+                "x": "2019",
+                "y": 7.4
+              },
+              {
+                "x": "2020",
+                "y": 14.6
+              },
+              {
+                "x": "2021",
+                "y": 29.1,
+                "annotation": "pic"
+              },
+              {
+                "x": "2022",
+                "y": 15.3
+              },
+              {
+                "x": "2023",
+                "y": 10.8
+              },
+              {
+                "x": "2024",
+                "y": 10.1
+              },
+              {
+                "x": "2025",
+                "y": 14.2,
+                "annotation": "rebond IA"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Ce que la France et l’Europe peuvent en tirer",
+        "body": "Aucun de ces modèles ne s'importe tel quel, mais leur grammaire commune, si. De l'Allemagne, la France a déjà pris l'idée d'un remboursement accéléré du logiciel médical ; il lui reste à le rendre assez rapide et assez large pour qu'une startup puisse en vivre. Des États-Unis, elle peut retenir que le bon levier n'est pas l'assurance universelle — qu'elle possède déjà — mais la mise en risque d'un payeur sur le coût total d'un patient, dont la télésurveillance remboursée est l'embryon, comme le détaille le guichet du remboursement. Du Royaume-Uni, qu'un payeur centralisé peut imposer un standard d'un coup, à condition de vouloir acheter.\n\nLa conclusion rejoint celle de tout le dossier, et celle du miroir international : la démographie crée le besoin, la technologie crée la possibilité, mais seul le mécanisme de paiement crée le marché. La France a posé les bonnes briques de remboursement ; son sort dépendra moins de ses laboratoires que de sa capacité à financer la croissance et à faire émerger ses propres acquéreurs."
+      }
+    ],
+    "convictions": [
+      {
+        "statement": "Les écosystèmes healthtech qui surperformeront d'ici 2030 seront ceux dotés d'un remboursement rapide du logiciel médical (type DiGA) couplé à un payeur mis en risque sur le coût total — pas ceux qui misent sur la démographie ou la seule prouesse technique.",
+        "horizon": "2030",
+        "strength": "moyenne",
+        "rationale": "La correction post-2021 a éliminé les modèles sans payeur. Ce qui reste corrèle avec la qualité du mécanisme de remboursement, et non avec la pyramide des âges ni le niveau technologique."
+      }
+    ],
+    "signals": [
+      {
+        "label": "Montée en charge du PECAN français vers les volumes d'usage de la DiGA allemande",
+        "direction": "incertain",
+        "note": "Le test de la transposition : la France a copié le mécanisme, reste à atteindre les volumes. Un écart durable signalerait un problème d'exécution, pas de conception."
+      },
+      {
+        "label": "Nature du rebond du financement digital health depuis 2025 (concentration sur l'IA et les gros tours)",
+        "direction": "incertain",
+        "note": "Le financement est reparti en 2025 (+ d'un tiers aux États-Unis), mais sur moins de sociétés et massivement vers l'IA. À surveiller : retour durable d'un marché sain, ou nouvelle bulle thématique appelée à se dégonfler ?"
+      }
+    ],
+    "players": [
+      {
+        "name": "DiGA / BfArM",
+        "role": "institution",
+        "note": "Le répertoire allemand des applications remboursées et son régulateur. Le premier guichet national pensé pour le logiciel médical, et le modèle direct du PECAN français."
+      },
+      {
+        "name": "Teladoc / Livongo",
+        "role": "corporate",
+        "note": "Le symbole de la bulle : 18,5 Md$ d'acquisition en 2020, plus de 13 Md$ de dépréciations deux ans plus tard. La borne haute de l'excès."
+      },
+      {
+        "name": "Medicare Advantage",
+        "role": "institution",
+        "note": "La machine de financement américaine qui met l'assureur en risque sur le coût total du patient. Le moteur de toute la vague agetech, décrypté dans le sous-dossier sur les États-Unis."
+      },
+      {
+        "name": "Ping An Good Doctor",
+        "role": "corporate",
+        "note": "La démesure chinoise : une plateforme de santé à une échelle inatteignable ailleurs, adossée à un assureur. Un modèle non transposable, mais un rappel du rôle structurant du payeur."
+      }
+    ],
+    "glossaryRefs": [
+      "ma",
+      "exit",
+      "recurring-revenue"
+    ],
+    "sources": [
+      {
+        "label": "BfArM — DiGA-Verzeichnis (répertoire des applications remboursées)",
+        "url": "https://diga.bfarm.de"
+      },
+      {
+        "label": "Rock Health — rapports de financement digital health",
+        "url": "https://rockhealth.com"
+      },
+      {
+        "label": "NICE — évaluation des technologies de santé (Royaume-Uni)",
+        "url": "https://www.nice.org.uk"
+      },
+      {
+        "label": "HAS — PECAN (prise en charge anticipée numérique)",
+        "url": "https://www.has-sante.fr"
+      }
+    ]
+  },
+  {
+    "id": "eco-silver-br-logiciel",
+    "slug": "silver-branche-logiciel-du-care",
+    "parentId": "eco-silver-filiere",
+    "order": 2,
+    "name": "Logiciels du care",
+    "title": "Logiciels métier et infrastructure du care",
+    "subtitle": "TAM modeste, position structurante : le meilleur rapport défendabilité sur capital de la filière",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 6,
+    "summary": "Télégestion, planification des tournées, facturation multi-payeurs, conformité, coordination domicile-établissement : la plomberie logicielle du care se vend aux opérateurs et aux collectivités. Le marché paraît petit, la position est structurante, et la demande de conformité née de l'après-Orpea la rend non discrétionnaire. C'est, à nos yeux, le meilleur rapport défendabilité sur capital de toute la filière.",
+    "tags": [
+      "logiciel",
+      "saas",
+      "conformité",
+      "infrastructure"
+    ],
+    "sections": [
+      {
+        "heading": "Le coin d'entrée : la facturation multi-payeurs",
+        "body": "Le care est un cauchemar administratif, et c'est précisément ce qui fait de son logiciel un marché. Une heure d'aide à domicile peut être financée en partie par l'APA, en partie par la caisse de retraite, en partie par la famille, avec des règles, des plafonds et des justificatifs différents pour chacun. La facturation multi-payeurs est le coin d'entrée idéal : douloureuse, récurrente, et impossible à faire à la main proprement. Une fois ce besoin résolu, le logiciel s'étend naturellement vers la télégestion, la planification des tournées, la conformité et la coordination entre le domicile et l'établissement.\n\nLa demande s'est durcie depuis le scandale Orpea, traité dans le sous-dossier sur les opérateurs : la conformité et la traçabilité sont passées d'argument commercial à obligation. Birdie, au Royaume-Uni, illustre la trajectoire — partir de l'outillage d'une agence de domicile pour en devenir le système d'exploitation."
+      },
+      {
+        "heading": "Petits tickets, marché fragmenté, défendabilité qui croît",
+        "body": "L'économie est celle d'un logiciel vertical, avec ses bonnes marges, mais sur un marché fragmenté et un acheteur qui compte chaque euro. Les tickets sont petits, la [[market-concentration|concentration]] du marché faible : on ne gagne pas par un grand contrat, on gagne par une mécanique d'atterrissage et d'expansion, agence après agence, établissement après établissement. Le ROI doit être limpide — des heures administratives économisées, un risque réglementaire réduit —, sans quoi un acheteur fragile ne signe pas.\n\nLa contrepartie est une défendabilité qui s'approfondit avec le temps. Un logiciel qui s'enfonce dans les processus réglementés d'un opérateur devient très difficile à déloger, et le [[business-model|modèle]] reste un SaaS aux [[recurring-revenue|revenus récurrents]] propres. C'est cette combinaison — petit marché par dossier, mais position imprenable et marges logicielles — qui en fait la branche la plus efficiente en capital."
+      }
+    ],
+    "convictions": [
+      {
+        "statement": "Le logiciel métier du care offre le meilleur rapport défendabilité sur capital de la filière silver, et produira des sorties plus régulières (quoique de taille moyenne) que les branches plus médiatisées.",
+        "horizon": "2030",
+        "strength": "moyenne",
+        "rationale": "Marges logicielles, demande de conformité non discrétionnaire post-Orpea, et ancrage profond dans les processus réglementés. La taille modeste du marché par client plafonne l'upside mais réduit aussi le risque de zéro."
+      }
+    ],
+    "glossaryRefs": [
+      "market-concentration",
+      "business-model",
+      "recurring-revenue"
+    ]
+  },
+  {
+    "id": "eco-silver-br-fintech",
+    "slug": "silver-branche-fintech-assurtech",
+    "parentId": "eco-silver-filiere",
+    "order": 3,
+    "name": "Fintech & assurtech",
+    "title": "Fintech et assurtech du vieillissement",
+    "subtitle": "Le patrimoine est concentré chez les 60+, les produits datent de quarante ans : la branche la plus vide d'Europe",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 6,
+    "summary": "Décumulation du patrimoine, viager modernisé, protection contre la fraude financière des aînés, prévoyance dépendance : la branche financière du vieillissement réunit un payeur solvable et des produits restés archaïques. C'est sans doute la plus sous-explorée d'Europe — et celle où le piège de l'assurance dépendance pure rappelle qu'un grand besoin ne fait pas un bon produit.",
+    "tags": [
+      "fintech",
+      "assurtech",
+      "patrimoine",
+      "décumulation"
+    ],
+    "sections": [
+      {
+        "heading": "Un patrimoine immense, des produits archaïques",
+        "body": "Les plus de 60 ans détiennent la majorité du patrimoine des ménages, et les produits financiers qui s'adressent à eux ont, pour beaucoup, quarante ans. Trois chantiers restent largement ouverts. La décumulation d'abord : toute une vie, l'industrie aide à accumuler de l'épargne, puis abandonne le retraité au moment de la dépenser intelligemment sur vingt ou trente ans — c'est le trou béant de la gestion d'actifs post-retraite. La protection contre la fraude ensuite, où True Link a montré aux États-Unis qu'une carte de paiement assortie de contrôles paramétrables par la famille répond à un risque massif et croissant. Le viager et l'équivalent du retrait sur la valeur du logement enfin, marché latent énorme que la complexité et la défiance maintiennent à l'état embryonnaire.\n\nLe payeur, ici, est double et plutôt favorable : le senior solvable lui-même, et l'assureur qui cherche des relais. La [[ltv|valeur vie client]] peut y être longue, ce qui change l'économie par rapport au reste du grand âge."
+      },
+      {
+        "heading": "Le piège de l'assurance dépendance pure",
+        "body": "Une mise en garde s'impose, car elle a déjà coûté cher ailleurs. L'assurance dépendance pure — vendre aujourd'hui une couverture contre le risque de perte d'autonomie dans trente ans — est un produit redoutablement difficile. Le marché américain de la long-term care insurance en a fait l'amère expérience : mauvaise estimation de la longévité et des coûts, primes qui explosent, assurés qui résilient, spirale qui a poussé une partie de l'industrie à se retirer. Le besoin était réel ; le produit, intenable.\n\nLa leçon vaut pour toute la branche : on n'investit pas le besoin, on investit un mécanisme de distribution et de confiance. Les gagnants probables passeront par les banques et les assureurs comme canal, feront de la confiance leur fossé, et navigueront une réglementation lourde. C'est exigeant — mais c'est aussi pourquoi la branche est si vide, et donc si ouverte."
+      }
+    ],
+    "convictions": [
+      {
+        "statement": "La fintech-assurtech du vieillissement produira au moins un acteur européen d'envergure d'ici 2031, sur la décumulation ou la protection financière des aînés plutôt que sur l'assurance dépendance pure.",
+        "horizon": "2031",
+        "strength": "exploratoire",
+        "rationale": "Le patrimoine et le payeur solvable sont là, la branche est anormalement vide, et les précédents (True Link) existent. Exploratoire car la distribution dépend d'incumbents financiers lents, et l'assurance dépendance pure reste un piège."
+      }
+    ],
+    "glossaryRefs": [
+      "ltv"
+    ]
+  },
+  {
+    "id": "eco-silver-br-emploi",
+    "slug": "silver-branche-emploi-aidants",
+    "parentId": "eco-silver-filiere",
+    "order": 4,
+    "name": "Emploi & aidants",
+    "title": "Emploi, transmission et aidants salariés",
+    "subtitle": "Quand l'employeur devient le payeur — l'angle B2B le plus sous-estimé de la filière",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "Environ un actif sur six aide un proche âgé, souvent en silence et au prix de son absentéisme. Cette branche fait de l'employeur un payeur — pour soutenir les aidants salariés, retenir les seniors au travail et organiser la transmission des compétences. Vente B2B classique, acheteur rationnel, demande encore jeune.",
+    "tags": [
+      "emploi",
+      "aidants",
+      "rh",
+      "b2b"
+    ],
+    "sections": [
+      {
+        "heading": "L'employeur, payeur méconnu du vieillissement",
+        "body": "On oublie souvent le quatrième payeur institutionnel de la filière : l'employeur. Près d'un actif sur six accompagne un parent âgé, et cette charge invisible se traduit en absentéisme, en désengagement, parfois en départs. Pour une entreprise, financer des services aux aidants salariés — conciergerie, orientation dans le dédale médico-social, droit au répit — n'est pas de la générosité, c'est de la rétention et de la marque employeur. C'est une vente de type avantages sociaux, avec un [[gtm|go-to-market]] B2B éprouvé et un acheteur qui raisonne en coût évité.\n\nLe même payeur ouvre deux autres chantiers : le maintien des seniors dans l'emploi, à l'heure des carrières longues et des retraites progressives, et la transmission organisée des compétences avant les départs. Là encore, c'est l'entreprise qui paie, pour des raisons mesurables.\n\nLa branche est jeune, sa demande encore en construction, et c'est sa principale limite : le besoin existe avant que le budget ne soit systématiquement fléché. Mais le payeur est solvable et rationnel, ce qui la place, à juste titre, dans la première famille."
+      }
+    ],
+    "glossaryRefs": [
+      "gtm"
+    ]
+  },
+  {
+    "id": "eco-silver-br-domicile",
+    "slug": "silver-branche-care-a-domicile",
+    "parentId": "eco-silver-filiere",
+    "order": 5,
+    "name": "Care à domicile",
+    "title": "Care et services à domicile",
+    "subtitle": "Le marché le plus grand de la filière, et l'un des plus difficiles à investir tel quel",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "L'aide à domicile est immense, essentielle, et financée par l'APA, les départements et les familles. C'est aussi un métier d'opérateur à marges fines sous tarifs administrés, percuté de plein fouet par la pénurie de main-d'œuvre. On ne l'investit pas tel quel : on l'investit par le logiciel, ou en version tech-enabled très disciplinée.",
+    "tags": [
+      "domicile",
+      "aide-à-domicile",
+      "opérateur",
+      "tech-enabled"
+    ],
+    "sections": [
+      {
+        "heading": "Un métier d'opérateur, pas un dossier de SaaS",
+        "body": "Le care à domicile concentre une part énorme de la dépense du grand âge, mais sa structure le rend ingrat pour le capital-risque pris au pied de la lettre. Les marges sont fines, les tarifs largement administrés, et toute l'activité bute sur le goulot de la main-d'œuvre analysé dans le sous-dossier sur la productivité du care. Une pure société d'aide à domicile est un opérateur de services — un bon métier, mais qui se finance comme un opérateur, pas comme une startup logicielle, et dont le [[business-model|modèle]] n'offre ni les marges ni la scalabilité qu'attend un fonds.\n\nLes deux portes investissables sont connues. La première est le logiciel qui outille ces opérateurs, traité dans sa propre branche. La seconde est le modèle tech-enabled, à condition d'en accepter l'économie : Honor et Cera ont prouvé qu'on pouvait construire grand à domicile, mais en devenant opérateurs et en captant la donnée, pas en restant une couche légère. Qui investit cette branche le fait donc avec un [[burn-multiple|burn multiple]] strict et sans illusion sur les multiples de sortie : c'est de l'opération, pas du logiciel."
+      }
+    ],
+    "glossaryRefs": [
+      "business-model",
+      "burn-multiple"
+    ]
+  },
+  {
+    "id": "eco-silver-br-habitat",
+    "slug": "silver-branche-habitat-hebergement",
+    "parentId": "eco-silver-filiere",
+    "order": 6,
+    "name": "Habitat & hébergement",
+    "title": "Hébergement et habitat",
+    "subtitle": "Attention à la frontière d'actifs : une résidence services est un projet immobilier avec une marque dessus",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "EHPAD, résidences services, adaptation du domicile, habitat intergénérationnel : la branche du logement des âgés mélange des objets très différents. Le piège est de prendre un projet immobilier pour une startup. Ce qui s'investit vraiment, c'est la couche logicielle et de services au-dessus des murs — et l'aging-in-place que MaPrimeAdapt' commence à financer.",
+    "tags": [
+      "habitat",
+      "ehpad",
+      "résidences-services",
+      "aging-in-place"
+    ],
+    "sections": [
+      {
+        "heading": "Le piège de la frontière d'actifs",
+        "body": "C'est la branche où l'on confond le plus facilement deux métiers. Une résidence services, un EHPAD, c'est avant tout de l'immobilier exploité : du capital lourd, un rendement d'opérateur foncier, une logique de mètres carrés et de taux d'occupation. Une marque et une promesse de services par-dessus n'en font pas une startup. L'investisseur qui finance « une résidence services innovante » finance le plus souvent un projet immobilier déguisé, avec les rendements et l'illiquidité de l'immobilier, pas le profil de risque-rendement du capital-risque."
+      },
+      {
+        "heading": "Ce qui s'investit vraiment",
+        "body": "La valeur logicielle se trouve au-dessus des murs : les outils qui font tourner ces lieux, la coordination des soins, la relation avec les familles, la supervision — autant de sujets qui rejoignent la branche du logiciel du care. Et surtout, il y a l'adaptation du domicile, l'aging-in-place, porté par MaPrimeAdapt', lancée en 2024 pour financer les travaux. Diagnostic du logement, aménagement, équipement : un marché solvabilisé par un flux public, qui adresse le « bien vieillir chez soi » plutôt que l'institution.\n\nLe [[tam-sam-som|marché adressable]] réel de cette branche n'est donc pas la valeur de l'immobilier des seniors — chiffre immense et trompeur — mais la couche de services et d'adaptation qui se greffe dessus. C'est là, et seulement là, que se logent les dossiers investissables."
+      }
+    ],
+    "glossaryRefs": [
+      "tam-sam-som"
+    ]
+  },
+  {
+    "id": "eco-silver-br-lien",
+    "slug": "silver-branche-lien-social-cognition",
+    "parentId": "eco-silver-filiere",
+    "order": 7,
+    "name": "Lien social & cognition",
+    "title": "Lien social et cognition",
+    "subtitle": "Le besoin le plus immense de la filière, et le payeur le plus introuvable",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 5,
+    "summary": "Lutte contre l'isolement, stimulation cognitive, companionship : aucune branche n'a un besoin plus criant ni un payeur plus incertain. La solitude tue, littéralement, au grand âge — mais personne n'a budgété pour la combattre. Sans payeur institutionnel adossé, c'est la branche la plus piégeuse de toutes.",
+    "tags": [
+      "lien-social",
+      "isolement",
+      "cognition",
+      "companionship"
+    ],
+    "sections": [
+      {
+        "heading": "Un besoin réel, une dépense fantôme",
+        "body": "L'isolement social du grand âge est un problème de santé publique majeur et documenté : il aggrave la morbidité, accélère le déclin, pèse sur l'espérance de vie. Le besoin est donc incontestable. Le problème est qu'il ne correspond à aucune ligne de dépense évidente. Le senior isolé n'achète pas, ou peu ; sa famille, dispersée, paie mal une présence qu'elle ne contrôle pas ; et aucun budget public n'est clairement fléché vers « rompre la solitude ». C'est le cas le plus pur de la branche sans payeur.\n\nDeux écueils s'ajoutent. La cognition d'abord : les promesses d'entraînement cérébral souffrent d'une science fragile — les autorités américaines ont sanctionné des allégations non étayées dans ce champ —, et l'investisseur doit séparer le validé du marketing. Le companionship par IA ensuite, traité dans le sous-dossier sur l'IA : le besoin appelle la technologie, mais le risque éthique et réputationnel y est à la mesure du besoin.\n\nLa règle d'investissement est sévère mais simple : sans payeur institutionnel adossé — une caisse, une mutuelle qui achète de la prévention de l'isolement parce qu'elle en mesure le retour —, cette branche reste un piège. On y entre par le payeur, ou on n'y entre pas."
+      }
+    ],
+    "glossaryRefs": [
+      "traction"
+    ]
+  },
+  {
+    "id": "eco-silver-br-mobilite",
+    "slug": "silver-branche-mobilite-autonomie",
+    "parentId": "eco-silver-filiere",
+    "order": 8,
+    "name": "Mobilité & autonomie",
+    "title": "Mobilité et autonomie physique",
+    "subtitle": "Du matériel, des cycles lents, un payeur mixte : des fenêtres ponctuelles plutôt que des plateformes",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 4,
+    "summary": "Équipement de maintien de l'autonomie, transport adapté, exosquelettes d'assistance : la branche de la mobilité physique est capital-intensive et rythmée par des cycles matériels lents. Son payeur est mixte, souvent médico-social. On y trouve des fenêtres ponctuelles, surtout quand l'équipement est remboursé, plus que des plateformes scalables.",
+    "tags": [
+      "mobilité",
+      "autonomie",
+      "matériel",
+      "exosquelettes"
+    ],
+    "sections": [
+      {
+        "heading": "La contrainte du matériel",
+        "body": "Maintenir la mobilité et l'autonomie physique passe par des objets : aides techniques, équipements de transfert, transport adapté, exosquelettes d'assistance. Cette matérialité impose ses règles au capital-risque. Le développement est long et coûteux, la fabrication mobilise du capital, les cycles d'itération se comptent en années, pas en sprints logiciels. La scalabilité d'un produit physique n'a rien à voir avec celle d'un logiciel, et la marge non plus.\n\nLe payeur est mixte, souvent médico-social : une partie de l'équipement est remboursée, le reste à la charge des familles ou des institutions. C'est ce qui dessine la bonne stratégie : viser les segments où une voie de remboursement existe, qui transforment un achat hésitant en dépense solvabilisée. Hors de ces fenêtres, la branche offre surtout des dossiers de niche, défendables mais bornés — rarement les plateformes que recherche un fonds de capital-risque, plutôt des sociétés industrielles à croissance maîtrisée."
+      }
+    ],
+    "glossaryRefs": []
+  },
+  {
+    "id": "eco-silver-br-conso",
+    "slug": "silver-branche-consommation-loisirs",
+    "parentId": "eco-silver-filiere",
+    "order": 9,
+    "name": "Consommation & loisirs",
+    "title": "Consommation, loisirs et tourisme des 60-75",
+    "subtitle": "Le jeune senior paie, et paie bien — mais ce sont des marchés grand public, pas des marchés « silver »",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 4,
+    "summary": "Voyage, sport, médias, rénovation : les 60-75 ans solvables dépensent directement, et sans intermédiaire. C'est la seule branche où le senior est franchement le client. Mais c'est aussi celle où l'étiquette « silver » fait le plus de dégâts — ces marchés se gagnent en marque grand public, jamais en marque pour seniors.",
+    "tags": [
+      "consommation",
+      "loisirs",
+      "tourisme",
+      "jeunes-seniors"
+    ],
+    "sections": [
+      {
+        "heading": "Des marchés réels, mais généralistes",
+        "body": "Ici, enfin, le senior paie de sa poche, et il paie bien : les jeunes seniors de 60 à 75 ans, solvables et en bonne santé, sont de gros consommateurs de voyage, de loisirs, de sport, de médias et de rénovation. La tentation est immédiate de bâtir « la marque des seniors » pour capter cette manne.\n\nC'est l'erreur la plus prévisible de toute la filière, parce qu'elle se heurte au paradoxe d'identité décrit dans le dossier-racine : ces clients ne se vivent pas comme des seniors et rejettent les produits qui les y assignent. Le bon [[buyer-persona|persona]] n'est pas « un senior » mais « un actif de 65 ans qui voyage », et il s'atteint par une marque grand public au design universel, pas par un segment à part. La conséquence pour l'investisseur est nette : on ne traite pas cette branche comme de la silver économie. On y finance des sociétés de consommation classiques qui servent particulièrement bien une clientèle qui se trouve être âgée — ce qui est un tout autre exercice, et un tout autre comparable de valorisation."
+      }
+    ],
+    "glossaryRefs": [
+      "buyer-persona"
+    ]
+  },
+  {
+    "id": "eco-silver-br-robotique",
+    "slug": "silver-branche-robotique-materiel",
+    "parentId": "eco-silver-filiere",
+    "order": 10,
+    "name": "Robotique",
+    "title": "Robotique et agetech matérielle",
+    "subtitle": "Le cimetière de la filière — sauf à l'aborder par l'augmentation, jamais par la substitution",
+    "kind": "secteur",
+    "accent": "#9A6A3C",
+    "author": "L'équipe VC Premium",
+    "createdAt": "2026-06-13",
+    "updatedAt": "2026-06-13",
+    "readMin": 4,
+    "summary": "Robots compagnons, robots de soin, automates de substitution : c'est le cimetière documenté du secteur. Vingt ans de prototypes primés, aucun marché payant durable, et la preuve japonaise que même les meilleures conditions ne font pas décoller la substitution. La seule porte investissable est l'augmentation des soignants — qui relève alors de la productivité du care.",
+    "tags": [
+      "robotique",
+      "substitution",
+      "augmentation",
+      "matériel"
+    ],
+    "sections": [
+      {
+        "heading": "Pourquoi la substitution ne décolle pas",
+        "body": "La robotique de care est la branche qui a le plus promis et le moins tenu. L'intuition est séduisante — puisqu'il manque des bras, remplaçons-les par des machines — et elle nourrit les démonstrations attendrissantes des salons depuis vingt ans. La réalité est un cimetière : pas de marché payant durable, des prototypes qui ne franchissent jamais l'étape du déploiement.\n\nLe sous-dossier sur le Japon en administre la preuve la plus rigoureuse. Aucun pays n'a réuni de meilleures conditions — pénurie de bras extrême, culture technophile, subventions massives — et la substitution n'y a pas décollé : adoption faible, abandons fréquents. Si elle échoue là, parier qu'elle réussira ailleurs à l'horizon d'un fonds n'a pas de fondement.\n\nReste une porte, et une seule : l'augmentation. Un outil qui rend une heure à un soignant — et non qui le remplace — a un marché, parce qu'un système en pénurie l'achète immédiatement. Mais alors ce n'est plus vraiment de la robotique « silver » : c'est de la productivité du care, et c'est dans ce sous-dossier qu'il faut l'évaluer, avec sa logique de ROI et son acheteur opérateur. Investie pour ce qu'elle prétend être — la substitution —, cette branche déçoit ; réorientée vers l'augmentation, elle rejoint la thèse la plus solide du dossier."
+      }
+    ],
+    "glossaryRefs": []
   }
 ]
