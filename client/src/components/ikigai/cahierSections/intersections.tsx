@@ -3,8 +3,8 @@ import { IKIGAI } from '@/content';
 import type { IkigaiMode } from '@/content/types';
 import { Reveal } from '@/components/ui/primitives';
 import { IkigaiText } from '../IkigaiText';
-import { StickyChapterHeader, StickySubsectionHeader } from '../cahierUi';
-import { WARN, subsectionAnchorStyle } from './shared';
+import { StickyChapterHeader, StickySubsectionHeader, SubsectionArticle, SubsectionTitleRow } from '../cahierUi';
+import { ROMAN, WARN } from './shared';
 
 // ── §03 — Intersections ─────────────────────────────────────────────────────
 export function IntersectionsSection({
@@ -31,19 +31,9 @@ export function IntersectionsSection({
           const example = mode === 'decouverte' ? it.exampleDecouverte ?? it.example : it.example;
           const active = activeId === it.id;
           return (
-            <article
-              key={it.id}
-              id={`ikigai-inter-${it.id}`}
-              className={`py-7 transition-opacity duration-500 ease-in-out ${activeId && !active ? 'opacity-30' : 'opacity-100'} hover:opacity-100`}
-              style={subsectionAnchorStyle}
-            >
+            <SubsectionArticle key={it.id} id={`ikigai-inter-${it.id}`} active={active} hasActive={!!activeId}>
               <StickySubsectionHeader>
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="font-mono text-xs text-[color:var(--primary)]">{['I', 'II', 'III', 'IV'][i]}.</span>
-                  <h3 className={`font-headline text-headline-md font-semibold transition-colors duration-500 ${active ? 'text-[color:var(--primary)]' : ''}`}>{it.label}</h3>
-                  <span className={`font-headline text-sm italic transition-colors duration-500 ${active ? 'text-[color:var(--primary)]/80' : 'text-surface-variant'}`}>{it.subtitle}</span>
-                </div>
-                <p className={`eyebrow mt-1.5 !tracking-[0.16em] normal-case transition-colors duration-500 ${active ? 'text-[color:var(--primary)]/90' : 'text-surface-variant'}`}>{it.negative}</p>
+                <SubsectionTitleRow roman={ROMAN[i]} title={it.label} subtitle={it.subtitle} eyebrow={it.negative} active={active} />
               </StickySubsectionHeader>
               <Reveal className="mt-3">
                 <p className="mt-3 max-w-2xl leading-relaxed">
@@ -53,7 +43,7 @@ export function IntersectionsSection({
                   <AlertTriangle size={15} className="mt-0.5 shrink-0" /> {it.warning}
                 </p>
               </Reveal>
-            </article>
+            </SubsectionArticle>
           );
         })}
       </div>

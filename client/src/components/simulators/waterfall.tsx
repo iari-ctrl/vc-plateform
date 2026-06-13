@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
+import { formatCurrency, formatMultiple, formatPercent } from '@/lib/utils';
 import { calculateWaterfall } from '@/lib/simulators/waterfall';
 import { GlossaryPreview } from '@/lib/markdown';
 import { Field, Panel, Slider, Stat } from './shared';
@@ -43,7 +43,7 @@ export function WaterfallSim({ accent }: { accent: string }) {
             <Stat label="Investisseur préférentiel" value={formatCurrency(investor * 1e6)} accent={accent} hint={participating ? 'préférence + participation' : choseConvert ? 'convertit en ordinaire' : 'préférence exercée'} />
             <Stat label="Actions ordinaires" value={formatCurrency(common * 1e6)} hint="fondateurs & employés" />
             <Stat label="Préférence de liquidation" value={formatCurrency(pref * 1e6)} hint={`${multiple}× la mise`} />
-            <Stat label="Multiple investisseur" value={`${formatNumber(investorMultiple, { maximumFractionDigits: 2 })}×`} hint="retour sur la mise" />
+            <Stat label="Multiple investisseur" value={formatMultiple(investorMultiple)} hint="retour sur la mise" />
           </div>
           <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-5">
             <p className="mb-3 text-xs text-surface-variant">Répartition du produit de sortie</p>

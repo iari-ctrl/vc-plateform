@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
-import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
+import { formatCurrency, formatMultiple, formatNumber, formatPercent } from '@/lib/utils';
 import { simulatePowerLawPortfolio, type HistogramBucket } from '@/lib/simulators/power-law';
 import { GlossaryPreview } from '@/lib/markdown';
-import { Panel, Slider, Stat } from './shared';
+import { Callout, Panel, Slider, Stat } from './shared';
 
 // ── 8. Power law & portfolio construction (Monte Carlo) ─────────────────────
 function Histogram({ data, accent, title }: { data: HistogramBucket[]; accent: string; title: string }) {
@@ -85,10 +85,10 @@ export function PowerLawSim({ accent }: { accent: string }) {
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <Stat label="TVPI médian" value={`${formatNumber(res.percentiles.p50, { maximumFractionDigits: 2 })}×`} accent={accent} hint="brut, hors frais" />
-            <Stat label="TVPI moyen" value={`${formatNumber(res.mean, { maximumFractionDigits: 2 })}×`} hint="tiré par les outliers" />
-            <Stat label="P10 — défavorable" value={`${formatNumber(res.percentiles.p10, { maximumFractionDigits: 2 })}×`} hint="10 % des cas en dessous" />
-            <Stat label="P90 — favorable" value={`${formatNumber(res.percentiles.p90, { maximumFractionDigits: 2 })}×`} hint="10 % des cas au-dessus" />
+            <Stat label="TVPI médian" value={formatMultiple(res.percentiles.p50)} accent={accent} hint="brut, hors frais" />
+            <Stat label="TVPI moyen" value={formatMultiple(res.mean)} hint="tiré par les outliers" />
+            <Stat label="P10 — défavorable" value={formatMultiple(res.percentiles.p10)} hint="10 % des cas en dessous" />
+            <Stat label="P90 — favorable" value={formatMultiple(res.percentiles.p90)} hint="10 % des cas au-dessus" />
             <Stat label="Proba TVPI ≥ 2×" value={formatPercent(res.probAtLeast.x2 * 100)} accent={accent} hint="seuil d'un bon fonds" />
             <Stat label="Proba TVPI ≥ 3×" value={formatPercent(res.probAtLeast.x3 * 100)} hint="territoire top décile" />
             <Stat label="Part de la meilleure ligne" value={formatPercent(res.medianTopLineShare * 100)} hint="du retour total (médiane)" />
@@ -101,15 +101,9 @@ export function PowerLawSim({ accent }: { accent: string }) {
             <Stat label="Ownership à l'exit" value={formatPercent(res.ownershipAtExitPct * 100, 1)} hint="après dilution non défendue" />
           </div>
 
-          <div className="rounded-xl border border-outline-variant bg-surface-container-low/60 p-4 text-sm flex gap-3">
-            <span className="font-semibold text-lg leading-none" style={{ color: accent }}>Σ</span>
-            <div>
-              <p className="font-semibold text-foreground">Fund returner math</p>
-              <p className="mt-1 text-xs text-surface-variant">
-                Avec {formatPercent(res.ownershipAtExitPct * 100, 1)} d'ownership à l'exit, une seule société doit sortir à <strong className="text-foreground">{formatCurrency(res.fundReturnerExitM * 1e6)}</strong> pour rendre 1× le fonds à elle seule. C'est le test de cohérence entre taille de fonds, ownership et marché visé.
-              </p>
-            </div>
-          </div>
+          <Callout icon="Σ" iconColor={accent} title="Fund returner math">
+            Avec {formatPercent(res.ownershipAtExitPct * 100, 1)} d'ownership à l'exit, une seule société doit sortir à <strong className="text-foreground">{formatCurrency(res.fundReturnerExitM * 1e6)}</strong> pour rendre 1× le fonds à elle seule. C'est le test de cohérence entre taille de fonds, ownership et marché visé.
+          </Callout>
 
           <Histogram data={res.tvpiHistogram} accent={accent} title="Distribution du TVPI sur 4 000 simulations" />
           <Histogram data={res.multipleHistogram} accent={accent} title="Distribution des multiples par ligne (avant dilution)" />

@@ -17,6 +17,11 @@ export function formatNumber(n: number, opts: Intl.NumberFormatOptions = {}): st
   return new Intl.NumberFormat('fr-FR', opts).format(n);
 }
 
+/** Borne `n` dans l'intervalle [min, max]. */
+export function clamp(n: number, min: number, max: number): number {
+  return Math.min(Math.max(n, min), max);
+}
+
 export function formatCurrency(n: number): string {
   if (Math.abs(n) >= 1_000_000) return `${formatNumber(n / 1_000_000, { maximumFractionDigits: 2 })} M€`;
   if (Math.abs(n) >= 1_000) return `${formatNumber(n / 1_000, { maximumFractionDigits: 1 })} k€`;
@@ -25,6 +30,11 @@ export function formatCurrency(n: number): string {
 
 export function formatPercent(n: number, digits = 1): string {
   return `${formatNumber(n, { maximumFractionDigits: digits })} %`;
+}
+
+/** Formate un multiple VC (TVPI, DPI, préférence…) : `2,4×`. */
+export function formatMultiple(n: number, digits = 2): string {
+  return `${formatNumber(n, { maximumFractionDigits: digits })}×`;
 }
 
 export function pluralize(n: number, singular: string, plural?: string): string {

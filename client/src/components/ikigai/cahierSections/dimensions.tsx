@@ -5,8 +5,8 @@ import { Reveal } from '@/components/ui/primitives';
 import { useTheme } from '@/context/ThemeContext';
 import { legibleAccent } from '@/lib/ikigaiColor';
 import { IkigaiText } from '../IkigaiText';
-import { StickyChapterHeader, StickySubsectionHeader } from '../cahierUi';
-import { subsectionAnchorStyle } from './shared';
+import { StickyChapterHeader, StickySubsectionHeader, SubsectionArticle } from '../cahierUi';
+import { ROMAN } from './shared';
 
 // ── §02 — Dimensions ────────────────────────────────────────────────────────
 export function DimensionsSection({
@@ -38,12 +38,7 @@ export function DimensionsSection({
           const active = activeDim === d.id;
           const accent = legibleAccent(d.accent, dark);
           return (
-            <article
-              key={d.id}
-              id={`ikigai-dim-${d.id}`}
-              className={`py-7 transition-opacity duration-500 ease-in-out ${activeDim && !active ? 'opacity-30' : 'opacity-100'} hover:opacity-100`}
-              style={subsectionAnchorStyle}
-            >
+            <SubsectionArticle key={d.id} id={`ikigai-dim-${d.id}`} active={active} hasActive={!!activeDim}>
               <StickySubsectionHeader>
                 <button
                   type="button"
@@ -53,7 +48,7 @@ export function DimensionsSection({
                 >
                   <div className="flex flex-1 flex-wrap items-baseline gap-x-3 gap-y-1">
                     <span className="font-mono text-xs" style={{ color: active ? accent : 'var(--primary)' }}>
-                      {['I', 'II', 'III', 'IV'][i]}.
+                      {ROMAN[i]}.
                     </span>
                     <h3 className="font-headline text-headline-md font-semibold transition-colors" style={active ? { color: accent } : undefined}>
                       {d.label}
@@ -81,7 +76,7 @@ export function DimensionsSection({
                   ))}
                 </ul>
               </Reveal>
-            </article>
+            </SubsectionArticle>
           );
         })}
       </div>

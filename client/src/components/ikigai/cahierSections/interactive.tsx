@@ -16,14 +16,14 @@ export function InteractifIntrospectionView({
     onSelectDimension(SCENARIOS[activeStep].dimensionId);
   }, [activeStep, onSelectDimension]);
 
+  const hasAnswered = validatedSteps[activeStep] === true;
+  const hasSelected = answers[activeStep] !== undefined;
+
   const selectOption = (idx: number) => {
     if (!hasAnswered) {
       setAnswers((cur) => ({ ...cur, [activeStep]: idx }));
     }
   };
-
-  const hasAnswered = validatedSteps[activeStep] === true;
-  const hasSelected = answers[activeStep] !== undefined;
 
   return (
     <div className="space-y-6 lg:w-[52%] animate-fade-in">

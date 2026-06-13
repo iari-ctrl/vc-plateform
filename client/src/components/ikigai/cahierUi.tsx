@@ -2,6 +2,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import { BookOpen, GraduationCap, Zap, AlignLeft } from 'lucide-react';
 import type { IkigaiMode, OnboardingMode } from '@/content/types';
 import { cn } from '@/lib/utils';
+import { subsectionAnchorStyle } from './cahierSections/shared';
 
 /**
  * Compact segmented control to switch a single section between the pedagogical
@@ -143,6 +144,64 @@ export function StickySubsectionHeader({ children, className }: { children: Reac
     >
       {children}
     </div>
+  );
+}
+
+/**
+ * A numbered subsection inside a pinned chapter: the scroll-anchored `<article>`
+ * whose id drives the active dimension, dimmed when another subsection is active.
+ */
+export function SubsectionArticle({
+  id,
+  active,
+  hasActive,
+  children,
+}: {
+  id: string;
+  /** This subsection is the active one. */
+  active: boolean;
+  /** Some subsection (this one or another) is active — dims the rest. */
+  hasActive: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <article
+      id={id}
+      className={`py-7 transition-opacity duration-500 ease-in-out ${hasActive && !active ? 'opacity-30' : 'opacity-100'} hover:opacity-100`}
+      style={subsectionAnchorStyle}
+    >
+      {children}
+    </article>
+  );
+}
+
+/**
+ * The numbered title line shared by the Intersections and Presque chapters:
+ * roman numeral · title · italic subtitle, with an eyebrow caption underneath.
+ * Lives inside a {@link StickySubsectionHeader}.
+ */
+export function SubsectionTitleRow({
+  roman,
+  title,
+  subtitle,
+  eyebrow,
+  active,
+}: {
+  roman: ReactNode;
+  title: ReactNode;
+  subtitle: ReactNode;
+  eyebrow: ReactNode;
+  active: boolean;
+}) {
+  return (
+    <>
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span className="font-mono text-xs text-[color:var(--primary)]">{roman}.</span>
+        <h3 className={`font-headline text-headline-md font-semibold transition-colors duration-500 ${active ? 'text-[color:var(--primary)]' : ''}`}>{title}</h3>
+        <span className={`font-headline text-sm italic transition-colors duration-500 ${active ? 'text-[color:var(--primary)]/80' : 'text-surface-variant'}`}>{subtitle}</span>
+      </div>
+      <p className={`eyebrow mt-1.5 !tracking-[0.16em] normal-case transition-colors duration-500 ${active ? 'text-[color:var(--primary)]/90' : 'text-surface-variant'}`}>{eyebrow}</p>
+    </>
   );
 }
 

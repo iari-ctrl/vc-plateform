@@ -75,7 +75,10 @@ export default function OnboardingPage() {
   const [activeDim, setActiveDim] = useState<string | null>(null);
   const [chosenArchetype, setChosen] = useState<string | null>(() => getChosenArchetype());
 
-  const { pinContainerRef, scrollContentRef, scrollTo, handleRegion } = useIkigaiScrollPinning({ modes, setActiveDim });
+  // Only the modes of the pinned sections (§02/§03/§03.b) change their height
+  // and thus require the scroll handler to re-measure.
+  const sectionsKey = `${modes.dims}|${modes.inters}|${modes.presque}`;
+  const { pinContainerRef, scrollContentRef, scrollTo, handleRegion } = useIkigaiScrollPinning({ sectionsKey, setActiveDim });
 
   const chooseArchetype = (id: string | null) => {
     setChosen(id);

@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
 import { GlossaryPreview } from '@/lib/markdown';
-import { Panel, Slider } from './shared';
+import { Panel, Slider, useEditableList } from './shared';
 
 // ── 3. Ownership / cap table ────────────────────────────────────────────────────
 interface Holder { id: number; name: string; shares: number }
 export function OwnershipSim({ accent }: { accent: string }) {
   const [valuation, setValuation] = useState(40);
-  const [holders, setHolders] = useState<Holder[]>([
+  const { items: holders, update, remove, add } = useEditableList<Holder>([
     { id: 1, name: 'Fondateurs', shares: 6000 },
     { id: 2, name: 'ESOP', shares: 1000 },
     { id: 3, name: 'Seed', shares: 1800 },
@@ -23,13 +23,13 @@ export function OwnershipSim({ accent }: { accent: string }) {
           <div className="space-y-2">
             {holders.map((h) => (
               <div key={h.id} className="flex items-center gap-2">
-                <input value={h.name} aria-label="Nom du détenteur" onChange={(e) => setHolders((hs) => hs.map((x) => (x.id === h.id ? { ...x, name: e.target.value } : x)))} className="w-28 rounded-lg border border-outline-variant bg-surface-container-lowest px-2.5 py-1.5 text-sm outline-none" />
-                <input type="number" value={h.shares} aria-label={`Parts de ${h.name || 'ce détenteur'}`} onChange={(e) => setHolders((hs) => hs.map((x) => (x.id === h.id ? { ...x, shares: parseFloat(e.target.value) || 0 } : x)))} className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-2.5 py-1.5 text-sm outline-none" />
-                {holders.length > 1 && <button onClick={() => setHolders((hs) => hs.filter((x) => x.id !== h.id))} aria-label={`Retirer ${h.name || 'ce détenteur'}`} className="text-surface-variant hover:text-error"><Trash2 size={14} /></button>}
+                <input value={h.name} aria-label="Nom du détenteur" onChange={(e) => update(h.id, { name: e.target.value })} className="w-28 rounded-lg border border-outline-variant bg-surface-container-lowest px-2.5 py-1.5 text-sm outline-none" />
+                <input type="number" value={h.shares} aria-label={`Parts de ${h.name || 'ce détenteur'}`} onChange={(e) => update(h.id, { shares: parseFloat(e.target.value) || 0 })} className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-2.5 py-1.5 text-sm outline-none" />
+                {holders.length > 1 && <button onClick={() => remove(h.id)} aria-label={`Retirer ${h.name || 'ce détenteur'}`} className="text-surface-variant hover:text-error"><Trash2 size={14} /></button>}
               </div>
             ))}
           </div>
-          <button onClick={() => setHolders((hs) => [...hs, { id: Date.now(), name: 'Nouveau', shares: 500 }])} className="btn-ghost w-full !py-2"><Plus size={15} /> Ajouter une ligne</button>
+          <button onClick={() => add({ id: Date.now(), name: 'Nouveau', shares: 500 })} className="btn-ghost w-full !py-2"><Plus size={15} /> Ajouter une ligne</button>
         </>
       }
       results={

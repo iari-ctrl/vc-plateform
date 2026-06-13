@@ -4,11 +4,27 @@ import type { RegionSelect } from '@/components/ikigai/IkigaiAtlasDiagram';
 const prefersReduced = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// The pinned sections whose ids drive the active dimension, as a single CSS
+// selector reused by both the IntersectionObserver and the scroll handler.
+const OBSERVED_SELECTOR =
+  '#ikigai-section-rappel, [id^="ikigai-dim-"], [id^="ikigai-inter-"], [id^="ikigai-presque-"]';
+
+// Maps a pinned-section element id to the dimension it activates (null = the
+// §01 rappel, which clears any highlighted dimension).
+function dimFromId(id: string): string | null {
+  for (const prefix of ['ikigai-dim-', 'ikigai-inter-', 'ikigai-presque-']) {
+    if (id.startsWith(prefix)) return id.slice(prefix.length);
+  }
+  return null;
+}
+
 export function useIkigaiScrollPinning({
-  modes,
+  sectionsKey,
   setActiveDim,
 }: {
-  modes: unknown;
+  /** Changes whenever pinned-section content (and thus height) changes, so the
+   *  scroll handler re-measures. */
+  sectionsKey: string;
   setActiveDim: Dispatch<SetStateAction<string | null>>;
 }) {
   const pinContainerRef = useRef<HTMLDivElement>(null);
@@ -26,26 +42,13 @@ export function useIkigaiScrollPinning({
       if (window.innerWidth >= 1024) return;
 
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          if (id === 'ikigai-section-rappel') {
-            setActiveDim(null);
-          } else if (id.startsWith('ikigai-dim-')) {
-            setActiveDim(id.replace('ikigai-dim-', ''));
-          } else if (id.startsWith('ikigai-inter-')) {
-            setActiveDim(id.replace('ikigai-inter-', ''));
-          } else if (id.startsWith('ikigai-presque-')) {
-            setActiveDim(id.replace('ikigai-presque-', ''));
-          }
-        }
+        if (entry.isIntersecting) setActiveDim(dimFromId(entry.target.id));
       });
     };
 
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
 
-    const targets = document.querySelectorAll(
-      '#ikigai-section-rappel, [id^="ikigai-dim-"], [id^="ikigai-inter-"], [id^="ikigai-presque-"]'
-    );
+    const targets = document.querySelectorAll(OBSERVED_SELECTOR);
     targets.forEach((target) => observer.observe(target));
 
     return () => {
@@ -85,9 +88,7 @@ export function useIkigaiScrollPinning({
       scrollContent.scrollTop = progress * maxScroll;
 
       // Find the active element closest to the middle of the viewport
-      const targets = scrollContent.querySelectorAll(
-        '#ikigai-section-rappel, [id^="ikigai-dim-"], [id^="ikigai-inter-"], [id^="ikigai-presque-"]'
-      );
+      const targets = scrollContent.querySelectorAll(OBSERVED_SELECTOR);
       let closestId = '';
       let minDistance = Infinity;
 
@@ -101,17 +102,7 @@ export function useIkigaiScrollPinning({
         }
       });
 
-      if (closestId) {
-        if (closestId === 'ikigai-section-rappel') {
-          setActiveDim(null);
-        } else if (closestId.startsWith('ikigai-dim-')) {
-          setActiveDim(closestId.replace('ikigai-dim-', ''));
-        } else if (closestId.startsWith('ikigai-inter-')) {
-          setActiveDim(closestId.replace('ikigai-inter-', ''));
-        } else if (closestId.startsWith('ikigai-presque-')) {
-          setActiveDim(closestId.replace('ikigai-presque-', ''));
-        }
-      }
+      if (closestId) setActiveDim(dimFromId(closestId));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -131,7 +122,7 @@ export function useIkigaiScrollPinning({
       window.removeEventListener('resize', handleScroll);
       resizeObserver.disconnect();
     };
-  }, [modes, setActiveDim]);
+  }, [sectionsKey, setActiveDim]);
 
   function scrollTo(target: string, block: ScrollLogicalPosition = 'start') {
     const el = document.getElementById(target);

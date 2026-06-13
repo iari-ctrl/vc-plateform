@@ -3,6 +3,18 @@ import { api } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
 
 /**
+ * Keep the bundled copy when the API answers with null *or* an empty list while
+ * the bundle has content — an empty array (e.g. an un-seeded DB) must not blank a
+ * page that ships with editorial content.
+ */
+function preferBundle<T>(fresh: T, fallback: T): T {
+  const apiBlank =
+    fresh == null ||
+    (Array.isArray(fresh) && fresh.length === 0 && Array.isArray(fallback) && fallback.length > 0);
+  return apiBlank ? fallback : fresh;
+}
+
+/**
  * Renders bundled content instantly, then overlays fresh data from the API when
  * the server is reachable. This keeps the app fully usable offline / as a guest,
  * while letting admin/CMS edits surface on the public site.
@@ -33,14 +45,10 @@ export function useApiData<T>(path: string | null, fallback: T, options?: { stal
     ...(options?.staleTime !== undefined && { staleTime: options.staleTime }),
   });
 
-  // Keep the bundled copy if the API answers with null *or* an empty list while
-  // the bundle has content — an empty array (e.g. an un-seeded DB) must not blank
-  // a page that ships with editorial content.
-  const fresh = query.data;
-  const keepFallback =
-    fresh == null ||
-    (Array.isArray(fresh) && fresh.length === 0 && Array.isArray(fallback) && fallback.length > 0);
-  return { data: keepFallback ? fallback : fresh, loading: query.isFetching };
+  // Derive in the render body (not `select`): `select` would drop TanStack's
+  // `initialData` "defined" guarantee and widen `data` to `T | undefined`,
+  // forcing every consumer to null-check.
+  return { data: preferBundle(query.data, fallback), loading: query.isFetching };
 }
 
 /**

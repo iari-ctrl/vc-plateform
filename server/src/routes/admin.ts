@@ -168,6 +168,9 @@ adminRouter.put('/case-studies/:id', ah(async (req, res) => {
 // puis renvoie le diff git de data/ pour relecture avant commit.
 // `?dryRun=1` (ou body { dryRun: true }) n'écrit rien et signale le drift.
 const execFileP = promisify(execFile);
+// Scopes the post-export `git diff` shown for review. Mirrors the `collections`
+// in scripts/export-content.mjs — keep in sync if a collection is added there.
+// (Not imported: server tsc has rootDir "src", so it can't pull a repo-root .mjs.)
 const EXPORTED_FILES = ['data/glossary.json', 'data/caseStudies.json', 'data/blog.json'];
 
 const runCmd = async (cmd: string, args: string[]) => {

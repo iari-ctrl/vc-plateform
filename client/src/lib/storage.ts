@@ -36,6 +36,7 @@ export const STORAGE_KEYS = {
   journal: 'decision-journal',
   highlights: 'highlights',
   onboardingSeen: 'onboarding-seen',
+  onboardingMode: 'onboarding-mode',
   // ── Ikigai "cahier d'introspection" ──
   ikigaiMode: 'ikigai-reading-mode',
   ikigaiAnswers: 'ikigai-cahier-answers',
