@@ -28,6 +28,7 @@
     "validate:glossary": "node scripts/validate-glossary.mjs",
     "validate:content:strict": "node scripts/validate-content.mjs --strict",
     "content:export": "node scripts/export-content.mjs",
+    "content:sync": "npm run split:content && npm run validate:content && npm run db:seed --workspace server -- --force",
     "aliases:merge": "node scripts/merge-aliases.mjs"
   },
   "devDependencies": {

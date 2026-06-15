@@ -193,7 +193,8 @@
     "slug": "aum",
     "aliases": [
       "actifs gérés",
-      "assets under management"
+      "assets under management",
+      "AUM"
     ],
     "category": "Fund Economics",
     "short": "Montant total des actifs ou engagements gérés par une société de gestion.",
@@ -296,12 +297,12 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "défendabilité",
+      "avantage concurrentiel",
       "barrière à l'entrée",
       "barrières à l'entrée",
-      "douve",
-      "avantage concurrentiel",
-      "defensibility"
+      "défendabilité",
+      "defensibility",
+      "douve"
     ]
   },
   {
@@ -637,6 +638,7 @@
     "term": "Benchmark de fonds",
     "slug": "benchmark",
     "aliases": [
+      "Benchmark",
       "benchmarking de fonds",
       "comparaison de performance",
       "fund benchmark"
@@ -1043,11 +1045,11 @@
   },
   {
     "id": "cac",
-    "term": "CAC",
+    "term": "Customer Acquisition Cost (CAC)",
     "slug": "cac",
     "category": "Métriques",
     "short": "Coût moyen nécessaire pour acquérir un nouveau client.",
-    "definition": "Le CAC additionne les dépenses commerciales et marketing nécessaires pour acquérir un client. En VC, il ne se lit jamais seul : il doit être comparé à la marge, à la LTV, au payback, au canal d'acquisition et à la répétabilité du go-to-market.",
+    "definition": "Le CAC additionne les dépenses commerciales et marketing nécessaires pour acquérir un client. En VC, il ne se lit jamais seul : il doit être comparé à la marge, à la [[ltv|LTV]], au payback, au canal d'acquisition et à la répétabilité du go-to-market.",
     "example": "Un CAC de 5 000 € peut être sain si le client génère une marge récurrente élevée et se rembourse vite.",
     "seeAlso": [
       "ltv",
@@ -1059,6 +1061,7 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
+      "CAC",
       "coût d’acquisition client",
       "Customer Acquisition Cost"
     ]
@@ -1087,16 +1090,17 @@
   },
   {
     "id": "cfo",
-    "term": "CFO",
+    "term": "Chief Financial Officer (CFO)",
     "slug": "cfo",
     "aliases": [
+      "CFO",
       "Chief Financial Officer",
       "directeur financier",
       "Finance Team Leader"
     ],
     "category": "Acteurs",
     "short": "Dirigeant finance responsable du reporting, de la planification, des contrôles et de la finance stratégique.",
-    "definition": "Le CFO structure la fonction finance d’une startup en croissance : reporting, FP&A, contrôle, cash, budget, data room, relation investisseurs et préparation des tours ou de l’IPO. Son arrivée devient souvent critique lorsque les exigences de reporting et de gouvernance augmentent.",
+    "definition": "Le CFO structure la fonction finance d'une startup en croissance : reporting, FP&A, contrôle, cash, budget, data room, relation investisseurs et préparation des tours ou de l'IPO. Son arrivée devient souvent critique lorsque les exigences de reporting et de gouvernance augmentent.",
     "example": "Un CFO expérimenté peut rendre une Series B plus crédible en fiabilisant les KPIs, le modèle financier et le cash planning.",
     "seeAlso": [
       "financial-model",
@@ -1109,7 +1113,7 @@
   },
   {
     "id": "cogs",
-    "term": "COGS",
+    "term": "Cost of Goods Sold (COGS)",
     "slug": "cogs",
     "category": "Métriques",
     "short": "Coûts directs nécessaires pour produire ou livrer le produit ou service.",
@@ -1124,6 +1128,7 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
+      "COGS",
       "Cost of Goods Sold",
       "coût des ventes",
       "coûts directs"
@@ -1248,6 +1253,7 @@
       "l-career-levels"
     ],
     "aliases": [
+      "Carry",
       "intéressement carried"
     ]
   },
@@ -1375,6 +1381,7 @@
     ],
     "aliases": [
       "comité d’investissement",
+      "IC",
       "Investment Committee"
     ]
   },
@@ -1780,11 +1787,11 @@
   },
   {
     "id": "dpi",
-    "term": "DPI",
+    "term": "Distributions to Paid-In (DPI)",
     "slug": "dpi",
     "category": "Métriques",
     "short": "Cash distribué aux LPs rapporté au capital appelé.",
-    "definition": "Le DPI mesure l’argent réellement retourné aux LPs par rapport au capital appelé. C’est la métrique la plus concrète de liquidité réalisée, à lire avec TVPI et RVPI pour distinguer cash reçu et valeur encore sur le papier.",
+    "definition": "Le DPI mesure l'argent réellement retourné aux LPs par rapport au capital appelé. C'est la métrique la plus concrète de liquidité réalisée, à lire avec [[tvpi|TVPI]] et [[rvpi|RVPI]] pour distinguer cash reçu et valeur encore sur le papier.",
     "example": "Un DPI de 0,6x signifie que les LPs ont reçu 60 % du capital appelé en distributions.",
     "seeAlso": [
       "tvpi",
@@ -1799,7 +1806,8 @@
     ],
     "aliases": [
       "Distributed to Paid-In",
-      "Distributions to Paid-In"
+      "Distributions to Paid-In",
+      "DPI"
     ]
   },
   {
@@ -2204,6 +2212,7 @@
       "l-ts-economics"
     ],
     "aliases": [
+      "DCF",
       "flux de trésorerie actualisés"
     ]
   },
@@ -2409,16 +2418,17 @@
   },
   {
     "id": "ebitda",
-    "term": "EBITDA",
+    "term": "Earnings Before Interest, Taxes, Depreciation and Amortization (EBITDA)",
     "slug": "ebitda",
     "aliases": [
       "BAIIA",
       "Earnings Before Interest, Taxes, Depreciation and Amortization",
+      "EBITDA",
       "excédent brut d’exploitation ajusté"
     ],
     "category": "Métriques",
     "short": "Indicateur de résultat opérationnel avant intérêts, impôts, dépréciations et amortissements.",
-    "definition": "L’EBITDA est une mesure de rentabilité opérationnelle avant intérêts, impôts, dépréciations et amortissements. En VC early-stage il est souvent négatif ou secondaire, mais il devient utile pour les sociétés plus matures, les comparables, l’[[enterprise-value|enterprise value]] et les multiples de sortie.",
+    "definition": "L'EBITDA est une mesure de rentabilité opérationnelle avant intérêts, impôts, dépréciations et amortissements. En VC early-stage il est souvent négatif ou secondaire, mais il devient utile pour les sociétés plus matures, les comparables, l'[[enterprise-value|enterprise value]] et les multiples de sortie.",
     "example": "Une startup growth encore déficitaire sera souvent valorisée sur son ARR ; une société plus mature pourra être comparée sur un multiple d’EBITDA.",
     "seeAlso": [
       "enterprise-value",
@@ -2496,11 +2506,11 @@
   },
   {
     "id": "esop",
-    "term": "ESOP",
+    "term": "Employee Stock Ownership Plan (ESOP)",
     "slug": "esop",
     "category": "Deal & Structuration",
-    "short": "Pool d’equity réservé aux salariés, advisors et recrutements futurs.",
-    "definition": "Un ESOP ou option pool est une réserve d’equity utilisée pour attribuer des stock options ou incentives similaires aux salariés, advisors et consultants. Il affecte directement la cap table, la dilution et la négociation pre-money/post-money.",
+    "short": "Pool d'equity réservé aux salariés, advisors et recrutements futurs.",
+    "definition": "Un ESOP ou option pool est une réserve d'equity utilisée pour attribuer des stock options ou incentives similaires aux salariés, advisors et consultants. Il affecte directement la cap table, la dilution et la négociation pre-money/post-money.",
     "seeAlso": [
       "stock-options",
       "employee-equity",
@@ -2514,6 +2524,7 @@
       "Employee incentives",
       "employee option pool",
       "Employee Stock Option Plan",
+      "ESOP",
       "option pool",
       "pool d’options"
     ]
@@ -3003,6 +3014,7 @@
     "slug": "crowdfunding",
     "aliases": [
       "crowd equity",
+      "Crowdfunding",
       "equity crowdfunding",
       "financement par la foule"
     ],
@@ -3219,7 +3231,8 @@
     "example": "Un investisseur institutionnel passe par un fonds de fonds pour accéder à des managers seed difficiles à sélectionner en direct.",
     "aliases": [
       "FoF",
-      "Fund of Funds"
+      "Fund of Funds",
+      "Fund-of-Funds"
     ]
   },
   {
@@ -3542,6 +3555,7 @@
       "General Partner",
       "General Partners",
       "gérant du fonds",
+      "GP",
       "GPs",
       "Partner VC",
       "VC partner"
@@ -3578,7 +3592,8 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "go-to-market execution"
+      "go-to-market execution",
+      "GTM"
     ],
     "example": "Avant une Series B, un investisseur attend un GTM plus prévisible qu’une série de ventes opportunistes portées par les founders."
   },
@@ -3872,11 +3887,11 @@
   },
   {
     "id": "ipo",
-    "term": "IPO",
+    "term": "Initial Public Offering (IPO)",
     "slug": "ipo",
     "category": "Liquidité",
-    "short": "Introduction en bourse d’une société privée, créant une cotation publique et une liquidité potentielle.",
-    "definition": "Une IPO est une transaction dans laquelle une société privée cote ses actions sur un marché public. Pour une startup financée par VC, elle peut créer de la liquidité, une valorisation publique et une monnaie d’acquisition, mais impose aussi disclosure, gouvernance de société cotée, lock-ups et exposition au risque de marché.",
+    "short": "Introduction en bourse d'une société privée, créant une cotation publique et une liquidité potentielle.",
+    "definition": "Une IPO est une transaction dans laquelle une société privée cote ses actions sur un marché public. Pour une startup financée par VC, elle peut créer de la liquidité, une valorisation publique et une monnaie d'acquisition, mais impose aussi disclosure, gouvernance de société cotée, lock-ups et exposition au risque de marché.",
     "seeAlso": [
       "exit",
       "qpo",
@@ -3889,17 +3904,18 @@
     "aliases": [
       "Initial Public Offering",
       "introduction en bourse",
+      "IPO",
       "Registration Rights"
     ],
     "example": "Après une IPO, les investisseurs VC ne peuvent pas toujours vendre immédiatement leurs actions à cause des périodes de lock-up et de la volatilité du marché."
   },
   {
     "id": "irr",
-    "term": "IRR",
+    "term": "Internal Rate of Return (IRR)",
     "slug": "irr",
     "category": "Métriques",
     "short": "Rendement annualisé sensible au calendrier des cash flows.",
-    "definition": "L’IRR annualise la performance en tenant compte du timing des sorties et distributions. En VC, il peut être trompeur pour les jeunes fonds ou les flux précoces, donc il doit être lu avec MOIC, DPI, TVPI et vintage.",
+    "definition": "L'IRR annualise la performance en tenant compte du timing des sorties et distributions. En VC, il peut être trompeur pour les jeunes fonds ou les flux précoces, donc il doit être lu avec MOIC, DPI, TVPI et vintage.",
     "seeAlso": [
       "moic",
       "dpi",
@@ -3913,6 +3929,7 @@
     "example": "Deux fonds avec le même MOIC peuvent afficher des IRR très différents si l’un distribue beaucoup plus tôt.",
     "aliases": [
       "Internal Rate of Return",
+      "IRR",
       "Taux de rendement interne",
       "TRI"
     ]
@@ -4223,7 +4240,7 @@
   },
   {
     "id": "kpi",
-    "term": "KPI",
+    "term": "Key Performance Indicator (KPI)",
     "slug": "kpi",
     "category": "Métriques",
     "short": "Indicateur clé utilisé pour suivre une priorité opérationnelle importante.",
@@ -4243,16 +4260,17 @@
       "Key Performance Indicator",
       "Key performance indicators",
       "Key performance indicators (KPIs)",
+      "KPI",
       "KPIs"
     ]
   },
   {
     "id": "loi",
-    "term": "LOI",
+    "term": "Letter of Intent (LOI)",
     "slug": "loi",
     "category": "Deal & Structuration",
-    "short": "Document préliminaire qui cadre les grands termes d’une transaction avant les contrats définitifs.",
-    "definition": "Une LOI établit l’intention des parties d’avancer vers une transaction, notamment en M&A. Elle couvre souvent prix indicatif, exclusivité, confidentialité, due diligence, conditions de closing et calendrier, avec des clauses parfois contraignantes.",
+    "short": "Document préliminaire qui cadre les grands termes d'une transaction avant les contrats définitifs.",
+    "definition": "Une LOI établit l'intention des parties d'avancer vers une transaction, notamment en M&A. Elle couvre souvent prix indicatif, exclusivité, confidentialité, due diligence, conditions de closing et calendrier, avec des clauses parfois contraignantes.",
     "seeAlso": [
       "exclusivite",
       "term-sheet",
@@ -4263,12 +4281,13 @@
     "aliases": [
       "Letter of Intent",
       "lettre d'intention",
+      "LOI",
       "LOI M&A"
     ]
   },
   {
     "id": "ltv",
-    "term": "LTV",
+    "term": "Lifetime Value (LTV)",
     "slug": "ltv",
     "category": "Métriques",
     "short": "Valeur économique attendue d'un client sur toute sa relation avec l'entreprise.",
@@ -4286,12 +4305,13 @@
     "aliases": [
       "CLV",
       "Customer Lifetime Value",
-      "lifetime value"
+      "lifetime value",
+      "LTV"
     ]
   },
   {
     "id": "ltv-cac",
-    "term": "LTV/CAC",
+    "term": "Lifetime Value / Customer Acquisition Cost (LTV/CAC)",
     "slug": "ltv-cac",
     "category": "Métriques",
     "short": "Ratio comparant la valeur économique d'un client au coût de son acquisition.",
@@ -4308,6 +4328,8 @@
     ],
     "aliases": [
       "CLV/CAC",
+      "LTV-CAC",
+      "LTV/CAC",
       "ratio LTV CAC"
     ]
   },
@@ -4366,6 +4388,7 @@
     "term": "Levier opérationnel",
     "slug": "leverage",
     "aliases": [
+      "Leverage",
       "levier d’exploitation",
       "operating leverage"
     ],
@@ -4435,6 +4458,7 @@
       "investisseur du fonds",
       "Limited Partner",
       "Limited Partners",
+      "LP",
       "LP fund allocator",
       "LPs"
     ]
@@ -4461,7 +4485,8 @@
     ],
     "aliases": [
       "contrat de limited partnership",
-      "Limited Partnership Agreement (LPA)"
+      "Limited Partnership Agreement (LPA)",
+      "LPA"
     ]
   },
   {
@@ -4586,18 +4611,19 @@
   },
   {
     "id": "ma",
-    "term": "M&A",
+    "term": "Mergers & Acquisitions (M&A)",
     "slug": "ma",
     "aliases": [
       "Acquisition Exit",
       "fusion-acquisition",
+      "M&A",
       "M&A Exit",
       "Mergers and Acquisitions",
       "Startup Acquisition"
     ],
     "category": "Liquidité",
-    "short": "Fusion ou acquisition utilisée comme voie d’exit pour une startup financée par VC.",
-    "definition": "Le M&A désigne les transactions de fusion ou acquisition qui permettent à une startup de rejoindre un acheteur stratégique ou financier. En VC, c’est une voie d’exit fréquente, dont l’économie dépend du prix, de la structure, des préférences de liquidation et de la répartition des produits.",
+    "short": "Fusion ou acquisition utilisée comme voie d'exit pour une startup financée par VC.",
+    "definition": "Le M&A désigne les transactions de fusion ou acquisition qui permettent à une startup de rejoindre un acheteur stratégique ou financier. En VC, c'est une voie d'exit fréquente, dont l'économie dépend du prix, de la structure, des préférences de liquidation et de la répartition des produits.",
     "example": "Une startup peut produire un bon résultat founder via M&A tout en générant un rendement insuffisant pour un grand fonds si le prix d’exit reste trop bas.",
     "seeAlso": [
       "exit",
@@ -4611,11 +4637,11 @@
   },
   {
     "id": "moic",
-    "term": "MOIC",
+    "term": "Multiple on Invested Capital (MOIC)",
     "slug": "moic",
     "category": "Métriques",
     "short": "Multiple de valeur ou cash retourné par rapport au capital investi.",
-    "definition": "Le MOIC mesure combien de fois le capital investi est retourné ou valorisé. Contrairement à l’IRR, il ne tient pas compte du temps ; il sert donc à comprendre l’ampleur du rendement brut avant d’analyser son rythme.",
+    "definition": "Le MOIC mesure combien de fois le capital investi est retourné ou valorisé. Contrairement à l'IRR, il ne tient pas compte du temps ; il sert donc à comprendre l'ampleur du rendement brut avant d'analyser son rythme.",
     "example": "Un investissement de 1 M€ valorisé 5 M€ affiche un MOIC de 5x.",
     "seeAlso": [
       "tvpi",
@@ -4630,6 +4656,7 @@
     ],
     "aliases": [
       "cash-on-cash multiple",
+      "MOIC",
       "Multiple of Invested Capital",
       "Multiple on Invested Capital"
     ]
@@ -4779,7 +4806,7 @@
     "slug": "market-readiness",
     "category": "Stratégie",
     "short": "Degré auquel un marché est prêt à adopter et payer une solution.",
-    "definition": "La market readiness évalue si les clients sont prêts à acheter maintenant : budget, urgence, maturité du problème, habitudes d'achat, réglementation et capacité opérationnelle. Une bonne technologie peut échouer si le marché n'est pas prêt, même avec un grand [[tam-sam-som|TAM]].",
+    "definition": "La market readiness évalue si les clients sont prêts à acheter maintenant : budget, urgence, maturité du problème, habitudes d'achat, réglementation et capacité opérationnelle. Une bonne technologie peut échouer si le marché n'est pas prêt, même avec un grand [[tam|TAM]].",
     "example": "Un produit deeptech peut avoir une avance technique mais attendre plusieurs années avant que les clients aient budget et processus d'achat.",
     "seeAlso": [
       "pmf",
@@ -4958,16 +4985,17 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
+      "MRR",
       "revenu récurrent mensuel"
     ]
   },
   {
     "id": "nvca",
-    "term": "NVCA",
+    "term": "National Venture Capital Association (NVCA)",
     "slug": "nvca",
     "category": "Institutions",
     "short": "Association professionnelle américaine du VC, connue pour ses model legal documents.",
-    "definition": "La NVCA est l’association professionnelle américaine du venture capital. Elle est particulièrement utile aux praticiens car ses model documents servent souvent de point de départ pour les term sheets et la documentation juridique des financements VC américains.",
+    "definition": "La NVCA est l'association professionnelle américaine du venture capital. Elle est particulièrement utile aux praticiens car ses model documents servent souvent de point de départ pour les term sheets et la documentation juridique des financements VC américains.",
     "example": "Un counsel peut comparer une term sheet à un modèle NVCA pour identifier les clauses standard et les écarts négociés.",
     "seeAlso": [
       "term-sheet",
@@ -4979,7 +5007,7 @@
     "aliases": [
       "model documents NVCA",
       "National Venture Capital Association",
-      "National Venture Capital Association (NVCA)"
+      "NVCA"
     ]
   },
   {
@@ -5041,6 +5069,9 @@
     "relatedLessonIds": [
       "l-traction-unit-economics",
       "l-dd-process"
+    ],
+    "aliases": [
+      "NPS"
     ]
   },
   {
@@ -5061,6 +5092,7 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
+      "NRR",
       "rétention nette du revenu"
     ]
   },
@@ -5822,7 +5854,8 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
-      "adéquation produit-marché"
+      "adéquation produit-marché",
+      "PMF"
     ]
   },
   {
@@ -5876,11 +5909,11 @@
   },
   {
     "id": "qsbs",
-    "term": "QSBS",
+    "term": "Qualified Small Business Stock (QSBS)",
     "slug": "qsbs",
     "category": "Juridique & Fiscalité",
     "short": "Régime fiscal américain pouvant exclure une partie du gain sur certaines actions de C-Corp.",
-    "definition": "Le QSBS est un régime fiscal américain applicable à certaines actions qualifiées de petites entreprises, généralement acquises directement auprès d’une C-Corp et détenues au moins cinq ans. Il peut rendre une partie du gain exonérée, sous conditions strictes.",
+    "definition": "Le QSBS est un régime fiscal américain applicable à certaines actions qualifiées de petites entreprises, généralement acquises directement auprès d'une C-Corp et détenues au moins cinq ans. Il peut rendre une partie du gain exonérée, sous conditions strictes.",
     "example": "Un angel qui investit directement en equity dans une C-Corp qualifiée peut préférer cette structure à une convertible note, car le compteur de détention QSBS commence avec l’acquisition des actions.",
     "seeAlso": [
       "c-corporation",
@@ -5890,8 +5923,8 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
+      "QSBS",
       "Qualified Small Business Stock",
-      "Qualified Small Business Stock (QSBS)",
       "Section 1202"
     ]
   },
@@ -5922,6 +5955,7 @@
     "term": "Qualified Public Offering",
     "slug": "qpo",
     "aliases": [
+      "QPO",
       "Qualified IPO"
     ],
     "category": "Deal & Structuration",
@@ -5985,15 +6019,16 @@
   },
   {
     "id": "rofo",
-    "term": "ROFO",
+    "term": "Right of First Offer (ROFO)",
     "slug": "rofo",
     "aliases": [
       "droit de première offre",
-      "right of first offer"
+      "right of first offer",
+      "ROFO"
     ],
     "category": "Deal & Structuration",
-    "short": "Droit d’être sollicité en priorité avant qu’un actionnaire vende ses titres.",
-    "definition": "Le ROFO donne aux actionnaires existants la possibilité de formuler une offre avant qu’un vendeur cherche un acheteur externe. Il ressemble au [[rofr|ROFR]], mais intervient plus tôt : les bénéficiaires proposent un prix avant que le vendeur accepte une offre de tiers.",
+    "short": "Droit d'être sollicité en priorité avant qu'un actionnaire vende ses titres.",
+    "definition": "Le ROFO donne aux actionnaires existants la possibilité de formuler une offre avant qu'un vendeur cherche un acheteur externe. Il ressemble au [[rofr|ROFR]], mais intervient plus tôt : les bénéficiaires proposent un prix avant que le vendeur accepte une offre de tiers.",
     "example": "Un fondateur souhaitant vendre une partie de ses actions doit d’abord laisser les investisseurs existants faire une offre dans le cadre du ROFO.",
     "seeAlso": [
       "rofr",
@@ -6007,11 +6042,11 @@
   },
   {
     "id": "rofr",
-    "term": "ROFR",
+    "term": "Right of First Refusal (ROFR)",
     "slug": "rofr",
     "category": "Deal & Structuration",
-    "short": "Droit d’acheter en priorité des actions qu’un actionnaire souhaite vendre à un tiers.",
-    "definition": "Le ROFR donne à la société puis parfois aux investisseurs existants la priorité pour acheter des titres proposés à un tiers, souvent sur les ventes de fondateurs ou salariés. Il aide à contrôler l’entrée de nouveaux actionnaires.",
+    "short": "Droit d'acheter en priorité des actions qu'un actionnaire souhaite vendre à un tiers.",
+    "definition": "Le ROFR donne à la société puis parfois aux investisseurs existants la priorité pour acheter des titres proposés à un tiers, souvent sur les ventes de fondateurs ou salariés. Il aide à contrôler l'entrée de nouveaux actionnaires.",
     "seeAlso": [
       "secondary",
       "tag-along",
@@ -6023,16 +6058,17 @@
     "example": "Avant de vendre ses actions à un tiers, un fondateur doit les proposer à la société puis aux investisseurs existants.",
     "aliases": [
       "droit de premier refus",
-      "Right of First Refusal"
+      "Right of First Refusal",
+      "ROFR"
     ]
   },
   {
     "id": "rsu",
-    "term": "RSU",
+    "term": "Restricted Stock Units (RSU)",
     "slug": "rsu",
     "category": "Deal & Structuration",
-    "short": "Unités donnant droit à des actions après vesting, sans prix d’exercice.",
-    "definition": "Les RSU sont des attributions donnant droit à des actions lorsque les conditions de vesting sont satisfaites. Contrairement aux options, elles n’ont pas de strike price, ce qui les rend plus fréquentes dans les sociétés privées plus matures ou proches de la liquidité.",
+    "short": "Unités donnant droit à des actions après vesting, sans prix d'exercice.",
+    "definition": "Les RSU sont des attributions donnant droit à des actions lorsque les conditions de vesting sont satisfaites. Contrairement aux options, elles n'ont pas de strike price, ce qui les rend plus fréquentes dans les sociétés privées plus matures ou proches de la liquidité.",
     "example": "Une scale-up late-stage peut passer des options aux RSU pour rendre la rémunération equity plus lisible malgré une valorisation déjà élevée.",
     "seeAlso": [
       "employee-equity",
@@ -6042,16 +6078,17 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "restricted stock units"
+      "restricted stock units",
+      "RSU"
     ]
   },
   {
     "id": "rvpi",
-    "term": "RVPI",
+    "term": "Residual Value to Paid-In (RVPI)",
     "slug": "rvpi",
     "category": "Métriques",
-    "short": "Residual Value to Paid-In : la valeur latente restante.",
-    "definition": "Ratio de la valeur résiduelle du portefeuille (non encore réalisée) sur le capital appelé. La partie « sur le papier » de la performance, à confirmer par de futures sorties.",
+    "short": "La part latente de la performance, non encore réalisée.",
+    "definition": "Le RVPI rapporte la valeur résiduelle du portefeuille, non encore réalisée, au capital appelé. C'est la part « sur le papier » de la performance, à confirmer par de futures sorties.",
     "seeAlso": [
       "dpi",
       "tvpi"
@@ -6061,7 +6098,8 @@
     ],
     "aliases": [
       "Residual value to paid in",
-      "Residual value to paid in (RVPI)"
+      "Residual value to paid in (RVPI)",
+      "RVPI"
     ]
   },
   {
@@ -6391,11 +6429,11 @@
   },
   {
     "id": "safe",
-    "term": "SAFE",
+    "term": "Simple Agreement for Future Equity (SAFE)",
     "slug": "safe",
     "category": "Deal & Structuration",
-    "short": "Instrument de financement qui donne droit à de l’equity future sans être une dette classique.",
-    "definition": "Le SAFE, et souvent son équivalent français BSA-AIR, permet de lever rapidement sans fixer immédiatement une valorisation. Contrairement à une convertible note, il n’est généralement pas une dette, ne porte pas d’intérêt et n’a pas de maturité fixe ; la conversion dépend du prochain tour selon un cap et/ou discount.",
+    "short": "Instrument de financement qui donne droit à de l'equity future sans être une dette classique.",
+    "definition": "Le SAFE, et souvent son équivalent français BSA-AIR, permet de lever rapidement sans fixer immédiatement une valorisation. Contrairement à une convertible note, il n'est généralement pas une dette, ne porte pas d'intérêt et n'a pas de maturité fixe ; la conversion dépend du prochain tour selon un cap et/ou discount.",
     "seeAlso": [
       "convertible-note",
       "valuation-cap",
@@ -6411,16 +6449,17 @@
     "aliases": [
       "BSA-AIR",
       "future equity agreement",
+      "SAFE",
       "Simple Agreement for Future Equity"
     ]
   },
   {
     "id": "sfdr",
-    "term": "SFDR",
+    "term": "Sustainable Finance Disclosure Regulation (SFDR)",
     "slug": "sfdr",
     "category": "Juridique & Fiscalité",
     "short": "Réglementation européenne de disclosure durable applicable aux acteurs financiers.",
-    "definition": "SFDR est le cadre européen de disclosure durable applicable aux acteurs des services financiers. Il impose des publications sur l’intégration des risques de durabilité et, selon les produits, sur les caractéristiques ou objectifs ESG ; en VC, il influence surtout le reporting des fonds, les demandes LP et certaines diligences portfolio.",
+    "definition": "Le SFDR est le cadre européen de disclosure durable applicable aux acteurs des services financiers. Il impose des publications sur l'intégration des risques de durabilité et, selon les produits, sur les caractéristiques ou objectifs ESG ; en VC, il influence surtout le reporting des fonds, les demandes LP et certaines diligences portfolio.",
     "example": "Un fonds VC européen classé Article 8 peut demander plus de données ESG aux startups pour répondre à ses obligations de reporting envers les LPs.",
     "seeAlso": [
       "esg-assessment",
@@ -6431,6 +6470,7 @@
     "relatedLessonIds": [],
     "aliases": [
       "règlement SFDR",
+      "SFDR",
       "Sustainable Finance Disclosure Regulation"
     ]
   },
@@ -6655,7 +6695,10 @@
       "board-of-directors"
     ],
     "relatedLessonIds": [],
-    "link": "https://www.sequoiacap.com"
+    "link": "https://www.sequoiacap.com",
+    "aliases": [
+      "Sequoia"
+    ]
   },
   {
     "id": "serena",
@@ -6691,6 +6734,7 @@
     "aliases": [
       "Series A financing",
       "Series A round",
+      "Series-A",
       "tour de Series A"
     ]
   },
@@ -7068,40 +7112,112 @@
     ]
   },
   {
-    "id": "tam-sam-som",
-    "term": "TAM / SAM / SOM",
-    "slug": "tam-sam-som",
+    "id": "tam",
+    "term": "Total Addressable Market (TAM)",
+    "slug": "tam",
     "category": "Stratégie",
-    "short": "Cadre qui distingue marché total, marché servable et part réalistement capturable.",
-    "definition": "TAM, SAM et SOM structurent le dimensionnement de marché : le TAM mesure la demande totale, le SAM la part réellement servable avec le modèle actuel, et le SOM la part capturable à court ou moyen terme. En diligence, ces chiffres doivent être reliés aux segments clients, au pricing, au go-to-market et au timing.",
-    "example": "Une startup peut viser un TAM mondial énorme tout en ayant un SOM initial limité à un segment enterprise précis dans deux pays.",
+    "short": "Demande totale d'un marché si on le couvrait entièrement.",
+    "definition": "Le TAM mesure la demande totale qui existerait si un produit captait l'intégralité de son marché pertinent, toutes géographies et tous segments confondus, sans contrainte de concurrence ni de canal. C'est le plafond théorique de l'opportunité : en diligence, il sert surtout à vérifier qu'un marché est assez grand pour viser un [[fund-returner|retour de fonds]], pas à prédire un chiffre d'affaires. Un TAM gonflé par des agrégats macro ne dit presque rien de ce qu'une société peut réellement capter.",
+    "example": "Un éditeur de logiciel pour cliniques vétérinaires peut afficher un TAM mondial de plusieurs milliards, alors que sa réalité commerciale se joue sur une fraction bien plus étroite.",
     "seeAlso": [
+      "sam",
+      "som",
+      "tam-sam-som",
       "market-opportunity",
-      "pmf",
-      "gtm",
-      "timing"
+      "fund-returner"
     ],
     "relatedLessonIds": [
-      "l-team-market",
-      "l-dd-process"
+      "lmv-market-sizing",
+      "l-team-market"
     ],
     "aliases": [
-      "dimensionnement de marché",
-      "marché servable adressable",
-      "marché servable capturable",
-      "Market size",
-      "SAM",
-      "Serviceable Addressable Market",
-      "Serviceable Obtainable Market",
-      "SOM",
-      "taille de marché",
+      "marché total adressable",
       "TAM",
       "Total Addressable Market"
     ]
   },
   {
+    "id": "sam",
+    "term": "Serviceable Addressable Market (SAM)",
+    "slug": "sam",
+    "category": "Stratégie",
+    "short": "Part du TAM réellement servable avec le modèle actuel.",
+    "definition": "Le SAM désigne la portion du [[tam|TAM]] qu'une société peut réellement adresser avec son produit, son prix, sa géographie et son canal de vente actuels. On l'obtient en filtrant le marché total par ce que l'entreprise sait effectivement vendre, à qui et où. C'est le périmètre dans lequel se joue la croissance des prochaines années, et celui qu'un sizing bottom-up sérieux cherche à chiffrer client par client plutôt qu'en appliquant un pourcentage au TAM.",
+    "example": "Un SaaS de réservation visant 150 000 restaurants français, dont 40 % seulement sont équipés pour l'adopter, ramène le marché à un SAM de quelques dizaines de millions d'euros.",
+    "seeAlso": [
+      "tam",
+      "som",
+      "tam-sam-som",
+      "gtm",
+      "market-opportunity"
+    ],
+    "relatedLessonIds": [
+      "lmv-market-sizing",
+      "l-team-market"
+    ],
+    "aliases": [
+      "marché servable adressable",
+      "SAM",
+      "Serviceable Addressable Market"
+    ]
+  },
+  {
+    "id": "som",
+    "term": "Serviceable Obtainable Market (SOM)",
+    "slug": "som",
+    "category": "Stratégie",
+    "short": "Part du SAM réalistement capturable à 3-5 ans.",
+    "definition": "Le SOM correspond à la part du [[sam|SAM]] qu'une société peut réalistement capturer à horizon trois à cinq ans, compte tenu de la concurrence, de sa force commerciale et de sa vitesse d'exécution. C'est le plus concret des trois cercles, car il engage des hypothèses vérifiables de pénétration et de rythme de vente. Un SOM crédible se construit par le bas et s'exprime souvent en ARR atteignable plutôt qu'en taille de marché abstraite.",
+    "example": "Sur un SAM de 72 M€, une société qui vise 8 % de pénétration en cinq ans projette un SOM de l'ordre de 5,8 M€ d'ARR.",
+    "seeAlso": [
+      "tam",
+      "sam",
+      "tam-sam-som",
+      "traction",
+      "gtm"
+    ],
+    "relatedLessonIds": [
+      "lmv-market-sizing",
+      "l-team-market"
+    ],
+    "aliases": [
+      "marché servable capturable",
+      "marché servable obtenable",
+      "Serviceable Obtainable Market",
+      "SOM"
+    ]
+  },
+  {
+    "id": "tam-sam-som",
+    "term": "TAM / SAM / SOM",
+    "slug": "tam-sam-som",
+    "category": "Stratégie",
+    "short": "Le cadre des trois cercles concentriques pour dimensionner un marché : total, servable, capturable.",
+    "definition": "Le cadre TAM / SAM / SOM dimensionne un marché en trois cercles concentriques, du plus large au plus réaliste : le [[tam|TAM]] borne l'opportunité théorique, le [[sam|SAM]] la ramène à ce qui est servable avec le modèle actuel, et le [[som|SOM]] à ce qui est capturable à court terme. Chaque cercle se définit séparément ; pris ensemble, ils servent surtout à relier la taille du marché aux segments clients, au pricing, au go-to-market et au timing. Un sizing crédible se mène en bottom-up, puis se contre-vérifie en top-down.",
+    "example": "Une startup peut viser un TAM mondial énorme tout en n'ayant qu'un SOM initial limité à un segment enterprise précis dans deux pays.",
+    "seeAlso": [
+      "tam",
+      "sam",
+      "som",
+      "market-opportunity",
+      "gtm",
+      "timing"
+    ],
+    "relatedLessonIds": [
+      "lmv-market-sizing",
+      "l-team-market",
+      "l-dd-process"
+    ],
+    "aliases": [
+      "dimensionnement de marché",
+      "marché adressable",
+      "Market size",
+      "taille de marché"
+    ]
+  },
+  {
     "id": "tvpi",
-    "term": "TVPI",
+    "term": "Total Value to Paid-In (TVPI)",
     "slug": "tvpi",
     "category": "Métriques",
     "short": "Valeur totale du fonds, réalisée et résiduelle, rapportée au capital appelé.",
@@ -7117,7 +7233,8 @@
     ],
     "example": "Un TVPI de 2,5x avec un DPI de 0,3x signifie que l’essentiel de la performance reste encore latent.",
     "aliases": [
-      "Total Value to Paid-In"
+      "Total Value to Paid-In",
+      "TVPI"
     ]
   },
   {
@@ -7595,7 +7712,8 @@
       "VCs",
       "Venture Capital (VC)",
       "venture capital financing",
-      "venture capitalists"
+      "venture capitalists",
+      "Venture-Capital"
     ]
   },
   {
@@ -7967,6 +8085,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
+      "A16Z",
       "Andreessen Horowitz",
       "Andreessen Horowitz LLC"
     ],

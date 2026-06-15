@@ -1,10 +1,17 @@
 import { Router } from 'express';
 import { prisma } from '../lib/db.js';
 import { ah } from '../lib/async-handler.js';
+import { content } from '../lib/content.js';
 
 export const contentRouter = Router();
 
 const parse = <T>(s: string): T => JSON.parse(s) as T;
+
+// In dev, admin-editable content (glossary, case studies, blog) is served
+// straight from the JSON source so edits to data/*.json appear on reload
+// without a DB re-seed (the seed is non-destructive). `content.*()` re-reads
+// the file on every call. Production keeps the DB-backed path.
+const DEV_JSON = process.env.NODE_ENV !== 'production';
 
 // ── Learning paths ──────────────────────────────────────────────────────
 contentRouter.get('/paths', ah(async (_req, res) => {
@@ -58,11 +65,16 @@ contentRouter.get('/lessons/:slug', ah(async (req, res) => {
 
 // ── Glossary ────────────────────────────────────────────────────────────
 contentRouter.get('/glossary', ah(async (_req, res) => {
+  if (DEV_JSON) return res.json([...content.glossary()].sort((a, b) => a.term.localeCompare(b.term, 'fr')));
   const rows = await prisma.glossaryTerm.findMany({ orderBy: { term: 'asc' } });
   res.json(rows.map((r) => parse(r.data)));
 }));
 
 contentRouter.get('/glossary/:slug', ah(async (req, res) => {
+  if (DEV_JSON) {
+    const t = content.glossary().find((g) => g.slug === req.params.slug);
+    return t ? res.json(t) : res.status(404).json({ error: 'Terme introuvable.' });
+  }
   const term = await prisma.glossaryTerm.findUnique({ where: { slug: req.params.slug } });
   if (!term) return res.status(404).json({ error: 'Terme introuvable.' });
   res.json(parse(term.data));
@@ -70,10 +82,15 @@ contentRouter.get('/glossary/:slug', ah(async (req, res) => {
 
 // ── Case studies ────────────────────────────────────────────────────────
 contentRouter.get('/case-studies', ah(async (_req, res) => {
+  if (DEV_JSON) return res.json([...content.caseStudies()].sort((a, b) => a.title.localeCompare(b.title, 'fr')));
   const rows = await prisma.caseStudy.findMany({ orderBy: { title: 'asc' } });
   res.json(rows.map((r) => parse(r.data)));
 }));
 contentRouter.get('/case-studies/:slug', ah(async (req, res) => {
+  if (DEV_JSON) {
+    const cs = content.caseStudies().find((c) => c.slug === req.params.slug);
+    return cs ? res.json(cs) : res.status(404).json({ error: 'Étude de cas introuvable.' });
+  }
   const cs = await prisma.caseStudy.findUnique({ where: { slug: req.params.slug } });
   if (!cs) return res.status(404).json({ error: 'Étude de cas introuvable.' });
   res.json(parse(cs.data));
@@ -81,10 +98,15 @@ contentRouter.get('/case-studies/:slug', ah(async (req, res) => {
 
 // ── Blog / research notes ─────────────────────────────────────────────────
 contentRouter.get('/blog', ah(async (_req, res) => {
+  if (DEV_JSON) return res.json([...content.blog()].sort((a, b) => b.date.localeCompare(a.date)));
   const rows = await prisma.blogPost.findMany({ orderBy: { date: 'desc' } });
   res.json(rows.map((r) => parse(r.data)));
 }));
 contentRouter.get('/blog/:slug', ah(async (req, res) => {
+  if (DEV_JSON) {
+    const b = content.blog().find((p) => p.slug === req.params.slug);
+    return b ? res.json(b) : res.status(404).json({ error: 'Article introuvable.' });
+  }
   const b = await prisma.blogPost.findUnique({ where: { slug: req.params.slug } });
   if (!b) return res.status(404).json({ error: 'Article introuvable.' });
   res.json(parse(b.data));

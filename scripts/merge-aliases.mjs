@@ -50,7 +50,12 @@ const unmatched = [];
 for (const term of shipped) {
   const fromLedger = aliasesBySlug.get(term.slug) ?? [];
   const existing = Array.isArray(term.aliases) ? term.aliases : [];
-  const banned = new Set([key(term.term), key(term.slug)]);
+  // Drop an alias that merely repeats the display label, or that is the raw
+  // slug verbatim. We intentionally do NOT ban by the slug's normalized key:
+  // an acronym entry's title is now its expansion (e.g. "Total Value to
+  // Paid-In (TVPI)") while the bare sigle ("TVPI") lives in `aliases` so the
+  // lesson auto-linker keeps wrapping it — and "TVPI" normalises to the slug.
+  const banned = new Set([key(term.term)]);
 
   const seen = new Set();
   const merged = [];
@@ -58,7 +63,7 @@ for (const term of shipped) {
     if (typeof raw !== 'string') continue;
     const value = norm(raw);
     const k = key(value);
-    if (!value || banned.has(k) || seen.has(k)) continue;
+    if (!value || value === term.slug || banned.has(k) || seen.has(k)) continue;
     seen.add(k);
     merged.push(value);
   }
