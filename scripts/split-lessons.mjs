@@ -3,8 +3,8 @@
 // index, while the full body/quiz loads lazily on the lesson reader.
 //
 //   data/lessons.json + data/parcours/*.lessons.json  (sources of truth)
-//     ├─→ data/lessons.index.json   every field except body/keyTakeaways/quiz/furtherReading
-//     └─→ data/lessons.bodies.json  { [slug]: { body, keyTakeaways, quiz?, furtherReading? } }
+//     ├─→ data/lessons.index.json   every field except body/bodyShort/keyTakeaways/quiz/furtherReading
+//     └─→ data/lessons.bodies.json  { [slug]: { body, bodyShort?, keyTakeaways, quiz?, furtherReading? } }
 //
 // The parcours-authored registers (ld-*/lea-*) are folded into the same two
 // outputs, in the same order the client used to concatenate them, so the split
@@ -38,9 +38,10 @@ for (const lesson of source) {
     console.error(`split-lessons: duplicate slug "${lesson.slug}" — bodies are keyed by slug`);
     process.exit(1);
   }
-  const { body, keyTakeaways, quiz, furtherReading, ...light } = lesson;
+  const { body, bodyShort, keyTakeaways, quiz, furtherReading, ...light } = lesson;
   index.push(light);
   const payload = { body: body ?? '', keyTakeaways: keyTakeaways ?? [] };
+  if (bodyShort !== undefined) payload.bodyShort = bodyShort;
   if (quiz !== undefined) payload.quiz = quiz;
   if (furtherReading !== undefined) payload.furtherReading = furtherReading;
   bodies[lesson.slug] = payload;

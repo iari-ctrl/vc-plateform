@@ -51,7 +51,10 @@ export interface Lesson {
   kicker: string;
   readMin: number;
   summary: string;
+  /** The full, deep version of the lesson — the default when no `bodyShort` exists. */
   body: string;
+  /** Optional "essentiel" version shown by default; `body` becomes the opt-in "Profond". */
+  bodyShort?: string;
   keyTakeaways: string[];
   glossaryRefs: string[];
   quiz?: QuizQuestion[];
@@ -60,10 +63,10 @@ export interface Lesson {
 
 /** Light lesson entry (everything but the heavy reader payload) — eager on the
  *  hot path; see `LessonBody` for the lazily-loaded remainder. */
-export type LessonIndexEntry = Omit<Lesson, 'body' | 'keyTakeaways' | 'quiz' | 'furtherReading'>;
+export type LessonIndexEntry = Omit<Lesson, 'body' | 'bodyShort' | 'keyTakeaways' | 'quiz' | 'furtherReading'>;
 
 /** The heavy part of a lesson (reader payload), loaded lazily and keyed by slug. */
-export type LessonBody = Pick<Lesson, 'body' | 'keyTakeaways' | 'quiz' | 'furtherReading'>;
+export type LessonBody = Pick<Lesson, 'body' | 'bodyShort' | 'keyTakeaways' | 'quiz' | 'furtherReading'>;
 
 export interface GlossaryTerm {
   id: string;
@@ -106,6 +109,55 @@ export interface CaseStudy {
   glossaryRefs: string[];
   sections: { heading: string; body: string }[];
   takeaways: string[];
+}
+
+// ── Livrables (milestones) ────────────────────────────────────────────────────
+// The « do something » end of a parcours: a brief + a fill-in template + a
+// self-evaluation rubric, anchored by a worked example that lives in the
+// intelligence layer (an ecosystem dossier, a case, a memo). The parcours step
+// references it by id via `ref.kind: 'milestone'`; see content/parcours.ts.
+
+/** A worked example to imitate — an artefact already published elsewhere. */
+export interface DeliverableModelRef {
+  kind: 'ecosystem' | 'case' | 'memo' | 'lesson';
+  id: string;
+  /** Why this artefact is a good model — what to look at. */
+  note: string;
+}
+
+/** One line of the self-evaluation grid. */
+export interface DeliverableCriterion {
+  /** What is being judged. */
+  criterion: string;
+  /** The concrete test the learner applies to their own draft. */
+  check: string;
+}
+
+/** One section of the template the learner fills in. */
+export interface DeliverableTemplateSection {
+  heading: string;
+  /** Markdown — what goes in this section and how to write it. */
+  prompt: string;
+}
+
+export interface Deliverable {
+  /** Matches the parcours step's `ref.id` (e.g. "todo-ic-simulation"). */
+  id: string;
+  slug: string;
+  title: string;
+  kicker?: string;
+  readMin: number;
+  summary: string;
+  /** Markdown — the brief: what the learner produces and why. */
+  brief: string;
+  template: DeliverableTemplateSection[];
+  rubric: DeliverableCriterion[];
+  /** The exemplar to imitate, resolved to an in-app route by the page. */
+  model?: DeliverableModelRef;
+  /** Lessons that prepare this deliverable (theory backing the practice). */
+  relatedLessonIds?: string[];
+  glossaryRefs?: string[];
+  tags?: string[];
 }
 
 /** Ouvrage analysé dans une « lecture oblique » (deux entrées pour un duel de livres). */

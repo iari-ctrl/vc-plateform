@@ -106,6 +106,7 @@ addCollection(readFirstArray(['glossary.index.json', 'glossary.json']), '/glossa
   priority: '0.55',
 });
 addCollection(readJson('caseStudies.json', []), '/cases', { changefreq: 'monthly', priority: '0.7' });
+addCollection(readJson('deliverables.json', []), '/livrables', { changefreq: 'monthly', priority: '0.55' });
 addCollection(readJson('simulators.json', []), '/simulators', { changefreq: 'monthly', priority: '0.65' });
 addCollection(readJson('memos.json', []), '/memos', { changefreq: 'monthly', priority: '0.65' });
 

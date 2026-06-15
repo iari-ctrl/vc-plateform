@@ -4,7 +4,7 @@ Document canonique fusionné — positionnement, architecture cible et roadmap
 
 Projet : `vc-platform`  
 Date de consolidation : 2026-06-11  
-Dernière mise à jour : 2026-06-12 (corpus simulateurs, workflow drop-in, seed non destructif, avancement Phase 0)  
+Dernière mise à jour : 2026-06-15 (charte de style transverse §9.3 ; quiz systématiques 66/66 ; due diligence 1→5 leçons ; corpus simulateurs, workflow drop-in, seed non destructif, avancement Phase 0)  
 Sources fusionnées : `docs/Stratégie doc et ROADMAP` et `docs/AUDIT-vc-intelligence.md`  
 Règle d'arbitrage : en cas de contradiction, le document **Stratégie** prime sur l'audit. L'audit reste une archive historique.
 
@@ -63,15 +63,16 @@ L'audit du 2026-06-10 a correctement identifié l'effet produit dominant : l'exp
 | Parcours `now / next / later` | 4 / 13 / 5 |
 | Familles de parcours | 6 |
 | Cours | 16 |
-| Leçons canoniques (`data/lessons.json`) | 51 |
+| Leçons canoniques (`data/lessons.json`) | 55 |
 | Leçons drop-in (`data/parcours/*.lessons.json`) | 11 |
-| Leçons servables au total | 62 |
-| Études de cas | 4 |
+| Leçons servables au total | 66 |
+| Études de cas | 5 |
+| Livrables de parcours (`data/deliverables.json`) | 2 |
 | Analyses / blog | 8 |
 | Dossiers d'écosystème (`data/ecosystems.json`) | 31 (3 racines, 28 sous-dossiers) |
 | Simulateurs | 9 |
 | Termes de glossaire | 358 |
-| Étapes de parcours | 148, dont 10 `a-produire` |
+| Étapes de parcours | 148, dont 8 `a-produire` (2 milestones réalisés en livrables) |
 
 Corrections par rapport à l'audit historique :
 
@@ -80,6 +81,7 @@ Corrections par rapport à l'audit historique :
 - **Simulateurs** : le corpus actuel compte 9 simulateurs.
 - **Familles de parcours** : les données actuelles exposent 6 familles (`decouvrir`, `entretien`, `levee`, `grade`, `maitriser`, `express`), le sur-mesure vivant dans `profileParcours.json`.
 - **Couche VC Intelligence amorcée (2026-06-13)** : la couche d'**analyse signée** a commencé à se construire, ce qui nuance le diagnostic « apprentissage uniquement ». Le blog porte désormais 8 analyses (dont 3 « lectures obliques »), et surtout un **espace dédié « Décortiquer un écosystème »** (`/ecosystemes`, 100 % client, `data/ecosystems.json`) publie 31 dossiers vivants arborescents avec thèse falsifiable, convictions datées et figures natives — réalisation concrète du Pilier 5 (Atlas) et du format §10.9. Le centre de gravité reste à déplacer vers cette couche, mais elle n'est plus seulement théorique.
+- **Milestones de parcours réalisés en livrables (2026-06-15)** : les étapes `a-produire` où l'apprenant *produit* un artefact deviennent des pages `/livrables` (brief + gabarit + grille d'auto-évaluation + renvoi à un modèle existant), via `data/deliverables.json` et `client/src/pages/DeliverablePage.tsx`. Deux livrables early-stage (pre-seed/seed) sont en ligne et chacun amorce un pilier Intelligence par « double emploi » : la **simulation de comité (seed)** s'appuie sur le 1ᵉʳ Case décisionnel `cs-seed-ic` (Pilier 4, §10.4), et la **thèse propriétaire** prend pour modèle un dossier `/ecosystemes` existant (Thesis Lab de facto, §10.2). Reste 8 milestones `a-produire` ; le mémo deal seed est la prochaine cible early-stage, la Série A est hors priorité.
 
 Lecture correcte de l'état actuel :
 
@@ -581,6 +583,8 @@ Le ton doit être :
 - non scolaire ;
 - non startup-bullshit.
 
+Ce ton est formalisé en **charte de style rédactionnel non négociable**, applicable à toute rédaction du site (leçons, glossaire, analyses, dossiers d'écosystème, parcours, simulateurs). Source canonique : la section « Writing style (non-negotiable) » du skill `.claude/skills/ecosystemes/SKILL.md` et la mémoire `style-redaction-naturel` ; résumé opérationnel dans `Suivis/Manuel_Architecture_Edition.md` §4.0.c. En clair : prose fluide à phrases de longueur variée, une idée par paragraphe, énoncer le fait puis sa conséquence et s'arrêter ; bannir énumérations mécaniques, punchlines de fin de paragraphe, gras à outrance, métaphores vendeuses, superlatifs et aphorismes de clôture.
+
 ### 9.4 Ce qui doit disparaître du premier niveau de lecture
 
 À retirer de la vitrine principale :
@@ -725,6 +729,8 @@ Structure type :
 13. Related tools
 14. Related glossary terms
 
+> **État d'implémentation (2026-06-15).** Le Thesis Lab existe déjà *de facto* sous la forme des dossiers `/ecosystemes` (§10.5 / §10.9) : thèse falsifiable, convictions datées avec degré d'assurance, signaux de réfutation et figures natives — la structure-type ci-dessus, au format long. Une première passerelle parcours → Thesis Lab est livrée : le livrable **« thèse propriétaire » (pre-seed/seed)** (`/livrables/these-proprietaire-pre-seed-seed`) fait écrire à l'apprenant une note de thèse + un plan de portefeuille, et prend pour modèle un dossier existant (*IA appliquée Europe*). **Reste à faire :** créer des dossiers-racines explicitement « thèse » sur les angles recommandés ci-dessus encore absents (AI Infrastructure, Climate Adaptation, Defense Tech…) et les relier aux Cases / Tools.
+
 ### 10.3 Pilier 3 — Tools / Fund Economics
 
 Priorité : très élevée.
@@ -795,6 +801,8 @@ Deux formats à forte valeur praticien :
 
 - **Anti-portfolio / pass analysis** : analyser pourquoi un fonds a passé sur un futur winner, avec l'information disponible à l'époque et le signal raté. Sources publiques uniquement. Le format montre le jugement, pas seulement le résultat.
 - **Memo library annotée** : partir de memos d'investissement publiés légalement par leurs auteurs, puis annoter ligne par ligne la logique décisionnelle, les hypothèses, les signaux forts/faibles et les angles morts.
+
+> **État d'implémentation (2026-06-15).** Le premier cas décisionnel est livré — `cs-seed-ic`, **« Seed Investment Committee — stylized case »** (l'item 1 ci-dessus), structure §10.4 complète (contexte → question → timing → dynamique → risques → options → décision → outcome stylisé → pattern → leçons), un deal seed (« Volta ») qui divise le comité. Il sert de **modèle** au livrable **« simulation de comité (seed) »** (`/livrables/simulation-comite-investissement-seed`), où l'apprenant rédige son ordre du jour d'IC avant de le confronter au cas. **Reste à faire :** les cas suivants de la liste (Series B follow-on, fund reserve allocation, CVC), l'anti-portfolio (déjà amorcé sous `/anti-portfolio`) et la memo library annotée (`/memos`).
 
 ### 10.5 Pilier 5 — Atlas
 

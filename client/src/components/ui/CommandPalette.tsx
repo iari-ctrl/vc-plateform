@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from '@/i18n/navigation';
-import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft, Ghost, ScrollText, Microscope } from 'lucide-react';
+import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft, Ghost, ScrollText, Microscope, Dumbbell } from 'lucide-react';
 import { api } from '@/lib/api';
 import type { SearchHit } from '@/content/search';
 import { useAuth } from '@/context/AuthContext';
@@ -11,6 +11,7 @@ const TYPE_META: Record<SearchHit['type'], { label: string; icon: typeof Search 
   lesson: { label: 'Leçon', icon: BookOpen },
   glossary: { label: 'Dictionnaire', icon: BookMarked },
   case: { label: 'Étude de cas', icon: FileText },
+  deliverable: { label: 'Livrable', icon: Dumbbell },
   blog: { label: 'Analyse', icon: Newspaper },
   path: { label: 'Parcours', icon: Route },
   simulator: { label: 'Simulateur', icon: FlaskConical },

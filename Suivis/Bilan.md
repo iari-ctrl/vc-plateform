@@ -1,6 +1,6 @@
 # Bilan - VC Premium Platform
 
-Dernière mise à jour : 2026-06-13
+Dernière mise à jour : 2026-06-15
 
 Objet : état actuel synthétique de `vc-premium-platform`, avec les acquis, les limites connues et les prochaines priorités utiles pour sortir du prototype sans lancer une phase production complète.
 
@@ -39,11 +39,11 @@ La priorité n'est plus d'ajouter des features. Deux décisions d'architecture c
 
 ## 2. Vérifications effectuées
 
-Dernier état vérifié — **2026-06-13** (branche `chore/flux-c-repo-hygiene`, exécuté en local) :
+Dernier état vérifié — **2026-06-15** (branche `chore/flux-c-repo-hygiene`, exécuté en local) :
 
 | Commande | Résultat |
 | --- | --- |
-| `npm run validate:content` | exit 0 ; récap : 51 leçons canoniques (+ 11 drop-in = 62 servables) · 358 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs ; 1 lacune éditoriale non bloquante (23/62 leçons sans quiz) |
+| `npm run validate:content` | exit 0 ; récap : 55 leçons canoniques (+ 11 drop-in = 66 servables) · 358 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs ; **plus de lacune quiz** (66/66 leçons avec quiz) |
 | `npm run lint` | OK, 0 erreur, 4 warnings (`react-refresh` structurels) |
 | `npm run build` | OK, build serveur + client |
 | `npm run test --workspace client` | OK, 10 fichiers / 59 tests |
@@ -127,13 +127,15 @@ Forces :
 - marqueurs inline validés ;
 - cahier Ikigai très différenciant ;
 - premiers parcours déjà exploitables pour une démo ;
-- une couche d'**analyse signée** émerge (8 analyses dont 3 « lectures obliques » + 31 dossiers d'écosystème), socle de la bascule vers une VC Intelligence Platform.
+- quiz systématiques : toutes les leçons (66/66) portent désormais un quiz ;
+- cours **due diligence** étoffé (5 leçons : enquête priorisée, commerciale, produit/tech, équipe, juridique/cap table) ;
+- une couche d'**analyse signée** émerge (8 analyses dont 3 « lectures obliques » + 31 dossiers d'écosystème), socle de la bascule vers une VC Intelligence Platform ;
+- premiers **livrables de parcours** : les milestones `a-produire` où l'apprenant produit un artefact deviennent des pages `/livrables` (brief + gabarit + grille + modèle), qui amorcent les piliers Intelligence par double emploi — 2 en ligne (Seed IC → 1ᵉʳ cas décisionnel ; thèse propriétaire → dossier d'écosystème modèle).
 
 Limites :
 
-- 62 leçons canoniques pour 16 cours, plus les leçons drop-in servies côté client ;
-- 23 leçons canoniques sans quiz ;
-- peu d'études de cas ;
+- 55 leçons canoniques (+ 11 drop-in = 66 servables) pour 16 cours — couverture encore inégale, plusieurs cours à 2 leçons ;
+- 5 études de cas seulement (dont 1 décisionnel) ; 8 milestones `a-produire` restent des culs-de-sac ;
 - blog encore mince ;
 - certains parcours ressemblent davantage à un squelette qu'à un vrai curriculum.
 
@@ -142,8 +144,8 @@ Priorité éditoriale :
 1. Densifier les deux parcours `tous` :
    - `levee-de-fonds-cote-entrepreneur` ;
    - `devenir-analyst-associate-principal`.
-2. Viser 4 à 6 leçons par cours sur les zones prioritaires.
-3. Ajouter quiz et takeaways systématiques.
+2. Viser 4 à 6 leçons par cours sur les zones prioritaires (acquis : due diligence porté à 5 leçons ; restent les cours à 2 leçons).
+3. Maintenir quiz et takeaways systématiques (acquis : 66/66 leçons avec quiz).
 4. Relier chaque leçon à des termes de glossaire et, quand pertinent, à un cas ou simulateur.
 
 ---
@@ -250,7 +252,7 @@ Prochaine étape design utile :
 | Vitrine learning-first vs ambition intelligence | Élevé | Home / nav / meta disent « apprentissage » alors que la matière (anti-portfolio, écosystèmes, memos) vise la VC Intelligence ; cf. audit `Report et scoring.md` §8 |
 | Divergence CMS / JSON | Élevé | Le CMS ne persiste pas dans `/data` ; à étendre à la `locale` pour l'i18n |
 | Mode de rendu non tranché | Élevé | CSR vs SSR/prerender à décider **avant** de produire le contenu (impacte SEO + authoring) |
-| Contenu à consolider | Élevé | 62 leçons canoniques dans `data/lessons.json` ; les leçons drop-in de parcours restent à fusionner côté seed/API |
+| Contenu à consolider | Élevé | 55 leçons canoniques dans `data/lessons.json` (+ 11 drop-in) ; couverture inégale (cours à 2 leçons), peu d'études de cas |
 | SEO faible | Moyen | SPA sans prérendu ; `hreflang`/`canonical` i18n différés au pré-lancement |
 | Tests partiels | Faible à moyen | Client 59 tests + serveur 10 tests (auth/profil/isolation) + CI ; reste à étendre la couverture API (admin, notes, journal…) |
 | ~~Garde JWT inopérante~~ | Résolu | Corrigée le 2026-06-12 : longueur min. + blocklist en production, fail-fast au démarrage |
@@ -273,6 +275,7 @@ Prochaine étape design utile :
 ### P0 - Atelier éditorial
 
 - formaliser les templates leçon / cours / article / cas ;
+- **appliquer la charte de style rédactionnel transverse à toute production** : registre d'analyste sobre, prose fluide, zéro tic d'IA ni survente (source canonique : skill `.claude/skills/ecosystemes/SKILL.md` § « Writing style » + mémoire `style-redaction-naturel` ; résumé dans [Manuel_Architecture_Edition.md §4.0.c](Manuel_Architecture_Edition.md)) ;
 - créer une matrice éditoriale des contenus ;
 - compléter les quiz des parcours prioritaires ;
 - garder `/data` comme source de vérité.
@@ -287,7 +290,7 @@ Prochaine étape design utile :
 ### P2 - Garde-fous
 
 - enrichir `validate:content` avec un score de complétude éditoriale ;
-- rendre les leçons sans quiz bloquantes sur les parcours prioritaires ;
+- rendre le quiz obligatoire (erreur bloquante) sur les nouvelles leçons — acquis ponctuel : les 66 leçons actuelles ont toutes un quiz ;
 - signaler les contenus CMS non versionnés.
 
 ### P3 - Corrections techniques minimales
@@ -329,7 +332,8 @@ Prochaine étape design utile :
 ### Contenu
 
 - **Thèmes à combler** : marché secondaire & liquidité ; fund formation / relations LP / rôle BPI–EIF ; construction de portefeuille & réserves ; méthodes de valorisation (VC method, comparables, DCF, multiples) ; cap table & SAFE vs equity vs BSA-AIR ; term sheet clause par clause ; down rounds & gouvernance / board ; sorties (M&A / IPO / secondaire) ; spécificités européennes ; impact de l'IA sur le métier.
-- **Études de cas à créer** : cas européen de scale-up, cas de fonds, post-mortem d'échec, down round annoté, deal memo complet.
+- **Études de cas à créer** : cas européen de scale-up, cas de fonds, post-mortem d'échec, down round annoté, deal memo complet. *(Acquis : `cs-seed-ic`, 1ᵉʳ cas décisionnel — comité d'investissement seed « Volta ».)*
+- **Livrables de parcours à produire** : 8 milestones `a-produire` restent à transformer en livrables. Prochaine cible early-stage : le **mémo de deal seed** (`todo-ecrire-memo`). La Série A (`todo-attentes-serie-a`) est hors priorité early-stage et deviendra une leçon de référence, pas un livrable.
 
 ---
 

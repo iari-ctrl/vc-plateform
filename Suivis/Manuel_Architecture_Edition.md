@@ -1,6 +1,6 @@
 # Manuel d'Architecture et d'Édition — VC Intelligence Platform
 
-Dernière mise à jour : 2026-06-13
+Dernière mise à jour : 2026-06-15
 
 Ce document décrit l'architecture **full-stack** du projet, la **vision produit et le positionnement stratégique**, le cycle de vie du contenu (de la source canonique JSON jusqu'à l'écran), et un **guide d'édition pas-à-pas** pour un développeur qui veut ajouter du contenu, modifier le design, ou faire évoluer le code.
 
@@ -27,11 +27,11 @@ Le projet n'est pas une simple SPA : c'est un **monorepo npm workspaces** à deu
 ```
 vc-premium-platform/
 ├── data/                      # ← SOURCE DE VÉRITÉ du contenu (JSON)
-│   ├── paths.json (9 rayons)  courses.json (16)  lessons.json (51 leçons canoniques)
+│   ├── paths.json (9 rayons)  courses.json (16)  lessons.json (55 leçons canoniques)
 │   ├── lessons.index.json  lessons.bodies.json   # leçons scindées (index léger / corps lazy) — GÉNÉRÉ, ne pas éditer
-│   ├── glossary.json (357)  glossary.index.json  glossary.defs.json   # glossaire scindé — GÉNÉRÉ
-│   ├── caseStudies.json (4)  blog.json (8)
-│   ├── simulators.json (8)  ikigai.json
+│   ├── glossary.json (358)  glossary.index.json  glossary.defs.json   # glossaire scindé — GÉNÉRÉ
+│   ├── caseStudies.json (5)  deliverables.json (2)  blog.json (8)
+│   ├── simulators.json (9)  ikigai.json
 │   ├── parcours.json (22)  parcours.en.json  parcoursConfig.json  profileParcours.json
 │   └── parcours/              # 3 registres drop-in, 11 leçons additionnelles (*.lessons.json, ld-*/lea-*)
 │   # ── À VENIR (piliers VC Intelligence) ──────────────────
@@ -153,7 +153,7 @@ Le glossaire final consommé par l'app reste [data/glossary.json](data/glossary.
 
 - `canonical-glossary.json` est le registre durable : il conserve sources, modules, décisions d'édition, aliases, `action` (`add`, `update`, `merge`, `skip`) et `status` (`draft`, `needs-review`, `approved`, `applied`).
 - `data/glossary.json` ne contient que les entrées finales consommées par l'application : `id`, `term`, `slug`, `category`, `short`, `definition`, `example`, `link`, `seeAlso`, `relatedLessonIds`.
-- Au 2026-06-07, le registre contient **433 entrées** et le glossaire final **357 termes**. Les audits PitchBook, SEC et Schoenherr sont couverts par entrées finales ou aliases.
+- Le registre contient **433 entrées** et le glossaire final **358 termes**. Les audits PitchBook, SEC et Schoenherr sont couverts par entrées finales ou aliases.
 - Toute variante simple doit devenir un **alias** d'un terme existant plutôt qu'une fiche autonome ; une fiche finale n'est créée que si le concept a une utilité de popover ou de navigation propre.
 
 Pour clôturer une passe glossaire : mettez le registre à jour, injectez seulement les `add`/`update` retenus dans `data/glossary.json`, puis lancez `npm run validate:glossary`, `npm run validate:content` et `npm run build`.
@@ -212,7 +212,7 @@ La Phase 1 de l'architecture i18n (voir [i18n_architecture_FR-EN.md](i18n_archit
 
 ### 4.0. Conventions d'`id` et de `slug`
 - `slug` = identifiant d'URL (kebab-case, sans accent). Doit être **unique** par type.
-- `id` = clé interne stable. Conventions observées : **parcours** (couche neuve, `parcours.json`) → `p-*` ; **rayon** de la Bibliothèque (ancien `paths.json`) → court (`discover`) ; cours → `c-*`, leçons → `l-*` (bibliothèque) / `lpl-*` (cours Power Law & Monte Carlo) / `ld-*` (registre découverte) / `lea-*` (registre entretien analyst), **glossaire → `id == slug`**, blog → `bp-<slug>`, études de cas → id propre (`cs-*`).
+- `id` = clé interne stable. Conventions observées : **parcours** (couche neuve, `parcours.json`) → `p-*` ; **rayon** de la Bibliothèque (ancien `paths.json`) → court (`discover`) ; cours → `c-*`, leçons → `l-*` (bibliothèque) / `lpl-*` (cours Power Law & Monte Carlo) / `ld-*` (registre découverte) / `lea-*` (registre entretien analyst), **glossaire → `id == slug`**, blog → `bp-<slug>`, études de cas → id propre (`cs-*`), **livrables** → l'`id` du milestone résolu (`todo-*`, cf. §4.5ter).
 - Les relations se font **par `id`**, pas par slug (voir le graphe ci-dessous).
 
 ```
@@ -220,6 +220,8 @@ Path.courseIds[] ──► Course.id           Course.lessonIds[] ──► Less
 Course.pathId ──► Path.id                Lesson.courseId ──► Course.id
 Lesson.glossaryRefs[] ──► Glossary.slug  Glossary.relatedLessonIds[] ──► Lesson.id
 CaseStudy.glossaryRefs[] ──► Glossary.slug   Simulator.relatedLessonIds[] ──► Lesson.id
+Deliverable.model{kind,id} ──► CaseStudy.id | EcosystemDossier.id | Memo.id | Lesson.id
+Deliverable.relatedLessonIds[] ──► Lesson.id   ParcoursStep.ref(milestone).id ──► Deliverable.id
 ```
 
 ### 4.0.b. Taxonomie et validation (standard cible Phase 3)
@@ -228,8 +230,26 @@ Le repositionnement introduit une taxonomie cible (voir §1bis) : `contentKind`,
 - **Validez toujours** vos JSON locaux avec `npm run validate:content`.
 - Le script `scripts/validate-content.mjs` agit comme une garde-barrière empêchant l'injection de données mal formées. Les schémas Zod assurent cette cohérence structurelle.
 
+### 4.0.c. Style rédactionnel — charte transverse (non négociable)
+Toute prose éditoriale publiée sur le site suit la **même** charte de style, quelle que soit la collection : leçons (`body`, `summary`, `keyTakeaways`, quiz), glossaire (`short`, `definition`, `example`), études de cas et analyses/blog (`sections`, `excerpt`, `body`), dossiers d'écosystème (`these`, sections, `convictions`, signaux, légendes de figures), parcours (`hook`, `goal`, `outcomes`, `prerequisites`), cahier ikigai et fiches de simulateurs (`description`).
+
+> [!IMPORTANT]
+> **Source canonique de la charte** : la section « Writing style (non-negotiable) » du skill [`.claude/skills/ecosystemes/SKILL.md`](../.claude/skills/ecosystemes/SKILL.md) et la mémoire `style-redaction-naturel`. Le skill est nommé d'après les écosystèmes, mais ses règles de style **s'appliquent à toute rédaction du site** — c'est le skill qui fait foi en cas de doute. Ce qui suit en est le résumé opérationnel.
+
+Le registre visé est celui d'un analyste compétent qui rédige un mémo, pas d'un copywriter qui vend. Concrètement :
+
+- **Prose fluide, longueurs de phrases variées.** Des phrases courtes, puis une plus longue qui prend son temps. Ouvertures *in medias res*, sans mise en bouche.
+- **Une idée par paragraphe**, énoncée puis étayée. Chaque phrase apporte une information neuve ; on coupe ce qui ne fait que « sonner intelligent » (« Il est important de noter que… », « Dans un monde en constante évolution… »).
+- **Bannir les tics d'IA** : énumérations mécaniques (« Premièrement… Deuxièmement… »), une punchline à la fin de chaque paragraphe, surdensité de deux-points / tirets / appositions, gras multiples par section (un seul par grande idée, ou aucun — sauf catalogues), méta-discours (« Notre lecture : »).
+- **Registre sobre, ne pas survendre** (c'est là que les brouillons échouent le plus). Proscrits : métaphores vendeuses (« le cimetière le mieux documenté », « le juge de paix »), superlatifs et dramatisation (« spectaculaire », « étonnamment », « le détail qui change tout »), aphorismes de clôture qui couronnent un paragraphe ou l'article, adverbes qui dictent au lecteur ce qu'il doit ressentir.
+- **Énoncer le fait, donner le chiffre avec sa source, en tirer la conséquence en mots simples, s'arrêter.** Une affirmation est plus forte à plat qu'habillée ; si une phrase sonne comme un slogan, la réécrire en constat. Les titres et légendes **décrivent ce qui est montré**, ils ne performent pas une thèse.
+- **Grounding** : aucun chiffre sans source vérifiée ; préférer l'ordre de grandeur honnête (« de l'ordre de », « ≈ ») à la fausse précision.
+
+> [!NOTE]
+> La charte vise les contenus VC Intelligence et **toute nouvelle production**. Des contenus historiques (certaines leçons antérieures) gardent par endroits des tournures « école » (punchlines, gras appuyés) : on les aligne au fil des relectures, sans imposer de réécriture de masse.
+
 ### 4.1. Ajouter une LEÇON (`data/lessons.json`)
-La leçon est l'unité de lecture. Exemple minimal :
+La leçon est l'unité de lecture. Le `body`, le `summary`, les `keyTakeaways` et les `quiz` suivent la **charte de style §4.0.c**. Exemple minimal :
 
 ```jsonc
 {
@@ -288,7 +308,7 @@ Le rendu est assuré par [client/src/lib/markdown.tsx](client/src/lib/markdown.t
 #### Détection automatique des termes (prose des leçons) — 2026-06-09
 Le balisage manuel ne suffit plus à garantir la règle produit : **dans les cours, tout terme technique ou sigle doit avoir un popover + redirection vers le dictionnaire.** `markdown.tsx` applique donc une **détection automatique** quand `glossaryPreview` est actif (prose de leçon via `ActiveProse sourceType="lesson"`, et définitions de `GlossaryPage`).
 
-- Un matcher est construit une fois à partir de **tous les termes + alias** du glossaire (357 termes, ~1256 clés). La **première occurrence** de chaque terme dans la page devient un popover ; les occurrences suivantes restent en texte simple (lecture propre).
+- Un matcher est construit une fois à partir de **tous les termes + alias** du glossaire (358 termes, ~1256 clés). La **première occurrence** de chaque terme dans la page devient un popover ; les occurrences suivantes restent en texte simple (lecture propre).
 - Les **marqueurs manuels** `[[..]]` / `{{..}}` restent prioritaires : leurs slugs sont pré-amorcés, donc la détection auto ne re-lie jamais un terme déjà balisé.
 - Les **sigles** (VC, MOIC, B2B, DPI…) sont reconnus **en respectant la casse** : `VC`/`VCs` sont liés, `vc` en minuscule ou `VC` à l'intérieur d'un mot (`MVC`) ne le sont pas. Les phrases longues priment sur leurs sous-mots (« fonds VC » → `venture-capital-fund`). Frontières Unicode → les termes accentués restent intacts.
 - **Contenu du popover** : terme + champ `short` uniquement (explication très brève). Le **panneau entier** est cliquable et redirige vers `/glossary?term=slug` (lien réel : accessible clavier, clic-milieu/nouvel onglet préservés, navigation SPA au clic gauche) — pas de ligne « Voir dans le dictionnaire » séparée.
@@ -414,7 +434,7 @@ La couche **Parcours** est une **trajectoire par objectif** posée *au-dessus* d
 
 > [!IMPORTANT]
 > - **Le curseur temps** est implémenté par `timeFit` + le `type` des étapes : `visibleSteps(p, budget)` montre `low → coeur`, `medium → coeur+pratique`, `high → tout`. Donc taguez les étapes correctement.
-> - **Résolution des `ref`** (`resolveStep` dans `content/parcours.ts`) : `lesson`/`milestone` → `lessonById` → `/lessons/:slug` ; `case` → `/cases/:slug` ; `simulator` → `/simulators/:slug` ; `glossary` → `/glossary?term=`. Un `ref` non résolu (id `todo-*`, contenu non écrit) s'affiche en **« bientôt »**, sans lien — c'est le rôle de `status: "a-produire"`.
+> - **Résolution des `ref`** (`resolveStep` dans `content/parcours.ts`) : `milestone` → **livrable d'abord** (`deliverableById` → `/livrables/:slug`, cf. §4.5ter), **sinon** `lessonById` → `/lessons/:slug` (préserve `lea-mock`) ; `lesson` → `/lessons/:slug` ; `case` → `/cases/:slug` ; `simulator` → `/simulators/:slug` ; `glossary` → `/glossary?term=`. Un `ref` non résolu (id `todo-*`, contenu non écrit) s'affiche en **« bientôt »**, sans lien — c'est le rôle de `status: "a-produire"`.
 > - **Aiguillage ikigai** : pour qu'un profil recommande ce parcours (bandeau « Ton parcours »), ajoutez-le dans [`data/profileParcours.json`](data/profileParcours.json) (`byProfile.<profil>.primary|then|express`). Les politiques transverses (gating, évaluation, i18n) sont dans [`data/parcoursConfig.json`](data/parcoursConfig.json).
 > - **i18n** : tout champ texte est un `LocalizedText` (`string` = `fr`, ou `{ fr, en }`) ; les surcharges vivent dans `data/parcours.en.json`, fusionnées par `id`.
 
@@ -430,6 +450,8 @@ La couche **Parcours** est une **trajectoire par objectif** posée *au-dessus* d
 ```
 
 ### 4.5. Étude de cas (`data/caseStudies.json`) & Analyse/blog (`data/blog.json`)
+> Prose soumise à la **charte de style §4.0.c** (registre sobre, pas de punchlines ni de survente).
+
 - **Étude de cas** : `kind` ∈ `startup|fund|deal|market`, `sections[]` (`heading` + `body` markdown), `takeaways[]`, `glossaryRefs[]`.
 - **Analyse (blog)** : `category`, `author`, `date` (`YYYY-MM-DD`), `excerpt`, `body` (même markdown), `tags[]`. Le `body` accepte les liens `[[slug]]`. Deux champs **optionnels** servent le format « Lecture oblique » (analyses de livres, cf. §10.9 de `docs/STRATEGIE-vc-intelligence.md`) : `books[]` (`title`/`author`/`year?`, tableau pour les « duels de livres ») affiché sur la carte et l'en-tête de l'article, et `glossaryRefs[]` (mêmes ids que les études de cas) qui rend le bloc « Pour aller plus loin » en fin d'article. La catégorie `"Lecture oblique"` est filtrable sur `/blog`.
 
@@ -442,7 +464,17 @@ Espace d'**analyse signée** (`/ecosystemes`), **100 % client** : tout vit dans 
 - **Figures** (`section.figures[]`) : le renderer markdown maison ne gère ni image, ni HTML brut, ni tableau → les visuels sont des **figures structurées**, rendues en **SVG/HTML natif theme-aware** par `client/src/components/ecosystems/EcosystemFigures.tsx`, **sans aucun asset ni librairie de charting**. 5 types (union discriminée par `kind`) : `bars`, `line`, `matrix` (pastilles `none/low/mid/high`), `quadrant` (items en `x,y ∈ [0,1]`), `taxonomy`. Couleurs via tokens (`--on-surface(-variant)`, `--outline-variant`, `--surface-container*`) + `accent` du dossier. **Un nouveau type de figure = 3 éditions synchronisées** : l'union dans `types.ts`, le `z.discriminatedUnion` dans `scripts/validate-content.mjs`, le renderer dans `EcosystemFigures.tsx`.
 - ⚠️ **Pièges** : (1) **jamais de marqueur `[[slug]]`/`{{slug}}` dans le texte d'une figure** (titre/légende/labels/notes) — le validateur scanne tout le JSON et exigerait leur résolution → échec ; (2) `data/ecosystems.json` est un **round-trip exact** de `JSON.stringify(…, null, 2) + '\n'` → muter via un **petit script Node** jetable plutôt qu'à la main, pour zéro diff parasite.
 - **Validation** : `npm run validate:content` applique un Zod strict (parent existant, **absence de cycle**, racine ⇒ `these`, `glossaryRefs` + marqueurs `[[..]]` résolus contre le glossaire). Si le glossaire change : `npm run split:content`.
-- **Méthodo complète** (recherche sourcée, rédaction, figures, validation) : skill projet **`.claude/skills/ecosystemes/SKILL.md`** — à lire avant tout travail sur un dossier.
+- **Méthodo complète** (recherche sourcée, rédaction, figures, validation) : skill projet **`.claude/skills/ecosystemes/SKILL.md`** — à lire avant tout travail sur un dossier. C'est aussi la **source canonique de la charte de style §4.0.c**, applicable à toute rédaction du site.
+
+### 4.5ter. Livrable de parcours (`data/deliverables.json`)
+> Prose soumise à la **charte de style §4.0.c**. Contenu **100 % client** (`useApiItem(null, …)` : aucun endpoint serveur), même pattern que les dossiers d'écosystème.
+
+Un **livrable** réalise les étapes `milestone` où l'apprenant *produit* un artefact (autrefois des culs-de-sac `a-produire` affichés « bientôt »). C'est la page `/livrables/:slug` qui montre un **brief** (la consigne) + un **gabarit** (`template[]`, section par section) + une **grille d'auto-évaluation** (`rubric[]`) + un renvoi au **modèle** (`model`) — un artefact de la couche Intelligence déjà existant, qu'on imite (« double emploi » : le livrable complète le parcours **et** amorce un pilier).
+
+- **Type** `Deliverable` dans `client/src/content/types.ts` ; loader `client/src/content/deliverables.ts` (`deliverableById`/`deliverableBySlug`) ; page `client/src/pages/DeliverablePage.tsx` ; route `livrables/:slug`. Le `model.kind` ∈ `ecosystem|case|memo|lesson` est résolu vers `/ecosystemes`, `/cases`, `/memos` ou `/lessons`.
+- **Câblage** : `id` du livrable = l'`id` du `milestone` référencé par le step ; passer ce step de `status: "a-produire"` → `"existant"` (le `ref.kind` reste `milestone`, résolu par `resolveStep`, cf. §4.3). À penser : barrel `content/index.ts`, `search.ts` (+ `TYPE_META`/`TYPE_LABEL`), `shared/routes.mjs` (OG `livrables: 'path'`), `scripts/generate-sitemap.mjs`.
+- **Validation** : `scripts/validate-content.mjs` applique un Zod strict + résout `model`, `relatedLessonIds`, `glossaryRefs` et les marqueurs `[[..]]` ; le résolveur `milestone` y est aligné sur `resolveStep` (livrable d'abord, leçon en repli).
+- **En ligne (early-stage)** : `simulation-comite-investissement-seed` (modèle = Case `cs-seed-ic`) et `these-proprietaire-pre-seed-seed` (modèle = dossier `eco-ia-appliquee`). Restent 8 milestones `a-produire`.
 
 ### 4.6. Simulateur (`data/simulators.json`)
 Le JSON ne décrit que la **fiche** (titre, `category`, `accent`, `description`, `relatedLessonIds`). **La logique de calcul est du code**, dans [client/src/components/simulators/calculators.tsx](client/src/components/simulators/calculators.tsx). Ajouter un *nouveau* simulateur = ajouter la fiche JSON **et** brancher un composant calculateur (mappé par `slug`).

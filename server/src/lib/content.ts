@@ -28,7 +28,7 @@ export interface RawQuiz {
 }
 export interface RawLesson {
   id: string; slug: string; courseId: string; order: number; title: string;
-  kicker: string; readMin: number; summary: string; body: string;
+  kicker: string; readMin: number; summary: string; body: string; bodyShort?: string;
   keyTakeaways: string[]; glossaryRefs: string[]; quiz?: RawQuiz[];
   furtherReading?: { label: string; kind: string; ref: string }[];
 }

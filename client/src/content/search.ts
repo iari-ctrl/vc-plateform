@@ -7,6 +7,7 @@ import { LESSONS } from './lessons';
 import { COURSES } from './courses';
 import { GLOSSARY } from './glossary';
 import { CASE_STUDIES } from './caseStudies';
+import { DELIVERABLES } from './deliverables';
 import { BLOG } from './blog';
 import { PARCOURS, t } from './parcours';
 import { SIMULATORS } from './simulators';
@@ -15,7 +16,7 @@ import { MEMOS } from './memos';
 import { ECOSYSTEMS } from './ecosystems';
 
 export interface SearchHit {
-  type: 'course' | 'lesson' | 'glossary' | 'case' | 'blog' | 'path' | 'simulator' | 'anti-portfolio' | 'memo' | 'ecosystem';
+  type: 'course' | 'lesson' | 'glossary' | 'case' | 'deliverable' | 'blog' | 'path' | 'simulator' | 'anti-portfolio' | 'memo' | 'ecosystem';
   id: string;
   slug: string;
   title: string;
@@ -48,6 +49,9 @@ export function searchLocal(query: string): SearchHit[] {
   for (const c of CASE_STUDIES)
     if (has(c.title, c.subtitle, c.summary))
       hits.push({ type: 'case', id: c.id, slug: c.slug, title: c.title, excerpt: c.summary, href: `/cases/${c.slug}` });
+  for (const d of DELIVERABLES)
+    if (has(d.title, d.kicker, d.summary, (d.tags ?? []).join(' ')))
+      hits.push({ type: 'deliverable', id: d.id, slug: d.slug, title: d.title, excerpt: d.summary, href: `/livrables/${d.slug}` });
   for (const b of BLOG)
     if (has(b.title, b.subtitle, b.excerpt, b.body))
       hits.push({ type: 'blog', id: b.id, slug: b.slug, title: b.title, excerpt: b.excerpt, href: `/blog/${b.slug}` });

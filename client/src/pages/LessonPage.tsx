@@ -14,7 +14,11 @@ import { PageLoader } from '@/components/ui/primitives';
 import { useApiItem } from '@/hooks/useApiData';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
+import { storage, STORAGE_KEYS } from '@/lib/storage';
 import NotFoundPage from './NotFoundPage';
+
+/** Reader depth for lessons that ship both an "essentiel" and a full version. */
+type ReadingDepth = 'court' | 'profond';
 
 /** The lesson detail endpoint enriches the lesson with its course/path/neighbours. */
 type LessonNeighbour = { slug: string; title: string };
@@ -58,6 +62,12 @@ export default function LessonPage() {
   );
   const { progress, setProgress } = useUserData();
   const [readPct, setReadPct] = useState(0);
+  // Reader depth is a global, client-only preference; defaults to "court" everywhere.
+  const [depth, setDepth] = useState<ReadingDepth>(() => storage.get<ReadingDepth>(STORAGE_KEYS.readingDepth, 'court'));
+  const changeDepth = (d: ReadingDepth) => {
+    setDepth(d);
+    storage.set(STORAGE_KEYS.readingDepth, d);
+  };
   const articleRef = useRef<HTMLDivElement>(null);
   const initialised = useRef(false);
 
@@ -104,6 +114,10 @@ export default function LessonPage() {
   if (pending || (!lesson && !bundledReady)) return <PageLoader />;
   if (!lesson) return <NotFoundPage />;
 
+  // "Court" (essentiel) is the default; "Profond" is the opt-in full body.
+  const hasShort = typeof lesson.bodyShort === 'string' && lesson.bodyShort.length > 0;
+  const bodySource = hasShort && depth === 'court' ? (lesson.bodyShort as string) : lesson.body;
+
   function complete() {
     if (!lesson) return;
     void setProgress({ lessonId: lesson.id, courseId: lesson.courseId, pathId: parcours?.id, status: 'done', percent: 100 });
@@ -134,15 +148,34 @@ export default function LessonPage() {
           </div>
           <h1 className="mt-3 font-headline text-display-sm font-semibold leading-[1.1] tracking-tight text-balance">{lesson.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-surface-variant text-pretty">{lesson.summary}</p>
-          <div className="mt-5 flex items-center gap-4 border-y border-outline-variant py-3 text-sm text-surface-variant">
+          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-outline-variant py-3 text-sm text-surface-variant">
             <span className="inline-flex items-center gap-1.5"><Clock size={14} /> {lesson.readMin} min de lecture</span>
             <span className="inline-flex items-center gap-1.5"><BookMarked size={14} /> Lecture active : surlignez pour citer</span>
+            {hasShort && (
+              <div className="ml-auto flex gap-1" role="group" aria-label="Profondeur de lecture">
+                {(['court', 'profond'] as const).map((d) => (
+                  <button
+                    key={d}
+                    onClick={() => changeDepth(d)}
+                    aria-pressed={depth === d}
+                    title={d === 'court' ? "L'essentiel" : 'Version approfondie'}
+                    className={`rounded-full border px-3 py-1 text-xs font-medium capitalize transition-colors ${
+                      depth === d
+                        ? 'border-[color:var(--primary)] bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] text-foreground'
+                        : 'border-outline-variant text-surface-variant hover:text-foreground'
+                    }`}
+                  >
+                    {d}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </header>
 
         {/* body */}
         <div ref={articleRef} className="mt-8">
-          <ActiveProse source={lesson.body} sourceType="lesson" sourceId={lesson.id} sourceTitle={lesson.title} />
+          <ActiveProse source={bodySource} sourceType="lesson" sourceId={lesson.id} sourceTitle={lesson.title} />
         </div>
 
         {/* key takeaways */}

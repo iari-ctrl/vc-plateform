@@ -14,6 +14,7 @@ Une plateforme **full-stack** d'initiation, d'apprentissage et d'approfondisseme
 - **Liberté responsable.** Aucun chapitre n'est bloqué, aucune progression n'est imposée. On peut tout explorer en invité.
 - **Introspection d'abord.** L'onboarding est un véritable **cahier d'introspection** ikigai (diagramme à 13 zones, deux niveaux de lecture *Découverte / Avancé*, trois archétypes, sept questions libres) qui précède le catalogue : *pourquoi* avant *quoi*. Il conserve le test d'orientation scoré et le profil d'apprentissage.
 - **Premium éditorial.** Entre école privée, memo d'investissement, knowledge base et carnet personnel — jamais un dashboard SaaS générique.
+- **Style sobre et naturel.** Toute rédaction du site (leçons, glossaire, analyses, dossiers d'écosystème, parcours, simulateurs) suit une **charte de style transverse non négociable** : prose fluide, registre d'analyste, pas de tics d'IA ni de survente. Source canonique : le skill `.claude/skills/ecosystemes/SKILL.md` (section « Writing style ») + la mémoire `style-redaction-naturel` ; résumé opérationnel dans [`Manuel_Architecture_Edition.md` §4.0.c](Manuel_Architecture_Edition.md).
 - **Le compte est optionnel et utile.** Il ne sert qu'à *sauvegarder* : progression, notes, citations, favoris, profil, synchronisés entre appareils.
 - **Bilingue par conception (FR/EN).** Le routing localisé `/fr` `/en` est en place (Phase 1) ; le français reste la langue par défaut, avec repli FR pour les contenus EN non encore traduits. Le sélecteur FR/EN est **masqué** tant que l'anglais n'est pas livré (drapeau `EN_ENABLED = false` dans `client/src/i18n/config.ts`) — sous `/en`, `<html lang>` reste `fr` pour ne pas mentir aux lecteurs d'écran / crawlers. Voir [`i18n_architecture_FR-EN.md`](i18n_architecture_FR-EN.md).
 
@@ -28,7 +29,7 @@ Une plateforme **full-stack** d'initiation, d'apprentissage et d'approfondisseme
 | **Base de données** | SQLite (prototype) — interchangeable avec Postgres en changeant le `datasource` Prisma |
 | **Typographie** | Newsreader (titres) · Plus Jakarta Sans (corps) · JetBrains Mono (mono) |
 
-Le **contenu canonique** (parcours, cours, leçons, dictionnaire, études de cas, analyses, simulateurs, ikigai) vit dans `/data/*.json`. Il est **partagé** : le client le bundle pour fonctionner hors-ligne / en invité, et le serveur l'utilise pour *seeder* la base de données.
+Le **contenu canonique** (parcours, cours, leçons, dictionnaire, études de cas, livrables de parcours, analyses, simulateurs, ikigai) vit dans `/data/*.json`. Il est **partagé** : le client le bundle pour fonctionner hors-ligne / en invité, et le serveur l'utilise pour *seeder* la base de données.
 
 ---
 
@@ -80,7 +81,7 @@ npm run dev
 
 Audit local courant (2026-06-12, exécuté sur la branche `chore/flux-c-repo-hygiene`) :
 
-- `npm run validate:content` : OK (récap au 2026-06-13 : 62 leçons · 358 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs), avec un warning éditorial (23/62 leçons sans quiz — backlog contenu) ;
+- `npm run validate:content` : OK (récap au 2026-06-15 : 66 leçons · 358 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs), **sans warning éditorial** — quiz désormais systématiques (plus aucune leçon sans quiz) ;
 - `npm run lint` : OK, 0 erreur, 4 warnings (uniquement `react-refresh/only-export-components`, structurels aux Context) ;
 - `npm run build` : OK, build serveur + client (validation contenu rejouée via le hook `prebuild`) ;
 - `npm run test --workspace client` : OK, 10 fichiers / 59 tests ;
@@ -116,8 +117,9 @@ vc-premium-platform/
 │   ├── paths.json  courses.json  lessons.json  glossary.json
 │   ├── glossary.index.json  glossary.defs.json   # glossaire scindé (index léger / défs lazy) — généré
 │   ├── lessons.index.json   lessons.bodies.json  # leçons scindées (index léger / corps lazy) — généré
-│   ├── caseStudies.json  blog.json  simulators.json  ikigai.json
+│   ├── caseStudies.json  deliverables.json  blog.json  simulators.json  ikigai.json
 │   ├── ecosystems.json       # dossiers « Décortiquer un écosystème » (arbre parentId/order, 100% client)
+│   #   deliverables.json     # livrables de parcours (/livrables) : brief + gabarit + grille + modèle, 100% client
 │   ├── parcours.json  parcours.en.json  parcoursConfig.json  profileParcours.json
 │   └── parcours/             # fiches de leçons drop-in par parcours (*.lessons.json)
 │
@@ -146,7 +148,7 @@ Le build client est découpé par routes et par collections de contenu : le vend
 
 ### Pages (client)
 
-`Home` · `Onboarding` (ikigai) · `Résultat du profil` · `Dashboard` · `Parcours` (Atlas + catalogue par familles, sur `/paths`) · `Détail parcours` (carte de voyage, sur `/paths/:slug`) · `Bibliothèque` (les cours, lectures et études de cas, sur `/bibliotheque`) · `Détail rayon` · `Cours` · `Leçon` (lecture active) · `Dictionnaire` · `Études de cas` (détail) · `Simulateurs` (liste + 9 calculateurs) · `Analyses` (blog liste + article) · `Écosystèmes` (« Décortiquer un écosystème » : index + dossier, sur `/ecosystemes` et `/ecosystemes/:slug`) · `Notes & favoris` · `Profil` · `Recherche` · `Administration (CMS)`.
+`Home` · `Onboarding` (ikigai) · `Résultat du profil` · `Dashboard` · `Parcours` (Atlas + catalogue par familles, sur `/paths`) · `Détail parcours` (carte de voyage, sur `/paths/:slug`) · `Bibliothèque` (les cours, lectures et études de cas, sur `/bibliotheque`) · `Détail rayon` · `Cours` · `Leçon` (lecture active) · `Dictionnaire` · `Études de cas` (détail) · `Livrable` (l'aboutissement « à produire » d'un parcours : brief + gabarit + grille + modèle, sur `/livrables/:slug`) · `Simulateurs` (liste + 9 calculateurs) · `Analyses` (blog liste + article) · `Écosystèmes` (« Décortiquer un écosystème » : index + dossier, sur `/ecosystemes` et `/ecosystemes/:slug`) · `Notes & favoris` · `Profil` · `Recherche` · `Administration (CMS)`.
 
 > `/paths/:slug` route intelligemment : un slug de parcours → la carte de voyage ; tout autre slug (liens legacy des sujets) → l'ancien détail de rayon. Aucun lien existant n'est cassé.
 

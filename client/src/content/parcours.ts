@@ -10,6 +10,7 @@ import { courseById } from './courses';
 import { lessonById } from './lessons';
 import { CASE_STUDIES } from './caseStudies';
 import { SIMULATORS } from './simulators';
+import { deliverableById } from './deliverables';
 import type {
   Parcours,
   ParcoursFamily,
@@ -80,13 +81,18 @@ export interface ResolvedStep {
 }
 
 /**
- * Resolve a step's `ref` to a concrete route. Milestone steps may point at a
- * written lesson (e.g. the analyst mock `lea-mock`); otherwise they are an
- * « à produire » placeholder with no destination yet.
+ * Resolve a step's `ref` to a concrete route. Milestone steps resolve, in order,
+ * to a produced deliverable (`/livrables/...`), then to a written lesson (e.g.
+ * the analyst mock `lea-mock`); otherwise they are an « à produire » placeholder
+ * with no destination yet.
  */
 export function resolveStep(step: ParcoursStep): ResolvedStep {
   const { kind, id } = step.ref;
 
+  if (kind === 'milestone') {
+    const deliverable = deliverableById(id);
+    if (deliverable) return { href: `/livrables/${deliverable.slug}`, exists: true, readMin: deliverable.readMin };
+  }
   if (kind === 'lesson' || kind === 'milestone') {
     const lesson = lessonById(id);
     if (lesson) return { href: `/lessons/${lesson.slug}`, exists: true, lessonId: lesson.id, readMin: lesson.readMin };

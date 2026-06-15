@@ -1,6 +1,6 @@
 # Report et scoring - VC Premium Platform
 
-Dernière mise à jour : 2026-06-13
+Dernière mise à jour : 2026-06-15
 
 Objet : conserver le **journal daté** des avancées et des vérifications de `vc-premium-platform`, et le **scoring** du produit.
 
@@ -65,6 +65,14 @@ Travaux du jour (2026-06-13) — **validés** (`validate:content` OK, `db:seed` 
 - **Deuxième « Lecture oblique » rédigée** : `bp-societe-du-spectacle` (*La Société du spectacle*, Debord, 1967) — 11 idées, ~3 530 mots / 18 min, parallèles contexte actuel (IA, méga-tours, structures post-2021) et **taxonomie de 8 logiques de levée** (carburant / signal / validation / monnaie / rituel / offre / théâtre / produit). Renvois : étude de cas « valorisation flatteuse », anti-portfolio, diptyque avec Scott. `blog.json` : 7 → **8 articles** ; `validate:content` + `db:seed` OK.
 - **Troisième « Lecture oblique » rédigée** : `bp-exit-voice-loyalty` (*Exit, Voice, and Loyalty*, Hirschman, 1970) — le squelette devient un article complet de 9 idées, ~2 870 mots / 14 min : VC = classe d'actifs « voice », entrepreneuriat comme exit (Shockley→Fairchild, Zoom/anti-portfolio), attrition/diligence, churn muet, loyauté lucide vs captive, LPs/re-up, paradoxe de l'exit facile. Triptyque Scott/Debord/Hirschman. Seed via suppression ciblée + re-seed (DB préservée). **Reste 1 squelette : Flatland.**
 
+Travaux du jour (2026-06-15) — **validés** (`validate:content` OK, build client OK, **70 tests**) :
+
+- **Livrables de parcours — nouveau type de contenu** (`data/deliverables.json`, cf. [Manuel §4.5ter](Manuel_Architecture_Edition.md)) : les étapes `milestone` `a-produire`, jusqu'ici des culs-de-sac affichés « bientôt », deviennent des pages `/livrables/:slug` (brief + gabarit + grille d'auto-évaluation + renvoi à un **modèle** existant). Infra **100 % client** réutilisant le patron Case/écosystème : type `Deliverable` (`content/types.ts`), loader `content/deliverables.ts`, page `DeliverablePage.tsx`, route, indexation recherche/command palette, OG `livrables: 'path'` (`shared/routes.mjs`), sitemap. `resolveStep` étendu : un `milestone` résout vers un livrable **d'abord**, sinon retombe sur une leçon (préserve `lea-mock`).
+- **Vague 1 — Simulation de comité (seed)** : livrable `simulation-comite-investissement-seed` (parcours `reussir-l-entretien-associate`) + **1ᵉʳ cas décisionnel** `cs-seed-ic` (« Volta », deal seed qui divise le comité, structure §10.4 complète). `caseStudies.json` : 4 → **5**. Amorce le Pilier 4 (Cases) par double emploi : le Case sert de modèle au livrable.
+- **Vague 2 — Thèse propriétaire (pre-seed/seed)** : livrable `these-proprietaire-pre-seed-seed` (parcours `entretien-principal-poste-senior`), gabarit double (note de thèse + plan de portefeuille), modèle = dossier d'écosystème `eco-ia-appliquee`. Amorce le Pilier 2 (Thesis Lab), dont les dossiers `/ecosystemes` sont la réalisation *de facto*. Les deux steps passent à `existant` ; restent **8 milestones `a-produire`**.
+- **Validateur durci** : `scripts/validate-content.mjs` couvre désormais les livrables (schéma Zod strict, unicité id/slug, résolution `model`/`relatedLessonIds`/`glossaryRefs`, marqueurs `[[..]]`) et son résolveur `milestone` est aligné sur `resolveStep`. A corrigé un latent : les 2 milestones flippés échouaient la validation (le build client direct avait sauté le `prebuild` racine).
+- **Docs de suivi & stratégie** : `docs/STRATEGIE-vc-intelligence.md` (§2, §10.2 Thesis Lab, §10.4 Cases) et `Suivis/` (ce journal, Bilan, README, Manuel) mis à jour ; mémoire projet `livrables-milestones-format` rafraîchie.
+
 > Note de séquencement (issue des conversations) : garder design system tokenisé + tests/CI + Error Boundary (utiles tout de suite, peu de churn) ; **différer** le lot 🔴 restant (SSR/SEO, CSP/HSTS, contraste de l'or, interstitiel splash) jusqu'à un contenu réel et un déploiement — la garde JWT, elle, est désormais corrigée. Priorité immédiate : les deux décisions d'architecture (rendu + modèle de contenu), puis une tranche verticale réelle.
 
 Points confirmés lors du dernier audit (2026-06-10) :
@@ -105,7 +113,7 @@ Points bloquants ou fragiles :
 | Vision produit | 8.5 / 10 | Positionnement fort : introspection + apprentissage VC + premium éditorial. |
 | UX globale | 8.1 / 10 | Portail d'entrée premium, cahier Ikigai fort, atlas navigable (pan/zoom/recentrage), `DesignSystemShowcasePage` existante pour l'interface. |
 | Design / direction artistique | 8.6 / 10 | Identité atlas/carnet convaincante. Mode sombre rehaussé par ciel photographique. Portail splash à la hauteur. Barre latérale en verre dépoli. |
-| Contenu pédagogique | 7.8 / 10 | Très complet : **22 parcours, 16 cours, 62 leçons canoniques (+ leçons drop-in de parcours), 4 études de cas, 8 simulateurs, 357 termes au glossaire**. Le nouveau cours Power Law/Monte Carlo renforce le chaînage théorie → simulateur. Attention : 23 leçons canoniques n'ont pas encore de quiz. |
+| Contenu pédagogique | 7.8 / 10 | Très complet : **22 parcours, 16 cours, 55 leçons canoniques (+ 11 drop-in = 66 servables), 5 études de cas, 2 livrables de parcours, 9 simulateurs, 358 termes au glossaire**. Quiz désormais systématiques (66/66) ; cours due diligence porté à 5 leçons. Le cours Power Law/Monte Carlo renforce le chaînage théorie → simulateur ; les milestones `a-produire` commencent à devenir des livrables (Seed IC, thèse propriétaire). |
 | Technique front-end | 8.2 / 10 | Build OK (vendor React ~232 kB), lazy routes. Glossaire + leçons scindés index/contenu (chunk `lessons` eager 176→32 kB). Assets WebP. Routing i18n `/fr` `/en` en place. |
 | Back-end / API | 8.0 / 10 | Architecture fonctionnelle. Rate-limiting (auth + `/search`), **garde JWT corrigée**, **wrapper async `ah()`** (plus de crash sur rejection), `attachUser` scoping. Reste helmet/CSP, cookie `secure`, CSRF. |
 | Qualité / tests | 8.4 / 10 | Lint (0 erreur, 4 warnings), validation contenu complète, **Vitest client (59 tests) + serveur (10 tests : auth/profil/isolation) + CI**. |
@@ -218,7 +226,7 @@ Statut : en place.
 - Toutes les relations structurantes vérifiées.
 - Règle quiz : malformation = erreur bloquante ; absence = warning.
 - Marqueurs `[[..]]` / `{{..}}` vérifiés.
-- `npm run validate:content` : exit 0 avec warning éditorial courant (23/62 leçons canoniques sans quiz).
+- `npm run validate:content` : exit 0, sans warning éditorial (toutes les leçons ont désormais un quiz).
 
 ### Build et architecture
 
@@ -479,6 +487,25 @@ Audit complet demandé (positionnement, UX/UI, parcours, contenu, fonctionnalit�
 4. **Rails contextuels C** au fil de l'étoffage de la couche intelligence.
 5. **POC prérendu éditorial** (débloque le partage social du bon contenu).
 6. Aligner la **recherche serveur** sur le client (eco / anti-portfolio / memos) — dette, pas P1.
+
+---
+
+### 2026-06-15 — Quiz systématiques & due diligence approfondie
+
+Commandes de vérification (branche `chore/flux-c-repo-hygiene`, en local) :
+
+- `npm run validate:content` : **exit 0**, récap 66 leçons · 358 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs ; **plus aucune leçon sans quiz** (le warning « 23/62 sans quiz » disparaît).
+- `npm run split:content` : **OK** (55 leçons library + 11 drop-in → `lessons.index.json` / `lessons.bodies.json`).
+- `cd client && npx tsc --noEmit -p tsconfig.app.json` : **exit 0**.
+- `npm run build` : **exit 0**, serveur + client.
+
+Apport éditorial :
+
+- **Quiz posés sur les 23 leçons canoniques qui en manquaient** (2 questions chacune, une seule bonne réponse, explication ancrée sur la matière). Les 66 leçons servables ont désormais un quiz ; le cours `c-founder-raise` (7 leçons, aucun quiz auparavant) est traité en priorité.
+- **Cours `c-due-diligence` étendu de 1 à 5 leçons** : `l-dd-process` + `l-dd-commercial`, `l-dd-tech-product`, `l-dd-team`, `l-dd-legal` — marché, produit/tech, équipe/références et juridique/cap table côté investisseur, reliées au glossaire, à des leçons voisines, au simulateur `ownership` et au cas `cs-liquidation-preference`. `data/lessons.json` : 51 → **55 leçons canoniques**.
+- Rédaction alignée sur la **charte de style §4.0.c** du Manuel (registre d'analyste sobre, sans punchlines ni survente).
+
+Fichiers modifiés : `data/lessons.json`, `data/courses.json` (lessonIds de `c-due-diligence`), fichiers scindés régénérés (`lessons.index.json`, `lessons.bodies.json`), `client/public/sitemap.xml`. Côté serveur/API, `npm run db:seed` reste à lancer pour aligner la base (non requis en mode invité : le bundle sert déjà les nouvelles leçons).
 
 ---
 

@@ -16,6 +16,7 @@ const CourseDetailPage = lazy(() => import('@/pages/CourseDetailPage'));
 const LessonPage = lazy(() => import('@/pages/LessonPage'));
 const GlossaryPage = lazy(() => import('@/pages/GlossaryPage'));
 const CaseStudyPage = lazy(() => import('@/pages/CaseStudyPage'));
+const DeliverablePage = lazy(() => import('@/pages/DeliverablePage'));
 const SimulatorsPage = lazy(() => import('@/pages/SimulatorsPage'));
 const SimulatorPage = lazy(() => import('@/pages/SimulatorPage'));
 const AntiPortfolioPage = lazy(() => import('@/pages/AntiPortfolioPage'));
@@ -85,6 +86,7 @@ export default function App() {
           <Route path="glossary/:slug" element={<GlossaryPage />} />
           <Route path="cases" element={<Navigate to="../bibliotheque" replace />} />
           <Route path="cases/:slug" element={<CaseStudyPage />} />
+          <Route path="livrables/:slug" element={<DeliverablePage />} />
           <Route path="simulators" element={<SimulatorsPage />} />
           <Route path="simulators/:slug" element={<SimulatorPage />} />
           <Route path="anti-portfolio" element={<AntiPortfolioPage />} />

@@ -116,7 +116,11 @@
       "process"
     ],
     "lessonIds": [
-      "l-dd-process"
+      "l-dd-process",
+      "l-dd-commercial",
+      "l-dd-tech-product",
+      "l-dd-team",
+      "l-dd-legal"
     ]
   },
   {

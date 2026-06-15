@@ -1,0 +1,173 @@
+[
+  {
+    "id": "todo-ic-simulation",
+    "slug": "simulation-comite-investissement-seed",
+    "title": "Simulation de comité d'investissement (seed)",
+    "kicker": "Livrable",
+    "readMin": 7,
+    "summary": "Tu as bouclé la due diligence sur un deal seed qui divise l'équipe. Le partner te donne dix minutes en comité : écris l'ordre du jour que tu défendrais, puis confronte-le au cas modèle.",
+    "brief": "Tu viens de boucler la due diligence sur **Volta**, un deal seed qui partage l'équipe d'investissement. Le partner te donne dix minutes en comité. Il ne veut pas un résumé de la boîte — il l'a déjà lu. Il veut ta **recommandation** et la conviction qui la porte : investir ou passer, et pourquoi celui qui pense l'inverse a tort.\n\nCe livrable te fait écrire l'ordre du jour que tu défendrais à l'oral, section par section. Tu le confrontes ensuite au cas modèle, où le même deal passe réellement en comité et où la décision se prend pour de bon. L'enjeu n'est pas d'avoir raison sur la sortie — personne ne la connaît. C'est de prendre une position **falsifiable**, d'anticiper l'objection avant qu'on te la serve, et de dire à voix haute ce qui te ferait changer d'avis.",
+    "template": [
+      {
+        "heading": "La recommandation, en une phrase",
+        "prompt": "Ouvre par ta position, pas par le contexte. « Je recommande de mener à 1,2 M€ pour ~13 % » ou « je recommande de passer ». Le comité doit savoir où tu vas avant que tu expliques comment tu y es arrivé."
+      },
+      {
+        "heading": "La thèse : pourquoi maintenant, pourquoi eux",
+        "prompt": "En trois ou quatre phrases, le pari central. Quel changement de marché rend ce produit possible aujourd'hui et pas il y a deux ans, et pourquoi cette équipe est mieux placée que la prochaine pour le saisir. Écris une thèse, pas une description : elle doit pouvoir être démentie par un fait futur."
+      },
+      {
+        "heading": "Ce qui doit être vrai",
+        "prompt": "Les deux ou trois hypothèses dont dépend toute la valeur — la [[traction|traction]] qui tient, le marché qui s'ouvre, l'équipe qui recrute commercial. Ce sont elles, pas la boîte, que le comité va attaquer."
+      },
+      {
+        "heading": "Les risques, et ta réponse",
+        "prompt": "Prends les objections les plus dures à ta propre reco et formule-les mieux que ne le ferait un sceptique. Pour chacune, dis si elle est rédhibitoire ou gérable, et ce que tu surveillerais après le chèque. Un risque que tu n'as pas nommé, c'est le comité qui le nommera pour toi."
+      },
+      {
+        "heading": "Le deal",
+        "prompt": "Le chiffre et sa logique : ticket, [[pre-money|valorisation pre-money]], part visée, [[pro-rata|pro-rata]] pour le tour suivant et réserve de [[follow-on|follow-on]]. Pourquoi ce prix se défend, et à partir de quelle valorisation tu ne suis plus."
+      },
+      {
+        "heading": "Ce qui me ferait changer d'avis",
+        "prompt": "Une ou deux phrases. Le signal précis — un chiffre de vente, un départ, un concurrent qui lève — qui retournerait ta conviction. C'est ce qui sépare une position d'une opinion."
+      }
+    ],
+    "rubric": [
+      {
+        "criterion": "Position d'entrée",
+        "check": "Le comité connaît ta reco dès la première phrase, sans avoir à la deviner."
+      },
+      {
+        "criterion": "Thèse falsifiable",
+        "check": "Ta thèse pourrait être démentie par un fait futur — ce n'est pas une description de la boîte."
+      },
+      {
+        "criterion": "Objections anticipées",
+        "check": "Tu as formulé toi-même l'argument du sceptique, et mieux qu'il ne l'aurait fait."
+      },
+      {
+        "criterion": "Logique du prix",
+        "check": "Le ticket et la valo sont justifiés, avec un seuil au-delà duquel tu passes."
+      },
+      {
+        "criterion": "Critère de réfutation",
+        "check": "Tu as nommé le signal concret qui te ferait changer d'avis."
+      }
+    ],
+    "model": {
+      "kind": "case",
+      "id": "cs-seed-ic",
+      "note": "Le même deal passe réellement en comité. Compare ton ordre du jour à la façon dont la décision se prend : où les options se tranchent, quelle conviction l'emporte, et comment le deal est structuré pour acheter de l'information avant d'engager tout le capital."
+    },
+    "relatedLessonIds": [
+      "l-defending-thesis",
+      "l-thesis-anatomy",
+      "l-dd-process"
+    ],
+    "glossaryRefs": [
+      "traction",
+      "runway",
+      "pre-money",
+      "dilution",
+      "pro-rata",
+      "follow-on",
+      "power-law"
+    ],
+    "tags": [
+      "seed",
+      "investment-committee",
+      "deal-memo",
+      "conviction"
+    ]
+  },
+  {
+    "id": "todo-these-proprietaire",
+    "slug": "these-proprietaire-pre-seed-seed",
+    "title": "Écrire une thèse propriétaire (pre-seed / seed)",
+    "kicker": "Livrable",
+    "readMin": 8,
+    "summary": "Pour un poste de Principal, on attend de toi une conviction, pas un avis éclairé. Écris la thèse pre-seed/seed que tu défendrais — où la valeur va se déposer, et comment tu construirais le portefeuille pour la capter — puis confronte-la à un dossier d'écosystème abouti.",
+    "brief": "Un Associate trie des deals. Un Principal explique pourquoi le fonds devrait en chasser certains plutôt que d'autres. La différence tient dans un document : une **thèse propriétaire** — un pari assumé sur l'endroit où la valeur va se créer dans les trois à cinq ans, et sur la raison pour laquelle ton fonds est mieux placé qu'un autre pour la capter au pre-seed et au seed.\n\nCe livrable te fait écrire ce document en deux temps qui n'en font qu'un. D'abord la **note de thèse** : la conviction, pourquoi elle tient maintenant, et ce qui la démentirait. Ensuite le **plan de portefeuille** : comment cette conviction se traduit en tickets, en [[dilution|ownership cible]], en réserves de [[follow-on|follow-on]] et en discipline de triage. Une thèse qui n'engendre pas de portefeuille n'est qu'une opinion bien tournée ; une construction de portefeuille sans thèse n'est qu'un tableur. L'exercice consiste à les tenir ensemble.\n\nChoisis un terrain que tu connais — un secteur, une couche technologique, une géographie. L'enjeu n'est pas d'avoir le bon secteur, c'est d'écrire une thèse **réfutable** : un pari que le réel pourra contredire, daté, avec un degré d'assurance, et la liste précise des signaux que tu surveillerais pour savoir si tu te trompes.",
+    "template": [
+      {
+        "heading": "Thèse · Où la valeur va se déposer",
+        "prompt": "Ouvre par le pari, pas par la taille du marché. La bonne question n'est pas « la technologie est-elle réelle ? » mais « *où* la valeur va-t-elle se déposer ? » — quelle couche, quel type d'acteur, quelle étape de la chaîne. En deux ou trois phrases, formule la conviction centrale de telle façon qu'un investisseur sérieux puisse être en désaccord."
+      },
+      {
+        "heading": "Thèse · Pourquoi maintenant, pourquoi ce terrain",
+        "prompt": "Deux questions liées. Quel basculement — réglementaire, technologique, de coûts, de comportement — rend ce pari juste aujourd'hui et faux il y a trois ans ? Et pourquoi ton fonds a un droit de jouer singulier ici : un accès, un réseau, une expertise qui te feront voir et gagner les deals que les généralistes manqueront. Le [[tam-sam-som|marché]] grand n'est pas un argument ; un [[moat|fossé]] que tu peux atteindre en est un."
+      },
+      {
+        "heading": "Thèse · Trois convictions falsifiables",
+        "prompt": "Décline la thèse en deux ou trois affirmations datées. Chacune porte un horizon (« d'ici 2029 »), un degré d'assurance assumé (forte, moyenne, spéculative), et surtout un fait futur précis qui la démentirait. Une conviction qu'aucun chiffre ne pourrait contredire n'est pas une conviction, c'est une posture."
+      },
+      {
+        "heading": "Thèse · Ce qui me ferait changer d'avis",
+        "prompt": "Nomme les signaux que tu suivrais trimestre après trimestre pour savoir si la thèse tient — un coût qui baisse, une cohorte qui passe du pilote au contrat, un nombre d'acteurs survivants. Ce sont eux qui transforment une thèse en instrument de travail plutôt qu'en manifeste."
+      },
+      {
+        "heading": "Portefeuille · La forme du fonds",
+        "prompt": "Traduis la conviction en construction. Combien de tickets de premier chèque sur la durée d'investissement, à quel ticket d'entrée, pour quelle [[dilution|part cible]] au pre-seed et au seed ? Une thèse de power-law concentrée et une thèse d'indexation large ne donnent pas le même nombre de paris — la forme du portefeuille doit *découler* de ce que tu viens d'affirmer, pas s'y ajouter."
+      },
+      {
+        "heading": "Portefeuille · Réserves et triage",
+        "prompt": "Le premier chèque n'est que la moitié de la décision. Quelle part du fonds gardes-tu en réserve pour les [[follow-on|follow-on]], comment exerces-tu (ou pas) ton [[pro-rata|pro-rata]], et selon quelle règle tu décides de re-financer un gagnant naissant plutôt que de soutenir un retardataire ? C'est là que la [[portfolio-construction|construction de portefeuille]] sépare les fonds qui pensent leurs réserves de ceux qui les dépensent au fil de l'eau."
+      },
+      {
+        "heading": "Portefeuille · Comment il rend l'argent",
+        "prompt": "Termine par l'arithmétique. Combien de sorties, à quelle taille, doivent rembourser le fonds entier — et donc combien de tes paris peuvent échouer sans casser le rendement ? Assume la [[power-law|loi de puissance]] : ce n'est pas un risque à couvrir, c'est la structure que la construction doit épouser. Si tu disposes du simulateur de retours du fonds, fais tourner ta forme de portefeuille et lis le [[tvpi|TVPI]] / [[dpi|DPI]] qu'elle implique."
+      }
+    ],
+    "rubric": [
+      {
+        "criterion": "Une thèse, pas un panorama",
+        "check": "C'est un pari réfutable sur l'endroit où la valeur se dépose, pas une description du marché ou un état des lieux du secteur."
+      },
+      {
+        "criterion": "Convictions datées et falsifiables",
+        "check": "Chaque conviction porte un horizon, un degré d'assurance, et un fait futur précis qui la démentirait."
+      },
+      {
+        "criterion": "Un terrain défendable",
+        "check": "Tu expliques pourquoi cette thèse t'appartient — un accès, un edge — et pas seulement pourquoi le marché est grand."
+      },
+      {
+        "criterion": "La thèse engendre le portefeuille",
+        "check": "Le nombre de tickets, l'ownership cible et la politique de réserves découlent de la conviction au lieu d'y être plaqués."
+      },
+      {
+        "criterion": "Le portefeuille tient mathématiquement",
+        "check": "Tu sais combien de sorties doivent rembourser le fonds, et la loi de puissance est assumée plutôt que subie."
+      }
+    ],
+    "model": {
+      "kind": "ecosystem",
+      "id": "eco-ia-appliquee",
+      "note": "Un dossier d'écosystème abouti est une thèse propriétaire au format long. Celui-ci pose d'emblée où la valeur se dépose — la couche application verticale, pas les modèles de fondation — date ses convictions avec un degré d'assurance, et nomme les signaux qui les démentiraient. Ne copie pas le secteur ; copie la forme : le pari central formulé pour qu'on puisse le contester, les convictions falsifiables, et le fait précis qui ferait changer d'avis."
+    },
+    "relatedLessonIds": [
+      "l-thesis-anatomy",
+      "l-reserves",
+      "l-triage"
+    ],
+    "glossaryRefs": [
+      "power-law",
+      "tam-sam-som",
+      "moat",
+      "dilution",
+      "follow-on",
+      "pro-rata",
+      "portfolio-construction",
+      "tvpi",
+      "dpi"
+    ],
+    "tags": [
+      "pre-seed",
+      "seed",
+      "these",
+      "portfolio-construction",
+      "conviction"
+    ]
+  }
+]

@@ -551,7 +551,10 @@
     "kicker": "Comprendre le jeu",
     "readMin": 5,
     "summary": "Les 3-4 tours d'un process analyst et ce que chacun teste vraiment — pour ne plus jamais jouer la mauvaise partition.",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "deal-memo",
+      "dd"
+    ]
   },
   {
     "id": "lea-grille",
@@ -699,7 +702,9 @@
     "kicker": "Bonus",
     "readMin": 4,
     "summary": "Tes questions parlent autant que tes réponses : taillées pour ce fonds, elles révèlent un cerveau d'investisseur.",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "thesis-driven"
+    ]
   },
   {
     "id": "lea-fund-research",
@@ -726,7 +731,10 @@
     "kicker": "Bonus",
     "readMin": 5,
     "summary": "La logistique qui évite les autogoals : préparation, comportements gagnants le jour J, et le follow-up.",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "pre-money",
+      "tam-sam-som"
+    ]
   },
   {
     "id": "lea-mock",
@@ -737,7 +745,11 @@
     "kicker": "Le jalon",
     "readMin": 6,
     "summary": "La répétition générale en 3 manches + la grille d'auto-évaluation. Prêt = tout en vert, chronométré, deux fois.",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "pre-money",
+      "irr",
+      "tam-sam-som"
+    ]
   },
   {
     "id": "lf-dilution",
@@ -804,6 +816,70 @@
     "summary": "Comment une mauvaise préparation documentaire peut tuer votre levée de fonds avant la signature finale.",
     "glossaryRefs": [
       "term-sheet"
+    ]
+  },
+  {
+    "id": "l-dd-commercial",
+    "slug": "la-due-diligence-commerciale",
+    "courseId": "c-due-diligence",
+    "order": 2,
+    "title": "La due diligence commerciale",
+    "kicker": "Marché",
+    "readMin": 8,
+    "summary": "Vérifier que la demande existe vraiment, au prix annoncé : marché atteignable, appels clients, rétention.",
+    "glossaryRefs": [
+      "tam-sam-som",
+      "nrr",
+      "pmf",
+      "moat"
+    ]
+  },
+  {
+    "id": "l-dd-tech-product",
+    "slug": "la-due-diligence-produit-technologie",
+    "courseId": "c-due-diligence",
+    "order": 3,
+    "title": "La due diligence produit et technologie",
+    "kicker": "Produit",
+    "readMin": 7,
+    "summary": "Le produit fait-il ce qui est annoncé, et tient-il à l'échelle : démêler la défensibilité réelle de la démonstration.",
+    "glossaryRefs": [
+      "moat",
+      "gross-margin",
+      "unit-economics"
+    ]
+  },
+  {
+    "id": "l-dd-team",
+    "slug": "la-due-diligence-equipe-references",
+    "courseId": "c-due-diligence",
+    "order": 4,
+    "title": "La due diligence équipe et références",
+    "kicker": "Équipe",
+    "readMin": 8,
+    "summary": "En amorçage, l'essentiel du pari porte sur les personnes : founder-market fit, appels de référence, alignement.",
+    "glossaryRefs": [
+      "vesting",
+      "cap-table",
+      "deal-memo"
+    ]
+  },
+  {
+    "id": "l-dd-legal",
+    "slug": "la-due-diligence-juridique-cap-table",
+    "courseId": "c-due-diligence",
+    "order": 5,
+    "title": "La due diligence juridique, financière et cap table",
+    "kicker": "Structuration",
+    "readMin": 9,
+    "summary": "Réconcilier la cap table, sécuriser la propriété intellectuelle et vérifier que le wording juridique traduit l'accord économique.",
+    "glossaryRefs": [
+      "cap-table",
+      "esop",
+      "liquidation-preference",
+      "term-sheet",
+      "runway",
+      "burn-rate"
     ]
   },
   {

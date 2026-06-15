@@ -43,6 +43,7 @@ export async function loadLesson(slug: string): Promise<Lesson | undefined> {
   return {
     ...entry,
     body: payload?.body ?? '',
+    bodyShort: payload?.bodyShort,
     keyTakeaways: payload?.keyTakeaways ?? [],
     quiz: payload?.quiz,
     furtherReading: payload?.furtherReading,

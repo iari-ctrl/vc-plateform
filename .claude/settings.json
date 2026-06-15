@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const c=require\\('./data/caseStudies.json'\\); const d=require\\('./data/deliverables.json'\\); console.log\\('cases:',c.length,'| last id:',c[c.length-1].id\\); console.log\\('deliverables:',d.length,'| id:',d[0].id,'| model->',d[0].model.kind,d[0].model.id\\);\")",
+      "Bash(node -e \"const p=require\\('./client/package.json'\\); console.log\\(JSON.stringify\\(p.scripts,null,1\\)\\)\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\(JSON.stringify\\(p.scripts,null,1\\)\\)\")",
+      "Bash(npm --prefix client run build)",
+      "Bash(node -e ' *)",
+      "Bash(npm --prefix client test)",
+      "Bash(npx --prefix client vitest run --root client src/i18n/routes.test.ts)",
+      "Bash(node -e \"const d=require\\('./data/glossary.defs.json'\\); for\\(const k of ['tam','sam','som','tam-sam-som']\\) console.log\\('\\\\n### '+k+'\\\\n'+d[k].definition\\);\")",
+      "Bash(node /tmp/mutate-glossary.mjs)"
+    ]
+  }
+}

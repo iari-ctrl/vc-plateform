@@ -179,5 +179,133 @@
       "Les termes économiques priment sur le nombre affiché.",
       "Toujours modéliser plusieurs scénarios de sortie avant de signer."
     ]
+  },
+  {
+    "id": "cs-seed-ic",
+    "slug": "comite-investissement-seed-le-cas-volta",
+    "title": "Le deal qui divise le comité : Volta au seed",
+    "subtitle": "Comment une décision d'investissement seed se prend quand l'équipe n'est pas d'accord",
+    "kind": "deal",
+    "company": "Volta · seed (fictif, stylisé)",
+    "year": 2026,
+    "readMin": 12,
+    "summary": "Tout le comité croit au marché ; personne n'est d'accord sur la vitesse. On suit un deal seed clivant depuis la question d'investissement jusqu'au vote, pour montrer comment une conviction se prend, se défend et se structure quand l'incertitude porte sur une seule variable.",
+    "tags": [
+      "seed",
+      "investment-committee",
+      "applied-ai",
+      "energy",
+      "decision"
+    ],
+    "glossaryRefs": [
+      "traction",
+      "runway",
+      "burn-rate",
+      "pre-money",
+      "dilution",
+      "pro-rata",
+      "liquidation-preference",
+      "follow-on",
+      "power-law"
+    ],
+    "sections": [
+      {
+        "heading": "Le contexte",
+        "body": "Volta lève un seed de 1,5 M€. La boîte construit un copilote pour les opérateurs de réseaux de distribution électrique : un assistant qui lit les alarmes du réseau, propose des manœuvres de délestage et documente chaque décision pour le régulateur. Deux fondateurs — un ancien ingénieur d'exploitation passé par un gestionnaire de réseau, une ingénieure ML sortie d'un labo public. Neuf mois d'existence, un produit en pilote chez un opérateur régional, 14 mois de runway demandés. Le fonds — généraliste European seed — a un ticket cible de 1,2 M€ pour mener le tour."
+      },
+      {
+        "heading": "La question d'investissement",
+        "body": "La question n'est pas « est-ce un bon marché » : tout le monde au comité croit que l'IA appliquée aux infrastructures critiques est un sujet de décennie. Elle est plus étroite et plus dure. Ce produit-là, avec cette équipe-là, peut-il devenir une ligne qui rend le fonds — ou restera-t-il un bon outil vendu lentement à un marché qui achète lentement ? Mener engage 1,2 M€ et un siège ; c'est près d'un quart du rythme de déploiement annuel du fonds."
+      },
+      {
+        "heading": "Le timing marché",
+        "body": "Trois choses ont changé en deux ans. Les modèles sont devenus assez fiables pour qu'un opérateur accepte de les mettre en boucle de décision sous supervision humaine. La pression réglementaire sur la traçabilité des manœuvres a transformé la documentation, hier corvée, en argument d'achat. Et les gestionnaires de réseau, sous tension de raccordement des renouvelables, cherchent enfin à automatiser ce qu'ils faisaient à la main. Le pari « pourquoi maintenant » tient — mais il tient depuis douze mois déjà, et deux concurrents américains l'ont vu aussi."
+      },
+      {
+        "heading": "La dynamique du deal",
+        "body": "Volta n'est pas une enchère, mais un fonds tier-1 a déjà pris un call de second tour : signal ambigu, ni soft-circle ni pass franc. Les fondateurs veulent boucler en trois semaines pour rester concentrés sur le pilote. La valorisation pre-money demandée est de 8 M€ — défendable au regard du profil de l'équipe, élevée au regard de la traction, qui se résume à un seul pilote pas encore payant. Mener à 1,2 M€ sur 9,2 post donne environ 13 % avant dilution future, avec pro-rata pour suivre en série A."
+      },
+      {
+        "heading": "Les risques",
+        "body": "Le risque produit est faible : le pilote fonctionne. Le vrai risque est le cycle de vente — vendre à des infrastructures régulées prend douze à dix-huit mois, et le runway ne couvre qu'un seul cycle complet avant le prochain tour. Le deuxième risque est la taille : quelques dizaines d'acheteurs en Europe plafonnent le marché adressable. Le troisième est l'équipe commerciale, inexistante : deux fondateurs techniques, personne qui a déjà vendu à un gestionnaire de réseau. Aucun n'est rédhibitoire seul ; ensemble, ils dessinent un scénario où la boîte est excellente et croît trop lentement pour la loi de puissance."
+      },
+      {
+        "heading": "Les options du comité",
+        "body": "Trois chemins. Mener à 1,2 M€ comme proposé, en assumant la valo. Entrer plus petit, 400 à 600 k€ en suiveur, garder de la poudre et le droit de pro-rata, au prix de renoncer au siège et à l'information de premier rang. Ou passer, en notant la boîte pour la revoir en série A, quand le cycle de vente aura parlé. Chaque option est une position différente sur la même incertitude : la vitesse à laquelle ce marché achète."
+      },
+      {
+        "heading": "La décision prise",
+        "body": "Le comité mène, mais pas aux conditions proposées. Il offre 1,2 M€ à 7 M€ pre — un cran sous la demande, justifié par l'unique pilote — avec un siège et une réserve de follow-on explicitement fléchée sur un jalon : trois clients payants sous douze mois. La conviction qui emporte la décision n'est pas « le marché est énorme », un argument sur lequel personne n'apprend rien, mais « si la vente s'accélère, cette équipe est la mieux placée d'Europe, et on veut le siège pour le voir avant les autres »."
+      },
+      {
+        "heading": "Le résultat (stylisé)",
+        "body": "À douze mois, Volta compte deux clients payants et un troisième en pilote avancé — sous le jalon, mais pas loin. Le fonds n'exerce pas tout son follow-on et attend la série A pour reconcentrer. Dans le scénario favorable, Volta devient l'infrastructure de décision de la moitié des opérateurs européens et la ligne rend plusieurs fois le fonds ; dans le scénario médian, elle est rachetée par un équipementier pour un multiple honnête, sans loi de puissance. L'important n'est pas de savoir lequel advient : c'est que la décision de mener restait défendable dans les deux."
+      },
+      {
+        "heading": "Le pattern",
+        "body": "Le deal qui divise un comité partage presque toujours la même forme : tout le monde est d'accord sur le marché, personne ne l'est sur la vitesse. La conviction ne se gagne pas en empilant des arguments sur la taille du marché — elle se gagne en prenant position sur la variable incertaine, ici le cycle de vente, et en structurant le deal (réserve fléchée, jalon) pour acheter de l'information avant d'engager tout le capital."
+      },
+      {
+        "heading": "Pour l'investisseur",
+        "body": "Un bon passage en comité ne maximise pas la certitude, il rend la position lisible : voici mon pari, voici ce qui doit être vrai, voici ce qui me ferait changer d'avis. Le rôle du comité n'est pas de dissoudre le désaccord mais de le mettre à nu — pour que la décision, quelle qu'elle soit, soit prise pour des raisons explicites et révisée pour des raisons explicites."
+      }
+    ],
+    "takeaways": [
+      "Un deal qui divise oppose rarement deux visions du marché : il oppose deux paris sur une seule variable incertaine. Nomme-la.",
+      "La conviction se prouve en prenant une position falsifiable, pas en empilant des arguments sur la taille du marché.",
+      "Structurer le deal — réserve fléchée sur un jalon — permet d'acheter de l'information avant d'engager tout le capital.",
+      "Une bonne décision peut rester défendable dans plusieurs scénarios de sortie : on juge le raisonnement, pas seulement le résultat.",
+      "Le comité ne sert pas à effacer le désaccord mais à le rendre lisible et révisable."
+    ]
+  },
+  {
+    "id": "cs-market-sizing-live",
+    "slug": "market-sizing-en-direct-le-cas-vetoflow",
+    "title": "Un market sizing déroulé en direct",
+    "subtitle": "Comment on construit un TAM/SAM/SOM au tableau, hypothèses assumées",
+    "kind": "market",
+    "company": "VétoFlow · vertical SaaS (fictif, stylisé)",
+    "year": 2026,
+    "readMin": 8,
+    "summary": "On rejoue, étape par étape, le market sizing qu'un analyst doit savoir dérouler au tableau : bottom-up d'abord, contre-test top-down, test de sensibilité, puis verdict venture-scale. Les chiffres sont des hypothèses explicites, pas des faits.",
+    "tags": [
+      "market-sizing",
+      "tam-sam-som",
+      "methode",
+      "entretien"
+    ],
+    "glossaryRefs": [
+      "tam-sam-som",
+      "arr",
+      "why-now"
+    ],
+    "sections": [
+      {
+        "heading": "Le brief",
+        "body": "On te donne dix minutes au tableau : « VétoFlow vend un logiciel de gestion — planning, dossiers, facturation — aux cliniques vétérinaires. Le marché est-il assez grand pour un fonds early-stage ? » La première réponse d'analyst n'est jamais « oui » ou « non » : c'est « voici comment je le chiffre, et voici les hypothèses que je pose ». On verbalise la méthode avant le résultat."
+      },
+      {
+        "heading": "Bottom-up : on part de l’unité",
+        "body": "On annonce chaque hypothèse à voix haute, pour qu'elle soit attaquable. Supposons environ 12 000 cliniques vétérinaires adressables en France — un ordre de grandeur à valider, pas un fait acquis. Toutes ne basculeront pas vers un nouvel outil : retenons la moitié comme réellement servable, les autres étant déjà verrouillées par un logiciel en place ou trop petites pour payer. Cela donne 6 000 cibles. À un abonnement de l'ordre de 3 000 € par an et par clinique, le SAM ressort à 6 000 × 3 000 = 18 M€. La formule, écrite noir sur blanc : cibles servables × prix annuel = SAM."
+      },
+      {
+        "heading": "Le contre-test top-down",
+        "body": "On vérifie l'ordre de grandeur par l'autre bout. Le marché du logiciel vétérinaire en France se compte en dizaines de millions d'euros par an — cohérent avec un SAM d'environ 18 M€ pour un acteur horizontal. La règle : quand le bottom-up et le top-down convergent à ±15 %, les hypothèses tiennent. S'ils divergent d'un facteur trois, c'est qu'une hypothèse est fausse — et on la cherche à voix haute plutôt que de masquer l'écart."
+      },
+      {
+        "heading": "Le test de sensibilité (le réflexe qui distingue)",
+        "body": "On stresse la variable la plus fragile — ici, le prix. « Et si l'abonnement réaliste était plutôt de 1 800 € par an ? » Le SAM tombe à 6 000 × 1 800 = 10,8 M€. C'est l'instant décisif : à 11–18 M€ de SAM sur la France seule, on est sous le seuil qui rend un fonds early-stage confortable. La boîte doit donc soit s'étendre géographiquement, soit élargir son périmètre produit — assurance, pharmacie, télémédecine. C'est exactement le why-now et la trajectoire qu'on ira challenger."
+      },
+      {
+        "heading": "Le verdict",
+        "body": "SOM à trois-cinq ans : en captant environ 10 % du marché servable, VétoFlow viserait 1,5 à 2 M€ d'ARR sur la France seule — honnête, mais pas encore venture-scale. La bonne reco d'analyst n'est pas « le marché est trop petit », un verdict paresseux ; c'est « la France seule ne suffit pas, l'investissement ne tient que si l'expansion européenne ou l'extension produit est crédible — et voilà précisément ce que je creuserais ». On a transformé un chiffre en question d'investissement."
+      }
+    ],
+    "takeaways": [
+      "Un market sizing n'est pas un nombre : c'est une suite d'hypothèses assumées, défendables et stressables.",
+      "Bottom-up d’abord (unité × prix), contre-test top-down ; convergence à ±15 % = hypothèses solides.",
+      "Stresse la variable la plus fragile (souvent le prix) : c'est là que se révèle si la boîte est venture-scale.",
+      "Le bon verdict transforme le chiffre en question d’investissement plutôt que de trancher « trop petit / assez grand »."
+    ]
   }
 ]

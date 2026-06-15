@@ -123,7 +123,45 @@
       "follow-on",
       "j-curve"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Quelle est la durée de vie typique d'un fonds de capital-risque ?",
+        "options": [
+          {
+            "text": "Environ dix ans, parfois prolongeable d'un ou deux ans",
+            "correct": true
+          },
+          {
+            "text": "Trois ans, le temps de déployer le capital",
+            "correct": false
+          },
+          {
+            "text": "Une durée indéterminée, tant que le fonds reste actif",
+            "correct": false
+          }
+        ],
+        "explanation": "Un fonds est une entité fermée d'environ dix ans, structurée en trois phases : investir, accompagner, sortir."
+      },
+      {
+        "question": "Pourquoi un GP évite-t-il d'investir tard dans une société dont la sortie n'arriverait qu'après la fin du fonds ?",
+        "options": [
+          {
+            "text": "Parce qu'il doit rendre le capital et les plus-values aux LPs avant la liquidation",
+            "correct": true
+          },
+          {
+            "text": "Parce que les sociétés financées tardivement sont toujours moins rentables",
+            "correct": false
+          },
+          {
+            "text": "Parce que la dry powder est épuisée dès la première année",
+            "correct": false
+          }
+        ],
+        "explanation": "Le calendrier du fonds détermine quand on peut investir et avec quelle urgence on pousse vers la liquidité."
+      }
+    ]
   },
   {
     "id": "l-actors",
@@ -194,7 +232,45 @@
       "cap-table",
       "dilution"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Que décrivent d'abord les noms des tours (pre-seed, seed, Series A) ?",
+        "options": [
+          {
+            "text": "Des stades de validation du risque, plus que des montants fixes",
+            "correct": true
+          },
+          {
+            "text": "Des montants standardisés identiques d'une entreprise à l'autre",
+            "correct": false
+          },
+          {
+            "text": "Le secteur d'activité de l'entreprise financée",
+            "correct": false
+          }
+        ],
+        "explanation": "Chaque tour correspond à un risque qu'on a validé : concept, premiers signaux, product-market fit, passage à l'échelle."
+      },
+      {
+        "question": "À chaque tour réussi, qu'arrive-t-il typiquement à la cap table des premiers investisseurs ?",
+        "options": [
+          {
+            "text": "Ils sont dilués, mais sur une valeur qui croît en principe plus vite que leur part ne diminue",
+            "correct": true
+          },
+          {
+            "text": "Leur pourcentage reste figé grâce à un mécanisme automatique",
+            "correct": false
+          },
+          {
+            "text": "Ils sortent obligatoirement du capital à chaque nouveau tour",
+            "correct": false
+          }
+        ],
+        "explanation": "La valorisation monte, le risque spécifique baisse et la cap table se rééquilibre : la dilution porte sur une base de valeur plus élevée."
+      }
+    ]
   },
   {
     "id": "l-vc-week",
@@ -217,7 +293,45 @@
       "pitch-deck",
       "cap-table"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Quelles activités structurent une semaine type de VC ?",
+        "options": [
+          {
+            "text": "Sourcing, évaluation, écriture et accompagnement",
+            "correct": true
+          },
+          {
+            "text": "Uniquement des pitchs et la signature de chèques",
+            "correct": false
+          },
+          {
+            "text": "Surtout de la gestion administrative et du reporting LP",
+            "correct": false
+          }
+        ],
+        "explanation": "L'essentiel du travail est invisible : on lit, on rencontre, on écrit des mémos et on dit non bien plus souvent qu'oui."
+      },
+      {
+        "question": "Sur quoi repose le plus souvent la décision en comité d'investissement ?",
+        "options": [
+          {
+            "text": "La qualité de l'argumentation et la conviction, pas les seuls chiffres",
+            "correct": true
+          },
+          {
+            "text": "Le calcul automatique d'un score de rendement attendu",
+            "correct": false
+          },
+          {
+            "text": "L'ancienneté de la personne qui présente le dossier",
+            "correct": false
+          }
+        ],
+        "explanation": "Le comité met les convictions à l'épreuve : un junior présente le mémo, les seniors attaquent la thèse."
+      }
+    ]
   },
   {
     "id": "l-roles",
@@ -239,7 +353,45 @@
       "gp",
       "ic"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Quelle est la ligne de fracture la plus importante entre les rôles d'un fonds ?",
+        "options": [
+          {
+            "text": "Entre ceux qui exécutent et ceux qui assument la décision",
+            "correct": true
+          },
+          {
+            "text": "Entre analyst et associate",
+            "correct": false
+          },
+          {
+            "text": "Entre les équipes d'investissement et les équipes support",
+            "correct": false
+          }
+        ],
+        "explanation": "Devenir principal, c'est cesser de préparer la décision pour commencer à l'assumer, y compris en cas d'échec."
+      },
+      {
+        "question": "Qu'est-ce qui distingue surtout un futur partner d'un bon junior ?",
+        "options": [
+          {
+            "text": "Un jugement propriétaire et un réseau qui lui appartiennent",
+            "correct": true
+          },
+          {
+            "text": "Une plus grande vitesse d'exécution sur les modèles",
+            "correct": false
+          },
+          {
+            "text": "La maîtrise exhaustive des outils de sourcing",
+            "correct": false
+          }
+        ],
+        "explanation": "La compétence technique ouvre la porte ; le jugement et la relation décident de la trajectoire."
+      }
+    ]
   },
   {
     "id": "l-sourcing",
@@ -261,7 +413,45 @@
       "thesis-driven",
       "warm-intro"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Pourquoi dit-on que le sourcing et la réputation sont indissociables ?",
+        "options": [
+          {
+            "text": "Les meilleurs fondateurs choisissent leurs investisseurs, donc l'accès aux bons dossiers dépend de la réputation",
+            "correct": true
+          },
+          {
+            "text": "Parce qu'un bon outil de scoring suffit à attirer les meilleurs deals",
+            "correct": false
+          },
+          {
+            "text": "Parce que la réputation dispense de tout travail de sourcing",
+            "correct": false
+          }
+        ],
+        "explanation": "Un avantage de sourcing durable vient d'une thèse claire, d'un réseau cultivé dans le temps et d'une réputation d'investisseur utile."
+      },
+      {
+        "question": "Que cherchent à maximiser les meilleurs fonds en matière de deal flow ?",
+        "options": [
+          {
+            "text": "L'accès aux meilleurs dossiers, pas le volume vu",
+            "correct": true
+          },
+          {
+            "text": "Le nombre total de dossiers reçus chaque mois",
+            "correct": false
+          },
+          {
+            "text": "La rapidité de réponse à tous les dossiers entrants",
+            "correct": false
+          }
+        ],
+        "explanation": "Voir beaucoup de dossiers ne sert à rien si ce sont les mauvais ; l'enjeu est l'accès aux entreprises exceptionnelles."
+      }
+    ]
   },
   {
     "id": "l-screening",
@@ -284,7 +474,45 @@
       "power-law",
       "fund-returner"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Quel est le danger d'un filtre de screening trop rigide ?",
+        "options": [
+          {
+            "text": "Rejeter précisément les aberrations qui font la loi de puissance",
+            "correct": true
+          },
+          {
+            "text": "Laisser passer trop de dossiers en due diligence",
+            "correct": false
+          },
+          {
+            "text": "Ralentir excessivement le traitement des dossiers",
+            "correct": false
+          }
+        ],
+        "explanation": "Beaucoup de licornes avaient un deck médiocre : la discipline consiste à filtrer sur le potentiel plus que sur la présentation."
+      },
+      {
+        "question": "Comment fonctionne un screening efficace ?",
+        "options": [
+          {
+            "text": "De manière asymétrique : rejeter vite ce qui ne peut pas faire 10x, mais accorder le bénéfice du doute au potentiel exceptionnel",
+            "correct": true
+          },
+          {
+            "text": "En appliquant le même seuil strict à tous les dossiers",
+            "correct": false
+          },
+          {
+            "text": "En se fondant d'abord sur la qualité graphique du deck",
+            "correct": false
+          }
+        ],
+        "explanation": "On filtre sur ce qui peut produire un fund-returner, pas sur la qualité de la présentation."
+      }
+    ]
   },
   {
     "id": "l-team-market",
@@ -353,7 +581,45 @@
       "burn-multiple",
       "nrr"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Qu'est-ce qui révèle le mieux la solidité d'une traction ?",
+        "options": [
+          {
+            "text": "La rétention nette et les cohortes, pas la croissance brute",
+            "correct": true
+          },
+          {
+            "text": "Le nombre total d'inscriptions cumulées",
+            "correct": false
+          },
+          {
+            "text": "Le montant levé lors du dernier tour",
+            "correct": false
+          }
+        ],
+        "explanation": "Une entreprise qui acquiert vite mais perd vite ses clients remplit un seau percé ; la rétention montre si le besoin est réel."
+      },
+      {
+        "question": "Un ratio LTV/CAC considéré comme sain se situe généralement :",
+        "options": [
+          {
+            "text": "Au-dessus de 3",
+            "correct": true
+          },
+          {
+            "text": "En dessous de 1",
+            "correct": false
+          },
+          {
+            "text": "Exactement à 1",
+            "correct": false
+          }
+        ],
+        "explanation": "Au-dessus de 3 le modèle est généralement sain ; en dessous de 1 on perd de l'argent à chaque vente."
+      }
+    ]
   },
   {
     "id": "l-dd-process",
@@ -375,7 +641,45 @@
       "cap-table",
       "deal-memo"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "La due diligence est-elle un audit exhaustif de l'entreprise ?",
+        "options": [
+          {
+            "text": "Non : c'est une enquête ciblée sur ce qui peut tuer l'investissement, dans un temps contraint",
+            "correct": true
+          },
+          {
+            "text": "Oui, elle doit couvrir chaque aspect avec la même profondeur",
+            "correct": false
+          },
+          {
+            "text": "Oui, mais uniquement sur le plan financier",
+            "correct": false
+          }
+        ],
+        "explanation": "La sur-analyse est une fuite : décider sous incertitude fait partie du métier."
+      },
+      {
+        "question": "Par quoi commence une due diligence priorisée ?",
+        "options": [
+          {
+            "text": "Formuler les trois risques majeurs avant de creuser",
+            "correct": true
+          },
+          {
+            "text": "Réclamer l'ensemble des contrats de l'entreprise",
+            "correct": false
+          },
+          {
+            "text": "Modéliser le rendement attendu du fonds",
+            "correct": false
+          }
+        ],
+        "explanation": "On définit d'abord ce qui peut faire échouer l'investissement, puis on concentre l'effort sur ces risques."
+      }
+    ]
   },
   {
     "id": "l-thesis-anatomy",
@@ -396,7 +700,45 @@
       "thesis-driven",
       "why-now"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Quelle propriété rend une thèse d'investissement réellement utile ?",
+        "options": [
+          {
+            "text": "Elle est falsifiable : on peut écrire ce qui la rendrait fausse",
+            "correct": true
+          },
+          {
+            "text": "Elle s'appuie sur un secteur porteur largement reconnu",
+            "correct": false
+          },
+          {
+            "text": "Elle reste assez vague pour ne jamais être contredite",
+            "correct": false
+          }
+        ],
+        "explanation": "Si aucun fait ne pourrait jamais la contredire, ce n'est pas une thèse mais une croyance."
+      },
+      {
+        "question": "Quelles questions une thèse structurée doit-elle traiter ?",
+        "options": [
+          {
+            "text": "Où va le monde, pourquoi maintenant, pourquoi nous",
+            "correct": true
+          },
+          {
+            "text": "Combien lever, à quelle valorisation, avec quel instrument",
+            "correct": false
+          },
+          {
+            "text": "Quel concurrent acheter et à quel prix",
+            "correct": false
+          }
+        ],
+        "explanation": "La macro donne la direction (où va le monde, pourquoi maintenant) ; le terrain donne la conviction (pourquoi nous)."
+      }
+    ]
   },
   {
     "id": "l-defending-thesis",
@@ -418,7 +760,45 @@
       "deal-memo",
       "thesis-driven"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "À quoi sert un pre-mortem avant de défendre un deal ?",
+        "options": [
+          {
+            "text": "Imaginer l'échec à cinq ans pour expliciter les risques que l'enthousiasme masque",
+            "correct": true
+          },
+          {
+            "text": "Vérifier une dernière fois les calculs de cap table",
+            "correct": false
+          },
+          {
+            "text": "Préparer la communication en cas de succès",
+            "correct": false
+          }
+        ],
+        "explanation": "On présente ensuite ces risques soi-même, avant que d'autres ne les soulèvent : c'est le signe d'un jugement mûr."
+      },
+      {
+        "question": "Quelle posture inspire le plus confiance en comité d'investissement ?",
+        "options": [
+          {
+            "text": "Présenter à la fois les raisons d'investir et de ne pas le faire, puis trancher",
+            "correct": true
+          },
+          {
+            "text": "Ne présenter que des arguments favorables, pour rester convaincant",
+            "correct": false
+          },
+          {
+            "text": "Éviter les objections pour ne pas fragiliser le dossier",
+            "correct": false
+          }
+        ],
+        "explanation": "Une thèse bien défendue est celle qui a déjà anticipé les objections, en combinant conviction et humilité épistémique."
+      }
+    ]
   },
   {
     "id": "l-ts-economics",
@@ -491,7 +871,45 @@
       "vesting",
       "term-sheet"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Le contrôle d'une société revient-il à celui qui détient le plus d'actions ?",
+        "options": [
+          {
+            "text": "Non : les termes de contrôle distribuent le pouvoir indépendamment du pourcentage détenu",
+            "correct": true
+          },
+          {
+            "text": "Oui, l'actionnaire majoritaire décide toujours",
+            "correct": false
+          },
+          {
+            "text": "Oui, sauf en cas de pacte signé après la levée",
+            "correct": false
+          }
+        ],
+        "explanation": "On peut détenir 15 % et disposer d'un droit de véto déterminant via le board et les protective provisions."
+      },
+      {
+        "question": "Qu'est-ce que le droit de pro-rata ?",
+        "options": [
+          {
+            "text": "Le droit, non l'obligation, de réinvestir pour maintenir sa part aux tours suivants",
+            "correct": true
+          },
+          {
+            "text": "L'obligation de suivre chaque tour à hauteur de sa participation",
+            "correct": false
+          },
+          {
+            "text": "Le droit de revendre ses actions en priorité lors d'une sortie",
+            "correct": false
+          }
+        ],
+        "explanation": "Le pro-rata est précieux pour suivre les gagnantes ; ne pas l'exercer envoie un signal aux nouveaux investisseurs."
+      }
+    ]
   },
   {
     "id": "l-reserves",
@@ -520,6 +938,44 @@
         "kind": "lesson",
         "ref": "lpl-simulator-engine"
       }
+    ],
+    "quiz": [
+      {
+        "question": "Quelle part d'un fonds est souvent gardée en réserve pour le follow-on ?",
+        "options": [
+          {
+            "text": "Environ 40 à 60 %",
+            "correct": true
+          },
+          {
+            "text": "Moins de 5 %",
+            "correct": false
+          },
+          {
+            "text": "La quasi-totalité, dès le premier tour",
+            "correct": false
+          }
+        ],
+        "explanation": "Le fonds ne déploie pas tout son capital en premiers tickets : il réserve de quoi réinvestir dans ses meilleures lignes."
+      },
+      {
+        "question": "Sur quelles lignes concentre-t-on en priorité les réserves ?",
+        "options": [
+          {
+            "text": "Sur les gagnantes qui sur-performent, pas sur les retardataires",
+            "correct": true
+          },
+          {
+            "text": "Sur les lignes en difficulté, pour limiter les pertes",
+            "correct": false
+          },
+          {
+            "text": "Uniformément, pour ne léser aucune participation",
+            "correct": false
+          }
+        ],
+        "explanation": "Réinvestir dans une gagnante à un stade plus avancé augmente l'exposition à l'aberration qui rend le fonds."
+      }
     ]
   },
   {
@@ -541,7 +997,45 @@
       "power-law",
       "follow-on"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Quel biais menace l'allocation du temps d'un investisseur ?",
+        "options": [
+          {
+            "text": "Passer trop de temps sur les sociétés en difficulté, par espoir ou culpabilité",
+            "correct": true
+          },
+          {
+            "text": "Consacrer trop de temps aux stars du portefeuille",
+            "correct": false
+          },
+          {
+            "text": "Ignorer systématiquement les walking dead",
+            "correct": false
+          }
+        ],
+        "explanation": "Le temps d'un investisseur est rare ; la discipline consiste à le sur-investir là où le potentiel est le plus grand."
+      },
+      {
+        "question": "Comment interpréter un portefeuille qui ne compte aucune perte ?",
+        "options": [
+          {
+            "text": "Il n'a probablement pas pris assez de risque",
+            "correct": true
+          },
+          {
+            "text": "Il est mieux géré que la moyenne",
+            "correct": false
+          },
+          {
+            "text": "Il garantit un meilleur rendement final",
+            "correct": false
+          }
+        ],
+        "explanation": "Laisser mourir une ligne est la conséquence assumée de la loi de puissance, pas un échec moral."
+      }
+    ]
   },
   {
     "id": "lpl-average-lies",
@@ -930,7 +1424,45 @@
       "deal-memo",
       "pmf"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Que cherche un VC, contrairement à une banque ?",
+        "options": [
+          {
+            "text": "Un dossier capable de faire 10x ou plus, pas une PME rentable",
+            "correct": true
+          },
+          {
+            "text": "Une entreprise déjà rentable et peu risquée",
+            "correct": false
+          },
+          {
+            "text": "Des garanties personnelles du fondateur",
+            "correct": false
+          }
+        ],
+        "explanation": "Présenter une entreprise « solide et bientôt rentable » séduit une banque, mais laisse souvent un VC indifférent."
+      },
+      {
+        "question": "Que signifie « armer un allié » quand on lève des fonds ?",
+        "options": [
+          {
+            "text": "Donner au VC les éléments pour défendre le deal en interne, devant son comité",
+            "correct": true
+          },
+          {
+            "text": "Offrir des garanties juridiques supplémentaires",
+            "correct": false
+          },
+          {
+            "text": "Accepter toutes les conditions de la term sheet",
+            "correct": false
+          }
+        ],
+        "explanation": "Lever, ce n'est pas convaincre une personne, mais armer quelqu'un qui devra convaincre ses associés."
+      }
+    ]
   },
   {
     "id": "l-founder-instruments",
@@ -960,6 +1492,44 @@
         "label": "Simulateur de dilution",
         "kind": "simulator",
         "ref": "dilution"
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Pourquoi des dilutions de 20 %, 20 % puis 15 % ne s'additionnent-elles pas à 55 % ?",
+        "options": [
+          {
+            "text": "Les pourcentages se composent sur une base qui diminue à chaque tour",
+            "correct": true
+          },
+          {
+            "text": "Parce qu'une partie de la dilution est remboursée",
+            "correct": false
+          },
+          {
+            "text": "Parce que seul le dernier tour compte vraiment",
+            "correct": false
+          }
+        ],
+        "explanation": "Le danger n'est pas un tour isolé mais l'empilement sur toute la trajectoire, sans compter l'ESOP."
+      },
+      {
+        "question": "Qu'est-ce qu'un SAFE (ou son équivalent français le BSA-AIR) ?",
+        "options": [
+          {
+            "text": "Un instrument rapide qui reporte la valorisation au tour suivant, via un cap et/ou un discount",
+            "correct": true
+          },
+          {
+            "text": "Une dette assortie d'un taux d'intérêt et d'une échéance",
+            "correct": false
+          },
+          {
+            "text": "Une émission immédiate d'actions à une valorisation fixée",
+            "correct": false
+          }
+        ],
+        "explanation": "Il évite la lourdeur d'un priced round, mais empile des conversions futures qu'il faut suivre de près."
       }
     ]
   },
@@ -1246,7 +1816,45 @@
       "gp",
       "ic"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Quelle est la transition de carrière la plus difficile dans le venture ?",
+        "options": [
+          {
+            "text": "Acquérir et assumer le droit de signer une décision",
+            "correct": true
+          },
+          {
+            "text": "Passer du sourcing à la modélisation",
+            "correct": false
+          },
+          {
+            "text": "Obtenir un premier siège d'observateur au board",
+            "correct": false
+          }
+        ],
+        "explanation": "Beaucoup d'excellents associates n'y accèdent jamais, faute de jugement propriétaire et de conviction assumée."
+      },
+      {
+        "question": "Pourquoi la patience est-elle une compétence centrale dans ce métier ?",
+        "options": [
+          {
+            "text": "Un investissement ne révèle son résultat que sur des cycles d'environ dix ans",
+            "correct": true
+          },
+          {
+            "text": "Parce que les promotions sont rares et lentes",
+            "correct": false
+          },
+          {
+            "text": "Parce que les LPs imposent des reportings espacés",
+            "correct": false
+          }
+        ],
+        "explanation": "La progression de carrière épouse la lenteur du métier : on est jugé sur dix ans, pas sur dix jours."
+      }
+    ]
   },
   {
     "id": "l-career-breaking-in",
@@ -1269,7 +1877,45 @@
       "scout",
       "tam-sam-som"
     ],
-    "furtherReading": []
+    "furtherReading": [],
+    "quiz": [
+      {
+        "question": "Qu'ont en commun les bons candidats à un poste en venture ?",
+        "options": [
+          {
+            "text": "Une compréhension réelle du métier et un angle propre (thèse, réseau, expertise)",
+            "correct": true
+          },
+          {
+            "text": "Un diplôme identique d'une grande école",
+            "correct": false
+          },
+          {
+            "text": "Une expérience préalable obligatoire en fonds",
+            "correct": false
+          }
+        ],
+        "explanation": "Le venture recrute par réseau et réputation ; mieux vaut démontrer (écrire, sourcer, scouter) que revendiquer."
+      },
+      {
+        "question": "Quel exercice est typique d'un entretien VC ?",
+        "options": [
+          {
+            "text": "Présenter un deal memo et défendre la thèse d'une startup qu'on financerait",
+            "correct": true
+          },
+          {
+            "text": "Réciter les définitions du glossaire financier",
+            "correct": false
+          },
+          {
+            "text": "Passer un test de personnalité standardisé",
+            "correct": false
+          }
+        ],
+        "explanation": "On retrouve souvent un stock pitch, un market sizing à voix haute et un cas de cap table."
+      }
+    ]
   },
   {
     "id": "lea-process",
@@ -1280,13 +1926,17 @@
     "kicker": "Comprendre le jeu",
     "readMin": 5,
     "summary": "Les 3-4 tours d'un process analyst et ce que chacun teste vraiment — pour ne plus jamais jouer la mauvaise partition.",
-    "body": "## Un process analyst tient en 3 à 4 tours\n\nChaque tour teste une chose précise. Sache laquelle.\n\n- **Tour 1 — screening / fit.** Pourquoi le VC, pourquoi ce fonds, motivation solide ou opportuniste. *Ton job : une motivation informée, jamais générique.*\n- **Tour 2 — technique / analytique.** Ta tête d'investisseur : juger un business model, poser les bonnes questions, raisonner sous incertitude. *Ton job : penser à voix haute, structurer.*\n- **Tour 3 — case study** (take-home ou live, souvent 3e tour et +). Produire une reco défendable. *Ton job : une reco claire invest/pass + 3 risques.*\n- **Tour 4 — équipe / partners.** Culture, conviction long terme, parfois le salaire. *Ton job : être toi, poser de bonnes questions.*\n\n## Trois repères qui changent tout\n\n- Le **case apparaît dans ~70 %** des process et arrive **tard** — c'est souvent là que ça se joue.\n- Le **fit gate dès le tour 1** : un bon technicien mal motivé est éliminé avant de briller.\n- Le **technique pur (gros modèle Excel) est rare** en early-stage : on teste le jugement.\n\n> **Erreur fatale :** arriver au case sans format choisi (1-pager **ou** 4 slides). Tu perds 20 min sur la forme au lieu du fond.",
+    "body": "## Les tours d'un process analyst\n\nUn process analyst comporte trois à quatre tours.\n\n- **Tour 1 — fit.** Le candidat doit montrer sa motivation, sa compréhension du capital-risque et sa connaissance du fonds. Une réponse précise et documentée est attendue.\n- **Tour 2 — technique et analytique.** Le candidat analyse un business model, identifie les bonnes questions et raisonne en situation d'incertitude. Le raisonnement compte autant que la conclusion.\n- **Tour 3 — case study.** Remis à l'avance ou traité en direct, il demande une recommandation argumentée : un avis « investir » ou « passer », accompagné de trois risques classés par importance.\n- **Tour 4 — équipe et partners.** Ce tour porte sur la compatibilité culturelle, la motivation de long terme et, parfois, la rémunération.\n\n## Trois points à connaître\n\n- Le case study apparaît dans environ 70 % des process. Il intervient tard et détermine souvent l'issue du recrutement.\n- Le fit est éliminatoire dès le premier tour. Un candidat techniquement solide mais peu motivé est écarté avant d'avoir pu démontrer ses compétences.\n- L'exercice purement technique, comme un modèle Excel détaillé, est rare en early-stage. L'évaluation porte d'abord sur le jugement.\n\nLe format du case study, une page ou quatre slides, doit être choisi avant l'entretien. Se présenter sans format défini fait perdre une vingtaine de minutes sur la forme.",
+    "bodyShort": "## La structure du process\n\nUn process analyst compte trois à quatre tours : le fit (la motivation et la connaissance du fonds), un tour technique et analytique (le jugement d'investisseur), un case study (une recommandation défendable) et un tour équipe (la conviction de long terme).\n\nTrois points méritent l'attention. Le case study apparaît dans environ 70 % des process et intervient tard, souvent comme épreuve décisive. Le fit est éliminatoire dès le premier tour. L'exercice purement technique reste rare en early-stage, où l'évaluation porte avant tout sur le raisonnement.\n\nLe format du case, une page ou quatre slides, se choisit avant l'entretien.",
     "keyTakeaways": [
       "Chaque tour a un examinateur et un critère.",
       "Fit d'abord, cerveau d'investisseur ensuite, livrable au bout.",
       "Le case (~70 % des process) arrive tard : prépare-le."
     ],
-    "glossaryRefs": [],
+    "glossaryRefs": [
+      "deal-memo",
+      "dd"
+    ],
     "quiz": [
       {
         "question": "À quel moment arrive généralement le case study dans un process VC ?",
@@ -1305,9 +1955,33 @@
           }
         ],
         "explanation": "Le case apparaît dans ~70 % des process et arrive tard : c'est souvent l'épreuve décisive."
+      },
+      {
+        "question": "Quelle erreur fait perdre un temps précieux le jour du case study ?",
+        "options": [
+          {
+            "text": "Arriver sans avoir choisi son format (1-pager ou 4 slides)",
+            "correct": true
+          },
+          {
+            "text": "Avoir préparé une recommandation",
+            "correct": false
+          },
+          {
+            "text": "Connaître la thèse du fonds",
+            "correct": false
+          }
+        ],
+        "explanation": "Sans format décidé à l'avance, on perd une vingtaine de minutes sur la forme au lieu du fond."
       }
     ],
-    "furtherReading": []
+    "furtherReading": [
+      {
+        "label": "Le deal qui divise le comité : Volta au seed",
+        "kind": "case",
+        "ref": "cs-seed-ic"
+      }
+    ]
   },
   {
     "id": "lea-grille",
@@ -1318,7 +1992,8 @@
     "kicker": "Le socle",
     "readMin": 7,
     "summary": "Équipe, Marché, Produit, Traction, Moat : la seule grille que tu réutiliseras à chaque question, chaque case, chaque pitch.",
-    "body": "## La grille universelle\n\nTout se lit avec : **Équipe · Marché · Produit · Traction · Moat** (+ Deal & Timing). Une seule faiblesse peut tuer un dossier.\n\n- **Équipe** — le facteur n°1 au début. Expertise du domaine, [[founder-market-fit|founder-market fit]], grit, et l'**agency** (« quoi qu'il arrive, ce fondateur trouvera un moyen »).\n- **Marché** — là où meurent la plupart des dossiers. Venture-scale : assez grand pour un [[fund-returner|fund-returner]] (souvent ≥ 1 Md€ de [[tam-sam-som|TAM]]). Petit/commoditisé/déclinant = pass par défaut. Soigne le [[why-now|why now]].\n- **Produit** — 10× mieux, pas 10 % mieux. Antidouleur, pas vitamine.\n- **Traction** — la barre monte par stade : pré-seed = signaux, seed = revenus + rétention, Série A = [[pmf|PMF]] prouvé.\n- **Moat** — « qu'est-ce qui empêche un concurrent bien financé de copier ? » Effets de réseau, donnée, régulation, switching costs, complexité. Nommable en une phrase.\n\n## Mini-exercice (corrigé) — livraison de repas bio, Lyon, pré-seed\n\nÉquipe : 2 ex-Deliveroo + 1 chef → fit fort. Marché : food delivery commoditisé et brûlé en capital → drapeau orange. Produit : « bio + local » marginal. Traction : 800 commandes/sem, rétention M3 35 % → correct. Moat : faible. **Verdict : pass** — on tue sur le marché et le moat, pas sur l'équipe.\n\n> **En entretien :** face à n'importe quelle boîte, déroule la grille à voix haute. Tu parais structuré et tu ne sèches jamais.",
+    "body": "## La grille universelle\n\nTout se lit avec : **Équipe · Marché · Produit · Traction · Moat** (+ Deal & Timing). Une seule faiblesse peut tuer un dossier.\n\n- **Équipe** — le facteur n°1 au début. Expertise du domaine, [[founder-market-fit|founder-market fit]], grit, et l'**agency** (« quoi qu'il arrive, ce fondateur trouvera un moyen »).\n- **Marché** — là où meurent la plupart des dossiers. Venture-scale : assez grand pour un [[fund-returner|fund-returner]] (souvent ≥ 1 Md€ de [[tam|TAM]]). Petit/commoditisé/déclinant = pass par défaut. Soigne le [[why-now|why now]].\n- **Produit** — 10× mieux, pas 10 % mieux. Antidouleur, pas vitamine.\n- **Traction** — la barre monte par stade : pré-seed = signaux, seed = revenus + rétention, Série A = [[pmf|PMF]] prouvé.\n- **Moat** — « qu'est-ce qui empêche un concurrent bien financé de copier ? » Effets de réseau, donnée, régulation, switching costs, complexité. Nommable en une phrase.\n\n## Mini-exercice (corrigé) — livraison de repas bio, Lyon, pré-seed\n\nÉquipe : 2 ex-Deliveroo + 1 chef → fit fort. Marché : food delivery commoditisé et brûlé en capital → drapeau orange. Produit : « bio + local » marginal. Traction : 800 commandes/sem, rétention M3 35 % → correct. Moat : faible. **Verdict : pass** — on tue sur le marché et le moat, pas sur l'équipe.\n\n> **En entretien :** face à n'importe quelle boîte, déroule la grille à voix haute. Tu parais structuré et tu ne sèches jamais.",
+    "bodyShort": "## La grille universelle\n\nTout dossier se lit avec **Équipe · Marché · Produit · Traction · Moat** (+ Deal & Timing) — une seule faiblesse peut suffire à passer.\n\n- **Équipe** : facteur n°1 au début ([[founder-market-fit|founder-market fit]], grit, agency).\n- **Marché** : le tueur n°1 — venture-scale, assez grand pour un [[fund-returner|fund-returner]].\n- **Produit** : 10× mieux, pas 10 % mieux.\n- **Traction** : la barre monte par stade.\n- **Moat** : « qu'est-ce qui empêche un concurrent bien financé de copier ? »\n\n> **En entretien :** déroule la grille à voix haute sur n'importe quelle boîte — tu parais structuré et tu ne sèches jamais.",
     "keyTakeaways": [
       "Équipe, Marché, Produit, Traction, Moat — une faiblesse peut suffire.",
       "Le marché est le tueur n°1 des dossiers.",
@@ -1349,6 +2024,24 @@
           }
         ],
         "explanation": "Au pré-seed/seed, on parie d'abord sur les gens : expertise du domaine, grit, et l'agency du fondateur."
+      },
+      {
+        "question": "Sur quel pilier la majorité des dossiers sont-ils tués ?",
+        "options": [
+          {
+            "text": "Le marché (trop petit, commoditisé ou déclinant)",
+            "correct": true
+          },
+          {
+            "text": "Le design du produit",
+            "correct": false
+          },
+          {
+            "text": "Le nom de la société",
+            "correct": false
+          }
+        ],
+        "explanation": "Le marché est le tueur n°1 : il doit être venture-scale, assez grand pour rendre le fonds."
       }
     ],
     "furtherReading": [
@@ -1368,7 +2061,8 @@
     "kicker": "Compétence testée en direct",
     "readMin": 8,
     "summary": "Sache dérouler un market sizing au tableau, en bottom-up, hypothèses annoncées — deux exemples chiffrés à l'appui.",
-    "body": "## Les trois cercles\n\n- **[[tam-sam-som|TAM]]** — toute la demande possible (blue sky).\n- **SAM** — la part servable avec ton produit, ton prix, ta géo, ton go-to-market.\n- **SOM** — ce que tu captures réalistement en 3-5 ans.\n\n## Deux méthodes — et laquelle privilégier\n\n- **Top-down** : macro (rapport) → filtres. Rapide, mais **les investisseurs s'en méfient** (facile à gonfler : « 1 % d'un marché de 100 Md€ »).\n- **Bottom-up** : 1 client × volume. **Le standard early-stage. Mène toujours en bottom-up**, contre-vérifie en top-down. Convergence à ±15 % = hypothèses solides.\n\n## Exemple 1 — SaaS pour restaurants, France\n\n~150 000 restaurants cibles × ~40 % adressables = 60 000 × 1 200 €/an = **72 M€ de SAM**. SOM à 5 ans (~8 %) ≈ **5,8 M€ d'ARR**. *Contrôle top-down : cohérent avec un segment FR de dizaines de M€.*\n\n## Exemple 2 — appli de coaching sportif B2C, Europe\n\n50 M d'utilisateurs cibles × 3 % de conversion payante = 1,5 M d'abonnés × 80 €/an = **120 M€ de SAM**. SOM à 3 ans (~5 %) ≈ 6 M€.\n\n## Les pièges qui te grillent\n\nTop-down seul · confondre TAM et SAM · hypothèses cachées (**annonce-les**) · oublier le why-now.\n\n> **Au tableau :** dis tes hypothèses, écris la formule, donne l'ordre de grandeur, puis challenge-toi (« si l'ARPU est 2× plus bas, le SAM tombe à 36 M€ — encore venture-scale ? »).",
+    "body": "## Les trois cercles\n\n- **[[tam|TAM]]** — toute la demande possible (blue sky).\n- **[[sam|SAM]]** — la part servable avec ton produit, ton prix, ta géo, ton go-to-market.\n- **[[som|SOM]]** — ce que tu captures réalistement en 3-5 ans.\n\n## Deux méthodes — et laquelle privilégier\n\n- **Top-down** : macro (rapport) → filtres. Rapide, mais **les investisseurs s'en méfient** (facile à gonfler : « 1 % d'un marché de 100 Md€ »).\n- **Bottom-up** : 1 client × volume. **Le standard early-stage. Mène toujours en bottom-up**, contre-vérifie en top-down. Convergence à ±15 % = hypothèses solides.\n\n## Exemple 1 — SaaS pour restaurants, France\n\n~150 000 restaurants cibles × ~40 % adressables = 60 000 × 1 200 €/an = **72 M€ de SAM**. SOM à 5 ans (~8 %) ≈ **5,8 M€ d'ARR**. *Contrôle top-down : cohérent avec un segment FR de dizaines de M€.*\n\n## Exemple 2 — appli de coaching sportif B2C, Europe\n\n50 M d'utilisateurs cibles × 3 % de conversion payante = 1,5 M d'abonnés × 80 €/an = **120 M€ de SAM**. SOM à 3 ans (~5 %) ≈ 6 M€.\n\n## Les pièges qui te grillent\n\nTop-down seul · confondre TAM et SAM · hypothèses cachées (**annonce-les**) · oublier le why-now.\n\n> **Au tableau :** dis tes hypothèses, écris la formule, donne l'ordre de grandeur, puis challenge-toi (« si l'ARPU est 2× plus bas, le SAM tombe à 36 M€ — encore venture-scale ? »).",
+    "bodyShort": "## TAM → SAM → SOM, en bottom-up\n\n- **[[tam|TAM]]** : toute la demande possible. **[[sam|SAM]]** : la part servable. **[[som|SOM]]** : ce que tu captures en 3-5 ans.\n- **Mène toujours en bottom-up** (1 client × volume), contre-vérifie en top-down. Les investisseurs se méfient du top-down seul (trop facile à gonfler).\n- **Annonce tes hypothèses à voix haute** : c'est ce qu'on évalue.\n\n> **Au tableau :** dis tes hypothèses, écris la formule, donne l'ordre de grandeur, puis challenge-toi (« si l'ARPU est 2× plus bas, est-ce encore venture-scale ? »).",
     "keyTakeaways": [
       "TAM (tout) → SAM (servable) → SOM (3-5 ans).",
       "Mène en bottom-up, contre-vérifie en top-down.",
@@ -1397,9 +2091,33 @@
           }
         ],
         "explanation": "Les investisseurs se méfient du top-down (facile à gonfler). Le bottom-up, ancré sur des unités réelles, est le standard."
+      },
+      {
+        "question": "À quelle marge la convergence bottom-up / top-down indique-t-elle des hypothèses solides ?",
+        "options": [
+          {
+            "text": "Environ ±15 %",
+            "correct": true
+          },
+          {
+            "text": "±50 %",
+            "correct": false
+          },
+          {
+            "text": "Peu importe, seul le top-down compte",
+            "correct": false
+          }
+        ],
+        "explanation": "Quand les deux méthodes convergent à ±15 %, c'est un bon signe que les hypothèses tiennent."
       }
     ],
-    "furtherReading": []
+    "furtherReading": [
+      {
+        "label": "Cas : un market sizing déroulé en direct",
+        "kind": "case",
+        "ref": "cs-market-sizing-live"
+      }
+    ]
   },
   {
     "id": "lea-read-startup",
@@ -1411,6 +2129,7 @@
     "readMin": 7,
     "summary": "Du déclaratif au chiffré : les métriques qui comptent, la barre par stade, et le réflexe croissance + rétention.",
     "body": "## La grille, mais avec des chiffres\n\nLes métriques que tu dois lire et commenter :\n\n- **Croissance** : MoM en early-stage (15-20 %/mois = fort en seed), YoY ensuite.\n- **Rétention** : la métrique reine. Des cohortes qui se stabilisent (≠ tendent vers zéro). En SaaS : [[nrr|NRR]] > 100 % = la base se densifie seule.\n- **Unit economics** : [[cac|CAC]], [[ltv|LTV]], ratio **LTV/CAC > 3**, **CAC payback < 12-18 mois**, [[gross-margin|marge brute]] (un « SaaS » à 40 % de marge n'en est pas vraiment un).\n- **Efficience du capital** : [[burn-rate|burn]], [[runway|runway]], [[rule-of-40|Rule of 40]] (croissance % + marge % ≥ 40).\n\n## La barre par stade\n\n| Stade | Ce qu'on attend | Repère 2026 |\n|---|---|---|\n| Pré-seed | Signaux de demande | waitlist, pilotes, beta actifs |\n| Seed | Revenus + rétention | ~0,1-0,5 M€ d'[[arr|ARR]] |\n| Série A | PMF prouvé | ~2,5 M€ d'ARR, LTV/CAC > 3 |\n\n> **Question piège :** « ça croît de 30 %/mois, tu fonces ? » → « ça dépend de la **rétention** et du **CAC** : une croissance dopée au paid non rentable avec churn élevé, c'est un seau percé. Montre-moi les cohortes. »",
+    "bodyShort": "## Les chiffres qui comptent\n\n- **Croissance ET rétention** — jamais l'une sans l'autre. Une croissance dopée au paid avec churn élevé = un seau percé.\n- **Unit economics** : [[ltv|LTV]]/[[cac|CAC]] > 3, [[cac|CAC]] payback < 12-18 mois, [[gross-margin|marge brute]] saine.\n- **Efficience** : [[burn-rate|burn]], [[runway|runway]], [[rule-of-40|Rule of 40]].\n\nLa **barre de traction monte par stade** : signaux au pré-seed, revenus + rétention au seed, [[pmf|PMF]] prouvé en Série A.\n\n> **Réflexe :** devant une croissance forte, demande toujours les **cohortes de rétention** et le **CAC**.",
     "keyTakeaways": [
       "Croissance ET rétention, jamais l'une sans l'autre.",
       "LTV/CAC > 3, CAC payback < 18 mois.",
@@ -1445,6 +2164,24 @@
           }
         ],
         "explanation": "Sans rétention, la croissance ne fait que remplir un seau percé. On regarde toujours les cohortes."
+      },
+      {
+        "question": "Quel repère sain attend-on pour le ratio LTV/CAC ?",
+        "options": [
+          {
+            "text": "Supérieur à 3",
+            "correct": true
+          },
+          {
+            "text": "Inférieur à 1",
+            "correct": false
+          },
+          {
+            "text": "Exactement 1",
+            "correct": false
+          }
+        ],
+        "explanation": "LTV/CAC > 3 et un CAC payback < 12-18 mois sont les repères d'une acquisition économiquement saine."
       }
     ],
     "furtherReading": [
@@ -1465,6 +2202,7 @@
     "readMin": 7,
     "summary": "Cap table, dilution, returns : pas de gros modèle, mais ces calculs-là tombent. Sache-les de tête.",
     "body": "## Cap table & dilution — le calcul incontournable\n\n*« Une fondatrice détient 50 % avant une Série A. Elle lève 5 M€ sur une pre-money de 15 M€. Que devient sa part ? »*\n- Post-money = 15 + 5 = **20 M€**.\n- Part de l'investisseur = 5 / 20 = **25 %**.\n- Fondatrice = 50 % × (1 − 25 %) = **37,5 %**.\n- **Piège de l'[[esop|option pool]] :** créer un pool de 10 % en pre-money dilue les **actionnaires existants** → la fondatrice tombe sous 37,5 %.\n\nFormule clé : part de l'investisseur = montant ÷ post-money. Entraîne-toi sur les simulateurs `pre-post-money`, `ownership`, `dilution`.\n\n## Returns — le langage des fonds\n\n- **[[moic|MOIC]]** = combien de fois la mise. Simple, mais **ignore le temps**.\n- **[[irr|IRR]]** = rendement annualisé, **intègre le temps**. 3× en 3 ans ≫ 3× en 10 ans.\n- **[[dpi|DPI]]** (réalisé) et **[[tvpi|TVPI]]** (réalisé + latent).\n- Lien power-law : chaque ligne doit pouvoir « rendre le fonds » → ownership targets 10-20 % + [[follow-on|follow-on]].\n\n## Term sheet — niveau analyst (comprendre, pas négocier)\n\n[[liquidation-preference|Liquidation preference]] (1× non-participating = sain), [[anti-dilution|anti-dilution]], [[pro-rata|pro-rata]], [[vesting|vesting]]. Juste savoir **qui touche quoi**.\n\n> **Question piège :** « 30 % d'IRR ou un MOIC de 5× ? » → « ça dépend de l'horizon : 5× sur 10 ans ≈ 17 % d'IRR ; 30 % d'IRR sur 4 ans ≈ 2,9×. Sans la durée, on ne compare pas. »",
+    "bodyShort": "## Les calculs qui tombent\n\n- **Cap table & dilution** : post-money = pre + montant ; part de l'investisseur = montant ÷ post-money. Méfie-toi de l'[[esop|option pool]] shuffle (créé en pre-money, il dilue les actionnaires existants).\n- **Returns** : [[moic|MOIC]] (combien de fois la mise, ignore le temps) vs [[irr|IRR]] (annualisé, intègre le temps). Sans l'horizon, on ne compare pas.\n- **Term sheet** (niveau analyst) : comprendre [[liquidation-preference|liquidation preference]], [[pro-rata|pro-rata]], [[vesting|vesting]] — savoir **qui touche quoi**, pas négocier.\n\n> Pas de gros modèle Excel en early-stage, mais ces calculs-là, sache-les **de tête**.",
     "keyTakeaways": [
       "post-money = pre + montant ; part = montant / post-money.",
       "Méfie-toi de l'option pool shuffle.",
@@ -1501,6 +2239,24 @@
           }
         ],
         "explanation": "Post-money = 16 M€ ; l'investisseur prend 4/16 = 25 % ; le fondateur : 50 % × 0,75 = 37,5 %."
+      },
+      {
+        "question": "Pourquoi créer un option pool en pre-money pénalise-t-il la fondatrice ?",
+        "options": [
+          {
+            "text": "Le pool dilue les actionnaires existants avant l'entrée de l'investisseur",
+            "correct": true
+          },
+          {
+            "text": "Il augmente la valorisation post-money",
+            "correct": false
+          },
+          {
+            "text": "Il n'a aucun effet sur la cap table",
+            "correct": false
+          }
+        ],
+        "explanation": "L'option pool shuffle : créé en pre-money, le pool est supporté par les actionnaires existants, ce qui dilue la fondatrice au-delà du calcul naïf."
       }
     ],
     "furtherReading": [
@@ -1513,6 +2269,11 @@
         "label": "Fund returns : DPI / TVPI / MOIC",
         "kind": "simulator",
         "ref": "fund-returns"
+      },
+      {
+        "label": "Pre-money / Post-money",
+        "kind": "simulator",
+        "ref": "pre-post-money"
       }
     ]
   },
@@ -1526,6 +2287,7 @@
     "readMin": 8,
     "summary": "La synthèse écrite d'une reco d'investissement — structure attendue et un exemple modèle entièrement déroulé.",
     "body": "## Le document roi\n\nUne page (400-600 mots) en screening. La structure attendue :\n\n1. **Recommandation** (invest / pass) **en haut**, en une phrase.\n2. **L'entreprise** — quoi, pour qui, quel problème.\n3. **Le marché** — taille bottom-up, croissance, why-now.\n4. **L'équipe** — pourquoi eux.\n5. **La traction** — chiffres clés.\n6. **Business model & économie** — unit economics.\n7. **Les 3 risques** hiérarchisés + mitigations.\n8. **Le deal** — montant, stade, valo, ownership.\n\n**Ce que les correcteurs veulent :** une reco assumée, **zéro erreur grossière**, **3 risques hiérarchisés**, et idéalement la preuve que tu as **parlé à 2-3 personnes** du secteur.\n\n## Exemple modèle (~480 mots)\n\n**Recommandation : INVEST** (seed 800 k€, ownership ~10 %).\n\n**Entreprise.** *Atelier* édite un logiciel de conformité environnementale (CSRD) pour PME industrielles européennes — il automatise ce que des consultants font à la main.\n\n**Marché.** ~50 000 PME concernées. Bottom-up : 50 000 × 40 % × 8 000 €/an ≈ **160 M€ de SAM**, en forte croissance (vague réglementaire 2024-2027). *Why-now : l'obligation crée une demande non-discrétionnaire maintenant.*\n\n**Équipe.** CEO ex-directrice RSE (a vécu le problème), CTO ex-Pennylane. **Founder-market fit fort.**\n\n**Traction.** 18 clients payants en 9 mois, 22 k€ de [[mrr|MRR]], +25 %/mois, rétention logo 100 %.\n\n**Économie.** SaaS, ~80 % de marge, ACV 8 k€, CAC payback ~10 mois, [[ltv|LTV]]/[[cac|CAC]] ~4.\n\n**Risques.** (1) *Dépendance réglementaire* (report CSRD) → mitigé par l'élargissement à d'autres normes. (2) *Cycle de vente PME long* → canal expert-comptable. (3) *Concurrence des grands éditeurs* → fenêtre de 18 mois.\n\n**Deal.** Seed 800 k€, pre-money ~7 M€, ownership ~10 %.\n\n> *Pourquoi ça marche : reco en haut, marché bottom-up, 3 risques hiérarchisés + mitigations, why-now béton.*",
+    "bodyShort": "## Le document roi\n\nUne page (400-600 mots). Structure : **reco invest / pass en haut**, puis entreprise → marché (bottom-up + [[why-now|why-now]]) → équipe → traction → unit economics → **3 risques hiérarchisés + mitigations** → le deal (montant, valo, ownership).\n\nCe que veulent les correcteurs : une **reco assumée**, **zéro erreur grossière**, **3 risques hiérarchisés**, et idéalement la preuve que tu as **parlé à 2-3 personnes** du secteur.\n\n> **Jamais de suspense :** la reco en première ligne, en une phrase.",
     "keyTakeaways": [
       "Reco en haut, jamais de suspense.",
       "Marché en bottom-up, 3 risques hiérarchisés + mitigations.",
@@ -1557,6 +2319,24 @@
           }
         ],
         "explanation": "Pas de suspense : la reco en haut, en une phrase. Le correcteur doit savoir où tu vas en 5 secondes."
+      },
+      {
+        "question": "Combien de risques un deal memo solide hiérarchise-t-il ?",
+        "options": [
+          {
+            "text": "Trois, hiérarchisés et assortis de mitigations",
+            "correct": true
+          },
+          {
+            "text": "Aucun, pour rester positif",
+            "correct": false
+          },
+          {
+            "text": "Tous les risques imaginables, sans ordre",
+            "correct": false
+          }
+        ],
+        "explanation": "Trois risques hiérarchisés avec leurs mitigations : c'est le signe d'un jugement, pas d'une liste."
       }
     ],
     "furtherReading": [
@@ -1577,6 +2357,7 @@
     "readMin": 7,
     "summary": "Formats, méthode en 5 temps, et l'erreur fatale : ne pas trancher. On embauche des gens qui décident.",
     "body": "## Les formats\n\nTake-home (quelques jours, memo ou deck) **ou** live (1-2 h). On te donne un [[pitch-deck|deck]] ou des données, on attend une reco **invest/pass**. Souvent : **1-pager OU 4 slides** — choisis **à l'avance** lequel tu maîtrises.\n\n## La méthode en 5 temps\n\n1. **Cadrer (5 min)** — stade, ticket, décision ? Pose tes hypothèses.\n2. **Dérouler la grille** — Équipe → Marché ([[tam-sam-som|sizing]] bottom-up) → Produit → Traction → Moat → Deal. Un constat + un risque par pilier.\n3. **Trancher** — reco claire. Si invest : à quelles conditions ; si pass : ce qui te ferait changer d'avis.\n4. **Hiérarchiser 3 risques** + mitigations.\n5. **Présenter (live)** — 5 min top-line : reco d'abord, 2-3 raisons, puis risques.\n\n**Ce qui distingue :** parler à 2-3 personnes du secteur (faisable même en 24 h), anticiper les contre-questions.\n\n> **Erreur fatale :** ne pas trancher. Un case sans reco nette = échec, même avec une analyse brillante. On embauche des gens qui **décident**.\n\n## Ton mock\n\n« Voici le deck d'Atelier (CSRD, seed 800 k€). 60 minutes. Rends un 1-pager : invest ou pass, pourquoi. » Chronomètre-toi. La grille d'évaluation est dans la leçon « Le mock complet ».",
+    "bodyShort": "## La méthode en 5 temps\n\n1. **Cadrer** — stade, ticket, décision ? Pose tes hypothèses.\n2. **Dérouler la grille** — Équipe → Marché ([[tam-sam-som|sizing]] bottom-up) → Produit → Traction → Moat → Deal.\n3. **Trancher** — reco claire (conditions si invest ; ce qui te ferait changer d'avis si pass).\n4. **Hiérarchiser 3 risques** + mitigations.\n5. **Présenter** — reco d'abord, 2-3 raisons, puis risques.\n\nChoisis ton format (**1-pager OU 4 slides**) à l'avance.\n\n> **Erreur fatale :** ne pas trancher. Un case sans reco nette échoue, même brillant — on embauche des gens qui **décident**.",
     "keyTakeaways": [
       "Cadre → grille → tranche → 3 risques → présente reco d'abord.",
       "Décider est non-négociable.",
@@ -1605,9 +2386,33 @@
           }
         ],
         "explanation": "Une analyse brillante sans recommandation claire échoue : le métier consiste à décider."
+      },
+      {
+        "question": "Dans une présentation live, par quoi commencer ?",
+        "options": [
+          {
+            "text": "La recommandation, puis 2-3 raisons, puis les risques",
+            "correct": true
+          },
+          {
+            "text": "L'historique détaillé de l'entreprise",
+            "correct": false
+          },
+          {
+            "text": "La liste des sources consultées",
+            "correct": false
+          }
+        ],
+        "explanation": "On présente top-line : la reco d'abord, puis les raisons, puis les risques. Pas de suspense."
       }
     ],
-    "furtherReading": []
+    "furtherReading": [
+      {
+        "label": "Le deal qui divise le comité : Volta au seed",
+        "kind": "case",
+        "ref": "cs-seed-ic"
+      }
+    ]
   },
   {
     "id": "lea-pitch",
@@ -1619,6 +2424,7 @@
     "readMin": 6,
     "summary": "Présenter une startup que le fonds devrait financer — l'enjeu est de montrer que tu penses comme un investisseur.",
     "body": "## L'enjeu\n\nPrésenter une startup que le fonds devrait financer. On teste si **tu penses comme un investisseur** et **communiques clair** — pas la boîte elle-même.\n\n## Sélection\n\n- Un secteur **que tu connais** (tu tiendras les follow-ups).\n- Une boîte qui **colle au fonds** : son **stade** et sa **[[thesis-driven|thèse]]**. (Pitcher une Série C à un fonds seed = élimination directe.)\n\n## Structure (2-3 min)\n\n1. **La thèse en une phrase** (« je crois X, donc Y devient inévitable »).\n2. **Problème** + pour qui.\n3. **Produit / UVP** — pourquoi 10× mieux.\n4. **Marché** — bottom-up + [[why-now|why-now]].\n5. **Équipe & traction**.\n6. **Risques** — assume-les + ce qui te ferait changer d'avis.\n\n## Prépare les follow-ups\n\n« Qu'est-ce qui te ferait changer d'avis ? » · « Pourquoi pas le concurrent X ? » · « Le moat dans 5 ans ? » · « À quelle valo tu n'investirais plus ? »\n\n> **Squelette :** *Thèse :* « l'électrification des flottes rend le pilotage de recharge critique. » → *Boîte :* logiciel B2B de recharge. → *Marché :* nb de flottes × budget énergie. → *Risque :* intégration native par les constructeurs.",
+    "bodyShort": "## « Pitch me a company »\n\nOn teste si **tu penses comme un investisseur**, pas la boîte. Choisis un secteur **que tu connais** et une boîte qui **colle au stade et à la [[thesis-driven|thèse]] du fonds** (pitcher une Série C à un fonds seed = élimination).\n\nStructure (2-3 min) : **thèse en une phrase** → problème → produit (10× mieux) → marché (bottom-up + [[why-now|why-now]]) → équipe & traction → **risques assumés**.\n\n> **C'est dans les follow-ups qu'on te juge :** « qu'est-ce qui te ferait changer d'avis ? », « pourquoi pas le concurrent X ? », « le moat dans 5 ans ? ». Prépare-les.",
     "keyTakeaways": [
       "Thèse d'abord, puis problème / produit / marché / risques.",
       "Colle au stade et à la thèse du fonds.",
@@ -1647,9 +2453,33 @@
           }
         ],
         "explanation": "Pitcher hors du stade/thèse du fonds montre que tu n'as pas compris à qui tu parles : élimination directe."
+      },
+      {
+        "question": "Où se joue surtout l'évaluation lors d'un « pitch me a company » ?",
+        "options": [
+          {
+            "text": "Dans les follow-ups (ce qui te ferait changer d'avis, le moat dans 5 ans…)",
+            "correct": true
+          },
+          {
+            "text": "Dans la notoriété de la boîte choisie",
+            "correct": false
+          },
+          {
+            "text": "Dans la longueur du pitch",
+            "correct": false
+          }
+        ],
+        "explanation": "Le pitch ouvre la discussion ; ce sont les questions de suivi qui révèlent si tu raisonnes en investisseur."
       }
     ],
-    "furtherReading": []
+    "furtherReading": [
+      {
+        "label": "Anatomie d'une thèse d'investissement",
+        "kind": "lesson",
+        "ref": "l-thesis-anatomy"
+      }
+    ]
   },
   {
     "id": "lea-fit",
@@ -1661,6 +2491,7 @@
     "readMin": 7,
     "summary": "Le tour qu'on néglige et qui élimine le plus. Réponses-types, framework STAR, et ta thèse perso.",
     "body": "## Le tour qui élimine le plus\n\n**« Why VC ? »** ✅ enthousiasme sincère pour l'**early-stage** (rencontrer des fondateurs, comprendre le scaling, parier sur l'avenir), relié à **ton parcours**. ❌ « c'est prestigieux », « j'aime la finance » → tu fizzles, et ils le savent.\n\n**« Why this fund ? »** ✅ cite leur **thèse**, 2-3 **boîtes du portefeuille** et pourquoi, leur stade/secteur, un **deal récent** ou un article d'un partner. Relie à **ton edge**. ❌ « vous êtes un top fonds » = pas préparé = pass.\n\n**« Why you ? »** ton **edge** (réseau, expertise sectorielle, expérience opérateur, analyse prouvée). **Montre** plutôt que dis (une analyse que tu as écrite). Faiblesse : une vraie, avec ta correction.\n\n**Comportemental — framework STAR(L) :** Situation, Tâche, **Action** (ce que **tu** as fait), **Résultat** (chiffré), **Learning**. Prépare 4-5 histoires réutilisables.\n\n**Ta thèse perso :** un secteur + un why-now + un type de boîte, en 3 phrases, falsifiable. Le plus fort signal de « cette personne pense déjà comme nous ».\n\n> **Modèle « why VC » :** « En stage chez [startup], j'ai vu [problème de scaling] de l'intérieur. J'ai adoré ce point de bascule où une idée devient une entreprise — et été frustré de ne voir qu'**une** boîte à la fois. Le VC me met du bon côté : rencontrer des dizaines de fondateurs, parier tôt, aider à construire. »",
+    "bodyShort": "## Why VC / why this fund / why you\n\nLe tour qu'on néglige et qui **élimine le plus**.\n\n- **Why VC** : enthousiasme sincère pour l'early-stage, relié à ton parcours. Pas « c'est prestigieux ».\n- **Why this fund** : leur [[thesis-driven|thèse]], 2-3 **boîtes du portefeuille** commentées, un deal récent. Du générique = pass.\n- **Why you** : ton **edge**, *montré* (une analyse que tu as écrite) plutôt que dit.\n- **Comportemental** : framework **STAR(L)** — l'Action que *tu* as faite, le Résultat chiffré.\n\n> Aie une **thèse perso falsifiable en 3 phrases** : c'est le plus fort signal que tu penses déjà comme eux.",
     "keyTakeaways": [
       "Sincérité + spécificité battent tout.",
       "Why this fund = leur thèse + des boîtes du portefeuille nommées.",
@@ -1687,6 +2518,24 @@
           }
         ],
         "explanation": "Cette question teste si tu as fait tes devoirs. Du générique = pas préparé = pass."
+      },
+      {
+        "question": "Dans le framework STAR(L), sur quoi insister ?",
+        "options": [
+          {
+            "text": "L'Action que TU as menée et le Résultat chiffré",
+            "correct": true
+          },
+          {
+            "text": "Le contexte général de l'entreprise",
+            "correct": false
+          },
+          {
+            "text": "Les actions de l'équipe sans préciser ton rôle",
+            "correct": false
+          }
+        ],
+        "explanation": "On évalue ta contribution : l'Action personnelle et le Résultat mesurable, pas le décor."
       }
     ],
     "furtherReading": [
@@ -1707,12 +2556,15 @@
     "readMin": 4,
     "summary": "Tes questions parlent autant que tes réponses : taillées pour ce fonds, elles révèlent un cerveau d'investisseur.",
     "body": "## Tes questions sont un test de plus\n\nTaillées pour **ce** fonds, révélant un cerveau d'investisseur. Jamais génériques, jamais agressives.\n\n**De bonnes questions :**\n- « Comment prenez-vous vos décisions — consensus, conviction d'un partner, droit de veto ? »\n- « Sur quelle thèse avez-vous le plus changé d'avis ces deux dernières années ? »\n- « Qu'est-ce qui fait qu'un analyst réussit vraiment chez vous à 12 mois ? »\n- « Quel deal avez-vous raté et qui vous a le plus appris ? »\n- « Sur [secteur du portefeuille], quelle est votre thèse contrariante ? »\n\n**À éviter :** générique (« c'est quoi vos valeurs ? ») = zéro préparation · interrogatoire agressif au mauvais moment. Les questions dures (turnover, « quel risque en m'embauchant ? ») se gardent pour **quand ils te veulent déjà**.\n\n> **Astuce :** prépare 3 questions par interlocuteur et **rebondis** sur ce qu'il dit. Une question qui suit la conversation vaut mieux qu'une question récitée.",
+    "bodyShort": "## Tes questions sont un test de plus\n\nTaillées pour **ce** fonds, jamais génériques, jamais agressives. Quelques bonnes pioches :\n\n- « Comment prenez-vous vos décisions — consensus, conviction d'un partner, veto ? »\n- « Sur quelle [[thesis-driven|thèse]] avez-vous le plus changé d'avis ces deux dernières années ? »\n- « Qu'est-ce qui fait qu'un analyst réussit chez vous à 12 mois ? »\n\nGarde les **questions dures** (turnover, « quel risque en m'embauchant ? ») pour **quand ils te veulent déjà**.\n\n> **Astuce :** rebondis sur ce qu'on te dit plutôt que réciter — une question qui suit la conversation vaut mieux qu'une question préparée.",
     "keyTakeaways": [
       "Spécifique, réfléchi, non-agressif.",
       "Garde les questions dures pour quand ils te veulent.",
       "Rebondis sur la conversation plutôt que réciter."
     ],
-    "glossaryRefs": [],
+    "glossaryRefs": [
+      "thesis-driven"
+    ],
     "quiz": [
       {
         "question": "Quand poser les questions dures (turnover, pourquoi le poste est vacant) ?",
@@ -1731,9 +2583,33 @@
           }
         ],
         "explanation": "Les questions inconfortables se posent en position de force, pas quand tu cherches encore à décrocher le poste."
+      },
+      {
+        "question": "Que vaut-il mieux faire de ses questions préparées ?",
+        "options": [
+          {
+            "text": "Rebondir sur la conversation plutôt que les réciter",
+            "correct": true
+          },
+          {
+            "text": "Les poser toutes, dans l'ordre, quoi qu'il arrive",
+            "correct": false
+          },
+          {
+            "text": "Garder le silence pour ne pas déranger",
+            "correct": false
+          }
+        ],
+        "explanation": "Une question qui suit ce qu'on vient de te dire vaut mieux qu'une question récitée : elle montre que tu écoutes."
       }
     ],
-    "furtherReading": []
+    "furtherReading": [
+      {
+        "label": "Faire ses devoirs sur le fonds",
+        "kind": "lesson",
+        "ref": "lea-fund-research"
+      }
+    ]
   },
   {
     "id": "lea-fund-research",
@@ -1745,6 +2621,7 @@
     "readMin": 6,
     "summary": "Le différenciateur n°1 au recrutement français : arriver avec une analyse de startup que tu as écrite toi-même.",
     "body": "## Recherche le fonds à fond\n\n- **Thèse & stade** : que financent-ils, à quel stade, quels secteurs, quel ticket (site, Dealroom, [[pitchbook|PitchBook]], leurs articles).\n- **Portfolio** : 5-6 boîtes, dont 2-3 que tu peux commenter (pourquoi un bon pari, où elles en sont).\n- **Deals récents** : leurs 3 derniers investissements → de quoi parler d'actualité.\n- **Les gens** : qui mène les deals, qui écrit, qui publie quoi. Lis leurs prises de position.\n\n## Le geste qui fait la différence\n\nArrive avec une **analyse de startup auto-produite** — une boîte de leur portefeuille décortiquée, ou une opportunité qu'ils pourraient financer. *C'est* le différenciateur au recrutement français : ça prouve que tu sais déjà faire le job. Une analyse d'une page vaut mille lignes de CV.\n\n## Cartographier l'écosystème FR (méthode, pas liste figée)\n\nSitue les fonds par **stade** et **thèse** — pré-seed/seed, seed/Série A, growth — avec la toile de fond du capital public ({{bpifrance|Bpifrance}}, {{eif|EIF}}). *Caveat : les stratégies bougent — vérifie toujours la thèse et le stade actuels sur le site du fonds.*\n\n> **Erreur fatale :** ne pas connaître 2-3 boîtes du portefeuille. C'est éliminatoire — ça dit « je n'ai pas pris 30 minutes pour vous ».",
+    "bodyShort": "## Le différenciateur\n\nRecherche le fonds à fond : **thèse & stade**, **portfolio** (2-3 boîtes que tu peux commenter), **deals récents**, **les gens** (qui mène, qui écrit).\n\nLe geste qui fait la différence : **arrive avec une analyse de startup que TU as écrite** — une boîte de leur portefeuille décortiquée, ou une opportunité qu'ils pourraient financer. Au recrutement français, *c'est* le différenciateur : ça prouve que tu sais déjà faire le job.\n\n> **Éliminatoire :** ne pas connaître 2-3 boîtes du portefeuille. Ça dit « je n'ai pas pris 30 minutes pour vous ».",
     "keyTakeaways": [
       "Thèse + portfolio + deals récents + les gens.",
       "Arrive avec une analyse que TU as écrite.",
@@ -1774,6 +2651,24 @@
           }
         ],
         "explanation": "Une analyse auto-produite prouve que tu sais déjà faire le job : elle vaut mille lignes de CV."
+      },
+      {
+        "question": "Que prouve une analyse de startup que tu as produite toi-même ?",
+        "options": [
+          {
+            "text": "Que tu sais déjà faire le job",
+            "correct": true
+          },
+          {
+            "text": "Que tu as du temps libre",
+            "correct": false
+          },
+          {
+            "text": "Rien de pertinent pour le recruteur",
+            "correct": false
+          }
+        ],
+        "explanation": "Une analyse auto-produite est le différenciateur n°1 au recrutement français : elle vaut mille lignes de CV."
       }
     ],
     "furtherReading": [
@@ -1794,12 +2689,16 @@
     "readMin": 5,
     "summary": "La logistique qui évite les autogoals : préparation, comportements gagnants le jour J, et le follow-up.",
     "body": "## 48 h avant\n\nRelis tes notes sur le fonds, ta thèse perso, ton « pitch me a company », tes 4-5 histoires STAR, et refais **un** mock case chronométré. Choisis ton format de case (1-pager **ou** slides).\n\n## Le jour J\n\n- **Pense à voix haute** — on évalue le raisonnement, pas juste la réponse.\n- **Structure** (« trois points : un, deux, trois »). La clarté > l'exhaustivité.\n- **Tranche** — une reco nette, toujours.\n- **Contrôle le rambling** — 60-90 s par réponse, puis « tu veux que je creuse ? ».\n- **Assume ce que tu ignores** — « je ne connais pas ce chiffre, mais voilà comment je l'estimerais. » Mieux que bluffer.\n\n## Le suivi\n\nUn email court (< 24 h) qui **ajoute** quelque chose : un point creusé après coup, un article pertinent.\n\n## Mémo des erreurs fatales\n\nRéponses génériques · pas de reco dans le case · top-down-only sur le sizing · erreur pre/post-money · ne pas connaître le portfolio · rambling · bluffer un chiffre.",
+    "bodyShort": "## Le jour J\n\n- **Pense à voix haute** — on évalue le raisonnement, pas juste la réponse.\n- **Structure** (« trois points : un, deux, trois ») et **tranche** — une reco nette, toujours.\n- **Contrôle le rambling** : 60-90 s par réponse, puis « tu veux que je creuse ? ».\n- **Assume ce que tu ignores** : « voilà comment je l'estimerais » bat le bluff.\n\n**48 h avant :** relis le fonds, ta thèse perso, tes histoires STAR, refais un mock case chronométré. **Après :** un email court (< 24 h) qui *ajoute* quelque chose.\n\n> **Autogoals à éviter :** réponses génériques · pas de reco dans le case · erreur pre/post-money · ignorer le portfolio.",
     "keyTakeaways": [
       "Pense à voix haute, structure, tranche.",
       "60-90 s par réponse, contrôle le rambling.",
       "Relance en 24 h en ajoutant de la valeur."
     ],
-    "glossaryRefs": [],
+    "glossaryRefs": [
+      "pre-money",
+      "tam-sam-som"
+    ],
     "quiz": [
       {
         "question": "Face à un chiffre que tu ignores en entretien, le mieux est de…",
@@ -1818,9 +2717,33 @@
           }
         ],
         "explanation": "Montrer ta méthode d'estimation prouve ton raisonnement ; bluffer un chiffre est un autogoal."
+      },
+      {
+        "question": "Quelle durée viser par réponse pour contrôler le rambling ?",
+        "options": [
+          {
+            "text": "60 à 90 secondes, puis proposer de creuser",
+            "correct": true
+          },
+          {
+            "text": "Au moins cinq minutes",
+            "correct": false
+          },
+          {
+            "text": "Le plus court possible, en un mot",
+            "correct": false
+          }
+        ],
+        "explanation": "60-90 s structurées, puis « tu veux que je creuse ? » : la clarté prime sur l'exhaustivité."
       }
     ],
-    "furtherReading": []
+    "furtherReading": [
+      {
+        "label": "Le mock complet",
+        "kind": "lesson",
+        "ref": "lea-mock"
+      }
+    ]
   },
   {
     "id": "lea-mock",
@@ -1832,17 +2755,60 @@
     "readMin": 6,
     "summary": "La répétition générale en 3 manches + la grille d'auto-évaluation. Prêt = tout en vert, chronométré, deux fois.",
     "body": "## La répétition générale\n\nEn conditions réelles, chronométré, à voix haute (enregistre-toi). Trois manches, comme un vrai process.\n\n**Manche 1 — Fit (15 min).** Why VC ? Why ce fonds [choisis-en un vrai] ? Why you ? Ta thèse perso (3 phrases). Une histoire STAR d'échec.\n\n**Manche 2 — Case study (60 min, livrable).** « Atelier, SaaS de conformité CSRD pour PME, seed 800 k€. Rends un 1-pager : invest ou pass, pourquoi, et tes 3 risques. » Format imposé : 1 page.\n\n**Manche 3 — Pitch & technique (15 min).** Ton pitch-me-a-company + (a) « fondateur 50 %, lève 4 M€ sur 12 M€ pre — sa part ? » (37,5 %) ; (b) « 4× en 5 ans, quel IRR en gros ? » (≈ 32 %).\n\n## Grille d'auto-évaluation — « prêt » = tout en vert\n\n- **Grille d'analyse** : tu déroules Équipe/Marché/Produit/Traction/Moat sans y penser.\n- **Market sizing** : bottom-up, hypothèses annoncées, contre-vérif top-down.\n- **Recommandation** : invest/pass net + conditions.\n- **Risques** : 3 hiérarchisés + mitigations.\n- **Technique** : cap table & returns justes, option pool repéré.\n- **Fit** : why VC/fund/you spécifiques, thèse perso falsifiable.\n- **Communication** : structuré, tranché, < 90 s, pas de rambling.\n\n## Puis : la revue par les pairs\n\nRefais la Manche 2 devant quelqu'un (idéalement déjà dans le métier) avec cette grille. C'est la dernière marche : ce que tu crois clair ne l'est qu'une fois validé par un tiers.\n\n> **Le seuil « 100 % » :** prêt = tout en vert **en conditions chronométrées, deux fois de suite, dont une devant un pair.** Pas après une simple lecture.",
+    "bodyShort": "## La répétition générale\n\nEn conditions réelles, chronométré, à voix haute (enregistre-toi). **Trois manches**, comme un vrai process :\n\n1. **Fit (15 min)** — why VC / why ce fonds / why you + ta thèse perso.\n2. **Case study (60 min)** — un livrable : invest ou pass, pourquoi, 3 risques.\n3. **Pitch & technique (15 min)** — ton pitch-me-a-company + un calcul de cap table et un d'IRR.\n\nPuis **la revue par les pairs** : refais la Manche 2 devant quelqu'un du métier.\n\n> **Le seuil « prêt » :** tout en vert, en conditions chronométrées, **deux fois de suite, dont une devant un pair**. Pas après une simple lecture.",
     "keyTakeaways": [
       "Trois manches : fit, case study, pitch & technique.",
       "Prêt = tout en vert, chronométré, deux fois.",
       "La revue par les pairs est la dernière marche."
     ],
-    "glossaryRefs": [],
+    "glossaryRefs": [
+      "pre-money",
+      "irr",
+      "tam-sam-som"
+    ],
     "furtherReading": [
       {
         "label": "Anatomie d'un portefeuille en loi de puissance",
         "kind": "case",
         "ref": "cs-power-law-portfolio"
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Dans la grille d'auto-évaluation, que signifie « prêt » ?",
+        "options": [
+          {
+            "text": "Tout en vert, en conditions chronométrées, deux fois de suite, dont une devant un pair",
+            "correct": true
+          },
+          {
+            "text": "Avoir lu une fois l'ensemble des fiches",
+            "correct": false
+          },
+          {
+            "text": "Réussir la manche technique isolément",
+            "correct": false
+          }
+        ],
+        "explanation": "Ce qu'on croit clair ne l'est qu'une fois validé par un tiers, en conditions réelles et répétées."
+      },
+      {
+        "question": "Quelles sont les trois manches du mock complet ?",
+        "options": [
+          {
+            "text": "Fit, case study, puis pitch et technique",
+            "correct": true
+          },
+          {
+            "text": "Sourcing, modélisation, puis reporting",
+            "correct": false
+          },
+          {
+            "text": "Lecture, rédaction, puis correction",
+            "correct": false
+          }
+        ],
+        "explanation": "Le mock reproduit un vrai process : entretien de fit, étude de cas livrable, puis pitch et questions techniques."
       }
     ]
   },
@@ -1864,6 +2830,44 @@
     "glossaryRefs": [
       "cap-table",
       "pre-money"
+    ],
+    "quiz": [
+      {
+        "question": "Quelle fourchette de dilution vise une levée saine en seed ?",
+        "options": [
+          {
+            "text": "Entre 15 % et 25 % par tour",
+            "correct": true
+          },
+          {
+            "text": "Entre 40 % et 50 % par tour",
+            "correct": false
+          },
+          {
+            "text": "Moins de 5 % par tour",
+            "correct": false
+          }
+        ],
+        "explanation": "Au-delà de 25 %, l'équipe fondatrice n'est plus assez incitée et les tours suivants deviennent plus difficiles à lever."
+      },
+      {
+        "question": "Qui subit la dilution d'un option pool créé en pre-money ?",
+        "options": [
+          {
+            "text": "Uniquement les fondateurs et actionnaires historiques",
+            "correct": true
+          },
+          {
+            "text": "L'ensemble des actionnaires, au prorata",
+            "correct": false
+          },
+          {
+            "text": "Principalement le nouvel investisseur",
+            "correct": false
+          }
+        ],
+        "explanation": "L'investisseur achète ses actions sur une base déjà diluée par le pool, ce qui protège son pourcentage post-money."
+      }
     ]
   },
   {
@@ -1883,6 +2887,44 @@
     ],
     "glossaryRefs": [
       "safe"
+    ],
+    "quiz": [
+      {
+        "question": "Quelle différence essentielle sépare le BSA-AIR de l'obligation convertible ?",
+        "options": [
+          {
+            "text": "Le BSA-AIR n'est pas une dette : ni intérêts, ni remboursement exigible",
+            "correct": true
+          },
+          {
+            "text": "Le BSA-AIR porte un taux d'intérêt plus élevé",
+            "correct": false
+          },
+          {
+            "text": "L'obligation convertible ne se convertit jamais en actions",
+            "correct": false
+          }
+        ],
+        "explanation": "L'OC peut devoir être remboursée si la startup ne lève pas ; le BSA-AIR est une promesse de capital qui soulage le bilan."
+      },
+      {
+        "question": "Que protège le Cap dans un BSA-AIR ?",
+        "options": [
+          {
+            "text": "L'investisseur : c'est le prix maximum auquel il convertira",
+            "correct": true
+          },
+          {
+            "text": "Le fondateur : c'est une valorisation minimale garantie",
+            "correct": false
+          },
+          {
+            "text": "Les salariés détenteurs de BSPCE",
+            "correct": false
+          }
+        ],
+        "explanation": "Le Cap protège l'investisseur (plafond de conversion) ; le Floor protège le fondateur (plancher de valorisation)."
+      }
     ]
   },
   {
@@ -1903,6 +2945,44 @@
     "glossaryRefs": [
       "liquidation-preference",
       "term-sheet"
+    ],
+    "quiz": [
+      {
+        "question": "Quel est le standard sain de préférence de liquidation en France ?",
+        "options": [
+          {
+            "text": "Le 1x non-participating",
+            "correct": true
+          },
+          {
+            "text": "Le 2x participating",
+            "correct": false
+          },
+          {
+            "text": "L'absence totale de préférence",
+            "correct": false
+          }
+        ],
+        "explanation": "L'investisseur choisit alors entre récupérer 1 fois sa mise ou convertir en actions ordinaires pour prendre son pourcentage."
+      },
+      {
+        "question": "Pourquoi une clause « participating » est-elle défavorable aux fondateurs ?",
+        "options": [
+          {
+            "text": "L'investisseur récupère sa mise, puis prend en plus son pourcentage du reste (double dip)",
+            "correct": true
+          },
+          {
+            "text": "Elle interdit toute revente de l'entreprise",
+            "correct": false
+          },
+          {
+            "text": "Elle réduit la valorisation pre-money",
+            "correct": false
+          }
+        ],
+        "explanation": "Ce cumul ruine les fondateurs lors d'une sortie moyenne ; il est à éviter en amorçage."
+      }
     ]
   },
   {
@@ -1922,6 +3002,44 @@
     ],
     "glossaryRefs": [
       "board-seat"
+    ],
+    "quiz": [
+      {
+        "question": "En SAS, qu'est-ce qui régit le pouvoir entre fondateurs et investisseurs ?",
+        "options": [
+          {
+            "text": "Le pacte d'actionnaires, plus que la loi",
+            "correct": true
+          },
+          {
+            "text": "Le seul code de commerce",
+            "correct": false
+          },
+          {
+            "text": "Le règlement intérieur de la société",
+            "correct": false
+          }
+        ],
+        "explanation": "La SAS doit sa flexibilité à ses statuts et à son pacte d'actionnaires, qui définissent les règles du jeu."
+      },
+      {
+        "question": "Quel droit de véto constitue une ligne rouge à refuser à un investisseur ?",
+        "options": [
+          {
+            "text": "Un véto sur le budget opérationnel courant ou les embauches hors C-level",
+            "correct": true
+          },
+          {
+            "text": "Un véto sur la vente ou la fusion de l'entreprise",
+            "correct": false
+          },
+          {
+            "text": "Un véto sur l'émission de nouvelles actions",
+            "correct": false
+          }
+        ],
+        "explanation": "Les matières réservées doivent rester limitées aux décisions extraordinaires, pas à la gestion quotidienne."
+      }
     ]
   },
   {
@@ -1941,6 +3059,327 @@
     ],
     "glossaryRefs": [
       "term-sheet"
+    ],
+    "quiz": [
+      {
+        "question": "Que faire d'un litige ou d'un passif connu avant la signature ?",
+        "options": [
+          {
+            "text": "L'annoncer avant la term sheet, car l'audit le découvrira",
+            "correct": true
+          },
+          {
+            "text": "L'omettre de la data room pour ne pas inquiéter le fonds",
+            "correct": false
+          },
+          {
+            "text": "Attendre que le fonds le détecte pour en discuter",
+            "correct": false
+          }
+        ],
+        "explanation": "Révéler les problèmes en amont préserve la confiance ; les laisser découvrir fait souvent échouer le deal."
+      },
+      {
+        "question": "Quel est le motif d'abandon le plus fréquent en software et deeptech ?",
+        "options": [
+          {
+            "text": "Une propriété intellectuelle non cédée à la société par les développeurs, freelances ou stagiaires",
+            "correct": true
+          },
+          {
+            "text": "Un chiffre d'affaires insuffisant",
+            "correct": false
+          },
+          {
+            "text": "Une équipe trop petite",
+            "correct": false
+          }
+        ],
+        "explanation": "Si l'actif clé n'appartient pas à la société, le fonds n'investira pas : la chaîne de cession de PI doit être complète."
+      }
+    ]
+  },
+  {
+    "id": "l-dd-commercial",
+    "slug": "la-due-diligence-commerciale",
+    "courseId": "c-due-diligence",
+    "order": 2,
+    "title": "La due diligence commerciale",
+    "kicker": "Marché",
+    "readMin": 8,
+    "summary": "Vérifier que la demande existe vraiment, au prix annoncé : marché atteignable, appels clients, rétention.",
+    "body": "## Tester la demande\n\nLa due diligence commerciale vérifie une chose : la demande existe-t-elle au prix annoncé. Le pitch décrit un marché qui veut le produit ; le terrain le confirme ou non. On va donc chercher la preuve chez les clients, dans les cohortes et chez les concurrents, plutôt que dans le récit du fondateur.\n\n## Le marché atteignable\n\nOn reprend le dimensionnement ([[tam-sam-som|TAM/SAM/SOM]]) et on le reconstruit par le bas : nombre de clients réellement adressables multiplié par un prix réaliste. Un marché de cent milliards dont l'entreprise ne peut servir qu'une fraction marginale n'est pas un grand marché pour elle. Ce qui compte, c'est de savoir si le marché adressable peut produire une sortie à la hauteur du risque pris.\n\n## Les appels clients\n\nLe travail central, ce sont les appels de référence clients, y compris ceux que le fondateur n'a pas sélectionnés. On cherche pourquoi ils ont acheté, ce qui les ferait partir, s'ils paieraient davantage. Un client qui hésite avant de dire qu'il rachèterait en apprend plus qu'un témoignage publié sur le site.\n\n## Rétention et concurrence\n\nLa traction qui compte est celle qui dure. On regarde la [[nrr|rétention nette]] et les cohortes avant la croissance brute : un produit qu'on garde signale un vrai besoin ([[pmf|product-market fit]]). Reste la question concurrentielle : qu'est-ce qui empêche un acteur mieux financé de répliquer l'offre en dix-huit mois ([[moat|barrière à l'entrée]]) ?",
+    "keyTakeaways": [
+      "Reconstruire le marché adressable par le bas, pas en pourcentage d'un grand total.",
+      "Les appels clients non sélectionnés par le fondateur sont la source la plus fiable.",
+      "La rétention mesure la demande réelle mieux que la croissance brute."
+    ],
+    "glossaryRefs": [
+      "tam-sam-som",
+      "nrr",
+      "pmf",
+      "moat"
+    ],
+    "furtherReading": [
+      {
+        "label": "Traction & unit economics",
+        "kind": "lesson",
+        "ref": "l-traction-unit-economics"
+      },
+      {
+        "label": "Screening & filtrage",
+        "kind": "lesson",
+        "ref": "l-screening"
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Comment reconstruit-on le marché en due diligence commerciale ?",
+        "options": [
+          {
+            "text": "Par le bas : clients réellement adressables multipliés par un prix réaliste",
+            "correct": true
+          },
+          {
+            "text": "En appliquant un pourcentage au marché total annoncé",
+            "correct": false
+          },
+          {
+            "text": "En reprenant tel quel le chiffre du deck",
+            "correct": false
+          }
+        ],
+        "explanation": "Un grand marché total ne dit rien du marché que l'entreprise peut réellement servir."
+      },
+      {
+        "question": "Pourquoi privilégier les appels clients non sélectionnés par le fondateur ?",
+        "options": [
+          {
+            "text": "Ils sont moins biaisés que les références choisies",
+            "correct": true
+          },
+          {
+            "text": "Ils sont plus rapides à organiser",
+            "correct": false
+          },
+          {
+            "text": "Ils dispensent de regarder la rétention",
+            "correct": false
+          }
+        ],
+        "explanation": "Les références fournies sont, par construction, les plus favorables ; le backchannel donne une image plus juste."
+      }
+    ]
+  },
+  {
+    "id": "l-dd-tech-product",
+    "slug": "la-due-diligence-produit-technologie",
+    "courseId": "c-due-diligence",
+    "order": 3,
+    "title": "La due diligence produit et technologie",
+    "kicker": "Produit",
+    "readMin": 7,
+    "summary": "Le produit fait-il ce qui est annoncé, et tient-il à l'échelle : démêler la défensibilité réelle de la démonstration.",
+    "body": "## Au-delà de la démonstration\n\nUne démonstration prouve qu'un scénario fonctionne, pas que le produit tient en production chez de vrais clients. La due diligence produit mesure l'écart entre ce qui est montré et ce qui est livré : fonctionnalités réellement déployées, part d'intervention manuelle, dette technique accumulée.\n\n## La défensibilité\n\nUne technologie impressionnante mais facile à répliquer ne protège pas durablement. Un avantage qui se renforce avec l'usage — données propriétaires, effets de réseau, coûts de changement — protège mieux ([[moat|barrière à l'entrée]]). La question utile porte sur l'horizon : dans dix-huit mois, qu'est-ce qui tient encore face à un concurrent mieux financé.\n\n## L'échelle\n\nUn produit peut fonctionner à cent clients et se dégrader à dix mille, techniquement ou économiquement. On vérifie que la [[gross-margin|marge brute]] tient quand le volume monte. Une activité dont chaque client coûte presque autant qu'il rapporte relève du service plus que du logiciel ; ses [[unit-economics|unit economics]] doivent s'améliorer avec l'échelle, pas l'inverse.\n\n## Les dépendances\n\nReste à identifier les points de défaillance unique : un seul fournisseur d'API, un modèle d'IA tiers, une brique critique non maîtrisée. Une entreprise dont la valeur dépend d'une ressource qu'un tiers peut couper ou retarifer porte un risque que le pitch mentionne rarement.",
+    "keyTakeaways": [
+      "Mesurer l'écart entre la démonstration et ce qui est réellement déployé.",
+      "Un avantage défensif se renforce avec l'usage ; une techno réplicable ne suffit pas.",
+      "Vérifier que marge brute et unit economics tiennent à l'échelle."
+    ],
+    "glossaryRefs": [
+      "moat",
+      "gross-margin",
+      "unit-economics"
+    ],
+    "furtherReading": [
+      {
+        "label": "Lire une startup",
+        "kind": "course",
+        "ref": "c-startup-analysis"
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Qu'est-ce qui distingue un vrai avantage défensif d'une simple avance ?",
+        "options": [
+          {
+            "text": "Un avantage qui se renforce avec l'usage (données, effets de réseau, coûts de changement)",
+            "correct": true
+          },
+          {
+            "text": "Une technologie plus récente que celle des concurrents",
+            "correct": false
+          },
+          {
+            "text": "Une équipe technique plus nombreuse",
+            "correct": false
+          }
+        ],
+        "explanation": "Une techno réplicable en quelques mois ne constitue pas un moat ; l'avantage doit se consolider dans le temps."
+      },
+      {
+        "question": "Quel signal trahit une activité présentée comme « tech » mais proche du service ?",
+        "options": [
+          {
+            "text": "La marge brute ne tient pas et les unit economics se dégradent à l'échelle",
+            "correct": true
+          },
+          {
+            "text": "Le produit dispose d'une interface soignée",
+            "correct": false
+          },
+          {
+            "text": "L'entreprise emploie des ingénieurs",
+            "correct": false
+          }
+        ],
+        "explanation": "Si chaque client coûte presque autant qu'il rapporte, l'économie ne s'améliore pas avec le volume."
+      }
+    ]
+  },
+  {
+    "id": "l-dd-team",
+    "slug": "la-due-diligence-equipe-references",
+    "courseId": "c-due-diligence",
+    "order": 4,
+    "title": "La due diligence équipe et références",
+    "kicker": "Équipe",
+    "readMin": 8,
+    "summary": "En amorçage, l'essentiel du pari porte sur les personnes : founder-market fit, appels de référence, alignement.",
+    "body": "## Un pari sur des personnes\n\nEn amorçage, les chiffres sont minces et le pari porte surtout sur l'équipe. La due diligence équipe ne cherche pas un CV prestigieux mais une raison crédible que ces fondateurs réussissent sur ce marché : connaissance du problème, vitesse d'apprentissage, capacité à recruter.\n\n## Les appels de référence\n\nOn parle aux anciens associés, employés et investisseurs, en incluant ceux qui ne figurent pas sur la liste fournie. Les questions utiles ne sont pas « est-il brillant » mais « le réembaucheriez-vous », « comment réagit-il sous tension », « pourquoi êtes-vous parti ». Les hésitations comptent autant que les réponses.\n\n## Les signaux d'intégrité\n\nUn doute sur l'honnêteté pèse plus lourd qu'une lacune de compétence : une compétence se recrute, un problème d'intégrité dure toute la relation. Écarts entre les déclarations et les données, ruptures répétées avec des cofondateurs, embellissements systématiques : ces signaux méritent d'être creusés avant de signer.\n\n## L'alignement dans la durée\n\nOn vérifie enfin que l'équipe reste incitée à tenir dix ans. Le [[vesting|vesting]] des fondateurs et la répartition de la [[cap-table|cap table]] doivent garder chacun motivé ; un cofondateur parti tôt avec un bloc d'actions déjà acquises est un problème de gouvernance. Ce qu'on apprend ici alimente directement le [[deal-memo|deal memo]] présenté au comité.",
+    "keyTakeaways": [
+      "Chercher une raison crédible que ces fondateurs gagnent sur ce marché, pas un CV.",
+      "Les références hors liste fournie sont les plus instructives.",
+      "Un doute d'intégrité pèse plus lourd qu'une lacune de compétence."
+    ],
+    "glossaryRefs": [
+      "vesting",
+      "cap-table",
+      "deal-memo"
+    ],
+    "furtherReading": [
+      {
+        "label": "Les rôles dans un fonds",
+        "kind": "lesson",
+        "ref": "l-roles"
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Qu'évalue-t-on en priorité dans la due diligence équipe en amorçage ?",
+        "options": [
+          {
+            "text": "Une raison crédible que ces fondateurs gagnent sur ce marché",
+            "correct": true
+          },
+          {
+            "text": "Le prestige des diplômes et des employeurs passés",
+            "correct": false
+          },
+          {
+            "text": "La taille actuelle de l'équipe",
+            "correct": false
+          }
+        ],
+        "explanation": "Le founder-market fit pèse plus que le CV : connaissance du problème, vitesse d'apprentissage, capacité à recruter."
+      },
+      {
+        "question": "Pourquoi un doute d'intégrité pèse-t-il plus lourd qu'une lacune de compétence ?",
+        "options": [
+          {
+            "text": "Une compétence se recrute, alors qu'un problème d'honnêteté dure toute la relation",
+            "correct": true
+          },
+          {
+            "text": "Parce qu'il est plus facile à mesurer",
+            "correct": false
+          },
+          {
+            "text": "Parce qu'il affecte uniquement la phase de levée",
+            "correct": false
+          }
+        ],
+        "explanation": "La relation court sur une dizaine d'années ; un signal d'intégrité mérite d'être creusé avant de signer."
+      }
+    ]
+  },
+  {
+    "id": "l-dd-legal",
+    "slug": "la-due-diligence-juridique-cap-table",
+    "courseId": "c-due-diligence",
+    "order": 5,
+    "title": "La due diligence juridique, financière et cap table",
+    "kicker": "Structuration",
+    "readMin": 9,
+    "summary": "Réconcilier la cap table, sécuriser la propriété intellectuelle et vérifier que le wording juridique traduit l'accord économique.",
+    "body": "## La dernière vérification\n\nUne fois la conviction faite, la due diligence juridique et financière confirme l'absence de défaut bloquant. Beaucoup de tours s'arrêtent ici, non par manque de potentiel, mais à cause d'une structure mal tenue.\n\n## La cap table\n\nOn reconstruit la [[cap-table|cap table]] entièrement diluée — actions, BSA, BSPCE, instruments convertibles — et on la confronte aux procès-verbaux d'assemblée et au registre de mouvements de titres. Un tableur qui ne correspond pas aux actes juridiques est un signal à traiter avant tout le reste. On regarde aussi la taille de l'[[esop|ESOP]] : un pool trop petit imposera une nouvelle dilution juste après l'entrée.\n\n## La propriété intellectuelle\n\nC'est le motif de retrait le plus fréquent en logiciel et en deeptech. Si des développeurs, freelances ou stagiaires n'ont pas cédé leur propriété intellectuelle à la société, l'actif principal ne lui appartient pas. On vérifie les clauses de cession, l'absence de revendication d'un fondateur parti et la continuité de la chaîne de titres.\n\n## Le wording et le carburant\n\nLa [[term-sheet|term sheet]] indique « 1x non-participating » ; les statuts doivent dire exactement la même chose. La due diligence s'assure que la [[liquidation-preference|préférence de liquidation]] et les droits de gouvernance traduisent fidèlement l'accord économique, car un écart se paie à la sortie. On confirme enfin la trésorerie : le [[runway|runway]] réel au regard du [[burn-rate|burn rate]], les dettes et les passifs (URSSAF, prud'hommes) qui réduisent le nombre de mois que le tour achète vraiment.",
+    "keyTakeaways": [
+      "Confronter la cap table entièrement diluée aux actes juridiques, pas au seul tableur.",
+      "La PI non cédée à la société est le motif de retrait le plus fréquent en logiciel et deeptech.",
+      "Le wording des statuts doit traduire exactement l'accord économique négocié."
+    ],
+    "glossaryRefs": [
+      "cap-table",
+      "esop",
+      "liquidation-preference",
+      "term-sheet",
+      "runway",
+      "burn-rate"
+    ],
+    "furtherReading": [
+      {
+        "label": "Ownership & cap table (simulateur)",
+        "kind": "simulator",
+        "ref": "ownership"
+      },
+      {
+        "label": "Le piège de la valorisation flatteuse",
+        "kind": "case",
+        "ref": "cs-liquidation-preference"
+      },
+      {
+        "label": "Les 5 erreurs mortelles de data room",
+        "kind": "lesson",
+        "ref": "lf-dataroom"
+      }
+    ],
+    "quiz": [
+      {
+        "question": "À quoi confronte-t-on la cap table entièrement diluée ?",
+        "options": [
+          {
+            "text": "Aux procès-verbaux d'assemblée et au registre de mouvements de titres",
+            "correct": true
+          },
+          {
+            "text": "Au seul tableur Excel fourni par le fondateur",
+            "correct": false
+          },
+          {
+            "text": "À la valorisation annoncée dans la term sheet",
+            "correct": false
+          }
+        ],
+        "explanation": "Un tableur qui ne correspond pas aux actes juridiques est un signal d'alerte à traiter en priorité."
+      },
+      {
+        "question": "Pourquoi vérifier que développeurs et freelances ont cédé leur propriété intellectuelle ?",
+        "options": [
+          {
+            "text": "Sinon l'actif principal n'appartient pas à la société, ce qui fait échouer le deal",
+            "correct": true
+          },
+          {
+            "text": "Pour calculer la marge brute",
+            "correct": false
+          },
+          {
+            "text": "Pour estimer le runway restant",
+            "correct": false
+          }
+        ],
+        "explanation": "La PI non sécurisée est le motif de retrait le plus fréquent en logiciel et en deeptech."
+      }
     ]
   }
 ]

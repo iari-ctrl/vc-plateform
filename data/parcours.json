@@ -355,7 +355,7 @@
     "time": {
       "coreHours": 7,
       "withBonusHours": 10,
-      "sessions": 13,
+      "sessions": 15,
       "cadence": "Sur 3 à 5 semaines"
     },
     "timeFit": [
@@ -410,6 +410,16 @@
       },
       {
         "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "case",
+          "id": "cs-market-sizing-live"
+        },
+        "label": "Cas : un market sizing déroulé en direct",
+        "status": "existant"
+      },
+      {
+        "order": 5,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
@@ -419,7 +429,7 @@
         "status": "existant"
       },
       {
-        "order": 5,
+        "order": 6,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
@@ -429,7 +439,7 @@
         "status": "existant"
       },
       {
-        "order": 6,
+        "order": 7,
         "type": "pratique",
         "ref": {
           "kind": "course",
@@ -440,7 +450,7 @@
         "keystone": true
       },
       {
-        "order": 7,
+        "order": 8,
         "type": "pratique",
         "ref": {
           "kind": "simulator",
@@ -450,7 +460,7 @@
         "status": "existant"
       },
       {
-        "order": 8,
+        "order": 9,
         "type": "pratique",
         "ref": {
           "kind": "simulator",
@@ -460,7 +470,7 @@
         "status": "existant"
       },
       {
-        "order": 9,
+        "order": 10,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
@@ -471,7 +481,7 @@
         "keystone": true
       },
       {
-        "order": 10,
+        "order": 11,
         "type": "pratique",
         "ref": {
           "kind": "lesson",
@@ -481,7 +491,17 @@
         "status": "existant"
       },
       {
-        "order": 11,
+        "order": 12,
+        "type": "pratique",
+        "ref": {
+          "kind": "case",
+          "id": "cs-seed-ic"
+        },
+        "label": "Cas : la décision de comité (Volta au seed)",
+        "status": "existant"
+      },
+      {
+        "order": 13,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
@@ -491,7 +511,7 @@
         "status": "existant"
       },
       {
-        "order": 12,
+        "order": 14,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
@@ -501,7 +521,7 @@
         "status": "existant"
       },
       {
-        "order": 13,
+        "order": 15,
         "type": "bonus",
         "ref": {
           "kind": "lesson",
@@ -511,7 +531,7 @@
         "status": "existant"
       },
       {
-        "order": 14,
+        "order": 16,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
@@ -521,7 +541,7 @@
         "status": "existant"
       },
       {
-        "order": 15,
+        "order": 17,
         "type": "bonus",
         "ref": {
           "kind": "lesson",
@@ -531,7 +551,7 @@
         "status": "existant"
       },
       {
-        "order": 16,
+        "order": 18,
         "type": "respiration",
         "ref": {
           "kind": "case",
@@ -541,7 +561,7 @@
         "status": "existant"
       },
       {
-        "order": 17,
+        "order": 19,
         "type": "pratique",
         "ref": {
           "kind": "milestone",
@@ -686,7 +706,7 @@
           "id": "todo-ic-simulation"
         },
         "label": "Simulation de comité d'investissement",
-        "status": "a-produire"
+        "status": "existant"
       },
       {
         "order": 10,
@@ -812,7 +832,7 @@
           "id": "todo-these-proprietaire"
         },
         "label": "Écrire une thèse propriétaire",
-        "status": "a-produire"
+        "status": "existant"
       },
       {
         "order": 8,

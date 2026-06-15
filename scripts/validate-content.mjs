@@ -130,6 +130,7 @@ const lessonSchema = z.object({
   readMin: z.number().nonnegative(),
   summary: nonEmpty,
   body: nonEmpty,
+  bodyShort: nonEmpty.optional(),
   keyTakeaways: z.array(z.string()),
   glossaryRefs: idList,
   quiz: z.array(quizQuestionSchema).optional(),
@@ -283,6 +284,29 @@ const caseStudySchema = z.object({
   glossaryRefs: idList,
   sections: z.array(z.object({ heading: nonEmpty, body: nonEmpty })).min(1),
   takeaways: z.array(z.string()),
+}).strict();
+
+// A « livrable » is the hands-on end of a parcours milestone: a brief + a
+// template + a self-assessment rubric + a pointer to an existing intelligence
+// artifact used as the worked model.
+const deliverableSchema = z.object({
+  id: nonEmpty,
+  slug,
+  title: nonEmpty,
+  kicker: z.string().optional(),
+  readMin: z.number().nonnegative(),
+  summary: nonEmpty,
+  brief: nonEmpty,
+  template: z.array(z.object({ heading: nonEmpty, prompt: nonEmpty }).strict()).min(1),
+  rubric: z.array(z.object({ criterion: nonEmpty, check: nonEmpty }).strict()).min(1),
+  model: z.object({
+    kind: z.enum(['ecosystem', 'case', 'memo', 'lesson']),
+    id: nonEmpty,
+    note: z.string(),
+  }).strict().optional(),
+  relatedLessonIds: idList.optional(),
+  glossaryRefs: idList.optional(),
+  tags: z.array(z.string()).optional(),
 }).strict();
 
 const blogSchema = z.object({
@@ -494,6 +518,7 @@ const courses = check('courses.json', z.array(courseSchema), readJson('courses.j
 const lessons = check('lessons.json', z.array(lessonSchema), readJson('lessons.json')) ?? [];
 const glossary = check('glossary.json', z.array(glossarySchema), readJson('glossary.json')) ?? [];
 const cases = check('caseStudies.json', z.array(caseStudySchema), readJson('caseStudies.json')) ?? [];
+const deliverables = check('deliverables.json', z.array(deliverableSchema), readJson('deliverables.json')) ?? [];
 const blog = check('blog.json', z.array(blogSchema), readJson('blog.json')) ?? [];
 const ecosystems = check('ecosystems.json', z.array(ecosystemSchema), readJson('ecosystems.json')) ?? [];
 const simulators = check('simulators.json', z.array(simulatorSchema), readJson('simulators.json')) ?? [];
@@ -528,6 +553,8 @@ assertUnique('glossary.json', glossary, 'id');
 assertUnique('glossary.json', glossary, 'slug');
 assertUnique('caseStudies.json', cases, 'id');
 assertUnique('caseStudies.json', cases, 'slug');
+assertUnique('deliverables.json', deliverables, 'id');
+assertUnique('deliverables.json', deliverables, 'slug');
 assertUnique('blog.json', blog, 'id');
 assertUnique('blog.json', blog, 'slug');
 assertUnique('ecosystems.json', ecosystems, 'id');
@@ -617,6 +644,23 @@ for (const s of simulators) {
   checkRefs(`simulators/${s.id}.relatedLessonIds`, s.relatedLessonIds, (r) => lessonIds.has(r), 'leçon');
   checkRefs(`simulators/${s.id}.glossaryRefs`, s.glossaryRefs, isGlossary, 'terme de glossaire');
 }
+// Livrables: relatedLessonIds, glossaryRefs and the model exemplar must resolve.
+// `memos.json` is loaded only to resolve a `model.kind: "memo"` reference.
+const memos = readJson('memos.json') ?? [];
+const memoRefs = new Set((Array.isArray(memos) ? memos : []).flatMap((m) => [m.id, m.slug].filter(Boolean)));
+const deliverableIds = new Set(deliverables.map((d) => d.id));
+const modelResolvers = {
+  ecosystem: (r) => ecosystemIds.has(r),
+  case: (r) => caseRefs.has(r),
+  memo: (r) => memoRefs.has(r),
+  lesson: (r) => lessonIds.has(r),
+};
+for (const d of deliverables) {
+  if (d.relatedLessonIds) checkRefs(`deliverables/${d.id}.relatedLessonIds`, d.relatedLessonIds, (r) => lessonIds.has(r), 'leçon');
+  if (d.glossaryRefs) checkRefs(`deliverables/${d.id}.glossaryRefs`, d.glossaryRefs, isGlossary, 'terme de glossaire');
+  if (d.model && !modelResolvers[d.model.kind](d.model.id))
+    err(`deliverables/${d.id}.model — ${d.model.kind} introuvable : "${d.model.id}"`);
+}
 for (const p of parcours) {
   checkRefs(`parcours/${p.id}.recommendedForProfiles`, p.recommendedForProfiles, (r) => profileIds.has(r), 'profil');
   p.steps.forEach((step) => {
@@ -628,9 +672,12 @@ for (const p of parcours) {
       case: (r) => caseRefs.has(r),
       simulator: (r) => simRefs.has(r),
       glossary: isGlossary,
-      milestone: (r) => lessonIds.has(r),
+      // Mirrors resolveStep (client/src/content/parcours.ts): a milestone resolves
+      // to a livrable first, then falls back to a lesson (preserves `lea-mock`).
+      milestone: (r) => deliverableIds.has(r) || lessonIds.has(r),
     };
-    if (step.ref.kind === 'milestone' && step.status === 'a-produire' && !lessonIds.has(ref)) return;
+    // `a-produire` milestones with no livrable/lesson yet are intentional placeholders.
+    if (step.ref.kind === 'milestone' && step.status === 'a-produire' && !deliverableIds.has(ref) && !lessonIds.has(ref)) return;
     if (!resolvers[step.ref.kind](ref)) err(`${label}.ref — ${step.ref.kind} introuvable : "${ref}"`);
   });
 }
@@ -689,6 +736,7 @@ const MARKER_FILES = [
   'blog.json',
   'ecosystems.json',
   'caseStudies.json',
+  'deliverables.json',
   'courses.json',
   'paths.json',
   'parcours.json',
@@ -715,7 +763,7 @@ for (const file of MARKER_FILES) {
 console.log('Validation du contenu VC Premium');
 console.log(`→ ${parcours.length} parcours · ${paths.length} rayon(s) hérités · ${courses.length} cours · ${allLessons.length} leçons · ${glossary.length} termes`);
 console.log(`→ ${parcoursLessons.length} leçon(s) de parcours drop-in · ${parcoursLessonDocs.length} registre(s)`);
-console.log(`→ ${cases.length} études de cas · ${blog.length} articles · ${ecosystems.length} dossier(s) d'écosystème · ${simulators.length} simulateurs`);
+console.log(`→ ${cases.length} études de cas · ${deliverables.length} livrable(s) · ${blog.length} articles · ${ecosystems.length} dossier(s) d'écosystème · ${simulators.length} simulateurs`);
 console.log(`→ ${markerCount} marqueur(s) [[..]] / {{..}} analysés`);
 
 if (warnings.length) {

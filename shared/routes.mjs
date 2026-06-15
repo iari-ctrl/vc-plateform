@@ -61,6 +61,8 @@ export const OG_IMAGE_BY_SEGMENT = {
   cases: 'case-study',
   courses: 'course',
   paths: 'path',
+  livrables: 'path', // a deliverable is the hands-on end of a parcours — reuse its card
+
   bibliotheque: 'course', // the library lists courses — reuse the course card
   glossary: 'glossary',
   simulators: 'simulator',

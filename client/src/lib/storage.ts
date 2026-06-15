@@ -36,6 +36,8 @@ export const STORAGE_KEYS = {
   journal: 'decision-journal',
   highlights: 'highlights',
   onboardingSeen: 'onboarding-seen',
+  /** Reader depth preference for lessons that ship both versions ('court' | 'profond'). */
+  readingDepth: 'reading-depth',
   // ── Ikigai "cahier d'introspection" ──
   ikigaiMode: 'ikigai-reading-mode',
   ikigaiAnswers: 'ikigai-cahier-answers',
