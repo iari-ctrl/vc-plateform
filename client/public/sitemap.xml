@@ -433,6 +433,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/cases/market-sizing-en-direct-le-cas-vetoflow</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/cases/market-sizing-en-direct-le-cas-vetoflow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/cases/market-sizing-en-direct-le-cas-vetoflow" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/cases/market-sizing-en-direct-le-cas-vetoflow" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/cases/market-sizing-en-direct-le-cas-vetoflow</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/cases/market-sizing-en-direct-le-cas-vetoflow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/cases/market-sizing-en-direct-le-cas-vetoflow" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/cases/market-sizing-en-direct-le-cas-vetoflow" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/courses/anatomie-d-une-term-sheet</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/courses/anatomie-d-une-term-sheet" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/courses/anatomie-d-une-term-sheet" />
@@ -5935,6 +5951,22 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/glossary/sam</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/sam" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/sam" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/sam" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/sam</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/sam" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/sam" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/sam" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/glossary/scalability</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/scalability" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/scalability" />
@@ -6207,6 +6239,22 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/glossary/som</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/som" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/som" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/som" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/som</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/som" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/som" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/som" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/glossary/sovereign-wealth-fund</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/sovereign-wealth-fund" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/sovereign-wealth-fund" />
@@ -6379,6 +6427,22 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/tag-along" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/tag-along" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/tag-along" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/glossary/tam</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/tam" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/tam" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/tam" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/tam</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/tam" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/tam" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/tam" />
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
