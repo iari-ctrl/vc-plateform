@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Merge curated `aliases` from the ingestion ledger
- * (`glossary-ingestion/canonical-glossary.json`) into the shipped content
+ * (`data/sources/canonical-glossary.json`) into the shipped content
  * collection (`data/glossary.json`), keyed by slug.
  *
  * Why: the ledger captures synonyms/abbreviations ("VC", "capital-risque",
@@ -25,7 +25,7 @@ import { dirname, join } from 'node:path';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const shippedPath = join(root, 'data', 'glossary.json');
-const canonicalPath = join(root, 'glossary-ingestion', 'canonical-glossary.json');
+const canonicalPath = join(root, 'data', 'sources', 'canonical-glossary.json');
 
 const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 
