@@ -15,7 +15,7 @@ import { useApiItem } from '@/hooks/useApiData';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
 import { storage, STORAGE_KEYS } from '@/lib/storage';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 /** Reader depth for lessons that ship both an "essentiel" and a full version. */
 type ReadingDepth = 'court' | 'profond';

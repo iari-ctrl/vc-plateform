@@ -9,7 +9,7 @@ import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { PageLoader } from '@/components/ui/primitives';
 import { useApiItem } from '@/hooks/useApiData';
 import { usePageMeta } from '@/lib/seo';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 const KIND_LABEL: Record<string, string> = { startup: 'Startup', fund: 'Fonds', deal: 'Deal', market: 'Marché' };
 

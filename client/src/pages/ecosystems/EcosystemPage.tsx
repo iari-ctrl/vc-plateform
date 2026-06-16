@@ -13,7 +13,7 @@ import { EcosystemFigureView } from '@/components/ecosystems/EcosystemFigures';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function EcosystemPage() {
   const { slug } = useParams();

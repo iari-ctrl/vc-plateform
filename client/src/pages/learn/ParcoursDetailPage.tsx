@@ -17,7 +17,7 @@ import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useApiItem } from '@/hooks/useApiData';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 const STEP_META: Record<StepType, { label: string; icon: LucideIcon; color: string; hint: string }> = {
   coeur: { label: 'Cœur', icon: Target, color: 'var(--primary)', hint: 'La colonne vertébrale — l’indispensable.' },

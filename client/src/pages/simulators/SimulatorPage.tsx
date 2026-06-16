@@ -6,7 +6,7 @@ import { SIMULATOR_COMPONENTS } from '@/components/simulators';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { usePageMeta } from '@/lib/seo';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function SimulatorPage() {
   const { slug } = useParams();

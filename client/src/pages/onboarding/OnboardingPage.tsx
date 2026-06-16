@@ -23,10 +23,10 @@ import {
   setChosenArchetype,
 } from '@/lib/ikigaiCahier';
 import { usePageMeta } from '@/lib/seo';
-import { OrientationTest } from './onboarding/OrientationTest';
-import { MythCard } from './onboarding/MythCard';
-import { useIkigaiScrollPinning } from './onboarding/useIkigaiScrollPinning';
-import { useOnboardingMode } from './onboarding/useOnboardingMode';
+import { OrientationTest } from './OrientationTest';
+import { MythCard } from './MythCard';
+import { useIkigaiScrollPinning } from './useIkigaiScrollPinning';
+import { useOnboardingMode } from './useOnboardingMode';
 import type { IkigaiMode } from '@/content/types';
 
 type SectionKey = 'dims' | 'inters' | 'presque' | 'archetypes' | 'reflection';

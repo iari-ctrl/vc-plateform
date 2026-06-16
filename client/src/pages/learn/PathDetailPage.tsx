@@ -10,7 +10,7 @@ import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
 import { cn } from '@/lib/utils';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function PathDetailPage() {
   const { slug } = useParams();

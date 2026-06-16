@@ -11,7 +11,7 @@ import { PageLoader } from '@/components/ui/primitives';
 import { useApiItem } from '@/hooks/useApiData';
 import { formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function BlogPostPage() {
   const { slug } = useParams();

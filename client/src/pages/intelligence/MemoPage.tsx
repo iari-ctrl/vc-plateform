@@ -8,7 +8,7 @@ import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { usePageMeta } from '@/lib/seo';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 import type { MemoBlock } from '@/content/types';
 
 function AnnotatedBlock({ block, memoTitle, memoId, index }: { block: MemoBlock; memoTitle: string; memoId: string; index: number }) {

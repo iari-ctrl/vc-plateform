@@ -9,7 +9,7 @@ import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { usePageMeta } from '@/lib/seo';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function AntiPortfolioEntryPage() {
   const { slug } = useParams();

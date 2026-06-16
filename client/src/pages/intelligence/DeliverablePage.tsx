@@ -9,7 +9,7 @@ import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { PageLoader } from '@/components/ui/primitives';
 import { useApiItem } from '@/hooks/useApiData';
 import { usePageMeta } from '@/lib/seo';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 /** Resolve a deliverable's model exemplar to an in-app route + label. */
 function resolveModel(m: DeliverableModelRef): { href: string; title: string; typeLabel: string } | null {

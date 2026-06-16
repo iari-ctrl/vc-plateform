@@ -10,7 +10,7 @@ import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useApiItem } from '@/hooks/useApiData';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function CourseDetailPage() {
   const { slug } = useParams();
