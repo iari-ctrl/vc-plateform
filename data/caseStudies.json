@@ -267,7 +267,7 @@
     "company": "VétoFlow · vertical SaaS (fictif, stylisé)",
     "year": 2026,
     "readMin": 8,
-    "summary": "On rejoue, étape par étape, le market sizing qu'un analyst doit savoir dérouler au tableau : bottom-up d'abord, contre-test top-down, test de sensibilité, puis verdict venture-scale. Les chiffres sont des hypothèses explicites, pas des faits.",
+    "summary": "Cette étude reprend, étape par étape, le market sizing qu’un analyst doit savoir dérouler au tableau : bottom-up d’abord, contre-test top-down, test de sensibilité, puis conclusion sur le caractère venture-scale. Les chiffres sont des hypothèses explicites, non des faits.",
     "tags": [
       "market-sizing",
       "tam-sam-som",
@@ -282,30 +282,30 @@
     "sections": [
       {
         "heading": "Le brief",
-        "body": "On te donne dix minutes au tableau : « VétoFlow vend un logiciel de gestion — planning, dossiers, facturation — aux cliniques vétérinaires. Le marché est-il assez grand pour un fonds early-stage ? » La première réponse d'analyst n'est jamais « oui » ou « non » : c'est « voici comment je le chiffre, et voici les hypothèses que je pose ». On verbalise la méthode avant le résultat."
+        "body": "L’exercice donne dix minutes au tableau : « VétoFlow vend un logiciel de gestion — planning, dossiers, facturation — aux cliniques vétérinaires. Le marché est-il assez grand pour un fonds early-stage ? » La réponse attendue n’est ni « oui » ni « non », mais l’exposé de la méthode et des hypothèses : la démarche se verbalise avant le résultat."
       },
       {
-        "heading": "Bottom-up : on part de l’unité",
-        "body": "On annonce chaque hypothèse à voix haute, pour qu'elle soit attaquable. Supposons environ 12 000 cliniques vétérinaires adressables en France — un ordre de grandeur à valider, pas un fait acquis. Toutes ne basculeront pas vers un nouvel outil : retenons la moitié comme réellement servable, les autres étant déjà verrouillées par un logiciel en place ou trop petites pour payer. Cela donne 6 000 cibles. À un abonnement de l'ordre de 3 000 € par an et par clinique, le SAM ressort à 6 000 × 3 000 = 18 M€. La formule, écrite noir sur blanc : cibles servables × prix annuel = SAM."
+        "heading": "Bottom-up : partir de l’unité",
+        "body": "Chaque hypothèse s’annonce explicitement, pour qu’elle soit discutable. On suppose environ 12 000 cliniques vétérinaires adressables en France, un ordre de grandeur à valider plutôt qu’un fait acquis. Toutes ne basculeront pas vers un nouvel outil : on retient la moitié comme réellement servable, les autres étant déjà équipées d’un logiciel en place ou trop petites pour payer, soit 6 000 cibles. À un abonnement de l’ordre de 3 000 € par an et par clinique, le SAM ressort à 6 000 × 3 000 = 18 M€. La formule s’écrit explicitement : cibles servables × prix annuel = SAM."
       },
       {
         "heading": "Le contre-test top-down",
-        "body": "On vérifie l'ordre de grandeur par l'autre bout. Le marché du logiciel vétérinaire en France se compte en dizaines de millions d'euros par an — cohérent avec un SAM d'environ 18 M€ pour un acteur horizontal. La règle : quand le bottom-up et le top-down convergent à ±15 %, les hypothèses tiennent. S'ils divergent d'un facteur trois, c'est qu'une hypothèse est fausse — et on la cherche à voix haute plutôt que de masquer l'écart."
+        "body": "L’ordre de grandeur se vérifie par l’autre bout. Le marché du logiciel vétérinaire en France se compte en dizaines de millions d’euros par an, ce qui reste cohérent avec un SAM d’environ 18 M€ pour un acteur horizontal. Lorsque le bottom-up et le top-down convergent à ±15 %, les hypothèses tiennent. S’ils divergent d’un facteur trois, c’est qu’une hypothèse est fausse, et il faut la chercher explicitement plutôt que de masquer l’écart."
       },
       {
-        "heading": "Le test de sensibilité (le réflexe qui distingue)",
-        "body": "On stresse la variable la plus fragile — ici, le prix. « Et si l'abonnement réaliste était plutôt de 1 800 € par an ? » Le SAM tombe à 6 000 × 1 800 = 10,8 M€. C'est l'instant décisif : à 11–18 M€ de SAM sur la France seule, on est sous le seuil qui rend un fonds early-stage confortable. La boîte doit donc soit s'étendre géographiquement, soit élargir son périmètre produit — assurance, pharmacie, télémédecine. C'est exactement le why-now et la trajectoire qu'on ira challenger."
+        "heading": "Le test de sensibilité",
+        "body": "On éprouve la variable la plus fragile, ici le prix : si l’abonnement réaliste était plutôt de 1 800 € par an, le SAM tomberait à 6 000 × 1 800 = 10,8 M€. C’est le point déterminant : à 11-18 M€ de SAM sur la France seule, le marché reste sous le seuil qui suffit à un fonds early-stage. La société doit donc s’étendre géographiquement ou élargir son périmètre produit — assurance, pharmacie, télémédecine. C’est précisément le why-now et la trajectoire à examiner."
       },
       {
         "heading": "Le verdict",
-        "body": "SOM à trois-cinq ans : en captant environ 10 % du marché servable, VétoFlow viserait 1,5 à 2 M€ d'ARR sur la France seule — honnête, mais pas encore venture-scale. La bonne reco d'analyst n'est pas « le marché est trop petit », un verdict paresseux ; c'est « la France seule ne suffit pas, l'investissement ne tient que si l'expansion européenne ou l'extension produit est crédible — et voilà précisément ce que je creuserais ». On a transformé un chiffre en question d'investissement."
+        "body": "À trois-cinq ans, en captant environ 10 % du marché servable, VétoFlow viserait 1,5 à 2 M€ d’ARR sur la France seule : un résultat honnête, mais pas encore venture-scale. La recommandation attendue n’est pas « le marché est trop petit », qui ne tranche rien, mais : « la France seule ne suffit pas ; l’investissement ne se justifie que si l’expansion européenne ou l’extension produit est crédible, et c’est ce point qu’il faut creuser ». Le chiffre est ainsi transformé en question d’investissement."
       }
     ],
     "takeaways": [
-      "Un market sizing n'est pas un nombre : c'est une suite d'hypothèses assumées, défendables et stressables.",
-      "Bottom-up d’abord (unité × prix), contre-test top-down ; convergence à ±15 % = hypothèses solides.",
-      "Stresse la variable la plus fragile (souvent le prix) : c'est là que se révèle si la boîte est venture-scale.",
-      "Le bon verdict transforme le chiffre en question d’investissement plutôt que de trancher « trop petit / assez grand »."
+      "Un market sizing n’est pas un nombre, mais une suite d’hypothèses assumées, défendables et testables.",
+      "On commence par le bottom-up (unité × prix), puis on contre-vérifie en top-down ; une convergence à ±15 % indique des hypothèses solides.",
+      "Le test de la variable la plus fragile, souvent le prix, révèle si la société est venture-scale.",
+      "Une bonne conclusion transforme le chiffre en question d’investissement au lieu de trancher entre « trop petit » et « assez grand »."
     ]
   }
 ]
