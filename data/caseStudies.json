@@ -136,51 +136,6 @@
     ]
   },
   {
-    "id": "cs-liquidation-preference",
-    "slug": "le-piege-de-la-valorisation-flatteuse",
-    "title": "Le piège de la valorisation flatteuse",
-    "subtitle": "Comment une term sheet « généreuse » peut appauvrir un fondateur",
-    "kind": "deal",
-    "company": "Series B fictive · 80 M€ post-money",
-    "year": 2026,
-    "readMin": 9,
-    "summary": "Deux term sheets, une valorisation haute et une plus basse. On modélise la sortie pour révéler laquelle enrichit réellement le fondateur — et pourquoi les chiffres affichés trompent.",
-    "tags": [
-      "term-sheet",
-      "liquidation-preference",
-      "negotiation"
-    ],
-    "glossaryRefs": [
-      "liquidation-preference",
-      "term-sheet",
-      "cap-table",
-      "pre-money"
-    ],
-    "sections": [
-      {
-        "heading": "Les deux offres",
-        "body": "Offre A : 80 M€ post-money, liquidation preference 2× participating. Offre B : 60 M€ post-money, 1× non-participating. La fondatrice est tentée par la valorisation la plus haute — un réflexe naturel et coûteux."
-      },
-      {
-        "heading": "Le scénario de sortie moyen",
-        "body": "L'entreprise est revendue 120 M€, un bon résultat sans être spectaculaire. Avec l'offre A, l'investisseur récupère d'abord 2× sa mise puis participe au reste : sa préférence dévore une part disproportionnée du produit, laissant beaucoup moins aux ordinaires. Avec l'offre B, l'investisseur convertit simplement en ordinaire et touche sa part au prorata."
-      },
-      {
-        "heading": "Le verdict",
-        "body": "Dans la majorité des scénarios de sortie réalistes (hors méga-exit), l'offre B « moins-disante » laisse davantage à la fondatrice et aux employés. La valorisation affichée n'est qu'un nombre ; ce sont les termes économiques qui déterminent qui touche quoi."
-      },
-      {
-        "heading": "La règle du praticien",
-        "body": "Ne jamais lire une clause isolément. Toujours modéliser plusieurs scénarios de sortie et se demander : qui touche quoi, dans chaque cas ? Une term sheet se lit comme une distribution de probabilités, pas comme une affiche."
-      }
-    ],
-    "takeaways": [
-      "Une valorisation élevée assortie d'une préférence participating peut appauvrir le fondateur.",
-      "Les termes économiques priment sur le nombre affiché.",
-      "Toujours modéliser plusieurs scénarios de sortie avant de signer."
-    ]
-  },
-  {
     "id": "cs-seed-ic",
     "slug": "comite-investissement-seed-le-cas-volta",
     "title": "Le deal qui divise le comité : Volta au seed",
@@ -256,6 +211,51 @@
       "Structurer le deal — réserve fléchée sur un jalon — permet d'acheter de l'information avant d'engager tout le capital.",
       "Une bonne décision peut rester défendable dans plusieurs scénarios de sortie : on juge le raisonnement, pas seulement le résultat.",
       "Le comité ne sert pas à effacer le désaccord mais à le rendre lisible et révisable."
+    ]
+  },
+  {
+    "id": "cs-liquidation-preference",
+    "slug": "le-piege-de-la-valorisation-flatteuse",
+    "title": "Le piège de la valorisation flatteuse",
+    "subtitle": "Comment une term sheet « généreuse » peut appauvrir un fondateur",
+    "kind": "deal",
+    "company": "Series B fictive · 80 M€ post-money",
+    "year": 2026,
+    "readMin": 9,
+    "summary": "Deux term sheets, une valorisation haute et une plus basse. On modélise la sortie pour révéler laquelle enrichit réellement le fondateur — et pourquoi les chiffres affichés trompent.",
+    "tags": [
+      "term-sheet",
+      "liquidation-preference",
+      "negotiation"
+    ],
+    "glossaryRefs": [
+      "liquidation-preference",
+      "term-sheet",
+      "cap-table",
+      "pre-money"
+    ],
+    "sections": [
+      {
+        "heading": "Les deux offres",
+        "body": "Offre A : 80 M€ post-money, liquidation preference 2× participating. Offre B : 60 M€ post-money, 1× non-participating. La fondatrice est tentée par la valorisation la plus haute — un réflexe naturel et coûteux."
+      },
+      {
+        "heading": "Le scénario de sortie moyen",
+        "body": "L'entreprise est revendue 120 M€, un bon résultat sans être spectaculaire. Avec l'offre A, l'investisseur récupère d'abord 2× sa mise puis participe au reste : sa préférence dévore une part disproportionnée du produit, laissant beaucoup moins aux ordinaires. Avec l'offre B, l'investisseur convertit simplement en ordinaire et touche sa part au prorata."
+      },
+      {
+        "heading": "Le verdict",
+        "body": "Dans la majorité des scénarios de sortie réalistes (hors méga-exit), l'offre B « moins-disante » laisse davantage à la fondatrice et aux employés. La valorisation affichée n'est qu'un nombre ; ce sont les termes économiques qui déterminent qui touche quoi."
+      },
+      {
+        "heading": "La règle du praticien",
+        "body": "Ne jamais lire une clause isolément. Toujours modéliser plusieurs scénarios de sortie et se demander : qui touche quoi, dans chaque cas ? Une term sheet se lit comme une distribution de probabilités, pas comme une affiche."
+      }
+    ],
+    "takeaways": [
+      "Une valorisation élevée assortie d'une préférence participating peut appauvrir le fondateur.",
+      "Les termes économiques priment sur le nombre affiché.",
+      "Toujours modéliser plusieurs scénarios de sortie avant de signer."
     ]
   },
   {
