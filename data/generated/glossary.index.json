@@ -257,28 +257,6 @@
     ]
   },
   {
-    "id": "moat",
-    "term": "Moat (avantage concurrentiel défendable)",
-    "slug": "moat",
-    "category": "Stratégie",
-    "short": "Barrière durable qui protège une entreprise de ses concurrents et soutient ses marges dans le temps.",
-    "seeAlso": [
-      "scalability",
-      "market-concentration",
-      "recurring-revenue",
-      "business-model"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "avantage concurrentiel",
-      "barrière à l'entrée",
-      "barrières à l'entrée",
-      "défendabilité",
-      "defensibility",
-      "douve"
-    ]
-  },
-  {
     "id": "virtual-shares",
     "term": "Actions virtuelles",
     "slug": "virtual-shares",
@@ -949,27 +927,6 @@
     ]
   },
   {
-    "id": "cac",
-    "term": "Customer Acquisition Cost (CAC)",
-    "slug": "cac",
-    "category": "Métriques",
-    "short": "Coût moyen nécessaire pour acquérir un nouveau client.",
-    "seeAlso": [
-      "ltv",
-      "cac-payback-period",
-      "unit-economics",
-      "gtm"
-    ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics"
-    ],
-    "aliases": [
-      "CAC",
-      "coût d’acquisition client",
-      "Customer Acquisition Cost"
-    ]
-  },
-  {
     "id": "cac-payback-period",
     "term": "CAC payback period",
     "slug": "cac-payback-period",
@@ -987,48 +944,6 @@
     "aliases": [
       "CAC payback",
       "période de remboursement CAC"
-    ]
-  },
-  {
-    "id": "cfo",
-    "term": "Chief Financial Officer (CFO)",
-    "slug": "cfo",
-    "aliases": [
-      "CFO",
-      "Chief Financial Officer",
-      "directeur financier",
-      "Finance Team Leader"
-    ],
-    "category": "Acteurs",
-    "short": "Dirigeant finance responsable du reporting, de la planification, des contrôles et de la finance stratégique.",
-    "seeAlso": [
-      "financial-model",
-      "data-room",
-      "burn-rate",
-      "runway",
-      "series-b-readiness"
-    ],
-    "relatedLessonIds": []
-  },
-  {
-    "id": "cogs",
-    "term": "Cost of Goods Sold (COGS)",
-    "slug": "cogs",
-    "category": "Métriques",
-    "short": "Coûts directs nécessaires pour produire ou livrer le produit ou service.",
-    "seeAlso": [
-      "gross-margin",
-      "unit-economics",
-      "business-model"
-    ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics"
-    ],
-    "aliases": [
-      "COGS",
-      "Cost of Goods Sold",
-      "coût des ventes",
-      "coûts directs"
     ]
   },
   {
@@ -1154,6 +1069,27 @@
     "seeAlso": [
       "gp",
       "thesis-driven"
+    ],
+    "relatedLessonIds": []
+  },
+  {
+    "id": "cfo",
+    "term": "Chief Financial Officer (CFO)",
+    "slug": "cfo",
+    "aliases": [
+      "CFO",
+      "Chief Financial Officer",
+      "directeur financier",
+      "Finance Team Leader"
+    ],
+    "category": "Acteurs",
+    "short": "Dirigeant finance responsable du reporting, de la planification, des contrôles et de la finance stratégique.",
+    "seeAlso": [
+      "financial-model",
+      "data-room",
+      "burn-rate",
+      "runway",
+      "series-b-readiness"
     ],
     "relatedLessonIds": []
   },
@@ -1521,6 +1457,27 @@
     ]
   },
   {
+    "id": "cogs",
+    "term": "Cost of Goods Sold (COGS)",
+    "slug": "cogs",
+    "category": "Métriques",
+    "short": "Coûts directs nécessaires pour produire ou livrer le produit ou service.",
+    "seeAlso": [
+      "gross-margin",
+      "unit-economics",
+      "business-model"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics"
+    ],
+    "aliases": [
+      "COGS",
+      "Cost of Goods Sold",
+      "coût des ventes",
+      "coûts directs"
+    ]
+  },
+  {
     "id": "fund-selection-criteria-lp",
     "term": "Critères de sélection LP",
     "slug": "fund-selection-criteria-lp",
@@ -1539,6 +1496,27 @@
       "critères de sélection de fonds",
       "Fund Selection Criteria (LP)",
       "LP fund selection"
+    ]
+  },
+  {
+    "id": "cac",
+    "term": "Customer Acquisition Cost (CAC)",
+    "slug": "cac",
+    "category": "Métriques",
+    "short": "Coût moyen nécessaire pour acquérir un nouveau client.",
+    "seeAlso": [
+      "ltv",
+      "cac-payback-period",
+      "unit-economics",
+      "gtm"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics"
+    ],
+    "aliases": [
+      "CAC",
+      "coût d’acquisition client",
+      "Customer Acquisition Cost"
     ]
   },
   {
@@ -1625,29 +1603,6 @@
       "cycle de vie d’un fonds",
       "Fund Life Cycle",
       "Fund Lifecycle"
-    ]
-  },
-  {
-    "id": "dpi",
-    "term": "Distributions to Paid-In (DPI)",
-    "slug": "dpi",
-    "category": "Métriques",
-    "short": "Cash distribué aux LPs rapporté au capital appelé.",
-    "seeAlso": [
-      "tvpi",
-      "rvpi",
-      "moic",
-      "irr",
-      "lp-capital-allocation"
-    ],
-    "relatedLessonIds": [
-      "l-fund-metrics",
-      "lpl-read-results"
-    ],
-    "aliases": [
-      "Distributed to Paid-In",
-      "Distributions to Paid-In",
-      "DPI"
     ]
   },
   {
@@ -2022,6 +1977,29 @@
     ]
   },
   {
+    "id": "dpi",
+    "term": "Distributions to Paid-In (DPI)",
+    "slug": "dpi",
+    "category": "Métriques",
+    "short": "Cash distribué aux LPs rapporté au capital appelé.",
+    "seeAlso": [
+      "tvpi",
+      "rvpi",
+      "moic",
+      "irr",
+      "lp-capital-allocation"
+    ],
+    "relatedLessonIds": [
+      "l-fund-metrics",
+      "lpl-read-results"
+    ],
+    "aliases": [
+      "Distributed to Paid-In",
+      "Distributions to Paid-In",
+      "DPI"
+    ]
+  },
+  {
     "id": "diversification",
     "term": "Diversification",
     "slug": "diversification",
@@ -2204,29 +2182,6 @@
     "relatedLessonIds": []
   },
   {
-    "id": "ebitda",
-    "term": "Earnings Before Interest, Taxes, Depreciation and Amortization (EBITDA)",
-    "slug": "ebitda",
-    "aliases": [
-      "BAIIA",
-      "Earnings Before Interest, Taxes, Depreciation and Amortization",
-      "EBITDA",
-      "excédent brut d’exploitation ajusté"
-    ],
-    "category": "Métriques",
-    "short": "Indicateur de résultat opérationnel avant intérêts, impôts, dépréciations et amortissements.",
-    "seeAlso": [
-      "enterprise-value",
-      "ebitda-exit-multiple",
-      "revenue-multiple",
-      "gross-margin",
-      "path-to-profitability"
-    ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics"
-    ]
-  },
-  {
     "id": "ebitda-exit-multiple",
     "term": "EBITDA exit multiple",
     "slug": "ebitda-exit-multiple",
@@ -2284,26 +2239,26 @@
     ]
   },
   {
-    "id": "esop",
-    "term": "Employee Stock Ownership Plan (ESOP)",
-    "slug": "esop",
-    "category": "Deal & Structuration",
-    "short": "Pool d'equity réservé aux salariés, advisors et recrutements futurs.",
-    "seeAlso": [
-      "stock-options",
-      "employee-equity",
-      "dilution",
-      "cap-table",
-      "vesting"
-    ],
-    "relatedLessonIds": [],
+    "id": "ebitda",
+    "term": "Earnings Before Interest, Taxes, Depreciation and Amortization (EBITDA)",
+    "slug": "ebitda",
     "aliases": [
-      "Employee incentives",
-      "employee option pool",
-      "Employee Stock Option Plan",
-      "ESOP",
-      "option pool",
-      "pool d’options"
+      "BAIIA",
+      "Earnings Before Interest, Taxes, Depreciation and Amortization",
+      "EBITDA",
+      "excédent brut d’exploitation ajusté"
+    ],
+    "category": "Métriques",
+    "short": "Indicateur de résultat opérationnel avant intérêts, impôts, dépréciations et amortissements.",
+    "seeAlso": [
+      "enterprise-value",
+      "ebitda-exit-multiple",
+      "revenue-multiple",
+      "gross-margin",
+      "path-to-profitability"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics"
     ]
   },
   {
@@ -2324,6 +2279,29 @@
     "aliases": [
       "first-time manager",
       "manager émergent"
+    ]
+  },
+  {
+    "id": "esop",
+    "term": "Employee Stock Ownership Plan (ESOP)",
+    "slug": "esop",
+    "category": "Deal & Structuration",
+    "short": "Pool d'equity réservé aux salariés, advisors et recrutements futurs.",
+    "seeAlso": [
+      "stock-options",
+      "employee-equity",
+      "dilution",
+      "cap-table",
+      "vesting"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "Employee incentives",
+      "employee option pool",
+      "Employee Stock Option Plan",
+      "ESOP",
+      "option pool",
+      "pool d’options"
     ]
   },
   {
@@ -3545,51 +3523,6 @@
     ]
   },
   {
-    "id": "ipo",
-    "term": "Initial Public Offering (IPO)",
-    "slug": "ipo",
-    "category": "Liquidité",
-    "short": "Introduction en bourse d'une société privée, créant une cotation publique et une liquidité potentielle.",
-    "seeAlso": [
-      "exit",
-      "qpo",
-      "mandatory-conversion",
-      "market-risk",
-      "dpi",
-      "dutch-auction-ipo"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "Initial Public Offering",
-      "introduction en bourse",
-      "IPO",
-      "Registration Rights"
-    ]
-  },
-  {
-    "id": "irr",
-    "term": "Internal Rate of Return (IRR)",
-    "slug": "irr",
-    "category": "Métriques",
-    "short": "Rendement annualisé sensible au calendrier des cash flows.",
-    "seeAlso": [
-      "moic",
-      "dpi",
-      "tvpi",
-      "j-curve",
-      "vintage"
-    ],
-    "relatedLessonIds": [
-      "l-fund-metrics"
-    ],
-    "aliases": [
-      "Internal Rate of Return",
-      "IRR",
-      "Taux de rendement interne",
-      "TRI"
-    ]
-  },
-  {
     "id": "illiquidite",
     "term": "Illiquidité",
     "slug": "illiquidite",
@@ -3665,6 +3598,28 @@
     ]
   },
   {
+    "id": "ipo",
+    "term": "Initial Public Offering (IPO)",
+    "slug": "ipo",
+    "category": "Liquidité",
+    "short": "Introduction en bourse d'une société privée, créant une cotation publique et une liquidité potentielle.",
+    "seeAlso": [
+      "exit",
+      "qpo",
+      "mandatory-conversion",
+      "market-risk",
+      "dpi",
+      "dutch-auction-ipo"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "Initial Public Offering",
+      "introduction en bourse",
+      "IPO",
+      "Registration Rights"
+    ]
+  },
+  {
     "id": "inside-sales",
     "term": "Inside sales",
     "slug": "inside-sales",
@@ -3681,6 +3636,29 @@
       "gtm"
     ],
     "relatedLessonIds": []
+  },
+  {
+    "id": "irr",
+    "term": "Internal Rate of Return (IRR)",
+    "slug": "irr",
+    "category": "Métriques",
+    "short": "Rendement annualisé sensible au calendrier des cash flows.",
+    "seeAlso": [
+      "moic",
+      "dpi",
+      "tvpi",
+      "j-curve",
+      "vintage"
+    ],
+    "relatedLessonIds": [
+      "l-fund-metrics"
+    ],
+    "aliases": [
+      "Internal Rate of Return",
+      "IRR",
+      "Taux de rendement interne",
+      "TRI"
+    ]
   },
   {
     "id": "international-expansion",
@@ -3891,69 +3869,6 @@
     ]
   },
   {
-    "id": "loi",
-    "term": "Letter of Intent (LOI)",
-    "slug": "loi",
-    "category": "Deal & Structuration",
-    "short": "Document préliminaire qui cadre les grands termes d'une transaction avant les contrats définitifs.",
-    "seeAlso": [
-      "exclusivite",
-      "term-sheet",
-      "exit-valuation"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "Letter of Intent",
-      "lettre d'intention",
-      "LOI",
-      "LOI M&A"
-    ]
-  },
-  {
-    "id": "ltv",
-    "term": "Lifetime Value (LTV)",
-    "slug": "ltv",
-    "category": "Métriques",
-    "short": "Valeur économique attendue d'un client sur toute sa relation avec l'entreprise.",
-    "seeAlso": [
-      "cac",
-      "ltv-cac",
-      "nrr",
-      "gross-margin"
-    ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics"
-    ],
-    "aliases": [
-      "CLV",
-      "Customer Lifetime Value",
-      "lifetime value",
-      "LTV"
-    ]
-  },
-  {
-    "id": "ltv-cac",
-    "term": "Lifetime Value / Customer Acquisition Cost (LTV/CAC)",
-    "slug": "ltv-cac",
-    "category": "Métriques",
-    "short": "Ratio comparant la valeur économique d'un client au coût de son acquisition.",
-    "seeAlso": [
-      "ltv",
-      "cac",
-      "cac-payback-period",
-      "unit-economics"
-    ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics"
-    ],
-    "aliases": [
-      "CLV/CAC",
-      "LTV-CAC",
-      "LTV/CAC",
-      "ratio LTV CAC"
-    ]
-  },
-  {
     "id": "lead-investor",
     "term": "Lead investor",
     "slug": "lead-investor",
@@ -4000,6 +3915,25 @@
     ]
   },
   {
+    "id": "loi",
+    "term": "Letter of Intent (LOI)",
+    "slug": "loi",
+    "category": "Deal & Structuration",
+    "short": "Document préliminaire qui cadre les grands termes d'une transaction avant les contrats définitifs.",
+    "seeAlso": [
+      "exclusivite",
+      "term-sheet",
+      "exit-valuation"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "Letter of Intent",
+      "lettre d'intention",
+      "LOI",
+      "LOI M&A"
+    ]
+  },
+  {
     "id": "leverage",
     "term": "Levier opérationnel",
     "slug": "leverage",
@@ -4039,6 +3973,50 @@
       "billion-dollar startup",
       "startup licorne",
       "unicorn startup"
+    ]
+  },
+  {
+    "id": "ltv",
+    "term": "Lifetime Value (LTV)",
+    "slug": "ltv",
+    "category": "Métriques",
+    "short": "Valeur économique attendue d'un client sur toute sa relation avec l'entreprise.",
+    "seeAlso": [
+      "cac",
+      "ltv-cac",
+      "nrr",
+      "gross-margin"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics"
+    ],
+    "aliases": [
+      "CLV",
+      "Customer Lifetime Value",
+      "lifetime value",
+      "LTV"
+    ]
+  },
+  {
+    "id": "ltv-cac",
+    "term": "Lifetime Value / Customer Acquisition Cost (LTV/CAC)",
+    "slug": "ltv-cac",
+    "category": "Métriques",
+    "short": "Ratio comparant la valeur économique d'un client au coût de son acquisition.",
+    "seeAlso": [
+      "ltv",
+      "cac",
+      "cac-payback-period",
+      "unit-economics"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics"
+    ],
+    "aliases": [
+      "CLV/CAC",
+      "LTV-CAC",
+      "LTV/CAC",
+      "ratio LTV CAC"
     ]
   },
   {
@@ -4205,54 +4183,6 @@
     "aliases": [
       "loss rate",
       "ratio de pertes"
-    ]
-  },
-  {
-    "id": "ma",
-    "term": "Mergers & Acquisitions (M&A)",
-    "slug": "ma",
-    "aliases": [
-      "Acquisition Exit",
-      "fusion-acquisition",
-      "M&A",
-      "M&A Exit",
-      "Mergers and Acquisitions",
-      "Startup Acquisition"
-    ],
-    "category": "Liquidité",
-    "short": "Fusion ou acquisition utilisée comme voie d'exit pour une startup financée par VC.",
-    "seeAlso": [
-      "exit",
-      "trade-sale",
-      "strategic-acquisition",
-      "financial-acquisition",
-      "acqui-hire",
-      "exit-waterfall"
-    ],
-    "relatedLessonIds": []
-  },
-  {
-    "id": "moic",
-    "term": "Multiple on Invested Capital (MOIC)",
-    "slug": "moic",
-    "category": "Métriques",
-    "short": "Multiple de valeur ou cash retourné par rapport au capital investi.",
-    "seeAlso": [
-      "tvpi",
-      "dpi",
-      "irr",
-      "power-law"
-    ],
-    "relatedLessonIds": [
-      "l-power-law",
-      "lpl-read-results",
-      "l-fund-metrics"
-    ],
-    "aliases": [
-      "cash-on-cash multiple",
-      "MOIC",
-      "Multiple of Invested Capital",
-      "Multiple on Invested Capital"
     ]
   },
   {
@@ -4442,6 +4372,30 @@
     ]
   },
   {
+    "id": "ma",
+    "term": "Mergers & Acquisitions (M&A)",
+    "slug": "ma",
+    "aliases": [
+      "Acquisition Exit",
+      "fusion-acquisition",
+      "M&A",
+      "M&A Exit",
+      "Mergers and Acquisitions",
+      "Startup Acquisition"
+    ],
+    "category": "Liquidité",
+    "short": "Fusion ou acquisition utilisée comme voie d'exit pour une startup financée par VC.",
+    "seeAlso": [
+      "exit",
+      "trade-sale",
+      "strategic-acquisition",
+      "financial-acquisition",
+      "acqui-hire",
+      "exit-waterfall"
+    ],
+    "relatedLessonIds": []
+  },
+  {
     "id": "presidio",
     "term": "Microsoft Presidio",
     "slug": "presidio",
@@ -4471,6 +4425,28 @@
       "Funding Milestones",
       "Milestone",
       "Operating Milestones"
+    ]
+  },
+  {
+    "id": "moat",
+    "term": "Moat (avantage concurrentiel défendable)",
+    "slug": "moat",
+    "category": "Stratégie",
+    "short": "Barrière durable qui protège une entreprise de ses concurrents et soutient ses marges dans le temps.",
+    "seeAlso": [
+      "scalability",
+      "market-concentration",
+      "recurring-revenue",
+      "business-model"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "avantage concurrentiel",
+      "barrière à l'entrée",
+      "barrières à l'entrée",
+      "défendabilité",
+      "defensibility",
+      "douve"
     ]
   },
   {
@@ -4555,22 +4531,27 @@
     ]
   },
   {
-    "id": "nvca",
-    "term": "National Venture Capital Association (NVCA)",
-    "slug": "nvca",
-    "category": "Institutions",
-    "short": "Association professionnelle américaine du VC, connue pour ses model legal documents.",
+    "id": "moic",
+    "term": "Multiple on Invested Capital (MOIC)",
+    "slug": "moic",
+    "category": "Métriques",
+    "short": "Multiple de valeur ou cash retourné par rapport au capital investi.",
     "seeAlso": [
-      "term-sheet",
-      "governing-law",
-      "representations-and-warranties",
-      "qsbs"
+      "tvpi",
+      "dpi",
+      "irr",
+      "power-law"
     ],
-    "relatedLessonIds": [],
+    "relatedLessonIds": [
+      "l-power-law",
+      "lpl-read-results",
+      "l-fund-metrics"
+    ],
     "aliases": [
-      "model documents NVCA",
-      "National Venture Capital Association",
-      "NVCA"
+      "cash-on-cash multiple",
+      "MOIC",
+      "Multiple of Invested Capital",
+      "Multiple on Invested Capital"
     ]
   },
   {
@@ -4592,6 +4573,25 @@
       "narrow-based",
       "narrow-based antidilution",
       "weighted average narrow-based"
+    ]
+  },
+  {
+    "id": "nvca",
+    "term": "National Venture Capital Association (NVCA)",
+    "slug": "nvca",
+    "category": "Institutions",
+    "short": "Association professionnelle américaine du VC, connue pour ses model legal documents.",
+    "seeAlso": [
+      "term-sheet",
+      "governing-law",
+      "representations-and-warranties",
+      "qsbs"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "model documents NVCA",
+      "National Venture Capital Association",
+      "NVCA"
     ]
   },
   {
@@ -5395,25 +5395,6 @@
     ]
   },
   {
-    "id": "qsbs",
-    "term": "Qualified Small Business Stock (QSBS)",
-    "slug": "qsbs",
-    "category": "Juridique & Fiscalité",
-    "short": "Régime fiscal américain pouvant exclure une partie du gain sur certaines actions de C-Corp.",
-    "seeAlso": [
-      "c-corporation",
-      "convertible-note",
-      "business-angel",
-      "equity"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "QSBS",
-      "Qualified Small Business Stock",
-      "Section 1202"
-    ]
-  },
-  {
     "id": "qualified-lead-velocity-rate",
     "term": "Qualified Lead Velocity Rate",
     "slug": "qualified-lead-velocity-rate",
@@ -5451,6 +5432,25 @@
       "dutch-auction-ipo"
     ],
     "relatedLessonIds": []
+  },
+  {
+    "id": "qsbs",
+    "term": "Qualified Small Business Stock (QSBS)",
+    "slug": "qsbs",
+    "category": "Juridique & Fiscalité",
+    "short": "Régime fiscal américain pouvant exclure une partie du gain sur certaines actions de C-Corp.",
+    "seeAlso": [
+      "c-corporation",
+      "convertible-note",
+      "business-angel",
+      "equity"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "QSBS",
+      "Qualified Small Business Stock",
+      "Section 1202"
+    ]
   },
   {
     "id": "qualified-purchaser",
@@ -5492,84 +5492,6 @@
       "crédibilité du référent",
       "qualité de la recommandation",
       "referrer quality"
-    ]
-  },
-  {
-    "id": "rofo",
-    "term": "Right of First Offer (ROFO)",
-    "slug": "rofo",
-    "aliases": [
-      "droit de première offre",
-      "right of first offer",
-      "ROFO"
-    ],
-    "category": "Deal & Structuration",
-    "short": "Droit d'être sollicité en priorité avant qu'un actionnaire vende ses titres.",
-    "seeAlso": [
-      "rofr",
-      "tag-along",
-      "drag-along",
-      "shareholders-agreement"
-    ],
-    "relatedLessonIds": [
-      "l-ts-control"
-    ]
-  },
-  {
-    "id": "rofr",
-    "term": "Right of First Refusal (ROFR)",
-    "slug": "rofr",
-    "category": "Deal & Structuration",
-    "short": "Droit d'acheter en priorité des actions qu'un actionnaire souhaite vendre à un tiers.",
-    "seeAlso": [
-      "secondary",
-      "tag-along",
-      "cap-table"
-    ],
-    "relatedLessonIds": [
-      "l-ts-control"
-    ],
-    "aliases": [
-      "droit de premier refus",
-      "Right of First Refusal",
-      "ROFR"
-    ]
-  },
-  {
-    "id": "rsu",
-    "term": "Restricted Stock Units (RSU)",
-    "slug": "rsu",
-    "category": "Deal & Structuration",
-    "short": "Unités donnant droit à des actions après vesting, sans prix d'exercice.",
-    "seeAlso": [
-      "employee-equity",
-      "stock-options",
-      "vesting",
-      "actions-ordinaires"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "restricted stock units",
-      "RSU"
-    ]
-  },
-  {
-    "id": "rvpi",
-    "term": "Residual Value to Paid-In (RVPI)",
-    "slug": "rvpi",
-    "category": "Métriques",
-    "short": "La part latente de la performance, non encore réalisée.",
-    "seeAlso": [
-      "dpi",
-      "tvpi"
-    ],
-    "relatedLessonIds": [
-      "l-fund-metrics"
-    ],
-    "aliases": [
-      "Residual value to paid in",
-      "Residual value to paid in (RVPI)",
-      "RVPI"
     ]
   },
   {
@@ -5720,6 +5642,43 @@
     ]
   },
   {
+    "id": "rvpi",
+    "term": "Residual Value to Paid-In (RVPI)",
+    "slug": "rvpi",
+    "category": "Métriques",
+    "short": "La part latente de la performance, non encore réalisée.",
+    "seeAlso": [
+      "dpi",
+      "tvpi"
+    ],
+    "relatedLessonIds": [
+      "l-fund-metrics"
+    ],
+    "aliases": [
+      "Residual value to paid in",
+      "Residual value to paid in (RVPI)",
+      "RVPI"
+    ]
+  },
+  {
+    "id": "rsu",
+    "term": "Restricted Stock Units (RSU)",
+    "slug": "rsu",
+    "category": "Deal & Structuration",
+    "short": "Unités donnant droit à des actions après vesting, sans prix d'exercice.",
+    "seeAlso": [
+      "employee-equity",
+      "stock-options",
+      "vesting",
+      "actions-ordinaires"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "restricted stock units",
+      "RSU"
+    ]
+  },
+  {
     "id": "revenue-growth",
     "term": "Revenue growth",
     "slug": "revenue-growth",
@@ -5786,6 +5745,47 @@
       "ARR multiple",
       "multiple d’acquisition",
       "multiple de revenu"
+    ]
+  },
+  {
+    "id": "rofo",
+    "term": "Right of First Offer (ROFO)",
+    "slug": "rofo",
+    "aliases": [
+      "droit de première offre",
+      "right of first offer",
+      "ROFO"
+    ],
+    "category": "Deal & Structuration",
+    "short": "Droit d'être sollicité en priorité avant qu'un actionnaire vende ses titres.",
+    "seeAlso": [
+      "rofr",
+      "tag-along",
+      "drag-along",
+      "shareholders-agreement"
+    ],
+    "relatedLessonIds": [
+      "l-ts-control"
+    ]
+  },
+  {
+    "id": "rofr",
+    "term": "Right of First Refusal (ROFR)",
+    "slug": "rofr",
+    "category": "Deal & Structuration",
+    "short": "Droit d'acheter en priorité des actions qu'un actionnaire souhaite vendre à un tiers.",
+    "seeAlso": [
+      "secondary",
+      "tag-along",
+      "cap-table"
+    ],
+    "relatedLessonIds": [
+      "l-ts-control"
+    ],
+    "aliases": [
+      "droit de premier refus",
+      "Right of First Refusal",
+      "ROFR"
     ]
   },
   {
@@ -5867,49 +5867,6 @@
     "aliases": [
       "réseau venture",
       "venture capital network"
-    ]
-  },
-  {
-    "id": "safe",
-    "term": "Simple Agreement for Future Equity (SAFE)",
-    "slug": "safe",
-    "category": "Deal & Structuration",
-    "short": "Instrument de financement qui donne droit à de l'equity future sans être une dette classique.",
-    "seeAlso": [
-      "convertible-note",
-      "valuation-cap",
-      "conversion-discount",
-      "pre-seed",
-      "bridge"
-    ],
-    "relatedLessonIds": [
-      "l-stages",
-      "l-founder-instruments"
-    ],
-    "aliases": [
-      "BSA-AIR",
-      "future equity agreement",
-      "SAFE",
-      "Simple Agreement for Future Equity"
-    ]
-  },
-  {
-    "id": "sfdr",
-    "term": "Sustainable Finance Disclosure Regulation (SFDR)",
-    "slug": "sfdr",
-    "category": "Juridique & Fiscalité",
-    "short": "Réglementation européenne de disclosure durable applicable aux acteurs financiers.",
-    "seeAlso": [
-      "esg-assessment",
-      "lp",
-      "governance",
-      "dd"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "règlement SFDR",
-      "SFDR",
-      "Sustainable Finance Disclosure Regulation"
     ]
   },
   {
@@ -6213,6 +6170,53 @@
     "relatedLessonIds": []
   },
   {
+    "id": "sam",
+    "term": "Serviceable Addressable Market (SAM)",
+    "slug": "sam",
+    "category": "Stratégie",
+    "short": "Part du TAM réellement servable avec le modèle actuel.",
+    "seeAlso": [
+      "tam",
+      "som",
+      "tam-sam-som",
+      "gtm",
+      "market-opportunity"
+    ],
+    "relatedLessonIds": [
+      "lmv-market-sizing",
+      "l-team-market"
+    ],
+    "aliases": [
+      "marché servable adressable",
+      "SAM",
+      "Serviceable Addressable Market"
+    ]
+  },
+  {
+    "id": "som",
+    "term": "Serviceable Obtainable Market (SOM)",
+    "slug": "som",
+    "category": "Stratégie",
+    "short": "Part du SAM réalistement capturable à 3-5 ans.",
+    "seeAlso": [
+      "tam",
+      "sam",
+      "tam-sam-som",
+      "traction",
+      "gtm"
+    ],
+    "relatedLessonIds": [
+      "lmv-market-sizing",
+      "l-team-market"
+    ],
+    "aliases": [
+      "marché servable capturable",
+      "marché servable obtenable",
+      "Serviceable Obtainable Market",
+      "SOM"
+    ]
+  },
+  {
     "id": "shareholders-agreement",
     "term": "Shareholders agreement",
     "slug": "shareholders-agreement",
@@ -6233,6 +6237,30 @@
       "pacte d’associés",
       "SHA",
       "Shareholder Agreement"
+    ]
+  },
+  {
+    "id": "safe",
+    "term": "Simple Agreement for Future Equity (SAFE)",
+    "slug": "safe",
+    "category": "Deal & Structuration",
+    "short": "Instrument de financement qui donne droit à de l'equity future sans être une dette classique.",
+    "seeAlso": [
+      "convertible-note",
+      "valuation-cap",
+      "conversion-discount",
+      "pre-seed",
+      "bridge"
+    ],
+    "relatedLessonIds": [
+      "l-stages",
+      "l-founder-instruments"
+    ],
+    "aliases": [
+      "BSA-AIR",
+      "future equity agreement",
+      "SAFE",
+      "Simple Agreement for Future Equity"
     ]
   },
   {
@@ -6495,73 +6523,22 @@
     ]
   },
   {
-    "id": "tam",
-    "term": "Total Addressable Market (TAM)",
-    "slug": "tam",
-    "category": "Stratégie",
-    "short": "Demande totale d'un marché si on le couvrait entièrement.",
+    "id": "sfdr",
+    "term": "Sustainable Finance Disclosure Regulation (SFDR)",
+    "slug": "sfdr",
+    "category": "Juridique & Fiscalité",
+    "short": "Réglementation européenne de disclosure durable applicable aux acteurs financiers.",
     "seeAlso": [
-      "sam",
-      "som",
-      "tam-sam-som",
-      "market-opportunity",
-      "fund-returner"
+      "esg-assessment",
+      "lp",
+      "governance",
+      "dd"
     ],
-    "relatedLessonIds": [
-      "lmv-market-sizing",
-      "l-team-market"
-    ],
+    "relatedLessonIds": [],
     "aliases": [
-      "marché total adressable",
-      "TAM",
-      "Total Addressable Market"
-    ]
-  },
-  {
-    "id": "sam",
-    "term": "Serviceable Addressable Market (SAM)",
-    "slug": "sam",
-    "category": "Stratégie",
-    "short": "Part du TAM réellement servable avec le modèle actuel.",
-    "seeAlso": [
-      "tam",
-      "som",
-      "tam-sam-som",
-      "gtm",
-      "market-opportunity"
-    ],
-    "relatedLessonIds": [
-      "lmv-market-sizing",
-      "l-team-market"
-    ],
-    "aliases": [
-      "marché servable adressable",
-      "SAM",
-      "Serviceable Addressable Market"
-    ]
-  },
-  {
-    "id": "som",
-    "term": "Serviceable Obtainable Market (SOM)",
-    "slug": "som",
-    "category": "Stratégie",
-    "short": "Part du SAM réalistement capturable à 3-5 ans.",
-    "seeAlso": [
-      "tam",
-      "sam",
-      "tam-sam-som",
-      "traction",
-      "gtm"
-    ],
-    "relatedLessonIds": [
-      "lmv-market-sizing",
-      "l-team-market"
-    ],
-    "aliases": [
-      "marché servable capturable",
-      "marché servable obtenable",
-      "Serviceable Obtainable Market",
-      "SOM"
+      "règlement SFDR",
+      "SFDR",
+      "Sustainable Finance Disclosure Regulation"
     ]
   },
   {
@@ -6588,26 +6565,6 @@
       "marché adressable",
       "Market size",
       "taille de marché"
-    ]
-  },
-  {
-    "id": "tvpi",
-    "term": "Total Value to Paid-In (TVPI)",
-    "slug": "tvpi",
-    "category": "Métriques",
-    "short": "Valeur totale du fonds, réalisée et résiduelle, rapportée au capital appelé.",
-    "seeAlso": [
-      "dpi",
-      "rvpi",
-      "moic",
-      "irr"
-    ],
-    "relatedLessonIds": [
-      "l-fund-metrics"
-    ],
-    "aliases": [
-      "Total Value to Paid-In",
-      "TVPI"
     ]
   },
   {
@@ -6761,6 +6718,49 @@
     "relatedLessonIds": [
       "l-founder-instruments",
       "l-ts-economics"
+    ]
+  },
+  {
+    "id": "tam",
+    "term": "Total Addressable Market (TAM)",
+    "slug": "tam",
+    "category": "Stratégie",
+    "short": "Demande totale d'un marché si on le couvrait entièrement.",
+    "seeAlso": [
+      "sam",
+      "som",
+      "tam-sam-som",
+      "market-opportunity",
+      "fund-returner"
+    ],
+    "relatedLessonIds": [
+      "lmv-market-sizing",
+      "l-team-market"
+    ],
+    "aliases": [
+      "marché total adressable",
+      "TAM",
+      "Total Addressable Market"
+    ]
+  },
+  {
+    "id": "tvpi",
+    "term": "Total Value to Paid-In (TVPI)",
+    "slug": "tvpi",
+    "category": "Métriques",
+    "short": "Valeur totale du fonds, réalisée et résiduelle, rapportée au capital appelé.",
+    "seeAlso": [
+      "dpi",
+      "rvpi",
+      "moic",
+      "irr"
+    ],
+    "relatedLessonIds": [
+      "l-fund-metrics"
+    ],
+    "aliases": [
+      "Total Value to Paid-In",
+      "TVPI"
     ]
   },
   {

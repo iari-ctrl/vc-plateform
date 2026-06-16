@@ -50,10 +50,6 @@
     "definition": "Les actions ordinaires représentent l’ownership économique de base d’une société. Dans les startups, elles sont souvent émises aux founders et salariés, tandis que les investisseurs VC reçoivent des actions de préférence avec des droits économiques ou de contrôle supérieurs.",
     "example": "À l’exit, les détenteurs d’actions ordinaires reçoivent leur part après satisfaction des dettes et des préférences de liquidation."
   },
-  "moat": {
-    "definition": "Le moat — littéralement la « douve » d'un château fort — désigne l'avantage concurrentiel structurel qui empêche un concurrent de répliquer facilement une entreprise, et lui permet de défendre ses parts de marché et ses marges sur la durée. Popularisé par Warren Buffett, le concept est central en capital-risque : un fonds cherche moins une bonne idée qu'une défendabilité qui se renforce avec le temps. Les sources classiques d'un moat sont les effets de réseau, les coûts de changement (switching costs), les économies d'échelle, la marque, la propriété intellectuelle et les barrières réglementaires — ces dernières étant décisives en healthtech, où le marquage médical et le remboursement protègent l'acteur qui les a franchis.",
-    "example": "En santé numérique, décrocher un remboursement et un marquage CE constitue un moat réglementaire : un concurrent doit refaire tout le parcours clinique pour seulement exister sur le marché."
-  },
   "virtual-shares": {
     "definition": "Les actions virtuelles, ou phantom shares, donnent à un salarié ou dirigeant un droit économique similaire à l’equity sans lui transférer de véritables actions ni droits de vote. Elles sont souvent utilisées pour l’[[employee-equity|employee equity]] lorsque l’émission de titres réels serait trop lourde juridiquement ou fiscalement.",
     "example": "Un salarié reçoit des phantom shares qui paieront un bonus indexé sur la valeur de sortie si la société est vendue."
@@ -190,21 +186,9 @@
     "definition": "Une C-Corporation est une forme de société américaine souvent choisie par les startups VC car elle facilite l’émission de plusieurs classes d’actions, les plans d’options salariés, l’entrée d’investisseurs institutionnels et certaines optimisations fiscales comme le QSBS.",
     "example": "Une startup qui veut lever auprès de fonds américains peut se constituer ou se redomicilier en Delaware C-Corp pour émettre des preferred shares et structurer un plan d’options."
   },
-  "cac": {
-    "definition": "Le CAC additionne les dépenses commerciales et marketing nécessaires pour acquérir un client. En VC, il ne se lit jamais seul : il doit être comparé à la marge, à la [[ltv|LTV]], au payback, au canal d'acquisition et à la répétabilité du go-to-market.",
-    "example": "Un CAC de 5 000 € peut être sain si le client génère une marge récurrente élevée et se rembourse vite."
-  },
   "cac-payback-period": {
     "definition": "Le CAC payback period mesure combien de mois il faut pour récupérer le CAC grâce au revenu ajusté de la marge brute. Il relie acquisition, cash flow et scalabilité commerciale.",
     "example": "Un payback de 10 mois est généralement plus robuste qu'un payback de 30 mois pour une startup qui brûle encore du cash."
-  },
-  "cfo": {
-    "definition": "Le CFO structure la fonction finance d'une startup en croissance : reporting, FP&A, contrôle, cash, budget, data room, relation investisseurs et préparation des tours ou de l'IPO. Son arrivée devient souvent critique lorsque les exigences de reporting et de gouvernance augmentent.",
-    "example": "Un CFO expérimenté peut rendre une Series B plus crédible en fiabilisant les KPIs, le modèle financier et le cash planning."
-  },
-  "cogs": {
-    "definition": "Les COGS regroupent les coûts directement liés à la livraison du produit : hébergement, support, services de livraison, coûts de production ou infrastructure selon le modèle. Ils déterminent la marge brute.",
-    "example": "Pour un SaaS IA, les coûts d'inférence peuvent devenir une composante majeure des COGS."
   },
   "cap-table": {
     "definition": "Une cap table présente qui détient quoi dans une startup : founders, salariés, investisseurs, options, warrants et classes de titres. En VC, elle se lit souvent sur une base fully diluted afin de comprendre la dilution, les droits économiques et les scénarios de financement ou d’exit.",
@@ -228,6 +212,10 @@
   },
   "cathay-innovation": {
     "definition": "VC investissant en Series A/B sur des entreprises à ambition multi-continentale, avec un positionnement de pont entre l'Europe, l'Asie et l'Afrique."
+  },
+  "cfo": {
+    "definition": "Le CFO structure la fonction finance d'une startup en croissance : reporting, FP&A, contrôle, cash, budget, data room, relation investisseurs et préparation des tours ou de l'IPO. Son arrivée devient souvent critique lorsque les exigences de reporting et de gouvernance augmentent.",
+    "example": "Un CFO expérimenté peut rendre une Series B plus crédible en fiabilisant les KPIs, le modèle financier et le cash planning."
   },
   "churn-rate": {
     "definition": "Le churn rate mesure la perte d'une base clients ou revenu sur une période. Il est central pour les modèles récurrents : une forte croissance peut cacher un modèle fragile si les clients partent rapidement.",
@@ -297,9 +285,17 @@
     "definition": "Le Corporate Venture Capital désigne les investissements startup réalisés par des entreprises établies, souvent via un fonds ou une équipe dédiée. La logique peut combiner rendement financier, veille stratégique, partenariats et accès à l'innovation.",
     "example": "Un groupe industriel investit dans une startup deeptech via son véhicule CVC pour suivre un marché stratégique."
   },
+  "cogs": {
+    "definition": "Les COGS regroupent les coûts directement liés à la livraison du produit : hébergement, support, services de livraison, coûts de production ou infrastructure selon le modèle. Ils déterminent la marge brute.",
+    "example": "Pour un SaaS IA, les coûts d'inférence peuvent devenir une composante majeure des COGS."
+  },
   "fund-selection-criteria-lp": {
     "definition": "Les critères de sélection LP structurent l’évaluation d’un fonds : qualité de l’équipe, stratégie, différenciation, track record, stabilité, alignement économique, construction de portefeuille et validation externe.",
     "example": "Un LP score un emerging manager sur sa thèse, son accès au deal flow et la cohérence de son modèle de réserves."
+  },
+  "cac": {
+    "definition": "Le CAC additionne les dépenses commerciales et marketing nécessaires pour acquérir un client. En VC, il ne se lit jamais seul : il doit être comparé à la marge, à la [[ltv|LTV]], au payback, au canal d'acquisition et à la répétabilité du go-to-market.",
+    "example": "Un CAC de 5 000 € peut être sain si le client génère une marge récurrente élevée et se rembourse vite."
   },
   "customer-roi": {
     "definition": "Le customer ROI mesure le bénéfice économique reçu par le client par rapport au prix et au coût d'adoption du produit. Il soutient le pricing, la rétention, les références clients et la capacité à vendre à des acheteurs rationnels.",
@@ -316,10 +312,6 @@
   "fund-lifecycle": {
     "definition": "Le cycle de vie d’un fonds VC décrit le passage des commitments LP au déploiement, aux follow-ons, aux exits puis aux distributions. Il explique pourquoi la durée du fonds, l’[[investment-period|investment period]], les réserves et les métriques comme [[dpi|DPI]] ou [[tvpi|TVPI]] structurent les décisions du GP.",
     "example": "Un fonds de 10 ans investit surtout les années 1 à 4, accompagne ses gagnants, puis cherche des sorties et distributions avant la fin de vie du véhicule."
-  },
-  "dpi": {
-    "definition": "Le DPI mesure l'argent réellement retourné aux LPs par rapport au capital appelé. C'est la métrique la plus concrète de liquidité réalisée, à lire avec [[tvpi|TVPI]] et [[rvpi|RVPI]] pour distinguer cash reçu et valeur encore sur le papier.",
-    "example": "Un DPI de 0,6x signifie que les LPs ont reçu 60 % du capital appelé en distributions."
   },
   "daphni": {
     "definition": "Fonds européen early-stage connu pour sa communauté d'experts sectoriels (les « daphnipolitains ») qui participe au sourcing et à l'évaluation des dossiers."
@@ -394,6 +386,10 @@
     "definition": "Le DCF valorise une entreprise en estimant ses cash flows futurs puis en les actualisant avec un discount rate. En VC early-stage, il est souvent moins central que les comparables ou scénarios d'exit, car les cash flows sont très incertains.",
     "example": "Un DCF peut être utile pour une société plus mature dont les cash flows deviennent prévisibles."
   },
+  "dpi": {
+    "definition": "Le DPI mesure l'argent réellement retourné aux LPs par rapport au capital appelé. C'est la métrique la plus concrète de liquidité réalisée, à lire avec [[tvpi|TVPI]] et [[rvpi|RVPI]] pour distinguer cash reçu et valeur encore sur le papier.",
+    "example": "Un DPI de 0,6x signifie que les LPs ont reçu 60 % du capital appelé en distributions."
+  },
   "diversification": {
     "definition": "La diversification réduit la dépendance à une seule société dans un univers où beaucoup d’investissements échouent. En VC, elle doit rester compatible avec assez d’ownership et de réserves pour capturer les gagnants.",
     "example": "Un fonds seed investit dans 40 sociétés pour augmenter ses chances d’être exposé à quelques outliers."
@@ -430,10 +426,6 @@
     "definition": "Une Dutch auction IPO est une introduction en bourse où les investisseurs soumettent un prix et une quantité, puis le prix d’offre est fixé autour du niveau qui permet de placer les actions disponibles. Les investisseurs servis paient généralement le même prix de clearing. Le mécanisme cherche à réduire la discrétion d’allocation du bookbuilding classique, mais reste rare en pratique.",
     "example": "Google a utilisé une IPO par enchère hollandaise modifiée en 2004 pour ouvrir davantage l’allocation aux investisseurs et laisser la demande contribuer au prix d’offre."
   },
-  "ebitda": {
-    "definition": "L'EBITDA est une mesure de rentabilité opérationnelle avant intérêts, impôts, dépréciations et amortissements. En VC early-stage il est souvent négatif ou secondaire, mais il devient utile pour les sociétés plus matures, les comparables, l'[[enterprise-value|enterprise value]] et les multiples de sortie.",
-    "example": "Une startup growth encore déficitaire sera souvent valorisée sur son ARR ; une société plus mature pourra être comparée sur un multiple d’EBITDA."
-  },
   "ebitda-exit-multiple": {
     "definition": "L’EBITDA exit multiple estime la valeur de sortie en appliquant un multiple de marché à l’EBITDA attendu au moment de l’exit. Cette méthode est surtout pertinente pour des sociétés matures ou rentables ; pour beaucoup de startups early-stage, les multiples de revenus ou la logique de marché restent plus fréquents.",
     "example": "Une société projetant 8 M€ d’EBITDA à l’exit peut être valorisée 80 M€ avec un multiple de sortie de 10x."
@@ -446,13 +438,17 @@
     "definition": "L'ESG assessment examine les risques et pratiques ESG d'une startup avant investissement ou en portefeuille. En VC, il peut couvrir conformité, gouvernance, impact environnemental, sécurité, diversité, chaîne de valeur et risques réputationnels.",
     "example": "Une startup climate peut devoir prouver que son impact annoncé est mesurable et que sa gouvernance des données est robuste."
   },
-  "esop": {
-    "definition": "Un ESOP ou option pool est une réserve d'equity utilisée pour attribuer des stock options ou incentives similaires aux salariés, advisors et consultants. Il affecte directement la cap table, la dilution et la négociation pre-money/post-money.",
-    "example": "Un investisseur peut demander un pool de 10 % avant le tour, ce qui dilue principalement les actionnaires existants."
+  "ebitda": {
+    "definition": "L'EBITDA est une mesure de rentabilité opérationnelle avant intérêts, impôts, dépréciations et amortissements. En VC early-stage il est souvent négatif ou secondaire, mais il devient utile pour les sociétés plus matures, les comparables, l'[[enterprise-value|enterprise value]] et les multiples de sortie.",
+    "example": "Une startup growth encore déficitaire sera souvent valorisée sur son ARR ; une société plus mature pourra être comparée sur un multiple d’EBITDA."
   },
   "emerging-manager": {
     "definition": "Un emerging manager est un gestionnaire VC encore en construction de marque et de track record. Les LPs l’évaluent sur la thèse, l’accès au deal flow, la cohérence de portefeuille et la capacité à lever puis performer malgré une base LP plus fragile.",
     "example": "Une équipe qui lève son Fund I avec quelques family offices et institutions publiques est un emerging manager."
+  },
+  "esop": {
+    "definition": "Un ESOP ou option pool est une réserve d'equity utilisée pour attribuer des stock options ou incentives similaires aux salariés, advisors et consultants. Il affecte directement la cap table, la dilution et la négociation pre-money/post-money.",
+    "example": "Un investisseur peut demander un pool de 10 % avant le tour, ce qui dilue principalement les actionnaires existants."
   },
   "employee-equity": {
     "definition": "L’employee equity aligne les salariés sur la création de valeur de la startup, souvent via stock options, RSU ou plans d’actionnariat. Sa qualité dépend du pool disponible, du vesting, du prix d’exercice, de la transparence et de la dilution.",
@@ -692,14 +688,6 @@
     "definition": "Le hurdle rate est un seuil de rendement prévu dans certains LPAs : les LPs doivent recevoir ce rendement avant que le carry du GP ne soit distribué. Il s’insère dans la waterfall et protège les LPs contre une rémunération de performance trop précoce.",
     "example": "Un hurdle de 8 % signifie que les distributions doivent d’abord atteindre ce rendement préférentiel avant le partage du carry."
   },
-  "ipo": {
-    "definition": "Une IPO est une transaction dans laquelle une société privée cote ses actions sur un marché public. Pour une startup financée par VC, elle peut créer de la liquidité, une valorisation publique et une monnaie d'acquisition, mais impose aussi disclosure, gouvernance de société cotée, lock-ups et exposition au risque de marché.",
-    "example": "Après une IPO, les investisseurs VC ne peuvent pas toujours vendre immédiatement leurs actions à cause des périodes de lock-up et de la volatilité du marché."
-  },
-  "irr": {
-    "definition": "L'IRR annualise la performance en tenant compte du timing des sorties et distributions. En VC, il peut être trompeur pour les jeunes fonds ou les flux précoces, donc il doit être lu avec MOIC, DPI, TVPI et vintage.",
-    "example": "Deux fonds avec le même MOIC peuvent afficher des IRR très différents si l’un distribue beaucoup plus tôt."
-  },
   "illiquidite": {
     "definition": "Caractéristique centrale du VC : une fois investi, le capital est immobilisé pour des années, faute de marché quotidien pour revendre des parts de startups. La liquidité n'arrive qu'à la sortie (acquisition, IPO, secondary)."
   },
@@ -715,9 +703,17 @@
     "definition": "Les information rights donnent accès à des reportings, budgets, comptes, cap table ou indicateurs opérationnels. Ils réduisent l’asymétrie d’information et soutiennent l’accompagnement post-investissement.",
     "example": "Un major investor reçoit un reporting mensuel, les comptes annuels et le budget approuvé."
   },
+  "ipo": {
+    "definition": "Une IPO est une transaction dans laquelle une société privée cote ses actions sur un marché public. Pour une startup financée par VC, elle peut créer de la liquidité, une valorisation publique et une monnaie d'acquisition, mais impose aussi disclosure, gouvernance de société cotée, lock-ups et exposition au risque de marché.",
+    "example": "Après une IPO, les investisseurs VC ne peuvent pas toujours vendre immédiatement leurs actions à cause des périodes de lock-up et de la volatilité du marché."
+  },
   "inside-sales": {
     "definition": "Inside sales désigne une organisation commerciale qui vend sans présence terrain systématique. Elle convient souvent à des paniers moyens plus faibles, des cycles plus rapides ou des marchés où la vente peut être industrialisée à distance.",
     "example": "Une startup SaaS mid-market peut privilégier inside sales pour réduire le CAC et accélérer la conversion."
+  },
+  "irr": {
+    "definition": "L'IRR annualise la performance en tenant compte du timing des sorties et distributions. En VC, il peut être trompeur pour les jeunes fonds ou les flux précoces, donc il doit être lu avec MOIC, DPI, TVPI et vintage.",
+    "example": "Deux fonds avec le même MOIC peuvent afficher des IRR très différents si l’un distribue beaucoup plus tôt."
   },
   "international-expansion": {
     "definition": "L’international expansion consiste à étendre une startup vers de nouveaux pays ou régions. Elle peut augmenter le TAM et la croissance, mais ajoute complexité GTM, recrutement, localisation, conformité, support client et discipline opérationnelle.",
@@ -759,18 +755,6 @@
     "definition": "Un KPI est une métrique choisie parce qu'elle éclaire une décision ou une priorité critique : acquisition, rétention, marge, cash, usage ou qualité. En diligence, les KPI doivent avoir des définitions stables et réconciliables avec les données sources.",
     "example": "Le NRR peut être un KPI central pour un SaaS B2B, tandis qu'un marketplace suivra plutôt GMV, take rate et liquidité."
   },
-  "loi": {
-    "definition": "Une LOI établit l'intention des parties d'avancer vers une transaction, notamment en M&A. Elle couvre souvent prix indicatif, exclusivité, confidentialité, due diligence, conditions de closing et calendrier, avec des clauses parfois contraignantes.",
-    "example": "Un acquéreur signe une LOI avec exclusivité de 60 jours avant de lancer la due diligence confirmatoire."
-  },
-  "ltv": {
-    "definition": "La LTV estime la valeur qu'un client générera sur sa durée de vie, souvent à partir de marge brute, rétention, expansion et durée de relation. C'est une métrique prospective : elle vaut seulement autant que les hypothèses de churn, marge et pricing qui la soutiennent.",
-    "example": "Une LTV élevée peut être trompeuse si elle suppose un churn très faible sur une cohorte encore trop jeune."
-  },
-  "ltv-cac": {
-    "definition": "Le LTV/CAC compare ce qu'un client rapporte à ce qu'il coûte à acquérir. Il aide à juger la viabilité du moteur d'acquisition, mais peut être trompeur si LTV, marge ou churn reposent sur des hypothèses trop optimistes.",
-    "example": "Un ratio LTV/CAC de 3x peut être sain si le payback reste court et la rétention vérifiée."
-  },
   "lead-investor": {
     "definition": "Le lead investor est l’investisseur qui structure et mène un tour de financement. Il négocie souvent la [[term-sheet|term sheet]], coordonne une partie de la diligence, fixe le cadre de valorisation et peut obtenir un [[board-seat|board seat]] ou nommer un [[investor-director|investor director]].",
     "example": "En Series A, un fonds prend le rôle de lead investor, investit 5 M€, fixe la term sheet et invite deux co-investisseurs à compléter le tour."
@@ -779,6 +763,10 @@
     "definition": "Un lead qualifié est une startup repérée dont le stade, le marché, l'équipe, la traction ou le fit avec la thèse justifient une revue sérieuse. Il transforme le sourcing en pipeline exploitable plutôt qu'en simple accumulation de contacts.",
     "example": "Une startup IA B2B avec premiers revenus, marché aligné et introduction crédible devient un lead qualifié pour un fonds seed spécialisé enterprise."
   },
+  "loi": {
+    "definition": "Une LOI établit l'intention des parties d'avancer vers une transaction, notamment en M&A. Elle couvre souvent prix indicatif, exclusivité, confidentialité, due diligence, conditions de closing et calendrier, avec des clauses parfois contraignantes.",
+    "example": "Un acquéreur signe une LOI avec exclusivité de 60 jours avant de lancer la due diligence confirmatoire."
+  },
   "leverage": {
     "definition": "Le levier opérationnel mesure à quel point le résultat peut progresser plus vite que le chiffre d’affaires lorsque les coûts fixes sont déjà couverts. Dans une startup, il aide à comprendre pourquoi une forte [[gross-margin|marge brute]], une base de coûts fixes et une croissance répétable peuvent améliorer la [[capital-efficiency|capital efficiency]], mais aussi amplifier la baisse si le revenu ralentit.",
     "example": "Une plateforme a déjà payé son produit et son équipe commerciale core : chaque nouveau client ajoute beaucoup de marge, donc le levier opérationnel devient positif."
@@ -786,6 +774,14 @@
   "unicorn": {
     "definition": "Une licorne est une [[startup|startup]] privée dont la valorisation atteint ou dépasse 1 milliard de dollars. C'est un statut de valorisation de marché privé, pas une preuve de liquidité ni de rendement réalisé pour les investisseurs.",
     "example": "Une startup peut devenir licorne lors d'une Series C très chère sans avoir encore généré de DPI pour ses investisseurs."
+  },
+  "ltv": {
+    "definition": "La LTV estime la valeur qu'un client générera sur sa durée de vie, souvent à partir de marge brute, rétention, expansion et durée de relation. C'est une métrique prospective : elle vaut seulement autant que les hypothèses de churn, marge et pricing qui la soutiennent.",
+    "example": "Une LTV élevée peut être trompeuse si elle suppose un churn très faible sur une cohorte encore trop jeune."
+  },
+  "ltv-cac": {
+    "definition": "Le LTV/CAC compare ce qu'un client rapporte à ce qu'il coûte à acquérir. Il aide à juger la viabilité du moteur d'acquisition, mais peut être trompeur si LTV, marge ou churn reposent sur des hypothèses trop optimistes.",
+    "example": "Un ratio LTV/CAC de 3x peut être sain si le payback reste court et la rétention vérifiée."
   },
   "lp": {
     "definition": "Le LP apporte les commitments qui financent un fonds VC, mais délègue la sélection et la gestion des startups au GP. Il évalue les managers via stratégie, track record, DPI, TVPI, liquidité, discipline de construction et fit de portefeuille.",
@@ -814,14 +810,6 @@
   "loss-ratio": {
     "definition": "Le loss ratio mesure la proportion d’investissements qui échouent ou ne retournent pas significativement le capital. En VC, un loss ratio élevé peut rester compatible avec une bonne performance si quelques gagnants compensent largement les pertes.",
     "example": "Un portefeuille seed peut perdre de l’argent sur 50 % des lignes et rester excellent si deux sociétés retournent le fonds."
-  },
-  "ma": {
-    "definition": "Le M&A désigne les transactions de fusion ou acquisition qui permettent à une startup de rejoindre un acheteur stratégique ou financier. En VC, c'est une voie d'exit fréquente, dont l'économie dépend du prix, de la structure, des préférences de liquidation et de la répartition des produits.",
-    "example": "Une startup peut produire un bon résultat founder via M&A tout en générant un rendement insuffisant pour un grand fonds si le prix d’exit reste trop bas."
-  },
-  "moic": {
-    "definition": "Le MOIC mesure combien de fois le capital investi est retourné ou valorisé. Contrairement à l'IRR, il ne tient pas compte du temps ; il sert donc à comprendre l'ampleur du rendement brut avant d'analyser son rythme.",
-    "example": "Un investissement de 1 M€ valorisé 5 M€ affiche un MOIC de 5x."
   },
   "management-company": {
     "definition": "La management company est la société de gestion derrière une firme VC. Elle est distincte des véhicules de fonds, emploie l’équipe, porte les coûts opérationnels et se finance principalement via les management fees.",
@@ -859,12 +847,20 @@
     "definition": "Un mega-seed est un tour [[seed|seed]] exceptionnellement important, souvent lié à une forte concurrence d'investisseurs, à l'IA ou à des besoins d'infrastructure. Il peut brouiller les frontières entre seed, [[series-a|Series A]] et growth.",
     "example": "Une startup IA lève un mega-seed pour financer compute, recrutement et go-to-market avant d'avoir les métriques d'une Series A classique."
   },
+  "ma": {
+    "definition": "Le M&A désigne les transactions de fusion ou acquisition qui permettent à une startup de rejoindre un acheteur stratégique ou financier. En VC, c'est une voie d'exit fréquente, dont l'économie dépend du prix, de la structure, des préférences de liquidation et de la répartition des produits.",
+    "example": "Une startup peut produire un bon résultat founder via M&A tout en générant un rendement insuffisant pour un grand fonds si le prix d’exit reste trop bas."
+  },
   "presidio": {
     "definition": "Outil Microsoft open-source pour détecter et masquer des données personnelles dans des documents, utilisable en local — utile pour pré-traiter des pitch decks sensibles sans tout envoyer dans le cloud."
   },
   "milestones": {
     "definition": "Les milestones traduisent la stratégie en preuves mesurables : revenus, croissance, recrutement, produit, qualité de reporting, pipeline, expansion ou efficacité. Ils servent à aligner founders, board et investisseurs sur ce qui doit être accompli avant le prochain tour.",
     "example": "Une startup peut lever un seed pour atteindre 1 M€ d’ARR, réduire son CAC payback et prouver un canal d’acquisition répétable avant la Series A."
+  },
+  "moat": {
+    "definition": "Le moat — littéralement la « douve » d'un château fort — désigne l'avantage concurrentiel structurel qui empêche un concurrent de répliquer facilement une entreprise, et lui permet de défendre ses parts de marché et ses marges sur la durée. Popularisé par Warren Buffett, le concept est central en capital-risque : un fonds cherche moins une bonne idée qu'une défendabilité qui se renforce avec le temps. Les sources classiques d'un moat sont les effets de réseau, les coûts de changement (switching costs), les économies d'échelle, la marque, la propriété intellectuelle et les barrières réglementaires — ces dernières étant décisives en healthtech, où le marquage médical et le remboursement protègent l'acteur qui les a franchis.",
+    "example": "En santé numérique, décrocher un remboursement et un marquage CE constitue un moat réglementaire : un concurrent doit refaire tout le parcours clinique pour seulement exister sur le marché."
   },
   "model-assumptions": {
     "definition": "Les model assumptions sont les hypothèses de croissance, conversion, pricing, churn, marge, recrutement et coûts qui déterminent le modèle financier. Leur qualité compte souvent plus que la précision apparente du tableur.",
@@ -882,13 +878,17 @@
     "definition": "Le MRR mesure le revenu récurrent mensuel actif d'une entreprise, généralement issu d'abonnements ou de contrats récurrents. Il est la base opérationnelle de l'ARR dans les modèles SaaS.",
     "example": "Une startup avec 500 clients payant 200 € par mois a 100 k€ de MRR, soit environ 1,2 M€ d'ARR."
   },
-  "nvca": {
-    "definition": "La NVCA est l'association professionnelle américaine du venture capital. Elle est particulièrement utile aux praticiens car ses model documents servent souvent de point de départ pour les term sheets et la documentation juridique des financements VC américains.",
-    "example": "Un counsel peut comparer une term sheet à un modèle NVCA pour identifier les clauses standard et les écarts négociés."
+  "moic": {
+    "definition": "Le MOIC mesure combien de fois le capital investi est retourné ou valorisé. Contrairement à l'IRR, il ne tient pas compte du temps ; il sert donc à comprendre l'ampleur du rendement brut avant d'analyser son rythme.",
+    "example": "Un investissement de 1 M€ valorisé 5 M€ affiche un MOIC de 5x."
   },
   "narrow-based-weighted-average": {
     "definition": "Le narrow-based weighted average protège davantage l’investisseur que la formule broad-based, car le calcul utilise une base de titres plus restreinte. Il reste généralement moins punitif pour les fondateurs qu’un full ratchet.",
     "example": "Deux clauses weighted average peuvent produire des ajustements très différents selon que le dénominateur inclut ou non l’option pool et les autres classes."
+  },
+  "nvca": {
+    "definition": "La NVCA est l'association professionnelle américaine du venture capital. Elle est particulièrement utile aux praticiens car ses model documents servent souvent de point de départ pour les term sheets et la documentation juridique des financements VC américains.",
+    "example": "Un counsel peut comparer une term sheet à un modèle NVCA pour identifier les clauses standard et les écarts négociés."
   },
   "net-new-arr": {
     "definition": "Net New ARR mesure l'augmentation nette d'ARR sur une période. Très utile en SaaS mais peut être trop spécifique pour le lot réduit.",
@@ -1042,10 +1042,6 @@
     "definition": "Les protective provisions imposent l’accord de certains investisseurs ou classes de preferred avant des actions majeures : émission de titres, vente, dette importante, modification statutaire, changement de taille du board ou liquidation. Elles déplacent du contrôle sans donner la gestion quotidienne.",
     "example": "Une startup ne peut pas émettre une nouvelle classe senior sans l’approbation des détenteurs de Series A."
   },
-  "qsbs": {
-    "definition": "Le QSBS est un régime fiscal américain applicable à certaines actions qualifiées de petites entreprises, généralement acquises directement auprès d'une C-Corp et détenues au moins cinq ans. Il peut rendre une partie du gain exonérée, sous conditions strictes.",
-    "example": "Un angel qui investit directement en equity dans une C-Corp qualifiée peut préférer cette structure à une convertible note, car le compteur de détention QSBS commence avec l’acquisition des actions."
-  },
   "qualified-lead-velocity-rate": {
     "definition": "Le Qualified Lead Velocity Rate mesure la progression du nombre de leads qualifiés d'un mois sur l'autre. En fundraising, il peut aider à juger si le pipeline commercial soutient le plan de croissance, surtout quand le revenu réalisé est encore en retard sur l'activité commerciale.",
     "example": "Une hausse de 25 % des leads qualifiés mensuels peut soutenir une histoire de croissance si les taux de conversion restent crédibles."
@@ -1054,6 +1050,10 @@
     "definition": "Une Qualified Public Offering est une IPO qui dépasse des seuils définis dans les documents de financement, souvent en montant levé et en prix par action. Elle sert à éviter qu’une petite IPO insuffisante déclenche automatiquement les mêmes effets qu’une vraie sortie de qualité institutionnelle.",
     "example": "Une term sheet peut prévoir qu’une QPO doit lever au moins 50 M$ à un prix par action supérieur à un multiple du prix Series A."
   },
+  "qsbs": {
+    "definition": "Le QSBS est un régime fiscal américain applicable à certaines actions qualifiées de petites entreprises, généralement acquises directement auprès d'une C-Corp et détenues au moins cinq ans. Il peut rendre une partie du gain exonérée, sous conditions strictes.",
+    "example": "Un angel qui investit directement en equity dans une C-Corp qualifiée peut préférer cette structure à une convertible note, car le compteur de détention QSBS commence avec l’acquisition des actions."
+  },
   "qualified-purchaser": {
     "definition": "Un qualified purchaser est une catégorie d’investisseur qualifié au sens du droit américain, généralement plus exigeante que l’[[investisseur-accredite|investisseur accrédité]]. Ce statut sert notamment à déterminer qui peut investir dans certains [[fonds-prive|fonds privés]] exclus du régime d’investment company.",
     "example": "Un grand family office peut être traité comme qualified purchaser et investir dans un fonds privé structuré pour des investisseurs institutionnels."
@@ -1061,21 +1061,6 @@
   "referrer-quality": {
     "definition": "La qualité du référent mesure le signal de confiance attaché à une introduction. Une recommandation venant d'un fondateur, client, angel ou operator respecté peut réduire l'asymétrie d'information, à condition que l'introduction apporte le bon contexte.",
     "example": "Une introduction par un client enterprise stratégique porte plus de poids si elle explique pourquoi la douleur produit est réelle et urgente."
-  },
-  "rofo": {
-    "definition": "Le ROFO donne aux actionnaires existants la possibilité de formuler une offre avant qu'un vendeur cherche un acheteur externe. Il ressemble au [[rofr|ROFR]], mais intervient plus tôt : les bénéficiaires proposent un prix avant que le vendeur accepte une offre de tiers.",
-    "example": "Un fondateur souhaitant vendre une partie de ses actions doit d’abord laisser les investisseurs existants faire une offre dans le cadre du ROFO."
-  },
-  "rofr": {
-    "definition": "Le ROFR donne à la société puis parfois aux investisseurs existants la priorité pour acheter des titres proposés à un tiers, souvent sur les ventes de fondateurs ou salariés. Il aide à contrôler l'entrée de nouveaux actionnaires.",
-    "example": "Avant de vendre ses actions à un tiers, un fondateur doit les proposer à la société puis aux investisseurs existants."
-  },
-  "rsu": {
-    "definition": "Les RSU sont des attributions donnant droit à des actions lorsque les conditions de vesting sont satisfaites. Contrairement aux options, elles n'ont pas de strike price, ce qui les rend plus fréquentes dans les sociétés privées plus matures ou proches de la liquidité.",
-    "example": "Une scale-up late-stage peut passer des options aux RSU pour rendre la rémunération equity plus lisible malgré une valorisation déjà élevée."
-  },
-  "rvpi": {
-    "definition": "Le RVPI rapporte la valeur résiduelle du portefeuille, non encore réalisée, au capital appelé. C'est la part « sur le papier » de la performance, à confirmer par de futures sorties."
   },
   "recurring-revenue": {
     "definition": "Le recurring revenue provient de contrats ou usages qui se renouvellent, souvent via abonnement. Il rend les revenus plus prévisibles et permet d'analyser ARR, MRR, churn et NRR.",
@@ -1105,6 +1090,13 @@
     "definition": "Les reserve funds sont la poche de capital gardée pour soutenir les sociétés existantes, surtout les gagnants potentiels. La discipline de réserves conditionne la capacité à maintenir l’ownership et à capturer la loi de puissance.",
     "example": "Un fonds garde 45 % de son capital pour pouvoir suivre ses meilleurs deals en Series A et B."
   },
+  "rvpi": {
+    "definition": "Le RVPI rapporte la valeur résiduelle du portefeuille, non encore réalisée, au capital appelé. C'est la part « sur le papier » de la performance, à confirmer par de futures sorties."
+  },
+  "rsu": {
+    "definition": "Les RSU sont des attributions donnant droit à des actions lorsque les conditions de vesting sont satisfaites. Contrairement aux options, elles n'ont pas de strike price, ce qui les rend plus fréquentes dans les sociétés privées plus matures ou proches de la liquidité.",
+    "example": "Une scale-up late-stage peut passer des options aux RSU pour rendre la rémunération equity plus lisible malgré une valorisation déjà élevée."
+  },
   "revenue-growth": {
     "definition": "La revenue growth mesure la vitesse de croissance du chiffre d'affaires. En VC, elle doit être analysée avec sa qualité : récurrence, marge, rétention, répétabilité, saisonnalité et coût d'acquisition.",
     "example": "Doubler le revenu annuel est plus convaincant si la croissance vient de clients récurrents avec faible churn."
@@ -1116,6 +1108,14 @@
   "revenue-multiple": {
     "definition": "Le revenue multiple valorise une entreprise comme un multiple de son revenu, souvent ARR pour le SaaS. Le multiple dépend de la croissance, de la marge, de la rétention, du marché, de la qualité du revenu et des comparables.",
     "example": "Une startup à 5 M€ d'ARR valorisée 40 M€ se négocie à 8x ARR."
+  },
+  "rofo": {
+    "definition": "Le ROFO donne aux actionnaires existants la possibilité de formuler une offre avant qu'un vendeur cherche un acheteur externe. Il ressemble au [[rofr|ROFR]], mais intervient plus tôt : les bénéficiaires proposent un prix avant que le vendeur accepte une offre de tiers.",
+    "example": "Un fondateur souhaitant vendre une partie de ses actions doit d’abord laisser les investisseurs existants faire une offre dans le cadre du ROFO."
+  },
+  "rofr": {
+    "definition": "Le ROFR donne à la société puis parfois aux investisseurs existants la priorité pour acheter des titres proposés à un tiers, souvent sur les ventes de fondateurs ou salariés. Il aide à contrôler l'entrée de nouveaux actionnaires.",
+    "example": "Avant de vendre ses actions à un tiers, un fondateur doit les proposer à la société puis aux investisseurs existants."
   },
   "risk-premium": {
     "definition": "La risk premium rémunère l'incertitude supportée par un investisseur. En VC, le risque extrême, l'illiquidité et l'asymétrie des résultats expliquent des exigences de rendement élevées, même si les modèles financiers classiques restent approximatifs.",
@@ -1132,14 +1132,6 @@
   "reseau-vc": {
     "definition": "Le réseau VC sert à sourcer des deals, vérifier une [[dd|due diligence]], aider une startup à recruter, vendre, lever en [[follow-on|follow-on]] ou préparer une sortie. Il explique pourquoi un investisseur peut valoir plus que son capital.",
     "example": "Un partner ouvre son réseau de clients enterprise et de fonds Series B à une participation en portefeuille."
-  },
-  "safe": {
-    "definition": "Le SAFE, et souvent son équivalent français BSA-AIR, permet de lever rapidement sans fixer immédiatement une valorisation. Contrairement à une convertible note, il n'est généralement pas une dette, ne porte pas d'intérêt et n'a pas de maturité fixe ; la conversion dépend du prochain tour selon un cap et/ou discount.",
-    "example": "Une startup pre-seed lève 300 k€ via SAFE avec valuation cap à 6 M€ avant son priced seed."
-  },
-  "sfdr": {
-    "definition": "Le SFDR est le cadre européen de disclosure durable applicable aux acteurs des services financiers. Il impose des publications sur l'intégration des risques de durabilité et, selon les produits, sur les caractéristiques ou objectifs ESG ; en VC, il influence surtout le reporting des fonds, les demandes LP et certaines diligences portfolio.",
-    "example": "Un fonds VC européen classé Article 8 peut demander plus de données ESG aux startups pour répondre à ses obligations de reporting envers les LPs."
   },
   "spv": {
     "definition": "Véhicule ad hoc regroupant plusieurs co-investisseurs dans une seule entité, qui investit ensuite dans une startup. Permet à un groupe d'angels ou de LPs de mutualiser un ticket sans créer un fonds complet.",
@@ -1202,9 +1194,21 @@
     "definition": "La Series B finance généralement le passage d’une société qui fonctionne à une société capable de scaler. Les investisseurs y examinent croissance, efficacité, reporting, profondeur du management, GTM et capacité à absorber davantage de capital.",
     "example": "Une Series B peut financer l’expansion internationale, le recrutement senior et l’accélération commerciale après preuve de répétabilité post-Series A."
   },
+  "sam": {
+    "definition": "Le SAM désigne la portion du [[tam|TAM]] qu'une société peut réellement adresser avec son produit, son prix, sa géographie et son canal de vente actuels. On l'obtient en filtrant le marché total par ce que l'entreprise sait effectivement vendre, à qui et où. C'est le périmètre dans lequel se joue la croissance des prochaines années, et celui qu'un sizing bottom-up sérieux cherche à chiffrer client par client plutôt qu'en appliquant un pourcentage au TAM.",
+    "example": "Un SaaS de réservation visant 150 000 restaurants français, dont 40 % seulement sont équipés pour l'adopter, ramène le marché à un SAM de quelques dizaines de millions d'euros."
+  },
+  "som": {
+    "definition": "Le SOM correspond à la part du [[sam|SAM]] qu'une société peut réalistement capturer à horizon trois à cinq ans, compte tenu de la concurrence, de sa force commerciale et de sa vitesse d'exécution. C'est le plus concret des trois cercles, car il engage des hypothèses vérifiables de pénétration et de rythme de vente. Un SOM crédible se construit par le bas et s'exprime souvent en ARR atteignable plutôt qu'en taille de marché abstraite.",
+    "example": "Sur un SAM de 72 M€, une société qui vise 8 % de pénétration en cinq ans projette un SOM de l'ordre de 5,8 M€ d'ARR."
+  },
   "shareholders-agreement": {
     "definition": "Un shareholders agreement encadre les relations entre actionnaires après un investissement : gouvernance, restrictions de transfert, information rights, droits économiques, liquidation preferences, obligations des fondateurs et clauses d’exit.",
     "example": "Après une Series A, le pacte peut donner au lead investor un board seat, des veto rights, un pro-rata et des droits d’information."
+  },
+  "safe": {
+    "definition": "Le SAFE, et souvent son équivalent français BSA-AIR, permet de lever rapidement sans fixer immédiatement une valorisation. Contrairement à une convertible note, il n'est généralement pas une dette, ne porte pas d'intérêt et n'a pas de maturité fixe ; la conversion dépend du prochain tour selon un cap et/ou discount.",
+    "example": "Une startup pre-seed lève 300 k€ via SAFE avec valuation cap à 6 M€ avant son priced seed."
   },
   "single-trigger-acceleration": {
     "definition": "La single-trigger acceleration fait vest tout ou partie de l’equity non acquise dès la survenance d’un événement unique, typiquement un changement de contrôle. Elle protège le bénéficiaire mais peut compliquer une acquisition pour l’acheteur.",
@@ -1254,25 +1258,13 @@
     "definition": "Le subscription agreement formalise l’achat d’actions nouvellement émises au closing. Il traduit les termes économiques de la term sheet en obligations contractuelles et contient souvent prix, nombre d’actions, conditions precedent, warranties et références à la disclosure letter.",
     "example": "Dans une Series A, le subscription agreement précise le nombre d’actions preferred émises, le prix par action et les conditions à remplir avant le versement des fonds."
   },
-  "tam": {
-    "definition": "Le TAM mesure la demande totale qui existerait si un produit captait l'intégralité de son marché pertinent, toutes géographies et tous segments confondus, sans contrainte de concurrence ni de canal. C'est le plafond théorique de l'opportunité : en diligence, il sert surtout à vérifier qu'un marché est assez grand pour viser un [[fund-returner|retour de fonds]], pas à prédire un chiffre d'affaires. Un TAM gonflé par des agrégats macro ne dit presque rien de ce qu'une société peut réellement capter.",
-    "example": "Un éditeur de logiciel pour cliniques vétérinaires peut afficher un TAM mondial de plusieurs milliards, alors que sa réalité commerciale se joue sur une fraction bien plus étroite."
-  },
-  "sam": {
-    "definition": "Le SAM désigne la portion du [[tam|TAM]] qu'une société peut réellement adresser avec son produit, son prix, sa géographie et son canal de vente actuels. On l'obtient en filtrant le marché total par ce que l'entreprise sait effectivement vendre, à qui et où. C'est le périmètre dans lequel se joue la croissance des prochaines années, et celui qu'un sizing bottom-up sérieux cherche à chiffrer client par client plutôt qu'en appliquant un pourcentage au TAM.",
-    "example": "Un SaaS de réservation visant 150 000 restaurants français, dont 40 % seulement sont équipés pour l'adopter, ramène le marché à un SAM de quelques dizaines de millions d'euros."
-  },
-  "som": {
-    "definition": "Le SOM correspond à la part du [[sam|SAM]] qu'une société peut réalistement capturer à horizon trois à cinq ans, compte tenu de la concurrence, de sa force commerciale et de sa vitesse d'exécution. C'est le plus concret des trois cercles, car il engage des hypothèses vérifiables de pénétration et de rythme de vente. Un SOM crédible se construit par le bas et s'exprime souvent en ARR atteignable plutôt qu'en taille de marché abstraite.",
-    "example": "Sur un SAM de 72 M€, une société qui vise 8 % de pénétration en cinq ans projette un SOM de l'ordre de 5,8 M€ d'ARR."
+  "sfdr": {
+    "definition": "Le SFDR est le cadre européen de disclosure durable applicable aux acteurs des services financiers. Il impose des publications sur l'intégration des risques de durabilité et, selon les produits, sur les caractéristiques ou objectifs ESG ; en VC, il influence surtout le reporting des fonds, les demandes LP et certaines diligences portfolio.",
+    "example": "Un fonds VC européen classé Article 8 peut demander plus de données ESG aux startups pour répondre à ses obligations de reporting envers les LPs."
   },
   "tam-sam-som": {
     "definition": "Le cadre TAM / SAM / SOM dimensionne un marché en trois cercles concentriques, du plus large au plus réaliste : le [[tam|TAM]] borne l'opportunité théorique, le [[sam|SAM]] la ramène à ce qui est servable avec le modèle actuel, et le [[som|SOM]] à ce qui est capturable à court terme. Chaque cercle se définit séparément ; pris ensemble, ils servent surtout à relier la taille du marché aux segments clients, au pricing, au go-to-market et au timing. Un sizing crédible se mène en bottom-up, puis se contre-vérifie en top-down.",
     "example": "Une startup peut viser un TAM mondial énorme tout en n'ayant qu'un SOM initial limité à un segment enterprise précis dans deux pays."
-  },
-  "tvpi": {
-    "definition": "Le TVPI additionne valeur distribuée et valeur résiduelle, puis la rapporte au capital appelé. Il donne une vue globale de création de valeur, mais peut être très dépendant de valorisations non réalisées.",
-    "example": "Un TVPI de 2,5x avec un DPI de 0,3x signifie que l’essentiel de la performance reste encore latent."
   },
   "tag-along": {
     "definition": "Le tag-along protège les minoritaires lorsqu’un actionnaire significatif vend ses titres à un tiers. Il leur permet de participer à la transaction aux mêmes conditions, plutôt que de rester dans une cap table modifiée.",
@@ -1301,6 +1293,14 @@
   "titre-financier": {
     "definition": "Un titre financier est un instrument qui représente un droit économique ou de propriété : action ordinaire, action de préférence, dette convertible, warrant ou autre instrument financier. En VC, comprendre la nature du titre permet de lire une [[cap-table|cap table]], une [[term-sheet|term sheet]] et les droits attachés aux investisseurs.",
     "example": "Une note convertible et une action de préférence sont deux titres financiers, mais elles n’ont pas les mêmes droits ni le même moment de conversion en equity."
+  },
+  "tam": {
+    "definition": "Le TAM mesure la demande totale qui existerait si un produit captait l'intégralité de son marché pertinent, toutes géographies et tous segments confondus, sans contrainte de concurrence ni de canal. C'est le plafond théorique de l'opportunité : en diligence, il sert surtout à vérifier qu'un marché est assez grand pour viser un [[fund-returner|retour de fonds]], pas à prédire un chiffre d'affaires. Un TAM gonflé par des agrégats macro ne dit presque rien de ce qu'une société peut réellement capter.",
+    "example": "Un éditeur de logiciel pour cliniques vétérinaires peut afficher un TAM mondial de plusieurs milliards, alors que sa réalité commerciale se joue sur une fraction bien plus étroite."
+  },
+  "tvpi": {
+    "definition": "Le TVPI additionne valeur distribuée et valeur résiduelle, puis la rapporte au capital appelé. Il donne une vue globale de création de valeur, mais peut être très dépendant de valorisations non réalisées.",
+    "example": "Un TVPI de 2,5x avec un DPI de 0,3x signifie que l’essentiel de la performance reste encore latent."
   },
   "funding-round": {
     "definition": "Un tour de financement est une opération de levée structurée dans laquelle une startup reçoit du capital contre de l’[[equity|equity]], un instrument convertible ou un autre titre. Les tours portent souvent des noms de stade : [[pre-seed|pre-seed]], [[seed|seed]], [[series-a|Series A]], puis Series B et au-delà.",
