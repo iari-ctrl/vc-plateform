@@ -99,17 +99,20 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
 
 La vérification automatique comporte un second contrôle, dit *drift*, qui peuple une base
 jetable depuis `data/*.json` puis la ré-exporte, et exige que le résultat soit identique aux
-fichiers `data/glossary.json`, `caseStudies.json` et `blog.json`. Ce contrôle **échoue
-actuellement, et échouait déjà avant** : le cycle peuplement → export ne reproduit pas
-l'ordre exact des fichiers sources. C'est une question d'ordonnancement, pas une perte de
-contenu, et c'est indépendant de la fraîcheur d'une publication donnée. Il n'a donc pas à
-bloquer un push.
+fichiers `data/glossary.json`, `caseStudies.json` et `blog.json`. C'est la preuve que seed
+(JSON→DB) et export (DB→JSON) sont inverses : l'ordre canonique attendu est celui que produit
+l'export (glossaire trié par `term`, cas par `title`, blog par `date` décroissante puis
+`title`).
 
-Pour le résoudre un jour (séparément), deux voies : soit aligner les fichiers sources sur la
-forme produite par l'export — `npm run content:export` puis committer (gros diff de
-réordonnancement, sans changement de contenu) ; soit corriger l'ordre de tri de l'export ou
-du seed pour qu'il respecte l'ordre d'édition. Reproduire le contrôle en local, sans toucher
-à la base de développement :
+Ce contrôle a été **résolu** : les fichiers sources ont été réalignés sur la forme produite
+par l'export (réordonnancement pur, sans changement de contenu — voir le commit
+`chore(content): normalise l'ordre canonique`).
+
+**Pour éviter qu'il ne réapparaisse** : après toute édition manuelle de `glossary.json`,
+`caseStudies.json` ou `blog.json` (ajout d'un terme, d'un cas, d'un article), relancer
+`npm run content:export` pour réimposer l'ordre canonique, puis committer le résultat. Une
+édition via le CMS suivie de `content:export` ne pose pas ce problème. Reproduire le contrôle
+en local, sans toucher à la base de développement :
 ```bash
 DATABASE_URL="file:/tmp/drift-check.db" npm run db:setup --workspace server
 DATABASE_URL="file:/tmp/drift-check.db" npm run content:export -- --dry-run
