@@ -28,20 +28,21 @@ Le projet n'est pas une simple SPA : c'est un **monorepo npm workspaces** à deu
 vc-premium-platform/
 ├── data/                      # ← SOURCE DE VÉRITÉ du contenu (JSON)
 │   ├── paths.json (9 rayons)  courses.json (16)  lessons.json (55 leçons canoniques)
-│   ├── lessons.index.json  lessons.bodies.json   # leçons scindées (index léger / corps lazy) — GÉNÉRÉ, ne pas éditer
-│   ├── glossary.json (358)  glossary.index.json  glossary.defs.json   # glossaire scindé — GÉNÉRÉ
+│   ├── glossary.json (361)
 │   ├── caseStudies.json (5)  deliverables.json (2)  blog.json (8)
 │   ├── simulators.json (9)  ikigai.json
 │   ├── parcours.json (22)  parcours.en.json  parcoursConfig.json  profileParcours.json
-│   └── parcours/              # 3 registres drop-in, 11 leçons additionnelles (*.lessons.json, ld-*/lea-*)
+│   ├── parcours/              # 3 registres drop-in, 11 leçons additionnelles (*.lessons.json, ld-*/lea-*)
+│   ├── generated/             # GÉNÉRÉ, ne pas éditer : lessons.index/bodies.json + glossary.index/defs.json (split:content)
+│   └── sources/               # registre d'ingestion durable : canonical-glossary.json (433)
 │   # ── À VENIR (piliers VC Intelligence) ──────────────────
 │   # theses.json · atlas.json · frameworks.json · research.json (ou blog.json refondu)
 ├── docs/
 │   ├── parcours/              # conception + rédaction des parcours (Markdown)
+│   ├── i18n_architecture_FR-EN.md        # ADR + plan de migration bilingue (FR/EN)
 │   └── STRATEGIE-vc-intelligence.md      # doc directeur : positionnement, architecture cible, roadmap (fusion stratégie + audit)
+├── prototypes/                # maquettes splash/ornaments exploratoires (HTML/JSX, hors application)
 ├── Suivis/                    # documents de suivi projet (Bilan, Report, Design System, ce Manuel)
-├── glossary-ingestion/
-│   └── canonical-glossary.json (433)  # registre durable de préparation du glossaire
 │
 ├── client/                    # SPA React + Vite
 │   └── src/
@@ -51,7 +52,7 @@ vc-premium-platform/
 │       ├── hooks/             # useApiData (API-first, repli sur le bundle)
 │       ├── lib/               # api · storage · markdown · ikigai · seo · utils (safeHttpUrl)
 │       ├── components/        # ui · chrome · ornaments · explore · cards · reading · ikigai · simulators · ErrorBoundary
-│       ├── pages/             # pages applicatives lazy-loadées + admin/
+│       ├── pages/             # pages lazy-loadées, regroupées par domaine (home · onboarding · learn · glossary · blog · cases · ecosystems · simulators · intelligence · workspace · search · admin · system)
 │       └── styles/            # tokens.css (design tokens, dont --error/--success) + global.css
 │
 └── server/                    # API Express + Prisma
@@ -71,7 +72,7 @@ docs/STRATEGIE-vc-intelligence.md  # doc directeur : positionnement, architectur
 > [!NOTE]
 > Le client lit `data/` via l'alias Vite **`@data`** (ex. `import pathsJson from '@data/paths.json'` dans `client/src/content/paths.ts`). Chaque collection a son module (`paths.ts`, `courses.ts`, `lessons.ts`, etc.) afin que Rollup découpe le contenu par chunks. Le serveur lit les mêmes fichiers via `server/src/lib/content.ts` (chemin relatif `../../../data`). **Un seul fichier édité alimente les deux côtés.**
 >
-> **Collections scindées (glossaire & leçons).** Pour alléger le hot path, `glossary.json` et `lessons.json` (+ `data/parcours/*.lessons.json`) sont **dérivés** par `scripts/split-glossary.mjs` et `scripts/split-lessons.mjs` (câblés dans `predev`/`prebuild` via `npm run split:content`) en deux fichiers chacun : un **index léger** (`*.index.json`, importé en eager pour popovers / recherche / liens) et un **chunk lourd lazy** (`glossary.defs.json` / `lessons.bodies.json`, corps + quiz, chargé à la demande par `loadGlossaryTerm` / `loadLesson`). **Ne jamais éditer les fichiers générés** : on édite la source (`glossary.json`, `lessons.json`, `data/parcours/*.lessons.json`), le split se relance au prochain `dev`/`build`.
+> **Collections scindées (glossaire & leçons).** Pour alléger le hot path, `glossary.json` et `lessons.json` (+ `data/parcours/*.lessons.json`) sont **dérivés** par `scripts/split-glossary.mjs` et `scripts/split-lessons.mjs` (câblés dans `predev`/`prebuild` via `npm run split:content`) en deux fichiers chacun, écrits sous `data/generated/` : un **index léger** (`generated/*.index.json`, importé en eager pour popovers / recherche / liens) et un **chunk lourd lazy** (`generated/glossary.defs.json` / `generated/lessons.bodies.json`, corps + quiz, chargé à la demande par `loadGlossaryTerm` / `loadLesson`). **Ne jamais éditer les fichiers générés** : on édite la source (`glossary.json`, `lessons.json`, `data/parcours/*.lessons.json`), le split se relance au prochain `dev`/`build`.
 
 ---
 
@@ -149,7 +150,7 @@ const { data: paths } = useApiData<Path[]>('/content/paths', PATHS); // PATHS = 
 > **Garde-fou anti-drift (CI).** Le job `drift` ([.github/workflows/ci.yml](.github/workflows/ci.yml)) seed une SQLite jetable depuis `data/*.json` puis lance `content:export --dry-run` : si un fichier canonique changerait, le script sort en **code 1** et la CI échoue. C'est la preuve que **seed (JSON→DB) et export (DB→JSON) sont inverses**. Conséquence : si vous éditez en base sans exporter, ou si vous modifiez le sérialiseur, la CI vous le signale.
 
 ### 2.2.b. Cas particulier : glossaire VC
-Le glossaire final consommé par l'app reste [data/glossary.json](data/glossary.json), mais son chantier éditorial passe d'abord par [glossary-ingestion/canonical-glossary.json](glossary-ingestion/canonical-glossary.json).
+Le glossaire final consommé par l'app reste [data/glossary.json](data/glossary.json), mais son chantier éditorial passe d'abord par [data/sources/canonical-glossary.json](data/sources/canonical-glossary.json).
 
 - `canonical-glossary.json` est le registre durable : il conserve sources, modules, décisions d'édition, aliases, `action` (`add`, `update`, `merge`, `skip`) et `status` (`draft`, `needs-review`, `approved`, `applied`).
 - `data/glossary.json` ne contient que les entrées finales consommées par l'application : `id`, `term`, `slug`, `category`, `short`, `definition`, `example`, `link`, `seeAlso`, `relatedLessonIds`.
@@ -314,7 +315,7 @@ Le balisage manuel ne suffit plus à garantir la règle produit : **dans les cou
 - **Contenu du popover** : terme + champ `short` uniquement (explication très brève). Le **panneau entier** est cliquable et redirige vers `/glossary?term=slug` (lien réel : accessible clavier, clic-milieu/nouvel onglet préservés, navigation SPA au clic gauche) — pas de ligne « Voir dans le dictionnaire » séparée.
 - **Portée** : leçons (toutes via `LessonPage`) + définitions du dictionnaire. Les **études de cas / blog** restent en balisage manuel uniquement (`glossaryPreview` désactivé) : ce ne sont pas des « cours ».
 
-### 4.2. Ajouter un TERME au dictionnaire (`glossary-ingestion/canonical-glossary.json` puis `data/glossary.json`)
+### 4.2. Ajouter un TERME au dictionnaire (`data/sources/canonical-glossary.json` puis `data/glossary.json`)
 Commencez toujours par le registre canonique :
 
 ```jsonc

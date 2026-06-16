@@ -115,8 +115,8 @@ Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 vc-premium-platform/
 ├── data/                     # Contenu canonique (JSON) — source de vérité partagée
 │   ├── paths.json  courses.json  lessons.json  glossary.json
-│   ├── glossary.index.json  glossary.defs.json   # glossaire scindé (index léger / défs lazy) — généré
-│   ├── lessons.index.json   lessons.bodies.json  # leçons scindées (index léger / corps lazy) — généré
+│   ├── generated/            # glossaire/leçons scindés (index léger + défs/corps lazy) — GÉNÉRÉ
+│   ├── sources/              # registre d'ingestion du glossaire (canonical-glossary.json)
 │   ├── caseStudies.json  deliverables.json  blog.json  simulators.json  ikigai.json
 │   ├── ecosystems.json       # dossiers « Décortiquer un écosystème » (arbre parentId/order, 100% client)
 │   #   deliverables.json     # livrables de parcours (/livrables) : brief + gabarit + grille + modèle, 100% client

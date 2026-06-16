@@ -45,8 +45,9 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
    npm run generate:sitemap
    git status --short
    ```
-   Si `git status` révèle des fichiers modifiés (`data/*.index.json`, `*.bodies.json`,
-   `glossary.defs.json`, ou `client/public/sitemap.xml`), c'est qu'une édition n'avait pas
+   Si `git status` révèle des fichiers modifiés (`data/generated/*.index.json`,
+   `data/generated/*.bodies.json`, `data/generated/glossary.defs.json`, ou
+   `client/public/sitemap.xml`), c'est qu'une édition n'avait pas
    été propagée. Les enregistrer :
    ```bash
    git add -A
