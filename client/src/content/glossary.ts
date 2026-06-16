@@ -1,4 +1,4 @@
-import glossaryIndexJson from '@data/glossary.index.json';
+import glossaryIndexJson from '@data/generated/glossary.index.json';
 import type { GlossaryDef, GlossaryIndexEntry, GlossaryTerm } from './types';
 
 /**
@@ -16,7 +16,7 @@ let defsPromise: Promise<Record<string, GlossaryDef>> | null = null;
 /** Lazily load the heavy definitions (own chunk). Cached after the first call. */
 export function loadGlossaryDefs(): Promise<Record<string, GlossaryDef>> {
   if (!defsPromise) {
-    defsPromise = import('@data/glossary.defs.json').then(
+    defsPromise = import('@data/generated/glossary.defs.json').then(
       (m) => ((m as { default?: unknown }).default ?? m) as Record<string, GlossaryDef>,
     );
   }

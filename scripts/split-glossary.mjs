@@ -3,17 +3,18 @@
 // index, while full definitions load lazily on the dictionary page.
 //
 //   data/glossary.json  (source of truth, authored/validated)
-//     ├─→ data/glossary.index.json   every field except definition + example
-//     └─→ data/glossary.defs.json    { [slug]: { definition, example? } }
+//     ├─→ data/generated/glossary.index.json   every field except definition + example
+//     └─→ data/generated/glossary.defs.json    { [slug]: { definition, example? } }
 //
 // Deterministic output (source order, 2-space indent) so re-runs don't churn
 // the diff. Wired into `prebuild`/`predev`; the outputs are also committed so
 // the IDE and a fresh checkout resolve the imports without a generate step.
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const dataDir = fileURLToPath(new URL('../data/', import.meta.url));
+const generatedDir = `${dataDir}generated/`;
 const source = JSON.parse(readFileSync(`${dataDir}glossary.json`, 'utf8'));
 
 if (!Array.isArray(source)) {
@@ -32,7 +33,8 @@ for (const term of source) {
   defs[term.slug] = def;
 }
 
-writeFileSync(`${dataDir}glossary.index.json`, JSON.stringify(index, null, 2) + '\n');
-writeFileSync(`${dataDir}glossary.defs.json`, JSON.stringify(defs, null, 2) + '\n');
+mkdirSync(generatedDir, { recursive: true });
+writeFileSync(`${generatedDir}glossary.index.json`, JSON.stringify(index, null, 2) + '\n');
+writeFileSync(`${generatedDir}glossary.defs.json`, JSON.stringify(defs, null, 2) + '\n');
 
-console.log(`split-glossary: ${index.length} terms → glossary.index.json + glossary.defs.json`);
+console.log(`split-glossary: ${index.length} terms → generated/glossary.index.json + generated/glossary.defs.json`);

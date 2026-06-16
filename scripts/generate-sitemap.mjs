@@ -97,11 +97,11 @@ for (const route of STATIC_ROUTES) addRoute(route.path, route);
 addCollection(readJson('paths.json', []), '/paths', { changefreq: 'monthly', priority: '0.7' });
 addCollection(readJson('parcours.json', []), '/paths', { changefreq: 'monthly', priority: '0.75' });
 addCollection(readJson('courses.json', []), '/courses', { changefreq: 'monthly', priority: '0.65' });
-addCollection(readFirstArray(['lessons.index.json', 'lessons.json']), '/lessons', {
+addCollection(readFirstArray(['generated/lessons.index.json', 'lessons.json']), '/lessons', {
   changefreq: 'monthly',
   priority: '0.7',
 });
-addCollection(readFirstArray(['glossary.index.json', 'glossary.json']), '/glossary', {
+addCollection(readFirstArray(['generated/glossary.index.json', 'glossary.json']), '/glossary', {
   changefreq: 'monthly',
   priority: '0.55',
 });

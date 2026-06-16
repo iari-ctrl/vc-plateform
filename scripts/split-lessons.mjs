@@ -3,8 +3,8 @@
 // index, while the full body/quiz loads lazily on the lesson reader.
 //
 //   data/lessons.json + data/parcours/*.lessons.json  (sources of truth)
-//     ├─→ data/lessons.index.json   every field except body/bodyShort/keyTakeaways/quiz/furtherReading
-//     └─→ data/lessons.bodies.json  { [slug]: { body, bodyShort?, keyTakeaways, quiz?, furtherReading? } }
+//     ├─→ data/generated/lessons.index.json   every field except body/bodyShort/keyTakeaways/quiz/furtherReading
+//     └─→ data/generated/lessons.bodies.json  { [slug]: { body, bodyShort?, keyTakeaways, quiz?, furtherReading? } }
 //
 // The parcours-authored registers (ld-*/lea-*) are folded into the same two
 // outputs, in the same order the client used to concatenate them, so the split
@@ -13,10 +13,11 @@
 // `prebuild`/`predev`; the outputs are also committed so the IDE and a fresh
 // checkout resolve the imports without a generate step.
 
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const dataDir = fileURLToPath(new URL('../data/', import.meta.url));
+const generatedDir = `${dataDir}generated/`;
 const readJson = (p) => JSON.parse(readFileSync(`${dataDir}${p}`, 'utf8'));
 
 const library = readJson('lessons.json');
@@ -47,7 +48,8 @@ for (const lesson of source) {
   bodies[lesson.slug] = payload;
 }
 
-writeFileSync(`${dataDir}lessons.index.json`, JSON.stringify(index, null, 2) + '\n');
-writeFileSync(`${dataDir}lessons.bodies.json`, JSON.stringify(bodies, null, 2) + '\n');
+mkdirSync(generatedDir, { recursive: true });
+writeFileSync(`${generatedDir}lessons.index.json`, JSON.stringify(index, null, 2) + '\n');
+writeFileSync(`${generatedDir}lessons.bodies.json`, JSON.stringify(bodies, null, 2) + '\n');
 
-console.log(`split-lessons: ${index.length} lessons (${library.length} library + ${index.length - library.length} parcours) → lessons.index.json + lessons.bodies.json`);
+console.log(`split-lessons: ${index.length} lessons (${library.length} library + ${index.length - library.length} parcours) → generated/lessons.index.json + generated/lessons.bodies.json`);

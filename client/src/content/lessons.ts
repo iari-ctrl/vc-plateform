@@ -1,4 +1,4 @@
-import lessonsIndexJson from '@data/lessons.index.json';
+import lessonsIndexJson from '@data/generated/lessons.index.json';
 import type { Lesson, LessonBody, LessonIndexEntry } from './types';
 import { coursesForPath } from './courses';
 
@@ -27,7 +27,7 @@ let bodiesPromise: Promise<Record<string, LessonBody>> | null = null;
 /** Lazily load the heavy reader payloads (own chunk). Cached after the first call. */
 export function loadLessonBodies(): Promise<Record<string, LessonBody>> {
   if (!bodiesPromise) {
-    bodiesPromise = import('@data/lessons.bodies.json').then(
+    bodiesPromise = import('@data/generated/lessons.bodies.json').then(
       (m) => ((m as { default?: unknown }).default ?? m) as Record<string, LessonBody>,
     );
   }
