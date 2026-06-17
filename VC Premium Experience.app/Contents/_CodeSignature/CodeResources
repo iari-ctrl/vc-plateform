@@ -20,15 +20,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>MacOS/app_mode_loader</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			WPKIGkSmA3FCCifaRZpsjJwaKXE=
-			</data>
-			<key>requirement</key>
-			<string>cdhash H"58f2881a44a60371420a27da459a6c8c9c1a2971" or cdhash H"f2e1b4ff238f275d3d80bd6ded21bbe933bed7b4"</string>
-		</dict>
 		<key>Resources/app.icns</key>
 		<dict>
 			<key>hash2</key>
