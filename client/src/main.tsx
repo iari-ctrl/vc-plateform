@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import { AuthProvider } from '@/context/AuthContext';
 import { UserDataProvider } from '@/context/UserDataContext';
 import { UIProvider } from '@/context/UIContext';
+import { ViewportSwitcher } from '@/components/dev/ViewportSwitcher';
 import './styles/global.css';
 
 // Content is bundled and overlaid with the API copy, so it rarely changes
@@ -26,18 +27,20 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <AuthProvider>
-            <UserDataProvider>
-              <UIProvider>
-                <App />
-              </UIProvider>
-            </UserDataProvider>
-          </AuthProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+    <ViewportSwitcher>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider>
+            <AuthProvider>
+              <UserDataProvider>
+                <UIProvider>
+                  <App />
+                </UIProvider>
+              </UserDataProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </ViewportSwitcher>
   </StrictMode>,
 );
