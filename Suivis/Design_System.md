@@ -18,7 +18,7 @@ Le design ne doit pas ressembler à un dashboard SaaS générique. Il doit soute
 
 Mots-clés de direction artistique :
 
-- école privée ;
+
 - cabinet d'analyse ;
 - carnet d'explorateur ;
 - atlas cartographique ;

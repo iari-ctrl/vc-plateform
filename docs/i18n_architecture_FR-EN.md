@@ -9,8 +9,8 @@ incrémental, fallback FR). Rien à déployer tant que le site n'est pas en lign
 `hreflang` et le rendu prérendu restent couplés à la décision « rendu » (voir §5).
 
 > État actuel : routing localisé `/fr` / `/en` en place côté client, contenu encore
-> majoritairement FR dans `data/*.json` (357 termes de dictionnaire, 16 cours, 62 leçons
-> canoniques, 4 cas, 4 articles, 8 simulateurs, ikigai), SPA React/Vite + Express/Prisma,
+> majoritairement FR dans les JSON sources de `data/` (glossaire, cours, leçons,
+> cas, analyses dans `data/blog/*.json`, simulateurs, ikigai), SPA React/Vite + Express/Prisma,
 > `<html lang>` piloté par `LocaleBoundary`, `usePageMeta` côté client.
 
 ---
@@ -62,7 +62,7 @@ incrémental, fallback FR). Rien à déployer tant que le site n'est pas en lign
   et `SideNav`. **Implémenté 2026-06-09** (`client/src/i18n/`, `App.tsx`, wrappers de routing).
 - **Phase 2 — i18n de l'UI.** Mettre en place le dictionnaire maison, externaliser les chaînes du chrome
   (`TopBar`, `SideNav`, `Footer`, libellés de `GlossaryPage`…). Incrémental, page par page.
-- **Phase 3 — Contenu par langue.** Déplacer `data/*.json` → `data/fr/`, créer `data/en/`
+- **Phase 3 — Contenu par langue.** Déplacer les JSON sources (`data/*.json`, `data/blog/*.json`) → `data/fr/`, créer `data/en/`
   (au départ = copie FR servie en fallback) ; ajuster l'alias `@data` (`vite.config.ts`),
   `content/*.ts`, et `scripts/validate-content.mjs` pour **valider chaque dossier** (les
   marqueurs restent vérifiés contre le glossaire de la même langue).

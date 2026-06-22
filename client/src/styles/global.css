@@ -78,9 +78,8 @@
     border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 45%, transparent);
   }
 
-  /* Collapsed, the rail sits flush against the page as a near-solid strip of
-     chrome (nothing renders behind it — content starts at --sidebar-rail), so
-     the frosted glass is held back until it actually overlays content on open. */
+  /* Base (retracted) surface — the panel is parked off-screen, so this is also
+     the state the slide-in transition starts from before it overlays content. */
   .glass-rail {
     background-color: color-mix(in srgb, var(--surface) 90%, transparent);
     backdrop-filter: blur(6px) saturate(115%);

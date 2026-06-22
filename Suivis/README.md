@@ -29,7 +29,7 @@ Une plateforme **full-stack** d'initiation, d'apprentissage et d'approfondisseme
 | **Base de données** | SQLite (prototype) — interchangeable avec Postgres en changeant le `datasource` Prisma |
 | **Typographie** | Newsreader (titres) · Plus Jakarta Sans (corps) · JetBrains Mono (mono) |
 
-Le **contenu canonique** (parcours, cours, leçons, dictionnaire, études de cas, livrables de parcours, analyses, simulateurs, ikigai) vit dans `/data/*.json`. Il est **partagé** : le client le bundle pour fonctionner hors-ligne / en invité, et le serveur l'utilise pour *seeder* la base de données.
+Le **contenu canonique** (parcours, cours, leçons, dictionnaire, études de cas, livrables de parcours, analyses, simulateurs, ikigai) vit dans les JSON sources de `/data` : fichiers plats (`data/*.json`) et dossiers de collection comme `data/blog/*.json`. Il est **partagé** : le client le bundle pour fonctionner hors-ligne / en invité, et le serveur l'utilise pour *seeder* la base de données.
 
 ---
 
@@ -67,7 +67,7 @@ npm run dev
 | `npm run db:setup` | `prisma generate` + `db push` + seed |
 | `npm run db:seed` (`-- --force`) | (Re)peuple la base ; non destructif pour le contenu éditable sauf `--force` |
 | `npm run db:reset` | Réinitialise la base puis re-seed |
-| `npm run content:export` | Réexporte les éditions DB (glossaire, blog, cas) vers les JSON sources |
+| `npm run content:export` | Réexporte les éditions DB (glossaire, blog, cas) vers les JSON sources (`data/blog/<slug>.json` pour les analyses) |
 | `npm run split:content` | Régénère les index/contenus scindés (`split:glossary` + `split:lessons`) |
 | `npm run build` | Build serveur (tsc) puis client (vite) |
 | `npm run test --workspace client` | Tests Vitest client (routing i18n, `safeHttpUrl`, `computeProfile`, simulateurs…) |
@@ -92,7 +92,7 @@ Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 
 - **CI sur push** : `ci.yml` écoute désormais `branches: [main, master]` (était `main` seul, inopérant hors PR sur ce dépôt `master`).
 - **Crash async Express 4** : wrapper `ah()` (`server/src/lib/async-handler.ts`) appliqué à **tous** les handlers async (auth, content, me, admin, search) — une rejection est forwardée à l'error-handler central (→ 500) au lieu de tuer le process.
-- **Seed non destructif** : `server/prisma/seed.ts` ne réécrit plus le contenu éditable (glossaire, blog, études de cas) ; create-if-absent par défaut, écrasement uniquement avec `npm run db:seed -- --force`. Sens inverse DB→JSON via `npm run content:export`.
+- **Seed non destructif** : `server/prisma/seed.ts` ne réécrit plus le contenu éditable (glossaire, blog, études de cas) ; create-if-absent par défaut, écrasement uniquement avec `npm run db:seed -- --force`. Sens inverse DB→JSON sources via `npm run content:export` (`data/blog/*.json` pour le blog).
 - **Garde JWT durcie** : `getJwtSecretIssue()` vérifie une longueur minimale + une liste de valeurs interdites en production (fail-fast au démarrage).
 - **`clearProfile` côté serveur** : `DELETE /me/profile` supprime profil + réponses d'onboarding ; plus de résurrection de l'ancien ikigai au reload.
 - **`apiUp` re-sondé** : l'API qui démarre après le client (ou redevient joignable) est détectée — re-ping toutes les 15 s tant qu'elle est down, plus sur `window focus` / `online` ; restauration de session avant bascule de `apiUp` (`client/src/context/AuthContext.tsx`).
@@ -117,7 +117,8 @@ vc-premium-platform/
 │   ├── paths.json  courses.json  lessons.json  glossary.json
 │   ├── generated/            # glossaire/leçons scindés (index léger + défs/corps lazy) — GÉNÉRÉ
 │   ├── sources/              # registre d'ingestion du glossaire (canonical-glossary.json)
-│   ├── caseStudies.json  deliverables.json  blog.json  simulators.json  ikigai.json
+│   ├── caseStudies.json  deliverables.json  simulators.json  ikigai.json
+│   ├── blog/                 # analyses : un fichier JSON par article (`<slug>.json`)
 │   ├── ecosystems.json       # dossiers « Décortiquer un écosystème » (arbre parentId/order, 100% client)
 │   #   deliverables.json     # livrables de parcours (/livrables) : brief + gabarit + grille + modèle, 100% client
 │   ├── parcours.json  parcours.en.json  parcoursConfig.json  profileParcours.json

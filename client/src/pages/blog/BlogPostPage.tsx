@@ -1,6 +1,7 @@
-import { useParams } from 'react-router-dom';
+import { lazy, Suspense, type ComponentType } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { Link } from '@/i18n/routing';
-import { ArrowLeft, BookOpen, Clock } from 'lucide-react';
+import { ArrowLeft, BookOpen, Clock, ScrollText } from 'lucide-react';
 import { blogBySlug, BLOG } from '@/content';
 import type { BlogPost } from '@/content/types';
 import { ActiveProse } from '@/components/reading/ActiveProse';
@@ -9,12 +10,72 @@ import { BlogCard, GlossaryRefList } from '@/components/cards';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { PageLoader } from '@/components/ui/primitives';
 import { useApiItem } from '@/hooks/useApiData';
-import { formatDateFr } from '@/lib/utils';
+import { cn, formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
+// Scrollytelling variants are heavy (scenes, looping video) — keep them out of
+// the main blog chunk and load on demand when ?view=scrolly is selected.
+const HirschmanScrollytelling = lazy(() =>
+  import('./HirschmanScrollytelling').then((m) => ({ default: m.HirschmanScrollytelling })),
+);
+const DebordScrollytelling = lazy(() =>
+  import('./DebordScrollytelling').then((m) => ({ default: m.DebordScrollytelling })),
+);
+
+const SCROLLYTELLING: Record<string, ComponentType<{ post: BlogPost }>> = {
+  'exit-voice-loyalty-hirschman': HirschmanScrollytelling,
+  'la-societe-du-spectacle-leve-des-fonds': DebordScrollytelling,
+};
+
+function ReadingViewSwitch({
+  view,
+  onChange,
+}: {
+  view: 'article' | 'scrolly';
+  onChange: (view: 'article' | 'scrolly') => void;
+}) {
+  return (
+    <div
+      role="group"
+      aria-label="Choisir la version de lecture"
+      className="inline-flex rounded-full border border-outline-variant bg-surface-container-low p-1"
+    >
+      <button
+        type="button"
+        aria-pressed={view === 'article'}
+        onClick={() => onChange('article')}
+        className={cn(
+          'inline-flex min-h-9 items-center gap-2 rounded-full px-3.5 text-xs font-semibold transition-colors sm:px-4',
+          view === 'article'
+            ? 'bg-surface-container-lowest text-foreground shadow-editorial-xs'
+            : 'text-surface-variant hover:text-foreground',
+        )}
+      >
+        <BookOpen size={14} aria-hidden />
+        Article
+      </button>
+      <button
+        type="button"
+        aria-pressed={view === 'scrolly'}
+        onClick={() => onChange('scrolly')}
+        className={cn(
+          'inline-flex min-h-9 items-center gap-2 rounded-full px-3.5 text-xs font-semibold transition-colors sm:px-4',
+          view === 'scrolly'
+            ? 'bg-secondary text-secondary-foreground shadow-editorial-xs'
+            : 'text-surface-variant hover:text-foreground',
+        )}
+      >
+        <ScrollText size={14} aria-hidden />
+        Scrollytelling
+      </button>
+    </div>
+  );
+}
+
 export default function BlogPostPage() {
   const { slug } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { item: post, pending } = useApiItem<BlogPost>(
     slug ? `/content/blog/${slug}` : null,
     slug ? blogBySlug(slug) : undefined,
@@ -25,12 +86,24 @@ export default function BlogPostPage() {
   if (!post) return <NotFoundPage />;
 
   const related = BLOG.filter((p) => p.id !== post.id && p.tags.some((t) => post.tags.includes(t))).slice(0, 3);
+  const ScrollyComponent = SCROLLYTELLING[post.slug];
+  const hasScrollytelling = Boolean(ScrollyComponent);
+  const view: 'article' | 'scrolly' = hasScrollytelling && searchParams.get('view') === 'scrolly' ? 'scrolly' : 'article';
+
+  function setView(nextView: 'article' | 'scrolly') {
+    const nextParams = new URLSearchParams(searchParams);
+    if (nextView === 'scrolly') nextParams.set('view', 'scrolly');
+    else nextParams.delete('view');
+    setSearchParams(nextParams);
+  }
 
   return (
-    <article className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
-      <Link to="/blog" className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> Analyses</Link>
+    <article className={cn('mx-auto px-4 py-12 sm:px-6', view === 'scrolly' ? 'max-w-[88rem]' : 'max-w-2xl')}>
+      <div className={cn(view === 'scrolly' && 'mx-auto max-w-3xl')}>
+        <Link to="/blog" className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> Analyses</Link>
+      </div>
 
-      <header>
+      <header className={cn(view === 'scrolly' && 'mx-auto max-w-3xl')}>
         <div className="flex items-center justify-between gap-3">
           <span className="chip">{post.category}</span>
           <BookmarkButton item={{ itemType: 'blog', itemId: post.id, title: post.title, href: `/blog/${post.slug}` }} />
@@ -52,33 +125,46 @@ export default function BlogPostPage() {
             ))}
           </div>
         )}
+        {hasScrollytelling && (
+          <div className="mt-6">
+            <ReadingViewSwitch view={view} onChange={setView} />
+          </div>
+        )}
       </header>
 
-      <div className="mt-8">
-        <ActiveProse source={post.body} sourceType="blog" sourceId={post.id} sourceTitle={post.title} />
-      </div>
-
-      {post.tags.length > 0 && (
-        <div className="mt-8 flex flex-wrap gap-2">
-          {post.tags.map((t) => <span key={t} className="chip">#{t}</span>)}
-        </div>
-      )}
-
-      {post.glossaryRefs && post.glossaryRefs.length > 0 && (
+      {view === 'scrolly' && ScrollyComponent ? (
+        <Suspense fallback={<PageLoader />}>
+          <ScrollyComponent post={post} />
+        </Suspense>
+      ) : (
         <div className="mt-8">
-          <GlossaryRefList slugs={post.glossaryRefs} title="Pour aller plus loin" />
+          <ActiveProse source={post.body} sourceType="blog" sourceId={post.id} sourceTitle={post.title} />
         </div>
       )}
 
-      {related.length > 0 && (
-        <section className="mt-14">
-          <FleuronDivider className="mb-8" />
-          <p className="eyebrow mb-5">À lire ensuite</p>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {related.map((p) => <BlogCard key={p.id} post={p} />)}
+      <div className={cn(view === 'scrolly' && 'mx-auto max-w-2xl')}>
+        {post.tags.length > 0 && (
+          <div className="mt-8 flex flex-wrap gap-2">
+            {post.tags.map((t) => <span key={t} className="chip">#{t}</span>)}
           </div>
-        </section>
-      )}
+        )}
+
+        {post.glossaryRefs && post.glossaryRefs.length > 0 && (
+          <div className="mt-8">
+            <GlossaryRefList slugs={post.glossaryRefs} title="Pour aller plus loin" />
+          </div>
+        )}
+
+        {related.length > 0 && (
+          <section className="mt-14">
+            <FleuronDivider className="mb-8" />
+            <p className="eyebrow mb-5">À lire ensuite</p>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {related.map((p) => <BlogCard key={p.id} post={p} />)}
+            </div>
+          </section>
+        )}
+      </div>
     </article>
   );
 }

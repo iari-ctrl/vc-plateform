@@ -28,20 +28,22 @@ npx vitest run path/to/file       # single test file (cd into the workspace, or 
 
 npm run db:seed -- --force        # re-seed AND overwrite editable content (default seed is create-if-absent)
 npm run db:reset                  # wipe DB then re-seed
-npm run content:export            # reverse direction: DB edits (glossary/blog/cases) → data/*.json
+npm run content:export            # reverse direction: DB edits (glossary/blog/cases) → JSON sources
 ```
 
 Server env (optional, read from `server/.env` by a tiny hand-rolled loader — no dotenv): `PORT`, `JWT_SECRET` (a length+denylist guard fails startup in production if weak), `CLIENT_ORIGIN`, `DATABASE_URL`. Defaults are dev-friendly; SQLite `file:./dev.db`.
 
 ## Architecture — the parts that span files
 
-**Content-as-data is the core idea.** `/data/*.json` is the single canonical source of truth for all editorial content. It is consumed by *both* runtimes: the **client bundles it** (so the site is fully usable offline / as a guest with no auth wall), and the **server seeds the DB from it** (`server/prisma/seed.ts`). When changing content, edit the JSON sources — not the rendered pages.
+**Content-as-data is the core idea.** `/data/*.json` plus split collections such as `/data/blog/*.json` are the single canonical source of truth for editorial content. They are consumed by *both* runtimes: the **client bundles them** (so the site is fully usable offline / as a guest with no auth wall), and the **server seeds the DB from them** (`server/prisma/seed.ts`). When changing content, edit the JSON sources — not the rendered pages.
 
 **Some `data/*.json` files are generated — never hand-edit them.** `scripts/split-*.mjs` split heavy collections into a light eager index + a lazy body chunk, committed so a fresh checkout resolves imports without a build step:
 - `data/lessons.json` + `data/parcours/*.lessons.json` → `data/generated/lessons.index.json` (hot path) + `data/generated/lessons.bodies.json` (lazy reader payload)
 - `data/glossary.json` → `data/generated/glossary.index.json` + `data/generated/glossary.defs.json`
 
 Edit the sources; regenerate with `npm run split:content` (also auto-run by `predev`/`prebuild`). Note: drop-in parcours lessons (`ld-*`/`lea-*`) are folded into the index by the split and served client-side, but are **not** in canonical `lessons.json` nor seeded — so the API/DB doesn't have them and the client serves them from the bundle fallback.
+
+Blog analyses are authored as one file per article in `data/blog/<slug>.json`; client/server loaders recompose the sorted list at runtime.
 
 **Content validation gates the build.** `scripts/validate-content.mjs` (Zod) checks three layers: shape, cross-file references (every `pathId`/`courseId`/`lessonIds`/`glossaryRefs`/`furtherReading.ref`/etc. resolves, ids/slugs unique), and inline markers (`[[slug|label]]` / `{{slug|label}}` resolve to a glossary slug). Three tiers: errors (always fatal), warnings (fatal under `--strict`), softWarnings (acknowledged backlog, never fatal). It runs in `prebuild`, so a broken reference fails the build.
 

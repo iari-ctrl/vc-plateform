@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { NOINDEX_SEGMENTS, STATIC_ROUTES } from '../shared/routes.mjs';
@@ -37,6 +37,15 @@ function readJson(name, fallback) {
   const path = join(dataDir, name);
   if (!existsSync(path)) return fallback;
   return JSON.parse(readFileSync(path, 'utf8'));
+}
+
+function readJsonDir(name, fallback) {
+  const dir = join(dataDir, name);
+  if (!existsSync(dir)) return fallback;
+  return readdirSync(dir)
+    .filter((file) => file.endsWith('.json'))
+    .sort()
+    .map((file) => JSON.parse(readFileSync(join(dir, file), 'utf8')));
 }
 
 function readFirstArray(names) {
@@ -113,7 +122,7 @@ addCollection(readJson('memos.json', []), '/memos', { changefreq: 'monthly', pri
 const antiPortfolio = readJson('antiPortfolio.json', { entries: [] });
 addCollection(antiPortfolio.entries ?? [], '/anti-portfolio', { changefreq: 'monthly', priority: '0.65' });
 
-for (const post of readJson('blog.json', [])) {
+for (const post of readJsonDir('blog', [])) {
   if (!post?.slug) continue;
   addRoute(`/blog/${post.slug}`, {
     changefreq: 'monthly',

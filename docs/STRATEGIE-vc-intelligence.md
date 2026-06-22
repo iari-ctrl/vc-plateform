@@ -1100,7 +1100,7 @@ Collections à prévoir :
 - `theses.json` ;
 - `atlas.json` ;
 - `frameworks.json` ;
-- `research.json` ou refactor de `blog.json` ;
+- `research.json` ou poursuite du refactor `data/blog/*.json` vers une couche Research ;
 - cases enrichis ;
 - tools metadata.
 
@@ -1616,7 +1616,7 @@ Ces points viennent de l'audit et doivent rester visibles, car ils limitent les 
 
 - `data/parcours.json`
 - `data/lessons.json`
-- `data/blog.json`
+- `data/blog/*.json`
 - `data/caseStudies.json`
 - `data/simulators.json`
 - futurs `data/theses.json`, `data/atlas.json`, `data/frameworks.json`

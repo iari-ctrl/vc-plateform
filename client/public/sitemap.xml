@@ -1567,6 +1567,22 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/glossary/ancrage</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/ancrage" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/ancrage" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/ancrage" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/ancrage</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/ancrage" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/ancrage" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/ancrage" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/glossary/annualized-run-rate</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/annualized-run-rate" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/annualized-run-rate" />
@@ -1723,6 +1739,54 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/benchmark" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/benchmark" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/benchmark" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/glossary/biais-d-autorite</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/biais-d-autorite" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/biais-d-autorite" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/biais-d-autorite" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/biais-d-autorite</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/biais-d-autorite" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/biais-d-autorite" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/biais-d-autorite" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/glossary/biais-de-confirmation</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/biais-de-confirmation" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/biais-de-confirmation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/biais-de-confirmation" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/biais-de-confirmation</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/biais-de-confirmation" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/biais-de-confirmation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/biais-de-confirmation" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/glossary/biais-de-resultat</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/biais-de-resultat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/biais-de-resultat" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/biais-de-resultat" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/biais-de-resultat</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/biais-de-resultat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/biais-de-resultat" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/biais-de-resultat" />
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
@@ -2351,6 +2415,22 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/glossary/cout-irrecuperable</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/cout-irrecuperable" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/cout-irrecuperable" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/cout-irrecuperable" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/cout-irrecuperable</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/cout-irrecuperable" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/cout-irrecuperable" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/cout-irrecuperable" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/glossary/crowdfunding</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/crowdfunding" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/crowdfunding" />
@@ -2523,6 +2603,22 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/deal-flow" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/deal-flow" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/deal-flow" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/glossary/deal-heat</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/deal-heat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/deal-heat" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/deal-heat" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/deal-heat</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/deal-heat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/deal-heat" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/deal-heat" />
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
@@ -4239,6 +4335,22 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/glossary/journal-de-decision</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/journal-de-decision" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/journal-de-decision" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/journal-de-decision" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/journal-de-decision</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/journal-de-decision" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/journal-de-decision" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/journal-de-decision" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/glossary/kpi</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/kpi" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/kpi" />
@@ -4719,6 +4831,22 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/glossary/mimetisme</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/mimetisme" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/mimetisme" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/mimetisme" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/mimetisme</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/mimetisme" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/mimetisme" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/mimetisme" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/glossary/moat</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/moat" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/moat" />
@@ -4799,6 +4927,22 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/glossary/narrative-fallacy</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/narrative-fallacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/narrative-fallacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/narrative-fallacy" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/narrative-fallacy</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/narrative-fallacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/narrative-fallacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/narrative-fallacy" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/glossary/narrow-based-weighted-average</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/narrow-based-weighted-average" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/narrow-based-weighted-average" />
@@ -4811,6 +4955,22 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/narrow-based-weighted-average" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/narrow-based-weighted-average" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/narrow-based-weighted-average" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/glossary/negligence-des-taux-de-base</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/negligence-des-taux-de-base" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/negligence-des-taux-de-base" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/negligence-des-taux-de-base" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/negligence-des-taux-de-base</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/negligence-des-taux-de-base" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/negligence-des-taux-de-base" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/negligence-des-taux-de-base" />
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
@@ -5051,6 +5211,22 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/path-to-profitability" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/path-to-profitability" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/path-to-profitability" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/glossary/pattern-matching</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/pattern-matching" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/pattern-matching" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/pattern-matching" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/pattern-matching</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/pattern-matching" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/pattern-matching" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/pattern-matching" />
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
@@ -5339,6 +5515,38 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/preferred-non-participating" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/preferred-non-participating" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/preferred-non-participating" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/glossary/premortem</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/premortem" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/premortem" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/premortem" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/premortem</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/premortem" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/premortem" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/premortem" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/glossary/premortem-inverse</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/premortem-inverse" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/premortem-inverse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/premortem-inverse" />
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/glossary/premortem-inverse</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/glossary/premortem-inverse" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/glossary/premortem-inverse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/glossary/premortem-inverse" />
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>

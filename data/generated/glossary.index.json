@@ -7391,5 +7391,227 @@
       "Andreessen Horowitz LLC"
     ],
     "link": "https://a16z.com"
+  },
+  {
+    "id": "biais-de-resultat",
+    "term": "Biais de résultat",
+    "slug": "biais-de-resultat",
+    "category": "Sciences de la décision",
+    "short": "Juger la qualité d’une décision à son issue plutôt qu’au raisonnement qui l’a produite.",
+    "seeAlso": [
+      "journal-de-decision",
+      "premortem-inverse",
+      "power-law"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "outcome bias",
+      "biais d’issue"
+    ]
+  },
+  {
+    "id": "pattern-matching",
+    "term": "Pattern matching",
+    "slug": "pattern-matching",
+    "category": "Sciences de la décision",
+    "short": "Juger un fondateur par sa ressemblance à un archetype de gagnant, en ignorant les taux de base.",
+    "seeAlso": [
+      "negligence-des-taux-de-base",
+      "biais-d-autorite",
+      "power-law"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "reconnaissance de motifs",
+      "représentativité"
+    ]
+  },
+  {
+    "id": "biais-d-autorite",
+    "term": "Biais d’autorité",
+    "slug": "biais-d-autorite",
+    "category": "Sciences de la décision",
+    "short": "Surpondérer les signaux de statut — diplôme, ex-grande boîte, fondateur récidiviste.",
+    "seeAlso": [
+      "pattern-matching",
+      "narrative-fallacy",
+      "venture-capital"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "biais de pedigree",
+      "effet de halo"
+    ]
+  },
+  {
+    "id": "ancrage",
+    "term": "Ancrage",
+    "slug": "ancrage",
+    "category": "Sciences de la décision",
+    "short": "Laisser le premier chiffre rencontré gouverner tout le jugement de valeur.",
+    "seeAlso": [
+      "valuation",
+      "term-sheet",
+      "narrative-fallacy"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "anchoring",
+      "effet d’ancrage"
+    ]
+  },
+  {
+    "id": "narrative-fallacy",
+    "term": "Narrative fallacy",
+    "slug": "narrative-fallacy",
+    "category": "Sciences de la décision",
+    "short": "Confondre la cohérence d’un récit avec la probabilité de ce qu’il raconte.",
+    "seeAlso": [
+      "biais-de-confirmation",
+      "ancrage",
+      "premortem"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "sophisme narratif",
+      "narrative bias"
+    ]
+  },
+  {
+    "id": "biais-de-confirmation",
+    "term": "Biais de confirmation",
+    "slug": "biais-de-confirmation",
+    "category": "Sciences de la décision",
+    "short": "Chercher ce qui valide la thèse plutôt que ce qui la briserait.",
+    "seeAlso": [
+      "narrative-fallacy",
+      "premortem",
+      "mimetisme"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "confirmation bias"
+    ]
+  },
+  {
+    "id": "deal-heat",
+    "term": "Deal heat",
+    "slug": "deal-heat",
+    "category": "Sciences de la décision",
+    "short": "Pression compétitive, souvent fabriquée, qui comprime le temps de décision.",
+    "seeAlso": [
+      "mimetisme",
+      "term-sheet",
+      "premortem"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "FOMO",
+      "fear of missing out"
+    ]
+  },
+  {
+    "id": "mimetisme",
+    "term": "Mimétisme",
+    "slug": "mimetisme",
+    "category": "Sciences de la décision",
+    "short": "Calquer sa décision sur celle des fonds réputés ou du consensus du comité.",
+    "seeAlso": [
+      "deal-heat",
+      "biais-de-confirmation",
+      "premortem"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "herding",
+      "groupthink",
+      "cascade informationnelle"
+    ]
+  },
+  {
+    "id": "negligence-des-taux-de-base",
+    "term": "Négligence des taux de base",
+    "slug": "negligence-des-taux-de-base",
+    "category": "Sciences de la décision",
+    "short": "Oublier que la majorité des startups financées ne rendent pas le capital.",
+    "seeAlso": [
+      "pattern-matching",
+      "power-law",
+      "biais-de-resultat"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "base rate neglect",
+      "taux de base",
+      "biais du survivant"
+    ]
+  },
+  {
+    "id": "cout-irrecuperable",
+    "term": "Coût irrécupérable",
+    "slug": "cout-irrecuperable",
+    "category": "Sciences de la décision",
+    "short": "Re-financer par engagement passé des sociétés qu’on ne sourcerait jamais à froid.",
+    "seeAlso": [
+      "follow-on",
+      "mimetisme",
+      "journal-de-decision"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "sunk cost",
+      "escalade d’engagement",
+      "sunk cost fallacy"
+    ]
+  },
+  {
+    "id": "premortem",
+    "term": "Premortem",
+    "slug": "premortem",
+    "category": "Sciences de la décision",
+    "short": "Supposer la décision déjà échouée pour en révéler les causes avant de décider.",
+    "seeAlso": [
+      "premortem-inverse",
+      "mimetisme",
+      "journal-de-decision"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "pré-mortem",
+      "prospective hindsight"
+    ]
+  },
+  {
+    "id": "premortem-inverse",
+    "term": "Premortem inversé",
+    "slug": "premortem-inverse",
+    "category": "Sciences de la décision",
+    "short": "Supposer qu’un deal écarté est devenu le meilleur du millésime, et expliquer pourquoi on l’a raté.",
+    "seeAlso": [
+      "premortem",
+      "power-law",
+      "biais-de-resultat"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "inverse premortem"
+    ]
+  },
+  {
+    "id": "journal-de-decision",
+    "term": "Journal de décision",
+    "slug": "journal-de-decision",
+    "category": "Sciences de la décision",
+    "short": "Consigner une prédiction datée et sa confiance avant d’en connaître l’issue, pour juger le raisonnement.",
+    "seeAlso": [
+      "biais-de-resultat",
+      "premortem",
+      "power-law"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "decision journal",
+      "calibration"
+    ]
   }
 ]

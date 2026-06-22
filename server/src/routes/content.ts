@@ -8,9 +8,9 @@ export const contentRouter = Router();
 const parse = <T>(s: string): T => JSON.parse(s) as T;
 
 // In dev, admin-editable content (glossary, case studies, blog) is served
-// straight from the JSON source so edits to data/*.json appear on reload
-// without a DB re-seed (the seed is non-destructive). `content.*()` re-reads
-// the file on every call. Production keeps the DB-backed path.
+// straight from the JSON sources so edits appear on reload without a DB re-seed
+// (the seed is non-destructive). `content.*()` re-reads files/directories on
+// every call. Production keeps the DB-backed path.
 const DEV_JSON = process.env.NODE_ENV !== 'production';
 
 // ── Learning paths ──────────────────────────────────────────────────────

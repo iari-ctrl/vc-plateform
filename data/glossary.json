@@ -8090,5 +8090,253 @@
       "Andreessen Horowitz LLC"
     ],
     "link": "https://a16z.com"
+  },
+  {
+    "id": "biais-de-resultat",
+    "term": "Biais de résultat",
+    "slug": "biais-de-resultat",
+    "category": "Sciences de la décision",
+    "short": "Juger la qualité d’une décision à son issue plutôt qu’au raisonnement qui l’a produite.",
+    "definition": "Le biais de résultat conduit à évaluer une décision d’après ce qu’elle a produit, et non d’après la qualité du raisonnement disponible au moment où elle a été prise. Dans un métier à forte variance comme le capital-risque, où la chance pèse lourd sur l’issue d’un investissement, cette confusion empêche d’apprendre : une bonne décision peut mal tourner et une mauvaise décision réussir. Annie Duke en a fait le cœur de « Thinking in Bets » ; la parade consiste à consigner le raisonnement avant de connaître le résultat.",
+    "example": "Le comité passe sur une société pour des raisons de prix disciplinées ; trois ans plus tard elle vaut dix fois ce tour. Conclure « c’était une erreur » sur ce seul fait, c’est le biais de résultat.",
+    "seeAlso": [
+      "journal-de-decision",
+      "premortem-inverse",
+      "power-law"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "outcome bias",
+      "biais d’issue"
+    ]
+  },
+  {
+    "id": "pattern-matching",
+    "term": "Pattern matching",
+    "slug": "pattern-matching",
+    "category": "Sciences de la décision",
+    "short": "Juger un fondateur par sa ressemblance à un archetype de gagnant, en ignorant les taux de base.",
+    "definition": "Le pattern matching consiste à reconnaître dans un fondateur ou un dossier les traits d’un succès passé, et à en inférer un succès futur. Souvent célébré dans le métier comme une forme d’expertise, il repose sur l’heuristique de représentativité décrite par Kahneman et Tversky : on substitue la ressemblance à la probabilité, en négligeant le taux de base de la catégorie. Le risque est double — financer des copies de gagnants d’hier et écarter les profils atypiques d’où viennent souvent les rendements extrêmes.",
+    "example": "Deux dossiers identiques sur le fond ; on instruit en priorité celui dont le fondateur « ressemble » à un founder à succès connu.",
+    "seeAlso": [
+      "negligence-des-taux-de-base",
+      "biais-d-autorite",
+      "power-law"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "reconnaissance de motifs",
+      "représentativité"
+    ]
+  },
+  {
+    "id": "biais-d-autorite",
+    "term": "Biais d’autorité",
+    "slug": "biais-d-autorite",
+    "category": "Sciences de la décision",
+    "short": "Surpondérer les signaux de statut — diplôme, ex-grande boîte, fondateur récidiviste.",
+    "definition": "Le biais d’autorité conduit à accorder un poids excessif aux marqueurs de statut d’un fondateur — école, passage par une entreprise prestigieuse, expérience de fondateur récidiviste — au détriment de l’examen direct du dossier. Ces signaux ont une valeur informative réelle, mais elle est généralement déjà reflétée dans le prix et dans la concurrence sur le deal ; en faire un critère de tri revient souvent à payer cher une information publique. L’effet de halo, par lequel une qualité saillante colore l’ensemble du jugement, en est proche.",
+    "example": "Un fondateur ex-Stripe obtient une diligence plus rapide et plus indulgente qu’un autodidacte au dossier équivalent.",
+    "seeAlso": [
+      "pattern-matching",
+      "narrative-fallacy",
+      "venture-capital"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "biais de pedigree",
+      "effet de halo"
+    ]
+  },
+  {
+    "id": "ancrage",
+    "term": "Ancrage",
+    "slug": "ancrage",
+    "category": "Sciences de la décision",
+    "short": "Laisser le premier chiffre rencontré gouverner tout le jugement de valeur.",
+    "definition": "L’ancrage est la tendance à s’appuyer sur la première information chiffrée rencontrée — un ask, une valorisation de tour précédent, un comparable — et à s’en écarter insuffisamment ensuite, même lorsqu’elle est manifestement décorrélée des fondamentaux. Mis en évidence par Tversky et Kahneman, il gouverne en pratique la négociation de valorisation : celui qui pose le premier chiffre fixe le référent invisible de toute la discussion. La parade consiste à formuler sa propre estimation, documentée, avant d’entendre celle de la partie adverse.",
+    "example": "« Notre dernier tour était à 50 M€ » : six mois plus tard, la discussion reste arrimée à ce chiffre alors que le marché a tourné.",
+    "seeAlso": [
+      "valuation",
+      "term-sheet",
+      "narrative-fallacy"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "anchoring",
+      "effet d’ancrage"
+    ]
+  },
+  {
+    "id": "narrative-fallacy",
+    "term": "Narrative fallacy",
+    "slug": "narrative-fallacy",
+    "category": "Sciences de la décision",
+    "short": "Confondre la cohérence d’un récit avec la probabilité de ce qu’il raconte.",
+    "definition": "La narrative fallacy, formulée par Nassim Taleb, désigne le penchant à juger une histoire investissable parce qu’elle est cohérente et fluide. Or la qualité narrative d’un projet — la facilité avec laquelle ses pièces s’emboîtent — ne dit rien de sa probabilité de se réaliser ; elle mesure surtout le talent du conteur. En capital-risque, où la conviction se construit en partie sur un récit de futur, le biais est structurel. La parade consiste à isoler les quelques faits qui, s’ils étaient faux, effondreraient l’histoire, et à les tester.",
+    "example": "Une vision limpide et séduisante emporte l’adhésion du comité alors que les preuves d’exécution restent minces.",
+    "seeAlso": [
+      "biais-de-confirmation",
+      "ancrage",
+      "premortem"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "sophisme narratif",
+      "narrative bias"
+    ]
+  },
+  {
+    "id": "biais-de-confirmation",
+    "term": "Biais de confirmation",
+    "slug": "biais-de-confirmation",
+    "category": "Sciences de la décision",
+    "short": "Chercher ce qui valide la thèse plutôt que ce qui la briserait.",
+    "definition": "Le biais de confirmation conduit à rechercher, retenir et surpondérer les informations qui confirment une conviction préexistante, et à écarter celles qui la contredisent. En due diligence, il est particulièrement insidieux : le champion d’un deal, déjà convaincu, oriente involontairement la vérification vers la consolidation de sa thèse. La parade consiste à inverser la charge de la preuve — consacrer la diligence à chercher ce qui tuerait le deal — et à confier explicitement à un tiers le rôle d’avocat du diable.",
+    "example": "Convaincu d’un dossier, on rassemble surtout les éléments qui le défendent en comité, en s’appuyant sur les références fournies par le fondateur.",
+    "seeAlso": [
+      "narrative-fallacy",
+      "premortem",
+      "mimetisme"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "confirmation bias"
+    ]
+  },
+  {
+    "id": "deal-heat",
+    "term": "Deal heat",
+    "slug": "deal-heat",
+    "category": "Sciences de la décision",
+    "short": "Pression compétitive, souvent fabriquée, qui comprime le temps de décision.",
+    "definition": "Le deal heat désigne la chaleur compétitive entourant une transaction — term sheets concurrentes, tour qui « se boucle cette semaine » — qui pousse à décider vite, au détriment de la diligence. Il faut le distinguer de la FOMO (fear of missing out), qui en est la traduction émotionnelle : la peur de manquer une affaire. Le deal heat est souvent en partie fabriqué pour comprimer le temps de l’investisseur ; la première parade consiste à vérifier la réalité de l’urgence, puis à pré-engager les conditions sans lesquelles on ne signera pas, quitte à laisser partir le tour.",
+    "example": "« Plusieurs term sheets sont déjà sur la table, vous avez quarante-huit heures » : la diligence est écourtée sous la pression.",
+    "seeAlso": [
+      "mimetisme",
+      "term-sheet",
+      "premortem"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "FOMO",
+      "fear of missing out"
+    ]
+  },
+  {
+    "id": "mimetisme",
+    "term": "Mimétisme",
+    "slug": "mimetisme",
+    "category": "Sciences de la décision",
+    "short": "Calquer sa décision sur celle des fonds réputés ou du consensus du comité.",
+    "definition": "Le mimétisme, ou herding, est la tendance à aligner sa décision sur celle d’acteurs jugés mieux informés — un fonds réputé qui entre ou qui passe, le consensus naissant d’un comité. Il produit des cascades informationnelles où chacun suit un signal collectif qui peut ne reposer sur presque aucune analyse réelle. Sa variante interne, le groupthink, étouffe la dissidence au profit d’un consensus de comité. La parade sociale la plus efficace est le premortem, qui légitime le dissensus avant la décision.",
+    "example": "Apprenant qu’un fonds respecté a passé, sans en connaître la raison, on passe à son tour.",
+    "seeAlso": [
+      "deal-heat",
+      "biais-de-confirmation",
+      "premortem"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "herding",
+      "groupthink",
+      "cascade informationnelle"
+    ]
+  },
+  {
+    "id": "negligence-des-taux-de-base",
+    "term": "Négligence des taux de base",
+    "slug": "negligence-des-taux-de-base",
+    "category": "Sciences de la décision",
+    "short": "Oublier que la majorité des startups financées ne rendent pas le capital.",
+    "definition": "La négligence des taux de base consiste à juger un dossier sur ses singularités apparentes en oubliant la fréquence de référence de sa catégorie — ici, le fait qu’une large majorité des sociétés financées à un stade donné ne rendront pas le capital. Chaque dossier semble échapper à la statistique qui le concerne, d’autant qu’un exemple vif et favorable, par l’heuristique de disponibilité, vient souvent le confirmer. Le biais du survivant en est un cas particulier : n’apprendre que des startups qui ont réussi, en ignorant celles qui ont fait pareil et échoué. Le check des taux de base consiste à partir de la base statistique, puis à n’en sortir que sur des éléments vérifiables.",
+    "example": "« Celui-ci est différent » : l’intuition fait écarter le taux de base au lieu de servir de point de départ.",
+    "seeAlso": [
+      "pattern-matching",
+      "power-law",
+      "biais-de-resultat"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "base rate neglect",
+      "taux de base",
+      "biais du survivant"
+    ]
+  },
+  {
+    "id": "cout-irrecuperable",
+    "term": "Coût irrécupérable",
+    "slug": "cout-irrecuperable",
+    "category": "Sciences de la décision",
+    "short": "Re-financer par engagement passé des sociétés qu’on ne sourcerait jamais à froid.",
+    "definition": "Le biais de coût irrécupérable conduit à tenir compte, dans une décision, du capital déjà engagé et non récupérable — alors que seul devrait compter le rendement marginal attendu du nouvel investissement. En suivi de portefeuille, il produit l’escalade d’engagement : on re-finance par fidélité à l’histoire des sociétés qu’on ne sourcerait jamais aujourd’hui. La parade consiste à instruire chaque follow-on comme un dossier neuf, en coût d’opportunité : le mettrait-on au-dessus de ses meilleures nouvelles opportunités ?",
+    "example": "Une société en difficulté demande un bridge ; on participe « pour ne pas perdre » ce qui est déjà investi.",
+    "seeAlso": [
+      "follow-on",
+      "mimetisme",
+      "journal-de-decision"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "sunk cost",
+      "escalade d’engagement",
+      "sunk cost fallacy"
+    ]
+  },
+  {
+    "id": "premortem",
+    "term": "Premortem",
+    "slug": "premortem",
+    "category": "Sciences de la décision",
+    "short": "Supposer la décision déjà échouée pour en révéler les causes avant de décider.",
+    "definition": "Le premortem, formalisé par Gary Klein (Harvard Business Review, 2007), consiste, avant d’arrêter une décision, à se projeter dans un futur où elle a échoué de façon retentissante, puis à remonter le fil pour en expliquer les causes. Il s’appuie sur la recherche en « prospective hindsight » (Mitchell, Russo et Pennington) selon laquelle imaginer qu’un événement s’est déjà produit améliore d’environ trente pour cent la capacité à en identifier les causes. Son apport est autant social qu’analytique : il légitime le dissensus, neutralise le groupthink et l’excès de confiance, et donne une voix à ceux qui se tairaient.",
+    "example": "Avant le « oui » final en comité : « nous sommes dans dix-huit mois, l’investissement est un échec retentissant — qu’est-ce qui l’a causé ? »",
+    "seeAlso": [
+      "premortem-inverse",
+      "mimetisme",
+      "journal-de-decision"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "pré-mortem",
+      "prospective hindsight"
+    ]
+  },
+  {
+    "id": "premortem-inverse",
+    "term": "Premortem inversé",
+    "slug": "premortem-inverse",
+    "category": "Sciences de la décision",
+    "short": "Supposer qu’un deal écarté est devenu le meilleur du millésime, et expliquer pourquoi on l’a raté.",
+    "definition": "Le premortem inversé adapte la méthode de Klein à la logique propre du capital-risque, qui est un jeu de capture d’outliers régi par une loi de puissance. Le premortem classique, orienté évitement de l’échec, rend trop conservateur s’il est utilisé seul et fait passer à côté des paris audacieux non consensuels. Le premortem inversé corrige ce travers : avant un « non », supposer que le deal écarté est devenu le meilleur du millésime et expliquer pourquoi on l’a raté. Il prend acte que l’erreur de type II — rater un futur leader — coûte structurellement plus cher que l’erreur de type I : une perte est plafonnée à 1×, un miss peut coûter 100×.",
+    "example": "Avant de classer un dossier non consensuel : « il est devenu le meilleur deal de l’année — pourquoi l’avons-nous laissé filer ? »",
+    "seeAlso": [
+      "premortem",
+      "power-law",
+      "biais-de-resultat"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "inverse premortem"
+    ]
+  },
+  {
+    "id": "journal-de-decision",
+    "term": "Journal de décision",
+    "slug": "journal-de-decision",
+    "category": "Sciences de la décision",
+    "short": "Consigner une prédiction datée et sa confiance avant d’en connaître l’issue, pour juger le raisonnement.",
+    "definition": "Le journal de décision consiste à écrire, au moment de décider et avant d’en connaître le résultat, la prédiction faite, le degré de confiance qui lui est attaché et la date à laquelle on la reverra. Il répond directement au biais de résultat en permettant de juger plus tard la qualité du raisonnement, et non la seule issue. Tenu dans la durée, il mesure la calibration — l’écart entre confiance annoncée et taux de réalisation observé — dans la lignée des travaux de Philip Tetlock sur le jugement prévisionnel et d’Annie Duke. C’est aussi le mécanisme qui re-teste un profil cognitif au lieu de le figer en badge.",
+    "example": "« Cette société atteindra 1 M€ d’ARR sous douze mois — confiance 70 % », daté et revu à l’échéance.",
+    "seeAlso": [
+      "biais-de-resultat",
+      "premortem",
+      "power-law"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "decision journal",
+      "calibration"
+    ]
   }
 ]

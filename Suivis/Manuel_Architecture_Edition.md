@@ -1,11 +1,11 @@
 # Manuel d'Architecture et d'Édition — VC Intelligence Platform
 
-Dernière mise à jour : 2026-06-15
+Dernière mise à jour : 2026-06-22
 
 Ce document décrit l'architecture **full-stack** du projet, la **vision produit et le positionnement stratégique**, le cycle de vie du contenu (de la source canonique JSON jusqu'à l'écran), et un **guide d'édition pas-à-pas** pour un développeur qui veut ajouter du contenu, modifier le design, ou faire évoluer le code.
 
 > [!TIP]
-> Si vous ne deviez retenir qu'une chose : **le contenu canonique vit dans `/data/*.json` à la racine du dépôt.** Le client le *bundle* (mode invité / hors-ligne) et le serveur l'utilise pour *seeder* la base. Pour 95 % des ajouts de contenu, vous éditez un JSON puis vous lancez `npm run db:seed`.
+> Si vous ne deviez retenir qu'une chose : **le contenu canonique vit dans les JSON sources de `/data` à la racine du dépôt** (`data/*.json`, et `data/blog/*.json` pour les analyses). Le client le *bundle* (mode invité / hors-ligne) et le serveur l'utilise pour *seeder* la base. Pour 95 % des ajouts de contenu, vous éditez un JSON puis vous lancez `npm run db:seed`.
 
 > [!IMPORTANT]
 > **Positionnement stratégique (juin 2026).** Le projet est en cours de repositionnement : d'une plateforme de formation VC, il évolue vers une **VC Intelligence Platform** dont la couche formation ne représente que 10–20 % du produit final. La couche **VC Intelligence** (80–90 %) — research notes, thesis lab, atlas de marchés, cas décisionnels, tools, frameworks, workspace — est le cœur du produit. La formation reste un socle d'entrée précieux (aspirants, juniors, CVC, reconversions) mais ne doit plus dominer l'identité produit. Voir §1bis pour le détail.
@@ -29,14 +29,14 @@ vc-premium-platform/
 ├── data/                      # ← SOURCE DE VÉRITÉ du contenu (JSON)
 │   ├── paths.json (9 rayons)  courses.json (16)  lessons.json (55 leçons canoniques)
 │   ├── glossary.json (361)
-│   ├── caseStudies.json (5)  deliverables.json (2)  blog.json (8)
+│   ├── caseStudies.json (5)  deliverables.json (2)  blog/ (8 articles, un JSON par slug)
 │   ├── simulators.json (9)  ikigai.json
 │   ├── parcours.json (22)  parcours.en.json  parcoursConfig.json  profileParcours.json
 │   ├── parcours/              # 3 registres drop-in, 11 leçons additionnelles (*.lessons.json, ld-*/lea-*)
 │   ├── generated/             # GÉNÉRÉ, ne pas éditer : lessons.index/bodies.json + glossary.index/defs.json (split:content)
 │   └── sources/               # registre d'ingestion durable : canonical-glossary.json (433)
 │   # ── À VENIR (piliers VC Intelligence) ──────────────────
-│   # theses.json · atlas.json · frameworks.json · research.json (ou blog.json refondu)
+│   # theses.json · atlas.json · frameworks.json · research.json (ou blog/ refondu)
 ├── docs/
 │   ├── parcours/              # conception + rédaction des parcours (Markdown)
 │   ├── i18n_architecture_FR-EN.md        # ADR + plan de migration bilingue (FR/EN)
@@ -97,7 +97,7 @@ Pour piloter ce corpus diversifié et filtrer l'affichage (ex: masquer le conten
 - **`rigor`** : `intro`, `practitioner`, `desk-reference` (remplace les niveaux débutant/intermédiaire/avancé pour l'affichage public).
 - **`evidenceLevel`** : `conceptual`, `analytical`, `sourced`, `decision-grade`, `maintained-intelligence`.
 
-*Note technique : ces champs sont le **standard cible de la Phase 3** de la roadmap, pas encore le schéma généralisé des collections historiques. Le validateur actuel est strict : n'ajoutez pas ces champs dans `paths.json`, `courses.json`, `lessons.json`, `blog.json`, `caseStudies.json` ou `simulators.json` tant que les types et schémas Zod n'ont pas été migrés. La règle d'or reste **Schema-first** : aucune nouvelle collection VC Intelligence n'est ajoutée sans validation stricte.*
+*Note technique : ces champs sont le **standard cible de la Phase 3** de la roadmap, pas encore le schéma généralisé des collections historiques. Le validateur actuel est strict : n'ajoutez pas ces champs dans `paths.json`, `courses.json`, `lessons.json`, `data/blog/*.json`, `caseStudies.json` ou `simulators.json` tant que les types et schémas Zod n'ont pas été migrés. La règle d'or reste **Schema-first** : aucune nouvelle collection VC Intelligence n'est ajoutée sans validation stricte.*
 
 ---
 
@@ -106,7 +106,7 @@ Pour piloter ce corpus diversifié et filtrer l'affichage (ex: masquer le conten
 C'est le concept central de la plateforme. Le contenu suit ce chemin :
 
 ```
-data/*.json ──(client bundle @data)──────────────► fallback instantané (invité / hors-ligne)
+data/*.json + data/blog/*.json ──(client bundle @data/import.meta.glob)──► fallback instantané
      │
      └────(server lib/content.ts)──► prisma/seed.ts ──► SQLite ──► /api/content/* ──► useApiData
 ```
@@ -129,25 +129,25 @@ const { data: paths } = useApiData<Path[]>('/content/paths', PATHS); // PATHS = 
 
 | Vous éditez… | Ce qui se met à jour | L'action requise |
 | --- | --- | --- |
-| un fichier `data/*.json` | le **bundle** client (via HMR en dev) | rien pour le mode invité ; **`npm run db:seed`** pour que l'API serve la nouvelle version |
+| un fichier source (`data/*.json` ou `data/blog/<slug>.json`) | le **bundle** client (via HMR en dev) | rien pour le mode invité ; **`npm run db:seed`** pour que l'API serve la nouvelle version |
 | via le **CMS `/admin`** | la **base** uniquement (pas le JSON) | apparaît tout de suite via l'API ; **n'est PAS écrit dans `data/`** |
 
 > [!IMPORTANT]
-> Le **CMS écrit dans la base, jamais dans `data/`**. Depuis 2026-06-12, **`npm run db:seed` est non destructif** pour le contenu éditable (glossaire/blog/cas) : une ligne déjà en base est préservée — vos éditions CMS survivent à un re-seed. Seuls `npm run db:seed -- --force` et `npm run db:reset` réécrivent ces lignes depuis le JSON. Pour faire l'inverse (rapatrier les éditions CMS dans les JSON sources), lancez **`npm run content:export`**. Règle d'or inchangée : le CMS sert aux retouches rapides ; **le contenu pérenne doit finir dans `data/*.json`** (via `content:export` ou édition directe), versionné, puis re-seedé.
+> Le **CMS écrit dans la base, jamais dans `data/`**. Depuis 2026-06-12, **`npm run db:seed` est non destructif** pour le contenu éditable (glossaire/blog/cas) : une ligne déjà en base est préservée — vos éditions CMS survivent à un re-seed. Seuls `npm run db:seed -- --force` et `npm run db:reset` réécrivent ces lignes depuis le JSON. Pour faire l'inverse (rapatrier les éditions CMS dans les JSON sources), lancez **`npm run content:export`**. Règle d'or inchangée : le CMS sert aux retouches rapides ; **le contenu pérenne doit finir dans `data/*.json` ou `data/blog/*.json`** (via `content:export` ou édition directe), versionné, puis re-seedé.
 
 ### 2.2.c. La boucle d'édition canonique (export → commit → PR)
 
-`data/*.json` est l'**unique source canonique** ; la base SQLite n'est qu'un **cache d'édition**. Une édition CMS n'est « finie » que lorsqu'elle est revenue dans le JSON et committée. Le rituel ferme cette boucle :
+`data/*.json` et `data/blog/*.json` sont l'**unique source canonique** ; la base SQLite n'est qu'un **cache d'édition**. Une édition CMS n'est « finie » que lorsqu'elle est revenue dans le JSON et committée. Le rituel ferme cette boucle :
 
 1. **Éditer** dans `/admin` (glossaire, blog, études de cas — les trois seules collections éditables, exactement celles couvertes par l'export).
 2. **Exporter** : `POST /api/admin/export` (réservé admin) exécute le script `content:export` contre la base en cours et renvoie `{ log, diff, changed }` — le `diff` git de `data/` à relire. L'éditeur n'a pas besoin de terminal. En CLI : `npm run content:export`. Ajoutez `?dryRun=1` (ou `{ dryRun: true }`) pour prévisualiser sans écrire.
-3. **Committer** le diff de `data/glossary.json` / `caseStudies.json` / `blog.json`, puis ouvrir une **PR**.
+3. **Committer** le diff de `data/glossary.json` / `caseStudies.json` / `data/blog/`, puis ouvrir une **PR**.
 
 > [!IMPORTANT]
-> **Sérialiseur canonique unique.** Le format de référence d'un fichier exporté est exactement la sortie de `JSON.stringify(payload, null, 2)` + `\n`, trié (`glossary` par `term`, `caseStudies` par `title`, `blog` par `date` puis `title`). Les `data/*.json` éditables sont normalisés à cette forme : ne les reformatez pas à la main. Toute divergence est rattrapée par l'export.
+> **Sérialiseur canonique unique.** Le format de référence d'un fichier exporté est exactement la sortie de `JSON.stringify(payload, null, 2)` + `\n`. `glossary` reste trié par `term`, `caseStudies` par `title`, et le blog est exporté dans `data/blog/<slug>.json` avec un fichier par article. Les JSON éditables sont normalisés à cette forme : ne les reformatez pas à la main. Toute divergence est rattrapée par l'export.
 
 > [!IMPORTANT]
-> **Garde-fou anti-drift (CI).** Le job `drift` ([.github/workflows/ci.yml](.github/workflows/ci.yml)) seed une SQLite jetable depuis `data/*.json` puis lance `content:export --dry-run` : si un fichier canonique changerait, le script sort en **code 1** et la CI échoue. C'est la preuve que **seed (JSON→DB) et export (DB→JSON) sont inverses**. Conséquence : si vous éditez en base sans exporter, ou si vous modifiez le sérialiseur, la CI vous le signale.
+> **Garde-fou anti-drift (CI).** Le job `drift` ([.github/workflows/ci.yml](.github/workflows/ci.yml)) seed une SQLite jetable depuis les JSON sources puis lance `content:export --dry-run` : si un fichier canonique changerait, le script sort en **code 1** et la CI échoue. C'est la preuve que **seed (JSON→DB) et export (DB→JSON) sont inverses**. Conséquence : si vous éditez en base sans exporter, ou si vous modifiez le sérialiseur, la CI vous le signale.
 
 ### 2.2.b. Cas particulier : glossaire VC
 Le glossaire final consommé par l'app reste [data/glossary.json](data/glossary.json), mais son chantier éditorial passe d'abord par [data/sources/canonical-glossary.json](data/sources/canonical-glossary.json).
@@ -450,7 +450,7 @@ La couche **Parcours** est une **trajectoire par objectif** posée *au-dessus* d
 }
 ```
 
-### 4.5. Étude de cas (`data/caseStudies.json`) & Analyse/blog (`data/blog.json`)
+### 4.5. Étude de cas (`data/caseStudies.json`) & Analyse/blog (`data/blog/*.json`)
 > Prose soumise à la **charte de style §4.0.c** (registre sobre, pas de punchlines ni de survente).
 
 - **Étude de cas** : `kind` ∈ `startup|fund|deal|market`, `sections[]` (`heading` + `body` markdown), `takeaways[]`, `glossaryRefs[]`.
@@ -540,9 +540,9 @@ npm install            # installe client + server (workspaces)
 npm run db:setup       # prisma generate + db push + seed (à faire 1×)
 npm run dev            # client (Vite ~5173) + serveur (Express :4000) en parallèle
 
-npm run db:seed        # re-seed depuis data/*.json (non destructif ; -- --force pour écraser le CMS)
+npm run db:seed        # re-seed depuis les JSON sources (non destructif ; -- --force pour écraser le CMS)
 npm run db:reset       # ⚠️ réinitialise la base puis re-seed --force (efface le CMS)
-npm run content:export # rapatrie les éditions CMS (glossaire/blog/cas) dans les data/*.json
+npm run content:export # rapatrie les éditions CMS dans les JSON sources (blog -> data/blog/<slug>.json)
 npm run split:content  # régénère les index/contenus scindés (glossaire + leçons)
 npm run build          # build serveur (tsc) puis client (vite)
 npm run lint           # eslint (client)
@@ -559,7 +559,7 @@ npm run validate:content  # vérifie que tous les [[..]]/{{..}} pointent vers un
 - Variables d'environnement serveur : le loader minimal lit `server/.env` si présent (`DATABASE_URL`, `JWT_SECRET`, `PORT`, `CLIENT_ORIGIN`). Un modèle existe dans `server/.env.example`. En prod : vrai `JWT_SECRET`, cookie `secure`, et `provider = "postgresql"` dans `schema.prisma`. **En production, le serveur refuse de démarrer** si `JWT_SECRET` est trop court ou figure dans la blocklist (`getJwtSecretIssue` dans `server/src/lib/auth.ts`) — prévoyez un secret long et unique.
 
 > [!IMPORTANT]
-> Après une édition **de code ou de design**, Vite recharge à chaud (HMR) si `npm run dev` tourne. Après une édition **de `data/*.json` destinée à l'API**, lancez `npm run db:seed`.
+> Après une édition **de code ou de design**, Vite recharge à chaud (HMR) si `npm run dev` tourne. Après une édition **des JSON sources destinée à l'API**, lancez `npm run db:seed`.
 
 ---
 
@@ -607,7 +607,7 @@ La transition vers la **VC Intelligence Platform** repose sur un cadre d'exécut
 > [!WARNING]
 > **Risques Techniques Majeurs :**
 > - **Version Control (T1)** : Baseline Git validée le 2026-06-11 (`master` suit `origin/master`, commit initial `e5b37e0`). Avant toute modification structurante, vérifier un `git status` propre et figer un commit de référence.
-> - **Divergence JSON/CMS (T2)** : L'extension du CMS est gelée pour les nouveaux piliers. L'authoring (thèses, atlas) se fait d'abord dans `/data/*.json`. Ne pas accumuler de la dette d'état dans SQLite.
+> - **Divergence JSON/CMS (T2)** : L'extension du CMS est gelée pour les nouveaux piliers. L'authoring (thèses, atlas) se fait d'abord dans les JSON sources de `/data`. Ne pas accumuler de la dette d'état dans SQLite.
 > - **Validation (T3/T8)** : Ne jamais ajouter de contenu sans schéma Zod et validation pre-build (`validate-content.mjs`).
 > - **Fausse Intelligence (T4)** : Ne pas simuler de tableaux de bord de données vides ou fausses. Si l'information n'est pas "decision-grade", on ne publie pas.
 > - **Découvrabilité (T5/T7)** : Intégrer systématiquement les nouvelles collections (`theses`, `atlas`) dans la recherche client, la *Command Palette* et le SEO, sans briser les anciennes routes (d'où l'usage de redirects ou d'aiguilleurs de route).
@@ -616,4 +616,4 @@ La transition vers la **VC Intelligence Platform** repose sur un cadre d'exécut
 ---
 
 > [!TIP]
-> Pour bien démarrer une contribution : (1) lisez `types.ts` + `content.ts` pour le type que vous touchez, (2) éditez le `data/*.json`, (3) `npm run db:seed`, (4) vérifiez en invité **et** connecté. Pour le design, partez toujours de `tokens.css` et des composants `ornaments/` plutôt que de coder des couleurs en dur.
+> Pour bien démarrer une contribution : (1) lisez `types.ts` + `content.ts` pour le type que vous touchez, (2) éditez le JSON source concerné (`data/blog/<slug>.json` pour une analyse), (3) `npm run db:seed`, (4) vérifiez en invité **et** connecté. Pour le design, partez toujours de `tokens.css` et des composants `ornaments/` plutôt que de coder des couleurs en dur.

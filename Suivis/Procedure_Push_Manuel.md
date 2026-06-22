@@ -99,18 +99,18 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
 ## Le job « drift » de la vérification en ligne
 
 La vérification automatique comporte un second contrôle, dit *drift*, qui peuple une base
-jetable depuis `data/*.json` puis la ré-exporte, et exige que le résultat soit identique aux
-fichiers `data/glossary.json`, `caseStudies.json` et `blog.json`. C'est la preuve que seed
+jetable depuis les JSON sources puis la ré-exporte, et exige que le résultat soit identique aux
+fichiers `data/glossary.json`, `caseStudies.json` et `data/blog/*.json`. C'est la preuve que seed
 (JSON→DB) et export (DB→JSON) sont inverses : l'ordre canonique attendu est celui que produit
-l'export (glossaire trié par `term`, cas par `title`, blog par `date` décroissante puis
-`title`).
+l'export pour les fichiers-tableaux (glossaire trié par `term`, cas par `title`) ; le blog est
+exporté en un fichier par article, nommé `data/blog/<slug>.json`.
 
 Ce contrôle a été **résolu** : les fichiers sources ont été réalignés sur la forme produite
 par l'export (réordonnancement pur, sans changement de contenu — voir le commit
 `chore(content): normalise l'ordre canonique`).
 
 **Pour éviter qu'il ne réapparaisse** : après toute édition manuelle de `glossary.json`,
-`caseStudies.json` ou `blog.json` (ajout d'un terme, d'un cas, d'un article), relancer
+`caseStudies.json` ou `data/blog/<slug>.json` (ajout d'un terme, d'un cas, d'un article), relancer
 `npm run content:export` pour réimposer l'ordre canonique, puis committer le résultat. Une
 édition via le CMS suivie de `content:export` ne pose pas ce problème. Reproduire le contrôle
 en local, sans toucher à la base de développement :

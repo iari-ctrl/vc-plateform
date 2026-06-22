@@ -51,18 +51,18 @@ Travaux du jour (2026-06-12) — **compilés et validés** (branche `chore/flux-
 
 - **CI réparée** : `ci.yml` écoute `push` sur `main`/`master` (était `main` seul → tout le garde-fou était inopérant hors PR sur ce dépôt `master`). Pipeline : validation contenu → lint → build → tests client → tests serveur.
 - **Robustesse serveur (Express 4)** : wrapper async `ah()` (`server/src/lib/async-handler.ts`) sur **tous** les handlers — une rejection (Prisma, JSON corrompu, DB verrouillée) part à l'error-handler central (→ 500) au lieu de tuer le process Node.
-- **Seed non destructif** : `seed.ts` préserve le contenu éditable (glossaire/blog/cas) sauf `db:seed -- --force` ; `npm run content:export` réexporte les éditions DB → JSON. Comptes de démo gatés hors prod.
+- **Seed non destructif** : `seed.ts` préserve le contenu éditable (glossaire/blog/cas) sauf `db:seed -- --force` ; `npm run content:export` réexporte les éditions DB → JSON sources (`data/blog/<slug>.json` pour les analyses). Comptes de démo gatés hors prod.
 - **Garde JWT corrigée** : longueur min. + blocklist en production, fail-fast au démarrage (`getJwtSecretIssue`).
 - **`DELETE /me/profile`** : `clearProfile` supprime profil + onboarding côté serveur ; **`apiUp` re-sondé** (intervalle 15 s + `focus`/`online`) ; `attachUser` retiré du global ; rate-limit `/api/search` ; sélecteur EN masqué (`EN_ENABLED=false`).
 - **Perf bundle** : split des leçons (`lessons.index`/`lessons.bodies`, scripts `split-lessons.mjs` + `split:content`) — chunk eager `lessons` de **~176 kB à ~32 kB**, corps en lazy.
 - **Tests serveur (nouveaux)** : 10 tests d'intégration (auth, profil, isolation `userId`).
-- **Format éditorial « Lecture oblique »** (§10.9 de la stratégie) : analyses de livres livrées dans le blog — catégorie filtrable sur `/blog`, champs `BlogPost.books[]` / `glossaryRefs[]` (type + Zod + rendu `BlogCard`/`BlogPostPage`), 2 articles d'amorce seedés en squelettes (Flatland → anti-portfolio ; Hirschman *Exit, Voice, Loyalty*). `blog.json` : 4 → **6 articles**. Corps à rédiger.
+- **Format éditorial « Lecture oblique »** (§10.9 de la stratégie) : analyses de livres livrées dans le blog — catégorie filtrable sur `/blog`, champs `BlogPost.books[]` / `glossaryRefs[]` (type + Zod + rendu `BlogCard`/`BlogPostPage`), 2 articles d'amorce seedés en squelettes (Flatland → anti-portfolio ; Hirschman *Exit, Voice, Loyalty*). Blog : 4 → **6 articles**. Corps à rédiger.
 - Vérifs : `validate:content` OK, `lint` 0 erreur / **4 warnings**, `build` OK, **client 59 tests + serveur 10 tests** verts.
 
 Travaux du jour (2026-06-13) — **validés** (`validate:content` OK, `db:seed` OK) :
 
-- **Premier article « Lecture oblique » entièrement rédigé** : `bp-voir-comme-un-etat` (*Seeing Like a State*, J. C. Scott, 1998) — 10 idées transposées au VC / détection de talents, ~3 280 mots / 16 min, marqueurs `[[..]]` glossaire, renvoi anti-portfolio (Airbnb, eBay), `glossaryRefs` ×5. Article « à la une » de `/blog` ; **gabarit éditorial** pour rédiger Flatland et Hirschman. `blog.json` : 6 → **7 articles**.
-- **Deuxième « Lecture oblique » rédigée** : `bp-societe-du-spectacle` (*La Société du spectacle*, Debord, 1967) — 11 idées, ~3 530 mots / 18 min, parallèles contexte actuel (IA, méga-tours, structures post-2021) et **taxonomie de 8 logiques de levée** (carburant / signal / validation / monnaie / rituel / offre / théâtre / produit). Renvois : étude de cas « valorisation flatteuse », anti-portfolio, diptyque avec Scott. `blog.json` : 7 → **8 articles** ; `validate:content` + `db:seed` OK.
+- **Premier article « Lecture oblique » entièrement rédigé** : `bp-voir-comme-un-etat` (*Seeing Like a State*, J. C. Scott, 1998) — 10 idées transposées au VC / détection de talents, ~3 280 mots / 16 min, marqueurs `[[..]]` glossaire, renvoi anti-portfolio (Airbnb, eBay), `glossaryRefs` ×5. Article « à la une » de `/blog` ; **gabarit éditorial** pour rédiger Flatland et Hirschman. Blog : 6 → **7 articles**.
+- **Deuxième « Lecture oblique » rédigée** : `bp-societe-du-spectacle` (*La Société du spectacle*, Debord, 1967) — 11 idées, ~3 530 mots / 18 min, parallèles contexte actuel (IA, méga-tours, structures post-2021) et **taxonomie de 8 logiques de levée** (carburant / signal / validation / monnaie / rituel / offre / théâtre / produit). Renvois : étude de cas « valorisation flatteuse », anti-portfolio, diptyque avec Scott. Blog : 7 → **8 articles** ; `validate:content` + `db:seed` OK.
 - **Troisième « Lecture oblique » rédigée** : `bp-exit-voice-loyalty` (*Exit, Voice, and Loyalty*, Hirschman, 1970) — le squelette devient un article complet de 9 idées, ~2 870 mots / 14 min : VC = classe d'actifs « voice », entrepreneuriat comme exit (Shockley→Fairchild, Zoom/anti-portfolio), attrition/diligence, churn muet, loyauté lucide vs captive, LPs/re-up, paradoxe de l'exit facile. Triptyque Scott/Debord/Hirschman. Seed via suppression ciblée + re-seed (DB préservée). **Reste 1 squelette : Flatland.**
 
 Travaux du jour (2026-06-15) — **validés** (`validate:content` OK, build client OK, **70 tests**) :
@@ -391,7 +391,13 @@ Fichiers créés / modifiés :
 - `.github/workflows/ci.yml` : `push` sur `main`/`master` (+ tests serveur dans le pipeline).
 - `server/src/lib/async-handler.ts` : **[NOUVEAU]** wrapper `ah()` appliqué à tous les handlers (auth, content, me, admin, search).
 - `server/prisma/seed.ts` : seed non destructif (`seedEditable`, `--force`), comptes démo gatés hors prod.
-- `scripts/export-content.mjs` : **[NOUVEAU]** export DB → JSON (`npm run content:export`).
+- `scripts/export-content.mjs` : **[NOUVEAU]** export DB → JSON sources (`npm run content:export`).
+
+Travaux du jour (2026-06-22) — **recâblage contenu blog re-vérifié** (`validate:content` OK, build client OK, typecheck serveur OK) :
+
+- **Blog scindé en fichiers par article** : suppression de `data/blog.json` au profit de `data/blog/*.json` (8 fichiers, nommés par slug). `client/src/content/blog.ts` charge le dossier via `import.meta.glob`, `server/src/lib/content.ts` lit le dossier côté seed/API dev, et les listes sont triées par `date` décroissante puis `title`.
+- **Scripts alignés** : `validate-content` valide `blog/*.json` (shape, unicité, marqueurs, concordance fichier ↔ slug), `generate-sitemap` lit le dossier, `content:export` écrit désormais un fichier par article et supprime les JSON orphelins. L'endpoint admin `/export` diff `data/blog/`.
+- **Vérification DB→JSON** : `npm run content:export -- --dry-run` confirme `blog/ - 8 row(s) (unchanged)` ; l'échec local restant vient du drift `glossary.json`, indépendant du recâblage blog.
 - `server/src/lib/auth.ts` : `getJwtSecretIssue()` (longueur + blocklist) ; `shouldRefreshToken` (rotation glissante) ; `attachUser` scoping.
 - `server/src/app.ts` : `attachUser` monté sur `/me`/`/admin`/`/auth/me` ; rate-limit `/api/search`.
 - `server/src/routes/me.ts` : `DELETE /me/profile` (profil + onboarding).

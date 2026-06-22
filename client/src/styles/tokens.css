@@ -52,7 +52,9 @@
   --radius: 1.25rem;
   --topbar-h: 4.5rem;
   --sidebar-w: 16rem;
-  --sidebar-rail: 5rem;
+  /* Thin left gutter reserved for the always-visible logo handle (the SideNav
+     panel itself is hidden off-screen and slides over the content on hover). */
+  --sidebar-rail: 4rem;
   --content-max: 75rem;
 }
 

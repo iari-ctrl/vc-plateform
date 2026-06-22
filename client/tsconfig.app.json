@@ -23,5 +23,5 @@
       "@shared/*": ["../shared/*"]
     }
   },
-  "include": ["src", "../data/*.json", "../shared/*.d.mts"]
+  "include": ["src", "../data/*.json", "../data/blog/*.json", "../shared/*.d.mts"]
 }

@@ -162,13 +162,13 @@ adminRouter.put('/case-studies/:id', ah(async (req, res) => {
 }));
 
 // ── Export : DB éditable → JSON canonique ────────────────────────────────────
-// Ferme la boucle d'édition. La DB n'est qu'un cache d'édition ; data/*.json est
-// l'unique source canonique. Cet endpoint exécute le MÊME script que
-// `npm run content:export` (aucune logique dupliquée) contre la DB en cours,
+// Ferme la boucle d'édition. La DB n'est qu'un cache d'édition ; les JSON
+// sources de data/ sont l'unique source canonique. Cet endpoint exécute le MÊME
+// script que `npm run content:export` (aucune logique dupliquée) contre la DB en cours,
 // puis renvoie le diff git de data/ pour relecture avant commit.
 // `?dryRun=1` (ou body { dryRun: true }) n'écrit rien et signale le drift.
 const execFileP = promisify(execFile);
-const EXPORTED_FILES = ['data/glossary.json', 'data/caseStudies.json', 'data/blog.json'];
+const EXPORTED_FILES = ['data/glossary.json', 'data/caseStudies.json', 'data/blog'];
 
 const runCmd = async (cmd: string, args: string[]) => {
   try {

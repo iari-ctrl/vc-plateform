@@ -14,7 +14,7 @@ Objet : état actuel synthétique de `vc-premium-platform`, avec les acquis, les
 
 Le projet est aujourd'hui plus proche d'un atelier pédagogique fonctionnel que d'une simple maquette :
 
-- le contenu canonique est centralisé dans `/data/*.json` ;
+- le contenu canonique est centralisé dans les JSON sources de `/data` (`data/*.json` et collections comme `data/blog/*.json`) ;
 - l'app fonctionne en invité grâce au contenu bundlé ;
 - l'API peut servir les contenus seedés depuis les JSON ;
 - l'expérience Ikigai, le dictionnaire vivant, la lecture active, les notes, les favoris et les simulateurs sont en place ;
@@ -78,13 +78,13 @@ Le projet est un monorepo npm workspaces :
 | Client | React 19, Vite 6, TypeScript, Tailwind CSS v3, React Router |
 | Serveur | Express 4, TypeScript, Prisma 5, JWT cookie httpOnly |
 | Base | SQLite prototype |
-| Contenu | JSON canonique dans `/data` |
+| Contenu | JSON canonique dans `/data` (`data/blog/*.json` pour les analyses) |
 | Design | tokens CSS, classes globales, composants React |
 
 Flux de contenu :
 
 ```txt
-data/*.json
+data/*.json + data/blog/*.json
   -> client/src/content/*.ts pour le fallback invité / hors-ligne
   -> server/prisma/seed.ts pour peupler SQLite
   -> /api/content/* pour les contenus servis dynamiquement
@@ -98,17 +98,18 @@ Cette architecture est cohérente pour un prototype avancé. Le point fragile es
 
 État actuel :
 
-- `/data/*.json` est la source de vérité durable.
+- `/data/*.json` et `/data/blog/*.json` sont la source de vérité durable.
 - Le CMS `/admin` écrit en base, pas dans les JSON.
 - **Le seed ne détruit plus les éditions CMS** : depuis 2026-06-12, `seed.ts` est non destructif pour le contenu éditable (glossaire/blog/cas) — create-if-absent par défaut, écrasement seulement avec `db:seed -- --force`. Un `db:reset` (qui force) reste destructif, par conception.
-- **Le sens inverse est outillé** : `npm run content:export` réexporte les éditions DB vers les JSON sources, ce qui donne une boucle « éditer en CMS → exporter → valider → committer ».
+- **Le sens inverse est outillé** : `npm run content:export` réexporte les éditions DB vers les JSON sources, dont un fichier `data/blog/<slug>.json` par analyse, ce qui donne une boucle « éditer en CMS → exporter → valider → committer ».
 - Les pages Blog, CaseStudy et Lesson consomment déjà l'API avec fallback bundle.
+- Le blog n'est plus monolithique : les 8 analyses vivent dans `data/blog/*.json`, recomposées côté client/serveur et validées fichier par fichier.
 - Les pages PathDetail et CourseDetail restent encore sur le bundle statique, malgré des endpoints prêts côté serveur.
 - Le barrel `client/src/content/index.ts` a été allégé : les collections JSON sont importées par modules et les gros ensembles ne sont plus tirés dans l'entrée applicative.
 
 Risque principal :
 
-- une correction faite dans le CMS peut être visible localement via API mais absente de `/data` si on oublie `content:export` ; le risque de perte par re-seed, lui, est levé.
+- une correction faite dans le CMS peut être visible localement via API mais absente des JSON sources si on oublie `content:export` ; le risque de perte par re-seed, lui, est levé.
 
 Priorité recommandée :
 
@@ -266,7 +267,7 @@ Prochaine étape design utile :
 ### P0 - Décisions d'architecture (avant production de contenu)
 
 - trancher le **mode de rendu** : rester CSR (SPA actuelle) ou passer à un prérendu/SSG (hybride recommandé : SSG/ISR pour l'éditorial, CSR pour l'app) ;
-- figer le **modèle de contenu et le workflow d'authoring** (`data/*.json` + Prisma + CMS), en tenant compte de la `locale` ;
+- figer le **modèle de contenu et le workflow d'authoring** (JSON sources `/data` + Prisma + CMS), en tenant compte de la `locale` ;
 - valider la Phase 1 i18n en local (`npm run build`, `npm run test`) puis enchaîner la Phase 2 (chrome) ;
 - produire une **tranche verticale réelle** (un parcours complet : cours → leçons → glossaire → cas) avant d'optimiser perf/SEO.
 

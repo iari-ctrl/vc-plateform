@@ -11,6 +11,14 @@ function load<T>(file: string): T {
   return JSON.parse(raw) as T;
 }
 
+function loadDir<T>(dir: string): T[] {
+  const path = resolve(DATA_DIR, dir);
+  return readdirSync(path)
+    .filter((file) => file.endsWith('.json'))
+    .sort()
+    .map((file) => JSON.parse(readFileSync(resolve(path, file), 'utf-8')) as T);
+}
+
 export interface RawPath {
   id: string; slug: string; order: number; title: string; subtitle: string;
   level: string; accent: string; kanji?: string; durationHours: number;
@@ -47,6 +55,8 @@ export interface RawBlog {
   id: string; slug: string; title: string; subtitle: string; author: string;
   date: string; readMin: number; category: string; excerpt: string;
   tags: string[]; body: string;
+  books?: { title: string; author: string; year?: number }[];
+  glossaryRefs?: string[];
 }
 export interface RawSimulator {
   id: string; slug: string; title: string; subtitle: string; category: string;
@@ -80,7 +90,7 @@ export const content = {
   allLessons: () => [...load<RawLesson[]>('lessons.json'), ...loadParcoursLessons()],
   glossary: () => load<RawGlossary[]>('glossary.json'),
   caseStudies: () => load<RawCase[]>('caseStudies.json'),
-  blog: () => load<RawBlog[]>('blog.json'),
+  blog: () => loadDir<RawBlog>('blog').sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title)),
   simulators: () => load<RawSimulator[]>('simulators.json'),
 };
 

@@ -1,0 +1,17 @@
+{
+  "id": "bp-no-paywall",
+  "slug": "pourquoi-nous-ne-bloquons-aucun-chapitre",
+  "title": "Pourquoi nous ne bloquons aucun chapitre",
+  "subtitle": "La liberté responsable comme principe de design",
+  "author": "L'équipe VC Premium",
+  "date": "2026-04-28",
+  "readMin": 5,
+  "category": "Manifeste",
+  "excerpt": "Aucun mur d'authentification, aucune progression imposée. Voici pourquoi nous faisons le pari de la curiosité plutôt que du contrôle.",
+  "tags": [
+    "produit",
+    "ux",
+    "philosophie"
+  ],
+  "body": "## Le pari de la liberté\n\nLa plupart des plateformes d'apprentissage enferment : inscription obligatoire, chapitres verrouillés, progression linéaire imposée. Nous faisons le pari inverse. Vous pouvez explorer librement les parcours, lire les cours, utiliser le dictionnaire, parcourir les études de cas et tester les simulateurs — **sans créer de compte**.\n\n## Orienter sans verrouiller\n\nLes recommandations existent pour guider, jamais pour enfermer. Aucun parcours n'impose de validation pour accéder au contenu suivant. Vous pouvez commencer par n'importe quel sujet selon votre besoin du moment. La progression est un repère, pas une contrainte.\n\n## À quoi sert alors le compte ?\n\nL'authentification devient utile uniquement quand elle apporte une valeur claire : sauvegarder votre progression, conserver vos notes et citations, enregistrer vos favoris, retrouver votre profil d'introspection, synchroniser votre tableau de bord entre appareils. Tant que vous n'êtes pas connecté, vos préférences restent stockées localement, sur votre appareil.\n\n## La conviction sous-jacente\n\nNous croyons qu'un apprenant en confiance, libre et autonome apprend mieux qu'un apprenant contraint. Le capital-risque est un métier de discernement ; notre plateforme doit valoriser le vôtre dès la première seconde."
+}

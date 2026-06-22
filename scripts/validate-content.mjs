@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Content integrity check for the VC Premium data bundle (`/data/*.json`).
+ * Content integrity check for the VC Premium JSON sources (`/data/*.json`,
+ * `/data/blog/*.json`, and generated drop-in registries).
  *
  * Three layers of validation, from the inside out:
  *   1. SHAPE      — Zod schemas validate every JSON file's structure & types.
@@ -45,6 +46,17 @@ const readJson = (name) => {
   } catch (e) {
     err(`${name} — illisible ou JSON invalide : ${e.message}`);
     return undefined;
+  }
+};
+
+const listJsonFiles = (name) => {
+  try {
+    return readdirSync(join(dataDir, name))
+      .filter((file) => file.endsWith('.json'))
+      .sort();
+  } catch (e) {
+    err(`${name}/ — dossier illisible : ${e.message}`);
+    return [];
   }
 };
 
@@ -519,7 +531,12 @@ const lessons = check('lessons.json', z.array(lessonSchema), readJson('lessons.j
 const glossary = check('glossary.json', z.array(glossarySchema), readJson('glossary.json')) ?? [];
 const cases = check('caseStudies.json', z.array(caseStudySchema), readJson('caseStudies.json')) ?? [];
 const deliverables = check('deliverables.json', z.array(deliverableSchema), readJson('deliverables.json')) ?? [];
-const blog = check('blog.json', z.array(blogSchema), readJson('blog.json')) ?? [];
+const blogFiles = listJsonFiles('blog');
+const blogDocs = blogFiles.flatMap((file) => {
+  const doc = readJson(`blog/${file}`);
+  return doc === undefined ? [] : [{ file, doc }];
+});
+const blog = check('blog/*.json', z.array(blogSchema), blogDocs.map(({ doc }) => doc)) ?? [];
 const ecosystems = check('ecosystems.json', z.array(ecosystemSchema), readJson('ecosystems.json')) ?? [];
 const simulators = check('simulators.json', z.array(simulatorSchema), readJson('simulators.json')) ?? [];
 const ikigai = check('ikigai.json', ikigaiSchema, readJson('ikigai.json'));
@@ -555,8 +572,8 @@ assertUnique('caseStudies.json', cases, 'id');
 assertUnique('caseStudies.json', cases, 'slug');
 assertUnique('deliverables.json', deliverables, 'id');
 assertUnique('deliverables.json', deliverables, 'slug');
-assertUnique('blog.json', blog, 'id');
-assertUnique('blog.json', blog, 'slug');
+assertUnique('blog/*.json', blog, 'id');
+assertUnique('blog/*.json', blog, 'slug');
 assertUnique('ecosystems.json', ecosystems, 'id');
 assertUnique('ecosystems.json', ecosystems, 'slug');
 assertUnique('simulators.json', simulators, 'id');
@@ -621,6 +638,10 @@ for (const c of cases) {
 }
 for (const b of blog) {
   if (b.glossaryRefs) checkRefs(`blog/${b.id}.glossaryRefs`, b.glossaryRefs, isGlossary, 'terme de glossaire');
+}
+for (const { file, doc } of blogDocs) {
+  if (typeof doc?.slug === 'string' && file !== `${doc.slug}.json`)
+    err(`blog/${file} — le nom du fichier doit suivre le slug : "${doc.slug}.json"`);
 }
 const ecosystemIds = new Set(ecosystems.map((e) => e.id));
 for (const e of ecosystems) {
@@ -733,7 +754,7 @@ const MARKER = /(?:\[\[|\{\{)([^\]}|]+)(?:\|[^\]}]*)?(?:\]\]|\}\})/g;
 const MARKER_FILES = [
   'ikigai.json',
   'lessons.json',
-  'blog.json',
+  ...blogFiles.map((file) => `blog/${file}`),
   'ecosystems.json',
   'caseStudies.json',
   'deliverables.json',
@@ -779,7 +800,7 @@ if (softWarnings.length) {
 if (errors.length) {
   console.error(`\n✗ ${errors.length} erreur(s) :`);
   for (const e of errors) console.error(`   · ${e}`);
-  console.error('\nCorrigez les erreurs ci-dessus (data/*.json) avant de continuer.');
+  console.error('\nCorrigez les erreurs ci-dessus (data/**/*.json) avant de continuer.');
   process.exit(1);
 }
 

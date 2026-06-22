@@ -8,7 +8,7 @@
  * Run: `npm run content:export`
  *      `npm run content:export -- --dry-run`
  */
-import { existsSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PrismaClient } from '@prisma/client';
@@ -36,7 +36,7 @@ const collections = [
   },
   {
     label: 'blog',
-    file: 'blog.json',
+    dir: 'blog',
     load: () => prisma.blogPost.findMany({ orderBy: [{ date: 'desc' }, { title: 'asc' }] }),
   },
 ];
@@ -46,14 +46,17 @@ try {
   for (const collection of collections) {
     const rows = await collection.load();
     const payload = rows.map((row) => parseRow(collection.label, row.id, row.data));
-    const target = join(dataDir, collection.file);
-    const next = `${JSON.stringify(payload, null, 2)}\n`;
-    const current = existsSync(target) ? readFileSync(target, 'utf8') : '';
-    const changed = current !== next;
+    const targetLabel = collection.file ?? `${collection.dir}/`;
+    const changed = collection.dir
+      ? jsonDirChanged(join(dataDir, collection.dir), buildDirFiles(collection.label, payload))
+      : jsonFileChanged(join(dataDir, collection.file), serializeJson(payload));
     if (changed) anyChanged = true;
 
-    if (!dryRun && changed) writeAtomic(target, next);
-    console.log(`${changed ? dryRun ? 'DRY' : 'OK' : '--'} ${collection.file} - ${rows.length} row(s)${changed ? '' : ' (unchanged)'}`);
+    if (!dryRun && changed) {
+      if (collection.dir) writeJsonDir(join(dataDir, collection.dir), buildDirFiles(collection.label, payload));
+      else writeAtomic(join(dataDir, collection.file), serializeJson(payload));
+    }
+    console.log(`${changed ? dryRun ? 'DRY' : 'OK' : '--'} ${targetLabel} - ${rows.length} row(s)${changed ? '' : ' (unchanged)'}`);
   }
 } finally {
   await prisma.$disconnect();
@@ -63,7 +66,7 @@ try {
 // JSON have diverged (seed and export are no longer inverses). Fail so CI and
 // the curator notice. A normal run writes the files and exits 0.
 if (dryRun && anyChanged) {
-  console.error('\n✗ Drift détecté : data/*.json diffère de la DB. Lance `npm run content:export` puis commit.');
+  console.error('\n✗ Drift détecté : les JSON sources diffèrent de la DB. Lance `npm run content:export` puis commit.');
   process.exitCode = 1;
 }
 
@@ -77,6 +80,49 @@ function parseRow(label, id, data) {
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     throw new Error(`${label}/${id} - invalid data JSON: ${message}`);
+  }
+}
+
+function serializeJson(payload) {
+  return `${JSON.stringify(payload, null, 2)}\n`;
+}
+
+function jsonFileChanged(target, next) {
+  const current = existsSync(target) ? readFileSync(target, 'utf8') : '';
+  return current !== next;
+}
+
+function buildDirFiles(label, payload) {
+  const files = new Map();
+  for (const row of payload) {
+    if (!row?.slug) throw new Error(`${label}/${row?.id ?? 'unknown'} - missing slug for file export`);
+    const file = `${row.slug}.json`;
+    if (files.has(file)) throw new Error(`${label} - duplicate export file: ${file}`);
+    files.set(file, serializeJson(row));
+  }
+  return files;
+}
+
+function jsonDirChanged(targetDir, nextFiles) {
+  const currentFiles = existsSync(targetDir)
+    ? readdirSync(targetDir).filter((file) => file.endsWith('.json')).sort()
+    : [];
+  if (currentFiles.length !== nextFiles.size) return true;
+  for (const file of currentFiles) {
+    if (!nextFiles.has(file)) return true;
+    if (readFileSync(join(targetDir, file), 'utf8') !== nextFiles.get(file)) return true;
+  }
+  return false;
+}
+
+function writeJsonDir(targetDir, nextFiles) {
+  mkdirSync(targetDir, { recursive: true });
+  const keep = new Set(nextFiles.keys());
+  for (const file of readdirSync(targetDir).filter((f) => f.endsWith('.json'))) {
+    if (!keep.has(file)) unlinkSync(join(targetDir, file));
+  }
+  for (const [file, data] of nextFiles) {
+    writeAtomic(join(targetDir, file), data);
   }
 }
 

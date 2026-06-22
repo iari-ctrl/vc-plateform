@@ -34,12 +34,14 @@ const PERSONAL: Item[] = [
 ];
 
 /**
- * SideNav — the lateral, hover-expanding navigation used on every page *except*
- * the home/landing page (which keeps the full TopBar header).
+ * SideNav — the lateral navigation used on every page *except* the home/landing
+ * page (which keeps the full TopBar header).
  *
- * Desktop (≥lg): a fixed left rail showing only section icons. Hovering — or
- * focusing any item with the keyboard — expands it from `--sidebar-rail` to
- * `--sidebar-w` as an overlay, so the content never shifts.
+ * Desktop (≥lg): the panel is hidden off-screen. Only a small VC Premium logo
+ * handle stays pinned in the top-left gutter; hovering (or focusing) it slides
+ * the full panel out from the edge as an overlay. The panel retracts as soon as
+ * the pointer leaves it (or focus moves out). A thin `--sidebar-rail` gutter is
+ * reserved in MainLayout so the handle never overlaps page content.
  * Mobile (<lg): a compact top bar with a slide-down drawer (no hover there).
  */
 export function SideNav() {
@@ -53,56 +55,72 @@ export function SideNav() {
 
 // ── Desktop rail ──────────────────────────────────────────────────────────────
 function DesktopRail() {
-  const [expanded, setExpanded] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <aside
-      onMouseEnter={() => setExpanded(true)}
-      onMouseLeave={() => setExpanded(false)}
-      onFocus={() => setExpanded(true)}
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) setExpanded(false);
-      }}
-      data-open={expanded}
-      style={{ width: expanded ? 'var(--sidebar-w)' : 'var(--sidebar-rail)' }}
-      className="glass-rail fixed inset-y-0 left-0 z-40 hidden flex-col overflow-x-hidden border-r transition-[width] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:flex"
-      aria-label="Navigation principale"
-    >
-      {/* Brand */}
-      <div className={cn('flex h-[var(--topbar-h)] shrink-0 items-center', expanded ? 'px-4' : 'justify-center')}>
-        <Logo compact={!expanded} />
+    <>
+      {/* Always-visible logo handle: hovering/focusing it reveals the panel.
+          No onMouseLeave here — moving from the handle into the panel keeps it
+          open; the panel itself owns the close-on-leave. z-50 keeps the logo
+          clickable above the sliding panel. */}
+      <div
+        onMouseEnter={() => setOpen(true)}
+        onFocus={() => setOpen(true)}
+        className="fixed left-0 top-0 z-50 hidden h-[var(--topbar-h)] items-center justify-center lg:flex"
+        style={{ width: 'var(--sidebar-rail)' }}
+      >
+        <Logo compact />
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto px-3 pb-4">
-        <nav className="flex flex-col gap-1" aria-label="Sections">
-          {PRIMARY.map((it) => (
-            <RailLink key={it.to} item={it} expanded={expanded} end={it.to === '/'} />
-          ))}
-        </nav>
+      <aside
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+        onFocus={() => setOpen(true)}
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
+        }}
+        data-open={open}
+        aria-hidden={!open}
+        className={cn(
+          'glass-rail fixed inset-y-0 left-0 z-40 hidden w-[var(--sidebar-w)] flex-col overflow-x-hidden border-r transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:flex',
+          open ? 'translate-x-0' : '-translate-x-full',
+        )}
+        aria-label="Navigation principale"
+      >
+        {/* Spacer that clears the floating logo handle above. */}
+        <div className="h-[var(--topbar-h)] shrink-0" />
 
-        <div className="ornament-rule mx-1 my-2" />
+        <div className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto px-3 pb-4">
+          <nav className="flex flex-col gap-1" aria-label="Sections">
+            {PRIMARY.map((it) => (
+              <RailLink key={it.to} item={it} expanded end={it.to === '/'} />
+            ))}
+          </nav>
 
-        <nav className="flex flex-col gap-1" aria-label="Espace personnel">
-          {PERSONAL.map((it) => (
-            <RailLink key={it.to} item={it} expanded={expanded} />
-          ))}
-        </nav>
+          <div className="ornament-rule mx-1 my-2" />
 
-        {/* Utilities pinned to the bottom */}
-        <div className="mt-auto flex flex-col gap-1 pt-3">
-          <div className="ornament-rule mx-1 mb-2" />
-          <SearchButton expanded={expanded} />
-          <ThemeButton expanded={expanded} />
-          {EN_ENABLED && expanded && (
-            <div className="flex items-center justify-between gap-2 px-3 py-1.5 animate-fade-in">
-              <span className="whitespace-nowrap text-sm font-medium text-surface-variant">Langue</span>
-              <LocaleSwitcher />
-            </div>
-          )}
-          <AccountControl expanded={expanded} />
+          <nav className="flex flex-col gap-1" aria-label="Espace personnel">
+            {PERSONAL.map((it) => (
+              <RailLink key={it.to} item={it} expanded />
+            ))}
+          </nav>
+
+          {/* Utilities pinned to the bottom */}
+          <div className="mt-auto flex flex-col gap-1 pt-3">
+            <div className="ornament-rule mx-1 mb-2" />
+            <SearchButton expanded />
+            <ThemeButton expanded />
+            {EN_ENABLED && (
+              <div className="flex items-center justify-between gap-2 px-3 py-1.5 animate-fade-in">
+                <span className="whitespace-nowrap text-sm font-medium text-surface-variant">Langue</span>
+                <LocaleSwitcher />
+              </div>
+            )}
+            <AccountControl expanded />
+          </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }
 
