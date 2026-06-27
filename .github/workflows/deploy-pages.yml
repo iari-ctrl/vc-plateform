@@ -1,68 +1,29 @@
 name: Deploy frontend to GitHub Pages
 
-# Builds only the client (static SPA) and publishes it to GitHub Pages.
-# The server workspace is never built or deployed: the client is API-first with
-# a bundled content fallback, so it runs fully as a guest-mode static site.
-
 on:
   push:
     branches: [master]
-  workflow_dispatch:
 
-# Least privilege for the OIDC-based Pages deployment.
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# One Pages deploy at a time; let a newer push supersede an in-flight run.
-concurrency:
-  group: pages
-  cancel-in-progress: true
+  contents: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
-
       - run: npm ci
-
-      - name: Build client (static)
-        # Refresh the split content indexes the client bundles, then build only
-        # the client workspace. `--base` is forwarded to `vite build` so assets
-        # and the router resolve under the project-page sub-path.
-        run: |
+      - run: |
           npm run split:content
           npm run build --workspace client -- --base=/vc-plateform/
-
-      - name: SPA fallback + disable Jekyll
-        # GitHub Pages has no SPA rewrite: serve index.html for unknown deep
-        # links via 404.html. .nojekyll keeps files/dirs starting with `_`.
-        run: |
           cp client/dist/index.html client/dist/404.html
           touch client/dist/.nojekyll
-
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v3
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          path: client/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
-
-      - name: Print deployed URL
-        run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: client/dist
+          publish_branch: gh-pages
