@@ -1,0 +1,1 @@
+function o(n){const r=/^#?([0-9a-f]{6})$/i.exec(n.trim());if(!r)return .5;const t=parseInt(r[1],16),c=t>>16&255,e=t>>8&255,i=t&255;return(.2126*c+.7152*e+.0722*i)/255}function s(n,r){return r&&o(n)<.22?`color-mix(in srgb, ${n} 40%, #AEB8C2)`:n}export{s as l};

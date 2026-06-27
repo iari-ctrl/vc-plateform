@@ -1,0 +1,31 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /notes
+Disallow: /journal
+Disallow: /profile
+Disallow: /profile-result
+Disallow: /search
+Disallow: /design-system
+
+Disallow: /fr/admin
+Disallow: /fr/dashboard
+Disallow: /fr/notes
+Disallow: /fr/journal
+Disallow: /fr/profile
+Disallow: /fr/profile-result
+Disallow: /fr/search
+Disallow: /fr/design-system
+
+Disallow: /en/admin
+Disallow: /en/dashboard
+Disallow: /en/notes
+Disallow: /en/journal
+Disallow: /en/profile
+Disallow: /en/profile-result
+Disallow: /en/search
+Disallow: /en/design-system
+
+Sitemap: https://vcpx.io/sitemap.xml
