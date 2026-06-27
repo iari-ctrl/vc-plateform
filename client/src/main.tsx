@@ -25,10 +25,14 @@ const queryClient = new QueryClient({
   },
 });
 
+// Vite injects the deploy base (e.g. `/vc-plateform/` on GitHub Pages, `/` in
+// dev). React Router wants it without the trailing slash; keep `/` for root.
+const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ViewportSwitcher>
-      <BrowserRouter>
+      <BrowserRouter basename={routerBasename}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider>
             <AuthProvider>
