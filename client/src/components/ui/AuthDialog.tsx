@@ -3,7 +3,7 @@ import { Modal } from './Modal';
 import { Button, Spinner } from './primitives';
 import { Fleuron } from '@/components/ornaments/Ornaments';
 import { useAuth } from '@/context/AuthContext';
-import { ApiError } from '@/lib/api';
+import { ApiError, API_ENABLED } from '@/lib/api';
 
 export function AuthDialog({ open, onClose, reason }: { open: boolean; onClose: () => void; reason?: string }) {
   const { login, register, apiUp } = useAuth();
@@ -52,7 +52,11 @@ export function AuthDialog({ open, onClose, reason }: { open: boolean; onClose: 
 
         {!apiUp && (
           <div className="mb-5 rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 text-xs text-surface-variant">
-            Le serveur n’est pas démarré : vous explorez en <strong>mode invité</strong>. Vos données sont conservées localement sur cet appareil.
+            {API_ENABLED ? (
+              <>Le serveur n’est pas démarré : vous explorez en <strong>mode invité</strong>. Vos données sont conservées localement sur cet appareil.</>
+            ) : (
+              <>Démo statique sans serveur : connectez-vous en <strong>administrateur</strong> avec <span className="font-mono text-foreground/80">admin</span> / <span className="font-mono text-foreground/80">admin</span>. Vos données restent locales à cet appareil.</>
+            )}
           </div>
         )}
 
@@ -77,7 +81,7 @@ export function AuthDialog({ open, onClose, reason }: { open: boolean; onClose: 
           {mode === 'register' && (
             <Field name="name" label="Nom" value={name} onChange={setName} type="text" placeholder="Comment vous appeler ?" autoComplete="name" />
           )}
-          <Field name="email" label="Email" value={email} onChange={setEmail} type="email" placeholder="vous@exemple.com" required autoComplete="email" />
+          <Field name="email" label={API_ENABLED ? 'Email' : 'Identifiant'} value={email} onChange={setEmail} type={API_ENABLED ? 'email' : 'text'} placeholder={API_ENABLED ? 'vous@exemple.com' : 'admin'} required autoComplete={API_ENABLED ? 'email' : 'username'} />
           <Field name="password" label="Mot de passe" value={password} onChange={setPassword} type="password" placeholder="••••••••" required autoComplete={mode === 'login' ? 'current-password' : 'new-password'} />
 
           {error && <p role="alert" className="text-sm text-error">{error}</p>}
@@ -88,7 +92,12 @@ export function AuthDialog({ open, onClose, reason }: { open: boolean; onClose: 
         </form>
 
         <p className="mt-5 text-center text-xs text-surface-variant">
-          Compte de démo : <span className="font-mono text-foreground/80">demo@vcpx.io</span> · <span className="font-mono text-foreground/80">demo1234</span>
+          Compte de démo :{' '}
+          {API_ENABLED ? (
+            <><span className="font-mono text-foreground/80">demo@vcpx.io</span> · <span className="font-mono text-foreground/80">demo1234</span></>
+          ) : (
+            <><span className="font-mono text-foreground/80">admin</span> · <span className="font-mono text-foreground/80">admin</span></>
+          )}
         </p>
       </div>
     </Modal>

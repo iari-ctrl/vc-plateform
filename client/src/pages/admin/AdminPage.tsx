@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Shield, BookMarked, Newspaper, FileText, BarChart3, Plus, Save, Trash2, X, Loader2 } from 'lucide-react';
-import { api, ApiError } from '@/lib/api';
+import { api, ApiError, API_ENABLED } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
 import { useUI } from '@/context/UIContext';
 import { Fleuron } from '@/components/ornaments/Ornaments';
@@ -18,7 +18,7 @@ export default function AdminPage() {
 
   if (!ready) return null;
 
-  if (!apiUp) {
+  if (!apiUp && API_ENABLED) {
     return <Gate title="Serveur requis" body="L’espace d’administration nécessite que le serveur API soit démarré (npm run dev:server). En mode invité hors-ligne, le contenu reste consultable mais non modifiable." />;
   }
   if (!isAuthed) {
@@ -26,7 +26,7 @@ export default function AdminPage() {
       <Gate
         title="Espace réservé"
         body="Connectez-vous avec un compte administrateur pour gérer le contenu."
-        action={<button onClick={() => openAuth('Connectez-vous en administrateur (admin@vcpx.io / admin1234).')} className="btn-foil">Se connecter</button>}
+        action={<button onClick={() => openAuth(API_ENABLED ? 'Connectez-vous en administrateur (admin@vcpx.io / admin1234).' : 'Connectez-vous en administrateur (admin / admin).')} className="btn-foil">Se connecter</button>}
       />
     );
   }
@@ -83,6 +83,9 @@ function Gate({ title, body, action }: { title: string; body: string; action?: R
 function StatsPanel() {
   const [stats, setStats] = useState<Record<string, number> | null>(null);
   useEffect(() => { api.get<Record<string, number>>('/admin/stats').then(setStats).catch(() => setStats(null)); }, []);
+  if (!API_ENABLED) {
+    return <p className="text-sm text-surface-variant">Démo statique sans serveur : les statistiques et l’édition de contenu nécessitent l’API (<span className="font-mono">npm run dev:server</span>). Le contenu publié reste consultable sur le site.</p>;
+  }
   const ITEMS = [
     { key: 'paths', label: 'Parcours' }, { key: 'courses', label: 'Cours' }, { key: 'lessons', label: 'Leçons' },
     { key: 'glossary', label: 'Termes' }, { key: 'cases', label: 'Études de cas' }, { key: 'blog', label: 'Analyses' },

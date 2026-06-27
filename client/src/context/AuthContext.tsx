@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, pingApi, API_ENABLED } from '@/lib/api';
+import { loadLocalUser, localLogin, localRegister, localLogout } from '@/lib/localAuth';
 import type { AuthUser } from '@/content/types';
 
 interface AuthCtx {
@@ -32,9 +33,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // restored, `apiUp` flips (for offline-aware UI), and we invalidate the
   // content queries so they refetch the live copy on their own — no reload.
   useEffect(() => {
-    // Frontend-only build: no server to reach. Settle into guest mode at once and
-    // skip the health ping / retry loop — content renders from the bundle.
+    // Frontend-only build: no server to reach. Restore any demo session from
+    // localStorage, settle at once, and skip the health ping / retry loop —
+    // content renders from the bundle.
     if (!API_ENABLED) {
+      setUser(loadLocalUser());
       setReady(true);
       return;
     }
@@ -88,16 +91,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [queryClient]);
 
   const login = useCallback(async (email: string, password: string) => {
+    if (!API_ENABLED) {
+      setUser(localLogin(email, password));
+      return;
+    }
     const { user } = await api.post<{ user: AuthUser }>('/auth/login', { email, password });
     setUser(user);
   }, []);
 
   const register = useCallback(async (email: string, password: string, name?: string) => {
+    if (!API_ENABLED) {
+      setUser(localRegister(email, password, name));
+      return;
+    }
     const { user } = await api.post<{ user: AuthUser }>('/auth/register', { email, password, name });
     setUser(user);
   }, []);
 
   const logout = useCallback(async () => {
+    if (!API_ENABLED) {
+      localLogout();
+      setUser(null);
+      queryClient.clear();
+      return;
+    }
     try {
       await api.post('/auth/logout');
     } catch {
