@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { api, pingApi } from '@/lib/api';
+import { api, pingApi, API_ENABLED } from '@/lib/api';
 import type { AuthUser } from '@/content/types';
 
 interface AuthCtx {
@@ -32,6 +32,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // restored, `apiUp` flips (for offline-aware UI), and we invalidate the
   // content queries so they refetch the live copy on their own — no reload.
   useEffect(() => {
+    // Frontend-only build: no server to reach. Settle into guest mode at once and
+    // skip the health ping / retry loop — content renders from the bundle.
+    if (!API_ENABLED) {
+      setReady(true);
+      return;
+    }
+
     let active = true;
     let up = false;
     let checking = false;

@@ -6,6 +6,14 @@
 
 const BASE = '/api';
 
+/**
+ * Frontend-only builds (e.g. the static GitHub Pages deploy, where no server is
+ * reachable) set `VITE_API_DISABLED=true`. Every call then short-circuits to a
+ * failure so callers fall straight back to bundled content / localStorage, with
+ * no doomed network requests or health polling.
+ */
+export const API_ENABLED = import.meta.env.VITE_API_DISABLED !== 'true';
+
 export class ApiError extends Error {
   status: number;
   constructor(message: string, status: number) {
@@ -15,6 +23,7 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
+  if (!API_ENABLED) throw new ApiError('API désactivée (build frontend uniquement)', 0);
   const res = await fetch(`${BASE}${path}`, {
     credentials: 'include',
     headers: { 'Content-Type': 'application/json', ...(options.headers ?? {}) },
@@ -50,6 +59,7 @@ export const api = {
 
 /** Returns true if the API server responds to /api/health. */
 export async function pingApi(): Promise<boolean> {
+  if (!API_ENABLED) return false;
   try {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), 1500);
