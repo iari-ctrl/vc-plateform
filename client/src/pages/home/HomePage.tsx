@@ -11,9 +11,9 @@ import { usePageMeta } from '@/lib/seo';
 import { useResumeLesson } from '@/hooks/useResumeLesson';
 
 const STEPS = [
-  { n: '01', icon: Compass, title: 'Comprendre qui vous êtes', text: 'Un onboarding introspectif inspiré de l’ikigai : pourquoi le capital-risque, et où se situe votre centre de gravité.' },
-  { n: '02', icon: Sparkles, title: 'Tester votre alignement', text: 'Sept questions révèlent votre profil d’apprentissage — du débutant curieux au principal en devenir.' },
-  { n: '03', icon: BookOpen, title: 'Apprendre selon votre niveau', text: 'Un parcours personnalisé, mais jamais enfermant : vous explorez librement, à votre rythme.' },
+  { n: '01', icon: Compass, title: 'Analyser', text: 'Explorer les écosystèmes, suivre les convictions et lire les analyses comme des documents de travail.' },
+  { n: '02', icon: Sparkles, title: 'Décider', text: 'Étudier les cas, les memos et les passes pour comprendre comment un raisonnement d’investissement se construit.' },
+  { n: '03', icon: BookOpen, title: 'Apprendre', text: 'Utiliser les parcours, la bibliothèque et le dictionnaire comme rampe d’accès, sans verrouiller l’exploration.' },
 ];
 
 /** A few parcours seals drifting at the hero margins — the constellation made tangible. */
@@ -40,7 +40,7 @@ function DriftingSeals() {
 }
 
 export default function HomePage() {
-  usePageMeta(undefined, 'Comprendre le capital-risque, tester son alignement avec le métier, puis apprendre selon son niveau. Une plateforme éditoriale d’introspection et d’apprentissage.');
+  usePageMeta(undefined, 'Une plateforme d’intelligence VC pour analyser des écosystèmes, suivre des convictions, étudier des décisions et structurer sa progression.');
   const resume = useResumeLesson();
 
   return (
@@ -64,26 +64,26 @@ export default function HomePage() {
             <div className="mx-auto max-w-3xl text-center">
               <CompassRose size={88} className="mx-auto mb-7 drop-shadow-[0_6px_16px_color-mix(in_srgb,var(--primary)_30%,transparent)]" />
               <span className="inline-flex items-center gap-2 rounded-full border border-outline-variant bg-surface-container-low px-4 py-1.5 text-xs font-medium text-surface-variant">
-                <Fleuron className="text-[0.7rem]" /> École privée · memo d’investissement · carnet de réflexion
+                <Fleuron className="text-[0.7rem]" /> Intelligence VC · formation · workspace de réflexion
               </span>
               <h1 className="mt-7 font-headline text-[2.6rem] font-semibold leading-[1.05] tracking-tight text-balance sm:text-[3.75rem]">
-                Comprendre le capital-risque,
+                Analyser le capital-risque,
                 <span className="block italic text-[color:var(--primary)]">
-                  avec sérieux et <span className="ink-underline">ambition.</span>
+                  avec méthode et <span className="ink-underline">conviction.</span>
                 </span>
               </h1>
               <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-surface-variant text-pretty">
-                Ne commencez pas par un catalogue de cours. Commencez par vous demander pourquoi le venture vous attire — puis apprenez le métier selon votre niveau, à votre rythme.
+                Dossiers d’écosystème, convictions datées, analyses, memos, cas et outils : une base pour transformer l’information VC en raisonnement exploitable.
               </p>
               <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <Link to="/onboarding" className="btn-foil sheen-host w-full sm:w-auto">
-                  Commencer l’introspection <ArrowRight size={16} />
+                <Link to="/intelligence" className="btn-foil sheen-host w-full sm:w-auto">
+                  Ouvrir l’intelligence VC <ArrowRight size={16} />
                 </Link>
                 <Link to="/paths" className="btn-ghost w-full sm:w-auto">
-                  Explorer la carte des parcours
+                  Voir les parcours
                 </Link>
               </div>
-              <p className="mt-5 text-xs text-surface-variant">Aucun compte requis. Aucun chapitre verrouillé.</p>
+              <p className="mt-5 text-xs text-surface-variant">Les contenus publics restent libres. Le compte sert à retrouver notes, favoris et progression.</p>
               {resume && (
                 <Link
                   to={`/lessons/${resume.slug}`}
@@ -140,7 +140,7 @@ export default function HomePage() {
                   Jamais de mur d’authentification.
                 </h2>
                 <p className="mt-4 text-[0.95rem] leading-relaxed text-[color-mix(in_srgb,var(--on-secondary)_80%,transparent)]">
-                  Explorez les parcours, lisez les cours, utilisez le dictionnaire et les simulateurs sans créer de compte. Un compte ne sert qu’à vous suivre : progression, notes, citations et favoris, synchronisés entre vos appareils.
+                  Explorez les dossiers, analyses, parcours, cours, dictionnaire et simulateurs sans créer de compte. Un compte ne sert qu’à vous suivre : progression, notes, citations et favoris, synchronisés entre vos appareils.
                 </p>
                 <Link to="/blog/pourquoi-nous-ne-bloquons-aucun-chapitre" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--primary)]">
                   Lire notre manifeste <ArrowRight size={15} />
@@ -170,7 +170,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-[var(--content-max)] px-4 py-16 sm:px-6 lg:px-8">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading eyebrow="Apprendre en manipulant" title="Des simulateurs, pas des slides" description="Dilution, valorisation, waterfall, fund returns : touchez du doigt la mécanique financière du venture." />
+            <SectionHeading eyebrow="Outils de décision" title="Des simulateurs, pas des slides" description="Dilution, valorisation, waterfall, fund returns : manipuler les hypothèses financières au lieu de les lire abstraitement." />
             <Link to="/simulators" className="btn-quiet shrink-0">Tous les simulateurs <ArrowRight size={15} /></Link>
           </div>
         </Reveal>
@@ -188,7 +188,7 @@ export default function HomePage() {
         <FleuronDivider className="mb-12" />
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading eyebrow="Analyses & recherche" title="Penser le venture, pas seulement l’apprendre" />
+            <SectionHeading eyebrow="Analyses & recherche" title="Lire les signaux avant d’écrire une thèse" />
             <Link to="/blog" className="btn-quiet shrink-0">Toutes les analyses <ArrowRight size={15} /></Link>
           </div>
         </Reveal>
@@ -208,14 +208,19 @@ export default function HomePage() {
             <div className="mx-auto flex max-w-2xl flex-col items-center">
               <DropCap letter="?" size={72} className="mb-2 animate-float-slow" />
               <h2 className="mt-2 font-headline text-display-sm font-semibold leading-tight text-balance">
-                Où sera votre centre de gravité dans une décennie ?
+                Commencer par un terrain, puis formuler une thèse.
               </h2>
               <p className="mx-auto mt-4 max-w-lg text-surface-variant">
-                Sept questions pour commencer. Aucune obligation, aucune inscription.
+                Ouvrez la surface Intelligence VC ou utilisez le test d’orientation si vous cherchez d’abord un parcours.
               </p>
-              <Link to="/onboarding" className="btn-foil sheen-host mt-8">
-                Faire le test d’orientation <ArrowRight size={16} />
-              </Link>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link to="/intelligence" className="btn-foil sheen-host">
+                  Ouvrir l’intelligence VC <ArrowRight size={16} />
+                </Link>
+                <Link to="/onboarding" className="btn-ghost">
+                  Faire le test d’orientation
+                </Link>
+              </div>
             </div>
           </div>
         </Reveal>

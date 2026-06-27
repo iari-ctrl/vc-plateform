@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from '@/i18n/routing';
 import { Trash2, Quote, Highlighter, StickyNote, Plus, Bookmark as BookmarkIcon } from 'lucide-react';
 import { useUserData } from '@/context/UserDataContext';
@@ -31,6 +31,14 @@ export default function NotesPage() {
   const [pendingDelete, setPendingDelete] = useState<Note | null>(null);
 
   const visible = notes.filter((n) => filter === 'all' || n.kind === filter);
+  const groups = useMemo(() => {
+    const bySource = new Map<string, Note[]>();
+    for (const note of visible) {
+      const source = note.sourceTitle ?? 'Notes libres';
+      bySource.set(source, [...(bySource.get(source) ?? []), note]);
+    }
+    return Array.from(bySource.entries()).map(([source, items]) => ({ source, items }));
+  }, [visible]);
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -80,29 +88,39 @@ export default function NotesPage() {
           {visible.length === 0 ? (
             <EmptyState icon={<StickyNote size={26} />} title="Votre carnet est vide" description="Surlignez un passage pendant une lecture, ou ajoutez une note libre ci-dessus." />
           ) : (
-            <ul className="space-y-3">
-              {visible.map((n) => {
-                const Meta = KIND_META[n.kind] ?? KIND_META.note;
-                return (
-                  <li key={n.id} className="group rounded-2xl border border-outline-variant bg-surface-container-lowest p-5">
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 text-[0.625rem] font-medium uppercase tracking-wider text-surface-variant">
-                        <Meta.icon size={12} /> {Meta.label}
-                      </span>
-                      <button onClick={() => setPendingDelete(n)} className="rounded text-surface-variant opacity-0 transition-opacity hover:text-error focus-visible:opacity-100 group-hover:opacity-100" aria-label="Supprimer cette note">
-                        <Trash2 size={15} />
-                      </button>
-                    </div>
-                    <p className={`mt-2 leading-relaxed ${n.kind === 'note' ? '' : 'font-headline italic'}`}>
-                      {n.kind === 'note' ? n.body : `“${n.body}”`}
-                    </p>
-                    <p className="mt-2 text-[0.625rem] text-surface-variant">
-                      {n.sourceTitle ? `Extrait de « ${n.sourceTitle} »` : 'Note libre'} · {formatDateFr(n.createdAt)}
-                    </p>
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="space-y-6">
+              {groups.map((group) => (
+                <section key={group.source}>
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <h2 className="font-headline text-headline-sm font-semibold">{group.source}</h2>
+                    <span className="font-mono text-xs text-surface-variant">{group.items.length}</span>
+                  </div>
+                  <ul className="space-y-3">
+                    {group.items.map((n) => {
+                      const Meta = KIND_META[n.kind] ?? KIND_META.note;
+                      return (
+                        <li key={n.id} className="group rounded-2xl border border-outline-variant bg-surface-container-lowest p-5">
+                          <div className="flex items-center justify-between">
+                            <span className="inline-flex items-center gap-1.5 text-[0.625rem] font-medium uppercase tracking-wider text-surface-variant">
+                              <Meta.icon size={12} /> {Meta.label}
+                            </span>
+                            <button onClick={() => setPendingDelete(n)} className="rounded text-surface-variant opacity-0 transition-opacity hover:text-error focus-visible:opacity-100 group-hover:opacity-100" aria-label="Supprimer cette note">
+                              <Trash2 size={15} />
+                            </button>
+                          </div>
+                          <p className={`mt-2 leading-relaxed ${n.kind === 'note' ? '' : 'font-headline italic'}`}>
+                            {n.kind === 'note' ? n.body : `“${n.body}”`}
+                          </p>
+                          <p className="mt-2 text-[0.625rem] text-surface-variant">
+                            {n.sourceTitle ? `Extrait de « ${n.sourceTitle} »` : 'Note libre'} · {formatDateFr(n.createdAt)}
+                          </p>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
+              ))}
+            </div>
           )}
         </div>
 

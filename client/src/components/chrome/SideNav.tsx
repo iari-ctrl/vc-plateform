@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   Map, Library, BookA, FlaskConical, Newspaper, LayoutDashboard, NotebookPen, Microscope,
-  Search, Sun, Moon, LogIn, LogOut, Shield, User, Menu, X, Ghost, ScrollText, Crosshair, type LucideIcon,
+  Search, Sun, Moon, LogIn, LogOut, Shield, User, Menu, X, ScrollText, Crosshair, type LucideIcon,
+  FileText, ChevronRight,
 } from 'lucide-react';
 import { Link, NavLink } from '@/i18n/routing';
 import { useNavigate, isLinkActive } from '@/i18n/navigation';
@@ -15,33 +16,57 @@ import { useUI } from '@/context/UIContext';
 import { cn, initials } from '@/lib/utils';
 
 type Item = { to: string; label: string; icon: LucideIcon };
+type NavGroup = { title: string; to: string; icon: LucideIcon; items: Item[] };
 
-const PRIMARY: Item[] = [
-  { to: '/paths', label: 'Parcours', icon: Map },
-  { to: '/bibliotheque', label: 'Bibliothèque', icon: Library },
-  { to: '/glossary', label: 'Dictionnaire', icon: BookA },
-  { to: '/simulators', label: 'Simulateurs', icon: FlaskConical },
-  { to: '/anti-portfolio', label: 'Anti-portfolio', icon: Ghost },
-  { to: '/memos', label: 'Memo library', icon: ScrollText },
-  { to: '/ecosystemes', label: 'Écosystèmes', icon: Microscope },
-  { to: '/blog', label: 'Analyses', icon: Newspaper },
-];
-
-const PERSONAL: Item[] = [
-  { to: '/dashboard', label: 'Tableau de bord', icon: LayoutDashboard },
-  { to: '/notes', label: 'Notes & favoris', icon: NotebookPen },
-  { to: '/journal', label: 'Journal de décisions', icon: Crosshair },
+const NAV_GROUPS: NavGroup[] = [
+  {
+    title: 'Intelligence VC',
+    to: '/intelligence',
+    icon: Microscope,
+    items: [
+      { to: '/ecosystemes', label: 'Écosystèmes', icon: Microscope },
+      { to: '/convictions', label: 'Convictions', icon: Crosshair },
+      { to: '/decisions', label: 'Décisions', icon: ScrollText },
+      { to: '/simulators', label: 'Simulateurs', icon: FlaskConical },
+      { to: '/methode', label: 'Méthode', icon: FileText },
+      { to: '/blog', label: 'Analyses', icon: Newspaper },
+    ],
+  },
+  {
+    title: 'Formation',
+    to: '/paths',
+    icon: Map,
+    items: [
+      { to: '/paths', label: 'Parcours', icon: Map },
+      { to: '/bibliotheque', label: 'Bibliothèque', icon: Library },
+      { to: '/glossary', label: 'Dictionnaire', icon: BookA },
+    ],
+  },
+  {
+    title: 'Workspace',
+    to: '/dashboard',
+    icon: LayoutDashboard,
+    items: [
+      { to: '/dashboard', label: 'Tableau de bord', icon: LayoutDashboard },
+      { to: '/notes', label: 'Notes & favoris', icon: NotebookPen },
+      { to: '/journal', label: 'Journal de décisions', icon: Crosshair },
+    ],
+  },
 ];
 
 /**
  * SideNav — the lateral navigation used on every page *except* the home/landing
  * page (which keeps the full TopBar header).
  *
- * Desktop (≥lg): the panel is hidden off-screen. Only a small VC Premium logo
- * handle stays pinned in the top-left gutter; hovering (or focusing) it slides
- * the full panel out from the edge as an overlay. The panel retracts as soon as
- * the pointer leaves it (or focus moves out). A thin `--sidebar-rail` gutter is
- * reserved in MainLayout so the handle never overlaps page content.
+ * Desktop (≥lg): the panel is parked off-screen and made `inert` while closed,
+ * so its links leave the tab order *and* the accessibility tree (no focusable
+ * content stranded in a hidden subtree). A small VC Premium logo plus a discreet
+ * focusable "open navigation" handle stay pinned in the top-left gutter; hover,
+ * click, or keyboard focus on that handle slides the full panel out as an
+ * overlay (and clears `inert`, so focus can then move into it). The panel
+ * retracts as soon as the pointer leaves it (or focus moves out). A thin
+ * `--sidebar-rail` gutter is reserved in MainLayout so the handle never overlaps
+ * page content.
  * Mobile (<lg): a compact top bar with a slide-down drawer (no hover there).
  */
 export function SideNav() {
@@ -59,20 +84,49 @@ function DesktopRail() {
 
   return (
     <>
-      {/* Always-visible logo handle: hovering/focusing it reveals the panel.
-          No onMouseLeave here — moving from the handle into the panel keeps it
-          open; the panel itself owns the close-on-leave. z-50 keeps the logo
-          clickable above the sliding panel. */}
+      {/* Always-visible handle: hovering/focusing it reveals the panel. No
+          onMouseLeave here — moving from the handle into the panel keeps it open;
+          the panel itself owns the close-on-leave. z-50 keeps the handle above
+          the sliding panel. */}
       <div
         onMouseEnter={() => setOpen(true)}
         onFocus={() => setOpen(true)}
-        className="fixed left-0 top-0 z-50 hidden h-[var(--topbar-h)] items-center justify-center lg:flex"
+        className="fixed left-0 top-0 z-50 hidden flex-col items-center lg:flex"
         style={{ width: 'var(--sidebar-rail)' }}
       >
-        <Logo compact />
+        <div className="flex h-[var(--topbar-h)] items-center justify-center">
+          <Logo compact />
+        </div>
+
+        {/* Discreet opening hint so the navigation isn't hidden behind the logo
+            alone. A real focusable control: hover/click/keyboard-focus opens the
+            panel. It fades out once open (kept focusable so a keyboard user who
+            tabbed onto it lands here, opens the panel, then tabs straight into
+            it) and is pointer-inert when open so it never intercepts panel
+            clicks beneath it. */}
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label="Ouvrir la navigation"
+          aria-controls="desktop-nav"
+          aria-expanded={open}
+          title="Navigation"
+          className={cn(
+            'group flex flex-col items-center gap-0.5 rounded-xl px-2 py-2 text-surface-variant transition-all duration-200 hover:bg-surface-container-low hover:text-foreground',
+            open && 'pointer-events-none opacity-0',
+          )}
+        >
+          <Menu size={18} className="shrink-0" strokeWidth={1.8} />
+          <ChevronRight
+            size={12}
+            aria-hidden
+            className="shrink-0 opacity-50 transition-transform group-hover:translate-x-0.5"
+          />
+        </button>
       </div>
 
       <aside
+        id="desktop-nav"
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
         onFocus={() => setOpen(true)}
@@ -80,7 +134,13 @@ function DesktopRail() {
           if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
         }}
         data-open={open}
-        aria-hidden={!open}
+        // When parked off-screen the panel must leave the tab order entirely:
+        // `inert` removes its links from focus *and* from the accessibility tree
+        // (it supersedes the old `aria-hidden`, which left focusable content in an
+        // aria-hidden subtree — the anti-pattern). Focus can still *enter* via the
+        // always-visible rail handle below, whose onFocus flips `open` first, so a
+        // keyboard user reaches the panel before this attribute is reapplied.
+        inert={!open}
         className={cn(
           'glass-rail fixed inset-y-0 left-0 z-40 hidden w-[var(--sidebar-w)] flex-col overflow-x-hidden border-r transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:flex',
           open ? 'translate-x-0' : '-translate-x-full',
@@ -91,19 +151,15 @@ function DesktopRail() {
         <div className="h-[var(--topbar-h)] shrink-0" />
 
         <div className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto px-3 pb-4">
-          <nav className="flex flex-col gap-1" aria-label="Sections">
-            {PRIMARY.map((it) => (
-              <RailLink key={it.to} item={it} expanded end={it.to === '/'} />
-            ))}
-          </nav>
-
-          <div className="ornament-rule mx-1 my-2" />
-
-          <nav className="flex flex-col gap-1" aria-label="Espace personnel">
-            {PERSONAL.map((it) => (
-              <RailLink key={it.to} item={it} expanded />
-            ))}
-          </nav>
+          {NAV_GROUPS.map((group, index) => (
+            <nav key={group.title} className="flex flex-col gap-1" aria-label={group.title}>
+              {index > 0 && <div className="ornament-rule mx-1 my-2" />}
+              <RailGroupHeader group={group} />
+              {group.items.map((it) => (
+                <RailLink key={it.to} item={it} expanded end={it.to === '/'} />
+              ))}
+            </nav>
+          ))}
 
           {/* Utilities pinned to the bottom */}
           <div className="mt-auto flex flex-col gap-1 pt-3">
@@ -121,6 +177,24 @@ function DesktopRail() {
         </div>
       </aside>
     </>
+  );
+}
+
+function RailGroupHeader({ group }: { group: NavGroup }) {
+  const location = useLocation();
+  const active = isLinkActive(group.to, location);
+  const Icon = group.icon;
+  return (
+    <Link
+      to={group.to}
+      className={cn(
+        'mb-1 flex items-center gap-2 rounded-xl px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] transition-colors',
+        active ? 'text-[color:var(--primary)]' : 'text-surface-variant hover:text-foreground',
+      )}
+    >
+      <Icon size={13} className="shrink-0" />
+      <span className="truncate">{group.title}</span>
+    </Link>
   );
 }
 
@@ -275,13 +349,12 @@ function MobileBar() {
   const { theme, toggle } = useTheme();
   const { isAuthed, isAdmin, user, logout } = useAuth();
   const { openAuth } = useUI();
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   useEffect(() => setOpen(false), [pathname]);
-
-  const links = [...PRIMARY, ...PERSONAL];
 
   return (
     <>
@@ -308,24 +381,31 @@ function MobileBar() {
       {open && (
         <div className="fixed inset-x-0 bottom-0 top-14 z-30 animate-fade-in overflow-y-auto border-t border-outline-variant bg-surface lg:hidden">
           <nav className="mx-auto flex max-w-[var(--content-max)] flex-col gap-1 px-4 py-4">
-            {links.map((it) => {
-              const isActive = isLinkActive(it.to, location);
-              return (
-                <NavLink
-                  key={it.to}
-                  to={it.to}
-                  end={it.to === '/'}
-                  className={
-                    cn(
-                      'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium',
-                      isActive ? 'bg-surface-container text-foreground' : 'text-surface-variant',
-                    )
-                  }
-                >
-                  <it.icon size={18} className="shrink-0" /> {it.label}
-                </NavLink>
-              );
-            })}
+            {NAV_GROUPS.map((group, groupIndex) => (
+              <div key={group.title} className={groupIndex > 0 ? 'mt-3 border-t border-outline-variant pt-3' : undefined}>
+                <Link to={group.to} className="mb-1 flex items-center gap-2 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-surface-variant">
+                  <group.icon size={13} /> {group.title}
+                </Link>
+                {group.items.map((it) => {
+                  const isActive = isLinkActive(it.to, location);
+                  return (
+                    <NavLink
+                      key={it.to}
+                      to={it.to}
+                      end={it.to === '/'}
+                      className={
+                        cn(
+                          'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium',
+                          isActive ? 'bg-surface-container text-foreground' : 'text-surface-variant',
+                        )
+                      }
+                    >
+                      <it.icon size={18} className="shrink-0" /> {it.label}
+                    </NavLink>
+                  );
+                })}
+              </div>
+            ))}
 
             <div className="ornament-rule my-3" />
 

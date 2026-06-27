@@ -92,8 +92,38 @@ export const content = {
   caseStudies: () => load<RawCase[]>('caseStudies.json'),
   blog: () => loadDir<RawBlog>('blog').sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title)),
   simulators: () => load<RawSimulator[]>('simulators.json'),
+  // Tag facets, reproducing the seed's `tagCount`: only courses, case studies
+  // and blog posts contribute tags (see prisma/seed.ts). Ordered by descending
+  // count, with the term as a stable tie-break.
+  tags: (): { name: string; count: number }[] => {
+    const counts = new Map<string, number>();
+    const bump = (tags: string[] = []) => tags.forEach((t) => counts.set(t, (counts.get(t) ?? 0) + 1));
+    for (const c of load<RawCourse[]>('courses.json')) bump(c.tags);
+    for (const cs of load<RawCase[]>('caseStudies.json')) bump(cs.tags);
+    for (const b of loadDir<RawBlog>('blog')) bump(b.tags);
+    return [...counts]
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'fr'));
+  },
 };
 
 export function stripHtml(s: string): string {
   return s.replace(/<[^>]+>/g, ' ').replace(/[#*_>[\]|]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+// Replie casse + diacritiques (NFD puis retrait des marques combinantes U+0300-U+036F),
+// plus les ligatures françaises usuelles, pour que la recherche soit insensible
+// aux accents. Utilisé tel quel pour normaliser la requête de recherche.
+export function foldAccents(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/œ/g, 'oe')
+    .replace(/æ/g, 'ae')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+// Texte indexable d'une entité : on retire le HTML/markdown puis on replie casse + accents.
+export function buildSearchText(s: string): string {
+  return foldAccents(stripHtml(s));
 }

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { prisma } from '../lib/db.js';
+import { foldAccents } from '../lib/content.js';
 import { ah } from '../lib/async-handler.js';
 
 export const searchRouter = Router();
@@ -14,26 +15,27 @@ interface Hit {
 }
 
 searchRouter.get('/', ah(async (req, res) => {
-  const q = String(req.query.q ?? '').trim().toLowerCase();
-  if (q.length < 2) return res.json({ q, hits: [] });
-  const like = q;
+  const raw = String(req.query.q ?? '').trim();
+  if (raw.length < 2) return res.json({ q: raw, hits: [] });
+  // Replie casse + accents pour matcher la colonne searchText (elle-même repliée
+  // au seed/à l'écriture), de sorte que « ecosysteme » trouve « écosystème ».
+  const q = foldAccents(raw);
 
   const [courses, lessons, glossary, cases, blog, paths, simulators] = await Promise.all([
-    prisma.course.findMany({ take: 80 }),
-    prisma.lesson.findMany({ where: { searchText: { contains: like } }, take: 12 }),
-    prisma.glossaryTerm.findMany({ where: { searchText: { contains: like } }, take: 12 }),
-    prisma.caseStudy.findMany({ where: { searchText: { contains: like } }, take: 8 }),
-    prisma.blogPost.findMany({ where: { searchText: { contains: like } }, take: 8 }),
-    prisma.learningPath.findMany({ where: { id: { startsWith: 'p-' } }, take: 50 }),
-    prisma.simulator.findMany({ take: 20 }),
+    prisma.course.findMany({ where: { searchText: { contains: q } }, take: 8 }),
+    prisma.lesson.findMany({ where: { searchText: { contains: q } }, take: 12 }),
+    prisma.glossaryTerm.findMany({ where: { searchText: { contains: q } }, take: 12 }),
+    prisma.caseStudy.findMany({ where: { searchText: { contains: q } }, take: 8 }),
+    prisma.blogPost.findMany({ where: { searchText: { contains: q } }, take: 8 }),
+    prisma.learningPath.findMany({ where: { id: { startsWith: 'p-' }, searchText: { contains: q } }, take: 8 }),
+    prisma.simulator.findMany({ where: { searchText: { contains: q } }, take: 6 }),
   ]);
 
   const hits: Hit[] = [];
 
   for (const c of courses) {
     const d = JSON.parse(c.data);
-    if (([d.title, d.subtitle, d.summary, ...(d.tags ?? [])].join(' ')).toLowerCase().includes(like))
-      hits.push({ type: 'course', id: c.id, slug: c.slug, title: d.title, excerpt: d.summary, href: `/courses/${c.slug}` });
+    hits.push({ type: 'course', id: c.id, slug: c.slug, title: d.title, excerpt: d.summary, href: `/courses/${c.slug}` });
   }
   for (const l of lessons) {
     const d = JSON.parse(l.data);
@@ -51,17 +53,14 @@ searchRouter.get('/', ah(async (req, res) => {
     const d = JSON.parse(b.data);
     hits.push({ type: 'blog', id: b.id, slug: b.slug, title: d.title, excerpt: d.excerpt, href: `/blog/${b.slug}` });
   }
-  // Lightweight title-match for paths & simulators (small sets).
   for (const p of paths) {
     const d = JSON.parse(p.data);
-    if (([d.title, d.hook, d.goal, ...(d.outcomes ?? [])].join(' ')).toLowerCase().includes(like))
-      hits.push({ type: 'path', id: p.id, slug: p.slug, title: d.title, excerpt: d.hook, href: `/paths/${p.slug}` });
+    hits.push({ type: 'path', id: p.id, slug: p.slug, title: d.title, excerpt: d.hook, href: `/paths/${p.slug}` });
   }
   for (const s of simulators) {
     const d = JSON.parse(s.data);
-    if ((d.title + ' ' + d.description).toLowerCase().includes(like))
-      hits.push({ type: 'simulator', id: s.id, slug: s.slug, title: d.title, excerpt: d.subtitle, href: `/simulators/${s.slug}` });
+    hits.push({ type: 'simulator', id: s.id, slug: s.slug, title: d.title, excerpt: d.subtitle, href: `/simulators/${s.slug}` });
   }
 
-  res.json({ q, hits });
+  res.json({ q: raw, hits });
 }));

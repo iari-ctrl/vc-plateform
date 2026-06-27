@@ -1,6 +1,8 @@
 import { Link } from '@/i18n/routing';
 import { ArrowRight, BookOpen, NotebookPen, Bookmark, Compass, Crosshair, Play, Target } from 'lucide-react';
-import { LESSONS, lessonById, courseById, profileById } from '@/content';
+import { LESSONS, lessonById } from '@/content/lessons';
+import { courseById } from '@/content/courses';
+import { profileById } from '@/content/ikigai';
 import { PARCOURS, lessonIdsForParcours, t } from '@/content/parcours';
 import { recommendedPaths } from '@/lib/ikigai';
 import { ParcoursCard } from '@/components/cards';
@@ -16,7 +18,7 @@ import { formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 
 export default function DashboardPage() {
-  usePageMeta('Tableau de bord', 'Votre progression, vos recommandations et vos notes — votre centre de contrôle d’apprentissage.');
+  usePageMeta('Tableau de bord', 'Reprendre l’apprentissage, retrouver les notes et suivre le journal de décisions.');
   const { profile, progress, notes, bookmarks, journal } = useUserData();
   const { user } = useAuth();
   const dueJournal = journal.filter((e) => isDue(e)).length;
@@ -48,7 +50,7 @@ export default function DashboardPage() {
             <h1 className="font-headline text-display-sm font-semibold tracking-tight">
               Bonjour{user ? `, ${user.name.split(' ')[0]}` : ''}.
             </h1>
-            <p className="mt-2 text-surface-variant">Reprenez là où vous vous êtes arrêté, ou laissez-vous guider.</p>
+            <p className="mt-2 text-surface-variant">Reprenez une lecture, poursuivez un parcours, ou revenez à votre travail de connaissance.</p>
           </div>
           <div className="flex items-center gap-5 rounded-2xl border border-outline-variant bg-surface-container-low px-6 py-4">
             <ProgressRing value={globalPct} size={56} stroke={4} label={`${globalPct}%`} />
@@ -66,9 +68,38 @@ export default function DashboardPage() {
         reason="Créez un espace pour synchroniser votre progression et vos notes entre vos appareils."
       />
 
+      <Reveal delay={60}>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-outline-variant bg-surface-container-low/60 p-5">
+            <p className="eyebrow flex items-center gap-2"><BookOpen size={13} /> Voie apprentissage</p>
+            <h2 className="mt-2 font-headline text-headline-sm font-semibold">Parcours, leçons et reprise</h2>
+            <p className="mt-1.5 text-sm leading-relaxed text-surface-variant">
+              Cette colonne sert à reprendre une progression et choisir la prochaine lecture.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-outline-variant bg-surface-container-low/60 p-5">
+            <p className="eyebrow flex items-center gap-2"><Crosshair size={13} /> Voie connaissance</p>
+            <h2 className="mt-2 font-headline text-headline-sm font-semibold">Notes, favoris et décisions</h2>
+            <p className="mt-1.5 text-sm leading-relaxed text-surface-variant">
+              Cette colonne rassemble ce qui doit être conservé, confronté ou réutilisé dans un raisonnement.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
         {/* Left column */}
-        <div className="space-y-6">
+        <div className="space-y-6" aria-labelledby="dashboard-learning-lane">
+          <Reveal>
+            <div className="border-b border-outline-variant pb-3">
+              <h2 id="dashboard-learning-lane" className="flex items-center gap-2 font-headline text-headline-sm font-semibold text-balance">
+                <BookOpen size={18} className="text-surface-variant" />
+                Voie apprentissage
+              </h2>
+              <p className="mt-1 text-sm text-surface-variant text-pretty">Parcours, leçons et reprise.</p>
+            </div>
+          </Reveal>
+
           {/* Resume / start */}
           <Reveal>
             {resumeLesson ? (
@@ -99,7 +130,7 @@ export default function DashboardPage() {
             <div className="premium-card p-7">
               <div className="mb-4 flex items-center justify-between">
                 <p className="eyebrow flex items-center gap-2"><BookOpen size={13} /> Suggéré pour vous</p>
-              <Link to="/paths" className="text-xs text-surface-variant hover:text-foreground">Tous les parcours</Link>
+                <Link to="/paths" className="text-xs text-surface-variant hover:text-foreground">Tous les parcours</Link>
               </div>
               <div className="-mx-2">
                 {suggestedLessons.map((l) => {
@@ -131,7 +162,17 @@ export default function DashboardPage() {
         </div>
 
         {/* Right column */}
-        <div className="space-y-6">
+        <div className="space-y-6" aria-labelledby="dashboard-knowledge-lane">
+          <Reveal>
+            <div className="border-b border-outline-variant pb-3">
+              <h2 id="dashboard-knowledge-lane" className="flex items-center gap-2 font-headline text-headline-sm font-semibold text-balance">
+                <Crosshair size={18} className="text-surface-variant" />
+                Voie connaissance
+              </h2>
+              <p className="mt-1 text-sm text-surface-variant text-pretty">Notes, favoris et décisions.</p>
+            </div>
+          </Reveal>
+
           <Reveal>
             {learningProfile ? (
               <div className="premium-card p-7" style={{ borderColor: `color-mix(in srgb, ${learningProfile.accent} 35%, transparent)` }}>

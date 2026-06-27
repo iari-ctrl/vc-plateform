@@ -480,7 +480,7 @@ export function DebordScrollytelling({ post }: { post: BlogPost }) {
                   );
                 }
 
-                return <img key={scene.id} src={scene.image} alt={scene.alt} className={layerClass} />;
+                return <img key={scene.id} src={scene.image} alt={scene.alt} className={layerClass} loading={index === 0 ? 'eager' : 'lazy'} />;
               })}
             </div>
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(13_14_18/0.05),rgb(13_14_18/0.58))]" />

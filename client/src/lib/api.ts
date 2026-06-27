@@ -21,9 +21,22 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
     ...options,
   });
   const text = await res.text();
-  const data = text ? JSON.parse(text) : null;
+  let data: unknown = null;
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      // Non-JSON body (proxy error page, 502 HTML…). Surface it as an ApiError
+      // carrying res.status so offline-first callers fall back to the bundle,
+      // instead of a raw SyntaxError that no caller can interpret.
+      if (!res.ok) {
+        throw new ApiError(`Erreur ${res.status}`, res.status);
+      }
+      throw new ApiError(`Réponse non-JSON du serveur (statut ${res.status})`, res.status);
+    }
+  }
   if (!res.ok) {
-    throw new ApiError(data?.error ?? `Erreur ${res.status}`, res.status);
+    throw new ApiError((data as { error?: string } | null)?.error ?? `Erreur ${res.status}`, res.status);
   }
   return data as T;
 }

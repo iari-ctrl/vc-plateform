@@ -1,5 +1,17 @@
 # Manuel d'Architecture et d'Édition — VC Intelligence Platform
 
+> [!IMPORTANT]
+> **Statut documentaire — 2026-06-26**
+> - Dernière révision de fond indiquée : 2026-06-22.
+> - Périmètre : manuel d'architecture, cycle de vie du contenu et guide d'édition.
+> - Nature : **journal de suivi — peut diverger du code**. Pour les routes, scripts et compteurs, vérifier `client/src/App.tsx`, `shared/routes.mjs`, `package.json`, `data/` et `.github/workflows/ci.yml`.
+> - Sections manifestement à arbitrer au regard du code actuel : §1 annonce `glossary.json (361)` et un registre canonique à 433 entrées ; le repo courant compte 374 termes dans `data/glossary.json` et 436 entrées dans `data/sources/canonical-glossary.json`.
+> - Sections manifestement à arbitrer au regard du code actuel : §1 et §4.1 présentent les drop-in comme `ld-*` / `lea-*`; les fichiers `data/parcours/*.lessons.json` courants portent plutôt `ld-*`, `llp-*` et `lts-*`, tandis que les `lea-*` vivent maintenant dans `data/lessons.json`.
+> - Sections manifestement à arbitrer au regard du code actuel : §1bis liste une architecture cible en routes `/research`, `/theses`, `/atlas`, `/tools`, `/library`, `/workspace`; `client/src/App.tsx` expose aujourd'hui notamment `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables`, `/ecosystemes`, `/dashboard`, `/notes` et `/journal`.
+> - Sections manifestement à arbitrer au regard du code actuel : §3.3 cite `ThesisLabPage`, `AtlasPage` et `ResearchPage`, absentes du code courant ; les pages livrées côté intelligence sont `IntelligencePage`, `ConvictionsPage`, `DecisionsIndexPage`, `MethodePage`, `DeliverablesPage`, etc.
+> - Sections manifestement à arbitrer au regard du code actuel : §4.1 décrit les fichiers `data/parcours/<parcours>.lessons.json` comme un tableau exact de `Lesson`; les fichiers actuels sont des objets enveloppes avec une propriété `lessons`.
+> - Sections manifestement à arbitrer au regard du code actuel : §6 dit encore que `db:setup` fait un `db push` et conserve les compteurs `client 10 fichiers / 59 tests` + `serveur 3 fichiers / 10 tests`; le script courant utilise `prisma migrate deploy`, et les compteurs de tests sont dépassés par l'état du repo.
+
 Dernière mise à jour : 2026-06-22
 
 Ce document décrit l'architecture **full-stack** du projet, la **vision produit et le positionnement stratégique**, le cycle de vie du contenu (de la source canonique JSON jusqu'à l'écran), et un **guide d'édition pas-à-pas** pour un développeur qui veut ajouter du contenu, modifier le design, ou faire évoluer le code.

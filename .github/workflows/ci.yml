@@ -26,7 +26,11 @@ jobs:
       - name: Lint
         run: npm run lint
       - name: Build
-        # `npm run build` relance aussi la validation via le hook `prebuild`.
+        # `npm run build` relance aussi la validation via le hook `prebuild`, puis
+        # le prérendu statique des routes publiques via le hook `postbuild`
+        # (scripts/prerender.mjs, Puppeteer). Le Chromium est récupéré par `npm ci`
+        # (postinstall puppeteer) et lancé en `--no-sandbox`. Si le runner ne peut
+        # pas lancer Chromium, le prérendu s'auto-ignore (warning) sans casser le build.
         # `prisma generate` n'exige pas DATABASE_URL ; si le build serveur le
         # réclame un jour, ajouter le secret au job.
         run: npm run build

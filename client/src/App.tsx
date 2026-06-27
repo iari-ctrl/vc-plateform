@@ -16,6 +16,11 @@ const CourseDetailPage = lazy(() => import('@/pages/learn/CourseDetailPage'));
 const LessonPage = lazy(() => import('@/pages/learn/LessonPage'));
 const GlossaryPage = lazy(() => import('@/pages/glossary/GlossaryPage'));
 const CaseStudyPage = lazy(() => import('@/pages/cases/CaseStudyPage'));
+const IntelligencePage = lazy(() => import('@/pages/intelligence/IntelligencePage'));
+const ConvictionsPage = lazy(() => import('@/pages/intelligence/ConvictionsPage'));
+const DecisionsIndexPage = lazy(() => import('@/pages/intelligence/DecisionsIndexPage'));
+const MethodePage = lazy(() => import('@/pages/intelligence/MethodePage'));
+const DeliverablesPage = lazy(() => import('@/pages/intelligence/DeliverablesPage'));
 const DeliverablePage = lazy(() => import('@/pages/intelligence/DeliverablePage'));
 const SimulatorsPage = lazy(() => import('@/pages/simulators/SimulatorsPage'));
 const SimulatorPage = lazy(() => import('@/pages/simulators/SimulatorPage'));
@@ -84,8 +89,13 @@ export default function App() {
           <Route path="lessons/:slug" element={<LessonPage />} />
           <Route path="glossary" element={<GlossaryPage />} />
           <Route path="glossary/:slug" element={<GlossaryPage />} />
+          <Route path="intelligence" element={<IntelligencePage />} />
+          <Route path="convictions" element={<ConvictionsPage />} />
+          <Route path="decisions" element={<DecisionsIndexPage />} />
+          <Route path="methode" element={<MethodePage />} />
           <Route path="cases" element={<Navigate to="../bibliotheque" replace />} />
           <Route path="cases/:slug" element={<CaseStudyPage />} />
+          <Route path="livrables" element={<DeliverablesPage />} />
           <Route path="livrables/:slug" element={<DeliverablePage />} />
           <Route path="simulators" element={<SimulatorsPage />} />
           <Route path="simulators/:slug" element={<SimulatorPage />} />

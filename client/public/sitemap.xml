@@ -449,6 +449,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/convictions</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/convictions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/convictions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/convictions" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/convictions</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/convictions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/convictions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/convictions" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/courses/anatomie-d-une-term-sheet</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/courses/anatomie-d-une-term-sheet" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/courses/anatomie-d-une-term-sheet" />
@@ -703,6 +719,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/courses/reussir-l-entretien-analyst-modules" />
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/decisions</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/decisions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/decisions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/decisions" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/decisions</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/decisions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/decisions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/decisions" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vcpx.io/fr/ecosystemes</loc>
@@ -7295,6 +7327,22 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/intelligence</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/intelligence" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/intelligence" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/intelligence" />
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/intelligence</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/intelligence" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/intelligence" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/intelligence" />
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/lessons/48h-jour-j-suivi</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/lessons/48h-jour-j-suivi" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/lessons/48h-jour-j-suivi" />
@@ -8351,6 +8399,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/fr/livrables</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/livrables" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/livrables" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/livrables" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/livrables</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/livrables" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/livrables" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/livrables" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/fr/livrables/simulation-comite-investissement-seed</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/livrables/simulation-comite-investissement-seed" />
     <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/livrables/simulation-comite-investissement-seed" />
@@ -8477,6 +8541,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/memos/youtube-sequoia-2005" />
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/fr/methode</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/methode" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/methode" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/methode" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/en/methode</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vcpx.io/fr/methode" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vcpx.io/en/methode" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vcpx.io/fr/methode" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vcpx.io/fr/onboarding</loc>

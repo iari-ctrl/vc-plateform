@@ -239,7 +239,7 @@ export default function ParcoursPage() {
         </div>
       </div>
 
-      <p className="mt-6 text-center text-xs text-surface-variant">{PARCOURS.length} parcours · 7 familles · navigation libre</p>
+      <p className="mt-6 text-center text-xs text-surface-variant">{PARCOURS.length} parcours · {FAMILY_ORDER.length} familles · navigation libre</p>
     </div>
   );
 }

@@ -1,22 +1,30 @@
 # VC Premium Experience
 
-> Une plateforme d’intelligence VC comprendre le capital-risque, tester son alignement avec le métier,pour apprendre, analyser, cartographier et affiner son jugement d’investissement. 
+> Une plateforme d'intelligence VC pour analyser les écosystèmes, suivre les convictions, étudier les décisions et structurer sa progression dans le capital-risque.
 
 
-Une plateforme **full-stack** d'initiation, d'apprentissage et d'approfondissement du capital-risque. Elle commence par une **expérience d'introspection** inspirée de l'ikigai, puis recommande un parcours d'apprentissage personnalisé — sans jamais imposer de mur d'authentification ni verrouiller le moindre chapitre.
+Une plateforme **full-stack** d'intelligence VC, enrichie par une couche de formation. Elle articule désormais trois piliers navigables : **Intelligence VC** (dossiers, convictions, analyses, décisions, méthode), **Formation** (parcours, bibliothèque par rayons, dictionnaire) et **Workspace** (tableau de bord, notes, journal de décisions). Le compte reste optionnel : il sert à sauvegarder la progression, les notes, les citations, les favoris et le profil.
 
 > « L'ikigai n'est pas un point fixe à atteindre. C'est un centre de gravité qui se déplace avec toi. Le capital-risque, par sa temporalité longue — 10 ans par fonds — force précisément à se demander : où sera ce centre dans une décennie ? »
+
+---
+
+## ✦ Documentation
+
+- `docs/` porte la documentation pérenne : stratégie, décisions d'architecture, ADR i18n et documents de conception destinés à rester des références maintenues.
+- `Suivis/` est un **journal de suivi — peut diverger du code** : bilans datés, audits, scoring, notes de passes successives et procédures. Chaque fichier y porte désormais un encart de statut daté avec son périmètre et les sections à arbitrer.
+- En cas de doute, l'état réel se vérifie dans `client/`, `server/`, `data/`, `shared/routes.mjs` et les scripts du `package.json`.
 
 ---
 
 ## ✦ Principes fondateurs
 
 - **Liberté responsable.** Aucun chapitre n'est bloqué, aucune progression n'est imposée. On peut tout explorer en invité.
-- **Introspection d'abord.** L'onboarding est un véritable **cahier d'introspection** ikigai (diagramme à 13 zones, deux niveaux de lecture *Découverte / Avancé*, trois archétypes, sept questions libres) qui précède le catalogue : *pourquoi* avant *quoi*. Il conserve le test d'orientation scoré et le profil d'apprentissage.
+- **Intelligence d'abord, formation en soutien.** La première lecture du produit passe par les dossiers, convictions, analyses, décisions et méthodes. L'onboarding ikigai reste disponible pour personnaliser les parcours, mais il ne porte plus seul la promesse du site.
 - **Premium éditorial.** Entre école privée, memo d'investissement, knowledge base et carnet personnel — jamais un dashboard SaaS générique.
-- **Style sobre et naturel.** Toute rédaction du site (leçons, glossaire, analyses, dossiers d'écosystème, parcours, simulateurs) suit une **charte de style transverse non négociable** : prose fluide, registre d'analyste, pas de tics d'IA ni de survente. Source canonique : le skill `.claude/skills/ecosystemes/SKILL.md` (section « Writing style ») + la mémoire `style-redaction-naturel` ; résumé opérationnel dans [`Manuel_Architecture_Edition.md` §4.0.c](Manuel_Architecture_Edition.md).
+- **Style sobre et naturel.** Toute rédaction du site (leçons, glossaire, analyses, dossiers d'écosystème, parcours, simulateurs) suit une **charte de style transverse non négociable** : prose fluide, registre d'analyste, pas de tics d'IA ni de survente. Source canonique : le skill `.claude/skills/ecosystemes/SKILL.md` (section « Writing style ») + la mémoire `style-redaction-naturel` ; résumé opérationnel dans [`Suivis/Manuel_Architecture_Edition.md` §4.0.c](Suivis/Manuel_Architecture_Edition.md).
 - **Le compte est optionnel et utile.** Il ne sert qu'à *sauvegarder* : progression, notes, citations, favoris, profil, synchronisés entre appareils.
-- **Bilingue par conception (FR/EN).** Le routing localisé `/fr` `/en` est en place (Phase 1) ; le français reste la langue par défaut, avec repli FR pour les contenus EN non encore traduits. Le sélecteur FR/EN est **masqué** tant que l'anglais n'est pas livré (drapeau `EN_ENABLED = false` dans `client/src/i18n/config.ts`) — sous `/en`, `<html lang>` reste `fr` pour ne pas mentir aux lecteurs d'écran / crawlers. Voir [`i18n_architecture_FR-EN.md`](i18n_architecture_FR-EN.md).
+- **Bilingue par conception (FR/EN).** Le routing localisé `/fr` `/en` est en place (Phase 1) ; le français reste la langue par défaut, avec repli FR pour les contenus EN non encore traduits. Le sélecteur FR/EN est **masqué** tant que l'anglais n'est pas livré (drapeau `EN_ENABLED = false` dans `client/src/i18n/config.ts`) — sous `/en`, `<html lang>` reste `fr` pour ne pas mentir aux lecteurs d'écran / crawlers. Voir [`docs/i18n_architecture_FR-EN.md`](docs/i18n_architecture_FR-EN.md).
 
 ---
 
@@ -69,7 +77,8 @@ npm run dev
 | `npm run db:reset` | Réinitialise la base puis re-seed |
 | `npm run content:export` | Réexporte les éditions DB (glossaire, blog, cas) vers les JSON sources (`data/blog/<slug>.json` pour les analyses) |
 | `npm run split:content` | Régénère les index/contenus scindés (`split:glossary` + `split:lessons`) |
-| `npm run build` | Build serveur (tsc) puis client (vite) |
+| `npm run build` | Build serveur (tsc) puis client (vite) ; le hook `postbuild` enchaîne le **prérendu statique** |
+| `npm run prerender` | Prérend les routes publiques en HTML statique (`client/dist/<route>/index.html`) — lancé automatiquement après `build` |
 | `npm run test --workspace client` | Tests Vitest client (routing i18n, `safeHttpUrl`, `computeProfile`, simulateurs…) |
 | `npm run test --workspace server` | Tests d'intégration serveur (auth, profil, isolation par `userId`) |
 | `npm run validate:content` | Vérifie que tous les liens dictionnaire `[[..]]` / `{{..}}` du contenu résolvent |
@@ -79,14 +88,13 @@ npm run dev
 
 ### État vérifié
 
-Audit local courant (2026-06-12, exécuté sur la branche `chore/flux-c-repo-hygiene`) :
+Audit local courant (2026-06-26) :
 
-- `npm run validate:content` : OK (récap au 2026-06-15 : 66 leçons · 358 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs), **sans warning éditorial** — quiz désormais systématiques (plus aucune leçon sans quiz) ;
-- `npm run lint` : OK, 0 erreur, 4 warnings (uniquement `react-refresh/only-export-components`, structurels aux Context) ;
-- `npm run build` : OK, build serveur + client (validation contenu rejouée via le hook `prebuild`) ;
-- `npm run test --workspace client` : OK, 10 fichiers / 59 tests ;
-- `npm run test --workspace server` : OK, 3 fichiers / 10 tests (auth, profil, isolation des données par `userId`) ;
-- Git : dépôt initialisé ; `master` suit `origin/master`.
+- `npm run build` : OK, avec `split:content`, `validate:content`, `generate:sitemap`, build serveur, build client, puis `postbuild` → **prérendu statique** (573 routes FR écrites sous `client/dist/<route>/index.html`, ~70 s) ;
+- `npm run validate:content` via `prebuild` : OK, 22 parcours · 9 rayons · 16 cours · 66 leçons · 374 termes · 6 études de cas · 2 livrables · 8 articles · 31 dossiers d'écosystème · 9 simulateurs ;
+- `npm run lint` : OK, 0 erreur, 4 warnings structurels `react-refresh/only-export-components` sur les Context ;
+- `npm run test --workspace client` : OK, 12 fichiers / 70 tests ;
+- sitemap régénéré : les index `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables` sont publiés en FR/EN.
 
 Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 
@@ -101,7 +109,8 @@ Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 - **i18n Phase 1** : routing localisé `/fr` `/en` (`client/src/i18n/`), redirection racine crawler-safe, sélecteur FR/EN **présent mais masqué** jusqu'à la traduction du chrome et du contenu ;
 - **Sécurité / qualité** : auth cookie-only, mot de passe ≥ 8 + rate-limit auth, CORS dev-only, markdown sûr (`safeHttpUrl`), Error Boundary au niveau route, tokens `--error`/`--success` ;
 - **Tests** : harnais Vitest (client 10 fichiers / 59 tests · serveur 3 fichiers / 10 tests) + CI ;
-- **Couche Parcours branchée au client** : la **page `/paths` réunit la carte interactive (l'Atlas) et le catalogue des parcours** (trajectoires par objectif, étagères par famille, bandeau « Ton parcours » issu de l'ikigai) ; `/paths/:slug` est la « carte de voyage » d'un parcours (étapes typées cœur/bonus/pratique/respiration, curseur temps, jalon, bloc interactif de pré-requis liés au glossaire). La **Bibliothèque (`/bibliotheque`) présente les cours**, rangés par rayon (les 9 anciens *paths* deviennent ces rayons thématiques). Loader `client/src/content/parcours.ts`, pages `ParcoursPage` / `ParcoursDetailPage` / `ParcoursOrSubjectPage`. Voir [`docs/parcours-apprentissage-conception.md`](docs/parcours-apprentissage-conception.md).
+- **IA en 3 piliers (2026-06-26)** : la navigation publique est réorganisée autour d'**Intelligence VC**, **Formation** et **Workspace**. Les nouvelles pages-index `/intelligence`, `/convictions`, `/decisions`, `/methode` et `/livrables` agrègent les contenus existants sans déplacer les slugs de détail.
+- **Couche Parcours branchée au client** : la **page `/paths` réunit la carte interactive (l'Atlas) et le catalogue des parcours** (trajectoires par objectif, étagères par famille, bandeau « Ton parcours » issu de l'ikigai) ; `/paths/:slug` reste l'aiguilleur parcours/rayon. La **Bibliothèque (`/bibliotheque`) présente désormais les 9 rayons thématiques comme ossature**, puis le catalogue complet des cours, lectures et cas. Loader `client/src/content/parcours.ts`, pages `ParcoursPage` / `PathDetailPage` / `ParcoursOrSubjectPage`. Voir [`docs/parcours-apprentissage-conception.md`](docs/parcours-apprentissage-conception.md).
 - **Contenu** : pipeline d'authoring `docs/parcours/` → `data/parcours/*.lessons.json` (2 parcours rédigés, dont le registre « entretien Analyst »). Les leçons drop-in (`ld-*`/`lea-*`) sont **servies côté client** : `scripts/split-lessons.mjs` les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts` (cf. « Performance » ci-dessous), et les 2 parcours phares pointent dessus. **Pas encore** fusionnées dans `data/lessons.json` canonique ni seedées en base : côté **API/DB** elles restent absentes — le client les sert via le fallback bundle, donc `npm run db:seed` reste à faire pour aligner le serveur.
 - **Cours Power Law & Monte Carlo** : nouveau cours canonique `c-power-law-portfolio` dans le rayon Portfolio, avec 4 leçons (`lpl-*`) qui expliquent moyenne vs médiane, pertinence de Monte Carlo, moteur du simulateur Power Law et lecture TVPI/concentration/fund returner. Le simulateur Power Law référence maintenant ces leçons en premier.
 - **Performance / bundle** : le glossaire **et** les leçons sont découpés en un index léger (eager, hot path : popovers, recherche, liens) et un chunk lourd lazy (définitions / corps de leçon), via `scripts/split-glossary.mjs` + `scripts/split-lessons.mjs` (câblés dans `predev`/`prebuild` par `npm run split:content`). Le chunk eager `lessons` passe de ~176 kB à ~32 kB ; les corps (~143 kB) ne sont chargés que par le lecteur de leçon.
@@ -188,9 +197,31 @@ Palette éditoriale de luxe — **feuille d'or doré** (`#C5A85C`), **bleu marin
 
 ---
 
+## ✦ Prérendu statique (SEO & partage social)
+
+Le site reste une SPA : `client/index.html` ne porte que des métadonnées génériques et les balises par page (`<title>`, `og:*`, `twitter:*`, `canonical`, `hreflang`) sont injectées au runtime par `usePageMeta` (`client/src/lib/seo.ts`) dans un effet React. Les scrapers de partage social (Open Graph/Twitter, LinkedIn, Slack, Discord) et nombre de crawlers **n'exécutent pas le JavaScript** : sans prérendu, tout partage retombe sur la carte générique.
+
+`scripts/prerender.mjs` corrige ce point **après le build** : il sert le `client/dist` produit par Vite, pilote un Chromium headless (Puppeteer) sur chaque route publique, attend la fin de l'hydratation (donc `usePageMeta` exécuté, métadonnées présentes dans le `<head>`) puis écrit le DOM rendu dans `client/dist/<route>/index.html`. Un hébergeur statique sert alors un `<head>` complet (et un corps déjà rendu) aux scrapers et crawlers sans JS, pendant que la SPA continue de s'hydrater par-dessus pour les visiteurs.
+
+```bash
+# Lancé automatiquement par le hook postbuild ; sinon, après un build client :
+VITE_SITE_URL=https://vcpx.io npm run build          # build + prérendu de toutes les routes
+VITE_SITE_URL=https://vcpx.io npm run prerender      # prérendu seul (dist déjà construit)
+
+# Itérer sur une route précise (vérification) :
+node scripts/prerender.mjs --filter=/fr/blog/voir-comme-un-etat --limit=1
+node scripts/prerender.mjs --concurrency=8            # parallélisme (défaut 6)
+```
+
+- **Liste des URLs.** Même énumération que le sitemap (`scripts/collect-routes.mjs` : pages statiques de `shared/routes.mjs` + collections dérivées de `data/`). Les `NOINDEX_SEGMENTS` de `shared/routes.mjs` sont exclus ; l'anglais n'est prérendu que si `EN_ENABLED` est activé dans `client/src/i18n/config.ts`.
+- **Domaine canonique.** Builder avec `VITE_SITE_URL` (ou `SITE_URL`/`CLIENT_ORIGIN`) défini pour que `canonical`/`og:url` portent le domaine de production. À défaut, le script réécrit l'origine de crawl vers le domaine résolu (fallback `https://vcpx.io`), mais définir la variable au build reste la voie propre.
+- **Hébergement.** Le CDN/host statique doit servir `client/dist/<route>/index.html` pour l'URL correspondante (clean URLs / auto-index), et conserver `client/dist/index.html` comme repli SPA pour les routes non prérendues (espace authentifié, `/` qui redirige côté client).
+
+---
+
 ## ✦ Vers la production
 
-- **Décision d'architecture préalable :** trancher le **mode de rendu** (CSR actuel vs prérendu/SSG). Analyse menée : hybride recommandé — SSG/ISR pour l'éditorial (SEO, partage social), CSR pour l'app authentifiée. Le SEO concret (prérendu, OpenGraph par page, `hreflang` i18n) en découle et reste différé au pré-lancement.
+- **Mode de rendu — tranché.** SPA (CSR) + **prérendu statique des routes publiques au build** (cf. section « Prérendu statique » ci-dessus) : OpenGraph/`canonical`/`hreflang` par page sont désormais présents dans le HTML statique pour le SEO et le partage social, sans migration SSG. L'app authentifiée reste en CSR.
 - Remplacer `provider = "sqlite"` par `postgresql` dans `prisma/schema.prisma` et ajuster `DATABASE_URL`. Pour l'i18n, ajouter `locale` aux modèles de contenu + `@@unique([slug, locale])` (i18n Phase 4).
 - Définir un vrai `JWT_SECRET` (la garde production exige déjà longueur min. + blocklist) et passer le cookie en `secure: true` derrière HTTPS ; finaliser le durcissement (helmet, CSP/HSTS, contraste de l'or).
 - Servir le `client/dist` derrière un CDN ; héberger l'API séparément (Render, Fly, Railway…) ou en serverless.

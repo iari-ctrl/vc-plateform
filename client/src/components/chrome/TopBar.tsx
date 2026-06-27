@@ -12,10 +12,9 @@ import { useUI } from '@/context/UIContext';
 import { initials } from '@/lib/utils';
 
 const NAV = [
-  { to: '/paths', label: 'Parcours' },
-  { to: '/bibliotheque', label: 'Bibliothèque' },
+  { to: '/intelligence', label: 'Intelligence VC' },
+  { to: '/paths', label: 'Formation' },
   { to: '/glossary', label: 'Dictionnaire' },
-  { to: '/simulators', label: 'Simulateurs' },
   { to: '/blog', label: 'Analyses' },
 ];
 

@@ -2,8 +2,9 @@ import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, BookOpen, Briefcase, ChevronDown, Clock, GraduationCap, Library, Route, Search } from 'lucide-react';
 import { Link } from '@/i18n/routing';
-import { COURSES, courseById } from '@/content/courses';
-import { LESSONS } from '@/content/lessons';
+import { courseById, coursesForPath } from '@/content/courses';
+import { lessonsForPath } from '@/content/lessons';
+import { PATHS } from '@/content/paths';
 import { CASE_STUDIES } from '@/content/caseStudies';
 import {
   FAMILY_META,
@@ -16,8 +17,9 @@ import {
   type ParcoursFamily,
 } from '@/content/parcours';
 import { cn } from '@/lib/utils';
-import type { Course, Level } from '@/content/types';
+import type { CaseStudy, Course, LessonIndexEntry, Level } from '@/content/types';
 import { SectionHeading, Reveal, LevelBadge, EmptyState } from '@/components/ui/primitives';
+import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { CompassRose } from '@/components/ornaments/Illustrations';
 import { usePageMeta } from '@/lib/seo';
 
@@ -82,57 +84,48 @@ function courseParcours(course: Course) {
   ]);
 }
 
-function buildLibraryItems(): LibraryItem[] {
-  const courseItems = COURSES.flatMap((course): LibraryItem[] => {
-    const parcours = courseParcours(course);
-    if (!parcours.length) return [];
-    return [{
-      id: course.id,
-      type: 'course',
-      title: course.title,
-      subtitle: course.summary,
-      href: `/courses/${course.slug}`,
-      level: course.level,
-      durationMin: course.durationMin,
-      tags: course.tags,
-      parcours,
-    }];
-  });
+function courseToItem(course: Course): LibraryItem {
+  return {
+    id: course.id,
+    type: 'course',
+    title: course.title,
+    subtitle: course.summary,
+    href: `/courses/${course.slug}`,
+    level: course.level,
+    durationMin: course.durationMin,
+    tags: course.tags,
+    parcours: courseParcours(course),
+  };
+}
 
-  const lessonItems = LESSONS.flatMap((lesson): LibraryItem[] => {
-    const course = courseById(lesson.courseId);
-    const parcours = parcoursForLesson(lesson.id);
-    if (!parcours.length) return [];
-    return [{
-      id: lesson.id,
-      type: 'lesson',
-      title: lesson.title,
-      subtitle: lesson.summary,
-      href: `/lessons/${lesson.slug}`,
-      level: course?.level ?? 'tous',
-      durationMin: lesson.readMin,
-      tags: Array.from(new Set([...(course?.tags ?? []), ...lesson.glossaryRefs])),
-      parcours,
-      courseTitle: course?.title,
-    }];
-  });
+function lessonToItem(lesson: LessonIndexEntry): LibraryItem {
+  const course = courseById(lesson.courseId);
+  return {
+    id: lesson.id,
+    type: 'lesson',
+    title: lesson.title,
+    subtitle: lesson.summary,
+    href: `/lessons/${lesson.slug}`,
+    level: course?.level ?? 'tous',
+    durationMin: lesson.readMin,
+    tags: Array.from(new Set([...(course?.tags ?? []), ...lesson.glossaryRefs])),
+    parcours: parcoursForLesson(lesson.id),
+    courseTitle: course?.title,
+  };
+}
 
-  const caseItems = CASE_STUDIES.flatMap((cs): LibraryItem[] => {
-    const parcours = parcoursForCase(cs.id);
-    return [{
-      id: cs.id,
-      type: 'case',
-      title: cs.title,
-      subtitle: cs.subtitle,
-      href: `/cases/${cs.slug}`,
-      level: 'tous',
-      durationMin: cs.readMin,
-      tags: cs.tags,
-      parcours,
-    }];
-  });
-
-  return [...courseItems, ...lessonItems, ...caseItems];
+function caseToItem(cs: CaseStudy): LibraryItem {
+  return {
+    id: cs.id,
+    type: 'case',
+    title: cs.title,
+    subtitle: cs.subtitle,
+    href: `/cases/${cs.slug}`,
+    level: 'tous',
+    durationMin: cs.readMin,
+    tags: cs.tags,
+    parcours: parcoursForCase(cs.id),
+  };
 }
 
 function ParcoursBadges({ parcours }: { parcours: Parcours[] }) {
@@ -220,24 +213,44 @@ function LessonLibraryRow({ item }: { item: LibraryItem }) {
 
 export default function PathsPage() {
   usePageMeta(
-    'Bibliothèque · cours et lectures',
-    'Le catalogue des cours, lectures et études de cas qui composent les parcours VC Premium. Les simulateurs restent dans leur espace dédié.',
+    'Bibliothèque · rayons par thème',
+    'La bibliothèque organisée par thème : 9 rayons qui exposent leurs cours, lectures et cas. Les parcours restent l’entrée par objectif.',
   );
 
   const [searchParams, setSearchParams] = useSearchParams();
   const type = (searchParams.get('type') as ItemType) || 'all';
 
-  const allItems = useMemo(() => buildLibraryItems(), []);
-  const tags = useMemo(() => Array.from(new Set(allItems.flatMap((item) => item.tags))).sort((a, b) => a.localeCompare(b, 'fr')), [allItems]);
+  // The 9 rayons (data/paths.json, sorted by `order`) are the backbone: each
+  // carries its own courses and lessons. Parcours-module courses (pathId `p-*`)
+  // belong to the « par objectif » entry (/paths) and are intentionally absent.
+  const rayons = useMemo(
+    () =>
+      [...PATHS]
+        .sort((a, b) => a.order - b.order)
+        .map((path) => ({
+          path,
+          courses: coursesForPath(path.id).map(courseToItem),
+          lessons: lessonsForPath(path.id).map(lessonToItem),
+        })),
+    [],
+  );
+  // Études de cas are transversal — they illustrate several rayons at once, so
+  // they live in a residual shelf rather than under a single theme.
+  const caseItems = useMemo(() => CASE_STUDIES.map(caseToItem), []);
+
+  const tags = useMemo(() => {
+    const all = [...rayons.flatMap((r) => [...r.courses, ...r.lessons]), ...caseItems].flatMap((item) => item.tags);
+    return Array.from(new Set(all)).sort((a, b) => a.localeCompare(b, 'fr'));
+  }, [rayons, caseItems]);
+
   const [query, setQuery] = useState('');
   const [level, setLevel] = useState<'all' | Level>('all');
   const [family, setFamily] = useState<'all' | ParcoursFamily>('all');
   const [duration, setDuration] = useState<DurationFilter>('all');
   const [tag, setTag] = useState('all');
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
-  const [coursesCollapsed, setCoursesCollapsed] = useState(false);
-  const [lessonsCollapsed, setLessonsCollapsed] = useState(false);
-  const [casesCollapsed, setCasesCollapsed] = useState(false);
+  const toggleRayon = (id: string) => setCollapsed((prev) => ({ ...prev, [id]: !prev[id] }));
 
   const handleTypeChange = (newType: ItemType) => {
     setSearchParams((prev) => {
@@ -250,7 +263,7 @@ export default function PathsPage() {
     });
   };
 
-  const filtered = allItems.filter((item) => {
+  const matches = (item: LibraryItem) => {
     const q = normalize(query.trim());
     const haystack = normalize([item.title, item.subtitle, item.courseTitle, item.tags.join(' '), item.parcours.map((p) => t(p.title)).join(' ')].filter(Boolean).join(' '));
     return (
@@ -261,11 +274,18 @@ export default function PathsPage() {
       durationMatches(item.durationMin, duration) &&
       (tag === 'all' || item.tags.includes(tag))
     );
-  });
+  };
 
-  const courses = filtered.filter((item) => item.type === 'course');
-  const lessons = filtered.filter((item) => item.type === 'lesson');
-  const cases = filtered.filter((item) => item.type === 'case');
+  // Filters apply *inside* the rayon structure: each shelf keeps only the items
+  // that match, and a shelf with nothing left simply drops out.
+  const groups = rayons
+    .map((r) => ({ path: r.path, courses: r.courses.filter(matches), lessons: r.lessons.filter(matches) }))
+    .filter((g) => g.courses.length || g.lessons.length);
+  const cases = caseItems.filter(matches);
+
+  const courseCount = groups.reduce((n, g) => n + g.courses.length, 0);
+  const lessonCount = groups.reduce((n, g) => n + g.lessons.length, 0);
+  const total = courseCount + lessonCount + cases.length;
 
   return (
     <div className="mx-auto max-w-[var(--content-max)] px-4 py-14 sm:px-6 lg:px-8">
@@ -273,9 +293,9 @@ export default function PathsPage() {
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <SectionHeading
-              eyebrow="Bibliothèque · matière première"
-              title={<>Cours, lectures et <span className="ink-underline">études de cas</span></>}
-              description="Le catalogue des contenus qui composent les parcours : cours structurants, lectures courtes, frameworks et études de cas. Les simulateurs restent dans leur atelier dédié."
+              eyebrow="Bibliothèque · par thème"
+              title={<>Choisis un <span className="ink-underline">rayon</span>, puis explore ses cours</>}
+              description="La bibliothèque est l’entrée par thème : neuf rayons qui exposent leurs cours et leurs lectures. Les parcours restent l’entrée par objectif, quand vous cherchez une destination précise."
             />
             <div className="flex shrink-0 items-center gap-4">
               <CompassRose size={88} className="hidden opacity-90 sm:block" />
@@ -284,9 +304,10 @@ export default function PathsPage() {
           </div>
         </Reveal>
       </section>
- 
+
       <Reveal delay={80}>
         <section className="mt-10 rounded-2xl border border-outline-variant bg-surface-container-low/40 p-4 sm:p-5" aria-label="Filtres de bibliothèque">
+          <p className="eyebrow mb-4">Filtrer les rayons</p>
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
             <label className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-outline-variant bg-surface-container-lowest px-4">
               <Search size={16} className="shrink-0 text-surface-variant" aria-hidden />
@@ -299,7 +320,7 @@ export default function PathsPage() {
                 placeholder="Rechercher un cours, une lecture, un thème..."
               />
             </label>
- 
+
             <div className="flex flex-wrap gap-2" role="group" aria-label="Type de contenu">
               {TYPE_FILTERS.map((f) => (
                 <button
@@ -350,132 +371,106 @@ export default function PathsPage() {
       </Reveal>
 
       <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-surface-variant">
-        <span className="inline-flex items-center gap-1.5"><Library size={15} /> {filtered.length} contenu{filtered.length > 1 ? 's' : ''}</span>
-        <span className="inline-flex items-center gap-1.5"><GraduationCap size={15} /> {courses.length} cours</span>
-        <span className="inline-flex items-center gap-1.5"><BookOpen size={15} /> {lessons.length} lecture{lessons.length > 1 ? 's' : ''}</span>
+        <span className="inline-flex items-center gap-1.5"><Library size={15} /> {total} contenu{total > 1 ? 's' : ''}</span>
+        <span className="inline-flex items-center gap-1.5"><Route size={15} /> {groups.length} rayon{groups.length > 1 ? 's' : ''}</span>
+        <span className="inline-flex items-center gap-1.5"><GraduationCap size={15} /> {courseCount} cours</span>
+        <span className="inline-flex items-center gap-1.5"><BookOpen size={15} /> {lessonCount} lecture{lessonCount > 1 ? 's' : ''}</span>
         <span className="inline-flex items-center gap-1.5"><Briefcase size={15} /> {cases.length} étude{cases.length > 1 ? 's' : ''} de cas</span>
-        <span className="inline-flex items-center gap-1.5"><Route size={15} /> rattachés aux parcours</span>
       </div>
 
-      {filtered.length === 0 ? (
+      {total === 0 ? (
         <div className="mt-12">
           <EmptyState icon={<Search size={26} />} title="Aucun contenu trouvé" description="Essayez un autre thème, niveau ou mot-clé." />
         </div>
       ) : (
         <>
-          {courses.length > 0 && (
-            <section className="mt-10">
-              <Reveal>
-                <button
-                  type="button"
-                  onClick={() => setCoursesCollapsed(!coursesCollapsed)}
-                  className="mb-5 flex items-center gap-3 text-left font-headline text-headline-lg font-semibold group cursor-pointer focus:outline-none select-none"
-                  aria-expanded={!coursesCollapsed}
-                >
-                  <h2>Cours</h2>
-                  <span className="font-mono text-xs text-surface-variant bg-surface-container px-2 py-0.5 rounded-full">{courses.length}</span>
-                  <ChevronDown
-                    size={20}
-                    className={cn(
-                      "text-surface-variant transition-transform duration-300 group-hover:text-foreground",
-                      coursesCollapsed && "-rotate-90"
-                    )}
-                  />
-                </button>
-              </Reveal>
-              <div
-                className={cn(
-                  "grid transition-all duration-300 ease-in-out",
-                  coursesCollapsed ? "grid-rows-[0fr] opacity-0 pointer-events-none" : "grid-rows-[1fr] opacity-100"
-                )}
-              >
-                <div className="overflow-hidden">
-                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 pt-1 pb-1">
-                    {courses.map((item, i) => (
-                      <Reveal key={item.id} delay={(i % 3) * 60}>
-                        <CourseLibraryCard item={item} />
-                      </Reveal>
-                    ))}
+          {groups.map((g) => {
+            const isCollapsed = collapsed[g.path.id];
+            return (
+              <section key={g.path.id} id={g.path.slug} className="mt-12 scroll-mt-24 border-b border-outline-variant/30 pb-10 last:border-0 last:pb-0">
+                <Reveal>
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <button
+                      type="button"
+                      onClick={() => toggleRayon(g.path.id)}
+                      aria-expanded={!isCollapsed}
+                      className="flex flex-1 items-start gap-4 text-left group cursor-pointer select-none focus:outline-none"
+                    >
+                      <KanjiSeal kanji={g.path.kanji ?? '◆'} accent={g.path.accent} size={44} />
+                      <div className="min-w-0">
+                        <p className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-surface-variant">
+                          Rayon {String(g.path.order).padStart(2, '0')}
+                        </p>
+                        <div className="flex items-center gap-2">
+                          <h2 className="font-headline text-headline-lg font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">
+                            {g.path.title}
+                          </h2>
+                          <ChevronDown
+                            size={18}
+                            className={cn(
+                              "text-surface-variant transition-transform duration-300 group-hover:text-foreground",
+                              isCollapsed && "-rotate-90",
+                            )}
+                          />
+                        </div>
+                        <p className="mt-0.5 text-sm italic text-surface-variant">{g.path.subtitle}</p>
+                      </div>
+                    </button>
+                    <div className="flex shrink-0 flex-col items-end gap-2">
+                      <span className="chip">{g.courses.length} cours · {g.lessons.length} lectures</span>
+                      <Link to={`/paths/${g.path.slug}`} className="inline-flex items-center gap-1 text-xs font-medium text-[color:var(--primary)] hover:underline">
+                        Ouvrir le rayon <ArrowRight size={12} />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </section>
-          )}
+                </Reveal>
 
-          {lessons.length > 0 && (
-            <section className="mt-12">
-              <Reveal>
-                <button
-                  type="button"
-                  onClick={() => setLessonsCollapsed(!lessonsCollapsed)}
-                  className="mb-5 flex items-center gap-3 text-left font-headline text-headline-lg font-semibold group cursor-pointer focus:outline-none select-none"
-                  aria-expanded={!lessonsCollapsed}
+                <div
+                  className={cn(
+                    "grid transition-all duration-300 ease-in-out",
+                    isCollapsed ? "grid-rows-[0fr] opacity-0 pointer-events-none mt-0" : "grid-rows-[1fr] opacity-100 mt-6",
+                  )}
                 >
-                  <h2>Lectures</h2>
-                  <span className="font-mono text-xs text-surface-variant bg-surface-container px-2 py-0.5 rounded-full">{lessons.length}</span>
-                  <ChevronDown
-                    size={20}
-                    className={cn(
-                      "text-surface-variant transition-transform duration-300 group-hover:text-foreground",
-                      lessonsCollapsed && "-rotate-90"
+                  <div className="overflow-hidden">
+                    {g.courses.length > 0 && (
+                      <div className="grid gap-5 pt-1 pb-1 sm:grid-cols-2 lg:grid-cols-3">
+                        {g.courses.map((item, i) => (
+                          <Reveal key={item.id} delay={(i % 3) * 60}>
+                            <CourseLibraryCard item={item} />
+                          </Reveal>
+                        ))}
+                      </div>
                     )}
-                  />
-                </button>
-              </Reveal>
-              <div
-                className={cn(
-                  "grid transition-all duration-300 ease-in-out",
-                  lessonsCollapsed ? "grid-rows-[0fr] opacity-0 pointer-events-none" : "grid-rows-[1fr] opacity-100"
-                )}
-              >
-                <div className="overflow-hidden">
-                  <div className="space-y-3 pt-1 pb-1">
-                    {lessons.map((item, i) => (
-                      <Reveal key={item.id} delay={(i % 6) * 35}>
-                        <LessonLibraryRow item={item} />
-                      </Reveal>
-                    ))}
+                    {g.lessons.length > 0 && (
+                      <div className={cn("space-y-3", g.courses.length > 0 && "mt-6")}>
+                        {g.lessons.map((item, i) => (
+                          <Reveal key={item.id} delay={(i % 6) * 35}>
+                            <LessonLibraryRow item={item} />
+                          </Reveal>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
-            </section>
-          )}
+              </section>
+            );
+          })}
 
           {cases.length > 0 && (
             <section className="mt-12">
               <Reveal>
-                <button
-                  type="button"
-                  onClick={() => setCasesCollapsed(!casesCollapsed)}
-                  className="mb-5 flex items-center gap-3 text-left font-headline text-headline-lg font-semibold group cursor-pointer focus:outline-none select-none"
-                  aria-expanded={!casesCollapsed}
-                >
-                  <h2>Études de cas</h2>
-                  <span className="font-mono text-xs text-surface-variant bg-surface-container px-2 py-0.5 rounded-full">{cases.length}</span>
-                  <ChevronDown
-                    size={20}
-                    className={cn(
-                      "text-surface-variant transition-transform duration-300 group-hover:text-foreground",
-                      casesCollapsed && "-rotate-90"
-                    )}
-                  />
-                </button>
-              </Reveal>
-              <div
-                className={cn(
-                  "grid transition-all duration-300 ease-in-out",
-                  casesCollapsed ? "grid-rows-[0fr] opacity-0 pointer-events-none" : "grid-rows-[1fr] opacity-100"
-                )}
-              >
-                <div className="overflow-hidden">
-                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 pt-1 pb-1">
-                    {cases.map((item, i) => (
-                      <Reveal key={item.id} delay={(i % 3) * 60}>
-                        <CaseLibraryCard item={item} />
-                      </Reveal>
-                    ))}
-                  </div>
+                <div className="mb-2 flex items-center gap-3">
+                  <h2 className="font-headline text-headline-lg font-semibold">Études de cas</h2>
+                  <span className="rounded-full bg-surface-container px-2 py-0.5 font-mono text-xs text-surface-variant">{cases.length}</span>
                 </div>
+                <p className="mb-5 text-sm text-surface-variant">Transversales aux rayons — elles confrontent plusieurs thèmes à la fois.</p>
+              </Reveal>
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {cases.map((item, i) => (
+                  <Reveal key={item.id} delay={(i % 3) * 60}>
+                    <CaseLibraryCard item={item} />
+                  </Reveal>
+                ))}
               </div>
             </section>
           )}

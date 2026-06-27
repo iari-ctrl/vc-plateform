@@ -18,6 +18,8 @@
     "split:lessons": "node scripts/split-lessons.mjs",
     "prebuild": "npm run split:content && npm run validate:content && npm run generate:sitemap",
     "build": "npm run build --workspace server && npm run build --workspace client",
+    "postbuild": "npm run prerender",
+    "prerender": "node scripts/prerender.mjs",
     "db:setup": "npm run db:setup --workspace server",
     "db:seed": "npm run db:seed --workspace server",
     "db:reset": "npm run db:reset --workspace server",
@@ -32,7 +34,8 @@
     "aliases:merge": "node scripts/merge-aliases.mjs"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "puppeteer": "^25.2.1"
   },
   "engines": {
     "node": ">=20"

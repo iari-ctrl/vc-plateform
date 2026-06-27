@@ -6,7 +6,7 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { prisma } from '../lib/db.js';
 import { requireAdmin } from '../lib/auth.js';
-import { stripHtml } from '../lib/content.js';
+import { buildSearchText } from '../lib/content.js';
 import { ah } from '../lib/async-handler.js';
 
 export const adminRouter = Router();
@@ -53,7 +53,7 @@ adminRouter.post('/glossary', ah(async (req, res) => {
   const slug = parsed.data.slug || slugify(parsed.data.term);
   const id = slug;
   const obj = { id, ...parsed.data, slug };
-  const searchText = stripHtml([obj.term, obj.latin, obj.short, obj.definition, obj.example].filter(Boolean).join(' ')).toLowerCase();
+  const searchText = buildSearchText([obj.term, obj.latin, obj.short, obj.definition, obj.example].filter(Boolean).join(' '));
   try {
     const row = await prisma.glossaryTerm.create({ data: { id, slug, term: obj.term, category: obj.category, searchText, data: JSON.stringify(obj) } });
     res.status(201).json(JSON.parse(row.data));
@@ -69,7 +69,7 @@ adminRouter.put('/glossary/:id', ah(async (req, res) => {
   if (!existing) return res.status(404).json({ error: 'Terme introuvable.' });
   const slug = parsed.data.slug || existing.slug;
   const obj = { id: existing.id, ...parsed.data, slug };
-  const searchText = stripHtml([obj.term, obj.latin, obj.short, obj.definition, obj.example].filter(Boolean).join(' ')).toLowerCase();
+  const searchText = buildSearchText([obj.term, obj.latin, obj.short, obj.definition, obj.example].filter(Boolean).join(' '));
   const row = await prisma.glossaryTerm.update({ where: { id: existing.id }, data: { slug, term: obj.term, category: obj.category, searchText, data: JSON.stringify(obj) } });
   res.json(JSON.parse(row.data));
 }));
@@ -104,7 +104,7 @@ adminRouter.post('/blog', ah(async (req, res) => {
   const slug = parsed.data.slug || slugify(parsed.data.title);
   const id = `bp-${slug}`.slice(0, 60);
   const obj = { id, ...parsed.data, slug };
-  const searchText = stripHtml([obj.title, obj.subtitle, obj.excerpt, obj.body].join(' ')).toLowerCase();
+  const searchText = buildSearchText([obj.title, obj.subtitle, obj.excerpt, obj.body].join(' '));
   try {
     const row = await prisma.blogPost.create({ data: { id, slug, title: obj.title, category: obj.category, date: obj.date, searchText, data: JSON.stringify(obj) } });
     res.status(201).json(JSON.parse(row.data));
@@ -120,7 +120,7 @@ adminRouter.put('/blog/:id', ah(async (req, res) => {
   if (!existing) return res.status(404).json({ error: 'Article introuvable.' });
   const slug = parsed.data.slug || existing.slug;
   const obj = { id: existing.id, ...parsed.data, slug };
-  const searchText = stripHtml([obj.title, obj.subtitle, obj.excerpt, obj.body].join(' ')).toLowerCase();
+  const searchText = buildSearchText([obj.title, obj.subtitle, obj.excerpt, obj.body].join(' '));
   const row = await prisma.blogPost.update({ where: { id: existing.id }, data: { slug, title: obj.title, category: obj.category, date: obj.date, searchText, data: JSON.stringify(obj) } });
   res.json(JSON.parse(row.data));
 }));
@@ -156,7 +156,7 @@ adminRouter.put('/case-studies/:id', ah(async (req, res) => {
   const existing = await prisma.caseStudy.findUnique({ where: { id: req.params.id } });
   if (!existing) return res.status(404).json({ error: 'Étude de cas introuvable.' });
   const obj = { id: existing.id, slug: existing.slug, ...parsed.data };
-  const searchText = stripHtml([obj.title, obj.subtitle, obj.summary, ...obj.sections.map((s) => s.heading + ' ' + s.body)].join(' ')).toLowerCase();
+  const searchText = buildSearchText([obj.title, obj.subtitle, obj.summary, ...obj.sections.map((s) => s.heading + ' ' + s.body)].join(' '));
   const row = await prisma.caseStudy.update({ where: { id: existing.id }, data: { title: obj.title, kind: obj.kind, searchText, data: JSON.stringify(obj) } });
   res.json(JSON.parse(row.data));
 }));

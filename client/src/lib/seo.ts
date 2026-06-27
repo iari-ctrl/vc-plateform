@@ -7,9 +7,9 @@ import { plainText } from './markdown-text';
 
 const SITE_NAME = 'VC Premium Experience';
 const FALLBACK_SITE_URL = 'https://vcpx.io';
-const DEFAULT_TITLE = `${SITE_NAME} — Comprendre, tester, apprendre le capital-risque`;
+const DEFAULT_TITLE = `${SITE_NAME} — Intelligence VC, formation et décisions`;
 const DEFAULT_DESCRIPTION =
-  "Comprendre le capital-risque, tester son alignement avec le métier, puis apprendre selon son niveau. Une plateforme éditoriale d'introspection et d'apprentissage.";
+  "Analyser les écosystèmes, suivre des convictions, étudier des décisions et structurer sa progression dans le capital-risque.";
 
 // Open Graph image key → file. The presentation table; the page → key mapping
 // lives in the shared route registry (shared/routes.mjs) so pages no longer

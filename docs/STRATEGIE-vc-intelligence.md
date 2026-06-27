@@ -4,7 +4,7 @@ Document canonique fusionné — positionnement, architecture cible et roadmap
 
 Projet : `vc-platform`  
 Date de consolidation : 2026-06-11  
-Dernière mise à jour : 2026-06-15 (charte de style transverse §9.3 ; quiz systématiques 66/66 ; due diligence 1→5 leçons ; corpus simulateurs, workflow drop-in, seed non destructif, avancement Phase 0)  
+Dernière mise à jour : 2026-06-26 (IA en 3 piliers ; routes-index Intelligence VC ; compteurs de contenu vérifiés ; sitemap FR/EN régénéré)
 Sources fusionnées : `docs/Stratégie doc et ROADMAP` et `docs/AUDIT-vc-intelligence.md`  
 Règle d'arbitrage : en cas de contradiction, le document **Stratégie** prime sur l'audit. L'audit reste une archive historique.
 
@@ -66,12 +66,12 @@ L'audit du 2026-06-10 a correctement identifié l'effet produit dominant : l'exp
 | Leçons canoniques (`data/lessons.json`) | 55 |
 | Leçons drop-in (`data/parcours/*.lessons.json`) | 11 |
 | Leçons servables au total | 66 |
-| Études de cas | 5 |
+| Études de cas | 6 |
 | Livrables de parcours (`data/deliverables.json`) | 2 |
 | Analyses / blog | 8 |
 | Dossiers d'écosystème (`data/ecosystems.json`) | 31 (3 racines, 28 sous-dossiers) |
 | Simulateurs | 9 |
-| Termes de glossaire | 358 |
+| Termes de glossaire | 374 |
 | Étapes de parcours | 148, dont 8 `a-produire` (2 milestones réalisés en livrables) |
 
 Corrections par rapport à l'audit historique :
@@ -80,12 +80,13 @@ Corrections par rapport à l'audit historique :
 - **Leçons drop-in** : elles ne sont plus seulement côté client. `server/src/lib/content.ts` charge `data/parcours/*.lessons.json`, et `server/prisma/seed.ts` utilise `content.allLessons()`. Après `npm run db:seed`, elles sont servies par l'API comme les leçons canoniques. Le sujet restant est le **workflow d'authoring** : quand garder un registre drop-in, quand replier dans `data/lessons.json`, comment synchroniser les références.
 - **Simulateurs** : le corpus actuel compte 9 simulateurs.
 - **Familles de parcours** : les données actuelles exposent 6 familles (`decouvrir`, `entretien`, `levee`, `grade`, `maitriser`, `express`), le sur-mesure vivant dans `profileParcours.json`.
-- **Couche VC Intelligence amorcée (2026-06-13)** : la couche d'**analyse signée** a commencé à se construire, ce qui nuance le diagnostic « apprentissage uniquement ». Le blog porte désormais 8 analyses (dont 3 « lectures obliques »), et surtout un **espace dédié « Décortiquer un écosystème »** (`/ecosystemes`, 100 % client, `data/ecosystems.json`) publie 31 dossiers vivants arborescents avec thèse falsifiable, convictions datées et figures natives — réalisation concrète du Pilier 5 (Atlas) et du format §10.9. Le centre de gravité reste à déplacer vers cette couche, mais elle n'est plus seulement théorique.
+- **Couche VC Intelligence amorcée (2026-06-13)** : la couche d'**analyse signée** a commencé à se construire, ce qui nuance le diagnostic « apprentissage uniquement ». Le blog porte désormais 8 analyses (dont 4 « lectures obliques »), et surtout un **espace dédié « Décortiquer un écosystème »** (`/ecosystemes`, 100 % client, `data/ecosystems.json`) publie 31 dossiers vivants arborescents avec thèse falsifiable, convictions datées et figures natives — réalisation concrète du Pilier 5 (Atlas) et du format §10.9.
+- **IA en 3 piliers livrée (2026-06-26)** : la navigation publique et la vitrine sont réorganisées autour d'**Intelligence VC**, **Formation** et **Workspace**. Cinq index publics ont été ajoutés sans déplacer les détails existants : `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables`. Le sitemap les publie en FR/EN.
 - **Milestones de parcours réalisés en livrables (2026-06-15)** : les étapes `a-produire` où l'apprenant *produit* un artefact deviennent des pages `/livrables` (brief + gabarit + grille d'auto-évaluation + renvoi à un modèle existant), via `data/deliverables.json` et `client/src/pages/DeliverablePage.tsx`. Deux livrables early-stage (pre-seed/seed) sont en ligne et chacun amorce un pilier Intelligence par « double emploi » : la **simulation de comité (seed)** s'appuie sur le 1ᵉʳ Case décisionnel `cs-seed-ic` (Pilier 4, §10.4), et la **thèse propriétaire** prend pour modèle un dossier `/ecosystemes` existant (Thesis Lab de facto, §10.2). Reste 8 milestones `a-produire` ; le mémo deal seed est la prochaine cible early-stage, la Série A est hors priorité.
 
 Lecture correcte de l'état actuel :
 
-> La plateforme donne encore une impression de learning platform parce que la couche VC Intelligence n'a pas été construite, pas parce que la couche formation serait inutile.
+> La plateforme dispose maintenant d'une couche Intelligence navigable. La formation reste une rampe d'accès, mais elle ne porte plus seule la première impression produit.
 
 Il ne faut donc pas supprimer la formation. Il faut :
 

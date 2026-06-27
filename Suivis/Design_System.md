@@ -1,5 +1,12 @@
 # Design System - VC Premium Platform
 
+> [!IMPORTANT]
+> **Statut documentaire — 2026-06-26**
+> - Dernière révision de fond indiquée : 2026-06-12.
+> - Périmètre : système visuel et interactionnel, tokens, composants, motion, accessibilité et patterns UI.
+> - Nature : **journal de suivi — peut diverger du code**. Vérifier les détails d'implémentation dans `client/src/styles/`, `client/src/components/` et les pages qui consomment ces primitives.
+> - Sections manifestement à arbitrer au regard du code actuel : aucune section obsolète évidente repérée lors du contrôle ; les composants et classes majeurs cités existent encore. À revalider par capture visuelle avant toute évolution UI structurante.
+
 Dernière mise à jour : 2026-06-12
 
 Objet : formaliser le système visuel et interactionnel de `vc-premium-platform` afin de garder une expérience cohérente pendant le travail éditorial, pédagogique et produit, en intégrant les derniers ajouts (i18n, auto-détection pédagogique, alignements UI).

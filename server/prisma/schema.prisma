@@ -120,24 +120,30 @@ model DecisionEntry {
 // ─────────────────────────── Editable content ───────────────────────────
 
 model LearningPath {
-  id        String  @id
-  slug      String  @unique
-  order     Int     @default(0)
-  title     String
-  level     String
-  data      String  // JSON of the full path object
-  updatedAt DateTime @updatedAt @default(now())
+  id         String  @id
+  slug       String  @unique
+  order      Int     @default(0)
+  title      String
+  level      String
+  searchText String  @default("")
+  data       String  // JSON of the full path object
+  updatedAt  DateTime @updatedAt @default(now())
+
+  @@index([searchText])
 }
 
 model Course {
-  id        String  @id
-  slug      String  @unique
-  pathId    String
-  order     Int     @default(0)
-  title     String
-  level     String
-  data      String
-  updatedAt DateTime @updatedAt @default(now())
+  id         String  @id
+  slug       String  @unique
+  pathId     String
+  order      Int     @default(0)
+  title      String
+  level      String
+  searchText String  @default("")
+  data       String
+  updatedAt  DateTime @updatedAt @default(now())
+
+  @@index([searchText])
 }
 
 model Lesson {
@@ -151,6 +157,8 @@ model Lesson {
   updatedAt  DateTime @updatedAt @default(now())
 
   quizzes    Quiz[]
+
+  @@index([searchText])
 }
 
 model Quiz {
@@ -172,6 +180,8 @@ model GlossaryTerm {
   searchText String
   data       String
   updatedAt  DateTime @updatedAt @default(now())
+
+  @@index([searchText])
 }
 
 model CaseStudy {
@@ -182,6 +192,8 @@ model CaseStudy {
   searchText String
   data       String
   updatedAt  DateTime @updatedAt @default(now())
+
+  @@index([searchText])
 }
 
 model BlogPost {
@@ -193,15 +205,20 @@ model BlogPost {
   searchText String
   data       String
   updatedAt  DateTime @updatedAt @default(now())
+
+  @@index([searchText])
 }
 
 model Simulator {
-  id        String  @id
-  slug      String  @unique
-  title     String
-  category  String
-  data      String
-  updatedAt DateTime @updatedAt @default(now())
+  id         String  @id
+  slug       String  @unique
+  title      String
+  category   String
+  searchText String  @default("")
+  data       String
+  updatedAt  DateTime @updatedAt @default(now())
+
+  @@index([searchText])
 }
 
 model Tag {

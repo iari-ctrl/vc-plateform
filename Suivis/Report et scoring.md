@@ -1,5 +1,16 @@
 # Report et scoring - VC Premium Platform
 
+> [!IMPORTANT]
+> **Statut documentaire — 2026-06-26**
+> - Dernière révision de fond repérée : 2026-06-26 (§8), malgré l'en-tête historique ci-dessous resté à 2026-06-15.
+> - Périmètre : journal daté des travaux, vérifications et scoring produit.
+> - Nature : **journal de suivi — peut diverger du code**. Les entrées datées doivent être lues comme historique, pas comme source unique de vérité.
+> - Sections manifestement à arbitrer au regard du code actuel : §1 indique que les leçons `lea-*` restent à fusionner dans `data/lessons.json`; elles sont désormais présentes dans `data/lessons.json` et dans `data/generated/lessons.*.json`.
+> - Sections manifestement à arbitrer au regard du code actuel : §1 / §2 / §8 contiennent d'anciens compteurs (`357` ou `358` termes, `4` ou `5` cas, `51` ou `62` leçons, `59` tests). Le repo courant compte notamment 374 termes dans `data/glossary.json`, 55 leçons canoniques + 11 drop-in servables, 6 études de cas et 9 simulateurs.
+> - Sections manifestement à arbitrer au regard du code actuel : §3 dit encore que `CourseDetailPage` est sur bundle statique ; le fichier utilise maintenant `useApiItem('/content/courses/:slug')` avec fallback.
+> - Sections manifestement à arbitrer au regard du code actuel : §8 (entrée 2026-06-12) cite `data/parcours/02-reussir-l-entretien-analyst.lessons.json`, absent du repo courant ; le contenu `lea-*` correspondant vit dans `data/lessons.json`.
+> - Sections manifestement à arbitrer au regard du code actuel : §8 (audit 2026-06-13) décrit une nav sans entrée « Intelligence » ; cette observation historique est supplantée par l'entrée 2026-06-26 sur la navigation en trois piliers.
+
 Dernière mise à jour : 2026-06-15
 
 Objet : conserver le **journal daté** des avancées et des vérifications de `vc-premium-platform`, et le **scoring** du produit.
@@ -512,6 +523,31 @@ Apport éditorial :
 - Rédaction alignée sur la **charte de style §4.0.c** du Manuel (registre d'analyste sobre, sans punchlines ni survente).
 
 Fichiers modifiés : `data/lessons.json`, `data/courses.json` (lessonIds de `c-due-diligence`), fichiers scindés régénérés (`lessons.index.json`, `lessons.bodies.json`), `client/public/sitemap.xml`. Côté serveur/API, `npm run db:seed` reste à lancer pour aligner la base (non requis en mode invité : le bundle sert déjà les nouvelles leçons).
+
+---
+
+### 2026-06-26 — Réorganisation IA en 3 piliers
+
+Commandes de vérification (local) :
+
+- `npm run build` : **exit 0**. Le hook `prebuild` a rejoué `split:content`, `validate:content` et `generate:sitemap`. Récap contenu : 22 parcours · 9 rayons · 16 cours · 66 leçons · 374 termes · 6 cas · 2 livrables · 8 articles · 31 dossiers d'écosystème · 9 simulateurs.
+- `npm run lint` : **exit 0**, 0 erreur, 4 warnings `react-refresh/only-export-components` déjà connus sur les Context.
+- `npm run test --workspace client` : **exit 0**, 12 fichiers / 70 tests.
+
+Apport produit :
+
+- Navigation en trois piliers : **Intelligence VC**, **Formation**, **Workspace** (`SideNav`, `TopBar`, `Footer`).
+- Cinq nouvelles routes indexables, sans déplacement des slugs de détail : `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables`.
+- `client/src/content/convictions.ts` agrège les 24 convictions des dossiers d'écosystème et expose les horizons à réviser.
+- `/intelligence` devient le toit de travail : dossiers récents, analyses récentes, convictions à réviser, accès décisions/méthode/convictions.
+- `/convictions` rend filtrables les convictions par force et horizon ; chaque item renvoie à `/ecosystemes/:slug`.
+- `/decisions` entrelace études de cas, memos et anti-portfolio avec filtres par type, en conservant les détails existants.
+- `/methode` regroupe les articles de catégorie Méthode et les livrables ; `/livrables` expose les modèles avant `/livrables/:slug`.
+- `/blog` devient « Analyses & notes de recherche » avec familles Lecture oblique, Notes & brèves, Cadres méthode.
+- `/bibliotheque` place les 9 rayons thématiques au premier plan puis conserve le catalogue filtrable.
+- Home, meta HTML statiques et fallback SEO ne présentent plus le produit comme une seule plateforme d'introspection/apprentissage.
+
+Fichiers structurants créés : `client/src/pages/intelligence/IntelligencePage.tsx`, `ConvictionsPage.tsx`, `DecisionsIndexPage.tsx`, `MethodePage.tsx`, `DeliverablesPage.tsx`, `client/src/content/convictions.ts`.
 
 ---
 

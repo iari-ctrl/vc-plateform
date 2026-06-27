@@ -17,6 +17,7 @@ export * from './caseStudies';
 export * from './deliverables';
 export * from './blog';
 export * from './ecosystems';
+export * from './convictions';
 export * from './simulators';
 export * from './antiPortfolio';
 export * from './memos';

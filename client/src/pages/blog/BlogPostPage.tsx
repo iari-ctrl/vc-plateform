@@ -2,7 +2,7 @@ import { lazy, Suspense, type ComponentType } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { Link } from '@/i18n/routing';
 import { ArrowLeft, BookOpen, Clock, ScrollText } from 'lucide-react';
-import { blogBySlug, BLOG } from '@/content';
+import { blogBySlug, BLOG } from '@/content/blog';
 import type { BlogPost } from '@/content/types';
 import { ActiveProse } from '@/components/reading/ActiveProse';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';

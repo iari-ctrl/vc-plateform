@@ -1,4 +1,5 @@
 import './lib/env.js';
+import { randomUUID } from 'node:crypto';
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -15,6 +16,48 @@ import { searchRouter } from './routes/search.js';
 // The Express app is built here (no `listen`) so it can be imported directly by
 // integration tests. `index.ts` owns the production safeguards and `listen`.
 export const app = express();
+
+type TrustProxySetting = boolean | number | string | string[];
+
+function parseTrustProxy(value: string | undefined, fallback: TrustProxySetting): TrustProxySetting {
+  if (value === undefined || value.trim() === '') return fallback;
+
+  const trimmed = value.trim();
+  const normalized = trimmed.toLowerCase();
+  if (['false', 'off', 'no'].includes(normalized)) return false;
+  if (['true', 'on', 'yes'].includes(normalized)) return true;
+
+  const asNumber = Number(trimmed);
+  if (Number.isInteger(asNumber) && asNumber >= 0) return asNumber;
+
+  if (trimmed.includes(',')) {
+    return trimmed
+      .split(',')
+      .map((entry) => entry.trim())
+      .filter(Boolean);
+  }
+
+  return trimmed;
+}
+
+const trustProxy = parseTrustProxy(process.env.TRUST_PROXY, ENV.NODE_ENV === 'production' ? 1 : false);
+app.set('trust proxy', trustProxy);
+
+app.use((req, res, next) => {
+  const requestId = randomUUID();
+  const start = Date.now();
+  const path = req.originalUrl.split('?', 1)[0] || req.path;
+
+  res.locals.requestId = requestId;
+  res.setHeader('x-request-id', requestId);
+
+  res.on('finish', () => {
+    const durationMs = Date.now() - start;
+    console.info(`[${requestId}] ${req.method} ${path} ${res.statusCode} ${durationMs}ms`);
+  });
+
+  next();
+});
 
 // Secure Express headers (allow cross-origin resource policy for the client)
 app.use(
@@ -85,6 +128,7 @@ app.use('/api', (_req, res) => res.status(404).json({ error: 'Endpoint introuvab
 
 // Centralised error handler
 app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  console.error('[api error]', err);
+  const requestId = typeof res.locals.requestId === 'string' ? res.locals.requestId : 'no-request-id';
+  console.error(`[${requestId}] [api error]`, err);
   res.status(500).json({ error: 'Erreur serveur inattendue.' });
 });

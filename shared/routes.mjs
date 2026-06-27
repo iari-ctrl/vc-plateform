@@ -38,10 +38,15 @@ export const NOINDEX_SEGMENTS = [
 export const STATIC_ROUTES = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/home', changefreq: 'weekly', priority: '0.9' },
+  { path: '/intelligence', changefreq: 'weekly', priority: '0.9' },
   { path: '/onboarding', changefreq: 'monthly', priority: '0.5' },
   { path: '/paths', changefreq: 'weekly', priority: '0.8' },
   { path: '/bibliotheque', changefreq: 'weekly', priority: '0.8' },
   { path: '/glossary', changefreq: 'weekly', priority: '0.8' },
+  { path: '/convictions', changefreq: 'weekly', priority: '0.8' },
+  { path: '/decisions', changefreq: 'weekly', priority: '0.8' },
+  { path: '/methode', changefreq: 'monthly', priority: '0.7' },
+  { path: '/livrables', changefreq: 'monthly', priority: '0.7' },
   { path: '/simulators', changefreq: 'monthly', priority: '0.7' },
   { path: '/anti-portfolio', changefreq: 'monthly', priority: '0.7' },
   { path: '/memos', changefreq: 'monthly', priority: '0.7' },
@@ -62,6 +67,10 @@ export const OG_IMAGE_BY_SEGMENT = {
   courses: 'course',
   paths: 'path',
   livrables: 'path', // a deliverable is the hands-on end of a parcours — reuse its card
+  intelligence: 'blog',
+  convictions: 'blog',
+  decisions: 'case-study',
+  methode: 'path',
 
   bibliotheque: 'course', // the library lists courses — reuse the course card
   glossary: 'glossary',

@@ -1,54 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
-import { ArrowUpRight, Ghost, Scale } from 'lucide-react';
-import { ANTI_PORTFOLIO, ANTI_PORTFOLIO_PATTERNS, antiPortfolioPatternById } from '@/content/antiPortfolio';
+import { Ghost, Scale } from 'lucide-react';
+import { ANTI_PORTFOLIO, ANTI_PORTFOLIO_PATTERNS } from '@/content/antiPortfolio';
+import { AntiPortfolioEntryCard } from '@/components/cards';
 import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { SectionHeading, Reveal } from '@/components/ui/primitives';
 import { usePageMeta } from '@/lib/seo';
 import { cn } from '@/lib/utils';
-import type { AntiPortfolioEntry } from '@/content/types';
-
-function EntryCard({ entry }: { entry: AntiPortfolioEntry }) {
-  const firstPass = entry.passes[0];
-  const patterns = entry.patternIds
-    .map((id) => antiPortfolioPatternById(id))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
-
-  return (
-    <Link to={`/anti-portfolio/${entry.slug}`} className="premium-card premium-card-hover group flex flex-col overflow-hidden">
-      <div className="flex items-center justify-between border-b border-outline-variant px-6 py-3">
-        <span className="font-mono text-xs text-surface-variant">{firstPass.year}</span>
-        <span className="flex items-center gap-1.5">
-          {patterns.map((p) => (
-            <span key={p.id} title={p.label} className="grid h-6 w-6 place-items-center rounded-full text-[0.7rem]" style={{ color: p.accent, background: `color-mix(in srgb, ${p.accent} 12%, transparent)` }}>
-              {p.glyph}
-            </span>
-          ))}
-        </span>
-      </div>
-      <div className="flex flex-1 flex-col p-6">
-        <p className="font-mono text-[0.625rem] uppercase tracking-wider text-surface-variant">
-          {entry.passes.map((p) => p.fund).join(' · ')}
-        </p>
-        <h3 className="mt-2 font-headline text-headline-md font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">
-          {entry.company}
-        </h3>
-        <p className="mt-1.5 text-sm italic text-surface-variant">{entry.subtitle}</p>
-        {entry.quote ? (
-          <blockquote className="mt-4 border-l-2 border-[color-mix(in_srgb,var(--primary)_40%,transparent)] pl-3 font-headline text-[0.95rem] italic leading-snug">
-            « {entry.quote.text} »
-          </blockquote>
-        ) : (
-          <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-surface-variant">{entry.summary}</p>
-        )}
-        <div className="mt-auto flex items-center justify-between pt-5 text-xs text-surface-variant">
-          <span className="line-clamp-1">{entry.outcome.split('.')[0].slice(0, 64)}…</span>
-          <ArrowUpRight size={15} className="shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </div>
-      </div>
-    </Link>
-  );
-}
 
 export default function AntiPortfolioPage() {
   usePageMeta(
@@ -118,7 +75,7 @@ export default function AntiPortfolioPage() {
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {entries.map((entry, i) => (
           <Reveal key={entry.id} delay={(i % 3) * 70}>
-            <EntryCard entry={entry} />
+            <AntiPortfolioEntryCard entry={entry} />
           </Reveal>
         ))}
       </div>

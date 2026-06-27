@@ -45,7 +45,7 @@ let anyChanged = false;
 try {
   for (const collection of collections) {
     const rows = await collection.load();
-    const payload = rows.map((row) => parseRow(collection.label, row.id, row.data));
+    const payload = preserveExistingFileOrder(collection, rows.map((row) => parseRow(collection.label, row.id, row.data)));
     const targetLabel = collection.file ?? `${collection.dir}/`;
     const changed = collection.dir
       ? jsonDirChanged(join(dataDir, collection.dir), buildDirFiles(collection.label, payload))
@@ -101,6 +101,39 @@ function buildDirFiles(label, payload) {
     files.set(file, serializeJson(row));
   }
   return files;
+}
+
+function preserveExistingFileOrder(collection, payload) {
+  if (!collection.file) return payload;
+
+  const target = join(dataDir, collection.file);
+  if (!existsSync(target)) return payload;
+
+  let current;
+  try {
+    current = JSON.parse(readFileSync(target, 'utf8'));
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    throw new Error(`${collection.file} - invalid JSON: ${message}`);
+  }
+  if (!Array.isArray(current)) return payload;
+
+  const byId = new Map();
+  for (const row of payload) {
+    if (!row?.id) return payload;
+    byId.set(row.id, row);
+  }
+
+  const ordered = [];
+  for (const row of current) {
+    const id = row?.id;
+    if (id && byId.has(id)) {
+      ordered.push(byId.get(id));
+      byId.delete(id);
+    }
+  }
+
+  return [...ordered, ...byId.values()];
 }
 
 function jsonDirChanged(targetDir, nextFiles) {

@@ -1,5 +1,12 @@
 # Procédure de publication (« push ») manuelle
 
+> [!IMPORTANT]
+> **Statut documentaire — 2026-06-26**
+> - Dernière révision documentaire indiquée : 2026-06-26 (encart de statut ; aucune date de fond n'était indiquée dans le fichier).
+> - Périmètre : procédure manuelle de publication Git/GitHub depuis la racine du projet.
+> - Nature : **journal de suivi — peut diverger du code**. Revalider les commandes contre `package.json` et `.github/workflows/ci.yml` avant usage critique.
+> - Sections manifestement à arbitrer au regard du code actuel : aucune section obsolète évidente repérée lors du contrôle ; les commandes citées existent dans les scripts actuels et le job `drift` existe dans la CI.
+
 Cette procédure explique comment envoyer en ligne (sur GitHub) le travail enregistré
 localement, en s'assurant qu'aucune mise à jour n'a été oubliée. Elle vise une exécution
 manuelle, sans assistance, et suppose seulement un terminal ouvert à la racine du projet

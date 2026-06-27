@@ -2,12 +2,13 @@ import { Link } from '@/i18n/routing';
 import { ArrowRight, ArrowUpRight, BookOpen, Clock, FlaskConical, Layers } from 'lucide-react';
 import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { LevelBadge, ProgressBar, ProgressRing } from '@/components/ui/primitives';
+import { antiPortfolioPatternById } from '@/content/antiPortfolio';
 import { lessonIdsForPath } from '@/content/courses';
 import { FAMILY_META, lessonIdsForParcours, t } from '@/content/parcours';
 import { ECOSYSTEM_KIND_LABEL, LEVEL_LABEL } from '@/content/labels';
 import { useUserData } from '@/context/UserDataContext';
 import { formatDateFr, pluralize } from '@/lib/utils';
-import type { BlogPost, CaseStudy, Course, EcosystemDossier, Path, Simulator } from '@/content/types';
+import type { AntiPortfolioEntry, BlogPost, CaseStudy, Course, Deliverable, EcosystemDossier, InvestmentMemo, Path, Simulator } from '@/content/types';
 import type { Parcours } from '@/content/parcours';
 
 function usePathProgress(pathId: string) {
@@ -169,6 +170,93 @@ export function CaseCard({ cs }: { cs: CaseStudy }) {
         <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-surface-variant">{cs.summary}</p>
         <div className="mt-4 flex items-center gap-1.5 text-xs text-surface-variant"><Clock size={13} /> {cs.readMin} min · {cs.company}</div>
       </div>
+    </Link>
+  );
+}
+
+export function MemoCard({ memo }: { memo: InvestmentMemo }) {
+  return (
+    <Link to={`/memos/${memo.slug}`} className="premium-card premium-card-hover group flex flex-col overflow-hidden">
+      <div className="flex items-center justify-between gap-3 border-b border-outline-variant px-6 py-3">
+        <span className="chip">{memo.fund}</span>
+        <span className="font-mono text-xs text-surface-variant">{memo.stage} · {memo.date}</span>
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="font-headline text-headline-md font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">
+          {memo.company}
+        </h3>
+        <p className="mt-1.5 text-sm italic text-surface-variant">{memo.author}{memo.amount ? ` · ${memo.amount}` : ''}</p>
+        <p className="mt-3 line-clamp-4 flex-1 text-sm leading-relaxed text-surface-variant">{memo.whyItMatters}</p>
+        <div className="mt-5 flex items-center justify-between text-xs text-surface-variant">
+          <span className="inline-flex items-center gap-1.5"><Clock size={13} /> {memo.readMin} min</span>
+          <span className="inline-flex items-center gap-1.5 font-medium text-[color:var(--primary)]">
+            Lire l'annotation <ArrowUpRight size={13} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+export function AntiPortfolioEntryCard({ entry }: { entry: AntiPortfolioEntry }) {
+  const firstPass = entry.passes[0];
+  const patterns = entry.patternIds
+    .map((id) => antiPortfolioPatternById(id))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+
+  return (
+    <Link to={`/anti-portfolio/${entry.slug}`} className="premium-card premium-card-hover group flex flex-col overflow-hidden">
+      <div className="flex items-center justify-between border-b border-outline-variant px-6 py-3">
+        <span className="font-mono text-xs text-surface-variant">{firstPass.year}</span>
+        <span className="flex items-center gap-1.5">
+          {patterns.map((p) => (
+            <span key={p.id} title={p.label} className="grid h-6 w-6 place-items-center rounded-full text-[0.7rem]" style={{ color: p.accent, background: `color-mix(in srgb, ${p.accent} 12%, transparent)` }}>
+              {p.glyph}
+            </span>
+          ))}
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <p className="font-mono text-[0.625rem] uppercase tracking-wider text-surface-variant">
+          {entry.passes.map((p) => p.fund).join(' · ')}
+        </p>
+        <h3 className="mt-2 font-headline text-headline-md font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">
+          {entry.company}
+        </h3>
+        <p className="mt-1.5 text-sm italic text-surface-variant">{entry.subtitle}</p>
+        {entry.quote ? (
+          <blockquote className="mt-4 border-l-2 border-[color-mix(in_srgb,var(--primary)_40%,transparent)] pl-3 font-headline text-[0.95rem] italic leading-snug">
+            « {entry.quote.text} »
+          </blockquote>
+        ) : (
+          <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-surface-variant">{entry.summary}</p>
+        )}
+        <div className="mt-auto flex items-center justify-between pt-5 text-xs text-surface-variant">
+          <span className="line-clamp-1">{entry.outcome.split('.')[0].slice(0, 64)}...</span>
+          <ArrowUpRight size={15} className="shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+export function DeliverableCard({ deliverable }: { deliverable: Deliverable }) {
+  return (
+    <Link to={`/livrables/${deliverable.slug}`} className="premium-card premium-card-hover group flex flex-col p-6">
+      <div className="flex items-center justify-between gap-3 text-xs text-surface-variant">
+        <span className="chip">Livrable</span>
+        <span className="inline-flex items-center gap-1.5"><Clock size={13} /> {deliverable.readMin} min</span>
+      </div>
+      <h3 className="mt-4 font-headline text-headline-md font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">
+        {deliverable.title}
+      </h3>
+      {deliverable.kicker && <p className="mt-1.5 text-sm italic text-surface-variant">{deliverable.kicker}</p>}
+      <p className="mt-3 line-clamp-4 flex-1 text-sm leading-relaxed text-surface-variant">{deliverable.summary}</p>
+      {deliverable.tags && deliverable.tags.length > 0 && (
+        <div className="mt-5 flex flex-wrap gap-2">
+          {deliverable.tags.slice(0, 3).map((tag) => <span key={tag} className="chip">{tag}</span>)}
+        </div>
+      )}
     </Link>
   );
 }

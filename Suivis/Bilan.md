@@ -1,6 +1,14 @@
 # Bilan - VC Premium Platform
 
-Dernière mise à jour : 2026-06-15
+> [!IMPORTANT]
+> **Statut documentaire — 2026-06-26**
+> - Dernière révision de fond indiquée : 2026-06-26.
+> - Périmètre : synthèse de l'état produit, risques, priorités et backlog prospectif.
+> - Nature : **journal de suivi — peut diverger du code**. Vérifier l'état courant dans `client/`, `server/`, `data/`, `shared/routes.mjs` et `package.json`.
+> - Sections manifestement à arbitrer au regard du code actuel : §4 / §7 / §10 P3 mentionnent encore `PathDetail` et `CourseDetail` comme dette API commune, alors que `CourseDetailPage.tsx` utilise déjà `useApiItem('/content/courses/:slug')` ; la dette visible restante concerne surtout `PathDetailPage.tsx`, encore bundle-first.
+> - Sections manifestement à arbitrer au regard du code actuel : §7 et §9 donnent encore les compteurs de tests `client 10 fichiers / 59 tests` et `serveur 3 fichiers / 10 tests`; le repo contient désormais davantage de fichiers de tests (`client/src/**/*.test.*`, `server/test/*.test.ts`) et ce même document indique en §2 un audit client `12 fichiers / 70 tests`.
+
+Dernière mise à jour : 2026-06-26
 
 Objet : état actuel synthétique de `vc-premium-platform`, avec les acquis, les limites connues et les prochaines priorités utiles pour sortir du prototype sans lancer une phase production complète.
 
@@ -10,13 +18,15 @@ Objet : état actuel synthétique de `vc-premium-platform`, avec les acquis, les
 
 ## 1. Résumé exécutif
 
-`vc-premium-platform` est une plateforme full-stack React / Express / Prisma destinée à apprendre le capital-risque avec une expérience éditoriale premium.
+`vc-premium-platform` est une plateforme full-stack React / Express / Prisma destinée à structurer une intelligence VC : analyser des écosystèmes, suivre des convictions, étudier des décisions et organiser sa montée en compétence.
 
 Le projet est aujourd'hui plus proche d'un atelier pédagogique fonctionnel que d'une simple maquette :
 
 - le contenu canonique est centralisé dans les JSON sources de `/data` (`data/*.json` et collections comme `data/blog/*.json`) ;
 - l'app fonctionne en invité grâce au contenu bundlé ;
 - l'API peut servir les contenus seedés depuis les JSON ;
+- l'IA publique est réorganisée en **3 piliers** : Intelligence VC, Formation, Workspace ;
+- les nouvelles pages-index `/intelligence`, `/convictions`, `/decisions`, `/methode` et `/livrables` rendent navigables les contenus existants sans déplacer les URLs de détail ;
 - l'expérience Ikigai, le dictionnaire vivant, la lecture active, les notes, les favoris et les simulateurs sont en place ;
 - les simulateurs utilisent désormais les formules standard du marché avec un bloc pédagogique interactif et des popovers ;
 - tous les parcours affichent de manière systématique leurs pré-requis (liens et termes de glossaire cliquables) ;
@@ -31,25 +41,35 @@ Le projet est aujourd'hui plus proche d'un atelier pédagogique fonctionnel que 
 - un **espace d'analyse signée « Décortiquer un écosystème »** (`/ecosystemes`, 100 % client) publie des dossiers vivants arborescents avec thèse falsifiable, convictions datées à degré d'assurance explicite et **figures natives** (graphiques/schémas en SVG/HTML theme-aware, sans asset ni lib de charting) ;
 - le dépôt Git est initialisé et rattaché à `origin/master`, avec une baseline initiale versionnée.
 
-La priorité n'est plus d'ajouter des features. Deux décisions d'architecture conditionnent la suite (mode de rendu CSR/SSR, modèle de contenu/authoring) ; ensuite, l'étape utile reste de rendre l'écriture, la validation et l'itération pédagogique confortables.
-
-> **Note (audit indépendant, 2026-06-13 — cf. §2 et `Report et scoring.md` §8).** Ce résumé décrit le produit comme « destiné à apprendre le capital-risque » / « atelier pédagogique » : c'est précisément la **lentille learning-first** que l'audit pointe comme le décalage n°1. Par sa matière (anti-portfolio sourcé, 31 dossiers d'écosystème à thèses falsifiables, memos annotés), le produit vise déjà la **VC Intelligence** ; c'est la vitrine (home, nav, meta) qui ne le dit pas encore. Séquencement assumé : finir la formation d'abord — sans pour autant la laisser parler au nom du produit.
+La priorité n'est plus de prouver que la matière existe. Elle est maintenant de consolider la couche Intelligence, d'éviter la duplication éditoriale, et de traiter les sujets de publication publique : prérendu, OpenGraph par contenu, recherche serveur alignée sur la recherche client.
 
 ---
 
 ## 2. Vérifications effectuées
 
-Dernier état vérifié — **2026-06-15** (branche `chore/flux-c-repo-hygiene`, exécuté en local) :
+Dernier état vérifié — **2026-06-26** (exécuté en local) :
 
 | Commande | Résultat |
 | --- | --- |
-| `npm run validate:content` | exit 0 ; récap : 55 leçons canoniques (+ 11 drop-in = 66 servables) · 358 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs ; **plus de lacune quiz** (66/66 leçons avec quiz) |
+| `npm run validate:content` | OK via `prebuild` ; récap : 55 leçons canoniques (+ 11 drop-in = 66 servables) · 374 termes · 8 articles · 31 dossiers d'écosystème · 9 simulateurs · 6 cas · 2 livrables |
 | `npm run lint` | OK, 0 erreur, 4 warnings (`react-refresh` structurels) |
 | `npm run build` | OK, build serveur + client |
-| `npm run test --workspace client` | OK, 10 fichiers / 59 tests |
-| `npm run test --workspace server` | OK, 3 fichiers / 10 tests (auth, profil, isolation `userId`) |
-| `npm run db:seed` | OK, contenu DB existant préservé (seed non destructif) |
-| Git | dépôt initialisé ; `master` suit `origin/master` |
+| `npm run test --workspace client` | OK, 12 fichiers / 70 tests |
+| Sitemap | OK, index FR/EN pour `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables` |
+
+### 2026-06-26 — IA en 3 piliers
+
+La vitrine a été réalignée sur l'ambition VC Intelligence :
+
+- `SideNav`, `TopBar` et `Footer` expriment trois piliers : **Intelligence VC**, **Formation**, **Workspace** ;
+- `/intelligence` agrège dossiers récents, analyses récentes et convictions à réviser ;
+- `/convictions` liste les convictions issues des dossiers d'écosystème avec force, horizon et lien source ;
+- `/decisions` entrelace cas, memos et anti-portfolio sans déplacer leurs URLs de détail ;
+- `/methode` regroupe les articles de catégorie Méthode et les livrables ;
+- `/livrables` expose les modèles existants avant les détails `/livrables/:slug` ;
+- `/blog` est requalifié en « Analyses & notes de recherche » ;
+- `/bibliotheque` met les 9 rayons au premier plan, puis conserve le catalogue filtrable ;
+- `/dashboard` distingue reprise d'apprentissage et travail de connaissance ; `/notes` groupe les notes par source.
 
 > **Historique daté complet** — chaque passe de vérification depuis le 2026-05-30 (commandes, résultats, fichiers touchés) : voir [Report et scoring.md](Report%20et%20scoring.md) §8. La synthèse de l'audit indépendant du 2026-06-13 (re-vérifié sur le code, hors discours des docs) reste ci-dessous.
 

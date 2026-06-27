@@ -190,6 +190,7 @@ export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
                 key={scene.id}
                 src={scene.image}
                 alt={scene.alt}
+                loading={index === 0 ? 'eager' : 'lazy'}
                 className={cn(
                   'absolute inset-0 h-full w-full object-cover',
                   reducedMotion ? '' : 'transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',

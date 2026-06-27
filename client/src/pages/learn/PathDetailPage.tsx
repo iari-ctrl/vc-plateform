@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from '@/i18n/routing';
 import { ArrowLeft, ArrowRight, Check, ChevronDown, Clock, Users, Target } from 'lucide-react';
-import { pathBySlug, coursesForPath, lessonsForCourse, lessonsForPath, LEVEL_LABEL } from '@/content';
+import { pathBySlug } from '@/content/paths';
+import { coursesForPath } from '@/content/courses';
+import { lessonsForCourse, lessonsForPath } from '@/content/lessons';
+import { LEVEL_LABEL } from '@/content/labels';
 import { LessonRow } from '@/components/cards';
 import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { ProgressBar, LevelBadge } from '@/components/ui/primitives';
@@ -60,7 +63,7 @@ export default function PathDetailPage() {
               <div className="mt-7 flex flex-wrap gap-3">
                 {firstLesson && (
                   <Link to={`/lessons/${firstLesson.slug}`} className="btn-foil">
-                    {pct > 0 ? 'Continuer le parcours' : 'Commencer le parcours'}
+                    {pct > 0 ? 'Reprendre le rayon' : 'Commencer le rayon'}
                   </Link>
                 )}
                 <BookmarkButton variant="labelled" item={{ itemType: 'path', itemId: path.id, title: path.title, href: `/paths/${path.slug}` }} />
