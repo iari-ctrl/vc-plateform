@@ -1,15 +1,15 @@
 # Design System - VC Premium Platform
 
 > [!IMPORTANT]
-> **Statut documentaire — 2026-06-26**
-> - Dernière révision de fond indiquée : 2026-06-12.
+> **Statut documentaire — 2026-06-28**
+> - Dernière révision de fond indiquée : 2026-06-28.
 > - Périmètre : système visuel et interactionnel, tokens, composants, motion, accessibilité et patterns UI.
-> - Nature : **journal de suivi — peut diverger du code**. Vérifier les détails d'implémentation dans `client/src/styles/`, `client/src/components/` et les pages qui consomment ces primitives.
-> - Sections manifestement à arbitrer au regard du code actuel : aucune section obsolète évidente repérée lors du contrôle ; les composants et classes majeurs cités existent encore. À revalider par capture visuelle avant toute évolution UI structurante.
+> - Nature : **référence vivante — peut diverger du code**. Vérifier les détails d'implémentation dans `client/src/styles/`, `client/src/components/` et les pages qui consomment ces primitives.
+> - Contrôle 2026-06-28 : les sections rail latéral, portail splash, cartes éditoriales et accessibilité ont été réalignées sur le code. Aucune capture visuelle n'a été rejouée pendant cette passe documentaire.
 
-Dernière mise à jour : 2026-06-12
+Dernière mise à jour : 2026-06-28
 
-Objet : formaliser le système visuel et interactionnel de `vc-premium-platform` afin de garder une expérience cohérente pendant le travail éditorial, pédagogique et produit, en intégrant les derniers ajouts (i18n, auto-détection pédagogique, alignements UI).
+Objet : formaliser le système visuel et interactionnel de `vc-premium-platform` afin de garder une expérience cohérente pendant le travail éditorial, pédagogique et produit, en intégrant les derniers ajouts vérifiés (i18n locale-prefixed, auto-détection pédagogique, rail latéral off-screen, portail splash single-stage).
 
 ---
 
@@ -49,6 +49,7 @@ Les primitives actuelles sont distribuées dans plusieurs fichiers :
 | Ornements / langage atlas | `client/src/components/ornaments/*` |
 | Splash / boussole animée | `client/src/components/splash/CompassIkigaiIntro.tsx` |
 | Lecture active | `client/src/components/reading/*` |
+| Showcase interne | `client/src/pages/system/DesignSystemShowcasePage.tsx` (`/design-system`) |
 | Découpage front | `client/src/content/*.ts` + `client/vite.config.ts` |
 
 Le projet utilise Tailwind CSS v3 avec tokens CSS sémantiques. La règle de base : utiliser les tokens existants avant d'ajouter une couleur, une taille ou une ombre.
@@ -103,7 +104,7 @@ Le mode sombre est complet et piloté par `.dark`. Il ne doit pas inverser bruta
 
 Spécificités mode sombre (2026-06-01) :
 
-- le toggle « Choisissez votre lumière » du portail splash (`/`) pilote désormais le `ThemeContext` global — le choix persiste sur l'accueil et dans toute l'app ;
+- le toggle « Choisissez votre lumière » du portail splash (`/fr`, après redirection depuis `/`) pilote désormais le `ThemeContext` global — le choix persiste sur l'accueil et dans toute l'app ;
 - sur `/home`, le hero et la carte `PathAtlas` affichent le ciel étoilé photographique (`bg-sombre.webp`) en fond via `NightSkyBackdrop`, **uniquement en sombre** (`hidden dark:block`) ;
 - le parchemin `map-paper` est conservé en mode clair ; en mode sombre, la photo passe derrière les tracés SVG (constellation dessinée, routes pointillées, sceaux, rose des vents).
 
@@ -155,7 +156,7 @@ Tokens structurants :
 | --- | ---: | --- |
 | `--topbar-h` | `4.5rem` | hauteur de top bar |
 | `--sidebar-w` | `16rem` | largeur navigation latérale |
-| `--sidebar-rail` | `5rem` | rail compact |
+| `--sidebar-rail` | `4rem` | gouttière réservée au handle desktop de la navigation |
 | `--content-max` | `75rem` | largeur maximale des vues riches |
 | `--radius` | `1.25rem` | rayon global historique |
 
@@ -169,17 +170,17 @@ Règles de composition :
 
 ### Barre latérale (`SideNav` + `.glass-rail`)
 
-La navigation latérale desktop (`components/chrome/SideNav.tsx`) est un rail fixe qui s'élargit de `--sidebar-rail` (5rem) à `--sidebar-w` (16rem) **en overlay** au survol / focus clavier — le contenu, décalé seulement de `--sidebar-rail` (`PageShell`, qui remplace `MainLayout` avec des routes aplaties), ne bouge jamais.
-L'architecture de l'information (IA) de la `SideNav` et de la `TopBar` est désormais alignée, et toutes deux **prévoient** le sélecteur de langue `LocaleSwitcher` (FR/EN). Celui-ci n'est rendu que si le drapeau `EN_ENABLED` (`client/src/i18n/config.ts`) est vrai ; il est **actuellement masqué** tant que l'anglais n'est pas livré.
+La navigation latérale desktop (`components/chrome/SideNav.tsx`) est un panneau `--sidebar-w` (16rem) garé hors écran (`-translate-x-full`) quand il est fermé. Une gouttière fixe `--sidebar-rail` (4rem) reste visible avec le logo et le bouton `Menu`; `MainLayout` réserve cette gouttière via `lg:pl-[var(--sidebar-rail)]`, donc le contenu ne bouge jamais quand le panneau glisse en overlay. `PageShell` existe bien, mais il sert seulement de route layout pour `Suspense` + `ErrorBoundary`; il ne remplace pas `MainLayout`.
+L'architecture de l'information (IA) de la `SideNav` et de la `TopBar` partage les grandes entrées publiques (Intelligence VC, Formation, Dictionnaire, Analyses), tandis que la `SideNav` ajoute les sous-entrées et le groupe Workspace. Toutes deux **prévoient** le sélecteur de langue `LocaleSwitcher` (FR/EN). Celui-ci n'est rendu que si le drapeau `EN_ENABLED` (`client/src/i18n/config.ts`) est vrai ; il est **actuellement masqué** tant que l'anglais n'est pas livré.
 
-L'effet verre est piloté par l'attribut `data-open` (= `expanded`) et la classe `.glass-rail` (définie dans `global.css`), avec **deux états distincts** :
+L'effet verre est piloté par l'attribut `data-open` et la classe `.glass-rail` (définie dans `global.css`), avec **deux états distincts** :
 
-- **Replié** (`data-open="false"`) : quasi-opaque (`--surface` ~90 %), flou léger (`blur(6px)`), aucune ombre. Rien n'est rendu derrière le rail replié (le contenu commence à `--sidebar-rail`), donc le verre serait invisible — on l'intègre au fond comme du chrome.
-- **Ouvert** (`data-open="true"`) : panneau de **verre dépoli** qui flotte au-dessus du contenu qu'il recouvre — fond **très** translucide teinté d'un ton conteneur (`--surface-container-lowest` ~38 % en clair, `--surface-container-low` ~34 % en sombre), `backdrop-filter: blur(14px) saturate(165%) contrast(104%)`. Le flou volontairement **modéré** ne masque pas la page : les aplats de couleur et les grandes formes restent lisibles sous le rail, tout en gardant les libellés nets. Par-dessus : un double dégradé (voile lumineux diagonal `--surface-bright` + teinte or/prune `--primary`/`--tertiary`), une arête gauche brillante et une ombre portée multi-couches avec lisérés internes. Une règle dédiée `.dark .glass-rail[data-open]` réajuste teintes (accents `--primary`/`--secondary`) et ombres en mode sombre.
+- **Fermé** (`data-open="false"`) : le panneau complet est hors écran et `inert={!open}` ; la classe conserve une base quasi-opaque (`--surface` ~90 %), flou léger (`blur(6px)`), sans ombre, pour servir d'état de départ lisible à la transition.
+- **Ouvert** (`data-open="true"`) : panneau de **verre dépoli** qui flotte au-dessus du contenu qu'il recouvre — fond transparent, `backdrop-filter: blur(14px) saturate(165%) contrast(104%)`, bordure `outline-variant` ~52 %, ombres latérales et lisérés internes. Le flou volontairement **modéré** ne masque pas la page : les aplats de couleur et les grandes formes restent lisibles sous le rail, tout en gardant les libellés nets.
 
-Règle critique apprise : **ne pas teinter le verre avec `--surface`** — il est strictement égal à `--background` (clair comme sombre), donc un panneau translucide en `--surface` n'a aucun contraste avec la page derrière et paraît plat/opaque sans flou perceptible. Toujours utiliser un ton `--surface-container*` distinct du fond pour qu'un panneau de verre se lise. Toutes les transitions de verre sont animées (`background-color`, `background-image`, `box-shadow`, `border-color`, `backdrop-filter`) en parallèle de l'élargissement. Un fallback `@supports not (backdrop-filter)` repasse en panneaux quasi-opaques pour la lisibilité.
+Règle critique apprise : pour que le verre se lise, le panneau ouvert doit éviter un remplissage opaque proche du fond (`--surface` = `--background`) et s'appuyer sur le flou, les bordures et l'ombre. Toutes les transitions de verre sont animées (`background-color`, `box-shadow`, `border-color`, `backdrop-filter`) en parallèle de la translation. Un fallback `@supports not (backdrop-filter)` repasse en panneaux quasi-opaques pour la lisibilité.
 
-### Portail splash (`/`)
+### Portail splash (`/:locale`)
 
 La page splash est **hors chrome** (pas de TopBar ni SideNav, footer masqué). Elle remplit 100 % du viewport via `.splash-portal { height: 100svh }` et `.splash-stage { position: absolute; inset: 0 }`. La typographie du titre est fluide : `clamp(1.6rem, 2.4vw, 2.6rem)`. Des media queries couvrent le mobile portrait (≤ 760px) et le paysage court (max-height ≤ 600px).
 
@@ -212,15 +213,21 @@ Règles :
 Les cartes actuelles à stabiliser :
 
 - `PathCard` ;
+- `ParcoursCard` ;
 - `CourseCard` ;
 - `LessonRow` ;
 - `CaseCard` ;
+- `DeliverableCard` ;
+- `MemoCard` ;
+- `AntiPortfolioEntryCard` ;
+- `EcosystemCard` ;
 - `BlogCard` ;
 - `SimulatorCard`.
 
 Règles :
 
-- `PathCard` et `SimulatorCard` peuvent utiliser une couleur d'accent dynamique ;
+- `PathCard`, `ParcoursCard`, `EcosystemCard` et `SimulatorCard` peuvent utiliser une couleur d'accent dynamique ;
+- `MemoCard`, `AntiPortfolioEntryCard` et `DeliverableCard` doivent rester lisibles comme pièces d'intelligence VC, pas comme cartes marketing ;
 - `LessonRow` doit rester dense, scannable et stable ;
 - les listes de contenu doivent privilégier la comparaison rapide.
 
@@ -356,13 +363,15 @@ Règles / garde-fous :
 
 ---
 
-## 9. Portail splash (`pages/SplashPage.tsx` + `styles/splash.css`)
+## 9. Portail splash (`pages/home/SplashPage.tsx` + `styles/splash.css`)
 
-Le portail est une surface autonome avec son propre système de tokens (`splash-portal.splash-light` / `.splash-dark`). Il ne dépend pas des classes Tailwind génériques.
+Le portail est une surface autonome avec son propre système de tokens piloté par `.splash-portal[data-mode='light'|'dark']`. Il ne dépend pas des classes Tailwind génériques.
 
 Règles propres au portail :
 
-- les couches `.splash-layer` sont toutes deux montées (cross-fade) ; la couche inactive reçoit `inert` pour rester hors du focus clavier et de l'arbre ARIA ;
+- le portail est un **single stage** : les photos claire/sombre, les étoiles, les sceaux, le contenu et le toggle restent dans une seule scène `.splash-stage` ;
+- les deux photos sont superposées dans `.splash-photos` et marquées `aria-hidden` ; la bascule ne duplique pas les contenus focusables ;
+- la transition « Aube » est pilotée par Web Animations API dans `SplashPage.tsx` (opacité photo sombre, filtre photo claire, flare d'horizon, révélation des étoiles), tandis que React garde les éléments racine stables ;
 - le toggle "Choisissez votre lumière" pilote `ThemeContext` (`useTheme().toggle`) — pas un état local ni un `localStorage` séparé ;
 - les fonds sont en WebP (`/splash/bg-claire.webp` ~21 Ko, `/splash/bg-sombre.webp` ~97 Ko) — ne pas les remplacer par des PNG ;
 - le `stage` remplit le viewport (`position: absolute; inset: 0`) — ne pas réintroduire le scaling `Math.min(w/1440, h/900)` qui cassait le mobile ;
@@ -403,7 +412,7 @@ Animations existantes :
 - `draw` ;
 - `sheen` ;
 - `compass-needle` ;
-- `splash-rise`, `splash-breathe`, `splash-float`, `splash-float-x`, `splash-float-slow` (portail splash uniquement, dans `splash.css` ; l'effet de parallaxe est géré de manière fluide via `requestAnimationFrame`).
+- `splash-rise`, `splash-float`, `splash-float-x`, `splash-float-slow`, `splash-compass-needle`, `splash-enter-ring`, `splash-nudge`, `splash-star-pop`, `splash-twinkle` (portail splash uniquement, dans `splash.css` ; l'effet de parallaxe est coalescé via `requestAnimationFrame`, la transition Aube via Web Animations API).
 
 Règles :
 
@@ -425,7 +434,8 @@ Déjà en place :
 - `role="alert"` sur erreurs d'auth ;
 - inputs de simulateurs labellisés ;
 - `prefers-reduced-motion` ;
-- couche splash inactive : `inert={!active}` + `aria-hidden` — lien « Entrer » non focusable quand masqué.
+- `SideNav` desktop fermée : panneau complet en `inert={!open}` pour sortir ses liens du focus et de l'arbre d'accessibilité ;
+- portail splash : photos, étoiles et sceaux décoratifs en `aria-hidden`, toggle en `radiogroup`, pas de second lien « Entrer » masqué.
 
 Règles à maintenir :
 

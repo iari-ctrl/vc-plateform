@@ -37,7 +37,7 @@ Une plateforme **full-stack** d'intelligence VC, enrichie par une couche de form
 | **Base de données** | SQLite (prototype) — interchangeable avec Postgres en changeant le `datasource` Prisma |
 | **Typographie** | Newsreader (titres) · Plus Jakarta Sans (corps) · JetBrains Mono (mono) |
 
-Le **contenu canonique** (parcours, cours, leçons, dictionnaire, études de cas, livrables de parcours, analyses, simulateurs, ikigai) vit dans les JSON sources de `/data` : fichiers plats (`data/*.json`) et dossiers de collection comme `data/blog/*.json`. Il est **partagé** : le client le bundle pour fonctionner hors-ligne / en invité, et le serveur l'utilise pour *seeder* la base de données.
+Le **contenu canonique** (parcours, cours, leçons, dictionnaire, études de cas, livrables de parcours, analyses, anti-portfolio, mémos annotés, simulateurs, ikigai) vit dans les JSON sources de `/data` : fichiers plats (`data/*.json`) et dossiers de collection comme `data/blog/*.json`. Il est **partagé** : le client le bundle pour fonctionner hors-ligne / en invité, et le serveur l'utilise pour *seeder* la base de données.
 
 ---
 
@@ -72,7 +72,7 @@ npm run dev
 | --- | --- |
 | `npm run dev` | Client + serveur en parallèle |
 | `npm run dev:client` / `npm run dev:server` | Un seul des deux |
-| `npm run db:setup` | `prisma generate` + `db push` + seed |
+| `npm run db:setup` | `prisma generate` + `prisma migrate deploy` + seed |
 | `npm run db:seed` (`-- --force`) | (Re)peuple la base ; non destructif pour le contenu éditable sauf `--force` |
 | `npm run db:reset` | Réinitialise la base puis re-seed |
 | `npm run content:export` | Réexporte les éditions DB (glossaire, blog, cas) vers les JSON sources (`data/blog/<slug>.json` pour les analyses) |
@@ -84,21 +84,23 @@ npm run dev
 | `npm run validate:content` | Vérifie que tous les liens dictionnaire `[[..]]` / `{{..}}` du contenu résolvent |
 | `npm run validate:glossary` | Contrôle custom du glossaire final (slugs uniques, `id === slug`, liens, aliases) |
 
-> Une **CI** (`.github/workflows/ci.yml`) enchaîne validation du contenu → lint → build → tests client → tests serveur, à chaque push sur `main`/`master` et sur chaque PR.
+> Workflow GitHub actif : `.github/workflows/deploy-pages.yml` déploie le **frontend** sur GitHub Pages à chaque push sur `master`. Il installe les dépendances, lance `split:content`, build le client avec `--base=/vc-plateform/` et `VITE_API_DISABLED=true`, puis publie `client/dist`. Il ne remplace pas une CI complète validation → lint → build root → tests client/serveur.
 
 ### État vérifié
 
-Audit local courant (2026-06-26) :
+Audit local courant (2026-06-28 ; build/prérendu complet dernier contrôle consigné le 2026-06-26) :
 
-- `npm run build` : OK, avec `split:content`, `validate:content`, `generate:sitemap`, build serveur, build client, puis `postbuild` → **prérendu statique** (573 routes FR écrites sous `client/dist/<route>/index.html`, ~70 s) ;
+- Dernier `npm run build` consigné : OK, avec `split:content`, `validate:content`, `generate:sitemap`, build serveur, build client, puis `postbuild` → **prérendu statique** (573 routes FR écrites sous `client/dist/<route>/index.html`, ~70 s) ;
 - `npm run validate:content` via `prebuild` : OK, 22 parcours · 9 rayons · 16 cours · 66 leçons · 374 termes · 6 études de cas · 2 livrables · 8 articles · 31 dossiers d'écosystème · 9 simulateurs ;
+- `npm run validate:glossary` : OK, 374 termes ;
 - `npm run lint` : OK, 0 erreur, 4 warnings structurels `react-refresh/only-export-components` sur les Context ;
-- `npm run test --workspace client` : OK, 12 fichiers / 70 tests ;
+- `npm run test --workspace client` : OK, 13 fichiers / 74 tests ;
+- `npm run test --workspace server` : OK, 4 fichiers / 11 tests ;
 - sitemap régénéré : les index `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables` sont publiés en FR/EN.
 
 Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 
-- **CI sur push** : `ci.yml` écoute désormais `branches: [main, master]` (était `main` seul, inopérant hors PR sur ce dépôt `master`).
+- **Déploiement GitHub Pages** : le workflow réel est `.github/workflows/deploy-pages.yml` ; il déploie le frontend statique sur `gh-pages` depuis `master`, avec l'API désactivée côté bundle (`VITE_API_DISABLED=true`) pour fonctionner sans backend.
 - **Crash async Express 4** : wrapper `ah()` (`server/src/lib/async-handler.ts`) appliqué à **tous** les handlers async (auth, content, me, admin, search) — une rejection est forwardée à l'error-handler central (→ 500) au lieu de tuer le process.
 - **Seed non destructif** : `server/prisma/seed.ts` ne réécrit plus le contenu éditable (glossaire, blog, études de cas) ; create-if-absent par défaut, écrasement uniquement avec `npm run db:seed -- --force`. Sens inverse DB→JSON sources via `npm run content:export` (`data/blog/*.json` pour le blog).
 - **Garde JWT durcie** : `getJwtSecretIssue()` vérifie une longueur minimale + une liste de valeurs interdites en production (fail-fast au démarrage).
@@ -108,10 +110,11 @@ Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 
 - **i18n Phase 1** : routing localisé `/fr` `/en` (`client/src/i18n/`), redirection racine crawler-safe, sélecteur FR/EN **présent mais masqué** jusqu'à la traduction du chrome et du contenu ;
 - **Sécurité / qualité** : auth cookie-only, mot de passe ≥ 8 + rate-limit auth, CORS dev-only, markdown sûr (`safeHttpUrl`), Error Boundary au niveau route, tokens `--error`/`--success` ;
-- **Tests** : harnais Vitest (client 10 fichiers / 59 tests · serveur 3 fichiers / 10 tests) + CI ;
+- **Tests** : harnais Vitest (client 13 fichiers / 74 tests · serveur 4 fichiers / 11 tests) ;
 - **IA en 3 piliers (2026-06-26)** : la navigation publique est réorganisée autour d'**Intelligence VC**, **Formation** et **Workspace**. Les nouvelles pages-index `/intelligence`, `/convictions`, `/decisions`, `/methode` et `/livrables` agrègent les contenus existants sans déplacer les slugs de détail.
-- **Couche Parcours branchée au client** : la **page `/paths` réunit la carte interactive (l'Atlas) et le catalogue des parcours** (trajectoires par objectif, étagères par famille, bandeau « Ton parcours » issu de l'ikigai) ; `/paths/:slug` reste l'aiguilleur parcours/rayon. La **Bibliothèque (`/bibliotheque`) présente désormais les 9 rayons thématiques comme ossature**, puis le catalogue complet des cours, lectures et cas. Loader `client/src/content/parcours.ts`, pages `ParcoursPage` / `PathDetailPage` / `ParcoursOrSubjectPage`. Voir [`docs/parcours-apprentissage-conception.md`](docs/parcours-apprentissage-conception.md).
-- **Contenu** : pipeline d'authoring `docs/parcours/` → `data/parcours/*.lessons.json` (2 parcours rédigés, dont le registre « entretien Analyst »). Les leçons drop-in (`ld-*`/`lea-*`) sont **servies côté client** : `scripts/split-lessons.mjs` les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts` (cf. « Performance » ci-dessous), et les 2 parcours phares pointent dessus. **Pas encore** fusionnées dans `data/lessons.json` canonique ni seedées en base : côté **API/DB** elles restent absentes — le client les sert via le fallback bundle, donc `npm run db:seed` reste à faire pour aligner le serveur.
+- **Couche Parcours branchée au client** : la **page `/paths` réunit la carte interactive (l'Atlas) et le catalogue des parcours** (trajectoires par objectif, étagères par famille, bandeau « Ton parcours » issu de l'ikigai) ; `/paths/:slug` reste l'aiguilleur parcours/rayon. La **Bibliothèque (`/bibliotheque`) présente désormais les 9 rayons thématiques comme ossature**, puis le catalogue complet des cours, lectures et cas. Loader `client/src/content/parcours.ts`, pages `ParcoursPage` / `PathDetailPage` / `ParcoursOrSubjectPage`.
+- **Parcours en accès libre, avec backlog visible** : aucune progression n'est bloquée, mais 8 étapes restent marquées `a-produire` dans `data/parcours.json` et s'affichent comme « bientôt » tant qu'elles ne résolvent ni vers une leçon ni vers un livrable.
+- **Contenu** : pipeline d'authoring `docs/parcours/` → `data/parcours/*.lessons.json` (3 registres drop-in actifs : Découverte VC, lever son fonds LP, standard français). Les leçons drop-in (`ld-*`, `llp-*`, `lts-*`) sont **servies côté client** : `scripts/split-lessons.mjs` les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts` (cf. « Performance » ci-dessous). Elles sont aussi **seedées côté serveur** via `content.allLessons()` dans `server/src/lib/content.ts` / `server/prisma/seed.ts`, ce qui aligne le bundle client, l'API et la base locale sur 66 leçons disponibles.
 - **Cours Power Law & Monte Carlo** : nouveau cours canonique `c-power-law-portfolio` dans le rayon Portfolio, avec 4 leçons (`lpl-*`) qui expliquent moyenne vs médiane, pertinence de Monte Carlo, moteur du simulateur Power Law et lecture TVPI/concentration/fund returner. Le simulateur Power Law référence maintenant ces leçons en premier.
 - **Performance / bundle** : le glossaire **et** les leçons sont découpés en un index léger (eager, hot path : popovers, recherche, liens) et un chunk lourd lazy (définitions / corps de leçon), via `scripts/split-glossary.mjs` + `scripts/split-lessons.mjs` (câblés dans `predev`/`prebuild` par `npm run split:content`). Le chunk eager `lessons` passe de ~176 kB à ~32 kB ; les corps (~143 kB) ne sont chargés que par le lecteur de leçon.
 - **Espace « Décortiquer un écosystème » (2026-06-13)** : `/ecosystemes` réunit des **analyses signées** sur des géographies, secteurs et thèses transverses. Dossiers vivants **arborescents** (`parentId` + `order`) avec thèse falsifiable, **convictions datées à degré d'assurance explicite** (exploratoire / moyenne / forte), signaux directionnels et **figures natives** (graphiques/schémas en SVG/HTML theme-aware, 5 types, sans asset ni librairie de charting). **100 % client** (`data/ecosystems.json`, aucune table serveur). 31 dossiers au lancement (3 racines + 28 sous-dossiers). Méthodo d'authoring : skill `.claude/skills/ecosystemes/SKILL.md`.
@@ -129,6 +132,7 @@ vc-premium-platform/
 │   ├── caseStudies.json  deliverables.json  simulators.json  ikigai.json
 │   ├── blog/                 # analyses : un fichier JSON par article (`<slug>.json`)
 │   ├── ecosystems.json       # dossiers « Décortiquer un écosystème » (arbre parentId/order, 100% client)
+│   ├── antiPortfolio.json  memos.json  # Intelligence VC : anti-portfolio (patterns + entrées) + mémos annotés — 100% client
 │   #   deliverables.json     # livrables de parcours (/livrables) : brief + gabarit + grille + modèle, 100% client
 │   ├── parcours.json  parcours.en.json  parcoursConfig.json  profileParcours.json
 │   └── parcours/             # fiches de leçons drop-in par parcours (*.lessons.json)
@@ -147,7 +151,7 @@ vc-premium-platform/
 │       └── styles/           # tokens.css (design tokens) + global.css
 │
 └── server/                   # API Express + Prisma
-    ├── prisma/schema.prisma  # 15 modèles (voir ci-dessous)
+    ├── prisma/schema.prisma  # 16 modèles (voir ci-dessous)
     ├── prisma/seed.ts        # peuple la base depuis /data
     └── src/
         ├── routes/           # auth · content · me · admin · search
@@ -158,13 +162,18 @@ Le build client est découpé par routes et par collections de contenu : le vend
 
 ### Pages (client)
 
-`Home` · `Onboarding` (ikigai) · `Résultat du profil` · `Dashboard` · `Parcours` (Atlas + catalogue par familles, sur `/paths`) · `Détail parcours` (carte de voyage, sur `/paths/:slug`) · `Bibliothèque` (les cours, lectures et études de cas, sur `/bibliotheque`) · `Détail rayon` · `Cours` · `Leçon` (lecture active) · `Dictionnaire` · `Études de cas` (détail) · `Livrable` (l'aboutissement « à produire » d'un parcours : brief + gabarit + grille + modèle, sur `/livrables/:slug`) · `Simulateurs` (liste + 9 calculateurs) · `Analyses` (blog liste + article) · `Écosystèmes` (« Décortiquer un écosystème » : index + dossier, sur `/ecosystemes` et `/ecosystemes/:slug`) · `Notes & favoris` · `Profil` · `Recherche` · `Administration (CMS)`.
+Organisées autour des trois piliers, plus les pages transverses :
+
+- **Intelligence VC** — `Intelligence` (index) · `Convictions` · `Décisions` (index) · `Méthode` · `Anti-portfolio` (+ détail d'entrée, sur `/anti-portfolio`) · `Memos` (bibliothèque + détail, sur `/memos`) · `Analyses` (blog : liste, article, scrollytelling) · `Écosystèmes` (index + dossier, sur `/ecosystemes` et `/ecosystemes/:slug`) · `Livrables` (index + détail « à produire » : brief + gabarit + grille + modèle, sur `/livrables` et `/livrables/:slug`) · `Études de cas` (détail).
+- **Formation** — `Parcours` (Atlas + catalogue par familles, sur `/paths`) · `Détail parcours` (carte de voyage, sur `/paths/:slug`) · `Bibliothèque` (cours, lectures et études de cas, sur `/bibliotheque`) · `Détail rayon` · `Cours` · `Leçon` (lecture active) · `Dictionnaire` · `Simulateurs` (liste + 9 calculateurs).
+- **Workspace** — `Dashboard` · `Journal de décisions` · `Notes & favoris`.
+- **Transverses** — `Home` · `Splash` · `Onboarding` (ikigai + test d'orientation) · `Résultat du profil` · `Profil` · `Recherche` · `Administration (CMS)` · `Design System`.
 
 > `/paths/:slug` route intelligemment : un slug de parcours → la carte de voyage ; tout autre slug (liens legacy des sujets) → l'ancien détail de rayon. Aucun lien existant n'est cassé.
 
 ### Modèle de données (Prisma)
 
-`User` · `Profile` · `OnboardingAnswer` · `Note` · `Bookmark` · `Progress` · `LearningPath` · `Course` · `Lesson` · `Quiz` · `GlossaryTerm` · `CaseStudy` · `BlogPost` · `Simulator` · `Tag`.
+`User` · `Profile` · `OnboardingAnswer` · `Note` · `Bookmark` · `Progress` · `DecisionEntry` · `LearningPath` · `Course` · `Lesson` · `Quiz` · `GlossaryTerm` · `CaseStudy` · `BlogPost` · `Simulator` · `Tag`.
 
 Le contenu éditorial est stocké en colonnes indexées (titre, slug, catégorie, `searchText`) + un blob JSON `data` qui porte l'objet complet — un compromis pragmatique pour SQLite qui reste requêtable et facilement migrable.
 
@@ -177,7 +186,7 @@ Le contenu éditorial est stocké en colonnes indexées (titre, slug, catégorie
 | `GET` | `/api/content/paths` · `/paths/:slug` · `/courses/:slug` · `/lessons/:slug` | public |
 | `GET` | `/api/content/glossary` · `/case-studies` · `/blog` · `/simulators` · `/tags` | public |
 | `GET` | `/api/search?q=` | public |
-| `GET/PUT` | `/api/me/profile` · `GET/POST/DELETE /me/notes` · `/me/bookmarks` · `/me/progress` | requise |
+| `GET/PUT` | `/api/me/profile` · `GET/POST/DELETE /me/notes` · `/me/bookmarks` · `/me/progress` · `/me/decisions` (journal de décisions) | requise |
 | `*` | `/api/admin/glossary` · `/blog` · `/case-studies` · `/stats` | admin |
 
 ---
@@ -223,6 +232,6 @@ node scripts/prerender.mjs --concurrency=8            # parallélisme (défaut 6
 
 - **Mode de rendu — tranché.** SPA (CSR) + **prérendu statique des routes publiques au build** (cf. section « Prérendu statique » ci-dessus) : OpenGraph/`canonical`/`hreflang` par page sont désormais présents dans le HTML statique pour le SEO et le partage social, sans migration SSG. L'app authentifiée reste en CSR.
 - Remplacer `provider = "sqlite"` par `postgresql` dans `prisma/schema.prisma` et ajuster `DATABASE_URL`. Pour l'i18n, ajouter `locale` aux modèles de contenu + `@@unique([slug, locale])` (i18n Phase 4).
-- Définir un vrai `JWT_SECRET` (la garde production exige déjà longueur min. + blocklist) et passer le cookie en `secure: true` derrière HTTPS ; finaliser le durcissement (helmet, CSP/HSTS, contraste de l'or).
+- Définir un vrai `JWT_SECRET` (la garde production exige déjà longueur min. + blocklist) et passer le cookie en `secure: true` derrière HTTPS ; `helmet` est déjà appliqué (`server/src/app.ts`), reste à finaliser le durcissement (CSP/HSTS, contraste de l'or).
 - Servir le `client/dist` derrière un CDN ; héberger l'API séparément (Render, Fly, Railway…) ou en serverless.
 ```

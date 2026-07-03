@@ -1,18 +1,13 @@
 # Manuel d'Architecture et d'Édition — VC Intelligence Platform
 
 > [!IMPORTANT]
-> **Statut documentaire — 2026-06-26**
-> - Dernière révision de fond indiquée : 2026-06-22.
+> **Statut documentaire — 2026-06-28**
 > - Périmètre : manuel d'architecture, cycle de vie du contenu et guide d'édition.
 > - Nature : **journal de suivi — peut diverger du code**. Pour les routes, scripts et compteurs, vérifier `client/src/App.tsx`, `shared/routes.mjs`, `package.json`, `data/` et `.github/workflows/ci.yml`.
-> - Sections manifestement à arbitrer au regard du code actuel : §1 annonce `glossary.json (361)` et un registre canonique à 433 entrées ; le repo courant compte 374 termes dans `data/glossary.json` et 436 entrées dans `data/sources/canonical-glossary.json`.
-> - Sections manifestement à arbitrer au regard du code actuel : §1 et §4.1 présentent les drop-in comme `ld-*` / `lea-*`; les fichiers `data/parcours/*.lessons.json` courants portent plutôt `ld-*`, `llp-*` et `lts-*`, tandis que les `lea-*` vivent maintenant dans `data/lessons.json`.
-> - Sections manifestement à arbitrer au regard du code actuel : §1bis liste une architecture cible en routes `/research`, `/theses`, `/atlas`, `/tools`, `/library`, `/workspace`; `client/src/App.tsx` expose aujourd'hui notamment `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables`, `/ecosystemes`, `/dashboard`, `/notes` et `/journal`.
-> - Sections manifestement à arbitrer au regard du code actuel : §3.3 cite `ThesisLabPage`, `AtlasPage` et `ResearchPage`, absentes du code courant ; les pages livrées côté intelligence sont `IntelligencePage`, `ConvictionsPage`, `DecisionsIndexPage`, `MethodePage`, `DeliverablesPage`, etc.
-> - Sections manifestement à arbitrer au regard du code actuel : §4.1 décrit les fichiers `data/parcours/<parcours>.lessons.json` comme un tableau exact de `Lesson`; les fichiers actuels sont des objets enveloppes avec une propriété `lessons`.
-> - Sections manifestement à arbitrer au regard du code actuel : §6 dit encore que `db:setup` fait un `db push` et conserve les compteurs `client 10 fichiers / 59 tests` + `serveur 3 fichiers / 10 tests`; le script courant utilise `prisma migrate deploy`, et les compteurs de tests sont dépassés par l'état du repo.
+> - **Réconciliation 2026-06-28** : passe complète contre le code. La couche **VC Intelligence**, jusqu'ici décrite comme « à venir », est désormais documentée comme **livrée** sous ses noms réels — `/intelligence`, `/ecosystemes`, `/convictions`, `/memos`, `/anti-portfolio`, `/decisions` + `/journal`, `/methode`, `/livrables` (§1bis, §3.3). Compteurs, conventions d'`id`, schéma des registres drop-in, scripts (`db:setup`, `content:sync`, `prerender`) et compteurs de tests ont été alignés sur le dépôt. Nouvelles sous-sections d'édition : §4.5quater (mémos annotés) et §4.5quinquies (anti-portfolio).
+> - **Écarts résiduels (assumés, non bloquants)** : la **taxonomie cible Phase 3** (`contentKind`/`audience`/`rigor`/`evidenceLevel`, §1bis) n'est **pas** généralisée aux schémas Zod — ne pas l'ajouter aux JSON existants. Les noms de routes du plan stratégique initial (`/research`, `/theses`, `/atlas`, `/tools`, `/library`, `/workspace`) n'ont pas été retenus tels quels ; leur valeur a été livrée sous d'autres routes (cf. table §1bis).
 
-Dernière mise à jour : 2026-06-22
+Dernière mise à jour : 2026-06-28
 
 Ce document décrit l'architecture **full-stack** du projet, la **vision produit et le positionnement stratégique**, le cycle de vie du contenu (de la source canonique JSON jusqu'à l'écran), et un **guide d'édition pas-à-pas** pour un développeur qui veut ajouter du contenu, modifier le design, ou faire évoluer le code.
 
@@ -20,7 +15,7 @@ Ce document décrit l'architecture **full-stack** du projet, la **vision produit
 > Si vous ne deviez retenir qu'une chose : **le contenu canonique vit dans les JSON sources de `/data` à la racine du dépôt** (`data/*.json`, et `data/blog/*.json` pour les analyses). Le client le *bundle* (mode invité / hors-ligne) et le serveur l'utilise pour *seeder* la base. Pour 95 % des ajouts de contenu, vous éditez un JSON puis vous lancez `npm run db:seed`.
 
 > [!IMPORTANT]
-> **Positionnement stratégique (juin 2026).** Le projet est en cours de repositionnement : d'une plateforme de formation VC, il évolue vers une **VC Intelligence Platform** dont la couche formation ne représente que 10–20 % du produit final. La couche **VC Intelligence** (80–90 %) — research notes, thesis lab, atlas de marchés, cas décisionnels, tools, frameworks, workspace — est le cœur du produit. La formation reste un socle d'entrée précieux (aspirants, juniors, CVC, reconversions) mais ne doit plus dominer l'identité produit. Voir §1bis pour le détail.
+> **Positionnement stratégique (mis à jour 2026-06-28).** D'une plateforme de formation VC, le projet est devenu une **VC Intelligence Platform**. La couche **VC Intelligence** est désormais **livrée pour l'essentiel** : hub `/intelligence`, dossiers d'écosystème `/ecosystemes`, convictions `/convictions`, mémos annotés `/memos`, anti-portfolio `/anti-portfolio`, carnet de décision `/decisions` + `/journal`, méthode `/methode`, livrables `/livrables`. La formation reste un socle d'entrée précieux (aspirants, juniors, CVC, reconversions) mais ne domine plus l'identité produit. Voir §1bis pour la cartographie « cible initiale → livré ».
 
 ---
 
@@ -40,15 +35,15 @@ Le projet n'est pas une simple SPA : c'est un **monorepo npm workspaces** à deu
 vc-premium-platform/
 ├── data/                      # ← SOURCE DE VÉRITÉ du contenu (JSON)
 │   ├── paths.json (9 rayons)  courses.json (16)  lessons.json (55 leçons canoniques)
-│   ├── glossary.json (361)
-│   ├── caseStudies.json (5)  deliverables.json (2)  blog/ (8 articles, un JSON par slug)
+│   ├── glossary.json (374)
+│   ├── caseStudies.json (6)  deliverables.json (2)  blog/ (8 articles, un JSON par slug)
 │   ├── simulators.json (9)  ikigai.json
 │   ├── parcours.json (22)  parcours.en.json  parcoursConfig.json  profileParcours.json
-│   ├── parcours/              # 3 registres drop-in, 11 leçons additionnelles (*.lessons.json, ld-*/lea-*)
+│   ├── parcours/              # 3 registres drop-in, 11 leçons additionnelles (*.lessons.json, ld-*/llp-*/lts-*)
+│   ├── # ── couche VC Intelligence (100 % client, AUCUN seed) ──
+│   ├── ecosystems.json (31 dossiers)  memos.json (5 mémos annotés)  antiPortfolio.json (5 motifs + 9 entrées)
 │   ├── generated/             # GÉNÉRÉ, ne pas éditer : lessons.index/bodies.json + glossary.index/defs.json (split:content)
-│   └── sources/               # registre d'ingestion durable : canonical-glossary.json (433)
-│   # ── À VENIR (piliers VC Intelligence) ──────────────────
-│   # theses.json · atlas.json · frameworks.json · research.json (ou blog/ refondu)
+│   └── sources/               # registre d'ingestion durable : canonical-glossary.json (436)
 ├── docs/
 │   ├── parcours/              # conception + rédaction des parcours (Markdown)
 │   ├── i18n_architecture_FR-EN.md        # ADR + plan de migration bilingue (FR/EN)
@@ -68,7 +63,7 @@ vc-premium-platform/
 │       └── styles/            # tokens.css (design tokens, dont --error/--success) + global.css
 │
 └── server/                    # API Express + Prisma
-    ├── prisma/schema.prisma   # 15 modèles
+    ├── prisma/schema.prisma   # 16 modèles (dont DecisionEntry, adossant le carnet de décision)
     ├── prisma/seed.ts         # peuple la base depuis /data (non destructif sauf --force)
     ├── test/                  # tests d'intégration (auth · profile · isolation)
     └── src/
@@ -76,7 +71,7 @@ vc-premium-platform/
         └── lib/               # db · auth (JWT) · env · content (lecture de /data) · async-handler
 
 .github/workflows/ci.yml       # CI (validate:content → lint → build → tests client → tests serveur ; push main/master + PR)
-client/vitest.config.ts        # harnais client (10 fichiers, 59 tests) ; serveur : server/test (3 fichiers, 10 tests)
+client/vitest.config.ts        # harnais client (13 fichiers, 74 tests) ; serveur : server/test (4 fichiers, 11 tests)
 i18n_architecture_FR-EN.md     # ADR + plan de migration bilingue (FR/EN)
 docs/STRATEGIE-vc-intelligence.md  # doc directeur : positionnement, architecture cible, roadmap (fusion stratégie + audit)
 ```
@@ -88,19 +83,22 @@ docs/STRATEGIE-vc-intelligence.md  # doc directeur : positionnement, architectur
 
 ---
 
-## 1bis. Vision stratégique et architecture cible (Repositionnement)
+## 1bis. Vision stratégique : cible initiale → livré (Repositionnement)
 
-La plateforme est en cours de transformation pour devenir une **VC Intelligence Platform**. Le modèle d'apprentissage (Learning & Development) n'est qu'une porte d'entrée ; la valeur principale réside dans les outils professionnels.
+La plateforme s'est transformée pour devenir une **VC Intelligence Platform**. Le modèle d'apprentissage reste une porte d'entrée ; la valeur principale réside dans les outils de travail de l'investisseur. Le plan stratégique initial visait huit piliers sous des routes précises. La plupart ont été livrés, mais sous d'autres noms de route — la table ci-dessous fait correspondre la cible d'origine à ce qui existe aujourd'hui dans [`client/src/App.tsx`](../client/src/App.tsx).
 
-### Architecture cible en 8 piliers
-1. **Intelligence / Research** (`/research`) : notes sectorielles, analyses de marché, flux de capitaux.
-2. **Thesis Lab** (`/theses`) : thèses d'investissement structurées, critères de falsification, risques.
-3. **Atlas** (`/atlas`) : cartographie des écosystèmes et géographies (différent de la carte des parcours d'apprentissage).
-4. **Cases** (`/cases`) : cas d'investissement réels ou stylisés, orientés décision (comité, suivi, allocation).
-5. **Tools** (`/simulators` → `/tools`) : simulateurs repositionnés comme supports de décision professionnels (dilution, waterfall, economics).
-6. **Library** (`/library`, fusionnant `/paths` et `/bibliotheque`) : le socle de formation, relégué au second plan.
-7. **Glossary** (`/glossary`) : dictionnaire vivant et connecteur universel.
-8. **Workspace** (`/workspace`, ex-dashboard) : espace de production (brouillons, notes, thèses sauvegardées).
+| Pilier (cible initiale) | Route livrée | Surface |
+| --- | --- | --- |
+| Intelligence / Research (`/research`) | `/intelligence` + `/blog` | hub `IntelligencePage` + analyses (dont « Lectures obliques ») |
+| Thesis Lab (`/theses`) | `/convictions` + `/ecosystemes` | convictions datées (vue dérivée, §4.5sexies) + thèses falsifiables portées par les dossiers d'écosystème |
+| Atlas (`/atlas`) | `/ecosystemes` | « Décortiquer un écosystème » (§4.5bis), 31 dossiers arborescents |
+| Cases (`/cases`) | `/cases/:slug` | études de cas décisionnelles (l'index `/cases` redirige vers la Bibliothèque) |
+| Tools (`/tools`) | `/simulators` | simulateurs de décision (§4.6) — route inchangée |
+| Library (`/library`) | `/paths` + `/bibliotheque` | parcours (§4.3bis) + rayons (§4.3) — non fusionnés |
+| Glossary (`/glossary`) | `/glossary` | dictionnaire vivant et connecteur universel |
+| Workspace (`/workspace`) | `/dashboard` + `/notes` + `/journal` | tableau de bord, carnet, **carnet de décision** (§4.5sexies) |
+
+Surfaces livrées **hors plan initial** : `/memos` (mémos d'investissement annotés, §4.5quater), `/anti-portfolio` (ratés d'investissement documentés, §4.5quinquies), `/livrables` (artefacts de parcours, §4.5ter), `/methode` (exposé de la méthode d'analyse). Les piliers `/research`, `/theses`, `/tools`, `/library`, `/workspace` n'ont **pas** été retenus comme routes : leur valeur a été absorbée par les surfaces ci-dessus.
 
 ### Taxonomie de contenu (Nouveaux métadonnées)
 Pour piloter ce corpus diversifié et filtrer l'affichage (ex: masquer le contenu "founder" à un investisseur), chaque nouveau contenu doit intégrer une taxonomie stricte :
@@ -109,7 +107,7 @@ Pour piloter ce corpus diversifié et filtrer l'affichage (ex: masquer le conten
 - **`rigor`** : `intro`, `practitioner`, `desk-reference` (remplace les niveaux débutant/intermédiaire/avancé pour l'affichage public).
 - **`evidenceLevel`** : `conceptual`, `analytical`, `sourced`, `decision-grade`, `maintained-intelligence`.
 
-*Note technique : ces champs sont le **standard cible de la Phase 3** de la roadmap, pas encore le schéma généralisé des collections historiques. Le validateur actuel est strict : n'ajoutez pas ces champs dans `paths.json`, `courses.json`, `lessons.json`, `data/blog/*.json`, `caseStudies.json` ou `simulators.json` tant que les types et schémas Zod n'ont pas été migrés. La règle d'or reste **Schema-first** : aucune nouvelle collection VC Intelligence n'est ajoutée sans validation stricte.*
+*Note technique : ces champs sont le **standard cible de la Phase 3** de la roadmap, pas encore le schéma généralisé des collections historiques. Le validateur actuel est strict : n'ajoutez pas ces champs dans `paths.json`, `courses.json`, `lessons.json`, `data/blog/*.json`, `caseStudies.json` ou `simulators.json` tant que les types et schémas Zod n'ont pas été migrés. La règle d'or visée reste **Schema-first**. Dette à solder : `memos.json` et `antiPortfolio.json` ont été livrés **avant** leurs schémas — ils sont typés en TypeScript mais ni validés par Zod ni couverts par le scan de marqueurs (§4.5quater). Toute nouvelle collection devrait, elle, embarquer son schéma `validate-content.mjs` dès l'ajout.*
 
 ---
 
@@ -166,7 +164,7 @@ Le glossaire final consommé par l'app reste [data/glossary.json](data/glossary.
 
 - `canonical-glossary.json` est le registre durable : il conserve sources, modules, décisions d'édition, aliases, `action` (`add`, `update`, `merge`, `skip`) et `status` (`draft`, `needs-review`, `approved`, `applied`).
 - `data/glossary.json` ne contient que les entrées finales consommées par l'application : `id`, `term`, `slug`, `category`, `short`, `definition`, `example`, `link`, `seeAlso`, `relatedLessonIds`.
-- Le registre contient **433 entrées** et le glossaire final **358 termes**. Les audits PitchBook, SEC et Schoenherr sont couverts par entrées finales ou aliases.
+- Le registre contient **436 entrées** et le glossaire final **374 termes**. Les audits PitchBook, SEC et Schoenherr sont couverts par entrées finales ou aliases.
 - Toute variante simple doit devenir un **alias** d'un terme existant plutôt qu'une fiche autonome ; une fiche finale n'est créée que si le concept a une utilité de popover ou de navigation propre.
 
 Pour clôturer une passe glossaire : mettez le registre à jour, injectez seulement les `add`/`update` retenus dans `data/glossary.json`, puis lancez `npm run validate:glossary`, `npm run validate:content` et `npm run build`.
@@ -184,18 +182,20 @@ Chaque type de contenu a une table Prisma avec des **colonnes indexées** (slug,
 ### 3.1. État & persistance (React Context — `client/src/context/`)
 - **`ThemeProvider`** — clair/sombre, persistant (`localStorage`), respecte `prefers-color-scheme`.
 - **`AuthProvider`** — session JWT (cookie httpOnly), expose `isAuthed`, `isAdmin`, et surtout `apiUp` / `ready` (sondage de l'API) consommés par `useApiData`. Le sondage est **répété** tant que l'API est injoignable (intervalle 15 s + événements `focus`/`online`) : une API qui démarre après le client ne laisse plus l'app bloquée en mode invité jusqu'au reload, et la session est restaurée avant de basculer `apiUp`.
-- **`UserDataProvider`** — profil, notes, favoris, progression, surlignages. **Mode invité** = `localStorage` ; **connecté** = API. À la première connexion, les données invité sont **migrées** vers le serveur.
+- **`UserDataProvider`** — profil, notes, favoris, progression, surlignages, **entrées du carnet de décision** (modèle Prisma `DecisionEntry`, par `userId` ; cf. §4.5sexies). **Mode invité** = `localStorage` ; **connecté** = API. À la première connexion, les données invité sont **migrées** vers le serveur.
 - **`UIProvider`** — palette de commande (⌘K), dialogues d'auth, états d'UI globaux.
 
 ### 3.2. Persistance invité (`client/src/lib/storage.ts`)
 Toutes les clés sont préfixées `vcpx:` : `theme`, `profile`, `notes`, `bookmarks`, `progress`, `highlights`, `onboarding-seen`.
 
 ### 3.3. Pages clés (`client/src/pages/`)
-L'arborescence évolue vers la cible VC Intelligence :
-- **Intelligence & Outils** : `ThesisLabPage`, `AtlasPage`, `ResearchPage` (à venir). `CaseStudyPage` (détail d'une étude de cas), `SimulatorsPage` / `SimulatorPage` (outils). **`EcosystemsPage`** (index « Décortiquer un écosystème », `/ecosystemes`) et **`EcosystemPage`** (détail d'un dossier, `/ecosystemes/:slug`) — première brique livrée de la couche Atlas / analyse signée (cf. §4.5bis).
-- **Library (Formation)** : **`ParcoursPage`** (catalogue des parcours, `/paths`), **`ParcoursDetailPage`** (carte de voyage d'un parcours, `/paths/:slug`), **`ParcoursOrSubjectPage`** (aiguilleur `/paths/:slug`). `PathsPage` (la **Bibliothèque**, `/bibliotheque`), `PathDetailPage` (détail d'un rayon), `CourseDetailPage`, `LessonPage` (lecture active).
-- **Core & Infrastructure** : `HomePage`, `OnboardingPage` (ikigai optionnel), `GlossaryPage`, `SearchPage`.
-- **Workspace** : `DashboardPage` (évolue vers un workspace artifact-first), `ProfileResultPage`, `NotesPage`, `ProfilePage`.
+L'arborescence est rangée par domaine (un sous-dossier par couche). La couche VC Intelligence est **livrée** :
+- **Intelligence** (`pages/intelligence/`) : **`IntelligencePage`** (hub `/intelligence`), **`MethodePage`** (`/methode`), **`ConvictionsPage`** (`/convictions`, convictions agrégées), **`DecisionsIndexPage`** (`/decisions`, présentation du carnet de décision), **`MemoLibraryPage`** / **`MemoPage`** (`/memos`, mémos annotés — §4.5quater), **`AntiPortfolioPage`** / **`AntiPortfolioEntryPage`** (`/anti-portfolio` — §4.5quinquies), **`DeliverablesPage`** / **`DeliverablePage`** (`/livrables` — §4.5ter).
+- **Écosystèmes** (`pages/ecosystems/`) : **`EcosystemsPage`** (index « Décortiquer un écosystème », `/ecosystemes`) et **`EcosystemPage`** (détail d'un dossier, `/ecosystemes/:slug`) — la couche Atlas / analyse signée (cf. §4.5bis).
+- **Outils & cas** : `SimulatorsPage` / `SimulatorPage` (`/simulators`), `CaseStudyPage` (`/cases/:slug` ; l'index `/cases` redirige vers la Bibliothèque), `blog/BlogPage` / `BlogPostPage`.
+- **Library (Formation)** : **`ParcoursPage`** (catalogue des parcours, `/paths`), **`ParcoursDetailPage`** (carte de voyage d'un parcours), **`ParcoursOrSubjectPage`** (aiguilleur `/paths/:slug`), `PathsPage` (la **Bibliothèque**, `/bibliotheque`), `PathDetailPage` (détail d'un rayon), `CourseDetailPage`, `LessonPage` (lecture active).
+- **Core & Infrastructure** : **`SplashPage`** (route index `/`), `HomePage` (`/home`), `OnboardingPage` (ikigai optionnel, avec `OrientationTest` + `MythCard`), `GlossaryPage`, `SearchPage`, `system/NotFoundPage`, `system/DesignSystemShowcasePage`.
+- **Workspace** (`pages/workspace/`) : `DashboardPage`, **`DecisionJournalPage`** (`/journal`, carnet de décision adossé serveur — §4.5sexies), `NotesPage`, plus `onboarding/ProfileResultPage` et `onboarding/ProfilePage`.
 - **CMS** : `admin/AdminPage`.
 
 > [!IMPORTANT]
@@ -225,7 +225,7 @@ La Phase 1 de l'architecture i18n (voir [i18n_architecture_FR-EN.md](i18n_archit
 
 ### 4.0. Conventions d'`id` et de `slug`
 - `slug` = identifiant d'URL (kebab-case, sans accent). Doit être **unique** par type.
-- `id` = clé interne stable. Conventions observées : **parcours** (couche neuve, `parcours.json`) → `p-*` ; **rayon** de la Bibliothèque (ancien `paths.json`) → court (`discover`) ; cours → `c-*`, leçons → `l-*` (bibliothèque) / `lpl-*` (cours Power Law & Monte Carlo) / `ld-*` (registre découverte) / `lea-*` (registre entretien analyst), **glossaire → `id == slug`**, blog → `bp-<slug>`, études de cas → id propre (`cs-*`), **livrables** → l'`id` du milestone résolu (`todo-*`, cf. §4.5ter).
+- `id` = clé interne stable. Conventions observées : **parcours** (couche neuve, `parcours.json`) → `p-*` ; **rayon** de la Bibliothèque (ancien `paths.json`) → court (`discover`) ; cours → `c-*` ; leçons de `lessons.json` → `l-*` (bibliothèque) / `lpl-*` (Power Law & Monte Carlo) / `lmv-*` / `lea-*` (entretien analyst) / `lf-*` ; leçons **drop-in** de `data/parcours/*.lessons.json` → `ld-*` (découverte), `llp-*` (lever son fonds LP), `lts-*` (standard français) ; **glossaire → `id == slug`** ; blog → `bp-<slug>` ; études de cas → `cs-*` ; **mémos** → `memo-*` (§4.5quater) ; **anti-portfolio** → `ap-*` (§4.5quinquies) ; **livrables** → l'`id` du milestone résolu (`todo-*`, cf. §4.5ter).
 - Les relations se font **par `id`**, pas par slug (voir le graphe ci-dessous).
 
 ```
@@ -296,7 +296,7 @@ La leçon est l'unité de lecture. Le `body`, le `summary`, les `keyTakeaways` e
 Puis **ajoutez l'`id` de la leçon dans `lessonIds[]` du cours** (`data/courses.json`) — c'est ce qui détermine l'ordre et l'appartenance.
 
 > [!NOTE]
-> **Pipeline d'authoring des parcours.** Pour un parcours entier, la rédaction se fait d'abord en Markdown dans [docs/parcours/](docs/parcours) (un doc de conception transverse `parcours-apprentissage-conception.md`, puis un doc par parcours, ex. `02-reussir-l-entretien-analyst.md`). Le contenu rédigé est ensuite porté en fiches de leçons **drop-in** dans `data/parcours/<parcours>.lessons.json` — un tableau d'objets au **schéma `Lesson` exact** (`data.lessons as Lesson[]`). Conventions d'`id` : `ld-*` = leçon *découverte* (parcours 01), `lea-*` = leçon *entretien analyst* (cours `c-entretien-analyst`) — choisies pour **cohabiter** avec les `l-*` sans les écraser.
+> **Pipeline d'authoring des parcours.** Pour un parcours entier, la rédaction se fait d'abord en Markdown dans [docs/parcours/](docs/parcours) (un doc de conception transverse `parcours-apprentissage-conception.md`, puis un doc par parcours). Le contenu rédigé est ensuite porté en fiches de leçons **drop-in** dans `data/parcours/<parcours>.lessons.json`. **Attention au schéma : ces fichiers sont des objets-enveloppes** `{ "_doc": …, "parcoursId": …, "courseId": …, "lessons": Lesson[] }` — la propriété `lessons` est le tableau au schéma `Lesson` exact (le split lit `data.lessons`, pas le fichier comme un `Lesson[]` nu). Trois registres existent aujourd'hui, leurs `id` choisis pour **cohabiter** avec les `l-*` sans les écraser : `ld-*` (parcours 01 *Le VC sans bullshit*, 7), `llp-*` (parcours 03 *Lever son fonds — LP*, 3), `lts-*` (parcours 04 *Le standard français*, 1). Les leçons *entretien analyst* `lea-*`, elles, sont passées dans le canonique `data/lessons.json`.
 >
 > **État actuel du câblage (cohabitation client + serveur).** Ces fiches sont **servies au client** : `scripts/split-lessons.mjs` fusionne `data/lessons.json` **et** `data/parcours/*.lessons.json` dans l'index/bodies générés, que `content/lessons.ts` expose (`LESSONS` + `loadLesson`), donc `lessonById`/`lessonBySlug` et le lecteur les résolvent. *(L'ancien `client/src/content/parcoursLessons.ts` a été supprimé : sa concaténation est désormais reprise par le script de split.)* Côté serveur, `server/src/lib/content.ts` charge aussi `data/parcours/*.lessons.json` et `server/prisma/seed.ts` seed `content.allLessons()`. Après `npm run db:seed`, les endpoints API `/content/lessons/:slug` résolvent donc les leçons drop-in comme les leçons de `data/lessons.json`.
 >
@@ -321,7 +321,7 @@ Le rendu est assuré par [client/src/lib/markdown.tsx](client/src/lib/markdown.t
 #### Détection automatique des termes (prose des leçons) — 2026-06-09
 Le balisage manuel ne suffit plus à garantir la règle produit : **dans les cours, tout terme technique ou sigle doit avoir un popover + redirection vers le dictionnaire.** `markdown.tsx` applique donc une **détection automatique** quand `glossaryPreview` est actif (prose de leçon via `ActiveProse sourceType="lesson"`, et définitions de `GlossaryPage`).
 
-- Un matcher est construit une fois à partir de **tous les termes + alias** du glossaire (358 termes, ~1256 clés). La **première occurrence** de chaque terme dans la page devient un popover ; les occurrences suivantes restent en texte simple (lecture propre).
+- Un matcher est construit une fois à partir de **tous les termes + alias** du glossaire (374 termes, plus d'un millier de clés une fois les alias dépliés). La **première occurrence** de chaque terme dans la page devient un popover ; les occurrences suivantes restent en texte simple (lecture propre).
 - Les **marqueurs manuels** `[[..]]` / `{{..}}` restent prioritaires : leurs slugs sont pré-amorcés, donc la détection auto ne re-lie jamais un terme déjà balisé.
 - Les **sigles** (VC, MOIC, B2B, DPI…) sont reconnus **en respectant la casse** : `VC`/`VCs` sont liés, `vc` en minuscule ou `VC` à l'intérieur d'un mot (`MVC`) ne le sont pas. Les phrases longues priment sur leurs sous-mots (« fonds VC » → `venture-capital-fund`). Frontières Unicode → les termes accentués restent intacts.
 - **Contenu du popover** : terme + champ `short` uniquement (explication très brève). Le **panneau entier** est cliquable et redirige vers `/glossary?term=slug` (lien réel : accessible clavier, clic-milieu/nouvel onglet préservés, navigation SPA au clic gauche) — pas de ligne « Voir dans le dictionnaire » séparée.
@@ -489,6 +489,34 @@ Un **livrable** réalise les étapes `milestone` où l'apprenant *produit* un ar
 - **Validation** : `scripts/validate-content.mjs` applique un Zod strict + résout `model`, `relatedLessonIds`, `glossaryRefs` et les marqueurs `[[..]]` ; le résolveur `milestone` y est aligné sur `resolveStep` (livrable d'abord, leçon en repli).
 - **En ligne (early-stage)** : `simulation-comite-investissement-seed` (modèle = Case `cs-seed-ic`) et `these-proprietaire-pre-seed-seed` (modèle = dossier `eco-ia-appliquee`). Restent 8 milestones `a-produire`.
 
+### 4.5quater. Mémo d'investissement annoté (`data/memos.json`)
+> Prose soumise à la **charte de style §4.0.c**. Contenu **100 % client** (aucun endpoint serveur, aucun seed), même pattern que les dossiers d'écosystème et les livrables.
+
+Un **mémo annoté** reprend un mémo d'investissement **réellement publié** et l'expose section par section, chaque passage commenté par ce que l'investisseur y fait, sur le plan de la décision. C'est la bibliothèque `/memos` (`MemoLibraryPage`) et la lecture `/memos/:slug` (`MemoPage`).
+
+- **Type** `InvestmentMemo` dans [`client/src/content/types.ts`](../client/src/content/types.ts) ; loader [`client/src/content/memos.ts`](../client/src/content/memos.ts) (`MEMOS`, `memoById`/`memoBySlug`, `MEMO_TAG_META`). `id` → `memo-*`.
+- **Format** : en-tête factuel (`company`, `fund`, `author`, `date`, `stage`, `amount?`, `outcome`, `whyItMatters`) + **provenance obligatoire** (`sourceUrl` vers l'original publié, `sourceNote` qui justifie pourquoi le document est légitimement public) + `context` (markdown). Le corps est `sections[]`, chaque section = `heading` + `blocks[]` ; un bloc = `excerpt` (extrait **court** du mémo, `isParaphrase: true` quand il est condensé plutôt que cité) + `note` (markdown : la décision à l'œuvre) + `tag` ∈ `these|marche|traction|equipe|risque|deal|concurrence|verdict`. Puis `lessons[]`, `glossaryRefs[]`, `relatedAntiPortfolioIds?`, `tags[]`.
+- ⚠️ **Légal / éthique** : ne reprendre que des mémos dont la diffusion publique est documentée (`sourceNote`) ; garder les `excerpt` brefs, renvoyer à l'original. La discipline d'attribution prime sur l'exhaustivité.
+- **Câblage d'une nouvelle collection** (à reproduire à l'identique pour tout pilier neuf) : barrel [`content/index.ts`](../client/src/content/index.ts), recherche [`content/search.ts`](../client/src/content/search.ts) (union `type` + push d'un hit `memo`), SEO/sitemap [`shared/routes.mjs`](../shared/routes.mjs) (`OG_IMAGE_BY_SEGMENT.memos = 'memo'`, `STATIC_ROUTES /memos`) et l'énumération des pages de détail dans [`scripts/collect-routes.mjs`](../scripts/collect-routes.mjs).
+- ⚠️ **Trou de validation** : `scripts/validate-content.mjs` ne porte **pas** de schéma Zod pour `memos.json`, et `memos.json` **n'est pas** dans `MARKER_FILES` — ni la forme ni les `glossaryRefs`/marqueurs `[[..]]` ne sont vérifiés par la CI. Le seul filet est le typage TypeScript (`types.ts`) au build/dev. Un `[[slug]]` cassé dans un mémo s'affichera en texte simple sans échec de build : relire à la main.
+
+### 4.5quinquies. Anti-portfolio (`data/antiPortfolio.json`)
+> Prose soumise à la **charte de style §4.0.c**. Contenu **100 % client** (aucun endpoint serveur, aucun seed).
+
+L'**anti-portfolio** documente des **refus d'investissement** devenus coûteux, sans biais rétrospectif : on reconstitue l'information publique disponible au moment de la décision, on défend honnêtement le refus, puis on nomme le signal manqué. Index `/anti-portfolio` (`AntiPortfolioPage`), détail `/anti-portfolio/:slug` (`AntiPortfolioEntryPage`).
+
+- **Schéma** : le fichier est un **objet-enveloppe** `{ "patterns": AntiPortfolioPattern[], "entries": AntiPortfolioEntry[] }` (types dans `types.ts`), exposé par [`content/antiPortfolio.ts`](../client/src/content/antiPortfolio.ts) (`ANTI_PORTFOLIO`, `ANTI_PORTFOLIO_PATTERNS`, `antiPortfolioById`/`BySlug`, `antiPortfolioPatternById`). `id` d'entrée → `ap-*`.
+- **`patterns[]`** : les **motifs** récurrents de refus (5 aujourd'hui : `categorie-deja-jouee`, `marche-trop-petit`, `produit-jouet`, `trop-cher`, `risque-structurel`), chacun `id`/`label`/`glyph`/`accent`/`description`/`antidote`. Une entrée s'y rattache par `patternIds[]`.
+- **`entries[]`** : `company`/`title`/`subtitle`, `passes[]` (`fund`, `partner?`, `year`, `stage`), `sector`, `summary`, `quote?`, **`knownAtTheTime[]`** (`date` + `fact` — uniquement de l'information **publique et datée** disponible à l'époque), `statedReason` + `reasonIsPublic`, `missedSignal` (markdown), **`steelman`** (markdown : le meilleur argument *en faveur* du refus, ex ante — exigé, c'est la garde anti-biais), `outcome`, `costEstimate?` (toujours présenté comme une estimation, jamais une fausse précision), `takeaways[]`, `glossaryRefs[]`, `relatedMemoIds?`, `sources[]`.
+- **Câblage** identique à §4.5quater (barrel, search `type: 'anti-portfolio'`, `shared/routes.mjs` OG `anti-portfolio`, `collect-routes.mjs` lisant `antiPortfolio.json.entries`).
+- ⚠️ **Même trou de validation** que les mémos : `antiPortfolio.json` n'a pas de schéma Zod ni d'entrée dans `MARKER_FILES`. Relire les marqueurs à la main.
+
+### 4.5sexies. Convictions (vue dérivée) & Carnet de décision (serveur)
+Deux surfaces de la couche Intelligence qui **ne s'éditent pas comme une collection** :
+
+- **Convictions** (`/convictions`, `ConvictionsPage`) : **aucun fichier de données propre**. [`content/convictions.ts`](../client/src/content/convictions.ts) (`allConvictions()`) **agrège** les `convictions[]` de tous les dossiers d'écosystème (statement, `horizon`, `strength` ∈ `exploratoire|moyenne|forte`, `rationale`, + provenance du dossier). Pour ajouter ou corriger une conviction, on édite le `convictions[]` du dossier concerné dans `data/ecosystems.json` (§4.5bis) — la page se recompose, triée et filtrable par degré d'assurance / horizon.
+- **Carnet de décision** (`/decisions` = présentation `DecisionsIndexPage` ; `/journal` = l'outil `DecisionJournalPage`) : ce n'est **pas du contenu éditorial**, c'est une **donnée utilisateur**, comme les notes. Adossé au **serveur** : modèle Prisma `DecisionEntry` (par `userId`), type client `DecisionJournalEntry`, calibration dans [`client/src/lib/decisionJournal.ts`](../client/src/lib/decisionJournal.ts) (testée, `decisionJournal.test.ts`). Une prédiction = énoncé falsifiable + `confidence` (50–99 %) + `reviewAt` ; résolue `correct|incorrect|void` (les `void` sont exclus du calcul de calibration). `/journal` est dans `NOINDEX_SEGMENTS`. Un éditeur ne l'alimente pas : l'utilisateur la produit, migrée invité→serveur à la connexion.
+
 ### 4.6. Simulateur (`data/simulators.json`)
 Le JSON ne décrit que la **fiche** (titre, `category`, `accent`, `description`, `relatedLessonIds`). **La logique de calcul est du code**, dans [client/src/components/simulators/calculators.tsx](client/src/components/simulators/calculators.tsx). Ajouter un *nouveau* simulateur = ajouter la fiche JSON **et** brancher un composant calculateur (mappé par `slug`).
 
@@ -508,7 +536,7 @@ Les entrées sont validées par **zod** côté serveur, le `slug` est auto-gén�
 1. JSON valide ? (virgules, guillemets — un `JSON.parse` qui casse fait planter le seed).
 2. `id` et `slug` **uniques** ; relations (`courseId`, `pathId`, `lessonIds`, `glossaryRefs`) pointant vers des entrées **existantes**.
 3. Champs cohérents avec `types.ts` **et** `content.ts`.
-4. `npm run db:seed` (ou `db:reset`) → vérifier le récap `✓ Seed complete { … }`. **Exception : les dossiers d'écosystème (§4.5bis) sont 100 % client** — pas de seed ; on valide avec `npm run validate:content` puis on vérifie `/ecosystemes/<slug>` dans l'app.
+4. `npm run db:seed` (ou `db:reset`) → vérifier le récap `✓ Seed complete { … }`. **Exception : les collections 100 % client** — dossiers d'écosystème (§4.5bis), livrables (§4.5ter), mémos (§4.5quater), anti-portfolio (§4.5quinquies) et convictions (§4.5sexies) ne sont **pas** seedés ; on valide (quand un schéma existe, cf. §4.5quater) avec `npm run validate:content` puis on vérifie la page (`/ecosystemes/<slug>`, `/memos/<slug>`…) dans l'app.
 5. Recharger l'app. (En invité, le HMR Vite suffit pour le bundle ; pour l'API, le seed est obligatoire.)
 
 ---
@@ -549,23 +577,25 @@ Classes utilitaires Tailwind (`animate-float`, `animate-twinkle`, `animate-fade-
 
 ```bash
 npm install            # installe client + server (workspaces)
-npm run db:setup       # prisma generate + db push + seed (à faire 1×)
+npm run db:setup       # prisma generate + migrate deploy + seed (à faire 1×)
 npm run dev            # client (Vite ~5173) + serveur (Express :4000) en parallèle
 
 npm run db:seed        # re-seed depuis les JSON sources (non destructif ; -- --force pour écraser le CMS)
 npm run db:reset       # ⚠️ réinitialise la base puis re-seed --force (efface le CMS)
 npm run content:export # rapatrie les éditions CMS dans les JSON sources (blog -> data/blog/<slug>.json)
+npm run content:sync   # split + validate + db:seed --force : POUSSER les JSON édités en base (prod)
 npm run split:content  # régénère les index/contenus scindés (glossaire + leçons)
-npm run build          # build serveur (tsc) puis client (vite)
+npm run build          # prebuild (split → validate → sitemap) · serveur (tsc) + client (vite) · postbuild = prerender (scripts/prerender.mjs)
 npm run lint           # eslint (client)
-npm run test --workspace client  # Vitest client (i18n routing, safeHttpUrl, computeProfile, simulateurs)
-npm run test --workspace server  # tests d'intégration serveur (auth, profil, isolation userId)
-npm run validate:glossary # contrôle custom du glossaire final
-npm run validate:content  # vérifie que tous les [[..]]/{{..}} pointent vers un slug du glossaire
+npm run test --workspace client  # Vitest client (i18n routing, safeHttpUrl, computeProfile, simulateurs, decisionJournal)
+npm run test --workspace server  # tests d'intégration serveur (auth, health, profil, isolation userId)
+npm run validate:glossary       # contrôle custom du glossaire final
+npm run validate:content        # shape + références croisées + marqueurs [[..]]/{{..}} (memos/anti-portfolio NON couverts — §4.5quater)
+npm run validate:content:strict # idem mais warnings fatals (utilisé en CI)
 ```
 
 > [!NOTE]
-> Un pipeline **CI** (`.github/workflows/ci.yml`) enchaîne validation contenu → lint → build → tests client → tests serveur, sur chaque `push` `main`/`master` et chaque PR. Harnais Vitest : **client 59 tests sur 10 fichiers** (simulateurs, utils, i18n, ikigai) + **serveur 10 tests sur 3 fichiers** (auth, profil, isolation `userId`) ; à étoffer sur les routes API restantes.
+> Un pipeline **CI** (`.github/workflows/ci.yml`) enchaîne validation contenu → lint → build → tests client → tests serveur (+ un job `drift` qui vérifie que seed et export sont inverses), sur chaque `push` `main`/`master` et chaque PR. Harnais Vitest : **client 74 tests sur 13 fichiers** (simulateurs, utils, i18n, ikigai, carnet de décision) + **serveur 11 tests sur 4 fichiers** (auth, health, profil, isolation `userId`) ; à étoffer sur les routes API restantes.
 
 - Front-end : `http://localhost:5173` · API : `http://localhost:4000/api`.
 - Variables d'environnement serveur : le loader minimal lit `server/.env` si présent (`DATABASE_URL`, `JWT_SECRET`, `PORT`, `CLIENT_ORIGIN`). Un modèle existe dans `server/.env.example`. En prod : vrai `JWT_SECRET`, cookie `secure`, et `provider = "postgresql"` dans `schema.prisma`. **En production, le serveur refuse de démarrer** si `JWT_SECRET` est trop court ou figure dans la blocklist (`getJwtSecretIssue` dans `server/src/lib/auth.ts`) — prévoyez un secret long et unique.
@@ -595,7 +625,8 @@ L'onboarding est un **cahier d'introspection** éditorial : masthead, sections n
 - `dimensions` / `intersections` / `presqueIkigai` : chaque entrée a une variante **Découverte** (`itemsDecouverte`, `exampleDecouverte`, `descriptionDecouverte`, `trapDecouverte`) en langage clair, et une variante **Avancé** (`items`, `example`, `description`, `trap`) avec marqueurs glossaire.
 - `archetypes` : les 3 archétypes incarnés (Architecte de Thèse, Bâtisseur d'Infrastructure, Opérateur-Investisseur). Chacun porte positionnement / semaine type / valeur / signaux / métriques en deux modes, plus `profileIds` (profils d'apprentissage reliés) et `recommendedPathIds`.
 - `reflection` : `{ decouverte: [7], avance: [7] }` questions libres (sans scoring).
-- `questions` : inchangé — le test scoré qui alimente `computeProfile`.
+- `questions` : le test scoré qui alimente `computeProfile` ; `profiles` (7) : les profils d'apprentissage cibles de ce scoring (reliés aux archétypes et aux parcours via `profileParcours.json`).
+- `myths` (3) : idées reçues sur le VC, déboulonnées dans l'onboarding par `onboarding/MythCard.tsx`. Le test d'orientation lui-même est porté par `onboarding/OrientationTest.tsx`.
 
 **Deux niveaux de lecture** (par section, jamais global uniquement) :
 - *Découverte* — pédagogique ; `[[terme]]` rendu en texte simple, `{{fonds}}` reste cliquable.
@@ -622,7 +653,7 @@ La transition vers la **VC Intelligence Platform** repose sur un cadre d'exécut
 > - **Divergence JSON/CMS (T2)** : L'extension du CMS est gelée pour les nouveaux piliers. L'authoring (thèses, atlas) se fait d'abord dans les JSON sources de `/data`. Ne pas accumuler de la dette d'état dans SQLite.
 > - **Validation (T3/T8)** : Ne jamais ajouter de contenu sans schéma Zod et validation pre-build (`validate-content.mjs`).
 > - **Fausse Intelligence (T4)** : Ne pas simuler de tableaux de bord de données vides ou fausses. Si l'information n'est pas "decision-grade", on ne publie pas.
-> - **Découvrabilité (T5/T7)** : Intégrer systématiquement les nouvelles collections (`theses`, `atlas`) dans la recherche client, la *Command Palette* et le SEO, sans briser les anciennes routes (d'où l'usage de redirects ou d'aiguilleurs de route).
+> - **Découvrabilité (T5/T7)** : règle tenue — `ecosystems`, `memos`, `anti-portfolio`, `convictions` et le carnet de décision sont câblés dans la recherche client ([`content/search.ts`](../client/src/content/search.ts), union `type` + `searchLocal`), le SEO et le sitemap ([`shared/routes.mjs`](../shared/routes.mjs) : `STATIC_ROUTES`, `OG_IMAGE_BY_SEGMENT`, `NOINDEX_SEGMENTS` ; [`scripts/collect-routes.mjs`](../scripts/collect-routes.mjs) pour les pages de détail), sans briser les anciennes routes (redirect `/cases` → Bibliothèque, aiguilleur `ParcoursOrSubjectPage`). **Toute nouvelle collection doit refaire ce câblage** (cf. checklist §4.5quater).
 > - **Dette de traduction (T6)** : Le développement de la plateforme bilingue complète (i18n) est repoussé ; la priorité est le *FR-first* avec la traduction différée sur les seuls pilotes stratégiques.
 
 ---

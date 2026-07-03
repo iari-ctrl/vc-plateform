@@ -1,17 +1,15 @@
 # Report et scoring - VC Premium Platform
 
 > [!IMPORTANT]
-> **Statut documentaire — 2026-06-26**
-> - Dernière révision de fond repérée : 2026-06-26 (§8), malgré l'en-tête historique ci-dessous resté à 2026-06-15.
+> **Statut documentaire — 2026-06-28**
+> - Dernière révision de fond indiquée : 2026-06-28 (§1, §2, §3, §8).
 > - Périmètre : journal daté des travaux, vérifications et scoring produit.
-> - Nature : **journal de suivi — peut diverger du code**. Les entrées datées doivent être lues comme historique, pas comme source unique de vérité.
-> - Sections manifestement à arbitrer au regard du code actuel : §1 indique que les leçons `lea-*` restent à fusionner dans `data/lessons.json`; elles sont désormais présentes dans `data/lessons.json` et dans `data/generated/lessons.*.json`.
-> - Sections manifestement à arbitrer au regard du code actuel : §1 / §2 / §8 contiennent d'anciens compteurs (`357` ou `358` termes, `4` ou `5` cas, `51` ou `62` leçons, `59` tests). Le repo courant compte notamment 374 termes dans `data/glossary.json`, 55 leçons canoniques + 11 drop-in servables, 6 études de cas et 9 simulateurs.
-> - Sections manifestement à arbitrer au regard du code actuel : §3 dit encore que `CourseDetailPage` est sur bundle statique ; le fichier utilise maintenant `useApiItem('/content/courses/:slug')` avec fallback.
-> - Sections manifestement à arbitrer au regard du code actuel : §8 (entrée 2026-06-12) cite `data/parcours/02-reussir-l-entretien-analyst.lessons.json`, absent du repo courant ; le contenu `lea-*` correspondant vit dans `data/lessons.json`.
-> - Sections manifestement à arbitrer au regard du code actuel : §8 (audit 2026-06-13) décrit une nav sans entrée « Intelligence » ; cette observation historique est supplantée par l'entrée 2026-06-26 sur la navigation en trois piliers.
+> - Nature : **journal de suivi — historique par construction**. Les entrées datées antérieures gardent parfois leurs compteurs et diagnostics du moment ; l'état courant est celui des sections §1, §2 et de l'entrée §8 du 2026-06-28.
+> - État réconcilié avec le dépôt courant : contenu **22 parcours · 9 rayons · 16 cours · 66 leçons servables · 374 termes · 6 cas · 2 livrables · 8 articles · 31 écosystèmes · 9 simulateurs**.
+> - État technique courant : rendu public **CSR + prérendu statique** (`scripts/prerender.mjs` + `scripts/collect-routes.mjs`), déploiement GitHub Pages via `.github/workflows/deploy-pages.yml`, `CourseDetailPage` API-first, `PathDetailPage` encore bundle-first.
+> - Vérifications courantes : `validate:content` OK, `validate:glossary` OK ; derniers contrôles complets consignés : lint OK 4 warnings, client **13 fichiers / 74 tests**, serveur **4 fichiers / 11 tests**, build/prérendu complet du 2026-06-26.
 
-Dernière mise à jour : 2026-06-15
+Dernière mise à jour : 2026-06-28
 
 Objet : conserver le **journal daté** des avancées et des vérifications de `vc-premium-platform`, et le **scoring** du produit.
 
@@ -21,99 +19,28 @@ Objet : conserver le **journal daté** des avancées et des vérifications de `v
 
 ## 1. État global observé
 
-La nouvelle version de `vc-premium-platform` est nettement plus mature que la version précédente. Le produit a une identité forte autour du cahier Ikigai, du glossaire vivant et d'une expérience éditoriale premium. La plateforme n'est plus seulement un catalogue de contenus VC : elle est un outil d'introspection, de lecture active et d'apprentissage personnalisé avec un portail d'entrée à hauteur de la promesse.
+État courant au **2026-06-28** : `vc-premium-platform` est maintenant une plateforme d'intelligence VC en construction avancée, pas seulement une app de formation. La couche pédagogique reste solide (parcours, cours, leçons, quiz, glossaire vivant, simulateurs), mais la vitrine et l'IA publique ont été réorientées vers trois piliers : **Intelligence VC**, **Formation**, **Workspace**.
 
-Travaux d'interaction front (2026-06-02) :
+Acquis majeurs vérifiés :
 
-- La carte `PathAtlas` est devenue **manipulable comme une vraie carte** : préhension (grab/pan), zoom molette centré sur le curseur, pinch tactile, boutons **+/−** et **recentrage**, avec bornage du zoom (`[0.6, 3]`) et de la translation, et un seuil de 4 px qui distingue le clic (navigation) du glissement (pan). Modèle de référence : `VC PortfolioJourney/map.html`.
-- La barre latérale `SideNav` affiche un **effet verre dépoli à l'ouverture** : repliée, elle reste intégrée au fond ; ouverte, elle devient un panneau très translucide teinté d'un ton conteneur (`--surface-container-lowest`/`-low`, ~34–38 %), flou modéré (`blur(14px)`) qui laisse transparaître la page, double dégradé voile + teinte or/prune, arête brillante, ombre portée multi-couches et variante mode sombre dédiée. Leçon clé : `--surface` est égal à `--background` (pas de contraste) — teinter le verre avec un ton `--surface-container*`.
-- `npm run validate:content` exit 0, `npm run lint` 0 erreur / 15 warnings, `npm run build` OK : aucune régression.
+- **Contenu servable** : 22 parcours, 9 rayons hérités, 16 cours, 55 leçons canoniques + 11 leçons drop-in, 374 termes, 6 études de cas, 2 livrables, 8 articles, 31 dossiers d'écosystème, 9 simulateurs, 9 entrées d'anti-portfolio et 5 mémos annotés.
+- **Navigation / vitrine** : `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables` structurent les contenus existants sans déplacer les URLs de détail ; `/blog` devient « Analyses & notes de recherche » ; `/bibliotheque` met les rayons au premier plan.
+- **Rendu public** : l'ancien arbitrage de rendu n'est plus ouvert au niveau prototype ; le mode retenu est **CSR + prérendu statique public**. `scripts/collect-routes.mjs` fournit les routes, `scripts/prerender.mjs` écrit les HTML par route après build, et `.github/workflows/deploy-pages.yml` publie le frontend statique sur GitHub Pages.
+- **API / fallback** : Blog, CaseStudy, Lesson, ParcoursDetail et `CourseDetailPage` utilisent l'API avec fallback bundle ; `PathDetailPage` reste encore bundle-first pour les rayons hérités.
+- **Recherche** : la recherche locale couvre aussi livrables, anti-portfolio, mémos et écosystèmes ; `/api/search` reste plus étroit et constitue une dette visible.
+- **Design system** : tokens CSS, mode sombre, portail splash, `NightSkyBackdrop`, cartes éditoriales, `SideNav` off-screen + verre dépoli, `PathAtlas` manipulable, lecture active et popovers de glossaire sont documentés et cohérents avec le code courant.
+- **Qualité** : `validate:content` OK, `validate:glossary` OK, lint OK avec 4 warnings structurels connus, tests client 13 fichiers / 74 tests, tests serveur 4 fichiers / 11 tests hors sandbox.
 
-Travaux récents (2026-06-09) — **non recompilés ici** (le sandbox ne peut pas monter le dossier « VC SITE », espace dans le nom) :
+Points fragiles actuels :
 
-- **i18n FR/EN — Phase 1 (routing localisé)** : nouveau module `client/src/i18n/` (`config`, `routing`, `guards`, `useLocale`, `LocaleSwitcher`, `routing.test.ts`), `App.tsx` sous `/:locale`, redirection racine crawler-safe, redirection des liens legacy `/paths` → `/fr/paths`, `<html lang>` dynamique, sélecteur FR/EN (TopBar + SideNav), ~27 fichiers migrés. Slugs canoniques → marqueurs `[[..]]`/`{{..}}` inchangés. Amorce corpus EN : `data/parcours.en.json`. ADR : `i18n_architecture_FR-EN.md`.
-- **Lot de durcissement sécurité / qualité (12 correctifs)** : CORS localhost dev-only ; auth cookie-only (token hors body, `Bearer` retiré) ; mot de passe ≥ 8 + limiteur 20/15 min sur login/register ; markdown sûr (nœuds React, pas d'`innerHTML`) + garde `safeHttpUrl()` ; tokens `--error`/`--success` + sweep ~9 fichiers, IA des deux navs alignée ; Error Boundary au niveau route ; graisse 300 retirée ; parallaxe splash en `requestAnimationFrame` ; loader `/profile-result` ; quiz piloté par l'URL (`?test=1&q=N`) ; `<Routes>` aplaties (layout `PageShell`) ; **premier harnais Vitest (3 tests) + CI** (`client/vitest.config.ts`, `.github/workflows/ci.yml`).
-- **Analyse CSR vs SSR** : décision de **mode de rendu** ouverte ; recommandation hybride (SSG/ISR pour l'éditorial, CSR pour l'app). À trancher avant la production de contenu.
-- **Pipeline parcours** : `docs/parcours/` (conception + rédaction) → `data/parcours/*.lessons.json` (fiches drop-in). « Réussir l'entretien Analyst » rédigé en 13 leçons (`c-entretien-analyst`, ids `lea-*`). Reste à fusionner dans `data/lessons.json` + seed et à synchroniser `parcours.json`.
-- **Simulateurs & Pédagogie** : Mise à jour des calculateurs (formules professionnelles standard), ajout d'un panneau pédagogique complet intégrant l'historique de simulation et des popovers interactifs de glossaire (`InlineMarkdown`).
-- **Parcours & Pré-requis** : Ajout systématique du bloc "Pour qui / Pré-requis / Ce que tu sauras faire" sur les parcours d'apprentissage, avec intégration d'un rendu Markdown inline pour lier d'autres leçons ou des termes du dictionnaire.
+- `PathDetailPage` doit être branchée sur `/content/paths/:slug` avec fallback bundle, comme `CourseDetailPage`.
+- Le prérendu améliore SEO et partage social, mais les cartes sociales réelles restent à vérifier sur domaine déployé (`VITE_SITE_URL`, canonical, OG spécifiques, `hreflang`).
+- Le workflow GitHub présent est un **déploiement Pages**, pas une CI complète : il build le client statique, mais ne remplace pas un pipeline validation/lint/tests complet.
+- Le CMS reste à cadrer : preview éditoriale, signal de contenu non exporté vers `/data`, et boucle `content:export -> validate -> commit`.
+- Le durcissement production reste partiel : `helmet` et bases serveur existent, mais CSP/HSTS stricts, cookie `secure`, CSRF et politique de rotation JWT restent à trancher avant production réelle.
+- L'i18n EN est architecturée mais masquée (`EN_ENABLED=false`) tant que chrome et corpus ne sont pas livrés.
 
-Travaux du jour (2026-06-10) — **compilés et validés** :
-
-- **Rétractation de chapitres Bibliothèque** : Intégration de boutons interactifs à la place des titres de catégories statiques dans `PathsPage.tsx` avec chevrons animés en rotation. Enveloppement des contenus dans des grilles Grid CSS à hauteur dynamique via `grid-rows-[0fr]/[1fr]` pour un repliage fluide.
-- **Intégration d'Études de cas** : Intégration directe des Études de cas (`CASE_STUDIES`) en tant que catégorie à part entière sur la page de la Bibliothèque (`/bibliotheque` / `PathsPage.tsx`).
-- **Unification de la navigation** :
-  - Remplacement de l'état local par `useSearchParams` (`type = searchParams.get('type')`) pour synchroniser dynamiquement l'URL et l'onglet sélectionné.
-  - Ajout du helper `isLinkActive` dans `routing.tsx` pour isoler finement la surbrillance active des liens de navigation selon la locale et les paramètres de requête URL.
-  - Retrait des raccourcis « Études de cas » des menus `SideNav`, `TopBar` et `Footer`.
-  - Retrait de l'onglet filtre spécifique « Études de cas » (les cas s'affichent par défaut sous forme de section autonome dans la bibliothèque).
-  - Mise à jour du bouton retour de `CaseStudyPage.tsx` vers `/bibliotheque`.
-  - Redirection de `/cases` vers `/bibliotheque` dans `App.tsx` et nettoyage de l'import obsolète.
-
-Travaux du jour (2026-06-11) — **compilés et validés** (`npm run build --workspace client` : OK) :
-
-- **Rétractation des familles sur la page catalogue `/paths`** (`ParcoursPage.tsx`) : les en-têtes de familles de parcours (« Découvrir », « Réussir un entretien », « Lever des fonds », etc.) sont devenus des boutons interactifs accessibles. État local `collapsedFamilies`, icône `ChevronDown` pivotant à 90°, accordión fluide via `grid-rows-[0fr]/[1fr]`.
-- **Rétractation des cours dans les rayons legacy** (`PathDetailPage.tsx`) : même pattern accordéon appliqué aux cours listés dans un rayon (slug legacy). Le lien direct vers le cours est repositionné à droite du titre pour dissocier le collapse de la navigation.
-- **Aiguilleur de route `/paths/:slug`** : création de `ParcoursOrSubjectPage.tsx`, composant pivot importé en lazy qui détecte dynamiquement si le slug appartient à `parcours.json` (nouveau modèle) ou à `paths.json` (rayons legacy), et rend le bon composant de détail (`ParcoursDetailPage` ou `PathDetailPage`). Route `App.tsx` mise à jour en conséquence.
-- **Cours autonome Power Law & Monte Carlo** : ajout de `c-power-law-portfolio` dans le rayon Portfolio avec 4 leçons canoniques (`lpl-average-lies`, `lpl-why-monte-carlo`, `lpl-simulator-engine`, `lpl-read-results`). La séquence explique moyenne vs médiane, intérêt de Monte Carlo comme outil de jugement sous incertitude, moteur déterministe du simulateur Power Law, lecture TVPI/concentration/fund returner. Le simulateur Power Law référence ces leçons en premier ; le parcours `p-penser-gp` les expose comme étape de cœur.
-- **Liens pédagogiques enrichis** : mise à jour des `furtherReading` de `l-power-law`, `l-reserves`, `l-fund-metrics`, des `relatedLessonIds` glossaire (`power-law`, `fund-returner`, `portfolio-construction`, `reserve-funds`, `follow-on`, `tvpi`, `moic`) et résolution des liens `course`/`case`/`glossary` dans `LessonPage`.
-
-Travaux du jour (2026-06-12) — **compilés et validés** (branche `chore/flux-c-repo-hygiene`) :
-
-- **CI réparée** : `ci.yml` écoute `push` sur `main`/`master` (était `main` seul → tout le garde-fou était inopérant hors PR sur ce dépôt `master`). Pipeline : validation contenu → lint → build → tests client → tests serveur.
-- **Robustesse serveur (Express 4)** : wrapper async `ah()` (`server/src/lib/async-handler.ts`) sur **tous** les handlers — une rejection (Prisma, JSON corrompu, DB verrouillée) part à l'error-handler central (→ 500) au lieu de tuer le process Node.
-- **Seed non destructif** : `seed.ts` préserve le contenu éditable (glossaire/blog/cas) sauf `db:seed -- --force` ; `npm run content:export` réexporte les éditions DB → JSON sources (`data/blog/<slug>.json` pour les analyses). Comptes de démo gatés hors prod.
-- **Garde JWT corrigée** : longueur min. + blocklist en production, fail-fast au démarrage (`getJwtSecretIssue`).
-- **`DELETE /me/profile`** : `clearProfile` supprime profil + onboarding côté serveur ; **`apiUp` re-sondé** (intervalle 15 s + `focus`/`online`) ; `attachUser` retiré du global ; rate-limit `/api/search` ; sélecteur EN masqué (`EN_ENABLED=false`).
-- **Perf bundle** : split des leçons (`lessons.index`/`lessons.bodies`, scripts `split-lessons.mjs` + `split:content`) — chunk eager `lessons` de **~176 kB à ~32 kB**, corps en lazy.
-- **Tests serveur (nouveaux)** : 10 tests d'intégration (auth, profil, isolation `userId`).
-- **Format éditorial « Lecture oblique »** (§10.9 de la stratégie) : analyses de livres livrées dans le blog — catégorie filtrable sur `/blog`, champs `BlogPost.books[]` / `glossaryRefs[]` (type + Zod + rendu `BlogCard`/`BlogPostPage`), 2 articles d'amorce seedés en squelettes (Flatland → anti-portfolio ; Hirschman *Exit, Voice, Loyalty*). Blog : 4 → **6 articles**. Corps à rédiger.
-- Vérifs : `validate:content` OK, `lint` 0 erreur / **4 warnings**, `build` OK, **client 59 tests + serveur 10 tests** verts.
-
-Travaux du jour (2026-06-13) — **validés** (`validate:content` OK, `db:seed` OK) :
-
-- **Premier article « Lecture oblique » entièrement rédigé** : `bp-voir-comme-un-etat` (*Seeing Like a State*, J. C. Scott, 1998) — 10 idées transposées au VC / détection de talents, ~3 280 mots / 16 min, marqueurs `[[..]]` glossaire, renvoi anti-portfolio (Airbnb, eBay), `glossaryRefs` ×5. Article « à la une » de `/blog` ; **gabarit éditorial** pour rédiger Flatland et Hirschman. Blog : 6 → **7 articles**.
-- **Deuxième « Lecture oblique » rédigée** : `bp-societe-du-spectacle` (*La Société du spectacle*, Debord, 1967) — 11 idées, ~3 530 mots / 18 min, parallèles contexte actuel (IA, méga-tours, structures post-2021) et **taxonomie de 8 logiques de levée** (carburant / signal / validation / monnaie / rituel / offre / théâtre / produit). Renvois : étude de cas « valorisation flatteuse », anti-portfolio, diptyque avec Scott. Blog : 7 → **8 articles** ; `validate:content` + `db:seed` OK.
-- **Troisième « Lecture oblique » rédigée** : `bp-exit-voice-loyalty` (*Exit, Voice, and Loyalty*, Hirschman, 1970) — le squelette devient un article complet de 9 idées, ~2 870 mots / 14 min : VC = classe d'actifs « voice », entrepreneuriat comme exit (Shockley→Fairchild, Zoom/anti-portfolio), attrition/diligence, churn muet, loyauté lucide vs captive, LPs/re-up, paradoxe de l'exit facile. Triptyque Scott/Debord/Hirschman. Seed via suppression ciblée + re-seed (DB préservée). **Reste 1 squelette : Flatland.**
-
-Travaux du jour (2026-06-15) — **validés** (`validate:content` OK, build client OK, **70 tests**) :
-
-- **Livrables de parcours — nouveau type de contenu** (`data/deliverables.json`, cf. [Manuel §4.5ter](Manuel_Architecture_Edition.md)) : les étapes `milestone` `a-produire`, jusqu'ici des culs-de-sac affichés « bientôt », deviennent des pages `/livrables/:slug` (brief + gabarit + grille d'auto-évaluation + renvoi à un **modèle** existant). Infra **100 % client** réutilisant le patron Case/écosystème : type `Deliverable` (`content/types.ts`), loader `content/deliverables.ts`, page `DeliverablePage.tsx`, route, indexation recherche/command palette, OG `livrables: 'path'` (`shared/routes.mjs`), sitemap. `resolveStep` étendu : un `milestone` résout vers un livrable **d'abord**, sinon retombe sur une leçon (préserve `lea-mock`).
-- **Vague 1 — Simulation de comité (seed)** : livrable `simulation-comite-investissement-seed` (parcours `reussir-l-entretien-associate`) + **1ᵉʳ cas décisionnel** `cs-seed-ic` (« Volta », deal seed qui divise le comité, structure §10.4 complète). `caseStudies.json` : 4 → **5**. Amorce le Pilier 4 (Cases) par double emploi : le Case sert de modèle au livrable.
-- **Vague 2 — Thèse propriétaire (pre-seed/seed)** : livrable `these-proprietaire-pre-seed-seed` (parcours `entretien-principal-poste-senior`), gabarit double (note de thèse + plan de portefeuille), modèle = dossier d'écosystème `eco-ia-appliquee`. Amorce le Pilier 2 (Thesis Lab), dont les dossiers `/ecosystemes` sont la réalisation *de facto*. Les deux steps passent à `existant` ; restent **8 milestones `a-produire`**.
-- **Validateur durci** : `scripts/validate-content.mjs` couvre désormais les livrables (schéma Zod strict, unicité id/slug, résolution `model`/`relatedLessonIds`/`glossaryRefs`, marqueurs `[[..]]`) et son résolveur `milestone` est aligné sur `resolveStep`. A corrigé un latent : les 2 milestones flippés échouaient la validation (le build client direct avait sauté le `prebuild` racine).
-- **Docs de suivi & stratégie** : `docs/STRATEGIE-vc-intelligence.md` (§2, §10.2 Thesis Lab, §10.4 Cases) et `Suivis/` (ce journal, Bilan, README, Manuel) mis à jour ; mémoire projet `livrables-milestones-format` rafraîchie.
-
-> Note de séquencement (issue des conversations) : garder design system tokenisé + tests/CI + Error Boundary (utiles tout de suite, peu de churn) ; **différer** le lot 🔴 restant (SSR/SEO, CSP/HSTS, contraste de l'or, interstitiel splash) jusqu'à un contenu réel et un déploiement — la garde JWT, elle, est désormais corrigée. Priorité immédiate : les deux décisions d'architecture (rendu + modèle de contenu), puis une tranche verticale réelle.
-
-Points confirmés lors du dernier audit (2026-06-10) :
-
-- Le portail splash (`/`) est entièrement intégré, corrigé et responsive : boussole animée ikigai → compass, parallaxe, deux couches clair/sombre cross-fadées, toggle synchronisé avec le thème global.
-- Le mode sombre de `/home` est rehaussé : ciel étoilé photographique en fond du hero et de la carte `PathAtlas`, conservant tous les tracés SVG existants.
-- Les fonds photographiques sont en WebP (~118 Ko total contre ~3,4 Mo en PNG, soit ~97 % de réduction).
-- Le cahier Ikigai reste une expérience centrale : 13 zones, deux niveaux de lecture, archétypes, réponses libres, sauvegarde locale et popovers de glossaire.
-- Le glossaire a été enrichi : **357 termes** dans la base.
-- `npm run validate:content` passe : 16 cours, 62 leçons canoniques, 8 simulateurs, 266 marqueurs `[[..]]` / `{{..}}` résolus dynamiquement.
-- `npm run build` passe : serveur + client OK, assets WebP présents dans `dist/`.
-- Le projet a un `.gitignore` qui couvre `node_modules`, `dist`, `.env`, SQLite et logs, et le dépôt Git est désormais initialisé : `master` suit `origin/master`, commit initial `e5b37e0 Initialisation du projet`.
-- Le build client est désormais découpé : `react-vendor` ≈ 232 kB (74 kB gzip) ; le glossaire et les leçons sont **scindés index/contenu** (index léger eager + corps/défs lazy), le chunk `lessons` eager tombant de ~176 kB à ~32 kB.
-
-Points bloquants ou fragiles :
-
-- ~~`npm run lint` échoue car `eslint` n'est pas installé dans le workspace client.~~ **Corrigé 2026-05-30.**
-- ~~Les pages détail utilisent encore souvent le contenu bundlé local, alors que les listes utilisent l'API.~~ **Corrigé 2026-05-30 pour Blog, CaseStudy, Lesson.**
-- ~~Le script `validate:content` ne couvre pas encore toutes les relations de contenu.~~ **Corrigé 2026-05-30.**
-- ~~L'accessibilité des modales, formulaires, simulateurs et suppressions doit être durcie.~~ **Corrigé 2026-05-30.**
-- ~~Le portail splash écrase tout à ~27 % sur mobile (artboard 1440×900 mis à l'échelle).~~ **Corrigé 2026-06-01 — mise en page fluid.**
-- ~~La couche inactive du splash garde ses liens focusables au clavier malgré `aria-hidden`.~~ **Corrigé 2026-06-01 — `inert`.**
-- ~~Le toggle clair/sombre du splash est déconnecté du thème global.~~ **Corrigé 2026-06-01 — pilote `ThemeContext`.**
-- ~~Les fonds photographiques de la splash sont des PNG volumineux (~3,4 Mo).~~ **Corrigé 2026-06-01 — WebP ~97 % plus léger.**
-- SEO et partage social restent faibles car l'app est une SPA (CSR) sans prérendu. **Décision de rendu ouverte** (CSR vs SSG/SSR) à trancher avant production ; l'émission SEO/`hreflang` en découle. *(Différé pré-lancement.)*
-- Path/CourseDetailPage restent sur le bundle statique. *(Reste à brancher, endpoints déjà prêts.)*
-- ~~Aucune sécurité de durcissement.~~ **Lot 2026-06-09** (auth cookie-only, mdp ≥ 8, rate-limit, CORS dev-only, `safeHttpUrl`) **+ lot 2026-06-12** (garde JWT corrigée, `attachUser` scoping, rate-limit `/search`, wrapper async `ah()`, comptes démo hors prod). Reste le lot 🔴 : helmet, CSP/HSTS, cookie `secure`, CSRF, rotation JWT.
-- ~~Aucun test.~~ **Harnais Vitest : client 10 fichiers / 59 tests + serveur 3 fichiers / 10 tests (auth/profil/isolation `userId`) + CI.** Reste à étendre la couverture API (admin, notes, journal).
-- i18n Phase 1 compilée côté client ; le **sélecteur EN est masqué** (`EN_ENABLED=false`) en attendant la traduction ; restent le chrome traduit, la base `locale`, `hreflang` et le corpus EN.
-- Fiches `data/parcours/*.lessons.json` rédigées mais **pas encore fusionnées** dans `data/lessons.json` / le seed.
+Lecture générale : la base produit est crédible pour une démo publique statique et pour poursuivre l'écriture. Le prochain palier n'est pas de « prouver le contenu », mais de verrouiller le workflow éditorial, fiabiliser la publication publique, et aligner les dernières surfaces serveur/client.
 
 ---
 
@@ -121,39 +48,24 @@ Points bloquants ou fragiles :
 
 | Axe | Score | Commentaire |
 | --- | ---: | --- |
-| Vision produit | 8.5 / 10 | Positionnement fort : introspection + apprentissage VC + premium éditorial. |
-| UX globale | 8.1 / 10 | Portail d'entrée premium, cahier Ikigai fort, atlas navigable (pan/zoom/recentrage), `DesignSystemShowcasePage` existante pour l'interface. |
-| Design / direction artistique | 8.6 / 10 | Identité atlas/carnet convaincante. Mode sombre rehaussé par ciel photographique. Portail splash à la hauteur. Barre latérale en verre dépoli. |
-| Contenu pédagogique | 7.8 / 10 | Très complet : **22 parcours, 16 cours, 55 leçons canoniques (+ 11 drop-in = 66 servables), 5 études de cas, 2 livrables de parcours, 9 simulateurs, 358 termes au glossaire**. Quiz désormais systématiques (66/66) ; cours due diligence porté à 5 leçons. Le cours Power Law/Monte Carlo renforce le chaînage théorie → simulateur ; les milestones `a-produire` commencent à devenir des livrables (Seed IC, thèse propriétaire). |
-| Technique front-end | 8.2 / 10 | Build OK (vendor React ~232 kB), lazy routes. Glossaire + leçons scindés index/contenu (chunk `lessons` eager 176→32 kB). Assets WebP. Routing i18n `/fr` `/en` en place. |
-| Back-end / API | 8.0 / 10 | Architecture fonctionnelle. Rate-limiting (auth + `/search`), **garde JWT corrigée**, **wrapper async `ah()`** (plus de crash sur rejection), `attachUser` scoping. Reste helmet/CSP, cookie `secure`, CSRF. |
-| Qualité / tests | 8.4 / 10 | Lint (0 erreur, 4 warnings), validation contenu complète, **Vitest client (59 tests) + serveur (10 tests : auth/profil/isolation) + CI**. |
-| Accessibilité | 8 / 10 | Focus trap + restauration modal, focus-visible inputs, aria-live toasts, role="alert" erreurs, ConfirmDialog, aria-labels simulateurs, `inert` splash. |
-| SEO / distribution | 4 / 10 | Meta client-side, pas de prérendu ni d'OpenGraph par page. Mode de rendu (CSR vs SSG/SSR) à trancher avant d'agir. |
-| i18n / bilinguisme | 5.5 / 10 | Architecture décidée (ADR) + Phase 1 (routing localisé) implémentée ; sélecteur EN **masqué** (`EN_ENABLED=false`) tant que le contenu n'est pas traduit. Reste : chrome (Phase 2), base `locale` (Phase 4), `hreflang` (Phase 5), corpus EN. |
-| Robustesse contenu / CMS | 7 / 10 | Validation Zod + refs complète. Pages branchées sur l'API avec fallback. CMS à étendre à la `locale`. |
-| Performance assets | 8.2 / 10 | Fonds splash en WebP (~97 % de réduction). Entry JS/CSS optimisés. |
+| Vision produit | 8.6 / 10 | Positionnement désormais plus clair : intelligence VC + formation + workspace. La couche Ikigai reste différenciante, mais ne doit plus dominer la promesse publique. |
+| UX globale | 8.3 / 10 | IA en trois piliers, portail premium, atlas navigable, lecture active, recherche locale complète. Restent dashboard/journal de bord, rails contextuels et reprise de lecture à densifier. |
+| Design / direction artistique | 8.6 / 10 | Identité atlas/carnet solide, mode sombre photographique, splash single-stage, `SideNav` off-screen + verre dépoli, showcase interne. |
+| Contenu pédagogique & intelligence | 8.3 / 10 | Très bon socle : 22 parcours, 16 cours, 66 leçons servables, 374 termes, 31 écosystèmes, 9 anti-portfolio, 5 mémos, 8 articles, 6 cas, 2 livrables, 9 simulateurs. À renforcer : cas décisionnels, livrables, cours courts. |
+| Technique front-end | 8.5 / 10 | React/Vite/Tailwind propre, lazy routes, contenu scindé, pages-index intelligence, prérendu statique public, GitHub Pages frontend-only. |
+| Back-end / API | 8.1 / 10 | API fonctionnelle, seed non destructif, auth cookie httpOnly, rate limits, wrapper async, `content.allLessons()`. Dette : `/api/search` plus étroit que la recherche locale, `PathDetailPage` bundle-first. |
+| Qualité / tests | 8.6 / 10 | Validation contenu/glossaire OK, lint OK 4 warnings, client 13 fichiers / 74 tests, serveur 4 fichiers / 11 tests hors sandbox. Manque un workflow CI complet dans `.github/workflows`. |
+| Accessibilité | 8.2 / 10 | Focus visible, modales avec focus trap/restauration, `ConfirmDialog`, loaders `role=status`, `inert` SideNav fermée, splash décoratif `aria-hidden`. À compléter par audits clavier/contraste production. |
+| SEO / distribution | 6.7 / 10 | Gros progrès : prérendu statique et sitemap partagé. Risque restant : validation sur domaine réel, cartes sociales par contenu, canonical, `hreflang`, images OG spécifiques. |
+| i18n / bilinguisme | 5.8 / 10 | Routing `/fr` `/en`, `LocaleSwitcher` prêt, `<html lang>` gardé honnête tant que `EN_ENABLED=false`. Reste traduction chrome/corpus et `hreflang` public validé. |
+| Robustesse contenu / CMS | 7.3 / 10 | JSON source-of-truth, `content:export`, blog par fichier, validation Zod. Manquent preview CMS, signal non versionné, workflow éditorial verrouillé. |
+| Performance assets | 8.4 / 10 | WebP, routes lazy, glossaire/leçons scindés, prérendu. À revoir après mesures réelles Pages et captures mobile. |
 
-Score global estimé : **8.3 / 10**
+Score global produit estimé : **8.3 / 10**
 
-Interprétation : très bonne base produit et éditoriale, déjà crédible pour une démo avancée et un portail premium. Avant lancement public, priorité aux garde-fous qualité, à la cohérence API/CMS et au SEO.
+Score global **vs ambition VC Intelligence** : **7.1 / 10**
 
-> **Révision 2026-06-13 — re-scoring honnête vs l'ambition affichée (VC Intelligence).** Le tableau ci-dessus note le produit *comme une plateforme de formation premium* — un yardstick qui flatte. Mesuré contre la cible « VC Intelligence Platform » (`docs/STRATEGIE-vc-intelligence.md`) et **après lecture directe du contenu** (cf. §8, entrée « Audit indépendant ») :
-
-| Axe | vs MOOC premium | vs ambition VC Intelligence |
-| --- | ---: | ---: |
-| Clarté du positionnement | 8.5 | **4** — home/nav/meta disent encore « apprentissage » |
-| UX / UI | 8.1 | **6.5** — 2 portes (splash + home), double nav incohérente, densité faible pour un pro |
-| Crédibilité VC — substance | — | **8** — contenu lu : decision-grade, sourcé, point de vue assumé |
-| Crédibilité VC — 1re impression | — | **4.5** — ikigai / « test d'orientation » / vocab scolaire la sabotent avant lecture |
-| Potentiel premium | — | **7** |
-| Architecture technique | 8.0 | **7** — CSR vs stratégie public-first = vrai risque |
-| Profondeur contenu | 7.8 | **8** — forte et sourcée ; mais 0 Research note / 0 Thesis au format cible |
-| Scalabilité | — | **6** — SQLite + blob JSON + contenu bundle-only + CSR |
-| Différenciation | — | **6.5** — vrais différenciateurs (angle FR, anti-portfolio, journal) mais enterrés |
-| Potentiel business | — | **5.5** — 0 capture email / RSS / monétisation |
-
-> Score global **vs ambition : ~6 / 10** (contre 8.3 mesuré comme MOOC). **L'écart entre les deux chiffres EST le diagnostic** : le danger n'est pas l'échec mais de continuer à se mesurer au mauvais produit.
+Interprétation : la plateforme a franchi le cap où elle n'est plus seulement un MOOC premium. Les corrections de vitrine, de navigation et de prérendu ont réduit l'écart identifié le 2026-06-13. L'ambition VC Intelligence reste toutefois plus haute que l'état livré : il faut encore plus de cas décisionnels, de rails contextuels, de recherche serveur alignée, et une publication publique vérifiée sur domaine réel.
 
 ---
 
@@ -174,30 +86,32 @@ Carte `PathAtlas` (`client/src/components/explore/PathAtlas.tsx`) :
 
 Barre latérale `SideNav` (`.glass-rail` dans `global.css`, attribut `data-open`) :
 
-- état replié quasi-opaque (`--surface` ~90 %, `blur(6px)`, intégré au fond, rien derrière le rail) ;
-- état ouvert en verre dépoli très translucide teinté `--surface-container-lowest` ~38 % (clair) / `--surface-container-low` ~34 % (sombre), `backdrop-filter: blur(14px) saturate(165%) contrast(104%)` — flou modéré qui laisse transparaître aplats et grandes formes ; double dégradé (voile `--surface-bright` + teinte or/prune), arête gauche brillante, ombre portée multi-couches avec lisérés internes ;
-- variante dédiée `.dark .glass-rail[data-open]` (accents `--primary`/`--secondary`/`--tertiary`, ombres renforcées) ;
-- transitions animées (`background-color`, `background-image`, `box-shadow`, `border-color`, `backdrop-filter`) + fallback `@supports not (backdrop-filter)` ;
-- correctif de fond : `--surface` == `--background`, donc le verre doit être teinté avec un ton `--surface-container*` distinct pour être perceptible.
+- panneau desktop `--sidebar-w` (16rem) garé hors écran quand fermé ; `MainLayout` réserve seulement la gouttière `--sidebar-rail` (4rem) pour le logo et le bouton `Menu` ;
+- état fermé : panneau complet hors écran et `inert={!open}`, base quasi-opaque (`--surface` ~90 %, `blur(6px)`) utilisée comme état de transition ;
+- état ouvert : verre dépoli en overlay, fond transparent, `backdrop-filter: blur(14px) saturate(165%) contrast(104%)`, bordure `outline-variant` ~52 %, ombres latérales et lisérés internes ;
+- transitions animées (`background-color`, `box-shadow`, `border-color`, `backdrop-filter`, translation) + fallback `@supports not (backdrop-filter)` ;
+- correctif de fond : éviter un remplissage opaque proche de `--surface`/`--background` et laisser le flou, la bordure et l'ombre porter la lisibilité.
 
-### Portail splash (2026-06-01)
+### Portail splash (2026-06-01, modèle courant réconcilié 2026-06-28)
 
 Statut : en place, intégré et corrigé.
 
 Éléments observés :
 
-- Portail `SplashDuo` (variante « Clair · Sombre ») porté depuis le dossier `splash/` vers `pages/SplashPage.tsx` et `components/splash/CompassIkigaiIntro.tsx`.
-- Deux couches cross-fadées : lumière (atlas, parchemin, ciel d'aube) et sombre (constellation, ciel étoilé).
+- Portail single-stage dans `client/src/pages/home/SplashPage.tsx`, avec styles dédiés dans `client/src/styles/splash.css` et `CompassIkigaiIntro`.
+- Système de tokens piloté par `.splash-portal[data-mode='light'|'dark']`.
+- Photos claire/sombre superposées dans `.splash-photos` (`aria-hidden`) ; la bascule ne duplique pas de contenu focusable.
+- Transition « Aube » via Web Animations API : opacité photo sombre, filtre photo claire, flare d'horizon et révélation des étoiles.
 - Boussole animée : intro ikigai (4 cercles dorés) → compass en ~5 s, puis hoverable.
 - Sceaux de cire dérivants avec parallaxe souris.
-- Toggle "Choisissez votre lumière" — segment doré doré.
+- Toggle "Choisissez votre lumière" — segment doré.
 - Fonds photographiques en WebP : `bg-claire.webp` (~21 Ko, q80), `bg-sombre.webp` (~97 Ko, q83).
 
 Corrections apportées (2026-06-01) :
 
 - Responsive : suppression du scaling artboard 1440×900 ; le stage remplit le viewport, titre `clamp(1.6rem, 2.4vw, 2.6rem)`, règles mobile portrait et paysage court.
-- Accessibilité : `inert={!active}` sur la couche inactive — le lien « Entrer » caché n'est plus focusable au clavier.
-- Thème synchronisé : le toggle pilote `useTheme()` (ThemeContext global) ; le mode choisi persist sur `/home` et dans toute l'app.
+- Accessibilité : les couches décoratives sont `aria-hidden`, le toggle est un `radiogroup`, et il n'existe plus de second lien « Entrer » masqué.
+- Thème synchronisé : le toggle pilote `useTheme()` (ThemeContext global) ; le mode choisi persiste sur `/home` et dans toute l'app.
 - PNG supprimés.
 
 ### Mode sombre sur /home (2026-06-01)
@@ -232,22 +146,23 @@ Statut : en place, très positif.
 
 Statut : en place.
 
-- Schémas Zod stricts sur les 8 fichiers JSON.
+- Schémas Zod stricts sur les collections JSON structurantes.
 - Unicité des `id` et `slug` vérifiée.
 - Toutes les relations structurantes vérifiées.
 - Règle quiz : malformation = erreur bloquante ; absence = warning.
 - Marqueurs `[[..]]` / `{{..}}` vérifiés.
 - `npm run validate:content` : exit 0, sans warning éditorial (toutes les leçons ont désormais un quiz).
 
-### Build et architecture
+### Build, prérendu et architecture
 
-Statut : sain, assets optimisés, entry chunk réduit.
+Statut : sain, assets optimisés, prérendu public branché.
 
-- `npm run build` passe.
-- Build client observé : `index-*.js` ≈ 100 kB, `react-vendor` ≈ 232 kB, chunks spécifiques volumineux (glossaire ~279 kB).
+- dernier build complet/prérendu consigné le 2026-06-26 : serveur + client OK, `postbuild` → `scripts/prerender.mjs`.
+- `scripts/collect-routes.mjs` alimente à la fois le sitemap et le prérendu ; inventaire courant : 573 routes publiques, sitemap FR/EN, prérendu FR tant que `EN_ENABLED=false`.
 - Fonds splash : WebP uniquement dans `public/splash/` et `dist/splash/`.
-- `BlogPostPage`, `CaseStudyPage`, `LessonPage` : branchées sur l'API avec fallback bundle.
-- `PathDetailPage`, `CourseDetailPage` : encore sur bundle (endpoints prêts côté serveur).
+- `BlogPostPage`, `CaseStudyPage`, `LessonPage`, `ParcoursDetailPage`, `CourseDetailPage` : branchées sur l'API avec fallback bundle.
+- `PathDetailPage` : encore bundle-first pour les rayons hérités (endpoint `/content/paths/:slug` prêt côté serveur).
+- `.github/workflows/deploy-pages.yml` déploie le frontend statique sur GitHub Pages avec `VITE_API_DISABLED=true`; il ne remplace pas encore une CI complète validation/lint/tests.
 
 ---
 
@@ -260,7 +175,7 @@ Les corrections prioritaires, les propositions d'enrichissement (UX / produit / 
 - backlog d'enrichissements (produit / technique / contenu) : §10bis ;
 - plan de vérification : §11bis.
 
-Ce document conserve le **scoring** (§2), le **journal daté des avancées** (§1, §3) et l'**historique des vérifications** (§8).
+Ce document conserve l'**état courant** (§1), le **scoring** (§2), les **acquis techniques stables** (§3) et l'**historique daté des vérifications** (§8).
 
 ---
 
@@ -548,6 +463,28 @@ Apport produit :
 - Home, meta HTML statiques et fallback SEO ne présentent plus le produit comme une seule plateforme d'introspection/apprentissage.
 
 Fichiers structurants créés : `client/src/pages/intelligence/IntelligencePage.tsx`, `ConvictionsPage.tsx`, `DecisionsIndexPage.tsx`, `MethodePage.tsx`, `DeliverablesPage.tsx`, `client/src/content/convictions.ts`.
+
+### 2026-06-28 — Réconciliation report/scoring avec l'état courant
+
+Commandes relancées pendant cette passe documentaire :
+
+- `npm run validate:content` : **exit 0** — 22 parcours · 9 rayons hérités · 16 cours · 66 leçons · 374 termes · 11 leçons drop-in · 3 registres · 6 études de cas · 2 livrables · 8 articles · 31 dossiers d'écosystème · 9 simulateurs · 441 marqueurs analysés.
+- `npm run validate:glossary` : **exit 0** — 374 termes, slugs uniques, `id === slug`, liens, marqueurs et aliases résolus.
+
+Contrôles complets déjà consignés au 2026-06-28 :
+
+- `npm run lint` : **exit 0**, 0 erreur, 4 warnings `react-refresh/only-export-components`.
+- `npm run test --workspace client` : **13 fichiers / 74 tests**.
+- `npm run test --workspace server` : **4 fichiers / 11 tests**, relancé hors sandbox lors du contrôle précédent car l'écoute `127.0.0.1` est bloquée dans le sandbox.
+- `npm run build` : dernier contrôle complet consigné le **2026-06-26**, serveur + client OK puis `postbuild` → prérendu statique.
+
+Apports de réconciliation :
+
+- §1 remplacé par un état courant au lieu d'une accumulation de travaux passés.
+- §2 recalibré : score produit maintenu à **8.3/10**, score vs ambition VC Intelligence remonté à **7.1/10** après IA en trois piliers et prérendu statique.
+- §3 corrigé sur le modèle réel du `SideNav`, du portail splash single-stage, du prérendu et de `CourseDetailPage` API-first.
+- Clarification workflow : le dépôt courant expose `.github/workflows/deploy-pages.yml` pour GitHub Pages ; aucun workflow CI complet n'est présent dans `.github/workflows` à cette date.
+- Dettes courantes maintenues visibles : `PathDetailPage` bundle-first, `/api/search` plus étroit que la recherche locale, preview CMS / signal non versionné, validation SEO/OG sur domaine réel, sécurité production et i18n EN.
 
 ---
 
