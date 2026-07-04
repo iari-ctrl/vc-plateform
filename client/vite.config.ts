@@ -30,12 +30,6 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:4000',
-        changeOrigin: true,
-      },
-    },
     fs: {
       // allow importing JSON from the repo-root /data directory
       allow: ['..'],

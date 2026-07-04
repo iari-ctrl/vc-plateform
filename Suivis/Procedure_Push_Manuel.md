@@ -1,11 +1,14 @@
 # Procédure de publication (« push ») manuelle
 
+> [!WARNING]
+> **MISE À JOUR ARCHITECTURE STATIQUE (Juillet 2026)**
+> Le projet a été migré vers une architecture **100% statique et locale**. L'API, la base de données et les tests serveurs ont été supprimés. Les étapes listées ci-dessous ont été épurées des dépendances au backend.
+
 > [!IMPORTANT]
 > **Statut documentaire — 2026-06-26**
 > - Dernière révision documentaire indiquée : 2026-06-26 (encart de statut ; aucune date de fond n'était indiquée dans le fichier).
 > - Périmètre : procédure manuelle de publication Git/GitHub depuis la racine du projet.
 > - Nature : **journal de suivi — peut diverger du code**. Revalider les commandes contre `package.json` et `.github/workflows/ci.yml` avant usage critique.
-> - Sections manifestement à arbitrer au regard du code actuel : aucune section obsolète évidente repérée lors du contrôle ; les commandes citées existent dans les scripts actuels et le job `drift` existe dans la CI.
 
 Cette procédure explique comment envoyer en ligne (sur GitHub) le travail enregistré
 localement, en s'assurant qu'aucune mise à jour n'a été oubliée. Elle vise une exécution
@@ -68,7 +71,6 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
    npm run lint
    npm run build
    npm run test --workspace client
-   npm run test --workspace server
    ```
    Chacune doit se terminer sans erreur (code de sortie 0). Le `lint` peut afficher des
    *avertissements* (`warning`) sans que ce soit bloquant ; seules les *erreurs* le sont.
@@ -100,31 +102,9 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
   inline sont cohérents, sans tolérance.
 - `lint` : la qualité du code client.
 - `build` : le site se construit réellement (et relance au passage `split` + validation).
-- `test` (client et serveur) : les comportements clés (routage i18n, profil/ikigai,
-  simulateurs, authentification, isolation par utilisateur) ne sont pas cassés.
+- `test` (client) : les comportements clés (routage i18n, profil/ikigai,
+  simulateurs) ne sont pas cassés.
 
-## Le job « drift » de la vérification en ligne
-
-La vérification automatique comporte un second contrôle, dit *drift*, qui peuple une base
-jetable depuis les JSON sources puis la ré-exporte, et exige que le résultat soit identique aux
-fichiers `data/glossary.json`, `caseStudies.json` et `data/blog/*.json`. C'est la preuve que seed
-(JSON→DB) et export (DB→JSON) sont inverses : l'ordre canonique attendu est celui que produit
-l'export pour les fichiers-tableaux (glossaire trié par `term`, cas par `title`) ; le blog est
-exporté en un fichier par article, nommé `data/blog/<slug>.json`.
-
-Ce contrôle a été **résolu** : les fichiers sources ont été réalignés sur la forme produite
-par l'export (réordonnancement pur, sans changement de contenu — voir le commit
-`chore(content): normalise l'ordre canonique`).
-
-**Pour éviter qu'il ne réapparaisse** : après toute édition manuelle de `glossary.json`,
-`caseStudies.json` ou `data/blog/<slug>.json` (ajout d'un terme, d'un cas, d'un article), relancer
-`npm run content:export` pour réimposer l'ordre canonique, puis committer le résultat. Une
-édition via le CMS suivie de `content:export` ne pose pas ce problème. Reproduire le contrôle
-en local, sans toucher à la base de développement :
-```bash
-DATABASE_URL="file:/tmp/drift-check.db" npm run db:setup --workspace server
-DATABASE_URL="file:/tmp/drift-check.db" npm run content:export -- --dry-run
-```
 
 ## En cas de besoin d'annulation
 

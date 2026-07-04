@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { Trash2, Quote, Highlighter, StickyNote, Plus, Bookmark as BookmarkIcon } from 'lucide-react';
 import { useUserData } from '@/context/UserDataContext';
 import { SectionHeading, EmptyState } from '@/components/ui/primitives';
-import { GuestBanner } from '@/components/ui/GuestBanner';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { IkigaiCahierSummary } from '@/components/ikigai/IkigaiCahierSummary';
 import { formatDateFr } from '@/lib/utils';
@@ -51,11 +50,7 @@ export default function NotesPage() {
     <div className="mx-auto max-w-[var(--content-max)] px-4 py-14 sm:px-6 lg:px-8">
       <SectionHeading eyebrow="Le commonplace book" title="Notes & favoris" description="Vos citations, surlignages et réflexions, capturés au fil de la lecture. Le carnet de l’apprenant actif." />
 
-      <GuestBanner
-        className="mt-8"
-        message="Vous travaillez en mode invité — vos notes sont conservées sur cet appareil. Créez un espace pour les retrouver partout."
-        reason="Créez un espace pour synchroniser votre carnet entre vos appareils."
-      />
+      
 
       <IkigaiCahierSummary className="mt-8" />
 

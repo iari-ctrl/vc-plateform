@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { IKIGAI } from '@/content';
-import { useNavigate } from '@/i18n/navigation';
+import { useNavigate } from 'react-router-dom';
 import { ProgressBar } from '@/components/ui/primitives';
 import { useUserData } from '@/context/UserDataContext';
 import { computeProfile, suggestedArchetype, type OnboardingAnswer } from '@/lib/ikigai';

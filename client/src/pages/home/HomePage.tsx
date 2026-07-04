@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, BookOpen, Sparkles, Lock, Unlock, Play } from 'lucide-react';
 import { PARCOURS } from '@/content/parcours';
 import { SIMULATORS } from '@/content/simulators';

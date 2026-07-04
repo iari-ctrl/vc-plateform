@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, ChevronDown, ChevronUp, ExternalLink, Search } from 'lucide-react';
 import { GLOSSARY, glossaryBySlug, loadGlossaryDefs } from '@/content/glossary';
 import { lessonById } from '@/content/lessons';
-import { useApiData } from '@/hooks/useApiData';
 import { Markdown } from '@/lib/markdown';
 import { usePageMeta } from '@/lib/seo';
 import { safeHttpUrl } from '@/lib/utils';
@@ -95,12 +94,11 @@ export default function GlossaryPage() {
   const activeTerm = activeSlug ? glossaryBySlug(activeSlug) : undefined;
   usePageMeta(
     activeTerm ? `${activeTerm.term} · Dictionnaire du capital-risque` : 'Dictionnaire du capital-risque',
-    activeTerm?.short ?? 'Les termes du venture, définis avec clarté : définitions, exemples et liens vers les cours associés.',
-    { canonicalPath: activeTerm ? `/glossary/${activeTerm.slug}` : '/glossary' },
+    activeTerm?.short ?? 'Les termes du venture, définis avec clarté : définitions, exemples et liens vers les cours associés.'
   );
 
   // Editorial content changes rarely — hold the API copy fresh for 10 min.
-  const { data: terms } = useApiData<IndexedTerm[]>('/content/glossary', GLOSSARY, { staleTime: 10 * 60 * 1000 });
+  const terms = GLOSSARY;
   const [defs, setDefs] = useState<Record<string, GlossaryDef> | null>(null);
   const [activeCategory, setActiveCategory] = useState('Tous');
   const [query, setQuery] = useState('');
@@ -124,9 +122,9 @@ export default function GlossaryPage() {
   const fullTerms = useMemo<GlossaryTerm[]>(
     () =>
       terms.map((t) =>
-        t.definition != null
+        (t as any).definition != null
           ? (t as GlossaryTerm)
-          : { ...t, definition: defs?.[t.slug]?.definition ?? '', example: defs?.[t.slug]?.example },
+          : { ...t, definition: defs?.[t.slug]?.definition ?? '', example: defs?.[t.slug]?.example } as GlossaryTerm,
       ),
     [terms, defs],
   );

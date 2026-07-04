@@ -2,18 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   Map, Library, BookA, FlaskConical, Newspaper, LayoutDashboard, NotebookPen, Microscope,
-  Search, Sun, Moon, LogIn, LogOut, Shield, User, Menu, X, ScrollText, Crosshair, type LucideIcon,
+  Search, Sun, Moon, Menu, X, ScrollText, Crosshair, type LucideIcon,
   FileText, ChevronRight,
 } from 'lucide-react';
-import { Link, NavLink } from '@/i18n/routing';
-import { useNavigate, isLinkActive } from '@/i18n/navigation';
-import { LocaleSwitcher } from '@/i18n/LocaleSwitcher';
-import { EN_ENABLED } from '@/i18n/config';
+import { Link, NavLink } from 'react-router-dom';
 import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
-import { useAuth } from '@/context/AuthContext';
 import { useUI } from '@/context/UIContext';
 import { cn, initials } from '@/lib/utils';
+const isLinkActive = (to: string, location: any) => 
+  to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
+
 
 type Item = { to: string; label: string; icon: LucideIcon };
 type NavGroup = { title: string; to: string; icon: LucideIcon; items: Item[] };
@@ -166,13 +165,8 @@ function DesktopRail() {
             <div className="ornament-rule mx-1 mb-2" />
             <SearchButton expanded />
             <ThemeButton expanded />
-            {EN_ENABLED && (
-              <div className="flex items-center justify-between gap-2 px-3 py-1.5 animate-fade-in">
-                <span className="whitespace-nowrap text-sm font-medium text-surface-variant">Langue</span>
-                <LocaleSwitcher />
-              </div>
-            )}
-            <AccountControl expanded />
+            
+            
           </div>
         </div>
       </aside>
@@ -264,95 +258,13 @@ function ThemeButton({ expanded }: { expanded: boolean }) {
   );
 }
 
-function AccountControl({ expanded }: { expanded: boolean }) {
-  const { isAuthed, isAdmin, user, logout } = useAuth();
-  const { openAuth } = useUI();
-  const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const onClick = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
-    document.addEventListener('mousedown', onClick);
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('mousedown', onClick);
-      document.removeEventListener('keydown', onKey);
-    };
-  }, [open]);
-
-  if (!isAuthed) {
-    return <RailButton icon={LogIn} label="Se connecter" expanded={expanded} onClick={() => openAuth()} />;
-  }
-
-  const menu = [
-    { to: '/profile', label: 'Mon profil', icon: User },
-    ...(isAdmin ? [{ to: '/admin', label: 'Administration', icon: Shield }] : []),
-  ];
-
-  return (
-    <div className="relative" ref={ref}>
-      <button
-        onClick={() => setOpen((v) => !v)}
-        title={!expanded ? 'Mon compte' : undefined}
-        aria-expanded={open}
-        className={cn(
-          'flex w-full items-center rounded-xl transition-colors hover:bg-surface-container-low',
-          expanded ? 'gap-3 px-3 py-2.5' : 'justify-center p-2.5',
-        )}
-      >
-        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[color:var(--secondary)] font-mono text-[0.7rem] font-semibold text-[color:var(--on-secondary)]">
-          {initials(user?.name ?? 'VC')}
-        </span>
-        {expanded && (
-          <span className="min-w-0 flex-1 text-left">
-            <span className="block truncate text-sm font-medium text-foreground">{user?.name}</span>
-            <span className="block truncate text-[0.7rem] text-surface-variant">{user?.email}</span>
-          </span>
-        )}
-      </button>
-      {open && (
-        <div className="absolute bottom-0 left-full z-50 ml-2 w-52 animate-scale-in overflow-hidden rounded-2xl border border-outline-variant bg-surface-container-lowest shadow-editorial-lg">
-          <div className="p-1.5">
-            {menu.map((it) => (
-              <Link key={it.to} to={it.to} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors hover:bg-surface-container-low">
-                <it.icon size={16} className="text-surface-variant" />
-                {it.label}
-              </Link>
-            ))}
-          </div>
-          <div className="border-t border-outline-variant p-1.5">
-            <button
-              onClick={async () => {
-                setOpen(false);
-                await logout();
-                navigate('/');
-              }}
-              className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-error transition-colors hover:bg-surface-container-low"
-            >
-              <LogOut size={16} /> Se déconnecter
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
 // ── Mobile bar + drawer ─────────────────────────────────────────────────────────
 function MobileBar() {
   const { openSearch } = useUI();
   const { theme, toggle } = useTheme();
-  const { isAuthed, isAdmin, user, logout } = useAuth();
-  const { openAuth } = useUI();
-  const location = useLocation();
+      const location = useLocation();
   const { pathname } = location;
-  const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -409,41 +321,9 @@ function MobileBar() {
 
             <div className="ornament-rule my-3" />
 
-            {isAuthed ? (
-              <>
-                <Link to="/profile" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-surface-variant">
-                  <User size={18} /> Mon profil
-                </Link>
-                {isAdmin && (
-                  <Link to="/admin" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-surface-variant">
-                    <Shield size={18} /> Administration
-                  </Link>
-                )}
-                <button
-                  onClick={async () => {
-                    await logout();
-                    navigate('/');
-                  }}
-                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-error"
-                >
-                  <LogOut size={18} /> Se déconnecter ({user?.name})
-                </button>
-              </>
-            ) : (
-              <button onClick={() => openAuth()} className="btn-ghost mt-1">
-                <LogIn size={15} /> Se connecter
-              </button>
-            )}
+            
 
-            {EN_ENABLED && (
-              <>
-                <div className="ornament-rule my-3" />
-                <div className="flex items-center justify-between px-1">
-                  <span className="text-sm font-medium text-surface-variant">Langue</span>
-                  <LocaleSwitcher />
-                </div>
-              </>
-            )}
+            
           </nav>
         </div>
       )}

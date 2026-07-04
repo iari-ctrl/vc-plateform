@@ -1,10 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useNavigate } from '@/i18n/navigation';
+import { useNavigate } from 'react-router-dom';
 import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft, Ghost, ScrollText, Microscope, Dumbbell } from 'lucide-react';
-import { api } from '@/lib/api';
 import type { SearchHit } from '@/content/search';
-import { useAuth } from '@/context/AuthContext';
 
 const TYPE_META: Record<SearchHit['type'], { label: string; icon: typeof Search }> = {
   course: { label: 'Cours', icon: BookMarked },
@@ -21,7 +19,6 @@ const TYPE_META: Record<SearchHit['type'], { label: string; icon: typeof Search 
 };
 
 export function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { apiUp } = useAuth();
   const navigate = useNavigate();
   const [q, setQ] = useState('');
   const [hits, setHits] = useState<SearchHit[]>([]);
@@ -50,20 +47,11 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
         setHits([]);
         return;
       }
-      if (apiUp) {
-        try {
-          const { hits } = await api.get<{ hits: SearchHit[] }>(`/search?q=${encodeURIComponent(q)}`);
-          setHits(hits);
-          return;
-        } catch {
-          /* fall back */
-        }
-      }
       const { searchLocal } = await import('@/content/search');
       setHits(searchLocal(q));
     }, 160);
     return () => clearTimeout(handle);
-  }, [q, open, apiUp]);
+  }, [q, open]);
 
   const grouped = useMemo(() => hits.slice(0, 24), [hits]);
 

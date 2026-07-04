@@ -5,7 +5,6 @@ import { MEMOS } from '@/content/memos';
 import { ANTI_PORTFOLIO } from '@/content/antiPortfolio';
 import { AntiPortfolioEntryCard, CaseCard, MemoCard } from '@/components/cards';
 import { SectionHeading, Reveal, EmptyState } from '@/components/ui/primitives';
-import { useApiData } from '@/hooks/useApiData';
 import { usePageMeta } from '@/lib/seo';
 import type { AntiPortfolioEntry, CaseStudy, InvestmentMemo } from '@/content/types';
 
@@ -35,7 +34,7 @@ export default function DecisionsIndexPage() {
     'Cas, memos et anti-portfolio pour étudier comment une décision d’investissement se construit, se justifie ou se manque.',
   );
 
-  const { data: cases } = useApiData<CaseStudy[]>('/content/case-studies', CASE_STUDIES, { staleTime: 10 * 60 * 1000 });
+  const cases = CASE_STUDIES;
   const [filter, setFilter] = useState<DecisionType>('all');
 
   const items = useMemo<DecisionItem[]>(() => {

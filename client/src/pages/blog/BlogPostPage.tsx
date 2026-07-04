@@ -1,6 +1,6 @@
 import { lazy, Suspense, type ComponentType } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, Clock, ScrollText } from 'lucide-react';
 import { blogBySlug, BLOG } from '@/content/blog';
 import type { BlogPost } from '@/content/types';
@@ -9,7 +9,6 @@ import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { BlogCard, GlossaryRefList } from '@/components/cards';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { PageLoader } from '@/components/ui/primitives';
-import { useApiItem } from '@/hooks/useApiData';
 import { cn, formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
@@ -76,10 +75,8 @@ function ReadingViewSwitch({
 export default function BlogPostPage() {
   const { slug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { item: post, pending } = useApiItem<BlogPost>(
-    slug ? `/content/blog/${slug}` : null,
-    slug ? blogBySlug(slug) : undefined,
-  );
+  const post = slug ? blogBySlug(slug) : undefined;
+  const pending = false;
   usePageMeta(post?.title, post?.excerpt, { type: 'article', publishedTime: post?.date });
 
   if (pending) return <PageLoader />;

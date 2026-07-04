@@ -1,4 +1,9 @@
-# Report et scoring - VC Premium Platform
+# Report et Scoring : vc-premium-platform
+
+> [!WARNING]
+> **MISE À JOUR ARCHITECTURE STATIQUE (Juillet 2026)**
+> Le projet a été migré vers une architecture **100% statique et locale**. Le backend (`server/`), l'API Express, la base Prisma/SQLite et les appels réseau correspondants ont été **définitivement supprimés**. 
+> Toutes les références au backend dans ce document représentent un état historique obsolète.
 
 > [!IMPORTANT]
 > **Statut documentaire — 2026-06-28**

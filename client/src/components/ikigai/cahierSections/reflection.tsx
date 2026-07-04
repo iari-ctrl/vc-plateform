@@ -3,8 +3,6 @@ import { Check, Save, Lock } from 'lucide-react';
 import { IKIGAI } from '@/content';
 import type { IkigaiMode } from '@/content/types';
 import { useUserData } from '@/context/UserDataContext';
-import { useAuth } from '@/context/AuthContext';
-import { useUI } from '@/context/UIContext';
 import { NOTE_SOURCE, answerKey, getCahierAnswers, setCahierAnswers, type CahierAnswers } from '@/lib/ikigaiCahier';
 import { IkigaiText } from '../IkigaiText';
 import { StickyChapterHeader } from '../cahierUi';
@@ -12,9 +10,7 @@ import { StickyChapterHeader } from '../cahierUi';
 // ── §05 — Cahier d'introspection (7 free-text questions) ──────────────────────
 export function ReflectionSection({ mode, onMode }: { mode: IkigaiMode; onMode: (m: IkigaiMode) => void }) {
   const { addNote, deleteNote, notes } = useUserData();
-  const { isAuthed, apiUp } = useAuth();
-  const { openAuth } = useUI();
-
+    
   const [answers, setAnswers] = useState<CahierAnswers>(() => getCahierAnswers());
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
@@ -109,18 +105,9 @@ export function ReflectionSection({ mode, onMode }: { mode: IkigaiMode; onMode: 
 
       <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-outline-variant bg-surface-container-low/60 p-5 sm:flex-row sm:items-center">
         <p className="flex-1 text-sm text-surface-variant">
-          {isAuthed
-            ? 'Enregistrez vos réponses dans votre carnet pour les retrouver sur tous vos appareils.'
-            : apiUp
-              ? 'Vos brouillons sont déjà conservés localement. Enregistrez-les dans votre carnet pour les synchroniser après création d’un espace.'
-              : 'Vos brouillons sont conservés localement sur cet appareil.'}
+          'Vos brouillons sont conservés localement sur cet appareil.'
         </p>
         <div className="flex items-center gap-2">
-          {!isAuthed && apiUp && (
-            <button onClick={() => openAuth('Créez un espace pour synchroniser votre cahier Ikigai.')} className="btn-quiet">
-              <Lock size={14} /> Créer un espace
-            </button>
-          )}
           <button onClick={saveToCarnet} disabled={busy} className="btn-foil !py-2.5 disabled:opacity-50">
             {savedAt ? <Check size={15} /> : <Save size={15} />}
             {savedAt ? 'Enregistré' : 'Enregistrer dans mon carnet'}

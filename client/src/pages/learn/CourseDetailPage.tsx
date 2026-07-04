@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock, BookOpen } from 'lucide-react';
 import { courseBySlug, lessonsForCourse, LEVEL_LABEL } from '@/content';
 import type { Course } from '@/content/types';
@@ -7,17 +7,14 @@ import { parcoursById, parcoursForCourse, t } from '@/content/parcours';
 import { LessonRow } from '@/components/cards';
 import { ProgressBar, PageLoader } from '@/components/ui/primitives';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
-import { useApiItem } from '@/hooks/useApiData';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function CourseDetailPage() {
   const { slug } = useParams();
-  const { item: course, pending } = useApiItem<Course>(
-    slug ? `/content/courses/${slug}` : null,
-    slug ? courseBySlug(slug) : undefined
-  );
+  const course = slug ? courseBySlug(slug) : undefined;
+  const pending = false;
   const { progress } = useUserData();
   usePageMeta(course?.title, course?.summary);
 
@@ -53,7 +50,7 @@ export default function CourseDetailPage() {
 
       {course.tags.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-2">
-          {course.tags.map((t) => <span key={t} className="chip">{t}</span>)}
+          {course.tags.map((t: any) => <span key={t} className="chip">{t}</span>)}
         </div>
       )}
 

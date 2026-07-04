@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, ChevronDown, Clock, Users, Target } from 'lucide-react';
 import { pathBySlug } from '@/content/paths';
 import { coursesForPath } from '@/content/courses';

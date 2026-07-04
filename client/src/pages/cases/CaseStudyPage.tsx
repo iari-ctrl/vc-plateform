@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Sparkles } from 'lucide-react';
 import { caseBySlug } from '@/content';
 import type { CaseStudy } from '@/content/types';
@@ -7,7 +7,6 @@ import { ActiveProse } from '@/components/reading/ActiveProse';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { PageLoader } from '@/components/ui/primitives';
-import { useApiItem } from '@/hooks/useApiData';
 import { usePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
@@ -15,10 +14,8 @@ const KIND_LABEL: Record<string, string> = { startup: 'Startup', fund: 'Fonds', 
 
 export default function CaseStudyPage() {
   const { slug } = useParams();
-  const { item: cs, pending } = useApiItem<CaseStudy>(
-    slug ? `/content/case-studies/${slug}` : null,
-    slug ? caseBySlug(slug) : undefined,
-  );
+  const cs = slug ? caseBySlug(slug) : undefined;
+  const pending = false;
   usePageMeta(cs?.title, cs?.summary, { type: 'article' });
 
   if (pending) return <PageLoader />;
@@ -51,7 +48,7 @@ export default function CaseStudyPage() {
       <aside className="mt-12 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_25%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-6 sm:p-7">
         <p className="eyebrow mb-4 flex items-center gap-2"><Sparkles size={14} /> Ce qu’il faut retenir</p>
         <ul className="space-y-3">
-          {cs.takeaways.map((t, i) => (
+          {cs.takeaways.map((t: any, i: number) => (
             <li key={i} className="flex items-start gap-3 text-[0.95rem] font-medium">
               <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] font-mono text-[0.625rem] text-[color:var(--primary)]">{i + 1}</span>
               {t}

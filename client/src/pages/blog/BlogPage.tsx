@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { BLOG } from '@/content/blog';
 import { BlogCard } from '@/components/cards';
 import { SectionHeading, Reveal } from '@/components/ui/primitives';
-import { useApiData } from '@/hooks/useApiData';
 import { usePageMeta } from '@/lib/seo';
 import type { BlogPost } from '@/content/types';
 
 export default function BlogPage() {
   usePageMeta('Analyses & notes de recherche', 'Lectures obliques, notes de recherche et réflexions sur le capital-risque.');
   // Editorial content changes rarely — hold the API copy fresh for 10 min.
-  const { data: posts } = useApiData<BlogPost[]>('/content/blog', BLOG, { staleTime: 10 * 60 * 1000 });
+  const posts = BLOG;
   const [category, setCategory] = useState('all');
 
   const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));

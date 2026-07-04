@@ -9,7 +9,7 @@ import {
   type MouseEvent as ReactMouseEvent,
   type RefObject,
 } from 'react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Moon, Sun } from 'lucide-react';
 import { CompassIkigaiIntro } from '@/components/splash/CompassIkigaiIntro';
 import { WaxSeal } from '@/components/ornaments/Illustrations';

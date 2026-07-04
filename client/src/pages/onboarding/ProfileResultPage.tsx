@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowRight, RotateCcw, Target, Sparkles, Clock, UserPlus } from 'lucide-react';
 import { IKIGAI, profileById } from '@/content';
 import { t } from '@/content/parcours';
@@ -8,7 +8,6 @@ import { ParcoursCard } from '@/components/cards';
 import { KanjiSeal, FleuronDivider } from '@/components/ornaments/Ornaments';
 import { ProgressBar, EmptyState, Button, Reveal, PageLoader } from '@/components/ui/primitives';
 import { useUserData } from '@/context/UserDataContext';
-import { useAuth } from '@/context/AuthContext';
 import { useUI } from '@/context/UIContext';
 import { usePageMeta } from '@/lib/seo';
 
@@ -22,9 +21,7 @@ export default function ProfileResultPage() {
   const location = useLocation();
   const state = (location.state as ResultState) ?? {};
   const { profile: savedProfile, loading } = useUserData();
-  const { isAuthed, apiUp } = useAuth();
-  const { openAuth } = useUI();
-
+    
   const profileId = state.profileId ?? savedProfile?.profileType;
   const scores = state.scores ?? savedProfile?.scores;
   const timeBudget = state.timeBudget ?? savedProfile?.timeBudget ?? 'medium';
@@ -147,16 +144,7 @@ export default function ProfileResultPage() {
         <Link to="/onboarding" className="btn-quiet"><RotateCcw size={14} /> Refaire le test</Link>
       </div>
 
-      {!isAuthed && apiUp && (
-        <div className="mx-auto mt-10 flex max-w-xl items-center gap-4 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] px-6 py-5">
-          <UserPlus size={22} className="shrink-0 text-[color:var(--primary)]" />
-          <div className="flex-1">
-            <p className="text-sm font-semibold">Conservez ce profil</p>
-            <p className="text-xs text-surface-variant">Créez un espace pour retrouver votre profil, vos notes et votre progression sur tous vos appareils.</p>
-          </div>
-          <button onClick={() => openAuth('Créez votre espace pour conserver votre profil d’introspection et votre progression.')} className="btn-ghost shrink-0">Créer mon espace</button>
-        </div>
-      )}
+
     </div>
   );
 }

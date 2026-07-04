@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
-import { useNavigate } from '@/i18n/navigation';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Clock, Sparkles, BookMarked, ArrowUpRight } from 'lucide-react';
 import { loadLesson, lessonById, courseById, lessonsForCourse, simulatorBySlug, caseById, glossaryBySlug } from '@/content';
 import { parcoursById, parcoursForLesson, t, type Parcours } from '@/content/parcours';
@@ -11,7 +11,6 @@ import { QuizBlock } from '@/components/reading/QuizBlock';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { PageLoader } from '@/components/ui/primitives';
-import { useApiItem } from '@/hooks/useApiData';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
 import { storage, STORAGE_KEYS } from '@/lib/storage';
@@ -56,10 +55,8 @@ export default function LessonPage() {
     };
   }, [slug]);
 
-  const { item: lesson, pending } = useApiItem<LessonDetail>(
-    slug ? `/content/lessons/${slug}` : null,
-    bundled,
-  );
+  const lesson = bundled;
+  const pending = !bundledReady;
   const { progress, setProgress } = useUserData();
   const [readPct, setReadPct] = useState(0);
   // Reader depth is a global, client-only preference; defaults to "court" everywhere.
@@ -183,7 +180,7 @@ export default function LessonPage() {
           <aside className="mt-12 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_25%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-6 sm:p-7">
             <p className="eyebrow mb-4 flex items-center gap-2"><Sparkles size={14} /> À retenir</p>
             <ul className="space-y-3">
-              {lesson.keyTakeaways.map((t, i) => (
+              {lesson.keyTakeaways.map((t: any, i: number) => (
                 <li key={i} className="flex items-start gap-3 text-[0.95rem] font-medium">
                   <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] font-mono text-[0.625rem] text-[color:var(--primary)]">{i + 1}</span>
                   {t}
@@ -207,7 +204,7 @@ export default function LessonPage() {
             <div>
               <p className="eyebrow mb-3">Pour aller plus loin</p>
               <div className="space-y-2">
-                {lesson.furtherReading.map((fr, i) => {
+                {lesson.furtherReading.map((fr: any, i: number) => {
                   const href =
                     fr.kind === 'simulator' ? `/simulators/${simulatorBySlug(fr.ref)?.slug ?? fr.ref}` :
                     fr.kind === 'lesson' ? `/lessons/${lessonById(fr.ref)?.slug ?? fr.ref}` :

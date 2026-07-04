@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, BookOpen, Clock, FlaskConical, Layers } from 'lucide-react';
 import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { LevelBadge, ProgressBar, ProgressRing } from '@/components/ui/primitives';

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, FlaskConical } from 'lucide-react';
 import { simulatorBySlug, lessonById } from '@/content';
 import { SIMULATOR_COMPONENTS } from '@/components/simulators';

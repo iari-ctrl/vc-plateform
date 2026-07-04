@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { ArrowRight, RefreshCw } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { allConvictions, convictionsToReview } from '@/content/convictions';
 import { CONVICTION_STRENGTH_META } from '@/content/ecosystems';
 import { EmptyState, SectionHeading, Reveal } from '@/components/ui/primitives';

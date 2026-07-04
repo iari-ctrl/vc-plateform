@@ -1,11 +1,10 @@
 import { ArrowRight, Crosshair, FileText, Microscope, ScrollText } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { BLOG } from '@/content/blog';
 import { ECOSYSTEMS, childEcosystems } from '@/content/ecosystems';
 import { allConvictions, convictionsToReview } from '@/content/convictions';
 import { BlogCard, EcosystemCard } from '@/components/cards';
 import { SectionHeading, Reveal } from '@/components/ui/primitives';
-import { useApiData } from '@/hooks/useApiData';
 import { usePageMeta } from '@/lib/seo';
 import type { BlogPost } from '@/content/types';
 
@@ -36,7 +35,7 @@ export default function IntelligencePage() {
     'Surface de travail pour suivre les dossiers, convictions, analyses et décisions utiles à une pensée d’investisseur.',
   );
 
-  const { data: posts } = useApiData<BlogPost[]>('/content/blog', BLOG, { staleTime: 10 * 60 * 1000 });
+  const posts = BLOG;
   const latestPosts = [...posts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
   const recentDossiers = [...ECOSYSTEMS].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)).slice(0, 4);
   const review = convictionsToReview().slice(0, 4);

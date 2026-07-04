@@ -1,7 +1,5 @@
 import { Fragment, useCallback, useEffect, useId, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from 'react';
-import { Link } from '@/i18n/routing';
-import { localizePath, useNavigate } from '@/i18n/navigation';
-import { useLocale } from '@/i18n/useLocale';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { glossaryBySlug, GLOSSARY } from '@/content';
 
@@ -40,8 +38,7 @@ function GlossaryLink({ slug, label }: { slug: string; label: string }) {
 export function GlossaryPreview({ slug, label }: { slug: string; label: string }) {
   const term = glossaryBySlug(slug);
   const navigate = useNavigate();
-  const locale = useLocale();
-  const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
   const [pinned, setPinned] = useState(false);
   const [position, setPosition] = useState<PopoverPosition | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -154,7 +151,7 @@ export function GlossaryPreview({ slug, label }: { slug: string; label: string }
         <a
           ref={panelRef}
           id={panelId}
-          href={localizePath(`/glossary?term=${slug}`, locale)}
+          href={`/glossary?term=${slug}`}
           aria-label={`${term.term} — ouvrir dans le dictionnaire`}
           onClick={goToGlossary}
           onMouseEnter={openPreview}

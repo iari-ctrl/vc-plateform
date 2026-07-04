@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { InlineMarkdown } from '@/lib/markdown';
 import {
   ArrowLeft, ArrowRight, Check, Clock, Users, Target, Trophy, BookOpen,
@@ -14,7 +14,6 @@ import {
 import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { ProgressBar, LevelBadge, PageLoader } from '@/components/ui/primitives';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
-import { useApiItem } from '@/hooks/useApiData';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
@@ -38,10 +37,8 @@ const TIME_BUDGETS: { id: TimeBudget; label: string; sub: string }[] = [
 
 export default function ParcoursDetailPage() {
   const { slug } = useParams();
-  const { item: parcours, pending } = useApiItem<Parcours>(
-    slug ? `/content/paths/${slug}` : null,
-    slug ? parcoursBySlug(slug) : undefined
-  );
+  const parcours = slug ? parcoursBySlug(slug) : undefined;
+  const pending = false;
   const { progress, profile } = useUserData();
   const [budget, setBudget] = useState<TimeBudget>((profile?.timeBudget as TimeBudget) ?? 'high');
 
@@ -119,14 +116,14 @@ export default function ParcoursDetailPage() {
               <div>
                 <p className="eyebrow mb-3 flex items-center gap-2"><Users size={13} /> Pour qui</p>
                 <div className="flex flex-wrap gap-2">
-                  {parcours.forWhom.map((w, i) => <span key={i} className="chip">{t(w)}</span>)}
+                  {parcours.forWhom.map((w: any, i: number) => <span key={i} className="chip">{t(w)}</span>)}
                 </div>
               </div>
               {parcours.prerequisites && parcours.prerequisites.length > 0 && (
                 <div>
                   <p className="eyebrow mb-3 flex items-center gap-2"><BookOpen size={13} /> Pré-requis</p>
                   <ul className="space-y-2">
-                    {parcours.prerequisites.map((p, i) => (
+                    {parcours.prerequisites.map((p: any, i: number) => (
                       <li key={i} className="flex items-start gap-2.5 text-sm text-surface-variant">
                         <span className="mt-[0.35rem] h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: accent }} />
                         <span className="leading-relaxed text-foreground"><InlineMarkdown source={t(p)} glossaryPreview /></span>
@@ -138,7 +135,7 @@ export default function ParcoursDetailPage() {
               <div>
                 <p className="eyebrow mb-3">Ce que tu sauras faire</p>
                 <ul className="space-y-2">
-                  {parcours.outcomes.map((o, i) => (
+                  {parcours.outcomes.map((o: any, i: number) => (
                     <li key={i} className="flex items-start gap-2.5 text-sm text-surface-variant">
                       <Check size={15} className="mt-0.5 shrink-0" style={{ color: accent }} />
                       {t(o)}

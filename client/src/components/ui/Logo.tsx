@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { Fleuron } from '@/components/ornaments/Ornaments';
 import { cn } from '@/lib/utils';
 

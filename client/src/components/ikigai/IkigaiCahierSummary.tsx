@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowRight, BookHeart, RotateCcw, Sparkles, History } from 'lucide-react';
 import { IKIGAI, profileById } from '@/content';
 import { archetypeById } from '@/lib/ikigai';

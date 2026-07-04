@@ -1,24 +1,16 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { AuthDialog } from '@/components/ui/AuthDialog';
 import { CommandPalette } from '@/components/ui/CommandPalette';
 
 interface UICtx {
-  openAuth: (reason?: string) => void;
-  openSearch: () => void;
+    openSearch: () => void;
 }
 
 const Ctx = createContext<UICtx | null>(null);
 
 export function UIProvider({ children }: { children: ReactNode }) {
-  const [authOpen, setAuthOpen] = useState(false);
-  const [authReason, setAuthReason] = useState<string | undefined>();
-  const [searchOpen, setSearchOpen] = useState(false);
+      const [searchOpen, setSearchOpen] = useState(false);
 
-  const openAuth = useCallback((reason?: string) => {
-    setAuthReason(reason);
-    setAuthOpen(true);
-  }, []);
-  const openSearch = useCallback(() => setSearchOpen(true), []);
+    const openSearch = useCallback(() => setSearchOpen(true), []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -31,13 +23,12 @@ export function UIProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const value = useMemo(() => ({ openAuth, openSearch }), [openAuth, openSearch]);
+  const value = useMemo(() => ({ openSearch }), [openSearch]);
 
   return (
     <Ctx.Provider value={value}>
       {children}
-      <AuthDialog open={authOpen} onClose={() => setAuthOpen(false)} reason={authReason} />
-      <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
+            <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
     </Ctx.Provider>
   );
 }

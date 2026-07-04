@@ -13,7 +13,7 @@ Une plateforme **full-stack** d'intelligence VC, enrichie par une couche de form
 
 - `docs/` porte la documentation pérenne : stratégie, décisions d'architecture, ADR i18n et documents de conception destinés à rester des références maintenues.
 - `Suivis/` est un **journal de suivi — peut diverger du code** : bilans datés, audits, scoring, notes de passes successives et procédures. Chaque fichier y porte désormais un encart de statut daté avec son périmètre et les sections à arbitrer.
-- En cas de doute, l'état réel se vérifie dans `client/`, `server/`, `data/`, `shared/routes.mjs` et les scripts du `package.json`.
+- En cas de doute, l'état réel se vérifie dans `client/`, `data/`, `shared/routes.mjs` et les scripts du `package.json`.
 
 ---
 
@@ -33,54 +33,37 @@ Une plateforme **full-stack** d'intelligence VC, enrichie par une couche de form
 | Couche | Technologies |
 | --- | --- |
 | **Front-end** | React 19 · Vite 6 · TypeScript · Tailwind CSS v3 · React Router 7 · lucide-react |
-| **Back-end** | Node · Express 4 · TypeScript · Prisma 5 · JWT (cookie httpOnly) · zod |
-| **Base de données** | SQLite (prototype) — interchangeable avec Postgres en changeant le `datasource` Prisma |
+| **Stockage Local** | `localStorage` pour les notes, favoris et journal |
 | **Typographie** | Newsreader (titres) · Plus Jakarta Sans (corps) · JetBrains Mono (mono) |
 
-Le **contenu canonique** (parcours, cours, leçons, dictionnaire, études de cas, livrables de parcours, analyses, anti-portfolio, mémos annotés, simulateurs, ikigai) vit dans les JSON sources de `/data` : fichiers plats (`data/*.json`) et dossiers de collection comme `data/blog/*.json`. Il est **partagé** : le client le bundle pour fonctionner hors-ligne / en invité, et le serveur l'utilise pour *seeder* la base de données.
+Le **contenu canonique** (parcours, cours, leçons, dictionnaire, études de cas, livrables de parcours, analyses, anti-portfolio, mémos annotés, simulateurs, ikigai) vit dans les JSON sources de `/data` : fichiers plats (`data/*.json`) et dossiers de collection comme `data/blog/*.json`. Il est **partagé** et le client le bundle pour fonctionner hors-ligne / en invité, sans backend.
 
 ---
 
 ## ✦ Démarrage rapide
 
 ```bash
-# 1. Installer toutes les dépendances (workspaces client + server)
+# 1. Installer les dépendances du client
 npm install
 
-# 2. Générer le client Prisma, créer la base SQLite et la peupler
-npm run db:setup
-
-# 3. Lancer le client (Vite) et le serveur (Express) ensemble
+# 2. Lancer le client (Vite)
 npm run dev
 ```
 
 - Front-end : http://localhost:5173 (ou le premier port libre)
-- API : http://localhost:4000/api
 
-### Comptes de démonstration
-
-| Rôle | Email | Mot de passe |
-| --- | --- | --- |
-| Administrateur (CMS) | `admin@vcpx.io` | `admin1234` |
-| Apprenant | `demo@vcpx.io` | `demo1234` |
-
-> L'app est **entièrement utilisable sans compte** : en invité, profil, notes, favoris et progression sont stockés dans le `localStorage` et **migrés automatiquement** vers le serveur à la première connexion.
+> L'app est **100% statique et locale** : profil, notes, favoris et progression sont stockés exclusivement dans le `localStorage`. La notion de compte distant a été retirée en faveur d'une expérience "guest" améliorée.
 
 ### Scripts
 
 | Commande | Effet |
 | --- | --- |
-| `npm run dev` | Client + serveur en parallèle |
-| `npm run dev:client` / `npm run dev:server` | Un seul des deux |
-| `npm run db:setup` | `prisma generate` + `prisma migrate deploy` + seed |
-| `npm run db:seed` (`-- --force`) | (Re)peuple la base ; non destructif pour le contenu éditable sauf `--force` |
-| `npm run db:reset` | Réinitialise la base puis re-seed |
+| `npm run dev` | Client Vite |
 | `npm run content:export` | Réexporte les éditions DB (glossaire, blog, cas) vers les JSON sources (`data/blog/<slug>.json` pour les analyses) |
 | `npm run split:content` | Régénère les index/contenus scindés (`split:glossary` + `split:lessons`) |
 | `npm run build` | Build serveur (tsc) puis client (vite) ; le hook `postbuild` enchaîne le **prérendu statique** |
 | `npm run prerender` | Prérend les routes publiques en HTML statique (`client/dist/<route>/index.html`) — lancé automatiquement après `build` |
 | `npm run test --workspace client` | Tests Vitest client (routing i18n, `safeHttpUrl`, `computeProfile`, simulateurs…) |
-| `npm run test --workspace server` | Tests d'intégration serveur (auth, profil, isolation par `userId`) |
 | `npm run validate:content` | Vérifie que tous les liens dictionnaire `[[..]]` / `{{..}}` du contenu résolvent |
 | `npm run validate:glossary` | Contrôle custom du glossaire final (slugs uniques, `id === slug`, liens, aliases) |
 
@@ -93,20 +76,14 @@ Audit local courant (2026-06-28 ; build/prérendu complet dernier contrôle cons
 - Dernier `npm run build` consigné : OK, avec `split:content`, `validate:content`, `generate:sitemap`, build serveur, build client, puis `postbuild` → **prérendu statique** (573 routes FR écrites sous `client/dist/<route>/index.html`, ~70 s) ;
 - `npm run validate:content` via `prebuild` : OK, 22 parcours · 9 rayons · 16 cours · 66 leçons · 374 termes · 6 études de cas · 2 livrables · 8 articles · 31 dossiers d'écosystème · 9 simulateurs ;
 - `npm run validate:glossary` : OK, 374 termes ;
-- `npm run lint` : OK, 0 erreur, 4 warnings structurels `react-refresh/only-export-components` sur les Context ;
+- `npm run lint` : OK, 0 erreur ;
 - `npm run test --workspace client` : OK, 13 fichiers / 74 tests ;
-- `npm run test --workspace server` : OK, 4 fichiers / 11 tests ;
 - sitemap régénéré : les index `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables` sont publiés en FR/EN.
 
 Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 
 - **Déploiement GitHub Pages** : le workflow réel est `.github/workflows/deploy-pages.yml` ; il déploie le frontend statique sur `gh-pages` depuis `master`, avec l'API désactivée côté bundle (`VITE_API_DISABLED=true`) pour fonctionner sans backend.
-- **Crash async Express 4** : wrapper `ah()` (`server/src/lib/async-handler.ts`) appliqué à **tous** les handlers async (auth, content, me, admin, search) — une rejection est forwardée à l'error-handler central (→ 500) au lieu de tuer le process.
-- **Seed non destructif** : `server/prisma/seed.ts` ne réécrit plus le contenu éditable (glossaire, blog, études de cas) ; create-if-absent par défaut, écrasement uniquement avec `npm run db:seed -- --force`. Sens inverse DB→JSON sources via `npm run content:export` (`data/blog/*.json` pour le blog).
-- **Garde JWT durcie** : `getJwtSecretIssue()` vérifie une longueur minimale + une liste de valeurs interdites en production (fail-fast au démarrage).
-- **`clearProfile` côté serveur** : `DELETE /me/profile` supprime profil + réponses d'onboarding ; plus de résurrection de l'ancien ikigai au reload.
-- **`apiUp` re-sondé** : l'API qui démarre après le client (ou redevient joignable) est détectée — re-ping toutes les 15 s tant qu'elle est down, plus sur `window focus` / `online` ; restauration de session avant bascule de `apiUp` (`client/src/context/AuthContext.tsx`).
-- **Surface réduite** : `attachUser` retiré du global (monté sur `/me`, `/admin`, `/auth/me` seulement) ; rate-limit ajouté sur `/api/search` ; sélecteur EN masqué (`EN_ENABLED=false`).
+- **Surface réduite** : l'administration et le backend ont été supprimés pour garantir une application 100% statique et locale, sans point de défaillance réseau. Le sélecteur EN masqué (`EN_ENABLED=false`).
 
 - **i18n Phase 1** : routing localisé `/fr` `/en` (`client/src/i18n/`), redirection racine crawler-safe, sélecteur FR/EN **présent mais masqué** jusqu'à la traduction du chrome et du contenu ;
 - **Sécurité / qualité** : auth cookie-only, mot de passe ≥ 8 + rate-limit auth, CORS dev-only, markdown sûr (`safeHttpUrl`), Error Boundary au niveau route, tokens `--error`/`--success` ;
@@ -114,7 +91,7 @@ Recommandations d'audit résolues (lot « repo hygiene », 2026-06-12) :
 - **IA en 3 piliers (2026-06-26)** : la navigation publique est réorganisée autour d'**Intelligence VC**, **Formation** et **Workspace**. Les nouvelles pages-index `/intelligence`, `/convictions`, `/decisions`, `/methode` et `/livrables` agrègent les contenus existants sans déplacer les slugs de détail.
 - **Couche Parcours branchée au client** : la **page `/paths` réunit la carte interactive (l'Atlas) et le catalogue des parcours** (trajectoires par objectif, étagères par famille, bandeau « Ton parcours » issu de l'ikigai) ; `/paths/:slug` reste l'aiguilleur parcours/rayon. La **Bibliothèque (`/bibliotheque`) présente désormais les 9 rayons thématiques comme ossature**, puis le catalogue complet des cours, lectures et cas. Loader `client/src/content/parcours.ts`, pages `ParcoursPage` / `PathDetailPage` / `ParcoursOrSubjectPage`.
 - **Parcours en accès libre, avec backlog visible** : aucune progression n'est bloquée, mais 8 étapes restent marquées `a-produire` dans `data/parcours.json` et s'affichent comme « bientôt » tant qu'elles ne résolvent ni vers une leçon ni vers un livrable.
-- **Contenu** : pipeline d'authoring `docs/parcours/` → `data/parcours/*.lessons.json` (3 registres drop-in actifs : Découverte VC, lever son fonds LP, standard français). Les leçons drop-in (`ld-*`, `llp-*`, `lts-*`) sont **servies côté client** : `scripts/split-lessons.mjs` les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts` (cf. « Performance » ci-dessous). Elles sont aussi **seedées côté serveur** via `content.allLessons()` dans `server/src/lib/content.ts` / `server/prisma/seed.ts`, ce qui aligne le bundle client, l'API et la base locale sur 66 leçons disponibles.
+- **Contenu** : pipeline d'authoring `docs/parcours/` → `data/parcours/*.lessons.json` (3 registres drop-in actifs : Découverte VC, lever son fonds LP, standard français). Les leçons drop-in (`ld-*`, `llp-*`, `lts-*`) sont **servies côté client** : `scripts/split-lessons.mjs` les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts` (cf. « Performance » ci-dessous). Elles sont directement embarquées dans le build client sans nécessiter de base de données.
 - **Cours Power Law & Monte Carlo** : nouveau cours canonique `c-power-law-portfolio` dans le rayon Portfolio, avec 4 leçons (`lpl-*`) qui expliquent moyenne vs médiane, pertinence de Monte Carlo, moteur du simulateur Power Law et lecture TVPI/concentration/fund returner. Le simulateur Power Law référence maintenant ces leçons en premier.
 - **Performance / bundle** : le glossaire **et** les leçons sont découpés en un index léger (eager, hot path : popovers, recherche, liens) et un chunk lourd lazy (définitions / corps de leçon), via `scripts/split-glossary.mjs` + `scripts/split-lessons.mjs` (câblés dans `predev`/`prebuild` par `npm run split:content`). Le chunk eager `lessons` passe de ~176 kB à ~32 kB ; les corps (~143 kB) ne sont chargés que par le lecteur de leçon.
 - **Espace « Décortiquer un écosystème » (2026-06-13)** : `/ecosystemes` réunit des **analyses signées** sur des géographies, secteurs et thèses transverses. Dossiers vivants **arborescents** (`parentId` + `order`) avec thèse falsifiable, **convictions datées à degré d'assurance explicite** (exploratoire / moyenne / forte), signaux directionnels et **figures natives** (graphiques/schémas en SVG/HTML theme-aware, 5 types, sans asset ni librairie de charting). **100 % client** (`data/ecosystems.json`, aucune table serveur). 31 dossiers au lancement (3 racines + 28 sous-dossiers). Méthodo d'authoring : skill `.claude/skills/ecosystemes/SKILL.md`.
@@ -144,18 +121,11 @@ vc-premium-platform/
 │       ├── i18n/             # routing localisé /fr /en (config · routing · guards · LocaleSwitcher)
 │       ├── content/          # types + modules par collection JSON + recherche locale lazy
 │       ├── context/          # ThemeProvider · AuthProvider · UserDataProvider · UIProvider
-│       ├── hooks/            # useApiData (API-first, fallback bundlé)
-│       ├── lib/              # api · storage · markdown · ikigai · utils · seo
+│       ├── hooks/            # useApiData (100% statique, fallback bundlé direct)
+│       ├── lib/              # storage · markdown · ikigai · utils · seo
 │       ├── components/       # ui · chrome · ornaments · cards · reading · ikigai · simulators
-│       ├── pages/            # pages applicatives lazy-loadées + admin/
+│       ├── pages/            # pages applicatives lazy-loadées
 │       └── styles/           # tokens.css (design tokens) + global.css
-│
-└── server/                   # API Express + Prisma
-    ├── prisma/schema.prisma  # 16 modèles (voir ci-dessous)
-    ├── prisma/seed.ts        # peuple la base depuis /data
-    └── src/
-        ├── routes/           # auth · content · me · admin · search
-        └── lib/              # db · auth (JWT) · env · content · async-handler (wrapper async Express 4)
 ```
 
 Le build client est découpé par routes et par collections de contenu : le vendor React pèse environ **232 kB** ; les collections lourdes (`lessons`, `glossary`, `ikigai`) restent dans des chunks séparés. Le glossaire et les leçons sont en outre **scindés index/contenu** : seul l'index léger (`*.index.json`) est chargé sur le hot path, les définitions et les corps de leçon (`glossary.defs.json` / `lessons.bodies.json`) arrivent en chunks lazy à la demande.
@@ -167,27 +137,14 @@ Organisées autour des trois piliers, plus les pages transverses :
 - **Intelligence VC** — `Intelligence` (index) · `Convictions` · `Décisions` (index) · `Méthode` · `Anti-portfolio` (+ détail d'entrée, sur `/anti-portfolio`) · `Memos` (bibliothèque + détail, sur `/memos`) · `Analyses` (blog : liste, article, scrollytelling) · `Écosystèmes` (index + dossier, sur `/ecosystemes` et `/ecosystemes/:slug`) · `Livrables` (index + détail « à produire » : brief + gabarit + grille + modèle, sur `/livrables` et `/livrables/:slug`) · `Études de cas` (détail).
 - **Formation** — `Parcours` (Atlas + catalogue par familles, sur `/paths`) · `Détail parcours` (carte de voyage, sur `/paths/:slug`) · `Bibliothèque` (cours, lectures et études de cas, sur `/bibliotheque`) · `Détail rayon` · `Cours` · `Leçon` (lecture active) · `Dictionnaire` · `Simulateurs` (liste + 9 calculateurs).
 - **Workspace** — `Dashboard` · `Journal de décisions` · `Notes & favoris`.
-- **Transverses** — `Home` · `Splash` · `Onboarding` (ikigai + test d'orientation) · `Résultat du profil` · `Profil` · `Recherche` · `Administration (CMS)` · `Design System`.
+- **Transverses** — `Home` · `Splash` · `Onboarding` (ikigai + test d'orientation) · `Résultat du profil` · `Profil` · `Recherche` · `Design System`.
 
 > `/paths/:slug` route intelligemment : un slug de parcours → la carte de voyage ; tout autre slug (liens legacy des sujets) → l'ancien détail de rayon. Aucun lien existant n'est cassé.
 
-### Modèle de données (Prisma)
+### Stockage 100% Local (Précédemment Prisma)
 
-`User` · `Profile` · `OnboardingAnswer` · `Note` · `Bookmark` · `Progress` · `DecisionEntry` · `LearningPath` · `Course` · `Lesson` · `Quiz` · `GlossaryTerm` · `CaseStudy` · `BlogPost` · `Simulator` · `Tag`.
-
-Le contenu éditorial est stocké en colonnes indexées (titre, slug, catégorie, `searchText`) + un blob JSON `data` qui porte l'objet complet — un compromis pragmatique pour SQLite qui reste requêtable et facilement migrable.
-
-### API REST (extrait)
-
-| Méthode | Endpoint | Auth |
-| --- | --- | --- |
-| `POST` | `/api/auth/register` · `/login` · `/logout` | — |
-| `GET` | `/api/auth/me` | cookie |
-| `GET` | `/api/content/paths` · `/paths/:slug` · `/courses/:slug` · `/lessons/:slug` | public |
-| `GET` | `/api/content/glossary` · `/case-studies` · `/blog` · `/simulators` · `/tags` | public |
-| `GET` | `/api/search?q=` | public |
-| `GET/PUT` | `/api/me/profile` · `GET/POST/DELETE /me/notes` · `/me/bookmarks` · `/me/progress` · `/me/decisions` (journal de décisions) | requise |
-| `*` | `/api/admin/glossary` · `/blog` · `/case-studies` · `/stats` | admin |
+Le stockage est désormais entièrement géré dans le `localStorage` du navigateur. Les entités gérées en local sont :
+`Profile` · `Note` · `Bookmark` · `Progress` · `DecisionEntry`
 
 ---
 
@@ -202,7 +159,6 @@ Palette éditoriale de luxe — **feuille d'or doré** (`#C5A85C`), **bleu marin
 - **Lecture active** : sélectionnez un passage dans une leçon, une étude de cas ou un article pour le **surligner** ou le **citer** directement dans votre carnet.
 - **Dictionnaire vivant** : les termes du venture sont liés *inline* dans les leçons (`[[slug|libellé]]`) et renvoient au dictionnaire et aux cours associés.
 - **Simulateurs réels** : dilution, pre/post-money, ownership, waterfall, fund returns (DPI/TVPI/MOIC), scénario de levée, management fees et Power Law/Monte Carlo — tous calculés côté client, en temps réel. Ils intègrent désormais des explications pédagogiques interactives, le dictionnaire vivant, et utilisent les formules standard de l'industrie.
-- **CMS** : l'espace `/admin` (compte admin) crée et modifie dictionnaire, analyses et études de cas — les changements apparaissent immédiatement sur le site public.
 
 ---
 
@@ -230,8 +186,6 @@ node scripts/prerender.mjs --concurrency=8            # parallélisme (défaut 6
 
 ## ✦ Vers la production
 
-- **Mode de rendu — tranché.** SPA (CSR) + **prérendu statique des routes publiques au build** (cf. section « Prérendu statique » ci-dessus) : OpenGraph/`canonical`/`hreflang` par page sont désormais présents dans le HTML statique pour le SEO et le partage social, sans migration SSG. L'app authentifiée reste en CSR.
-- Remplacer `provider = "sqlite"` par `postgresql` dans `prisma/schema.prisma` et ajuster `DATABASE_URL`. Pour l'i18n, ajouter `locale` aux modèles de contenu + `@@unique([slug, locale])` (i18n Phase 4).
-- Définir un vrai `JWT_SECRET` (la garde production exige déjà longueur min. + blocklist) et passer le cookie en `secure: true` derrière HTTPS ; `helmet` est déjà appliqué (`server/src/app.ts`), reste à finaliser le durcissement (CSP/HSTS, contraste de l'or).
-- Servir le `client/dist` derrière un CDN ; héberger l'API séparément (Render, Fly, Railway…) ou en serverless.
+- **Mode de rendu — tranché.** SPA (CSR) + **prérendu statique des routes publiques au build** (cf. section « Prérendu statique » ci-dessus) : OpenGraph/`canonical`/`hreflang` par page sont désormais présents dans le HTML statique pour le SEO et le partage social. L'app authentifiée reste en CSR avec `localStorage`.
+- Servir le `client/dist` derrière un CDN (Vercel, Netlify, GitHub Pages). L'API est supprimée, donc le déploiement est un simple hébergement de fichiers statiques.
 ```

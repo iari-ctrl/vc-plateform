@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { Logo } from '@/components/ui/Logo';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { ExLibris } from '@/components/ornaments/Illustrations';

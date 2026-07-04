@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, NotebookPen, Bookmark, Compass, Crosshair, Play, Target } from 'lucide-react';
 import { LESSONS, lessonById } from '@/content/lessons';
 import { courseById } from '@/content/courses';
@@ -9,8 +9,6 @@ import { ParcoursCard } from '@/components/cards';
 import { ProgressRing, ProgressBar, SectionHeading, Reveal } from '@/components/ui/primitives';
 import { KanjiSeal, Fleuron } from '@/components/ornaments/Ornaments';
 import { useUserData } from '@/context/UserDataContext';
-import { useAuth } from '@/context/AuthContext';
-import { GuestBanner } from '@/components/ui/GuestBanner';
 import { useResumeLesson } from '@/hooks/useResumeLesson';
 import { plainText } from '@/lib/markdown-text';
 import { isDue } from '@/lib/decisionJournal';
@@ -20,8 +18,7 @@ import { usePageMeta } from '@/lib/seo';
 export default function DashboardPage() {
   usePageMeta('Tableau de bord', 'Reprendre l’apprentissage, retrouver les notes et suivre le journal de décisions.');
   const { profile, progress, notes, bookmarks, journal } = useUserData();
-  const { user } = useAuth();
-  const dueJournal = journal.filter((e) => isDue(e)).length;
+    const dueJournal = journal.filter((e) => isDue(e)).length;
 
   const learningProfile = profile ? profileById(profile.profileType) : undefined;
   const progressList = Object.values(progress);
@@ -48,7 +45,7 @@ export default function DashboardPage() {
           <div>
             <p className="eyebrow mb-2">Tableau de bord</p>
             <h1 className="font-headline text-display-sm font-semibold tracking-tight">
-              Bonjour{user ? `, ${user.name.split(' ')[0]}` : ''}.
+              Bonjour.
             </h1>
             <p className="mt-2 text-surface-variant">Reprenez une lecture, poursuivez un parcours, ou revenez à votre travail de connaissance.</p>
           </div>
@@ -62,11 +59,7 @@ export default function DashboardPage() {
         </div>
       </Reveal>
 
-      <GuestBanner
-        className="mt-8"
-        message="Vous explorez en mode invité — votre progression et vos notes sont conservées sur cet appareil. Créez un espace pour les retrouver partout."
-        reason="Créez un espace pour synchroniser votre progression et vos notes entre vos appareils."
-      />
+      
 
       <Reveal delay={60}>
         <div className="mt-8 grid gap-4 md:grid-cols-2">

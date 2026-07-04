@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Clock, Compass, ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { PathAtlas } from '@/components/explore/PathAtlas';
 import { CompassRose } from '@/components/ornaments/Illustrations';
 import { cn } from '@/lib/utils';

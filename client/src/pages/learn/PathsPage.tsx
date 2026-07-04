@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, BookOpen, Briefcase, ChevronDown, Clock, GraduationCap, Library, Route, Search } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { courseById, coursesForPath } from '@/content/courses';
 import { lessonsForPath } from '@/content/lessons';
 import { PATHS } from '@/content/paths';

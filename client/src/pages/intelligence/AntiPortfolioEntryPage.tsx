@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, Clock, ExternalLink, Eye, FileCheck2, FilePen, Scale, Sparkles, TrendingUp } from 'lucide-react';
 import { antiPortfolioBySlug, antiPortfolioPatternById } from '@/content/antiPortfolio';
 import { memoById } from '@/content/memos';

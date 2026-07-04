@@ -3,10 +3,9 @@ import {
   Check, X as XIcon, CircleSlash, Trash2, Plus, Link2, CalendarClock, AlarmClockCheck,
   Crosshair, Gauge, Search as SearchIcon,
 } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { useUserData } from '@/context/UserDataContext';
 import { SectionHeading, EmptyState } from '@/components/ui/primitives';
-import { GuestBanner } from '@/components/ui/GuestBanner';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import {
   CONFIDENCE_MIN, CONFIDENCE_MAX, MIN_SAMPLE, OUTCOME_LABEL,
@@ -95,11 +94,7 @@ export default function DecisionJournalPage() {
         description="Écrivez ce que vous croyez avant de savoir si c’est vrai : une prédiction datée, un niveau de confiance, une date de revue. Puis confrontez. C’est le seul instrument qui mesure si votre jugement s’améliore — pas votre mémoire, qui réécrit tout."
       />
 
-      <GuestBanner
-        className="mt-8"
-        message="Vous travaillez en mode invité — votre journal est conservé sur cet appareil. Créez un espace pour le retrouver partout."
-        reason="Créez un espace pour synchroniser votre journal de décisions entre vos appareils."
-      />
+      
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
         {/* Left — form + entries */}

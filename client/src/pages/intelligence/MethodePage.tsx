@@ -1,10 +1,9 @@
 import { ArrowRight, FileText } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { BLOG } from '@/content/blog';
 import { DELIVERABLES } from '@/content/deliverables';
 import { BlogCard, DeliverableCard } from '@/components/cards';
 import { SectionHeading, Reveal } from '@/components/ui/primitives';
-import { useApiData } from '@/hooks/useApiData';
 import { usePageMeta } from '@/lib/seo';
 import type { BlogPost } from '@/content/types';
 
@@ -14,7 +13,7 @@ export default function MethodePage() {
     'Cadres d’analyse, articles méthode et modèles de travail pour transformer une lecture en raisonnement VC exploitable.',
   );
 
-  const { data: posts } = useApiData<BlogPost[]>('/content/blog', BLOG, { staleTime: 10 * 60 * 1000 });
+  const posts = BLOG;
   const methodPosts = posts.filter((post) => post.category === 'Méthode').sort((a, b) => b.date.localeCompare(a.date));
   const deliverablePreview = DELIVERABLES.slice(0, 2);
 

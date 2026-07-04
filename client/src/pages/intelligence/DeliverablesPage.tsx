@@ -1,5 +1,5 @@
 import { ArrowRight, FileText } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { DELIVERABLES } from '@/content/deliverables';
 import { DeliverableCard } from '@/components/cards';
 import { SectionHeading, Reveal } from '@/components/ui/primitives';

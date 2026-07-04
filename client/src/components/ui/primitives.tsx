@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { LEVEL_LABEL } from '@/content/labels';
 

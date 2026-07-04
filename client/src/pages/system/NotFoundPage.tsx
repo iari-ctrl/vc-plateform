@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { CompassRose, SeaMonster, Constellation } from '@/components/ornaments/Illustrations';
 import { usePageMeta } from '@/lib/seo';
 

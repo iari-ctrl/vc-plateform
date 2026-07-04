@@ -3,13 +3,11 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { TopBar } from '@/components/chrome/TopBar';
 import { SideNav } from '@/components/chrome/SideNav';
 import { Footer } from '@/components/chrome/Footer';
-import { useLocale } from '@/i18n/useLocale';
 import { cn } from '@/lib/utils';
 
 export function MainLayout() {
   const { pathname } = useLocation();
-  const locale = useLocale();
-  const mainRef = useRef<HTMLElement>(null);
+    const mainRef = useRef<HTMLElement>(null);
   const firstRender = useRef(true);
 
   useEffect(() => {
@@ -30,13 +28,10 @@ export function MainLayout() {
 
   // The splash portal is deliberately chrome-less. The editorial home keeps the
   // full header; every other page uses the lateral, hover-expanding SideNav.
-  // Paths are locale-prefixed (`/fr`, `/en`), so chrome decisions key off the
-  // current locale home rather than a bare `/`.
-  const home = `/${locale}`;
-  const isSplash = pathname === home || pathname === `${home}/`;
-  const isHome = pathname === `${home}/home`;
+  const isSplash = pathname === '/' || pathname === '';
+  const isHome = pathname === `/home`;
   const hasSideNav = !isSplash && !isHome;
-  const hideFooter = isSplash || pathname.startsWith(`${home}/admin`);
+  const hideFooter = isSplash || pathname.startsWith(`/admin`);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
-import { LocaleBoundary, RootRedirect } from '@/i18n/guards';
+
 import SplashPage from '@/pages/home/SplashPage';
 import { Spinner } from '@/components/ui/primitives';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
@@ -36,7 +36,6 @@ const NotesPage = lazy(() => import('@/pages/workspace/NotesPage'));
 const DecisionJournalPage = lazy(() => import('@/pages/workspace/DecisionJournalPage'));
 const ProfilePage = lazy(() => import('@/pages/onboarding/ProfilePage'));
 const SearchPage = lazy(() => import('@/pages/search/SearchPage'));
-const AdminPage = lazy(() => import('@/pages/admin/AdminPage'));
 const DesignSystemShowcasePage = lazy(() => import('@/pages/system/DesignSystemShowcasePage'));
 const NotFoundPage = lazy(() => import('@/pages/system/NotFoundPage'));
 
@@ -66,16 +65,12 @@ function PageShell() {
   );
 }
 
+import { MainLayout } from '@/layouts/MainLayout';
+
 export default function App() {
   return (
     <Routes>
-      {/* Bare `/` → redirect once to the detected locale (cookie → browser → fr). */}
-      <Route path="/" element={<RootRedirect />} />
-
-      {/* Everything else lives under `/:locale`. LocaleBoundary validates the
-          segment (redirecting legacy unprefixed links like `/paths` → `/fr/paths`)
-          and renders MainLayout, whose <Outlet/> shows the child route below. */}
-      <Route path="/:locale" element={<LocaleBoundary />}>
+      <Route path="/" element={<MainLayout />}>
         <Route index element={<SplashPage />} />
         <Route element={<PageShell />}>
           <Route path="home" element={<HomePage />} />
@@ -111,7 +106,6 @@ export default function App() {
           <Route path="journal" element={<DecisionJournalPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="search" element={<SearchPage />} />
-          <Route path="admin" element={<AdminPage />} />
           <Route path="design-system" element={<DesignSystemShowcasePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

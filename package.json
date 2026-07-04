@@ -5,36 +5,28 @@
   "description": "VC Premium Experience — full-stack platform to discover, learn and master venture capital.",
   "type": "module",
   "workspaces": [
-    "client",
-    "server"
+    "client"
   ],
   "scripts": {
     "predev": "npm run split:content",
-    "dev": "concurrently -n server,client -c magenta,cyan \"npm:dev:server\" \"npm:dev:client\"",
+    "dev": "npm run dev --workspace client",
     "dev:client": "npm run dev --workspace client",
-    "dev:server": "npm run dev --workspace server",
     "split:content": "npm run split:glossary && npm run split:lessons",
     "split:glossary": "node scripts/split-glossary.mjs",
     "split:lessons": "node scripts/split-lessons.mjs",
     "prebuild": "npm run split:content && npm run validate:content && npm run generate:sitemap",
-    "build": "npm run build --workspace server && npm run build --workspace client",
+    "build": "npm run build --workspace client",
     "postbuild": "npm run prerender",
     "prerender": "node scripts/prerender.mjs",
-    "db:setup": "npm run db:setup --workspace server",
-    "db:seed": "npm run db:seed --workspace server",
-    "db:reset": "npm run db:reset --workspace server",
-    "start": "npm run start --workspace server",
     "lint": "npm run lint --workspace client",
     "validate:content": "node scripts/validate-content.mjs",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "validate:glossary": "node scripts/validate-glossary.mjs",
     "validate:content:strict": "node scripts/validate-content.mjs --strict",
     "content:export": "node scripts/export-content.mjs",
-    "content:sync": "npm run split:content && npm run validate:content && npm run db:seed --workspace server -- --force",
     "aliases:merge": "node scripts/merge-aliases.mjs"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0",
     "puppeteer": "^25.2.1"
   },
   "engines": {

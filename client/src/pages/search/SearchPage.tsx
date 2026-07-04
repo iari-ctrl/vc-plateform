@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import { api } from '@/lib/api';
 import type { SearchHit } from '@/content/search';
-import { useAuth } from '@/context/AuthContext';
 import { SectionHeading, EmptyState } from '@/components/ui/primitives';
 import { usePageMeta } from '@/lib/seo';
 
@@ -13,7 +11,6 @@ const TYPE_LABEL: Record<string, string> = { course: 'Cours', lesson: 'Leçon', 
 export default function SearchPage() {
   usePageMeta('Recherche');
   const [params, setParams] = useSearchParams();
-  const { apiUp } = useAuth();
   const [q, setQ] = useState(params.get('q') ?? '');
   const [hits, setHits] = useState<SearchHit[]>([]);
 
@@ -26,18 +23,11 @@ export default function SearchPage() {
     }
     let active = true;
     (async () => {
-      if (apiUp) {
-        try {
-          const { hits } = await api.get<{ hits: SearchHit[] }>(`/search?q=${encodeURIComponent(term)}`);
-          if (active) setHits(hits);
-          return;
-        } catch { /* fallback */ }
-      }
       const { searchLocal } = await import('@/content/search');
       if (active) setHits(searchLocal(term));
     })();
     return () => { active = false; };
-  }, [params, apiUp]);
+  }, [params]);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">

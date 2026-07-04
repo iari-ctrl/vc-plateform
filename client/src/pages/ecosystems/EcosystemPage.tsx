@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ChevronRight, Clock, Compass, Crosshair, ExternalLink, Layers, Radar, Users } from 'lucide-react';
 import {
   ecosystemBySlug, childEcosystems, ecosystemAncestors, rootEcosystems,

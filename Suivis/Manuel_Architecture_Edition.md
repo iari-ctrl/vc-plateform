@@ -1,5 +1,10 @@
 # Manuel d'Architecture et d'Édition — VC Intelligence Platform
 
+> [!WARNING]
+> **MISE À JOUR ARCHITECTURE STATIQUE (Juillet 2026)**
+> Le projet a été migré vers une architecture **100% statique et locale**. Le backend (`server/`), l'API Express, la base Prisma/SQLite et les appels réseau correspondants (`useApiData`) ont été **définitivement supprimés**. 
+> Toutes les références au backend dans ce document sont désormais obsolètes. Les données utilisateur (profil, notes, favoris, progression) sont gérées exclusivement via `localStorage`. L'application se déploie comme un site statique classique (CSR).
+
 > [!IMPORTANT]
 > **Statut documentaire — 2026-06-28**
 > - Périmètre : manuel d'architecture, cycle de vie du contenu et guide d'édition.
@@ -7,7 +12,7 @@
 > - **Réconciliation 2026-06-28** : passe complète contre le code. La couche **VC Intelligence**, jusqu'ici décrite comme « à venir », est désormais documentée comme **livrée** sous ses noms réels — `/intelligence`, `/ecosystemes`, `/convictions`, `/memos`, `/anti-portfolio`, `/decisions` + `/journal`, `/methode`, `/livrables` (§1bis, §3.3). Compteurs, conventions d'`id`, schéma des registres drop-in, scripts (`db:setup`, `content:sync`, `prerender`) et compteurs de tests ont été alignés sur le dépôt. Nouvelles sous-sections d'édition : §4.5quater (mémos annotés) et §4.5quinquies (anti-portfolio).
 > - **Écarts résiduels (assumés, non bloquants)** : la **taxonomie cible Phase 3** (`contentKind`/`audience`/`rigor`/`evidenceLevel`, §1bis) n'est **pas** généralisée aux schémas Zod — ne pas l'ajouter aux JSON existants. Les noms de routes du plan stratégique initial (`/research`, `/theses`, `/atlas`, `/tools`, `/library`, `/workspace`) n'ont pas été retenus tels quels ; leur valeur a été livrée sous d'autres routes (cf. table §1bis).
 
-Dernière mise à jour : 2026-06-28
+Dernière mise à jour : 2026-07-03
 
 Ce document décrit l'architecture **full-stack** du projet, la **vision produit et le positionnement stratégique**, le cycle de vie du contenu (de la source canonique JSON jusqu'à l'écran), et un **guide d'édition pas-à-pas** pour un développeur qui veut ajouter du contenu, modifier le design, ou faire évoluer le code.
 
@@ -21,13 +26,12 @@ Ce document décrit l'architecture **full-stack** du projet, la **vision produit
 
 ## 1. Architecture globale et technologies
 
-Le projet n'est pas une simple SPA : c'est un **monorepo npm workspaces** à deux paquets (`client`, `server`) partageant une source de contenu commune (`data/`). Il est conçu pour évoluer d'une plateforme éducative premium vers une **plateforme d'intelligence VC** (voir §1bis).
+Le projet est une **Single Page Application statique** sans backend réseau, reposant entièrement sur son bundle local et le stockage du navigateur. Il est conçu pour évoluer d'une plateforme éducative premium vers une **plateforme d'intelligence VC** (voir §1bis).
 
 | Couche | Technologies |
 | --- | --- |
 | **Front-end** (`client/`) | React 19 · Vite 6 · TypeScript · Tailwind CSS v3 · React Router 7 · lucide-react |
-| **Back-end** (`server/`) | Node 20+ · Express 4 · TypeScript · Prisma 5 · JWT (cookie httpOnly) · zod |
-| **Base de données** | SQLite (prototype) — bascule vers Postgres en changeant le `datasource` Prisma |
+| **Stockage Utilisateur** | `localStorage` (gestion 100% locale sans API distante) |
 | **Contenu** (`data/`) | JSON brut, **source de vérité partagée** client ↔ serveur |
 | **Typographie** | Newsreader (titres) · Plus Jakarta Sans (corps) · JetBrains Mono (mono) |
 
@@ -56,22 +60,14 @@ vc-premium-platform/
 │       ├── i18n/              # routing localisé /fr /en (config · routing · guards · useLocale · LocaleSwitcher)
 │       ├── content/           # types.ts + modules par collection @data + recherche locale
 │       ├── context/           # Theme · Auth · UserData · UI (React Context)
-│       ├── hooks/             # useApiData (API-first, repli sur le bundle)
-│       ├── lib/               # api · storage · markdown · ikigai · seo · utils (safeHttpUrl)
+│       ├── hooks/             # useApiData (100% statique)
+│       ├── lib/               # storage · markdown · ikigai · seo · utils (safeHttpUrl)
 │       ├── components/        # ui · chrome · ornaments · explore · cards · reading · ikigai · simulators · ErrorBoundary
-│       ├── pages/             # pages lazy-loadées, regroupées par domaine (home · onboarding · learn · glossary · blog · cases · ecosystems · simulators · intelligence · workspace · search · admin · system)
+│       ├── pages/             # pages lazy-loadées, regroupées par domaine
 │       └── styles/            # tokens.css (design tokens, dont --error/--success) + global.css
 │
-└── server/                    # API Express + Prisma
-    ├── prisma/schema.prisma   # 16 modèles (dont DecisionEntry, adossant le carnet de décision)
-    ├── prisma/seed.ts         # peuple la base depuis /data (non destructif sauf --force)
-    ├── test/                  # tests d'intégration (auth · profile · isolation)
-    └── src/
-        ├── routes/            # auth · content · me · admin · search
-        └── lib/               # db · auth (JWT) · env · content (lecture de /data) · async-handler
-
-.github/workflows/ci.yml       # CI (validate:content → lint → build → tests client → tests serveur ; push main/master + PR)
-client/vitest.config.ts        # harnais client (13 fichiers, 74 tests) ; serveur : server/test (4 fichiers, 11 tests)
+.github/workflows/ci.yml       # CI (validate:content → lint → build → tests client ; push main/master + PR)
+client/vitest.config.ts        # harnais client (13 fichiers, 74 tests)
 i18n_architecture_FR-EN.md     # ADR + plan de migration bilingue (FR/EN)
 docs/STRATEGIE-vc-intelligence.md  # doc directeur : positionnement, architecture cible, roadmap (fusion stratégie + audit)
 ```

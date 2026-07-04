@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Link } from '@/i18n/routing';
+import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Target, CheckCircle2, BookOpen, ArrowUpRight, Sparkles } from 'lucide-react';
 import { deliverableBySlug, caseById, ecosystemById, memoById, lessonById } from '@/content';
 import type { Deliverable, DeliverableModelRef } from '@/content/types';
@@ -7,7 +7,6 @@ import { Markdown } from '@/lib/markdown';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { PageLoader } from '@/components/ui/primitives';
-import { useApiItem } from '@/hooks/useApiData';
 import { usePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
@@ -39,7 +38,8 @@ export default function DeliverablePage() {
   const { slug } = useParams();
   // Deliverables are bundled editorial content (no CMS endpoint yet): pass a null
   // path so useApiItem serves the bundle directly and never flashes a loader.
-  const { item: d, pending } = useApiItem<Deliverable>(null, slug ? deliverableBySlug(slug) : undefined);
+  const d = slug ? deliverableBySlug(slug) : undefined;
+  const pending = false;
   usePageMeta(d?.title, d?.summary, { type: 'article' });
 
   if (pending) return <PageLoader />;
@@ -47,7 +47,7 @@ export default function DeliverablePage() {
 
   const model = d.model ? resolveModel(d.model) : null;
   const relatedLessons = (d.relatedLessonIds ?? [])
-    .map((id) => lessonById(id))
+    .map((id: any) => lessonById(id))
     .filter((l): l is NonNullable<typeof l> => !!l);
 
   return (
@@ -89,7 +89,7 @@ export default function DeliverablePage() {
       <section className="mt-12">
         <p className="eyebrow mb-5 flex items-center gap-2"><Target size={14} /> Le gabarit</p>
         <ol className="space-y-7">
-          {d.template.map((s, i) => (
+          {d.template.map((s: any, i: number) => (
             <li key={i}>
               <div className="flex items-center gap-3">
                 <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[color-mix(in_srgb,var(--primary)_15%,transparent)] font-mono text-[0.625rem] text-[color:var(--primary)]">{i + 1}</span>
@@ -106,7 +106,7 @@ export default function DeliverablePage() {
       <aside className="mt-12 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_25%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-6 sm:p-7">
         <p className="eyebrow mb-5 flex items-center gap-2"><CheckCircle2 size={14} /> Grille d’auto-évaluation</p>
         <ul className="space-y-4">
-          {d.rubric.map((r, i) => (
+          {d.rubric.map((r: any, i: number) => (
             <li key={i} className="flex items-start gap-3">
               <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[color:var(--primary)]" />
               <span>
@@ -122,7 +122,7 @@ export default function DeliverablePage() {
         <section className="mt-12">
           <p className="eyebrow mb-3">Pour préparer ce livrable</p>
           <ul className="space-y-2">
-            {relatedLessons.map((l) => (
+            {relatedLessons.map((l: any) => (
               <li key={l.id}>
                 <Link to={`/lessons/${l.slug}`} className="inline-flex items-center gap-2 text-[0.95rem] font-medium text-foreground underline decoration-dotted decoration-primary/60 decoration-1 underline-offset-[3px] transition-colors hover:decoration-primary hover:text-[color:var(--primary)]">
                   <BookOpen size={14} className="text-surface-variant" /> {l.title}

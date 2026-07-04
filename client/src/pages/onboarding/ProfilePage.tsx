@@ -1,5 +1,5 @@
-import { Link } from '@/i18n/routing';
-import { useNavigate } from '@/i18n/navigation';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, RotateCcw, LogOut, UserPlus, Shield, Sun, Moon, Target } from 'lucide-react';
 import { profileById } from '@/content';
 import { t } from '@/content/parcours';
@@ -7,7 +7,6 @@ import { recommendedPaths, TIME_LABEL } from '@/lib/ikigai';
 import { KanjiSeal, Fleuron } from '@/components/ornaments/Ornaments';
 import { IkigaiCahierSummary } from '@/components/ikigai/IkigaiCahierSummary';
 import { SectionHeading } from '@/components/ui/primitives';
-import { useAuth } from '@/context/AuthContext';
 import { useUserData } from '@/context/UserDataContext';
 import { useUI } from '@/context/UIContext';
 import { useTheme } from '@/context/ThemeContext';
@@ -16,10 +15,8 @@ import { usePageMeta } from '@/lib/seo';
 
 export default function ProfilePage() {
   usePageMeta('Mon profil', 'Votre profil d’apprentissage, vos préférences et votre compte.');
-  const { user, isAuthed, isAdmin, logout } = useAuth();
-  const { profile } = useUserData();
-  const { openAuth } = useUI();
-  const { theme, toggle } = useTheme();
+    const { profile } = useUserData();
+    const { theme, toggle } = useTheme();
   const navigate = useNavigate();
 
   const learningProfile = profile ? profileById(profile.profileType) : undefined;
@@ -30,31 +27,6 @@ export default function ProfilePage() {
       <SectionHeading eyebrow="Votre espace" title="Mon profil" />
 
       <div className="mt-8 space-y-6">
-        {/* Account */}
-        <div className="premium-card p-7">
-          <p className="eyebrow mb-4">Compte</p>
-          {isAuthed ? (
-            <div className="flex flex-wrap items-center gap-4">
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-[color:var(--secondary)] font-mono text-sm font-semibold text-[color:var(--on-secondary)]">{initials(user!.name)}</span>
-              <div className="flex-1">
-                <p className="font-headline text-headline-sm font-semibold">{user!.name}</p>
-                <p className="text-sm text-surface-variant">{user!.email}</p>
-              </div>
-              {isAdmin && <Link to="/admin" className="btn-ghost"><Shield size={15} /> Administration</Link>}
-              <button onClick={async () => { await logout(); navigate('/'); }} className="btn-quiet text-error"><LogOut size={15} /> Déconnexion</button>
-            </div>
-          ) : (
-            <div className="flex flex-wrap items-center gap-4">
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-surface-container text-surface-variant"><UserPlus size={22} /></span>
-              <div className="flex-1">
-                <p className="font-medium">Vous explorez en mode invité</p>
-                <p className="text-sm text-surface-variant">Votre profil et vos notes sont conservés sur cet appareil. Créez un espace pour les synchroniser.</p>
-              </div>
-              <button onClick={() => openAuth()} className="btn-foil !py-2.5">Créer mon espace</button>
-            </div>
-          )}
-        </div>
-
         {/* Learning profile */}
         {learningProfile ? (
           <div className="premium-card p-7" style={{ borderColor: `color-mix(in srgb, ${learningProfile.accent} 35%, transparent)` }}>
