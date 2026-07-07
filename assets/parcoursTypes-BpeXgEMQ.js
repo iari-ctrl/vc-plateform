@@ -1,1 +1,0 @@
-function s(r,e="fr"){return r==null?"":typeof r=="string"?r:r[e]??r.fr??Object.values(r)[0]??""}function t(r,e){const n={low:["coeur"],medium:["coeur","pratique"],high:["coeur","bonus","pratique","respiration"]},u=new Set(n[e]);return r.steps.filter(o=>u.has(o.type)).sort((o,i)=>o.order-i.order)}export{s as t,t as v};
