@@ -98,7 +98,7 @@ export default function GlossaryPage() {
   );
 
   // Editorial content changes rarely — hold the API copy fresh for 10 min.
-  const terms = GLOSSARY;
+  const terms: IndexedTerm[] = GLOSSARY;
   const [defs, setDefs] = useState<Record<string, GlossaryDef> | null>(null);
   const [activeCategory, setActiveCategory] = useState('Tous');
   const [query, setQuery] = useState('');
@@ -121,11 +121,14 @@ export default function GlossaryPage() {
 
   const fullTerms = useMemo<GlossaryTerm[]>(
     () =>
-      terms.map((t) =>
-        (t as any).definition != null
-          ? (t as GlossaryTerm)
-          : { ...t, definition: defs?.[t.slug]?.definition ?? '', example: defs?.[t.slug]?.example } as GlossaryTerm,
-      ),
+      terms.map((term) => {
+        const lazyDef = defs?.[term.slug];
+        return {
+          ...term,
+          definition: term.definition ?? lazyDef?.definition ?? '',
+          example: term.example ?? lazyDef?.example,
+        };
+      }),
     [terms, defs],
   );
 

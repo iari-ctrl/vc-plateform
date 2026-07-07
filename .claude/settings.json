@@ -11,5 +11,31 @@
       "Bash(node -e \"const d=require\\('./data/glossary.defs.json'\\); for\\(const k of ['tam','sam','som','tam-sam-som']\\) console.log\\('\\\\n### '+k+'\\\\n'+d[k].definition\\);\")",
       "Bash(node /tmp/mutate-glossary.mjs)"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-generated.mjs\"",
+            "statusMessage": "Garde-fou data/generated"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/validate-content.mjs\"",
+            "statusMessage": "Validation du contenu"
+          }
+        ]
+      }
+    ]
   }
 }

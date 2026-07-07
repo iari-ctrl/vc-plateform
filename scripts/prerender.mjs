@@ -2,7 +2,7 @@
 // Static prerender of the public routes — the SEO/social-sharing fix.
 //
 // The site is a pure client-rendered SPA: client/index.html ships only generic
-// metadata, and the per-page <title>/<meta og:*>/<link canonical|hreflang> are
+// metadata, and the per-page <title>/<meta og:*>/<link canonical> are
 // injected at runtime by usePageMeta (client/src/lib/seo.ts) inside a React
 // effect. Social-share scrapers (Open Graph/Twitter, LinkedIn, Slack, Discord)
 // and many crawlers do NOT execute JavaScript, so every shared link fell back to
@@ -27,11 +27,10 @@
 //
 // Route list is the SAME enumeration the sitemap uses (scripts/collect-routes.mjs:
 // static pages from shared/routes.mjs + collections from data/). NOINDEX_SEGMENTS
-// are excluded; EN is prerendered only when EN_ENABLED is set in the client i18n
-// config.
+// are excluded.
 //
 // Flags:
-//   --filter=<substr>   only prerender localized URLs containing <substr>
+//   --filter=<substr>   only prerender URLs containing <substr>
 //   --concurrency=<n>   parallel pages (default 6)
 //   --limit=<n>         cap the number of URLs (after filtering) — for smoke tests
 //   --port=<n>          static server port (default 4317)
@@ -46,12 +45,7 @@ import { collectRoutes } from './collect-routes.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = join(root, 'client', 'dist');
-const i18nConfigPath = join(root, 'client', 'src', 'i18n', 'config.ts');
 
-// Locale taxonomy mirrors client/src/i18n/config.ts. EN is only emitted when
-// EN_ENABLED is set there (read by enEnabled()), matching the sitemap's defaults.
-const LOCALES = ['fr', 'en'];
-const DEFAULT_LOCALE = 'fr';
 const FALLBACK_SITE_URL = 'https://vcpx.io';
 const SITE_URL_ENV_KEYS = ['SITE_URL', 'VITE_SITE_URL', 'CLIENT_ORIGIN'];
 
@@ -80,22 +74,6 @@ function resolveSiteUrl() {
   }
   const url = new URL(configured ?? FALLBACK_SITE_URL);
   return `${url.origin}${url.pathname.replace(/\/+$/, '')}`;
-}
-
-/** Read EN_ENABLED straight from the client i18n config (no transpile needed). */
-function enEnabled() {
-  try {
-    const src = readFileSync(i18nConfigPath, 'utf8');
-    const match = src.match(/export\s+const\s+EN_ENABLED\s*=\s*(true|false)/);
-    return match ? match[1] === 'true' : false;
-  } catch {
-    return false;
-  }
-}
-
-/** `/blog/x` → `/fr/blog/x`; `/` → `/fr`. Mirrors i18n/paths.localizePath. */
-function localizedPath(path, locale) {
-  return path === '/' ? `/${locale}` : `/${locale}${path}`;
 }
 
 // --- static server over dist -------------------------------------------------
@@ -187,8 +165,8 @@ async function renderOne(page, origin, urlPath, siteUrl) {
   return { html, metaReady };
 }
 
-function outPathFor(localized) {
-  return join(distDir, localized.replace(/^\//, ''), 'index.html');
+function outPathFor(path) {
+  return join(distDir, path.replace(/^\//, ''), 'index.html');
 }
 
 async function run() {
@@ -198,19 +176,18 @@ async function run() {
   }
 
   const siteUrl = resolveSiteUrl();
-  const locales = LOCALES.filter((locale) => locale === DEFAULT_LOCALE || enEnabled());
-
   const routePaths = collectRoutes()
     .map((route) => route.path)
     .filter((path) => !isNoindexPath(path));
 
-  let urls = locales.flatMap((locale) => routePaths.map((path) => localizedPath(path, locale)));
+  let urls = routePaths;
   if (FILTER) urls = urls.filter((url) => url.includes(FILTER));
   if (LIMIT > 0) urls = urls.slice(0, LIMIT);
 
   console.log(
-    `[prerender] ${routePaths.length} routes × ${locales.length} locale(s) [${locales.join(', ')}] ` +
-      `→ ${urls.length} URL(s)${FILTER ? ` (filtre « ${FILTER} »)` : ''}; exclus: ${NOINDEX_SEGMENTS.join(', ')}`,
+    `[prerender] ${routePaths.length} routes → ${urls.length} URL(s)${
+      FILTER ? ` (filtre « ${FILTER} »)` : ''
+    }; exclus: ${NOINDEX_SEGMENTS.join(', ')}`,
   );
   if (urls.length === 0) {
     console.warn('[prerender] aucune URL à prérendre — rien à faire.');
@@ -250,16 +227,16 @@ async function run() {
     page.on('console', () => {});
     page.on('pageerror', () => {});
     for (let next = queue.shift(); next; next = queue.shift()) {
-      const localized = next;
+      const urlPath = next;
       try {
-        const { html, metaReady } = await renderOne(page, origin, localized, siteUrl);
-        const outPath = outPathFor(localized);
+        const { html, metaReady } = await renderOne(page, origin, urlPath, siteUrl);
+        const outPath = outPathFor(urlPath);
         mkdirSync(dirname(outPath), { recursive: true });
         writeFileSync(outPath, html);
         written += 1;
-        if (!metaReady) warnings.push(`${localized} (métadonnées non confirmées — capturé tel quel)`);
+        if (!metaReady) warnings.push(`${urlPath} (métadonnées non confirmées — capturé tel quel)`);
       } catch (err) {
-        warnings.push(`${localized} — ÉCHEC: ${err instanceof Error ? err.message : String(err)}`);
+        warnings.push(`${urlPath} — ÉCHEC: ${err instanceof Error ? err.message : String(err)}`);
       }
       done += 1;
       if (done % 25 === 0 || done === urls.length) {

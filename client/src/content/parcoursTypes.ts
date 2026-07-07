@@ -10,19 +10,13 @@
 
 import type { Level } from './types';
 
-// ── i18n (décision n°5) ──────────────────────────────────────────────────────
-// La structure est prête pour le bilingue dès le modèle. Une `string` nue vaut
-// pour la locale par défaut (fr) ; on peut sinon fournir { fr, en, … }. Les
-// traductions vivent dans des fichiers d'surcharge par locale (parcours.en.json),
-// fusionnés par `id`. Politique dans data/parcoursConfig.json.
-export type Locale = 'fr' | 'en' | string;
-export type LocalizedText = string | Partial<Record<Locale, string>>;
+// ── Textes FR ────────────────────────────────────────────────────────────────
+// Helper conservé pour les appels existants (`t(parcours.title)`), mais la V1 ne
+// sert plus de variantes localisées : les champs texte sont des chaînes FR.
+export type LocalizedText = string;
 
-/** Résout un LocalizedText pour une locale, avec repli sur fr puis sur la 1re valeur. */
-export function t(text: LocalizedText | undefined, locale: Locale = 'fr'): string {
-  if (text == null) return '';
-  if (typeof text === 'string') return text;
-  return text[locale] ?? text.fr ?? Object.values(text)[0] ?? '';
+export function t(text: LocalizedText | undefined): string {
+  return text ?? '';
 }
 
 /** Perspective d'apprentissage (décision n°1 : la levée se lit des deux sièges). */

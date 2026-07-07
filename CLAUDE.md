@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A full-stack VC ("venture capital") learning platform: an ikigai-style introspection onboarding, a personalized learning catalog (parcours / courses / lessons), a glossary, case studies, simulators, signed ecosystem analyses, and a blog. Editorial content is the product — most of the codebase exists to author, validate, ship, and render it.
+A fully static VC ("venture capital") intelligence and learning platform: an ikigai-style introspection onboarding, a personalized learning catalog (parcours / courses / lessons), a glossary, case studies, simulators, signed ecosystem analyses, and a blog. Editorial content is the product — most of the codebase exists to author, validate, ship, and render it.
 
 npm **workspaces** monorepo (`client`), ESM everywhere (`"type": "module"`), Node ≥ 20.
 
@@ -17,15 +17,14 @@ npm run dev                       # client (Vite :5173)
 npm run build                     # prebuild hook: split:content → validate:content → generate:sitemap, then vite(client)
 npm run lint                      # ESLint
 npm run validate:content          # shape + cross-references + [[glossary]] markers; non-zero exit on error
-npm run validate:content:strict   # warnings become fatal (used by CI)
+npm run validate:content:strict   # warnings become fatal (run locally before publishing)
 
 # tests
 npm run test --workspace client   # Vitest (i18n routing, profile/ikigai, simulators, url safety…)
 npx vitest run path/to/file       # single test file
-
-# content export
-npm run content:export            # Export edits to JSON sources
 ```
+
+Note: `scripts/export-content.mjs` (`content:export`) is a **dead script** — it imports `@prisma/client`, removed with the backend. Do not document or run it.
 
 ## Architecture — the parts that span files
 
@@ -35,13 +34,13 @@ npm run content:export            # Export edits to JSON sources
 - `data/lessons.json` + `data/parcours/*.lessons.json` → `data/generated/lessons.index.json` (hot path) + `data/generated/lessons.bodies.json` (lazy reader payload)
 - `data/glossary.json` → `data/generated/glossary.index.json` + `data/generated/glossary.defs.json`
 
-Edit the sources; regenerate with `npm run split:content` (also auto-run by `predev`/`prebuild`). Note: drop-in parcours lessons (`ld-*`/`lea-*`) are folded into the index by the split and served client-side, but are **not** in canonical `lessons.json` nor seeded — so the API/DB doesn't have them and the client serves them from the bundle fallback.
+Edit the sources; regenerate with `npm run split:content` (also auto-run by `predev`/`prebuild`). Note: drop-in parcours lessons (`ld-*`/`lea-*`) are **not** in canonical `lessons.json`; the split folds them into the generated index and the client serves them from there.
 
-Blog analyses are authored as one file per article in `data/blog/<slug>.json`; client/server loaders recompose the sorted list at runtime.
+Blog analyses are authored as one file per article in `data/blog/<slug>.json`; the client loader recomposes the sorted list at runtime.
 
 **Content validation gates the build.** `scripts/validate-content.mjs` (Zod) checks three layers: shape, cross-file references (every `pathId`/`courseId`/`lessonIds`/`glossaryRefs`/`furtherReading.ref`/etc. resolves, ids/slugs unique), and inline markers (`[[slug|label]]` / `{{slug|label}}` resolve to a glossary slug). Three tiers: errors (always fatal), warnings (fatal under `--strict`), softWarnings (acknowledged backlog, never fatal). It runs in `prebuild`, so a broken reference fails the build.
 
-**Client data fetching: API-first with bundled fallback (Removed).** The app now runs as a 100% static client rendering local JSON. Local auth fallback is the default, and notes/progress are saved strictly to localStorage.
+**Client data fetching: 100% static.** There is no backend, API, or database — the Express/Prisma server was removed in the July 2026 migration. The client bundles the `/data` JSON directly and renders it; user data (profile, notes, bookmarks, progress, decision journal) is stored strictly in `localStorage`. There is no auth wall and no network dependency.
 
 **Route taxonomy is centralized in `shared/routes.mjs`** — a cross-runtime module (runs in Node *and* the Vite bundle), so it is **pure data + pure functions, zero deps, no TypeScript** (types mirrored in `routes.d.mts`). It is the single source for the noindex segment list (drives both robots.txt `Disallow` and the client's automatic `noindex`) and the OG-image-by-segment map. Adding a private surface or a social card means editing here, not three places.
 
@@ -70,6 +69,18 @@ This applies to **everything you write** — analyses, ecosystem dossiers, blog 
 
 Fuller reference: the "Writing style" / "Sober register" section of `.claude/skills/ecosystemes/SKILL.md`, plus the `style-redaction-naturel` and `style-prose-analyse` memories. Read the `ecosystemes` skill before authoring or editing any ecosystem dossier — it documents the data shape, validation rules, and native figure types, and prevents re-exploring the code each time.
 
-## Reference docs
+## Reference docs — where each fact lives
 
-Deeper context lives in `Suivis/` (French): `README.md` (founding principles, stack, verified audit state), `Manuel_Architecture_Edition.md` (authoring manual), `Design_System.md`, plus `docs/` (strategy, i18n architecture, parcours design). CI (`.github/workflows/ci.yml`) chains validate-content → lint → build → client tests → server tests on PRs and pushes to `main`/`master`.
+One fact lives in one place. Reference (must stay true) is separated from state (a small replaceable snapshot) and journal (append-only). When facts and docs disagree, the code wins; verify against `client/`, `data/`, `shared/routes.mjs` and `package.json`.
+
+- `docs/ARCHITECTURE_EDITION.md` — authoring manual: content lifecycle, per-collection editing guides, id/slug conventions, the writing-style charter (§4.0.c). Read before authoring content.
+- `docs/DESIGN_SYSTEM.md` — visual/interaction system: tokens, components, ornaments, motion, accessibility.
+- `docs/STRATEGIE-vc-intelligence.md` — product direction (positioning, target architecture, roadmap).
+- `docs/i18n_architecture_FR-EN.md` — bilingual ADR. `docs/parcours/` — parcours authoring pipeline.
+- `Suivis/ETAT.md` — current verified state: content counts (pasted from `validate:content`), latest checks, risks, priorities. The **only** place counts live.
+- `Suivis/JOURNAL.md` — dated, append-only work log (post-migration only).
+- `Suivis/PROCEDURE_PUSH.md` — manual publish runbook.
+
+There is **no CI that validates content**. The only workflow is `.github/workflows/deploy-pages.yml`, which builds the client and deploys it to GitHub Pages on push to `master`; it does not run `validate:content`, `lint`, or tests. Those gates run locally (see `Suivis/PROCEDURE_PUSH.md`).
+
+The pre-migration documents `Suivis/Bilan.md` and `Suivis/Report et scoring.md` (which described the removed Express/Prisma/CMS backend) have been **deleted**; their content lives in Git history. Never read `Suivis/archive/`-style historical material for current state — use `ETAT.md` and `JOURNAL.md`.

@@ -2,7 +2,7 @@
 //
 // Consumed by BOTH runtimes, untouched:
 //   • scripts/generate-sitemap.mjs   (Node) — sitemap.xml + robots.txt
-//   • client/src/i18n/routes.ts      (browser) — usePageMeta noindex + OG card
+//   • client/src/lib/seo.ts          (browser) — noindex + OG card taxonomy
 //
 // Before this, the static route list + crawl hints lived in the sitemap script,
 // the noindex set was declared twice (robots `Disallow:` + 8 scattered

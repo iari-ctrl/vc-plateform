@@ -8,8 +8,6 @@ import { cleanPath, collectRoutes } from './collect-routes.mjs';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = join(root, 'client', 'public');
 
-const LOCALES = ['fr', 'en'];
-const DEFAULT_LOCALE = 'fr';
 const FALLBACK_SITE_URL = 'https://vcpx.io';
 
 const SITE_URL_ENV_KEYS = ['SITE_URL', 'VITE_SITE_URL', 'CLIENT_ORIGIN'];
@@ -42,36 +40,18 @@ function escapeXml(value) {
     .replace(/'/g, '&apos;');
 }
 
-function localizedPath(path, locale) {
-  const normalized = cleanPath(path);
-  return normalized === '/' ? `/${locale}` : `/${locale}${normalized}`;
-}
-
-function absoluteUrl(path, locale) {
-  const localized = locale ? localizedPath(path, locale) : cleanPath(path);
-  return new URL(localized, `${siteUrl}/`).toString();
+function absoluteUrl(path) {
+  return new URL(cleanPath(path), `${siteUrl}/`).toString();
 }
 
 // The exhaustive route set (static pages + collections from data/) is shared
 // with the prerender crawl via scripts/collect-routes.mjs.
 const orderedRoutes = collectRoutes();
 
-function alternateLinks(path) {
-  const links = LOCALES.map(
-    (locale) =>
-      `<xhtml:link rel="alternate" hreflang="${locale}" href="${escapeXml(absoluteUrl(path, locale))}" />`,
-  );
-  links.push(
-    `<xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(absoluteUrl(path, DEFAULT_LOCALE))}" />`,
-  );
-  return links.map((line) => `    ${line}`).join('\n');
-}
-
-function urlEntry(route, locale) {
+function urlEntry(route) {
   const lines = [
     '  <url>',
-    `    <loc>${escapeXml(absoluteUrl(route.path, locale))}</loc>`,
-    alternateLinks(route.path),
+    `    <loc>${escapeXml(absoluteUrl(route.path))}</loc>`,
   ];
   if (route.lastmod) lines.push(`    <lastmod>${escapeXml(route.lastmod)}</lastmod>`);
   lines.push(`    <changefreq>${route.changefreq}</changefreq>`);
@@ -80,11 +60,11 @@ function urlEntry(route, locale) {
   return lines.join('\n');
 }
 
-const entries = orderedRoutes.flatMap((route) => LOCALES.map((locale) => urlEntry(route, locale)));
+const entries = orderedRoutes.map((route) => urlEntry(route));
 
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   entries.join('\n'),
   '</urlset>',
   '',
@@ -99,7 +79,6 @@ const robots = [
   'Allow: /',
   '',
   ...disallowBlock(''),
-  ...LOCALES.flatMap((locale) => disallowBlock(`/${locale}`)),
   `Sitemap: ${absoluteUrl('/sitemap.xml')}`,
   '',
 ].join('\n');
@@ -108,4 +87,4 @@ mkdirSync(publicDir, { recursive: true });
 writeFileSync(join(publicDir, 'sitemap.xml'), sitemap);
 writeFileSync(join(publicDir, 'robots.txt'), robots);
 
-console.log(`[sitemap] ${orderedRoutes.length} routes x ${LOCALES.length} locales -> client/public/sitemap.xml`);
+console.log(`[sitemap] ${orderedRoutes.length} routes -> client/public/sitemap.xml`);

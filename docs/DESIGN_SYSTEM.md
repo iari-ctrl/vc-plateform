@@ -1,15 +1,9 @@
-# Design System - VC Premium Platform
+# Design System — vc-platform
 
 > [!IMPORTANT]
-> **Statut documentaire — 2026-06-28**
-> - Dernière révision de fond indiquée : 2026-06-28.
-> - Périmètre : système visuel et interactionnel, tokens, composants, motion, accessibilité et patterns UI.
-> - Nature : **référence vivante — peut diverger du code**. Vérifier les détails d'implémentation dans `client/src/styles/`, `client/src/components/` et les pages qui consomment ces primitives.
-> - Contrôle 2026-06-28 : les sections rail latéral, portail splash, cartes éditoriales et accessibilité ont été réalignées sur le code. Aucune capture visuelle n'a été rejouée pendant cette passe documentaire.
+> **Référence maintenue.** Ce document doit rester vrai. Il décrit le système visuel et interactionnel : tokens, composants, motion, accessibilité et patterns UI. En cas de doute sur un détail d'implémentation, la source fait foi : `client/src/styles/`, `client/src/components/` et les pages qui consomment ces primitives.
 
-Dernière mise à jour : 2026-06-28
-
-Objet : formaliser le système visuel et interactionnel de `vc-premium-platform` afin de garder une expérience cohérente pendant le travail éditorial, pédagogique et produit, en intégrant les derniers ajouts vérifiés (i18n locale-prefixed, auto-détection pédagogique, rail latéral off-screen, portail splash single-stage).
+Objet : formaliser le système visuel et interactionnel de `vc-platform` afin de garder une expérience cohérente pendant le travail éditorial, pédagogique et produit (V1 française, auto-détection pédagogique, rail latéral off-screen, portail splash single-stage).
 
 ---
 
@@ -24,7 +18,6 @@ Le design ne doit pas ressembler à un dashboard SaaS générique. Il doit soute
 - explorer un parcours d'apprentissage sans se sentir enfermé.
 
 Mots-clés de direction artistique :
-
 
 - cabinet d'analyse ;
 - carnet d'explorateur ;
@@ -102,9 +95,9 @@ Les collections JSON de contenu sont séparées par modules (`paths.ts`, `course
 
 Le mode sombre est complet et piloté par `.dark`. Il ne doit pas inverser brutalement la marque : il doit conserver une ambiance "encre profonde + accents dorés + ciel de navigation".
 
-Spécificités mode sombre (2026-06-01) :
+Spécificités mode sombre :
 
-- le toggle « Choisissez votre lumière » du portail splash (`/fr`, après redirection depuis `/`) pilote désormais le `ThemeContext` global — le choix persiste sur l'accueil et dans toute l'app ;
+- le toggle « Choisissez votre lumière » du portail splash (`/`) pilote le `ThemeContext` global — le choix persiste sur l'accueil et dans toute l'app ;
 - sur `/home`, le hero et la carte `PathAtlas` affichent le ciel étoilé photographique (`bg-sombre.webp`) en fond via `NightSkyBackdrop`, **uniquement en sombre** (`hidden dark:block`) ;
 - le parchemin `map-paper` est conservé en mode clair ; en mode sombre, la photo passe derrière les tracés SVG (constellation dessinée, routes pointillées, sceaux, rose des vents).
 
@@ -171,7 +164,8 @@ Règles de composition :
 ### Barre latérale (`SideNav` + `.glass-rail`)
 
 La navigation latérale desktop (`components/chrome/SideNav.tsx`) est un panneau `--sidebar-w` (16rem) garé hors écran (`-translate-x-full`) quand il est fermé. Une gouttière fixe `--sidebar-rail` (4rem) reste visible avec le logo et le bouton `Menu`; `MainLayout` réserve cette gouttière via `lg:pl-[var(--sidebar-rail)]`, donc le contenu ne bouge jamais quand le panneau glisse en overlay. `PageShell` existe bien, mais il sert seulement de route layout pour `Suspense` + `ErrorBoundary`; il ne remplace pas `MainLayout`.
-L'architecture de l'information (IA) de la `SideNav` et de la `TopBar` partage les grandes entrées publiques (Intelligence VC, Formation, Dictionnaire, Analyses), tandis que la `SideNav` ajoute les sous-entrées et le groupe Workspace. Toutes deux **prévoient** le sélecteur de langue `LocaleSwitcher` (FR/EN). Celui-ci n'est rendu que si le drapeau `EN_ENABLED` (`client/src/i18n/config.ts`) est vrai ; il est **actuellement masqué** tant que l'anglais n'est pas livré.
+
+L'architecture de l'information (IA) de la `SideNav` et de la `TopBar` partage les grandes entrées publiques (Intelligence VC, Formation, Dictionnaire, Analyses), tandis que la `SideNav` ajoute les sous-entrées et le groupe Workspace. La V1 est française uniquement : aucun sélecteur de langue n'est prévu dans le chrome.
 
 L'effet verre est piloté par l'attribut `data-open` et la classe `.glass-rail` (définie dans `global.css`), avec **deux états distincts** :
 
@@ -180,7 +174,7 @@ L'effet verre est piloté par l'attribut `data-open` et la classe `.glass-rail` 
 
 Règle critique apprise : pour que le verre se lise, le panneau ouvert doit éviter un remplissage opaque proche du fond (`--surface` = `--background`) et s'appuyer sur le flou, les bordures et l'ombre. Toutes les transitions de verre sont animées (`background-color`, `box-shadow`, `border-color`, `backdrop-filter`) en parallèle de la translation. Un fallback `@supports not (backdrop-filter)` repasse en panneaux quasi-opaques pour la lisibilité.
 
-### Portail splash (`/:locale`)
+### Portail splash (`/`)
 
 La page splash est **hors chrome** (pas de TopBar ni SideNav, footer masqué). Elle remplit 100 % du viewport via `.splash-portal { height: 100svh }` et `.splash-stage { position: absolute; inset: 0 }`. La typographie du titre est fluide : `clamp(1.6rem, 2.4vw, 2.6rem)`. Des media queries couvrent le mobile portrait (≤ 760px) et le paysage court (max-height ≤ 600px).
 
@@ -275,7 +269,7 @@ Règles :
 
 ### Dictionnaire vivant et Détection automatique
 
-Les liens de glossaire ne sont pas décoratifs : ils sont la couche pédagogique transversale. Dans les composants de cours (`ActiveProse`), **la détection est désormais automatique** pour tout terme ou sigle (en respectant la casse).
+Les liens de glossaire ne sont pas décoratifs : ils sont la couche pédagogique transversale. Dans les composants de cours (`ActiveProse`), **la détection est automatique** pour tout terme ou sigle (en respectant la casse).
 
 Règles :
 
@@ -286,7 +280,7 @@ Règles :
 
 ### Simulateurs et Blocs pédagogiques
 
-Les simulateurs intègrent désormais des **explications pédagogiques interactives** à côté des paramètres. Ils remplacent les infobulles natives par des `GlossaryPreview` avec redirections cliquables, assurant une cohérence parfaite avec le dictionnaire vivant.
+Les simulateurs intègrent des **explications pédagogiques interactives** à côté des paramètres. Ils remplacent les infobulles natives par des `GlossaryPreview` avec redirections cliquables, assurant une cohérence avec le dictionnaire vivant.
 
 ---
 
@@ -344,7 +338,7 @@ Règles :
 
 ### Navigation de la carte `PathAtlas`
 
-La carte des parcours est **manipulable comme une vraie carte** (modèle de référence : `VC PortfolioJourney/map.html`). Tout le contenu SVG (graticule, arcs, ports, cartouche, monstres, rose des vents) est enveloppé dans un groupe `<g transform="translate(tx ty) scale(scale)">` piloté par un état `view`.
+La carte des parcours est **manipulable comme une vraie carte**. Tout le contenu SVG (graticule, arcs, ports, cartouche, monstres, rose des vents) est enveloppé dans un groupe `<g transform="translate(tx ty) scale(scale)">` piloté par un état `view`.
 
 | Geste | Comportement |
 | --- | --- |
@@ -477,10 +471,7 @@ Avant d'ajouter un composant :
 À formaliser plus tard, sans ouvrir une refonte :
 
 - variantes de formulaire (`Input`, `Textarea`, `Select`, erreur, aide) ;
-- table/list dense pour l'admin ;
-- pattern de preview éditoriale ;
 - table of contents pour les leçons longues ;
-- états de santé éditoriale du contenu ;
 - composants de dashboard "journal de bord" ;
 - documentation visuelle des couleurs d'accent de parcours ;
 - extension de `NightSkyBackdrop` aux autres sections de l'accueil si un ciel continu du hero jusqu'à la carte est souhaité.

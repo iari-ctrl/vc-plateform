@@ -48,11 +48,11 @@ function PageFallback() {
 }
 
 /**
- * Layout route that wraps every locale-scoped page in a single Suspense (for the
- * lazy chunks) and an ErrorBoundary keyed on the pathname, then renders the
- * matched page through <Outlet/>. A pathless layout route keeps one flat route
- * tree — no nested <Routes> — which is what React Router expects and what lets
- * the data/loader APIs work later.
+ * Layout route that wraps routed pages in a single Suspense (for the lazy
+ * chunks) and an ErrorBoundary keyed on the pathname, then renders the matched
+ * page through <Outlet/>. A pathless layout route keeps one flat route tree,
+ * which is what React Router expects and what lets the data/loader APIs work
+ * later.
  */
 function PageShell() {
   const { pathname } = useLocation();

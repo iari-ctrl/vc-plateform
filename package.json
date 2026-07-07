@@ -2,7 +2,7 @@
   "name": "vc-premium-platform",
   "private": true,
   "version": "0.1.0",
-  "description": "VC Premium Experience — full-stack platform to discover, learn and master venture capital.",
+  "description": "VC Premium Experience — static intelligence platform for venture capital.",
   "type": "module",
   "workspaces": [
     "client"
@@ -23,7 +23,6 @@
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "validate:glossary": "node scripts/validate-glossary.mjs",
     "validate:content:strict": "node scripts/validate-content.mjs --strict",
-    "content:export": "node scripts/export-content.mjs",
     "aliases:merge": "node scripts/merge-aliases.mjs"
   },
   "devDependencies": {

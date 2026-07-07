@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { isNoindexPath, ogImageKeyForPath } from '@shared/routes.mjs';
 import { plainText } from './markdown-text';
 
 const SITE_NAME = 'VC Premium Experience';
@@ -9,6 +10,7 @@ const DEFAULT_DESCRIPTION =
   "Analyser les écosystèmes, suivre des convictions, étudier des décisions et structurer sa progression dans le capital-risque.";
 
 type OgType = 'website' | 'article';
+type OgImageKey = 'anti-portfolio' | 'blog' | 'case-study' | 'course' | 'default' | 'glossary' | 'lesson' | 'memo' | 'path' | 'simulator';
 
 export interface PageMetaOptions {
   type?: OgType;
@@ -19,6 +21,19 @@ export interface PageMetaOptions {
 }
 
 const clean = (value: string | undefined): string => plainText(value, Infinity);
+
+const OG_IMAGE_BY_KEY: Record<OgImageKey, string> = {
+  'anti-portfolio': '/og/anti-portfolio.png',
+  blog: '/og/blog.png',
+  'case-study': '/og/case-study.png',
+  course: '/og/course.png',
+  default: '/og/default.png',
+  glossary: '/og/glossary.png',
+  lesson: '/og/lesson.png',
+  memo: '/og/memo.png',
+  path: '/og/path.png',
+  simulator: '/og/simulator.png',
+};
 
 function pageTitle(title: string | undefined): string {
   const text = clean(title);
@@ -49,6 +64,11 @@ function toAbsoluteUrl(pathOrUrl: string): string {
   }
 }
 
+function ogImageForPath(pathname: string): string {
+  const key = ogImageKeyForPath(pathname) as OgImageKey | undefined;
+  return key ? OG_IMAGE_BY_KEY[key] ?? OG_IMAGE_BY_KEY.default : OG_IMAGE_BY_KEY.default;
+}
+
 interface MetaModel {
   title: string;
   titlePlain: string;
@@ -63,7 +83,7 @@ interface MetaModel {
 
 function buildMetaModel(pathname: string, title: string | undefined, description: string | undefined, options: PageMetaOptions): MetaModel {
   const { type = 'website', image, noindex, publishedTime, modifiedTime } = options;
-  const imageUrl = image ? toAbsoluteUrl(image) : toAbsoluteUrl('/og/default.png');
+  const imageUrl = toAbsoluteUrl(image ?? ogImageForPath(pathname));
   
   return {
     title: pageTitle(title),
@@ -72,7 +92,7 @@ function buildMetaModel(pathname: string, title: string | undefined, description
     canonicalUrl: toAbsoluteUrl(pathname),
     imageUrl,
     type,
-    noindex: noindex ?? false,
+    noindex: noindex ?? isNoindexPath(pathname),
     publishedTime,
     modifiedTime,
   };

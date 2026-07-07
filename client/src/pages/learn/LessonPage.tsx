@@ -180,7 +180,7 @@ export default function LessonPage() {
           <aside className="mt-12 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_25%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-6 sm:p-7">
             <p className="eyebrow mb-4 flex items-center gap-2"><Sparkles size={14} /> À retenir</p>
             <ul className="space-y-3">
-              {lesson.keyTakeaways.map((t: any, i: number) => (
+              {lesson.keyTakeaways.map((t, i) => (
                 <li key={i} className="flex items-start gap-3 text-[0.95rem] font-medium">
                   <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] font-mono text-[0.625rem] text-[color:var(--primary)]">{i + 1}</span>
                   {t}
@@ -204,7 +204,7 @@ export default function LessonPage() {
             <div>
               <p className="eyebrow mb-3">Pour aller plus loin</p>
               <div className="space-y-2">
-                {lesson.furtherReading.map((fr: any, i: number) => {
+                {lesson.furtherReading.map((fr, i) => {
                   const href =
                     fr.kind === 'simulator' ? `/simulators/${simulatorBySlug(fr.ref)?.slug ?? fr.ref}` :
                     fr.kind === 'lesson' ? `/lessons/${lessonById(fr.ref)?.slug ?? fr.ref}` :

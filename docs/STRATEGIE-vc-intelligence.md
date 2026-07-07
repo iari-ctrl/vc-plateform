@@ -4,7 +4,7 @@ Document canonique fusionné — positionnement, architecture cible et roadmap
 
 Projet : `vc-platform`  
 Date de consolidation : 2026-06-11  
-Dernière mise à jour : 2026-06-26 (IA en 3 piliers ; routes-index Intelligence VC ; compteurs de contenu vérifiés ; sitemap FR/EN régénéré)
+Dernière mise à jour : 2026-07-07 (architecture statique V1 FR ; routes/prérendu alignés ; compteurs de contenu vérifiés)
 Sources fusionnées : `docs/Stratégie doc et ROADMAP` et `docs/AUDIT-vc-intelligence.md`  
 Règle d'arbitrage : en cas de contradiction, le document **Stratégie** prime sur l'audit. L'audit reste une archive historique.
 
@@ -52,7 +52,7 @@ La priorité n'est pas d'ajouter des fonctionnalités au hasard. La priorité es
 
 ## 2. État actuel corrigé
 
-L'audit du 2026-06-10 a correctement identifié l'effet produit dominant : l'expérience actuelle ressemble encore trop à une plateforme de formation, parce que la couche VC Intelligence n'a pas encore été construite. Certains constats techniques de l'audit sont toutefois dépassés au 2026-06-11.
+L'audit du 2026-06-10 a correctement identifié l'effet produit dominant de l'époque : l'expérience ressemblait encore trop à une plateforme de formation, parce que la couche VC Intelligence n'était pas encore assez visible. Certains constats techniques de l'audit sont désormais dépassés au 2026-07-07.
 
 État vérifié du corpus :
 
@@ -70,18 +70,24 @@ L'audit du 2026-06-10 a correctement identifié l'effet produit dominant : l'exp
 | Livrables de parcours (`data/deliverables.json`) | 2 |
 | Analyses / blog | 8 |
 | Dossiers d'écosystème (`data/ecosystems.json`) | 31 (3 racines, 28 sous-dossiers) |
+| Convictions dérivées des dossiers | 24 |
+| Mémos annotés (`data/memos.json`) | 5 |
+| Anti-portfolio (`data/antiPortfolio.json`) | 9 entrées + 5 motifs |
 | Simulateurs | 9 |
 | Termes de glossaire | 374 |
-| Étapes de parcours | 148, dont 8 `a-produire` (2 milestones réalisés en livrables) |
+| Étapes de parcours | 150, dont 8 `a-produire` (2 milestones réalisés en livrables) |
 
 Corrections par rapport à l'audit historique :
 
 - **Git** : le dépôt est initialisé, `master` suit `origin/master`, une baseline existe. Le risque critique relevé par l'audit est résolu ; le risque restant est de maintenir une discipline de branches, commits et rollback.
-- **Leçons drop-in** : elles ne sont plus seulement côté client. `server/src/lib/content.ts` charge `data/parcours/*.lessons.json`, et `server/prisma/seed.ts` utilise `content.allLessons()`. Après `npm run db:seed`, elles sont servies par l'API comme les leçons canoniques. Le sujet restant est le **workflow d'authoring** : quand garder un registre drop-in, quand replier dans `data/lessons.json`, comment synchroniser les références.
+- **Architecture statique V1 FR (2026-07-07)** : l'application n'a plus de backend applicatif, API, CMS, base SQLite/Prisma ni routes localisées `/fr` `/en`. Les JSON sources de `/data` sont la source de vérité, le client les bundle, et les données utilisateur restent dans `localStorage`.
+- **Leçons drop-in** : 11 leçons réparties dans 3 registres `data/parcours/*.lessons.json` sont fusionnées avec les 55 leçons canoniques par `scripts/split-lessons.mjs`, puis servies via `data/generated/lessons.index.json` et `data/generated/lessons.bodies.json`. Le sujet restant est le **workflow d'authoring** : quand garder un registre drop-in, quand replier dans `data/lessons.json`, comment synchroniser les références.
 - **Simulateurs** : le corpus actuel compte 9 simulateurs.
 - **Familles de parcours** : les données actuelles exposent 6 familles (`decouvrir`, `entretien`, `levee`, `grade`, `maitriser`, `express`), le sur-mesure vivant dans `profileParcours.json`.
 - **Couche VC Intelligence amorcée (2026-06-13)** : la couche d'**analyse signée** a commencé à se construire, ce qui nuance le diagnostic « apprentissage uniquement ». Le blog porte désormais 8 analyses (dont 4 « lectures obliques »), et surtout un **espace dédié « Décortiquer un écosystème »** (`/ecosystemes`, 100 % client, `data/ecosystems.json`) publie 31 dossiers vivants arborescents avec thèse falsifiable, convictions datées et figures natives — réalisation concrète du Pilier 5 (Atlas) et du format §10.9.
-- **IA en 3 piliers livrée (2026-06-26)** : la navigation publique et la vitrine sont réorganisées autour d'**Intelligence VC**, **Formation** et **Workspace**. Cinq index publics ont été ajoutés sans déplacer les détails existants : `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables`. Le sitemap les publie en FR/EN.
+- **IA en 3 piliers livrée (2026-06-26)** : la navigation publique et la vitrine sont réorganisées autour d'**Intelligence VC**, **Formation** et **Workspace**. Cinq index publics ont été ajoutés sans déplacer les détails existants : `/intelligence`, `/convictions`, `/decisions`, `/methode`, `/livrables`. Le sitemap publie désormais les routes canoniques sans préfixe de langue.
+- **SEO statique et routes (2026-07-07)** : `shared/routes.mjs` centralise les routes statiques, le `noindex` et l'image Open Graph par segment. `scripts/collect-routes.mjs` alimente à la fois le sitemap et le prérendu, ce qui évite la divergence entre URLs indexables et HTML statique généré.
+- **Scrollytelling interactif amorcé** : `BlogPostPage` supporte déjà une vue `?view=scrolly` pour certains articles longs. Deux lectures obliques ont un composant dédié (`DebordScrollytelling`, `HirschmanScrollytelling`). Cette piste doit devenir un axe systématique des longs formats, avec exigence de design éditorial et de direction artistique.
 - **Milestones de parcours réalisés en livrables (2026-06-15)** : les étapes `a-produire` où l'apprenant *produit* un artefact deviennent des pages `/livrables` (brief + gabarit + grille d'auto-évaluation + renvoi à un modèle existant), via `data/deliverables.json` et `client/src/pages/DeliverablePage.tsx`. Deux livrables early-stage (pre-seed/seed) sont en ligne et chacun amorce un pilier Intelligence par « double emploi » : la **simulation de comité (seed)** s'appuie sur le 1ᵉʳ Case décisionnel `cs-seed-ic` (Pilier 4, §10.4), et la **thèse propriétaire** prend pour modèle un dossier `/ecosystemes` existant (Thesis Lab de facto, §10.2). Reste 8 milestones `a-produire` ; le mémo deal seed est la prochaine cible early-stage, la Série A est hors priorité.
 
 Lecture correcte de l'état actuel :
@@ -321,6 +327,27 @@ Bessemer, a16z, First Round, Data-Driven VC, Sacra et The Information Pro apport
 - The Information Pro : modèle média premium + data + tools.
 
 La plateforme doit combiner profondeur intellectuelle, research exploitable, frameworks, outils, workspace et formation secondaire.
+
+### 6.6 Interactive journalism / scrollytelling
+
+Rôle : référence de benchmark pour les longs formats interactifs, la narration visuelle et le design d'information. Le dépôt [`wbkd/awesome-interactive-journalism`](https://github.com/wbkd/awesome-interactive-journalism) répertorie des exemples exigeants de data journalism, storytelling interactif, visualisations, formats immersifs et enquêtes visuelles.
+
+À retenir :
+
+- design éditorial fort ;
+- usage inventif des technologies web ;
+- nouvelles formes de storytelling ou de visualisation ;
+- recherche de données ou investigation solide ;
+- engagement actif du lecteur ;
+- fonctionnement robuste sur tous les devices.
+
+Application au projet :
+
+- utiliser ce dépôt comme **swipe file qualitatif** avant chaque scrollytelling stratégique ;
+- sélectionner 3 références par projet : une pour la structure narrative, une pour l'interaction/data, une pour la direction artistique ;
+- traduire ces inspirations dans le langage VC : flux de capitaux, chaînes de valeur, bascules de marché, dynamique concurrentielle, thèse/falsification, scénarios investisseur ;
+- ne pas copier les formats tels quels : chaque long format doit trouver une grammaire visuelle propre au sujet ;
+- faire du design une exigence de compréhension, pas une couche décorative.
 
 ---
 
@@ -584,7 +611,7 @@ Le ton doit être :
 - non scolaire ;
 - non startup-bullshit.
 
-Ce ton est formalisé en **charte de style rédactionnel non négociable**, applicable à toute rédaction du site (leçons, glossaire, analyses, dossiers d'écosystème, parcours, simulateurs). Source canonique : la section « Writing style (non-negotiable) » du skill `.claude/skills/ecosystemes/SKILL.md` et la mémoire `style-redaction-naturel` ; résumé opérationnel dans `Suivis/Manuel_Architecture_Edition.md` §4.0.c. En clair : prose fluide à phrases de longueur variée, une idée par paragraphe, énoncer le fait puis sa conséquence et s'arrêter ; bannir énumérations mécaniques, punchlines de fin de paragraphe, gras à outrance, métaphores vendeuses, superlatifs et aphorismes de clôture.
+Ce ton est formalisé en **charte de style rédactionnel non négociable**, applicable à toute rédaction du site (leçons, glossaire, analyses, dossiers d'écosystème, parcours, simulateurs). Source canonique : la section « Writing style (non-negotiable) » du skill `.claude/skills/ecosystemes/SKILL.md` et la mémoire `style-redaction-naturel` ; résumé opérationnel dans `docs/ARCHITECTURE_EDITION.md` §4.0.c. En clair : prose fluide à phrases de longueur variée, une idée par paragraphe, énoncer le fait puis sa conséquence et s'arrêter ; bannir énumérations mécaniques, punchlines de fin de paragraphe, gras à outrance, métaphores vendeuses, superlatifs et aphorismes de clôture.
 
 ### 9.4 Ce qui doit disparaître du premier niveau de lecture
 
@@ -650,6 +677,24 @@ Règle :
 
 > Tant que le moat recherché est la crédibilité, la distribution publique prime sur la rétention gated.
 
+### 9.9 Scrollytelling, design éditorial et mémorisation
+
+Angle mort actuel : les articles longs et notes denses peuvent être excellents, mais rester difficiles à visualiser, parcourir et retenir. La plateforme ne doit pas seulement publier des textes longs ; elle doit aussi aider le lecteur à **voir** le raisonnement.
+
+Décision :
+
+- tout article long stratégique, research note dense, lecture oblique, cas majeur ou dossier à forte charge conceptuelle doit avoir un équivalent en **scrollytelling interactif** ;
+- l'article linéaire reste la version canonique, lisible, indexable et citable ; le scrollytelling est la version de compréhension visuelle, de pédagogie active et de mémorisation ;
+- le scrollytelling doit extraire la structure du raisonnement : progression logique, tensions, causalités, données clés, cartes mentales, matrices, timelines, bascules de thèse, points de falsification ;
+- la dimension artistique et design est essentielle : direction artistique propre au sujet, composition éditoriale, typographie, rythme de scroll, micro-interactions, motion sobre, illustrations ou scènes visuelles quand elles clarifient vraiment l'idée ;
+- chaque scrollytelling stratégique doit démarrer par un mini-benchmark d'inspiration, notamment à partir de `wbkd/awesome-interactive-journalism`, pour cadrer l'ambition narrative, interactive, visuelle et responsive ;
+- les données et figures interactives doivent rester sourcées, sobres et explicites sur leurs limites ;
+- l'expérience doit rester accessible, performante, responsive et utilisable sans effets gratuits.
+
+Règle :
+
+> Un long format Intelligence important sans équivalent scrollytelling est incomplet ; un scrollytelling sans exigence artistique et design est une simple mise en page animée, pas un produit de compréhension.
+
 ---
 
 ## 10. Piliers de contenu prioritaires
@@ -693,11 +738,12 @@ Structure type :
 10. Related tools
 11. Related glossary
 
-Chaque note Research publique doit produire trois sorties :
+Chaque note Research publique doit produire quatre sorties :
 
 - la page longue ;
 - l'email newsletter ;
-- un angle de partage court pour partenaires, experts ou communautés VC.
+- un angle de partage court pour partenaires, experts ou communautés VC ;
+- un équivalent scrollytelling interactif pour visualiser les données, la mécanique de raisonnement et les implications investisseur.
 
 ### 10.2 Pilier 2 — Thesis Lab
 
@@ -902,7 +948,27 @@ La plateforme possède déjà des actifs français (`BSA-AIR`, standard françai
 
 ### 10.9 Formats éditoriaux blog
 
-Trois formats à ajouter au backlog éditorial du blog, en complément des piliers existants.
+Trois formats à ajouter au backlog éditorial du blog, en complément des piliers existants, plus un format transversal de mise en scène interactive.
+
+**Scrollytelling interactif**
+
+Chaque écrit long à forte valeur doit pouvoir exister en double lecture : article complet et scrollytelling. Le format ne doit pas résumer le texte en cartes décoratives ; il doit mettre en scène les concepts, rendre visibles les enchaînements causaux, faire manipuler les données quand c'est utile et installer une mémoire visuelle du raisonnement.
+
+Exigence design :
+
+- direction artistique spécifique au sujet, pas un template uniforme plaqué sur tous les articles ;
+- design d'information rigoureux : hiérarchie, rythme, annotations, visualisations natives, états de lecture ;
+- interaction utile : sticky panels, timelines, matrices, cartes, curseurs, comparaisons avant/après, révélations progressives ;
+- motion sobre, au service de la compréhension, compatible avec `prefers-reduced-motion` ;
+- continuité avec le design system premium, sans sacrifier la singularité artistique du récit.
+
+Benchmark éditorial :
+
+- consulter [`wbkd/awesome-interactive-journalism`](https://github.com/wbkd/awesome-interactive-journalism) comme bibliothèque d'exemples avant la conception ;
+- identifier ce que chaque référence réussit : rythme narratif, manipulation de données, immersion, interaction, mémorisation ou tenue graphique ;
+- transformer cette analyse en brief de design : intention, scènes clés, composants interactifs, données à révéler, contraintes responsive et règle de sobriété.
+
+> **État d'implémentation.** Deux lectures obliques ont déjà une version scrollytelling dédiée : *La société du spectacle lève des fonds* (`DebordScrollytelling`) et *Exit, Voice, Loyalty : la grammaire des départs* (`HirschmanScrollytelling`), exposées depuis `BlogPostPage` via `?view=scrolly`. Reste à formaliser ce modèle pour les prochains longs formats et à éviter que chaque scrollytelling ne devienne un one-off impossible à maintenir.
 
 **Décortiquer un écosystème**
 
@@ -1041,47 +1107,41 @@ Règle maintenue :
 - garder des commits propres ;
 - documenter rollback et baseline.
 
-### 13.2 Divergence JSON / CMS / SQLite
+### 13.2 Source de vérité JSON et fichiers générés
 
-Risque : élevé (abaissé depuis « très élevé » au 2026-06-12).
+Risque : faible, mais réel si les fichiers générés sont modifiés à la main.
 
-Le projet repose sur une tension entre :
-
-- JSON canonique ;
-- base SQLite/Prisma ;
-- CMS/admin ;
-- fallback client.
-
-État corrigé (2026-06-12) : le `seed` est désormais **non destructif** pour le contenu éditable (glossaire/blog/cas) — il préserve les lignes déjà en base sauf `db:seed -- --force`. `npm run content:export` rapatrie les éditions CMS vers les JSON sources. La perte d'éditions CMS par re-seed accidentel est donc levée ; reste la discipline de versionnement (exporter → committer).
+Avec la suppression du CMS, de l'API et de la base SQLite, la divergence entre éditions JSON et base de données n'existe plus. Les JSON sources de `/data` sont l'unique source de vérité éditoriale. Les fichiers de `data/generated/` sont des dérivés techniques, produits par `split:content`.
 
 Règle immédiate :
 
-- ne pas étendre le CMS aux nouveaux piliers ;
 - authoring des nouveaux contenus dans `/data` ;
+- ne jamais éditer `data/generated/*` à la main ;
+- relancer `npm run split:content` après modification des leçons ou du glossaire ;
 - validation stricte ;
-- seed contrôlé (non destructif par défaut) + `content:export` pour pérenniser les éditions CMS ;
+- aucune commande de seed/export CMS : le JSON source est édité directement ;
 - documentation des sources de vérité.
 
 Décision recommandée :
 
-> JSON reste source de vérité jusqu'à refonte propre du CMS.
+> JSON reste source de vérité. Toute réintroduction future d'un CMS ou d'un backend doit être une migration produit explicite, pas une extension opportuniste.
 
 ### 13.3 Leçons drop-in et pipeline d'authoring
 
-État corrigé : les leçons drop-in sont chargées côté client et côté serveur, **sans import manuel**. Depuis le 2026-06-12, `client/src/content/parcoursLessons.ts` a été supprimé : `scripts/split-lessons.mjs` fait un glob sur `data/parcours/*.lessons.json` et les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts` ; côté serveur, `server/src/lib/content.ts` charge déjà ce même dossier. Déposer un fichier suffit donc à le servir des deux côtés. Le risque n'est plus une divergence client/API structurelle, mais une gouvernance de contenu.
+État corrigé : les leçons drop-in sont chargées automatiquement, **sans import manuel**. Depuis le 2026-06-12, `client/src/content/parcoursLessons.ts` a été supprimé : `scripts/split-lessons.mjs` fait un glob sur `data/parcours/*.lessons.json` et les fusionne avec `data/lessons.json` dans l'index/bodies consommés par `content/lessons.ts`. Au 2026-07-07, 11 leçons drop-in issues de 3 registres portent le total servable à 66 leçons. Déposer un fichier JSON suffit donc à le servir après split. Le risque n'est plus une divergence structurelle, mais une gouvernance de contenu.
 
 Risque restant :
 
 - collision de `slug` (le split échoue désormais explicitement sur un slug dupliqué — à corriger avant build) ;
 - incohérence entre `parcours.steps[]`, `course.lessonIds[]`, glossaire et `furtherReading` ;
-- seed non relancé après ajout de contenu.
+- validation non relancée après ajout de contenu.
 
 Règle :
 
 - nouveau registre drop-in uniquement si son rôle est clair ;
-- déposer le fichier dans `data/parcours/*.lessons.json` (auto-chargé client + serveur, plus aucun import à ajouter) ;
-- vérifier l'unicité des `slug` ; vérifier `content.allLessons()` côté serveur ;
-- lancer validation puis seed ;
+- déposer le fichier dans `data/parcours/*.lessons.json` (auto-chargé par le split client, plus aucun import à ajouter) ;
+- vérifier l'unicité des `slug` ;
+- lancer `npm run split:content`, puis `npm run validate:content` ;
 - replier dans `data/lessons.json` quand la leçon devient canonique.
 
 ### 13.4 Validation
@@ -1103,18 +1163,19 @@ Collections à prévoir :
 - `frameworks.json` ;
 - `research.json` ou poursuite du refactor `data/blog/*.json` vers une couche Research ;
 - cases enrichis ;
-- tools metadata.
+- tools metadata ;
+- schémas complets pour `data/memos.json` et `data/antiPortfolio.json`, encore moins contrôlés que les autres collections.
 
-### 13.5 i18n
+### 13.5 Langue V1 FR
 
-Risque : dette de traduction.
+Risque : réintroduire une promesse de traduction non livrée.
 
 Décision :
 
-- FR-first ;
-- EN différé ;
-- ne traduire que les contenus pilotes vraiment stratégiques ;
-- ne pas promettre plateforme bilingue complète à court terme.
+- V1 française propre ;
+- routes non localisées (`/`, `/home`, `/blog/...`) ;
+- aucun sitemap localisé, aucune balise d'alternance EN ;
+- ne pas rouvrir le multilingue sans décision produit, budget éditorial et migration explicites.
 
 ### 13.6 Search / Command Palette
 
@@ -1123,9 +1184,10 @@ Risque : invisibilité des nouveaux contenus.
 Chaque nouvelle collection doit être intégrée à :
 
 - recherche client ;
-- recherche serveur si applicable ;
 - Command Palette ;
 - related content ;
+- `shared/routes.mjs` pour `noindex` et Open Graph si nécessaire ;
+- `scripts/collect-routes.mjs` pour sitemap et prérendu ;
 - sitemap/SEO.
 
 ### 13.7 Routes et legacy IA
@@ -1134,23 +1196,26 @@ Risque : liens cassés et confusion navigation.
 
 Actions :
 
-- redirects propres ;
-- conservation des anciennes routes ;
+- conserver les routes publiques non localisées comme canon (`/blog/...`, `/paths/...`, `/ecosystemes/...`) ;
+- ajouter des redirects explicites seulement pour les routes legacy utiles ;
+- ne pas réintroduire de routage `/fr` ou `/en` sans migration dédiée ;
 - mise à jour SideNav ;
 - mise à jour SEO ;
 - mise à jour Command Palette ;
 - mise à jour breadcrumbs.
 
-### 13.8 SEO / CSR
+### 13.8 SEO / CSR + prérendu statique
 
-Risque : faible découvrabilité des contenus Intelligence.
+Risque : faible découvrabilité des contenus Intelligence si le prérendu ou les URLs canoniques dérivent.
 
 Décision :
 
-- ne pas migrer SSR/SSG immédiatement ;
-- préparer les pages pour une future génération statique ;
+- rester en SPA React/Vite avec prérendu statique des routes publiques au build ;
+- ne pas migrer vers SSR/SSG complet immédiatement ;
+- garder `scripts/collect-routes.mjs` comme source commune du sitemap et du prérendu ;
 - soigner meta titles/descriptions ;
-- centraliser les loaders.
+- définir `VITE_SITE_URL` en publication pour `canonical` et `og:url` ;
+- valider les cartes Open Graph sur le domaine réel.
 
 ### 13.9 Données et fausse intelligence
 
@@ -1175,20 +1240,20 @@ Règle :
 
 Objectif : stabiliser le projet avant transformation.
 
-État : largement avancé au 2026-06-12. Git est en place ; validation contenu, lint, build et tests (client + serveur) tournent en CI sur `push` `main`/`master` ; la divergence JSON/CMS est cadrée (seed non destructif + `content:export`). Restent surtout la checklist de release formalisée et la décision public/gated. À finaliser avant le repositionnement visible.
+État : largement avancé au 2026-07-07. Git est en place ; validation contenu, validation stricte, validation glossaire, lint, TypeScript, tests client et génération de sitemap cadrent la base de publication en local. Le projet est désormais statique : plus de seed DB, plus de serveur applicatif, plus d'export CMS. Le risque technique principal n'est plus la divergence JSON/CMS, mais un déploiement incomplet si la publication GitHub Pages ne rejoue pas tous les garde-fous locaux.
 
 Actions :
 
 1. vérifier Git ;
 2. créer branche repositioning ;
-3. lancer validation ;
-4. lancer build ;
+3. lancer `split:content`, `validate:content:strict`, `validate:glossary`, lint, TypeScript et tests client ;
+4. lancer build racine + prérendu avant publication ;
 5. documenter les erreurs ;
-6. identifier les divergences JSON/CMS/DB ;
-7. geler extension CMS ;
+6. vérifier qu'aucun fichier `data/generated/*` n'a été modifié à la main ;
+7. durcir le workflow GitHub Pages pour rejouer les garde-fous utiles ;
 8. documenter rollback ;
 9. établir checklist de release ;
-10. décider le mode public/gated initial : public-first pour réputation et SEO.
+10. documenter le mode public-first initial pour réputation et SEO.
 
 Livrable : base de travail sécurisée.
 
@@ -1283,12 +1348,14 @@ Actions :
 10. mettre à jour navigation ;
 11. lancer newsletter + capture email ;
 12. publier chaque research note en page + email ;
-13. ajouter RSS pour contenus publics ;
-14. définir la première cadence de review trimestrielle.
+13. produire au moins une version scrollytelling interactive avec direction artistique dédiée pour un long format stratégique ;
+14. constituer un mini-benchmark d'inspiration pour cette version, à partir de références comme `wbkd/awesome-interactive-journalism` ;
+15. ajouter RSS pour contenus publics ;
+16. définir la première cadence de review trimestrielle.
 
 Critère de succès :
 
-> Au moins une note peut être partagée à un VC/CVC sans donner une impression scolaire.
+> Au moins une note peut être partagée à un VC/CVC sans donner une impression scolaire, et au moins un long format peut être compris visuellement via un scrollytelling interactif de niveau éditorial premium.
 
 ### Phase 5 — Thesis Lab MVP
 
@@ -1466,6 +1533,7 @@ Il doit contenir :
 - navigation VC Intelligence ;
 - Library propre ;
 - 3 research notes ;
+- 1 à 2 scrollytellings interactifs pour les longs formats prioritaires ;
 - newsletter + capture email + RSS ;
 - 2 thesis lab ;
 - 5 tools repositionnés, plus backlog prioritaire secondaries / BSA-AIR / term sheet France vs US ;
@@ -1482,6 +1550,12 @@ Il doit contenir :
 2. AI Infrastructure VC Thesis
 3. DPI Pressure and Fundraising Reality
 4. Emerging Managers Europe: Fund I Construction and First Close Reality
+
+**Scrollytelling**
+
+1. Une version interactive d'une research note prioritaire, par exemple European Seed Market Structure.
+2. Une version interactive d'une lecture oblique ou d'un dossier conceptuel déjà long, avec direction artistique spécifique au sujet.
+3. Un mini-benchmark documenté pour chaque version, incluant références de narration interactive, d'information design et de tenue artistique.
 
 **Thesis Lab**
 
@@ -1509,15 +1583,16 @@ Il doit contenir :
 ### 16.3 MVP technique
 
 - validation active ;
-- schemas propres ;
+- schémas propres ;
 - champs maintenanceClass / reviewDate / visibility ;
 - routing propre ;
 - search minimum ;
 - SEO correct ;
 - newsletter/capture email/RSS minimum ;
-- no CMS extension ;
-- no fake data ;
-- no SSR migration.
+- support maintenable des vues scrollytelling (`?view=scrolly`, composants lazy, motion accessible) ;
+- aucun backend/CMS réintroduit sans migration dédiée ;
+- aucune donnée factice ;
+- pas de migration SSR/SSG complète tant que le CSR + prérendu statique suffit.
 
 ---
 
@@ -1527,6 +1602,7 @@ Il doit contenir :
 
 - consultation Research ;
 - consultation Thesis Lab ;
+- consultation des vues scrollytelling ;
 - usage Tools ;
 - sauvegardes Workspace ;
 - inscriptions newsletter ;
@@ -1534,6 +1610,7 @@ Il doit contenir :
 - taux de retour ;
 - recherches internes ;
 - clics related content ;
+- profondeur de lecture / complétion des scrollytellings ;
 - notes créées.
 
 **Éditorial**
@@ -1542,9 +1619,11 @@ Il doit contenir :
 - nombre de contenus sourcés ;
 - nombre de thèses complètes ;
 - nombre de cas exploitables ;
+- part des longs formats stratégiques couverts par un scrollytelling ;
+- qualité de design éditorial des expériences interactives ;
 - ratio VC Intelligence vs Learning ;
 - contenus à mettre à jour ;
-- contenus founder/career dépriorisés.
+- contenus founder/career dépriorisés ;
 - contenus `perishable` avec reviewDate respectée ;
 - briefs trimestriels publiés ;
 - contenus publics partagés.
@@ -1554,10 +1633,11 @@ Il doit contenir :
 - validation prebuild ;
 - erreurs cross-ref ;
 - stabilité build ;
+- performance et accessibilité des scrollytellings ;
 - couverture search ;
 - routes redirigées ;
 - absence de divergence critique ;
-- temps de maintenance contenu.
+- temps de maintenance contenu ;
 - RSS ou équivalent public disponible ;
 - capture email fonctionnelle ;
 - champs maintenance / visibility validés.
@@ -1590,9 +1670,9 @@ Ne pas :
 - viser des partages qualifiés sans newsletter, email capture ou RSS ;
 - publier des contenus périssables sans reviewDate ;
 - gater les premiers contenus si l'objectif principal reste la réputation ;
-- migrer SSR/SSG maintenant ;
-- refondre le CMS immédiatement ;
-- promettre bilingue complet ;
+- remplacer le CSR + prérendu statique par une migration SSR/SSG complète maintenant ;
+- réintroduire un CMS, une API ou une base sans décision produit et migration dédiée ;
+- promettre ou réintroduire le multilingue sans migration dédiée ;
 - ajouter de l'IA sans cas d'usage clair ;
 - transformer la plateforme en blog ;
 - produire six rubriques minces au lieu de deux piliers forts.
@@ -1617,16 +1697,25 @@ Ces points viennent de l'audit et doivent rester visibles, car ils limitent les 
 
 - `data/parcours.json`
 - `data/lessons.json`
+- `data/parcours/*.lessons.json`
 - `data/blog/*.json`
 - `data/caseStudies.json`
+- `data/deliverables.json`
+- `data/ecosystems.json`
+- `data/memos.json`
+- `data/antiPortfolio.json`
 - `data/simulators.json`
+- `data/generated/*` (généré par `split:content`, à ne pas éditer directement)
 - futurs `data/theses.json`, `data/atlas.json`, `data/frameworks.json`
-- `data/parcours.en.json`
 
 **Validation**
 
 - `scripts/validate-content.mjs`
-- scripts de fusion ou de contrôle des leçons si le workflow drop-in évolue
+- `scripts/split-lessons.mjs`
+- `scripts/split-glossary.mjs`
+- `scripts/collect-routes.mjs`
+- `scripts/generate-sitemap.mjs`
+- `scripts/prerender.mjs`
 
 **Client**
 
@@ -1634,19 +1723,14 @@ Ces points viennent de l'audit et doivent rester visibles, car ils limitent les 
 - `client/src/pages/HomePage.tsx`
 - `client/src/App.tsx`
 - `client/src/content/*`
+- `client/src/content/search.ts`
+- `client/src/pages/blog/BlogPostPage.tsx`
+- `client/src/pages/blog/*Scrollytelling.tsx`
+- composants de visualisation / design d'information à factoriser si le format se répète
 - `client/src/pages/*`
 - `client/src/pages/DashboardPage.tsx`
 - `client/src/lib/seo.ts`
-- `client/src/i18n/*`
 - recherche / Command Palette si présente dans le code courant
-
-**Server**
-
-- `server/src/lib/content.ts`
-- `server/src/routes/content.ts`
-- `server/src/routes/search.ts`
-- `server/prisma/schema.prisma`
-- `server/prisma/seed.ts`
 
 **Docs**
 

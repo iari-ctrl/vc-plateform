@@ -10,7 +10,7 @@ import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
 import { useUI } from '@/context/UIContext';
 import { cn, initials } from '@/lib/utils';
-const isLinkActive = (to: string, location: any) => 
+const isLinkActive = (to: string, location: { pathname: string }) =>
   to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
 
 

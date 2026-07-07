@@ -116,14 +116,14 @@ export default function ParcoursDetailPage() {
               <div>
                 <p className="eyebrow mb-3 flex items-center gap-2"><Users size={13} /> Pour qui</p>
                 <div className="flex flex-wrap gap-2">
-                  {parcours.forWhom.map((w: any, i: number) => <span key={i} className="chip">{t(w)}</span>)}
+                  {parcours.forWhom.map((w, i) => <span key={i} className="chip">{t(w)}</span>)}
                 </div>
               </div>
               {parcours.prerequisites && parcours.prerequisites.length > 0 && (
                 <div>
                   <p className="eyebrow mb-3 flex items-center gap-2"><BookOpen size={13} /> Pré-requis</p>
                   <ul className="space-y-2">
-                    {parcours.prerequisites.map((p: any, i: number) => (
+                    {parcours.prerequisites.map((p, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-sm text-surface-variant">
                         <span className="mt-[0.35rem] h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: accent }} />
                         <span className="leading-relaxed text-foreground"><InlineMarkdown source={t(p)} glossaryPreview /></span>
@@ -135,7 +135,7 @@ export default function ParcoursDetailPage() {
               <div>
                 <p className="eyebrow mb-3">Ce que tu sauras faire</p>
                 <ul className="space-y-2">
-                  {parcours.outcomes.map((o: any, i: number) => (
+                  {parcours.outcomes.map((o, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-sm text-surface-variant">
                       <Check size={15} className="mt-0.5 shrink-0" style={{ color: accent }} />
                       {t(o)}

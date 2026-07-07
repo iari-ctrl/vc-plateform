@@ -233,10 +233,8 @@ const profileParcoursSchema = z.object({
 
 const parcoursConfigSchema = z.object({
   _doc: z.string().optional(),
-  i18n: z.object({
-    defaultLocale: nonEmpty,
-    locales: z.array(nonEmpty),
-    overrideFiles: z.record(z.string(), nonEmpty),
+  language: z.object({
+    defaultLocale: z.literal('fr'),
     note: z.string().optional(),
   }).strict(),
   gating: z.object({
@@ -259,12 +257,6 @@ const parcoursConfigSchema = z.object({
     parcours: nonEmpty,
     atomes: z.array(nonEmpty),
   }).strict(),
-}).strict();
-
-const parcoursOverrideSchema = z.object({
-  _doc: z.string().optional(),
-  locale: nonEmpty,
-  overrides: z.record(z.string(), z.record(z.string(), z.unknown())),
 }).strict();
 
 const glossarySchema = z.object({
@@ -525,7 +517,6 @@ const paths = check('paths.json', z.array(pathSchema), readJson('paths.json')) ?
 const parcours = check('parcours.json', z.array(parcoursSchema), readJson('parcours.json')) ?? [];
 const profileParcours = check('profileParcours.json', profileParcoursSchema, readJson('profileParcours.json'));
 const parcoursConfig = check('parcoursConfig.json', parcoursConfigSchema, readJson('parcoursConfig.json'));
-const parcoursEn = check('parcours.en.json', parcoursOverrideSchema, readJson('parcours.en.json'));
 const courses = check('courses.json', z.array(courseSchema), readJson('courses.json')) ?? [];
 const lessons = check('lessons.json', z.array(lessonSchema), readJson('lessons.json')) ?? [];
 const glossary = check('glossary.json', z.array(glossarySchema), readJson('glossary.json')) ?? [];
@@ -712,11 +703,6 @@ if (profileParcours) {
     checkRefs(`profileParcours.byArchetype/${archetypeId}.bundle`, route.bundle, (r) => parcoursIds.has(r), 'parcours');
   }
 }
-if (parcoursEn) {
-  for (const id of Object.keys(parcoursEn.overrides)) {
-    if (!parcoursIds.has(id)) err(`parcours.en.json.overrides — parcours introuvable : "${id}"`);
-  }
-}
 if (ikigai) {
   for (const p of ikigai.profiles)
     checkRefs(`ikigai.profiles/${p.id}.recommendedPathIds`, p.recommendedPathIds, (r) => contentContainerIds.has(r), 'rayon/parcours');
@@ -761,7 +747,6 @@ const MARKER_FILES = [
   'courses.json',
   'paths.json',
   'parcours.json',
-  'parcours.en.json',
   'simulators.json',
   ...parcoursLessonDocs.map((doc) => `parcours/${doc.file}`),
 ];

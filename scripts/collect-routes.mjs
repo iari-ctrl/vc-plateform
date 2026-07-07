@@ -8,9 +8,8 @@
 // ecosystem dossiers, …). This module owns that one enumeration so the sitemap
 // and the prerender can never drift apart.
 //
-// Pure data reads, no DOM/Node-server concerns: locale prefixing and rendering
-// stay in the consumers (the sitemap emits FR+EN; the prerender respects
-// EN_ENABLED). Routes are returned unlocalized, normalized and de-duplicated.
+// Pure data reads, no DOM/Node-server concerns. Routes are returned normalized
+// and de-duplicated exactly as they are served by the V1 FR app.
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';

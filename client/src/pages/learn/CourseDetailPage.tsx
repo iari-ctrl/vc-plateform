@@ -50,7 +50,7 @@ export default function CourseDetailPage() {
 
       {course.tags.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-2">
-          {course.tags.map((t: any) => <span key={t} className="chip">{t}</span>)}
+          {course.tags.map((tag) => <span key={tag} className="chip">{tag}</span>)}
         </div>
       )}
 

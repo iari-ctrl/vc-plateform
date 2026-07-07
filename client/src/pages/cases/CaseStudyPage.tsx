@@ -48,7 +48,7 @@ export default function CaseStudyPage() {
       <aside className="mt-12 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_25%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-6 sm:p-7">
         <p className="eyebrow mb-4 flex items-center gap-2"><Sparkles size={14} /> Ce qu’il faut retenir</p>
         <ul className="space-y-3">
-          {cs.takeaways.map((t: any, i: number) => (
+          {cs.takeaways.map((t, i) => (
             <li key={i} className="flex items-start gap-3 text-[0.95rem] font-medium">
               <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] font-mono text-[0.625rem] text-[color:var(--primary)]">{i + 1}</span>
               {t}

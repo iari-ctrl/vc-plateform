@@ -9,7 +9,7 @@
 import Cocoa
 import WebKit
 
-let appURLString = "http://localhost:5173/fr"
+let appURLString = "http://localhost:5173/"
 let logPath = "/tmp/vc-premium-dev.log"
 
 // .../vc-platform/VC Premium Experience.app  →  parent = racine du dépôt
