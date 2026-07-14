@@ -19,6 +19,10 @@
     "postbuild": "npm run prerender",
     "prerender": "node scripts/prerender.mjs",
     "lint": "npm run lint --workspace client",
+    "typecheck": "npm run typecheck --workspace client",
+    "test": "npm run test --workspace client && npm run test:node",
+    "test:node": "node --test scripts/*.test.mjs",
+    "check": "npm run validate:content:strict && npm run validate:glossary && npm run typecheck && npm run lint && npm run test",
     "validate:content": "node scripts/validate-content.mjs",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "validate:glossary": "node scripts/validate-glossary.mjs",
@@ -26,7 +30,8 @@
     "aliases:merge": "node scripts/merge-aliases.mjs"
   },
   "devDependencies": {
-    "puppeteer": "^25.2.1"
+    "puppeteer": "^25.2.1",
+    "zod": "^3.25.76"
   },
   "engines": {
     "node": ">=20"

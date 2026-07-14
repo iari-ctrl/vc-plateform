@@ -316,6 +316,7 @@ const deliverableSchema = z.object({
 const blogSchema = z.object({
   id: nonEmpty,
   slug,
+  status: z.enum(['draft', 'published']).optional(),
   title: nonEmpty,
   subtitle: z.string(),
   author: z.string(),
@@ -415,6 +416,7 @@ const ecosystemSchema = z.object({
   author: z.string(),
   createdAt: isoDate,
   updatedAt: isoDate,
+  verifiedAt: isoDate.optional(),
   readMin: z.number().nonnegative(),
   summary: nonEmpty,
   tags: z.array(z.string()),
@@ -461,6 +463,83 @@ const simulatorSchema = z.object({
   description: z.string(),
   relatedLessonIds: idList,
   glossaryRefs: idList,
+}).strict();
+
+// Memo library annotée — memos d'investissement publiés, annotés bloc par bloc.
+const memoBlockSchema = z.object({
+  excerpt: nonEmpty,
+  isParaphrase: z.boolean(),
+  note: nonEmpty,
+  tag: z.string(),
+}).strict();
+
+const memoSchema = z.object({
+  id: nonEmpty,
+  slug,
+  company: nonEmpty,
+  title: nonEmpty,
+  fund: nonEmpty,
+  author: z.string(),
+  // Date éditoriale en prose (« Septembre 2005 »), pas une date ISO.
+  date: nonEmpty,
+  stage: z.string(),
+  amount: z.string(),
+  outcome: nonEmpty,
+  whyItMatters: nonEmpty,
+  sourceUrl: nonEmpty,
+  sourceNote: z.string(),
+  readMin: z.number().nonnegative(),
+  summary: nonEmpty,
+  context: nonEmpty,
+  sections: z.array(z.object({ heading: nonEmpty, blocks: z.array(memoBlockSchema).min(1) }).strict()).min(1),
+  lessons: z.array(nonEmpty),
+  glossaryRefs: idList,
+  relatedAntiPortfolioIds: idList,
+  tags: z.array(z.string()),
+}).strict();
+
+// Anti-portfolio — motifs de refus récurrents + entrées « pass » documentées.
+const antiPortfolioPatternSchema = z.object({
+  id: nonEmpty,
+  label: nonEmpty,
+  glyph: z.string(),
+  accent: z.string(),
+  description: nonEmpty,
+  antidote: nonEmpty,
+}).strict();
+
+const antiPortfolioEntrySchema = z.object({
+  id: nonEmpty,
+  slug,
+  company: nonEmpty,
+  title: nonEmpty,
+  subtitle: z.string(),
+  passes: z.array(
+    // `partner` est optionnel : certains passes publics ne sont attribués
+    // qu'au fonds, pas à un partner nommé.
+    z.object({ fund: nonEmpty, partner: nonEmpty.optional(), year: z.number().int(), stage: z.string() }).strict(),
+  ).min(1),
+  sector: z.string(),
+  patternIds: idList,
+  readMin: z.number().nonnegative(),
+  summary: nonEmpty,
+  quote: z.object({ text: nonEmpty, author: z.string(), source: z.string() }).strict().optional(),
+  knownAtTheTime: z.array(z.object({ date: nonEmpty, fact: nonEmpty }).strict()).min(1),
+  statedReason: nonEmpty,
+  reasonIsPublic: z.boolean(),
+  missedSignal: nonEmpty,
+  steelman: nonEmpty,
+  outcome: nonEmpty,
+  costEstimate: z.string().optional(),
+  takeaways: z.array(nonEmpty),
+  glossaryRefs: idList,
+  relatedMemoIds: idList,
+  sources: z.array(z.object({ label: nonEmpty, url: nonEmpty }).strict()).min(1),
+}).strict();
+
+const antiPortfolioSchema = z.object({
+  patterns: z.array(antiPortfolioPatternSchema).min(1),
+  entries: z.array(antiPortfolioEntrySchema).min(1),
 }).strict();
 
 // Ikigai — looser than the content collections, but still structurally checked.
@@ -530,6 +609,10 @@ const blogDocs = blogFiles.flatMap((file) => {
 const blog = check('blog/*.json', z.array(blogSchema), blogDocs.map(({ doc }) => doc)) ?? [];
 const ecosystems = check('ecosystems.json', z.array(ecosystemSchema), readJson('ecosystems.json')) ?? [];
 const simulators = check('simulators.json', z.array(simulatorSchema), readJson('simulators.json')) ?? [];
+const memos = check('memos.json', z.array(memoSchema), readJson('memos.json')) ?? [];
+const antiPortfolio = check('antiPortfolio.json', antiPortfolioSchema, readJson('antiPortfolio.json'));
+const antiPortfolioPatterns = antiPortfolio?.patterns ?? [];
+const antiPortfolioEntries = antiPortfolio?.entries ?? [];
 const ikigai = check('ikigai.json', ikigaiSchema, readJson('ikigai.json'));
 
 const parcoursLessonDocs = [];
@@ -569,6 +652,15 @@ assertUnique('ecosystems.json', ecosystems, 'id');
 assertUnique('ecosystems.json', ecosystems, 'slug');
 assertUnique('simulators.json', simulators, 'id');
 assertUnique('simulators.json', simulators, 'slug');
+assertUnique('memos.json', memos, 'id');
+assertUnique('memos.json', memos, 'slug');
+assertUnique('antiPortfolio.json (patterns)', antiPortfolioPatterns, 'id');
+assertUnique('antiPortfolio.json (entries)', antiPortfolioEntries, 'id');
+assertUnique('antiPortfolio.json (entries)', antiPortfolioEntries, 'slug');
+if (ikigai) {
+  assertUnique('ikigai.json (profiles)', ikigai.profiles, 'id');
+  assertUnique('ikigai.json (archetypes)', ikigai.archetypes, 'id');
+}
 
 // ── Reference sets ───────────────────────────────────────────────────────────
 const pathIds = new Set(paths.map((p) => p.id));
@@ -596,6 +688,27 @@ for (const p of paths) {
 for (const c of courses) {
   if (!contentContainerIds.has(c.pathId)) err(`courses/${c.id}.pathId — rayon/parcours introuvable : "${c.pathId}"`);
   checkRefs(`courses/${c.id}.lessonIds`, c.lessonIds, (r) => lessonIds.has(r), 'leçon');
+
+  const declaredLessonIds = new Set(c.lessonIds);
+  if (declaredLessonIds.size !== c.lessonIds.length)
+    err(`courses/${c.id}.lessonIds — une leçon ne peut pas être déclarée plusieurs fois`);
+
+  for (const lessonId of declaredLessonIds) {
+    const lesson = allLessons.find((candidate) => candidate.id === lessonId);
+    if (lesson && lesson.courseId !== c.id)
+      err(`courses/${c.id}.lessonIds — "${lessonId}" appartient à "${lesson.courseId}"`);
+  }
+
+  const ownedLessons = allLessons.filter((lesson) => lesson.courseId === c.id);
+  for (const lesson of ownedLessons) {
+    if (!declaredLessonIds.has(lesson.id))
+      err(`courses/${c.id}.lessonIds — leçon réciproque manquante : "${lesson.id}"`);
+  }
+
+  const orders = ownedLessons.map((lesson) => lesson.order).sort((a, b) => a - b);
+  const expectedOrders = ownedLessons.map((_, index) => index + 1);
+  if (orders.some((order, index) => order !== expectedOrders[index]))
+    err(`lessons/${c.id}.order — ordres attendus ${expectedOrders.join(', ')}, trouvés ${orders.join(', ')}`);
 }
 for (const doc of parcoursLessonDocs) {
   if (!parcoursIds.has(doc.parcoursId)) err(`parcours/${doc.file}.parcoursId — parcours introuvable : "${doc.parcoursId}"`);
@@ -629,6 +742,8 @@ for (const c of cases) {
 }
 for (const b of blog) {
   if (b.glossaryRefs) checkRefs(`blog/${b.id}.glossaryRefs`, b.glossaryRefs, isGlossary, 'terme de glossaire');
+  if ((b.status ?? 'published') === 'published' && /squelette|(?:à|a)\s+développer/i.test(JSON.stringify(b)))
+    err(`blog/${b.id} — un article publié ne peut pas contenir de marqueur éditorial "squelette" ou "à développer"`);
 }
 for (const { file, doc } of blogDocs) {
   if (typeof doc?.slug === 'string' && file !== `${doc.slug}.json`)
@@ -656,10 +771,27 @@ for (const s of simulators) {
   checkRefs(`simulators/${s.id}.relatedLessonIds`, s.relatedLessonIds, (r) => lessonIds.has(r), 'leçon');
   checkRefs(`simulators/${s.id}.glossaryRefs`, s.glossaryRefs, isGlossary, 'terme de glossaire');
 }
+// Memo library ↔ anti-portfolio : les renvois croisés des deux collections
+// doivent se résoudre, et leurs glossaryRefs pointer sur le glossaire.
+const memoIds = new Set(memos.map((m) => m.id));
+const antiPortfolioEntryIds = new Set(antiPortfolioEntries.map((e) => e.id));
+const antiPortfolioPatternIds = new Set(antiPortfolioPatterns.map((p) => p.id));
+for (const m of memos) {
+  checkRefs(`memos/${m.id}.glossaryRefs`, m.glossaryRefs, isGlossary, 'terme de glossaire');
+  checkRefs(
+    `memos/${m.id}.relatedAntiPortfolioIds`,
+    m.relatedAntiPortfolioIds,
+    (r) => antiPortfolioEntryIds.has(r),
+    'entrée anti-portfolio',
+  );
+}
+for (const e of antiPortfolioEntries) {
+  checkRefs(`antiPortfolio/${e.id}.patternIds`, e.patternIds, (r) => antiPortfolioPatternIds.has(r), 'motif');
+  checkRefs(`antiPortfolio/${e.id}.glossaryRefs`, e.glossaryRefs, isGlossary, 'terme de glossaire');
+  checkRefs(`antiPortfolio/${e.id}.relatedMemoIds`, e.relatedMemoIds, (r) => memoIds.has(r), 'mémo');
+}
 // Livrables: relatedLessonIds, glossaryRefs and the model exemplar must resolve.
-// `memos.json` is loaded only to resolve a `model.kind: "memo"` reference.
-const memos = readJson('memos.json') ?? [];
-const memoRefs = new Set((Array.isArray(memos) ? memos : []).flatMap((m) => [m.id, m.slug].filter(Boolean)));
+const memoRefs = new Set(memos.flatMap((m) => [m.id, m.slug]));
 const deliverableIds = new Set(deliverables.map((d) => d.id));
 const modelResolvers = {
   ecosystem: (r) => ecosystemIds.has(r),
@@ -701,6 +833,24 @@ if (profileParcours) {
   for (const [archetypeId, route] of Object.entries(profileParcours.byArchetype)) {
     if (!archetypeIds.has(archetypeId)) err(`profileParcours.byArchetype — archétype introuvable : "${archetypeId}"`);
     checkRefs(`profileParcours.byArchetype/${archetypeId}.bundle`, route.bundle, (r) => parcoursIds.has(r), 'parcours');
+  }
+
+  if (ikigai) {
+    for (const profile of ikigai.profiles) {
+      if (!Object.hasOwn(profileParcours.byProfile, profile.id))
+        err(`profileParcours.byProfile — aiguillage manquant pour le profil "${profile.id}"`);
+
+      const memberships = ikigai.archetypes.filter((archetype) => archetype.profileIds.includes(profile.id));
+      if (memberships.length !== 1)
+        err(`ikigai.archetypes — le profil "${profile.id}" doit appartenir à exactement un archétype (trouvé : ${memberships.length})`);
+    }
+
+    for (const archetype of ikigai.archetypes) {
+      if (!Object.hasOwn(profileParcours.byArchetype, archetype.id))
+        err(`profileParcours.byArchetype — aiguillage manquant pour l'archétype "${archetype.id}"`);
+      if (new Set(archetype.profileIds).size !== archetype.profileIds.length)
+        err(`ikigai.archetypes/${archetype.id}.profileIds — profil déclaré plusieurs fois`);
+    }
   }
 }
 if (ikigai) {
@@ -748,6 +898,8 @@ const MARKER_FILES = [
   'paths.json',
   'parcours.json',
   'simulators.json',
+  'memos.json',
+  'antiPortfolio.json',
   ...parcoursLessonDocs.map((doc) => `parcours/${doc.file}`),
 ];
 let markerCount = 0;
@@ -770,6 +922,7 @@ console.log('Validation du contenu VC Premium');
 console.log(`→ ${parcours.length} parcours · ${paths.length} rayon(s) hérités · ${courses.length} cours · ${allLessons.length} leçons · ${glossary.length} termes`);
 console.log(`→ ${parcoursLessons.length} leçon(s) de parcours drop-in · ${parcoursLessonDocs.length} registre(s)`);
 console.log(`→ ${cases.length} études de cas · ${deliverables.length} livrable(s) · ${blog.length} articles · ${ecosystems.length} dossier(s) d'écosystème · ${simulators.length} simulateurs`);
+console.log(`→ ${memos.length} mémo(s) annoté(s) · ${antiPortfolioEntries.length} entrée(s) d'anti-portfolio · ${antiPortfolioPatterns.length} motif(s)`);
 console.log(`→ ${markerCount} marqueur(s) [[..]] / {{..}} analysés`);
 
 if (warnings.length) {

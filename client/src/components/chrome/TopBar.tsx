@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Search, Sun, Moon, Menu, X, LayoutDashboard, NotebookPen, User, Shield, LogOut, Compass } from 'lucide-react';
+import { Search, Sun, Moon, Menu, X, Compass } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
 import { useUI } from '@/context/UIContext';
-import { initials } from '@/lib/utils';
 const isLinkActive = (to: string, location: { pathname: string }) =>
   to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
 

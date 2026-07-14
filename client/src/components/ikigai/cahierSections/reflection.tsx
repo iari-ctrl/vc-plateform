@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Check, Save, Lock } from 'lucide-react';
+import { Check, Save } from 'lucide-react';
 import { IKIGAI } from '@/content';
 import type { IkigaiMode } from '@/content/types';
 import { useUserData } from '@/context/UserDataContext';
@@ -10,7 +10,7 @@ import { StickyChapterHeader } from '../cahierUi';
 // ── §05 — Cahier d'introspection (7 free-text questions) ──────────────────────
 export function ReflectionSection({ mode, onMode }: { mode: IkigaiMode; onMode: (m: IkigaiMode) => void }) {
   const { addNote, deleteNote, notes } = useUserData();
-    
+
   const [answers, setAnswers] = useState<CahierAnswers>(() => getCahierAnswers());
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
@@ -43,15 +43,19 @@ export function ReflectionSection({ mode, onMode }: { mode: IkigaiMode; onMode: 
         const value = (answers[sourceId] ?? '').trim();
         // Replace any previous note for this question to avoid duplicates.
         const existing = notes.filter((nt) => nt.sourceType === NOTE_SOURCE && nt.sourceId === sourceId);
-        for (const ex of existing) await deleteNote(ex.id);
+        for (const ex of existing) {
+          const result = await deleteNote(ex.id);
+          if (!result.ok) return;
+        }
         if (value) {
-          await addNote({
+          const result = await addNote({
             kind: 'note',
             body: value,
             sourceType: NOTE_SOURCE,
             sourceId,
             sourceTitle: `Cahier Ikigai · Question ${q.n}`,
           });
+          if (!result.ok) return;
         }
       }
       setSavedAt(Date.now());
@@ -105,7 +109,7 @@ export function ReflectionSection({ mode, onMode }: { mode: IkigaiMode; onMode: 
 
       <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-outline-variant bg-surface-container-low/60 p-5 sm:flex-row sm:items-center">
         <p className="flex-1 text-sm text-surface-variant">
-          'Vos brouillons sont conservés localement sur cet appareil.'
+          Vos brouillons sont conservés localement sur cet appareil.
         </p>
         <div className="flex items-center gap-2">
           <button onClick={saveToCarnet} disabled={busy} className="btn-foil !py-2.5 disabled:opacity-50">

@@ -15,6 +15,7 @@ import { cn, formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 import type { DecisionCategory, DecisionJournalEntry, DecisionLink, DecisionOutcome } from '@/content/types';
 import type { SearchHit } from '@/content/search';
+import type { StorageResult } from '@/lib/storage';
 
 const CATEGORIES: { id: DecisionCategory; label: string }[] = [
   { id: 'deal', label: 'Deal' },
@@ -149,33 +150,40 @@ export default function DecisionJournalPage() {
 }
 
 // ── New prediction form ───────────────────────────────────────────────────────
-function NewPredictionForm({ onSubmit }: { onSubmit: (e: Omit<DecisionJournalEntry, 'id' | 'createdAt' | 'status'>) => Promise<void> }) {
+function NewPredictionForm({ onSubmit }: { onSubmit: (e: Omit<DecisionJournalEntry, 'id' | 'createdAt' | 'status'>) => Promise<StorageResult> }) {
   const [statement, setStatement] = useState('');
   const [rationale, setRationale] = useState('');
   const [confidence, setConfidence] = useState(70);
   const [category, setCategory] = useState<DecisionCategory>('deal');
   const [reviewDate, setReviewDate] = useState(() => dateInMonths(6));
   const [links, setLinks] = useState<DecisionLink[]>([]);
+  const [saving, setSaving] = useState(false);
 
   const canSubmit = statement.trim().length > 0 && !!reviewDate;
 
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
-    void onSubmit({
-      statement: statement.trim(),
-      rationale: rationale.trim() || undefined,
-      confidence,
-      category,
-      // Noon UTC: the calendar day survives every timezone.
-      reviewAt: new Date(`${reviewDate}T12:00:00Z`).toISOString(),
-      links,
-    });
-    setStatement('');
-    setRationale('');
-    setConfidence(70);
-    setLinks([]);
-    setReviewDate(dateInMonths(6));
+    setSaving(true);
+    try {
+      const result = await onSubmit({
+        statement: statement.trim(),
+        rationale: rationale.trim() || undefined,
+        confidence,
+        category,
+        // Noon UTC: the calendar day survives every timezone.
+        reviewAt: new Date(`${reviewDate}T12:00:00Z`).toISOString(),
+        links,
+      });
+      if (!result.ok) return;
+      setStatement('');
+      setRationale('');
+      setConfidence(70);
+      setLinks([]);
+      setReviewDate(dateInMonths(6));
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -261,8 +269,8 @@ function NewPredictionForm({ onSubmit }: { onSubmit: (e: Omit<DecisionJournalEnt
       <LinkPicker links={links} onChange={setLinks} />
 
       <div className="mt-4 flex justify-end">
-        <button type="submit" disabled={!canSubmit} className="btn-foil !py-2 disabled:opacity-40">
-          <Plus size={15} /> Consigner la prédiction
+        <button type="submit" disabled={!canSubmit || saving} className="btn-foil !py-2 disabled:opacity-40">
+          <Plus size={15} /> {saving ? 'Enregistrement…' : 'Consigner la prédiction'}
         </button>
       </div>
     </form>
@@ -349,18 +357,25 @@ function EntryCard({
 }: {
   entry: DecisionJournalEntry;
   now: Date;
-  onResolve: (id: string, outcome: DecisionOutcome, note?: string) => Promise<void>;
+  onResolve: (id: string, outcome: DecisionOutcome, note?: string) => Promise<StorageResult>;
   onDelete: () => void;
 }) {
   const [pendingOutcome, setPendingOutcome] = useState<DecisionOutcome | null>(null);
   const [note, setNote] = useState('');
+  const [resolving, setResolving] = useState(false);
   const due = isDue(entry, now);
 
-  function confirmResolve() {
+  async function confirmResolve() {
     if (!pendingOutcome) return;
-    void onResolve(entry.id, pendingOutcome, note.trim() || undefined);
-    setPendingOutcome(null);
-    setNote('');
+    setResolving(true);
+    try {
+      const result = await onResolve(entry.id, pendingOutcome, note.trim() || undefined);
+      if (!result.ok) return;
+      setPendingOutcome(null);
+      setNote('');
+    } finally {
+      setResolving(false);
+    }
   }
 
   return (
@@ -425,8 +440,8 @@ function EntryCard({
                 className="mt-2 w-full resize-none rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm outline-none transition-colors placeholder:text-surface-variant focus:border-[color:var(--primary)]"
               />
               <div className="mt-2 flex justify-end gap-2">
-                <button onClick={() => { setPendingOutcome(null); setNote(''); }} className="btn-quiet !py-1.5 text-xs">Annuler</button>
-                <button onClick={confirmResolve} className="btn-foil !py-1.5 text-xs">Confirmer</button>
+                <button onClick={() => { setPendingOutcome(null); setNote(''); }} disabled={resolving} className="btn-quiet !py-1.5 text-xs disabled:opacity-50">Annuler</button>
+                <button onClick={() => void confirmResolve()} disabled={resolving} className="btn-foil !py-1.5 text-xs disabled:opacity-50">{resolving ? 'Enregistrement…' : 'Confirmer'}</button>
               </div>
             </div>
           )}

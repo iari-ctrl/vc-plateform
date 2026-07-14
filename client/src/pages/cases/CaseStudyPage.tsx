@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Sparkles } from 'lucide-react';
 import { caseBySlug } from '@/content';
-import type { CaseStudy } from '@/content/types';
 import { ActiveProse } from '@/components/reading/ActiveProse';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Target, CheckCircle2, BookOpen, ArrowUpRight, Sparkles } from 'lucide-react';
 import { deliverableBySlug, caseById, ecosystemById, memoById, lessonById } from '@/content';
-import type { Deliverable, DeliverableModelRef } from '@/content/types';
+import type { DeliverableModelRef } from '@/content/types';
 import { Markdown } from '@/lib/markdown';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';

@@ -78,8 +78,9 @@ export default function OnboardingPage() {
   const { pinContainerRef, scrollContentRef, scrollTo, handleRegion } = useIkigaiScrollPinning({ modes, setActiveDim });
 
   const chooseArchetype = (id: string | null) => {
-    setChosen(id);
-    setChosenArchetype(id);
+    const result = setChosenArchetype(id);
+    if (result.ok) setChosen(id);
+    return result;
   };
 
   if (phase === 'quiz') return <OrientationTest onBack={exitQuiz} chosenArchetype={chosenArchetype} onSuggestArchetype={chooseArchetype} />;
@@ -118,7 +119,7 @@ export default function OnboardingPage() {
             <span className="h-3 w-px bg-outline-variant" />
             <span>03 archétypes</span>
             <span className="h-3 w-px bg-outline-variant" />
-            <span>07 questions</span>
+            <span>{String(IKIGAI.questions.length).padStart(2, '0')} questions</span>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <button onClick={enterQuiz} className="btn-foil">
@@ -252,12 +253,12 @@ export default function OnboardingPage() {
           <div className="premium-card grid gap-6 p-7 sm:p-9 lg:grid-cols-[1.4fr_1fr] lg:items-center">
             <div>
               <p className="mt-3 max-w-xl text-surface-variant">
-                Sept questions courtes situent votre profil d’apprentissage et vos parcours recommandés. Aucune réponse
+                {IKIGAI.questions.length} questions courtes situent votre profil d’apprentissage et vos parcours recommandés. Aucune réponse
                 n’est enregistrée tant que vous n’avez pas terminé le test.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <button onClick={enterQuiz} className="btn-foil">
-                  <ClipboardList size={16} /> Commencer le test (7 questions)
+                  <ClipboardList size={16} /> Commencer le test ({IKIGAI.questions.length} questions)
                 </button>
                 <span className="self-center text-xs text-surface-variant">≈ 2 minutes</span>
               </div>
@@ -265,7 +266,7 @@ export default function OnboardingPage() {
             <div className="rounded-2xl border border-outline-variant bg-surface-container-low/60 p-5">
               <p className="eyebrow mb-3">Ce que le test révèle</p>
               <ul className="space-y-2 text-sm text-surface-variant">
-                <li className="flex gap-2.5"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--primary)]" /> Votre profil d’apprentissage parmi six</li>
+                <li className="flex gap-2.5"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--primary)]" /> Votre profil d’apprentissage parmi {IKIGAI.profiles.length}</li>
                 <li className="flex gap-2.5"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--primary)]" /> Vos affinités par profil, en clair</li>
                 <li className="flex gap-2.5"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--primary)]" /> Vos parcours recommandés et l’archétype relié</li>
               </ul>

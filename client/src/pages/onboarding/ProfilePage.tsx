@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { ArrowRight, RotateCcw, LogOut, UserPlus, Shield, Sun, Moon, Target } from 'lucide-react';
+import { ArrowRight, RotateCcw, Sun, Moon, Target } from 'lucide-react';
 import { profileById } from '@/content';
 import { t } from '@/content/parcours';
 import { recommendedPaths, TIME_LABEL } from '@/lib/ikigai';
@@ -8,23 +7,20 @@ import { KanjiSeal, Fleuron } from '@/components/ornaments/Ornaments';
 import { IkigaiCahierSummary } from '@/components/ikigai/IkigaiCahierSummary';
 import { SectionHeading } from '@/components/ui/primitives';
 import { useUserData } from '@/context/UserDataContext';
-import { useUI } from '@/context/UIContext';
 import { useTheme } from '@/context/ThemeContext';
-import { initials } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 
 export default function ProfilePage() {
-  usePageMeta('Mon profil', 'Votre profil d’apprentissage, vos préférences et votre compte.');
-    const { profile } = useUserData();
-    const { theme, toggle } = useTheme();
-  const navigate = useNavigate();
+  usePageMeta('Mon profil', 'Votre profil d’apprentissage et vos préférences, enregistrés uniquement sur cet appareil.');
+  const { profile } = useUserData();
+  const { theme, toggle } = useTheme();
 
   const learningProfile = profile ? profileById(profile.profileType) : undefined;
   const recPaths = learningProfile ? recommendedPaths(learningProfile, profile?.timeBudget) : [];
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
-      <SectionHeading eyebrow="Votre espace" title="Mon profil" />
+      <SectionHeading eyebrow="Votre espace" title="Mon profil" description="Votre profil, votre cahier et vos préférences sont enregistrés uniquement sur cet appareil." />
 
       <div className="mt-8 space-y-6">
         {/* Learning profile */}

@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock, BookOpen } from 'lucide-react';
 import { courseBySlug, lessonsForCourse, LEVEL_LABEL } from '@/content';
-import type { Course } from '@/content/types';
 import { parcoursById, parcoursForCourse, t } from '@/content/parcours';
 import { LessonRow } from '@/components/cards';
 import { ProgressBar, PageLoader } from '@/components/ui/primitives';

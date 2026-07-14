@@ -6,7 +6,7 @@
  * action (see `UserDataContext.addNote` usage in the cahier UI). The previous
  * orientation result is preserved as history when the test is re-taken.
  */
-import { storage, STORAGE_KEYS } from '@/lib/storage';
+import { storage, STORAGE_KEYS, STORAGE_SUCCESS, type StorageResult } from '@/lib/storage';
 import type { IkigaiMode, UserProfile } from '@/content/types';
 
 export const NOTE_SOURCE = 'ikigai-cahier';
@@ -28,16 +28,16 @@ export const answerKey = (mode: IkigaiMode, n: string) => `${mode}-${n}`;
 export function getReadingMode(): IkigaiMode {
   return storage.get<IkigaiMode>(STORAGE_KEYS.ikigaiMode, 'decouverte');
 }
-export function setReadingMode(mode: IkigaiMode): void {
-  storage.set(STORAGE_KEYS.ikigaiMode, mode);
+export function setReadingMode(mode: IkigaiMode): StorageResult {
+  return storage.set(STORAGE_KEYS.ikigaiMode, mode);
 }
 
 // ── Cahier free-text answers ────────────────────────────────────────────────
 export function getCahierAnswers(): CahierAnswers {
   return storage.get<CahierAnswers>(STORAGE_KEYS.ikigaiAnswers, {});
 }
-export function setCahierAnswers(answers: CahierAnswers): void {
-  storage.set(STORAGE_KEYS.ikigaiAnswers, answers);
+export function setCahierAnswers(answers: CahierAnswers): StorageResult {
+  return storage.set(STORAGE_KEYS.ikigaiAnswers, answers);
 }
 /** Number of non-empty answers across both reading modes. */
 export function countAnswered(answers: CahierAnswers): number {
@@ -48,9 +48,10 @@ export function countAnswered(answers: CahierAnswers): number {
 export function getChosenArchetype(): string | null {
   return storage.get<string | null>(STORAGE_KEYS.ikigaiArchetype, null);
 }
-export function setChosenArchetype(id: string | null): void {
-  if (id) storage.set(STORAGE_KEYS.ikigaiArchetype, id);
-  else storage.remove(STORAGE_KEYS.ikigaiArchetype);
+export function setChosenArchetype(id: string | null): StorageResult {
+  return id
+    ? storage.set(STORAGE_KEYS.ikigaiArchetype, id)
+    : storage.remove(STORAGE_KEYS.ikigaiArchetype);
 }
 
 // ── Orientation history (kept on retake) ────────────────────────────────────
@@ -58,8 +59,8 @@ export function getHistory(): IkigaiHistoryEntry[] {
   return storage.get<IkigaiHistoryEntry[]>(STORAGE_KEYS.ikigaiHistory, []);
 }
 /** Archive the current saved profile before it is overwritten by a retake. */
-export function archiveProfile(profile: UserProfile | null): void {
-  if (!profile?.profileType) return;
+export function archiveProfile(profile: UserProfile | null): StorageResult {
+  if (!profile?.profileType) return STORAGE_SUCCESS;
   const entry: IkigaiHistoryEntry = {
     profileType: profile.profileType,
     timeBudget: profile.timeBudget,
@@ -68,5 +69,5 @@ export function archiveProfile(profile: UserProfile | null): void {
     takenAt: new Date().toISOString(),
   };
   const next = [entry, ...getHistory()].slice(0, 12);
-  storage.set(STORAGE_KEYS.ikigaiHistory, next);
+  return storage.set(STORAGE_KEYS.ikigaiHistory, next);
 }

@@ -1,15 +1,8 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { storage, STORAGE_KEYS } from '@/lib/storage';
+import { ThemeContext, type Theme } from '@/context/ThemeContext';
 
-type Theme = 'light' | 'dark';
-interface ThemeCtx {
-  theme: Theme;
-  toggle: () => void;
-}
-
-const Ctx = createContext<ThemeCtx | null>(null);
-
-function getInitial(): Theme {
+function getInitialTheme(): Theme {
   const saved = storage.get<Theme | null>(STORAGE_KEYS.theme, null);
   if (saved === 'light' || saved === 'dark') return saved;
   if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
@@ -17,7 +10,7 @@ function getInitial(): Theme {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitial);
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -26,13 +19,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     storage.set(STORAGE_KEYS.theme, theme);
   }, [theme]);
 
-  const toggle = useCallback(() => setTheme((t) => (t === 'dark' ? 'light' : 'dark')), []);
+  const toggle = useCallback(() => setTheme((current) => (current === 'dark' ? 'light' : 'dark')), []);
   const value = useMemo(() => ({ theme, toggle }), [theme, toggle]);
-  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
-}
 
-export function useTheme() {
-  const ctx = useContext(Ctx);
-  if (!ctx) throw new Error('useTheme must be used within ThemeProvider');
-  return ctx;
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }

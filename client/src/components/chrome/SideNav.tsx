@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   Map, Library, BookA, FlaskConical, Newspaper, LayoutDashboard, NotebookPen, Microscope,
@@ -9,7 +9,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
 import { useUI } from '@/context/UIContext';
-import { cn, initials } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 const isLinkActive = (to: string, location: { pathname: string }) =>
   to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
 

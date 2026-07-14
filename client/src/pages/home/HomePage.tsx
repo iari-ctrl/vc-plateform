@@ -83,7 +83,7 @@ export default function HomePage() {
                   Voir les parcours
                 </Link>
               </div>
-              <p className="mt-5 text-xs text-surface-variant">Les contenus publics restent libres. Le compte sert à retrouver notes, favoris et progression.</p>
+              <p className="mt-5 text-xs text-surface-variant">Les contenus publics restent libres. Vos notes, favoris et progression sont enregistrés uniquement sur cet appareil.</p>
               {resume && (
                 <Link
                   to={`/lessons/${resume.slug}`}
@@ -140,7 +140,7 @@ export default function HomePage() {
                   Jamais de mur d’authentification.
                 </h2>
                 <p className="mt-4 text-[0.95rem] leading-relaxed text-[color-mix(in_srgb,var(--on-secondary)_80%,transparent)]">
-                  Explorez les dossiers, analyses, parcours, cours, dictionnaire et simulateurs sans créer de compte. Un compte ne sert qu’à vous suivre : progression, notes, citations et favoris, synchronisés entre vos appareils.
+                  Explorez les dossiers, analyses, parcours, cours, dictionnaire et simulateurs sans créer de compte. Votre progression, vos notes, citations et favoris sont enregistrés uniquement sur cet appareil.
                 </p>
                 <Link to="/blog/pourquoi-nous-ne-bloquons-aucun-chapitre" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--primary)]">
                   Lire notre manifeste <ArrowRight size={15} />

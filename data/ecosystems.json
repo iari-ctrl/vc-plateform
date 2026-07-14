@@ -1647,6 +1647,7 @@
     "author": "L'équipe VC Premium",
     "createdAt": "2026-06-13",
     "updatedAt": "2026-06-13",
+    "verifiedAt": "2026-07-14",
     "readMin": 8,
     "summary": "Le même enseignement que partout dans ce dossier, vérifié à l'échelle du monde : ce n'est ni la démographie ni la technologie qui fait le marché de la santé numérique, c'est le mécanisme de remboursement. L'Allemagne a inventé l'« app sur ordonnance », les États-Unis ont la machine de financement la plus puissante et la bulle la plus spectaculaire, le Royaume-Uni centralise mais avance lentement. La France a copié le meilleur de l'Allemagne ; il lui reste à le faire vivre.",
     "tags": [
@@ -1792,7 +1793,7 @@
             "title": "Financement du capital-risque digital health aux États-Unis",
             "unit": "Md$",
             "caption": "Le pic de 2021, la longue normalisation de 2022-2024, puis un rebond très sélectif en 2025 — tiré par l'IA et concentré sur moins de sociétés, plus grosses.",
-            "source": "Rock Health (financement annuel, États-Unis)",
+            "source": "Rock Health, « 2025 year-end digital health funding overview: A tale of two markets », 12 janvier 2026",
             "points": [
               {
                 "x": "2019",
@@ -1817,7 +1818,7 @@
               },
               {
                 "x": "2024",
-                "y": 10.1
+                "y": 10.5
               },
               {
                 "x": "2025",
@@ -1886,8 +1887,8 @@
         "url": "https://diga.bfarm.de"
       },
       {
-        "label": "Rock Health — rapports de financement digital health",
-        "url": "https://rockhealth.com"
+        "label": "Rock Health — 2025 year-end digital health funding overview (donnée 2024 révisée)",
+        "url": "https://rockhealth.com/insights/2025-year-end-digital-health-funding-overview-a-tale-of-two-markets/"
       },
       {
         "label": "NICE — évaluation des technologies de santé (Royaume-Uni)",

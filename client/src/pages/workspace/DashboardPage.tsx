@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, NotebookPen, Bookmark, Compass, Crosshair, Play, Target } from 'lucide-react';
+import { IKIGAI } from '@/content/ikigai';
 import { LESSONS, lessonById } from '@/content/lessons';
 import { courseById } from '@/content/courses';
 import { profileById } from '@/content/ikigai';
@@ -183,7 +184,7 @@ export default function DashboardPage() {
               <div className="premium-card p-7 text-center">
                 <Fleuron className="text-base" />
                 <h3 className="mt-2 font-headline text-headline-sm font-semibold">Révélez votre profil</h3>
-                <p className="mt-1.5 text-sm text-surface-variant">Sept questions pour personnaliser vos recommandations.</p>
+                <p className="mt-1.5 text-sm text-surface-variant">{IKIGAI.questions.length} questions pour personnaliser vos recommandations.</p>
                 <Link to="/onboarding" className="btn-foil mt-4 !py-2.5"><Target size={15} /> Faire le test</Link>
               </div>
             )}

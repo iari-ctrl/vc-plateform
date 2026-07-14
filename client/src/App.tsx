@@ -36,7 +36,9 @@ const NotesPage = lazy(() => import('@/pages/workspace/NotesPage'));
 const DecisionJournalPage = lazy(() => import('@/pages/workspace/DecisionJournalPage'));
 const ProfilePage = lazy(() => import('@/pages/onboarding/ProfilePage'));
 const SearchPage = lazy(() => import('@/pages/search/SearchPage'));
-const DesignSystemShowcasePage = lazy(() => import('@/pages/system/DesignSystemShowcasePage'));
+const DesignSystemShowcasePage = import.meta.env.DEV
+  ? lazy(() => import('@/pages/system/DesignSystemShowcasePage'))
+  : undefined;
 const NotFoundPage = lazy(() => import('@/pages/system/NotFoundPage'));
 
 function PageFallback() {
@@ -106,7 +108,7 @@ export default function App() {
           <Route path="journal" element={<DecisionJournalPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="search" element={<SearchPage />} />
-          <Route path="design-system" element={<DesignSystemShowcasePage />} />
+          {DesignSystemShowcasePage && <Route path="design-system" element={<DesignSystemShowcasePage />} />}
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>

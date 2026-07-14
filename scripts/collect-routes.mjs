@@ -98,7 +98,7 @@ export function collectRoutes() {
   addCollection(antiPortfolio.entries ?? [], '/anti-portfolio', { changefreq: 'monthly', priority: '0.65' });
 
   for (const post of readJsonDir('blog', [])) {
-    if (!post?.slug) continue;
+    if (!post?.slug || (post.status ?? 'published') !== 'published') continue;
     addRoute(`/blog/${post.slug}`, {
       changefreq: 'monthly',
       priority: '0.7',

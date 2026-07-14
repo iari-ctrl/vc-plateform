@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { IKIGAI } from '@/content';
-import { useNavigate } from 'react-router-dom';
 import { ProgressBar } from '@/components/ui/primitives';
 import { useUserData } from '@/context/UserDataContext';
 import { computeProfile, suggestedArchetype, type OnboardingAnswer } from '@/lib/ikigai';
 import { archiveProfile } from '@/lib/ikigaiCahier';
+import type { StorageResult } from '@/lib/storage';
 
 // ── Orientation test (scored MCQ → learning profile) ─────────────────────────
 export function OrientationTest({
@@ -16,12 +16,13 @@ export function OrientationTest({
 }: {
   onBack: () => void;
   chosenArchetype: string | null;
-  onSuggestArchetype: (id: string | null) => void;
+  onSuggestArchetype: (id: string | null) => StorageResult;
 }) {
   const navigate = useNavigate();
   const { profile: savedProfile, saveProfile } = useUserData();
   const [params, setParams] = useSearchParams();
   const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [saving, setSaving] = useState(false);
   const questions = IKIGAI.questions;
   const last = questions.length - 1;
   const step = Math.min(Math.max(Number.parseInt(params.get('q') ?? '0', 10) || 0, 0), last);
@@ -39,19 +40,30 @@ export function OrientationTest({
     setAnswers((cur) => ({ ...cur, [q.n]: optionIndex }));
   }
 
-  function finish(finalAnswers: Record<string, number>) {
+  async function finish(finalAnswers: Record<string, number>) {
     const list: OnboardingAnswer[] = Object.entries(finalAnswers).map(([questionN, optionIndex]) => ({ questionN, optionIndex }));
     const result = computeProfile(list);
     if (!result) return;
-    // Keep the previous result as history before overwriting it.
-    archiveProfile(savedProfile);
-    void saveProfile({ profileType: result.top.id, timeBudget: result.timeBudget, scores: result.scores });
-    // If the cahier doesn't have a chosen archetype yet, suggest one from the profile.
-    if (!chosenArchetype) {
-      const suggestion = suggestedArchetype(result.top.id);
-      if (suggestion) onSuggestArchetype(suggestion.id);
+
+    setSaving(true);
+    try {
+      // Keep the previous result as history before overwriting it.
+      const archiveResult = archiveProfile(savedProfile);
+      if (!archiveResult.ok) return;
+
+      const saveResult = await saveProfile({ profileType: result.top.id, timeBudget: result.timeBudget, scores: result.scores });
+      if (!saveResult.ok) return;
+
+      // If the cahier doesn't have a chosen archetype yet, suggest one from the profile.
+      if (!chosenArchetype) {
+        const suggestion = suggestedArchetype(result.top.id);
+        if (suggestion && !onSuggestArchetype(suggestion.id).ok) return;
+      }
+
+      navigate('/profile-result', { state: { profileId: result.top.id, scores: result.scores, timeBudget: result.timeBudget } });
+    } finally {
+      setSaving(false);
     }
-    navigate('/profile-result', { state: { profileId: result.top.id, scores: result.scores, timeBudget: result.timeBudget } });
   }
 
   return (
@@ -101,8 +113,8 @@ export function OrientationTest({
               Suivant <ArrowRight size={15} />
             </button>
           ) : (
-            <button onClick={() => finish(answers)} className="btn-foil">
-              Voir mon résultat <ArrowRight size={15} />
+            <button onClick={() => void finish(answers)} disabled={saving} className="btn-foil disabled:opacity-50">
+              {saving ? 'Enregistrement…' : 'Voir mon résultat'} <ArrowRight size={15} />
             </button>
           ))}
       </div>

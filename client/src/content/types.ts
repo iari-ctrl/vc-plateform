@@ -170,6 +170,8 @@ export interface BookRef {
 export interface BlogPost {
   id: string;
   slug: string;
+  /** Publication gate: absent means published for backward compatibility. */
+  status?: 'draft' | 'published';
   title: string;
   subtitle: string;
   author: string;
@@ -311,6 +313,8 @@ export interface EcosystemDossier {
   createdAt: string;
   /** ISO — dernière révision (le dossier est un document vivant). */
   updatedAt: string;
+  /** ISO — dernière vérification factuelle des données et sources. */
+  verifiedAt?: string;
   readMin: number;
   summary: string;
   tags: string[];

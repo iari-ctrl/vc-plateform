@@ -247,7 +247,12 @@
     ],
     "lessonIds": [
       "l-founder-narrative",
-      "l-founder-instruments"
+      "l-founder-instruments",
+      "lf-dilution",
+      "lf-instruments",
+      "lf-liquidation",
+      "lf-board",
+      "lf-dataroom"
     ]
   },
   {

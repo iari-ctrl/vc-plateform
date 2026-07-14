@@ -27,6 +27,7 @@ export default function NotesPage() {
   const { notes, bookmarks, addNote, deleteNote, toggleBookmark } = useUserData();
   const [filter, setFilter] = useState('all');
   const [draft, setDraft] = useState('');
+  const [saving, setSaving] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<Note | null>(null);
 
   const visible = notes.filter((n) => filter === 'all' || n.kind === filter);
@@ -39,11 +40,16 @@ export default function NotesPage() {
     return Array.from(bySource.entries()).map(([source, items]) => ({ source, items }));
   }, [visible]);
 
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!draft.trim()) return;
-    void addNote({ kind: 'note', body: draft.trim() });
-    setDraft('');
+    setSaving(true);
+    try {
+      const result = await addNote({ kind: 'note', body: draft.trim() });
+      if (result.ok) setDraft('');
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -68,7 +74,7 @@ export default function NotesPage() {
               className="w-full resize-none bg-transparent text-sm outline-none placeholder:text-surface-variant"
             />
             <div className="mt-2 flex justify-end">
-              <button type="submit" disabled={!draft.trim()} className="btn-foil !py-2 disabled:opacity-40"><Plus size={15} /> Ajouter au carnet</button>
+              <button type="submit" disabled={!draft.trim() || saving} className="btn-foil !py-2 disabled:opacity-40"><Plus size={15} /> {saving ? 'Enregistrement…' : 'Ajouter au carnet'}</button>
             </div>
           </form>
 

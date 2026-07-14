@@ -31,6 +31,11 @@
       "primary": "p-penser-gp",
       "then": ["p-passer-principal", "p-carry", "p-levee-fonds-lp"],
       "express": "p-carry"
+    },
+    "investor-relations": {
+      "primary": "p-levee-fonds-lp",
+      "then": ["p-penser-gp", "p-carry"],
+      "express": "p-carry"
     }
   },
   "byArchetype": {

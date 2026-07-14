@@ -59,14 +59,15 @@ export default function LessonPage() {
   const pending = !bundledReady;
   const { progress, setProgress } = useUserData();
   const [readPct, setReadPct] = useState(0);
+  const [completing, setCompleting] = useState(false);
   // Reader depth is a global, client-only preference; defaults to "court" everywhere.
   const [depth, setDepth] = useState<ReadingDepth>(() => storage.get<ReadingDepth>(STORAGE_KEYS.readingDepth, 'court'));
   const changeDepth = (d: ReadingDepth) => {
-    setDepth(d);
-    storage.set(STORAGE_KEYS.readingDepth, d);
+    const result = storage.set(STORAGE_KEYS.readingDepth, d);
+    if (result.ok) setDepth(d);
   };
   const articleRef = useRef<HTMLDivElement>(null);
-  const initialised = useRef(false);
+  const lastMarkedLessonId = useRef<string | null>(null);
 
   usePageMeta(lesson?.title, lesson?.summary, { type: 'article' });
 
@@ -83,13 +84,17 @@ export default function LessonPage() {
 
   // Mark as "reading" on first view (without downgrading a completed lesson).
   useEffect(() => {
-    if (!lesson || initialised.current) return;
-    initialised.current = true;
+    if (!lesson || lastMarkedLessonId.current === lesson.id) return;
+    lastMarkedLessonId.current = lesson.id;
     if (progress[lesson.id]?.status !== 'done') {
       void setProgress({ lessonId: lesson.id, courseId: lesson.courseId, pathId: parcours?.id, status: 'reading', percent: Math.max(progress[lesson.id]?.percent ?? 0, 5) });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lesson?.id]);
+
+  useEffect(() => {
+    setReadPct(0);
+  }, [slug]);
 
   // Track reading progress for the top bar.
   useEffect(() => {
@@ -115,10 +120,19 @@ export default function LessonPage() {
   const hasShort = typeof lesson.bodyShort === 'string' && lesson.bodyShort.length > 0;
   const bodySource = hasShort && depth === 'court' ? (lesson.bodyShort as string) : lesson.body;
 
-  function complete() {
+  async function complete() {
     if (!lesson) return;
-    void setProgress({ lessonId: lesson.id, courseId: lesson.courseId, pathId: parcours?.id, status: 'done', percent: 100 });
-    if (next) navigate(`/lessons/${next.slug}`);
+    if (isDone) {
+      if (next) navigate(`/lessons/${next.slug}`);
+      return;
+    }
+    setCompleting(true);
+    try {
+      const result = await setProgress({ lessonId: lesson.id, courseId: lesson.courseId, pathId: parcours?.id, status: 'done', percent: 100 });
+      if (result.ok && next) navigate(`/lessons/${next.slug}`);
+    } finally {
+      setCompleting(false);
+    }
   }
 
   return (
@@ -228,8 +242,8 @@ export default function LessonPage() {
         <div className="mt-12 flex flex-col items-center rounded-2xl border border-outline-variant bg-surface-container-low p-7 text-center">
           <p className="font-headline text-headline-sm font-semibold">{isDone ? 'Leçon terminée' : 'Avez-vous terminé cette leçon ?'}</p>
           <p className="mt-1 text-sm text-surface-variant">{next ? `Suivant : ${next.title}` : 'Dernière leçon de ce cours.'}</p>
-          <button onClick={complete} className="btn-foil mt-5">
-            {isDone ? (next ? 'Continuer' : 'Revenir au cours') : 'Marquer comme terminé'}
+          <button onClick={() => void complete()} disabled={completing} className="btn-foil mt-5 disabled:opacity-50">
+            {completing ? 'Enregistrement…' : isDone ? (next ? 'Continuer' : 'Revenir au cours') : 'Marquer comme terminé'}
             {next ? <ArrowRight size={16} /> : <Check size={16} />}
           </button>
         </div>

@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import {
   parcoursBySlug, resolveStep, lessonIdsForParcours, visibleSteps, t,
-  FAMILY_META, type ParcoursStep, type StepType, type TimeBudget, type Parcours,
+  FAMILY_META, type ParcoursStep, type StepType, type TimeBudget,
 } from '@/content/parcours';
 import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { ProgressBar, LevelBadge, PageLoader } from '@/components/ui/primitives';

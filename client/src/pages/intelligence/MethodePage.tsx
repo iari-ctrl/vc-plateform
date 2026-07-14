@@ -5,7 +5,6 @@ import { DELIVERABLES } from '@/content/deliverables';
 import { BlogCard, DeliverableCard } from '@/components/cards';
 import { SectionHeading, Reveal } from '@/components/ui/primitives';
 import { usePageMeta } from '@/lib/seo';
-import type { BlogPost } from '@/content/types';
 
 export default function MethodePage() {
   usePageMeta(

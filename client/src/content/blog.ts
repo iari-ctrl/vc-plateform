@@ -4,6 +4,7 @@ const blogModules = import.meta.glob<{ default: BlogPost }>('../../../data/blog/
 
 export const BLOG = Object.values(blogModules)
   .map((module) => module.default)
+  .filter((post) => (post.status ?? 'published') === 'published')
   .sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
 
 export const blogBySlug = (slug: string) => BLOG.find((b) => b.slug === slug);

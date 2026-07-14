@@ -67,7 +67,7 @@ export function archetypePaths(archetype: IkigaiArchetype): Parcours[] {
  */
 export function suggestedArchetype(profileId?: string): IkigaiArchetype | undefined {
   if (!profileId) return undefined;
-  return IKIGAI.archetypes.find((a) => a.profileIds.includes(profileId)) ?? IKIGAI.archetypes[0];
+  return IKIGAI.archetypes.find((a) => a.profileIds.includes(profileId));
 }
 
 export const TIME_LABEL: Record<string, string> = {

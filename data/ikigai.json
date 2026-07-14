@@ -386,7 +386,7 @@
         "Vous ne regardez pas l'horloge pendant une [[dd|DD]] — vous regardez le planning de l'[[ic|IC]]."
       ],
       "metrics": ["DPI cible 2,0× sur 10 ans", "TVPI 3,5×", "Ticket moyen 300–800 k€", "8–12 lignes par vintage"],
-      "profileIds": ["principal-mindset", "analyst-progression"],
+      "profileIds": ["principal-mindset", "analyst-progression", "investor-relations"],
       "recommendedPathIds": ["investment-thesis", "fund-economics", "portfolio"]
     },
     {
