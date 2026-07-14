@@ -1,17 +1,17 @@
-# Procédure de publication (« push ») manuelle
+# Procédure de sauvegarde Git (« push »)
 
-Runbook de publication Git/GitHub depuis la racine du projet. Application **100 % statique, locale et FR-only** : pas d'API, pas de base, pas de tests serveur, pas de routes `/fr` `/en`.
+Runbook de sauvegarde Git/GitHub depuis la racine du projet. Application **100 % statique, locale et FR-only** : pas d'API, pas de base, pas de tests serveur, pas de routes `/fr` `/en`.
 
 > [!IMPORTANT]
-> **Le seul workflow GitHub est `.github/workflows/deploy-pages.yml`** : à chaque push sur `master`, il relance `split:content`, build le client (`--base=/vc-plateform/`, `VITE_API_DISABLED=true`) et publie `client/dist` sur la branche `gh-pages`. Il **ne lance ni `validate:content`, ni `lint`, ni les tests**. Ces contrôles de cohérence ne sont donc joués **que** localement, à l'étape 4 ci-dessous : rien ne les rejoue en ligne. Un contenu invalide poussé sur `master` sera déployé tel quel.
+> **Un push ne publie plus le site.** `.github/workflows/deploy-pages.yml` est limité à un déclenchement manuel (`workflow_dispatch`) et ne doit pas être exécuté pendant la phase local-first. GitHub sert actuellement de sauvegarde du code ; la remise en ligne fera l'objet d'un lot distinct.
 
 Cette procédure vise une exécution manuelle, sans assistance, et suppose un terminal ouvert à la racine du projet (`vc-platform`).
 
-## Ce que « publier » signifie ici
+## Ce que « sauvegarder » signifie ici
 
-Le travail passe par trois états successifs. Il est d'abord *enregistré sur l'ordinateur* (les `commits` git) ; il n'est pas encore visible ailleurs. Il devient ensuite *en ligne* lorsqu'on l'envoie vers GitHub (le `push`). La version officielle du site est la branche `master` : ce qui s'y trouve fait référence. Publier consiste donc à amener le travail local jusqu'à `master`, en ligne, après avoir vérifié sa cohérence.
+Le travail est d'abord enregistré sur l'ordinateur par des `commits` Git. Un `push` en copie ensuite l'historique sur GitHub comme sauvegarde du code, sans rendre l'application publique et sans lancer GitHub Pages. La branche `master` reste la référence du code sauvegardé ; elle n'est pas, dans cette phase, un signal de publication.
 
-Le piège propre à ce projet : certains fichiers de `data/` sont *fabriqués automatiquement* à partir des textes (glossaire, leçons), et le plan du site (`sitemap.xml`) l'est aussi. Un working tree « propre » ne garantit pas que ces fichiers dérivés sont à jour : ils ne le sont que si l'on a relancé leur fabrication après la dernière édition. La procédure relance donc systématiquement cette fabrication avant de publier.
+Le piège propre à ce projet : certains fichiers de `data/` sont *fabriqués automatiquement* à partir des textes (glossaire, leçons), et le plan du site (`sitemap.xml`) l'est aussi. Un working tree « propre » ne garantit pas que ces fichiers dérivés sont à jour : la procédure relance donc leur fabrication avant la sauvegarde.
 
 ## Étapes
 
@@ -43,16 +43,15 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
    ```
    Si rien ne bouge, les fichiers dérivés étaient déjà à jour.
 
-4. **Passer les contrôles de cohérence — en local, car rien ne les rejoue en ligne.**
+4. **Passer les contrôles de cohérence en local.**
    ```bash
-   npm run validate:content:strict
-   npm run lint
+   npm run check
    npm run build
-   npm run test --workspace client
+   git diff --check
    ```
-   Chacune doit se terminer sans erreur (code de sortie 0). Le `lint` peut afficher des *avertissements* (`warning`) sans que ce soit bloquant ; seules les *erreurs* le sont. En cas d'échec, corriger, puis reprendre à l'étape 3. Ne pas publier tant que tout n'est pas au vert : le workflow de déploiement ne referait pas ces vérifications. Le build recrée `client/dist`, qui reste un artefact généré local et ne doit pas être traité comme source.
+   Chaque commande doit se terminer sans erreur. Le lint refuse aussi les avertissements. En cas d'échec, corriger puis reprendre à l'étape 3. Le build recrée `client/dist`, qui reste un artefact local et ne doit pas être traité comme source.
 
-5. **Amener le travail dans la version officielle et l'envoyer.**
+5. **Amener le travail dans la branche de sauvegarde et l'envoyer, uniquement sur demande.**
    ```bash
    git checkout master
    git merge --ff-only <nom-de-la-branche-de-travail>
@@ -60,11 +59,11 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
    ```
    `--ff-only` garantit que l'opération échoue plutôt que de créer une fusion hasardeuse si quelque chose a divergé entre-temps.
 
-6. **Confirmer que le local et l'en-ligne sont identiques, puis que le déploiement a réussi.**
+6. **Confirmer que le local et la sauvegarde distante sont identiques.**
    ```bash
    git rev-list --left-right --count origin/master...master
    ```
-   Le résultat attendu est `0  0`. Vérifier enfin, sur la page Actions du dépôt (https://github.com/iari-ctrl/vc-plateform/actions), que le workflow **Deploy frontend to GitHub Pages** s'est terminé au vert. Ce workflow **construit et déploie** seulement : il ne valide pas le contenu. La cohérence reposait entièrement sur l'étape 4.
+   Le résultat attendu est `0  0`. Aucun workflow Pages ne doit avoir démarré : son déclenchement est désormais strictement manuel.
 
 ## Ce que garantit chaque contrôle
 
@@ -73,8 +72,8 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
 - `validate:content:strict` : la structure, les références croisées (un `pathId`, un `glossaryRef`, un marqueur `[[..]]` qui pointe dans le vide est refusé) et les marqueurs inline sont cohérents, sans tolérance.
 - `lint` : la qualité du code client.
 - `build` : le site se construit réellement (et relance au passage `split` + validation + prérendu).
-- `test` (client) : les comportements clés (routes client, profil/ikigai, simulateurs, journal de décision) ne sont pas cassés.
+- `test` : les comportements clés (routes client, profil/ikigai, persistance locale, simulateurs, journal de décision) ne sont pas cassés.
 
 ## En cas de besoin d'annulation
 
-Tant que l'étape 5 (`git push`) n'a pas été lancée, rien n'est en ligne : on peut tout reprendre librement. Après le push, revenir en arrière sur `master` suppose un `git revert` (crée un commit qui annule) ou un `git reset` suivi d'un push forcé (plus risqué) — à ne faire qu'avec précaution.
+Tant que l'étape 5 (`git push`) n'a pas été lancée, la sauvegarde distante n'a pas changé. Après le push, préférer `git revert`, qui conserve l'historique ; éviter toute réécriture forcée de `master`.

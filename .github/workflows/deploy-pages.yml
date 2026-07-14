@@ -1,8 +1,9 @@
-name: Deploy frontend to GitHub Pages
+name: Deploy frontend to GitHub Pages (manual)
 
 on:
-  push:
-    branches: [master]
+  # GitHub is currently used as a code backup. Publishing stays an explicit,
+  # manual action until the local-first product and its content are ready.
+  workflow_dispatch:
 
 permissions:
   contents: write

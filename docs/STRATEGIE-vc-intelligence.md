@@ -1240,7 +1240,7 @@ Règle :
 
 Objectif : stabiliser le projet avant transformation.
 
-État : largement avancé au 2026-07-07. Git est en place ; validation contenu, validation stricte, validation glossaire, lint, TypeScript, tests client et génération de sitemap cadrent la base de publication en local. Le projet est désormais statique : plus de seed DB, plus de serveur applicatif, plus d'export CMS. Le risque technique principal n'est plus la divergence JSON/CMS, mais un déploiement incomplet si la publication GitHub Pages ne rejoue pas tous les garde-fous locaux.
+État : largement avancé au 2026-07-14. Git est en place comme sauvegarde du code ; validation contenu, validation stricte, validation glossaire, lint, TypeScript, tests client et génération de sitemap cadrent la base locale. Le projet est désormais statique : plus de seed DB, plus de serveur applicatif, plus d'export CMS. La publication est volontairement reportée jusqu'à stabilisation du local-first, finalisation de la formation et consolidation d'Intelligence VC ; le workflow Pages est manuel et ne doit pas être lancé dans cette phase.
 
 Actions :
 
@@ -1250,7 +1250,7 @@ Actions :
 4. lancer build racine + prérendu avant publication ;
 5. documenter les erreurs ;
 6. vérifier qu'aucun fichier `data/generated/*` n'a été modifié à la main ;
-7. durcir le workflow GitHub Pages pour rejouer les garde-fous utiles ;
+7. conserver le workflow GitHub Pages en déclenchement manuel jusqu'au lot de remise en ligne ;
 8. documenter rollback ;
 9. établir checklist de release ;
 10. documenter le mode public-first initial pour réputation et SEO.

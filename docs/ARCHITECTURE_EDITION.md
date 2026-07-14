@@ -522,15 +522,17 @@ npm run dev            # serveur Vite local (HMR) : http://localhost:5173 (prede
 
 npm run split:content  # régénère les index/contenus scindés (glossaire + leçons)
 npm run build          # prebuild (split → validate → sitemap) · build client (vite) · postbuild = prerender (scripts/prerender.mjs)
-npm run lint           # eslint (client)
-npm run test --workspace client  # Vitest client (safeHttpUrl, computeProfile, simulateurs, decisionJournal)
+npm run typecheck      # TypeScript client
+npm run lint           # eslint client, sans avertissement toléré
+npm run test           # Vitest client
+npm run check          # validation stricte + glossaire + TypeScript + lint + tests
 npm run validate:glossary        # contrôle custom du glossaire final
 npm run validate:content         # shape + références croisées + marqueurs [[..]]/{{..}}
 npm run validate:content:strict  # idem mais warnings fatals
 ```
 
 > [!IMPORTANT]
-> **Il n'y a pas de CI de validation.** Le seul workflow GitHub est `.github/workflows/deploy-pages.yml` : à chaque push sur `master`, il relance `split:content`, build le client (`--base=/vc-plateform/`, `VITE_API_DISABLED=true`) et publie `client/dist` sur `gh-pages`. Il **ne joue ni `validate:content`, ni `lint`, ni les tests**. Ces contrôles se lancent en local avant publication — voir `Suivis/PROCEDURE_PUSH.md`.
+> **Phase local-first.** GitHub sert actuellement de sauvegarde du code. Un push ne publie rien : `.github/workflows/deploy-pages.yml` est limité à un déclenchement manuel (`workflow_dispatch`) et ne doit pas être exécuté avant le lot de remise en ligne. Les garde-fous se jouent localement avec `npm run check`, puis `npm run build` — voir `Suivis/PROCEDURE_PUSH.md`.
 
 > [!IMPORTANT]
 > Après une édition de code, de design ou de données, Vite recharge à chaud (HMR) l'application si `npm run dev` tourne. L'architecture étant 100 % statique, un seul terminal suffit.

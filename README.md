@@ -11,7 +11,7 @@ Une plateforme **statique** d'intelligence VC, enrichie par une couche de format
 ## ✦ Documentation
 
 - `docs/` porte la documentation **de référence maintenue** : [`ARCHITECTURE_EDITION.md`](docs/ARCHITECTURE_EDITION.md) (manuel d'architecture et d'édition), [`DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md), [`STRATEGIE-vc-intelligence.md`](docs/STRATEGIE-vc-intelligence.md) (direction produit) et `parcours/` (pipeline de conception des parcours).
-- `Suivis/` porte le **suivi vivant** : [`ETAT.md`](Suivis/ETAT.md) (état vérifié, compteurs, risques, priorités), [`JOURNAL.md`](Suivis/JOURNAL.md) (journal daté) et [`PROCEDURE_PUSH.md`](Suivis/PROCEDURE_PUSH.md) (procédure de publication).
+- `Suivis/` porte le **suivi vivant** : [`ETAT.md`](Suivis/ETAT.md) (état vérifié, compteurs, risques, priorités), [`JOURNAL.md`](Suivis/JOURNAL.md) (journal daté) et [`PROCEDURE_PUSH.md`](Suivis/PROCEDURE_PUSH.md) (procédure de sauvegarde Git ; la publication est reportée).
 - En cas de doute, l'état réel se vérifie dans `client/`, `data/`, `shared/routes.mjs` et les scripts du `package.json`.
 
 ---
@@ -60,14 +60,16 @@ npm run dev
 | `npm run split:content` | Régénère les index/contenus scindés (`split:glossary` + `split:lessons`) |
 | `npm run build` | `prebuild` (split → validate → sitemap), build client (vite), puis `postbuild` → **prérendu statique** |
 | `npm run prerender` | Prérend les routes publiques en HTML statique (`client/dist/<route>/index.html`) — lancé automatiquement après `build` |
-| `npm run lint` | ESLint (client) |
-| `npm run test --workspace client` | Tests Vitest client (`safeHttpUrl`, `computeProfile`, simulateurs, journal de décision) |
+| `npm run typecheck` | Vérification TypeScript du client |
+| `npm run lint` | ESLint client, sans avertissement toléré |
+| `npm run test` | Tests Vitest du client |
+| `npm run check` | Validation stricte + glossaire + TypeScript + lint + tests |
 | `npm run validate:content` | Vérifie shape, références croisées et marqueurs dictionnaire `[[..]]` / `{{..}}` |
 | `npm run validate:content:strict` | Idem, warnings fatals |
 | `npm run validate:glossary` | Contrôle custom du glossaire final (slugs uniques, `id === slug`, liens, aliases) |
 | `npm run generate:sitemap` | Régénère le sitemap |
 
-> **Déploiement.** Le seul workflow GitHub est `.github/workflows/deploy-pages.yml` : à chaque push sur `master`, il relance `split:content`, build le client avec `--base=/vc-plateform/` et `VITE_API_DISABLED=true`, puis publie `client/dist` sur GitHub Pages. Il **ne fait ni validation, ni lint, ni tests** : ces contrôles se lancent en local avant publication (voir [`Suivis/PROCEDURE_PUSH.md`](Suivis/PROCEDURE_PUSH.md)).
+> **Statut local-first.** Git et GitHub servent actuellement à sauvegarder le code. Un push ne publie plus le site : `.github/workflows/deploy-pages.yml` ne peut être lancé que manuellement (`workflow_dispatch`) et ne doit pas l'être avant une décision explicite de remise en ligne. Les contrôles se jouent en local avec `npm run check`, puis `npm run build` (voir [`Suivis/PROCEDURE_PUSH.md`](Suivis/PROCEDURE_PUSH.md)).
 
 > **État vérifié, compteurs, risques et priorités** : [`Suivis/ETAT.md`](Suivis/ETAT.md).
 
@@ -132,7 +134,9 @@ node scripts/prerender.mjs --filter=/blog/voir-comme-un-etat --limit=1   # itér
 
 ---
 
-## ✦ Vers la production
+## ✦ Remise en ligne future
+
+La remise en ligne est volontairement reportée : la priorité actuelle est une base locale fiable, puis la finalisation de la formation et d'une première couche d'Intelligence VC. Les choix ci-dessous décrivent la cible future, pas le fonctionnement courant.
 
 - **Mode de rendu — tranché.** SPA (CSR) + **prérendu statique des routes publiques au build** : OpenGraph et `canonical` par page sont présents dans le HTML statique pour le SEO et le partage social.
 - Servir le `client/dist` derrière un CDN (Vercel, Netlify, GitHub Pages). L'API ayant été supprimée, le déploiement est un simple hébergement de fichiers statiques.

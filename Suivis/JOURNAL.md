@@ -6,6 +6,31 @@ Le journal des travaux antérieurs à la migration (passes du 2026-05-30 au 2026
 
 ---
 
+## 2026-07-14 — Fiabilisation local-first, formation et Intelligence VC
+
+Objet : consolider la base locale avant toute remise en ligne, fermer les incohérences de formation prioritaires et ajouter les garde-fous éditoriaux minimums.
+
+Travaux :
+
+- Persistance typée (`StorageResult` / `StorageFailure`), registre observable, alerte globale accessible et mutations React appliquées uniquement après écriture réussie.
+- Consommateurs notes, journal, citations, favoris, orientation, cahier et progression adaptés aux échecs ; promesses de compte/synchronisation remplacées par un message explicite « uniquement sur cet appareil ».
+- Aiguillage `investor-relations`, archétype `architecte`, compteurs d'orientation dérivés des 9 questions, cours fondateur à 7 leçons et suivi de navigation corrigé.
+- Validation étendue aux profils, archétypes, relations cours-leçons, ordres, `memos` et `antiPortfolio`.
+- Statut brouillon/publié pour les analyses ; Flatland masqué de toutes les surfaces publiques. Dossier Rock Health corrigé et daté de sa vérification.
+- Workflow Pages rendu exclusivement manuel ; Git/GitHub documentés comme sauvegarde du code pendant la phase local-first.
+
+Vérifications :
+
+- `npm ci` : exit 0.
+- `npm run check` : exit 0 — validation stricte, glossaire, TypeScript, lint 0 warning, 12 fichiers / 67 tests Vitest et 1 test Node.
+- `npm run build` : exit 0 — sitemap 572 routes, build client 1 745 modules, prérendu 572/572.
+- `git diff --check` : exit 0.
+- Contrôle navigateur intégré indisponible dans l'environnement ; aucune validation visuelle manuelle n'est revendiquée.
+
+Aucun push ni lancement du workflow Pages.
+
+---
+
 ## 2026-07-07 — Recentrage V1 FR et remise à jour du suivi
 
 Objet : aligner les documents de suivi sur la décision V1 française, routes non localisées et architecture statique sans backend.
