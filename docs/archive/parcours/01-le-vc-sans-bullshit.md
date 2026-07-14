@@ -1,5 +1,7 @@
 # Parcours 01 — Le VC sans bullshit
 
+> **Archive historique — document non exécutable.** Ce brouillon a servi à concevoir le parcours désormais publié dans `data/parcours.json` et ses registres de leçons. Il peut contenir des formulations ou pistes non reprises ; il ne constitue plus une source de vérité.
+
 > **Famille** Découvrir · **Niveau** débutant · **Temps** ~1 h (7 épisodes) · **Profil** le Débutant curieux
 > **La promesse :** en 1 h, comprends comment l'argent passe de l'épargne aux fondateurs — et pourquoi 9 startups sur 10 doivent mourir pour que le métier marche.
 >

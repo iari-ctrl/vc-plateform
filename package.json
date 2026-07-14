@@ -10,7 +10,6 @@
   "scripts": {
     "predev": "npm run split:content",
     "dev": "npm run dev --workspace client",
-    "dev:client": "npm run dev --workspace client",
     "split:content": "npm run split:glossary && npm run split:lessons",
     "split:glossary": "node scripts/split-glossary.mjs",
     "split:lessons": "node scripts/split-lessons.mjs",

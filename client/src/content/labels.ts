@@ -16,9 +16,25 @@ export const ECOSYSTEM_KIND_LABEL: Record<string, string> = {
   these: 'Thèse transverse',
 };
 
-export function lessonHref(lesson: { slug: string }) {
-  return `/lessons/${lesson.slug}`;
-}
-export function courseHref(course: { slug: string }) {
-  return `/courses/${course.slug}`;
-}
+export const CASE_KIND_LABEL: Record<string, string> = {
+  startup: 'Startup',
+  fund: 'Fonds',
+  deal: 'Deal',
+  market: 'Marché',
+};
+
+export const SEARCH_TYPE_LABEL = {
+  course: 'Cours',
+  lesson: 'Leçon',
+  glossary: 'Dictionnaire',
+  case: 'Étude de cas',
+  deliverable: 'Livrable',
+  blog: 'Analyse',
+  path: 'Parcours',
+  simulator: 'Simulateur',
+  'anti-portfolio': 'Anti-portfolio',
+  memo: 'Memo annoté',
+  ecosystem: 'Écosystème',
+} as const;
+
+export type SearchHitType = keyof typeof SEARCH_TYPE_LABEL;

@@ -1,29 +1,11 @@
 // Couche « Parcours » — trajectoires orientées objectif posées au-dessus des
-// matières (leçons, cours, cas, simulateurs). Voir docs/parcours-apprentissage-conception.md.
-//
-// Non destructif : ce fichier vit à côté de `types.ts`. Le type `Level` y est
-// déjà défini ('debutant' | 'intermediaire' | 'avance' | 'tous') — on le réimporte
-// plutôt que de le redéclarer, pour rester aligné avec la bibliothèque existante.
-//
-// À l'intégration : `import { Parcours } from './parcoursTypes'` puis charger
-// `@data/parcours.json` comme les autres jeux de données.
+// matières (leçons, cours, cas, simulateurs). Les conventions éditoriales sont
+// décrites dans docs/parcours/README.md.
 
 import type { Level } from './types';
 
-// ── Textes FR ────────────────────────────────────────────────────────────────
-// Helper conservé pour les appels existants (`t(parcours.title)`), mais la V1 ne
-// sert plus de variantes localisées : les champs texte sont des chaînes FR.
-export type LocalizedText = string;
-
-export function t(text: LocalizedText | undefined): string {
-  return text ?? '';
-}
-
 /** Perspective d'apprentissage (décision n°1 : la levée se lit des deux sièges). */
 export type Perspective = 'founder' | 'investor' | 'both';
-
-/** Mode de progression (décision n°3 : souple par défaut, verrou optionnel). */
-export type Gating = 'soft' | 'lock';
 
 /** Familles de parcours (les « étagères » de la page Parcours). */
 export type ParcoursFamily =
@@ -61,21 +43,21 @@ export interface ParcoursStep {
   order: number;
   type: StepType;
   ref: { kind: StepRefKind; id: string };
-  label: LocalizedText;
+  label: string;
   /** 'existant' = atome déjà dans la bibliothèque ; 'a-produire' = contenu neuf. */
   status: 'existant' | 'a-produire';
   /** Étape décisive pour la suite — affichée « important pour la suite » (décision n°3). */
   keystone?: boolean;
   /** Prérequis conseillé, montré en filigrane (jamais bloquant en mode soft). */
-  prereqNote?: LocalizedText;
+  prereqNote?: string;
   note?: string;
 }
 
 /** Le jalon : le livrable concret qui couronne le parcours (récompense, pas examen). */
 export interface ParcoursMilestone {
   type: string; // 'deal-memo' | 'deck' | 'cap-table' | 'quiz' | 'none' | ...
-  label: LocalizedText;
-  description: LocalizedText;
+  label: string;
+  description: string;
   /** Décision n°2 : auto-évaluation d'abord, revue par les pairs ensuite. */
   evaluation?: ('auto' | 'peer')[];
   rubricId?: string;
@@ -87,14 +69,14 @@ export interface Parcours {
   slug: string;
   family: ParcoursFamily;
   roadmap: ParcoursRoadmap;
-  title: LocalizedText;
+  title: string;
   /** La promesse, en une phrase — affichée avant tout sommaire. */
-  hook: LocalizedText;
+  hook: string;
   kanji?: string;
   accent?: string;
-  goal: LocalizedText;
-  forWhom: LocalizedText[];
-  /** Siège d'apprentissage (décision n°1). Défaut 'investor' si absent ; 'both' pour la levée. */
+  goal: string;
+  forWhom: string[];
+  /** Siège d'apprentissage explicite ; 'both' affiche le point de vue des deux parties. */
   perspective?: Perspective;
   level: Level;
   /** Niveau d'entrée conseillé (peut différer de `level`). */
@@ -103,18 +85,16 @@ export interface Parcours {
     coreHours: number;
     withBonusHours?: number;
     sessions?: number;
-    cadence?: LocalizedText;
+    cadence?: string;
   };
   /** Budgets-temps auxquels le parcours convient. */
   timeFit: TimeBudget[];
-  /** Mode de progression (décision n°3). Défaut 'soft' si absent. */
-  gating?: Gating;
   /** Ids de profils ikigai (cf. data/ikigai.json → profiles[].id). */
   recommendedForProfiles: string[];
   milestone?: ParcoursMilestone;
   steps: ParcoursStep[];
-  outcomes: LocalizedText[];
-  prerequisites?: LocalizedText[];
+  outcomes: string[];
+  prerequisites?: string[];
 }
 
 /** Aiguillage profil/archétype → parcours (cf. data/profileParcours.json). */
@@ -132,15 +112,4 @@ export interface ProfileParcoursMap {
   byProfile: Record<string, ProfileParcoursRoute>;
   byArchetype: Record<string, ArchetypeParcoursBundle>;
   timeCalibration: Record<TimeBudget, { show: StepType[]; cadence: string }>;
-}
-
-/** Filtre les étapes visibles selon le budget-temps (curseur temps). */
-export function visibleSteps(p: Parcours, budget: TimeBudget): ParcoursStep[] {
-  const show: Record<TimeBudget, StepType[]> = {
-    low: ['coeur'],
-    medium: ['coeur', 'pratique'],
-    high: ['coeur', 'bonus', 'pratique', 'respiration'],
-  };
-  const allowed = new Set(show[budget]);
-  return p.steps.filter((s) => allowed.has(s.type)).sort((a, b) => a.order - b.order);
 }

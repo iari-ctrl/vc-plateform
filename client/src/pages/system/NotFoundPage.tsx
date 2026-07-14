@@ -23,7 +23,7 @@ export default function NotFoundPage() {
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link to="/" className="btn-foil sheen-host">Revenir au port</Link>
-          <Link to="/paths" className="btn-ghost">Voir la carte des parcours</Link>
+          <Link to="/parcours" className="btn-ghost">Voir la carte des parcours</Link>
         </div>
       </div>
     </div>

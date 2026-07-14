@@ -20,11 +20,9 @@ npm run validate:content          # shape + cross-references + [[glossary]] mark
 npm run validate:content:strict   # warnings become fatal (run locally before publishing)
 
 # tests
-npm run test --workspace client   # Vitest (i18n routing, profile/ikigai, simulators, url safety…)
+npm run test --workspace client   # Vitest (profile/ikigai, simulators, url safety…)
 npx vitest run path/to/file       # single test file
 ```
-
-Note: `scripts/export-content.mjs` (`content:export`) is a **dead script** — it imports `@prisma/client`, removed with the backend. Do not document or run it.
 
 ## Architecture — the parts that span files
 
@@ -44,7 +42,7 @@ Blog analyses are authored as one file per article in `data/blog/<slug>.json`; t
 
 **Route taxonomy is centralized in `shared/routes.mjs`** — a cross-runtime module (runs in Node *and* the Vite bundle), so it is **pure data + pure functions, zero deps, no TypeScript** (types mirrored in `routes.d.mts`). It is the single source for the noindex segment list (drives both robots.txt `Disallow` and the client's automatic `noindex`) and the OG-image-by-segment map. Adding a private surface or a social card means editing here, not three places.
 
-**i18n.** Every page lives under `/:locale` (`client/src/i18n/`). `DEFAULT_LOCALE = 'fr'`; bare `/` redirects to the detected locale; legacy unprefixed links redirect to `/fr/...`. `EN_ENABLED = false` in `i18n/config.ts` hides the FR/EN switcher until EN content ships (and `<html lang>` stays `fr` under `/en` to not mislead crawlers/screen readers).
+**Language contract.** The current product is French-only. Routes are canonical and unprefixed (`/home`, `/parcours/...`, `/blog/...`); there is no dormant locale router or localized-text wrapper. Do not add `/fr` or `/en` prefixes without an explicit product decision and a complete routing/content migration.
 
 **Path aliases** (Vite + tsconfig): `@` → `client/src`, `@data` → repo `/data`, `@shared` → `/shared`.
 
@@ -75,12 +73,12 @@ One fact lives in one place. Reference (must stay true) is separated from state 
 
 - `docs/ARCHITECTURE_EDITION.md` — authoring manual: content lifecycle, per-collection editing guides, id/slug conventions, the writing-style charter (§4.0.c). Read before authoring content.
 - `docs/DESIGN_SYSTEM.md` — visual/interaction system: tokens, components, ornaments, motion, accessibility.
-- `docs/STRATEGIE-vc-intelligence.md` — product direction (positioning, target architecture, roadmap).
-- `docs/i18n_architecture_FR-EN.md` — bilingual ADR. `docs/parcours/` — parcours authoring pipeline.
+- `docs/STRATEGIE-vc-intelligence.md` — maintained product direction and remaining strategic priorities.
+- `docs/parcours/README.md` — current parcours policies and authoring contract. Superseded drafts live under `docs/archive/parcours/`.
 - `Suivis/ETAT.md` — current verified state: content counts (pasted from `validate:content`), latest checks, risks, priorities. The **only** place counts live.
 - `Suivis/JOURNAL.md` — dated, append-only work log (post-migration only).
 - `Suivis/PROCEDURE_PUSH.md` — manual publish runbook.
 
-There is **no CI that validates content**. The only workflow is `.github/workflows/deploy-pages.yml`, which builds the client and deploys it to GitHub Pages on push to `master`; it does not run `validate:content`, `lint`, or tests. Those gates run locally (see `Suivis/PROCEDURE_PUSH.md`).
+The optional publishing workflow is manual and invokes the root build lifecycle, including content splitting, validation, sitemap generation, Vite build and prerendering. Run `npm run check` locally before publishing (see `Suivis/PROCEDURE_PUSH.md`).
 
-The pre-migration documents `Suivis/Bilan.md` and `Suivis/Report et scoring.md` (which described the removed Express/Prisma/CMS backend) have been **deleted**; their content lives in Git history. Never read `Suivis/archive/`-style historical material for current state — use `ETAT.md` and `JOURNAL.md`.
+Material under `docs/archive/` and dated audits under `Suivis/AUDIT/` is historical context, never current specification. Use `ETAT.md`, `JOURNAL.md` and the maintained reference docs above.

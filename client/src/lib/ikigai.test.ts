@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { IKIGAI } from '@/content';
-import { PROFILE_PARCOURS, routeForProfile } from '@/content/parcours';
+import { PARCOURS, PROFILE_PARCOURS, routeForProfile, visibleSteps } from '@/content/parcours';
 import { computeProfile, suggestedArchetype, type OnboardingAnswer } from './ikigai';
 
 const questions = IKIGAI.questions;
@@ -78,5 +78,14 @@ describe('ikigai orientation mappings', () => {
 
   it('does not silently fall back for an unmapped profile', () => {
     expect(suggestedArchetype('profil-inconnu')).toBeUndefined();
+  });
+
+  it('uses the time calibration declared in profileParcours.json', () => {
+    const parcours = PARCOURS.find((item) => item.id === 'p-stage')!;
+
+    for (const budget of ['low', 'medium', 'high'] as const) {
+      const visibleTypes = [...new Set(visibleSteps(parcours, budget).map((step) => step.type))].sort();
+      expect(visibleTypes).toEqual([...PROFILE_PARCOURS.timeCalibration[budget].show].sort());
+    }
   });
 });

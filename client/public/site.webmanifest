@@ -1,9 +1,9 @@
 {
   "name": "VC Premium Experience",
   "short_name": "VC Premium",
-  "description": "Comprendre le capital-risque, tester son alignement avec le metier, puis apprendre selon son niveau.",
+  "description": "Analyser les écosystèmes, étudier les décisions et structurer sa pensée d'investisseur VC.",
   "lang": "fr",
-  "start_url": "/fr",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#FDFCF7",

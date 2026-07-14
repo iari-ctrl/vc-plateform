@@ -76,10 +76,8 @@ export default function BlogPostPage() {
   const { slug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const post = slug ? blogBySlug(slug) : undefined;
-  const pending = false;
   usePageMeta(post?.title, post?.excerpt, { type: 'article', publishedTime: post?.date });
 
-  if (pending) return <PageLoader />;
   if (!post) return <NotFoundPage />;
 
   const related = BLOG.filter((p) => p.id !== post.id && p.tags.some((t) => post.tags.includes(t))).slice(0, 3);

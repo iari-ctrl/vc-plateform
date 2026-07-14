@@ -298,7 +298,7 @@
     stroke-linecap: round;
   }
 
-  /* Compass rose embedded in the /paths atlas. Resting state is intentionally
+  /* Compass rose embedded in the /parcours atlas. Resting state is intentionally
      unchanged; on hover the rings morph into the four-circle Ikigai diagram. */
   .path-atlas-compass {
     cursor: pointer;

@@ -66,7 +66,7 @@ export default function PathDetailPage() {
                     {pct > 0 ? 'Reprendre le rayon' : 'Commencer le rayon'}
                   </Link>
                 )}
-                <BookmarkButton variant="labelled" item={{ itemType: 'path', itemId: path.id, title: path.title, href: `/paths/${path.slug}` }} />
+                <BookmarkButton variant="labelled" item={{ itemType: 'path', itemId: path.id, title: path.title, href: `/bibliotheque/${path.slug}` }} />
               </div>
             </div>
 
@@ -107,15 +107,17 @@ export default function PathDetailPage() {
         <div className="space-y-10">
           {courses.map((course, ci) => {
             const lessons = lessonsForCourse(course.id);
-            const isCollapsed = collapsedCourses[course.id];
+            const isCollapsed = collapsedCourses[course.id] ?? false;
+            const panelId = `library-course-${course.slug}`;
             return (
               <div key={course.id} className="border-b border-outline-variant/30 pb-6 last:border-0 last:pb-0">
                 <div className="flex items-start justify-between gap-4">
                   <button
                     type="button"
                     onClick={() => toggleCourse(course.id)}
-                    className="flex-1 text-left group cursor-pointer select-none focus:outline-none"
+                    className="flex-1 text-left group cursor-pointer select-none"
                     aria-expanded={!isCollapsed}
+                    aria-controls={panelId}
                   >
                     <div className="flex items-center gap-2">
                       <p className="font-mono text-[0.625rem] uppercase tracking-wider text-surface-variant">Cours {ci + 1} · {LEVEL_LABEL[course.level]}</p>
@@ -143,6 +145,9 @@ export default function PathDetailPage() {
                   </div>
                 </div>
                 <div
+                  id={panelId}
+                  inert={isCollapsed}
+                  aria-hidden={isCollapsed}
                   className={cn(
                     "grid transition-all duration-300 ease-in-out",
                     isCollapsed ? "grid-rows-[0fr] opacity-0 pointer-events-none mt-0" : "grid-rows-[1fr] opacity-100 mt-4"

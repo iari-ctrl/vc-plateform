@@ -1,57 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
-  Map, Library, BookA, FlaskConical, Newspaper, LayoutDashboard, NotebookPen, Microscope,
-  Search, Sun, Moon, Menu, X, ScrollText, Crosshair, type LucideIcon,
-  FileText, ChevronRight,
+  Search, Sun, Moon, Menu, X, ChevronRight, type LucideIcon,
 } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
 import { useUI } from '@/context/UIContext';
 import { cn } from '@/lib/utils';
-const isLinkActive = (to: string, location: { pathname: string }) =>
-  to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
-
-
-type Item = { to: string; label: string; icon: LucideIcon };
-type NavGroup = { title: string; to: string; icon: LucideIcon; items: Item[] };
-
-const NAV_GROUPS: NavGroup[] = [
-  {
-    title: 'Intelligence VC',
-    to: '/intelligence',
-    icon: Microscope,
-    items: [
-      { to: '/ecosystemes', label: 'Écosystèmes', icon: Microscope },
-      { to: '/convictions', label: 'Convictions', icon: Crosshair },
-      { to: '/decisions', label: 'Décisions', icon: ScrollText },
-      { to: '/simulators', label: 'Simulateurs', icon: FlaskConical },
-      { to: '/methode', label: 'Méthode', icon: FileText },
-      { to: '/blog', label: 'Analyses', icon: Newspaper },
-    ],
-  },
-  {
-    title: 'Formation',
-    to: '/paths',
-    icon: Map,
-    items: [
-      { to: '/paths', label: 'Parcours', icon: Map },
-      { to: '/bibliotheque', label: 'Bibliothèque', icon: Library },
-      { to: '/glossary', label: 'Dictionnaire', icon: BookA },
-    ],
-  },
-  {
-    title: 'Workspace',
-    to: '/dashboard',
-    icon: LayoutDashboard,
-    items: [
-      { to: '/dashboard', label: 'Tableau de bord', icon: LayoutDashboard },
-      { to: '/notes', label: 'Notes & favoris', icon: NotebookPen },
-      { to: '/journal', label: 'Journal de décisions', icon: Crosshair },
-    ],
-  },
-];
+import {
+  NAVIGATION_PILLARS,
+  isNavigationItemActive,
+  isNavigationPillarActive,
+  type NavigationItem,
+  type NavigationPillar,
+} from '@/lib/navigation';
 
 /**
  * SideNav — the lateral navigation used on every page *except* the home/landing
@@ -150,12 +113,12 @@ function DesktopRail() {
         <div className="h-[var(--topbar-h)] shrink-0" />
 
         <div className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto px-3 pb-4">
-          {NAV_GROUPS.map((group, index) => (
-            <nav key={group.title} className="flex flex-col gap-1" aria-label={group.title}>
+          {NAVIGATION_PILLARS.map((pillar, index) => (
+            <nav key={pillar.id} className="flex flex-col gap-1" aria-label={pillar.label}>
               {index > 0 && <div className="ornament-rule mx-1 my-2" />}
-              <RailGroupHeader group={group} />
-              {group.items.map((it) => (
-                <RailLink key={it.to} item={it} expanded end={it.to === '/'} />
+              <RailGroupHeader pillar={pillar} />
+              {pillar.children.map((item) => (
+                <RailLink key={item.to} item={item} expanded />
               ))}
             </nav>
           ))}
@@ -165,8 +128,6 @@ function DesktopRail() {
             <div className="ornament-rule mx-1 mb-2" />
             <SearchButton expanded />
             <ThemeButton expanded />
-            
-            
           </div>
         </div>
       </aside>
@@ -174,32 +135,32 @@ function DesktopRail() {
   );
 }
 
-function RailGroupHeader({ group }: { group: NavGroup }) {
-  const location = useLocation();
-  const active = isLinkActive(group.to, location);
-  const Icon = group.icon;
+function RailGroupHeader({ pillar }: { pillar: NavigationPillar }) {
+  const { pathname } = useLocation();
+  const active = isNavigationPillarActive(pathname, pillar);
+  const Icon = pillar.icon;
   return (
     <Link
-      to={group.to}
+      to={pillar.to}
+      aria-current={active ? 'page' : undefined}
       className={cn(
         'mb-1 flex items-center gap-2 rounded-xl px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] transition-colors',
         active ? 'text-[color:var(--primary)]' : 'text-surface-variant hover:text-foreground',
       )}
     >
       <Icon size={13} className="shrink-0" />
-      <span className="truncate">{group.title}</span>
+      <span className="truncate">{pillar.label}</span>
     </Link>
   );
 }
 
-function RailLink({ item, expanded, end }: { item: Item; expanded: boolean; end?: boolean }) {
+function RailLink({ item, expanded }: { item: NavigationItem; expanded: boolean }) {
   const { icon: Icon, label, to } = item;
-  const location = useLocation();
-  const isActive = isLinkActive(to, location);
+  const { pathname } = useLocation();
+  const isActive = isNavigationItemActive(pathname, item);
   return (
     <NavLink
       to={to}
-      end={end}
       title={!expanded ? label : undefined}
       className={
         cn(
@@ -262,9 +223,8 @@ function ThemeButton({ expanded }: { expanded: boolean }) {
 function MobileBar() {
   const { openSearch } = useUI();
   const { theme, toggle } = useTheme();
-      const location = useLocation();
-  const { pathname } = location;
-    const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -293,37 +253,42 @@ function MobileBar() {
       {open && (
         <div className="fixed inset-x-0 bottom-0 top-14 z-30 animate-fade-in overflow-y-auto border-t border-outline-variant bg-surface lg:hidden">
           <nav className="mx-auto flex max-w-[var(--content-max)] flex-col gap-1 px-4 py-4">
-            {NAV_GROUPS.map((group, groupIndex) => (
-              <div key={group.title} className={groupIndex > 0 ? 'mt-3 border-t border-outline-variant pt-3' : undefined}>
-                <Link to={group.to} className="mb-1 flex items-center gap-2 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-surface-variant">
-                  <group.icon size={13} /> {group.title}
-                </Link>
-                {group.items.map((it) => {
-                  const isActive = isLinkActive(it.to, location);
-                  return (
-                    <NavLink
-                      key={it.to}
-                      to={it.to}
-                      end={it.to === '/'}
-                      className={
-                        cn(
-                          'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium',
-                          isActive ? 'bg-surface-container text-foreground' : 'text-surface-variant',
-                        )
-                      }
-                    >
-                      <it.icon size={18} className="shrink-0" /> {it.label}
-                    </NavLink>
-                  );
-                })}
-              </div>
-            ))}
+            {NAVIGATION_PILLARS.map((pillar, pillarIndex) => {
+              const pillarActive = isNavigationPillarActive(pathname, pillar);
+              return (
+                <div key={pillar.id} className={pillarIndex > 0 ? 'mt-3 border-t border-outline-variant pt-3' : undefined}>
+                  <Link
+                    to={pillar.to}
+                    aria-current={pillarActive ? 'page' : undefined}
+                    className={cn(
+                      'mb-1 flex items-center gap-2 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em]',
+                      pillarActive ? 'text-[color:var(--primary)]' : 'text-surface-variant',
+                    )}
+                  >
+                    <pillar.icon size={13} /> {pillar.label}
+                  </Link>
+                  {pillar.children.map((item) => {
+                    const isActive = isNavigationItemActive(pathname, item);
+                    return (
+                      <NavLink
+                        key={item.to}
+                        to={item.to}
+                        className={
+                          cn(
+                            'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium',
+                            isActive ? 'bg-surface-container text-foreground' : 'text-surface-variant',
+                          )
+                        }
+                      >
+                        <item.icon size={18} className="shrink-0" /> {item.label}
+                      </NavLink>
+                    );
+                  })}
+                </div>
+              );
+            })}
 
             <div className="ornament-rule my-3" />
-
-            
-
-            
           </nav>
         </div>
       )}

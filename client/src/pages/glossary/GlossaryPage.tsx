@@ -70,9 +70,6 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-/** A glossary term whose heavy definition/example may not be loaded yet. */
-type IndexedTerm = GlossaryIndexEntry & Partial<GlossaryDef>;
-
 /** Placeholder shown in the expanded detail while the definitions chunk loads. */
 function DefinitionSkeleton() {
   return (
@@ -97,8 +94,7 @@ export default function GlossaryPage() {
     activeTerm?.short ?? 'Les termes du venture, définis avec clarté : définitions, exemples et liens vers les cours associés.'
   );
 
-  // Editorial content changes rarely — hold the API copy fresh for 10 min.
-  const terms: IndexedTerm[] = GLOSSARY;
+  const terms: GlossaryIndexEntry[] = GLOSSARY;
   const [defs, setDefs] = useState<Record<string, GlossaryDef> | null>(null);
   const [activeCategory, setActiveCategory] = useState('Tous');
   const [query, setQuery] = useState('');
@@ -112,9 +108,8 @@ export default function GlossaryPage() {
   const alphabetButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const scrollSpyFrame = useRef<number | null>(null);
 
-  // Heavy definitions load lazily; merge them in (preferring the server copy
-  // when the API already returned full terms) so the detail view and search
-  // have them once available.
+  // Heavy definitions load lazily so the detail view and search can use them
+  // without adding them to the initial bundle.
   useEffect(() => {
     void loadGlossaryDefs().then(setDefs);
   }, []);
@@ -125,8 +120,8 @@ export default function GlossaryPage() {
         const lazyDef = defs?.[term.slug];
         return {
           ...term,
-          definition: term.definition ?? lazyDef?.definition ?? '',
-          example: term.example ?? lazyDef?.example,
+          definition: lazyDef?.definition ?? '',
+          example: lazyDef?.example,
         };
       }),
     [terms, defs],
@@ -435,6 +430,8 @@ export default function GlossaryPage() {
               <div className="relative w-full shrink-0 lg:w-72">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-variant" aria-hidden />
                 <input
+                  id="glossary-search"
+                  name="glossary-search"
                   aria-label="Rechercher dans le lexique"
                   type="search"
                   placeholder="Chercher..."

@@ -78,8 +78,8 @@ export function collectRoutes() {
   // the prerender and the client stay in lockstep.
   for (const route of STATIC_ROUTES) addRoute(route.path, route);
 
-  addCollection(readJson('paths.json', []), '/paths', { changefreq: 'monthly', priority: '0.7' });
-  addCollection(readJson('parcours.json', []), '/paths', { changefreq: 'monthly', priority: '0.75' });
+  addCollection(readJson('paths.json', []), '/bibliotheque', { changefreq: 'monthly', priority: '0.7' });
+  addCollection(readJson('parcours.json', []), '/parcours', { changefreq: 'monthly', priority: '0.75' });
   addCollection(readJson('courses.json', []), '/courses', { changefreq: 'monthly', priority: '0.65' });
   addCollection(readFirstArray(['generated/lessons.index.json', 'lessons.json']), '/lessons', {
     changefreq: 'monthly',

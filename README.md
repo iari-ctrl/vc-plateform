@@ -10,7 +10,8 @@ Une plateforme **statique** d'intelligence VC, enrichie par une couche de format
 
 ## ✦ Documentation
 
-- `docs/` porte la documentation **de référence maintenue** : [`ARCHITECTURE_EDITION.md`](docs/ARCHITECTURE_EDITION.md) (manuel d'architecture et d'édition), [`DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md), [`STRATEGIE-vc-intelligence.md`](docs/STRATEGIE-vc-intelligence.md) (direction produit) et `parcours/` (pipeline de conception des parcours).
+- [`PRODUCT.md`](PRODUCT.md) fixe le contrat produit : registre, intention, anti-références, principes et cible d'accessibilité.
+- `docs/` porte la documentation **de référence maintenue** : [`ARCHITECTURE_EDITION.md`](docs/ARCHITECTURE_EDITION.md), [`DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md), [`STRATEGIE-vc-intelligence.md`](docs/STRATEGIE-vc-intelligence.md) et [`parcours/README.md`](docs/parcours/README.md). Les documents supersédés sont isolés sous `docs/archive/`.
 - `Suivis/` porte le **suivi vivant** : [`ETAT.md`](Suivis/ETAT.md) (état vérifié, compteurs, risques, priorités), [`JOURNAL.md`](Suivis/JOURNAL.md) (journal daté) et [`PROCEDURE_PUSH.md`](Suivis/PROCEDURE_PUSH.md) (procédure de sauvegarde Git ; la publication est reportée).
 - En cas de doute, l'état réel se vérifie dans `client/`, `data/`, `shared/routes.mjs` et les scripts du `package.json`.
 
@@ -87,16 +88,17 @@ data/                     # Contenu canonique (JSON) — source de vérité
   caseStudies.json  deliverables.json  simulators.json  ikigai.json
   blog/                   # analyses : un fichier JSON par article (<slug>.json)
   ecosystems.json  memos.json  antiPortfolio.json   # couche Intelligence VC, 100% client
-  parcours.json  parcoursConfig.json  profileParcours.json
+  parcours.json  profileParcours.json
   parcours/               # leçons drop-in par parcours (*.lessons.json)
-docs/parcours/            # conception + rédaction des parcours (Markdown)
+docs/parcours/            # contrat maintenu de conception des parcours
+docs/archive/             # historique non normatif
 shared/routes.mjs         # taxonomie de routes (noindex, OG par segment)
 client/                   # SPA React + Vite (content, context, lib, components, pages, styles)
 ```
 
-Le build client est découpé par routes et par collections. Le vendor React est isolé (~232 kB) ; le glossaire et les leçons sont **scindés index/contenu** : seul l'index léger est chargé sur le hot path, définitions et corps arrivent en chunks lazy.
+Le build client est découpé par routes et par collections. Le vendor React est isolé ; le glossaire et les leçons sont **scindés index/contenu** : seul l'index léger est chargé sur le hot path, définitions et corps arrivent en chunks lazy.
 
-Les pages s'organisent autour des trois piliers (**Intelligence VC**, **Formation**, **Workspace**) plus les transverses (Home, Splash, Onboarding, Profil, Recherche, Design System). `/paths/:slug` route intelligemment : un slug de parcours → la carte de voyage ; tout autre slug (liens legacy) → l'ancien détail de rayon.
+Les pages s'organisent autour des trois piliers (**Intelligence VC**, **Formation**, **Workspace**) plus les transverses (Home, Splash, Onboarding, Profil, Recherche, Design System). La Formation suit un contrat explicite : `/parcours` liste les parcours, `/parcours/:slug` conserve leur fiche intermédiaire, `/bibliotheque` liste les rayons et `/bibliotheque/:slug` ouvre le détail d'un rayon. Les cours et leçons restent sous `/courses/:slug` et `/lessons/:slug`.
 
 **Stockage local.** Les entités utilisateur (`Profile`, `Note`, `Bookmark`, `Progress`, `DecisionEntry`) sont gérées dans le `localStorage`.
 

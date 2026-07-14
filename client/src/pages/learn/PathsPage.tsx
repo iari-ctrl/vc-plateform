@@ -12,7 +12,6 @@ import {
   parcoursForCourse,
   parcoursForLesson,
   parcoursForCase,
-  t,
   type Parcours,
   type ParcoursFamily,
 } from '@/content/parcours';
@@ -43,6 +42,7 @@ const TYPE_FILTERS: { id: ItemType; label: string }[] = [
   { id: 'all', label: 'Tout' },
   { id: 'course', label: 'Cours' },
   { id: 'lesson', label: 'Lectures' },
+  { id: 'case', label: 'Études de cas' },
 ];
 
 const LEVEL_FILTERS: { id: 'all' | Level; label: string }[] = [
@@ -134,7 +134,7 @@ function ParcoursBadges({ parcours }: { parcours: Parcours[] }) {
     <div className="mt-4 flex flex-wrap gap-2">
       {parcours.slice(0, 3).map((p) => (
         <span key={p.id} className="chip">
-          {t(p.title)}
+          {p.title}
         </span>
       ))}
       {parcours.length > 3 && <span className="chip">+{parcours.length - 3}</span>}
@@ -218,11 +218,10 @@ export default function PathsPage() {
   );
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const type = (searchParams.get('type') as ItemType) || 'all';
 
   // The 9 rayons (data/paths.json, sorted by `order`) are the backbone: each
   // carries its own courses and lessons. Parcours-module courses (pathId `p-*`)
-  // belong to the « par objectif » entry (/paths) and are intentionally absent.
+  // belong to the « par objectif » entry (/parcours) and are intentionally absent.
   const rayons = useMemo(
     () =>
       [...PATHS]
@@ -243,29 +242,40 @@ export default function PathsPage() {
     return Array.from(new Set(all)).sort((a, b) => a.localeCompare(b, 'fr'));
   }, [rayons, caseItems]);
 
-  const [query, setQuery] = useState('');
-  const [level, setLevel] = useState<'all' | Level>('all');
-  const [family, setFamily] = useState<'all' | ParcoursFamily>('all');
-  const [duration, setDuration] = useState<DurationFilter>('all');
-  const [tag, setTag] = useState('all');
+  const rawType = searchParams.get('type');
+  const rawLevel = searchParams.get('level');
+  const rawFamily = searchParams.get('family');
+  const rawDuration = searchParams.get('duration');
+  const rawTag = searchParams.get('tag');
+  const query = searchParams.get('q') ?? '';
+  const type = TYPE_FILTERS.some((filter) => filter.id === rawType) ? rawType as ItemType : 'all';
+  const level = LEVEL_FILTERS.some((filter) => filter.id === rawLevel) ? rawLevel as 'all' | Level : 'all';
+  const family = FAMILY_OPTIONS.some((option) => option.id === rawFamily) ? rawFamily as 'all' | ParcoursFamily : 'all';
+  const duration = DURATION_FILTERS.some((filter) => filter.id === rawDuration) ? rawDuration as DurationFilter : 'all';
+  const tag = rawTag && tags.includes(rawTag) ? rawTag : 'all';
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
   const toggleRayon = (id: string) => setCollapsed((prev) => ({ ...prev, [id]: !prev[id] }));
 
-  const handleTypeChange = (newType: ItemType) => {
+  const updateFilter = (
+    key: string,
+    value: string,
+    { defaultValue = 'all', replace = false }: { defaultValue?: string; replace?: boolean } = {},
+  ) => {
     setSearchParams((prev) => {
-      if (newType === 'all') {
-        prev.delete('type');
+      const next = new URLSearchParams(prev);
+      if (!value || value === defaultValue) {
+        next.delete(key);
       } else {
-        prev.set('type', newType);
+        next.set(key, value);
       }
-      return prev;
-    });
+      return next;
+    }, { replace });
   };
 
   const matches = (item: LibraryItem) => {
     const q = normalize(query.trim());
-    const haystack = normalize([item.title, item.subtitle, item.courseTitle, item.tags.join(' '), item.parcours.map((p) => t(p.title)).join(' ')].filter(Boolean).join(' '));
+    const haystack = normalize([item.title, item.subtitle, item.courseTitle, item.tags.join(' '), item.parcours.map((p) => p.title).join(' ')].filter(Boolean).join(' '));
     return (
       (!q || haystack.includes(q)) &&
       (type === 'all' || item.type === type) &&
@@ -299,7 +309,7 @@ export default function PathsPage() {
             />
             <div className="flex shrink-0 items-center gap-4">
               <CompassRose size={88} className="hidden opacity-90 sm:block" />
-              <Link to="/paths" className="btn-quiet">Voir les parcours <ArrowRight size={15} /></Link>
+              <Link to="/parcours" className="btn-quiet">Voir les parcours <ArrowRight size={15} /></Link>
             </div>
           </div>
         </Reveal>
@@ -314,7 +324,7 @@ export default function PathsPage() {
               <span className="sr-only">Rechercher dans la bibliothèque</span>
               <input
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => updateFilter('q', e.target.value, { defaultValue: '', replace: true })}
                 type="search"
                 className="min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none placeholder:text-surface-variant"
                 placeholder="Rechercher un cours, une lecture, un thème..."
@@ -326,7 +336,7 @@ export default function PathsPage() {
                 <button
                   key={f.id}
                   type="button"
-                  onClick={() => handleTypeChange(f.id)}
+                  onClick={() => updateFilter('type', f.id)}
                   aria-pressed={type === f.id}
                   className={`rounded-full border px-3.5 py-2 text-xs font-medium transition-colors ${
                     type === f.id
@@ -343,25 +353,25 @@ export default function PathsPage() {
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <label className="text-xs font-medium text-surface-variant">
               Niveau
-              <select value={level} onChange={(e) => setLevel(e.target.value as 'all' | Level)} className="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm text-foreground outline-none">
+              <select value={level} onChange={(e) => updateFilter('level', e.target.value)} className="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm text-foreground outline-none">
                 {LEVEL_FILTERS.map((f) => <option key={f.id} value={f.id}>{f.label}</option>)}
               </select>
             </label>
             <label className="text-xs font-medium text-surface-variant">
               Famille
-              <select value={family} onChange={(e) => setFamily(e.target.value as 'all' | ParcoursFamily)} className="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm text-foreground outline-none">
+              <select value={family} onChange={(e) => updateFilter('family', e.target.value)} className="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm text-foreground outline-none">
                 {FAMILY_OPTIONS.map((f) => <option key={f.id} value={f.id}>{f.label}</option>)}
               </select>
             </label>
             <label className="text-xs font-medium text-surface-variant">
               Durée
-              <select value={duration} onChange={(e) => setDuration(e.target.value as DurationFilter)} className="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm text-foreground outline-none">
+              <select value={duration} onChange={(e) => updateFilter('duration', e.target.value)} className="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm text-foreground outline-none">
                 {DURATION_FILTERS.map((f) => <option key={f.id} value={f.id}>{f.label}</option>)}
               </select>
             </label>
             <label className="text-xs font-medium text-surface-variant">
               Thème
-              <select value={tag} onChange={(e) => setTag(e.target.value)} className="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm text-foreground outline-none">
+              <select value={tag} onChange={(e) => updateFilter('tag', e.target.value)} className="mt-1 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm text-foreground outline-none">
                 <option value="all">Tous thèmes</option>
                 {tags.map((value) => <option key={value} value={value}>{value}</option>)}
               </select>
@@ -385,7 +395,8 @@ export default function PathsPage() {
       ) : (
         <>
           {groups.map((g) => {
-            const isCollapsed = collapsed[g.path.id];
+            const isCollapsed = collapsed[g.path.id] ?? false;
+            const panelId = `library-shelf-${g.path.slug}`;
             return (
               <section key={g.path.id} id={g.path.slug} className="mt-12 scroll-mt-24 border-b border-outline-variant/30 pb-10 last:border-0 last:pb-0">
                 <Reveal>
@@ -394,7 +405,8 @@ export default function PathsPage() {
                       type="button"
                       onClick={() => toggleRayon(g.path.id)}
                       aria-expanded={!isCollapsed}
-                      className="flex flex-1 items-start gap-4 text-left group cursor-pointer select-none focus:outline-none"
+                      aria-controls={panelId}
+                      className="flex flex-1 items-start gap-4 text-left group cursor-pointer select-none"
                     >
                       <KanjiSeal kanji={g.path.kanji ?? '◆'} accent={g.path.accent} size={44} />
                       <div className="min-w-0">
@@ -418,7 +430,7 @@ export default function PathsPage() {
                     </button>
                     <div className="flex shrink-0 flex-col items-end gap-2">
                       <span className="chip">{g.courses.length} cours · {g.lessons.length} lectures</span>
-                      <Link to={`/paths/${g.path.slug}`} className="inline-flex items-center gap-1 text-xs font-medium text-[color:var(--primary)] hover:underline">
+                      <Link to={`/bibliotheque/${g.path.slug}`} className="inline-flex items-center gap-1 text-xs font-medium text-[color:var(--primary)] hover:underline">
                         Ouvrir le rayon <ArrowRight size={12} />
                       </Link>
                     </div>
@@ -426,6 +438,9 @@ export default function PathsPage() {
                 </Reveal>
 
                 <div
+                  id={panelId}
+                  inert={isCollapsed}
+                  aria-hidden={isCollapsed}
                   className={cn(
                     "grid transition-all duration-300 ease-in-out",
                     isCollapsed ? "grid-rows-[0fr] opacity-0 pointer-events-none mt-0" : "grid-rows-[1fr] opacity-100 mt-6",

@@ -47,7 +47,7 @@ Les primitives actuelles sont distribuées dans plusieurs fichiers :
 
 Le projet utilise Tailwind CSS v3 avec tokens CSS sémantiques. La règle de base : utiliser les tokens existants avant d'ajouter une couleur, une taille ou une ombre.
 
-Les collections JSON de contenu sont séparées par modules (`paths.ts`, `courses.ts`, `lessons.ts`, etc.) et le vendor React est isolé dans le build. Les surfaces visuelles chargées tôt doivent donc importer la collection exacte dont elles ont besoin, pas le barrel complet `@/content`. Le glossaire et les leçons vont plus loin : seul l'**index léger** (`GLOSSARY`, `LESSONS`) est eager ; les définitions et corps complets se chargent à la demande (`loadGlossaryTerm`, `loadLesson`) — n'importez le contenu lourd que sur la page qui le rend réellement (lecteur de leçon, fiche de dictionnaire).
+Les collections JSON de contenu sont séparées par modules (`paths.ts`, `courses.ts`, `lessons.ts`, etc.) et le vendor React est isolé dans le build. Les surfaces visuelles chargées tôt doivent donc importer la collection exacte dont elles ont besoin, pas le barrel complet `@/content`. Le glossaire et les leçons vont plus loin : seul l'**index léger** (`GLOSSARY`, `LESSONS`) est eager ; les définitions et corps complets se chargent à la demande (`loadGlossaryDefs`, `loadLesson`) — n'importez le contenu lourd que sur la page qui le rend réellement (lecteur de leçon, fiche de dictionnaire).
 
 ---
 
@@ -165,7 +165,7 @@ Règles de composition :
 
 La navigation latérale desktop (`components/chrome/SideNav.tsx`) est un panneau `--sidebar-w` (16rem) garé hors écran (`-translate-x-full`) quand il est fermé. Une gouttière fixe `--sidebar-rail` (4rem) reste visible avec le logo et le bouton `Menu`; `MainLayout` réserve cette gouttière via `lg:pl-[var(--sidebar-rail)]`, donc le contenu ne bouge jamais quand le panneau glisse en overlay. `PageShell` existe bien, mais il sert seulement de route layout pour `Suspense` + `ErrorBoundary`; il ne remplace pas `MainLayout`.
 
-L'architecture de l'information (IA) de la `SideNav` et de la `TopBar` partage les grandes entrées publiques (Intelligence VC, Formation, Dictionnaire, Analyses), tandis que la `SideNav` ajoute les sous-entrées et le groupe Workspace. La V1 est française uniquement : aucun sélecteur de langue n'est prévu dans le chrome.
+L'architecture de l'information (IA) est centralisée dans `client/src/lib/navigation.ts`. La `TopBar`, la `SideNav` et le `Footer` exposent les mêmes trois piliers : **Intelligence VC**, **Formation** et **Workspace**. Leurs entrées secondaires restent propres au contexte, mais l'état actif d'un pilier couvre aussi ses pages de détail. La V1 est française uniquement : aucun sélecteur de langue n'est prévu dans le chrome.
 
 L'effet verre est piloté par l'attribut `data-open` et la classe `.glass-rail` (définie dans `global.css`), avec **deux états distincts** :
 
@@ -206,9 +206,7 @@ Règles :
 
 Les cartes actuelles à stabiliser :
 
-- `PathCard` ;
-- `ParcoursCard` ;
-- `CourseCard` ;
+- `ParcoursCard` (variantes `catalogue` et `recommendation`) ;
 - `LessonRow` ;
 - `CaseCard` ;
 - `DeliverableCard` ;
@@ -220,7 +218,7 @@ Les cartes actuelles à stabiliser :
 
 Règles :
 
-- `PathCard`, `ParcoursCard`, `EcosystemCard` et `SimulatorCard` peuvent utiliser une couleur d'accent dynamique ;
+- `ParcoursCard`, `EcosystemCard` et `SimulatorCard` peuvent utiliser une couleur d'accent dynamique ;
 - `MemoCard`, `AntiPortfolioEntryCard` et `DeliverableCard` doivent rester lisibles comme pièces d'intelligence VC, pas comme cartes marketing ;
 - `LessonRow` doit rester dense, scannable et stable ;
 - les listes de contenu doivent privilégier la comparaison rapide.

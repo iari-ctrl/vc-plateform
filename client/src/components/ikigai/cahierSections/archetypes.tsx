@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { IKIGAI, profileById } from '@/content';
-import { t } from '@/content/parcours';
 import type { IkigaiArchetype, IkigaiMode } from '@/content/types';
 import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { Reveal } from '@/components/ui/primitives';
@@ -161,10 +160,10 @@ function ArchetypeCard({
                     {paths.map((p) => (
                       <Link
                         key={p!.id}
-                        to={`/paths/${p!.slug}`}
+                        to={`/parcours/${p!.slug}`}
                         className="flex items-center justify-between gap-2 rounded-lg border border-outline-variant px-3 py-2 text-sm transition-colors hover:border-[color-mix(in_srgb,var(--primary)_50%,transparent)] hover:bg-surface-container-low"
                       >
-                        <span className="truncate">{t(p.title)}</span>
+                        <span className="truncate">{p.title}</span>
                         <ArrowRight size={14} className="shrink-0 text-surface-variant" />
                       </Link>
                     ))}

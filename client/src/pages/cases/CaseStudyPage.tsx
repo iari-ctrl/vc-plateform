@@ -5,19 +5,15 @@ import { caseBySlug } from '@/content';
 import { ActiveProse } from '@/components/reading/ActiveProse';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
-import { PageLoader } from '@/components/ui/primitives';
 import { usePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
-
-const KIND_LABEL: Record<string, string> = { startup: 'Startup', fund: 'Fonds', deal: 'Deal', market: 'Marché' };
+import { CASE_KIND_LABEL } from '@/content/labels';
 
 export default function CaseStudyPage() {
   const { slug } = useParams();
   const cs = slug ? caseBySlug(slug) : undefined;
-  const pending = false;
   usePageMeta(cs?.title, cs?.summary, { type: 'article' });
 
-  if (pending) return <PageLoader />;
   if (!cs) return <NotFoundPage />;
 
   const markdown = cs.sections.map((s) => `## ${s.heading}\n\n${s.body}`).join('\n\n');
@@ -29,7 +25,7 @@ export default function CaseStudyPage() {
       <header>
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-xs">
-            <span className="chip">{KIND_LABEL[cs.kind] ?? cs.kind}</span>
+            <span className="chip">{CASE_KIND_LABEL[cs.kind] ?? cs.kind}</span>
             <span className="text-surface-variant">{cs.company} · {cs.year}</span>
           </div>
           <BookmarkButton item={{ itemType: 'case', itemId: cs.id, title: cs.title, href: `/cases/${cs.slug}` }} />

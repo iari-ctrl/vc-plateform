@@ -8,12 +8,3 @@ export const courseById = (id: string) => COURSES.find((c) => c.id === id);
 
 export const coursesForPath = (pathId: string) =>
   COURSES.filter((c) => c.pathId === pathId).sort((a, b) => a.order - b.order);
-
-/**
- * Lesson ids belonging to a path, derived from its courses' denormalised
- * `lessonIds`. Lets light surfaces (path/course cards, the atlas) compute
- * progress counts without pulling the heavy LESSONS collection into the
- * initial bundle.
- */
-export const lessonIdsForPath = (pathId: string) =>
-  coursesForPath(pathId).flatMap((c) => c.lessonIds);

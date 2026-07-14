@@ -149,11 +149,9 @@ const lessonSchema = z.object({
   furtherReading: z.array(furtherReadingSchema).optional(),
 }).strict();
 
-const localizedText = z.union([nonEmpty, z.record(z.string(), z.string())]);
 const parcoursFamily = z.enum(['decouvrir', 'entretien', 'levee', 'grade', 'maitriser', 'express']);
 const parcoursRoadmap = z.enum(['now', 'next', 'later']);
 const perspective = z.enum(['founder', 'investor', 'both']);
-const gating = z.enum(['soft', 'lock']);
 const timeBudget = z.enum(['low', 'medium', 'high']);
 const stepType = z.enum(['coeur', 'bonus', 'pratique', 'respiration']);
 const stepRefKind = z.enum(['lesson', 'course', 'case', 'simulator', 'glossary', 'milestone']);
@@ -162,10 +160,10 @@ const parcoursStepSchema = z.object({
   order: z.number().int().positive(),
   type: stepType,
   ref: z.object({ kind: stepRefKind, id: nonEmpty }).strict(),
-  label: localizedText,
+  label: nonEmpty,
   status: z.enum(['existant', 'a-produire']),
   keystone: z.boolean().optional(),
-  prereqNote: localizedText.optional(),
+  prereqNote: nonEmpty.optional(),
   note: z.string().optional(),
 }).strict();
 
@@ -174,12 +172,12 @@ const parcoursSchema = z.object({
   slug,
   family: parcoursFamily,
   roadmap: parcoursRoadmap,
-  title: localizedText,
-  hook: localizedText,
+  title: nonEmpty,
+  hook: nonEmpty,
   kanji: z.string().optional(),
   accent: z.string().optional(),
-  goal: localizedText,
-  forWhom: z.array(localizedText),
+  goal: nonEmpty,
+  forWhom: z.array(nonEmpty),
   perspective: perspective.optional(),
   level,
   entryLevel: level,
@@ -187,22 +185,21 @@ const parcoursSchema = z.object({
     coreHours: z.number().nonnegative(),
     withBonusHours: z.number().nonnegative().optional(),
     sessions: z.number().int().positive().optional(),
-    cadence: localizedText.optional(),
+    cadence: nonEmpty.optional(),
   }).strict(),
   timeFit: z.array(timeBudget),
-  prerequisites: z.array(localizedText).optional(),
-  gating: gating.optional(),
+  prerequisites: z.array(nonEmpty).optional(),
   recommendedForProfiles: idList,
   milestone: z.object({
     type: z.string(),
-    label: localizedText,
-    description: localizedText,
+    label: nonEmpty,
+    description: nonEmpty,
     evaluation: z.array(z.enum(['auto', 'peer'])).optional(),
     rubricId: z.string().optional(),
     modelAnswerId: z.string().optional(),
   }).strict().optional(),
   steps: z.array(parcoursStepSchema).min(1),
-  outcomes: z.array(localizedText),
+  outcomes: z.array(nonEmpty),
 }).strict();
 
 const parcoursLessonsDocSchema = z.object({
@@ -229,34 +226,6 @@ const profileParcoursSchema = z.object({
     show: z.array(stepType),
     cadence: nonEmpty,
   }).strict()),
-}).strict();
-
-const parcoursConfigSchema = z.object({
-  _doc: z.string().optional(),
-  language: z.object({
-    defaultLocale: z.literal('fr'),
-    note: z.string().optional(),
-  }).strict(),
-  gating: z.object({
-    default: gating,
-    lockable: z.boolean(),
-    note: z.string().optional(),
-  }).strict(),
-  milestoneEvaluation: z.object({
-    default: z.array(z.enum(['auto', 'peer'])),
-    withDeliverableDefault: z.array(z.enum(['auto', 'peer'])),
-    note: z.string().optional(),
-  }).strict(),
-  perspective: z.object({
-    default: perspective,
-    note: z.string().optional(),
-  }).strict(),
-  naming: z.object({
-    bibliotheque: nonEmpty,
-    rayons: nonEmpty,
-    parcours: nonEmpty,
-    atomes: z.array(nonEmpty),
-  }).strict(),
 }).strict();
 
 const glossarySchema = z.object({
@@ -595,7 +564,6 @@ const ikigaiSchema = z.object({
 const paths = check('paths.json', z.array(pathSchema), readJson('paths.json')) ?? [];
 const parcours = check('parcours.json', z.array(parcoursSchema), readJson('parcours.json')) ?? [];
 const profileParcours = check('profileParcours.json', profileParcoursSchema, readJson('profileParcours.json'));
-const parcoursConfig = check('parcoursConfig.json', parcoursConfigSchema, readJson('parcoursConfig.json'));
 const courses = check('courses.json', z.array(courseSchema), readJson('courses.json')) ?? [];
 const lessons = check('lessons.json', z.array(lessonSchema), readJson('lessons.json')) ?? [];
 const glossary = check('glossary.json', z.array(glossarySchema), readJson('glossary.json')) ?? [];

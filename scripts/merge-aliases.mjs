@@ -16,8 +16,8 @@
  *     case-insensitively, with any alias equal to the term label or slug
  *     dropped, then sorted for stable diffs.
  *
- * Run: `npm run aliases:merge`  then  `npm run validate:content`
- *      (and `npm run db:seed` to push them into the API/DB).
+ * Run: `npm run aliases:merge`, then `npm run validate:content` and
+ *      `npm run split:content` to refresh the generated glossary files.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';

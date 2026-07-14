@@ -1,5 +1,5 @@
 {
-  "_doc": "Registre DÉCOUVERTE (ton fun) du parcours « Le VC sans bullshit ». Jeu de leçons autonome, ids ld-* + course c-decouvrir-vc, pour ne PAS écraser les leçons sérieuses existantes (l-*) tant que le registre n'est pas tranché. `lessons` suit exactement le type Lesson (drop-in). Épisode 8 (Europe) réutilise le cas existant cs-europe-vs-valley ; l'épisode 9 est le quiz-jalon du parcours (déjà dans parcours.json). Câblage à décider : (a) cohabitation → parcours pointe vers ld-* ; (b) toggle → fusionner ces bodies comme registre 'decouverte' des l-* (nécessite un champ bodyDecouverte au schéma Lesson) ; (c) remplacement → ces bodies écrasent les l-*.",
+  "_doc": "Registre actif du parcours « Le VC sans bullshit ». Ces leçons drop-in `ld-*`, rattachées au cours `c-decouvrir-vc`, sont référencées directement par `data/parcours.json` puis fusionnées dans les fichiers générés par `scripts/split-lessons.mjs`. L'épisode Europe réutilise le cas `cs-europe-vs-valley` et le quiz-jalon reste défini dans le parcours.",
   "register": "decouverte",
   "parcoursId": "p-decouvrir-vc",
   "courseId": "c-decouvrir-vc",

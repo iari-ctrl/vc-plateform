@@ -6,7 +6,6 @@ import type { DeliverableModelRef } from '@/content/types';
 import { Markdown } from '@/lib/markdown';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
-import { PageLoader } from '@/components/ui/primitives';
 import { usePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
@@ -36,13 +35,9 @@ function resolveModel(m: DeliverableModelRef): { href: string; title: string; ty
 
 export default function DeliverablePage() {
   const { slug } = useParams();
-  // Deliverables are bundled editorial content (no CMS endpoint yet): pass a null
-  // path so useApiItem serves the bundle directly and never flashes a loader.
   const d = slug ? deliverableBySlug(slug) : undefined;
-  const pending = false;
   usePageMeta(d?.title, d?.summary, { type: 'article' });
 
-  if (pending) return <PageLoader />;
   if (!d) return <NotFoundPage />;
 
   const model = d.model ? resolveModel(d.model) : null;
@@ -52,7 +47,7 @@ export default function DeliverablePage() {
 
   return (
     <article className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
-      <Link to="/paths" className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> Parcours</Link>
+      <Link to="/parcours" className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> Parcours</Link>
 
       <header>
         <div className="flex items-center justify-between gap-3">

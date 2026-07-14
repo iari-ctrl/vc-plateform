@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowDownRight, Footprints, MessageSquareText, Network, ShieldCheck, Split, UsersRound, type LucideIcon } from 'lucide-react';
 import type { BlogPost } from '@/content/types';
+import { ScrollytellingProgress, ScrollytellingScene } from '@/components/blog/ScrollytellingPrimitives';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { cn } from '@/lib/utils';
 
 const ASSET_BASE = '/blog/exit-voice-loyalty-hirschman';
@@ -116,21 +118,6 @@ const scenes: Scene[] = [
   },
 ];
 
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReduced(query.matches);
-
-    const onChange = () => setReduced(query.matches);
-    query.addEventListener('change', onChange);
-    return () => query.removeEventListener('change', onChange);
-  }, []);
-
-  return reduced;
-}
-
 export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
   const [active, setActive] = useState(0);
   const reducedMotion = usePrefersReducedMotion();
@@ -200,16 +187,7 @@ export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
             ))}
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(13_14_18/0.05),rgb(13_14_18/0.58))]" />
             <div className="absolute inset-x-5 bottom-5">
-              <div className="rounded-2xl border border-[#D1B875]/35 bg-[#11131A]/82 p-5 text-[#F4F2EB] shadow-editorial-lg">
-                <p className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-[#D1B875]">{activeScene.eyebrow}</p>
-                <p className="mt-2 font-headline text-2xl font-semibold leading-tight">{activeScene.title}</p>
-                <div className="mt-4 h-1 overflow-hidden rounded-full bg-[#F4F2EB]/16">
-                  <div
-                    className={cn('h-full origin-left rounded-full bg-[#D1B875]', reducedMotion ? '' : 'transition-transform duration-500 ease-out')}
-                    style={{ transform: `scaleX(${progress})` }}
-                  />
-                </div>
-              </div>
+              <ScrollytellingProgress eyebrow={activeScene.eyebrow} title={activeScene.title} progress={progress} reducedMotion={reducedMotion} />
             </div>
           </div>
         </aside>
@@ -220,16 +198,13 @@ export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
             const isActive = active === index;
 
             return (
-              <section
+              <ScrollytellingScene
                 key={scene.id}
-                ref={(node) => {
+                sceneRef={(node) => {
                   sceneRefs.current[index] = node;
                 }}
-                data-scene-index={index}
-                className={cn(
-                  'rounded-[1.4rem] border bg-surface-container-lowest p-5 shadow-editorial-sm sm:p-7 lg:min-h-[74vh] lg:p-8',
-                  isActive ? 'border-[color-mix(in_srgb,var(--primary)_55%,var(--outline-variant))]' : 'border-outline-variant',
-                )}
+                index={index}
+                active={isActive}
               >
                 <figure className="mb-6 overflow-hidden rounded-[1rem] border border-outline-variant lg:hidden">
                   <img src={scene.image} alt={scene.alt} className="aspect-[4/3] w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} />
@@ -258,7 +233,7 @@ export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
                 <p className="mt-8 max-w-2xl border-t border-outline-variant pt-5 font-headline text-2xl italic leading-snug text-foreground">
                   {scene.question}
                 </p>
-              </section>
+              </ScrollytellingScene>
             );
           })}
 

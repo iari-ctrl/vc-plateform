@@ -1,69 +1,25 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, BookOpen, Clock, FlaskConical, Layers } from 'lucide-react';
 import { WaxSeal } from '@/components/ornaments/Illustrations';
-import { LevelBadge, ProgressBar, ProgressRing } from '@/components/ui/primitives';
+import { KanjiSeal } from '@/components/ornaments/Ornaments';
+import { LevelBadge, ProgressRing } from '@/components/ui/primitives';
 import { antiPortfolioPatternById } from '@/content/antiPortfolio';
-import { lessonIdsForPath } from '@/content/courses';
-import { FAMILY_META, lessonIdsForParcours, t } from '@/content/parcours';
-import { ECOSYSTEM_KIND_LABEL, LEVEL_LABEL } from '@/content/labels';
+import { FAMILY_META, lessonIdsForParcours } from '@/content/parcours';
+import { CASE_KIND_LABEL, ECOSYSTEM_KIND_LABEL } from '@/content/labels';
 import { useUserData } from '@/context/UserDataContext';
 import { formatDateFr, pluralize } from '@/lib/utils';
-import type { AntiPortfolioEntry, BlogPost, CaseStudy, Course, Deliverable, EcosystemDossier, InvestmentMemo, Path, Simulator } from '@/content/types';
+import type { AntiPortfolioEntry, BlogPost, CaseStudy, Deliverable, EcosystemDossier, InvestmentMemo, Simulator } from '@/content/types';
 import type { Parcours } from '@/content/parcours';
 
-function usePathProgress(pathId: string) {
-  const { progress } = useUserData();
-  const lessonIds = lessonIdsForPath(pathId);
-  if (!lessonIds.length) return { pct: 0, done: 0, total: 0 };
-  const done = lessonIds.filter((id) => progress[id]?.status === 'done').length;
-  return { pct: Math.round((done / lessonIds.length) * 100), done, total: lessonIds.length };
-}
-
-export function PathCard({ path, index = 0 }: { path: Path; index?: number }) {
-  const { pct, total } = usePathProgress(path.id);
-  return (
-    <Link
-      to={`/paths/${path.slug}`}
-      className="premium-card premium-card-hover sheen-host group isolate flex flex-col p-6"
-      style={{ borderTopColor: `color-mix(in srgb, ${path.accent} 50%, transparent)`, borderTopWidth: 2 }}
-    >
-      <span
-        aria-hidden
-        className="contour-field pointer-events-none absolute -right-10 -top-10 -z-10 h-44 w-44 rounded-full opacity-70 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ '--contour': path.accent } as React.CSSProperties}
-      />
-      <div className="flex items-start justify-between gap-4">
-        <WaxSeal
-          glyph={path.kanji ?? '◆'}
-          accent={path.accent}
-          size={48}
-          className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-rotate-6 group-hover:scale-105"
-        />
-        <span className="font-mono text-xs text-surface-variant">{String(index + 1).padStart(2, '0')}</span>
-      </div>
-      <div className="mt-5 flex items-center gap-2">
-        <LevelBadge level={path.level} accent={path.accent} />
-        <span className="chip">{pluralize(path.courseIds.length, 'cours')}</span>
-      </div>
-      <h3 className="mt-3 font-headline text-headline-md font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">
-        {path.title}
-      </h3>
-      <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-surface-variant">{path.summary}</p>
-      <div className="mt-5 flex items-center justify-between text-xs text-surface-variant">
-        <span className="inline-flex items-center gap-1.5"><Clock size={13} /> ≈ {path.durationHours} h</span>
-        <span className="inline-flex items-center gap-1.5"><BookOpen size={13} /> {total} leçons</span>
-      </div>
-      {pct > 0 && (
-        <div className="mt-3">
-          <ProgressBar value={pct} accent={path.accent} />
-          <p className="mt-1.5 text-[0.625rem] text-surface-variant">{pct}% parcouru</p>
-        </div>
-      )}
-    </Link>
-  );
-}
-
-export function ParcoursCard({ parcours, index = 0 }: { parcours: Parcours; index?: number }) {
+export function ParcoursCard({
+  parcours,
+  index = 0,
+  variant = 'recommendation',
+}: {
+  parcours: Parcours;
+  index?: number;
+  variant?: 'catalogue' | 'recommendation';
+}) {
   const { progress } = useUserData();
   const meta = FAMILY_META[parcours.family];
   const accent = parcours.accent ?? meta.accent;
@@ -73,7 +29,7 @@ export function ParcoursCard({ parcours, index = 0 }: { parcours: Parcours; inde
 
   return (
     <Link
-      to={`/paths/${parcours.slug}`}
+      to={`/parcours/${parcours.slug}`}
       className="premium-card premium-card-hover sheen-host group isolate flex h-full flex-col p-6"
       style={{ borderTopColor: `color-mix(in srgb, ${accent} 50%, transparent)`, borderTopWidth: 2 }}
     >
@@ -83,54 +39,44 @@ export function ParcoursCard({ parcours, index = 0 }: { parcours: Parcours; inde
         style={{ '--contour': accent } as React.CSSProperties}
       />
       <div className="flex items-start justify-between gap-4">
-        <WaxSeal
-          glyph={parcours.kanji ?? meta.kanji}
-          accent={accent}
-          size={48}
-          className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-rotate-6 group-hover:scale-105"
-        />
+        {variant === 'catalogue' ? (
+          <KanjiSeal kanji={parcours.kanji ?? meta.kanji} accent={accent} size={46} />
+        ) : (
+          <WaxSeal
+            glyph={parcours.kanji ?? meta.kanji}
+            accent={accent}
+            size={48}
+            className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-rotate-6 group-hover:scale-105"
+          />
+        )}
         {pct > 0 ? (
-          <ProgressRing value={pct} size={42} stroke={3} accent={accent} />
+          <ProgressRing value={pct} size={variant === 'catalogue' ? 40 : 42} stroke={3} accent={accent} />
+        ) : variant === 'catalogue' ? (
+          parcours.roadmap === 'now' ? (
+            <span className="chip !border-[color-mix(in_srgb,var(--primary)_45%,transparent)] !text-[color:var(--primary)]">Phare</span>
+          ) : null
         ) : (
           <span className="font-mono text-xs text-surface-variant">{String(index + 1).padStart(2, '0')}</span>
         )}
       </div>
       <div className="mt-5 flex flex-wrap items-center gap-2">
         <LevelBadge level={parcours.level} accent={accent} />
-        <span className="chip">{meta.label}</span>
+        {variant === 'catalogue' ? (
+          parcours.perspective === 'both' && <span className="chip">Les deux sièges</span>
+        ) : (
+          <span className="chip">{meta.label}</span>
+        )}
       </div>
       <h3 className="mt-3 font-headline text-headline-md font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">
-        {t(parcours.title)}
+        {parcours.title}
       </h3>
-      <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-surface-variant">{t(parcours.hook)}</p>
+      <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-surface-variant">{parcours.hook}</p>
       <div className="mt-5 flex items-center justify-between text-xs text-surface-variant">
         <span className="inline-flex items-center gap-1.5"><Clock size={13} /> ≈ {parcours.time.coreHours} h</span>
         <span className="inline-flex items-center gap-1.5 font-medium text-[color:var(--primary)]">
           {pct > 0 ? 'Reprendre' : 'Commencer'} <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
         </span>
       </div>
-    </Link>
-  );
-}
-
-export function CourseCard({ course, accent }: { course: Course; accent?: string }) {
-  const { progress } = useUserData();
-  const lessonIds = course.lessonIds;
-  const done = lessonIds.filter((id) => progress[id]?.status === 'done').length;
-  const pct = lessonIds.length ? Math.round((done / lessonIds.length) * 100) : 0;
-  return (
-    <Link to={`/courses/${course.slug}`} className="premium-card premium-card-hover group flex flex-col p-5">
-      <div className="flex items-center justify-between">
-        <span className="font-mono text-[0.625rem] uppercase tracking-wider text-surface-variant">{LEVEL_LABEL[course.level]}</span>
-        <ArrowUpRight size={16} className="text-surface-variant transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-      </div>
-      <h4 className="mt-2 font-headline text-headline-sm font-semibold leading-tight">{course.title}</h4>
-      <p className="mt-1.5 line-clamp-2 flex-1 text-sm text-surface-variant">{course.subtitle}</p>
-      <div className="mt-4 flex items-center justify-between text-xs text-surface-variant">
-        <span>{pluralize(lessonIds.length, 'leçon')}</span>
-        <span className="inline-flex items-center gap-1.5"><Clock size={13} /> {course.durationMin} min</span>
-      </div>
-      {pct > 0 && <ProgressBar value={pct} accent={accent} className="mt-3" />}
     </Link>
   );
 }
@@ -157,11 +103,10 @@ export function LessonRow({ slug, order, title, kicker, readMin, summary, done, 
 }
 
 export function CaseCard({ cs }: { cs: CaseStudy }) {
-  const KIND_LABEL: Record<string, string> = { startup: 'Startup', fund: 'Fonds', deal: 'Deal', market: 'Marché' };
   return (
     <Link to={`/cases/${cs.slug}`} className="premium-card premium-card-hover group flex flex-col overflow-hidden">
       <div className="flex items-center justify-between border-b border-outline-variant px-6 py-3">
-        <span className="chip">{KIND_LABEL[cs.kind] ?? cs.kind}</span>
+        <span className="chip">{CASE_KIND_LABEL[cs.kind] ?? cs.kind}</span>
         <span className="font-mono text-xs text-surface-variant">{cs.year}</span>
       </div>
       <div className="flex flex-1 flex-col p-6">

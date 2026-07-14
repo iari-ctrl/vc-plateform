@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Clock, Sparkles, BookMarked, ArrowUpRight } from 'lucide-react';
 import { loadLesson, lessonById, courseById, lessonsForCourse, simulatorBySlug, caseById, glossaryBySlug } from '@/content';
-import { parcoursById, parcoursForLesson, t, type Parcours } from '@/content/parcours';
-import type { Lesson, Course, Path } from '@/content/types';
+import { parcoursById, parcoursForLesson } from '@/content/parcours';
+import type { Lesson } from '@/content/types';
 import { ActiveProse } from '@/components/reading/ActiveProse';
 import { QuizBlock } from '@/components/reading/QuizBlock';
 import { GlossaryRefList } from '@/components/cards';
@@ -19,23 +19,14 @@ import NotFoundPage from '@/pages/system/NotFoundPage';
 /** Reader depth for lessons that ship both an "essentiel" and a full version. */
 type ReadingDepth = 'court' | 'profond';
 
-/** The lesson detail endpoint enriches the lesson with its course/path/neighbours. */
-type LessonNeighbour = { slug: string; title: string };
-type LessonDetail = Lesson & {
-  course?: Course | null;
-  path?: Path | Parcours | null;
-  prev?: LessonNeighbour | null;
-  next?: LessonNeighbour | null;
-};
-
 export default function LessonPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
 
-  // The bundled fallback resolves lazily: the reader payload (body/quiz) lives
+  // The bundled lesson resolves lazily: the reader payload (body/quiz) lives
   // in its own chunk (see content/lessons.ts), fetched on demand instead of
   // weighing down the initial bundle.
-  const [bundled, setBundled] = useState<LessonDetail | undefined>(undefined);
+  const [bundled, setBundled] = useState<Lesson | undefined>(undefined);
   const [bundledReady, setBundledReady] = useState(false);
   useEffect(() => {
     let active = true;
@@ -47,7 +38,7 @@ export default function LessonPage() {
     }
     void loadLesson(slug).then((l) => {
       if (!active) return;
-      setBundled(l as LessonDetail | undefined);
+      setBundled(l);
       setBundledReady(true);
     });
     return () => {
@@ -56,7 +47,6 @@ export default function LessonPage() {
   }, [slug]);
 
   const lesson = bundled;
-  const pending = !bundledReady;
   const { progress, setProgress } = useUserData();
   const [readPct, setReadPct] = useState(0);
   const [completing, setCompleting] = useState(false);
@@ -71,14 +61,12 @@ export default function LessonPage() {
 
   usePageMeta(lesson?.title, lesson?.summary, { type: 'article' });
 
-  // Prefer the API-provided course/path/neighbours; fall back to the bundle.
-  const course = lesson?.course ?? (lesson ? courseById(lesson.courseId) : undefined);
-  const apiParcours = lesson?.path && 'family' in lesson.path ? lesson.path : undefined;
-  const parcours = apiParcours ?? (course ? parcoursById(course.pathId) : undefined) ?? (lesson ? parcoursForLesson(lesson.id)[0] : undefined);
+  const course = lesson ? courseById(lesson.courseId) : undefined;
+  const parcours = (course ? parcoursById(course.pathId) : undefined) ?? (lesson ? parcoursForLesson(lesson.id)[0] : undefined);
   const siblings = course ? lessonsForCourse(course.id) : [];
   const idx = lesson ? siblings.findIndex((l) => l.id === lesson.id) : -1;
-  const prev = lesson?.prev ?? (idx > 0 ? siblings[idx - 1] : undefined);
-  const next = lesson?.next ?? (idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : undefined);
+  const prev = idx > 0 ? siblings[idx - 1] : undefined;
+  const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : undefined;
   const entry = lesson ? progress[lesson.id] : undefined;
   const isDone = entry?.status === 'done';
 
@@ -111,9 +99,8 @@ export default function LessonPage() {
     return () => window.removeEventListener('scroll', onScroll);
   }, [lesson?.id]);
 
-  // Hold the loader while the lazy bundled copy is still resolving, so an
-  // offline visit doesn't flash a 404 before the chunk lands.
-  if (pending || (!lesson && !bundledReady)) return <PageLoader />;
+  // Hold the loader while the lazy content chunk resolves to avoid flashing a 404.
+  if (!bundledReady) return <PageLoader />;
   if (!lesson) return <NotFoundPage />;
 
   // "Court" (essentiel) is the default; "Profond" is the opt-in full body.
@@ -123,13 +110,23 @@ export default function LessonPage() {
   async function complete() {
     if (!lesson) return;
     if (isDone) {
-      if (next) navigate(`/lessons/${next.slug}`);
+      if (next) {
+        navigate(`/lessons/${next.slug}`);
+      } else if (course) {
+        navigate(`/courses/${course.slug}`);
+      }
       return;
     }
     setCompleting(true);
     try {
       const result = await setProgress({ lessonId: lesson.id, courseId: lesson.courseId, pathId: parcours?.id, status: 'done', percent: 100 });
-      if (result.ok && next) navigate(`/lessons/${next.slug}`);
+      if (result.ok) {
+        if (next) {
+          navigate(`/lessons/${next.slug}`);
+        } else if (course) {
+          navigate(`/courses/${course.slug}`);
+        }
+      }
     } finally {
       setCompleting(false);
     }
@@ -138,14 +135,14 @@ export default function LessonPage() {
   return (
     <article>
       {/* reading progress */}
-      <div className="sticky top-[var(--topbar-h)] z-30 h-0.5 w-full bg-transparent">
+      <div className="sticky top-14 z-30 h-0.5 w-full bg-transparent lg:top-0">
         <div className="h-full bg-[color:var(--primary)] transition-[width] duration-150" style={{ width: `${isDone ? 100 : readPct}%` }} />
       </div>
 
       <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
         {/* breadcrumb */}
         <nav className="mb-6 flex flex-wrap items-center gap-1.5 text-xs text-surface-variant">
-          {parcours && <Link to={`/paths/${parcours.slug}`} className="hover:text-foreground">{t(parcours.title)}</Link>}
+          {parcours && <Link to={`/parcours/${parcours.slug}`} className="hover:text-foreground">{parcours.title}</Link>}
           {course && <><span>/</span><Link to={`/courses/${course.slug}`} className="hover:text-foreground">{course.title}</Link></>}
         </nav>
 

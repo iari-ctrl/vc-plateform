@@ -79,7 +79,7 @@ export default function HomePage() {
                 <Link to="/intelligence" className="btn-foil sheen-host w-full sm:w-auto">
                   Ouvrir l’intelligence VC <ArrowRight size={16} />
                 </Link>
-                <Link to="/paths" className="btn-ghost w-full sm:w-auto">
+                <Link to="/parcours" className="btn-ghost w-full sm:w-auto">
                   Voir les parcours
                 </Link>
               </div>

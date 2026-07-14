@@ -4,7 +4,7 @@ import { IKIGAI } from '@/content/ikigai';
 import { LESSONS, lessonById } from '@/content/lessons';
 import { courseById } from '@/content/courses';
 import { profileById } from '@/content/ikigai';
-import { PARCOURS, lessonIdsForParcours, t } from '@/content/parcours';
+import { PARCOURS, lessonIdsForParcours } from '@/content/parcours';
 import { recommendedPaths } from '@/lib/ikigai';
 import { ParcoursCard } from '@/components/cards';
 import { ProgressRing, ProgressBar, SectionHeading, Reveal } from '@/components/ui/primitives';
@@ -19,7 +19,7 @@ import { usePageMeta } from '@/lib/seo';
 export default function DashboardPage() {
   usePageMeta('Tableau de bord', 'Reprendre l’apprentissage, retrouver les notes et suivre le journal de décisions.');
   const { profile, progress, notes, bookmarks, journal } = useUserData();
-    const dueJournal = journal.filter((e) => isDue(e)).length;
+  const dueJournal = journal.filter((e) => isDue(e)).length;
 
   const learningProfile = profile ? profileById(profile.profileType) : undefined;
   const progressList = Object.values(progress);
@@ -110,9 +110,9 @@ export default function DashboardPage() {
               <div className="premium-card p-7">
                 <p className="eyebrow mb-3 flex items-center gap-2"><Compass size={13} /> Premier pas</p>
                 <h3 className="font-headline text-headline-md font-semibold">Commencez votre parcours</h3>
-                <p className="mt-1.5 text-sm text-surface-variant">{learningProfile ? `Votre profil ${learningProfile.name} vous oriente vers « ${recPaths[0] ? t(recPaths[0].title) : 'un parcours'} ».` : 'Faites le test d’orientation pour une recommandation sur-mesure, ou plongez directement.'}</p>
+                <p className="mt-1.5 text-sm text-surface-variant">{learningProfile ? `Votre profil ${learningProfile.name} vous oriente vers « ${recPaths[0]?.title ?? 'un parcours'} ».` : 'Faites le test d’orientation pour une recommandation sur-mesure, ou plongez directement.'}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  {recPaths[0] && <Link to={`/paths/${recPaths[0].slug}`} className="btn-foil !py-2.5">Commencer <ArrowRight size={15} /></Link>}
+                  {recPaths[0] && <Link to={`/parcours/${recPaths[0].slug}`} className="btn-foil !py-2.5">Commencer <ArrowRight size={15} /></Link>}
                   {!learningProfile && <Link to="/onboarding" className="btn-ghost !py-2.5">Faire le test</Link>}
                 </div>
               </div>
@@ -124,7 +124,7 @@ export default function DashboardPage() {
             <div className="premium-card p-7">
               <div className="mb-4 flex items-center justify-between">
                 <p className="eyebrow flex items-center gap-2"><BookOpen size={13} /> Suggéré pour vous</p>
-                <Link to="/paths" className="text-xs text-surface-variant hover:text-foreground">Tous les parcours</Link>
+                <Link to="/parcours" className="text-xs text-surface-variant hover:text-foreground">Tous les parcours</Link>
               </div>
               <div className="-mx-2">
                 {suggestedLessons.map((l) => {

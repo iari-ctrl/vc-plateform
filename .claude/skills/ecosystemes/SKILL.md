@@ -14,7 +14,7 @@ The « Décortiquer un écosystème » space (`/ecosystemes`): signed analyses, 
 - **Tree** via `parentId` + `order` (unlimited depth). A **root** = no `parentId`, **the only kind listed on the index**, and **`these` is required**. A **sub-dossier**: `these`/`convictions`/`signals`/`players`/`sources` are all **optional**.
 - Loader helpers: `rootEcosystems()`, `childEcosystems(id)`, `ecosystemAncestors(d)` in [client/src/content/ecosystems.ts].
 - Sibling order: ascending `order`, then most-recently-revised first.
-- The detail page ([client/src/pages/EcosystemPage.tsx]) renders, in this order: breadcrumb (ancestors) → header → **these** (if present) → **sections** (+ figures) → **convictions** → **signals** → **players** → **« Approfondir »** (children cards) → tags → **sources** → glossaryRefs → "next to dissect".
+- The detail page ([client/src/pages/ecosystems/EcosystemPage.tsx]) renders, in this order: breadcrumb (ancestors) → header → **these** (if present) → **sections** (+ figures) → **convictions** → **signals** → **players** → **« Approfondir »** (children cards) → tags → **sources** → glossaryRefs → "next to dissect".
 - Shapes: `Conviction { statement, horizon?, strength: exploratoire|moyenne|forte, rationale? }` · `Signal { label, direction: haussier|baissier|incertain, note }` · `Player { name, role, note }`. `kind` ∈ `geographie|secteur|these`. Dates are ISO `YYYY-MM-DD`. `accent` = hex (children usually inherit the parent's accent for cohesion).
 
 ## Figures (charts + diagrams)
@@ -40,7 +40,7 @@ The « Décortiquer un écosystème » space (`/ecosystemes`): signed analyses, 
 ## Validation workflow (every time)
 
 1. `npm run validate:content` — **strict** Zod (`.strict()` everywhere). Checks: parent exists, **no cycle**, root ⇒ `these`, **`glossaryRefs` resolve**, **every `[[slug]]`/`{{slug}}` marker resolves** against the glossary.
-2. If the glossary changed: `npm run split:content` (regenerates `glossary.index.json` + `glossary.defs.json` used at runtime).
+2. If the glossary changed: `npm run split:content` (regenerates `data/generated/glossary.index.json` + `data/generated/glossary.defs.json` used at runtime).
 3. `cd client && npx tsc --noEmit -p tsconfig.app.json` then `npx eslint <changed files>`; optionally `npm run build`.
 4. No headless browser here → visual check via `npm run dev` then `/ecosystemes/<slug>`.
 
@@ -78,6 +78,6 @@ Content prose is **French**. See the `style-redaction-naturel` memory. In short:
 
 - Data: `data/ecosystems.json`, `data/glossary.json`
 - Types/loader: [client/src/content/types.ts], [client/src/content/ecosystems.ts]
-- Rendering: [client/src/pages/EcosystemPage.tsx], [client/src/components/ecosystems/EcosystemFigures.tsx], [client/src/lib/markdown.tsx]
+- Rendering: [client/src/pages/ecosystems/EcosystemPage.tsx], [client/src/components/ecosystems/EcosystemFigures.tsx], [client/src/lib/markdown.tsx]
 - Validation: [scripts/validate-content.mjs]
 - Related memories: `ecosystem-dossiers-format`, `style-redaction-naturel`, `lectures-obliques-format`

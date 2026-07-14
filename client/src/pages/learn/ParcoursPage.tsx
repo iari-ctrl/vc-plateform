@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Clock, Compass, ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
+import { Compass, ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PathAtlas } from '@/components/explore/PathAtlas';
+import { ParcoursCard } from '@/components/cards';
 import { CompassRose } from '@/components/ornaments/Illustrations';
 import { cn } from '@/lib/utils';
 import {
@@ -9,71 +10,13 @@ import {
   FAMILY_ORDER,
   FAMILY_META,
   parcoursByFamily,
-  lessonIdsForParcours,
   routeForProfile,
-  t,
-  type Parcours,
   type TimeBudget,
 } from '@/content/parcours';
-import { SectionHeading, Reveal, LevelBadge, ProgressRing } from '@/components/ui/primitives';
+import { SectionHeading, Reveal } from '@/components/ui/primitives';
 import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
-
-function useParcoursProgress(p: Parcours) {
-  const { progress } = useUserData();
-  const ids = lessonIdsForParcours(p);
-  if (!ids.length) return { pct: 0, started: false };
-  const done = ids.filter((id) => progress[id]?.status === 'done').length;
-  const started = ids.some((id) => progress[id]);
-  return { pct: Math.round((done / ids.length) * 100), started };
-}
-
-function ParcoursCard({ parcours }: { parcours: Parcours }) {
-  const meta = FAMILY_META[parcours.family];
-  const accent = parcours.accent ?? meta.accent;
-  const kanji = parcours.kanji ?? meta.kanji;
-  const { pct } = useParcoursProgress(parcours);
-  const hours = parcours.time.coreHours;
-
-  return (
-    <Link
-      to={`/paths/${parcours.slug}`}
-      className="premium-card premium-card-hover sheen-host group isolate flex h-full flex-col p-6"
-      style={{ borderTopColor: `color-mix(in srgb, ${accent} 50%, transparent)`, borderTopWidth: 2 }}
-    >
-      <span
-        aria-hidden
-        className="contour-field pointer-events-none absolute -right-10 -top-10 -z-10 h-44 w-44 rounded-full opacity-70 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ '--contour': accent } as React.CSSProperties}
-      />
-      <div className="flex items-start justify-between gap-4">
-        <KanjiSeal kanji={kanji} accent={accent} size={46} />
-        {pct > 0 ? (
-          <ProgressRing value={pct} size={40} stroke={3} accent={accent} />
-        ) : (
-          parcours.roadmap === 'now' && (
-            <span className="chip !border-[color-mix(in_srgb,var(--primary)_45%,transparent)] !text-[color:var(--primary)]">Phare</span>
-          )
-        )}
-      </div>
-      <div className="mt-5 flex flex-wrap items-center gap-2">
-        <LevelBadge level={parcours.level} accent={accent} />
-        {parcours.perspective === 'both' && <span className="chip">Les deux sièges</span>}
-      </div>
-      <h3 className="mt-3 font-headline text-headline-md font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">
-        {t(parcours.title)}
-      </h3>
-      <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-surface-variant">{t(parcours.hook)}</p>
-      <div className="mt-5 flex items-center justify-between text-xs text-surface-variant">
-        <span className="inline-flex items-center gap-1.5"><Clock size={13} /> ≈ {hours} h</span>
-        <span className="inline-flex items-center gap-1.5 font-medium text-[color:var(--primary)]">
-          {pct > 0 ? 'Reprendre' : 'Commencer'} <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
-        </span>
-      </div>
-    </Link>
-  );
-}
 
 /** « Ton parcours » — the ikigai → parcours hand-off, shown when a profile exists. */
 function YourParcoursBanner() {
@@ -86,7 +29,7 @@ function YourParcoursBanner() {
   return (
     <Reveal>
       <Link
-        to={`/paths/${p.slug}`}
+        to={`/parcours/${p.slug}`}
         className="group relative mt-10 block overflow-hidden rounded-3xl border border-outline-variant p-7 sm:p-8"
         style={{ background: `linear-gradient(120deg, color-mix(in srgb, ${accent} 14%, transparent), transparent 65%)` }}
       >
@@ -95,8 +38,8 @@ function YourParcoursBanner() {
           <div className="flex items-start gap-4">
             <KanjiSeal kanji={p.kanji ?? FAMILY_META[p.family].kanji} accent={accent} size={56} />
             <div>
-              <h2 className="font-headline text-headline-lg font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">{t(p.title)}</h2>
-              <p className="mt-1.5 max-w-xl text-sm text-surface-variant">{t(p.hook)}</p>
+              <h2 className="font-headline text-headline-lg font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">{p.title}</h2>
+              <p className="mt-1.5 max-w-xl text-sm text-surface-variant">{p.hook}</p>
               {route.cadence && <p className="mt-2 text-xs text-surface-variant">Calibré pour toi : {route.cadence.toLowerCase()}.</p>}
             </div>
           </div>
@@ -106,7 +49,7 @@ function YourParcoursBanner() {
         </div>
         {route.then.length > 0 && (
           <p className="mt-5 border-t border-outline-variant pt-4 text-xs text-surface-variant">
-            Puis : {route.then.map((tp) => t(tp.title)).join(' · ')}
+            Puis : {route.then.map((tp) => tp.title).join(' · ')}
           </p>
         )}
       </Link>
@@ -144,9 +87,11 @@ export default function ParcoursPage() {
               <button
                 type="button"
                 onClick={() => setMapCollapsed(!mapCollapsed)}
-                className="group cursor-pointer transition-transform hover:scale-105 active:scale-95 outline-none rounded-full"
+                className="group cursor-pointer rounded-full transition-transform hover:scale-105 active:scale-95"
                 title={mapCollapsed ? "Ouvrir la carte des parcours" : "Rétracter la carte des parcours"}
                 aria-label={mapCollapsed ? "Ouvrir la carte des parcours" : "Rétracter la carte des parcours"}
+                aria-expanded={!mapCollapsed}
+                aria-controls="parcours-map"
               >
                 <CompassRose size={64} className="opacity-90 sm:hidden" />
                 <CompassRose size={88} className="hidden opacity-90 sm:block" />
@@ -157,6 +102,9 @@ export default function ParcoursPage() {
         </Reveal>
         <Reveal delay={120}>
           <div
+            id="parcours-map"
+            inert={mapCollapsed}
+            aria-hidden={mapCollapsed}
             className={cn(
               "transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden",
               mapCollapsed
@@ -179,15 +127,17 @@ export default function ParcoursPage() {
         const items = parcoursByFamily(family);
         if (!items.length) return null;
         const meta = FAMILY_META[family];
-        const isCollapsed = collapsedFamilies[family];
+        const isCollapsed = collapsedFamilies[family] ?? false;
+        const panelId = `parcours-family-${family}`;
         return (
           <section key={family} className="mt-14 scroll-mt-24 border-b border-outline-variant/30 pb-10 last:border-0 last:pb-0" id={family}>
             <Reveal>
               <button
                 type="button"
                 onClick={() => toggleFamily(family)}
-                className="w-full flex items-center gap-4 text-left group cursor-pointer select-none focus:outline-none"
+                className="w-full flex items-center gap-4 text-left group cursor-pointer select-none"
                 aria-expanded={!isCollapsed}
+                aria-controls={panelId}
               >
                 <KanjiSeal kanji={meta.kanji} accent={meta.accent} size={40} />
                 <div className="flex-1 min-w-0">
@@ -209,6 +159,9 @@ export default function ParcoursPage() {
               </button>
             </Reveal>
             <div
+              id={panelId}
+              inert={isCollapsed}
+              aria-hidden={isCollapsed}
               className={cn(
                 "grid transition-all duration-300 ease-in-out",
                 isCollapsed ? "grid-rows-[0fr] opacity-0 pointer-events-none mt-0" : "grid-rows-[1fr] opacity-100 mt-6"
@@ -218,7 +171,7 @@ export default function ParcoursPage() {
                 <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 pt-1 pb-1">
                   {items.map((p, i) => (
                     <Reveal key={p.id} delay={(i % 3) * 60 + (fi === 0 ? 80 : 0)}>
-                      <ParcoursCard parcours={p} />
+                      <ParcoursCard parcours={p} variant="catalogue" />
                     </Reveal>
                   ))}
                 </div>

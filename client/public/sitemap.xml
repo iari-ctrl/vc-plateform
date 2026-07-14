@@ -61,6 +61,51 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/bibliotheque/analyse-de-startup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/bibliotheque/comprendre-le-metier-de-vc</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/bibliotheque/decouvrir-le-capital-risque</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/bibliotheque/devenir-analyst-associate-principal</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/bibliotheque/fund-economics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/bibliotheque/levee-de-fonds-cote-entrepreneur</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/bibliotheque/portfolio-management</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/bibliotheque/term-sheets-et-structuration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/bibliotheque/these-d-investissement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2689,162 +2734,117 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths</loc>
+    <loc>https://vcpx.io/parcours</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/analyse-de-startup</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/paths/comprendre-le-metier-de-vc</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/paths/decoder-une-term-sheet</loc>
+    <loc>https://vcpx.io/parcours/decoder-une-term-sheet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/decouvrir-le-capital-risque</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/paths/decrocher-un-stage-en-vc</loc>
+    <loc>https://vcpx.io/parcours/decrocher-un-stage-en-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/devenir-analyst-associate-principal</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/paths/devenir-un-meilleur-analyst</loc>
+    <loc>https://vcpx.io/parcours/devenir-un-meilleur-analyst</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/dimensionner-un-marche</loc>
+    <loc>https://vcpx.io/parcours/dimensionner-un-marche</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/entretien-principal-poste-senior</loc>
+    <loc>https://vcpx.io/parcours/entretien-principal-poste-senior</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/fund-economics</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/paths/l-entretien-vc-en-1h</loc>
+    <loc>https://vcpx.io/parcours/l-entretien-vc-en-1h</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/le-carry-enfin-clair</loc>
+    <loc>https://vcpx.io/parcours/le-carry-enfin-clair</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/le-vc-sans-bullshit</loc>
+    <loc>https://vcpx.io/parcours/le-vc-sans-bullshit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/levee-de-fonds-cote-entrepreneur</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/paths/lever-en-1h-l-essentiel</loc>
+    <loc>https://vcpx.io/parcours/lever-en-1h-l-essentiel</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/lever-son-fonds-lps-institutions</loc>
+    <loc>https://vcpx.io/parcours/lever-son-fonds-lps-institutions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/lire-un-cap-table-sans-paniquer</loc>
+    <loc>https://vcpx.io/parcours/lire-un-cap-table-sans-paniquer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/mener-un-tour-de-table</loc>
+    <loc>https://vcpx.io/parcours/mener-un-tour-de-table</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/passer-associate</loc>
+    <loc>https://vcpx.io/parcours/passer-associate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/passer-principal</loc>
+    <loc>https://vcpx.io/parcours/passer-principal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/penser-comme-un-gp</loc>
+    <loc>https://vcpx.io/parcours/penser-comme-un-gp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/portfolio-management</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/paths/preparer-ma-preseed</loc>
+    <loc>https://vcpx.io/parcours/preparer-ma-preseed</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/preparer-ma-seed</loc>
+    <loc>https://vcpx.io/parcours/preparer-ma-seed</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/preparer-ma-serie-a</loc>
+    <loc>https://vcpx.io/parcours/preparer-ma-serie-a</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/reussir-l-entretien-analyst</loc>
+    <loc>https://vcpx.io/parcours/reussir-l-entretien-analyst</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/reussir-l-entretien-associate</loc>
+    <loc>https://vcpx.io/parcours/reussir-l-entretien-associate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/term-sheets-et-structuration</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/paths/these-d-investissement</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/paths/une-semaine-dans-la-peau-d-un-vc</loc>
+    <loc>https://vcpx.io/parcours/une-semaine-dans-la-peau-d-un-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/paths/unit-economics-rule-of-40</loc>
+    <loc>https://vcpx.io/parcours/unit-economics-rule-of-40</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>

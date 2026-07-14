@@ -332,7 +332,7 @@
       "Aborder un café-réseau sans réseau préexistant"
     ],
     "prerequisites": [
-      "Avoir complété le parcours [Le VC sans bullshit](/paths/le-vc-sans-bullshit)",
+      "Avoir complété le parcours [Le VC sans bullshit](/parcours/le-vc-sans-bullshit)",
       "Avoir un profil professionnel (ex: LinkedIn) clair et à jour"
     ]
   },
@@ -578,7 +578,7 @@
       "Tenir une reco invest/pass en temps contraint"
     ],
     "prerequisites": [
-      "Avoir complété le parcours [Le VC sans bullshit](/paths/le-vc-sans-bullshit)",
+      "Avoir complété le parcours [Le VC sans bullshit](/parcours/le-vc-sans-bullshit)",
       "Connaître les concepts de base d’une entreprise (revenu, marge, profit)"
     ]
   },
@@ -725,7 +725,7 @@
       "Lire une term sheet économie + contrôle"
     ],
     "prerequisites": [
-      "Avoir réussi le parcours [Entretien Analyst](/paths/reussir-l-entretien-analyst)",
+      "Avoir réussi le parcours [Entretien Analyst](/parcours/reussir-l-entretien-analyst)",
       "Maîtriser les mathématiques du VC ([[pre-money|Pre-money]], [[pre-money|Post-money]], [[dilution|Dilution]])"
     ]
   },

@@ -21,9 +21,9 @@
 // an SSR-safe head manager AND auditing every eagerly-rendered provider/component
 // for `window`/`document`/`localStorage` access — a large, invasive migration.
 // Capturing the post-hydration DOM in a real browser reproduces exactly what
-// usePageMeta produces, with zero changes to the app. Content needs no API
-// server: the client bundles its content and uses it as the offline/guest
-// fallback (useApiData), so the bundled copy renders during the crawl.
+// usePageMeta produces, with zero changes to the app. The client bundles its
+// content, so the complete product renders during the crawl without a service
+// dependency.
 //
 // Route list is the SAME enumeration the sitemap uses (scripts/collect-routes.mjs:
 // static pages from shared/routes.mjs + collections from data/). NOINDEX_SEGMENTS
@@ -63,6 +63,31 @@ const LIMIT = Number(readFlag('limit', '0')) || 0;
 const PORT = Number(readFlag('port', '4317')) || 4317;
 
 // --- config helpers ----------------------------------------------------------
+
+function resolveBasePath() {
+  const configured = process.env.VITE_BASE_URL?.trim() || '/';
+  let pathname = configured;
+  try {
+    pathname = new URL(configured).pathname;
+  } catch {
+    // Vite also accepts path-only bases such as /repository/.
+  }
+  const normalized = `/${pathname}`.replace(/\/{2,}/g, '/').replace(/\/+$/, '');
+  return normalized || '/';
+}
+
+const BASE_PATH = resolveBasePath();
+
+function withBasePath(pathname) {
+  if (BASE_PATH === '/') return pathname;
+  return pathname === '/' ? `${BASE_PATH}/` : `${BASE_PATH}${pathname}`;
+}
+
+function withoutBasePath(pathname) {
+  if (BASE_PATH === '/') return pathname;
+  if (pathname === BASE_PATH) return '/';
+  return pathname.startsWith(`${BASE_PATH}/`) ? pathname.slice(BASE_PATH.length) : pathname;
+}
 
 function resolveSiteUrl() {
   const configured = SITE_URL_ENV_KEYS.map((key) => process.env[key]).find(Boolean);
@@ -110,11 +135,12 @@ function startStaticServer(shellHtml) {
   return new Promise((resolve) => {
     const server = createServer((req, res) => {
       const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
-      const ext = extname(pathname.split('/').pop() ?? '');
+      const distPathname = withoutBasePath(pathname);
+      const ext = extname(distPathname.split('/').pop() ?? '');
 
       if (ext) {
-        const filePath = join(distDir, pathname);
-        if (filePath.startsWith(distDir) && existsSync(filePath)) {
+        const filePath = join(distDir, distPathname.replace(/^\/+/, ''));
+        if (filePath.startsWith(`${distDir}/`) && existsSync(filePath)) {
           res.writeHead(200, { 'Content-Type': MIME[ext] ?? 'application/octet-stream' });
           res.end(readFileSync(filePath));
           return;
@@ -133,13 +159,13 @@ function startStaticServer(shellHtml) {
 // --- crawl -------------------------------------------------------------------
 
 async function renderOne(page, origin, urlPath, siteUrl) {
-  await page.goto(`${origin}${urlPath}`, { waitUntil: 'load', timeout: 45_000 });
+  await page.goto(`${origin}${withBasePath(urlPath)}`, { waitUntil: 'load', timeout: 45_000 });
 
   // Detail pages (e.g. LessonPage) read their title from a lazily-imported body
-  // chunk and/or an API overlay, so usePageMeta first runs with an undefined
-  // title (generic card) and only re-runs with the page-specific one once that
-  // async data resolves. Waiting for the network to go idle lets those chunks
-  // land before we snapshot; the canonical link then confirms usePageMeta ran.
+  // chunk, so usePageMeta first runs with an undefined title (generic card) and
+  // only re-runs with the page-specific one once that async data resolves.
+  // Waiting for the network to go idle lets those chunks land before we
+  // snapshot; the canonical link then confirms usePageMeta ran.
   await page.waitForNetworkIdle({ idleTime: 600, timeout: 20_000 }).catch(() => {});
 
   let metaReady = true;
@@ -222,10 +248,6 @@ async function run() {
 
   async function worker() {
     const page = await browser.newPage();
-    // The bundle pings the (absent) API; let those requests fail fast instead of
-    // logging noise, and never get stuck waiting on them.
-    page.on('console', () => {});
-    page.on('pageerror', () => {});
     for (let next = queue.shift(); next; next = queue.shift()) {
       const urlPath = next;
       try {

@@ -2,7 +2,6 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ArrowRight, RotateCcw, Target, Sparkles, Clock } from 'lucide-react';
 import { IKIGAI, profileById } from '@/content';
-import { t } from '@/content/parcours';
 import { recommendedPaths, TIME_LABEL } from '@/lib/ikigai';
 import { ParcoursCard } from '@/components/cards';
 import { KanjiSeal, FleuronDivider } from '@/components/ornaments/Ornaments';
@@ -29,10 +28,8 @@ export default function ProfileResultPage() {
   usePageMeta(profile ? `Votre profil — ${profile.name}` : 'Votre profil');
 
   if (!profile) {
-    // On a fresh reload the router state is gone and an authed user's saved
-    // profile is still being fetched. Show a loader until we actually know there
-    // is no profile, instead of flashing the empty state. (When arriving from
-    // the quiz, `state.profileId` is present, so this branch is skipped.)
+    // On a fresh reload the router state is gone while the locally persisted
+    // profile is still being restored. Wait before showing the empty state.
     if (loading && !state.profileId) {
       return <PageLoader label="Chargement de votre profil…" />;
     }
@@ -135,8 +132,8 @@ export default function ProfileResultPage() {
       {/* CTAs */}
       <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
         {paths[0] && (
-          <Link to={`/paths/${paths[0].slug}`} className="btn-foil">
-            Commencer « {t(paths[0].title)} » <ArrowRight size={16} />
+          <Link to={`/parcours/${paths[0].slug}`} className="btn-foil">
+            Commencer « {paths[0].title} » <ArrowRight size={16} />
           </Link>
         )}
         <Link to="/dashboard" className="btn-ghost">Aller à mon tableau de bord</Link>

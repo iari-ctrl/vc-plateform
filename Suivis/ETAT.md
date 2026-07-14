@@ -2,7 +2,7 @@
 
 Instantané court et remplaçable de l'état vérifié du dépôt. Réécrit à chaque passe ; ne pas y accumuler d'historique (celui-ci vit dans `JOURNAL.md`). Les compteurs sont collés depuis la sortie de `npm run validate:content` — ne pas les recopier ailleurs.
 
-Dernière passe : 2026-07-14. Architecture : application **100 % statique, locale et FR-only** (SPA React/Vite, routes non localisées, contenu JSON bundlé, données utilisateur en `localStorage`). Aucun backend, aucune API, aucune base : le serveur Express/Prisma et les tests serveur ont été supprimés lors de la migration de juillet 2026. La persistance locale signale désormais ses échecs et ne met l'état React à jour qu'après une écriture réussie. Le routage `/fr` `/en`, le fichier `data/parcours.en.json` et l'ADR i18n ont été retirés du périmètre V1.
+Dernière passe : 2026-07-14. Architecture : application **100 % statique, locale et FR-only** (SPA React/Vite, routes non localisées, contenu JSON bundlé, données utilisateur en `localStorage`). Aucun backend, aucune API, aucune base, aucun espace admin ni enveloppe de localisation dormante. Les politiques de parcours sont documentées dans `docs/parcours/README.md`; la calibration temporelle réellement consommée vit dans `data/profileParcours.json`. Le splash reste canonique sur `/`, la Formation vit sous `/parcours` avec sa fiche intermédiaire `/parcours/:slug`, et les rayons documentaires sous `/bibliotheque/:slug`.
 
 ## Compteurs de contenu
 
@@ -32,12 +32,13 @@ Contrôles consignés (voir `JOURNAL.md` pour les commandes datées) :
 - `npm run validate:content` : exit 0.
 - `npm run validate:content:strict` : exit 0.
 - `npm run validate:glossary` : exit 0, 374 termes, slugs uniques, `id === slug`, liens et aliases résolus.
-- `npm ci` : exit 0 depuis le lockfile ; `zod@3.25.76` est déclaré à la racine.
+- `npm ls --depth=0` : arbre de dépendances directes cohérent ; le lockfile ne contient plus l'ancien paquet `server`.
 - `npm run lint` : exit 0, 0 erreur, 0 warning (`--max-warnings=0`).
 - `npm run typecheck` : exit 0.
-- `npm run test` : 12 fichiers / 67 tests Vitest + 1 test Node.
+- `npm run test` : 13 fichiers / 75 tests Vitest + 2 tests Node.
 - `npm run generate:sitemap` : exit 0 ; 572 routes canoniques non localisées, Flatland exclu.
-- `npm run build` : exit 0 ; build client (1 745 modules) puis prérendu de 572/572 routes. Le domaine canonique reste volontairement reporté au lot de remise en ligne.
+- Build client : exit 0, 1 747 modules transformés, recherche à nouveau isolée en chunk lazy ; prérendu de 572/572 routes terminé sur le build final. Le domaine canonique reste volontairement reporté au lot de remise en ligne.
+- Revue manuelle Chrome DevTools terminée en bureau et mobile (390 × 844) sur Parcours, Dashboard, leçon et popovers, dictionnaire, recherche/palette et les deux scrollytellings : aucun débordement horizontal, média cassé, 404 ou erreur console. Le seul signal relevé — champ de recherche du dictionnaire sans `id`/`name` — a été corrigé puis revalidé.
 - Statut local-first : GitHub sert de sauvegarde du code. Un push sur `master` ne déploie rien ; `.github/workflows/deploy-pages.yml` est limité à `workflow_dispatch` et ne doit pas être lancé avant une décision explicite de remise en ligne. Les contrôles restent locaux (`Suivis/PROCEDURE_PUSH.md`).
 
 ## Risques
@@ -48,7 +49,7 @@ Contrôles consignés (voir `JOURNAL.md` pour les commandes datées) :
 | Contenu à consolider | Élevé | Couverture inégale des cours (plusieurs à 2 leçons), 6 études de cas seulement dont 1 décisionnel, 8 milestones `a-produire` sans livrable |
 | Données limitées à un navigateur | Moyen | Le stockage est fiable et observable, mais reste propre à l'appareil ; export/import et store versionné sont reportés |
 | SEO / partage social à fiabiliser | Reporté | À traiter lors de la remise en ligne : domaine réel, `VITE_SITE_URL`, cartes OpenGraph, `canonical` et unfurlers |
-| Vitrine héritée de la formation | Faible à moyen | La nav publique est passée en trois piliers ; reste à vérifier les premières impressions et les rails contextuels |
+| Clarté des rails contextuels | Faible | La navigation partagée en trois piliers et la séparation Parcours/Bibliothèque sont en place ; les libellés devront continuer d'être vérifiés à mesure que la formation s'enrichit |
 
 Risques disparus avec la migration statique et le recentrage V1 FR (ne plus les traiter) : divergence CMS/JSON, recherche serveur incomplète, durcissement JWT/cookie/CSP côté serveur, choix du mode de rendu, routage bilingue `/fr` `/en`, traduction EN au lancement.
 

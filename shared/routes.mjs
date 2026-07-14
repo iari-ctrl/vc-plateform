@@ -20,7 +20,6 @@
  * everywhere without per-page wiring. Order is reflected in robots.txt.
  */
 export const NOINDEX_SEGMENTS = [
-  'admin',
   'dashboard',
   'notes',
   'journal',
@@ -40,7 +39,7 @@ export const STATIC_ROUTES = [
   { path: '/home', changefreq: 'weekly', priority: '0.9' },
   { path: '/intelligence', changefreq: 'weekly', priority: '0.9' },
   { path: '/onboarding', changefreq: 'monthly', priority: '0.5' },
-  { path: '/paths', changefreq: 'weekly', priority: '0.8' },
+  { path: '/parcours', changefreq: 'weekly', priority: '0.8' },
   { path: '/bibliotheque', changefreq: 'weekly', priority: '0.8' },
   { path: '/glossary', changefreq: 'weekly', priority: '0.8' },
   { path: '/convictions', changefreq: 'weekly', priority: '0.8' },
@@ -65,7 +64,7 @@ export const OG_IMAGE_BY_SEGMENT = {
   blog: 'blog',
   cases: 'case-study',
   courses: 'course',
-  paths: 'path',
+  parcours: 'path',
   livrables: 'path', // a deliverable is the hands-on end of a parcours — reuse its card
   intelligence: 'blog',
   convictions: 'blog',

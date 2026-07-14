@@ -2,9 +2,9 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock, BookOpen } from 'lucide-react';
 import { courseBySlug, lessonsForCourse, LEVEL_LABEL } from '@/content';
-import { parcoursById, parcoursForCourse, t } from '@/content/parcours';
+import { parcoursById, parcoursForCourse } from '@/content/parcours';
 import { LessonRow } from '@/components/cards';
-import { ProgressBar, PageLoader } from '@/components/ui/primitives';
+import { ProgressBar } from '@/components/ui/primitives';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
@@ -13,11 +13,9 @@ import NotFoundPage from '@/pages/system/NotFoundPage';
 export default function CourseDetailPage() {
   const { slug } = useParams();
   const course = slug ? courseBySlug(slug) : undefined;
-  const pending = false;
   const { progress } = useUserData();
   usePageMeta(course?.title, course?.summary);
 
-  if (pending) return <PageLoader />;
   if (!course) return <NotFoundPage />;
 
   const lessons = lessonsForCourse(course.id);
@@ -29,7 +27,7 @@ export default function CourseDetailPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
       {parcours ? (
-        <Link to={`/paths/${parcours.slug}`} className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> {t(parcours.title)}</Link>
+        <Link to={`/parcours/${parcours.slug}`} className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> {parcours.title}</Link>
       ) : (
         <Link to="/bibliotheque" className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> Bibliothèque</Link>
       )}

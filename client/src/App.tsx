@@ -10,8 +10,9 @@ const OnboardingPage = lazy(() => import('@/pages/onboarding/OnboardingPage'));
 const ProfileResultPage = lazy(() => import('@/pages/onboarding/ProfileResultPage'));
 const DashboardPage = lazy(() => import('@/pages/workspace/DashboardPage'));
 const ParcoursPage = lazy(() => import('@/pages/learn/ParcoursPage'));
-const ParcoursOrSubjectPage = lazy(() => import('@/pages/learn/ParcoursOrSubjectPage'));
+const ParcoursDetailPage = lazy(() => import('@/pages/learn/ParcoursDetailPage'));
 const PathsPage = lazy(() => import('@/pages/learn/PathsPage'));
+const PathDetailPage = lazy(() => import('@/pages/learn/PathDetailPage'));
 const CourseDetailPage = lazy(() => import('@/pages/learn/CourseDetailPage'));
 const LessonPage = lazy(() => import('@/pages/learn/LessonPage'));
 const GlossaryPage = lazy(() => import('@/pages/glossary/GlossaryPage'));
@@ -79,9 +80,10 @@ export default function App() {
           <Route path="onboarding" element={<OnboardingPage />} />
           <Route path="profile-result" element={<ProfileResultPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="paths" element={<ParcoursPage />} />
-          <Route path="paths/:slug" element={<ParcoursOrSubjectPage />} />
+          <Route path="parcours" element={<ParcoursPage />} />
+          <Route path="parcours/:slug" element={<ParcoursDetailPage />} />
           <Route path="bibliotheque" element={<PathsPage />} />
+          <Route path="bibliotheque/:slug" element={<PathDetailPage />} />
           <Route path="courses/:slug" element={<CourseDetailPage />} />
           <Route path="lessons/:slug" element={<LessonPage />} />
           <Route path="glossary" element={<GlossaryPage />} />

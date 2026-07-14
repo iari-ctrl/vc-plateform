@@ -7,9 +7,8 @@
       "Bash(npm --prefix client run build)",
       "Bash(node -e ' *)",
       "Bash(npm --prefix client test)",
-      "Bash(npx --prefix client vitest run --root client src/i18n/routes.test.ts)",
-      "Bash(node -e \"const d=require\\('./data/glossary.defs.json'\\); for\\(const k of ['tam','sam','som','tam-sam-som']\\) console.log\\('\\\\n### '+k+'\\\\n'+d[k].definition\\);\")",
-      "Bash(node /tmp/mutate-glossary.mjs)"
+      "Bash(npx --prefix client vitest run --root client *)",
+      "Bash(node -e \"const d=require\\('./data/generated/glossary.defs.json'\\); for\\(const k of ['tam','sam','som','tam-sam-som']\\) console.log\\('\\\\n### '+k+'\\\\n'+d[k].definition\\);\")"
     ]
   },
   "hooks": {

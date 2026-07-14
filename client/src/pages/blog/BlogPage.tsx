@@ -7,7 +7,6 @@ import type { BlogPost } from '@/content/types';
 
 export default function BlogPage() {
   usePageMeta('Analyses & notes de recherche', 'Lectures obliques, notes de recherche et réflexions sur le capital-risque.');
-  // Editorial content changes rarely — hold the API copy fresh for 10 min.
   const posts = BLOG;
   const [category, setCategory] = useState('all');
 

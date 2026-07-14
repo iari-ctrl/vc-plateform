@@ -1,6 +1,5 @@
-// Offline search across the whole content bundle, used when the API is
-// unavailable (guest mode / server down). It references *every* collection, so
-// it is intentionally kept in its own module and loaded lazily — eager callers
+// Local search across the static content bundle. It references every collection,
+// so it is intentionally kept in its own module and loaded lazily — eager callers
 // (the command palette) `import()` it on first query, keeping the 8 JSON
 // collections out of the initial bundle.
 import { LESSONS } from './lessons';
@@ -9,14 +8,15 @@ import { GLOSSARY } from './glossary';
 import { CASE_STUDIES } from './caseStudies';
 import { DELIVERABLES } from './deliverables';
 import { BLOG } from './blog';
-import { PARCOURS, t } from './parcours';
+import { PARCOURS } from './parcours';
 import { SIMULATORS } from './simulators';
 import { ANTI_PORTFOLIO } from './antiPortfolio';
 import { MEMOS } from './memos';
 import { ECOSYSTEMS } from './ecosystems';
+import type { SearchHitType } from './labels';
 
 export interface SearchHit {
-  type: 'course' | 'lesson' | 'glossary' | 'case' | 'deliverable' | 'blog' | 'path' | 'simulator' | 'anti-portfolio' | 'memo' | 'ecosystem';
+  type: SearchHitType;
   id: string;
   slug: string;
   title: string;
@@ -56,8 +56,8 @@ export function searchLocal(query: string): SearchHit[] {
     if (has(b.title, b.subtitle, b.excerpt, b.body))
       hits.push({ type: 'blog', id: b.id, slug: b.slug, title: b.title, excerpt: b.excerpt, href: `/blog/${b.slug}` });
   for (const p of PARCOURS)
-    if (has(t(p.title), t(p.hook), t(p.goal), p.outcomes.map((o) => t(o)).join(' ')))
-      hits.push({ type: 'path', id: p.id, slug: p.slug, title: t(p.title), excerpt: t(p.hook), href: `/paths/${p.slug}` });
+    if (has(p.title, p.hook, p.goal, p.outcomes.join(' ')))
+      hits.push({ type: 'path', id: p.id, slug: p.slug, title: p.title, excerpt: p.hook, href: `/parcours/${p.slug}` });
   for (const s of SIMULATORS)
     if (has(s.title, s.subtitle, s.description))
       hits.push({ type: 'simulator', id: s.id, slug: s.slug, title: s.title, excerpt: s.subtitle, href: `/simulators/${s.slug}` });

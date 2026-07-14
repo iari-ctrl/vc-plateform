@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 export function MainLayout() {
   const { pathname } = useLocation();
-    const mainRef = useRef<HTMLElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
   const firstRender = useRef(true);
 
   useEffect(() => {
@@ -31,7 +31,6 @@ export function MainLayout() {
   const isSplash = pathname === '/' || pathname === '';
   const isHome = pathname === `/home`;
   const hasSideNav = !isSplash && !isHome;
-  const hideFooter = isSplash || pathname.startsWith(`/admin`);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -43,7 +42,7 @@ export function MainLayout() {
         <main ref={mainRef} id="main" className={cn('flex-1 outline-none', hasSideNav && 'pt-14 lg:pt-0')} tabIndex={-1}>
           <Outlet />
         </main>
-        {!hideFooter && <Footer />}
+        {!isSplash && <Footer />}
       </div>
     </div>
   );

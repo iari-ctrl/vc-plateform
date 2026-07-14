@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, RotateCcw, Sun, Moon, Target } from 'lucide-react';
 import { profileById } from '@/content';
-import { t } from '@/content/parcours';
 import { recommendedPaths, TIME_LABEL } from '@/lib/ikigai';
 import { KanjiSeal, Fleuron } from '@/components/ornaments/Ornaments';
 import { IkigaiCahierSummary } from '@/components/ikigai/IkigaiCahierSummary';
@@ -40,7 +39,7 @@ export default function ProfilePage() {
               <Link to="/onboarding" className="btn-quiet"><RotateCcw size={14} /> Refaire le test</Link>
             </div>
             {recPaths[0] && (
-              <p className="mt-4 text-sm text-surface-variant">Parcours recommandé : <Link to={`/paths/${recPaths[0].slug}`} className="gold-link">{t(recPaths[0].title)}</Link></p>
+              <p className="mt-4 text-sm text-surface-variant">Parcours recommandé : <Link to={`/parcours/${recPaths[0].slug}`} className="gold-link">{recPaths[0].title}</Link></p>
             )}
           </div>
         ) : (

@@ -15,6 +15,7 @@ import { cn, formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 import type { DecisionCategory, DecisionJournalEntry, DecisionLink, DecisionOutcome } from '@/content/types';
 import type { SearchHit } from '@/content/search';
+import { SEARCH_TYPE_LABEL } from '@/content/labels';
 import type { StorageResult } from '@/lib/storage';
 
 const CATEGORIES: { id: DecisionCategory; label: string }[] = [
@@ -27,18 +28,6 @@ const CATEGORIES: { id: DecisionCategory; label: string }[] = [
 ];
 
 const CATEGORY_LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
-
-const LINK_TYPE_LABEL: Record<string, string> = {
-  course: 'Cours',
-  lesson: 'Leçon',
-  glossary: 'Dictionnaire',
-  case: 'Cas',
-  blog: 'Analyse',
-  path: 'Parcours',
-  simulator: 'Simulateur',
-  'anti-portfolio': 'Anti-portfolio',
-  memo: 'Memo',
-};
 
 function confidenceLabel(c: number): string {
   if (c < 60) return 'À peine mieux qu’une pièce';
@@ -325,7 +314,7 @@ function LinkPicker({ links, onChange }: { links: DecisionLink[]; onChange: (l: 
             {hits.map((h) => (
               <li key={`${h.type}-${h.id}`}>
                 <button type="button" onClick={() => add(h)} className="flex w-full items-center gap-3 px-3.5 py-2.5 text-left text-sm transition-colors hover:bg-surface-container-low">
-                  <span className="shrink-0 font-mono text-[0.5625rem] uppercase tracking-wider text-surface-variant">{LINK_TYPE_LABEL[h.type] ?? h.type}</span>
+                  <span className="shrink-0 font-mono text-[0.5625rem] uppercase tracking-wider text-surface-variant">{SEARCH_TYPE_LABEL[h.type]}</span>
                   <span className="min-w-0 flex-1 truncate">{h.title}</span>
                   <Plus size={13} className="shrink-0 text-surface-variant" />
                 </button>
@@ -338,7 +327,7 @@ function LinkPicker({ links, onChange }: { links: DecisionLink[]; onChange: (l: 
         <ul className="mt-2 flex flex-wrap gap-1.5">
           {links.map((l) => (
             <li key={`${l.type}-${l.id}`} className="inline-flex items-center gap-1.5 rounded-full border border-outline-variant bg-surface-container-lowest px-3 py-1 text-xs">
-              <span className="font-mono text-[0.5625rem] uppercase tracking-wider text-surface-variant">{LINK_TYPE_LABEL[l.type] ?? l.type}</span>
+              <span className="font-mono text-[0.5625rem] uppercase tracking-wider text-surface-variant">{SEARCH_TYPE_LABEL[l.type as SearchHit['type']] ?? l.type}</span>
               <span className="max-w-[16rem] truncate">{l.title}</span>
               <button type="button" onClick={() => onChange(links.filter((x) => !(x.type === l.type && x.id === l.id)))} aria-label={`Retirer ${l.title}`} className="text-surface-variant transition-colors hover:text-error">
                 <XIcon size={12} />

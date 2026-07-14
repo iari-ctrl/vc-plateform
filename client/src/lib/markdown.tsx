@@ -1,7 +1,8 @@
-import { Fragment, useCallback, useEffect, useId, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from 'react';
+import { Fragment, type MouseEvent as ReactMouseEvent, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { glossaryBySlug, GLOSSARY } from '@/content';
+import { useAnchoredPopover } from '@/components/ui/useAnchoredPopover';
 
 /**
  * Lightweight markdown renderer tailored to the lesson/article content:
@@ -19,8 +20,6 @@ import { glossaryBySlug, GLOSSARY } from '@/content';
  */
 
 const INLINE = /(\[[^\]]+\]\([^)]+\)|\[\[[^\]]+\]\]|\{\{[^}]+\}\}|\*\*[^*]+\*\*|\*[^*]+\*)/g;
-type PopoverPosition = { top: number; left: number; width: number; placement: 'above' | 'below' };
-
 function GlossaryLink({ slug, label }: { slug: string; label: string }) {
   const term = glossaryBySlug(slug);
   if (!term) return <>{label}</>;
@@ -38,51 +37,17 @@ function GlossaryLink({ slug, label }: { slug: string; label: string }) {
 export function GlossaryPreview({ slug, label }: { slug: string; label: string }) {
   const term = glossaryBySlug(slug);
   const navigate = useNavigate();
-    const [open, setOpen] = useState(false);
-  const [pinned, setPinned] = useState(false);
-  const [position, setPosition] = useState<PopoverPosition | null>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLAnchorElement>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const panelId = useId();
-
-  const clearCloseTimer = () => clearTimeout(closeTimer.current);
-  const positionPanel = useCallback(() => {
-    const rect = triggerRef.current?.getBoundingClientRect();
-    if (!rect) return;
-
-    const margin = 14;
-    const width = Math.min(320, window.innerWidth - margin * 2);
-    const center = rect.left + rect.width / 2;
-    const left = Math.min(Math.max(center, margin + width / 2), window.innerWidth - margin - width / 2);
-    const shouldOpenAbove = rect.bottom > window.innerHeight - 200 && rect.top > 200;
-
-    setPosition({
-      top: shouldOpenAbove ? rect.top - 10 : rect.bottom + 10,
-      left,
-      width,
-      placement: shouldOpenAbove ? 'above' : 'below',
-    });
-  }, []);
-
-  const openPreview = () => {
-    clearCloseTimer();
-    positionPanel();
-    setOpen(true);
-  };
-
-  const closePreview = () => {
-    if (pinned) return;
-    closeTimer.current = setTimeout(() => setOpen(false), 140);
-  };
-
-  const closeIfFocusLeaves = () => {
-    window.setTimeout(() => {
-      const active = document.activeElement;
-      if (pinned || triggerRef.current?.contains(active) || panelRef.current?.contains(active)) return;
-      setOpen(false);
-    }, 0);
-  };
+  const {
+    open,
+    position,
+    triggerRef,
+    panelRef,
+    panelId,
+    openPreview,
+    scheduleClose: closePreview,
+    closeIfFocusLeaves,
+    togglePinned,
+  } = useAnchoredPopover<HTMLButtonElement, HTMLAnchorElement>({ width: 320, closeDelay: 140, panelHeight: 200 });
 
   const goToGlossary = (event: ReactMouseEvent) => {
     // Let modified clicks (new tab / window) follow the real href.
@@ -90,36 +55,6 @@ export function GlossaryPreview({ slug, label }: { slug: string; label: string }
     event.preventDefault();
     navigate(`/glossary?term=${slug}`);
   };
-
-  useEffect(() => () => clearCloseTimer(), []);
-
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (triggerRef.current?.contains(target) || panelRef.current?.contains(target)) return;
-      setPinned(false);
-      setOpen(false);
-    };
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setPinned(false);
-        setOpen(false);
-      }
-    };
-    const onMove = () => positionPanel();
-
-    document.addEventListener('mousedown', onDown);
-    document.addEventListener('keydown', onKey);
-    window.addEventListener('resize', onMove);
-    window.addEventListener('scroll', onMove, true);
-    return () => {
-      document.removeEventListener('mousedown', onDown);
-      document.removeEventListener('keydown', onKey);
-      window.removeEventListener('resize', onMove);
-      window.removeEventListener('scroll', onMove, true);
-    };
-  }, [open, positionPanel]);
 
   if (!term) return <>{label}</>;
 
@@ -134,15 +69,7 @@ export function GlossaryPreview({ slug, label }: { slug: string; label: string }
         onMouseLeave={closePreview}
         onFocus={openPreview}
         onBlur={closeIfFocusLeaves}
-        onClick={() => {
-          clearCloseTimer();
-          positionPanel();
-          setPinned((current) => {
-            const next = !current;
-            setOpen(next || !open);
-            return next;
-          });
-        }}
+        onClick={togglePinned}
         className="inline cursor-help rounded-[2px] font-medium text-foreground underline decoration-dotted decoration-primary/60 decoration-1 underline-offset-[3px] transition-colors hover:text-[color:var(--primary)] hover:decoration-primary focus-visible:text-[color:var(--primary)]"
       >
         {label}

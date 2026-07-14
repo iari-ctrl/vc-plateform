@@ -1,5 +1,7 @@
 # Parcours 02 — Réussir l'entretien Analyst
 
+> **Archive historique — document non exécutable.** Ce brouillon précède les modules `lea-*` aujourd'hui publiés. Il est conservé pour ses pistes éditoriales uniques, mais ne doit pas servir à déduire l'état du parcours.
+
 > **Famille** Réussir un entretien · **Niveau** intermédiaire · **Temps** ~7 h (cœur) / ~10 h (immersion) · **Profil** le Futur analyste
 > **La promesse :** finis ce parcours et tu arrives à l'entretien avec une grille d'investisseur, un deal memo modèle dans la tête, un market sizing que tu sais dérouler au tableau, une thèse perso, et zéro question qui te prend par surprise.
 >
@@ -425,4 +427,3 @@ Fais-le **en conditions réelles**, chronométré, à voix haute (enregistre-toi
 ---
 
 *Sources (recherche) : process & questions — Mergers & Inquisitions, GoingVC, Leland ; case & deal memo — M&I, VC Lab, Visible.vc ; market sizing — Data-Mania, Waveup ; technique — M&I, beehiiv (cap table) ; évaluation startup — Forum VC, Substack « 6 T's » ; reverse questions — Reforge. Repères chiffrés 2025-2026 (Carta, Dealroom).*
-

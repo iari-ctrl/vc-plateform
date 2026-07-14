@@ -31,17 +31,9 @@ export function pluralize(n: number, singular: string, plural?: string): string 
   return `${n} ${n > 1 ? plural ?? `${singular}s` : singular}`;
 }
 
-export function readingTime(minutes: number): string {
-  return `${minutes} min`;
-}
-
-export function initials(name: string): string {
-  return name.split(/\s+/).slice(0, 2).map((s) => s[0]?.toUpperCase() ?? '').join('');
-}
-
 /**
  * Returns the URL only if it uses a safe, user-navigable scheme (http/https/
- * mailto). Guards external-link fields (e.g. admin-entered glossary links) so a
+ * mailto). Guards external-link fields (e.g. glossary references) so a
  * `javascript:`/`data:` URI can never reach an href. Returns undefined when the
  * value is missing or unsafe — callers treat that as "no link".
  */

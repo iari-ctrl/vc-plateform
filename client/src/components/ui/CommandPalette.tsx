@@ -3,19 +3,20 @@ import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft, Ghost, ScrollText, Microscope, Dumbbell } from 'lucide-react';
 import type { SearchHit } from '@/content/search';
+import { SEARCH_TYPE_LABEL } from '@/content/labels';
 
-const TYPE_META: Record<SearchHit['type'], { label: string; icon: typeof Search }> = {
-  course: { label: 'Cours', icon: BookMarked },
-  lesson: { label: 'Leçon', icon: BookOpen },
-  glossary: { label: 'Dictionnaire', icon: BookMarked },
-  case: { label: 'Étude de cas', icon: FileText },
-  deliverable: { label: 'Livrable', icon: Dumbbell },
-  blog: { label: 'Analyse', icon: Newspaper },
-  path: { label: 'Parcours', icon: Route },
-  simulator: { label: 'Simulateur', icon: FlaskConical },
-  'anti-portfolio': { label: 'Anti-portfolio', icon: Ghost },
-  memo: { label: 'Memo annoté', icon: ScrollText },
-  ecosystem: { label: 'Écosystème', icon: Microscope },
+const TYPE_ICON: Record<SearchHit['type'], typeof Search> = {
+  course: BookMarked,
+  lesson: BookOpen,
+  glossary: BookMarked,
+  case: FileText,
+  deliverable: Dumbbell,
+  blog: Newspaper,
+  path: Route,
+  simulator: FlaskConical,
+  'anti-portfolio': Ghost,
+  memo: ScrollText,
+  ecosystem: Microscope,
 };
 
 export function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -108,8 +109,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             <p className="px-3 py-8 text-center text-sm text-surface-variant">Aucun résultat pour « {q} ».</p>
           )}
           {grouped.map((hit, i) => {
-            const Meta = TYPE_META[hit.type];
-            const Icon = Meta.icon;
+            const Icon = TYPE_ICON[hit.type];
             return (
               <button
                 key={`${hit.type}-${hit.id}`}
@@ -125,7 +125,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-2">
                     <span className="truncate font-medium">{hit.title}</span>
-                    <span className="shrink-0 font-mono text-[0.5625rem] uppercase tracking-wider text-surface-variant">{Meta.label}</span>
+                    <span className="shrink-0 font-mono text-[0.5625rem] uppercase tracking-wider text-surface-variant">{SEARCH_TYPE_LABEL[hit.type]}</span>
                   </span>
                   <span className="mt-0.5 line-clamp-1 block text-xs text-surface-variant">{hit.excerpt}</span>
                 </span>

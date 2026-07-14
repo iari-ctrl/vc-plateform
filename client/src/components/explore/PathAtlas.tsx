@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Compass as CompassIcon, LocateFixed, Minus, Plus } from 'lucide-react';
 import { IKIGAI } from '@/content/ikigai';
-import { PARCOURS, FAMILY_META, lessonIdsForParcours, t, type Parcours } from '@/content/parcours';
+import { PARCOURS, FAMILY_META, lessonIdsForParcours, type Parcours } from '@/content/parcours';
 import { LEVEL_LABEL } from '@/content/labels';
 import { useTheme } from '@/context/ThemeContext';
 import { useUserData } from '@/context/UserDataContext';
@@ -361,7 +361,7 @@ export function PathAtlas({
                     key={p.id}
                     role="link"
                     tabIndex={0}
-                    aria-label={`${t(p.title)} — ${FAMILY_META[p.family].label}, ${LEVEL_LABEL[p.level]}, environ ${p.time.coreHours} heures`}
+                    aria-label={`${p.title} — ${FAMILY_META[p.family].label}, ${LEVEL_LABEL[p.level]}, environ ${p.time.coreHours} heures`}
                     className="cursor-pointer outline-none transition-opacity duration-300"
                     style={{ opacity: dim ? 0.26 : 1 }}
                     onMouseEnter={() => setActiveId(p.id)}
@@ -370,13 +370,13 @@ export function PathAtlas({
                     onBlur={() => setActiveId(null)}
                     onClick={() => {
                       if (dragged.current || collapsed) return; // ignore the click that ends a pan or when collapsed
-                      navigate(`/paths/${p.slug}`);
+                      navigate(`/parcours/${p.slug}`);
                     }}
                     onKeyDown={(e) => {
                       if (collapsed) return;
                       if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
-                        navigate(`/paths/${p.slug}`);
+                        navigate(`/parcours/${p.slug}`);
                       }
                     }}
                   >
@@ -394,7 +394,7 @@ export function PathAtlas({
                     {isActive && (
                       <text x={lx} y={ly} textAnchor={anchor} className="pointer-events-none select-none">
                         <tspan x={lx} fontFamily="JetBrains Mono, monospace" fontSize="8" fill={p.accent} letterSpacing="0.14em">{FAMILY_META[p.family].label.toUpperCase()}</tspan>
-                        <tspan x={lx} dy="13" fontFamily="Newsreader" fontStyle="italic" fontSize="14.5" fill="var(--on-surface)">{t(p.title)}</tspan>
+                        <tspan x={lx} dy="13" fontFamily="Newsreader" fontStyle="italic" fontSize="14.5" fill="var(--on-surface)">{p.title}</tspan>
                       </text>
                     )}
                   </g>
@@ -498,8 +498,8 @@ export function PathAtlas({
                   <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: active.accent }} />
                   <span className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-surface-variant">{FAMILY_META[active.family].label} · {LEVEL_LABEL[active.level]} · ≈ {active.time.coreHours} h</span>
                 </div>
-                <p className="mt-1.5 font-headline text-headline-sm font-semibold leading-tight">{t(active.title)}</p>
-                <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-surface-variant">{t(active.hook)}</p>
+                <p className="mt-1.5 font-headline text-headline-sm font-semibold leading-tight">{active.title}</p>
+                <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-surface-variant">{active.hook}</p>
                 <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-[color:var(--primary)]">Cliquer pour mettre le cap <ArrowRight size={13} /></p>
               </>
             ) : (
@@ -530,14 +530,14 @@ export function PathAtlas({
           return (
             <Link
               key={p.id}
-              to={`/paths/${p.slug}`}
+              to={`/parcours/${p.slug}`}
               onMouseEnter={() => setActiveId(p.id)}
               onMouseLeave={() => setActiveId(null)}
               className="group inline-flex items-center gap-1.5 rounded-full border border-outline-variant bg-surface-container-low px-3 py-1.5 text-xs font-medium text-surface-variant transition-colors hover:text-foreground"
               style={activeId === p.id ? { borderColor: `color-mix(in srgb, ${accent} 55%, transparent)`, color: 'var(--on-surface)' } : undefined}
             >
               <span className="font-headline text-sm" style={{ color: accent }}>{p.kanji ?? meta.kanji}</span>
-              {t(p.title)}
+              {p.title}
             </Link>
           );
         })}

@@ -5,20 +5,11 @@ import { Link, NavLink } from 'react-router-dom';
 import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
 import { useUI } from '@/context/UIContext';
-const isLinkActive = (to: string, location: { pathname: string }) =>
-  to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
-
-
-const NAV = [
-  { to: '/intelligence', label: 'Intelligence VC' },
-  { to: '/paths', label: 'Formation' },
-  { to: '/glossary', label: 'Dictionnaire' },
-  { to: '/blog', label: 'Analyses' },
-];
+import { NAVIGATION_PILLARS, isNavigationPillarActive } from '@/lib/navigation';
 
 export function TopBar() {
   const { theme, toggle } = useTheme();
-    const { openSearch } = useUI();
+  const { openSearch } = useUI();
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const { pathname } = location;
@@ -31,12 +22,13 @@ export function TopBar() {
         <Logo />
 
         <nav className="ml-4 hidden items-center gap-1 lg:flex" aria-label="Navigation principale">
-          {NAV.map((item) => {
-            const isActive = isLinkActive(item.to, location);
+          {NAVIGATION_PILLARS.map((pillar) => {
+            const isActive = isNavigationPillarActive(pathname, pillar);
             return (
               <NavLink
-                key={item.to}
-                to={item.to}
+                key={pillar.id}
+                to={pillar.to}
+                aria-current={isActive ? 'page' : undefined}
                 className={
                   `rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
                     isActive ? 'text-foreground' : 'text-surface-variant hover:text-foreground'
@@ -44,7 +36,7 @@ export function TopBar() {
                 }
               >
                 <span className="relative">
-                  {item.label}
+                  {pillar.label}
                   {isActive && <span className="absolute -bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[color:var(--primary)]" />}
                 </span>
               </NavLink>
@@ -66,13 +58,9 @@ export function TopBar() {
             <Search size={17} />
           </button>
 
-          
-
           <button onClick={toggle} className="grid h-9 w-9 place-items-center rounded-full text-surface-variant transition-colors hover:bg-surface-container-low" aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}>
             {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
           </button>
-
-          
 
           <Link to="/onboarding" className="btn-foil hidden !px-4 !py-2 sm:inline-flex">
             <Compass size={15} />
@@ -88,27 +76,24 @@ export function TopBar() {
       {mobileOpen && (
         <div className="border-t border-outline-variant bg-surface lg:hidden animate-fade-in">
           <nav className="mx-auto flex max-w-[var(--content-max)] flex-col gap-1 px-4 py-4">
-            {NAV.map((item) => {
-              const isActive = isLinkActive(item.to, location);
+            {NAVIGATION_PILLARS.map((pillar) => {
+              const isActive = isNavigationPillarActive(pathname, pillar);
               return (
                 <NavLink
-                  key={item.to}
-                  to={item.to}
+                  key={pillar.id}
+                  to={pillar.to}
+                  aria-current={isActive ? 'page' : undefined}
                   className={`rounded-xl px-4 py-3 text-sm font-medium ${
                     isActive ? 'bg-surface-container text-foreground' : 'text-surface-variant'
                   }`}
                 >
-                  {item.label}
+                  {pillar.label}
                 </NavLink>
               );
             })}
-            <Link to="/dashboard" className="rounded-xl px-4 py-3 text-sm font-medium text-surface-variant">Mon tableau de bord</Link>
             <Link to="/onboarding" className="btn-foil mt-2">
               <Compass size={15} /> Test d’orientation
             </Link>
-            
-
-            
           </nav>
         </div>
       )}

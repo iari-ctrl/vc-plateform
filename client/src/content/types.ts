@@ -556,13 +556,6 @@ export interface IkigaiData {
 }
 
 // ── User-scoped types ──────────────────────────────────────────────────────
-export interface AuthUser {
-  id: string;
-  email: string;
-  name: string;
-  role: 'user' | 'admin' | string;
-}
-
 export interface UserProfile {
   profileType: string;
   timeBudget?: string;

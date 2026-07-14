@@ -3,7 +3,7 @@
 // data/parcours.json; this module loads it, resolves each step's reference to a
 // real in-app route, and exposes the ikigai → parcours routing table.
 //
-// See docs/parcours-apprentissage-conception.md and parcoursTypes.ts.
+// See docs/parcours/README.md and parcoursTypes.ts.
 import parcoursJson from '@data/parcours.json';
 import profileParcoursJson from '@data/profileParcours.json';
 import { courseById } from './courses';
@@ -28,14 +28,18 @@ export type {
   TimeBudget,
   Perspective,
 } from './parcoursTypes';
-export { t, visibleSteps } from './parcoursTypes';
 
 export const PARCOURS = parcoursJson as unknown as Parcours[];
 export const PROFILE_PARCOURS = profileParcoursJson as unknown as ProfileParcoursMap;
 
+/** Filtre les étapes selon la calibration définie dans profileParcours.json. */
+export function visibleSteps(p: Parcours, budget: TimeBudget): ParcoursStep[] {
+  const allowed = new Set(PROFILE_PARCOURS.timeCalibration[budget].show);
+  return p.steps.filter((step) => allowed.has(step.type)).sort((a, b) => a.order - b.order);
+}
+
 export const parcoursBySlug = (slug: string) => PARCOURS.find((p) => p.slug === slug);
 export const parcoursById = (id: string) => PARCOURS.find((p) => p.id === id);
-export const isParcoursId = (id: string | undefined): id is string => !!id && id.startsWith('p-');
 
 // ── Families — the « Netflix shelves » of the catalogue, in display order ──────
 export const FAMILY_ORDER: ParcoursFamily[] = [

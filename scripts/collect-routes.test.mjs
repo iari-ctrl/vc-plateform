@@ -9,3 +9,13 @@ test('collectRoutes excludes draft blog posts and keeps default-published posts'
   assert.equal(paths.has('/blog/flatland-cecite-dimensionnelle'), false);
   assert.equal(paths.has('/blog/voir-comme-un-etat'), true);
 });
+
+test('collectRoutes keeps parcours and library subjects on distinct canonical prefixes', () => {
+  const paths = new Set(collectRoutes().map((route) => route.path));
+
+  assert.equal(paths.has('/parcours'), true);
+  assert.equal(paths.has('/parcours/le-vc-sans-bullshit'), true);
+  assert.equal(paths.has('/bibliotheque'), true);
+  assert.equal(paths.has('/bibliotheque/decouvrir-le-capital-risque'), true);
+  assert.equal([...paths].some((path) => path === '/paths' || path.startsWith('/paths/')), false);
+});

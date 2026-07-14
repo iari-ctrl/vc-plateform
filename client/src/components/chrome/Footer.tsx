@@ -2,37 +2,7 @@ import { Link } from 'react-router-dom';
 import { Logo } from '@/components/ui/Logo';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { ExLibris } from '@/components/ornaments/Illustrations';
-
-const COLUMNS = [
-  {
-    title: 'Intelligence VC',
-    links: [
-      { to: '/intelligence', label: 'Vue d’ensemble' },
-      { to: '/ecosystemes', label: 'Écosystèmes' },
-      { to: '/convictions', label: 'Convictions' },
-      { to: '/decisions', label: 'Décisions' },
-      { to: '/simulators', label: 'Simulateurs' },
-      { to: '/methode', label: 'Méthode' },
-      { to: '/blog', label: 'Analyses' },
-    ],
-  },
-  {
-    title: 'Formation',
-    links: [
-      { to: '/paths', label: 'Parcours' },
-      { to: '/bibliotheque', label: 'Bibliothèque' },
-      { to: '/glossary', label: 'Dictionnaire' },
-    ],
-  },
-  {
-    title: 'Workspace',
-    links: [
-      { to: '/dashboard', label: 'Tableau de bord' },
-      { to: '/notes', label: 'Notes & favoris' },
-      { to: '/journal', label: 'Journal de décisions' },
-    ],
-  },
-];
+import { NAVIGATION_PILLARS } from '@/lib/navigation';
 
 export function Footer() {
   return (
@@ -49,14 +19,14 @@ export function Footer() {
             </p>
             <ExLibris owner="L’explorateur" num="Tabula Ventura · MMXXVI" className="mt-6 max-w-[230px]" />
           </div>
-          {COLUMNS.map((col) => (
-            <div key={col.title}>
-              <p className="eyebrow mb-4">{col.title}</p>
+          {NAVIGATION_PILLARS.map((pillar) => (
+            <div key={pillar.id}>
+              <p className="eyebrow mb-4">{pillar.label}</p>
               <ul className="space-y-2.5">
-                {col.links.map((l) => (
-                  <li key={l.to}>
-                    <Link to={l.to} className="text-sm text-surface-variant transition-colors hover:text-foreground">
-                      {l.label}
+                {pillar.children.map((item) => (
+                  <li key={item.to}>
+                    <Link to={item.to} className="text-sm text-surface-variant transition-colors hover:text-foreground">
+                      {item.label}
                     </Link>
                   </li>
                 ))}

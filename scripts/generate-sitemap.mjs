@@ -41,7 +41,8 @@ function escapeXml(value) {
 }
 
 function absoluteUrl(path) {
-  return new URL(cleanPath(path), `${siteUrl}/`).toString();
+  const relativePath = cleanPath(path).replace(/^\/+/, '');
+  return new URL(relativePath, `${siteUrl}/`).toString();
 }
 
 // The exhaustive route set (static pages + collections from data/) is shared
@@ -72,13 +73,14 @@ const sitemap = [
 
 // The noindex set is shared with the client (shared/routes.mjs): the same
 // segments that get `Disallow:` here are what usePageMeta marks `noindex`.
-const disallowBlock = (prefix) => [...NOINDEX_SEGMENTS.map((segment) => `Disallow: ${prefix}/${segment}`), ''];
+const sitePath = new URL(`${siteUrl}/`).pathname.replace(/\/+$/, '');
+const disallowBlock = () => [...NOINDEX_SEGMENTS.map((segment) => `Disallow: ${sitePath}/${segment}`), ''];
 
 const robots = [
   'User-agent: *',
-  'Allow: /',
+  `Allow: ${sitePath}/`,
   '',
-  ...disallowBlock(''),
+  ...disallowBlock(),
   `Sitemap: ${absoluteUrl('/sitemap.xml')}`,
   '',
 ].join('\n');

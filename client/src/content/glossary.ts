@@ -1,11 +1,11 @@
 import glossaryIndexJson from '@data/generated/glossary.index.json';
-import type { GlossaryDef, GlossaryIndexEntry, GlossaryTerm } from './types';
+import type { GlossaryDef, GlossaryIndexEntry } from './types';
 
 /**
  * Light glossary index — every field except the heavy `definition`/`example`.
  * Safe to import on the lesson/article hot path (markdown auto-linker, popover
  * previews, search). Full definitions live in a separate chunk loaded on demand
- * via {@link loadGlossaryDefs} / {@link loadGlossaryTerm}.
+ * via {@link loadGlossaryDefs}.
  */
 export const GLOSSARY = glossaryIndexJson as unknown as GlossaryIndexEntry[];
 
@@ -21,13 +21,4 @@ export function loadGlossaryDefs(): Promise<Record<string, GlossaryDef>> {
     );
   }
   return defsPromise;
-}
-
-/** A full term (index entry + definition), resolved lazily. `undefined` for an
- *  unknown slug. */
-export async function loadGlossaryTerm(slug: string): Promise<GlossaryTerm | undefined> {
-  const entry = glossaryBySlug(slug);
-  if (!entry) return undefined;
-  const def = (await loadGlossaryDefs())[slug];
-  return { ...entry, definition: def?.definition ?? '', example: def?.example };
 }

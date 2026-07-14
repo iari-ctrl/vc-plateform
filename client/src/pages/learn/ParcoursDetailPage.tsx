@@ -8,11 +8,11 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import {
-  parcoursBySlug, resolveStep, lessonIdsForParcours, visibleSteps, t,
+  parcoursBySlug, resolveStep, lessonIdsForParcours, visibleSteps,
   FAMILY_META, type ParcoursStep, type StepType, type TimeBudget,
 } from '@/content/parcours';
 import { KanjiSeal } from '@/components/ornaments/Ornaments';
-import { ProgressBar, LevelBadge, PageLoader } from '@/components/ui/primitives';
+import { ProgressBar, LevelBadge } from '@/components/ui/primitives';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useUserData } from '@/context/UserDataContext';
 import { usePageMeta } from '@/lib/seo';
@@ -38,17 +38,15 @@ const TIME_BUDGETS: { id: TimeBudget; label: string; sub: string }[] = [
 export default function ParcoursDetailPage() {
   const { slug } = useParams();
   const parcours = slug ? parcoursBySlug(slug) : undefined;
-  const pending = false;
   const { progress, profile } = useUserData();
   const [budget, setBudget] = useState<TimeBudget>((profile?.timeBudget as TimeBudget) ?? 'high');
 
-  usePageMeta(parcours ? t(parcours.title) : undefined, parcours ? t(parcours.hook) : undefined);
+  usePageMeta(parcours?.title, parcours?.hook);
 
   const lessonIds = useMemo(() => (parcours ? lessonIdsForParcours(parcours) : []), [parcours]);
   const done = lessonIds.filter((id) => progress[id]?.status === 'done').length;
   const pct = lessonIds.length ? Math.round((done / lessonIds.length) * 100) : 0;
 
-  if (pending) return <PageLoader />;
   if (!parcours) return <NotFoundPage />;
 
   const meta = FAMILY_META[parcours.family];
@@ -73,7 +71,7 @@ export default function ParcoursDetailPage() {
       {/* Hero */}
       <section className="border-b border-outline-variant" style={{ background: `linear-gradient(180deg, color-mix(in srgb, ${accent} 8%, transparent), transparent)` }}>
         <div className="mx-auto max-w-[var(--content-max)] px-4 py-12 sm:px-6 lg:px-8">
-          <Link to="/paths" className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> Tous les parcours</Link>
+          <Link to="/parcours" className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} /> Tous les parcours</Link>
           <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:items-end">
             <div>
               <div className="flex items-center gap-4">
@@ -86,9 +84,9 @@ export default function ParcoursDetailPage() {
                   </div>
                 </div>
               </div>
-              <h1 className="mt-5 font-headline text-display-md font-semibold leading-[1.05] tracking-tight text-balance">{t(parcours.title)}</h1>
-              <p className="mt-3 max-w-2xl text-[1.0625rem] font-headline italic leading-relaxed text-surface-variant text-pretty">{t(parcours.hook)}</p>
-              <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-surface-variant text-pretty">{t(parcours.goal)}</p>
+              <h1 className="mt-5 font-headline text-display-md font-semibold leading-[1.05] tracking-tight text-balance">{parcours.title}</h1>
+              <p className="mt-3 max-w-2xl text-[1.0625rem] font-headline italic leading-relaxed text-surface-variant text-pretty">{parcours.hook}</p>
+              <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-surface-variant text-pretty">{parcours.goal}</p>
               <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-surface-variant">
                 <span className="inline-flex items-center gap-1.5"><Clock size={15} /> ≈ {parcours.time.coreHours} h{parcours.time.withBonusHours ? ` · ${parcours.time.withBonusHours} h en immersion` : ''}</span>
                 <span className="inline-flex items-center gap-1.5"><Target size={15} /> {parcours.steps.length} étapes</span>
@@ -99,7 +97,7 @@ export default function ParcoursDetailPage() {
                     {pct > 0 ? 'Reprendre où j’en étais' : 'Commencer le parcours'}
                   </Link>
                 )}
-                <BookmarkButton variant="labelled" item={{ itemType: 'parcours', itemId: parcours.id, title: t(parcours.title), href: `/paths/${parcours.slug}` }} />
+                <BookmarkButton variant="labelled" item={{ itemType: 'parcours', itemId: parcours.id, title: parcours.title, href: `/parcours/${parcours.slug}` }} />
               </div>
             </div>
 
@@ -116,7 +114,7 @@ export default function ParcoursDetailPage() {
               <div>
                 <p className="eyebrow mb-3 flex items-center gap-2"><Users size={13} /> Pour qui</p>
                 <div className="flex flex-wrap gap-2">
-                  {parcours.forWhom.map((w, i) => <span key={i} className="chip">{t(w)}</span>)}
+                  {parcours.forWhom.map((w, i) => <span key={i} className="chip">{w}</span>)}
                 </div>
               </div>
               {parcours.prerequisites && parcours.prerequisites.length > 0 && (
@@ -126,7 +124,7 @@ export default function ParcoursDetailPage() {
                     {parcours.prerequisites.map((p, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-sm text-surface-variant">
                         <span className="mt-[0.35rem] h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: accent }} />
-                        <span className="leading-relaxed text-foreground"><InlineMarkdown source={t(p)} glossaryPreview /></span>
+                        <span className="leading-relaxed text-foreground"><InlineMarkdown source={p} glossaryPreview /></span>
                       </li>
                     ))}
                   </ul>
@@ -138,7 +136,7 @@ export default function ParcoursDetailPage() {
                   {parcours.outcomes.map((o, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-sm text-surface-variant">
                       <Check size={15} className="mt-0.5 shrink-0" style={{ color: accent }} />
-                      {t(o)}
+                      {o}
                     </li>
                   ))}
                 </ul>
@@ -189,8 +187,8 @@ export default function ParcoursDetailPage() {
         {parcours.milestone && (
           <div className="mt-10 rounded-2xl border-2 border-dashed p-6 sm:p-7" style={{ borderColor: `color-mix(in srgb, ${accent} 40%, transparent)`, background: `color-mix(in srgb, ${accent} 5%, transparent)` }}>
             <p className="eyebrow flex items-center gap-2"><Trophy size={14} style={{ color: accent }} /> Le jalon — ta récompense</p>
-            <h3 className="mt-3 font-headline text-headline-md font-semibold">{t(parcours.milestone.label)}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-surface-variant">{t(parcours.milestone.description)}</p>
+            <h3 className="mt-3 font-headline text-headline-md font-semibold">{parcours.milestone.label}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-surface-variant">{parcours.milestone.description}</p>
             {parcours.milestone.evaluation && parcours.milestone.evaluation.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
                 {parcours.milestone.evaluation.includes('auto') && <span className="chip">Auto-évaluation (grille)</span>}
@@ -238,8 +236,8 @@ function StepRow({ step, accent }: { step: ParcoursStep; accent: string }) {
             {isReading && <span className="chip !py-0 text-[0.5625rem]">en cours</span>}
             {step.status === 'a-produire' && !r.exists && <span className="chip !py-0 text-[0.5625rem]">bientôt</span>}
           </div>
-          <p className="mt-1 font-medium leading-snug text-foreground">{t(step.label)}</p>
-          {step.prereqNote && <p className="mt-0.5 text-xs italic text-surface-variant">Conseillé d’abord : {t(step.prereqNote)}</p>}
+          <p className="mt-1 font-medium leading-snug text-foreground">{step.label}</p>
+          {step.prereqNote && <p className="mt-0.5 text-xs italic text-surface-variant">Conseillé d’abord : {step.prereqNote}</p>}
         </div>
         {r.href && (
           <span className="mt-1 shrink-0 text-surface-variant transition-transform group-hover:translate-x-0.5">
