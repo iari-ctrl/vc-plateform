@@ -9,6 +9,7 @@ import { Markdown } from '@/lib/markdown';
 import { usePageMeta } from '@/lib/seo';
 import { safeHttpUrl } from '@/lib/utils';
 import type { GlossaryDef, GlossaryIndexEntry, GlossaryTerm } from '@/content/types';
+import { matchesGlossaryQuery } from './glossarySearch';
 
 const ALPHABET = '0ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const DEFAULT_ANCHOR_OFFSET = 150;
@@ -58,14 +59,6 @@ function secondInitialFor(term: string) {
   return /^[A-Z]$/.test(second) ? second : '0';
 }
 
-function matchesQuery(term: GlossaryTerm, query: string) {
-  const q = query.trim().toLowerCase();
-  if (!q) return true;
-  return `${term.term} ${(term.aliases ?? []).join(' ')} ${term.latin ?? ''} ${term.category} ${term.short} ${term.definition} ${term.example ?? ''}`
-    .toLowerCase()
-    .includes(q);
-}
-
 function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
@@ -108,8 +101,8 @@ export default function GlossaryPage() {
   const alphabetButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const scrollSpyFrame = useRef<number | null>(null);
 
-  // Heavy definitions load lazily so the detail view and search can use them
-  // without adding them to the initial bundle.
+  // Heavy definitions load lazily for the detail view so they do not add to
+  // the initial bundle.
   useEffect(() => {
     void loadGlossaryDefs().then(setDefs);
   }, []);
@@ -136,7 +129,7 @@ export default function GlossaryPage() {
   const filteredTerms = useMemo(() => {
     return sortedTerms
       .filter((t) => activeCategory === 'Tous' || t.category === activeCategory)
-      .filter((t) => matchesQuery(t, query));
+      .filter((t) => matchesGlossaryQuery(t, query));
   }, [sortedTerms, activeCategory, query]);
 
   const availableLetters = useMemo(() => {
@@ -436,7 +429,10 @@ export default function GlossaryPage() {
                   type="search"
                   placeholder="Chercher..."
                   value={query}
-                  onChange={(event) => setQuery(event.target.value)}
+                  onChange={(event) => {
+                    setQuery(event.target.value);
+                    if (event.target.value.trim()) setIsLetterFilterActive(false);
+                  }}
                   className="w-full rounded-full border border-[color-mix(in_srgb,var(--outline)_18%,transparent)] bg-[color-mix(in_srgb,var(--surface-container-lowest)_72%,transparent)] py-2 pl-9 pr-4 font-headline text-sm italic outline-none transition-colors placeholder:text-surface-variant focus:border-[color-mix(in_srgb,var(--primary)_55%,transparent)]"
                 />
               </div>

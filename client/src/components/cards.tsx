@@ -81,11 +81,11 @@ export function ParcoursCard({
   );
 }
 
-export function LessonRow({ slug, order, title, kicker, readMin, summary, done, reading }: {
-  slug: string; order: number; title: string; kicker: string; readMin: number; summary?: string; done?: boolean; reading?: boolean;
+export function LessonRow({ slug, order, title, kicker, readMin, summary, done, reading, upcoming = false }: {
+  slug: string; order: number; title: string; kicker: string; readMin: number; summary?: string; done?: boolean; reading?: boolean; upcoming?: boolean;
 }) {
-  return (
-    <Link to={`/lessons/${slug}`} className="group flex items-start gap-4 rounded-xl border border-transparent px-3 py-3.5 transition-colors hover:border-outline-variant hover:bg-surface-container-low">
+  const content = (
+    <>
       <span className={`mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border font-mono text-xs ${done ? 'border-[color:var(--primary)] bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] text-[color:var(--primary)]' : reading ? 'border-[color-mix(in_srgb,var(--primary)_40%,transparent)] text-foreground' : 'border-outline-variant text-surface-variant'}`}>
         {done ? '✓' : String(order).padStart(2, '0')}
       </span>
@@ -93,13 +93,17 @@ export function LessonRow({ slug, order, title, kicker, readMin, summary, done, 
         <span className="flex flex-wrap items-center gap-2">
           <span className="font-mono text-[0.5625rem] uppercase tracking-wider text-surface-variant">{kicker}</span>
           {reading && <span className="chip !py-0 text-[0.5625rem]">en cours</span>}
+          {upcoming && <span className="chip !py-0 text-[0.5625rem]">à venir</span>}
         </span>
-        <span className="mt-0.5 block font-medium leading-snug transition-colors group-hover:text-[color:var(--primary)]">{title}</span>
+        <span className="mt-0.5 block font-medium leading-snug transition-colors group-hover:text-[color:var(--primary)]">{title}{upcoming ? ' (à venir)' : ''}</span>
         {summary && <span className="mt-1 line-clamp-1 block text-sm text-surface-variant">{summary}</span>}
       </span>
-      <span className="mt-1 shrink-0 text-xs text-surface-variant">{readMin} min</span>
-    </Link>
+      {!upcoming && <span className="mt-1 shrink-0 text-xs text-surface-variant">{readMin} min</span>}
+    </>
   );
+  const className = "group flex items-start gap-4 rounded-xl border border-transparent px-3 py-3.5 transition-colors";
+  if (upcoming) return <div className={`${className} opacity-70`}>{content}</div>;
+  return <Link to={`/lessons/${slug}`} className={`${className} hover:border-outline-variant hover:bg-surface-container-low`}>{content}</Link>;
 }
 
 export function CaseCard({ cs }: { cs: CaseStudy }) {

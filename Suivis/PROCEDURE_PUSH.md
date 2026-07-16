@@ -26,9 +26,9 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
 2. **Rafraîchir l'état distant et confirmer que la fusion sera sans conflit.**
    ```bash
    git fetch origin
-   git merge-base --is-ancestor master HEAD && echo "OK fast-forward"
+   git merge-base --is-ancestor origin/master HEAD && echo "OK fast-forward"
    ```
-   Le message `OK fast-forward` indique que `master` pourra simplement « avancer » jusqu'au travail, sans fusion compliquée. À défaut, c'est que `master` a évolué en ligne de son côté : rebaser d'abord (`git rebase origin/master` depuis la branche), puis reprendre.
+   Le message `OK fast-forward` indique que la référence distante `origin/master`, fraîchement actualisée, est bien un ancêtre du travail courant et que `master` pourra avancer sans fusion compliquée. À défaut, la branche distante a évolué de son côté : rebaser d'abord (`git rebase origin/master` depuis la branche), puis reprendre.
 
 3. **Re-fabriquer les fichiers générés et le plan du site.**
    ```bash
@@ -69,10 +69,10 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
 
 - `git status` / `git fetch` : rien d'oublié localement, et la version en ligne est connue.
 - `split:content` + `generate:sitemap` : les fichiers dérivés reflètent les derniers textes.
-- `validate:content:strict` : la structure, les références croisées (un `pathId`, un `glossaryRef`, un marqueur `[[..]]` qui pointe dans le vide est refusé) et les marqueurs inline sont cohérents, sans tolérance.
+- `validate:content:strict` : la structure, les relations plusieurs-à-plusieurs (`Path.courseIds`, exigences cours/leçons des certifications), les contextes et variantes certifiantes, les `glossaryRef` et les marqueurs `[[..]]` sont cohérents, sans référence vide ni doublon toléré.
 - `lint` : la qualité du code client.
 - `build` : le site se construit réellement (et relance au passage `split` + validation + prérendu).
-- `test` : les comportements clés (routes client, profil/ikigai, persistance locale, simulateurs, journal de décision) ne sont pas cassés.
+- `test` : les comportements clés (routes client, composition et persistance des certifications, profil/ikigai, simulateurs, journal de décision) ne sont pas cassés ; les contenus `upcoming` restent exclus du sitemap et du prérendu.
 
 ## En cas de besoin d'annulation
 

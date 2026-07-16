@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft, Ghost, ScrollText, Microscope, Dumbbell } from 'lucide-react';
+import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft, Ghost, ScrollText, Microscope, Dumbbell, PanelTop, Award } from 'lucide-react';
 import type { SearchHit } from '@/content/search';
 import { SEARCH_TYPE_LABEL } from '@/content/labels';
 
 const TYPE_ICON: Record<SearchHit['type'], typeof Search> = {
+  page: PanelTop,
+  certification: Award,
   course: BookMarked,
   lesson: BookOpen,
   glossary: BookMarked,

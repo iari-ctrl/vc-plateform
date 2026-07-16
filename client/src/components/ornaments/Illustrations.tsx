@@ -194,16 +194,19 @@ export function ExLibris({
   return (
     <div
       className={cn('relative rounded-xl p-5 text-center font-headline', className)}
-      style={{ border: `1px solid color-mix(in srgb, ${hue} 30%, transparent)`, color: hue }}
+      style={{
+        border: `1px solid color-mix(in srgb, ${hue} 30%, transparent)`,
+        color: `color-mix(in srgb, ${hue} 30%, var(--on-background))`,
+      }}
       aria-hidden
     >
       <div className="absolute inset-2 rounded-lg border" style={{ borderColor: `color-mix(in srgb, ${hue} 16%, transparent)` }} />
       <div className="relative">
-        <div className="font-body text-[0.5625rem] font-semibold uppercase tracking-[0.34em] opacity-70">Ex Libris</div>
+        <div className="font-body text-[0.5625rem] font-semibold uppercase tracking-[0.34em] opacity-80">Ex Libris</div>
         <div className="my-1.5 text-[0.625rem] opacity-40">❦</div>
         <div className="text-[1.35rem] italic leading-none">{owner}</div>
         <div className="my-1.5 text-[0.625rem] opacity-40">❦</div>
-        <div className="font-body text-[0.5625rem] uppercase tracking-[0.22em] opacity-70">{num}</div>
+        <div className="font-body text-[0.5625rem] uppercase tracking-[0.22em] opacity-80">{num}</div>
       </div>
     </div>
   );

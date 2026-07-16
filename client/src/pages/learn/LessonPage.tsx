@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Clock, Sparkles, BookMarked, ArrowUpRight } from 'lucide-react';
 import { loadLesson, lessonById, courseById, lessonsForCourse, simulatorBySlug, caseById, glossaryBySlug } from '@/content';
-import { parcoursById, parcoursForLesson } from '@/content/parcours';
+import { parcoursForLesson } from '@/content/parcours';
 import type { Lesson } from '@/content/types';
 import { ActiveProse } from '@/components/reading/ActiveProse';
 import { QuizBlock } from '@/components/reading/QuizBlock';
@@ -62,8 +62,8 @@ export default function LessonPage() {
   usePageMeta(lesson?.title, lesson?.summary, { type: 'article' });
 
   const course = lesson ? courseById(lesson.courseId) : undefined;
-  const parcours = (course ? parcoursById(course.pathId) : undefined) ?? (lesson ? parcoursForLesson(lesson.id)[0] : undefined);
-  const siblings = course ? lessonsForCourse(course.id) : [];
+  const parcours = lesson ? parcoursForLesson(lesson.id)[0] : undefined;
+  const siblings = course ? lessonsForCourse(course.id).filter((candidate) => candidate.status !== 'upcoming') : [];
   const idx = lesson ? siblings.findIndex((l) => l.id === lesson.id) : -1;
   const prev = idx > 0 ? siblings[idx - 1] : undefined;
   const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : undefined;
@@ -246,15 +246,15 @@ export default function LessonPage() {
         </div>
 
         {/* prev / next */}
-        <nav className="mt-8 grid gap-3 sm:grid-cols-2">
+        <nav className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {prev ? (
-            <Link to={`/lessons/${prev.slug}`} className="group flex items-center gap-3 rounded-xl border border-outline-variant px-4 py-3 transition-colors hover:bg-surface-container-low">
+            <Link to={`/lessons/${prev.slug}`} className="group flex min-w-0 items-center gap-3 rounded-xl border border-outline-variant px-4 py-3 transition-colors hover:bg-surface-container-low">
               <ArrowLeft size={16} className="shrink-0 text-surface-variant" />
               <span className="min-w-0"><span className="block text-[0.625rem] uppercase tracking-wider text-surface-variant">Précédent</span><span className="block truncate text-sm font-medium">{prev.title}</span></span>
             </Link>
           ) : <span />}
           {next && (
-            <Link to={`/lessons/${next.slug}`} className="group flex items-center justify-end gap-3 rounded-xl border border-outline-variant px-4 py-3 text-right transition-colors hover:bg-surface-container-low">
+            <Link to={`/lessons/${next.slug}`} className="group flex min-w-0 items-center justify-end gap-3 rounded-xl border border-outline-variant px-4 py-3 text-right transition-colors hover:bg-surface-container-low">
               <span className="min-w-0"><span className="block text-[0.625rem] uppercase tracking-wider text-surface-variant">Suivant</span><span className="block truncate text-sm font-medium">{next.title}</span></span>
               <ArrowRight size={16} className="shrink-0 text-surface-variant" />
             </Link>

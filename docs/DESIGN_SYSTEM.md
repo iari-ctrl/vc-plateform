@@ -239,6 +239,16 @@ Usages :
 
 Ne pas utiliser la progression comme décoration : elle doit toujours représenter une donnée utilisateur réelle.
 
+### Fiches de certification
+
+Les fiches suivent une divulgation progressive en quatre étapes : **Aperçu**, **Options**, **Programme**, **Évaluation**.
+
+- un seul panneau principal est rendu à la fois ;
+- toutes les étapes restent accessibles, sans verrouillage artificiel ;
+- les axes d'options s'affichent un par un ;
+- les cours et les blocs d'évaluation sont fermés par défaut ;
+- les titres, libellés et retours d'état restent courts et orientés décision.
+
 ---
 
 ## 7. Langage éditorial

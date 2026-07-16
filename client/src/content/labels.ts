@@ -24,6 +24,8 @@ export const CASE_KIND_LABEL: Record<string, string> = {
 };
 
 export const SEARCH_TYPE_LABEL = {
+  page: 'Page',
+  certification: 'Certification',
   course: 'Cours',
   lesson: 'Leçon',
   glossary: 'Dictionnaire',

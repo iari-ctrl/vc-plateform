@@ -7613,5 +7613,143 @@
       "decision journal",
       "calibration"
     ]
+  },
+  {
+    "id": "venture-philanthropie",
+    "term": "Venture philanthropie",
+    "slug": "venture-philanthropie",
+    "category": "Stratégie",
+    "short": "Approche engagée qui combine financement sur mesure, accompagnement non financier et mesure de l’impact.",
+    "seeAlso": [
+      "investissement-pour-impact",
+      "subvention-catalytique",
+      "beyond-grants",
+      "continuum-du-capital",
+      "money-plus"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "venture philanthropy",
+      "philanthropie de risque",
+      "philanthropie entrepreneuriale",
+      "philanthropie à impact",
+      "capital-risque philanthropique"
+    ]
+  },
+  {
+    "id": "investissement-pour-impact",
+    "term": "Investissement pour l’impact",
+    "slug": "investissement-pour-impact",
+    "category": "Stratégie",
+    "short": "Déploiement intentionnel de capital et de ressources pour produire un impact social ou environnemental additionnel.",
+    "seeAlso": [
+      "venture-philanthropie",
+      "capital-catalytique",
+      "continuum-du-capital",
+      "esg-assessment",
+      "investment-strategy"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "investing for impact",
+      "investir pour l’impact",
+      "investissement au service de l’impact"
+    ]
+  },
+  {
+    "id": "subvention-catalytique",
+    "term": "Subvention catalytique",
+    "slug": "subvention-catalytique",
+    "category": "Deal & Structuration",
+    "short": "Subvention utilisée pour réduire un risque, éprouver un modèle ou débloquer des financements ultérieurs.",
+    "seeAlso": [
+      "capital-catalytique",
+      "financement-mixte",
+      "beyond-grants",
+      "non-dilutive-financing"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "catalytic grantmaking",
+      "catalytic grant",
+      "octroi de subventions catalytiques",
+      "grantmaking catalytique"
+    ]
+  },
+  {
+    "id": "capital-catalytique",
+    "term": "Capital catalytique",
+    "slug": "capital-catalytique",
+    "category": "Deal & Structuration",
+    "short": "Capital patient, flexible ou concessionnel qui assume plus de risque pour rendre d’autres investissements possibles.",
+    "seeAlso": [
+      "subvention-catalytique",
+      "financement-mixte",
+      "continuum-du-capital",
+      "investment-strategy"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "catalytic capital",
+      "financement catalytique",
+      "finance catalytique"
+    ]
+  },
+  {
+    "id": "beyond-grants",
+    "term": "Beyond grants",
+    "slug": "beyond-grants",
+    "category": "Stratégie",
+    "short": "Approche par laquelle une fondation complète ses subventions avec des instruments remboursables ou d’investissement.",
+    "seeAlso": [
+      "venture-philanthropie",
+      "subvention-catalytique",
+      "continuum-du-capital",
+      "non-dilutive-financing"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "au-delà des subventions",
+      "beyond grantmaking",
+      "financement au-delà des subventions"
+    ]
+  },
+  {
+    "id": "continuum-du-capital",
+    "term": "Continuum du capital",
+    "slug": "continuum-du-capital",
+    "category": "Stratégie",
+    "short": "Spectre des financements allant du don au capital commercial, selon les objectifs d’impact, le risque et le rendement.",
+    "seeAlso": [
+      "investissement-pour-impact",
+      "capital-catalytique",
+      "financement-mixte",
+      "beyond-grants"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "continuum of capital",
+      "continuum des capitaux",
+      "spectre du capital"
+    ]
+  },
+  {
+    "id": "financement-mixte",
+    "term": "Financement mixte",
+    "slug": "financement-mixte",
+    "category": "Deal & Structuration",
+    "short": "Usage stratégique de financements de développement pour mobiliser des capitaux commerciaux additionnels.",
+    "seeAlso": [
+      "capital-catalytique",
+      "subvention-catalytique",
+      "continuum-du-capital",
+      "non-dilutive-financing"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "blended finance",
+      "finance mixte",
+      "financements mixtes"
+    ]
   }
 ]

@@ -8338,5 +8338,157 @@
       "decision journal",
       "calibration"
     ]
+  },
+  {
+    "id": "venture-philanthropie",
+    "term": "Venture philanthropie",
+    "slug": "venture-philanthropie",
+    "category": "Stratégie",
+    "short": "Approche engagée qui combine financement sur mesure, accompagnement non financier et mesure de l’impact.",
+    "definition": "La venture philanthropie applique aux organisations à finalité sociale ou environnementale un accompagnement inspiré du capital-investissement : engagement de long terme, financement adapté aux besoins, soutien stratégique et suivi de l’impact. Elle ne se limite pas à une subvention et peut mobiliser dons, prêts, fonds propres ou instruments hybrides. Sa spécificité tient au niveau d’implication du financeur et à la recherche d’un impact additionnel, non à la seule forme du capital.",
+    "example": "Une fondation soutient durablement une entreprise sociale par une subvention, un prêt, un appui à la gouvernance et un suivi des résultats obtenus.",
+    "seeAlso": [
+      "investissement-pour-impact",
+      "subvention-catalytique",
+      "beyond-grants",
+      "continuum-du-capital",
+      "money-plus"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "venture philanthropy",
+      "philanthropie de risque",
+      "philanthropie entrepreneuriale",
+      "philanthropie à impact",
+      "capital-risque philanthropique"
+    ]
+  },
+  {
+    "id": "investissement-pour-impact",
+    "term": "Investissement pour l’impact",
+    "slug": "investissement-pour-impact",
+    "category": "Stratégie",
+    "short": "Déploiement intentionnel de capital et de ressources pour produire un impact social ou environnemental additionnel.",
+    "definition": "L’investissement pour l’impact repose sur une intention explicite de contribuer à résoudre un problème social ou environnemental, sur la mesure et la gestion des effets produits, et sur l’additionnalité de l’intervention. Il peut employer des subventions comme des instruments remboursables. Il se distingue d’une simple intégration [[esg-assessment|ESG]], souvent centrée sur la maîtrise des risques, et peut accepter davantage de risque ou un rendement moindre pour atteindre l’impact recherché.",
+    "example": "Un fonds finance une solution destinée à une population mal servie, accepte une phase de preuve plus longue et apporte une assistance technique que le marché ne fournirait pas.",
+    "seeAlso": [
+      "venture-philanthropie",
+      "capital-catalytique",
+      "continuum-du-capital",
+      "esg-assessment",
+      "investment-strategy"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "investing for impact",
+      "investir pour l’impact",
+      "investissement au service de l’impact"
+    ]
+  },
+  {
+    "id": "subvention-catalytique",
+    "term": "Subvention catalytique",
+    "slug": "subvention-catalytique",
+    "category": "Deal & Structuration",
+    "short": "Subvention utilisée pour réduire un risque, éprouver un modèle ou débloquer des financements ultérieurs.",
+    "definition": "Une subvention catalytique finance une étape que des instruments remboursables couvriraient mal : expérimentation, production de preuves, renforcement des capacités ou préparation à l’investissement. Elle reste non remboursable, mais son objectif dépasse l’activité financée en cherchant à rendre une solution plus robuste, à combler un manque de financement ou à attirer des capitaux ultérieurs. Son caractère catalytique dépend de cet effet additionnel, pas du seul statut de subvention.",
+    "example": "Une fondation finance un pilote et la mesure de ses résultats afin qu’une entreprise sociale puisse ensuite convaincre des prêteurs ou des investisseurs.",
+    "seeAlso": [
+      "capital-catalytique",
+      "financement-mixte",
+      "beyond-grants",
+      "non-dilutive-financing"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "catalytic grantmaking",
+      "catalytic grant",
+      "octroi de subventions catalytiques",
+      "grantmaking catalytique"
+    ]
+  },
+  {
+    "id": "capital-catalytique",
+    "term": "Capital catalytique",
+    "slug": "capital-catalytique",
+    "category": "Deal & Structuration",
+    "short": "Capital patient, flexible ou concessionnel qui assume plus de risque pour rendre d’autres investissements possibles.",
+    "definition": "Le capital catalytique accepte un risque disproportionné, un rendement inférieur au marché ou des conditions plus souples afin de produire un impact et de rendre possibles des investissements qui ne se feraient pas autrement. Il peut prendre la forme de dette, de fonds propres, de garantie ou de tranche subordonnée. Il sert notamment à prouver la viabilité d’un modèle, absorber une partie du risque ou mobiliser des financeurs tiers. Tout capital à impact n’est donc pas catalytique : l’additionnalité doit être identifiable.",
+    "example": "Une fondation apporte une tranche subordonnée qui absorbe les premières pertes et permet à une banque de financer un projet qu’elle jugeait trop risqué seule.",
+    "seeAlso": [
+      "subvention-catalytique",
+      "financement-mixte",
+      "continuum-du-capital",
+      "investment-strategy"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "catalytic capital",
+      "financement catalytique",
+      "finance catalytique"
+    ]
+  },
+  {
+    "id": "beyond-grants",
+    "term": "Beyond grants",
+    "slug": "beyond-grants",
+    "category": "Stratégie",
+    "short": "Approche par laquelle une fondation complète ses subventions avec des instruments remboursables ou d’investissement.",
+    "definition": "Beyond grants désigne l’élargissement de la boîte à outils d’une fondation au-delà des seules subventions : prêts, garanties, fonds propres, instruments hybrides, mobilisation de la dotation ou accompagnement non financier. L’approche ne remplace pas les dons. Elle consiste à choisir l’instrument en fonction des besoins de l’organisation, de sa capacité de remboursement, du risque et de l’impact recherché le long du [[continuum-du-capital|continuum du capital]].",
+    "example": "Une fondation conserve ses subventions pour les actions sans modèle de revenus, tout en accordant un prêt patient à une entreprise sociale capable de le rembourser.",
+    "seeAlso": [
+      "venture-philanthropie",
+      "subvention-catalytique",
+      "continuum-du-capital",
+      "non-dilutive-financing"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "au-delà des subventions",
+      "beyond grantmaking",
+      "financement au-delà des subventions"
+    ]
+  },
+  {
+    "id": "continuum-du-capital",
+    "term": "Continuum du capital",
+    "slug": "continuum-du-capital",
+    "category": "Stratégie",
+    "short": "Spectre des financements allant du don au capital commercial, selon les objectifs d’impact, le risque et le rendement.",
+    "definition": "Le continuum du capital situe les instruments selon la priorité donnée à l’impact, le risque accepté et le rendement financier attendu, depuis les dons jusqu’aux capitaux commerciaux. Il aide à faire correspondre une source de financement aux besoins d’une organisation et peut combiner subventions, capital catalytique, dette ou fonds propres. Il ne décrit ni des étapes obligatoires ni une hiérarchie : plusieurs formes de capital peuvent coexister au même moment.",
+    "example": "Un projet peut associer une subvention pour la recherche, un prêt catalytique pour le déploiement et des fonds propres commerciaux pour changer d’échelle.",
+    "seeAlso": [
+      "investissement-pour-impact",
+      "capital-catalytique",
+      "financement-mixte",
+      "beyond-grants"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "continuum of capital",
+      "continuum des capitaux",
+      "spectre du capital"
+    ]
+  },
+  {
+    "id": "financement-mixte",
+    "term": "Financement mixte",
+    "slug": "financement-mixte",
+    "category": "Deal & Structuration",
+    "short": "Usage stratégique de financements de développement pour mobiliser des capitaux commerciaux additionnels.",
+    "definition": "Le financement mixte utilise stratégiquement des financements publics, philanthropiques ou de développement pour améliorer le profil de risque et de rendement d’une opération et attirer des capitaux commerciaux vers le développement durable. Il peut combiner subventions, garanties, dette, fonds propres ou tranches concessionnelles. Toute coexistence de sources n’est pas du financement mixte : le montage doit mobiliser des financements additionnels qui ne seraient pas intervenus aux mêmes conditions.",
+    "example": "Une garantie publique couvre une partie du risque d’un portefeuille de projets climatiques et permet à des investisseurs privés de participer au financement.",
+    "seeAlso": [
+      "capital-catalytique",
+      "subvention-catalytique",
+      "continuum-du-capital",
+      "non-dilutive-financing"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "blended finance",
+      "finance mixte",
+      "financements mixtes"
+    ]
   }
 ]

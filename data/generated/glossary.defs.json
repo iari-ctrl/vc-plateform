@@ -1471,5 +1471,33 @@
   "journal-de-decision": {
     "definition": "Le journal de décision consiste à écrire, au moment de décider et avant d’en connaître le résultat, la prédiction faite, le degré de confiance qui lui est attaché et la date à laquelle on la reverra. Il répond directement au biais de résultat en permettant de juger plus tard la qualité du raisonnement, et non la seule issue. Tenu dans la durée, il mesure la calibration — l’écart entre confiance annoncée et taux de réalisation observé — dans la lignée des travaux de Philip Tetlock sur le jugement prévisionnel et d’Annie Duke. C’est aussi le mécanisme qui re-teste un profil cognitif au lieu de le figer en badge.",
     "example": "« Cette société atteindra 1 M€ d’ARR sous douze mois — confiance 70 % », daté et revu à l’échéance."
+  },
+  "venture-philanthropie": {
+    "definition": "La venture philanthropie applique aux organisations à finalité sociale ou environnementale un accompagnement inspiré du capital-investissement : engagement de long terme, financement adapté aux besoins, soutien stratégique et suivi de l’impact. Elle ne se limite pas à une subvention et peut mobiliser dons, prêts, fonds propres ou instruments hybrides. Sa spécificité tient au niveau d’implication du financeur et à la recherche d’un impact additionnel, non à la seule forme du capital.",
+    "example": "Une fondation soutient durablement une entreprise sociale par une subvention, un prêt, un appui à la gouvernance et un suivi des résultats obtenus."
+  },
+  "investissement-pour-impact": {
+    "definition": "L’investissement pour l’impact repose sur une intention explicite de contribuer à résoudre un problème social ou environnemental, sur la mesure et la gestion des effets produits, et sur l’additionnalité de l’intervention. Il peut employer des subventions comme des instruments remboursables. Il se distingue d’une simple intégration [[esg-assessment|ESG]], souvent centrée sur la maîtrise des risques, et peut accepter davantage de risque ou un rendement moindre pour atteindre l’impact recherché.",
+    "example": "Un fonds finance une solution destinée à une population mal servie, accepte une phase de preuve plus longue et apporte une assistance technique que le marché ne fournirait pas."
+  },
+  "subvention-catalytique": {
+    "definition": "Une subvention catalytique finance une étape que des instruments remboursables couvriraient mal : expérimentation, production de preuves, renforcement des capacités ou préparation à l’investissement. Elle reste non remboursable, mais son objectif dépasse l’activité financée en cherchant à rendre une solution plus robuste, à combler un manque de financement ou à attirer des capitaux ultérieurs. Son caractère catalytique dépend de cet effet additionnel, pas du seul statut de subvention.",
+    "example": "Une fondation finance un pilote et la mesure de ses résultats afin qu’une entreprise sociale puisse ensuite convaincre des prêteurs ou des investisseurs."
+  },
+  "capital-catalytique": {
+    "definition": "Le capital catalytique accepte un risque disproportionné, un rendement inférieur au marché ou des conditions plus souples afin de produire un impact et de rendre possibles des investissements qui ne se feraient pas autrement. Il peut prendre la forme de dette, de fonds propres, de garantie ou de tranche subordonnée. Il sert notamment à prouver la viabilité d’un modèle, absorber une partie du risque ou mobiliser des financeurs tiers. Tout capital à impact n’est donc pas catalytique : l’additionnalité doit être identifiable.",
+    "example": "Une fondation apporte une tranche subordonnée qui absorbe les premières pertes et permet à une banque de financer un projet qu’elle jugeait trop risqué seule."
+  },
+  "beyond-grants": {
+    "definition": "Beyond grants désigne l’élargissement de la boîte à outils d’une fondation au-delà des seules subventions : prêts, garanties, fonds propres, instruments hybrides, mobilisation de la dotation ou accompagnement non financier. L’approche ne remplace pas les dons. Elle consiste à choisir l’instrument en fonction des besoins de l’organisation, de sa capacité de remboursement, du risque et de l’impact recherché le long du [[continuum-du-capital|continuum du capital]].",
+    "example": "Une fondation conserve ses subventions pour les actions sans modèle de revenus, tout en accordant un prêt patient à une entreprise sociale capable de le rembourser."
+  },
+  "continuum-du-capital": {
+    "definition": "Le continuum du capital situe les instruments selon la priorité donnée à l’impact, le risque accepté et le rendement financier attendu, depuis les dons jusqu’aux capitaux commerciaux. Il aide à faire correspondre une source de financement aux besoins d’une organisation et peut combiner subventions, capital catalytique, dette ou fonds propres. Il ne décrit ni des étapes obligatoires ni une hiérarchie : plusieurs formes de capital peuvent coexister au même moment.",
+    "example": "Un projet peut associer une subvention pour la recherche, un prêt catalytique pour le déploiement et des fonds propres commerciaux pour changer d’échelle."
+  },
+  "financement-mixte": {
+    "definition": "Le financement mixte utilise stratégiquement des financements publics, philanthropiques ou de développement pour améliorer le profil de risque et de rendement d’une opération et attirer des capitaux commerciaux vers le développement durable. Il peut combiner subventions, garanties, dette, fonds propres ou tranches concessionnelles. Toute coexistence de sources n’est pas du financement mixte : le montage doit mobiliser des financements additionnels qui ne seraient pas intervenus aux mêmes conditions.",
+    "example": "Une garantie publique couvre une partie du risque d’un portefeuille de projets climatiques et permet à des investisseurs privés de participer au financement."
   }
 }

@@ -33,14 +33,17 @@ const source = [...library, ...parcoursFiles.flatMap((f) => readJson(`parcours/$
 
 const index = [];
 const bodies = {};
+const slugs = new Set();
 
 for (const lesson of source) {
-  if (bodies[lesson.slug]) {
+  if (slugs.has(lesson.slug)) {
     console.error(`split-lessons: duplicate slug "${lesson.slug}" — bodies are keyed by slug`);
     process.exit(1);
   }
+  slugs.add(lesson.slug);
   const { body, bodyShort, keyTakeaways, quiz, furtherReading, ...light } = lesson;
   index.push(light);
+  if (lesson.status === 'upcoming') continue;
   const payload = { body: body ?? '', keyTakeaways: keyTakeaways ?? [] };
   if (bodyShort !== undefined) payload.bodyShort = bodyShort;
   if (quiz !== undefined) payload.quiz = quiz;

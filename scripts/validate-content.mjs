@@ -5,7 +5,7 @@
  *
  * Three layers of validation, from the inside out:
  *   1. SHAPE      — Zod schemas validate every JSON file's structure & types.
- *   2. REFERENCES — cross-file ids/slugs resolve (pathId, courseId, lessonIds,
+ *   2. REFERENCES — cross-file ids/slugs resolve (domainId, courseId, lessonIds,
  *                   relatedLessonIds, glossaryRefs, furtherReading.ref, ikigai
  *                   recommendedPathIds / profileIds …) and ids/slugs are unique.
  *   3. MARKERS    — every inline [[slug|label]] / {{slug|label}} resolves to a
@@ -88,11 +88,23 @@ const nonEmpty = z.string().min(1);
 const slug = z.string().regex(/^[a-z0-9-]+$/, 'doit être un slug en minuscules (a-z, 0-9, -)');
 const level = z.enum(['debutant', 'intermediaire', 'avance', 'tous']);
 const idList = z.array(z.string());
+const FUND_STAGE_OPTION_IDS = ['pre-seed', 'seed', 'series-a', 'growth'];
+const DEAL_ROLE_OPTION_IDS = ['lead', 'co-lead', 'follower'];
+const SPECIALTY_OPTION_IDS = [
+  'generalist',
+  'saas',
+  'deeptech',
+  'climate',
+  'health-biotech',
+  'consumer-marketplaces',
+  'impact',
+];
 
 // ── Schemas ──────────────────────────────────────────────────────────────────
 const pathSchema = z.object({
   id: nonEmpty,
   slug,
+  domainId: nonEmpty,
   order: z.number().int().nonnegative(),
   title: nonEmpty,
   subtitle: z.string(),
@@ -104,13 +116,19 @@ const pathSchema = z.object({
   forWhom: z.array(z.string()),
   outcomes: z.array(z.string()),
   courseIds: idList,
-}).strict();
+}).strict().superRefine((path, ctx) => {
+  if (new Set(path.courseIds).size !== path.courseIds.length) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['courseIds'],
+      message: 'un cours ne peut pas être déclaré plusieurs fois dans un rayon',
+    });
+  }
+});
 
 const courseSchema = z.object({
   id: nonEmpty,
   slug,
-  pathId: nonEmpty,
-  order: z.number().int().nonnegative(),
   title: nonEmpty,
   subtitle: z.string(),
   level,
@@ -141,13 +159,57 @@ const lessonSchema = z.object({
   kicker: z.string(),
   readMin: z.number().nonnegative(),
   summary: nonEmpty,
-  body: nonEmpty,
+  status: z.enum(['published', 'upcoming']).optional(),
+  level: level.optional(),
+  contexts: z.object({
+    fundStages: z.array(z.enum(FUND_STAGE_OPTION_IDS)).optional(),
+    dealRoles: z.array(z.enum(DEAL_ROLE_OPTION_IDS)).optional(),
+    sectors: z.array(z.enum(SPECIALTY_OPTION_IDS)).optional(),
+  }).strict().optional(),
+  optional: z.boolean().optional(),
+  learningOutcomes: z.array(nonEmpty).optional(),
+  prerequisiteLessonIds: idList.optional(),
+  assessmentId: nonEmpty.optional(),
+  body: nonEmpty.optional(),
   bodyShort: nonEmpty.optional(),
-  keyTakeaways: z.array(z.string()),
+  keyTakeaways: z.array(z.string()).optional(),
   glossaryRefs: idList,
   quiz: z.array(quizQuestionSchema).optional(),
   furtherReading: z.array(furtherReadingSchema).optional(),
-}).strict();
+}).strict().superRefine((lesson, ctx) => {
+  const status = lesson.status ?? 'published';
+  if (status === 'published' && !lesson.body) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['body'], message: 'requis pour une leçon publiée' });
+  }
+  if (status === 'published' && !lesson.keyTakeaways) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['keyTakeaways'], message: 'requis pour une leçon publiée' });
+  }
+  if (status === 'upcoming') {
+    const requiredMetadata = [
+      ['level', lesson.level],
+      ['contexts', lesson.contexts],
+      ['optional', lesson.optional],
+      ['prerequisiteLessonIds', lesson.prerequisiteLessonIds],
+      ['assessmentId', lesson.assessmentId],
+    ];
+    for (const [field, value] of requiredMetadata) {
+      if (value === undefined) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [field],
+          message: 'métadonnée pédagogique requise pour une leçon à venir',
+        });
+      }
+    }
+    if (!lesson.learningOutcomes?.length) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['learningOutcomes'],
+        message: 'au moins un objectif pédagogique est requis pour une leçon à venir',
+      });
+    }
+  }
+});
 
 const parcoursFamily = z.enum(['decouvrir', 'entretien', 'levee', 'grade', 'maitriser', 'express']);
 const parcoursRoadmap = z.enum(['now', 'next', 'later']);
@@ -200,6 +262,105 @@ const parcoursSchema = z.object({
   }).strict().optional(),
   steps: z.array(parcoursStepSchema).min(1),
   outcomes: z.array(nonEmpty),
+}).strict();
+
+const domainSchema = z.object({
+  id: nonEmpty,
+  slug,
+  title: nonEmpty,
+  description: nonEmpty,
+}).strict();
+
+const courseRequirementSchema = z.object({
+  id: nonEmpty,
+  courseId: nonEmpty,
+  title: nonEmpty,
+  summary: nonEmpty,
+  lessonIds: idList.min(1),
+  assessmentVariantId: nonEmpty,
+}).strict();
+
+const certificationOptionSchema = z.object({
+  id: nonEmpty,
+  label: nonEmpty,
+  certificateLabel: nonEmpty,
+  description: nonEmpty,
+  requirement: courseRequirementSchema,
+}).strict();
+
+const certificationAxisSchema = (axisId, optionIds) => z.object({
+  id: z.literal(axisId),
+  label: nonEmpty,
+  description: nonEmpty,
+  options: z.array(certificationOptionSchema.extend({ id: z.enum(optionIds) })).min(1),
+}).strict().superRefine((axis, ctx) => {
+  const actualIds = axis.options.map((option) => option.id);
+  const missingIds = optionIds.filter((optionId) => !actualIds.includes(optionId));
+  const unexpectedIds = actualIds.filter((optionId) => !optionIds.includes(optionId));
+  if (missingIds.length || unexpectedIds.length || actualIds.length !== optionIds.length) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['options'],
+      message: [
+        `couverture exacte attendue : ${optionIds.join(', ')}`,
+        missingIds.length ? `manquante(s) : ${missingIds.join(', ')}` : '',
+        unexpectedIds.length ? `inattendue(s) : ${unexpectedIds.join(', ')}` : '',
+      ].filter(Boolean).join(' ; '),
+    });
+  }
+});
+
+const rubricCriterionSchema = z.object({
+  id: nonEmpty,
+  label: nonEmpty,
+  description: nonEmpty,
+  maxScore: z.number().int().positive().max(100),
+  critical: z.boolean(),
+}).strict();
+
+const finalAssessmentVariantSchema = z.object({
+  id: nonEmpty,
+  axis: z.enum(['fundStage', 'dealRole', 'specialty']),
+  optionId: nonEmpty,
+  caseAdaptation: nonEmpty,
+  rubricCriteria: z.array(nonEmpty).min(1),
+}).strict();
+
+const certificationSchema = z.object({
+  id: nonEmpty,
+  slug,
+  domainId: nonEmpty,
+  title: nonEmpty,
+  shortTitle: nonEmpty,
+  certificateType: z.enum(['knowledge', 'competence', 'professional']),
+  status: z.enum(['draft', 'published']),
+  availability: z.enum(['in-construction', 'open', 'closed']),
+  issuer: nonEmpty,
+  targetRoles: z.array(nonEmpty).min(1),
+  level,
+  summary: nonEmpty,
+  competencies: z.array(nonEmpty).min(1),
+  coreRequirements: z.array(courseRequirementSchema).min(1),
+  axes: z.object({
+    fundStage: certificationAxisSchema('fundStage', FUND_STAGE_OPTION_IDS),
+    dealRole: certificationAxisSchema('dealRole', DEAL_ROLE_OPTION_IDS),
+    specialty: certificationAxisSchema('specialty', SPECIALTY_OPTION_IDS),
+  }).strict(),
+  finalAssessment: z.object({
+    id: nonEmpty,
+    type: z.literal('case-and-oral-defense'),
+    title: nonEmpty,
+    description: nonEmpty,
+    deliverables: z.array(nonEmpty).min(1),
+    rubricId: nonEmpty,
+    rubricCriteria: z.array(rubricCriterionSchema).min(1),
+    optionVariants: z.array(finalAssessmentVariantSchema),
+    passingScore: z.number().min(0).max(100),
+    criticalCriteriaMustPass: z.boolean(),
+    evaluatorTypes: z.array(z.enum(['expert', 'jury'])).min(1),
+  }).strict(),
+  eligibilityConditions: z.array(nonEmpty).min(1),
+  criticalErrors: z.array(nonEmpty).min(1),
 }).strict();
 
 const parcoursLessonsDocSchema = z.object({
@@ -562,6 +723,8 @@ const ikigaiSchema = z.object({
 
 // ── Load + shape-validate ────────────────────────────────────────────────────
 const paths = check('paths.json', z.array(pathSchema), readJson('paths.json')) ?? [];
+const domains = check('domains.json', z.array(domainSchema), readJson('domains.json')) ?? [];
+const certifications = check('certifications.json', z.array(certificationSchema), readJson('certifications.json')) ?? [];
 const parcours = check('parcours.json', z.array(parcoursSchema), readJson('parcours.json')) ?? [];
 const profileParcours = check('profileParcours.json', profileParcoursSchema, readJson('profileParcours.json'));
 const courses = check('courses.json', z.array(courseSchema), readJson('courses.json')) ?? [];
@@ -598,6 +761,17 @@ const allLessons = [...lessons, ...parcoursLessons];
 // ── Uniqueness ───────────────────────────────────────────────────────────────
 assertUnique('paths.json', paths, 'id');
 assertUnique('paths.json', paths, 'slug');
+assertUnique('domains.json', domains, 'id');
+assertUnique('domains.json', domains, 'slug');
+assertUnique('certifications.json', certifications, 'id');
+assertUnique('certifications.json', certifications, 'slug');
+assertUnique('certifications.json (evaluations finales)', certifications.map((c) => c.finalAssessment), 'id');
+assertUnique('certifications.json (rubriques finales)', certifications.map((c) => c.finalAssessment), 'rubricId');
+assertUnique(
+  'certifications.json (variantes finales)',
+  certifications.flatMap((c) => c.finalAssessment.optionVariants),
+  'id',
+);
 assertUnique('parcours.json', parcours, 'id');
 assertUnique('parcours.json', parcours, 'slug');
 assertUnique('courses.json', courses, 'id');
@@ -632,6 +806,7 @@ if (ikigai) {
 
 // ── Reference sets ───────────────────────────────────────────────────────────
 const pathIds = new Set(paths.map((p) => p.id));
+const domainIds = new Set(domains.map((domain) => domain.id));
 const parcoursIds = new Set(parcours.map((p) => p.id));
 const parcoursSlugs = new Set(parcours.map((p) => p.slug));
 const contentContainerIds = new Set([...pathIds, ...parcoursIds]);
@@ -651,10 +826,10 @@ const checkRefs = (label, refs, has, kind) => {
 
 // ── Referential integrity ────────────────────────────────────────────────────
 for (const p of paths) {
+  if (!domainIds.has(p.domainId)) err(`paths/${p.id}.domainId — domaine introuvable : "${p.domainId}"`);
   checkRefs(`paths/${p.id}.courseIds`, p.courseIds, (r) => courseIds.has(r), 'cours');
 }
 for (const c of courses) {
-  if (!contentContainerIds.has(c.pathId)) err(`courses/${c.id}.pathId — rayon/parcours introuvable : "${c.pathId}"`);
   checkRefs(`courses/${c.id}.lessonIds`, c.lessonIds, (r) => lessonIds.has(r), 'leçon');
 
   const declaredLessonIds = new Set(c.lessonIds);
@@ -688,6 +863,7 @@ for (const doc of parcoursLessonDocs) {
 for (const l of allLessons) {
   if (!courseIds.has(l.courseId)) err(`lessons/${l.id}.courseId — cours introuvable : "${l.courseId}"`);
   checkRefs(`lessons/${l.id}.glossaryRefs`, l.glossaryRefs, isGlossary, 'terme de glossaire');
+  checkRefs(`lessons/${l.id}.prerequisiteLessonIds`, l.prerequisiteLessonIds ?? [], (r) => lessonIds.has(r), 'leçon');
   for (const fr of l.furtherReading ?? []) {
     const resolvers = {
       lesson: (r) => lessonIds.has(r),
@@ -699,6 +875,128 @@ for (const l of allLessons) {
     const resolve = resolvers[fr.kind];
     if (!resolve) warn(`lessons/${l.id}.furtherReading — type inconnu "${fr.kind}" (réf "${fr.ref}" non vérifiée)`);
     else if (!resolve(fr.ref)) err(`lessons/${l.id}.furtherReading — ${fr.kind} introuvable : "${fr.ref}"`);
+  }
+}
+for (const certification of certifications) {
+  if (!domainIds.has(certification.domainId))
+    err(`certifications/${certification.id}.domainId — domaine introuvable : "${certification.domainId}"`);
+
+  const requirements = [
+    ...certification.coreRequirements,
+    ...Object.values(certification.axes).flatMap((axis) => axis.options.map((option) => option.requirement)),
+  ];
+  const requirementIds = new Set();
+  for (const requirement of requirements) {
+    if (requirementIds.has(requirement.id))
+      err(`certifications/${certification.id}.requirements — id en double : "${requirement.id}"`);
+    requirementIds.add(requirement.id);
+    if (!courseIds.has(requirement.courseId))
+      err(`certifications/${certification.id}/${requirement.id}.courseId — cours introuvable : "${requirement.courseId}"`);
+    checkRefs(
+      `certifications/${certification.id}/${requirement.id}.lessonIds`,
+      requirement.lessonIds,
+      (ref) => lessonIds.has(ref),
+      'leçon',
+    );
+    if (new Set(requirement.lessonIds).size !== requirement.lessonIds.length)
+      err(`certifications/${certification.id}/${requirement.id}.lessonIds — une leçon ne peut pas être déclarée plusieurs fois`);
+    for (const lessonId of requirement.lessonIds) {
+      const lesson = allLessons.find((candidate) => candidate.id === lessonId);
+      if (lesson && lesson.courseId !== requirement.courseId)
+        err(`certifications/${certification.id}/${requirement.id}.lessonIds — "${lessonId}" appartient à "${lesson.courseId}"`);
+    }
+  }
+
+  const { finalAssessment } = certification;
+  const rubricCriterionIds = finalAssessment.rubricCriteria.map((criterion) => criterion.id);
+  if (new Set(rubricCriterionIds).size !== rubricCriterionIds.length) {
+    err(`certifications/${certification.id}.finalAssessment.rubricCriteria — id de critère en double`);
+  }
+  const baseRubricWeight = finalAssessment.rubricCriteria.reduce(
+    (total, criterion) => total + criterion.maxScore,
+    0,
+  );
+  if (baseRubricWeight !== 100) {
+    err(
+      `certifications/${certification.id}.finalAssessment.rubricCriteria — `
+      + `le total des maxScore doit être 100 (trouvé : ${baseRubricWeight})`,
+    );
+  }
+  if (finalAssessment.criticalCriteriaMustPass
+    && !finalAssessment.rubricCriteria.some((criterion) => criterion.critical)) {
+    err(
+      `certifications/${certification.id}.finalAssessment.rubricCriteria — `
+      + 'au moins un critère doit être critique lorsque criticalCriteriaMustPass vaut true',
+    );
+  }
+
+  for (const variant of finalAssessment.optionVariants) {
+    if (new Set(variant.rubricCriteria).size !== variant.rubricCriteria.length) {
+      err(
+        `certifications/${certification.id}.finalAssessment.optionVariants/${variant.id}.rubricCriteria — `
+        + 'un critère ne peut pas être déclaré plusieurs fois',
+      );
+    }
+    const option = certification.axes[variant.axis].options.find(
+      (candidate) => candidate.id === variant.optionId,
+    );
+    if (!option) {
+      err(
+        `certifications/${certification.id}.finalAssessment.optionVariants/${variant.id} — `
+        + `option introuvable : ${variant.axis}.${variant.optionId}`,
+      );
+    } else if (option.requirement.assessmentVariantId !== variant.id) {
+      err(
+        `certifications/${certification.id}.finalAssessment.optionVariants/${variant.id} — `
+        + `la variante n'est pas référencée par ${variant.axis}.${variant.optionId}.requirement.assessmentVariantId`,
+      );
+    }
+  }
+
+  for (const [axisId, axis] of Object.entries(certification.axes)) {
+    const optionIds = axis.options.map((option) => option.id);
+    if (new Set(optionIds).size !== optionIds.length)
+      err(`certifications/${certification.id}.axes.${axisId}.options — id d'option en double`);
+
+    const contextKey = {
+      fundStage: 'fundStages',
+      dealRole: 'dealRoles',
+      specialty: 'sectors',
+    }[axisId];
+    for (const option of axis.options) {
+      const matchingVariants = finalAssessment.optionVariants.filter(
+        (variant) => variant.id === option.requirement.assessmentVariantId,
+      );
+      if (matchingVariants.length !== 1) {
+        err(
+          `certifications/${certification.id}.axes.${axisId}.${option.id}.requirement.assessmentVariantId — `
+          + `exactement une variante finale attendue pour "${option.requirement.assessmentVariantId}" `
+          + `(trouvé : ${matchingVariants.length})`,
+        );
+      } else if (matchingVariants[0].axis !== axisId || matchingVariants[0].optionId !== option.id) {
+        err(
+          `certifications/${certification.id}.axes.${axisId}.${option.id}.requirement.assessmentVariantId — `
+          + `la variante "${matchingVariants[0].id}" doit cibler ${axisId}.${option.id}`,
+        );
+      }
+
+      for (const lessonId of option.requirement.lessonIds) {
+        const lesson = allLessons.find((candidate) => candidate.id === lessonId);
+        if (!lesson) continue;
+        if (!lesson.contexts?.[contextKey]?.includes(option.id)) {
+          err(
+            `certifications/${certification.id}.axes.${axisId}.${option.id} — `
+            + `la leçon "${lesson.id}" doit déclarer contexts.${contextKey}: ["${option.id}"]`,
+          );
+        }
+        if (lesson.optional !== true) {
+          err(
+            `certifications/${certification.id}.axes.${axisId}.${option.id} — `
+            + `la leçon optionnelle "${lesson.id}" doit déclarer optional: true`,
+          );
+        }
+      }
+    }
   }
 }
 for (const g of glossary) {
@@ -839,6 +1137,7 @@ if (ikigai) {
 // ── Quiz rule ────────────────────────────────────────────────────────────────
 const lessonsWithoutQuiz = [];
 for (const l of allLessons) {
+  if (l.status === 'upcoming') continue;
   const quiz = l.quiz ?? [];
   if (quiz.length < MIN_QUIZ_QUESTIONS) {
     lessonsWithoutQuiz.push(l.id);
@@ -864,6 +1163,8 @@ const MARKER_FILES = [
   'deliverables.json',
   'courses.json',
   'paths.json',
+  'domains.json',
+  'certifications.json',
   'parcours.json',
   'simulators.json',
   'memos.json',
@@ -887,7 +1188,7 @@ for (const file of MARKER_FILES) {
 
 // ── Report ───────────────────────────────────────────────────────────────────
 console.log('Validation du contenu VC Premium');
-console.log(`→ ${parcours.length} parcours · ${paths.length} rayon(s) hérités · ${courses.length} cours · ${allLessons.length} leçons · ${glossary.length} termes`);
+console.log(`→ ${parcours.length} parcours · ${certifications.length} certification(s) · ${paths.length} rayon(s) hérités · ${courses.length} cours · ${allLessons.length} leçons · ${glossary.length} termes`);
 console.log(`→ ${parcoursLessons.length} leçon(s) de parcours drop-in · ${parcoursLessonDocs.length} registre(s)`);
 console.log(`→ ${cases.length} études de cas · ${deliverables.length} livrable(s) · ${blog.length} articles · ${ecosystems.length} dossier(s) d'écosystème · ${simulators.length} simulateurs`);
 console.log(`→ ${memos.length} mémo(s) annoté(s) · ${antiPortfolioEntries.length} entrée(s) d'anti-portfolio · ${antiPortfolioPatterns.length} motif(s)`);

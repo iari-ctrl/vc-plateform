@@ -38,7 +38,7 @@ export function loadLessonBodies(): Promise<Record<string, LessonBody>> {
  *  for an unknown slug. */
 export async function loadLesson(slug: string): Promise<Lesson | undefined> {
   const entry = lessonBySlug(slug);
-  if (!entry) return undefined;
+  if (!entry || entry.status === 'upcoming') return undefined;
   const payload = (await loadLessonBodies())[slug];
   return {
     ...entry,

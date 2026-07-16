@@ -23,3 +23,4 @@ export * from './antiPortfolio';
 export * from './memos';
 export * from './ikigai';
 export * from './labels';
+export * from './certifications';

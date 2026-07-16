@@ -4,14 +4,24 @@
     "slug": "le-capital-risque-vraiment",
     "courseId": "c-what-is-vc",
     "order": 1,
-    "title": "Le capital-risque, vraiment",
-    "kicker": "Fondations",
-    "readMin": 9,
-    "summary": "Avant tout vocabulaire, une définition honnête : le VC est un pari sur des entreprises qui n'existent pas encore vraiment.",
+    "title": "Définition et périmètre du capital-risque",
+    "kicker": "Fondamentaux",
+    "readMin": 6,
+    "summary": "Définir le capital-risque, le distinguer de la dette et des autres formes de capital-investissement, puis situer le rôle de l'investisseur dans le financement d'une entreprise non cotée.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Définir le capital-risque à partir de ses caractéristiques économiques et juridiques essentielles",
+      "Distinguer le capital-risque de la dette, du capital-développement et du capital-transmission",
+      "Identifier les principales sources de rendement et de risque d'un investissement en capital-risque"
+    ],
+    "prerequisiteLessonIds": [],
+    "assessmentId": "analyst-foundations",
     "glossaryRefs": [
       "venture-capital",
       "equity",
-      "georges-doriot",
       "illiquidite"
     ]
   },
@@ -20,14 +30,28 @@
     "slug": "la-loi-de-puissance",
     "courseId": "c-what-is-vc",
     "order": 2,
-    "title": "La loi de puissance",
-    "kicker": "Mathématique du risque",
-    "readMin": 8,
-    "summary": "Une poignée d'investissements génère l'essentiel des retours. Cette asymétrie n'est pas un accident : c'est le cœur du métier.",
+    "title": "Asymétrie des rendements et logique de portefeuille",
+    "kicker": "Rendements",
+    "readMin": 6,
+    "summary": "Comprendre la concentration des rendements du capital-risque et en déduire une méthode de construction de portefeuille qui distingue probabilité de perte, potentiel de gain et contraintes du fonds.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Expliquer pourquoi les rendements d'un portefeuille de capital-risque sont fortement asymétriques",
+      "Relier le potentiel d'un investissement à la taille et à la stratégie du fonds",
+      "Construire un scénario simple de portefeuille sans présenter une distribution historique comme une certitude"
+    ],
+    "prerequisiteLessonIds": [
+      "l-vc-definition"
+    ],
+    "assessmentId": "analyst-foundations",
     "glossaryRefs": [
       "power-law",
       "fund-returner",
-      "moic"
+      "moic",
+      "portfolio-construction"
     ]
   },
   {
@@ -35,16 +59,29 @@
     "slug": "le-cycle-de-vie-d-un-fonds",
     "courseId": "c-what-is-vc",
     "order": 3,
-    "title": "Le cycle de vie d'un fonds",
-    "kicker": "Temps long",
-    "readMin": 7,
-    "summary": "Dix ans, trois temps : investir, accompagner, sortir. Cette horloge contraint chaque décision d'un GP.",
+    "title": "Cycle de vie et économie d'un fonds",
+    "kicker": "Fonds",
+    "readMin": 6,
+    "summary": "Décrire la levée, les appels de capitaux, l'investissement, le suivi et la liquidation d'un fonds, puis relier ces phases à ses frais, à ses réserves et à ses obligations envers les investisseurs.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Décrire les principales phases du cycle de vie d'un fonds fermé de capital-risque",
+      "Expliquer les relations économiques entre engagements, appels de capitaux, frais et distributions",
+      "Relier l'âge du fonds à la capacité d'investir, de réinvestir et d'organiser la liquidité"
+    ],
+    "prerequisiteLessonIds": [
+      "l-power-law"
+    ],
+    "assessmentId": "analyst-foundations",
     "glossaryRefs": [
       "lp",
       "gp",
-      "dry-powder",
       "follow-on",
-      "j-curve"
+      "j-curve",
+      "reserve-funds"
     ]
   },
   {
@@ -52,17 +89,29 @@
     "slug": "qui-finance-qui",
     "courseId": "c-ecosystem",
     "order": 1,
-    "title": "Qui finance qui",
-    "kicker": "Cartographie",
-    "readMin": 8,
-    "summary": "LPs, fonds de fonds, GPs, business angels : le voyage de l'argent depuis l'épargne institutionnelle jusqu'aux fondateurs.",
+    "title": "Acteurs, mandats et chaîne d'allocation du capital",
+    "kicker": "Écosystème",
+    "readMin": 6,
+    "summary": "Cartographier les apporteurs de capitaux, les gestionnaires, les co-investisseurs et les entreprises financées en distinguant leurs mandats, leurs droits de décision et leurs intérêts économiques.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Décrire la chaîne d'allocation du capital depuis les investisseurs institutionnels jusqu'aux entreprises financées",
+      "Distinguer le mandat et les responsabilités des LP, des GP et des autres financeurs",
+      "Identifier les principaux problèmes d'alignement et de circulation de l'information entre acteurs"
+    ],
+    "prerequisiteLessonIds": [
+      "l-fund-lifecycle"
+    ],
+    "assessmentId": "analyst-ecosystem",
     "glossaryRefs": [
       "lp",
       "gp",
       "business-angel",
-      "management-fees",
-      "carry",
-      "fund-of-funds"
+      "fund-of-funds",
+      "carry"
     ]
   },
   {
@@ -70,16 +119,28 @@
     "slug": "la-grammaire-des-stades",
     "courseId": "c-ecosystem",
     "order": 2,
-    "title": "La grammaire des stades",
-    "kicker": "Vocabulaire",
-    "readMin": 9,
-    "summary": "Pre-seed, seed, Series A, B, C : moins des montants que des stades de maturité et de risque validé.",
+    "title": "Stades de financement et continuité du capital",
+    "kicker": "Financement",
+    "readMin": 6,
+    "summary": "Interpréter les stades de financement à partir des risques levés, des preuves disponibles et des jalons à financer, sans attribuer une valeur universelle aux noms ou aux montants des tours.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Caractériser un stade de financement par les preuves disponibles et les risques restant à lever",
+      "Relier le montant recherché aux jalons, au runway et au financement suivant",
+      "Analyser la continuité du capital sans utiliser les noms de tours comme des seuils universels"
+    ],
+    "prerequisiteLessonIds": [
+      "l-actors"
+    ],
+    "assessmentId": "analyst-ecosystem",
     "glossaryRefs": [
       "pre-seed",
       "seed",
       "series-a",
-      "pmf",
-      "safe",
+      "runway",
       "cap-table",
       "dilution"
     ]
@@ -89,10 +150,23 @@
     "slug": "une-semaine-de-vc",
     "courseId": "c-vc-job",
     "order": 1,
-    "title": "Une semaine de VC",
-    "kicker": "Le quotidien",
-    "readMin": 8,
-    "summary": "Le métier réel, heure par heure : sourcing, calls fondateurs, mémos, comité d'investissement, et beaucoup de lecture.",
+    "title": "Organisation du travail et traitement d'une opportunité",
+    "kicker": "Fonction",
+    "readMin": 6,
+    "summary": "Organiser le travail de l'Analyst depuis l'enregistrement d'une opportunité jusqu'à la décision, en assurant la qualité des sources, la gestion des délais et la traçabilité des travaux.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Décomposer le traitement d'une opportunité en séquences de travail traçables",
+      "Prioriser les analyses selon leur matérialité et le calendrier de décision",
+      "Organiser une semaine de travail qui concilie sourcing, analyse, écriture et suivi"
+    ],
+    "prerequisiteLessonIds": [
+      "l-stages"
+    ],
+    "assessmentId": "analyst-role",
     "glossaryRefs": [
       "deal-memo",
       "ic",
@@ -105,14 +179,27 @@
     "slug": "les-roles-dans-un-fonds",
     "courseId": "c-vc-job",
     "order": 2,
-    "title": "Les rôles dans un fonds",
-    "kicker": "Hiérarchie",
-    "readMin": 7,
-    "summary": "Analyst, associate, principal, partner : ce que chaque échelon décide, produit et signe.",
+    "title": "Rôles, responsabilités et gouvernance de la décision",
+    "kicker": "Gouvernance",
+    "readMin": 6,
+    "summary": "Distinguer préparation, recommandation, décision, exécution et contrôle au sein d'un fonds, en tenant compte de la variabilité des titres et des délégations entre organisations.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Distinguer les responsabilités courantes de l'Analyst, de l'Associate, du Principal et du Partner",
+      "Cartographier les pouvoirs de recommandation, de décision, d'exécution et de contrôle",
+      "Identifier les situations dans lesquelles une délégation ou un conflit doit être porté à la gouvernance compétente"
+    ],
+    "prerequisiteLessonIds": [
+      "l-vc-week"
+    ],
+    "assessmentId": "analyst-role",
     "glossaryRefs": [
-      "carry",
       "gp",
-      "ic"
+      "ic",
+      "carry"
     ]
   },
   {
@@ -120,10 +207,23 @@
     "slug": "l-art-du-sourcing",
     "courseId": "c-deal-flow",
     "order": 1,
-    "title": "L'art du sourcing",
-    "kicker": "Pipeline",
-    "readMin": 8,
-    "summary": "Trouver avant les autres. Le sourcing inbound, outbound, et la vraie source d'avantage : la réputation.",
+    "title": "Origination et organisation du sourcing",
+    "kicker": "Origination",
+    "readMin": 6,
+    "summary": "Structurer l'identification d'opportunités à partir du mandat du fonds, diversifier les canaux et documenter les sources afin d'améliorer la couverture sans confondre volume et qualité.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Construire un plan de sourcing cohérent avec le mandat et les capacités du fonds",
+      "Combiner canaux entrants, recherche ciblée et recommandations en limitant les biais de couverture",
+      "Mesurer la contribution des sources tout en respectant les règles de confidentialité et de protection des données"
+    ],
+    "prerequisiteLessonIds": [
+      "l-portfolio-monitoring"
+    ],
+    "assessmentId": "analyst-pipeline",
     "glossaryRefs": [
       "deal-flow",
       "thesis-driven",
@@ -135,10 +235,23 @@
     "slug": "screening-et-filtrage",
     "courseId": "c-deal-flow",
     "order": 2,
-    "title": "Screening & filtrage",
-    "kicker": "Tri",
-    "readMin": 7,
-    "summary": "Passer de mille dossiers à dix conversations sérieuses sans tuer la sérendipité.",
+    "title": "Qualification initiale et compatibilité avec la stratégie du fonds",
+    "kicker": "Qualification",
+    "readMin": 6,
+    "summary": "Appliquer un screening traçable qui vérifie le mandat, mesure le potentiel et hiérarchise les incertitudes sans transformer une grille en décision automatique.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Appliquer successivement les critères de mandat et les critères analytiques d'une première qualification",
+      "Construire une grille de screening qui sépare faits, hypothèses et informations manquantes",
+      "Formuler une décision de poursuite, de suivi ou de clôture avec un motif traçable"
+    ],
+    "prerequisiteLessonIds": [
+      "l-sourcing"
+    ],
+    "assessmentId": "analyst-pipeline",
     "glossaryRefs": [
       "deal-flow",
       "thesis-driven",
@@ -150,35 +263,58 @@
     "id": "l-team-market",
     "slug": "equipe-et-marche",
     "courseId": "c-startup-analysis",
-    "order": 1,
-    "title": "Équipe & marché",
-    "kicker": "Les deux piliers",
-    "readMin": 9,
-    "summary": "Au stade précoce, on parie sur des gens et sur une vague. Comment lire l'un et l'autre.",
+    "order": 2,
+    "title": "Analyse du marché, de la concurrence et de la chaîne de valeur",
+    "kicker": "Marché et concurrence",
+    "readMin": 6,
+    "summary": "Définir le marché pertinent, comprendre sa dynamique et situer l’entreprise dans une chaîne de valeur sans confondre taille théorique et accès commercial.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Délimiter un marché à partir d’un besoin, d’un acheteur, d’un usage et d’une géographie",
+      "Cartographier les concurrents directs, indirects et les solutions de non-consommation",
+      "Identifier les acteurs de la chaîne de valeur qui influencent l’accès au client et le partage de la marge"
+    ],
+    "prerequisiteLessonIds": [
+      "l-founder-analysis"
+    ],
+    "assessmentId": "analyst-opportunity",
     "glossaryRefs": [
-      "founder-market-fit",
       "tam-sam-som",
-      "why-now",
-      "pmf"
+      "why-now"
     ]
   },
   {
     "id": "l-traction-unit-economics",
     "slug": "traction-et-unit-economics",
     "courseId": "c-startup-analysis",
-    "order": 2,
-    "title": "Traction & unit economics",
-    "kicker": "Les chiffres qui comptent",
-    "readMin": 10,
-    "summary": "Quand les chiffres apparaissent, savoir lesquels racontent une vérité : croissance, rétention, et l'économie d'une unité.",
+    "order": 4,
+    "title": "Traction, qualité du revenu et lecture des unit economics",
+    "kicker": "Traction économique",
+    "readMin": 6,
+    "summary": "Évaluer la croissance, la rétention et l’économie unitaire à partir de données réconciliées, de cohortes comparables et d’hypothèses adaptées au modèle.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Réconcilier les indicateurs de traction avec les factures, encaissements et données d’usage",
+      "Lire la croissance et la rétention par cohorte, segment et période comparables",
+      "Interpréter les unit economics sans appliquer de seuil universel déconnecté du modèle"
+    ],
+    "prerequisiteLessonIds": [
+      "l-product-analysis"
+    ],
+    "assessmentId": "analyst-opportunity",
     "glossaryRefs": [
-      "unit-economics",
+      "arr",
+      "nrr",
       "cac",
       "ltv",
-      "rule-of-40",
-      "burn-rate",
-      "burn-multiple",
-      "nrr"
+      "gross-margin",
+      "rule-of-40"
     ]
   },
   {
@@ -186,14 +322,28 @@
     "slug": "la-due-diligence-priorisee",
     "courseId": "c-due-diligence",
     "order": 1,
-    "title": "La due diligence priorisée",
-    "kicker": "Enquête",
-    "readMin": 9,
-    "summary": "La DD n'est pas un audit exhaustif : c'est une enquête sur ce qui peut tuer l'investissement, dans un temps contraint.",
+    "title": "Plan de due diligence fondé sur les risques",
+    "kicker": "Méthode",
+    "readMin": 6,
+    "summary": "Élaborer un programme de vérification proportionné aux risques qui conditionnent la décision d'investissement.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Construire un plan de due diligence proportionné aux risques matériels",
+      "Relier chaque contrôle à une hypothèse de la thèse d'investissement",
+      "Documenter les conclusions, limites et risques résiduels"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-returns-waterfall"
+    ],
+    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
       "dd",
-      "cap-table",
-      "deal-memo"
+      "deal-memo",
+      "runway",
+      "gross-margin"
     ]
   },
   {
@@ -432,29 +582,56 @@
     "id": "lmv-pre-post-ownership",
     "slug": "pre-post-money-et-ownership",
     "courseId": "c-mathematiques-vc",
-    "order": 1,
-    "title": "Pre/post-money et ownership",
-    "kicker": "La formule mère",
-    "readMin": 18,
-    "summary": "Poser un tour en trois lignes : pre-money, post-money, part investisseur, ownership cible et prix implicite.",
+    "order": 4,
+    "title": "Valorisation pre-money, post-money et ownership",
+    "kicker": "Valorisation et détention",
+    "readMin": 6,
+    "summary": "Relier montant investi, valorisation pre-money, valorisation post-money et pourcentage de détention dans un tour en actions.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Calculer une valorisation post-money et la détention du nouvel investisseur",
+      "Déduire la valorisation implicite d’un montant et d’un objectif de détention",
+      "Identifier les hypothèses de capitalisation qui limitent l’interprétation du calcul simplifié"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-cash-flow-scenarios"
+    ],
+    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "pre-money",
       "valuation",
-      "fund-returner"
+      "cap-table",
+      "dilution"
     ]
   },
   {
     "id": "lmv-dilution-cap-table",
     "slug": "dilution-cap-table-et-option-pool",
     "courseId": "c-mathematiques-vc",
-    "order": 2,
-    "title": "Dilution, cap table et option pool",
-    "kicker": "Composer les pourcentages",
-    "readMin": 20,
-    "summary": "Comprendre pourquoi la dilution se compose tour après tour, et pourquoi l'ESOP pré-money change vraiment la répartition.",
+    "order": 5,
+    "title": "Table de capitalisation, dilution et instruments dilutifs",
+    "kicker": "Capitalisation et dilution",
+    "readMin": 6,
+    "summary": "Construire une cap table pleinement diluée, séquencer l’augmentation d’un pool d’options et calculer la dilution de chaque catégorie.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Réconcilier une table de capitalisation en base émise et pleinement diluée",
+      "Calculer la dilution composée résultant d’un tour et d’une augmentation du pool d’options",
+      "Identifier les instruments et clauses susceptibles de modifier le nombre de titres ou la répartition"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-pre-post-ownership"
+    ],
+    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
-      "dilution",
       "cap-table",
+      "dilution",
       "esop",
       "pre-money"
     ]
@@ -463,11 +640,24 @@
     "id": "lmv-market-sizing",
     "slug": "market-sizing-tam-sam-som",
     "courseId": "c-mathematiques-vc",
-    "order": 3,
-    "title": "Market sizing : TAM, SAM, SOM",
-    "kicker": "Ordres de grandeur",
-    "readMin": 18,
-    "summary": "Construire un sizing bottom-up crédible, challenger les hypothèses et éviter le piège du 1 % d'un gros marché.",
+    "order": 1,
+    "title": "Dimensionnement de marché : méthodes, sources et sensibilités",
+    "kicker": "Dimensionnement de marché",
+    "readMin": 6,
+    "summary": "Construire et contre-vérifier un dimensionnement de marché en distinguant demande théorique, périmètre accessible et capacité de capture.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Construire un dimensionnement bottom-up à partir d’unités et de prix documentés",
+      "Distinguer TAM, SAM et SOM sans confondre marché accessible et objectif commercial",
+      "Tester la sensibilité du résultat et effectuer une contre-vérification indépendante"
+    ],
+    "prerequisiteLessonIds": [
+      "l-traction-unit-economics"
+    ],
+    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "tam-sam-som",
       "arr"
@@ -477,38 +667,63 @@
     "id": "lmv-unit-economics",
     "slug": "unit-economics-cac-ltv-payback-rule-of-40",
     "courseId": "c-mathematiques-vc",
-    "order": 4,
-    "title": "Unit economics : CAC, LTV, payback, Rule of 40",
-    "kicker": "Le moteur économique",
-    "readMin": 20,
-    "summary": "Lire si la croissance crée de la valeur : CAC, LTV, marge brute, payback, NRR, burn et Rule of 40.",
+    "order": 2,
+    "title": "Calcul et réconciliation des unit economics",
+    "kicker": "Économie unitaire",
+    "readMin": 6,
+    "summary": "Calculer CAC, marge, payback et LTV à partir de définitions cohérentes, puis tester leur sensibilité à la rétention et aux coûts complets.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Définir l’unité économique pertinente et réconcilier les données nécessaires au calcul",
+      "Calculer CAC, marge contributive, payback et LTV en rendant visibles les hypothèses",
+      "Évaluer la sensibilité des résultats au churn, à la marge, au canal et aux coûts de déploiement"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-market-sizing"
+    ],
+    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
+      "unit-economics",
       "cac",
       "ltv",
       "gross-margin",
       "nrr",
       "rule-of-40",
-      "burn-rate",
-      "runway"
+      "burn-multiple"
     ]
   },
   {
     "id": "lmv-returns-waterfall",
     "slug": "returns-moic-irr-dpi-tvpi-waterfall",
     "courseId": "c-mathematiques-vc",
-    "order": 5,
-    "title": "Returns, MOIC, IRR et waterfall",
-    "kicker": "Qui gagne quoi",
-    "readMin": 19,
-    "summary": "Passer du retour d'une ligne au retour d'un fonds : MOIC, IRR, DPI, TVPI et effet d'une liquidation preference.",
+    "order": 7,
+    "title": "MOIC, TRI, waterfall et scénarios de rendement",
+    "kicker": "Rendements et distributions",
+    "readMin": 6,
+    "summary": "Calculer les rendements d’une ligne et d’un fonds, intégrer le calendrier des flux et vérifier la répartition des produits selon les droits.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Calculer et distinguer MOIC et TRI à partir de flux datés",
+      "Réconcilier DPI, RVPI et TVPI au niveau d’un fonds",
+      "Construire une waterfall de sortie et tester plusieurs valeurs de réalisation"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-valuation-economic-rights"
+    ],
+    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "moic",
       "irr",
       "dpi",
       "tvpi",
       "liquidation-preference",
-      "exit-waterfall",
-      "fund-returner"
+      "exit-waterfall"
     ]
   },
   {
@@ -823,13 +1038,27 @@
     "slug": "la-due-diligence-commerciale",
     "courseId": "c-due-diligence",
     "order": 2,
-    "title": "La due diligence commerciale",
+    "title": "Due diligence commerciale",
     "kicker": "Marché",
-    "readMin": 8,
-    "summary": "Vérifier que la demande existe vraiment, au prix annoncé : marché atteignable, appels clients, rétention.",
+    "readMin": 6,
+    "summary": "Vérifier l'existence, la qualité et la durabilité de la demande à partir de données rapprochées et d'entretiens structurés.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Reconstruire les indicateurs commerciaux à partir de données sources",
+      "Conduire des entretiens clients structurés et limiter leurs biais",
+      "Qualifier la demande, sa reproductibilité et les risques de concentration"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-process"
+    ],
+    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
       "tam-sam-som",
       "nrr",
+      "cac",
       "pmf",
       "moat"
     ]
@@ -839,14 +1068,28 @@
     "slug": "la-due-diligence-produit-technologie",
     "courseId": "c-due-diligence",
     "order": 3,
-    "title": "La due diligence produit et technologie",
+    "title": "Due diligence produit, technologie, cybersécurité et propriété intellectuelle",
     "kicker": "Produit",
-    "readMin": 7,
-    "summary": "Le produit fait-il ce qui est annoncé, et tient-il à l'échelle : démêler la défensibilité réelle de la démonstration.",
+    "readMin": 6,
+    "summary": "Évaluer le produit réellement livré, l'architecture, les dépendances, la sécurité et la maîtrise des actifs technologiques.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Délimiter une revue produit et technologie proportionnée",
+      "Identifier les dépendances techniques, économiques et de sécurité",
+      "Relier les constats techniques à la marge, au calendrier et au risque d'investissement"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-commercial"
+    ],
+    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
-      "moat",
       "gross-margin",
-      "unit-economics"
+      "unit-economics",
+      "moat",
+      "dd"
     ]
   },
   {
@@ -854,32 +1097,1206 @@
     "slug": "la-due-diligence-equipe-references",
     "courseId": "c-due-diligence",
     "order": 4,
-    "title": "La due diligence équipe et références",
+    "title": "Due diligence de l'équipe et conduite des références",
     "kicker": "Équipe",
-    "readMin": 8,
-    "summary": "En amorçage, l'essentiel du pari porte sur les personnes : founder-market fit, appels de référence, alignement.",
+    "readMin": 6,
+    "summary": "Évaluer les capacités, la gouvernance et l'intégrité de l'équipe à partir de faits, de références conduites selon le cadre applicable et de critères pertinents pour le projet.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Construire une matrice de capacités reliée au plan d'entreprise",
+      "Conduire et qualifier des références professionnelles",
+      "Formuler des risques d'équipe et des mesures de gouvernance proportionnées"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-tech-product"
+    ],
+    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
-      "vesting",
       "cap-table",
-      "deal-memo"
+      "vesting",
+      "deal-memo",
+      "dd"
     ]
   },
   {
     "id": "l-dd-legal",
     "slug": "la-due-diligence-juridique-cap-table",
     "courseId": "c-due-diligence",
-    "order": 5,
-    "title": "La due diligence juridique, financière et cap table",
-    "kicker": "Structuration",
-    "readMin": 9,
-    "summary": "Réconcilier la cap table, sécuriser la propriété intellectuelle et vérifier que le wording juridique traduit l'accord économique.",
+    "order": 6,
+    "title": "Due diligence juridique, conformité et structure du capital",
+    "kicker": "Conformité",
+    "readMin": 7,
+    "summary": "Organiser la revue des titres, contrats, droits de propriété intellectuelle et obligations réglementaires avec les conseils compétents.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Organiser une revue juridique fondée sur la matérialité",
+      "Réconcilier la structure du capital avec les actes",
+      "Traduire les écarts juridiques en conséquences et conditions de décision"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-financial"
+    ],
+    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
       "cap-table",
       "esop",
       "liquidation-preference",
       "term-sheet",
+      "vesting"
+    ]
+  },
+  {
+    "id": "l-pipeline-crm",
+    "slug": "gestion-pipeline-crm-investissement",
+    "courseId": "c-deal-flow",
+    "order": 3,
+    "title": "Gestion du pipeline, qualité du CRM et protection des données",
+    "kicker": "Processus",
+    "readMin": 6,
+    "summary": "Définir un modèle de données et des étapes de pipeline qui rendent les décisions traçables, tout en appliquant des contrôles de qualité, de sécurité, de conservation et d'automatisation.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Définir les champs, états et règles de transition nécessaires à un pipeline d'investissement traçable",
+      "Mettre en place des contrôles de qualité, d'accès, de conservation et de protection des données",
+      "Distinguer automatisation administrative, aide à l'analyse et décision relevant d'un responsable"
+    ],
+    "prerequisiteLessonIds": [
+      "l-screening"
+    ],
+    "assessmentId": "analyst-pipeline",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-founder-analysis",
+    "slug": "analyse-equipe-fondatrice",
+    "courseId": "c-startup-analysis",
+    "order": 1,
+    "title": "Analyse structurée de l’équipe fondatrice",
+    "kicker": "Équipe fondatrice",
+    "readMin": 6,
+    "summary": "Évaluer l’adéquation de l’équipe au problème traité à partir de faits observables, de références contradictoires et d’hypothèses explicitement qualifiées.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Construire une grille d’analyse de l’équipe fondatrice adaptée au stade de l’entreprise",
+      "Distinguer les faits vérifiés, les signaux observés et les interprétations de l’analyste",
+      "Formuler un plan de vérification proportionné aux risques humains et organisationnels identifiés"
+    ],
+    "prerequisiteLessonIds": [
+      "l-pipeline-crm"
+    ],
+    "assessmentId": "analyst-opportunity",
+    "glossaryRefs": [
+      "founder-market-fit"
+    ]
+  },
+  {
+    "id": "l-product-analysis",
+    "slug": "analyse-produit-technologie",
+    "courseId": "c-startup-analysis",
+    "order": 3,
+    "title": "Analyse du produit, de la technologie et des dépendances critiques",
+    "kicker": "Produit et technologie",
+    "readMin": 6,
+    "summary": "Relier la proposition de valeur aux preuves d’usage, qualifier la différenciation et hiérarchiser les risques techniques, cyber et de propriété intellectuelle.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Évaluer la proposition de valeur à partir du problème client et de preuves d’usage",
+      "Distinguer différenciation fonctionnelle, avantage technique et barrière défendable",
+      "Construire un plan de vérification des dépendances techniques, cyber et de propriété intellectuelle"
+    ],
+    "prerequisiteLessonIds": [
+      "l-team-market"
+    ],
+    "assessmentId": "analyst-opportunity",
+    "glossaryRefs": [
+      "pmf"
+    ]
+  },
+  {
+    "id": "l-fact-hypothesis",
+    "slug": "distinguer-faits-hypotheses",
+    "courseId": "c-investment-recommendation",
+    "order": 1,
+    "title": "Hiérarchie des sources et qualification des assertions",
+    "kicker": "Méthode",
+    "readMin": 7,
+    "summary": "Distinguer faits, estimations, hypothèses et jugements afin de construire une chaîne de preuve révisable.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Qualifier la nature et le niveau de preuve d'une assertion",
+      "Construire une fiche de preuve et une triangulation",
+      "Employer un langage cohérent avec l'incertitude disponible"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-legal"
+    ],
+    "assessmentId": "analyst-recommendation",
+    "glossaryRefs": [
+      "deal-memo",
+      "dd",
+      "tam-sam-som"
+    ]
+  },
+  {
+    "id": "l-investment-recommendation",
+    "slug": "redaction-recommandation-investissement",
+    "courseId": "c-investment-recommendation",
+    "order": 2,
+    "title": "Rédaction du memo et formulation de la recommandation",
+    "kicker": "Décision",
+    "readMin": 7,
+    "summary": "Rédiger un document orienté décision qui expose recommandation, preuves, risques, conditions et scénarios de rendement.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Structurer un memo autour d'une décision explicite",
+      "Relier preuves, risques, conditions et scénarios de rendement",
+      "Intégrer la matérialité ESG sans la confondre avec une mesure d'impact"
+    ],
+    "prerequisiteLessonIds": [
+      "l-fact-hypothesis"
+    ],
+    "assessmentId": "analyst-recommendation",
+    "glossaryRefs": [
+      "deal-memo",
+      "pre-money",
+      "founder-ownership",
+      "moic",
+      "irr",
+      "liquidation-preference"
+    ]
+  },
+  {
+    "id": "l-ic-defense",
+    "slug": "defense-comite-investissement",
+    "courseId": "c-investment-recommendation",
+    "order": 3,
+    "title": "Présentation et défense devant le comité d'investissement",
+    "kicker": "Comité",
+    "readMin": 6,
+    "summary": "Présenter une recommandation de façon concise, répondre aux objections et consigner les motifs de la décision.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Présenter une recommandation et ses limites dans un temps contraint",
+      "Répondre aux objections par des preuves et scénarios",
+      "Consigner une décision, ses conditions, conflits et désaccords"
+    ],
+    "prerequisiteLessonIds": [
+      "l-investment-recommendation"
+    ],
+    "assessmentId": "analyst-recommendation",
+    "glossaryRefs": [
+      "deal-memo",
+      "moic",
+      "irr",
+      "ic"
+    ]
+  },
+  {
+    "id": "l-confidentiality",
+    "slug": "confidentialite-information-investissement",
+    "courseId": "c-professional-integrity",
+    "order": 2,
+    "title": "Confidentialité, données personnelles et information sensible",
+    "kicker": "Information",
+    "readMin": 6,
+    "summary": "Collecter, utiliser, partager et conserver l'information d'investissement selon sa finalité, sa sensibilité et les règles applicables.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Distinguer confidentialité et protection des données personnelles",
+      "Appliquer finalité, minimisation, accès et conservation à une data room",
+      "Détecter et escalader un incident d'information"
+    ],
+    "prerequisiteLessonIds": [
+      "l-conflicts-conduct"
+    ],
+    "assessmentId": "analyst-integrity",
+    "glossaryRefs": [
+      "dd",
+      "deal-memo"
+    ]
+  },
+  {
+    "id": "l-ai-integrity",
+    "slug": "usage-declare-intelligence-artificielle",
+    "courseId": "c-professional-integrity",
+    "order": 3,
+    "title": "Usage déclaré, encadré et vérifié de l'intelligence artificielle",
+    "kicker": "Intégrité",
+    "readMin": 6,
+    "summary": "Employer les systèmes d'intelligence artificielle dans un cadre autorisé, sans déléguer la responsabilité, la confidentialité ni la vérification.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Qualifier un cas d'usage d'IA et ses données avant exécution",
+      "Vérifier indépendamment sources, citations et calculs",
+      "Documenter la contribution de l'outil et les contrôles appliqués"
+    ],
+    "prerequisiteLessonIds": [
+      "l-confidentiality"
+    ],
+    "assessmentId": "analyst-integrity",
+    "glossaryRefs": [
+      "dd",
+      "cap-table",
+      "waterfall"
+    ]
+  },
+  {
+    "id": "l-critical-errors",
+    "slug": "erreurs-critiques-analyse-investissement",
+    "courseId": "c-professional-integrity",
+    "order": 4,
+    "title": "Contrôles qualité, erreurs critiques et critères éliminatoires",
+    "kicker": "Contrôle",
+    "readMin": 6,
+    "summary": "Détecter les erreurs susceptibles d'invalider une production et appliquer un contrôle final proportionné avant diffusion.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Classer les erreurs selon leur effet sur la décision et la conformité",
+      "Exécuter un autocontrôle et une revue indépendante fondés sur les risques",
+      "Corriger, escalader et analyser la cause d'une erreur critique"
+    ],
+    "prerequisiteLessonIds": [
+      "l-ai-integrity"
+    ],
+    "assessmentId": "analyst-integrity",
+    "glossaryRefs": [
+      "founder-ownership",
+      "moic",
+      "irr",
+      "waterfall",
+      "cap-table"
+    ]
+  },
+  {
+    "id": "l-stage-preseed-team",
+    "slug": "preseed-equipe-sans-historique",
+    "courseId": "c-analyst-stage",
+    "order": 1,
+    "title": "Évaluer une équipe sans historique au pre-seed",
+    "kicker": "Pre-seed",
+    "readMin": 0,
+    "summary": "Utiliser l'expérience, la vitesse d'apprentissage et les références comme preuves indirectes lorsque les résultats sont encore limités.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "fundStages": [
+        "pre-seed"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Évaluer le founder-market fit sans surpondérer le pedigree",
+      "Construire un plan de références adapté"
+    ],
+    "prerequisiteLessonIds": [
+      "l-founder-analysis"
+    ],
+    "assessmentId": "analyst-stage-pre-seed",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-stage-preseed-evidence",
+    "slug": "preseed-signaux-produit-financement",
+    "courseId": "c-analyst-stage",
+    "order": 2,
+    "title": "Signaux produit et financement au pre-seed",
+    "kicker": "Pre-seed",
+    "readMin": 0,
+    "summary": "Analyser un produit qualitatif, des signaux précoces de marché, les instruments convertibles et la préparation du prochain tour.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "fundStages": [
+        "pre-seed"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Qualifier des signaux précoces de product-market fit",
+      "Relier l'instrument d'amorçage aux jalons du prochain tour"
+    ],
+    "prerequisiteLessonIds": [
+      "l-stage-preseed-team"
+    ],
+    "assessmentId": "analyst-stage-pre-seed",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-stage-seed-commercial",
+    "slug": "seed-validation-commerciale-retention",
+    "courseId": "c-analyst-stage",
+    "order": 3,
+    "title": "Validation commerciale et rétention au seed",
+    "kicker": "Seed",
+    "readMin": 0,
+    "summary": "Distinguer intérêt commercial, usage répété et premiers éléments de répétabilité dans une société seed.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "fundStages": [
+        "seed"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Évaluer la qualité des premiers revenus",
+      "Construire une lecture de rétention adaptée à un faible historique"
+    ],
+    "prerequisiteLessonIds": [
+      "l-traction-unit-economics"
+    ],
+    "assessmentId": "analyst-stage-seed",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-stage-seed-financing",
+    "slug": "seed-ownership-runway-financement",
+    "courseId": "c-analyst-stage",
+    "order": 4,
+    "title": "Ownership, runway et besoins de financement au seed",
+    "kicker": "Seed",
+    "readMin": 0,
+    "summary": "Relier l'ownership cible, le montant du tour, le runway et les jalons qui doivent être atteints avant le financement suivant.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "fundStages": [
+        "seed"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Tester la cohérence du montant recherché",
+      "Évaluer la trajectoire de dilution jusqu'au prochain tour"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-pre-post-ownership"
+    ],
+    "assessmentId": "analyst-stage-seed",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-stage-series-a-cohorts",
+    "slug": "series-a-cohorts-unit-economics",
+    "courseId": "c-analyst-stage",
+    "order": 5,
+    "title": "Cohorts et unit economics en Série A",
+    "kicker": "Série A",
+    "readMin": 0,
+    "summary": "Vérifier la rétention, l'expansion, les marges et la robustesse des cohortes avant un changement d'échelle.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "fundStages": [
+        "series-a"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Lire des cohorts par période et segment",
+      "Identifier les unit economics qui supportent l'accélération"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-unit-economics"
+    ],
+    "assessmentId": "analyst-stage-series-a",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-stage-series-a-repeatability",
+    "slug": "series-a-repetabilite-organisation",
+    "courseId": "c-analyst-stage",
+    "order": 6,
+    "title": "Répétabilité commerciale et organisation en Série A",
+    "kicker": "Série A",
+    "readMin": 0,
+    "summary": "Évaluer si le go-to-market, l'équipe de direction et les systèmes opérationnels peuvent absorber le capital du tour.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "fundStages": [
+        "series-a"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Distinguer croissance founder-led et moteur répétable",
+      "Identifier les recrutements critiques du plan"
+    ],
+    "prerequisiteLessonIds": [
+      "l-stage-series-a-cohorts"
+    ],
+    "assessmentId": "analyst-stage-series-a",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-stage-growth-revenue",
+    "slug": "growth-qualite-revenu-previsions",
+    "courseId": "c-analyst-stage",
+    "order": 7,
+    "title": "Qualité du revenu et prévisions en growth",
+    "kicker": "Growth",
+    "readMin": 0,
+    "summary": "Tester récurrence, concentration, marges, cohorts et scénarios de prévision d'une société en phase de croissance.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "fundStages": [
+        "growth"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Évaluer la qualité du chiffre d'affaires",
+      "Construire des scénarios de croissance et de trésorerie"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-unit-economics"
+    ],
+    "assessmentId": "analyst-stage-growth",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-stage-growth-capital",
+    "slug": "growth-valorisation-structure-capital",
+    "courseId": "c-analyst-stage",
+    "order": 8,
+    "title": "Valorisation et structure de capital en growth",
+    "kicker": "Growth",
+    "readMin": 0,
+    "summary": "Analyser la valorisation, la dette, les secondaries, les préférences existantes et les scénarios de sortie.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "fundStages": [
+        "growth"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Réconcilier les différentes couches de capital",
+      "Tester les rendements selon plusieurs scénarios de sortie"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-returns-waterfall"
+    ],
+    "assessmentId": "analyst-stage-growth",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-role-lead-dd",
+    "slug": "lead-plan-due-diligence-term-sheet",
+    "courseId": "c-analyst-deal-role",
+    "order": 1,
+    "title": "Plan de due diligence et préparation de la term sheet",
+    "kicker": "Lead",
+    "readMin": 0,
+    "summary": "Définir les travaux prioritaires, répartir les responsabilités et préparer les paramètres économiques et de gouvernance.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "dealRoles": [
+        "lead"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Construire un plan de diligence pilotable",
+      "Préparer les points de décision d'une term sheet"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-process"
+    ],
+    "assessmentId": "analyst-role-lead",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-role-lead-closing",
+    "slug": "lead-syndication-gouvernance-closing",
+    "courseId": "c-analyst-deal-role",
+    "order": 2,
+    "title": "Syndication, gouvernance et préparation du closing",
+    "kicker": "Lead",
+    "readMin": 0,
+    "summary": "Coordonner les co-investisseurs et les conseils, sécuriser la gouvernance et suivre les conditions du closing.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "dealRoles": [
+        "lead"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Tenir un tableau de responsabilités et de conditions",
+      "Identifier les points de blocage avant le closing"
+    ],
+    "prerequisiteLessonIds": [
+      "l-role-lead-dd"
+    ],
+    "assessmentId": "analyst-role-lead",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-role-colead-workshare",
+    "slug": "colead-repartition-diligence-conviction",
+    "courseId": "c-analyst-deal-role",
+    "order": 3,
+    "title": "Répartition des diligences et partage de la conviction",
+    "kicker": "Co-lead",
+    "readMin": 0,
+    "summary": "Répartir les travaux entre fonds sans créer de lacunes et réconcilier les thèses d'investissement.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "dealRoles": [
+        "co-lead"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Définir une matrice de responsabilités",
+      "Identifier les divergences de conviction avant la décision"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-process"
+    ],
+    "assessmentId": "analyst-role-co-lead",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-role-colead-governance",
+    "slug": "colead-negociation-gouvernance",
+    "courseId": "c-analyst-deal-role",
+    "order": 4,
+    "title": "Négociation et gouvernance partagées",
+    "kicker": "Co-lead",
+    "readMin": 0,
+    "summary": "Aligner les positions économiques et de gouvernance tout en préservant une exécution lisible pour la société.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "dealRoles": [
+        "co-lead"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Préparer une position commune",
+      "Traiter un désaccord entre co-leads"
+    ],
+    "prerequisiteLessonIds": [
+      "l-role-colead-workshare"
+    ],
+    "assessmentId": "analyst-role-co-lead",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-role-follower-validation",
+    "slug": "follower-validation-independante",
+    "courseId": "c-analyst-deal-role",
+    "order": 5,
+    "title": "Validation indépendante des travaux du lead",
+    "kicker": "Follower",
+    "readMin": 0,
+    "summary": "Former une recommandation propre à partir des travaux partagés et identifier les vérifications qui ne peuvent pas être déléguées.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "dealRoles": [
+        "follower"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Définir les vérifications indépendantes minimales",
+      "Documenter une décision distincte de celle du lead"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-process"
+    ],
+    "assessmentId": "analyst-role-follower",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-role-follower-rights",
+    "slug": "follower-allocation-droits-information",
+    "courseId": "c-analyst-deal-role",
+    "order": 6,
+    "title": "Allocation, syndication et droits d'information",
+    "kicker": "Follower",
+    "readMin": 0,
+    "summary": "Évaluer la qualité de l'allocation proposée et sécuriser les droits nécessaires au suivi de l'investissement.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "dealRoles": [
+        "follower"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Comparer allocation et intérêt économique",
+      "Identifier les droits d'information indispensables"
+    ],
+    "prerequisiteLessonIds": [
+      "l-role-follower-validation"
+    ],
+    "assessmentId": "analyst-role-follower",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-generalist-comparison",
+    "slug": "generaliste-comparaison-multisectorielle",
+    "courseId": "c-analyst-specialties",
+    "order": 1,
+    "title": "Comparaison multisectorielle des opportunités",
+    "kicker": "Généraliste",
+    "readMin": 0,
+    "summary": "Comparer des entreprises dont les modèles, les cycles de vente et les besoins de capital ne reposent pas sur les mêmes métriques.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "sectors": [
+        "generalist"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Choisir des métriques comparables",
+      "Éviter l'application mécanique d'un benchmark sectoriel"
+    ],
+    "prerequisiteLessonIds": [
+      "l-product-analysis"
+    ],
+    "assessmentId": "analyst-specialty-generalist",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-generalist-experts",
+    "slug": "generaliste-benchmarks-experts",
+    "courseId": "c-analyst-specialties",
+    "order": 2,
+    "title": "Sélection des benchmarks et recours aux experts",
+    "kicker": "Généraliste",
+    "readMin": 0,
+    "summary": "Définir les comparables pertinents et organiser une expertise externe sans déléguer la décision.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "sectors": [
+        "generalist"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Construire un panel de comparables",
+      "Préparer un entretien expert traçable"
+    ],
+    "prerequisiteLessonIds": [
+      "l-specialty-generalist-comparison"
+    ],
+    "assessmentId": "analyst-specialty-generalist",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-saas-metrics",
+    "slug": "saas-arr-retention-unit-economics",
+    "courseId": "c-analyst-specialties",
+    "order": 3,
+    "title": "ARR, rétention et unit economics SaaS",
+    "kicker": "SaaS",
+    "readMin": 0,
+    "summary": "Analyser ARR, NRR, GRR, churn, CAC, LTV et payback en tenant compte de la qualité des données.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "sectors": [
+        "saas"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Réconcilier les métriques SaaS",
+      "Identifier les effets de cohortes et de concentration"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-unit-economics"
+    ],
+    "assessmentId": "analyst-specialty-saas",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-saas-gtm",
+    "slug": "saas-repetabilite-go-to-market",
+    "courseId": "c-analyst-specialties",
+    "order": 4,
+    "title": "Répétabilité du go-to-market SaaS",
+    "kicker": "SaaS",
+    "readMin": 0,
+    "summary": "Évaluer l'efficacité des canaux, la vélocité commerciale, le pricing et la capacité d'expansion.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "sectors": [
+        "saas"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Tester la répétabilité d'un canal",
+      "Relier croissance commerciale et besoins de financement"
+    ],
+    "prerequisiteLessonIds": [
+      "l-specialty-saas-metrics"
+    ],
+    "assessmentId": "analyst-specialty-saas",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-deeptech-trl-ip",
+    "slug": "deeptech-trl-propriete-intellectuelle",
+    "courseId": "c-analyst-specialties",
+    "order": 5,
+    "title": "TRL, preuve scientifique et propriété intellectuelle",
+    "kicker": "Deeptech",
+    "readMin": 0,
+    "summary": "Qualifier la maturité technologique, la reproductibilité des résultats et la protection de la propriété intellectuelle.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "deeptech"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Situer une technologie sur une trajectoire de maturité",
+      "Identifier les principaux risques de propriété intellectuelle"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-tech-product"
+    ],
+    "assessmentId": "analyst-specialty-deeptech",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-deeptech-industrialization",
+    "slug": "deeptech-industrialisation-capital-reglementation",
+    "courseId": "c-analyst-specialties",
+    "order": 6,
+    "title": "Industrialisation, besoins de capital et réglementation",
+    "kicker": "Deeptech",
+    "readMin": 0,
+    "summary": "Relier les jalons techniques aux moyens industriels, aux certifications et aux financements futurs.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "deeptech"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Construire une feuille de route d'industrialisation",
+      "Tester la cohérence du financement avec les jalons techniques"
+    ],
+    "prerequisiteLessonIds": [
+      "l-specialty-deeptech-trl-ip"
+    ],
+    "assessmentId": "analyst-specialty-deeptech",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-climate-impact",
+    "slug": "climat-potentiel-reduction-additionalite",
+    "courseId": "c-analyst-specialties",
+    "order": 7,
+    "title": "Potentiel de réduction et additionalité climatique",
+    "kicker": "Climat",
+    "readMin": 0,
+    "summary": "Évaluer le scénario de référence, le potentiel de réduction et la contribution réelle du produit à la transition.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "sectors": [
+        "climate"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Définir un scénario de référence",
+      "Distinguer impact potentiel, réalisé et attribuable"
+    ],
+    "prerequisiteLessonIds": [
+      "l-product-analysis"
+    ],
+    "assessmentId": "analyst-specialty-climate",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-climate-economics",
+    "slug": "climat-techno-economie-reglementation",
+    "courseId": "c-analyst-specialties",
+    "order": 8,
+    "title": "Techno-économie, réglementation et intensité capitalistique",
+    "kicker": "Climat",
+    "readMin": 0,
+    "summary": "Analyser les courbes de coût, les dépendances réglementaires, les actifs physiques et la structure de financement.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "climate"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Construire une analyse techno-économique",
+      "Identifier les dépendances au cadre réglementaire"
+    ],
+    "prerequisiteLessonIds": [
+      "l-specialty-climate-impact"
+    ],
+    "assessmentId": "analyst-specialty-climate",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-health-clinical",
+    "slug": "sante-validation-clinique-reglementation",
+    "courseId": "c-analyst-specialties",
+    "order": 9,
+    "title": "Validation clinique et parcours réglementaire",
+    "kicker": "Santé/Biotech",
+    "readMin": 0,
+    "summary": "Relier le niveau de preuve clinique aux étapes réglementaires, aux risques d'étude et au calendrier de développement.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "health-biotech"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Évaluer un plan de développement clinique",
+      "Identifier les risques réglementaires critiques"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-tech-product"
+    ],
+    "assessmentId": "analyst-specialty-health-biotech",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-health-ip-reimbursement",
+    "slug": "sante-propriete-intellectuelle-remboursement",
+    "courseId": "c-analyst-specialties",
+    "order": 10,
+    "title": "Propriété intellectuelle, remboursement et accès au marché",
+    "kicker": "Santé/Biotech",
+    "readMin": 0,
+    "summary": "Analyser la protection, la liberté d'exploitation, la stratégie de remboursement et les conditions d'adoption clinique.",
+    "status": "upcoming",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "health-biotech"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Évaluer la durée et la portée de la protection",
+      "Relier remboursement et potentiel commercial"
+    ],
+    "prerequisiteLessonIds": [
+      "l-specialty-health-clinical"
+    ],
+    "assessmentId": "analyst-specialty-health-biotech",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-consumer-retention",
+    "slug": "consumer-retention-acquisition",
+    "courseId": "c-analyst-specialties",
+    "order": 11,
+    "title": "Rétention, fréquence et acquisition en consumer",
+    "kicker": "Consumer",
+    "readMin": 0,
+    "summary": "Analyser les cohorts d'usage, la fréquence, la contribution marginale et la dépendance aux canaux d'acquisition.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "sectors": [
+        "consumer-marketplaces"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Lire des cohorts d'usage",
+      "Évaluer la soutenabilité de l'acquisition"
+    ],
+    "prerequisiteLessonIds": [
+      "l-traction-unit-economics"
+    ],
+    "assessmentId": "analyst-specialty-consumer-marketplaces",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-marketplace-liquidity",
+    "slug": "marketplace-liquidite-effets-reseau",
+    "courseId": "c-analyst-specialties",
+    "order": 12,
+    "title": "Liquidité, effets de réseau et économie d'une marketplace",
+    "kicker": "Marketplaces",
+    "readMin": 0,
+    "summary": "Mesurer la liquidité des deux côtés du marché, la take rate et la réalité des effets de réseau.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "sectors": [
+        "consumer-marketplaces"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Choisir les indicateurs de liquidité",
+      "Distinguer croissance subventionnée et effet de réseau"
+    ],
+    "prerequisiteLessonIds": [
+      "l-specialty-consumer-retention"
+    ],
+    "assessmentId": "analyst-specialty-consumer-marketplaces",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-impact-intentionality",
+    "slug": "impact-intentionnalite-additionalite",
+    "courseId": "c-analyst-specialties",
+    "order": 13,
+    "title": "Intentionnalité, additionalité et théorie du changement",
+    "kicker": "Impact",
+    "readMin": 0,
+    "summary": "Vérifier que l'objectif d'impact est explicite, matériel pour le modèle et relié à une théorie du changement crédible.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "sectors": [
+        "impact"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Tester l'intentionnalité d'une stratégie",
+      "Distinguer additionalité de l'entreprise et contribution de l'investisseur"
+    ],
+    "prerequisiteLessonIds": [
+      "l-product-analysis"
+    ],
+    "assessmentId": "analyst-specialty-impact",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-specialty-impact-measurement",
+    "slug": "impact-materialite-indicateurs-performance",
+    "courseId": "c-analyst-specialties",
+    "order": 14,
+    "title": "Matérialité, indicateurs et articulation avec la performance financière",
+    "kicker": "Impact",
+    "readMin": 0,
+    "summary": "Sélectionner des indicateurs décisionnels et analyser les tensions ou synergies entre impact et performance financière.",
+    "status": "upcoming",
+    "level": "intermediaire",
+    "contexts": {
+      "sectors": [
+        "impact"
+      ]
+    },
+    "optional": true,
+    "learningOutcomes": [
+      "Choisir des indicateurs matériels et vérifiables",
+      "Intégrer l'impact à la recommandation d'investissement"
+    ],
+    "prerequisiteLessonIds": [
+      "l-specialty-impact-intentionality"
+    ],
+    "assessmentId": "analyst-specialty-impact",
+    "glossaryRefs": []
+  },
+  {
+    "id": "l-portfolio-monitoring",
+    "slug": "suivi-portefeuille-reporting-reinvestissement",
+    "courseId": "c-vc-job",
+    "order": 3,
+    "title": "Suivi de portefeuille, reporting et décisions de réinvestissement",
+    "kicker": "Portefeuille",
+    "readMin": 6,
+    "summary": "Mettre en place un suivi proportionné des participations, fiabiliser le reporting et préparer les décisions de réinvestissement à partir de la thèse initiale, de la trésorerie et des scénarios de rendement marginal.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Construire un dispositif de suivi reliant thèse d'investissement, indicateurs, risques et gouvernance",
+      "Contrôler la cohérence d'un reporting financier et opérationnel avant son utilisation",
+      "Évaluer un réinvestissement par comparaison de scénarios et allocation des réserves"
+    ],
+    "prerequisiteLessonIds": [
+      "l-roles"
+    ],
+    "assessmentId": "analyst-role",
+    "glossaryRefs": [
+      "follow-on",
+      "reserve-funds",
+      "runway",
+      "cap-table",
+      "dilution"
+    ]
+  },
+  {
+    "id": "lmv-cash-flow-scenarios",
+    "slug": "modele-tresorerie-runway-scenarios",
+    "courseId": "c-mathematiques-vc",
+    "order": 3,
+    "title": "Modèle de trésorerie, runway et scénarios de financement",
+    "kicker": "Trésorerie et scénarios",
+    "readMin": 6,
+    "summary": "Construire un plan de trésorerie mensuel, tester les écarts d’encaissement et déterminer le calendrier de financement à partir d’un niveau minimal de liquidité.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Construire un modèle mensuel reliant solde d’ouverture, encaissements, décaissements et solde de clôture",
+      "Calculer le runway à partir de flux variables et d’un niveau minimal de trésorerie",
+      "Comparer des scénarios de financement en intégrant délais d’encaissement, jalons et marge de sécurité"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-unit-economics"
+    ],
+    "assessmentId": "analyst-modeling",
+    "glossaryRefs": [
       "runway",
       "burn-rate"
+    ]
+  },
+  {
+    "id": "lmv-valuation-economic-rights",
+    "slug": "valorisation-transaction-droits-economiques",
+    "courseId": "c-mathematiques-vc",
+    "order": 6,
+    "title": "Valorisation de transaction et principaux termes économiques",
+    "kicker": "Valeur et droits économiques",
+    "readMin": 7,
+    "summary": "Distinguer prix du tour, juste valeur et valeur économique d’une catégorie de titres en modélisant les préférences et scénarios de sortie.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Distinguer valorisation de transaction, juste valeur et valeur économique d’un instrument",
+      "Modéliser l’effet d’une préférence de liquidation, d’une participation et d’une conversion",
+      "Évaluer la pertinence d’un tour récent comme point de calibration à une date ultérieure"
+    ],
+    "prerequisiteLessonIds": [
+      "lmv-dilution-cap-table"
+    ],
+    "assessmentId": "analyst-modeling",
+    "glossaryRefs": [
+      "valuation",
+      "liquidation-preference",
+      "exit-waterfall",
+      "dilution"
+    ]
+  },
+  {
+    "id": "l-dd-financial",
+    "slug": "due-diligence-financiere-reconciliation-donnees",
+    "courseId": "c-due-diligence",
+    "order": 5,
+    "title": "Due diligence financière et réconciliation des données",
+    "kicker": "Finance",
+    "readMin": 7,
+    "summary": "Rapprocher comptabilité, banque, contrats et données opérationnelles afin d'établir une base financière cohérente et des scénarios explicites.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Réconcilier les principales données financières avec leurs pièces sources",
+      "Construire des scénarios de trésorerie fondés sur des moteurs opérationnels",
+      "Qualifier les écarts, limites d'assurance et besoins d'expertise"
+    ],
+    "prerequisiteLessonIds": [
+      "l-dd-team"
+    ],
+    "assessmentId": "analyst-due-diligence",
+    "glossaryRefs": [
+      "runway",
+      "burn-rate",
+      "gross-margin",
+      "arr"
+    ]
+  },
+  {
+    "id": "l-conflicts-conduct",
+    "slug": "conflits-interets-independance-deontologie",
+    "courseId": "c-professional-integrity",
+    "order": 1,
+    "title": "Indépendance, conflits d'intérêts et règles de conduite",
+    "kicker": "Déontologie",
+    "readMin": 7,
+    "summary": "Identifier, prévenir, déclarer et traiter les intérêts susceptibles d'altérer l'indépendance d'une analyse ou d'une décision.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Identifier les conflits personnels et institutionnels avant une décision",
+      "Appliquer une hiérarchie de prévention, gestion et déclaration",
+      "Documenter les mesures et escalades selon les procédures compétentes"
+    ],
+    "prerequisiteLessonIds": [
+      "l-ic-defense"
+    ],
+    "assessmentId": "analyst-integrity",
+    "glossaryRefs": [
+      "ic",
+      "deal-flow",
+      "portfolio-company"
     ]
   },
   {

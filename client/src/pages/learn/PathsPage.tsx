@@ -1,14 +1,14 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowRight, BookOpen, Briefcase, ChevronDown, Clock, GraduationCap, Library, Route, Search } from 'lucide-react';
+import { ArrowRight, Award, BookOpen, Briefcase, ChevronDown, Clock, GraduationCap, Library, Route, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { courseById, coursesForPath } from '@/content/courses';
+import { courseById, coursesForPath, COURSES } from '@/content/courses';
 import { lessonsForPath } from '@/content/lessons';
-import { PATHS } from '@/content/paths';
+import { PATHS, pathsForCourse } from '@/content/paths';
+import { certificationsForCourse } from '@/content/certifications';
 import { CASE_STUDIES } from '@/content/caseStudies';
 import {
   FAMILY_META,
-  parcoursById,
   parcoursForCourse,
   parcoursForLesson,
   parcoursForCase,
@@ -16,6 +16,7 @@ import {
   type ParcoursFamily,
 } from '@/content/parcours';
 import { cn } from '@/lib/utils';
+import type { Certification } from '@/content/certificationTypes';
 import type { CaseStudy, Course, LessonIndexEntry, Level } from '@/content/types';
 import { SectionHeading, Reveal, LevelBadge, EmptyState } from '@/components/ui/primitives';
 import { KanjiSeal } from '@/components/ornaments/Ornaments';
@@ -35,6 +36,7 @@ interface LibraryItem {
   durationMin: number;
   tags: string[];
   parcours: Parcours[];
+  certifications: Certification[];
   courseTitle?: string;
 }
 
@@ -79,7 +81,6 @@ function durationMatches(minutes: number, filter: DurationFilter) {
 
 function courseParcours(course: Course) {
   return uniqueParcours([
-    ...(parcoursById(course.pathId) ? [parcoursById(course.pathId)!] : []),
     ...parcoursForCourse(course.id, course.lessonIds),
   ]);
 }
@@ -95,6 +96,7 @@ function courseToItem(course: Course): LibraryItem {
     durationMin: course.durationMin,
     tags: course.tags,
     parcours: courseParcours(course),
+    certifications: certificationsForCourse(course.id).filter((certification) => certification.status === 'published'),
   };
 }
 
@@ -110,6 +112,7 @@ function lessonToItem(lesson: LessonIndexEntry): LibraryItem {
     durationMin: lesson.readMin,
     tags: Array.from(new Set([...(course?.tags ?? []), ...lesson.glossaryRefs])),
     parcours: parcoursForLesson(lesson.id),
+    certifications: [],
     courseTitle: course?.title,
   };
 }
@@ -125,6 +128,7 @@ function caseToItem(cs: CaseStudy): LibraryItem {
     durationMin: cs.readMin,
     tags: cs.tags,
     parcours: parcoursForCase(cs.id),
+    certifications: [],
   };
 }
 
@@ -138,6 +142,21 @@ function ParcoursBadges({ parcours }: { parcours: Parcours[] }) {
         </span>
       ))}
       {parcours.length > 3 && <span className="chip">+{parcours.length - 3}</span>}
+    </div>
+  );
+}
+
+function CertificationBadges({ certifications }: { certifications: Certification[] }) {
+  if (!certifications.length) return null;
+  return (
+    <div className="mt-2 flex flex-wrap gap-2">
+      {certifications.slice(0, 2).map((certification) => (
+        <span key={certification.id} className="chip inline-flex items-center gap-1.5">
+          <Award size={11} aria-hidden />
+          {certification.shortTitle}
+        </span>
+      ))}
+      {certifications.length > 2 && <span className="chip">+{certifications.length - 2}</span>}
     </div>
   );
 }
@@ -161,6 +180,7 @@ function CaseLibraryCard({ item }: { item: LibraryItem }) {
         <span className="inline-flex items-center gap-1.5 font-medium text-[color:var(--primary)]">Ouvrir <ArrowRight size={13} /></span>
       </div>
       <ParcoursBadges parcours={item.parcours} />
+      <CertificationBadges certifications={item.certifications} />
     </Link>
   );
 }
@@ -184,6 +204,7 @@ function CourseLibraryCard({ item }: { item: LibraryItem }) {
         <span className="inline-flex items-center gap-1.5 font-medium text-[color:var(--primary)]">Ouvrir <ArrowRight size={13} /></span>
       </div>
       <ParcoursBadges parcours={item.parcours} />
+      <CertificationBadges certifications={item.certifications} />
     </Link>
   );
 }
@@ -219,9 +240,8 @@ export default function PathsPage() {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // The 9 rayons (data/paths.json, sorted by `order`) are the backbone: each
-  // carries its own courses and lessons. Parcours-module courses (pathId `p-*`)
-  // belong to the « par objectif » entry (/parcours) and are intentionally absent.
+  // The 9 rayons (data/paths.json, sorted by `order`) own their ordered course
+  // membership. Courses can be reused by several rayons or certifications.
   const rayons = useMemo(
     () =>
       [...PATHS]
@@ -229,18 +249,25 @@ export default function PathsPage() {
         .map((path) => ({
           path,
           courses: coursesForPath(path.id).map(courseToItem),
-          lessons: lessonsForPath(path.id).map(lessonToItem),
+          lessons: lessonsForPath(path.id).filter((lesson) => lesson.status !== 'upcoming').map(lessonToItem),
         })),
     [],
   );
   // Études de cas are transversal — they illustrate several rayons at once, so
   // they live in a residual shelf rather than under a single theme.
   const caseItems = useMemo(() => CASE_STUDIES.map(caseToItem), []);
+  const certificationOnlyCourses = useMemo(
+    () =>
+      COURSES
+        .filter((course) => pathsForCourse(course.id).length === 0 && certificationsForCourse(course.id).some((certification) => certification.status === 'published'))
+        .map(courseToItem),
+    [],
+  );
 
   const tags = useMemo(() => {
-    const all = [...rayons.flatMap((r) => [...r.courses, ...r.lessons]), ...caseItems].flatMap((item) => item.tags);
+    const all = [...rayons.flatMap((r) => [...r.courses, ...r.lessons]), ...certificationOnlyCourses, ...caseItems].flatMap((item) => item.tags);
     return Array.from(new Set(all)).sort((a, b) => a.localeCompare(b, 'fr'));
-  }, [rayons, caseItems]);
+  }, [rayons, certificationOnlyCourses, caseItems]);
 
   const rawType = searchParams.get('type');
   const rawLevel = searchParams.get('level');
@@ -275,7 +302,14 @@ export default function PathsPage() {
 
   const matches = (item: LibraryItem) => {
     const q = normalize(query.trim());
-    const haystack = normalize([item.title, item.subtitle, item.courseTitle, item.tags.join(' '), item.parcours.map((p) => p.title).join(' ')].filter(Boolean).join(' '));
+    const haystack = normalize([
+      item.title,
+      item.subtitle,
+      item.courseTitle,
+      item.tags.join(' '),
+      item.parcours.map((p) => p.title).join(' '),
+      item.certifications.map((certification) => certification.title).join(' '),
+    ].filter(Boolean).join(' '));
     return (
       (!q || haystack.includes(q)) &&
       (type === 'all' || item.type === type) &&
@@ -291,9 +325,10 @@ export default function PathsPage() {
   const groups = rayons
     .map((r) => ({ path: r.path, courses: r.courses.filter(matches), lessons: r.lessons.filter(matches) }))
     .filter((g) => g.courses.length || g.lessons.length);
+  const certificationCourses = certificationOnlyCourses.filter(matches);
   const cases = caseItems.filter(matches);
 
-  const courseCount = groups.reduce((n, g) => n + g.courses.length, 0);
+  const courseCount = groups.reduce((n, g) => n + g.courses.length, 0) + certificationCourses.length;
   const lessonCount = groups.reduce((n, g) => n + g.lessons.length, 0);
   const total = courseCount + lessonCount + cases.length;
 
@@ -470,6 +505,37 @@ export default function PathsPage() {
               </section>
             );
           })}
+
+          {certificationCourses.length > 0 && (
+            <section className="mt-12 border-b border-outline-variant/30 pb-10">
+              <Reveal>
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div className="flex items-start gap-4">
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-outline-variant bg-surface-container-low text-[color:var(--primary)]">
+                      <Award size={20} aria-hidden />
+                    </span>
+                    <div>
+                      <p className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-surface-variant">Catalogue certifiant</p>
+                      <h2 className="font-headline text-headline-lg font-semibold leading-tight">Cours propres aux certifications</h2>
+                      <p className="mt-1 max-w-2xl text-sm text-surface-variant">
+                        Ces cours complètent les rayons thématiques et sont mobilisés par un ou plusieurs parcours certifiants.
+                      </p>
+                    </div>
+                  </div>
+                  <Link to="/certifications" className="btn-quiet">
+                    Voir les certifications <ArrowRight size={15} />
+                  </Link>
+                </div>
+              </Reveal>
+              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {certificationCourses.map((item, i) => (
+                  <Reveal key={item.id} delay={(i % 3) * 60}>
+                    <CourseLibraryCard item={item} />
+                  </Reveal>
+                ))}
+              </div>
+            </section>
+          )}
 
           {cases.length > 0 && (
             <section className="mt-12">

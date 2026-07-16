@@ -11,6 +11,8 @@ const ProfileResultPage = lazy(() => import('@/pages/onboarding/ProfileResultPag
 const DashboardPage = lazy(() => import('@/pages/workspace/DashboardPage'));
 const ParcoursPage = lazy(() => import('@/pages/learn/ParcoursPage'));
 const ParcoursDetailPage = lazy(() => import('@/pages/learn/ParcoursDetailPage'));
+const CertificationsPage = lazy(() => import('@/pages/certifications/CertificationsPage'));
+const CertificationDetailPage = lazy(() => import('@/pages/certifications/CertificationDetailPage'));
 const PathsPage = lazy(() => import('@/pages/learn/PathsPage'));
 const PathDetailPage = lazy(() => import('@/pages/learn/PathDetailPage'));
 const CourseDetailPage = lazy(() => import('@/pages/learn/CourseDetailPage'));
@@ -82,6 +84,8 @@ export default function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="parcours" element={<ParcoursPage />} />
           <Route path="parcours/:slug" element={<ParcoursDetailPage />} />
+          <Route path="certifications" element={<CertificationsPage />} />
+          <Route path="certifications/:slug" element={<CertificationDetailPage />} />
           <Route path="bibliotheque" element={<PathsPage />} />
           <Route path="bibliotheque/:slug" element={<PathDetailPage />} />
           <Route path="courses/:slug" element={<CourseDetailPage />} />

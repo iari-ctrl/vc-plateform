@@ -183,9 +183,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/certifications</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/certifications/analyste-en-capital-risque</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/convictions</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/courses/analyse-selon-stade-investissement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
   </url>
   <url>
     <loc>https://vcpx.io/courses/anatomie-d-une-term-sheet</loc>
@@ -228,6 +243,11 @@
     <priority>0.65</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/courses/integrite-confidentialite-ia</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/courses/la-chaine-de-valeur</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
@@ -263,7 +283,22 @@
     <priority>0.65</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/courses/recommandation-investissement-comite</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/courses/reussir-l-entretien-analyst-modules</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/courses/role-fonds-dans-tour-investissement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/courses/specialisations-sectorielles-analyst</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
@@ -609,6 +644,11 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/glossary/beyond-grants</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/glossary/biais-d-autorite</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
@@ -734,6 +774,11 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/glossary/capital-catalytique</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/glossary/capital-efficiency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
@@ -795,6 +840,11 @@
   </url>
   <url>
     <loc>https://vcpx.io/glossary/continuation-fund</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/glossary/continuum-du-capital</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
@@ -1099,6 +1149,11 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/glossary/financement-mixte</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/glossary/financial-acquisition</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
@@ -1355,6 +1410,11 @@
   </url>
   <url>
     <loc>https://vcpx.io/glossary/international-expansion</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/glossary/investissement-pour-impact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
@@ -2129,6 +2189,11 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/glossary/subvention-catalytique</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/glossary/supervisory-board</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
@@ -2269,6 +2334,11 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/glossary/venture-philanthropie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/glossary/vesting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
@@ -2359,6 +2429,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/lessons/analyse-equipe-fondatrice</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/lessons/analyse-produit-technologie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/lessons/anatomie-d-une-these</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -2384,7 +2464,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/lessons/confidentialite-information-investissement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/lessons/conflits-interets-independance-deontologie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/lessons/defendre-une-these</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/lessons/defense-comite-investissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2399,12 +2494,27 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/lessons/distinguer-faits-hypotheses</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/lessons/due-diligence-financiere-reconciliation-donnees</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/lessons/entrer-dans-un-fonds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vcpx.io/lessons/equipe-et-marche</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/lessons/erreurs-critiques-analyse-investissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2420,6 +2530,11 @@
   </url>
   <url>
     <loc>https://vcpx.io/lessons/fees-carry-et-waterfall</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/lessons/gestion-pipeline-crm-investissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2584,6 +2699,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/lessons/modele-tresorerie-runway-scenarios</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/lessons/pitch-me-a-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -2624,6 +2744,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vcpx.io/lessons/redaction-recommandation-investissement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vcpx.io/lessons/reserves-et-follow-on</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -2645,6 +2770,11 @@
   </url>
   <url>
     <loc>https://vcpx.io/lessons/standard-francais-galion-france-invest</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/lessons/suivi-portefeuille-reporting-reinvestissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2675,6 +2805,16 @@
   </url>
   <url>
     <loc>https://vcpx.io/lessons/unit-economics-cac-ltv-payback-rule-of-40</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/lessons/usage-declare-intelligence-artificielle</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vcpx.io/lessons/valorisation-transaction-droits-economiques</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

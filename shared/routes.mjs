@@ -40,6 +40,7 @@ export const STATIC_ROUTES = [
   { path: '/intelligence', changefreq: 'weekly', priority: '0.9' },
   { path: '/onboarding', changefreq: 'monthly', priority: '0.5' },
   { path: '/parcours', changefreq: 'weekly', priority: '0.8' },
+  { path: '/certifications', changefreq: 'monthly', priority: '0.75' },
   { path: '/bibliotheque', changefreq: 'weekly', priority: '0.8' },
   { path: '/glossary', changefreq: 'weekly', priority: '0.8' },
   { path: '/convictions', changefreq: 'weekly', priority: '0.8' },
@@ -65,6 +66,7 @@ export const OG_IMAGE_BY_SEGMENT = {
   cases: 'case-study',
   courses: 'course',
   parcours: 'path',
+  certifications: 'path',
   livrables: 'path', // a deliverable is the hands-on end of a parcours — reuse its card
   intelligence: 'blog',
   convictions: 'blog',

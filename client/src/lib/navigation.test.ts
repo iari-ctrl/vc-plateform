@@ -29,16 +29,22 @@ describe('navigation taxonomy', () => {
     const formation = NAVIGATION_PILLARS.find((pillar) => pillar.id === 'formation')!;
     expect(formation.routes).toEqual(expect.arrayContaining([
       '/parcours',
+      '/certifications',
       '/courses',
       '/lessons',
       '/bibliotheque',
       '/glossary',
+    ]));
+    expect(formation.children).toEqual(expect.arrayContaining([
+      expect.objectContaining({ to: '/certifications', label: 'Certifications' }),
     ]));
     expect(formation.routes).not.toContain('/paths');
 
     for (const pathname of [
       '/parcours',
       '/parcours/devenir-analyst',
+      '/certifications',
+      '/certifications/analyste-en-capital-risque',
       '/courses/fondamentaux',
       '/lessons/power-law',
       '/bibliotheque',

@@ -2,17 +2,15 @@
   {
     "id": "c-what-is-vc",
     "slug": "qu-est-ce-que-le-capital-risque",
-    "pathId": "discover",
-    "order": 1,
-    "title": "Qu'est-ce que le capital-risque ?",
-    "subtitle": "Classe d'actifs, métier, et état d'esprit",
+    "title": "Fondamentaux du capital-risque",
+    "subtitle": "Périmètre, rendements et cycle de vie d'un fonds",
     "level": "debutant",
-    "durationMin": 65,
-    "summary": "Derrière l'acronyme VC se cache une classe d'actifs singulière : longue, illiquide, gouvernée par la loi de puissance. On part de l'histoire pour arriver à l'Europe de 2026.",
+    "durationMin": 42,
+    "summary": "Définir le capital-risque, comprendre l'asymétrie des rendements et situer chaque décision dans le cycle de vie d'un fonds.",
     "tags": [
       "fondations",
-      "histoire",
-      "power-law"
+      "rendements",
+      "cycle-de-vie"
     ],
     "lessonIds": [
       "l-vc-definition",
@@ -23,13 +21,11 @@
   {
     "id": "c-ecosystem",
     "slug": "la-chaine-de-valeur",
-    "pathId": "discover",
-    "order": 2,
-    "title": "La chaîne de valeur du capital-risque",
-    "subtitle": "Qui finance qui, et pourquoi",
+    "title": "Écosystème et chaîne de financement",
+    "subtitle": "Acteurs, mandats et stades d'investissement",
     "level": "debutant",
-    "durationMin": 55,
-    "summary": "LPs, fonds de fonds, GPs, business angels, family offices. On suit le voyage de l'argent depuis l'épargne institutionnelle jusqu'au compte en banque d'une startup.",
+    "durationMin": 28,
+    "summary": "Identifier les acteurs qui allouent, gèrent et reçoivent le capital, puis distinguer les stades de financement et leurs objectifs.",
     "tags": [
       "acteurs",
       "lp-gp",
@@ -43,33 +39,30 @@
   {
     "id": "c-vc-job",
     "slug": "le-metier-au-quotidien",
-    "pathId": "vc-craft",
-    "order": 1,
-    "title": "Le métier de VC au quotidien",
-    "subtitle": "Une semaine dans la vie d'un investisseur",
+    "title": "Fonctions et responsabilités de l'Analyst",
+    "subtitle": "Travail analytique, gouvernance de la décision et suivi de portefeuille",
     "level": "debutant",
-    "durationMin": 60,
-    "summary": "Le venture capital n'est pas qu'une affaire de chèques. C'est un métier de sourcing, de jugement sous incertitude, de relation et de patience structurelle.",
+    "durationMin": 42,
+    "summary": "Décrire les responsabilités de l'Analyst depuis la qualification d'une opportunité jusqu'au suivi des participations et aux décisions de réinvestissement.",
     "tags": [
-      "métier",
-      "roles",
-      "incitations"
+      "analyst",
+      "gouvernance",
+      "portefeuille"
     ],
     "lessonIds": [
       "l-vc-week",
-      "l-roles"
+      "l-roles",
+      "l-portfolio-monitoring"
     ]
   },
   {
     "id": "c-deal-flow",
     "slug": "deal-flow-et-screening",
-    "pathId": "vc-craft",
-    "order": 2,
-    "title": "Deal flow & screening",
-    "subtitle": "Trouver, filtrer, prioriser",
+    "title": "Sourcing, screening et gestion du pipeline",
+    "subtitle": "Origination, qualification et traçabilité des opportunités",
     "level": "intermediaire",
-    "durationMin": 50,
-    "summary": "Un fonds voit des milliers de dossiers et n'en finance que quelques-uns. Comment naît un pipeline, comment on filtre sans tuer la sérendipité, et où se cache l'avantage.",
+    "durationMin": 42,
+    "summary": "Organiser l'origination, qualifier chaque opportunité au regard de la stratégie du fonds et maintenir un pipeline exploitable et traçable.",
     "tags": [
       "sourcing",
       "pipeline",
@@ -77,39 +70,38 @@
     ],
     "lessonIds": [
       "l-sourcing",
-      "l-screening"
+      "l-screening",
+      "l-pipeline-crm"
     ]
   },
   {
     "id": "c-startup-analysis",
     "slug": "lire-une-startup",
-    "pathId": "startup-analysis",
-    "order": 1,
-    "title": "Lire une startup",
-    "subtitle": "Équipe, marché, produit, traction",
+    "title": "Analyse d'une opportunité d'investissement",
+    "subtitle": "Équipe, marché, produit, technologie et traction",
     "level": "intermediaire",
-    "durationMin": 70,
-    "summary": "Évaluer une entreprise qui n'a presque pas de données. Les quatre piliers d'analyse et l'art de formuler les trois risques qui décideront du résultat.",
+    "durationMin": 56,
+    "summary": "Analyser de manière structurée l'équipe fondatrice, le marché, le produit, la technologie, la traction et l'économie unitaire d'une entreprise non cotée.",
     "tags": [
       "analyse",
       "marché",
       "équipe"
     ],
     "lessonIds": [
+      "l-founder-analysis",
       "l-team-market",
+      "l-product-analysis",
       "l-traction-unit-economics"
     ]
   },
   {
     "id": "c-due-diligence",
     "slug": "due-diligence",
-    "pathId": "startup-analysis",
-    "order": 2,
-    "title": "Due diligence en pratique",
-    "subtitle": "Vérifier sans paralyser",
+    "title": "Due diligence et gestion des risques",
+    "subtitle": "Plan de vérification, qualité des preuves et recours aux spécialistes",
     "level": "intermediaire",
-    "durationMin": 55,
-    "summary": "La DD n'est pas un audit comptable : c'est une enquête priorisée sur ce qui peut tuer l'investissement. Commercial, technique, juridique, et le piège de la sur-analyse.",
+    "durationMin": 86,
+    "summary": "Construire et exécuter un plan de due diligence proportionné aux risques commerciaux, techniques, humains, financiers, juridiques et de conformité.",
     "tags": [
       "due-diligence",
       "risque",
@@ -120,14 +112,13 @@
       "l-dd-commercial",
       "l-dd-tech-product",
       "l-dd-team",
+      "l-dd-financial",
       "l-dd-legal"
     ]
   },
   {
     "id": "c-thesis",
     "slug": "construire-une-these",
-    "pathId": "investment-thesis",
-    "order": 1,
     "title": "Construire une thèse d'investissement",
     "subtitle": "Une hypothèse falsifiable sur l'avenir",
     "level": "intermediaire",
@@ -146,8 +137,6 @@
   {
     "id": "c-term-sheets",
     "slug": "anatomie-d-une-term-sheet",
-    "pathId": "term-sheets",
-    "order": 1,
     "title": "Anatomie d'une term sheet",
     "subtitle": "Économie et contrôle, ligne par ligne",
     "level": "avance",
@@ -167,8 +156,6 @@
   {
     "id": "c-portfolio",
     "slug": "gerer-un-portefeuille",
-    "pathId": "portfolio",
-    "order": 1,
     "title": "Gérer un portefeuille",
     "subtitle": "Réserves, follow-on et triage",
     "level": "avance",
@@ -187,8 +174,6 @@
   {
     "id": "c-power-law-portfolio",
     "slug": "construction-portefeuille-loi-puissance",
-    "pathId": "portfolio",
-    "order": 2,
     "title": "Construction de portefeuille en loi de puissance",
     "subtitle": "Distribution, Monte Carlo et fund returner math",
     "level": "avance",
@@ -210,8 +195,6 @@
   {
     "id": "c-fund-economics",
     "slug": "economie-d-un-fonds",
-    "pathId": "fund-economics",
-    "order": 1,
     "title": "L'économie d'un fonds",
     "subtitle": "Fees, carry, waterfall et métriques",
     "level": "avance",
@@ -233,8 +216,6 @@
   {
     "id": "c-founder-raise",
     "slug": "lever-des-fonds",
-    "pathId": "founder-fundraising",
-    "order": 1,
     "title": "Lever des fonds, côté fondateur",
     "subtitle": "Narratif, instruments et dilution",
     "level": "tous",
@@ -258,8 +239,6 @@
   {
     "id": "c-career",
     "slug": "entrer-dans-le-venture",
-    "pathId": "career",
-    "order": 1,
     "title": "Entrer dans le venture",
     "subtitle": "Analyst, associate, principal",
     "level": "tous",
@@ -278,32 +257,30 @@
   {
     "id": "c-mathematiques-vc",
     "slug": "mathematiques-du-vc",
-    "pathId": "career",
-    "order": 2,
-    "title": "Mathématiques du VC",
-    "subtitle": "Les calculs qui tombent en entretien",
+    "title": "Dimensionnement de marché, modélisation financière et structure de l'investissement",
+    "subtitle": "Marché, économie unitaire, trésorerie, valorisation et rendement",
     "level": "intermediaire",
-    "durationMin": 95,
-    "summary": "Pre/post-money, dilution, market sizing, unit economics, returns et waterfall : les calculs simples mais décisifs qu'un candidat, analyste ou investisseur doit savoir poser sans se cacher derrière Excel.",
+    "durationMin": 99,
+    "summary": "Construire des analyses chiffrées explicites et vérifiables sur le marché, la trésorerie, la valorisation, la dilution et les scénarios de rendement.",
     "tags": [
-      "mathématiques",
-      "entretien",
+      "modélisation",
+      "trésorerie",
       "dilution",
-      "returns"
+      "rendement"
     ],
     "lessonIds": [
-      "lmv-pre-post-ownership",
-      "lmv-dilution-cap-table",
       "lmv-market-sizing",
       "lmv-unit-economics",
+      "lmv-cash-flow-scenarios",
+      "lmv-pre-post-ownership",
+      "lmv-dilution-cap-table",
+      "lmv-valuation-economic-rights",
       "lmv-returns-waterfall"
     ]
   },
   {
     "id": "c-decouvrir-vc",
     "slug": "le-vc-sans-bullshit-modules",
-    "pathId": "p-decouvrir-vc",
-    "order": 1,
     "title": "Le VC sans bullshit",
     "subtitle": "La découverte, en 7 épisodes bingeables",
     "level": "debutant",
@@ -327,8 +304,6 @@
   {
     "id": "c-entretien-analyst",
     "slug": "reussir-l-entretien-analyst-modules",
-    "pathId": "p-entretien-analyst",
-    "order": 1,
     "title": "Réussir l'entretien Analyst",
     "subtitle": "Les 13 modules, du screening au mock final",
     "level": "intermediaire",
@@ -354,6 +329,101 @@
       "lea-fund-research",
       "lea-jour-j",
       "lea-mock"
+    ]
+  },
+  {
+    "id": "c-investment-recommendation",
+    "slug": "recommandation-investissement-comite",
+    "title": "Recommandation d'investissement et préparation du comité",
+    "subtitle": "Qualifier les preuves, formuler une décision et la défendre",
+    "level": "intermediaire",
+    "durationMin": 44,
+    "summary": "Qualifier les sources, rédiger une recommandation d'investissement traçable et présenter le raisonnement devant un comité d'investissement.",
+    "tags": ["recommandation", "memo", "comité-investissement"],
+    "lessonIds": [
+      "l-fact-hypothesis",
+      "l-investment-recommendation",
+      "l-ic-defense"
+    ]
+  },
+  {
+    "id": "c-professional-integrity",
+    "slug": "integrite-confidentialite-ia",
+    "title": "Intégrité professionnelle, confidentialité et usage déclaré de l'intelligence artificielle",
+    "subtitle": "Indépendance, protection de l'information et contrôle des productions",
+    "level": "intermediaire",
+    "durationMin": 57,
+    "summary": "Identifier les conflits d'intérêts, protéger les informations sensibles, encadrer l'usage de l'intelligence artificielle et prévenir les erreurs critiques.",
+    "tags": ["intégrité", "confidentialité", "intelligence-artificielle"],
+    "lessonIds": [
+      "l-conflicts-conduct",
+      "l-confidentiality",
+      "l-ai-integrity",
+      "l-critical-errors"
+    ]
+  },
+  {
+    "id": "c-analyst-stage",
+    "slug": "analyse-selon-stade-investissement",
+    "title": "Analyse selon le stade d'investissement",
+    "subtitle": "Adapter les preuves attendues du pre-seed au growth",
+    "level": "intermediaire",
+    "durationMin": 0,
+    "summary": "Approfondissements facultatifs adaptés au stade principal d'intervention du fonds.",
+    "tags": ["pre-seed", "seed", "series-a", "growth"],
+    "lessonIds": [
+      "l-stage-preseed-team",
+      "l-stage-preseed-evidence",
+      "l-stage-seed-commercial",
+      "l-stage-seed-financing",
+      "l-stage-series-a-cohorts",
+      "l-stage-series-a-repeatability",
+      "l-stage-growth-revenue",
+      "l-stage-growth-capital"
+    ]
+  },
+  {
+    "id": "c-analyst-deal-role",
+    "slug": "role-fonds-dans-tour-investissement",
+    "title": "Rôle du fonds dans un tour d'investissement",
+    "subtitle": "Lead, co-lead ou follower",
+    "level": "intermediaire",
+    "durationMin": 0,
+    "summary": "Approfondissements facultatifs selon la responsabilité assumée par le fonds dans le processus d'investissement.",
+    "tags": ["lead", "co-lead", "follower", "syndication"],
+    "lessonIds": [
+      "l-role-lead-dd",
+      "l-role-lead-closing",
+      "l-role-colead-workshare",
+      "l-role-colead-governance",
+      "l-role-follower-validation",
+      "l-role-follower-rights"
+    ]
+  },
+  {
+    "id": "c-analyst-specialties",
+    "slug": "specialisations-sectorielles-analyst",
+    "title": "Spécialisations sectorielles de l'Analyst",
+    "subtitle": "Référentiels et diligences propres à chaque spécialité",
+    "level": "intermediaire",
+    "durationMin": 0,
+    "summary": "Approfondissements facultatifs pour une pratique généraliste ou spécialisée du capital-risque.",
+    "tags": ["spécialisation", "saas", "deeptech", "climat", "santé", "impact"],
+    "lessonIds": [
+      "l-specialty-generalist-comparison",
+      "l-specialty-generalist-experts",
+      "l-specialty-saas-metrics",
+      "l-specialty-saas-gtm",
+      "l-specialty-deeptech-trl-ip",
+      "l-specialty-deeptech-industrialization",
+      "l-specialty-climate-impact",
+      "l-specialty-climate-economics",
+      "l-specialty-health-clinical",
+      "l-specialty-health-ip-reimbursement",
+      "l-specialty-consumer-retention",
+      "l-specialty-marketplace-liquidity",
+      "l-specialty-impact-intentionality",
+      "l-specialty-impact-measurement"
     ]
   }
 ]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "venture-capital",
+    "slug": "capital-risque",
+    "title": "Capital-risque",
+    "description": "Formations consacrées à l'analyse, à la sélection, à la structuration et au suivi des investissements en capital-risque."
+  },
+  {
+    "id": "venture-philanthropy",
+    "slug": "venture-philanthropie",
+    "title": "Venture philanthropie",
+    "description": "Domaine autonome consacré au financement, à l'accompagnement et à la mesure de l'impact des organisations d'intérêt général."
+  }
+]

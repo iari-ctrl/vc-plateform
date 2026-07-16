@@ -1,6 +1,6 @@
 // Local search across the static content bundle. It references every collection,
 // so it is intentionally kept in its own module and loaded lazily — eager callers
-// (the command palette) `import()` it on first query, keeping the 8 JSON
+// (the command palette) `import()` it on first query, keeping the content
 // collections out of the initial bundle.
 import { LESSONS } from './lessons';
 import { COURSES } from './courses';
@@ -13,6 +13,7 @@ import { SIMULATORS } from './simulators';
 import { ANTI_PORTFOLIO } from './antiPortfolio';
 import { MEMOS } from './memos';
 import { ECOSYSTEMS } from './ecosystems';
+import { CERTIFICATIONS } from './certifications';
 import type { SearchHitType } from './labels';
 
 export interface SearchHit {
@@ -24,52 +25,239 @@ export interface SearchHit {
   href: string;
 }
 
-const norm = (s: string) =>
-  s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+interface SearchCandidate {
+  hit: SearchHit;
+  aliases?: readonly string[];
+  metadata?: readonly (string | undefined)[];
+  boost?: number;
+}
+
+const PAGE_CANDIDATES: readonly SearchCandidate[] = [
+  page('home', 'Accueil', '/home', 'Vue d’ensemble de la plateforme.', ['Home']),
+  page('intelligence', 'Intelligence VC', '/intelligence', 'Analyses, convictions et outils de décision.', ['Intelligence']),
+  page('ecosystemes', 'Écosystèmes', '/ecosystemes', 'Dossiers consacrés aux marchés, secteurs et géographies.'),
+  page('convictions', 'Convictions', '/convictions', 'Convictions datées et signaux à surveiller.'),
+  page('decisions', 'Décisions', '/decisions', 'Cas, mémos et analyses de décisions d’investissement.'),
+  page('simulators', 'Simulateurs', '/simulators', 'Outils de calcul appliqués au capital-risque.', ['Simulations']),
+  page('methode', 'Méthode', '/methode', 'Méthode d’analyse et principes éditoriaux.'),
+  page('blog', 'Analyses', '/blog', 'Articles et notes de recherche.', ['Blog', 'Articles']),
+  page('livrables', 'Livrables', '/livrables', 'Gabarits et exercices pratiques.'),
+  page('anti-portfolio', 'Anti-portfolio', '/anti-portfolio', 'Décisions de refus étudiées rétrospectivement.'),
+  page('memos', 'Mémos annotés', '/memos', 'Mémos d’investissement publics et commentés.', ['Memos', 'Investment memos']),
+  page('formation', 'Formation', '/parcours', 'Parcours guidés pour apprendre le capital-risque.', [
+    'Formations',
+    'Parcours',
+    'Apprentissage',
+  ]),
+  page('certifications', 'Certifications', '/certifications', 'Certifications internes évaluées de la plateforme.', [
+    'Certification professionnelle',
+    'Certificat',
+  ]),
+  page('bibliotheque', 'Bibliothèque', '/bibliotheque', 'Cours, leçons et ressources classés par thème.', [
+    'Bibliotheque',
+    'Cours',
+    'Leçons',
+  ]),
+  page('dictionnaire', 'Dictionnaire', '/glossary', 'Définitions des concepts du capital-risque.', [
+    'Glossaire',
+    'Lexique',
+  ]),
+  page('workspace', 'Tableau de bord', '/dashboard', 'Progression et activité personnelle.', ['Workspace', 'Dashboard']),
+  page('notes', 'Notes & favoris', '/notes', 'Notes personnelles et contenus enregistrés.', ['Favoris']),
+  page('journal', 'Journal de décisions', '/journal', 'Prédictions et décisions à réévaluer.', ['Journal']),
+];
+
+function page(id: string, title: string, href: string, excerpt: string, aliases: readonly string[] = []): SearchCandidate {
+  return {
+    hit: { type: 'page', id: `page-${id}`, slug: id, title, excerpt, href },
+    aliases,
+    boost: 20,
+  };
+}
+
+const normalize = (value: string) =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/œ/g, 'oe')
+    .replace(/æ/g, 'ae')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .replace(/\s+/g, ' ');
+
+/**
+ * Match only at the beginning of a word. This keeps incremental queries useful
+ * (`form` → `formation`) without treating `formation` as a match for
+ * `information` or `transformation`.
+ */
+function fieldScore(value: string | undefined, query: string, weight: number) {
+  if (!value) return 0;
+  const normalizedValue = normalize(value);
+  if (normalizedValue === query) return weight + 30;
+  if (normalizedValue.startsWith(query)) return weight + 20;
+  if (normalizedValue.includes(` ${query}`)) return weight + 10;
+  return 0;
+}
+
+function candidateScore(candidate: SearchCandidate, query: string) {
+  const titleScore = fieldScore(candidate.hit.title, query, 100);
+  const aliasScore = Math.max(0, ...(candidate.aliases ?? []).map((alias) => fieldScore(alias, query, 90)));
+  const metadataScore = Math.max(0, ...(candidate.metadata ?? []).map((value) => fieldScore(value, query, 60)));
+  const score = Math.max(titleScore, aliasScore, metadataScore);
+  return score > 0 ? score + (candidate.boost ?? 0) : 0;
+}
 
 export function searchLocal(query: string): SearchHit[] {
-  const q = norm(query.trim());
-  if (q.length < 2) return [];
-  const hits: SearchHit[] = [];
-  const has = (...parts: (string | undefined)[]) => norm(parts.filter(Boolean).join(' ')).includes(q);
+  const normalizedQuery = normalize(query);
+  if (normalizedQuery.length < 2) return [];
 
-  for (const c of COURSES)
-    if (has(c.title, c.subtitle, c.summary, c.tags.join(' ')))
-      hits.push({ type: 'course', id: c.id, slug: c.slug, title: c.title, excerpt: c.summary, href: `/courses/${c.slug}` });
-  for (const l of LESSONS)
-    // `body` is no longer in the light index, so offline search matches
-    // title / kicker / summary — enough for the palette.
-    if (has(l.title, l.kicker, l.summary))
-      hits.push({ type: 'lesson', id: l.id, slug: l.slug, title: l.title, excerpt: l.summary, href: `/lessons/${l.slug}` });
-  for (const g of GLOSSARY)
-    // `definition` is no longer in the light index, so offline search matches
-    // term / latin / short (the concise summary) — enough for the palette.
-    if (has(g.term, g.latin, g.short))
-      hits.push({ type: 'glossary', id: g.id, slug: g.slug, title: g.term, excerpt: g.short, href: `/glossary?term=${g.slug}` });
-  for (const c of CASE_STUDIES)
-    if (has(c.title, c.subtitle, c.summary))
-      hits.push({ type: 'case', id: c.id, slug: c.slug, title: c.title, excerpt: c.summary, href: `/cases/${c.slug}` });
-  for (const d of DELIVERABLES)
-    if (has(d.title, d.kicker, d.summary, (d.tags ?? []).join(' ')))
-      hits.push({ type: 'deliverable', id: d.id, slug: d.slug, title: d.title, excerpt: d.summary, href: `/livrables/${d.slug}` });
-  for (const b of BLOG)
-    if (has(b.title, b.subtitle, b.excerpt, b.body))
-      hits.push({ type: 'blog', id: b.id, slug: b.slug, title: b.title, excerpt: b.excerpt, href: `/blog/${b.slug}` });
-  for (const p of PARCOURS)
-    if (has(p.title, p.hook, p.goal, p.outcomes.join(' ')))
-      hits.push({ type: 'path', id: p.id, slug: p.slug, title: p.title, excerpt: p.hook, href: `/parcours/${p.slug}` });
-  for (const s of SIMULATORS)
-    if (has(s.title, s.subtitle, s.description))
-      hits.push({ type: 'simulator', id: s.id, slug: s.slug, title: s.title, excerpt: s.subtitle, href: `/simulators/${s.slug}` });
-  for (const a of ANTI_PORTFOLIO)
-    if (has(a.company, a.title, a.subtitle, a.summary, a.passes.map((p) => p.fund).join(' ')))
-      hits.push({ type: 'anti-portfolio', id: a.id, slug: a.slug, title: a.title, excerpt: a.summary, href: `/anti-portfolio/${a.slug}` });
-  for (const m of MEMOS)
-    if (has(m.company, m.title, m.fund, m.author, m.summary))
-      hits.push({ type: 'memo', id: m.id, slug: m.slug, title: m.title, excerpt: m.whyItMatters, href: `/memos/${m.slug}` });
-  for (const e of ECOSYSTEMS)
-    if (has(e.name, e.title, e.subtitle, e.summary, e.tags.join(' ')))
-      hits.push({ type: 'ecosystem', id: e.id, slug: e.slug, title: e.title, excerpt: e.summary, href: `/ecosystemes/${e.slug}` });
+  const candidates: SearchCandidate[] = [...PAGE_CANDIDATES];
+  const add = (hit: SearchHit, aliases: readonly string[] = [], metadata: readonly (string | undefined)[] = []) => {
+    candidates.push({ hit, aliases, metadata });
+  };
 
-  return hits.slice(0, 40);
+  for (const course of COURSES)
+    add(
+      { type: 'course', id: course.id, slug: course.slug, title: course.title, excerpt: course.summary, href: `/courses/${course.slug}` },
+      [],
+      [course.subtitle, ...course.tags],
+    );
+
+  for (const lesson of LESSONS.filter((candidate) => candidate.status !== 'upcoming'))
+    add(
+      { type: 'lesson', id: lesson.id, slug: lesson.slug, title: lesson.title, excerpt: lesson.summary, href: `/lessons/${lesson.slug}` },
+      [],
+      [lesson.kicker],
+    );
+
+  for (const glossaryTerm of GLOSSARY)
+    add(
+      {
+        type: 'glossary',
+        id: glossaryTerm.id,
+        slug: glossaryTerm.slug,
+        title: glossaryTerm.term,
+        excerpt: glossaryTerm.short,
+        href: `/glossary?term=${glossaryTerm.slug}`,
+      },
+      glossaryTerm.aliases,
+    );
+
+  for (const caseStudy of CASE_STUDIES)
+    add(
+      {
+        type: 'case',
+        id: caseStudy.id,
+        slug: caseStudy.slug,
+        title: caseStudy.title,
+        excerpt: caseStudy.summary,
+        href: `/cases/${caseStudy.slug}`,
+      },
+      [caseStudy.company],
+      [caseStudy.subtitle, ...caseStudy.tags],
+    );
+
+  for (const deliverable of DELIVERABLES)
+    add(
+      {
+        type: 'deliverable',
+        id: deliverable.id,
+        slug: deliverable.slug,
+        title: deliverable.title,
+        excerpt: deliverable.summary,
+        href: `/livrables/${deliverable.slug}`,
+      },
+      [],
+      [deliverable.kicker, ...(deliverable.tags ?? [])],
+    );
+
+  for (const post of BLOG)
+    add(
+      { type: 'blog', id: post.id, slug: post.slug, title: post.title, excerpt: post.excerpt, href: `/blog/${post.slug}` },
+      [],
+      [post.subtitle, post.category, ...post.tags],
+    );
+
+  for (const parcours of PARCOURS)
+    add({
+      type: 'path',
+      id: parcours.id,
+      slug: parcours.slug,
+      title: parcours.title,
+      excerpt: parcours.hook,
+      href: `/parcours/${parcours.slug}`,
+    });
+
+  for (const simulator of SIMULATORS)
+    add(
+      {
+        type: 'simulator',
+        id: simulator.id,
+        slug: simulator.slug,
+        title: simulator.title,
+        excerpt: simulator.subtitle,
+        href: `/simulators/${simulator.slug}`,
+      },
+      [],
+      [simulator.subtitle, simulator.category],
+    );
+
+  for (const entry of ANTI_PORTFOLIO)
+    add(
+      {
+        type: 'anti-portfolio',
+        id: entry.id,
+        slug: entry.slug,
+        title: entry.title,
+        excerpt: entry.summary,
+        href: `/anti-portfolio/${entry.slug}`,
+      },
+      [entry.company, ...entry.passes.flatMap((pass) => [pass.fund, pass.partner])].filter(
+        (value): value is string => Boolean(value),
+      ),
+      [entry.subtitle, entry.sector],
+    );
+
+  for (const memo of MEMOS)
+    add(
+      { type: 'memo', id: memo.id, slug: memo.slug, title: memo.title, excerpt: memo.whyItMatters, href: `/memos/${memo.slug}` },
+      [memo.company, memo.fund, memo.author],
+      [memo.stage, ...memo.tags],
+    );
+
+  for (const ecosystem of ECOSYSTEMS)
+    add(
+      {
+        type: 'ecosystem',
+        id: ecosystem.id,
+        slug: ecosystem.slug,
+        title: ecosystem.title,
+        excerpt: ecosystem.summary,
+        href: `/ecosystemes/${ecosystem.slug}`,
+      },
+      [ecosystem.name],
+      [ecosystem.subtitle, ...ecosystem.tags],
+    );
+
+  for (const certification of CERTIFICATIONS.filter((candidate) => candidate.status === 'published'))
+    add(
+      {
+        type: 'certification',
+        id: certification.id,
+        slug: certification.slug,
+        title: certification.title,
+        excerpt: certification.summary,
+        href: `/certifications/${certification.slug}`,
+      },
+      certification.targetRoles,
+      [certification.shortTitle, ...certification.competencies],
+    );
+
+  return candidates
+    .map((candidate, order) => ({ candidate, order, score: candidateScore(candidate, normalizedQuery) }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score || a.order - b.order)
+    .slice(0, 40)
+    .map(({ candidate }) => candidate.hit);
 }

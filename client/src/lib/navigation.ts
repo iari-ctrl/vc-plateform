@@ -1,5 +1,6 @@
 import {
   BookA,
+  Award,
   Crosshair,
   FileText,
   FlaskConical,
@@ -68,11 +69,13 @@ export const NAVIGATION_PILLARS = [
     icon: Map,
     children: [
       { to: '/parcours', label: 'Parcours', icon: Map },
+      { to: '/certifications', label: 'Certifications', icon: Award },
       { to: '/bibliotheque', label: 'Bibliothèque', icon: Library },
       { to: '/glossary', label: 'Dictionnaire', icon: BookA },
     ],
     routes: [
       '/parcours',
+      '/certifications',
       '/courses',
       '/lessons',
       '/bibliotheque',

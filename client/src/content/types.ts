@@ -3,6 +3,7 @@ export type Level = 'debutant' | 'intermediaire' | 'avance' | 'tous';
 export interface Path {
   id: string;
   slug: string;
+  domainId: string;
   order: number;
   title: string;
   subtitle: string;
@@ -19,8 +20,6 @@ export interface Path {
 export interface Course {
   id: string;
   slug: string;
-  pathId: string;
-  order: number;
   title: string;
   subtitle: string;
   level: Level;
@@ -51,6 +50,19 @@ export interface Lesson {
   kicker: string;
   readMin: number;
   summary: string;
+  /** Publication state. Missing means `published` for legacy content. */
+  status?: 'published' | 'upcoming';
+  /** Lesson-level pedagogy used by certification curricula. */
+  level?: Level;
+  contexts?: {
+    fundStages?: string[];
+    dealRoles?: string[];
+    sectors?: string[];
+  };
+  optional?: boolean;
+  learningOutcomes?: string[];
+  prerequisiteLessonIds?: string[];
+  assessmentId?: string;
   /** The full, deep version of the lesson — the default when no `bodyShort` exists. */
   body: string;
   /** Optional "essentiel" version shown by default; `body` becomes the opt-in "Profond". */

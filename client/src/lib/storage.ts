@@ -118,6 +118,7 @@ export const STORAGE_KEYS = {
   notes: 'notes',
   bookmarks: 'bookmarks',
   progress: 'progress',
+  certificationEnrollments: 'certification-enrollments',
   journal: 'decision-journal',
   highlights: 'highlights',
   onboardingSeen: 'onboarding-seen',

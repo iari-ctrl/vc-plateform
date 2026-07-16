@@ -19,3 +19,18 @@ test('collectRoutes keeps parcours and library subjects on distinct canonical pr
   assert.equal(paths.has('/bibliotheque/decouvrir-le-capital-risque'), true);
   assert.equal([...paths].some((path) => path === '/paths' || path.startsWith('/paths/')), false);
 });
+
+test('collectRoutes publishes the certification catalogue and Analyst detail route', () => {
+  const paths = new Set(collectRoutes().map((route) => route.path));
+
+  assert.equal(paths.has('/certifications'), true);
+  assert.equal(paths.has('/certifications/analyste-en-capital-risque'), true);
+});
+
+test('collectRoutes excludes upcoming lessons while keeping published lessons', () => {
+  const paths = new Set(collectRoutes().map((route) => route.path));
+
+  assert.equal(paths.has('/lessons/preseed-equipe-sans-historique'), false);
+  assert.equal(paths.has('/lessons/gestion-pipeline-crm-investissement'), true);
+  assert.equal(paths.has('/lessons/le-capital-risque-vraiment'), true);
+});

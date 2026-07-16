@@ -80,11 +80,21 @@ export function collectRoutes() {
 
   addCollection(readJson('paths.json', []), '/bibliotheque', { changefreq: 'monthly', priority: '0.7' });
   addCollection(readJson('parcours.json', []), '/parcours', { changefreq: 'monthly', priority: '0.75' });
-  addCollection(readJson('courses.json', []), '/courses', { changefreq: 'monthly', priority: '0.65' });
-  addCollection(readFirstArray(['generated/lessons.index.json', 'lessons.json']), '/lessons', {
+  addCollection(readJson('certifications.json', []).filter((row) => row.status === 'published'), '/certifications', {
     changefreq: 'monthly',
-    priority: '0.7',
+    priority: '0.75',
   });
+  addCollection(readJson('courses.json', []), '/courses', { changefreq: 'monthly', priority: '0.65' });
+  addCollection(
+    readFirstArray(['generated/lessons.index.json', 'lessons.json']).filter(
+      (lesson) => (lesson?.status ?? 'published') === 'published',
+    ),
+    '/lessons',
+    {
+      changefreq: 'monthly',
+      priority: '0.7',
+    },
+  );
   addCollection(readFirstArray(['generated/glossary.index.json', 'glossary.json']), '/glossary', {
     changefreq: 'monthly',
     priority: '0.55',

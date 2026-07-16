@@ -2,6 +2,7 @@
   {
     "id": "discover",
     "slug": "decouvrir-le-capital-risque",
+    "domainId": "venture-capital",
     "order": 1,
     "title": "Découvrir le capital-risque",
     "subtitle": "Le point d'entrée",
@@ -22,6 +23,7 @@
   {
     "id": "vc-craft",
     "slug": "comprendre-le-metier-de-vc",
+    "domainId": "venture-capital",
     "order": 2,
     "title": "Comprendre le métier de VC",
     "subtitle": "Le quotidien réel",
@@ -42,6 +44,7 @@
   {
     "id": "startup-analysis",
     "slug": "analyse-de-startup",
+    "domainId": "venture-capital",
     "order": 3,
     "title": "Analyse de startup",
     "subtitle": "L'œil de l'investisseur",
@@ -62,6 +65,7 @@
   {
     "id": "investment-thesis",
     "slug": "these-d-investissement",
+    "domainId": "venture-capital",
     "order": 4,
     "title": "Thèse d'investissement",
     "subtitle": "Penser en convictions",
@@ -82,6 +86,7 @@
   {
     "id": "term-sheets",
     "slug": "term-sheets-et-structuration",
+    "domainId": "venture-capital",
     "order": 5,
     "title": "Term sheets & structuration de deals",
     "subtitle": "L'architecture juridique",
@@ -102,6 +107,7 @@
   {
     "id": "portfolio",
     "slug": "portfolio-management",
+    "domainId": "venture-capital",
     "order": 6,
     "title": "Portfolio management",
     "subtitle": "Après le chèque",
@@ -123,6 +129,7 @@
   {
     "id": "fund-economics",
     "slug": "fund-economics",
+    "domainId": "venture-capital",
     "order": 7,
     "title": "Fund economics",
     "subtitle": "La machine financière",
@@ -143,6 +150,7 @@
   {
     "id": "founder-fundraising",
     "slug": "levee-de-fonds-cote-entrepreneur",
+    "domainId": "venture-capital",
     "order": 8,
     "title": "Levée de fonds côté entrepreneur",
     "subtitle": "L'autre côté de la table",
@@ -163,6 +171,7 @@
   {
     "id": "career",
     "slug": "devenir-analyst-associate-principal",
+    "domainId": "venture-capital",
     "order": 9,
     "title": "Devenir analyst / associate / principal",
     "subtitle": "La trajectoire",

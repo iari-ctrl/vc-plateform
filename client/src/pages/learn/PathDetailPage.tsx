@@ -34,9 +34,10 @@ export default function PathDetailPage() {
 
   const courses = coursesForPath(path.id);
   const allLessons = lessonsForPath(path.id);
-  const done = allLessons.filter((l) => progress[l.id]?.status === 'done').length;
-  const pct = allLessons.length ? Math.round((done / allLessons.length) * 100) : 0;
-  const firstLesson = allLessons[0];
+  const publishedLessons = allLessons.filter((lesson) => lesson.status !== 'upcoming');
+  const done = publishedLessons.filter((l) => progress[l.id]?.status === 'done').length;
+  const pct = publishedLessons.length ? Math.round((done / publishedLessons.length) * 100) : 0;
+  const firstLesson = publishedLessons[0];
 
   return (
     <div>
@@ -166,6 +167,7 @@ export default function PathDetailPage() {
                           summary={l.summary}
                           done={progress[l.id]?.status === 'done'}
                           reading={progress[l.id]?.status === 'reading'}
+                          upcoming={l.status === 'upcoming'}
                         />
                       ))}
                     </div>

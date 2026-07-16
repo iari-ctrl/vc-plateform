@@ -4,7 +4,11 @@ import { cn } from '@/lib/utils';
 
 export function Logo({ compact = false, className, to = '/home' }: { compact?: boolean; className?: string; to?: string }) {
   return (
-    <Link to={to} className={cn('group inline-flex items-center gap-2.5', className)} aria-label="VC Premium Experience — accueil">
+    <Link
+      to={to}
+      className={cn('group inline-flex items-center gap-2.5', className)}
+      aria-label={compact ? 'VC Premium Experience — accueil' : undefined}
+    >
       <span className="grid h-9 w-9 place-items-center rounded-full border border-[color-mix(in_srgb,var(--primary)_40%,transparent)] bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] transition-colors group-hover:bg-[color-mix(in_srgb,var(--primary)_20%,transparent)]">
         <Fleuron className="text-base" />
       </span>
