@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Moon, Sun } from 'lucide-react';
+import { publicAssetUrl } from '@shared/base-url.mjs';
 import { CompassIkigaiIntro } from '@/components/splash/CompassIkigaiIntro';
 import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { Fleuron } from '@/components/ornaments/Ornaments';
@@ -25,6 +26,10 @@ type SplashMode = 'light' | 'dark';
 // The dawn switch: the sky tips over, a horizon flare blooms, and the stars
 // light up one by one while the compass and title stay rooted in place.
 const DUR = 1600;
+const SPLASH_PHOTO_STYLE = {
+  '--splash-photo-light': `url("${publicAssetUrl('splash/bg-claire.webp', import.meta.env.BASE_URL)}")`,
+  '--splash-photo-dark': `url("${publicAssetUrl('splash/bg-sombre.webp', import.meta.env.BASE_URL)}")`,
+} as CSSProperties;
 
 // ── Kanji seals — unchanged from the current splash (do not touch) ───────────
 type Seal = {
@@ -420,7 +425,7 @@ export default function SplashPage() {
   const starsTransform = `translate3d(${mx * -14}px, ${my * -6}px, 0)`;
 
   return (
-    <section className="splash-portal" data-mode={theme} aria-labelledby="splash-title">
+    <section className="splash-portal" data-mode={theme} aria-labelledby="splash-title" style={SPLASH_PHOTO_STYLE}>
       <div className="splash-stage" {...bind}>
         <div className="splash-photos" aria-hidden>
           <div ref={photoLightRef} className="splash-photo splash-photo-light" style={{ transform: photoTransform }} />

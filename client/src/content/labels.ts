@@ -21,6 +21,7 @@ export const CASE_KIND_LABEL: Record<string, string> = {
   fund: 'Fonds',
   deal: 'Deal',
   market: 'Marché',
+  organisation: 'Organisation à impact',
 };
 
 export const SEARCH_TYPE_LABEL = {

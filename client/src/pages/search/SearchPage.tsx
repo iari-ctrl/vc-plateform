@@ -3,11 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import type { SearchHit } from '@/content/search';
+import { loadSearchHits } from '@/content/searchLazy';
 import { SEARCH_TYPE_LABEL } from '@/content/labels';
 import { SectionHeading, EmptyState } from '@/components/ui/primitives';
 import { usePageMeta } from '@/lib/seo';
 
-type SearchStatus = 'idle' | 'loading' | 'done';
+type SearchStatus = 'idle' | 'loading' | 'done' | 'error';
 
 export default function SearchPage() {
   usePageMeta('Recherche');
@@ -16,6 +17,7 @@ export default function SearchPage() {
   const [hits, setHits] = useState<SearchHit[]>([]);
   const [status, setStatus] = useState<SearchStatus>('idle');
   const [resultTerm, setResultTerm] = useState('');
+  const [searchAttempt, setSearchAttempt] = useState(0);
   const submittedTerm = (params.get('q') ?? '').trim();
   const inputMatchesSearch = q.trim() === submittedTerm;
   const resultMatchesSearch = inputMatchesSearch && resultTerm === submittedTerm;
@@ -33,19 +35,23 @@ export default function SearchPage() {
     setHits([]);
     setStatus('loading');
     setResultTerm(term);
-    (async () => {
-      const { searchLocal } = await import('@/content/search');
+    void (async () => {
       if (active) {
-        setHits(searchLocal(term));
-        setStatus('done');
+        try {
+          setHits(await loadSearchHits(term));
+          setStatus('done');
+        } catch {
+          setHits([]);
+          setStatus('error');
+        }
       }
     })();
     return () => { active = false; };
-  }, [params]);
+  }, [params, searchAttempt]);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
-      <SectionHeading eyebrow="Recherche globale" title="Explorer toute la plateforme" />
+      <SectionHeading as="h1" eyebrow="Recherche globale" title="Explorer toute la plateforme" />
       <form
         onSubmit={(e) => { e.preventDefault(); setParams(q.trim() ? { q: q.trim() } : {}); }}
         className="mt-6 flex items-center gap-2 rounded-full border border-outline-variant bg-surface-container-low px-4"
@@ -57,6 +63,15 @@ export default function SearchPage() {
       <div className="mt-8">
         {resultMatchesSearch && status === 'loading' && (
           <p role="status" aria-live="polite" className="py-8 text-center text-sm text-surface-variant">Recherche en cours…</p>
+        )}
+        {resultMatchesSearch && status === 'error' && (
+          <div role="alert" className="rounded-2xl border border-outline-variant bg-surface-container-low p-5 text-sm text-surface-variant">
+            <p className="font-medium text-foreground">La recherche n’a pas pu être chargée.</p>
+            <p className="mt-1">Relancez le chargement de l’index local.</p>
+            <button type="button" onClick={() => setSearchAttempt((attempt) => attempt + 1)} className="btn-ghost mt-4">
+              Réessayer
+            </button>
+          </div>
         )}
         {resultMatchesSearch && status === 'done' && hits.length === 0 && (
           <EmptyState icon={<Search size={26} />} title={`Aucun résultat pour « ${submittedTerm} »`} description="Essayez un autre terme ou explorez les parcours." />

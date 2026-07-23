@@ -1,24 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { OnboardingMode } from '@/content/types';
-
-const ONBOARDING_MODE_KEY = 'onboardingMode';
+import { commitOnStorageSuccess, storage } from '@/lib/storage';
+import { STORAGE_CONTRACTS } from '@/lib/storageDomains';
 
 export function useOnboardingMode() {
-  const [onboardingMode, setOnboardingModeState] = useState<OnboardingMode>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem(ONBOARDING_MODE_KEY);
-      if (saved === 'editorial' || saved === 'bref' || saved === 'interactif') {
-        return saved as OnboardingMode;
-      }
-    }
-    return 'editorial';
-  });
+  const [onboardingMode, setOnboardingModeState] = useState<OnboardingMode>(() => (
+    storage.getParsed(STORAGE_CONTRACTS.onboardingMode)
+  ));
+
+  useEffect(() => {
+    storage.migrate(STORAGE_CONTRACTS.onboardingMode);
+  }, []);
 
   const setOnboardingMode = (m: OnboardingMode) => {
-    setOnboardingModeState(m);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(ONBOARDING_MODE_KEY, m);
-    }
+    const result = storage.setParsed(STORAGE_CONTRACTS.onboardingMode, m);
+    return commitOnStorageSuccess(result, m, setOnboardingModeState);
   };
 
   return [onboardingMode, setOnboardingMode] as const;

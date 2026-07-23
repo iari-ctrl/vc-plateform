@@ -1,3040 +1,3305 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://vcpx.io/</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio/airbnb-sept-refus-2008</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio/airbnb-sept-refus-2008</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio/apple-outrageously-expensive-1978</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio/apple-outrageously-expensive-1978</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio/ebay-stamps-coins-1997</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio/ebay-stamps-coins-1997</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio/facebook-bessemer-2004</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio/facebook-bessemer-2004</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio/fedex-sept-passes-1973</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio/fedex-sept-passes-1973</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio/google-bessemer-1999</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio/google-bessemer-1999</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio/tesla-achete-la-voiture-2006</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio/tesla-achete-la-voiture-2006</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio/uber-a16z-2011</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio/uber-a16z-2011</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/anti-portfolio/zoom-marche-sature-2012</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/anti-portfolio/zoom-marche-sature-2012</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/bibliotheque</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/bibliotheque</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/bibliotheque/analyse-de-startup</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/bibliotheque/comprendre-le-metier-de-vc</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/bibliotheque/decouvrir-le-capital-risque</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/bibliotheque/devenir-analyst-associate-principal</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/bibliotheque/fund-economics</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/bibliotheque/levee-de-fonds-cote-entrepreneur</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/bibliotheque/portfolio-management</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/bibliotheque/term-sheets-et-structuration</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/bibliotheque/these-d-investissement</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vcpx.io/blog</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/blog/exit-voice-loyalty-hirschman</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/blog/exit-voice-loyalty-hirschman</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/blog/l-art-de-formuler-les-trois-risques</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/blog/l-art-de-formuler-les-trois-risques</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/blog/la-societe-du-spectacle-leve-des-fonds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/blog/la-societe-du-spectacle-leve-des-fonds</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/blog/lire-le-vc-comme-un-praticien</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/blog/lire-le-vc-comme-un-praticien</loc>
     <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/blog/ou-sera-votre-centre-de-gravite-dans-une-decennie</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/blog/ou-sera-votre-centre-de-gravite-dans-une-decennie</loc>
     <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/blog/pourquoi-nous-ne-bloquons-aucun-chapitre</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/blog/pourquoi-nous-ne-bloquons-aucun-chapitre</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/blog/voir-comme-un-etat</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/blog/voir-comme-un-etat</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/cases/anatomie-d-un-portefeuille-power-law</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/cases/anatomie-d-un-portefeuille-power-law</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/cases/comite-investissement-seed-le-cas-volta</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/cases/comite-investissement-seed-le-cas-volta</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/cases/la-dilution-d-un-fondateur-du-seed-a-la-series-c</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/cases/energie-des-vallees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/cases/le-piege-de-la-valorisation-flatteuse</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/cases/insertion-3-regions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/cases/le-vc-europeen-contre-le-mythe-de-la-valley</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/cases/la-dilution-d-un-fondateur-du-seed-a-la-series-c</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/cases/market-sizing-en-direct-le-cas-vetoflow</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/cases/le-piege-de-la-valorisation-flatteuse</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/certifications</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/cases/le-vc-europeen-contre-le-mythe-de-la-valley</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/cases/market-sizing-en-direct-le-cas-vetoflow</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/certifications</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/certifications/analyste-en-capital-risque</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/certifications/analyste-en-capital-risque</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/convictions</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/certifications/niveaux</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/convictions</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/analyse-selon-stade-investissement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/analyse-selon-stade-investissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/anatomie-d-une-term-sheet</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/anatomie-d-une-term-sheet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/construction-portefeuille-loi-puissance</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/construction-portefeuille-loi-puissance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/construire-une-these</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/construire-une-these</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/deal-flow-et-screening</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/deal-flow-et-screening</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/due-diligence</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/diligence-financiere-resilience-impact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/economie-d-un-fonds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/diligence-organisationnelle-venture-philanthropie</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/entrer-dans-le-venture</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/due-diligence</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/gerer-un-portefeuille</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/economie-d-un-fonds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/integrite-confidentialite-ia</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/entrer-dans-le-venture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/la-chaine-de-valeur</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/gerer-un-portefeuille</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/le-metier-au-quotidien</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/integrite-confidentialite-ia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/le-vc-sans-bullshit-modules</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/la-chaine-de-valeur</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/lever-des-fonds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/le-metier-au-quotidien</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/lire-une-startup</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/le-vc-sans-bullshit-modules</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/mathematiques-du-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/lever-des-fonds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/qu-est-ce-que-le-capital-risque</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/lire-une-startup</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/recommandation-investissement-comite</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/mandat-role-triage-venture-philanthropie</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/reussir-l-entretien-analyst-modules</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/mathematiques-du-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/role-fonds-dans-tour-investissement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/partenariat-decision-cycle-portefeuille</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/courses/specialisations-sectorielles-analyst</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/probleme-preuves-beneficiaires</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/decisions</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/qu-est-ce-que-le-capital-risque</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/recommandation-investissement-comite</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/reussir-l-entretien-analyst-modules</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/role-fonds-dans-tour-investissement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/specialisations-sectorielles-analyst</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/courses/structuration-financement-sur-mesure</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/decisions</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/france-apres-l-hiver</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/france-apres-l-hiver</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/ia-appliquee-europe</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/ia-appliquee-europe</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-care-a-domicile</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-care-a-domicile</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-consommation-loisirs</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-consommation-loisirs</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-emploi-aidants</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-emploi-aidants</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-fintech-assurtech</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-fintech-assurtech</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-habitat-hebergement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-habitat-hebergement</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-lien-social-cognition</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-lien-social-cognition</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-logiciel-du-care</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-logiciel-du-care</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-mobilite-autonomie</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-mobilite-autonomie</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-robotique-materiel</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-robotique-materiel</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-branche-sante-dispositifs</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-branche-sante-dispositifs</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-cera</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-cera</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-economie</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-economie</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-greatcall-lively</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-greatcall-lively</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-healthtech-comparatif-mondial</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-healthtech-comparatif-mondial</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-healthtech-francaise</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-healthtech-francaise</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-honor</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-honor</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-l-ia-dans-le-grand-age</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-l-ia-dans-le-grand-age</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-la-filiere-en-dix-branches</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-la-filiere-en-dix-branches</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-la-france-et-la-sortie</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-la-france-et-la-sortie</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-la-productivite-du-care</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-la-productivite-du-care</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-le-japon</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-le-japon</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-le-miroir-international</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-le-miroir-international</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-le-remboursement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-le-remboursement</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-les-assureurs</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-les-assureurs</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-les-etats-unis</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-les-etats-unis</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-les-operateurs</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-les-operateurs</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-pourquoi-le-b2c-a-echoue</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-pourquoi-le-b2c-a-echoue</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-trajectoires</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-trajectoires</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/ecosystemes/silver-vendre-au-systeme</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/ecosystemes/silver-vendre-au-systeme</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/10x-return</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/10x-return</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/409a-valuation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/409a-valuation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/83b-election</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/83b-election</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/a16z</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/a16z</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/accel</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/accel</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/accelerateur</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/accelerateur</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/acceleration-vesting</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/acceleration-vesting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/acqui-hire</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/acqui-hire</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/actions-autorisees-emises</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/actions-autorisees-emises</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/actions-de-preference</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/actions-de-preference</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/actions-ordinaires</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/actions-ordinaires</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/advisory-board</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/additionalite</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/affinity</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/advisory-board</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/ai-native-startup</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/affinity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/alven</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/ai-native-startup</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/amorcage</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/alven</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/analyst-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/amorcage</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/ancrage</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/analyst-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/annualized-run-rate</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/ancrage</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/anti-dilution</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/annualized-run-rate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/arr</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/anti-dilution</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/arr-par-employe</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/arr</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/articles-of-association</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/arr-par-employe</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/associate-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/articles-of-association</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/audit-committee</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/associate-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/aum</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/audit-committee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/baseball-model</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/aum</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/benchmark</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/baseball-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/beyond-grants</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/benchmark</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/biais-d-autorite</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/beyond-grants</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/biais-de-confirmation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/biais-d-autorite</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/biais-de-resultat</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/biais-de-confirmation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/board-culture-best-practices</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/biais-de-resultat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/board-observer</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/board-culture-best-practices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/board-of-directors</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/board-observer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/board-representation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/board-of-directors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/board-seat</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/board-representation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/bootstrap</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/board-seat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/bpifrance</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/bootstrap</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/brad-feld</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/bpifrance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/break-even-point</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/brad-feld</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/bridge</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/break-even-point</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/broad-based-weighted-average</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/bridge</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/burn-multiple</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/broad-based-weighted-average</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/burn-rate</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/burn-multiple</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/business-angel</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/burn-rate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/business-model</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/business-angel</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/buyer-persona</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/business-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/buyer-pool-depth</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/buyer-persona</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/c-corporation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/buyer-pool-depth</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/cac</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/c-corporation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/cac-payback-period</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/cac</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/cap-table</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/cac-payback-period</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/capital-call</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/cap-table</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/capital-catalytique</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/capital-call</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/capital-efficiency</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/capital-catalytique</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/capital-increase-documentation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/capital-efficiency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/carry</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/capital-increase-documentation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/cathay-innovation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/capital-patient</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/cfo</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/carry</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/churn-rate</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/cathay-innovation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/cliff-vesting</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/cfo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/climat-fundraising</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/churn-rate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/co-investment</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/cliff-vesting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/cogs</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/climat-fundraising</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/company-value-shares</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/co-investment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/conditions-de-closing</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/cogs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/continuation-fund</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/company-value-shares</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/continuum-du-capital</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/conditions-de-closing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/conversion-discount</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/continuation-fund</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/conversion-ratio</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/continuum-du-capital</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/convertible-note</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/contrat-a-impact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/corporate-venture-capital</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/convention-de-financement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/cout-irrecuperable</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/conversion-discount</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/crowdfunding</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/conversion-ratio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/customer-objections</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/convertible-note</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/customer-roi</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/corporate-venture-capital</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/customer-success</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/cout-complet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/daphni</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/cout-irrecuperable</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/data-quality</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/crowdfunding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/data-room</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/customer-objections</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/dcf</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/customer-roi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/dd</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/customer-success</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/deal-champion</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/daphni</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/deal-flow</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/data-quality</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/deal-heat</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/data-room</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/deal-memo</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/dcf</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/deal-sourcing</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/dd</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/decile-hub</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/deal-champion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/deemed-liquidation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/deal-flow</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/deep-tech-metrics</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/deal-heat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/diligence-checklist</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/deal-memo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/dilution</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/deal-sourcing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/disclosure-letter</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/decile-hub</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/discount-rate</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/deemed-liquidation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/diversification</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/deep-tech-metrics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/dividendes-cumulatifs</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/diligence-checklist</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/double-trigger-acceleration</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/dilution</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/down-round</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/disclosure-letter</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/dpi</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/discount-rate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/drag-along</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/diversification</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/dry-powder</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/dividendes-cumulatifs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/dutch-auction-ipo</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/double-trigger-acceleration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/ebitda</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/down-round</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/ebitda-exit-multiple</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/dpi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/eif</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/drag-along</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/emerging-manager</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/droits-d-information-du-financeur</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/employee-equity</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/dry-powder</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/enterprise-value</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/dutch-auction-ipo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/equity</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/ebitda</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/equity-value</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/ebitda-exit-multiple</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/esg-assessment</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/eif</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/esop</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/emerging-manager</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/eurazeo</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/employee-equity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/evergreen</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/enterprise-value</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/exclusivite</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/entreprise-solidaire-utilite-sociale-esus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/executive-committee</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/equity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/exit</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/equity-value</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/exit-strategy</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/esg-assessment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/exit-timing</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/esop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/exit-transaction</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/eurazeo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/exit-valuation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/evergreen</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/exit-waterfall</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/exclusivite</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/expertise-sectorielle</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/executive-committee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/family-and-friends</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/exit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/family-office</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/exit-strategy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fiduciary-duty</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/exit-timing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/field-sales</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/exit-transaction</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/final-close</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/exit-valuation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/financement-mixte</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/exit-waterfall</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/financial-acquisition</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/expertise-sectorielle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/financial-model</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/family-and-friends</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/first-time-fund</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/family-office</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/flexco</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fiduciary-duty</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/follow-on</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/field-sales</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fonds-prive</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/final-close</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/finance-solidaire</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder-coaching</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/financement-mixte</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder-dilution</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/financement-non-affecte</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder-equity</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/financial-acquisition</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder-fit</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/financial-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder-market-fit</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/first-loss</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder-ownership</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/first-time-fund</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder-shares</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/flexco</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder-vc-fit</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/follow-on</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/founder-vesting</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fonds-de-dotation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fp-and-a</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fonds-prive</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/full-ratchet</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fully-diluted-shares</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder-coaching</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fund-lifecycle</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder-dilution</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fund-of-funds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder-equity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fund-returner</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder-fit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fund-selection-criteria-lp</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder-market-fit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fund-size-strategy</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder-ownership</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/funding-round</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder-shares</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fundraising-history</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder-vc-fit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/fundraising-target</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/founder-vesting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/general-meeting</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fp-and-a</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/geography-fit</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/full-ratchet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/georges-doriot</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fully-diluted-shares</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/good-leaver-bad-leaver</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fund-lifecycle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/governance</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fund-of-funds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/governing-law</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fund-returner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/gp</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fund-selection-criteria-lp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/gross-margin</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fund-size-strategy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/growth-crisis</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/funding-round</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/growth-drivers</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fundraising-history</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/growth-equity</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/fundraising-target</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/gtm</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/general-meeting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/harmonic</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/geography-fit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/head-of-sales</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/georges-doriot</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/hockey-stick</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/good-leaver-bad-leaver</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/hurdle-rate</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/gouvernance-associative</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/ic</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/governance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/illiquidite</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/governing-law</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/incentive-stock-options-iso</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/gp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/incubateur</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/gross-margin</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/information-asymmetry</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/growth-crisis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/information-rights</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/growth-drivers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/inside-sales</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/growth-equity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/institutional-investor</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/gtm</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/international-expansion</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/harmonic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investissement-pour-impact</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/head-of-sales</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investisseur-accredite</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/hockey-stick</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investment-agreement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/hurdle-rate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investment-horizon</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/ic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investment-period</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/illiquidite</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investment-strategy</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/incentive-stock-options-iso</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investor-confidence</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/incubateur</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investor-director</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/information-asymmetry</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investor-fit</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/information-rights</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/investor-return</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/inside-sales</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/ipo</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/institutional-investor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/irr</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/international-expansion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/j-curve</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investissement-pour-impact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/journal-de-decision</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investisseur-accredite</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/kpi</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investment-agreement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/last-round-date</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investment-horizon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/lead-investor</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investment-period</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/legal-share-capital</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investment-strategy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/leverage</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investor-confidence</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/limited-partnership</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investor-director</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/liquidation-preference</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investor-fit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/liquidity-premium</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/investor-return</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/loi</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/ipo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/loss-ratio</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/irr</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/lp</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/j-curve</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/lp-capital-allocation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/journal-de-decision</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/lpa</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/kpi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/ltv</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/last-round-date</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/ltv-cac</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/lead-investor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/ma</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/legal-share-capital</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/management-company</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/leverage</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/management-fees</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/limited-partnership</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/management-period</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/liquidation-preference</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/management-team-diligence</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/liquidity-premium</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/management-team-scaling</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/loi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/managing-director</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/loss-ratio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/mandatory-conversion</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/lp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/market-concentration</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/lp-capital-allocation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/market-opportunity</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/lpa</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/market-readiness</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/ltv</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/market-risk</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/ltv-cac</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/maturity-date</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/ma</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/mega-seed</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/management-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/milestones</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/management-fees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/mimetisme</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/management-period</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/moat</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/management-team-diligence</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/model-assumptions</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/management-team-scaling</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/moic</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/managing-director</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/money-plus</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/mandatory-conversion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/mrr</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/market-concentration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/narrative-fallacy</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/market-opportunity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/narrow-based-weighted-average</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/market-readiness</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/negligence-des-taux-de-base</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/market-risk</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/net-new-arr</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/maturity-date</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/no-shop</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/mega-seed</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/nominal-amount</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/mesure-impact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/non-compete-agreement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/milestones</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/non-dilutive-financing</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/mimetisme</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/nonqualified-stock-options</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/moat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/nps</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/model-assumptions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/nrr</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/moic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/nvca</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/money-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/operator-investor</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/mrr</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pari-passu</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/narrative-fallacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/partech</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/narrow-based-weighted-average</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/participating-preferred</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/negligence-des-taux-de-base</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/passage-seed-series-a</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/net-new-arr</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/path-to-profitability</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/no-shop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pattern-matching</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/nominal-amount</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pay-to-play</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/non-compete-agreement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/peter-thiel</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/non-dilutive-financing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pitch</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/nonqualified-stock-options</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pitch-deck</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/nps</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pitchbook</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/nrr</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/placement-agent</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/nvca</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/placement-prive</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/operator-investor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pmf</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pari-passu</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/portfolio-company</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/partech</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/portfolio-construction</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/participating-preferred</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/portfolio-monitoring</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/passage-seed-series-a</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/portfolio-operations</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/path-to-profitability</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/portfolio-support</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pattern-matching</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/potential-acquirers</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pay-to-play</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/power-law</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/peter-thiel</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pre-money</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pitch</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pre-seed</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pitch-deck</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/preferred-non-participating</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pitchbook</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/premortem</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/placement-agent</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/premortem-inverse</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/placement-prive</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/presidio</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pmf</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/price-per-share</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/portfolio-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pricing-methodology</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/portfolio-construction</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/principal-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/portfolio-monitoring</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/private-equity</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/portfolio-operations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/pro-rata</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/portfolio-support</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/problem</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/potential-acquirers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/proof-of-concept</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/power-law</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/protective-provisions</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pre-money</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/qpo</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pre-seed</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/qsbs</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/preferred-non-participating</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/qualified-lead</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/premortem</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/qualified-lead-velocity-rate</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/premortem-inverse</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/qualified-purchaser</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/presidio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/recurring-revenue</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/price-per-share</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/redemption-rights</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pricing-methodology</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/referrer-quality</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/principal-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/regulation-d</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/private-equity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/relative-valuation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/pro-rata</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/remuneration-committee</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/problem</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/reporting-obligations</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/proof-of-concept</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/representations-and-warranties</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/protective-provisions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/reseau-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/qpo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/reserve-funds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/qsbs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/revenue-growth</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/qualified-lead</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/revenue-growth-repeatability</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/qualified-lead-velocity-rate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/revenue-multiple</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/qualified-purchaser</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/risk-premium</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/quasi-fonds-propres</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/rofo</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/realisation-impact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/rofr</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/recurring-revenue</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/rsu</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/redemption-rights</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/rule-of-40</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/referrer-quality</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/runway</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/regulation-d</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/rvpi</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/relative-valuation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/safe</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/remuneration-committee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/sales-cycle</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/reporting-obligations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/sales-pipeline</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/representations-and-warranties</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/sales-playbook</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/reseau-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/sam</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/reserve-funds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/scalability</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/resultat-impact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/scout</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/revenue-growth</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/search-fund</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/revenue-growth-repeatability</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/secondary</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/revenue-multiple</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/seed</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/risk-premium</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/seniority</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/rofo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/sequoia</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/rofr</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/serena</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/rsu</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/series-a</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/rule-of-40</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/series-a-readiness</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/runway</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/series-b-readiness</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/rvpi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/series-b-round</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/safe</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/sfdr</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/safeguarding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/shareholder-contribution</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/sales-cycle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/shareholders-agreement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/sales-pipeline</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/single-trigger-acceleration</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/sales-playbook</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/solution</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/sam</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/som</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/scalability</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/sovereign-wealth-fund</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/scout</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/spv</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/search-fund</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/startup</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/secondary</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/startup-fundraising</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/seed</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/startup-metrics</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/seniority</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/startup-one-liner</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/sequoia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/stock-options</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/serena</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/strategic-acquisition</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/series-a</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/subscription-agreement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/series-a-readiness</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/subvention-catalytique</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/series-b-readiness</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/supervisory-board</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/series-b-round</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/tag-along</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/sfdr</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/tam</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/shareholder-contribution</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/tam-sam-som</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/shareholders-agreement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/team-problem-fit</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/single-trigger-acceleration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/technology-readiness-level</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/social-return-on-investment-sroi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/term-sheet</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/solution</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/thesis-driven</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/som</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/timing</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/sortie-de-partenariat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/titre-financier</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/sovereign-wealth-fund</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/total-funding</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/spv</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/traction</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/startup</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/trade-sale</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/startup-fundraising</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/trustee</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/startup-metrics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/tvpi</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/startup-one-liner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/unicorn</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/stock-options</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/unit-economics</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/strategic-acquisition</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/use-of-funds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/subscription-agreement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/valuation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/subvention-catalytique</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/valuation-cap</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/subvention-recuperable</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/value-creation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/supervisory-board</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/value-inflection-point</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/tag-along</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/vc-first-meeting</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/tam</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/venture-capital</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/tam-sam-som</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/venture-capital-fund</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/team-problem-fit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/venture-capital-method</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/technology-readiness-level</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/venture-debt</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/term-sheet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/venture-fundraising</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/theorie-du-changement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/venture-philanthropie</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/thesis-driven</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/vesting</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/timing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/veto-rights</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/titre-associatif</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/vintage</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/titre-financier</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/virtual-shares</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/titre-participatif</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/voting-pool</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/total-funding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/vp-engineering</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/traction</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/warm-intro</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/trade-sale</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/warrant-coverage</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/tresorerie-mobilisable</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/warrants</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/trustee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/waterfall</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/tvpi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/why-now</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/unicorn</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/xange</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/unit-economics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/y-combinator</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/use-of-funds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/glossary/zombie-firm</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/valuation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/home</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/valuation-cap</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/value-creation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/value-inflection-point</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/vc-first-meeting</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/venture-capital</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/venture-capital-fund</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/venture-capital-method</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/venture-debt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/venture-fundraising</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/venture-philanthropie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/vesting</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/veto-rights</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/vintage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/virtual-shares</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/voting-pool</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/vp-engineering</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/warm-intro</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/warrant-coverage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/warrants</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/waterfall</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/why-now</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/xange</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/y-combinator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/zombie-firm</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/home</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/intelligence</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/intelligence</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/48h-jour-j-suivi</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/48h-jour-j-suivi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/9-sur-10-vont-mourir</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/9-sur-10-vont-mourir</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/analyse-equipe-fondatrice</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/analyse-equipe-fondatrice</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/analyse-produit-technologie</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/analyse-produit-technologie</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/anatomie-d-une-these</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/analyser-mission-gouvernance-conflits</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/board-controle-sas</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/analyser-tresorerie-reserves-concentration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/bsa-air-vs-oc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/anatomie-d-une-these</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/c-est-quoi-le-vc-vraiment</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/atelier-note-options-termes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/comment-le-simulateur-power-law-tire-les-portefeuilles</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/atelier-reconstitution-scenario-choc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/confidentialite-information-investissement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/board-controle-sas</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/conflits-interets-independance-deontologie</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/bsa-air-vs-oc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/defendre-une-these</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/c-est-quoi-le-vc-vraiment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/defense-comite-investissement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/cartographier-probleme-systeme</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/dilution-cap-table-et-option-pool</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/choisir-instrument-financement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/dimensionner-un-marche</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/comment-le-simulateur-power-law-tire-les-portefeuilles</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/distinguer-faits-hypotheses</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/confidentialite-information-investissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/due-diligence-financiere-reconciliation-donnees</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/conflits-interets-independance-deontologie</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/entrer-dans-un-fonds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/construire-accompagnement-rapports-pouvoir</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/equipe-et-marche</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/construire-challenger-theorie-changement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/erreurs-critiques-analyse-investissement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/construire-plan-diligence-registre-preuves</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/erreurs-data-room</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/construire-prevision-scenarios</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/faire-ses-devoirs-sur-le-fonds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/defendre-une-these</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/fees-carry-et-waterfall</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/defense-comite-investissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/gestion-pipeline-crm-investissement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/dilution-cap-table-et-option-pool</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/l-art-du-sourcing</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/dimensionner-un-marche</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-carte-de-l-entonnoir</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/distinguer-faits-hypotheses</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-due-diligence-commerciale</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/due-diligence-financiere-reconciliation-donnees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-due-diligence-equipe-references</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/entrer-dans-un-fonds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-due-diligence-juridique-cap-table</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/entretiens-voix-beneficiaires</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-due-diligence-priorisee</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/equipe-et-marche</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-due-diligence-produit-technologie</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/erreurs-critiques-analyse-investissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-grammaire-des-stades</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/erreurs-data-room</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-grammaire-des-stades-decouverte</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/evaluer-equipe-operations-replication</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-grille-de-l-investisseur</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/faire-ses-devoirs-sur-le-fonds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/la-loi-de-puissance</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/fees-carry-et-waterfall</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-capital-risque-vraiment</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/gestion-pipeline-crm-investissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-case-study</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/l-art-du-sourcing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-cycle-de-vie-d-un-fonds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-carte-de-l-entonnoir</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-deal-memo</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-due-diligence-commerciale</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-fit-why-vc-why-fund-why-you</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-due-diligence-equipe-references</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-mock-complet</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-due-diligence-juridique-cap-table</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-narratif-de-levee</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-due-diligence-priorisee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-pitch-gp-seduire-les-lps</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-due-diligence-produit-technologie</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-triage-du-portefeuille</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-grammaire-des-stades</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-voyage-de-l-argent</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-grammaire-des-stades-decouverte</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/le-vrai-job-et-les-mythes</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-grille-de-l-investisseur</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/les-echelons-du-venture</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/la-loi-de-puissance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/les-questions-techniques</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-capital-risque-vraiment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/les-roles-dans-un-fonds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-case-study</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/les-termes-de-controle</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-cycle-de-vie-d-un-fonds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/les-termes-economiques</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-deal-memo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/lever-sans-se-faire-diluer</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-fit-why-vc-why-fund-why-you</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/lire-les-metriques-d-un-fonds</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-mock-complet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/lire-tvpi-concentration-fund-returner-math</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-narratif-de-levee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/lire-une-startup-unit-economics</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-pitch-gp-seduire-les-lps</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/market-sizing-tam-sam-som</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-triage-du-portefeuille</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/modele-tresorerie-runway-scenarios</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-voyage-de-l-argent</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/pitch-me-a-company</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/le-vrai-job-et-les-mythes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/pourquoi-la-moyenne-ment-en-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/les-echelons-du-venture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/pourquoi-utiliser-monte-carlo-en-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/les-questions-techniques</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/pre-post-money-et-ownership</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/les-roles-dans-un-fonds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/preference-liquidation</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/les-termes-de-controle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/process-de-levee-gp-teaser-closing</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/les-termes-economiques</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/qui-fait-quoi-qui-gagne-quoi</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/lever-sans-se-faire-diluer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/qui-finance-qui</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/lire-les-metriques-d-un-fonds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/redaction-recommandation-investissement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/lire-tvpi-concentration-fund-returner-math</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/reserves-et-follow-on</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/lire-une-startup-unit-economics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/returns-moic-irr-dpi-tvpi-waterfall</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/mandat-continuum-triage-venture-philanthropie</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/safe-priced-round-et-dilution</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/market-sizing-tam-sam-som</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/screening-et-filtrage</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/modele-tresorerie-runway-scenarios</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/standard-francais-galion-france-invest</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/piloter-mesure-impact-proportionnee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/suivi-portefeuille-reporting-reinvestissement</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/pitch-me-a-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/tes-questions-a-poser</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/pourquoi-la-moyenne-ment-en-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/traction-et-unit-economics</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/pourquoi-utiliser-monte-carlo-en-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/trouver-convaincre-lps-france</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/pre-post-money-et-ownership</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/un-fonds-nait-et-meurt-aussi</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/preference-liquidation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/une-semaine-de-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/process-de-levee-gp-teaser-closing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/unit-economics-cac-ltv-payback-rule-of-40</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/qui-fait-quoi-qui-gagne-quoi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/usage-declare-intelligence-artificielle</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/qui-finance-qui</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/lessons/valorisation-transaction-droits-economiques</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/reconstituer-comptes-cout-complet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/livrables</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/redaction-recommandation-investissement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/livrables/simulation-comite-investissement-seed</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/rediger-recommandation-defendre-comite</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/reserves-et-follow-on</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/returns-moic-irr-dpi-tvpi-waterfall</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/safe-priced-round-et-dilution</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/screening-additionalite-venture-philanthropie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/screening-et-filtrage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/standard-francais-galion-france-invest</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/structurer-montant-tranches-conditions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/suivi-portefeuille-reporting-reinvestissement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/suivre-remedier-renouveler-sortir</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/tes-questions-a-poser</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/traction-et-unit-economics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/traiter-safeguarding-risques-criteres-arret</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/trouver-convaincre-lps-france</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/un-fonds-nait-et-meurt-aussi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/une-semaine-de-vc</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/unit-economics-cac-ltv-payback-rule-of-40</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/usage-declare-intelligence-artificielle</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/valorisation-transaction-droits-economiques</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/verifier-compatibilite-capacite-remboursement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/livrables</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/livrables/atelier-perspective-financeur-portefeuille</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/livrables/these-proprietaire-pre-seed-seed</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/livrables/exercice-cumulatif-diligence</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/memos</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/livrables/exercice-cumulatif-probleme-preuves</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/livrables/exercice-cumulatif-recommandation-financement-sortie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/livrables/fiche-escalade-juridique-conformite</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/livrables/recommandation-de-soutien-venture-philanthropie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/livrables/simulation-comite-investissement-seed</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/livrables/these-proprietaire-pre-seed-seed</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/memos</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/memos/coinbase-a16z-2013</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/memos/coinbase-a16z-2013</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/memos/pinterest-bessemer-2011</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/memos/pinterest-bessemer-2011</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/memos/shopify-bessemer-2010</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/memos/shopify-bessemer-2010</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/memos/twilio-bessemer-2010</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/memos/twilio-bessemer-2010</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/memos/youtube-sequoia-2005</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/memos/youtube-sequoia-2005</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/methode</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/methode</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/onboarding</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/onboarding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/decoder-une-term-sheet</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/analyst-foundations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/decrocher-un-stage-en-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/decoder-une-term-sheet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/devenir-un-meilleur-analyst</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/decrocher-un-stage-en-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/dimensionner-un-marche</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/devenir-un-meilleur-analyst</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/entretien-principal-poste-senior</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/dimensionner-un-marche</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/l-entretien-vc-en-1h</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/entretien-principal-poste-senior</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/le-carry-enfin-clair</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/l-entretien-vc-en-1h</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/le-vc-sans-bullshit</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/le-carry-enfin-clair</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/lever-en-1h-l-essentiel</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/le-vc-sans-bullshit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/lever-son-fonds-lps-institutions</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/lever-en-1h-l-essentiel</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/lire-un-cap-table-sans-paniquer</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/lever-son-fonds-lps-institutions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/mener-un-tour-de-table</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/lire-un-cap-table-sans-paniquer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/passer-associate</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/mener-un-tour-de-table</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/passer-principal</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/passer-associate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/penser-comme-un-gp</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/passer-principal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/preparer-ma-preseed</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/penser-comme-un-gp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/preparer-ma-seed</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/preparer-ma-preseed</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/preparer-ma-serie-a</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/preparer-ma-seed</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/reussir-l-entretien-analyst</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/preparer-ma-serie-a</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/reussir-l-entretien-associate</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/reussir-l-entretien-analyst</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/une-semaine-dans-la-peau-d-un-vc</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/reussir-l-entretien-associate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/parcours/unit-economics-rule-of-40</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/une-semaine-dans-la-peau-d-un-vc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/unit-economics-rule-of-40</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/parcours/venture-philanthropy-foundations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators/dilution</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators/dilution</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators/fund-returns</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators/fund-returns</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators/management-fees-simulator</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators/management-fees-simulator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators/ownership</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators/ownership</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators/power-law-portfolio</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators/power-law-portfolio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators/scenario-de-levee</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators/scenario-de-levee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators/secondaries-continuation-fund</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators/secondaries-continuation-fund</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators/valorisation-pre-post-money</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators/valorisation-pre-post-money</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://vcpx.io/simulators/waterfall</loc>
+    <loc>https://iari-ctrl.github.io/vc-plateform/simulators/waterfall</loc>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>

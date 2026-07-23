@@ -27,11 +27,11 @@ Research, analyses, atlas d'écosystèmes, convictions, mémos annotés, anti-po
 
 ### Formation
 
-Parcours par objectif, bibliothèque par rayons, cours, leçons et dictionnaire. Aucun verrou artificiel : la progression organise la matière sans empêcher l'exploration.
+Path et Parcours désignent la même trajectoire de formation ordonnée par objectif, composant librement les ressources existantes. La Bibliothèque en fournit l'inventaire filtrable ; cours, leçons et dictionnaire restent librement accessibles. Aucun verrou artificiel n'impose la progression.
 
 ### Workspace
 
-Notes, citations, favoris, progression et journal de décisions stockés localement. Le workspace transforme la lecture en artefacts personnels plutôt qu'en simple consommation.
+Notes, citations, favoris, progression, états de production, autoévaluations et journal de décisions sont stockés localement. Les parcours peuvent ainsi relier une lecture à un dossier, une première version, un retour et une version révisée.
 
 ## Principes éditoriaux
 
@@ -45,14 +45,14 @@ Notes, citations, favoris, progression et journal de décisions stockés localem
 ## Priorités stratégiques restantes
 
 1. Approfondir les piliers Intelligence avec des cas, mémos et convictions suffisamment étayés pour être cités et réutilisés.
-2. Transformer les jalons pédagogiques encore abstraits en livrables concrets avec grille d'auto-évaluation et modèle.
+2. Étendre aux parcours prioritaires le cycle de production testé sur la venture philanthropie : dossier, première version, retour, révision et transfert.
 3. Renforcer les passages entre lecture, outil, cas et journal de décisions.
 4. Stabiliser la taxonomie et la qualité éditoriale avant d'élargir les collections.
 5. Mesurer l'usage par la profondeur de lecture et la création d'artefacts, pas uniquement par les pages vues.
 
 ## Garde-fous
 
-- `data/` est la source de vérité du contenu ; `data/generated/` est régénéré.
+- `data/` porte les sources des collections éditoriales structurées et `data/generated/` reste strictement dérivé ; les textes d'interface et instructions exécutables appartiennent à `client/src`.
 - Le produit reste statique et V1 française tant qu'une décision explicite ne change pas ce contrat.
 - Aucun nombre de corpus ne vit ici : consulter `Suivis/ETAT.md`.
 - Les conventions techniques et éditoriales détaillées vivent dans `docs/ARCHITECTURE_EDITION.md`.
@@ -64,4 +64,5 @@ Notes, citations, favoris, progression et journal de décisions stockés localem
 - notes, citations, décisions et livrables créés par session active ;
 - passage d'un contenu vers un cas, un outil ou un artefact de workspace ;
 - progression des parcours sans dégrader la liberté d'exploration ;
+- reprise des productions et passage d'une première version à une version révisée ;
 - fraîcheur des convictions, sources et dossiers datés.

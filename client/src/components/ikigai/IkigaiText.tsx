@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { ExternalLink, Pin } from 'lucide-react';
-import { glossaryBySlug, loadGlossaryDefs } from '@/content';
+import { glossaryBySlug, loadGlossaryDefs } from '@/content/glossary';
 import { safeHttpUrl } from '@/lib/utils';
 import { useAnchoredPopover } from '@/components/ui/useAnchoredPopover';
 import type { GlossaryDef, IkigaiMode } from '@/content/types';
@@ -23,6 +23,8 @@ const SPLIT = /(\[\[[^\]]+\]\]|\{\{[^}]+\}\})/g;
 function GlossaryPopover({ slug, label }: { slug: string; label: string }) {
   const entry = glossaryBySlug(slug);
   const [def, setDef] = useState<GlossaryDef | null>(null);
+  const [loadStatus, setLoadStatus] = useState<'idle' | 'loading' | 'error'>('idle');
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const {
     open,
     pinned,
@@ -40,8 +42,21 @@ function GlossaryPopover({ slug, label }: { slug: string; label: string }) {
   // short preview shows immediately while the definitions chunk loads.
   useEffect(() => {
     if (!open || def) return;
-    void loadGlossaryDefs().then((all) => setDef(all[slug] ?? { definition: entry?.short ?? '' }));
-  }, [open, def, slug, entry]);
+    let active = true;
+    setLoadStatus('loading');
+    void loadGlossaryDefs()
+      .then((all) => {
+        if (!active) return;
+        setDef(all[slug] ?? { definition: entry?.short ?? '' });
+        setLoadStatus('idle');
+      })
+      .catch(() => {
+        if (active) setLoadStatus('error');
+      });
+    return () => {
+      active = false;
+    };
+  }, [open, def, slug, entry, loadAttempt]);
 
   if (!entry) return <>{label}</>;
 
@@ -67,6 +82,21 @@ function GlossaryPopover({ slug, label }: { slug: string; label: string }) {
             {pinned && <Pin size={12} className="shrink-0 text-[color:var(--primary)]" aria-hidden />}
           </span>
           <span className="block text-[0.8rem] leading-relaxed text-surface-variant">{def ? def.definition : entry.short}</span>
+          {loadStatus === 'error' && (
+            <span role="alert" className="mt-2 block text-[0.72rem] leading-relaxed text-surface-variant">
+              Définition détaillée indisponible.
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setLoadAttempt((attempt) => attempt + 1);
+                }}
+                className="ml-1 underline decoration-dotted underline-offset-4"
+              >
+                Réessayer
+              </button>
+            </span>
+          )}
           {entry.aliases && entry.aliases.length > 0 && (
             <span className="mt-2 block font-mono text-[0.64rem] leading-relaxed text-surface-variant/80">
               Alias : {entry.aliases.slice(0, 5).join(', ')}

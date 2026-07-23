@@ -146,7 +146,7 @@ export default function DesignSystemShowcasePage() {
         </div>
 
         {/* Dynamic Section Renderer */}
-        <main className="grid gap-12">
+        <div className="grid gap-12">
 
           {/* 1. COLORS SECTION */}
           {activeTab === 'colors' && (
@@ -768,7 +768,7 @@ export default function DesignSystemShowcasePage() {
             </section>
           )}
 
-        </main>
+        </div>
 
         {/* Back Link */}
         <footer className="mt-16 text-center">

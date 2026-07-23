@@ -7,17 +7,9 @@
     "definition": "L’83(b) election permet à un bénéficiaire d’actions soumises au vesting d’être imposé au moment de l’attribution plutôt qu’au fur et à mesure du vesting. Elle est surtout pertinente lorsque la valeur initiale des actions est faible.",
     "example": "Un founder américain peut déposer une 83(b) election après l’émission de founder shares soumises au vesting."
   },
-  "ai-native-startup": {
-    "definition": "Startup pensée dès l'origine autour de l'IA, et non simple produit existant auquel on ajoute une fonctionnalité IA. Le caractère AI-native peut toucher le produit, la structure de coûts, les données propriétaires, la vitesse de développement, le support client ou la [[gtm|GTM]]. Pour un investisseur, l'enjeu est de distinguer un vrai changement de [[why-now|why now]] d'un habillage narratif : l'IA doit créer une barrière, une vitesse d'exécution ou une expérience difficile à reproduire.",
-    "example": "Un logiciel qui automatise un workflow métier complet grâce à l'IA et apprend des données clients peut être AI-native."
-  },
-  "arr": {
-    "definition": "L'ARR mesure la valeur annualisée des revenus récurrents actifs d'une entreprise. En SaaS, il sert à évaluer la trajectoire de croissance, la rétention, le burn multiple et les multiples de valorisation. Il ne doit pas être confondu avec un run rate annualisé basé sur un mois exceptionnel.",
-    "example": "100 k€ de MRR récurrent actif correspondent à environ 1,2 M€ d'ARR, hors setup fees et services non récurrents."
-  },
-  "arr-par-employe": {
-    "definition": "L'ARR par employé mesure l'efficacité avec laquelle une startup transforme son headcount en revenu récurrent. Il aide à comparer des modèles SaaS, mais doit être interprété avec stade, externalisation, marge et stratégie de croissance.",
-    "example": "Une startup à 10 M€ d'ARR avec 100 employés affiche 100 k€ d'ARR par employé."
+  "a16z": {
+    "definition": "a16z, ou Andreessen Horowitz, est une firme VC américaine devenue une référence par ses investissements, son contenu, ses thèses sectorielles et ses équipes platform. Le module 11 ajoute surtout son rôle de source et d’exemple de market development à grande échelle.",
+    "example": "Un fonds peut citer a16z comme modèle de platform support combinant contenu, réseau corporate, expertise sectorielle et services aux sociétés du portefeuille."
   },
   "accel": {
     "definition": "VC global avec une forte présence européenne, notamment depuis Londres. Accel investit du [[seed|seed]] à la croissance, avec un track record incluant Facebook, Slack, Spotify, Deliveroo et Supercell. Le fonds est aussi connu pour ses programmes de [[scout|scouts]] et sa capacité à mener des tours de [[series-a|Series A]] ambitieux."
@@ -54,6 +46,10 @@
     "definition": "Les actions virtuelles, ou phantom shares, donnent à un salarié ou dirigeant un droit économique similaire à l’equity sans lui transférer de véritables actions ni droits de vote. Elles sont souvent utilisées pour l’[[employee-equity|employee equity]] lorsque l’émission de titres réels serait trop lourde juridiquement ou fiscalement.",
     "example": "Un salarié reçoit des phantom shares qui paieront un bonus indexé sur la valeur de sortie si la société est vendue."
   },
+  "additionalite": {
+    "definition": "L’additionalité examine la différence attribuable à l’intervention d’un financeur ou d’une organisation par rapport à une situation de référence plausible. Elle peut venir du capital, de conditions plus patientes, d’un accompagnement ou d’une action que d’autres acteurs n’auraient pas fournie aux mêmes conditions. Elle ne se déduit ni de l’intention ni du seul constat d’un résultat : les hypothèses de comparaison, la contribution d’autres acteurs et les incertitudes doivent être explicitées.",
+    "example": "Une subvention finance une expérimentation que ni les recettes ni les financeurs ordinaires n’auraient couverte ; l’analyse documente ce contrefactuel avant de conclure à l’additionalité."
+  },
   "advisory-board": {
     "definition": "Un advisory board réunit des experts ou personnes de réseau qui conseillent la startup sans exercer les pouvoirs juridiques du Board of Directors. Il peut aider sur le marché, le recrutement, la crédibilité commerciale ou la préparation au fundraising.",
     "example": "Une startup deeptech crée un advisory board scientifique pour crédibiliser sa diligence technique auprès des investisseurs."
@@ -65,6 +61,10 @@
   "placement-agent": {
     "definition": "Un agent de placement aide un GP, un fonds ou parfois une société à identifier des investisseurs, préparer le matériel de levée et organiser les introductions. En VC fund fundraising, il peut accompagner un [[gp|GP]] auprès de [[lp|LPs]], surtout pour des fonds institutionnels ou internationaux.",
     "example": "Un emerging manager mandate un agent de placement pour accéder à des LPs européens et accélérer son final close."
+  },
+  "ai-native-startup": {
+    "definition": "Startup pensée dès l'origine autour de l'IA, et non simple produit existant auquel on ajoute une fonctionnalité IA. Le caractère AI-native peut toucher le produit, la structure de coûts, les données propriétaires, la vitesse de développement, le support client ou la [[gtm|GTM]]. Pour un investisseur, l'enjeu est de distinguer un vrai changement de [[why-now|why now]] d'un habillage narratif : l'IA doit créer une barrière, une vitesse d'exécution ou une expérience difficile à reproduire.",
+    "example": "Un logiciel qui automatise un workflow métier complet grâce à l'IA et apprend des données clients peut être AI-native."
   },
   "lp-capital-allocation": {
     "definition": "L’allocation de capital LP traduit une politique d’investissement en engagements par classe d’actifs, stratégie, manager et vintage. Elle contraint directement le fundraising des GPs et dépend des distributions, de la liquidité, du DPI et de l’appétit risque.",
@@ -82,6 +82,10 @@
     "definition": "L'analyst VC produit la matière première de l'investissement : veille marché, [[deal-flow|sourcing]], screening, benchmarks, modèles simples et support aux [[dd|due diligences]]. Il apprend surtout à construire un jugement d'investisseur.",
     "example": "Un analyst prépare une cartographie de marché et un premier deal memo avant le comité."
   },
+  "ancrage": {
+    "definition": "L’ancrage est la tendance à s’appuyer sur la première information chiffrée rencontrée — un ask, une valorisation de tour précédent, un comparable — et à s’en écarter insuffisamment ensuite, même lorsqu’elle est manifestement décorrélée des fondamentaux. Mis en évidence par Tversky et Kahneman, il gouverne en pratique la négociation de valorisation : celui qui pose le premier chiffre fixe le référent invisible de toute la discussion. La parade consiste à formuler sa propre estimation, documentée, avant d’entendre celle de la partie adverse.",
+    "example": "« Notre dernier tour était à 50 M€ » : six mois plus tard, la discussion reste arrimée à ce chiffre alors que le marché a tourné."
+  },
   "annualized-run-rate": {
     "definition": "L'annualized run rate extrapole un revenu récent sur douze mois. Il peut inclure du revenu non récurrent et reste une estimation instantanée, donc moins robuste que l'ARR contractuel d'un modèle récurrent.",
     "example": "Un mois à 80 k€ de revenu total peut être présenté comme 960 k€ de run rate, même si une partie du revenu est one-shot."
@@ -89,6 +93,14 @@
   "anti-dilution": {
     "definition": "Clause attachée aux [[actions-de-preference|actions de préférence]] qui protège les investisseurs si la société lève un [[down-round|down round]]. Elle n'empêche pas la [[dilution|dilution]] ; elle ajuste le prix ou le ratio de conversion pour que les investisseurs protégés reçoivent davantage d'[[actions-ordinaires|actions ordinaires]] à la conversion. En pratique française et européenne, la formule weighted average est la référence de marché ; le full ratchet existe dans les documents mais reste beaucoup plus punitif pour les fondateurs.",
     "example": "Si une Series A a investi à 10 € par action et qu'une Series B se fait à 5 €, la clause anti-dilution peut augmenter le nombre d'actions reçues par la Series A à la conversion."
+  },
+  "arr": {
+    "definition": "L'ARR mesure la valeur annualisée des revenus récurrents actifs d'une entreprise. En SaaS, il sert à évaluer la trajectoire de croissance, la rétention, le burn multiple et les multiples de valorisation. Il ne doit pas être confondu avec un run rate annualisé basé sur un mois exceptionnel.",
+    "example": "100 k€ de MRR récurrent actif correspondent à environ 1,2 M€ d'ARR, hors setup fees et services non récurrents."
+  },
+  "arr-par-employe": {
+    "definition": "L'ARR par employé mesure l'efficacité avec laquelle une startup transforme son headcount en revenu récurrent. Il aide à comparer des modèles SaaS, mais doit être interprété avec stade, externalisation, marge et stratégie de croissance.",
+    "example": "Une startup à 10 M€ d'ARR avec 100 employés affiche 100 k€ d'ARR par employé."
   },
   "general-meeting": {
     "definition": "L’assemblée générale réunit les actionnaires et adopte les décisions qui relèvent de leur compétence : approbation de comptes, modification des [[articles-of-association|statuts]], augmentation de capital ou certaines décisions de gouvernance. Dans une levée, elle peut autoriser l’émission de nouveaux titres.",
@@ -113,6 +125,22 @@
   "benchmark": {
     "definition": "Un benchmark de fonds permet de comparer les retours d’un fonds à ceux de fonds comparables par [[vintage|vintage]], stratégie, géographie ou stade. En VC, il sert à interpréter des métriques comme [[dpi|DPI]], [[tvpi|TVPI]], [[irr|IRR]] ou [[moic|MOIC]] avec le bon contexte de marché.",
     "example": "Un TVPI de 1,6x n’a pas le même sens pour un fonds 2021 encore jeune que pour un fonds 2014 proche de sa liquidation."
+  },
+  "beyond-grants": {
+    "definition": "Beyond grants désigne l’élargissement de la boîte à outils d’une fondation au-delà des seules subventions : prêts, garanties, fonds propres, instruments hybrides, mobilisation de la dotation ou accompagnement non financier. L’approche ne remplace pas les dons. Elle consiste à choisir l’instrument en fonction des besoins de l’organisation, de sa capacité de remboursement, du risque et de l’impact recherché le long du [[continuum-du-capital|continuum du capital]].",
+    "example": "Une fondation conserve ses subventions pour les actions sans modèle de revenus, tout en accordant un prêt patient à une entreprise sociale capable de le rembourser."
+  },
+  "biais-d-autorite": {
+    "definition": "Le biais d’autorité conduit à accorder un poids excessif aux marqueurs de statut d’un fondateur — école, passage par une entreprise prestigieuse, expérience de fondateur récidiviste — au détriment de l’examen direct du dossier. Ces signaux ont une valeur informative réelle, mais elle est généralement déjà reflétée dans le prix et dans la concurrence sur le deal ; en faire un critère de tri revient souvent à payer cher une information publique. L’effet de halo, par lequel une qualité saillante colore l’ensemble du jugement, en est proche.",
+    "example": "Un fondateur ex-Stripe obtient une diligence plus rapide et plus indulgente qu’un autodidacte au dossier équivalent."
+  },
+  "biais-de-confirmation": {
+    "definition": "Le biais de confirmation conduit à rechercher, retenir et surpondérer les informations qui confirment une conviction préexistante, et à écarter celles qui la contredisent. En due diligence, il est particulièrement insidieux : le champion d’un deal, déjà convaincu, oriente involontairement la vérification vers la consolidation de sa thèse. La parade consiste à inverser la charge de la preuve — consacrer la diligence à chercher ce qui tuerait le deal — et à confier explicitement à un tiers le rôle d’avocat du diable.",
+    "example": "Convaincu d’un dossier, on rassemble surtout les éléments qui le défendent en comité, en s’appuyant sur les références fournies par le fondateur."
+  },
+  "biais-de-resultat": {
+    "definition": "Le biais de résultat conduit à évaluer une décision d’après ce qu’elle a produit, et non d’après la qualité du raisonnement disponible au moment où elle a été prise. Dans un métier à forte variance comme le capital-risque, où la chance pèse lourd sur l’issue d’un investissement, cette confusion empêche d’apprendre : une bonne décision peut mal tourner et une mauvaise décision réussir. Annie Duke en a fait le cœur de « Thinking in Bets » ; la parade consiste à consigner le raisonnement avant de connaître le résultat.",
+    "example": "Le comité passe sur une société pour des raisons de prix disciplinées ; trois ans plus tard elle vaut dix fois ce tour. Conclure « c’était une erreur » sur ce seul fait, c’est le biais de résultat."
   },
   "board-culture-best-practices": {
     "definition": "La culture de board désigne la manière dont le board fonctionne en pratique : qualité des échanges, préparation, clarté des décisions, suivi et capacité à traiter les tensions. Un bon board aide le CEO sans devenir une charge de gouvernance inutile.",
@@ -198,9 +226,17 @@
     "definition": "Un capital call transforme un commitment LP en cash effectivement versé au fonds. Le GP appelle le capital au rythme des investissements, frais, follow-ons ou besoins du véhicule, selon les règles du LPA.",
     "example": "Un LP engagé à hauteur de 10 M€ reçoit un capital call de 1 M€ pour financer un nouveau deal et les frais du trimestre."
   },
+  "capital-catalytique": {
+    "definition": "Le capital catalytique accepte un risque disproportionné, un rendement inférieur au marché ou des conditions plus souples afin de produire un impact et de rendre possibles des investissements qui ne se feraient pas autrement. Il peut prendre la forme de dette, de fonds propres, de garantie ou de tranche subordonnée. Il sert notamment à prouver la viabilité d’un modèle, absorber une partie du risque ou mobiliser des financeurs tiers. Tout capital à impact n’est donc pas catalytique : l’additionnalité doit être identifiable.",
+    "example": "Une fondation apporte une tranche subordonnée qui absorbe les premières pertes et permet à une banque de financer un projet qu’elle jugeait trop risqué seule."
+  },
   "capital-efficiency": {
     "definition": "La capital efficiency mesure la discipline avec laquelle une startup transforme le financement en revenus, apprentissages ou valeur. Elle se lit via burn multiple, runway, marge brute, unit economics et qualité de croissance.",
     "example": "Deux startups au même ARR peuvent être très différentes si l'une a brûlé 3 M€ et l'autre 20 M€ pour y arriver."
+  },
+  "capital-patient": {
+    "definition": "Le capital patient décrit un profil économique : horizon long, remboursement ou rendement différé et tolérance à une montée en charge progressive. Il peut soutenir une organisation dont les résultats sociaux et les flux apparaissent lentement. Ce n’est pas un véhicule juridique autonome ; prêt, titre, garantie ou capital doivent être choisis selon la forme du bénéficiaire, les droits convenus et la capacité de remboursement.",
+    "example": "Un prêt de long terme avec différé accompagne une entreprise sociale dont les contrats montent progressivement en charge, après test de sa capacité de remboursement."
   },
   "legal-share-capital": {
     "definition": "Le capital social légal correspond au capital juridiquement souscrit et inscrit dans les [[articles-of-association|statuts]] ou registres applicables. Il se distingue du capital [[fully-diluted-shares|fully diluted]], qui tient compte des options, warrants et autres instruments convertibles pouvant diluer l’actionnariat.",
@@ -265,9 +301,21 @@
     "definition": "Un continuation fund est un véhicule créé par un GP pour transférer certains actifs d’un fonds arrivant en fin de vie vers une nouvelle structure. Il peut offrir de la liquidité aux LPs sortants tout en permettant au GP et à certains LPs de conserver l’exposition à un actif jugé prometteur.",
     "example": "Un fonds proche de sa fin de vie crée un continuation vehicle pour conserver une société encore privée mais prometteuse."
   },
+  "continuum-du-capital": {
+    "definition": "Le continuum du capital situe les instruments selon la priorité donnée à l’impact, le risque accepté et le rendement financier attendu, depuis les dons jusqu’aux capitaux commerciaux. Il aide à faire correspondre une source de financement aux besoins d’une organisation et peut combiner subventions, capital catalytique, dette ou fonds propres. Il ne décrit ni des étapes obligatoires ni une hiérarchie : plusieurs formes de capital peuvent coexister au même moment.",
+    "example": "Un projet peut associer une subvention pour la recherche, un prêt catalytique pour le déploiement et des fonds propres commerciaux pour changer d’échelle."
+  },
+  "contrat-a-impact": {
+    "definition": "Un contrat à impact organise généralement le préfinancement d’une action par un ou plusieurs investisseurs, puis le paiement par un payeur public selon des résultats convenus et vérifiés de manière indépendante. L’opération peut aussi associer opérateur, évaluateur et structeur ; elle ne se réduit donc pas toujours à trois intervenants. Sa pertinence dépend de la maturité de l’action, de la mesurabilité, de la trésorerie et des coûts de transaction. Ce n’est pas un mode de financement adapté à toute organisation.",
+    "example": "Des investisseurs préfinancent un programme d’insertion et le payeur public rembourse selon un protocole de résultats et d’évaluation défini au contrat."
+  },
   "shareholder-contribution": {
     "definition": "Une contribution d’actionnaire est un apport versé en complément du [[nominal-amount|montant nominal]] des titres. Elle permet de refléter le prix économique convenu dans le deal sans que tout le montant soit nécessairement inscrit au capital social, une distinction importante dans certaines juridictions européennes.",
     "example": "Pour obtenir 20 % de la société, l’investisseur paie le nominal des nouvelles parts puis verse le reste du million d’euros en contribution d’actionnaire."
+  },
+  "convention-de-financement": {
+    "definition": "Une convention de financement traduit la décision de soutien en engagements adaptés à la nature de l’instrument et aux parties. Elle précise notamment l’objet, le budget de référence, la durée, les versements, l’affectation ou la flexibilité, les conditions préalables, les informations proportionnées, le traitement des écarts, la suspension, la restitution éventuelle, la révision et la sortie. Elle ne se confond pas avec une term sheet de capital-risque ; ses clauses doivent être validées au regard du droit, de la fiscalité, de la comptabilité et des règles relatives aux données applicables.",
+    "example": "Une convention pluriannuelle prévoit un premier versement adapté au besoin de trésorerie, des revues documentées et une procédure de rephasage avant toute suspension."
   },
   "conversion-discount": {
     "definition": "Le conversion discount permet à une convertible note ou un SAFE de convertir à un prix inférieur à celui payé par les nouveaux investisseurs du tour qualifié. Il rémunère le risque pris plus tôt.",
@@ -289,6 +337,14 @@
     "definition": "Les COGS regroupent les coûts directement liés à la livraison du produit : hébergement, support, services de livraison, coûts de production ou infrastructure selon le modèle. Ils déterminent la marge brute.",
     "example": "Pour un SaaS IA, les coûts d'inférence peuvent devenir une composante majeure des COGS."
   },
+  "cout-complet": {
+    "definition": "Le coût complet rapproche les coûts directement attribuables d’une activité et la quote-part documentée des fonctions, outils, locaux et moyens partagés qu’elle consomme. Les clés d’allocation doivent refléter l’usage réel et rester réconciliables avec les comptes. Investissement, besoin en fonds de roulement et réserve de résilience sont présentés séparément lorsqu’ils répondent à des besoins distincts. Aucun taux de frais généraux ne constitue une norme universelle.",
+    "example": "Le budget d’un programme ajoute aux salaires de terrain une quote-part fondée sur le temps de la direction, de la finance, des outils et des locaux."
+  },
+  "cout-irrecuperable": {
+    "definition": "Le biais de coût irrécupérable conduit à tenir compte, dans une décision, du capital déjà engagé et non récupérable — alors que seul devrait compter le rendement marginal attendu du nouvel investissement. En suivi de portefeuille, il produit l’escalade d’engagement : on re-finance par fidélité à l’histoire des sociétés qu’on ne sourcerait jamais aujourd’hui. La parade consiste à instruire chaque follow-on comme un dossier neuf, en coût d’opportunité : le mettrait-on au-dessus de ses meilleures nouvelles opportunités ?",
+    "example": "Une société en difficulté demande un bridge ; on participe « pour ne pas perdre » ce qui est déjà investi."
+  },
   "fund-selection-criteria-lp": {
     "definition": "Les critères de sélection LP structurent l’évaluation d’un fonds : qualité de l’équipe, stratégie, différenciation, track record, stabilité, alignement économique, construction de portefeuille et validation externe.",
     "example": "Un LP score un emerging manager sur sa thèse, son accès au deal flow et la cohérence de son modèle de réserves."
@@ -297,13 +353,13 @@
     "definition": "Le CAC additionne les dépenses commerciales et marketing nécessaires pour acquérir un client. En VC, il ne se lit jamais seul : il doit être comparé à la marge, à la [[ltv|LTV]], au payback, au canal d'acquisition et à la répétabilité du go-to-market.",
     "example": "Un CAC de 5 000 € peut être sain si le client génère une marge récurrente élevée et se rembourse vite."
   },
-  "customer-roi": {
-    "definition": "Le customer ROI mesure le bénéfice économique reçu par le client par rapport au prix et au coût d'adoption du produit. Il soutient le pricing, la rétention, les références clients et la capacité à vendre à des acheteurs rationnels.",
-    "example": "Un outil qui économise 200 k€ par an peut justifier un prix de 40 k€ si la preuve de ROI est crédible."
-  },
   "customer-objections": {
     "definition": "Les customer objections révèlent les frictions de vente : budget, urgence, intégration, sécurité, confiance, ROI ou priorité interne. En diligence, leur répétition aide à distinguer un vrai problème de marché d'un simple manque de maturité commerciale.",
     "example": "Si plusieurs prospects disent que l'intégration est trop lourde, le risque peut être produit autant que commercial."
+  },
+  "customer-roi": {
+    "definition": "Le customer ROI mesure le bénéfice économique reçu par le client par rapport au prix et au coût d'adoption du produit. Il soutient le pricing, la rétention, les références clients et la capacité à vendre à des acheteurs rationnels.",
+    "example": "Un outil qui économise 200 k€ par an peut justifier un prix de 40 k€ si la preuve de ROI est crédible."
   },
   "customer-success": {
     "definition": "Le customer success accompagne les clients après la vente afin d’améliorer adoption, satisfaction, rétention, expansion et références. En SaaS, il relie directement la qualité d’exécution au churn, au NRR, à la LTV et à la répétabilité de la croissance.",
@@ -339,6 +395,10 @@
   "deal-flow": {
     "definition": "Le deal flow regroupe les opportunités d'investissement qui arrivent à un fonds par réseau, inbound, outbound ou travail de thèse. Sa valeur dépend moins du volume brut que de la qualité de l'accès, du timing et du fit avec la stratégie du fonds.",
     "example": "Un fonds seed peut voir 2 000 dossiers par an, mais n'investir que dans les opportunités où l'accès est précoce, qualifié et aligné avec sa thèse."
+  },
+  "deal-heat": {
+    "definition": "Le deal heat désigne la chaleur compétitive entourant une transaction — term sheets concurrentes, tour qui « se boucle cette semaine » — qui pousse à décider vite, au détriment de la diligence. Il faut le distinguer de la FOMO (fear of missing out), qui en est la traduction émotionnelle : la peur de manquer une affaire. Le deal heat est souvent en partie fabriqué pour comprimer le temps de l’investisseur ; la première parade consiste à vérifier la réalité de l’urgence, puis à pré-engager les conditions sans lesquelles on ne signera pas, quitte à laisser partir le tour.",
+    "example": "« Plusieurs term sheets sont déjà sur la table, vous avez quarante-huit heures » : la diligence est écourtée sous la pression."
   },
   "deal-memo": {
     "definition": "Document synthétique défendant (ou questionnant) un investissement devant le comité : thèse, marché, équipe, risques, termes. Un bon mémo présente aussi les raisons de ne pas investir."
@@ -414,6 +474,10 @@
     "definition": "Le drag-along évite qu’une minorité bloque un exit lorsque les approbations prévues sont atteintes. Il dépend des seuils de vote, des approvals board/investisseurs et des protections accordées aux fondateurs et minoritaires.",
     "example": "Si le board, les preferred et une majorité des common approuvent une vente, les autres actionnaires doivent vendre aux mêmes conditions."
   },
+  "droits-d-information-du-financeur": {
+    "definition": "Les droits d’information du financeur définissent les données, pièces, indicateurs, fréquences, formats, destinataires, protections et usages nécessaires à des décisions identifiées. Ils réutilisent autant que possible les données existantes, tiennent compte du coût de production et excluent les données personnelles non nécessaires. Ils ne confèrent aucun pouvoir de direction opérationnelle et ne remplacent pas les organes de l’organisation ; leurs modalités sont fixées dans la convention de financement.",
+    "example": "La convention prévoit un tableau trimestriel agrégé sur l’usage des fonds, la trésorerie, la qualité et les incidents matériels, sans transmission systématique de dossiers individuels."
+  },
   "dry-powder": {
     "definition": "La dry powder est le capital disponible mais non encore déployé. Elle donne au fonds de la flexibilité pour investir, soutenir ses gagnants ou saisir des opportunités, mais crée aussi une pression de déploiement.",
     "example": "Un fonds avec beaucoup de dry powder peut continuer à financer ses meilleures sociétés pendant un marché plus fermé."
@@ -426,6 +490,10 @@
     "definition": "Une Dutch auction IPO est une introduction en bourse où les investisseurs soumettent un prix et une quantité, puis le prix d’offre est fixé autour du niveau qui permet de placer les actions disponibles. Les investisseurs servis paient généralement le même prix de clearing. Le mécanisme cherche à réduire la discrétion d’allocation du bookbuilding classique, mais reste rare en pratique.",
     "example": "Google a utilisé une IPO par enchère hollandaise modifiée en 2004 pour ouvrir davantage l’allocation aux investisseurs et laisser la demande contribuer au prix d’offre."
   },
+  "ebitda": {
+    "definition": "L'EBITDA est une mesure de rentabilité opérationnelle avant intérêts, impôts, dépréciations et amortissements. En VC early-stage il est souvent négatif ou secondaire, mais il devient utile pour les sociétés plus matures, les comparables, l'[[enterprise-value|enterprise value]] et les multiples de sortie.",
+    "example": "Une startup growth encore déficitaire sera souvent valorisée sur son ARR ; une société plus mature pourra être comparée sur un multiple d’EBITDA."
+  },
   "ebitda-exit-multiple": {
     "definition": "L’EBITDA exit multiple estime la valeur de sortie en appliquant un multiple de marché à l’EBITDA attendu au moment de l’exit. Cette méthode est surtout pertinente pour des sociétés matures ou rentables ; pour beaucoup de startups early-stage, les multiples de revenus ou la logique de marché restent plus fréquents.",
     "example": "Une société projetant 8 M€ d’EBITDA à l’exit peut être valorisée 80 M€ avec un multiple de sortie de 10x."
@@ -434,29 +502,25 @@
     "definition": "Bras du groupe BEI dédié au financement des PME : l'EIF est l'un des plus gros LP de l'écosystème VC européen et un soutien incontournable pour lever un premier fonds.",
     "example": "L'EIF peut représenter une part significative d'un fonds européen émergent."
   },
-  "esg-assessment": {
-    "definition": "L'ESG assessment examine les risques et pratiques ESG d'une startup avant investissement ou en portefeuille. En VC, il peut couvrir conformité, gouvernance, impact environnemental, sécurité, diversité, chaîne de valeur et risques réputationnels.",
-    "example": "Une startup climate peut devoir prouver que son impact annoncé est mesurable et que sa gouvernance des données est robuste."
-  },
-  "ebitda": {
-    "definition": "L'EBITDA est une mesure de rentabilité opérationnelle avant intérêts, impôts, dépréciations et amortissements. En VC early-stage il est souvent négatif ou secondaire, mais il devient utile pour les sociétés plus matures, les comparables, l'[[enterprise-value|enterprise value]] et les multiples de sortie.",
-    "example": "Une startup growth encore déficitaire sera souvent valorisée sur son ARR ; une société plus mature pourra être comparée sur un multiple d’EBITDA."
-  },
   "emerging-manager": {
     "definition": "Un emerging manager est un gestionnaire VC encore en construction de marque et de track record. Les LPs l’évaluent sur la thèse, l’accès au deal flow, la cohérence de portefeuille et la capacité à lever puis performer malgré une base LP plus fragile.",
     "example": "Une équipe qui lève son Fund I avec quelques family offices et institutions publiques est un emerging manager."
-  },
-  "esop": {
-    "definition": "Un ESOP ou option pool est une réserve d'equity utilisée pour attribuer des stock options ou incentives similaires aux salariés, advisors et consultants. Il affecte directement la cap table, la dilution et la négociation pre-money/post-money.",
-    "example": "Un investisseur peut demander un pool de 10 % avant le tour, ce qui dilue principalement les actionnaires existants."
   },
   "employee-equity": {
     "definition": "L’employee equity aligne les salariés sur la création de valeur de la startup, souvent via stock options, RSU ou plans d’actionnariat. Sa qualité dépend du pool disponible, du vesting, du prix d’exercice, de la transparence et de la dilution.",
     "example": "Une startup Series B ajuste son employee equity pour rester compétitive lors du recrutement de senior managers."
   },
+  "esop": {
+    "definition": "Un ESOP ou option pool est une réserve d'equity utilisée pour attribuer des stock options ou incentives similaires aux salariés, advisors et consultants. Il affecte directement la cap table, la dilution et la négociation pre-money/post-money.",
+    "example": "Un investisseur peut demander un pool de 10 % avant le tour, ce qui dilue principalement les actionnaires existants."
+  },
   "enterprise-value": {
     "definition": "L'enterprise value représente la valeur économique de l'activité avant répartition entre dette, cash et equity. Elle sert souvent de base aux multiples de revenus ou d'EBITDA.",
     "example": "Une société avec 100 M€ d'equity value, 20 M€ de dette et 10 M€ de cash a une enterprise value de 110 M€."
+  },
+  "entreprise-solidaire-utilite-sociale-esus": {
+    "definition": "L’agrément Entreprise solidaire d’utilité sociale, ou ESUS, est accordé à des entreprises de l’économie sociale et solidaire qui remplissent les conditions légales en vigueur, notamment relatives à l’utilité sociale, au modèle économique et aux rémunérations. Il facilite l’accès à certains circuits de finance solidaire. Il n’est ni une forme juridique, ni une certification de l’impact obtenu, ni une autorisation générale de recevoir des dons défiscalisés ou tout instrument financier.",
+    "example": "Une association, une coopérative ou une société commerciale de l’ESS peut demander l’agrément si elle satisfait les conditions applicables à sa situation."
   },
   "equity": {
     "definition": "L'[[equity|equity]] représente la propriété économique d'une société. En VC, un investisseur apporte du capital contre des actions ou instruments assimilés, ce qui dilue les actionnaires existants mais aligne son rendement sur la création de valeur.",
@@ -465,6 +529,10 @@
   "equity-value": {
     "definition": "L'equity value est la valeur qui revient aux détenteurs d'equity après prise en compte de la dette nette. Dans un tour de startup, la valuation négociée est souvent pensée comme une equity value.",
     "example": "À enterprise value constante, plus de dette réduit l'equity value disponible pour les actionnaires."
+  },
+  "esg-assessment": {
+    "definition": "L'ESG assessment examine les risques et pratiques ESG d'une startup avant investissement ou en portefeuille. En VC, il peut couvrir conformité, gouvernance, impact environnemental, sécurité, diversité, chaîne de valeur et risques réputationnels.",
+    "example": "Une startup climate peut devoir prouver que son impact annoncé est mesurable et que sa gouvernance des données est robuste."
   },
   "eurazeo": {
     "definition": "Acteur français majeur du private equity, du venture (Eurazeo Ventures) et de la dette privée. Cotée à Paris, elle agit aussi bien en direct qu'en fonds de fonds à l'échelle européenne.",
@@ -505,10 +573,6 @@
     "definition": "L'expertise sectorielle aide un investisseur à identifier les bons problèmes, les bons fondateurs, les dynamiques concurrentielles et les signaux faibles d'un marché. Elle sert aussi aux LPs pour évaluer la crédibilité d'une [[thesis-driven|thèse d'investissement]].",
     "example": "Un investisseur spécialisé en cybersécurité peut mieux distinguer une vraie rupture technique d'un simple repositionnement marketing."
   },
-  "fp-and-a": {
-    "definition": "Le FP&A, pour Financial Planning & Analysis, transforme les données financières et opérationnelles en budgets, forecasts, scénarios et analyses de performance. En startup VC-backed, il devient important quand la croissance, le burn, le runway et la préparation des tours exigent une discipline financière plus structurée.",
-    "example": "Une scale-up crée une fonction FP&A pour comparer le forecast au réalisé, suivre le cash burn et préparer le board pack mensuel."
-  },
   "family-and-friends": {
     "definition": "Family & friends désigne les proches qui apportent du capital très tôt, souvent avant ou autour du [[pre-seed|pre-seed]]. Ce financement peut aider à lancer un prototype, mais il doit être documenté avec soin pour éviter une [[cap-table|cap table]] confuse ou des tensions personnelles si le projet échoue.",
     "example": "Avant de lever auprès de business angels, les fondateurs réunissent 80 000 € auprès de proches pour construire le MVP."
@@ -528,6 +592,18 @@
   "final-close": {
     "definition": "Le final close est la clôture finale de la levée d’un fonds : après cette date, le GP cesse normalement d’accepter de nouveaux [[lp|LPs]] ou commitments dans le véhicule. Il marque la taille définitive du fonds, après un ou plusieurs closes intermédiaires.",
     "example": "Le fonds annonce un first close à 70 M€ pour commencer à investir, puis un final close à 120 M€ six mois plus tard."
+  },
+  "finance-solidaire": {
+    "definition": "La finance solidaire rassemble des mécanismes d’épargne et de financement qui dirigent une partie des capitaux vers des entreprises ou projets à utilité sociale ou environnementale. Elle peut mobiliser fonds solidaires, prêts, garanties ou investissements. Les qualifications doivent rester distinctes : ESUS est un agrément public, tandis que les labels de produits d’épargne relèvent de leurs organismes attributaires. La qualification solidaire ne dispense pas d’analyser le risque et le véhicule.",
+    "example": "Un fonds d’épargne salariale solidaire investit une part de ses actifs dans des entreprises répondant aux conditions prévues par son cadre."
+  },
+  "financement-mixte": {
+    "definition": "Le financement mixte utilise stratégiquement des financements publics, philanthropiques ou de développement pour améliorer le profil de risque et de rendement d’une opération et attirer des capitaux commerciaux vers le développement durable. Il peut combiner subventions, garanties, dette, fonds propres ou tranches concessionnelles. Toute coexistence de sources n’est pas du financement mixte : le montage doit mobiliser des financements additionnels qui ne seraient pas intervenus aux mêmes conditions.",
+    "example": "Une garantie publique couvre une partie du risque d’un portefeuille de projets climatiques et permet à des investisseurs privés de participer au financement."
+  },
+  "financement-non-affecte": {
+    "definition": "Le financement non affecté laisse à l’organisation une latitude d’allocation entre activités, fonctions et besoins compatibles avec sa mission et la convention. Il peut financer des coûts partagés, la résilience ou des adaptations difficiles à anticiper. Il n’implique ni absence d’objectifs ni absence de reddition de comptes, et n’est pas toujours préférable : le choix dépend du risque, de la maturité, de la confiance, des obligations du financeur et de la capacité de pilotage.",
+    "example": "Une convention pluriannuelle autorise l’association à répartir le soutien entre équipes, outils et continuité, avec une revue globale des résultats et risques."
   },
   "non-dilutive-financing": {
     "definition": "Le financement non dilutif apporte du capital sans vendre immédiatement de l’equity. Il peut inclure dette, subventions, préfinancement de crédits d’impôt ou instruments liés au revenu, mais il peut tout de même créer des obligations économiques fortes.",
@@ -568,6 +644,10 @@
     "definition": "Le fondateur construit l'entreprise, porte la vision, recrute l'équipe, lève des fonds et assume les risques principaux. En early-stage, sa qualité et son [[founder-market-fit|adéquation au marché]] pèsent souvent plus que les métriques.",
     "example": "Au pre-seed, un VC investit souvent d'abord dans la qualité du fondateur et sa compréhension du problème."
   },
+  "fonds-de-dotation": {
+    "definition": "Le fonds de dotation est défini par l’article 140 de la loi du 4 août 2008. Il reçoit et gère des biens ou droits apportés gratuitement et irrévocablement, les capitalise et utilise les revenus pour une mission d’intérêt général ou les redistribue à une personne morale à but non lucratif poursuivant une telle mission. Sa création, ses ressources et son contrôle obéissent à un régime propre. Ce statut ne rend pas automatiquement chaque don éligible à une réduction fiscale.",
+    "example": "Un fonds de dotation finance dans la durée des actions d’intérêt général à partir des revenus de sa dotation et des ressources autorisées."
+  },
   "fund-of-funds": {
     "definition": "Un fonds de fonds alloue du capital à plusieurs venture capital funds sous-jacents. Il donne à ses LPs une exposition diversifiée à plusieurs managers, vintages et stratégies, au prix d’une couche de frais supplémentaire.",
     "example": "Un investisseur institutionnel passe par un fonds de fonds pour accéder à des managers seed difficiles à sélectionner en direct."
@@ -604,12 +684,16 @@
     "definition": "Le founder vesting ou re-vesting impose que les actions des founders s’acquièrent progressivement, souvent lors d’un financement. Il protège la société et les investisseurs si un founder quitte l’entreprise avant d’avoir contribué sur la durée attendue.",
     "example": "Une Series A peut demander qu’une partie des actions déjà détenues par les founders soit soumise à un nouveau vesting."
   },
+  "founder-market-fit": {
+    "definition": "Mesure de la pertinence d'une équipe pour son problème : compréhension non triviale, légitimité, vélocité d'apprentissage. Au stade précoce, c'est souvent le facteur le plus déterminant."
+  },
   "founder-vc-fit": {
     "definition": "Le founder-VC fit porte sur la confiance, le style de communication, le rapport au risque, la gouvernance et les attentes de sortie. Il devient critique après la term sheet, quand l'investisseur accompagne les décisions difficiles sur plusieurs années.",
     "example": "Un fondateur qui veut construire vite avec beaucoup de dilution peut être mal aligné avec un investisseur très prudent sur les réserves et la gouvernance."
   },
-  "founder-market-fit": {
-    "definition": "Mesure de la pertinence d'une équipe pour son problème : compréhension non triviale, légitimité, vélocité d'apprentissage. Au stade précoce, c'est souvent le facteur le plus déterminant."
+  "fp-and-a": {
+    "definition": "Le FP&A, pour Financial Planning & Analysis, transforme les données financières et opérationnelles en budgets, forecasts, scénarios et analyses de performance. En startup VC-backed, il devient important quand la croissance, le burn, le runway et la préparation des tours exigent une discipline financière plus structurée.",
+    "example": "Une scale-up crée une fonction FP&A pour comparer le forecast au réalisé, suivre le cash burn et préparer le board pack mensuel."
   },
   "full-ratchet": {
     "definition": "Le full ratchet est la forme la plus agressive d’anti-dilution : si un down round émet des actions à un prix inférieur, le prix de conversion des preferred existantes est ramené à ce nouveau prix, indépendamment de la taille du tour.",
@@ -640,6 +724,10 @@
   "good-leaver-bad-leaver": {
     "definition": "Les clauses good leaver / bad leaver définissent ce qu’il advient de l’equity d’un founder ou salarié clé lorsqu’il quitte la société. Elles peuvent affecter le prix de rachat, la conservation des actions vested et le traitement des actions non vested.",
     "example": "Un founder licencié pour faute peut être traité comme bad leaver et devoir revendre certaines actions à un prix défavorable."
+  },
+  "gouvernance-associative": {
+    "definition": "La gouvernance associative organise les compétences de l’assemblée, du conseil, du bureau, de la direction et, selon les statuts, des membres ou comités. Son analyse compare les textes, les délégations et les pratiques : composition, quorum, décisions réservées, information reçue, prévention des conflits et contrôle. Les droits accordés à un financeur ne doivent pas lui permettre de se substituer aux organes compétents.",
+    "example": "Avant un soutien pluriannuel, le financeur vérifie que le conseil a autorisé le programme, que la délégation de signature est à jour et qu’un conflit d’intérêts lié à un prestataire a été déclaré et traité."
   },
   "governance": {
     "definition": "La governance couvre la manière dont une startup prend ses décisions importantes, répartit ses droits, supervise ses risques et rend compte à ses actionnaires. Elle devient plus formelle avec les tours VC, le board, les droits investisseurs et les exigences de reporting.",
@@ -719,6 +807,10 @@
     "definition": "L’international expansion consiste à étendre une startup vers de nouveaux pays ou régions. Elle peut augmenter le TAM et la croissance, mais ajoute complexité GTM, recrutement, localisation, conformité, support client et discipline opérationnelle.",
     "example": "Une startup européenne peut viser 25 à 30 % de revenus internationaux avant une Series B si son marché domestique seul ne suffit pas à soutenir l’ambition growth."
   },
+  "investissement-pour-impact": {
+    "definition": "L’investissement pour l’impact repose sur une intention explicite de contribuer à résoudre un problème social ou environnemental, sur la mesure et la gestion des effets produits, et sur l’additionnalité de l’intervention. Il peut employer des subventions comme des instruments remboursables. Il se distingue d’une simple intégration [[esg-assessment|ESG]], souvent centrée sur la maîtrise des risques, et peut accepter davantage de risque ou un rendement moindre pour atteindre l’impact recherché.",
+    "example": "Un fonds finance une solution destinée à une population mal servie, accepte une phase de preuve plus longue et apporte une assistance technique que le marché ne fournirait pas."
+  },
   "investisseur-accredite": {
     "definition": "Un investisseur accrédité est, dans le droit américain, une personne ou entité qui satisfait des critères financiers ou professionnels et peut accéder à certaines [[placement-prive|offres privées]]. En pratique startup, ce statut revient souvent dans les levées US sous [[regulation-d|Regulation D]] et dans les investissements de business angels.",
     "example": "Un business angel américain doit souvent confirmer son statut d’investisseur accrédité avant d’investir dans un SAFE émis dans le cadre d’une offre privée."
@@ -750,6 +842,10 @@
   "j-curve": {
     "definition": "La J-curve décrit la trajectoire typique d’un fonds : fees, write-offs et investissements jeunes pèsent au début, puis les gagnants et sorties peuvent faire remonter DPI, TVPI et IRR. Elle rappelle qu’un jeune fonds est difficile à juger trop tôt.",
     "example": "Un fonds lancé en 2024 peut afficher une performance négative en 2026 avant que ses gagnants ne créent de la valeur plus tard."
+  },
+  "journal-de-decision": {
+    "definition": "Le journal de décision consiste à écrire, au moment de décider et avant d’en connaître le résultat, la prédiction faite, le degré de confiance qui lui est attaché et la date à laquelle on la reverra. Il répond directement au biais de résultat en permettant de juger plus tard la qualité du raisonnement, et non la seule issue. Tenu dans la durée, il mesure la calibration — l’écart entre confiance annoncée et taux de réalisation observé — dans la lignée des travaux de Philip Tetlock sur le jugement prévisionnel et d’Annie Duke. C’est aussi le mécanisme qui re-teste un profil cognitif au lieu de le figer en badge.",
+    "example": "« Cette société atteindra 1 M€ d’ARR sous douze mois — confiance 70 % », daté et revu à l’échéance."
   },
   "kpi": {
     "definition": "Un KPI est une métrique choisie parce qu'elle éclaire une décision ou une priorité critique : acquisition, rétention, marge, cash, usage ou qualité. En diligence, les KPI doivent avoir des définitions stables et réconciliables avec les données sources.",
@@ -787,13 +883,13 @@
     "definition": "Le LP apporte les commitments qui financent un fonds VC, mais délègue la sélection et la gestion des startups au GP. Il évalue les managers via stratégie, track record, DPI, TVPI, liquidité, discipline de construction et fit de portefeuille.",
     "example": "Un fonds de pension engage 20 M€ dans un fonds VC et reçoit ensuite reporting, distributions et valeur résiduelle."
   },
-  "lpa": {
-    "definition": "Le LPA est le contrat central d’un fonds : il fixe la durée du véhicule, les pouvoirs du GP, les engagements LP, les fees, le carry, les règles de distribution et les restrictions importantes.",
-    "example": "Un LPA peut prévoir une durée initiale de 10 ans, des extensions, un hurdle et des règles précises de capital call."
-  },
   "limited-partnership": {
     "definition": "Une limited partnership est l’architecture juridique et économique classique d’un fonds VC : les LPs apportent le capital, le GP gère le fonds et les règles du LPA organisent fees, carry, responsabilité et distributions.",
     "example": "Un fonds est constitué en limited partnership : un GP décide des investissements tandis que des LPs institutionnels financent le véhicule."
+  },
+  "lpa": {
+    "definition": "Le LPA est le contrat central d’un fonds : il fixe la durée du véhicule, les pouvoirs du GP, les engagements LP, les fees, le carry, les règles de distribution et les restrictions importantes.",
+    "example": "Un LPA peut prévoir une durée initiale de 10 ans, des extensions, un hurdle et des règles précises de capital call."
   },
   "liquidation-preference": {
     "definition": "Clause déterminant l'ordre et le montant de paiement à la sortie. Une préférence 1× non-participating rend la mise OU convertit en ordinaire ; une préférence participating rend la mise PUIS partage le reste. Le multiple amplifie l'effet.",
@@ -851,12 +947,20 @@
     "definition": "Le M&A désigne les transactions de fusion ou acquisition qui permettent à une startup de rejoindre un acheteur stratégique ou financier. En VC, c'est une voie d'exit fréquente, dont l'économie dépend du prix, de la structure, des préférences de liquidation et de la répartition des produits.",
     "example": "Une startup peut produire un bon résultat founder via M&A tout en générant un rendement insuffisant pour un grand fonds si le prix d’exit reste trop bas."
   },
+  "mesure-impact": {
+    "definition": "La mesure et gestion de l’impact, ou IMM, définit les changements recherchés, associe les parties concernées, choisit des indicateurs et méthodes proportionnés, collecte des données puis utilise les résultats pour adapter l’action et le financement. Elle distingue réalisations, résultats, contribution et effets négatifs. L’IMM n’est ni une certification ni une preuve automatique de causalité ; sa qualité dépend des données, des méthodes, de la gouvernance et de l’usage décisionnel.",
+    "example": "Un comité suit à la fois la qualité du service, les résultats pour les bénéficiaires et les effets indésirables, puis ajuste le déploiement à chaque revue."
+  },
   "presidio": {
     "definition": "Outil Microsoft open-source pour détecter et masquer des données personnelles dans des documents, utilisable en local — utile pour pré-traiter des pitch decks sensibles sans tout envoyer dans le cloud."
   },
   "milestones": {
     "definition": "Les milestones traduisent la stratégie en preuves mesurables : revenus, croissance, recrutement, produit, qualité de reporting, pipeline, expansion ou efficacité. Ils servent à aligner founders, board et investisseurs sur ce qui doit être accompli avant le prochain tour.",
     "example": "Une startup peut lever un seed pour atteindre 1 M€ d’ARR, réduire son CAC payback et prouver un canal d’acquisition répétable avant la Series A."
+  },
+  "mimetisme": {
+    "definition": "Le mimétisme, ou herding, est la tendance à aligner sa décision sur celle d’acteurs jugés mieux informés — un fonds réputé qui entre ou qui passe, le consensus naissant d’un comité. Il produit des cascades informationnelles où chacun suit un signal collectif qui peut ne reposer sur presque aucune analyse réelle. Sa variante interne, le groupthink, étouffe la dissidence au profit d’un consensus de comité. La parade sociale la plus efficace est le premortem, qui légitime le dissensus avant la décision.",
+    "example": "Apprenant qu’un fonds respecté a passé, sans en connaître la raison, on passe à son tour."
   },
   "moat": {
     "definition": "Le moat — littéralement la « douve » d'un château fort — désigne l'avantage concurrentiel structurel qui empêche un concurrent de répliquer facilement une entreprise, et lui permet de défendre ses parts de marché et ses marges sur la durée. Popularisé par Warren Buffett, le concept est central en capital-risque : un fonds cherche moins une bonne idée qu'une défendabilité qui se renforce avec le temps. Les sources classiques d'un moat sont les effets de réseau, les coûts de changement (switching costs), les économies d'échelle, la marque, la propriété intellectuelle et les barrières réglementaires — ces dernières étant décisives en healthtech, où le marquage médical et le remboursement protègent l'acteur qui les a franchis.",
@@ -882,6 +986,10 @@
     "definition": "Le MOIC mesure combien de fois le capital investi est retourné ou valorisé. Contrairement à l'IRR, il ne tient pas compte du temps ; il sert donc à comprendre l'ampleur du rendement brut avant d'analyser son rythme.",
     "example": "Un investissement de 1 M€ valorisé 5 M€ affiche un MOIC de 5x."
   },
+  "narrative-fallacy": {
+    "definition": "La narrative fallacy, formulée par Nassim Taleb, désigne le penchant à juger une histoire investissable parce qu’elle est cohérente et fluide. Or la qualité narrative d’un projet — la facilité avec laquelle ses pièces s’emboîtent — ne dit rien de sa probabilité de se réaliser ; elle mesure surtout le talent du conteur. En capital-risque, où la conviction se construit en partie sur un récit de futur, le biais est structurel. La parade consiste à isoler les quelques faits qui, s’ils étaient faux, effondreraient l’histoire, et à les tester.",
+    "example": "Une vision limpide et séduisante emporte l’adhésion du comité alors que les preuves d’exécution restent minces."
+  },
   "narrow-based-weighted-average": {
     "definition": "Le narrow-based weighted average protège davantage l’investisseur que la formule broad-based, car le calcul utilise une base de titres plus restreinte. Il reste généralement moins punitif pour les fondateurs qu’un full ratchet.",
     "example": "Deux clauses weighted average peuvent produire des ajustements très différents selon que le dénominateur inclut ou non l’option pool et les autres classes."
@@ -889,6 +997,10 @@
   "nvca": {
     "definition": "La NVCA est l'association professionnelle américaine du venture capital. Elle est particulièrement utile aux praticiens car ses model documents servent souvent de point de départ pour les term sheets et la documentation juridique des financements VC américains.",
     "example": "Un counsel peut comparer une term sheet à un modèle NVCA pour identifier les clauses standard et les écarts négociés."
+  },
+  "negligence-des-taux-de-base": {
+    "definition": "La négligence des taux de base consiste à juger un dossier sur ses singularités apparentes en oubliant la fréquence de référence de sa catégorie — ici, le fait qu’une large majorité des sociétés financées à un stade donné ne rendront pas le capital. Chaque dossier semble échapper à la statistique qui le concerne, d’autant qu’un exemple vif et favorable, par l’heuristique de disponibilité, vient souvent le confirmer. Le biais du survivant en est un cas particulier : n’apprendre que des startups qui ont réussi, en ignorant celles qui ont fait pareil et échoué. Le check des taux de base consiste à partir de la base statistique, puis à n’en sortir que sur des éléments vérifiables.",
+    "example": "« Celui-ci est différent » : l’intuition fait écarter le taux de base au lieu de servir de point de départ."
   },
   "net-new-arr": {
     "definition": "Net New ARR mesure l'augmentation nette d'ARR sur une période. Très utile en SaaS mais peut être trop spécifique pour le lot réduit.",
@@ -950,6 +1062,10 @@
     "definition": "Le path to profitability décrit les leviers qui peuvent mener à l'autosuffisance : croissance du revenu, marge brute, baisse du burn, meilleure efficacité commerciale et discipline de coûts. Il ne signifie pas forcément choisir la rentabilité immédiate plutôt que la croissance.",
     "example": "Une startup peut montrer qu'en ralentissant les recrutements et en améliorant le CAC payback, elle peut atteindre le break-even en 18 mois."
   },
+  "pattern-matching": {
+    "definition": "Le pattern matching consiste à reconnaître dans un fondateur ou un dossier les traits d’un succès passé, et à en inférer un succès futur. Souvent célébré dans le métier comme une forme d’expertise, il repose sur l’heuristique de représentativité décrite par Kahneman et Tversky : on substitue la ressemblance à la probabilité, en négligeant le taux de base de la catégorie. Le risque est double — financer des copies de gagnants d’hier et écarter les profils atypiques d’où viennent souvent les rendements extrêmes.",
+    "example": "Deux dossiers identiques sur le fond ; on instruit en priorité celui dont le fondateur « ressemble » à un founder à succès connu."
+  },
   "pay-to-play": {
     "definition": "Le pay-to-play oblige ou incite les investisseurs existants à suivre leur pro-rata dans un financement futur, souvent en situation de down round. Ceux qui ne participent pas peuvent perdre des droits anti-dilution, être convertis en common ou perdre l’accès aux prochains tours.",
     "example": "Dans un tour de sauvetage, un investisseur qui ne remet pas d’argent perd sa protection anti-dilution."
@@ -1007,6 +1123,14 @@
     "definition": "Le premier rendez-vous VC transforme des signaux de sourcing en décision de poursuivre ou non. Il teste rapidement le narratif, le fit investisseur, la traction, la qualité de l'équipe, le montant recherché et la crédibilité du dossier.",
     "example": "Après un premier call, un partner demande les métriques et la data room si le marché, le one-liner et la traction justifient une diligence."
   },
+  "premortem": {
+    "definition": "Le premortem, formalisé par Gary Klein (Harvard Business Review, 2007), consiste, avant d’arrêter une décision, à se projeter dans un futur où elle a échoué de façon retentissante, puis à remonter le fil pour en expliquer les causes. Il s’appuie sur la recherche en « prospective hindsight » (Mitchell, Russo et Pennington) selon laquelle imaginer qu’un événement s’est déjà produit améliore d’environ trente pour cent la capacité à en identifier les causes. Son apport est autant social qu’analytique : il légitime le dissensus, neutralise le groupthink et l’excès de confiance, et donne une voix à ceux qui se tairaient.",
+    "example": "Avant le « oui » final en comité : « nous sommes dans dix-huit mois, l’investissement est un échec retentissant — qu’est-ce qui l’a causé ? »"
+  },
+  "premortem-inverse": {
+    "definition": "Le premortem inversé adapte la méthode de Klein à la logique propre du capital-risque, qui est un jeu de capture d’outliers régi par une loi de puissance. Le premortem classique, orienté évitement de l’échec, rend trop conservateur s’il est utilisé seul et fait passer à côté des paris audacieux non consensuels. Le premortem inversé corrige ce travers : avant un « non », supposer que le deal écarté est devenu le meilleur du millésime et expliquer pourquoi on l’a raté. Il prend acte que l’erreur de type II — rater un futur leader — coûte structurellement plus cher que l’erreur de type I : une perte est plafonnée à 1×, un miss peut coûter 100×.",
+    "example": "Avant de classer un dossier non consensuel : « il est devenu le meilleur deal de l’année — pourquoi l’avons-nous laissé filer ? »"
+  },
   "pricing-methodology": {
     "definition": "La pricing methodology explique comment une startup relie prix, valeur créée, segmentation client, coûts, concurrence et packaging. En diligence, elle teste si la croissance peut aussi se traduire en marge et en captation de valeur.",
     "example": "Une tarification par siège peut être simple mais moins alignée qu'une tarification à l'usage si la valeur varie fortement par volume traité."
@@ -1038,6 +1162,10 @@
     "definition": "Un proof of concept montre qu'une hypothèse critique fonctionne assez pour mériter l'étape suivante. En VC, il peut valider une technologie, l'intérêt client, une intégration ou une première commercialisation, sans prouver encore la scalabilité complète.",
     "example": "Un PoC payé avec un grand compte peut réduire le risque produit, mais il faut encore vérifier le passage à un déploiement récurrent."
   },
+  "safeguarding": {
+    "definition": "La protection des personnes accompagnées regroupe l’analyse des risques, les règles de conduite, le recrutement sûr, la formation, les canaux de signalement accessibles, la réponse centrée sur la personne affectée et le suivi des partenaires. Elle couvre les dommages causés ou facilités par l’organisation, ses équipes, ses prestataires ou ses programmes. Elle constitue un cadre opérationnel ; en France, les obligations juridiques précises dépendent des publics, des activités et du secteur et doivent être vérifiées.",
+    "example": "Avant un entretien avec des mineurs, l’organisation définit consentement, présence d’un adulte habilité, confidentialité, voie de signalement et conduite à tenir en cas de révélation."
+  },
   "protective-provisions": {
     "definition": "Les protective provisions imposent l’accord de certains investisseurs ou classes de preferred avant des actions majeures : émission de titres, vente, dette importante, modification statutaire, changement de taille du board ou liquidation. Elles déplacent du contrôle sans donner la gestion quotidienne.",
     "example": "Une startup ne peut pas émettre une nouvelle classe senior sans l’approbation des détenteurs de Series A."
@@ -1050,17 +1178,25 @@
     "definition": "Une Qualified Public Offering est une IPO qui dépasse des seuils définis dans les documents de financement, souvent en montant levé et en prix par action. Elle sert à éviter qu’une petite IPO insuffisante déclenche automatiquement les mêmes effets qu’une vraie sortie de qualité institutionnelle.",
     "example": "Une term sheet peut prévoir qu’une QPO doit lever au moins 50 M$ à un prix par action supérieur à un multiple du prix Series A."
   },
-  "qsbs": {
-    "definition": "Le QSBS est un régime fiscal américain applicable à certaines actions qualifiées de petites entreprises, généralement acquises directement auprès d'une C-Corp et détenues au moins cinq ans. Il peut rendre une partie du gain exonérée, sous conditions strictes.",
-    "example": "Un angel qui investit directement en equity dans une C-Corp qualifiée peut préférer cette structure à une convertible note, car le compteur de détention QSBS commence avec l’acquisition des actions."
-  },
   "qualified-purchaser": {
     "definition": "Un qualified purchaser est une catégorie d’investisseur qualifié au sens du droit américain, généralement plus exigeante que l’[[investisseur-accredite|investisseur accrédité]]. Ce statut sert notamment à déterminer qui peut investir dans certains [[fonds-prive|fonds privés]] exclus du régime d’investment company.",
     "example": "Un grand family office peut être traité comme qualified purchaser et investir dans un fonds privé structuré pour des investisseurs institutionnels."
   },
+  "qsbs": {
+    "definition": "Le QSBS est un régime fiscal américain applicable à certaines actions qualifiées de petites entreprises, généralement acquises directement auprès d'une C-Corp et détenues au moins cinq ans. Il peut rendre une partie du gain exonérée, sous conditions strictes.",
+    "example": "Un angel qui investit directement en equity dans une C-Corp qualifiée peut préférer cette structure à une convertible note, car le compteur de détention QSBS commence avec l’acquisition des actions."
+  },
   "referrer-quality": {
     "definition": "La qualité du référent mesure le signal de confiance attaché à une introduction. Une recommandation venant d'un fondateur, client, angel ou operator respecté peut réduire l'asymétrie d'information, à condition que l'introduction apporte le bon contexte.",
     "example": "Une introduction par un client enterprise stratégique porte plus de poids si elle explique pourquoi la douleur produit est réelle et urgente."
+  },
+  "quasi-fonds-propres": {
+    "definition": "Les quasi-fonds propres regroupent, dans l’analyse financière, des ressources de long terme dont le rang, la rémunération ou le remboursement les rapprochent du risque supporté par les fonds propres. L’expression ne désigne pas un statut juridique unique. Le véhicule peut être un titre associatif, un titre participatif, un prêt subordonné ou un autre instrument compatible avec l’émetteur. Une association ne possède pas de capital social : qualifier une créance de quasi-fonds propres n’en fait pas une participation.",
+    "example": "Un financeur compare un titre associatif et un prêt subordonné, puis fait valider le véhicule autorisé pour le bénéficiaire et son propre statut."
+  },
+  "realisation-impact": {
+    "definition": "Une réalisation d’impact, ou output, décrit ce qui a été directement fourni ou produit : séances réalisées, personnes accompagnées, équipements installés ou services délivrés. Elle mesure l’exécution, non le changement qui en résulte. Une réalisation peut être nécessaire à un [[resultat-impact|résultat d’impact]] sans suffire à démontrer ce résultat, son maintien ou son attribution à l’intervention.",
+    "example": "Former 300 personnes est une réalisation ; l’amélioration durable de leur accès à l’emploi est un résultat à mesurer séparément."
   },
   "recurring-revenue": {
     "definition": "Le recurring revenue provient de contrats ou usages qui se renouvellent, souvent via abonnement. Il rend les revenus plus prévisibles et permet d'analyser ARR, MRR, churn et NRR.",
@@ -1086,6 +1222,10 @@
     "definition": "Les representations and warranties sont des déclarations faites par la société, et parfois les fondateurs, sur des sujets comme capitalisation, contrats, propriété intellectuelle, fiscalité, contentieux ou conformité. Elles conditionnent souvent le closing et peuvent ouvrir des recours si elles sont fausses.",
     "example": "Une warranty de propriété intellectuelle affirme que la société détient ou licence correctement la PI nécessaire à son produit ; une exception doit être décrite dans la disclosure letter."
   },
+  "reseau-vc": {
+    "definition": "Le réseau VC sert à sourcer des deals, vérifier une [[dd|due diligence]], aider une startup à recruter, vendre, lever en [[follow-on|follow-on]] ou préparer une sortie. Il explique pourquoi un investisseur peut valoir plus que son capital.",
+    "example": "Un partner ouvre son réseau de clients enterprise et de fonds Series B à une participation en portefeuille."
+  },
   "reserve-funds": {
     "definition": "Les reserve funds sont la poche de capital gardée pour soutenir les sociétés existantes, surtout les gagnants potentiels. La discipline de réserves conditionne la capacité à maintenir l’ownership et à capturer la loi de puissance.",
     "example": "Un fonds garde 45 % de son capital pour pouvoir suivre ses meilleurs deals en Series A et B."
@@ -1096,6 +1236,10 @@
   "rsu": {
     "definition": "Les RSU sont des attributions donnant droit à des actions lorsque les conditions de vesting sont satisfaites. Contrairement aux options, elles n'ont pas de strike price, ce qui les rend plus fréquentes dans les sociétés privées plus matures ou proches de la liquidité.",
     "example": "Une scale-up late-stage peut passer des options aux RSU pour rendre la rémunération equity plus lisible malgré une valorisation déjà élevée."
+  },
+  "resultat-impact": {
+    "definition": "Un résultat d’impact, ou outcome, est un changement de situation, de comportement, de capacité ou de condition pour les parties concernées. Il peut être positif ou négatif, attendu ou inattendu, immédiat ou différé. Son observation ne prouve pas automatiquement que l’intervention en est la cause : l’analyse examine la situation de référence, les autres contributions, la durée et les éventuels effets de déplacement.",
+    "example": "La part de participants conservant un emploi six mois après l’accompagnement décrit un résultat, sous réserve du périmètre, de l’attrition et des autres facteurs."
   },
   "revenue-growth": {
     "definition": "La revenue growth mesure la vitesse de croissance du chiffre d'affaires. En VC, elle doit être analysée avec sa qualité : récurrence, marge, rétention, répétabilité, saisonnalité et coût d'acquisition.",
@@ -1128,14 +1272,6 @@
   "runway": {
     "definition": "Le runway estime le nombre de mois disponibles avant de devoir lever, réduire le burn ou atteindre l'autosuffisance. Il se calcule à partir du cash disponible et du burn mensuel, mais doit intégrer les variations de revenus et de dépenses.",
     "example": "Une startup avec 18 mois de runway peut choisir de lever maintenant pour garder du levier ou attendre un milestone plus fort."
-  },
-  "reseau-vc": {
-    "definition": "Le réseau VC sert à sourcer des deals, vérifier une [[dd|due diligence]], aider une startup à recruter, vendre, lever en [[follow-on|follow-on]] ou préparer une sortie. Il explique pourquoi un investisseur peut valoir plus que son capital.",
-    "example": "Un partner ouvre son réseau de clients enterprise et de fonds Series B à une participation en portefeuille."
-  },
-  "spv": {
-    "definition": "Véhicule ad hoc regroupant plusieurs co-investisseurs dans une seule entité, qui investit ensuite dans une startup. Permet à un groupe d'angels ou de LPs de mutualiser un ticket sans créer un fonds complet.",
-    "example": "Vingt business angels se regroupent dans un SPV pour investir ensemble 500 k€ dans un seed."
   },
   "sales-cycle": {
     "definition": "Le sales cycle mesure le temps et le processus entre le premier contact qualifié et la signature. Il influence le besoin de cash, la prévisibilité du pipeline, le CAC payback et la capacité à scaler un modèle commercial.",
@@ -1214,6 +1350,10 @@
     "definition": "La single-trigger acceleration fait vest tout ou partie de l’equity non acquise dès la survenance d’un événement unique, typiquement un changement de contrôle. Elle protège le bénéficiaire mais peut compliquer une acquisition pour l’acheteur.",
     "example": "Un founder obtient 25 % d’accélération automatique de son vesting dès la clôture d’une acquisition."
   },
+  "social-return-on-investment-sroi": {
+    "definition": "Le Social Return on Investment, ou SROI, estime un ratio entre une valeur sociale monétarisée et les ressources engagées. Le calcul dépend notamment du périmètre, des proxys financiers, du contrefactuel, de l’attribution, de la durée et du taux de déperdition. Il doit donc présenter hypothèses, sensibilités et limites. Un SROI élevé ne constitue ni une preuve autonome de causalité ni un classement universel entre interventions différentes.",
+    "example": "Une évaluation publie son ratio avec les fourchettes de valeur, les hypothèses d’attribution et un scénario prudent plutôt qu’un chiffre isolé."
+  },
   "portfolio-company": {
     "definition": "Une société en portefeuille est une entreprise dans laquelle un fonds a investi. Pour un VC, elle est suivie dans le [[portfolio-monitoring|portfolio monitoring]], peut recevoir du [[portfolio-support|portfolio support]], des [[follow-on|follow-ons]] et contribue in fine aux retours via un [[exit|exit]] ou une perte.",
     "example": "Après son investissement seed, la startup devient une société en portefeuille du fonds et entre dans les revues mensuelles de portfolio."
@@ -1222,9 +1362,17 @@
     "definition": "La solution décrit comment une startup répond au problème identifié. En diligence, l'investisseur teste si elle crée une amélioration claire, défendable et adoptable par rapport aux alternatives existantes.",
     "example": "Une solution peut être techniquement forte mais commercialement faible si elle ne s'intègre pas au workflow du buyer persona."
   },
+  "sortie-de-partenariat": {
+    "definition": "La sortie de partenariat organise la fin ou la modification substantielle de la relation entre un financeur et une organisation. Elle précise la décision, la date, les décaissements restants, les responsabilités, le transfert d’informations, la communication, le sort des outils, les mesures de continuité et la revue postérieure. Elle n’est pas un événement de liquidité : elle tient compte de la convention, des risques pour les personnes servies et des dépendances créées par le soutien.",
+    "example": "Six mois avant l’échéance, les parties documentent les paiements restants, la continuité des orientations en cours, le transfert des outils et les conditions d’un éventuel renouvellement."
+  },
   "sovereign-wealth-fund": {
     "definition": "Un sovereign wealth fund investit du capital public excédentaire dans plusieurs classes d’actifs, dont venture, growth, secondaries et co-investments. Il peut influencer les grands fundraisings par la taille de ses tickets et ses mandats stratégiques.",
     "example": "Un fonds souverain participe comme anchor LP à un grand fonds growth ou co-investit dans une scale-up stratégique."
+  },
+  "spv": {
+    "definition": "Véhicule ad hoc regroupant plusieurs co-investisseurs dans une seule entité, qui investit ensuite dans une startup. Permet à un groupe d'angels ou de LPs de mutualiser un ticket sans créer un fonds complet.",
+    "example": "Vingt business angels se regroupent dans un SPV pour investir ensemble 500 k€ dans un seed."
   },
   "startup": {
     "definition": "Une [[startup|startup]] n'est pas seulement une petite entreprise : elle cherche un modèle économique répétable et scalable sur un marché assez grand pour justifier une croissance rapide. Le [[venture-capital|venture capital]] finance surtout ce type d'entreprise car le risque élevé peut être compensé par un upside extrême.",
@@ -1258,17 +1406,25 @@
     "definition": "Le subscription agreement formalise l’achat d’actions nouvellement émises au closing. Il traduit les termes économiques de la term sheet en obligations contractuelles et contient souvent prix, nombre d’actions, conditions precedent, warranties et références à la disclosure letter.",
     "example": "Dans une Series A, le subscription agreement précise le nombre d’actions preferred émises, le prix par action et les conditions à remplir avant le versement des fonds."
   },
+  "subvention-catalytique": {
+    "definition": "Une subvention catalytique finance une étape que des instruments remboursables couvriraient mal : expérimentation, production de preuves, renforcement des capacités ou préparation à l’investissement. Elle reste non remboursable, mais son objectif dépasse l’activité financée en cherchant à rendre une solution plus robuste, à combler un manque de financement ou à attirer des capitaux ultérieurs. Son caractère catalytique dépend de cet effet additionnel, pas du seul statut de subvention.",
+    "example": "Une fondation finance un pilote et la mesure de ses résultats afin qu’une entreprise sociale puisse ensuite convaincre des prêteurs ou des investisseurs."
+  },
+  "subvention-recuperable": {
+    "definition": "La subvention récupérable, souvent appelée recoverable grant, décrit un financement qui peut être reversé au financeur si des événements prévus surviennent. Aucune catégorie légale française générale et autonome portant ce nom n’a été identifiée dans les sources primaires examinées. Le montage doit donc être qualifié selon ses droits réels : don, créance, avance ou autre contrat, avec analyse juridique, fiscale et comptable. Son intitulé ne suffit pas à ouvrir le régime fiscal du mécénat.",
+    "example": "Une fondation envisage un remboursement si un projet génère des recettes ; les parties font d’abord qualifier le contrat et la capacité de chacune à l’exécuter."
+  },
   "sfdr": {
     "definition": "Le SFDR est le cadre européen de disclosure durable applicable aux acteurs des services financiers. Il impose des publications sur l'intégration des risques de durabilité et, selon les produits, sur les caractéristiques ou objectifs ESG ; en VC, il influence surtout le reporting des fonds, les demandes LP et certaines diligences portfolio.",
     "example": "Un fonds VC européen classé Article 8 peut demander plus de données ESG aux startups pour répondre à ses obligations de reporting envers les LPs."
   },
-  "tam-sam-som": {
-    "definition": "Le cadre TAM / SAM / SOM dimensionne un marché en trois cercles concentriques, du plus large au plus réaliste : le [[tam|TAM]] borne l'opportunité théorique, le [[sam|SAM]] la ramène à ce qui est servable avec le modèle actuel, et le [[som|SOM]] à ce qui est capturable à court terme. Chaque cercle se définit séparément ; pris ensemble, ils servent surtout à relier la taille du marché aux segments clients, au pricing, au go-to-market et au timing. Un sizing crédible se mène en bottom-up, puis se contre-vérifie en top-down.",
-    "example": "Une startup peut viser un TAM mondial énorme tout en n'ayant qu'un SOM initial limité à un segment enterprise précis dans deux pays."
-  },
   "tag-along": {
     "definition": "Le tag-along protège les minoritaires lorsqu’un actionnaire significatif vend ses titres à un tiers. Il leur permet de participer à la transaction aux mêmes conditions, plutôt que de rester dans une cap table modifiée.",
     "example": "Si un fondateur vend une partie importante de ses actions, certains investisseurs peuvent vendre pro-rata aux mêmes conditions."
+  },
+  "tam-sam-som": {
+    "definition": "Le cadre TAM / SAM / SOM dimensionne un marché en trois cercles concentriques, du plus large au plus réaliste : le [[tam|TAM]] borne l'opportunité théorique, le [[sam|SAM]] la ramène à ce qui est servable avec le modèle actuel, et le [[som|SOM]] à ce qui est capturable à court terme. Chaque cercle se définit séparément ; pris ensemble, ils servent surtout à relier la taille du marché aux segments clients, au pricing, au go-to-market et au timing. Un sizing crédible se mène en bottom-up, puis se contre-vérifie en top-down.",
+    "example": "Une startup peut viser un TAM mondial énorme tout en n'ayant qu'un SOM initial limité à un segment enterprise précis dans deux pays."
   },
   "team-problem-fit": {
     "definition": "Le team-problem fit regarde si l'expérience, les intuitions, la vitesse d'apprentissage et les réseaux de l'équipe correspondent au problème choisi. En early stage, il sert souvent de preuve indirecte lorsque le produit et les revenus sont encore jeunes.",
@@ -1282,6 +1438,10 @@
     "definition": "Une term sheet résume les conditions clés d’un investissement VC avant les contrats définitifs : prix, montant, [[liquidation-preference|liquidation preference]], droits de gouvernance, protections investisseur, closing conditions et clauses parfois contraignantes comme confidentialité ou exclusivité.",
     "example": "Une Series A peut être annoncée à 12 M€ pre-money, mais sa vraie économie dépend aussi de la liquidation preference, du pro-rata et des protective provisions."
   },
+  "theorie-du-changement": {
+    "definition": "Une théorie du changement décrit pourquoi et dans quelles conditions une intervention devrait conduire à des changements pour les personnes ou le système concernés. Elle relie ressources, activités, [[realisation-impact|réalisations]], [[resultat-impact|résultats]], hypothèses, facteurs externes et effets indésirables possibles. Elle organise la collecte de preuves et les décisions, mais ne constitue pas elle-même une preuve de causalité ; elle doit être confrontée aux faits et révisée.",
+    "example": "Un programme d’insertion explicite comment l’accompagnement doit améliorer les compétences puis l’accès à un emploi durable, et identifie les conditions économiques nécessaires à cette chaîne."
+  },
   "thesis-driven": {
     "definition": "Une thèse d'investissement formule une conviction sur un marché, une technologie, un timing ou un type d'entreprise. Elle guide le sourcing, filtre les dossiers et donne à la diligence une question centrale : les faits observés renforcent-ils ou invalident-ils la conviction initiale ?",
     "example": "Un fonds spécialisé climat peut tester si une startup correspond vraiment à sa thèse sur la décarbonation industrielle et non seulement à une mode sectorielle."
@@ -1290,9 +1450,17 @@
     "definition": "Le timing combine changements technologiques, réglementaires, économiques, comportementaux ou concurrentiels qui rendent une solution possible et urgente. En VC, il répond à la question : pourquoi cette entreprise peut-elle gagner maintenant plutôt qu'hier ou dans cinq ans ?",
     "example": "Une baisse du coût des modèles IA peut créer le bon timing pour automatiser un workflow qui était trop cher auparavant."
   },
+  "titre-associatif": {
+    "definition": "Le titre associatif est une obligation nominative de dernier rang relevant des articles L. 213-8 et suivants du Code monétaire et financier. Son remboursement obéit aux conditions du contrat et ne peut intervenir avant le délai légal minimal. L’émission suppose notamment une activité économique effective depuis au moins deux ans, ainsi que des formalités et une gouvernance adaptées. Le titre reste une créance : une association n’a pas de capital social et le porteur ne devient pas actionnaire.",
+    "example": "Une association éligible envisage une émission de long terme après examen de ses statuts, de sa procédure d’émission et de ses excédents futurs."
+  },
   "titre-financier": {
     "definition": "Un titre financier est un instrument qui représente un droit économique ou de propriété : action ordinaire, action de préférence, dette convertible, warrant ou autre instrument financier. En VC, comprendre la nature du titre permet de lire une [[cap-table|cap table]], une [[term-sheet|term sheet]] et les droits attachés aux investisseurs.",
     "example": "Une note convertible et une action de préférence sont deux titres financiers, mais elles n’ont pas les mêmes droits ni le même moment de conversion en equity."
+  },
+  "titre-participatif": {
+    "definition": "Le titre participatif est une créance dont l’émission est ouverte aux catégories limitativement énumérées à l’article L. 213-32 du Code monétaire et financier, notamment certaines sociétés anonymes coopératives et entités publiques. Sa rémunération peut comporter une composante variable selon son régime. Il ne constitue ni une prise de participation au capital ni un instrument générique accessible à toute association.",
+    "example": "Une société coopérative vérifie qu’elle relève des catégories autorisées avant de négocier les conditions d’un titre participatif."
   },
   "tam": {
     "definition": "Le TAM mesure la demande totale qui existerait si un produit captait l'intégralité de son marché pertinent, toutes géographies et tous segments confondus, sans contrainte de concurrence ni de canal. C'est le plafond théorique de l'opportunité : en diligence, il sert surtout à vérifier qu'un marché est assez grand pour viser un [[fund-returner|retour de fonds]], pas à prédire un chiffre d'affaires. Un TAM gonflé par des agrégats macro ne dit presque rien de ce qu'une société peut réellement capter.",
@@ -1314,9 +1482,17 @@
     "definition": "Un trade sale est une vente de la société à un acquéreur, souvent plus fréquent qu’une IPO pour les startups financées par VC. Il peut être stratégique ou financier et exige une cartographie crédible des acheteurs, du timing et de la valeur d’exit.",
     "example": "Une société SaaS verticale peut être vendue à un éditeur plus large qui veut compléter sa suite produit."
   },
+  "first-loss": {
+    "definition": "Une tranche de première perte supporte les pertes avant les tranches plus seniors, dans l’ordre et la limite fixés par les documents de l’opération. Elle peut améliorer le profil de risque des autres financeurs et contribuer à mobiliser des capitaux, mais elle ne garantit ni l’absence de pertes pour les tranches seniors ni la réalisation d’un impact. First-loss décrit une allocation économique des pertes ; les droits dépendent du véhicule, du rang et des contrats.",
+    "example": "Une tranche junior philanthropique absorbe les premières pertes d’un portefeuille, tandis que les investisseurs seniors restent exposés au-delà de son montant."
+  },
   "exit-transaction": {
     "definition": "Une transaction de sortie est une opération qui transforme l’equity des actionnaires en liquidité ou en contrepartie économique : [[ipo|IPO]], vente de titres, vente d’actifs, merger ou liquidation de société. Sa définition est importante car elle peut déclencher la [[liquidation-preference|liquidation preference]] et l’[[exit-waterfall|exit waterfall]].",
     "example": "Le pacte définit une transaction de sortie comme une IPO, une vente de plus de 50 % des titres ou une vente substantielle des actifs."
+  },
+  "tresorerie-mobilisable": {
+    "definition": "La trésorerie mobilisable part du solde bancaire réconcilié, identifie chaque restriction contractuelle ou comptable, l’emploi qu’elle finance et son échéance, puis rapproche les décaissements imminents des mêmes masses. Une somme n’est soustraite qu’une fois : un décaissement déjà couvert par un fonds affecté isolé ne réduit pas une seconde fois le solde libre. Le tableau distingue au minimum le solde bancaire, la restriction, l’emploi financé, l’échéance et le montant effectivement mobilisable. Toute qualification matérielle est confirmée avec les fonctions comptable ou juridique compétentes.",
+    "example": "Sur 620 000 euros en banque, l’organisation ne conclut pas à 120 000 euros disponibles avant d’avoir établi si les 190 000 euros de décaissements proches sont ou non déjà couverts par les 310 000 euros affectés."
   },
   "trustee": {
     "definition": "Un trustee est un intermédiaire qui peut détenir légalement des titres ou exercer des droits pour le compte de plusieurs petits investisseurs. En VC, ce type de structure sert à simplifier la [[cap-table|cap table]] : le trustee apparaît comme actionnaire unique, tandis que les bénéficiaires sont liés par un accord de trust ou de portage.",
@@ -1329,10 +1505,6 @@
   "use-of-funds": {
     "definition": "L’utilisation des fonds décrit la manière dont une startup prévoit d’allouer le capital levé : recrutement, produit, go-to-market, fonds de roulement ou acquisitions. Elle est souvent discutée dans le [[pitch-deck|pitch deck]], la [[term-sheet|term sheet]] ou l’[[investment-agreement|investment agreement]], puis suivie dans le reporting.",
     "example": "La startup prévoit d’utiliser 45 % du tour pour l’équipe produit, 35 % pour le go-to-market et 20 % pour la trésorerie de sécurité."
-  },
-  "vp-engineering": {
-    "definition": "Le VP Engineering structure l’organisation technique, le delivery, les managers engineering, les rituels d’exécution et la qualité opérationnelle. Il complète souvent un CTO plus orienté vision, architecture ou produit.",
-    "example": "Une startup qui grandit peut recruter un VP Engineering pour réduire les bottlenecks du CTO et professionnaliser la delivery produit."
   },
   "valuation": {
     "definition": "La valuation sert à pricer un financement, déterminer l'ownership vendu et évaluer le potentiel de rendement. En startup, elle est négociée sous incertitude à partir du stade, du marché, de la traction, des comparables, du pouvoir de négociation et du potentiel de sortie.",
@@ -1354,13 +1526,13 @@
     "definition": "Le [[venture-capital|venture capital]] finance des entreprises privées très incertaines mais capables de croître vite, en échange d'une participation en [[equity|equity]]. Sa logique repose sur l'illiquidité, l'accompagnement long et une distribution de rendements en [[power-law|loi de puissance]].",
     "example": "Un fonds investit 2 M€ en seed dans une startup SaaS pour obtenir une participation minoritaire et accompagner les tours suivants."
   },
-  "venture-capital-method": {
-    "definition": "La venture capital method estime une exit value, la divise par un multiple de rendement cible, puis remonte à une valorisation présente compatible avec le risque et l'ownership visés. Elle explicite le lien entre prix d'entrée et potentiel de retour.",
-    "example": "Si un fonds vise 10x et estime une sortie à 500 M€, il cherchera une entrée permettant une valeur post-money implicite compatible avec ce retour."
-  },
   "venture-capital-fund": {
     "definition": "Un venture capital fund est le véhicule qui reçoit les commitments LP, appelle le capital et investit dans des startups selon une stratégie donnée. Il est distinct de la management company et fonctionne avec son propre cycle de vie, LPA et économie GP-LP.",
     "example": "Un fonds seed de 80 M€ construit un portefeuille de 35 startups et garde une partie du capital pour les follow-ons."
+  },
+  "venture-capital-method": {
+    "definition": "La venture capital method estime une exit value, la divise par un multiple de rendement cible, puis remonte à une valorisation présente compatible avec le risque et l'ownership visés. Elle explicite le lien entre prix d'entrée et potentiel de retour.",
+    "example": "Si un fonds vise 10x et estime une sortie à 500 M€, il cherchera une entrée permettant une valeur post-money implicite compatible avec ce retour."
   },
   "venture-debt": {
     "definition": "La venture debt finance des startups déjà soutenues par des investisseurs VC. Elle peut compléter un tour d’equity, financer un jalon ou réduire la dilution, mais introduit remboursement, intérêts, covenants, frais, warrants potentiels et risque de défaut.",
@@ -1369,6 +1541,10 @@
   "venture-fundraising": {
     "definition": "Le venture fundraising est la levée de capital d’un fonds auprès de LPs. Le GP vend une équipe, une thèse, un track record, une construction de portefeuille et des preuves de liquidité pour obtenir des commitments.",
     "example": "Un emerging manager lève Fund II en montrant son DPI, ses markups crédibles et son accès différencié au deal flow."
+  },
+  "venture-philanthropie": {
+    "definition": "La venture philanthropie soutient des organisations à finalité sociale ou environnementale par un financement adapté au besoin, un accompagnement non financier et une gestion suivie de l’impact. Elle peut mobiliser une subvention, une dette, des fonds propres dans une entité qui peut en émettre ou un instrument hybride, mais ne constitue ni une forme juridique ni un instrument autonome. À la différence du capital-risque, le rendement financier et la cession ne la définissent pas ; à la différence de l’impact investing au sens financier, elle peut reposer entièrement sur des subventions sans rendement attendu. Le caractère catalytique éventuel décrit la fonction du financement, non l’ensemble de la relation.",
+    "example": "Une fondation accorde à une association un financement pluriannuel ajustable, accompagne le renforcement de ses opérations et utilise le suivi de l’impact pour réviser avec elle le plan de soutien."
   },
   "vesting": {
     "definition": "Le vesting fait acquérir progressivement des actions, options ou droits économiques à un founder ou salarié. Il protège la société si une personne part trop tôt et aligne la rémunération equity sur la contribution de long terme.",
@@ -1385,6 +1561,10 @@
   "voting-pool": {
     "definition": "Un voting pool regroupe plusieurs investisseurs pour exercer leurs droits de vote de manière coordonnée, parfois comme alternative à une structure de [[trustee|trustee]]. Il simplifie la gouvernance quand de nombreux petits investisseurs sont présents et évite de ralentir chaque décision sociale.",
     "example": "Les petits investisseurs signent une convention de vote pour qu’un représentant exprime leur position lors des décisions clés."
+  },
+  "vp-engineering": {
+    "definition": "Le VP Engineering structure l’organisation technique, le delivery, les managers engineering, les rituels d’exécution et la qualité opérationnelle. Il complète souvent un CTO plus orienté vision, architecture ou produit.",
+    "example": "Une startup qui grandit peut recruter un VP Engineering pour réduire les bottlenecks du CTO et professionnaliser la delivery produit."
   },
   "warm-intro": {
     "definition": "Une warm intro est une mise en relation par une personne dont le jugement est reconnu par le destinataire. En fundraising, elle peut accélérer l'attention du VC, mais elle ne remplace ni le fit investisseur ni les preuves de traction.",
@@ -1415,89 +1595,5 @@
   "zombie-firm": {
     "definition": "Une zombie firm conserve parfois des participations et des fees résiduels, mais n’a plus assez de performance, de marque ou de confiance LP pour lever un nouveau fonds. Pour les fondateurs, elle peut être moins capable de suivre en follow-on.",
     "example": "Un fonds qui ne peut plus lever Fund III et garde seulement quelques participations de Fund II devient une zombie firm."
-  },
-  "a16z": {
-    "definition": "a16z, ou Andreessen Horowitz, est une firme VC américaine devenue une référence par ses investissements, son contenu, ses thèses sectorielles et ses équipes platform. Le module 11 ajoute surtout son rôle de source et d’exemple de market development à grande échelle.",
-    "example": "Un fonds peut citer a16z comme modèle de platform support combinant contenu, réseau corporate, expertise sectorielle et services aux sociétés du portefeuille."
-  },
-  "biais-de-resultat": {
-    "definition": "Le biais de résultat conduit à évaluer une décision d’après ce qu’elle a produit, et non d’après la qualité du raisonnement disponible au moment où elle a été prise. Dans un métier à forte variance comme le capital-risque, où la chance pèse lourd sur l’issue d’un investissement, cette confusion empêche d’apprendre : une bonne décision peut mal tourner et une mauvaise décision réussir. Annie Duke en a fait le cœur de « Thinking in Bets » ; la parade consiste à consigner le raisonnement avant de connaître le résultat.",
-    "example": "Le comité passe sur une société pour des raisons de prix disciplinées ; trois ans plus tard elle vaut dix fois ce tour. Conclure « c’était une erreur » sur ce seul fait, c’est le biais de résultat."
-  },
-  "pattern-matching": {
-    "definition": "Le pattern matching consiste à reconnaître dans un fondateur ou un dossier les traits d’un succès passé, et à en inférer un succès futur. Souvent célébré dans le métier comme une forme d’expertise, il repose sur l’heuristique de représentativité décrite par Kahneman et Tversky : on substitue la ressemblance à la probabilité, en négligeant le taux de base de la catégorie. Le risque est double — financer des copies de gagnants d’hier et écarter les profils atypiques d’où viennent souvent les rendements extrêmes.",
-    "example": "Deux dossiers identiques sur le fond ; on instruit en priorité celui dont le fondateur « ressemble » à un founder à succès connu."
-  },
-  "biais-d-autorite": {
-    "definition": "Le biais d’autorité conduit à accorder un poids excessif aux marqueurs de statut d’un fondateur — école, passage par une entreprise prestigieuse, expérience de fondateur récidiviste — au détriment de l’examen direct du dossier. Ces signaux ont une valeur informative réelle, mais elle est généralement déjà reflétée dans le prix et dans la concurrence sur le deal ; en faire un critère de tri revient souvent à payer cher une information publique. L’effet de halo, par lequel une qualité saillante colore l’ensemble du jugement, en est proche.",
-    "example": "Un fondateur ex-Stripe obtient une diligence plus rapide et plus indulgente qu’un autodidacte au dossier équivalent."
-  },
-  "ancrage": {
-    "definition": "L’ancrage est la tendance à s’appuyer sur la première information chiffrée rencontrée — un ask, une valorisation de tour précédent, un comparable — et à s’en écarter insuffisamment ensuite, même lorsqu’elle est manifestement décorrélée des fondamentaux. Mis en évidence par Tversky et Kahneman, il gouverne en pratique la négociation de valorisation : celui qui pose le premier chiffre fixe le référent invisible de toute la discussion. La parade consiste à formuler sa propre estimation, documentée, avant d’entendre celle de la partie adverse.",
-    "example": "« Notre dernier tour était à 50 M€ » : six mois plus tard, la discussion reste arrimée à ce chiffre alors que le marché a tourné."
-  },
-  "narrative-fallacy": {
-    "definition": "La narrative fallacy, formulée par Nassim Taleb, désigne le penchant à juger une histoire investissable parce qu’elle est cohérente et fluide. Or la qualité narrative d’un projet — la facilité avec laquelle ses pièces s’emboîtent — ne dit rien de sa probabilité de se réaliser ; elle mesure surtout le talent du conteur. En capital-risque, où la conviction se construit en partie sur un récit de futur, le biais est structurel. La parade consiste à isoler les quelques faits qui, s’ils étaient faux, effondreraient l’histoire, et à les tester.",
-    "example": "Une vision limpide et séduisante emporte l’adhésion du comité alors que les preuves d’exécution restent minces."
-  },
-  "biais-de-confirmation": {
-    "definition": "Le biais de confirmation conduit à rechercher, retenir et surpondérer les informations qui confirment une conviction préexistante, et à écarter celles qui la contredisent. En due diligence, il est particulièrement insidieux : le champion d’un deal, déjà convaincu, oriente involontairement la vérification vers la consolidation de sa thèse. La parade consiste à inverser la charge de la preuve — consacrer la diligence à chercher ce qui tuerait le deal — et à confier explicitement à un tiers le rôle d’avocat du diable.",
-    "example": "Convaincu d’un dossier, on rassemble surtout les éléments qui le défendent en comité, en s’appuyant sur les références fournies par le fondateur."
-  },
-  "deal-heat": {
-    "definition": "Le deal heat désigne la chaleur compétitive entourant une transaction — term sheets concurrentes, tour qui « se boucle cette semaine » — qui pousse à décider vite, au détriment de la diligence. Il faut le distinguer de la FOMO (fear of missing out), qui en est la traduction émotionnelle : la peur de manquer une affaire. Le deal heat est souvent en partie fabriqué pour comprimer le temps de l’investisseur ; la première parade consiste à vérifier la réalité de l’urgence, puis à pré-engager les conditions sans lesquelles on ne signera pas, quitte à laisser partir le tour.",
-    "example": "« Plusieurs term sheets sont déjà sur la table, vous avez quarante-huit heures » : la diligence est écourtée sous la pression."
-  },
-  "mimetisme": {
-    "definition": "Le mimétisme, ou herding, est la tendance à aligner sa décision sur celle d’acteurs jugés mieux informés — un fonds réputé qui entre ou qui passe, le consensus naissant d’un comité. Il produit des cascades informationnelles où chacun suit un signal collectif qui peut ne reposer sur presque aucune analyse réelle. Sa variante interne, le groupthink, étouffe la dissidence au profit d’un consensus de comité. La parade sociale la plus efficace est le premortem, qui légitime le dissensus avant la décision.",
-    "example": "Apprenant qu’un fonds respecté a passé, sans en connaître la raison, on passe à son tour."
-  },
-  "negligence-des-taux-de-base": {
-    "definition": "La négligence des taux de base consiste à juger un dossier sur ses singularités apparentes en oubliant la fréquence de référence de sa catégorie — ici, le fait qu’une large majorité des sociétés financées à un stade donné ne rendront pas le capital. Chaque dossier semble échapper à la statistique qui le concerne, d’autant qu’un exemple vif et favorable, par l’heuristique de disponibilité, vient souvent le confirmer. Le biais du survivant en est un cas particulier : n’apprendre que des startups qui ont réussi, en ignorant celles qui ont fait pareil et échoué. Le check des taux de base consiste à partir de la base statistique, puis à n’en sortir que sur des éléments vérifiables.",
-    "example": "« Celui-ci est différent » : l’intuition fait écarter le taux de base au lieu de servir de point de départ."
-  },
-  "cout-irrecuperable": {
-    "definition": "Le biais de coût irrécupérable conduit à tenir compte, dans une décision, du capital déjà engagé et non récupérable — alors que seul devrait compter le rendement marginal attendu du nouvel investissement. En suivi de portefeuille, il produit l’escalade d’engagement : on re-finance par fidélité à l’histoire des sociétés qu’on ne sourcerait jamais aujourd’hui. La parade consiste à instruire chaque follow-on comme un dossier neuf, en coût d’opportunité : le mettrait-on au-dessus de ses meilleures nouvelles opportunités ?",
-    "example": "Une société en difficulté demande un bridge ; on participe « pour ne pas perdre » ce qui est déjà investi."
-  },
-  "premortem": {
-    "definition": "Le premortem, formalisé par Gary Klein (Harvard Business Review, 2007), consiste, avant d’arrêter une décision, à se projeter dans un futur où elle a échoué de façon retentissante, puis à remonter le fil pour en expliquer les causes. Il s’appuie sur la recherche en « prospective hindsight » (Mitchell, Russo et Pennington) selon laquelle imaginer qu’un événement s’est déjà produit améliore d’environ trente pour cent la capacité à en identifier les causes. Son apport est autant social qu’analytique : il légitime le dissensus, neutralise le groupthink et l’excès de confiance, et donne une voix à ceux qui se tairaient.",
-    "example": "Avant le « oui » final en comité : « nous sommes dans dix-huit mois, l’investissement est un échec retentissant — qu’est-ce qui l’a causé ? »"
-  },
-  "premortem-inverse": {
-    "definition": "Le premortem inversé adapte la méthode de Klein à la logique propre du capital-risque, qui est un jeu de capture d’outliers régi par une loi de puissance. Le premortem classique, orienté évitement de l’échec, rend trop conservateur s’il est utilisé seul et fait passer à côté des paris audacieux non consensuels. Le premortem inversé corrige ce travers : avant un « non », supposer que le deal écarté est devenu le meilleur du millésime et expliquer pourquoi on l’a raté. Il prend acte que l’erreur de type II — rater un futur leader — coûte structurellement plus cher que l’erreur de type I : une perte est plafonnée à 1×, un miss peut coûter 100×.",
-    "example": "Avant de classer un dossier non consensuel : « il est devenu le meilleur deal de l’année — pourquoi l’avons-nous laissé filer ? »"
-  },
-  "journal-de-decision": {
-    "definition": "Le journal de décision consiste à écrire, au moment de décider et avant d’en connaître le résultat, la prédiction faite, le degré de confiance qui lui est attaché et la date à laquelle on la reverra. Il répond directement au biais de résultat en permettant de juger plus tard la qualité du raisonnement, et non la seule issue. Tenu dans la durée, il mesure la calibration — l’écart entre confiance annoncée et taux de réalisation observé — dans la lignée des travaux de Philip Tetlock sur le jugement prévisionnel et d’Annie Duke. C’est aussi le mécanisme qui re-teste un profil cognitif au lieu de le figer en badge.",
-    "example": "« Cette société atteindra 1 M€ d’ARR sous douze mois — confiance 70 % », daté et revu à l’échéance."
-  },
-  "venture-philanthropie": {
-    "definition": "La venture philanthropie applique aux organisations à finalité sociale ou environnementale un accompagnement inspiré du capital-investissement : engagement de long terme, financement adapté aux besoins, soutien stratégique et suivi de l’impact. Elle ne se limite pas à une subvention et peut mobiliser dons, prêts, fonds propres ou instruments hybrides. Sa spécificité tient au niveau d’implication du financeur et à la recherche d’un impact additionnel, non à la seule forme du capital.",
-    "example": "Une fondation soutient durablement une entreprise sociale par une subvention, un prêt, un appui à la gouvernance et un suivi des résultats obtenus."
-  },
-  "investissement-pour-impact": {
-    "definition": "L’investissement pour l’impact repose sur une intention explicite de contribuer à résoudre un problème social ou environnemental, sur la mesure et la gestion des effets produits, et sur l’additionnalité de l’intervention. Il peut employer des subventions comme des instruments remboursables. Il se distingue d’une simple intégration [[esg-assessment|ESG]], souvent centrée sur la maîtrise des risques, et peut accepter davantage de risque ou un rendement moindre pour atteindre l’impact recherché.",
-    "example": "Un fonds finance une solution destinée à une population mal servie, accepte une phase de preuve plus longue et apporte une assistance technique que le marché ne fournirait pas."
-  },
-  "subvention-catalytique": {
-    "definition": "Une subvention catalytique finance une étape que des instruments remboursables couvriraient mal : expérimentation, production de preuves, renforcement des capacités ou préparation à l’investissement. Elle reste non remboursable, mais son objectif dépasse l’activité financée en cherchant à rendre une solution plus robuste, à combler un manque de financement ou à attirer des capitaux ultérieurs. Son caractère catalytique dépend de cet effet additionnel, pas du seul statut de subvention.",
-    "example": "Une fondation finance un pilote et la mesure de ses résultats afin qu’une entreprise sociale puisse ensuite convaincre des prêteurs ou des investisseurs."
-  },
-  "capital-catalytique": {
-    "definition": "Le capital catalytique accepte un risque disproportionné, un rendement inférieur au marché ou des conditions plus souples afin de produire un impact et de rendre possibles des investissements qui ne se feraient pas autrement. Il peut prendre la forme de dette, de fonds propres, de garantie ou de tranche subordonnée. Il sert notamment à prouver la viabilité d’un modèle, absorber une partie du risque ou mobiliser des financeurs tiers. Tout capital à impact n’est donc pas catalytique : l’additionnalité doit être identifiable.",
-    "example": "Une fondation apporte une tranche subordonnée qui absorbe les premières pertes et permet à une banque de financer un projet qu’elle jugeait trop risqué seule."
-  },
-  "beyond-grants": {
-    "definition": "Beyond grants désigne l’élargissement de la boîte à outils d’une fondation au-delà des seules subventions : prêts, garanties, fonds propres, instruments hybrides, mobilisation de la dotation ou accompagnement non financier. L’approche ne remplace pas les dons. Elle consiste à choisir l’instrument en fonction des besoins de l’organisation, de sa capacité de remboursement, du risque et de l’impact recherché le long du [[continuum-du-capital|continuum du capital]].",
-    "example": "Une fondation conserve ses subventions pour les actions sans modèle de revenus, tout en accordant un prêt patient à une entreprise sociale capable de le rembourser."
-  },
-  "continuum-du-capital": {
-    "definition": "Le continuum du capital situe les instruments selon la priorité donnée à l’impact, le risque accepté et le rendement financier attendu, depuis les dons jusqu’aux capitaux commerciaux. Il aide à faire correspondre une source de financement aux besoins d’une organisation et peut combiner subventions, capital catalytique, dette ou fonds propres. Il ne décrit ni des étapes obligatoires ni une hiérarchie : plusieurs formes de capital peuvent coexister au même moment.",
-    "example": "Un projet peut associer une subvention pour la recherche, un prêt catalytique pour le déploiement et des fonds propres commerciaux pour changer d’échelle."
-  },
-  "financement-mixte": {
-    "definition": "Le financement mixte utilise stratégiquement des financements publics, philanthropiques ou de développement pour améliorer le profil de risque et de rendement d’une opération et attirer des capitaux commerciaux vers le développement durable. Il peut combiner subventions, garanties, dette, fonds propres ou tranches concessionnelles. Toute coexistence de sources n’est pas du financement mixte : le montage doit mobiliser des financements additionnels qui ne seraient pas intervenus aux mêmes conditions.",
-    "example": "Une garantie publique couvre une partie du risque d’un portefeuille de projets climatiques et permet à des investisseurs privés de participer au financement."
   }
 }

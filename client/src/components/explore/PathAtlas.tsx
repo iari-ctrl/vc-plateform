@@ -10,6 +10,7 @@ import { useUserData } from '@/context/UserDataContext';
 import { MapCartouche, SeaMonster, NightSkyBackdrop } from '@/components/ornaments/Illustrations';
 import { legibleAccent } from '@/lib/ikigaiColor';
 import { cn } from '@/lib/utils';
+import { formatMinutes, parcoursTimeSummary } from '@/content/learningTime';
 import type { Level } from '@/content/types';
 
 /**
@@ -88,6 +89,12 @@ function clampView(scale: number, tx: number, ty: number): View {
 }
 
 type Port = Parcours & { x: number; y: number; angle: number | null; r: number | null; island: boolean; pct: number; order: number; accent: string; kanji: string };
+
+function atlasTimeLabel(parcours: Parcours): string {
+  return parcours.time.source === 'derived'
+    ? `${formatMinutes(parcoursTimeSummary(parcours).readingMinutes)} de lecture`
+    : `environ ${parcours.time.coreHours} heures`;
+}
 
 export function PathAtlas({
   className,
@@ -361,7 +368,7 @@ export function PathAtlas({
                     key={p.id}
                     role="link"
                     tabIndex={0}
-                    aria-label={`${p.title} — ${FAMILY_META[p.family].label}, ${LEVEL_LABEL[p.level]}, environ ${p.time.coreHours} heures`}
+                    aria-label={`${p.title} — ${FAMILY_META[p.family].label}, ${LEVEL_LABEL[p.level]}, ${atlasTimeLabel(p)}`}
                     className="cursor-pointer outline-none transition-opacity duration-300"
                     style={{ opacity: dim ? 0.26 : 1 }}
                     onMouseEnter={() => setActiveId(p.id)}
@@ -496,7 +503,7 @@ export function PathAtlas({
               <>
                 <div className="flex items-center gap-2">
                   <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: active.accent }} />
-                  <span className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-surface-variant">{FAMILY_META[active.family].label} · {LEVEL_LABEL[active.level]} · ≈ {active.time.coreHours} h</span>
+                  <span className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-surface-variant">{FAMILY_META[active.family].label} · {LEVEL_LABEL[active.level]} · {atlasTimeLabel(active)}</span>
                 </div>
                 <p className="mt-1.5 font-headline text-headline-sm font-semibold leading-tight">{active.title}</p>
                 <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-surface-variant">{active.hook}</p>

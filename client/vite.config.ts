@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
+import { normalizeBaseUrl } from '../shared/base-url.mjs';
 
 export default defineConfig({
-  base: process.env.VITE_BASE_URL || '/',
+  base: normalizeBaseUrl(process.env.VITE_BASE_URL),
   plugins: [react()],
   resolve: {
     alias: {

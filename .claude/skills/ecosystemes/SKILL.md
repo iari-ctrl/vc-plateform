@@ -1,83 +1,75 @@
 ---
 name: ecosystemes
-description: "Playbook for researching, writing and illustrating the « Décortiquer un écosystème » dossiers (data/ecosystems.json). Read before creating/editing a dossier, adding a sub-dossier or a figure — saves re-exploring the codebase and avoids validation errors."
-trigger: /ecosystemes
+description: "Research, author, revise, structure, source, validate, or illustrate the French « Décortiquer un écosystème » dossiers while enforcing their sober institutional style. Use when working on data/ecosystems.json, the /ecosystemes routes, root or child dossiers, convictions, signals, players, sources, glossary links, or ecosystem figures."
 ---
 
-# /ecosystemes — ecosystem dossiers: methodology & guardrails
+# Ecosystem dossiers
 
-The « Décortiquer un écosystème » space (`/ecosystemes`): signed analyses, **100% client-side**, stored in `data/ecosystems.json`. This skill condenses everything needed so you **don't re-explore the code every time** and don't get rejected by validation. Read it fully before starting. (Content prose itself is written in **French** — see the style section.)
+Use this playbook for work on the signed, fully client-side dossiers published under `/ecosystemes`.
 
-## Data model (don't re-derive it)
+## Start from maintained sources
 
-- Everything lives in **`data/ecosystems.json`**, typed `EcosystemDossier` in [client/src/content/types.ts]. No server table.
-- **Tree** via `parentId` + `order` (unlimited depth). A **root** = no `parentId`, **the only kind listed on the index**, and **`these` is required**. A **sub-dossier**: `these`/`convictions`/`signals`/`players`/`sources` are all **optional**.
-- Loader helpers: `rootEcosystems()`, `childEcosystems(id)`, `ecosystemAncestors(d)` in [client/src/content/ecosystems.ts].
-- Sibling order: ascending `order`, then most-recently-revised first.
-- The detail page ([client/src/pages/ecosystems/EcosystemPage.tsx]) renders, in this order: breadcrumb (ancestors) → header → **these** (if present) → **sections** (+ figures) → **convictions** → **signals** → **players** → **« Approfondir »** (children cards) → tags → **sources** → glossaryRefs → "next to dissect".
-- Shapes: `Conviction { statement, horizon?, strength: exploratoire|moyenne|forte, rationale? }` · `Signal { label, direction: haussier|baissier|incertain, note }` · `Player { name, role, note }`. `kind` ∈ `geographie|secteur|these`. Dates are ISO `YYYY-MM-DD`. `accent` = hex (children usually inherit the parent's accent for cohesion).
+- Treat §4.0.c of [`docs/ARCHITECTURE_EDITION.md`](../../../docs/ARCHITECTURE_EDITION.md) as the canonical transverse charter and [`CLAUDE.md`](../../../CLAUDE.md) as its shared operational summary for coding agents. The rules below add ecosystem-specific constraints only. Do not rely on machine-local memories.
+- Treat [`data/ecosystems.json`](../../../data/ecosystems.json) as the content source. Check the complete type in [`client/src/content/types.ts`](../../../client/src/content/types.ts) and the executable schema in [`scripts/validate-content.mjs`](../../../scripts/validate-content.mjs) before adding a field or figure kind.
+- Use [`client/src/content/ecosystems.ts`](../../../client/src/content/ecosystems.ts) for tree and ordering behavior, and the page and figure renderers for implemented display behavior. If maintained documentation and code disagree, report the drift instead of guessing.
 
-## Figures (charts + diagrams)
+## Model decisions that matter while authoring
 
-- **The in-house markdown renderer ([client/src/lib/markdown.tsx]) ONLY supports**: `##`/`###`, paragraphs, `- ` lists, `1. ` lists, `**bold**`, `*italic*`, `[text](url)`, `[[slug|label]]`, `{{slug|label}}`. **NO images, NO raw HTML/SVG, NO tables.** Visuals therefore cannot be inline markdown → they are **structured figures**.
-- Field: `section.figures?: EcosystemFigure[]`, rendered after the prose by [client/src/components/ecosystems/EcosystemFigures.tsx] (`EcosystemFigureView`).
-- **5 kinds** (union discriminated by `kind`):
-  - `bars` — horizontal bars `{label, value, valueLabel?, highlight?}` + `unit?`.
-  - `line` — curve `points: {x, y, annotation?}` (≥ 2).
-  - `matrix` — `columns[]` × `rows[{label, cells[{rating: none|low|mid|high, note?}]}]` (dot ratings).
-  - `quadrant` — `xAxis:[low,high]`, `yAxis:[low,high]`, `items:[{label, x, y, highlight?}]` with **x,y ∈ [0,1]**.
-  - `taxonomy` — `root` + `branches:[{label, note?, items[], highlight?}]`.
-- Rendering: bars/matrix/taxonomy in **HTML**; line/quadrant in **SVG**. Colors are **theme-aware** via tokens (`--on-surface`, `--on-surface-variant`, `--outline-variant`, `--surface-container*`) + the dossier `accent`. No external asset, no charting lib.
-- ⚠️ **PITFALL**: **never put a `[[slug]]`/`{{slug}}` marker inside figure text** (title/caption/labels/notes). The validator scans the whole JSON and would require them to resolve → failure. Figure text = plain.
-- A new figure kind = 3 synchronized edits: the union in [client/src/content/types.ts], the `z.discriminatedUnion` in [scripts/validate-content.mjs], a renderer in `EcosystemFigures.tsx`.
+- Build the tree with `parentId` and `order`. A root has no `parentId`, is the only level listed on the index, and must carry `these`. A child may omit `these`, `convictions`, `signals`, `players`, and `sources`.
+- Keep `sections` non-empty and `glossaryRefs` present, even when the latter is an empty array. Consult the type for the remaining required dossier fields rather than copying a stale template.
+- Give each child an explicit integer `order`. Siblings sort by ascending `order`, then by descending `updatedAt`.
+- Use `updatedAt` for any substantive revision. Set `verifiedAt` only after rechecking factual claims, figures, periods, scopes, and sources.
+- Write new convictions as falsifiable statements with an explicit `strength` and `horizon`. The current model dates the dossier, not each conviction; describe convictions as having an evaluation horizon unless a dedicated formulation date is added. Treat references that call each conviction “dated” as documented drift until the model changes.
+- Treat inline `[[slug|label]]` or `{{slug|label}}` markers and `glossaryRefs` as separate surfaces. Markers create links in prose; `glossaryRefs` selects the complementary “Pour aller plus loin” list. Do not force the two sets to match.
 
-## Editing the JSON without wasting tokens
+## Research and writing
 
-- Both `data/ecosystems.json` **and** `data/glossary.json` are **exact round-trips** of `JSON.stringify(parsed, null, 2) + '\n'`. Verify first: `node -e "const r=require('fs').readFileSync('data/ecosystems.json','utf8');console.log(r===JSON.stringify(JSON.parse(r),null,2)+'\n')"`.
-- So: **mutate via a small throwaway Node script** (`readFileSync` → `JSON.parse` → find by `id` → mutate/`splice` → `writeFileSync(JSON.stringify(arr,null,2)+'\n')`). **Zero spurious diff**, and you avoid matching long escaped strings with the Edit tool (a source of errors and round-trips).
-- In strings: **ASCII apostrophes `'`** (match existing content), template literals + `\n\n` for paragraph breaks. Make the script **idempotent** (drop any prior copies before `splice`).
+- Apply the editorial rules below to every new or revised thesis, section, conviction, signal, player note, summary, subtitle, label, title, and caption. When editing existing prose, align the touched passage and its immediate context without initiating an unrelated rewrite.
+- Write in French with the voice of a professional analyst: correct, sober, factual, direct, precise, concise, and institutional. Keep the syntax natural and the tone measured; avoid familiarity, promotional language, theatrical effects, and bureaucratic heaviness.
+- Lead with the information. Do not restate the assignment, announce the plan, add throat-clearing, or append a conclusion that merely repeats the text.
+- Give each paragraph one claim. State it, support it at the appropriate evidence level, draw the consequence in plain language when useful, and stop. Remove any sentence that adds tone but no information.
+- Separate established facts from interpretation, hypothesis, forecast, and opinion. Qualify uncertainty, keep confidence proportional to the evidence, and never present an inference as a fact.
+- Prefer complete sentences, precise verbs, short paragraphs, and naturally varied sentence lengths. Use bullets only for a genuine enumeration; keep explanations in argued prose rather than note-like fragments or bold-label lists.
+- Remove formulaic LLM patterns: generic acknowledgements such as “Voici…” or “Bien sûr…”, hollow openings such as “Il est important de noter que…” or “Dans un monde en constante évolution…”, meta-discourse such as “Notre lecture :”, mechanical “Premièrement / Deuxièmement”, repeated three-part structures, paragraph-ending punchlines, rhetorical questions, attention hooks, and calls to agreement.
+- Remove rhetorical and visual dressing: slogans, superlatives, artificial urgency, suspense, dramatization, selling metaphors, network-marketing rhetoric, aphoristic conclusions, editorializing adverbs, buzzword padding, and excessive bold, colons, em dashes, parentheses, or appositions.
+- Keep titles and captions descriptive rather than performative. Name what is shown; do not turn a heading into a slogan or an unsupported thesis.
+- Formulate the root thesis so evidence could confirm or invalidate it. Let child dossiers deepen one bounded question instead of repeating the parent or overloading one page.
+- Verify identifiable facts, figures, and studies against current primary or institutional sources and cite them precisely. For quantitative claims, record both publication date and data period; use exact `YYYY-MM-DD` dates where the model expects them, and state geography, population, currency, and other material scope limits. Check calendar validity manually because the current schema only validates the date prefix.
+- Prefer an honest order of magnitude to false precision. Keep one coherent methodology per quantitative series. A multi-source comparison is acceptable only when definitions, periods, scopes, and normalization are made explicit.
+- Cite absolute, safe `https:` source URLs in `sources[]`; the current schema only checks that a URL string is non-empty. For a quantitative figure, also provide a concise `figure.source` that identifies the dataset or publication used.
 
-## Validation workflow (every time)
+Before saving, reread every changed passage and delete repetition, filler, unsupported intensifiers, ornamental adjectives or adverbs, and template-like transitions. If a sentence sounds like copy, a slogan, or a generic model completion, rewrite it as a precise statement supported at the appropriate evidence level.
 
-1. `npm run validate:content` — **strict** Zod (`.strict()` everywhere). Checks: parent exists, **no cycle**, root ⇒ `these`, **`glossaryRefs` resolve**, **every `[[slug]]`/`{{slug}}` marker resolves** against the glossary.
-2. If the glossary changed: `npm run split:content` (regenerates `data/generated/glossary.index.json` + `data/generated/glossary.defs.json` used at runtime).
-3. `cd client && npx tsc --noEmit -p tsconfig.app.json` then `npx eslint <changed files>`; optionally `npm run build`.
-4. No headless browser here → visual check via `npm run dev` then `/ecosystemes/<slug>`.
+## Figures
 
-## Glossary
+Attach figures through `section.figures`; prose Markdown does not render images, raw HTML/SVG, or tables. The native kinds are:
 
-- `data/glossary.json` = flat array of full terms `{id, term, slug, category, short, definition, example?, seeAlso[], relatedLessonIds[], aliases?}`.
-- **Only add genuinely-missing VC terms** (the user's standing rule). `seeAlso` must point to existing slugs. `aliases` auto-link **only in lessons** (dossiers don't auto-link → explicit `[[ ]]` markers). Insert in alphabetical slug order.
-- List available slugs before writing: `grep -oE '"slug": "[a-z0-9-]+"' data/glossary.json | sort -u`. Reuse existing terms before inventing.
+- `bars`: at least one `{ label, value, valueLabel?, highlight? }`, with `unit?`;
+- `line`: at least two `{ x, y, annotation? }` points, with `unit?`;
+- `matrix`: at least two columns and one row; every row must contain exactly one cell per column;
+- `quadrant`: at least one item; keep every `x` and `y` within `[0,1]`;
+- `taxonomy`: a root and at least one branch.
 
-## Research methodology (grounding the analysis)
+Check matrix width and quadrant bounds manually: the current Zod schema does not enforce either invariant, and the quadrant renderer silently clamps out-of-range values.
 
-- **Thesis first.** Every dossier carries a falsifiable thesis + **dated convictions with an explicit confidence level** (never implicit) + signals that will confirm/invalidate them. A conviction is checkable against reality → always give a `horizon`.
-- **No number in a chart without grounding it via web search BEFORE drawing it** — a wrong number in a chart is glaring. It's **2026**: always look for the most recent annual reports (e.g. Rock Health year-end, Panorama France HealthTech published in February for year N-1).
-- Prefer **orders of magnitude + hedging** ("de l'ordre de", "≈", "une poignée") over false precision. **One consistent source per chart** (don't mix a US-only scope with a global scope in the same bars).
-- Cite **primary/institutional sources** in `sources[]` (INSEE, DREES, CNSA, HAS, ameli, Snitem, BfArM, Rock Health, France Biotech/EY, EUR-Lex…).
-- **Relative dates → absolute.** **Don't duplicate** an analysis already in a sibling dossier — **cross-reference** it in prose. When a chapter gets too dense → **branch it into sub-dossiers** rather than bloating one page.
+Use `title`, `caption?`, and `source?` as plain text. Never place glossary markers in figure text: valid markers would render literally, while unresolved markers fail content validation.
 
-## Writing style (non-negotiable)
+Keep the essential conclusion and important quantitative values available in the surrounding prose or caption. The current figure container exposes only a short image label to assistive technology, and the line renderer does not display Y-axis ticks or its unit; do not make the graphic the sole carrier of information.
 
-Content prose is **French**. See the `style-redaction-naturel` memory. In short: flowing prose, **varied sentence length** (short ones. then a long one that takes its time.), **in medias res** openings. **Ban AI tics**: formulaic enumerations ("Premier… Deuxième…"), a punchline at the end of every paragraph, over-density of colons/em-dashes/appositions, multiple bolds per section (one per big idea, or none — except catalogues), meta-discourse ("Notre lecture:"). Lessons woven into the narrative, not numbered.
+Adding a figure kind requires synchronized changes to the TypeScript union, the Zod discriminated union, and `EcosystemFigureView`. Replace the dispatcher's current silent fall-through with an `assertNever`-style exhaustive guard so an omitted renderer case cannot disappear silently.
 
-**Avoid a "vibe-coded" feel — aim for a clean, professional, natural voice.** The text must read like a human analyst wrote it on purpose, not like a model filling a template. Concretely: no hollow filler or throat-clearing ("Il est important de noter que…", "Dans un monde en constante évolution…"), no buzzword padding, no inflated transitions, no symmetric three-item lists for their own sake. Every sentence must carry an idea the reader didn't already have; cut anything that only sounds smart. Make a real claim, back it, move on. The same discipline applies to **code** (figures, scripts): match the surrounding conventions, name things plainly, no decorative abstractions or throwaway hacks — write it as if it ships.
+## Glossary changes
 
-**Sober register — don't oversell (this is where drafts most often fail).** The voice is that of a competent analyst writing a memo, not a copywriter pitching. Be **correct, direct, factual, clear and elegant**, with no unnecessary heaviness. The reader should feel a knowledgeable human wrote it, not a tool reaching for effect. Specifically banned: **selling metaphors** ("le cimetière le mieux documenté", "le naufrage de", "la lanterne rouge", "le juge de paix"); **superlatives and dramatization** ("le plus pur", "spectaculaire", "étonnamment", "le détail qui change tout"); **closing aphorisms / slogans** that crown a paragraph or the article ("utile ne veut pas dire vendable…"); **editorializing adverbs** that tell the reader how to feel. State the fact, give the figure with its source, draw the consequence in plain words, stop. A claim is stronger stated flatly than dressed up — if a sentence sounds like a tagline, rewrite it as a statement. Titles and captions describe what is shown ("Qui porte la distribution, qui maîtrise l'acte"), they don't perform a thesis. Structure stays clean and fluid: short paragraphs, one idea each, easy to read top to bottom.
+- Reuse an existing term whenever possible. Dossier prose does not auto-link aliases, so add explicit markers where a link is editorially useful.
+- Add a genuinely missing term through the two-layer workflow in §4.2 of [`docs/ARCHITECTURE_EDITION.md`](../../../docs/ARCHITECTURE_EDITION.md): update `data/sources/canonical-glossary.json`, align `data/glossary.json`, merge curated aliases when relevant, validate the published collection, then regenerate the glossary split files. Manually verify register-to-published alignment because no current validator compares the two layers.
+- Preserve the surrounding file order during a bounded edit. The maintained contract intends ordering by `term`, but the current file contains ordering drift; report it instead of mass-reordering opportunistically, and never sort the collection by slug.
 
-## Quick recipe — add an illustrated sub-dossier
+## Edit and validate proportionately
 
-1. `grep -n '"slug"' data/ecosystems.json` to locate the parent and siblings' `order`.
-2. Web-search the numbers → record source + exact year.
-3. Node script: `splice` the sub-dossier after the parent (`parentId` + `order`), figures included (figure text free of `[[ ]]`).
-4. `[[slug]]` markers only on existing glossary slugs; `glossaryRefs` = those used. Missing VC term? add it to `glossary.json`.
-5. `npm run validate:content` → `npm run split:content` (if glossary) → `tsc` → `eslint` → check `/ecosystemes/<slug>`.
+- Edit source files only. Never hand-edit `data/generated/`. Preserve the existing `JSON.stringify(payload, null, 2) + '\n'` serialization and keep the diff limited to the intended records.
+- Dossier prose or data only: run `npm run validate:content:strict`.
+- Glossary touched: run `npm run aliases:merge` when curated aliases changed, then `npm run validate:glossary`, `npm run validate:content:strict`, and `npm run split:content`.
+- Figure data or any visible rendering changed: run the relevant validation, start the local app, and inspect the affected route at desktop and mobile widths.
+- Type, renderer, route, or new figure kind changed: run targeted tests as needed, then `npm run check`, `npm run build`, and the browser verification required by `CLAUDE.md`.
 
-## Reference files
-
-- Data: `data/ecosystems.json`, `data/glossary.json`
-- Types/loader: [client/src/content/types.ts], [client/src/content/ecosystems.ts]
-- Rendering: [client/src/pages/ecosystems/EcosystemPage.tsx], [client/src/components/ecosystems/EcosystemFigures.tsx], [client/src/lib/markdown.tsx]
-- Validation: [scripts/validate-content.mjs]
-- Related memories: `ecosystem-dossiers-format`, `style-redaction-naturel`, `lectures-obliques-format`
+Do not treat a passing validator as evidence that claims are current or well sourced; factual verification remains an editorial responsibility.

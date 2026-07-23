@@ -4,7 +4,7 @@ import { BLOG, blogBySlug } from './blog';
 import { searchLocal } from './search';
 
 describe('blog publication gate', () => {
-  it('keeps articles without an explicit status published', () => {
+  it('keeps explicitly published articles public', () => {
     expect(blogBySlug('voir-comme-un-etat')).toBeDefined();
   });
 

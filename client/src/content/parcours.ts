@@ -7,7 +7,7 @@
 import parcoursJson from '@data/parcours.json';
 import profileParcoursJson from '@data/profileParcours.json';
 import { courseById } from './courses';
-import { lessonById } from './lessons';
+import { publicLessonById, publishedLessonsForCourse } from './lessons';
 import { CASE_STUDIES } from './caseStudies';
 import { SIMULATORS } from './simulators';
 import { deliverableById } from './deliverables';
@@ -27,6 +27,7 @@ export type {
   StepType,
   TimeBudget,
   Perspective,
+  StepRefKind,
 } from './parcoursTypes';
 
 export const PARCOURS = parcoursJson as unknown as Parcours[];
@@ -93,17 +94,17 @@ export interface ResolvedStep {
 export function resolveStep(step: ParcoursStep): ResolvedStep {
   const { kind, id } = step.ref;
 
-  if (kind === 'milestone') {
+  if (kind === 'milestone' || kind === 'deliverable') {
     const deliverable = deliverableById(id);
     if (deliverable) return { href: `/livrables/${deliverable.slug}`, exists: true, readMin: deliverable.readMin };
   }
   if (kind === 'lesson' || kind === 'milestone') {
-    const lesson = lessonById(id);
+    const lesson = publicLessonById(id);
     if (lesson) return { href: `/lessons/${lesson.slug}`, exists: true, lessonId: lesson.id, readMin: lesson.readMin };
   }
   if (kind === 'course') {
     const course = courseById(id);
-    if (course) return { href: `/courses/${course.slug}`, exists: true, lessonIds: course.lessonIds };
+    if (course) return { href: `/courses/${course.slug}`, exists: true, lessonIds: publishedLessonsForCourse(course.id).map((lesson) => lesson.id) };
   }
   if (kind === 'case') {
     const cs = caseById(id);

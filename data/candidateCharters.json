@@ -1,0 +1,58 @@
+[
+  {
+    "id": "candidate-charter",
+    "version": "1.0.0",
+    "status": "active",
+    "title": "Charte du candidat",
+    "effectiveDate": "2026-07-18",
+    "introduction": "La validation locale repose sur des réponses personnelles, des calculs vérifiables et une déclaration exacte des outils utilisés. Elle ne constitue pas l'émission d'un titre professionnel.",
+    "principles": [
+      {
+        "id": "authenticity",
+        "title": "Authenticité",
+        "statement": "Le candidat remet son propre travail, distingue ce qu'il a produit de ce qui a été repris et ne présente pas le travail d'un tiers comme le sien."
+      },
+      {
+        "id": "sources",
+        "title": "Sources et traçabilité",
+        "statement": "Toute information externe déterminante est attribuée, datée lorsque cela est pertinent et reliée à la conclusion qu'elle soutient. Les limites des sources sont signalées."
+      },
+      {
+        "id": "artificial-intelligence",
+        "title": "Usage de l'intelligence artificielle",
+        "statement": "Tout outil d'intelligence artificielle utilisé est déclaré. Le candidat vérifie les éléments produits, conserve la responsabilité des calculs et ne délègue pas son jugement à l'outil."
+      },
+      {
+        "id": "confidentiality",
+        "title": "Confidentialité",
+        "statement": "Aucune donnée confidentielle, donnée personnelle non nécessaire ou information de transaction réelle n'est saisie dans l'évaluation ou dans un outil externe."
+      },
+      {
+        "id": "conflicts-of-interest",
+        "title": "Conflits d'intérêts",
+        "statement": "Toute relation ou tout intérêt susceptible d'affecter l'indépendance du travail est déclaré avant la conclusion concernée."
+      },
+      {
+        "id": "critical-errors",
+        "title": "Erreurs critiques",
+        "statement": "La falsification, le plagiat, la violation de confidentialité, l'usage d'un outil non déclaré et toute erreur matérielle dissimulée sont incompatibles avec une validation, indépendamment du score."
+      },
+      {
+        "id": "local-data-responsibility",
+        "title": "Responsabilité des données locales",
+        "statement": "Les tentatives sont conservées sur l'appareil utilisé. Le candidat reste responsable de cet appareil, de ses sauvegardes et de l'effacement des données lorsqu'il utilise un équipement partagé."
+      }
+    ],
+    "acceptanceStatement": "Je confirme avoir compris cette charte, avoir déclaré les outils utilisés et conserver la responsabilité de mes réponses et des données enregistrées sur cet appareil.",
+    "futureSessionAnnex": {
+      "status": "inactive",
+      "title": "Annexe de session supervisée",
+      "provisions": [
+        "Vérification d'identité selon une procédure publiée",
+        "Désignation des évaluateurs et gestion de leurs conflits d'intérêts",
+        "Traçabilité de la version de l'évaluation et de la décision",
+        "Inscription éventuelle dans un registre d'émission distinct des résultats locaux"
+      ]
+    }
+  }
+]

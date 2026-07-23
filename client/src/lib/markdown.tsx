@@ -1,7 +1,8 @@
 import { Fragment, type MouseEvent as ReactMouseEvent, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { glossaryBySlug, GLOSSARY } from '@/content';
+import { appRouteUrl } from '@shared/base-url.mjs';
+import { glossaryBySlug, GLOSSARY } from '@/content/glossary';
 import { useAnchoredPopover } from '@/components/ui/useAnchoredPopover';
 
 /**
@@ -37,6 +38,7 @@ function GlossaryLink({ slug, label }: { slug: string; label: string }) {
 export function GlossaryPreview({ slug, label }: { slug: string; label: string }) {
   const term = glossaryBySlug(slug);
   const navigate = useNavigate();
+  const glossaryHref = appRouteUrl(`/glossary?term=${slug}`, import.meta.env.BASE_URL);
   const {
     open,
     position,
@@ -78,7 +80,7 @@ export function GlossaryPreview({ slug, label }: { slug: string; label: string }
         <a
           ref={panelRef}
           id={panelId}
-          href={`/glossary?term=${slug}`}
+          href={glossaryHref}
           aria-label={`${term.term} — ouvrir dans le dictionnaire`}
           onClick={goToGlossary}
           onMouseEnter={openPreview}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, Compass, ClipboardList } from 'lucide-react';
 import { IKIGAI } from '@/content';
@@ -20,8 +20,10 @@ import {
   getReadingMode,
   setReadingMode,
   getChosenArchetype,
+  migrateIkigaiStorage,
   setChosenArchetype,
 } from '@/lib/ikigaiCahier';
+import { commitOnStorageSuccess } from '@/lib/storage';
 import { usePageMeta } from '@/lib/seo';
 import { OrientationTest } from './OrientationTest';
 import { MythCard } from './MythCard';
@@ -37,6 +39,10 @@ export default function OnboardingPage() {
     'Un cahier d’introspection inspiré de l’ikigai pour comprendre pourquoi le capital-risque vous attire, explorer 13 zones de sens et révéler votre profil d’apprentissage.',
   );
   const [onboardingMode, setOnboardingMode] = useOnboardingMode();
+
+  useEffect(() => {
+    migrateIkigaiStorage();
+  }, []);
 
   // The quiz phase + step live in the URL (`?test=1&q=N`) so the browser Back
   // button, refresh and shared links resume exactly where the user was.
@@ -68,8 +74,12 @@ export default function OnboardingPage() {
   });
   const setMode = (k: SectionKey) => (m: IkigaiMode) => setModes((cur) => ({ ...cur, [k]: m }));
   const setAllModes = (m: IkigaiMode) => {
-    setModes({ dims: m, inters: m, presque: m, archetypes: m, reflection: m });
-    setReadingMode(m);
+    const result = setReadingMode(m);
+    commitOnStorageSuccess(
+      result,
+      { dims: m, inters: m, presque: m, archetypes: m, reflection: m },
+      setModes,
+    );
   };
 
   const [activeDim, setActiveDim] = useState<string | null>(null);
@@ -79,8 +89,7 @@ export default function OnboardingPage() {
 
   const chooseArchetype = (id: string | null) => {
     const result = setChosenArchetype(id);
-    if (result.ok) setChosen(id);
-    return result;
+    return commitOnStorageSuccess(result, id, setChosen);
   };
 
   if (phase === 'quiz') return <OrientationTest onBack={exitQuiz} chosenArchetype={chosenArchetype} onSuggestArchetype={chooseArchetype} />;

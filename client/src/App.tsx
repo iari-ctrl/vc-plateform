@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 
 import SplashPage from '@/pages/home/SplashPage';
-import { Spinner } from '@/components/ui/primitives';
+import { PageLoader } from '@/components/ui/primitives';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 const HomePage = lazy(() => import('@/pages/home/HomePage'));
@@ -11,14 +11,17 @@ const ProfileResultPage = lazy(() => import('@/pages/onboarding/ProfileResultPag
 const DashboardPage = lazy(() => import('@/pages/workspace/DashboardPage'));
 const ParcoursPage = lazy(() => import('@/pages/learn/ParcoursPage'));
 const ParcoursDetailPage = lazy(() => import('@/pages/learn/ParcoursDetailPage'));
+const ParcoursDiagnosticPage = lazy(() => import('@/pages/learn/ParcoursDiagnosticPage'));
 const CertificationsPage = lazy(() => import('@/pages/certifications/CertificationsPage'));
+const CertificationLevelsPage = lazy(() => import('@/pages/certifications/CertificationLevelsPage'));
 const CertificationDetailPage = lazy(() => import('@/pages/certifications/CertificationDetailPage'));
-const PathsPage = lazy(() => import('@/pages/learn/PathsPage'));
-const PathDetailPage = lazy(() => import('@/pages/learn/PathDetailPage'));
+const CertificationEvaluationPage = lazy(() => import('@/pages/certifications/CertificationEvaluationPage'));
+const LibraryPage = lazy(() => import('@/pages/learn/LibraryPage'));
 const CourseDetailPage = lazy(() => import('@/pages/learn/CourseDetailPage'));
 const LessonPage = lazy(() => import('@/pages/learn/LessonPage'));
 const GlossaryPage = lazy(() => import('@/pages/glossary/GlossaryPage'));
 const CaseStudyPage = lazy(() => import('@/pages/cases/CaseStudyPage'));
+const CaseCorrectionPage = lazy(() => import('@/pages/cases/CaseCorrectionPage'));
 const IntelligencePage = lazy(() => import('@/pages/intelligence/IntelligencePage'));
 const ConvictionsPage = lazy(() => import('@/pages/intelligence/ConvictionsPage'));
 const DecisionsIndexPage = lazy(() => import('@/pages/intelligence/DecisionsIndexPage'));
@@ -44,12 +47,8 @@ const DesignSystemShowcasePage = import.meta.env.DEV
   : undefined;
 const NotFoundPage = lazy(() => import('@/pages/system/NotFoundPage'));
 
-function PageFallback() {
-  return (
-    <div className="flex min-h-[60vh] items-center justify-center text-surface-variant" role="status">
-      <Spinner className="h-6 w-6" />
-    </div>
-  );
+export function PageFallback() {
+  return <PageLoader label="Chargement de la page…" />;
 }
 
 /**
@@ -84,10 +83,17 @@ export default function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="parcours" element={<ParcoursPage />} />
           <Route path="parcours/:slug" element={<ParcoursDetailPage />} />
+          <Route path="parcours/:slug/diagnostic" element={<ParcoursDiagnosticPage />} />
           <Route path="certifications" element={<CertificationsPage />} />
+          <Route path="certifications/niveaux" element={<CertificationLevelsPage />} />
+          <Route path="certifications/venture-philanthropy-foundations/evaluation" element={<Navigate to="/parcours/venture-philanthropy-foundations" replace />} />
+          <Route path="certifications/venture-philanthropy-foundations" element={<Navigate to="/parcours/venture-philanthropy-foundations" replace />} />
+          <Route path="certifications/analyst-foundations/evaluation" element={<Navigate to="/parcours/analyst-foundations" replace />} />
+          <Route path="certifications/analyst-foundations" element={<Navigate to="/parcours/analyst-foundations" replace />} />
+          <Route path="certifications/:slug/evaluation" element={<CertificationEvaluationPage />} />
           <Route path="certifications/:slug" element={<CertificationDetailPage />} />
-          <Route path="bibliotheque" element={<PathsPage />} />
-          <Route path="bibliotheque/:slug" element={<PathDetailPage />} />
+          <Route path="bibliotheque" element={<LibraryPage />} />
+          <Route path="bibliotheque/:slug" element={<Navigate to="/bibliotheque" replace />} />
           <Route path="courses/:slug" element={<CourseDetailPage />} />
           <Route path="lessons/:slug" element={<LessonPage />} />
           <Route path="glossary" element={<GlossaryPage />} />
@@ -98,6 +104,7 @@ export default function App() {
           <Route path="methode" element={<MethodePage />} />
           <Route path="cases" element={<Navigate to="../bibliotheque" replace />} />
           <Route path="cases/:slug" element={<CaseStudyPage />} />
+          <Route path="cases/:slug/correction" element={<CaseCorrectionPage />} />
           <Route path="livrables" element={<DeliverablesPage />} />
           <Route path="livrables/:slug" element={<DeliverablePage />} />
           <Route path="simulators" element={<SimulatorsPage />} />

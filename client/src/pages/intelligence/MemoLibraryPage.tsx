@@ -7,7 +7,7 @@ import { usePageMeta } from '@/lib/seo';
 export default function MemoLibraryPage() {
   usePageMeta(
     'Memo library annotée',
-    'Memos d’investissement réellement publiés — Bessemer, Sequoia, a16z — annotés bloc par bloc : la logique décisionnelle derrière chaque paragraphe.',
+    'Memos d’investissement publiés par Bessemer, Sequoia et a16z, accompagnés d’annotations qui explicitent la logique décisionnelle de chaque passage.',
   );
 
   return (
@@ -15,8 +15,8 @@ export default function MemoLibraryPage() {
       <Reveal>
         <SectionHeading
           eyebrow="Memo library"
-          title="Les memos qui ont décidé, annotés"
-          description="Des memos d'investissement authentiques et publics — publiés par Bessemer dans sa Memo Library, rendus publics par la justice (Sequoia × YouTube), ou assumés en ligne au moment du deal (a16z × Coinbase). Pour chacun : le document original en lien, et une annotation bloc par bloc de la logique décisionnelle — ce que fait l'investisseur à chaque paragraphe, et ce qu'un praticien doit copier."
+          title="Memos d’investissement publiés et annotés"
+          description="La collection réunit des memos publiés par Bessemer dans sa Memo Library, versés à une procédure judiciaire (Sequoia × YouTube) ou mis en ligne au moment de l’investissement (a16z × Coinbase). Chaque fiche donne accès au document original et explicite, bloc par bloc, le rôle de chaque passage dans le raisonnement d’investissement."
         />
       </Reveal>
 
@@ -26,7 +26,8 @@ export default function MemoLibraryPage() {
           <p>
             <strong className="font-medium text-foreground">Provenance & méthode.</strong> Chaque fiche lie le document original, dont la voie de
             publication est indiquée (bibliothèque officielle du fonds, pièce judiciaire, billet public). Les extraits sont courts, traduits de l'anglais et
-            signalés lorsqu'ils sont condensés — l'original fait toujours foi. Les annotations, elles, sont originales : c'est la valeur ajoutée de cet espace.
+            signalés lorsqu'ils sont condensés. Le document source permet de vérifier le contexte complet ; les annotations explicitent la fonction
+            décisionnelle de chaque passage.
           </p>
         </aside>
       </Reveal>

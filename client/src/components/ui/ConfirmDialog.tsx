@@ -1,3 +1,4 @@
+import { useId, useRef } from 'react';
 import { AlertTriangle } from 'lucide-react';
 import { Modal } from './Modal';
 
@@ -25,8 +26,19 @@ export function ConfirmDialog({
   cancelLabel?: string;
   destructive?: boolean;
 }) {
+  const titleId = useId();
+  const bodyId = useId();
+  const confirmRef = useRef<HTMLButtonElement>(null);
+
   return (
-    <Modal open={open} onClose={onClose} labelledBy="confirm-title" className="max-w-md">
+    <Modal
+      open={open}
+      onClose={onClose}
+      labelledBy={titleId}
+      describedBy={body ? bodyId : undefined}
+      initialFocusRef={confirmRef}
+      className="max-w-md"
+    >
       <div className="p-7">
         <div className="flex items-start gap-3.5">
           {destructive && (
@@ -35,14 +47,14 @@ export function ConfirmDialog({
             </span>
           )}
           <div className="min-w-0">
-            <h2 id="confirm-title" className="font-headline text-headline-sm font-semibold">{title}</h2>
-            {body && <p className="mt-2 text-sm text-surface-variant text-pretty">{body}</p>}
+            <h2 id={titleId} className="font-headline text-headline-sm font-semibold">{title}</h2>
+            {body && <p id={bodyId} className="mt-2 text-sm text-surface-variant text-pretty">{body}</p>}
           </div>
         </div>
         <div className="mt-7 flex justify-end gap-2">
           <button onClick={onClose} className="btn-quiet">{cancelLabel}</button>
           <button
-            autoFocus
+            ref={confirmRef}
             onClick={() => {
               onConfirm();
               onClose();

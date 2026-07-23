@@ -51,8 +51,8 @@ export default function DecisionsIndexPage() {
       <Reveal>
         <SectionHeading
           eyebrow="Décisions"
-          title="Étudier le raisonnement, pas seulement le résultat"
-          description="Cette salle rassemble les cas, les memos annotés et les passes célèbres. Les formats restent canoniques à leurs URLs existantes ; l’index les met en regard pour comparer les logiques de décision."
+          title="Étudier la construction des décisions"
+          description="Cette salle rassemble les cas, les memos annotés et les refus d’investissement documentés. Les formats restent canoniques à leurs URLs existantes ; l’index les met en regard pour comparer les logiques de décision et leurs résultats."
         />
       </Reveal>
 

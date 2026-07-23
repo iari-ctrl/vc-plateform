@@ -12,20 +12,36 @@
       "kicker": "Le pitch de fonds",
       "readMin": 5,
       "summary": "Pitcher un fonds de capital-risque à des LPs n'a rien à voir avec pitcher une startup. Voici ce que les investisseurs de fonds lookent réellement.",
+      "status": "published",
       "body": "## Pitcher son fonds n'est pas pitcher sa startup\n\nQuand un fondateur pitche son projet à un VC, il vend de la croissance rapide, un produit innovant et une exécution agile. Quand un General Partner ([[gp|GP]]) pitche son fonds à un Limited Partner ([[lp|LP]]), il vend un **alignement d'intérêts sur 10 ans**, une **discipline de gestion** et un **processus de décision reproductible**.\n\nLes LPs (fonds de fonds, assureurs, family offices) confient des millions pour diversifier leur patrimoine. Ils cherchent des gestionnaires professionnels, pas des cowboys.\n\n## Les quatre piliers du pitch GP\n\n1. **La thèse d'investissement (Investment Thesis).** Pourquoi ce secteur ? Pourquoi cette taille de fonds ? Pourquoi maintenant ? Une thèse trop large (« nous investissons dans la tech en Europe ») est éliminatoire. Le LP cherche un **expert chirurgical** sur un segment précis (ex: Série A en deeptech industrielle).\n2. **Le Track Record.** C'est le nerf de la guerre. Les LPs veulent voir ton historique. Si c'est un premier fonds (*First-time fund*), le GP doit prouver son historique individuel (les investissements menés dans ses précédents postes, les sorties réalisées).\n3. **Le Deal Flow & le réseau propriétaire.** Comment accèdes-tu aux meilleures opportunités de manière exclusive ? Si tu vois les mêmes deals que tout le monde, tu n'as pas d'avantage.\n4. **La cohésion de l'équipe (Team Cohesion).** C'est le **risque n°1** pour les LPs sur les jeunes fonds : la séparation des associés au bout de 3 ans. Les LPs veulent des associés complémentaires qui ont déjà travaillé ensemble.\n\n## L'alignement : le GP Commitment\n\nUn LP ne signera jamais si tu ne mets pas ton propre argent sur la table. C'est le **GP Commitment**. En général, les partners doivent investir personnellement entre **1 % et 2 %** de la taille du fonds. Pour un fonds de 100 M€, cela représente 1 à 2 M€ apportés par l'équipe. C'est la preuve ultime que tu crois à ta thèse et que tu partages le risque.",
       "keyTakeaways": [
         "Pitcher des LPs demande de vendre de la discipline et un processus reproductible sur 10 ans.",
         "Les LPs évaluent en priorité la clarté de la thèse, le track record et la cohésion de l'équipe.",
         "Le GP Commitment (1-2 % de la taille du fonds) est indispensable pour aligner les intérêts."
       ],
-      "glossaryRefs": ["gp", "lp", "thesis-driven", "management-fees", "carry"],
+      "glossaryRefs": [
+        "gp",
+        "lp",
+        "thesis-driven",
+        "management-fees",
+        "carry"
+      ],
       "quiz": [
         {
           "question": "Qu'est-ce que le GP Commitment ?",
           "options": [
-            { "text": "La part de capital apportée personnellement par les gestionnaires (GPs) du fonds", "correct": true },
-            { "text": "L'engagement écrit des LPs de financer le fonds", "correct": false },
-            { "text": "Le salaire fixe garanti des partenaires", "correct": false }
+            {
+              "text": "La part de capital apportée personnellement par les gestionnaires (GPs) du fonds",
+              "correct": true
+            },
+            {
+              "text": "L'engagement écrit des LPs de financer le fonds",
+              "correct": false
+            },
+            {
+              "text": "Le salaire fixe garanti des partenaires",
+              "correct": false
+            }
           ],
           "explanation": "Le GP Commitment exige que les gérants investissent 1 % à 2 % de la taille du fonds avec leur propre argent, garantissant ainsi l'alignement d'intérêts avec les LPs."
         }
@@ -41,20 +57,37 @@
       "kicker": "La levée de fonds GP",
       "readMin": 6,
       "summary": "Les étapes clés du calendrier de levée de fonds d'un GP, de la structuration des documents à la due diligence rigoureuse des LPs.",
+      "status": "published",
       "body": "## Le calendrier d'une levée GP\n\nLever un fonds VC prend en moyenne **12 à 18 mois**. Le process est jalonné par des documents et des étapes très codifiées.\n\n- **Le Teaser.** Un document de 1 à 2 pages résumant la thèse, la taille cible, l'équipe et le track record. Il sert à ouvrir la porte.\n- **Le Pitch Deck de fonds.** Un jeu de 20-30 slides détaillant la thèse, la construction de portefeuille (combien de lignes, montant du ticket initial, réserves de follow-on), et l'économie du fonds.\n- **Le Private Placement Memorandum (PPM).** Le document juridique central (50 à 100 pages) qui décrit en détail la stratégie, les risques juridiques, et les termes du Limited Partnership Agreement ([[lpa|LPA]]).\n- **La Data Room.** Un espace sécurisé contenant le modèle financier du fonds, les rapports d'audit passés, et les références de l'équipe.\n\n## La Due Diligence LP : une enquête policière\n\nLa diligence d'un LP institutionnel est bien plus longue et formelle que celle d'un VC sur une startup. Elle s'articule autour de deux volets :\n\n**1. Investment Due Diligence.** Analyse mathématique fine du track record (recalculer l'[[irr|IRR]] et le [[tvpi|TVPI]] brut/net de chaque deal passé, vérifier l'attribution de performance de chaque partner).\n**2. Operational Due Diligence (ODD).** Audit juridique, comptable et de conformité. Les LPs vérifient comment l'argent est appelé, les signatures bancaires, les processus KYC/AML et la cybersécurité.\n\n> **Les Reference Calls : le verdict.** Les LPs vont passer des dizaines de coups de fil. Ils appelleront les fondateurs de startups que tu as financés (pour savoir si tu es vraiment d'une aide ou une nuisance) et tes anciens collègues.\n\n## Le premier et le dernier Closing\n\nUn fonds n'attend pas d'avoir réuni la totalité de sa taille cible pour commencer à travailler.\n- **First Close (Premier closing).** Dès que le GP a sécurisé au moins 30 à 40 % de la taille cible (ex: 30 M€ pour un fonds de 80 M€), il réalise un premier closing. Cela lui permet d'activer le fonds, d'appeler le capital et de signer ses premiers investissements.\n- **Final Close (Closing final).** Le GP a généralement 12 mois après le premier closing pour atteindre sa taille cible finale et clôturer la levée.",
       "keyTakeaways": [
         "Lever un fonds VC est un marathon de 12 à 18 mois structuré autour du Teaser, du Deck et du PPM.",
         "La due diligence LP est ultra-rigoureuse : elle scrute le track record réel et mène des reference calls poussés.",
         "Le First Close permet de lancer les investissements avant que la levée globale ne soit bouclée."
       ],
-      "glossaryRefs": ["lp", "gp", "tvpi", "irr", "lpa", "dd"],
+      "glossaryRefs": [
+        "lp",
+        "gp",
+        "tvpi",
+        "irr",
+        "lpa",
+        "dd"
+      ],
       "quiz": [
         {
           "question": "Qu'est-ce que le First Close (premier closing) pour un fonds ?",
           "options": [
-            { "text": "L'étape qui permet de lancer le fonds et d'investir dès qu'une partie du capital cible est sécurisée", "correct": true },
-            { "text": "La date limite de signature des contrats avec les startups", "correct": false },
-            { "text": "L'évaluation finale des performances des associés", "correct": false }
+            {
+              "text": "L'étape qui permet de lancer le fonds et d'investir dès qu'une partie du capital cible est sécurisée",
+              "correct": true
+            },
+            {
+              "text": "La date limite de signature des contrats avec les startups",
+              "correct": false
+            },
+            {
+              "text": "L'évaluation finale des performances des associés",
+              "correct": false
+            }
           ],
           "explanation": "Le First Close permet au GP d'appeler du capital et de commencer à déployer le fonds dès qu'un montant minimal (souvent 30-40 %) est sécurisé, sans attendre le closing final."
         }
@@ -69,21 +102,38 @@
       "title": "Trouver et convaincre des LPs en France",
       "kicker": "Cartographie & Négociation",
       "readMin": 6,
-      "summary": "La cartographie des LPs français et européens (Bpifrance, EIF, assureurs, family offices) et les secrets pour les aborder et les convaincre.",
+      "summary": "Une cartographie des principaux LPs français et européens, ainsi que des modalités usuelles de prise de contact et de discussion.",
+      "status": "published",
       "body": "## Le paysage des LPs en France et en Europe\n\nEn France et en Europe, le marché des Limited Partners est caractérisé par deux acteurs publics pivots très puissants et un tissu d'acteurs privés très structuré.\n\n### 1. L'incontournable acteur public : Bpifrance\n{{bpifrance|Bpifrance}} est le premier investisseur dans les fonds de capital-risque en France. À travers son activité de **fonds de fonds**, elle est présente dans la majorité des véhicules de la place.\n- **Leur rôle :** Valider et labelliser ton projet. Avoir Bpifrance à ton premier closing est un signal de réputation massif (*signaling effect*) pour attirer les autres LPs.\n- **Comment les convaincre :** Ils regardent de très près l'intérêt pour l'économie française, la rigueur de ton process de due diligence, et exigent souvent une contrepartie d'investissement territorial (investir un multiple de leur mise dans des startups françaises).\n\n### 2. Le géant européen : Le Fonds Européen d'Investissement (EIF / FEI)\nLe {{eif|EIF}} (Fonds Européen d'Investissement), filiale de la Banque Européenne d'Investissement (BEI), est le principal moteur du capital-risque à l'échelle européenne.\n- **Leur rôle :** Agir en tant qu'investisseur ancré pour structurer le marché européen. Ils apportent des tickets très importants (parfois 20 à 40 M€) pour aider les fonds à atteindre leur taille critique.\n- **Comment les convaincre :** L'EIF est extrêmement sensible à la conformité réglementaire, aux politiques de diversité de l'équipe et à l'alignement avec les priorités de la Commission Européenne (transition écologique, souveraineté numérique, deeptech). Leur processus de due diligence opérationnelle (ODD) est l'un des plus rigoureux au monde.\n\n### 3. Les LPs institutionnels : Assureurs et Mutuelles\nDes acteurs comme AXA, CNP Assurances, Allianz, ou des mutuelles (MGEN, MACIF) allouent une fraction de leurs actifs au non-coté (le *private equity* et le VC).\n- **Leurs contraintes :** Ils sont soumis à la réglementation **Solvabilité II**, ce qui rend le capital-risque très coûteux pour eux en termes d'exigences de fonds propres. Ils préfèrent donc les fonds plus matures (Série A et au-delà) et les gros tickets (souvent minimum 5 à 10 M€).\n\n### 4. Les Family Offices et Corporate Venture (CVC)\nLes family offices (qui gèrent la fortune de grandes familles industrielles ou d'entrepreneurs tech à succès) et les fonds d'entreprises (CVC) sont plus agiles.\n- **Comment les convaincre :** Ils cherchent souvent des **synergies stratégiques** (comprendre un marché en avance) ou du co-investissement (pouvoir investir en direct dans les startups de ton portefeuille à des conditions préférentielles).\n\n## Astuces pour identifier et aborder les LPs\n\n- **France Invest (Association des VCs et LPs en France) :** C'est l'annuaire de référence. Assister aux événements de France Invest est précieux pour networker directement avec les responsables des allocations d'actifs (*LPs relations*).\n- **Analyser le portefeuille des concurrents :** Regarde les fonds français et européens comparables au tien et cherche les communiqués de presse de leurs closings. Les LPs institutionnels et publics y sont souvent cités.\n- **Le warm networking :** Tout comme pour les startups, les LPs reçoivent des cents de dossiers. Une introduction par un GP respecté d'un autre fonds (non concurrent) ou par un entrepreneur de renom est le meilleur moyen d'obtenir un rendez-vous.\n\n## Secrets de négociation avec un LP français ou européen\n\n- **Le \"First-time Fund\" discount :** Si c'est ton premier fonds, propose un tarif préférentiel sur les frais de gestion (*management fees*) aux LPs qui s'engagent dès le premier closing (ex: 1,75 % au lieu de 2,00 %).\n- **Le Co-investment Right (Droit de co-investissement) :** Accorde aux gros LPs le droit d'investir en direct, sans frais ni carry additionnels, dans tes meilleurs deals à côté du fonds. C'est l'argument ultime pour les family offices.",
       "keyTakeaways": [
         "Bpifrance et l'EIF sont les deux pivots publics incontournables pour structurer et valider un fonds en Europe.",
         "Les assureurs et mutuelles visent de gros tickets mais font face aux contraintes réglementaires de Solvabilité II.",
         "Proposer des droits de co-investissement et des frais réduits au premier closing (founder share class) sont des leviers majeurs."
       ],
-      "glossaryRefs": ["lp", "gp", "management-fees", "carry", "bpifrance", "eif"],
+      "glossaryRefs": [
+        "lp",
+        "gp",
+        "management-fees",
+        "carry",
+        "bpifrance",
+        "eif"
+      ],
       "quiz": [
         {
           "question": "Quel avantage recherché par les Family Offices les pousse souvent à investir dans un fonds VC ?",
           "options": [
-            { "text": "Le droit de co-investir en direct dans les futures startups du portefeuille à côté du fonds", "correct": true },
-            { "text": "Une garantie de remboursement de leur capital par l'État", "correct": false },
-            { "text": "La possibilité de gérer eux-mêmes les investissements du fonds", "correct": false }
+            {
+              "text": "Le droit de co-investir en direct dans les futures startups du portefeuille à côté du fonds",
+              "correct": true
+            },
+            {
+              "text": "Une garantie de remboursement de leur capital par l'État",
+              "correct": false
+            },
+            {
+              "text": "La possibilité de gérer eux-mêmes les investissements du fonds",
+              "correct": false
+            }
           ],
           "explanation": "Les family offices apprécient beaucoup les droits de co-investissement (co-investment rights) qui leur permettent d'investir en direct dans des startups qualifiées par le GP sans double couche de frais/carry."
         }

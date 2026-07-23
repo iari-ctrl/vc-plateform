@@ -1,0 +1,182 @@
+[
+  {
+    "id": "diag-vp-entree",
+    "slug": "diagnostic-entree-venture-philanthropie",
+    "parcoursId": "p-venture-philanthropy-foundations",
+    "title": "Diagnostic d’entrée facultatif",
+    "summary": "Cinq situations pour repérer les notions à revoir avant ou pendant le parcours. Chaque réponse donne un retour et un renvoi ciblé. Le diagnostic n’est ni noté ni bloquant.",
+    "optional": true,
+    "items": [
+      {
+        "id": "diag-vp-comptes-associatifs",
+        "topic": "Lecture de comptes associatifs",
+        "prompt": "Une association présente un excédent annuel de 80 000 €, alors que ses créances publiques ont augmenté de 240 000 € et que son solde bancaire a diminué. Quelle première lecture est adaptée ?",
+        "options": [
+          {
+            "id": "exc-egal-cash",
+            "label": "L’excédent établit que l’association a généré 80 000 € de trésorerie disponible.",
+            "result": "a-revoir",
+            "feedback": "Le résultat comptable et la variation de trésorerie répondent à des questions différentes. Les créances et les autres éléments du besoin en fonds de roulement doivent être rapprochés des flux bancaires."
+          },
+          {
+            "id": "rapprocher-resultat-bilan-cash",
+            "label": "Il faut rapprocher résultat, créances, dettes et flux avant de conclure sur la liquidité.",
+            "result": "point-maitrise",
+            "feedback": "Cette lecture distingue performance comptable et liquidité. Elle conduit à reconstituer les mouvements du bilan et les dates d’encaissement."
+          },
+          {
+            "id": "attendre-comptes-suivants",
+            "label": "La conclusion doit attendre les comptes de l’exercice suivant.",
+            "result": "acquis-a-confirmer",
+            "feedback": "Une période supplémentaire peut informer la tendance, mais les comptes, le bilan et les relevés actuels permettent déjà un premier rapprochement."
+          }
+        ],
+        "resourceRefs": [
+          {
+            "kind": "lesson",
+            "id": "lvp-comptes-cout-complet",
+            "label": "Lire les comptes et calculer le coût complet"
+          }
+        ]
+      },
+      {
+        "id": "diag-vp-tresorerie-fonds-affectes",
+        "topic": "Trésorerie, résultat et fonds affectés",
+        "prompt": "Le compte bancaire affiche 420 000 €, dont 300 000 € sont affectés par convention à des actions futures. Les salaires du mois prochain s’élèvent à 150 000 €. Quelle conclusion est justifiée ?",
+        "options": [
+          {
+            "id": "cash-total-disponible",
+            "label": "Les 420 000 € couvrent les salaires et constituent une réserve libre.",
+            "result": "a-revoir",
+            "feedback": "Le solde bancaire ne décrit pas les restrictions. Il faut rapprocher chaque fonds affecté de son emploi et de son échéance avant d’estimer la trésorerie mobilisable."
+          },
+          {
+            "id": "cash-libre-automatique",
+            "label": "La trésorerie libre est nécessairement de 120 000 €.",
+            "result": "acquis-a-confirmer",
+            "feedback": "120 000 € constitue une première différence arithmétique. Les emplois déjà couverts, les autres dettes proches et les dates d’encaissement doivent encore être réconciliés."
+          },
+          {
+            "id": "rapprochement-requis",
+            "label": "Un rapprochement des restrictions, emplois et échéances est requis avant de conclure.",
+            "result": "point-maitrise",
+            "feedback": "Cette réponse conserve la distinction entre solde bancaire, fonds affectés, résultat et liquidité effectivement mobilisable."
+          }
+        ],
+        "resourceRefs": [
+          {
+            "kind": "lesson",
+            "id": "lvp-tresorerie-reserves",
+            "label": "Analyser trésorerie, réserves et concentration"
+          }
+        ]
+      },
+      {
+        "id": "diag-vp-theorie-changement",
+        "topic": "Théorie du changement",
+        "prompt": "Un programme organise 40 ateliers et constate davantage de retours à l’emploi chez les participants suivis. Que permet d’affirmer sa théorie du changement ?",
+        "options": [
+          {
+            "id": "causalite-prouvee",
+            "label": "La séquence logique prouve que les ateliers ont causé les retours à l’emploi.",
+            "result": "a-revoir",
+            "feedback": "Une théorie du changement explicite un mécanisme et ses hypothèses. Elle ne démontre pas à elle seule la réalisation ni l’attribution des résultats."
+          },
+          {
+            "id": "hypotheses-testables",
+            "label": "Elle rend les mécanismes et hypothèses testables, avec des explications concurrentes à examiner.",
+            "result": "point-maitrise",
+            "feedback": "Cette formulation distingue cohérence logique, résultat observé et causalité."
+          },
+          {
+            "id": "activite-et-resultat",
+            "label": "Elle confirme surtout que les 40 ateliers ont été réalisés comme prévu.",
+            "result": "acquis-a-confirmer",
+            "feedback": "Le nombre d’ateliers est une réalisation. La théorie du changement doit aussi relier cette activité à des résultats et préciser les hypothèses."
+          }
+        ],
+        "resourceRefs": [
+          {
+            "kind": "lesson",
+            "id": "lvp-theorie-changement",
+            "label": "Construire et challenger une théorie du changement"
+          }
+        ]
+      },
+      {
+        "id": "diag-vp-instruments",
+        "topic": "Principaux instruments financiers",
+        "prompt": "Une association souhaite financer une fonction support pérenne. Aucun flux supplémentaire sécurisé ne permet un remboursement. Quelle option constitue le point de départ le plus cohérent ?",
+        "options": [
+          {
+            "id": "dette-pour-discipline",
+            "label": "Une dette, car son échéancier impose une discipline de gestion.",
+            "result": "a-revoir",
+            "feedback": "La dette exige une capacité de remboursement identifiable. Une discipline souhaitée ne crée pas le flux nécessaire et peut fragiliser la mission."
+          },
+          {
+            "id": "subvention-a-etudier",
+            "label": "Une subvention adaptée au besoin, avec examen des autres conditions du soutien.",
+            "result": "point-maitrise",
+            "feedback": "L’absence de flux remboursable conduit à étudier d’abord un financement non remboursable, puis son affectation, sa durée et ses conditions."
+          },
+          {
+            "id": "fonds-propres-association",
+            "label": "Une prise de participation minoritaire dans l’association.",
+            "result": "a-revoir",
+            "feedback": "Une association ne possède pas de capital social à céder. Les fonds propres ne concernent que les entités qui peuvent juridiquement en émettre."
+          }
+        ],
+        "resourceRefs": [
+          {
+            "kind": "lesson",
+            "id": "lvp-arbre-instruments",
+            "label": "Choisir l’instrument à partir du besoin"
+          },
+          {
+            "kind": "lesson",
+            "id": "lvp-compatibilite-remboursement",
+            "label": "Vérifier compatibilité et capacité de remboursement"
+          }
+        ]
+      },
+      {
+        "id": "diag-vp-escalade-professionnelle",
+        "topic": "Risque exigeant un avis professionnel",
+        "prompt": "Un dossier signale un possible conflit d’intérêts non déclaré et propose un transfert de données individuelles à un cofinanceur. Quel rôle revient à l’analyste ?",
+        "options": [
+          {
+            "id": "qualifier-seul",
+            "label": "Qualifier seul les faits et rédiger les clauses nécessaires avant le comité.",
+            "result": "a-revoir",
+            "feedback": "L’analyste repère, consigne et transmet les questions. Les fonctions juridiques, conformité ou données compétentes établissent les qualifications et mesures applicables."
+          },
+          {
+            "id": "ignorer-sans-preuve",
+            "label": "Poursuivre l’analyse tant qu’aucune violation n’est formellement démontrée.",
+            "result": "a-revoir",
+            "feedback": "Une information matérielle non résolue doit être traitée selon la procédure d’escalade, avec une conséquence explicite pour la décision."
+          },
+          {
+            "id": "repere-consigne-transmet",
+            "label": "Consigner les signaux, limiter les données collectées et saisir les professionnels compétents.",
+            "result": "point-maitrise",
+            "feedback": "Cette réponse respecte le périmètre de l’analyste : identification, protection de l’information, transmission et suivi de la décision professionnelle."
+          }
+        ],
+        "resourceRefs": [
+          {
+            "kind": "lesson",
+            "id": "lvp-safeguarding-risques",
+            "label": "Traiter les risques critiques et l’escalade"
+          },
+          {
+            "kind": "deliverable",
+            "id": "vp-fiche-escalade-juridique",
+            "label": "Fiche d’escalade juridique et conformité"
+          }
+        ]
+      }
+    ]
+  }
+]

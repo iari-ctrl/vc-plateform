@@ -10,7 +10,7 @@ import { BlogCard, GlossaryRefList } from '@/components/cards';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { PageLoader } from '@/components/ui/primitives';
 import { cn, formatDateFr } from '@/lib/utils';
-import { usePageMeta } from '@/lib/seo';
+import { useResourcePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
 // Scrollytelling variants are heavy (scenes, looping video) — keep them out of
@@ -76,7 +76,7 @@ export default function BlogPostPage() {
   const { slug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const post = slug ? blogBySlug(slug) : undefined;
-  usePageMeta(post?.title, post?.excerpt, { type: 'article', publishedTime: post?.date });
+  useResourcePageMeta(Boolean(post), post?.title, post?.excerpt, { type: 'article', publishedTime: post?.date });
 
   if (!post) return <NotFoundPage />;
 

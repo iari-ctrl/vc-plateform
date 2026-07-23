@@ -1,38 +1,41 @@
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Award, BookOpen, Clock, Library, Route } from 'lucide-react';
-import { certificationsForCourse, courseBySlug, lessonsForCourse, LEVEL_LABEL, pathsForCourse } from '@/content';
+import { ArrowLeft, Award, BookOpen, Clock, FileCheck2, Route } from 'lucide-react';
+import { certificationsForCourse, courseBySlug, deliverableById, lessonsForCourse, LEVEL_LABEL } from '@/content';
+import { courseReadingMinutes, formatMinutes } from '@/content/learningTime';
 import { parcoursForCourse } from '@/content/parcours';
 import { LessonRow } from '@/components/cards';
 import { ProgressBar } from '@/components/ui/primitives';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useUserData } from '@/context/UserDataContext';
-import { usePageMeta } from '@/lib/seo';
+import { useResourcePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function CourseDetailPage() {
   const { slug } = useParams();
   const course = slug ? courseBySlug(slug) : undefined;
   const { progress } = useUserData();
-  usePageMeta(course?.title, course?.summary);
+  useResourcePageMeta(Boolean(course), course?.title, course?.summary);
 
   if (!course) return <NotFoundPage />;
 
   const lessons = lessonsForCourse(course.id);
-  const publishedLessons = lessons.filter((lesson) => lesson.status !== 'upcoming');
-  const professionalPaths = parcoursForCourse(course.id, lessons.map((l) => l.id));
-  const cataloguePaths = pathsForCourse(course.id);
+  const publishedLessons = lessons.filter((lesson) => lesson.status === 'published');
+  const associatedParcours = parcoursForCourse(course.id, lessons.map((l) => l.id));
   const certifications = certificationsForCourse(course.id).filter((certification) => certification.status === 'published');
   const done = publishedLessons.filter((l) => progress[l.id]?.status === 'done').length;
   const pct = publishedLessons.length ? Math.round((done / publishedLessons.length) * 100) : 0;
-  const accent = professionalPaths[0]?.accent ?? cataloguePaths[0]?.accent ?? 'var(--primary)';
-  const backLink = cataloguePaths[0]
-    ? { href: `/bibliotheque/${cataloguePaths[0].slug}`, label: cataloguePaths[0].title }
-    : certifications[0]
-      ? { href: `/certifications/${certifications[0].slug}`, label: certifications[0].shortTitle }
-      : professionalPaths[0]
-        ? { href: `/parcours/${professionalPaths[0].slug}`, label: professionalPaths[0].title }
-        : { href: '/bibliotheque', label: 'Bibliothèque' };
+  const accent = associatedParcours[0]?.accent ?? 'var(--primary)';
+  const readingMinutes = courseReadingMinutes(course);
+  const practiceMinutes = publishedLessons.reduce((sum, lesson) => sum + (lesson.practice?.estimatedMinutes ?? 0), 0);
+  const practiceDeliverables = Array.from(new Set(publishedLessons.map((lesson) => lesson.practice?.deliverableId).filter((id): id is string => Boolean(id))))
+    .map(deliverableById)
+    .filter((deliverable): deliverable is NonNullable<typeof deliverable> => Boolean(deliverable));
+  const backLink = certifications[0]
+    ? { href: `/certifications/${certifications[0].slug}`, label: certifications[0].shortTitle }
+    : associatedParcours[0]
+      ? { href: `/parcours/${associatedParcours[0].slug}`, label: associatedParcours[0].title }
+      : { href: '/bibliotheque', label: 'Bibliothèque' };
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
@@ -47,7 +50,8 @@ export default function CourseDetailPage() {
 
       <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-surface-variant">
         <span className="inline-flex items-center gap-1.5"><BookOpen size={15} /> {lessons.length} leçons</span>
-        <span className="inline-flex items-center gap-1.5"><Clock size={15} /> {course.durationMin} min</span>
+        <span className="inline-flex items-center gap-1.5"><Clock size={15} aria-hidden /> {readingMinutes} min de lecture</span>
+        {practiceMinutes > 0 && <span className="inline-flex items-center gap-1.5"><FileCheck2 size={15} aria-hidden /> {formatMinutes(practiceMinutes)} de contributions guidées</span>}
         <div className="ml-auto"><BookmarkButton item={{ itemType: 'course', itemId: course.id, title: course.title, href: `/courses/${course.slug}` }} /></div>
       </div>
 
@@ -57,40 +61,26 @@ export default function CourseDetailPage() {
         </div>
       )}
 
-      {(cataloguePaths.length > 0 || professionalPaths.length > 0 || certifications.length > 0) && (
+      {(associatedParcours.length > 0 || certifications.length > 0) && (
         <aside className="mt-6 rounded-2xl border border-outline-variant bg-surface-container-low/40 p-5" aria-labelledby="course-catalogue-relations">
           <p id="course-catalogue-relations" className="eyebrow">Parcours et certifications associés</p>
           <div className="mt-4 grid gap-5 sm:grid-cols-2">
-            {cataloguePaths.length > 0 && (
+            {associatedParcours.length > 0 && (
               <div>
                 <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-surface-variant">
-                  <Library size={14} aria-hidden /> Rayons du catalogue
+                  <Route size={14} aria-hidden /> Parcours associés
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  {cataloguePaths.map((cataloguePath) => (
-                    <Link key={cataloguePath.id} to={`/bibliotheque/${cataloguePath.slug}`} className="chip transition-colors hover:border-[color:var(--primary)] hover:text-foreground">
-                      {cataloguePath.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-            {professionalPaths.length > 0 && (
-              <div>
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-surface-variant">
-                  <Route size={14} aria-hidden /> Parcours professionnels
-                </p>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {professionalPaths.map((professionalPath) => (
-                    <Link key={professionalPath.id} to={`/parcours/${professionalPath.slug}`} className="chip transition-colors hover:border-[color:var(--primary)] hover:text-foreground">
-                      {professionalPath.title}
+                  {associatedParcours.map((parcours) => (
+                    <Link key={parcours.id} to={`/parcours/${parcours.slug}`} className="chip transition-colors hover:border-[color:var(--primary)] hover:text-foreground">
+                      {parcours.title}
                     </Link>
                   ))}
                 </div>
               </div>
             )}
             {certifications.length > 0 && (
-              <div className="sm:col-span-2">
+              <div>
                 <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-surface-variant">
                   <Award size={14} aria-hidden /> Certifications
                 </p>
@@ -107,7 +97,17 @@ export default function CourseDetailPage() {
         </aside>
       )}
 
-      {pct > 0 && <ProgressBar value={pct} accent={accent} className="mt-6" />}
+      {pct > 0 && <ProgressBar value={pct} accent={accent} className="mt-6" label="Leçons déclarées lues dans ce cours" />}
+
+      {practiceDeliverables.length > 0 && (
+        <aside className="mt-6 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_25%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-5" aria-labelledby="course-production-title">
+          <p id="course-production-title" className="eyebrow">Production longitudinale</p>
+          <p className="mt-2 text-sm leading-relaxed text-surface-variant">Les contributions de ce cours alimentent une production réutilisée dans le jalon final.</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {practiceDeliverables.map((deliverable) => <Link key={deliverable.id} to={`/livrables/${deliverable.slug}`} className="btn-ghost">{deliverable.title}</Link>)}
+          </div>
+        </aside>
+      )}
 
       <div className="mt-8 rounded-2xl border border-outline-variant bg-surface-container-low/40 p-2">
         {lessons.map((l) => (
@@ -118,6 +118,7 @@ export default function CourseDetailPage() {
             title={l.title}
             kicker={l.kicker}
             readMin={l.readMin}
+            practiceMin={l.practice?.estimatedMinutes}
             summary={l.summary}
             done={progress[l.id]?.status === 'done'}
             reading={progress[l.id]?.status === 'reading'}

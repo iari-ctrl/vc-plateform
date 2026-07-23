@@ -14,7 +14,8 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { STATIC_ROUTES } from '../shared/routes.mjs';
+import { isPublishedContent } from '../shared/publication.mjs';
+import { STATIC_ROUTES, isNoindexPath } from '../shared/routes.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dataDir = join(root, 'data');
@@ -59,7 +60,7 @@ export function collectRoutes() {
 
   function addRoute(path, options = {}) {
     const normalized = cleanPath(path);
-    if (routes.has(normalized)) return;
+    if (routes.has(normalized) || isNoindexPath(normalized)) return;
     routes.set(normalized, {
       path: normalized,
       changefreq: options.changefreq ?? 'monthly',
@@ -78,17 +79,20 @@ export function collectRoutes() {
   // the prerender and the client stay in lockstep.
   for (const route of STATIC_ROUTES) addRoute(route.path, route);
 
-  addCollection(readJson('paths.json', []), '/bibliotheque', { changefreq: 'monthly', priority: '0.7' });
-  addCollection(readJson('parcours.json', []), '/parcours', { changefreq: 'monthly', priority: '0.75' });
-  addCollection(readJson('certifications.json', []).filter((row) => row.status === 'published'), '/certifications', {
+  const parcoursRows = readJson('parcours.json', []);
+  addCollection(parcoursRows, '/parcours', { changefreq: 'monthly', priority: '0.75' });
+  for (const parcours of parcoursRows) {
+    if (parcours?.slug && parcours?.entryDiagnosticId) {
+      addRoute(`/parcours/${parcours.slug}/diagnostic`, { changefreq: 'monthly', priority: '0.55' });
+    }
+  }
+  addCollection(readJson('certifications.json', []).filter(isPublishedContent), '/certifications', {
     changefreq: 'monthly',
     priority: '0.75',
   });
   addCollection(readJson('courses.json', []), '/courses', { changefreq: 'monthly', priority: '0.65' });
   addCollection(
-    readFirstArray(['generated/lessons.index.json', 'lessons.json']).filter(
-      (lesson) => (lesson?.status ?? 'published') === 'published',
-    ),
+    readFirstArray(['generated/lessons.index.json', 'lessons.json']).filter(isPublishedContent),
     '/lessons',
     {
       changefreq: 'monthly',
@@ -108,7 +112,7 @@ export function collectRoutes() {
   addCollection(antiPortfolio.entries ?? [], '/anti-portfolio', { changefreq: 'monthly', priority: '0.65' });
 
   for (const post of readJsonDir('blog', [])) {
-    if (!post?.slug || (post.status ?? 'published') !== 'published') continue;
+    if (!post?.slug || !isPublishedContent(post)) continue;
     addRoute(`/blog/${post.slug}`, {
       changefreq: 'monthly',
       priority: '0.7',

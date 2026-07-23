@@ -41,7 +41,7 @@ export default function ConvictionsPage() {
         <SectionHeading
           eyebrow="Convictions"
           title="Un registre de thèses datées"
-          description="Chaque conviction vient d’un dossier source, porte un niveau d’assurance et, lorsque la donnée existe, un horizon de vérification. Le registre sert autant à explorer qu’à revenir juger les hypothèses."
+          description="Chaque conviction vient d’un dossier source, porte un niveau d’assurance et, lorsque la donnée existe, un horizon de vérification. Le registre permet d’explorer les hypothèses et de les réexaminer à leur échéance."
         />
       </Reveal>
 

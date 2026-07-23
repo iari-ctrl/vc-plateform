@@ -6,7 +6,7 @@
     "subtitle": "Suivez votre part sur plusieurs tours",
     "category": "Cap table",
     "accent": "#9A6A3C",
-    "description": "Ajoutez des tours de financement et observez comment la part des fondateurs se dilue, tour après tour, ESOP compris. La dilution se compose : visualisez l'empilement.",
+    "description": "Ajoutez des tours de financement et observez comment la part des fondateurs se dilue, tour après tour, ESOP compris. Le résultat présente la composition de la dilution au fil des tours.",
     "relatedLessonIds": ["l-founder-instruments", "l-stages"],
     "glossaryRefs": ["dilution", "cap-table", "esop", "pre-money"]
   },
@@ -47,10 +47,10 @@
     "id": "fund-returns",
     "slug": "fund-returns",
     "title": "Fund returns : DPI / TVPI / MOIC",
-    "subtitle": "Le verdict d'un fonds",
+    "subtitle": "Lecture des indicateurs d'un fonds",
     "category": "Fund economics",
     "accent": "#B0894A",
-    "description": "Entrez le capital appelé, les distributions et la valeur résiduelle, et obtenez DPI, RVPI, TVPI et MOIC — réalisé vs latent, comme un LP les lit.",
+    "description": "Entrez le capital appelé, les distributions et la valeur résiduelle, puis obtenez le DPI, le RVPI, le TVPI et le MOIC, avec une distinction entre réalisé et latent selon la lecture d'un LP.",
     "relatedLessonIds": ["l-fund-metrics", "l-fees-carry"],
     "glossaryRefs": ["dpi", "tvpi", "rvpi", "moic"]
   },
@@ -61,7 +61,7 @@
     "subtitle": "Combien lever, à quelle valorisation",
     "category": "Fundraising",
     "accent": "#B5544E",
-    "description": "Définissez votre runway cible, votre burn et la dilution acceptable, et obtenez une fourchette de montant à lever et de valorisation cohérente — pour entrer dans une négociation informé.",
+    "description": "Définissez votre runway cible, votre burn et la dilution acceptable. L'outil calcule une fourchette cohérente de montant à lever et de valorisation afin de préparer la négociation.",
     "relatedLessonIds": ["l-founder-narrative", "l-founder-instruments"],
     "glossaryRefs": ["burn-rate", "dilution", "pre-money"]
   },
@@ -72,7 +72,7 @@
     "subtitle": "Simuler le budget opérationnel d'un fonds",
     "category": "Fund economics",
     "accent": "#5A4FA0",
-    "description": "Déterminez comment la taille d'un fonds et le taux de frais de gestion annuel dictent le budget disponible pour recruter l'équipe (IR, Analystes, Partners) et faire fonctionner la structure.",
+    "description": "Déterminez comment la taille d'un fonds et le taux de frais de gestion annuel définissent le budget disponible pour recruter l'équipe (IR, Analystes, Partners) et faire fonctionner la structure.",
     "relatedLessonIds": ["l-fees-carry"],
     "glossaryRefs": ["management-fees", "gp", "lp"]
   },
@@ -83,7 +83,7 @@
     "subtitle": "Monte Carlo sur les retours d'un fonds",
     "category": "Fund economics",
     "accent": "#3E7A4E",
-    "description": "Simulez 4 000 portefeuilles tirés d'une distribution power law et mesurez la sensibilité du TVPI au nombre de lignes, à l'ownership, aux réserves follow-on et aux taux de graduation. L'outil rend visible ce que la moyenne cache : la dispersion, la concentration des retours et le fund returner math.",
+    "description": "Simulez 4 000 portefeuilles tirés d'une distribution power law et mesurez la sensibilité du TVPI au nombre de lignes, à l'ownership, aux réserves follow-on et aux taux de graduation. L'outil présente la dispersion, la concentration des retours et la contribution mathématique du fund returner.",
     "relatedLessonIds": ["lpl-average-lies", "lpl-why-monte-carlo", "lpl-simulator-engine", "lpl-read-results", "l-power-law", "l-reserves", "l-fund-metrics", "lmv-returns-waterfall"],
     "glossaryRefs": ["power-law", "portfolio-construction", "follow-on", "reserve-funds", "tvpi", "moic"]
   },
@@ -94,7 +94,7 @@
     "subtitle": "Le prix de la liquidité avant l'exit",
     "category": "Fund economics",
     "accent": "#2E6E62",
-    "description": "Deux faces de la liquidité forcée : la vente secondaire LP-led (décote sur la NAV contre du DPI immédiat, avec le point mort vendre/conserver) et le continuation fund GP-led (carry cristallisé, second carry, frais du nouveau véhicule et conflit d'intérêts structurel). L'outil chiffre l'arbitrage que la pression DPI impose aux LPs.",
+    "description": "Comparez la vente secondaire LP-led, avec une décote sur la NAV, du DPI immédiat et un point mort entre vente et conservation, au continuation fund GP-led, avec un carry cristallisé, un second carry, les frais du nouveau véhicule et un conflit d'intérêts structurel. L'outil chiffre l'arbitrage entre vente et conservation dans un contexte de pression sur le DPI des LPs.",
     "relatedLessonIds": ["l-fund-metrics", "l-fund-lifecycle", "l-fees-carry"],
     "glossaryRefs": ["secondary", "continuation-fund", "dpi", "tvpi", "rvpi"]
   }

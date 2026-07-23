@@ -10,10 +10,20 @@ export interface StaticRoute {
   priority: string;
 }
 
-export const NOINDEX_SEGMENTS: readonly string[];
+export interface LegacyRedirect {
+  from: string;
+  to: string;
+}
+
 export const STATIC_ROUTES: readonly StaticRoute[];
+export const LEGACY_REDIRECTS: readonly LegacyRedirect[];
+export const EXECUTABLE_ROUTE_PATTERNS: readonly string[];
+export const PUBLIC_ROUTE_PATTERNS: readonly string[];
+export const NOINDEX_ROUTE_PATTERNS: readonly string[];
 export const OG_IMAGE_BY_SEGMENT: Readonly<Record<string, string>>;
 
 export function firstSegment(unlocalizedPath: string): string;
+export function matchesRoutePattern(path: string, pattern: string): boolean;
 export function isNoindexPath(unlocalizedPath: string): boolean;
+export function isPublicRoutePath(unlocalizedPath: string): boolean;
 export function ogImageKeyForPath(unlocalizedPath: string): string | undefined;

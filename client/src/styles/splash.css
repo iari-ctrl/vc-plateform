@@ -74,12 +74,12 @@
 }
 
 .splash-photo-light {
-  background-image: url('/splash/bg-claire.webp');
+  background-image: var(--splash-photo-light);
   background-position: center top;
 }
 
 .splash-photo-dark {
-  background-image: url('/splash/bg-sombre.webp');
+  background-image: var(--splash-photo-dark);
   opacity: 0;
 }
 

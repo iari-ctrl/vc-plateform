@@ -3,7 +3,15 @@ import { Check, Save } from 'lucide-react';
 import { IKIGAI } from '@/content';
 import type { IkigaiMode } from '@/content/types';
 import { useUserData } from '@/context/UserDataContext';
-import { NOTE_SOURCE, answerKey, getCahierAnswers, setCahierAnswers, type CahierAnswers } from '@/lib/ikigaiCahier';
+import {
+  IKIGAI_STORAGE_LIMITS,
+  NOTE_SOURCE,
+  answerKey,
+  getCahierAnswers,
+  setCahierAnswers,
+  type CahierAnswers,
+} from '@/lib/ikigaiCahier';
+import { commitOnStorageSuccess } from '@/lib/storage';
 import { IkigaiText } from '../IkigaiText';
 import { StickyChapterHeader } from '../cahierUi';
 
@@ -15,11 +23,6 @@ export function ReflectionSection({ mode, onMode }: { mode: IkigaiMode; onMode: 
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
 
-  // Draft autosave — local only, nothing is ever sent here.
-  useEffect(() => {
-    setCahierAnswers(answers);
-  }, [answers]);
-
   // Switching reading mode shows a different (unsaved) answer set, so the
   // "Enregistré" confirmation no longer applies.
   useEffect(() => {
@@ -28,10 +31,12 @@ export function ReflectionSection({ mode, onMode }: { mode: IkigaiMode; onMode: 
 
   const questions = mode === 'decouverte' ? IKIGAI.reflection.decouverte : IKIGAI.reflection.avance;
   const update = (n: string, v: string) => {
-    // Any edit invalidates the previous save, so revert the button to its
-    // "Enregistrer" state instead of leaving a stale "Enregistré".
-    setSavedAt(null);
-    setAnswers((cur) => ({ ...cur, [answerKey(mode, n)]: v }));
+    const next = { ...answers, [answerKey(mode, n)]: v };
+    const result = setCahierAnswers(next);
+    commitOnStorageSuccess(result, next, (stored) => {
+      setSavedAt(null);
+      setAnswers(stored);
+    });
   };
 
   // Explicit, deliberate save: sync this mode's answers into the notes system.
@@ -98,6 +103,7 @@ export function ReflectionSection({ mode, onMode }: { mode: IkigaiMode; onMode: 
                   onChange={(e) => update(q.n, e.target.value)}
                   placeholder="Vos notes…"
                   rows={3}
+                  maxLength={IKIGAI_STORAGE_LIMITS.freeText}
                   aria-label={`Réponse à la question ${q.n}`}
                   className="mt-4 w-full resize-y rounded-xl border border-outline-variant bg-surface-container-low/60 p-3 text-sm outline-none transition-colors placeholder:italic placeholder:text-surface-variant focus:border-[color:var(--primary)]"
                 />

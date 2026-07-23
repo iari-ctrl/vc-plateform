@@ -1,0 +1,129 @@
+[
+  {
+    "id": "corr-vp-trait-union",
+    "sourceCaseId": "cs-vp-insertion-3-regions",
+    "revealAfterDeliverableId": "vp-recommandation-soutien",
+    "title": "Correction commentée : Trait d’Union",
+    "subtitle": "Arbitrages possibles après une première version",
+    "readMin": 18,
+    "summary": "Une lecture commentée des preuves, des hypothèses financières et de quatre décisions possibles. La correction ne constitue pas une réponse unique ni un avis juridique.",
+    "sections": [
+      {
+        "heading": "Méthode de comparaison",
+        "body": "Une production recevable commence par fixer les conventions de calcul, puis relie chaque conclusion à une pièce. Les contradictions restent visibles. La qualité du travail dépend de la traçabilité des hypothèses et des conséquences attachées aux informations manquantes."
+      },
+      {
+        "heading": "Lecture financière commentée",
+        "body": "Le résultat 2025 de 40 k€ ne détermine pas la liquidité. Le solde bancaire annoncé de 390 k€ doit être rapproché du relevé, du virement de 30 k€, des chèques non débités et du compte de paiement secondaire. Les 250 k€ de fonds affectés sont reliés à leurs emplois et échéances. Le chiffre de 140 k€ constitue une première différence, sans établir à lui seul la trésorerie libre.\n\nLe modèle à treize semaines doit montrer les dates retenues pour les versements publics, la paie, le dépôt du site et les dépenses déjà couvertes par les fonds affectés. Le modèle à dix-huit mois sépare au moins trois scénarios : calendrier central, ouvertures différées et encaissements prudents. Le cofinancement Région Nord reste exclu ou décalé tant que le vote annoncé n’est pas intervenu. Toute autre hypothèse est acceptable si elle est expliquée et testée."
+      },
+      {
+        "heading": "Preuves d’impact et participation",
+        "body": "Les 510 situations positives portent sur 710 personnes suivies à six mois, parmi 960 entrées dans l’export. Ce résultat décrit les répondants ; il ne démontre ni l’attribution ni la stabilité. L’écart avec les 982 entrées présentées au conseil exige une réconciliation des dénominateurs. Les entretiens signalent des effets utiles, des contraintes d’horaires, des frais de garde et une interruption du suivi. Une analyse complète indique qui n’a pas été entendu, prévoit une restitution et traite la voie de réclamation concernant l’organisation et le financeur."
+      },
+      {
+        "heading": "Organisation, gouvernance et risques critiques",
+        "body": "Le calendrier de réplication dépend de fonctions centrales déjà chargées, d’un poste opérations non financé en 2026 et d’un système de données fragmenté. Le conseil n’a pas formellement approuvé l’annexe de réplication dans les pièces reçues. Le conflit d’intérêts, le signal de safeguarding et l’envoi erroné d’un fichier nominatif suivent les procédures compétentes. L’analyste consigne les questions, limite les données et obtient une décision professionnelle ; il ne conduit pas l’enquête."
+      },
+      {
+        "heading": "Choix du financement",
+        "body": "La subvention répond aux dépenses qui ne génèrent pas de flux remboursable. Une composante remboursable demande une personne morale éligible, un contrat qualifié, un flux prudent et une capacité compatible avec la continuité de la mission. Les fonds propres concernent uniquement une entité qui peut juridiquement en émettre. Les termes produits dans l’exercice sont des termes principaux prêts pour revue professionnelle."
+      }
+    ],
+    "decisionBranches": [
+      {
+        "title": "Soutien phasé sur une première ouverture",
+        "decision": "Accorder une subvention pluriannuelle en tranches pour une première ouverture, les fonctions centrales et la remédiation, avec revue avant toute extension.",
+        "assumptions": [
+          "Le scénario à treize semaines reste finançable après retrait ou décalage des encaissements non sécurisés.",
+          "Le conseil approuve le périmètre et les délégations.",
+          "Les responsables compétents traitent les signaux de safeguarding, de données et de conflit d’intérêts."
+        ],
+        "tradeoffs": [
+          "Le phasage réduit l’exposition et produit des preuves de transfert.",
+          "Une ouverture limitée sert moins de personnes à court terme et peut augmenter certains coûts unitaires."
+        ],
+        "evidenceLimits": [
+          "La stabilité à douze mois et l’attribution des résultats restent inconnues.",
+          "La capacité de supervision hors des sites historiques n’est pas démontrée."
+        ],
+        "informationNeeded": [
+          "Budget rebasé, plan à dix-huit mois et décision formelle du conseil.",
+          "Propriétaires, échéances et preuves de clôture des remédiations critiques.",
+          "Convention de cofinancement signée ou réduction correspondante du périmètre."
+        ]
+      },
+      {
+        "title": "Report avec travaux préparatoires bornés",
+        "decision": "Différer la décision de réplication et financer, si le mandat le permet, une préparation limitée portant sur la gouvernance, la trésorerie, les données et la protection des personnes.",
+        "assumptions": [
+          "Les risques critiques peuvent être traités sans engager l’ouverture d’un site.",
+          "Le besoin de préparation est distinct des dépenses courantes déjà financées."
+        ],
+        "tradeoffs": [
+          "Le report évite un engagement fondé sur des dates et autorisations non établies.",
+          "Il retarde l’accès au programme et peut faire perdre certains partenariats territoriaux."
+        ],
+        "evidenceLimits": [
+          "Le dossier ne chiffre pas précisément le coût et la durée de la préparation.",
+          "Le cofinancement et le calendrier municipal peuvent évoluer pendant le report."
+        ],
+        "informationNeeded": [
+          "Plan de travail de six mois avec responsables et livrables observables.",
+          "Nouvelle prévision de trésorerie sans recettes non signées.",
+          "Critères datés de retour devant le comité."
+        ]
+      },
+      {
+        "title": "Refus motivé de la demande actuelle",
+        "decision": "Refuser la demande de 1,2 M€ lorsque le mandat, la capacité du financeur ou les risques non résolus ne permettent pas un engagement proportionné.",
+        "assumptions": [
+          "Les signaux critiques restent sans propriétaire ni échéance vérifiable.",
+          "Le modèle prudent montre une tension qui déplacerait le risque vers les salariés ou les personnes accompagnées.",
+          "Le financeur ne peut pas apporter l’accompagnement requis."
+        ],
+        "tradeoffs": [
+          "Le refus préserve les limites du mandat et évite de créer une dépendance mal financée.",
+          "Il prive Trait d’Union d’une ressource potentielle et demande une communication qui limite les ruptures pour les personnes."
+        ],
+        "evidenceLimits": [
+          "Un refus fondé sur les pièces actuelles ne permet pas de conclure à l’inefficacité générale du programme.",
+          "Certaines lacunes peuvent résulter d’un dossier incomplet plutôt que d’une incapacité persistante."
+        ],
+        "informationNeeded": [
+          "Motifs reliés au mandat et aux preuves disponibles.",
+          "Conditions éventuelles d’une nouvelle saisine.",
+          "Plan de communication et orientation vers d’autres ressources, sans promesse."
+        ]
+      },
+      {
+        "title": "Composante remboursable conditionnelle et limitée",
+        "decision": "Réserver une composante remboursable à un besoin temporaire ou à une entité éligible, après validation professionnelle et démonstration de flux dans le scénario prudent.",
+        "assumptions": [
+          "Un flux identifiable, documenté et non affecté couvre le service sans réduire la mission.",
+          "La personne morale, le financeur et le contrat sont juridiquement compatibles.",
+          "La subvention finance séparément les fonctions sans flux de remboursement."
+        ],
+        "tradeoffs": [
+          "La composante peut recycler une ressource et couvrir un décalage temporaire démontré.",
+          "Elle ajoute un coût de transaction, des obligations et un risque de pression sur la mission."
+        ],
+        "evidenceLimits": [
+          "Les revenus futurs de prestations ne sont pas contractualisés dans le dossier.",
+          "Aucun échéancier prudent validé n’établit aujourd’hui une capacité de remboursement."
+        ],
+        "informationNeeded": [
+          "Contrats, dates, restrictions et scénario de remboursement stressé.",
+          "Avis juridique, fiscal, comptable et réglementaire adapté à l’instrument.",
+          "Termes principaux prêts pour revue professionnelle, avec remèdes et scénario de sortie."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Plusieurs décisions sont recevables lorsque leurs hypothèses et leurs conséquences sont explicites.",
+      "Le rapprochement financier précède le choix d’un instrument.",
+      "Une preuve favorable reste accompagnée de son périmètre, de ses biais et des informations manquantes.",
+      "Les risques critiques et les qualifications professionnelles suivent des voies distinctes de la notation générale.",
+      "La version révisée indique les changements apportés après la revue."
+    ]
+  }
+]

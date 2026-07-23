@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { Check, X, HelpCircle } from 'lucide-react';
 import type { QuizQuestion } from '@/content/types';
 
 export function QuizBlock({ quiz }: { quiz: QuizQuestion[] }) {
+  const baseId = useId();
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [validated, setValidated] = useState<Record<number, boolean>>({});
 
@@ -22,23 +23,24 @@ export function QuizBlock({ quiz }: { quiz: QuizQuestion[] }) {
 
       <div className="space-y-7">
         {quiz.map((q, qi) => {
+          const questionId = `${baseId}-${qi}`;
+          const legendId = `${questionId}-legend`;
+          const resultId = `${questionId}-result`;
           const chosen = answers[qi];
           const answered = validated[qi] === true;
           const hasChosen = chosen != null;
           return (
-            <div key={qi}>
-              <p className="font-medium">{q.question}</p>
-              <div className="mt-3 space-y-2">
+            <fieldset key={qi} className="min-w-0">
+              <legend id={legendId} className="font-medium">{q.question}</legend>
+              <div role="radiogroup" aria-labelledby={legendId} aria-describedby={answered ? resultId : undefined} className="mt-3 space-y-2">
                 {q.options.map((opt, oi) => {
                   const isChosen = chosen === oi;
                   const state = !answered
                     ? (isChosen ? 'selected' : 'idle')
                     : (opt.correct ? 'correct' : isChosen ? 'wrong' : 'muted');
                   return (
-                    <button
+                    <label
                       key={oi}
-                      disabled={answered}
-                      onClick={() => !answered && setAnswers((a) => ({ ...a, [qi]: oi }))}
                       className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition-colors ${
                         state === 'idle'
                           ? 'border-outline-variant hover:border-[color-mix(in_srgb,var(--primary)_50%,transparent)] hover:bg-surface-container-lowest'
@@ -51,6 +53,15 @@ export function QuizBlock({ quiz }: { quiz: QuizQuestion[] }) {
                                 : 'border-outline-variant opacity-50'
                       }`}
                     >
+                      <input
+                        type="radio"
+                        name={questionId}
+                        value={oi}
+                        checked={isChosen}
+                        disabled={answered}
+                        onChange={() => setAnswers((a) => ({ ...a, [qi]: oi }))}
+                        className="sr-only"
+                      />
                       <span className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border text-[0.625rem] ${
                         state === 'correct'
                           ? 'border-success text-success'
@@ -63,7 +74,7 @@ export function QuizBlock({ quiz }: { quiz: QuizQuestion[] }) {
                         {state === 'correct' ? <Check size={12} /> : state === 'wrong' ? <X size={12} /> : String.fromCharCode(65 + oi)}
                       </span>
                       {opt.text}
-                    </button>
+                    </label>
                   );
                 })}
               </div>
@@ -71,6 +82,7 @@ export function QuizBlock({ quiz }: { quiz: QuizQuestion[] }) {
                 <div className="mt-3">
                   <button
                     type="button"
+                    aria-label="Valider la réponse"
                     onClick={() => setValidated((v) => ({ ...v, [qi]: true }))}
                     className="btn-quiet !py-2 !px-4"
                   >
@@ -79,19 +91,19 @@ export function QuizBlock({ quiz }: { quiz: QuizQuestion[] }) {
                 </div>
               )}
               {answered && (
-                <p className="mt-3 rounded-xl bg-surface-container px-4 py-3 text-sm text-surface-variant animate-fade-in">
-                  <span className="font-semibold text-foreground">{q.options[chosen]?.correct ? 'Exact. ' : 'Pas tout à fait. '}</span>
+                <p id={resultId} role="status" aria-live="polite" aria-label="Résultat de la question" className="mt-3 rounded-xl bg-surface-container px-4 py-3 text-sm text-surface-variant animate-fade-in">
+                  <span className="font-semibold text-foreground">{q.options[chosen]?.correct ? 'Réponse correcte. ' : 'Réponse incorrecte. '}</span>
                   {q.explanation}
                 </p>
               )}
-            </div>
+            </fieldset>
           );
         })}
       </div>
 
       {validatedCount === quiz.length && (
-        <p className="mt-6 border-t border-outline-variant pt-5 font-headline text-headline-sm">
-          {correctCount} / {quiz.length} <span className="text-surface-variant text-base font-body">— {correctCount === quiz.length ? 'sans faute, le concept est acquis.' : 'relisez le passage concerné, puis avancez.'}</span>
+        <p role="status" aria-live="polite" aria-label="Score du quiz" className="mt-6 border-t border-outline-variant pt-5 font-headline text-headline-sm">
+          {correctCount} / {quiz.length} <span className="text-surface-variant text-base font-body">— {correctCount === quiz.length ? 'toutes les réponses sont correctes.' : 'consultez les explications associées aux réponses incorrectes.'}</span>
         </p>
       )}
     </section>

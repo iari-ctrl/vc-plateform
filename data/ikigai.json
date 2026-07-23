@@ -172,7 +172,6 @@
       "accent": "#D28236",
       "description": "Vous découvrez le capital-risque avec sérieux. Votre force est la curiosité brute et l'absence d'a priori. L'enjeu : bâtir un socle de vocabulaire et de compréhension avant de vous spécialiser.",
       "focus": ["Maîtriser le vocabulaire et les acteurs", "Comprendre la loi de puissance et le cycle d'un fonds", "Explorer largement avant de se spécialiser"],
-      "recommendedPathIds": ["discover", "vc-craft", "career"],
       "signals": ["Vous testez volontiers de nouveaux outils et idées", "Vous aimez vulgariser des concepts complexes"]
     },
     {
@@ -183,7 +182,6 @@
       "accent": "#B5544E",
       "description": "Vous levez ou vous vous y préparez. Comprendre les VC est votre meilleur levier de négociation. L'enjeu : maîtriser instruments, dilution et term sheets pour défendre vos intérêts sans casser la relation.",
       "focus": ["Construire un narratif et un data room crédibles", "Anticiper la dilution sur plusieurs tours", "Lire et négocier une term sheet"],
-      "recommendedPathIds": ["founder-fundraising", "term-sheets", "discover"],
       "signals": ["Vous pensez en termes de runway et de prochaine étape", "Vous voulez négocier en position informée"]
     },
     {
@@ -194,7 +192,6 @@
       "accent": "#4C6B8A",
       "description": "Vous visez un poste en fonds. Votre atout est la rigueur. L'enjeu : transformer une compréhension théorique en réflexes de praticien — sourcing, analyse, mémos — et préparer les entretiens VC.",
       "focus": ["Maîtriser le pipeline sourcing → DD → IC", "Savoir lire une startup et ses unit economics", "Préparer deal memo et market sizing"],
-      "recommendedPathIds": ["vc-craft", "startup-analysis", "career"],
       "signals": ["Vous croisez volontiers les sources de données", "Vous repérez vite une incohérence dans un dossier"]
     },
     {
@@ -205,7 +202,6 @@
       "accent": "#267A8C",
       "description": "Vous êtes en poste et voulez monter en puissance. L'enjeu : passer de l'exécution propre au jugement propriétaire — structurer des thèses, mener des DD complètes, comprendre la structuration de deals.",
       "focus": ["Structurer une due diligence priorisée", "Construire et défendre une thèse", "Comprendre l'architecture d'une term sheet"],
-      "recommendedPathIds": ["startup-analysis", "investment-thesis", "term-sheets"],
       "signals": ["Vous voulez porter des convictions, pas seulement les préparer", "Vous cherchez à hiérarchiser les risques"]
     },
     {
@@ -216,7 +212,6 @@
       "accent": "#9A6A3C",
       "description": "Vous menez des deals et siégez peut-être à des boards. L'enjeu : acquérir le droit de signer — négociation, gouvernance, gestion de portefeuille — et penser comme un décideur, pas un exécutant.",
       "focus": ["Négocier termes économiques et de contrôle", "Piloter un board et le follow-on", "Gérer la construction de portefeuille"],
-      "recommendedPathIds": ["term-sheets", "portfolio", "investment-thesis"],
       "signals": ["Vous êtes à l'aise dans la négociation", "Vous savez dire non avec clarté et respect"]
     },
     {
@@ -227,7 +222,6 @@
       "accent": "#5A4FA0",
       "description": "Vous raisonnez à l'échelle du fonds. L'enjeu : maîtriser l'économie d'un fonds, la relation LP, la construction de portefeuille en loi de puissance, et la stratégie de réserves qui fait — ou défait — un millésime.",
       "focus": ["Décomposer fees, carry et waterfall", "Lire DPI / TVPI / IRR sans confusion", "Construire une stratégie de réserves et de follow-on"],
-      "recommendedPathIds": ["fund-economics", "portfolio", "investment-thesis"],
       "signals": ["Vous pensez en termes de fund returners", "Vous raisonnez sur dix ans, pas sur un deal"]
     },
     {
@@ -242,7 +236,6 @@
         "Reporting financier et extra-financier (ESG/réglementaire)",
         "Animation de la communauté d'investisseurs (AG, communications)"
       ],
-      "recommendedPathIds": ["fund-economics", "discover", "career"],
       "signals": [
         "Vous aimez vulgariser des thèses d'investissement complexes devant des investisseurs traditionnels",
         "Vous êtes extrêmement rigoureux sur les chiffres et la régulation",
@@ -386,8 +379,7 @@
         "Vous ne regardez pas l'horloge pendant une [[dd|DD]] — vous regardez le planning de l'[[ic|IC]]."
       ],
       "metrics": ["DPI cible 2,0× sur 10 ans", "TVPI 3,5×", "Ticket moyen 300–800 k€", "8–12 lignes par vintage"],
-      "profileIds": ["principal-mindset", "analyst-progression", "investor-relations"],
-      "recommendedPathIds": ["investment-thesis", "fund-economics", "portfolio"]
+      "profileIds": ["principal-mindset", "analyst-progression", "investor-relations"]
     },
     {
       "id": "batisseur",
@@ -426,8 +418,7 @@
         "Vous faites une démo plus facilement qu'un pitch d'équipe."
       ],
       "metrics": ["ARR cible 3–5 M€ à 36 mois", "NRR > 115 %", "Burn multiple < 1,5", "Rule of 40 > 45"],
-      "profileIds": ["futur-analyste", "debutant-curieux"],
-      "recommendedPathIds": ["vc-craft", "founder-fundraising", "startup-analysis"]
+      "profileIds": ["futur-analyste", "debutant-curieux"]
     },
     {
       "id": "operateur",
@@ -466,8 +457,7 @@
         "Vous mesurez votre succès en [[dpi|DPI]] et en nombre d'ex-fondateurs devenus amis."
       ],
       "metrics": ["20–30 tickets angel", "1–2 rôles operator actifs", "Ticket moyen 30–75 k€", "Follow-on sélectif"],
-      "profileIds": ["associate-progression", "entrepreneur-levee"],
-      "recommendedPathIds": ["portfolio", "term-sheets", "founder-fundraising"]
+      "profileIds": ["associate-progression", "entrepreneur-levee"]
     }
   ],
   "reflection": {

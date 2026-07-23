@@ -13,12 +13,12 @@ type ButtonProps = {
   children: ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function Button({ variant = 'foil', as = 'button', to, href, className, children, ...rest }: ButtonProps) {
+export function Button({ variant = 'foil', as = 'button', to, href, className, children, type = 'button', ...rest }: ButtonProps) {
   const cls = cn(variant === 'foil' ? 'btn-foil' : variant === 'ghost' ? 'btn-ghost' : 'btn-quiet', className);
   if (as === 'link' && to) return <Link to={to} className={cls}>{children}</Link>;
   if (as === 'link' && href) return <a href={href} className={cls}>{children}</a>;
   return (
-    <button className={cls} {...rest}>
+    <button type={type} className={cls} {...rest}>
       {children}
     </button>
   );
@@ -44,13 +44,17 @@ export function LevelBadge({ level, accent }: { level: string; accent?: string }
 }
 
 // ── Section heading (eyebrow + serif title) ──────────────────────────────────
+type SectionHeadingElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
 export function SectionHeading({
+  as: Heading = 'h2',
   eyebrow,
   title,
   description,
   align = 'left',
   className,
 }: {
+  as?: SectionHeadingElement;
   eyebrow?: string;
   title: ReactNode;
   description?: ReactNode;
@@ -60,7 +64,7 @@ export function SectionHeading({
   return (
     <div className={cn(align === 'center' && 'text-center mx-auto max-w-2xl', className)}>
       {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
-      <h2 className="font-headline text-display-sm font-semibold tracking-tight text-balance">{title}</h2>
+      <Heading className="font-headline text-display-sm font-semibold tracking-tight text-balance">{title}</Heading>
       {description && <p className="mt-3 text-[1.0625rem] leading-relaxed text-surface-variant text-pretty">{description}</p>}
     </div>
   );
@@ -79,24 +83,40 @@ export function EmptyState({ icon, title, description, action }: { icon?: ReactN
 }
 
 // ── Progress ───────────────────────────────────────────────────────────────────
-export function ProgressBar({ value, accent = 'var(--primary)', className }: { value: number; accent?: string; className?: string }) {
+export function ProgressBar({ value, accent = 'var(--primary)', className, label = 'Progression' }: { value: number; accent?: string; className?: string; label?: string }) {
+  const bounded = Math.min(100, Math.max(0, value));
   return (
-    <div className={cn('h-1.5 w-full overflow-hidden rounded-full bg-surface-container-high', className)}>
+    <div
+      className={cn('h-1.5 w-full overflow-hidden rounded-full bg-surface-container-high', className)}
+      role="progressbar"
+      aria-label={label}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(bounded)}
+    >
       <div
         className="h-full rounded-full transition-[width] duration-700 ease-out"
-        style={{ width: `${Math.min(100, Math.max(0, value))}%`, background: accent }}
+        style={{ width: `${bounded}%`, background: accent }}
       />
     </div>
   );
 }
 
-export function ProgressRing({ value, size = 40, stroke = 3, accent = 'var(--primary)', label }: { value: number; size?: number; stroke?: number; accent?: string; label?: ReactNode }) {
+export function ProgressRing({ value, size = 40, stroke = 3, accent = 'var(--primary)', label, accessibleLabel = 'Progression' }: { value: number; size?: number; stroke?: number; accent?: string; label?: ReactNode; accessibleLabel?: string }) {
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   const offset = c - (Math.min(100, Math.max(0, value)) / 100) * c;
   return (
-    <span className="relative inline-grid place-items-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="-rotate-90">
+    <span
+      className="relative inline-grid place-items-center"
+      style={{ width: size, height: size }}
+      role="progressbar"
+      aria-label={accessibleLabel}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(Math.min(100, Math.max(0, value)))}
+    >
+      <svg width={size} height={size} className="-rotate-90" aria-hidden="true">
         <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--surface-container-high)" strokeWidth={stroke} />
         <circle
           cx={size / 2}

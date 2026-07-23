@@ -2,7 +2,7 @@
 
 > Une plateforme d'intelligence VC pour analyser les écosystèmes, suivre les convictions, étudier les décisions et structurer sa progression dans le capital-risque.
 
-Une plateforme **statique** d'intelligence VC, enrichie par une couche de formation. Elle articule trois piliers navigables : **Intelligence VC** (dossiers, convictions, analyses, décisions, méthode), **Formation** (parcours, bibliothèque par rayons, dictionnaire) et **Workspace** (tableau de bord, notes, journal de décisions). Toutes les données utilisateur (profil, notes, citations, favoris, progression) sont stockées localement dans le navigateur.
+Une plateforme **statique** d'intelligence VC, enrichie par une couche de formation. Elle articule trois piliers navigables : **Intelligence VC** (dossiers, convictions, analyses, décisions, méthode), **Formation** (parcours, bibliothèque filtrable, dictionnaire) et **Workspace** (tableau de bord, notes, journal de décisions). Toutes les données utilisateur (profil, notes, citations, favoris, progression) sont stockées localement dans le navigateur.
 
 > « L'ikigai n'est pas un point fixe à atteindre. C'est un centre de gravité qui se déplace avec toi. Le capital-risque, par sa temporalité longue — 10 ans par fonds — force précisément à se demander : où sera ce centre dans une décennie ? »
 
@@ -10,6 +10,7 @@ Une plateforme **statique** d'intelligence VC, enrichie par une couche de format
 
 ## ✦ Documentation
 
+- [`AGENTS.md`](AGENTS.md) est le point d'entrée portable des agents de code ; il impose à Codex, Claude Code et aux autres agents la lecture du contrat détaillé partagé [`CLAUDE.md`](CLAUDE.md).
 - [`PRODUCT.md`](PRODUCT.md) fixe le contrat produit : registre, intention, anti-références, principes et cible d'accessibilité.
 - `docs/` porte la documentation **de référence maintenue** : [`ARCHITECTURE_EDITION.md`](docs/ARCHITECTURE_EDITION.md), [`DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md), [`STRATEGIE-vc-intelligence.md`](docs/STRATEGIE-vc-intelligence.md) et [`parcours/README.md`](docs/parcours/README.md). Les documents supersédés sont isolés sous `docs/archive/`.
 - `Suivis/` porte le **suivi vivant** : [`ETAT.md`](Suivis/ETAT.md) (état vérifié, compteurs, risques, priorités), [`JOURNAL.md`](Suivis/JOURNAL.md) (journal daté) et [`PROCEDURE_PUSH.md`](Suivis/PROCEDURE_PUSH.md) (procédure de sauvegarde Git ; la publication est reportée).
@@ -22,7 +23,7 @@ Une plateforme **statique** d'intelligence VC, enrichie par une couche de format
 - **Liberté responsable.** Aucun chapitre n'est bloqué, aucune progression n'est imposée. On peut tout explorer en invité.
 - **Intelligence d'abord, formation en soutien.** La première lecture du produit passe par les dossiers, convictions, analyses, décisions et méthodes. L'onboarding ikigai reste disponible pour personnaliser les parcours.
 - **Premium éditorial.** Entre école privée, memo d'investissement, knowledge base et carnet personnel — jamais un dashboard SaaS générique.
-- **Style sobre et naturel.** Toute rédaction du site suit une **charte de style transverse non négociable** : prose fluide, registre d'analyste, pas de tics d'IA ni de survente. Source canonique : le skill `.claude/skills/ecosystemes/SKILL.md` (section « Writing style ») ; résumé opérationnel dans [`docs/ARCHITECTURE_EDITION.md` §4.0.c](docs/ARCHITECTURE_EDITION.md).
+- **Style sobre et naturel.** Toute rédaction du site suit une **charte de style transverse non négociable** : prose fluide, registre d'analyste, pas de tics d'IA ni de survente. Source canonique détaillée : [`docs/ARCHITECTURE_EDITION.md` §4.0.c](docs/ARCHITECTURE_EDITION.md) ; `PRODUCT.md` porte les principes produit et le skill `.claude/skills/ecosystemes/SKILL.md` complète le contrat pour les dossiers d'écosystème.
 - **V1 française assumée.** Le site sert des routes non localisées (`/`, `/home`, `/blog/...`). La traduction EN et les anciens préfixes de langue sont retirés du périmètre de lancement.
 
 ---
@@ -35,7 +36,7 @@ Une plateforme **statique** d'intelligence VC, enrichie par une couche de format
 | **Stockage local** | `localStorage` pour profil, notes, favoris, progression et journal |
 | **Typographie** | Newsreader (titres) · Plus Jakarta Sans (corps) · JetBrains Mono (mono) |
 
-Le **contenu canonique** (parcours, cours, leçons, dictionnaire, études de cas, livrables, analyses, anti-portfolio, mémos annotés, simulateurs, écosystèmes, ikigai) vit dans les JSON sources de `/data` : fichiers plats (`data/*.json`) et collections comme `data/blog/*.json`. Le client le bundle pour fonctionner hors-ligne / en invité, sans backend.
+Les **collections éditoriales canoniques** (parcours, cours, leçons, dictionnaire, études de cas, livrables, analyses, anti-portfolio, mémos annotés, simulateurs, écosystèmes, ikigai) vivent dans les JSON sources de `/data` : fichiers plats (`data/*.json`) et collections comme `data/blog/*.json`. Le client les bundle pour fonctionner en invité, sans backend applicatif. Les assets et chunks non encore chargés restent dépendants de l'hôte statique.
 
 ---
 
@@ -59,12 +60,13 @@ npm run dev
 | --- | --- |
 | `npm run dev` | Client Vite (le hook `predev` relance `split:content`) |
 | `npm run split:content` | Régénère les index/contenus scindés (`split:glossary` + `split:lessons`) |
-| `npm run build` | `prebuild` (split → validate → sitemap), build client (vite), puis `postbuild` → **prérendu statique** |
+| `npm run check:generated` | Vérifie sans écriture la parité des quatre sorties scindées avec leurs sources |
+| `npm run build` | Exige `VITE_SITE_URL` ; `prebuild` (split → validate → sitemap), build client, puis `postbuild` → **prérendu statique strict** |
 | `npm run prerender` | Prérend les routes publiques en HTML statique (`client/dist/<route>/index.html`) — lancé automatiquement après `build` |
 | `npm run typecheck` | Vérification TypeScript du client |
-| `npm run lint` | ESLint client, sans avertissement toléré |
-| `npm run test` | Tests Vitest du client |
-| `npm run check` | Validation stricte + glossaire + TypeScript + lint + tests |
+| `npm run lint` | ESLint du client, des scripts, des modules partagés et des hooks ESM, sans avertissement toléré |
+| `npm run test` | Tests Vitest du client et tests Node de `scripts/` et `shared/` |
+| `npm run check` | Fraîcheur des générés + validation stricte + glossaire + TypeScript + lint + tests |
 | `npm run validate:content` | Vérifie shape, références croisées et marqueurs dictionnaire `[[..]]` / `{{..}}` |
 | `npm run validate:content:strict` | Idem, warnings fatals |
 | `npm run validate:glossary` | Contrôle custom du glossaire final (slugs uniques, `id === slug`, liens, aliases) |
@@ -81,8 +83,8 @@ npm run dev
 Détail complet (arborescence, cycle de vie du contenu, pages, collections) dans [`docs/ARCHITECTURE_EDITION.md`](docs/ARCHITECTURE_EDITION.md). En bref :
 
 ```
-data/                     # Contenu canonique (JSON) — source de vérité
-  paths.json  courses.json  lessons.json  glossary.json
+data/                     # Collections éditoriales canoniques (JSON)
+  courses.json  lessons.json  glossary.json
   generated/              # glossaire/leçons scindés (index léger + défs/corps lazy) — GÉNÉRÉ
   sources/                # registre d'ingestion du glossaire (canonical-glossary.json)
   caseStudies.json  deliverables.json  simulators.json  ikigai.json
@@ -98,9 +100,9 @@ client/                   # SPA React + Vite (content, context, lib, components,
 
 Le build client est découpé par routes et par collections. Le vendor React est isolé ; le glossaire et les leçons sont **scindés index/contenu** : seul l'index léger est chargé sur le hot path, définitions et corps arrivent en chunks lazy.
 
-Les pages s'organisent autour des trois piliers (**Intelligence VC**, **Formation**, **Workspace**) plus les transverses (Home, Splash, Onboarding, Profil, Recherche, Design System). La Formation suit un contrat explicite : `/parcours` liste les parcours, `/parcours/:slug` conserve leur fiche intermédiaire, `/bibliotheque` liste les rayons et `/bibliotheque/:slug` ouvre le détail d'un rayon. Les cours et leçons restent sous `/courses/:slug` et `/lessons/:slug`.
+Les pages s'organisent autour des trois piliers (**Intelligence VC**, **Formation**, **Workspace**) plus les transverses (Home, Splash, Onboarding, Profil, Recherche, Design System). La Formation suit un contrat explicite : **path = Parcours**, soit une trajectoire de formation ordonnée par objectif qui compose librement les ressources existantes ; `/parcours` les liste et `/parcours/:slug` conserve leur fiche intermédiaire. `/bibliotheque` inventorie et filtre les ressources sans taxonomie parallèle. Les anciennes URL `/bibliotheque/:slug` redirigent vers cet inventaire. Les cours et leçons restent sous `/courses/:slug` et `/lessons/:slug`.
 
-**Stockage local.** Les entités utilisateur (`Profile`, `Note`, `Bookmark`, `Progress`, `DecisionEntry`) sont gérées dans le `localStorage`.
+**Stockage local.** Les entités utilisateur (`Profile`, `Note`, `Bookmark`, `Progress`, `DecisionEntry`) sont gérées dans le `localStorage` sous contrats `vcpx:` versionnés, validés et migrés.
 
 ---
 
@@ -122,17 +124,35 @@ Palette éditoriale de luxe — **feuille d'or** (`#C5A85C`), **bleu marine prof
 
 Le site est une SPA : les balises par page (`<title>`, `og:*`, `twitter:*`, `canonical`) sont injectées au runtime par `usePageMeta` (`client/src/lib/seo.ts`). Les scrapers de partage social et nombre de crawlers **n'exécutent pas le JavaScript** : sans prérendu, tout partage retomberait sur la carte générique.
 
-`scripts/prerender.mjs` corrige ce point **après le build** : il sert le `client/dist` produit par Vite, pilote un Chromium headless (Puppeteer) sur chaque route publique, attend la fin de l'hydratation, puis écrit le DOM rendu dans `client/dist/<route>/index.html`.
+`scripts/prerender.mjs` corrige ce point **après le build** : il sert le `client/dist` produit par Vite, pilote un Chromium headless (Puppeteer) sur chaque route publique, attend les métadonnées calculées au runtime, puis écrit le DOM rendu dans `client/dist/<route>/index.html`.
 
 ```bash
 # Lancé automatiquement par le hook postbuild ; sinon, après un build client :
-VITE_SITE_URL=https://vcpx.io npm run build          # build + prérendu de toutes les routes
-node scripts/prerender.mjs --filter=/blog/voir-comme-un-etat --limit=1   # itérer sur une route
+export VITE_BASE_URL=/vc-plateform/
+export VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform
+npm run build                                        # build + prérendu de toutes les routes
+npm run prerender:strict -- --filter=/blog/voir-comme-un-etat --limit=1  # contrôle ciblé bloquant
+npm run prerender:tolerant -- --filter=/blog/voir-comme-un-etat          # diagnostic local explicite
 ```
 
-- **Liste des URLs.** Même énumération que le sitemap (`scripts/collect-routes.mjs`). Les `NOINDEX_SEGMENTS` de `shared/routes.mjs` sont exclus.
-- **Domaine canonique.** Builder avec `VITE_SITE_URL` défini pour que `canonical`/`og:url` portent le domaine de production.
-- **Hébergement.** Le CDN/host statique doit servir `client/dist/<route>/index.html` (clean URLs / auto-index), et conserver `client/dist/index.html` comme repli SPA.
+- **Mode bloquant par défaut.** Un navigateur indisponible, une route en erreur, des métadonnées absentes ou un nombre de fichiers différent du nombre attendu font échouer le prérendu. Le mode tolérant est réservé au diagnostic local et doit être demandé explicitement.
+- **Liste des URLs.** Le collecteur, le sitemap et le prérendu consomment la même énumération (`scripts/collect-routes.mjs`). Les familles `NOINDEX_ROUTE_PATTERNS` de `shared/routes.mjs` en sont exclues.
+- **Domaine canonique.** `VITE_SITE_URL` est obligatoire pour le sitemap et le prérendu. Son chemin doit correspondre à `VITE_BASE_URL` ; aucun domaine de production n’est déduit par défaut.
+- **Page introuvable.** Le build produit un vrai `client/dist/404.html`, marqué `noindex,nofollow` et dépourvu de canonical auto-référente. L’hébergeur doit servir ce document avec un statut HTTP 404 ; copier le shell SPA comme page 404 n’est pas admis.
+- **Hébergement.** Le CDN/host statique doit servir `client/dist/<route>/index.html` (clean URLs / auto-index). Les routes publiques prérendues ne dépendent donc d’aucun repli SPA. Si des liens directs vers une route fonctionnelle `noindex` doivent répondre en 200, l’hébergeur doit recevoir une règle explicite pour ces chemins connus sans transformer les URL inconnues en faux succès ; à défaut, cette garantie n’est pas revendiquée.
+
+### En-têtes de sécurité attendus en production
+
+Le dépôt ne simule pas des en-têtes HTTP au moyen de balises HTML. L’hébergement retenu doit permettre de définir puis de contrôler une politique de réponse comparable à la cible suivante, à adapter après validation sur l’artefact final :
+
+```text
+Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'
+Referrer-Policy: strict-origin-when-cross-origin
+X-Content-Type-Options: nosniff
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+```
+
+`style-src-attr 'unsafe-inline'` correspond aux styles calculés actuellement rendus comme attributs par l’interface ; il ne doit pas être étendu à `script-src`. Un hébergement qui ne permet pas d’imposer et de vérifier ces en-têtes ne satisfait pas le prérequis `SEC-005`. La vérification porte sur les réponses HTTP publiées, notamment la page d’accueil, une route prérendue et la réponse 404.
 
 ---
 
@@ -142,3 +162,5 @@ La remise en ligne est volontairement reportée : la priorité actuelle est une 
 
 - **Mode de rendu — tranché.** SPA (CSR) + **prérendu statique des routes publiques au build** : OpenGraph et `canonical` par page sont présents dans le HTML statique pour le SEO et le partage social.
 - Servir le `client/dist` derrière un CDN (Vercel, Netlify, GitHub Pages). L'API ayant été supprimée, le déploiement est un simple hébergement de fichiers statiques.
+- **Origine canonique du workflow manuel.** Tant qu’aucun domaine personnalisé et aucun `CNAME` ne sont configurés, le workflow GitHub Pages utilise `https://iari-ctrl.github.io/vc-plateform` avec la base `/vc-plateform/` pour les assets, le routeur, le sitemap, les robots et les métadonnées.
+- **Manifest uniquement.** Le site fournit un manifest et des icônes d’installation, sans service worker ni promesse de navigation hors ligne. Toute évolution vers une PWA hors ligne devra définir séparément la stratégie de cache, le fallback et les mises à jour.

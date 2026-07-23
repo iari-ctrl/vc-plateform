@@ -27,23 +27,24 @@ export function DilutionSim({ accent }: { accent: string }) {
             {rounds.map((r, i) => (
               <div key={r.id} className="rounded-xl border border-outline-variant bg-surface-container-lowest p-3">
                 <div className="mb-2 flex items-center justify-between">
-                  <input value={r.label} aria-label={`Nom du tour ${i + 1}`} onChange={(e) => setRounds((rs) => rs.map((x) => (x.id === r.id ? { ...x, label: e.target.value } : x)))} className="w-28 bg-transparent text-sm font-medium outline-none" />
-                  {rounds.length > 1 && <button onClick={() => setRounds((rs) => rs.filter((x) => x.id !== r.id))} aria-label={`Retirer le tour ${r.label}`} className="text-surface-variant hover:text-error"><Trash2 size={14} /></button>}
+                  <input value={r.label} aria-label={`Nom du tour ${i + 1}`} onChange={(e) => setRounds((rs) => rs.map((x) => (x.id === r.id ? { ...x, label: e.target.value } : x)))} className="min-w-0 bg-transparent text-sm font-medium outline-none" />
+                  {rounds.length > 1 && <button type="button" onClick={() => setRounds((rs) => rs.filter((x) => x.id !== r.id))} aria-label={`Retirer le tour ${r.label}`} className="text-surface-variant hover:text-error"><Trash2 size={14} /></button>}
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <Field label="Pre-money" suffix="M€" value={r.pre} step={0.5} onChange={(v) => setRounds((rs) => rs.map((x) => (x.id === r.id ? { ...x, pre: v } : x)))} />
-                  <Field label="Levée" suffix="M€" value={r.raise} step={0.5} onChange={(v) => setRounds((rs) => rs.map((x) => (x.id === r.id ? { ...x, raise: v } : x)))} />
-                  <Field label="Création ESOP" suffix="%" value={r.esopTarget} step={1} onChange={(v) => setRounds((rs) => rs.map((x) => (x.id === r.id ? { ...x, esopTarget: v } : x)))} />
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                  <Field label="Pre-money" suffix="M€" description="Valorisation avant levée, en millions d’euros." value={r.pre} step={0.5} onChange={(v) => setRounds((rs) => rs.map((x) => (x.id === r.id ? { ...x, pre: v } : x)))} />
+                  <Field label="Levée" suffix="M€" description="Montant levé, en millions d’euros." value={r.raise} step={0.5} onChange={(v) => setRounds((rs) => rs.map((x) => (x.id === r.id ? { ...x, raise: v } : x)))} />
+                  <Field label="Création ESOP" suffix="%" description="Pourcentage ajouté au pool d’options." value={r.esopTarget} step={1} onChange={(v) => setRounds((rs) => rs.map((x) => (x.id === r.id ? { ...x, esopTarget: v } : x)))} />
                 </div>
                 <p className="mt-1.5 text-[0.625rem] text-surface-variant">Cède {formatPercent(rows[i].investorPct)} aux investisseurs et {formatPercent(rows[i].esopPct)} au pool ESOP (pre-money)</p>
               </div>
             ))}
           </div>
-          <button 
+          <button
+            type="button"
             onClick={() => setRounds((rs) => {
               const getNextLabel = (len: number) => len === 0 ? 'Seed' : `Series ${String.fromCharCode(65 + len - 1)}`;
               return [...rs, { id: Date.now(), label: getNextLabel(rs.length), pre: rows[rows.length - 1]?.post ?? 80, raise: 20, esopTarget: 0 }];
-            })} 
+            })}
             className="btn-ghost w-full !py-2"
           >
             <Plus size={15} /> Ajouter un tour
@@ -66,15 +67,16 @@ export function DilutionSim({ accent }: { accent: string }) {
             <Stat label="Dilution totale" value={formatPercent(100 - founder)} hint="cédée au total" />
             <Stat label="Valorisation finale" value={formatCurrency((rows[rows.length - 1]?.post ?? 0) * 1_000_000)} hint="post-money dernier tour" />
           </div>
-          <div className="overflow-hidden rounded-2xl border border-outline-variant">
-            <table className="w-full text-sm">
+          <div data-scroll-region="simulator-table" className="overflow-x-auto rounded-2xl border border-outline-variant">
+            <table className="min-w-[44rem] w-full text-sm">
+              <caption className="sr-only">Séquence de dilution par tour de financement</caption>
               <thead className="bg-surface-container text-left text-xs text-surface-variant">
-                <tr><th className="px-4 py-2.5 font-medium">Tour</th><th className="px-4 py-2.5 font-medium">Post-money</th><th className="px-4 py-2.5 font-medium">Nouveaux inv.</th><th className="px-4 py-2.5 font-medium">Nouvel ESOP</th><th className="px-4 py-2.5 font-medium">Fondateurs après</th></tr>
+                <tr><th scope="col" className="px-4 py-2.5 font-medium">Tour</th><th scope="col" className="px-4 py-2.5 font-medium">Post-money</th><th scope="col" className="px-4 py-2.5 font-medium">Nouveaux inv.</th><th scope="col" className="px-4 py-2.5 font-medium">Nouvel ESOP</th><th scope="col" className="px-4 py-2.5 font-medium">Fondateurs après</th></tr>
               </thead>
               <tbody>
                 {rows.map((r) => (
                   <tr key={r.id} className="border-t border-outline-variant">
-                    <td className="px-4 py-2.5 font-medium">{r.label}</td>
+                    <th scope="row" className="px-4 py-2.5 text-left font-medium">{r.label}</th>
                     <td className="px-4 py-2.5">{formatCurrency(r.post * 1_000_000)}</td>
                     <td className="px-4 py-2.5">{formatPercent(r.investorPct)}</td>
                     <td className="px-4 py-2.5 text-surface-variant">{r.esopPct > 0 ? formatPercent(r.esopPct) : '-'}</td>

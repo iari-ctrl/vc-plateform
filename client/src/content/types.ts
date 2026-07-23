@@ -1,22 +1,5 @@
 export type Level = 'debutant' | 'intermediaire' | 'avance' | 'tous';
 
-export interface Path {
-  id: string;
-  slug: string;
-  domainId: string;
-  order: number;
-  title: string;
-  subtitle: string;
-  level: Level;
-  accent: string;
-  kanji?: string;
-  durationHours: number;
-  summary: string;
-  forWhom: string[];
-  outcomes: string[];
-  courseIds: string[];
-}
-
 export interface Course {
   id: string;
   slug: string;
@@ -24,6 +7,8 @@ export interface Course {
   subtitle: string;
   level: Level;
   durationMin: number;
+  /** How the displayed reading duration is obtained. Legacy courses omit it. */
+  durationSource?: 'declared' | 'lesson-read-minutes';
   summary: string;
   tags: string[];
   lessonIds: string[];
@@ -50,8 +35,8 @@ export interface Lesson {
   kicker: string;
   readMin: number;
   summary: string;
-  /** Publication state. Missing means `published` for legacy content. */
-  status?: 'published' | 'upcoming';
+  /** Explicit publication state; omission is invalid and never public. */
+  status: 'published' | 'upcoming';
   /** Lesson-level pedagogy used by certification curricula. */
   level?: Level;
   contexts?: {
@@ -60,6 +45,12 @@ export interface Lesson {
     sectors?: string[];
   };
   optional?: boolean;
+  /** Contribution to a longitudinal production, kept separate from reading time. */
+  practice?: {
+    deliverableId: string;
+    sectionId: string;
+    estimatedMinutes: number;
+  };
   learningOutcomes?: string[];
   prerequisiteLessonIds?: string[];
   assessmentId?: string;
@@ -107,6 +98,29 @@ export interface GlossaryDef {
   example?: string;
 }
 
+export interface CaseStudyTable {
+  caption: string;
+  columns: string[];
+  rows: (string | number | null)[][];
+  notes?: string[];
+}
+
+export interface CaseStudyDocument {
+  id: string;
+  title: string;
+  kind: string;
+  summary?: string;
+  body?: string;
+  tables?: CaseStudyTable[];
+}
+
+export interface CaseStudyDownload {
+  label: string;
+  href: string;
+  format?: string;
+  note?: string;
+}
+
 export interface CaseStudy {
   id: string;
   slug: string;
@@ -120,6 +134,69 @@ export interface CaseStudy {
   tags: string[];
   glossaryRefs: string[];
   sections: { heading: string; body: string }[];
+  takeaways: string[];
+  /** Pedagogical role. Learner dossiers never contain the worked conclusion. */
+  learningRole?: 'standard' | 'learner-dossier' | 'transfer';
+  documents?: CaseStudyDocument[];
+  decisionQuestions?: string[];
+  downloads?: CaseStudyDownload[];
+  estimatedWorkMinutes?: number;
+}
+
+// ── Diagnostics and voluntarily revealed corrections ────────────────────────
+
+export type DiagnosticResult = 'a-revoir' | 'acquis-a-confirmer' | 'point-maitrise';
+
+export interface DiagnosticResourceRef {
+  kind: 'lesson' | 'deliverable';
+  id: string;
+  label: string;
+}
+
+export interface DiagnosticOption {
+  id: string;
+  label: string;
+  result: DiagnosticResult;
+  feedback: string;
+}
+
+export interface DiagnosticItem {
+  id: string;
+  topic: string;
+  prompt: string;
+  options: DiagnosticOption[];
+  resourceRefs: DiagnosticResourceRef[];
+}
+
+export interface Diagnostic {
+  id: string;
+  slug: string;
+  parcoursId: string;
+  title: string;
+  summary: string;
+  optional: true;
+  items: DiagnosticItem[];
+}
+
+export interface CaseCorrectionDecisionBranch {
+  title: string;
+  decision: string;
+  assumptions: string[];
+  tradeoffs: string[];
+  evidenceLimits: string[];
+  informationNeeded: string[];
+}
+
+export interface CaseCorrection {
+  id: string;
+  title: string;
+  subtitle: string;
+  summary: string;
+  readMin: number;
+  sourceCaseId: string;
+  revealAfterDeliverableId: string;
+  sections: { heading: string; body: string }[];
+  decisionBranches: CaseCorrectionDecisionBranch[];
   takeaways: string[];
 }
 
@@ -142,7 +219,32 @@ export interface DeliverableCriterion {
   /** What is being judged. */
   criterion: string;
   /** The concrete test the learner applies to their own draft. */
-  check: string;
+  check?: string;
+  /** Stable key used by the local review workspace. */
+  id?: string;
+  description?: string;
+  expectedEvidence?: string;
+  commonError?: string;
+  revisionQuestion?: string;
+}
+
+export interface DeliverableRubricLevel {
+  id: 'insuffisant' | 'acceptable' | 'solide' | 'non-observable' | string;
+  label: string;
+  description: string;
+}
+
+export interface DeliverableResource {
+  label: string;
+  href: string;
+  format: string;
+}
+
+export interface DeliverableRoleCard {
+  id: string;
+  title: string;
+  mandate: string;
+  questions: string[];
 }
 
 /** One section of the template the learner fills in. */
@@ -170,6 +272,22 @@ export interface Deliverable {
   relatedLessonIds?: string[];
   glossaryRefs?: string[];
   tags?: string[];
+  activityKind?: 'cumulative-exercise' | 'capstone' | 'worksheet' | 'workshop';
+  estimatedWorkMinutes?: number;
+  relatedCourseIds?: string[];
+  caseStudyId?: string;
+  correctionId?: string;
+  components?: { id: string; title: string; requirements: string[] }[];
+  rubricLevels?: DeliverableRubricLevel[];
+  evaluation?: ('auto' | 'peer' | 'practitioner')[];
+  externalReviewMinutes?: number;
+  resources?: DeliverableResource[];
+  roleCards?: DeliverableRoleCard[];
+  journal?: {
+    sourceType: 'deliverable';
+    predictionMin: number;
+    predictionMax: number;
+  };
 }
 
 /** Ouvrage analysé dans une « lecture oblique » (deux entrées pour un duel de livres). */
@@ -182,8 +300,8 @@ export interface BookRef {
 export interface BlogPost {
   id: string;
   slug: string;
-  /** Publication gate: absent means published for backward compatibility. */
-  status?: 'draft' | 'published';
+  /** Explicit publication gate; omission is invalid and never public. */
+  status: 'draft' | 'published';
   title: string;
   subtitle: string;
   author: string;
@@ -496,7 +614,6 @@ export interface LearningProfile {
   accent: string;
   description: string;
   focus: string[];
-  recommendedPathIds: string[];
   signals: string[];
 }
 export interface IkigaiQuestion {
@@ -513,7 +630,7 @@ export interface IkigaiDayItem {
 /**
  * An "incarnated" archetype that sits at the centre of the diagram — a more
  * embodied layer above the learning profiles. Relates to one or more learning
- * profiles via `profileIds` and recommends parcours via `recommendedPathIds`.
+ * profiles via `profileIds`.
  */
 export interface IkigaiArchetype {
   id: string;
@@ -532,7 +649,6 @@ export interface IkigaiArchetype {
   metrics: string[];
   /** Learning profiles this archetype resonates with. */
   profileIds: string[];
-  recommendedPathIds: string[];
 }
 
 /** A free-text introspection prompt for the "cahier" (no scoring). */

@@ -61,7 +61,7 @@
     "title": "Sourcing, screening et gestion du pipeline",
     "subtitle": "Origination, qualification et traçabilité des opportunités",
     "level": "intermediaire",
-    "durationMin": 42,
+    "durationMin": 43,
     "summary": "Organiser l'origination, qualifier chaque opportunité au regard de la stratégie du fonds et maintenir un pipeline exploitable et traçable.",
     "tags": [
       "sourcing",
@@ -281,11 +281,11 @@
   {
     "id": "c-decouvrir-vc",
     "slug": "le-vc-sans-bullshit-modules",
-    "title": "Le VC sans bullshit",
-    "subtitle": "La découverte, en 7 épisodes bingeables",
+    "title": "Comprendre le capital-risque",
+    "subtitle": "Un parcours introductif en sept leçons",
     "level": "debutant",
     "durationMin": 60,
-    "summary": "Le registre « découverte » du parcours d'entrée : comment l'argent passe de l'épargne aux fondateurs, et pourquoi 9 startups sur 10 doivent mourir. Ton léger, un concept par épisode, mythes démontés.",
+    "summary": "Un parcours d’entrée sur la circulation du capital, l’économie des fonds et la distribution asymétrique des rendements.",
     "tags": [
       "découverte",
       "fondations",
@@ -339,7 +339,11 @@
     "level": "intermediaire",
     "durationMin": 44,
     "summary": "Qualifier les sources, rédiger une recommandation d'investissement traçable et présenter le raisonnement devant un comité d'investissement.",
-    "tags": ["recommandation", "memo", "comité-investissement"],
+    "tags": [
+      "recommandation",
+      "memo",
+      "comité-investissement"
+    ],
     "lessonIds": [
       "l-fact-hypothesis",
       "l-investment-recommendation",
@@ -354,7 +358,11 @@
     "level": "intermediaire",
     "durationMin": 57,
     "summary": "Identifier les conflits d'intérêts, protéger les informations sensibles, encadrer l'usage de l'intelligence artificielle et prévenir les erreurs critiques.",
-    "tags": ["intégrité", "confidentialité", "intelligence-artificielle"],
+    "tags": [
+      "intégrité",
+      "confidentialité",
+      "intelligence-artificielle"
+    ],
     "lessonIds": [
       "l-conflicts-conduct",
       "l-confidentiality",
@@ -370,7 +378,12 @@
     "level": "intermediaire",
     "durationMin": 0,
     "summary": "Approfondissements facultatifs adaptés au stade principal d'intervention du fonds.",
-    "tags": ["pre-seed", "seed", "series-a", "growth"],
+    "tags": [
+      "pre-seed",
+      "seed",
+      "series-a",
+      "growth"
+    ],
     "lessonIds": [
       "l-stage-preseed-team",
       "l-stage-preseed-evidence",
@@ -390,7 +403,12 @@
     "level": "intermediaire",
     "durationMin": 0,
     "summary": "Approfondissements facultatifs selon la responsabilité assumée par le fonds dans le processus d'investissement.",
-    "tags": ["lead", "co-lead", "follower", "syndication"],
+    "tags": [
+      "lead",
+      "co-lead",
+      "follower",
+      "syndication"
+    ],
     "lessonIds": [
       "l-role-lead-dd",
       "l-role-lead-closing",
@@ -408,7 +426,14 @@
     "level": "intermediaire",
     "durationMin": 0,
     "summary": "Approfondissements facultatifs pour une pratique généraliste ou spécialisée du capital-risque.",
-    "tags": ["spécialisation", "saas", "deeptech", "climat", "santé", "impact"],
+    "tags": [
+      "spécialisation",
+      "saas",
+      "deeptech",
+      "climat",
+      "santé",
+      "impact"
+    ],
     "lessonIds": [
       "l-specialty-generalist-comparison",
       "l-specialty-generalist-experts",
@@ -424,6 +449,135 @@
       "l-specialty-marketplace-liquidity",
       "l-specialty-impact-intentionality",
       "l-specialty-impact-measurement"
+    ]
+  },
+  {
+    "id": "c-vp-mandat-triage",
+    "slug": "mandat-role-triage-venture-philanthropie",
+    "title": "Fondements, mandat et triage",
+    "subtitle": "Définir l’approche avant d’instruire un dossier",
+    "level": "intermediaire",
+    "durationMin": 11,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Distinguer la venture philanthropie des approches voisines, traduire le mandat en critères de triage et décider d’avancer, de différer ou de refuser un dossier.",
+    "tags": [
+      "venture-philanthropie",
+      "mandat",
+      "screening",
+      "additionalité"
+    ],
+    "lessonIds": [
+      "lvp-mandat-triage",
+      "lvp-screening-additionalite"
+    ]
+  },
+  {
+    "id": "c-vp-probleme-preuves",
+    "slug": "probleme-preuves-beneficiaires",
+    "title": "Problème, preuves et bénéficiaires",
+    "subtitle": "Établir ce qui change, pour qui et sur quelles preuves",
+    "level": "intermediaire",
+    "durationMin": 15,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Cartographier un problème, challenger une théorie du changement et préparer des entretiens qui protègent les personnes concernées.",
+    "tags": [
+      "théorie du changement",
+      "preuves",
+      "bénéficiaires",
+      "impact"
+    ],
+    "lessonIds": [
+      "lvp-analyse-probleme",
+      "lvp-theorie-changement",
+      "lvp-entretiens-beneficiaires"
+    ]
+  },
+  {
+    "id": "c-vp-diligence-organisationnelle",
+    "slug": "diligence-organisationnelle-venture-philanthropie",
+    "title": "Diligence organisationnelle",
+    "subtitle": "Vérifier gouvernance, équipe, opérations et protection des personnes",
+    "level": "intermediaire",
+    "durationMin": 20,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Construire une diligence proportionnée, confronter les preuves et distinguer une faiblesse traitable d’un risque qui impose une condition ou un arrêt.",
+    "tags": [
+      "due diligence",
+      "gouvernance",
+      "opérations",
+      "safeguarding"
+    ],
+    "lessonIds": [
+      "lvp-plan-diligence",
+      "lvp-mission-gouvernance",
+      "lvp-equipe-operations",
+      "lvp-safeguarding-risques"
+    ]
+  },
+  {
+    "id": "c-vp-diligence-financiere",
+    "slug": "diligence-financiere-resilience-impact",
+    "title": "Diligence financière et résilience",
+    "subtitle": "Reconstituer les ressources mobilisables et tester les scénarios",
+    "level": "intermediaire",
+    "durationMin": 22,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Lire des comptes associatifs, calculer un coût complet, établir une prévision de trésorerie et tester la perte d’un financement majeur.",
+    "tags": [
+      "finance",
+      "coût complet",
+      "trésorerie",
+      "scénarios"
+    ],
+    "lessonIds": [
+      "lvp-comptes-cout-complet",
+      "lvp-tresorerie-reserves",
+      "lvp-previsions-scenarios",
+      "lvp-atelier-choc"
+    ]
+  },
+  {
+    "id": "c-vp-structuration-financement",
+    "slug": "structuration-financement-sur-mesure",
+    "title": "Structuration du financement",
+    "subtitle": "Choisir un instrument compatible et en définir les termes",
+    "level": "intermediaire",
+    "durationMin": 22,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Comparer les instruments, vérifier la capacité juridique et financière, puis structurer montant, durée, tranches, conditions et partage du risque.",
+    "tags": [
+      "financement sur mesure",
+      "instrument",
+      "remboursement",
+      "termes"
+    ],
+    "lessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration"
+    ]
+  },
+  {
+    "id": "c-vp-partenariat-portefeuille",
+    "slug": "partenariat-decision-cycle-portefeuille",
+    "title": "Partenariat, recommandation, suivi et sortie",
+    "subtitle": "Accompagner, mesurer, décider et préparer la sortie",
+    "level": "intermediaire",
+    "durationMin": 21,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Définir un accompagnement utile, une mesure proportionnée et un dispositif de suivi, puis rédiger une recommandation révisable.",
+    "tags": [
+      "accompagnement",
+      "mesure impact",
+      "portefeuille",
+      "recommandation"
+    ],
+    "lessonIds": [
+      "lvp-accompagnement-pouvoir",
+      "lvp-mesure-impact",
+      "lvp-suivi-sortie",
+      "lvp-recommandation-comite"
     ]
   }
 ]

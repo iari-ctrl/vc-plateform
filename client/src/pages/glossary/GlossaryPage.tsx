@@ -4,7 +4,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, ChevronDown, ChevronUp, ExternalLink, Search } from 'lucide-react';
 import { GLOSSARY, glossaryBySlug, loadGlossaryDefs } from '@/content/glossary';
-import { lessonById } from '@/content/lessons';
+import { publicLessonById } from '@/content/lessons';
 import { Markdown } from '@/lib/markdown';
 import { usePageMeta } from '@/lib/seo';
 import { safeHttpUrl } from '@/lib/utils';
@@ -89,6 +89,8 @@ export default function GlossaryPage() {
 
   const terms: GlossaryIndexEntry[] = GLOSSARY;
   const [defs, setDefs] = useState<Record<string, GlossaryDef> | null>(null);
+  const [defsStatus, setDefsStatus] = useState<'loading' | 'done' | 'error'>('loading');
+  const [defsAttempt, setDefsAttempt] = useState(0);
   const [activeCategory, setActiveCategory] = useState('Tous');
   const [query, setQuery] = useState('');
   const [activeLetter, setActiveLetter] = useState('A');
@@ -104,8 +106,22 @@ export default function GlossaryPage() {
   // Heavy definitions load lazily for the detail view so they do not add to
   // the initial bundle.
   useEffect(() => {
-    void loadGlossaryDefs().then(setDefs);
-  }, []);
+    let active = true;
+    setDefsStatus('loading');
+    void loadGlossaryDefs()
+      .then((nextDefs) => {
+        if (!active) return;
+        setDefs(nextDefs);
+        setDefsStatus('done');
+      })
+      .catch(() => {
+        if (!active) return;
+        setDefsStatus('error');
+      });
+    return () => {
+      active = false;
+    };
+  }, [defsAttempt]);
 
   const fullTerms = useMemo<GlossaryTerm[]>(
     () =>
@@ -345,6 +361,16 @@ export default function GlossaryPage() {
             </div>
           </aside>
         </header>
+
+        {defsStatus === 'error' && (
+          <div role="alert" className="mb-8 rounded-2xl border border-outline-variant bg-surface-container-low p-5 text-sm text-surface-variant">
+            <p className="font-medium text-foreground">Les définitions détaillées n’ont pas pu être chargées.</p>
+            <p className="mt-1">Le glossaire reste consultable ; relancez le chargement pour afficher les définitions complètes.</p>
+            <button type="button" onClick={() => setDefsAttempt((attempt) => attempt + 1)} className="btn-ghost mt-4">
+              Réessayer
+            </button>
+          </div>
+        )}
 
         <div
           ref={stickyRef}
@@ -635,7 +661,7 @@ export default function GlossaryPage() {
                                   </p>
                                   <div className="space-y-2">
                                     {term.relatedLessonIds.map((id) => {
-                                      const lesson = lessonById(id);
+                                      const lesson = publicLessonById(id);
                                       if (!lesson) return null;
                                       return (
                                         <Link

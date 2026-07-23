@@ -17,6 +17,7 @@ export interface UserDataContextValue {
   toggleBookmark: (bookmark: Bookmark) => Promise<StorageResult>;
   setProgress: (progress: ProgressEntry) => Promise<StorageResult>;
   getProgress: (lessonId: string) => ProgressEntry | undefined;
+  reloadLocalData: () => void;
   addJournalEntry: (entry: Omit<DecisionJournalEntry, 'id' | 'createdAt' | 'status'>) => Promise<StorageResult>;
   resolveJournalEntry: (id: string, outcome: DecisionOutcome, resolutionNote?: string) => Promise<StorageResult>;
   deleteJournalEntry: (id: string) => Promise<StorageResult>;

@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowDownRight, Footprints, MessageSquareText, Network, ShieldCheck, Split, UsersRound, type LucideIcon } from 'lucide-react';
 import type { BlogPost } from '@/content/types';
+import { publicAssetUrl } from '@shared/base-url.mjs';
 import { ScrollytellingProgress, ScrollytellingScene } from '@/components/blog/ScrollytellingPrimitives';
-import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
+import { useMediaQuery, usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { cn } from '@/lib/utils';
 
-const ASSET_BASE = '/blog/exit-voice-loyalty-hirschman';
+const ASSET_BASE = publicAssetUrl('blog/exit-voice-loyalty-hirschman', import.meta.env.BASE_URL);
+
+const HERO_IMAGE_DIMENSIONS = { width: 2688, height: 1520 } as const;
+const PORTRAIT_IMAGE_DIMENSIONS = { width: 1744, height: 2336 } as const;
 
 type Scene = {
   id: string;
@@ -23,104 +27,109 @@ const scenes: Scene[] = [
   {
     id: 'triangle',
     eyebrow: '01 · Le triangle',
-    title: 'Partir, protester, rester: les trois verbes qui lisent toute organisation.',
+    title: 'Exit, voice et loyauté décrivent trois réponses au déclin d’une organisation.',
     summary:
-      "Hirschman commence par une idée simple: face au déclin, l'exit et la voice ne se complètent pas toujours. Ils se disputent l'attention, l'énergie et le temps disponible pour réparer.",
+      "Hirschman analyse leurs interactions : un départ réduit le nombre de personnes susceptibles de contester, tandis que la loyauté peut laisser à la voice le temps d'agir.",
     image: `${ASSET_BASE}/triangle.webp`,
     alt: "Instrument abstrait à trois trajectoires lumineuses représentant l'exit, la voice et la loyauté.",
     icon: Split,
     notes: [
-      "L'exit sanctionne sans expliquer.",
-      'La voice explique mais demande du pouvoir.',
-      "La loyauté retarde le départ, assez longtemps pour qu'une réparation existe.",
+      "L'exit sanctionne l'organisation sans préciser les causes du départ.",
+      "La voice rend les motifs explicites et suppose une capacité d'influence.",
+      "La loyauté peut retarder le départ et laisser du temps à la réforme.",
     ],
-    question: 'Qui part, qui proteste, qui reste, et pourquoi ?',
+    question: 'L’analyse distingue ceux qui partent, protestent ou restent, ainsi que leurs motifs.',
   },
   {
     id: 'venture-voice',
     eyebrow: '02 · Illiquidité',
-    title: 'Le VC est une classe d’actifs où l’exit est fermé, donc la voice devient le métier.',
+    title: 'L’illiquidité du capital-risque renforce la fonction de gouvernance.',
     summary:
-      "Quand l'investisseur ne peut pas vendre pendant sept à dix ans, ses vrais instruments ne sont pas décoratifs: board seat, droits d'information, protective provisions. Le term sheet achète une capacité de parole.",
+      "L'investisseur ne peut pas vendre pendant sept à dix ans. Le board seat, les droits d'information et les protective provisions définissent alors sa capacité d'influence.",
     image: `${ASSET_BASE}/governance.webp`,
     alt: "Salle de board abstraite avec fils dorés, porte verrouillée et instruments de gouvernance.",
     icon: MessageSquareText,
     notes: [
-      "La liquidité facile de 2021 a rendu la voice optionnelle.",
-      'Quand la fenêtre de sortie se ferme, un chèque sans influence devient une captivité.',
-      'La gouvernance est un canal de réparation, pas une annexe juridique.',
+      "En 2021, l'accès apparent à la liquidité a réduit l'incitation à exercer la voice.",
+      "La fermeture d'une fenêtre de sortie accroît la dépendance de l'investisseur à ses droits d'influence.",
+      "La gouvernance constitue le canal de voice attaché à un investissement illiquide.",
     ],
-    question: 'Quel canal d’influence le prix payé donne-t-il vraiment ?',
+    question: 'L’évaluation rapproche le prix payé des droits d’influence obtenus.',
   },
   {
     id: 'founders',
     eyebrow: '03 · Origine',
-    title: 'Un fondateur intéressant a souvent épuisé sa voice avant de créer son exit.',
+    title: 'Certains projets entrepreneuriaux suivent l’échec d’une tentative de réforme interne.',
     summary:
-      "Les meilleurs départs ne sont pas des fuites molles. Ce sont des diagnostics qui n'ont pas été entendus: Shockley vers Fairchild, PARC vers Adobe ou Apple, Cisco vers Zoom.",
+      "Les exemples de Shockley vers Fairchild, de PARC vers Adobe ou Apple et de Cisco vers Zoom relient la création d'entreprise à un diagnostic interne qui n'a pas été retenu.",
     image: `${ASSET_BASE}/hero.webp`,
     alt: 'Carte institutionnelle abstraite avec trajectoires dorées quittant puis réorganisant une salle sombre.',
     icon: ArrowDownRight,
     notes: [
-      "La provenance compte moins que la raison du départ.",
-      'La voice passée laisse des traces: alliés, prototypes, clients internes.',
-      'Le founder-market fit ressemble souvent à un problème vu de l’intérieur.',
+      "Le motif du départ apporte davantage d'information que la seule provenance.",
+      'La voice antérieure peut laisser des alliés, des prototypes et des clients internes.',
+      'Le founder-market fit peut associer un projet à un problème observé de l’intérieur.',
     ],
-    question: 'Qu’avait-il tenté de changer avant de partir ?',
+    question: 'La diligence documente ce que le fondateur avait tenté de modifier avant son départ.',
   },
   {
     id: 'attrition',
     eyebrow: '04 · Départs',
-    title: 'Les moyennes mentent: les meilleurs partent souvent avant que les KPIs ne rougissent.',
+    title: 'La composition des départs peut signaler une dégradation avant les indicateurs agrégés.',
     summary:
-      "La regretted attrition est un capteur avancé. Les premiers employés partis, leur ordre de départ et ce qu'ils ont rejoint racontent la qualité réelle plus tôt que les métriques de surface.",
+      "La regretted attrition constitue un indicateur avancé. L'identité des premiers employés partis, l'ordre des départs et leur destination apportent des informations que les métriques agrégées peuvent encore masquer.",
     image: `${ASSET_BASE}/flows.webp`,
     alt: "Flux dorés quittant un vaisseau abstrait de startup avec signaux lumineux de protestation.",
     icon: Footprints,
     notes: [
-      'Le churn brut compte moins que les noms qui quittent.',
-      "Les références fournies rassurent, les personnes parties instruisent.",
-      "Le talent qui rejoint depuis une meilleure maison est aussi un vote par exit.",
+      "Le churn brut doit être rapproché de l'identité des personnes parties.",
+      "Les personnes parties, sélectionnées hors des références fournies, apportent des informations complémentaires.",
+      "L'arrivée de talents issus des meilleures maisons du secteur constitue aussi un signal par exit.",
     ],
-    question: 'Qui savait le plus, et quand est-il parti ?',
+    question: 'L’analyse porte sur le niveau d’information des personnes parties et la chronologie de leurs départs.',
   },
   {
     id: 'loyalty',
     eyebrow: '05 · Loyauté',
-    title: 'La loyauté répare seulement si celui qui reste pourrait réellement partir.',
+    title: 'La loyauté contribue au redressement lorsqu’une possibilité de départ subsiste.',
     summary:
-      "La rétention peut être conviction ou captivité. Vesting, mission, options non liquides et coûts irrécupérables fabriquent parfois une fidélité silencieuse qui ne corrige plus rien.",
+      "La rétention peut relever de la conviction ou de la captivité. Vesting, mission, options non liquides et coûts irrécupérables contribuent parfois à une fidélité silencieuse qui limite la voice.",
     image: `${ASSET_BASE}/governance.webp`,
     alt: 'Instruments abstraits de gouvernance et porte verrouillée, dans une palette navy, or et prune.',
     icon: ShieldCheck,
     notes: [
-      'Loyauté lucide: je reste, je conteste, je pourrais partir.',
-      "Loyauté captive: je reste parce que l'exit coûte trop cher.",
-      'Une thèse morte peut aussi retenir un investisseur par coûts irrécupérables.',
+      'La loyauté lucide associe maintien, contestation et possibilité de départ.',
+      "La loyauté captive résulte d'un coût d'exit élevé.",
+      'Une thèse invalidée peut aussi retenir un investisseur en raison de coûts irrécupérables.',
     ],
-    question: 'La rétention observée parle-t-elle encore ?',
+    question: 'La diligence examine la nature de la rétention observée et la voice qu’elle permet.',
   },
   {
     id: 'grid',
     eyebrow: '06 · Grille',
-    title: 'Lire une organisation par ses flux, pas par ses stocks.',
+    title: 'Les flux complètent les indicateurs de stock dans l’analyse d’une organisation.',
     summary:
-      "Effectifs, parts de marché et cap table sont des photographies. Hirschman pousse à demander le film: qui entre, qui sort, qui proteste, qui se tait, et qui a le droit de faire corriger le système.",
+      "Les effectifs, les parts de marché et la cap table décrivent un état. La grille de Hirschman y ajoute l'analyse des entrées, des sorties, des protestations, des silences et des droits de voice.",
     image: `${ASSET_BASE}/flows.webp`,
     alt: 'Carte abstraite de flux de diligence reliant employés, clients, fondateurs, LPs et investisseurs.',
     icon: Network,
     notes: [
-      'Startup: flux d’employés et de clients.',
-      'Fondateur: histoire personnelle d’exit et de voice.',
-      'Fonds: LPs, re-ups, objections et fidélité réelle.',
+      'Pour la startup, l’analyse porte sur les flux d’employés et de clients.',
+      'Pour le fondateur, elle porte sur son histoire personnelle d’exit et de voice.',
+      'Pour le fonds, elle porte sur les LPs, les re-ups, les objections et la fidélité observée.',
     ],
-    question: 'Montrez-moi vos flux, et qui peut y exercer une voice.',
+    question: 'La diligence examine ces flux et les personnes habilitées à y exercer une voice.',
   },
 ];
+
+function sceneImageDimensions(scene: Scene) {
+  return scene.image.endsWith('/hero.webp') ? HERO_IMAGE_DIMENSIONS : PORTRAIT_IMAGE_DIMENSIONS;
+}
 
 export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
   const [active, setActive] = useState(0);
   const reducedMotion = usePrefersReducedMotion();
+  const isDesktopMedia = useMediaQuery('(min-width: 1024px)');
   const sceneRefs = useRef<Array<HTMLElement | null>>([]);
 
   useEffect(() => {
@@ -153,6 +162,8 @@ export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
         <img
           src={`${ASSET_BASE}/hero.webp`}
           alt="Carte abstraite des trajectoires exit, voice et loyauté appliquées au venture capital."
+          width={HERO_IMAGE_DIMENSIONS.width}
+          height={HERO_IMAGE_DIMENSIONS.height}
           className="h-[22rem] w-full object-cover sm:h-[28rem] lg:h-[34rem]"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(13_14_18/0.78),rgb(13_14_18/0.28)_48%,rgb(13_14_18/0.08))]" />
@@ -160,37 +171,44 @@ export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
           <div className="max-w-2xl">
             <p className="eyebrow text-primary-fixed">Lecture guidée</p>
             <h2 className="mt-3 font-headline text-[clamp(2.25rem,7vw,5.4rem)] font-semibold leading-[0.95] text-[#F7F0DC] text-balance">
-              La diligence comme carte des départs.
+              Les départs et les contestations dans la diligence.
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-[#E5DECB] sm:text-lg">
-              Même article, autre cadence: six scènes pour faire passer Hirschman du livre à la table de board.
+              Cette lecture guidée présente en six scènes l’application de la grille de Hirschman à la gouvernance et à la diligence.
             </p>
           </div>
         </div>
       </div>
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(21rem,0.85fr)_minmax(0,1.15fr)] lg:items-start">
-        <aside className="hidden lg:sticky lg:top-[calc(var(--topbar-h)+1.25rem)] lg:block">
-          <div className="relative h-[calc(100vh-var(--topbar-h)-2.5rem)] min-h-[34rem] overflow-hidden rounded-[1.5rem] border border-outline-variant bg-surface-container-lowest shadow-editorial-md">
-            {scenes.map((scene, index) => (
-              <img
-                key={scene.id}
-                src={scene.image}
-                alt={scene.alt}
-                loading={index === 0 ? 'eager' : 'lazy'}
-                className={cn(
-                  'absolute inset-0 h-full w-full object-cover',
-                  reducedMotion ? '' : 'transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
-                  active === index ? 'opacity-100' : 'opacity-0',
-                )}
-              />
-            ))}
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(13_14_18/0.05),rgb(13_14_18/0.58))]" />
-            <div className="absolute inset-x-5 bottom-5">
-              <ScrollytellingProgress eyebrow={activeScene.eyebrow} title={activeScene.title} progress={progress} reducedMotion={reducedMotion} />
+        {isDesktopMedia && (
+          <aside className="hidden lg:sticky lg:top-[calc(var(--topbar-h)+1.25rem)] lg:block">
+            <div className="relative h-[calc(100vh-var(--topbar-h)-2.5rem)] min-h-[34rem] overflow-hidden rounded-[1.5rem] border border-outline-variant bg-surface-container-lowest shadow-editorial-md">
+              {scenes.map((scene, index) => {
+                const dimensions = sceneImageDimensions(scene);
+                return (
+                  <img
+                    key={scene.id}
+                    src={scene.image}
+                    alt={scene.alt}
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    className={cn(
+                      'absolute inset-0 h-full w-full object-cover',
+                      reducedMotion ? '' : 'transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
+                      active === index ? 'opacity-100' : 'opacity-0',
+                    )}
+                  />
+                );
+              })}
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(13_14_18/0.05),rgb(13_14_18/0.58))]" />
+              <div className="absolute inset-x-5 bottom-5">
+                <ScrollytellingProgress eyebrow={activeScene.eyebrow} title={activeScene.title} progress={progress} reducedMotion={reducedMotion} />
+              </div>
             </div>
-          </div>
-        </aside>
+          </aside>
+        )}
 
         <div className="space-y-7 lg:py-[10vh]">
           {scenes.map((scene, index) => {
@@ -206,9 +224,18 @@ export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
                 index={index}
                 active={isActive}
               >
-                <figure className="mb-6 overflow-hidden rounded-[1rem] border border-outline-variant lg:hidden">
-                  <img src={scene.image} alt={scene.alt} className="aspect-[4/3] w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} />
-                </figure>
+                {!isDesktopMedia && (
+                  <figure className="mb-6 overflow-hidden rounded-[1rem] border border-outline-variant lg:hidden">
+                    <img
+                      src={scene.image}
+                      alt={scene.alt}
+                      width={sceneImageDimensions(scene).width}
+                      height={sceneImageDimensions(scene).height}
+                      className="aspect-[4/3] w-full object-cover"
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                    />
+                  </figure>
+                )}
 
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="inline-grid h-10 w-10 place-items-center rounded-full bg-primary-container text-primary-container-foreground">
@@ -243,12 +270,12 @@ export function HirschmanScrollytelling({ post }: { post: BlogPost }) {
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-primary-fixed">Synthèse opérationnelle</p>
             </div>
             <p className="mt-4 max-w-4xl font-headline text-[clamp(1.9rem,4vw,3.7rem)] font-semibold leading-tight text-balance">
-              Avant de juger une startup, demandez ce que ses flux ont déjà confessé.
+              Les flux apportent des informations complémentaires sur la trajectoire d’une startup.
             </p>
             <div className="mt-7 grid gap-4 text-sm leading-7 text-[#E7E0CE] md:grid-cols-3">
-              <p>Les clients silencieux ne donnent pas un diagnostic, les plaintes oui.</p>
-              <p>Les employés partis savent souvent avant le board ce qui a cessé de fonctionner.</p>
-              <p>Un investisseur enfermé sans voice n’a pas acheté du venture, mais une option muette.</p>
+              <p>Le départ silencieux d’un client limite l’information disponible ; une plainte en précise les motifs.</p>
+              <p>Les départs d’employés peuvent signaler une difficulté avant son apparition dans les indicateurs suivis par le board.</p>
+              <p>Pour un investisseur illiquide, les droits de gouvernance déterminent la capacité d’influence attachée à l’investissement.</p>
             </div>
           </section>
         </div>

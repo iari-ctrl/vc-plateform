@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore
 import { AlertTriangle, X } from 'lucide-react';
 import type { Bookmark, DecisionJournalEntry, DecisionOutcome, Note, ProgressEntry, UserProfile } from '@/content/types';
 import { UserDataContext, type UserDataContextValue } from '@/context/UserDataContext';
-import { storage, storageErrors, STORAGE_KEYS, type StorageFailure } from '@/lib/storage';
+import { commitOnStorageSuccess, STORAGE_PREFIX, storage, storageErrors, type StorageFailure } from '@/lib/storage';
+import { STORAGE_CONTRACTS } from '@/lib/storageDomains';
 
 const uid = () => typeof crypto !== 'undefined' && 'randomUUID' in crypto
   ? crypto.randomUUID()
@@ -13,6 +14,9 @@ const STORAGE_ERROR_MESSAGE: Record<StorageFailure['reason'], string> = {
   unavailable: 'Le stockage local est indisponible. La dernière modification n’a pas été enregistrée.',
   serialization: 'Ces données n’ont pas pu être préparées pour l’enregistrement. La dernière modification n’a pas été enregistrée.',
   unreadable: 'Certaines données enregistrées sur cet appareil sont illisibles. Une valeur par défaut a été utilisée.',
+  validation: 'Certaines données enregistrées sur cet appareil sont incompatibles. Elles ont été ignorées sans être supprimées.',
+  version: 'Certaines données proviennent d’une version non prise en charge. Elles ont été conservées sans être chargées.',
+  limit: 'La limite locale de taille ou de nombre d’éléments est atteinte. La dernière modification n’a pas été enregistrée.',
 };
 
 function StorageErrorAlert() {
@@ -52,11 +56,11 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   const journalRef = useRef(journal);
 
   const loadLocal = useCallback(() => {
-    setProfile(storage.get<UserProfile | null>(STORAGE_KEYS.profile, null));
-    const localNotes = storage.get<Note[]>(STORAGE_KEYS.notes, []);
-    const localBookmarks = storage.get<Bookmark[]>(STORAGE_KEYS.bookmarks, []);
-    const localProgress = storage.get<Record<string, ProgressEntry>>(STORAGE_KEYS.progress, {});
-    const localJournal = storage.get<DecisionJournalEntry[]>(STORAGE_KEYS.journal, []);
+    setProfile(storage.getParsed(STORAGE_CONTRACTS.profile));
+    const localNotes = storage.getParsed(STORAGE_CONTRACTS.notes);
+    const localBookmarks = storage.getParsed(STORAGE_CONTRACTS.bookmarks);
+    const localProgress = storage.getParsed(STORAGE_CONTRACTS.progress);
+    const localJournal = storage.getParsed(STORAGE_CONTRACTS.journal);
     notesRef.current = localNotes;
     bookmarksRef.current = localBookmarks;
     progressRef.current = localProgress;
@@ -66,43 +70,88 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
     setProgressState(localProgress);
     setJournal(localJournal);
     setLoading(false);
+
+    storage.migrate(STORAGE_CONTRACTS.profile);
+    storage.migrate(STORAGE_CONTRACTS.notes);
+    storage.migrate(STORAGE_CONTRACTS.bookmarks);
+    storage.migrate(STORAGE_CONTRACTS.progress);
+    storage.migrate(STORAGE_CONTRACTS.journal);
   }, []);
+
+  const reloadLocalData = useCallback(() => {
+    loadLocal();
+  }, [loadLocal]);
 
   useEffect(() => {
     loadLocal();
   }, [loadLocal]);
 
+  useEffect(() => {
+    function handleStorageEvent(event: StorageEvent) {
+      switch (event.key) {
+        case `${STORAGE_PREFIX}${STORAGE_CONTRACTS.profile.key}`:
+          setProfile(storage.parseStored(STORAGE_CONTRACTS.profile, event.newValue));
+          break;
+        case `${STORAGE_PREFIX}${STORAGE_CONTRACTS.notes.key}`: {
+          const next = storage.parseStored(STORAGE_CONTRACTS.notes, event.newValue);
+          notesRef.current = next;
+          setNotes(next);
+          break;
+        }
+        case `${STORAGE_PREFIX}${STORAGE_CONTRACTS.bookmarks.key}`: {
+          const next = storage.parseStored(STORAGE_CONTRACTS.bookmarks, event.newValue);
+          bookmarksRef.current = next;
+          setBookmarks(next);
+          break;
+        }
+        case `${STORAGE_PREFIX}${STORAGE_CONTRACTS.progress.key}`: {
+          const next = storage.parseStored(STORAGE_CONTRACTS.progress, event.newValue);
+          progressRef.current = next;
+          setProgressState(next);
+          break;
+        }
+        case `${STORAGE_PREFIX}${STORAGE_CONTRACTS.journal.key}`: {
+          const next = storage.parseStored(STORAGE_CONTRACTS.journal, event.newValue);
+          journalRef.current = next;
+          setJournal(next);
+          break;
+        }
+        default:
+          break;
+      }
+    }
+
+    window.addEventListener('storage', handleStorageEvent);
+    return () => window.removeEventListener('storage', handleStorageEvent);
+  }, []);
+
   const saveProfile = useCallback(async (nextProfile: UserProfile) => {
-    const result = storage.set(STORAGE_KEYS.profile, nextProfile);
-    if (result.ok) setProfile(nextProfile);
-    return result;
+    const result = storage.setParsed(STORAGE_CONTRACTS.profile, nextProfile);
+    return commitOnStorageSuccess(result, nextProfile, setProfile);
   }, []);
 
   const clearProfile = useCallback(async () => {
-    const result = storage.remove(STORAGE_KEYS.profile);
-    if (result.ok) setProfile(null);
-    return result;
+    const result = storage.remove(STORAGE_CONTRACTS.profile.key);
+    return commitOnStorageSuccess(result, null, setProfile);
   }, []);
 
   const addNote = useCallback(async (newNote: Omit<Note, 'id' | 'createdAt'>) => {
     const note: Note = { ...newNote, id: uid(), createdAt: new Date().toISOString() };
     const next = [note, ...notesRef.current];
-    const result = storage.set(STORAGE_KEYS.notes, next);
-    if (result.ok) {
-      notesRef.current = next;
-      setNotes(next);
-    }
-    return result;
+    const result = storage.setParsed(STORAGE_CONTRACTS.notes, next);
+    return commitOnStorageSuccess(result, next, (stored) => {
+      notesRef.current = stored;
+      setNotes(stored);
+    });
   }, []);
 
   const deleteNote = useCallback(async (id: string) => {
     const next = notesRef.current.filter((note) => note.id !== id);
-    const result = storage.set(STORAGE_KEYS.notes, next);
-    if (result.ok) {
-      notesRef.current = next;
-      setNotes(next);
-    }
-    return result;
+    const result = storage.setParsed(STORAGE_CONTRACTS.notes, next);
+    return commitOnStorageSuccess(result, next, (stored) => {
+      notesRef.current = stored;
+      setNotes(stored);
+    });
   }, []);
 
   const isBookmarked = useCallback(
@@ -115,22 +164,20 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
     const next = exists
       ? bookmarksRef.current.filter((item) => !(item.itemType === bookmark.itemType && item.itemId === bookmark.itemId))
       : [{ ...bookmark, createdAt: new Date().toISOString() }, ...bookmarksRef.current];
-    const result = storage.set(STORAGE_KEYS.bookmarks, next);
-    if (result.ok) {
-      bookmarksRef.current = next;
-      setBookmarks(next);
-    }
-    return result;
+    const result = storage.setParsed(STORAGE_CONTRACTS.bookmarks, next);
+    return commitOnStorageSuccess(result, next, (stored) => {
+      bookmarksRef.current = stored;
+      setBookmarks(stored);
+    });
   }, []);
 
   const setProgress = useCallback(async (entry: ProgressEntry) => {
     const next = { ...progressRef.current, [entry.lessonId]: entry };
-    const result = storage.set(STORAGE_KEYS.progress, next);
-    if (result.ok) {
-      progressRef.current = next;
-      setProgressState(next);
-    }
-    return result;
+    const result = storage.setParsed(STORAGE_CONTRACTS.progress, next);
+    return commitOnStorageSuccess(result, next, (stored) => {
+      progressRef.current = stored;
+      setProgressState(stored);
+    });
   }, []);
 
   const getProgress = useCallback((lessonId: string) => progress[lessonId], [progress]);
@@ -143,12 +190,11 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
       status: 'open',
     };
     const next = [entry, ...journalRef.current];
-    const result = storage.set(STORAGE_KEYS.journal, next);
-    if (result.ok) {
-      journalRef.current = next;
-      setJournal(next);
-    }
-    return result;
+    const result = storage.setParsed(STORAGE_CONTRACTS.journal, next);
+    return commitOnStorageSuccess(result, next, (stored) => {
+      journalRef.current = stored;
+      setJournal(stored);
+    });
   }, []);
 
   const resolveJournalEntry = useCallback(async (id: string, outcome: DecisionOutcome, resolutionNote?: string) => {
@@ -156,22 +202,20 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
     const next = journalRef.current.map((entry) => entry.id === id
       ? { ...entry, status: 'resolved' as const, outcome, resolutionNote, resolvedAt }
       : entry);
-    const result = storage.set(STORAGE_KEYS.journal, next);
-    if (result.ok) {
-      journalRef.current = next;
-      setJournal(next);
-    }
-    return result;
+    const result = storage.setParsed(STORAGE_CONTRACTS.journal, next);
+    return commitOnStorageSuccess(result, next, (stored) => {
+      journalRef.current = stored;
+      setJournal(stored);
+    });
   }, []);
 
   const deleteJournalEntry = useCallback(async (id: string) => {
     const next = journalRef.current.filter((entry) => entry.id !== id);
-    const result = storage.set(STORAGE_KEYS.journal, next);
-    if (result.ok) {
-      journalRef.current = next;
-      setJournal(next);
-    }
-    return result;
+    const result = storage.setParsed(STORAGE_CONTRACTS.journal, next);
+    return commitOnStorageSuccess(result, next, (stored) => {
+      journalRef.current = stored;
+      setJournal(stored);
+    });
   }, []);
 
   const value = useMemo<UserDataContextValue>(
@@ -190,11 +234,12 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
       toggleBookmark,
       setProgress,
       getProgress,
+      reloadLocalData,
       addJournalEntry,
       resolveJournalEntry,
       deleteJournalEntry,
     }),
-    [profile, notes, bookmarks, progress, journal, loading, saveProfile, clearProfile, addNote, deleteNote, isBookmarked, toggleBookmark, setProgress, getProgress, addJournalEntry, resolveJournalEntry, deleteJournalEntry],
+    [profile, notes, bookmarks, progress, journal, loading, saveProfile, clearProfile, addNote, deleteNote, isBookmarked, toggleBookmark, setProgress, getProgress, reloadLocalData, addJournalEntry, resolveJournalEntry, deleteJournalEntry],
   );
 
   return (

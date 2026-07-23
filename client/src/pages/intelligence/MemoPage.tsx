@@ -7,7 +7,8 @@ import { ActiveProse } from '@/components/reading/ActiveProse';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
-import { usePageMeta } from '@/lib/seo';
+import { useResourcePageMeta } from '@/lib/seo';
+import { safeHttpUrl } from '@/lib/utils';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 import type { MemoBlock } from '@/content/types';
 
@@ -43,10 +44,11 @@ function AnnotatedBlock({ block, memoTitle, memoId, index }: { block: MemoBlock;
 export default function MemoPage() {
   const { slug } = useParams();
   const memo = slug ? memoBySlug(slug) : undefined;
-  usePageMeta(memo?.title, memo?.summary, { type: 'article' });
+  useResourcePageMeta(Boolean(memo), memo?.title, memo?.summary, { type: 'article' });
 
   if (!memo) return <NotFoundPage />;
 
+  const sourceUrl = safeHttpUrl(memo.sourceUrl);
   const relatedEntries = (memo.relatedAntiPortfolioIds ?? [])
     .map((id) => antiPortfolioById(id))
     .filter((e): e is NonNullable<typeof e> => Boolean(e));
@@ -71,14 +73,16 @@ export default function MemoPage() {
           <span className="font-medium text-foreground">{memo.author}</span>
           <span>{memo.date}</span>
           <span className="inline-flex items-center gap-1.5"><Clock size={14} /> {memo.readMin} min</span>
-          <a
-            href={memo.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-auto inline-flex items-center gap-1.5 font-medium text-[color:var(--primary)] transition-opacity hover:opacity-80"
-          >
-            Document original <ExternalLink size={13} />
-          </a>
+          {sourceUrl && (
+            <a
+              href={sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto inline-flex items-center gap-1.5 font-medium text-[color:var(--primary)] transition-opacity hover:opacity-80"
+            >
+              Document original <ExternalLink size={13} />
+            </a>
+          )}
         </div>
         <p className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-surface-variant">
           <Landmark size={13} className="mt-0.5 shrink-0" /> {memo.sourceNote}
@@ -121,7 +125,7 @@ export default function MemoPage() {
 
       {/* Practitioner lessons */}
       <aside className="mt-12 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_25%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-6 sm:p-7">
-        <p className="eyebrow mb-4 flex items-center gap-2"><Sparkles size={14} /> Ce qu'un praticien doit copier</p>
+        <p className="eyebrow mb-4 flex items-center gap-2"><Sparkles size={14} /> Pratiques transposables</p>
         <ul className="space-y-3">
           {memo.lessons.map((l, i) => (
             <li key={i} className="flex items-start gap-3 text-[0.95rem] font-medium">
@@ -135,7 +139,7 @@ export default function MemoPage() {
       {relatedEntries.length > 0 && (
         <section className="mt-12">
           <FleuronDivider className="mb-8" />
-          <p className="eyebrow mb-4">À lire en miroir — anti-portfolio</p>
+          <p className="eyebrow mb-4">Entrées associées de l’anti-portfolio</p>
           <div className="space-y-3">
             {relatedEntries.map((e) => (
               <Link key={e.id} to={`/anti-portfolio/${e.slug}`} className="group flex items-center justify-between gap-4 rounded-2xl border border-outline-variant p-5 transition-colors hover:border-[color-mix(in_srgb,var(--primary)_40%,transparent)] hover:bg-surface-container-low">

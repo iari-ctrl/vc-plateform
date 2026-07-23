@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { normalizeBaseUrl } from '@shared/base-url.mjs';
 import App from './App';
 import { ThemeProvider } from '@/context/ThemeProvider';
 import { UIProvider } from '@/context/UIProvider';
@@ -8,14 +9,13 @@ import { UserDataProvider } from '@/context/UserDataProvider';
 import { ViewportSwitcher } from '@/components/dev/ViewportSwitcher';
 import './styles/global.css';
 
-// Vite injects the deploy base (e.g. `/vc-plateform/` on GitHub Pages, `/` in
-// dev). React Router wants it without the trailing slash; keep `/` for root.
-const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+// Vite and React Router consume the exact same canonical deployment base.
+const baseUrl = normalizeBaseUrl(import.meta.env.BASE_URL);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ViewportSwitcher>
-      <BrowserRouter basename={routerBasename}>
+      <BrowserRouter basename={baseUrl}>
         <ThemeProvider>
           <UserDataProvider>
             <UIProvider>

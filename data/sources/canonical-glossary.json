@@ -151,10 +151,13 @@
     "sourcePaths": [
       "Graph/Glossary fr/01 - VC Fundamentals/01.1 Definition & Logic of Venture Capital/Bootstrap.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://www.sba.gov/business-guide/plan-your-business/fund-your-business"
+    ],
     "category": "Fondations",
-    "short": "Construire une entreprise sans financement externe en equity.",
-    "definition": "Bootstrap désigne une trajectoire où les fondateurs financent la croissance avec leur épargne, les revenus clients et la trésorerie interne plutôt qu'avec du capital-risque. Le choix préserve l'equity et le contrôle, mais limite souvent la vitesse de croissance.",
+    "short": "Construire une entreprise principalement avec les ressources financières des fondateurs.",
+    "definition": "Bootstrap désigne une trajectoire où les fondateurs financent principalement l’entreprise avec leurs propres ressources plutôt qu’avec une levée en equity. Ce choix préserve davantage l’equity et le contrôle des fondateurs.",
     "example": "Une startup rentable dès ses premiers clients peut repousser une levée VC pour garder plus de contrôle.",
     "seeAlso": [
       "venture-capital",
@@ -163,7 +166,7 @@
       "business-angel"
     ],
     "relatedLessonIds": [],
-    "notes": "Source locale non sourcée ; conserver en needs-review avant injection."
+    "notes": "Source institutionnelle externe ajoutée en S6 ; l’entrée publiée reste rapprochée du registre canonique."
   },
   {
     "canonicalTerm": "Growth equity",
@@ -667,7 +670,10 @@
     "sourcePaths": [
       "Graph/Glossary fr/01 - VC Fundamentals/01.4 VC Market & Sector Dynamics/Angel Investor.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/early-stage-investors"
+    ],
     "category": "Acteurs",
     "short": "Particulier qui investit son propre argent dans des startups early-stage.",
     "definition": "Un business angel investit son capital personnel, souvent en pre-seed ou seed, avant ou aux côtés de fonds institutionnels. Il apporte parfois du réseau, de l'expertise et de la crédibilité en plus du chèque.",
@@ -684,7 +690,7 @@
       "l-actors",
       "l-stages"
     ],
-    "notes": "Entrée déjà présente ; fusionner Angel Investor vers le vocabulaire français courant. Source locale unsourced, mais terme déjà validé dans le glossaire final."
+    "notes": "Entrée déjà présente ; Angel Investor est rapproché du vocabulaire français courant et d’une source institutionnelle externe."
   },
   {
     "canonicalTerm": "Corporate Venture Capital",
@@ -1172,7 +1178,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/02 - Fund Economics/02.1 Fund Structure/Investment Horizon.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Fund Economics",
     "short": "Durée attendue entre un investissement et la liquidité.",
     "definition": "L’horizon d’investissement est la période attendue entre le premier chèque et un événement de liquidité. En VC, il dépend du cycle de vie du fonds, du stade investi et de la capacité à convertir la valeur latente en cash avant la fin du véhicule.",
@@ -1187,7 +1193,7 @@
     "relatedLessonIds": [
       "l-fund-lifecycle"
     ],
-    "notes": "Source locale draft/unsourced : entrée utile mais à valider avant injection. Revu et injecté depuis needs-review/add le 2026-06-07; liens internes vérifiés dans le lot."
+    "notes": "Entrée revue et injectée le 2026-06-07 ; la définition reste éditoriale, la page ILPA générale ne la documentant pas directement."
   },
   {
     "canonicalTerm": "Investment period",
@@ -2395,7 +2401,6 @@
     "slug": "portfolio-approach",
     "aliases": [
       "Portfolio Theory (VC)",
-      "spray and pray",
       "concentrated portfolio"
     ],
     "status": "applied",
@@ -2407,10 +2412,13 @@
     "sourcePaths": [
       "Graph/Glossary fr/02 - Fund Economics/02.6 Portfolio Strategy/Portfolio Approach.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://ilpa.org/resources-tools/resource-library/due-diligence-questionnaire/"
+    ],
     "category": "Stratégie",
     "short": "Philosophie de diversification ou concentration utilisée pour construire un portefeuille VC.",
-    "definition": "Le portfolio approach décrit le choix entre portefeuille diversifié, concentré ou hybride. Pour le glossaire final, il est probablement préférable de le fusionner vers portfolio construction afin d’éviter deux entrées trop proches.",
+    "definition": "Le portfolio approach décrit les choix de diversification et de concentration utilisés pour construire un portefeuille. Dans le glossaire final, il est rapproché de portfolio construction afin d’éviter deux entrées trop proches.",
     "example": "Un fonds pre-seed peut viser beaucoup de petits tickets, tandis qu’un fonds Series A concentre davantage ses positions.",
     "seeAlso": [
       "portfolio-construction",
@@ -2422,7 +2430,7 @@
       "l-reserves",
       "l-power-law"
     ],
-    "notes": "Source unsourced et recouvrement fort avec portfolio-construction : merge recommandé. Fusion traitee vers portfolio-construction. 4 alias candidat(s) verifies."
+    "notes": "Recouvrement fort avec portfolio-construction : fusion traitée vers cette entrée ; les aliases retenus et la source ILPA ont été revus en S6."
   },
   {
     "canonicalTerm": "Portfolio construction",
@@ -5930,10 +5938,13 @@
     "sourcePaths": [
       "Graph/Glossary fr/05 - Metrics & Valuation/05.5 Valuation Methods/Equity Value.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/lectures/val.html"
+    ],
     "category": "Valorisation",
-    "short": "Valeur économique attribuable aux actionnaires après dette et cash.",
-    "definition": "L'equity value est la valeur qui revient aux détenteurs d'equity après prise en compte de la dette nette. Dans un tour de startup, la valuation négociée est souvent pensée comme une equity value.",
+    "short": "Valeur économique attribuable aux actionnaires après prise en compte de la dette.",
+    "definition": "L'equity value est la valeur qui revient aux détenteurs d'equity après prise en compte des obligations envers les prêteurs.",
     "example": "À enterprise value constante, plus de dette réduit l'equity value disponible pour les actionnaires.",
     "seeAlso": [
       "enterprise-value",
@@ -5943,7 +5954,7 @@
     "relatedLessonIds": [
       "l-ts-economics"
     ],
-    "notes": "Source unsourced mais concept de base ; injection proposée en lot réduit car seeAlso EV en dépend."
+    "notes": "Concept de base rapproché d’une ressource académique de valorisation en S6 ; les références associées restent conservées."
   },
   {
     "canonicalTerm": "Enterprise Value vs Equity Value",
@@ -6653,7 +6664,10 @@
     "sourcePaths": [
       "Graph/Glossary fr/06 - Deal Architecture/06.3 Investor Economic Rights/Deemed Liquidation.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://nvca.org/document/nvca-model-certificate-of-incorporation-updated-oct-2025/"
+    ],
     "category": "Deal & Structuration",
     "short": "Événement contractuel traité comme une liquidation pour déclencher la liquidation preference.",
     "definition": "Une deemed liquidation étend la liquidation preference à des événements comme une vente, fusion, changement de contrôle ou cession substantielle d’actifs. Sans cette clause, la préférence pourrait ne s’appliquer qu’à une liquidation formelle.",
@@ -6666,7 +6680,7 @@
     "relatedLessonIds": [
       "l-ts-economics"
     ],
-    "notes": "Source locale draft/unsourced; à valider avant injection. Revu et injecté depuis needs-review/add le 2026-06-07; liens internes vérifiés dans le lot.",
+    "notes": "Entrée revue et injectée le 2026-06-07 ; une source sectorielle externe a été ajoutée en S6 et les liens internes restent vérifiés.",
     "canonicalTerm": "Deemed liquidation",
     "slug": "deemed-liquidation"
   },
@@ -7067,7 +7081,10 @@
     "sourcePaths": [
       "Graph/Glossary fr/06 - Deal Architecture/06.5 Convertible Instruments/Conversion Ratio.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://nvca.org/document/nvca-model-certificate-of-incorporation-updated-oct-2025/"
+    ],
     "category": "Deal & Structuration",
     "short": "Nombre d’actions ordinaires reçues pour chaque action de préférence convertie.",
     "definition": "Le conversion ratio détermine combien d’actions ordinaires une action de préférence donne à la conversion. Il commence souvent à 1:1, puis peut changer après des ajustements anti-dilution.",
@@ -7080,7 +7097,7 @@
     "relatedLessonIds": [
       "l-ts-economics"
     ],
-    "notes": "Source locale draft/unsourced; utile mais à valider. Revu et injecté depuis needs-review/add le 2026-06-07; liens internes vérifiés dans le lot.",
+    "notes": "Entrée revue et injectée le 2026-06-07 ; une source sectorielle externe a été ajoutée en S6 et les liens internes restent vérifiés.",
     "canonicalTerm": "Conversion ratio",
     "slug": "conversion-ratio"
   },
@@ -7099,7 +7116,10 @@
     "sourcePaths": [
       "Graph/Glossary fr/06 - Deal Architecture/06.5 Convertible Instruments/Bridge Financing.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://www.cooleygo.com/glossary/bridge-financing/"
+    ],
     "category": "Deal & Structuration",
     "short": "Financement intermédiaire destiné à prolonger la runway jusqu’au prochain tour ou jalon.",
     "definition": "Un bridge est un financement court entre deux tours principaux, souvent structuré en SAFE, convertible note ou dette, pour atteindre un milestone qui rendra le prochain priced round plus finançable. Il peut être stratégique ou signaler une difficulté de fundraising.",
@@ -7317,7 +7337,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/06 - Deal Architecture/06.4 Investor Contractual Rights/Pre-emption Rights.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Deal & Structuration",
     "short": "Variante à fusionner vers pro-rata.",
     "definition": "",
@@ -7401,24 +7421,24 @@
   },
   {
     "aliases": [],
-    "status": "applied",
-    "action": "merge",
+    "status": "needs-review",
+    "action": "add",
     "modules": [
       "06 - Deal Architecture"
     ],
     "sourcePaths": [
       "Graph/Glossary fr/06 - Deal Architecture/06.2 Preferred Equity/Dividend Rights.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Deal & Structuration",
-    "short": "Variante à fusionner vers dividendes-cumulatifs.",
+    "short": "Ensemble des clauses déterminant les dividendes attachés à une classe d’actions.",
     "definition": "",
     "example": "",
     "seeAlso": [
       "dividendes-cumulatifs"
     ],
     "relatedLessonIds": [],
-    "notes": "Ne pas créer d’entrée finale séparée; utiliser comme alias ou sous-mécanique de dividendes-cumulatifs. Fusion traitee vers dividendes-cumulatifs. 1 alias candidat(s) verifies.",
+    "notes": "Fusion vers dividendes-cumulatifs annulée après audit S6 : les dividend rights couvrent plusieurs régimes. Une définition et une source dédiées sont requises avant publication.",
     "canonicalTerm": "Dividend Rights",
     "slug": "dividend-rights"
   },
@@ -7470,24 +7490,24 @@
   },
   {
     "aliases": [],
-    "status": "applied",
-    "action": "merge",
+    "status": "needs-review",
+    "action": "add",
     "modules": [
       "06 - Deal Architecture"
     ],
     "sourcePaths": [
       "Graph/Glossary fr/06 - Deal Architecture/06.4 Investor Contractual Rights/Voting Rights.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Deal & Structuration",
-    "short": "Variante à fusionner vers protective-provisions.",
+    "short": "Ensemble des droits de vote attachés à une classe d’actions ou à un actionnaire.",
     "definition": "",
     "example": "",
     "seeAlso": [
       "protective-provisions"
     ],
     "relatedLessonIds": [],
-    "notes": "Ne pas créer d’entrée finale séparée; utiliser comme alias ou sous-mécanique de protective-provisions. Fusion traitee vers protective-provisions. 1 alias candidat(s) verifies.",
+    "notes": "Fusion vers protective-provisions annulée après audit S6 : les voting rights couvrent aussi le vote ordinaire et l’élection des administrateurs. Une définition et une source dédiées sont requises avant publication.",
     "canonicalTerm": "Voting Rights",
     "slug": "voting-rights"
   },
@@ -7539,24 +7559,24 @@
   },
   {
     "aliases": [],
-    "status": "applied",
-    "action": "merge",
+    "status": "needs-review",
+    "action": "add",
     "modules": [
       "06 - Deal Architecture"
     ],
     "sourcePaths": [
       "Graph/Glossary fr/06 - Deal Architecture/06.2 Preferred Equity/Subscription Price.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Deal & Structuration",
-    "short": "Variante à fusionner vers pre-money.",
+    "short": "Prix payé par action ou titre souscrit lors d’une émission.",
     "definition": "",
     "example": "",
     "seeAlso": [
       "pre-money"
     ],
     "relatedLessonIds": [],
-    "notes": "Ne pas créer d’entrée finale séparée; utiliser comme alias ou sous-mécanique de pre-money. Fusion traitee vers pre-money. 1 alias candidat(s) verifies.",
+    "notes": "Fusion vers pre-money annulée après audit S6 : le prix de souscription par titre et la valorisation pre-money sont des notions distinctes. Une définition et une source dédiées sont requises avant publication.",
     "canonicalTerm": "Subscription Price",
     "slug": "subscription-price"
   },
@@ -8269,7 +8289,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/07 - Governance & Ownership/07.3 Vesting & Founder Clauses/Cliff Vesting.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Deal & Structuration",
     "short": "Période initiale avant laquelle aucune equity ne devient acquise.",
     "definition": "Le cliff vesting retarde l’acquisition de l’equity jusqu’à une période minimale de service. Après le cliff, une première tranche devient vested, puis le reste s’acquiert selon le calendrier prévu.",
@@ -8326,7 +8346,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/07 - Governance & Ownership/07.3 Vesting & Founder Clauses/Single-Trigger Acceleration.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Deal & Structuration",
     "short": "Accélération du vesting déclenchée par un seul événement, souvent une acquisition.",
     "definition": "La single-trigger acceleration fait vest tout ou partie de l’equity non acquise dès la survenance d’un événement unique, typiquement un changement de contrôle. Elle protège le bénéficiaire mais peut compliquer une acquisition pour l’acheteur.",
@@ -8354,7 +8374,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/07 - Governance & Ownership/07.3 Vesting & Founder Clauses/Double-Trigger Acceleration.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Deal & Structuration",
     "short": "Accélération du vesting exigeant deux événements, typiquement acquisition puis départ involontaire.",
     "definition": "La double-trigger acceleration exige deux déclencheurs avant d’accélérer le vesting, souvent un changement de contrôle puis un licenciement sans cause ou une démission pour good reason. Elle équilibre protection du salarié et intérêts de l’acquéreur.",
@@ -8475,7 +8495,10 @@
     "sourcePaths": [
       "Graph/Glossary fr/07 - Governance & Ownership/07.4 Board Governance/Board Representation.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://nvca.org/wp-content/uploads/2026/06/Voting-Agreement-Updated-June-2026.docx"
+    ],
     "category": "Gouvernance",
     "short": "Répartition des sièges au board entre founders, investisseurs et indépendants.",
     "definition": "La board representation détermine qui siège au board et donc qui participe aux décisions formelles de gouvernance. Elle est négociée dans les financements VC et influence le contrôle, l’alignement et la gestion des conflits.",
@@ -8506,7 +8529,10 @@
     "sourcePaths": [
       "Graph/Glossary fr/07 - Governance & Ownership/07.4 Board Governance/Board Observer.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://nvca.org/document/nvca-model-investors-rights-agreement-updated-oct-2025/"
+    ],
     "category": "Gouvernance",
     "short": "Droit d’assister aux réunions du board sans droit de vote formel.",
     "definition": "Un board observer peut assister aux réunions du board et recevoir certains documents, sans être administrateur ni voter. Ce droit permet à un investisseur de suivre la société sans occuper un board seat complet.",
@@ -8535,7 +8561,10 @@
     "sourcePaths": [
       "Graph/Glossary fr/07 - Governance & Ownership/07.4 Board Governance/Investor Director.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://nvca.org/wp-content/uploads/2026/06/Voting-Agreement-Updated-June-2026.docx"
+    ],
     "category": "Gouvernance",
     "short": "Administrateur nommé ou soutenu par les investisseurs, souvent par une classe de preferred stock.",
     "definition": "Un investor director est un membre du board lié à un investisseur ou à une classe d’actionnaires, généralement le lead investor d’un tour. Il combine une perspective investisseur avec des devoirs envers la société selon le droit applicable.",
@@ -8720,7 +8749,11 @@
     "sourcePaths": [
       "Graph/Glossary fr/07 - Governance & Ownership/07.5 Internal Startup Governance/Audit Committee.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://www.sec.gov/newsroom/speeches-statements/statement-role-audit-committees-financial-reporting",
+      "https://www.sec.gov/rules-regulations/2003/04/standards-relating-listed-company-audit-committees"
+    ],
     "category": "Gouvernance",
     "short": "Sous-comité du board chargé du reporting financier, des contrôles, des auditeurs et des risques financiers.",
     "definition": "L’audit committee supervise la qualité du reporting financier, les contrôles internes, l’auditeur externe et certains risques financiers. Il devient surtout pertinent dans les sociétés late-stage, réglementées ou en préparation d’IPO.",
@@ -9186,10 +9219,13 @@
     "sourcePaths": [
       "Graph/Glossary fr/08 - Liquidity & Outcomes/08.4 Secondary Liquidity/Continuation Funds.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "source-backed",
+    "sourceUrls": [
+      "https://ilpa.org/resources-tools/resource-library/continuation-funds-considerations-for-limited-partners-and-general-partners/"
+    ],
     "category": "Fund Economics",
     "short": "Véhicule GP-led qui rachète des actifs d’un fonds existant pour prolonger leur détention.",
-    "definition": "Un continuation fund est un véhicule créé par un GP pour transférer certains actifs d’un fonds arrivant en fin de vie vers une nouvelle structure. Il peut offrir de la liquidité aux LPs sortants tout en permettant au GP et à certains LPs de conserver l’exposition à un actif jugé prometteur.",
+    "definition": "Un continuation fund est un véhicule créé par un GP pour transférer certains actifs d’un fonds existant, souvent proche de sa fin de vie, vers une nouvelle structure. Il peut offrir de la liquidité aux LPs sortants tout en permettant au GP et à certains LPs de conserver leur exposition.",
     "example": "Un fonds proche de sa fin de vie crée un continuation vehicle pour conserver une société encore privée mais prometteuse.",
     "seeAlso": [
       "secondary",
@@ -9594,7 +9630,7 @@
       "board-of-directors"
     ],
     "relatedLessonIds": [],
-    "notes": "",
+    "notes": "Liens avec le parcours Venture philanthropie retirés le 2026-07-20 au profit d’entrées propres aux associations et aux partenariats de financement.",
     "canonicalTerm": "Money plus",
     "slug": "money-plus"
   },
@@ -9642,7 +9678,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/09 - Portfolio Support & Scaling/09.1 Platform & Value Creation/Milestones.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Stratégie",
     "short": "Objectifs opérationnels ou financiers qui jalonnent le chemin vers un prochain financement ou une inflexion de valeur.",
     "definition": "Les milestones traduisent la stratégie en preuves mesurables : revenus, croissance, recrutement, produit, qualité de reporting, pipeline, expansion ou efficacité. Ils servent à aligner founders, board et investisseurs sur ce qui doit être accompli avant le prochain tour.",
@@ -9655,7 +9691,7 @@
       "runway"
     ],
     "relatedLessonIds": [],
-    "notes": "Revu et injecté depuis needs-review/add le 2026-06-07; liens internes vérifiés dans le lot.",
+    "notes": "Revu et injecté depuis needs-review/add le 2026-06-07 ; la définition reste éditoriale, la page SBA générale ne documentant pas directement ce concept.",
     "canonicalTerm": "Milestones",
     "slug": "milestones"
   },
@@ -10347,7 +10383,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/10 - Legal, Tax & Jurisdictions/10.2 Transactional Documents/Conditions Precedent.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Deal & Structuration",
     "short": "Conditions à satisfaire avant qu’un investisseur soit tenu de réaliser le closing.",
     "definition": "Les conditions precedent sont les conditions documentaires, opérationnelles, réglementaires ou de diligence qui doivent être remplies entre signing et closing. Dans le glossaire final, elles doivent être fusionnées avec Conditions de closing pour éviter un doublon.",
@@ -10361,7 +10397,7 @@
     "relatedLessonIds": [
       "l-ts-control"
     ],
-    "notes": "Merge recommandé vers conditions-de-closing, déjà appliqué depuis le module 06. Source locale non sourcée. Fusion traitee vers conditions-de-closing. 4 alias candidat(s) verifies."
+    "notes": "Fusion vers conditions-de-closing déjà appliquée depuis le module 06 ; quatre alias candidats ont été vérifiés. La définition reste éditoriale."
   },
   {
     "canonicalTerm": "Disclosure letter",
@@ -10381,7 +10417,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/10 - Legal, Tax & Jurisdictions/10.2 Transactional Documents/Disclosure Letter.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Juridique & Fiscalité",
     "short": "Document listant les exceptions aux déclarations et garanties d’un deal.",
     "definition": "La disclosure letter accompagne un subscription agreement ou investment agreement et qualifie les representations and warranties en listant les exceptions connues. Elle protège les fondateurs et la société contre des claims futures sur des faits correctement disclosed.",
@@ -10393,7 +10429,7 @@
       "data-room"
     ],
     "relatedLessonIds": [],
-    "notes": "Central dans les documents de closing, mais source locale non sourcée ; à valider avant injection. Revu et injecté depuis needs-review/add le 2026-06-07; liens internes vérifiés dans le lot."
+    "notes": "Entrée centrale des documents de closing, revue et injectée le 2026-06-07 ; la définition reste éditoriale dans l’attente d’une source directement vérifiable."
   },
   {
     "canonicalTerm": "Governing law",
@@ -10443,7 +10479,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/10 - Legal, Tax & Jurisdictions/10.2 Transactional Documents/Investment Agreement.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Juridique & Fiscalité",
     "short": "Document transactionnel combinant souscription, droits investisseurs et gouvernance selon la pratique locale.",
     "definition": "Un investment agreement formalise le financement et peut combiner les mécaniques de souscription, les representations and warranties, les conditions precedent et les droits continus des investisseurs. Il est particulièrement courant dans les structures UK/Europe, avec des variantes selon la juridiction.",
@@ -10457,7 +10493,7 @@
       "capital-increase-documentation"
     ],
     "relatedLessonIds": [],
-    "notes": "Concept central mais source locale non sourcée et fortement juridictionnel ; à valider avant injection. Revu et injecté depuis needs-review/add le 2026-06-07; liens internes vérifiés dans le lot."
+    "notes": "Concept juridictionnel revu et injecté le 2026-06-07 ; la définition reste éditoriale dans l’attente d’une source directement vérifiable."
   },
   {
     "canonicalTerm": "Non-compete agreement",
@@ -10478,7 +10514,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/10 - Legal, Tax & Jurisdictions/10.2 Transactional Documents/Non-Compete Agreements.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Juridique & Fiscalité",
     "short": "Restriction contractuelle limitant la capacité d’un fondateur ou salarié à concurrencer l’entreprise.",
     "definition": "Une non-compete agreement limite la possibilité pour un fondateur ou un employé clé de travailler pour un concurrent ou de lancer une activité concurrente après son départ. Sa validité dépend fortement de la juridiction, du contexte, de la durée, du périmètre et parfois d’une contrepartie financière.",
@@ -10582,7 +10618,7 @@
     "sourcePaths": [
       "Graph/Glossary fr/10 - Legal, Tax & Jurisdictions/10.2 Transactional Documents/Subscription Agreement.md"
     ],
-    "sourceStatus": "unsourced",
+    "sourceStatus": "editorial",
     "category": "Juridique & Fiscalité",
     "short": "Contrat par lequel un investisseur souscrit les actions émises lors d’un tour.",
     "definition": "Le subscription agreement formalise l’achat d’actions nouvellement émises au closing. Il traduit les termes économiques de la term sheet en obligations contractuelles et contient souvent prix, nombre d’actions, conditions precedent, warranties et références à la disclosure letter.",
@@ -10594,7 +10630,7 @@
       "conditions-de-closing"
     ],
     "relatedLessonIds": [],
-    "notes": "Document central mais source locale non sourcée ; à valider avant injection. Revu et injecté depuis needs-review/add le 2026-06-07; liens internes vérifiés dans le lot."
+    "notes": "Document transactionnel revu et injecté le 2026-06-07 ; la définition reste éditoriale dans l’attente d’une source directement vérifiable."
   },
   {
     "canonicalTerm": "Qualified Small Business Stock (QSBS)",
@@ -13714,26 +13750,42 @@
     "action": "add",
     "modules": [
       "12 - Impact & Philanthropie",
-      "12.1 Capital catalytique & continuum"
+      "12.1 Capital catalytique & continuum",
+      "Venture philanthropie"
     ],
     "sourcePaths": [
       "https://www.oecd.org/fr/publications/la-philanthropie-privee-pour-le-developpement_9789264303973-fr/full-report/component-8.html",
-      "https://www.impacteurope.net/insights/what-investing-impact"
+      "https://www.impacteurope.net/insights/what-investing-impact",
+      "https://www.impacteurope.net/sites/www.evpa.ngo/files/publications/EVPA_Financing_for_Social_Impact_2017.pdf",
+      "https://thegiin.org/publication/post/about-impact-investing/"
     ],
     "sourceStatus": "source-backed",
     "category": "Stratégie",
-    "short": "Approche engagée qui combine financement sur mesure, accompagnement non financier et mesure de l’impact.",
-    "definition": "La venture philanthropie applique aux organisations à finalité sociale ou environnementale un accompagnement inspiré du capital-investissement : engagement de long terme, financement adapté aux besoins, soutien stratégique et suivi de l’impact. Elle ne se limite pas à une subvention et peut mobiliser dons, prêts, fonds propres ou instruments hybrides. Sa spécificité tient au niveau d’implication du financeur et à la recherche d’un impact additionnel, non à la seule forme du capital.",
-    "example": "Une fondation soutient durablement une entreprise sociale par une subvention, un prêt, un appui à la gouvernance et un suivi des résultats obtenus.",
+    "short": "Approche de soutien qui combine financement adapté, accompagnement non financier, engagement suivi et gestion de l’impact.",
+    "definition": "La venture philanthropie soutient des organisations à finalité sociale ou environnementale par un financement adapté au besoin, un accompagnement non financier et une gestion suivie de l’impact. Elle peut mobiliser une subvention, une dette, des fonds propres dans une entité qui peut en émettre ou un instrument hybride, mais ne constitue ni une forme juridique ni un instrument autonome. À la différence du capital-risque, le rendement financier et la cession ne la définissent pas ; à la différence de l’impact investing au sens financier, elle peut reposer entièrement sur des subventions sans rendement attendu. Le caractère catalytique éventuel décrit la fonction du financement, non l’ensemble de la relation.",
+    "example": "Une fondation accorde à une association un financement pluriannuel ajustable, accompagne le renforcement de ses opérations et utilise le suivi de l’impact pour réviser avec elle le plan de soutien.",
     "seeAlso": [
       "investissement-pour-impact",
       "subvention-catalytique",
       "beyond-grants",
       "continuum-du-capital",
-      "money-plus"
+      "additionalite",
+      "mesure-impact",
+      "capital-patient",
+      "gouvernance-associative",
+      "convention-de-financement",
+      "tresorerie-mobilisable",
+      "sortie-de-partenariat",
+      "droits-d-information-du-financeur"
     ],
-    "relatedLessonIds": [],
-    "notes": "Ajout demandé le 2026-07-15 ; terme canonique et aliases validés par l’utilisateur, définition recoupée avec l’OCDE et Impact Europe."
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-screening-additionalite",
+      "lvp-arbre-instruments",
+      "lvp-accompagnement-pouvoir",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout demandé le 2026-07-15 ; terme canonique et aliases validés par l’utilisateur, définition recoupée avec l’OCDE et Impact Europe. Relations Venture philanthropie mises à jour le 2026-07-20."
   },
   {
     "canonicalTerm": "Investissement pour l’impact",
@@ -13747,7 +13799,8 @@
     "action": "add",
     "modules": [
       "12 - Impact & Philanthropie",
-      "12.1 Capital catalytique & continuum"
+      "12.1 Capital catalytique & continuum",
+      "Venture philanthropie"
     ],
     "sourcePaths": [
       "https://www.impacteurope.net/insights/what-investing-impact"
@@ -13762,10 +13815,17 @@
       "capital-catalytique",
       "continuum-du-capital",
       "esg-assessment",
-      "investment-strategy"
+      "investment-strategy",
+      "additionalite",
+      "mesure-impact"
     ],
-    "relatedLessonIds": [],
-    "notes": "Ajout demandé le 2026-07-15 ; définition alignée sur les critères d’intentionnalité, de gestion de l’impact et d’additionnalité d’Impact Europe."
+    "relatedLessonIds": [
+      "lvp-screening-additionalite",
+      "lvp-theorie-changement",
+      "lvp-mesure-impact",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout demandé le 2026-07-15 ; définition alignée sur les critères d’intentionnalité, de gestion de l’impact et d’additionnalité d’Impact Europe. Relations Venture philanthropie mises à jour le 2026-07-20."
   },
   {
     "canonicalTerm": "Subvention catalytique",
@@ -13780,7 +13840,8 @@
     "action": "add",
     "modules": [
       "12 - Impact & Philanthropie",
-      "12.1 Capital catalytique & continuum"
+      "12.1 Capital catalytique & continuum",
+      "Venture philanthropie"
     ],
     "sourcePaths": [
       "https://www.impacteurope.net/insights/help-us-map-catalytic-grantmaking-europe"
@@ -13794,10 +13855,16 @@
       "capital-catalytique",
       "financement-mixte",
       "beyond-grants",
-      "non-dilutive-financing"
+      "non-dilutive-financing",
+      "additionalite",
+      "subvention-recuperable"
     ],
-    "relatedLessonIds": [],
-    "notes": "Ajout demandé le 2026-07-15 ; définition fondée sur le cadre de catalytic grantmaking d’Impact Europe."
+    "relatedLessonIds": [
+      "lvp-screening-additionalite",
+      "lvp-arbre-instruments",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout demandé le 2026-07-15 ; définition fondée sur le cadre de catalytic grantmaking d’Impact Europe. Relations Venture philanthropie mises à jour le 2026-07-20."
   },
   {
     "canonicalTerm": "Capital catalytique",
@@ -13811,7 +13878,8 @@
     "action": "add",
     "modules": [
       "12 - Impact & Philanthropie",
-      "12.1 Capital catalytique & continuum"
+      "12.1 Capital catalytique & continuum",
+      "Venture philanthropie"
     ],
     "sourcePaths": [
       "https://www.impacteurope.net/stream/catalytic-capital?page=1",
@@ -13826,10 +13894,16 @@
       "subvention-catalytique",
       "financement-mixte",
       "continuum-du-capital",
-      "investment-strategy"
+      "investment-strategy",
+      "additionalite",
+      "first-loss"
     ],
-    "relatedLessonIds": [],
-    "notes": "Ajout demandé le 2026-07-15 ; définition recoupée avec Impact Europe et le travail francophone d’Investisseurs & Partenaires."
+    "relatedLessonIds": [
+      "lvp-screening-additionalite",
+      "lvp-arbre-instruments",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout demandé le 2026-07-15 ; définition recoupée avec Impact Europe et le travail francophone d’Investisseurs & Partenaires. Relations Venture philanthropie mises à jour le 2026-07-20."
   },
   {
     "canonicalTerm": "Beyond grants",
@@ -13843,7 +13917,8 @@
     "action": "add",
     "modules": [
       "12 - Impact & Philanthropie",
-      "12.1 Capital catalytique & continuum"
+      "12.1 Capital catalytique & continuum",
+      "Venture philanthropie"
     ],
     "sourcePaths": [
       "https://www.impacteurope.net/insights/turning-research-action",
@@ -13858,10 +13933,16 @@
       "venture-philanthropie",
       "subvention-catalytique",
       "continuum-du-capital",
-      "non-dilutive-financing"
+      "non-dilutive-financing",
+      "subvention-recuperable",
+      "quasi-fonds-propres"
     ],
-    "relatedLessonIds": [],
-    "notes": "Ajout demandé le 2026-07-15 ; Beyond grants conservé comme terme canonique à la demande de l’utilisateur, la traduction française restant un alias."
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement"
+    ],
+    "notes": "Ajout demandé le 2026-07-15 ; Beyond grants conservé comme terme canonique à la demande de l’utilisateur, la traduction française restant un alias. Relations Venture philanthropie mises à jour le 2026-07-20."
   },
   {
     "canonicalTerm": "Continuum du capital",
@@ -13875,7 +13956,8 @@
     "action": "add",
     "modules": [
       "12 - Impact & Philanthropie",
-      "12.1 Capital catalytique & continuum"
+      "12.1 Capital catalytique & continuum",
+      "Venture philanthropie"
     ],
     "sourcePaths": [
       "https://www.impacteurope.net/insights/what-investing-impact",
@@ -13890,10 +13972,17 @@
       "investissement-pour-impact",
       "capital-catalytique",
       "financement-mixte",
-      "beyond-grants"
+      "beyond-grants",
+      "capital-patient",
+      "subvention-recuperable",
+      "quasi-fonds-propres"
     ],
-    "relatedLessonIds": [],
-    "notes": "Ajout demandé le 2026-07-15 ; terme français aligné sur l’usage d’Impact Europe, avec continuum of capital en alias."
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-arbre-instruments",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout demandé le 2026-07-15 ; terme français aligné sur l’usage d’Impact Europe, avec continuum of capital en alias. Relations Venture philanthropie mises à jour le 2026-07-20."
   },
   {
     "canonicalTerm": "Financement mixte",
@@ -13907,7 +13996,8 @@
     "action": "add",
     "modules": [
       "12 - Impact & Philanthropie",
-      "12.1 Capital catalytique & continuum"
+      "12.1 Capital catalytique & continuum",
+      "Venture philanthropie"
     ],
     "sourcePaths": [
       "https://www.oecd.org/fr/topics/sub-issues/leveraging-private-finance-for-development/blended-finance.html"
@@ -13921,9 +14011,1018 @@
       "capital-catalytique",
       "subvention-catalytique",
       "continuum-du-capital",
-      "non-dilutive-financing"
+      "non-dilutive-financing",
+      "first-loss",
+      "quasi-fonds-propres"
     ],
-    "relatedLessonIds": [],
-    "notes": "Ajout demandé le 2026-07-15 ; définition alignée sur la définition française du financement mixte du CAD de l’OCDE."
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout demandé le 2026-07-15 ; définition alignée sur la définition française du financement mixte du CAD de l’OCDE. Relations Venture philanthropie mises à jour le 2026-07-20."
+  },
+  {
+    "canonicalTerm": "Additionalité",
+    "slug": "additionalite",
+    "aliases": [
+      "additionality",
+      "additionalité d’impact",
+      "additionalité de l’impact"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.impacteurope.net/glossary",
+      "https://www.impacteurope.net/insights/investing-impact-toolkit"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Stratégie",
+    "short": "Contribution qui produit un changement supérieur à ce qui se serait probablement produit sans l’intervention.",
+    "definition": "L’additionalité examine la différence attribuable à l’intervention d’un financeur ou d’une organisation par rapport à une situation de référence plausible. Elle peut venir du capital, de conditions plus patientes, d’un accompagnement ou d’une action que d’autres acteurs n’auraient pas fournie aux mêmes conditions. Elle ne se déduit ni de l’intention ni du seul constat d’un résultat : les hypothèses de comparaison, la contribution d’autres acteurs et les incertitudes doivent être explicitées.",
+    "example": "Une subvention finance une expérimentation que ni les recettes ni les financeurs ordinaires n’auraient couverte ; l’analyse documente ce contrefactuel avant de conclure à l’additionalité.",
+    "seeAlso": [
+      "theorie-du-changement",
+      "investissement-pour-impact",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-screening-additionalite",
+      "lvp-theorie-changement",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; définition alignée sur Impact Europe et formulée comme une hypothèse de contribution à documenter."
+  },
+  {
+    "canonicalTerm": "Théorie du changement",
+    "slug": "theorie-du-changement",
+    "aliases": [
+      "theory of change",
+      "ToC"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.avise.org/ressources/comment-evaluer-son-impact-principes-methodologiques",
+      "https://www.impacteurope.net/knowledge-centre/publications/navigating-impact-measurement-and-management"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Stratégie",
+    "short": "Hypothèse causale explicite reliant besoins, activités, réalisations, résultats et impact attendu.",
+    "definition": "Une théorie du changement décrit pourquoi et dans quelles conditions une intervention devrait conduire à des changements pour les personnes ou le système concernés. Elle relie ressources, activités, [[realisation-impact|réalisations]], [[resultat-impact|résultats]], hypothèses, facteurs externes et effets indésirables possibles. Elle organise la collecte de preuves et les décisions, mais ne constitue pas elle-même une preuve de causalité ; elle doit être confrontée aux faits et révisée.",
+    "example": "Un programme d’insertion explicite comment l’accompagnement doit améliorer les compétences puis l’accès à un emploi durable, et identifie les conditions économiques nécessaires à cette chaîne.",
+    "seeAlso": [
+      "additionalite",
+      "realisation-impact",
+      "resultat-impact",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-analyse-probleme",
+      "lvp-theorie-changement",
+      "lvp-mesure-impact"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; définition recoupée avec les principes méthodologiques de l’Avise et le cadre IMM d’Impact Europe."
+  },
+  {
+    "canonicalTerm": "Réalisation d’impact",
+    "slug": "realisation-impact",
+    "aliases": [
+      "output",
+      "outputs"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.impacteurope.net/glossary",
+      "https://www.avise.org/ressources/comment-evaluer-son-impact-principes-methodologiques"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Métriques",
+    "short": "Produit immédiat et observable d’une activité, sans présumer du changement obtenu pour les personnes.",
+    "definition": "Une réalisation d’impact, ou output, décrit ce qui a été directement fourni ou produit : séances réalisées, personnes accompagnées, équipements installés ou services délivrés. Elle mesure l’exécution, non le changement qui en résulte. Une réalisation peut être nécessaire à un [[resultat-impact|résultat d’impact]] sans suffire à démontrer ce résultat, son maintien ou son attribution à l’intervention.",
+    "example": "Former 300 personnes est une réalisation ; l’amélioration durable de leur accès à l’emploi est un résultat à mesurer séparément.",
+    "seeAlso": [
+      "resultat-impact",
+      "theorie-du-changement",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-analyse-probleme",
+      "lvp-theorie-changement",
+      "lvp-mesure-impact"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; titre français retenu avec output et outputs comme alias opérationnels."
+  },
+  {
+    "canonicalTerm": "Résultat d’impact",
+    "slug": "resultat-impact",
+    "aliases": [
+      "outcome",
+      "outcomes"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.impacteurope.net/glossary",
+      "https://www.avise.org/ressources/comment-evaluer-son-impact-principes-methodologiques"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Métriques",
+    "short": "Changement observé pour des personnes, des organisations ou un système après une intervention.",
+    "definition": "Un résultat d’impact, ou outcome, est un changement de situation, de comportement, de capacité ou de condition pour les parties concernées. Il peut être positif ou négatif, attendu ou inattendu, immédiat ou différé. Son observation ne prouve pas automatiquement que l’intervention en est la cause : l’analyse examine la situation de référence, les autres contributions, la durée et les éventuels effets de déplacement.",
+    "example": "La part de participants conservant un emploi six mois après l’accompagnement décrit un résultat, sous réserve du périmètre, de l’attrition et des autres facteurs.",
+    "seeAlso": [
+      "realisation-impact",
+      "additionalite",
+      "theorie-du-changement",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-theorie-changement",
+      "lvp-entretiens-beneficiaires",
+      "lvp-mesure-impact"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; distinction explicite entre résultat observé, contribution et attribution."
+  },
+  {
+    "canonicalTerm": "Mesure et gestion de l’impact",
+    "slug": "mesure-impact",
+    "aliases": [
+      "IMM",
+      "impact measurement and management",
+      "impact measurement & management",
+      "gestion de l’impact"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.impacteurope.net/knowledge-centre/publications/navigating-impact-measurement-and-management",
+      "https://www.avise.org/ressources/evaluer-son-impact-social"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Métriques",
+    "short": "Processus continu qui collecte des preuves d’impact proportionnées et les utilise pour décider.",
+    "definition": "La mesure et gestion de l’impact, ou IMM, définit les changements recherchés, associe les parties concernées, choisit des indicateurs et méthodes proportionnés, collecte des données puis utilise les résultats pour adapter l’action et le financement. Elle distingue réalisations, résultats, contribution et effets négatifs. L’IMM n’est ni une certification ni une preuve automatique de causalité ; sa qualité dépend des données, des méthodes, de la gouvernance et de l’usage décisionnel.",
+    "example": "Un comité suit à la fois la qualité du service, les résultats pour les bénéficiaires et les effets indésirables, puis ajuste le déploiement à chaque revue.",
+    "seeAlso": [
+      "theorie-du-changement",
+      "realisation-impact",
+      "resultat-impact",
+      "social-return-on-investment-sroi",
+      "droits-d-information-du-financeur"
+    ],
+    "relatedLessonIds": [
+      "lvp-theorie-changement",
+      "lvp-mesure-impact",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; définition fondée sur Impact Europe et l’Avise, sans assimiler IMM à une norme de certification."
+  },
+  {
+    "canonicalTerm": "Financement non affecté",
+    "slug": "financement-non-affecte",
+    "aliases": [
+      "unrestricted funding",
+      "unrestricted financing",
+      "core funding",
+      "core support"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.oecd.org/en/publications/no-strings-attached-making-sense-of-flexible-financing-in-philanthropy_0264b47f-en.html"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Deal & Structuration",
+    "short": "Financement que l’organisation peut allouer à ses priorités dans le cadre convenu, sans affectation détaillée à un projet.",
+    "definition": "Le financement non affecté laisse à l’organisation une latitude d’allocation entre activités, fonctions et besoins compatibles avec sa mission et la convention. Il peut financer des coûts partagés, la résilience ou des adaptations difficiles à anticiper. Il n’implique ni absence d’objectifs ni absence de reddition de comptes, et n’est pas toujours préférable : le choix dépend du risque, de la maturité, de la confiance, des obligations du financeur et de la capacité de pilotage.",
+    "example": "Une convention pluriannuelle autorise l’association à répartir le soutien entre équipes, outils et continuité, avec une revue globale des résultats et risques.",
+    "seeAlso": [
+      "cout-complet",
+      "venture-philanthropie",
+      "tresorerie-mobilisable",
+      "convention-de-financement"
+    ],
+    "relatedLessonIds": [
+      "lvp-comptes-cout-complet",
+      "lvp-tresorerie-reserves",
+      "lvp-accompagnement-pouvoir"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; définition alignée sur l’OCDE 2024 et limitée au financement non affecté, sans généraliser sa supériorité."
+  },
+  {
+    "canonicalTerm": "Coût complet",
+    "slug": "cout-complet",
+    "aliases": [
+      "full cost",
+      "full-cost recovery",
+      "recouvrement du coût complet"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.avise.org/sites/default/files/media/document/Guide_Financer_son_projet_ESS_Avise_2025.pdf",
+      "https://www.anc.gouv.fr/reglement-ndeg-2018-06-du-5-decembre-2018"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Métriques",
+    "short": "Coût d’une activité incluant ses charges directes et une part justifiée des fonctions nécessaires à sa réalisation.",
+    "definition": "Le coût complet rapproche les coûts directement attribuables d’une activité et la quote-part documentée des fonctions, outils, locaux et moyens partagés qu’elle consomme. Les clés d’allocation doivent refléter l’usage réel et rester réconciliables avec les comptes. Investissement, besoin en fonds de roulement et réserve de résilience sont présentés séparément lorsqu’ils répondent à des besoins distincts. Aucun taux de frais généraux ne constitue une norme universelle.",
+    "example": "Le budget d’un programme ajoute aux salaires de terrain une quote-part fondée sur le temps de la direction, de la finance, des outils et des locaux.",
+    "seeAlso": [
+      "financement-non-affecte",
+      "tresorerie-mobilisable",
+      "convention-de-financement"
+    ],
+    "relatedLessonIds": [
+      "lvp-comptes-cout-complet",
+      "lvp-previsions-scenarios",
+      "lvp-atelier-choc"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; définition opérationnelle distinguant coût récurrent, investissement et trésorerie."
+  },
+  {
+    "canonicalTerm": "Protection des personnes accompagnées",
+    "slug": "safeguarding",
+    "aliases": [
+      "safeguarding",
+      "protection des bénéficiaires"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.unicef.org/documents/safeguarding-policy",
+      "https://www.cnil.fr/fr/mon-quotidien/associations"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Gouvernance",
+    "short": "Dispositif de prévention, signalement et traitement des atteintes pouvant toucher les personnes accompagnées.",
+    "definition": "La protection des personnes accompagnées regroupe l’analyse des risques, les règles de conduite, le recrutement sûr, la formation, les canaux de signalement accessibles, la réponse centrée sur la personne affectée et le suivi des partenaires. Elle couvre les dommages causés ou facilités par l’organisation, ses équipes, ses prestataires ou ses programmes. Elle constitue un cadre opérationnel ; en France, les obligations juridiques précises dépendent des publics, des activités et du secteur et doivent être vérifiées.",
+    "example": "Avant un entretien avec des mineurs, l’organisation définit consentement, présence d’un adulte habilité, confidentialité, voie de signalement et conduite à tenir en cas de révélation.",
+    "seeAlso": [
+      "gouvernance-associative",
+      "droits-d-information-du-financeur",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-entretiens-beneficiaires",
+      "lvp-plan-diligence",
+      "lvp-safeguarding-risques"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; cadre UNICEF 2025 utilisé comme référence opérationnelle, sans le présenter comme un régime légal français unique."
+  },
+  {
+    "canonicalTerm": "Entreprise solidaire d’utilité sociale (ESUS)",
+    "slug": "entreprise-solidaire-utilite-sociale-esus",
+    "aliases": [
+      "ESUS",
+      "agrément ESUS",
+      "entreprise solidaire d'utilité sociale"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.economie.gouv.fr/entreprises/les-aides-et-financements-pour-developper-son-entreprise/economie-sociale-et-solidaire",
+      "https://www.tresor.economie.gouv.fr/banque-assurance-finance/finance-sociale-et-solidaire/liste-nationale-agrements-esus"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Juridique & Fiscalité",
+    "short": "Agrément public français attribué à certaines entreprises de l’ESS remplissant des conditions d’utilité sociale et de gestion.",
+    "definition": "L’agrément Entreprise solidaire d’utilité sociale, ou ESUS, est accordé à des entreprises de l’économie sociale et solidaire qui remplissent les conditions légales en vigueur, notamment relatives à l’utilité sociale, au modèle économique et aux rémunérations. Il facilite l’accès à certains circuits de finance solidaire. Il n’est ni une forme juridique, ni une certification de l’impact obtenu, ni une autorisation générale de recevoir des dons défiscalisés ou tout instrument financier.",
+    "example": "Une association, une coopérative ou une société commerciale de l’ESS peut demander l’agrément si elle satisfait les conditions applicables à sa situation.",
+    "seeAlso": [
+      "finance-solidaire",
+      "investissement-pour-impact",
+      "titre-associatif"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; droit vérifié à cette date. Réexaminer avant le 2027-01-01 en raison de l’évolution annoncée du régime ESUS."
+  },
+  {
+    "canonicalTerm": "Fonds de dotation",
+    "slug": "fonds-de-dotation",
+    "aliases": [
+      "endowment fund"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000054334469",
+      "https://www.service-public.fr/particuliers/vosdroits/N31028"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Juridique & Fiscalité",
+    "short": "Personne morale privée à but non lucratif qui capitalise des apports gratuits et irrévocables au service de l’intérêt général.",
+    "definition": "Le fonds de dotation est défini par l’article 140 de la loi du 4 août 2008. Il reçoit et gère des biens ou droits apportés gratuitement et irrévocablement, les capitalise et utilise les revenus pour une mission d’intérêt général ou les redistribue à une personne morale à but non lucratif poursuivant une telle mission. Sa création, ses ressources et son contrôle obéissent à un régime propre. Ce statut ne rend pas automatiquement chaque don éligible à une réduction fiscale.",
+    "example": "Un fonds de dotation finance dans la durée des actions d’intérêt général à partir des revenus de sa dotation et des ressources autorisées.",
+    "seeAlso": [
+      "venture-philanthropie",
+      "finance-solidaire",
+      "entreprise-solidaire-utilite-sociale-esus"
+    ],
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-plan-diligence",
+      "lvp-compatibilite-remboursement"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; droit vérifié sur l’article 140 dans sa version en vigueur depuis le 2026-06-27. Prochaine revue recommandée avant le 2027-07-20."
+  },
+  {
+    "canonicalTerm": "Finance solidaire",
+    "slug": "finance-solidaire",
+    "aliases": [
+      "solidarity finance",
+      "épargne solidaire"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.tresor.economie.gouv.fr/banque-assurance-finance/finance-sociale-et-solidaire/le-financement-de-l-economie-sociale-et-solidaire-ess",
+      "https://www.tresor.economie.gouv.fr/banque-assurance-finance/finance-sociale-et-solidaire/liste-nationale-agrements-esus"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Stratégie",
+    "short": "Canaux d’épargne et de financement orientant des ressources vers des activités à utilité sociale ou environnementale.",
+    "definition": "La finance solidaire rassemble des mécanismes d’épargne et de financement qui dirigent une partie des capitaux vers des entreprises ou projets à utilité sociale ou environnementale. Elle peut mobiliser fonds solidaires, prêts, garanties ou investissements. Les qualifications doivent rester distinctes : ESUS est un agrément public, tandis que les labels de produits d’épargne relèvent de leurs organismes attributaires. La qualification solidaire ne dispense pas d’analyser le risque et le véhicule.",
+    "example": "Un fonds d’épargne salariale solidaire investit une part de ses actifs dans des entreprises répondant aux conditions prévues par son cadre.",
+    "seeAlso": [
+      "entreprise-solidaire-utilite-sociale-esus",
+      "investissement-pour-impact",
+      "financement-mixte"
+    ],
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; définition alignée sur la Direction générale du Trésor et distinguant agrément public et labels privés."
+  },
+  {
+    "canonicalTerm": "Contrat à impact",
+    "slug": "contrat-a-impact",
+    "aliases": [
+      "contrat à impact social",
+      "CIS",
+      "impact contract"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.economie.gouv.fr/contrat-impact",
+      "https://www.ccomptes.fr/sites/default/files/2025-09/20250918-Soutiens-publics-a-economie-sociale-et-solidaire.pdf"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Deal & Structuration",
+    "short": "Montage de financement dans lequel un payeur conditionne tout ou partie de son paiement à des résultats vérifiés.",
+    "definition": "Un contrat à impact organise généralement le préfinancement d’une action par un ou plusieurs investisseurs, puis le paiement par un payeur public selon des résultats convenus et vérifiés de manière indépendante. L’opération peut aussi associer opérateur, évaluateur et structeur ; elle ne se réduit donc pas toujours à trois intervenants. Sa pertinence dépend de la maturité de l’action, de la mesurabilité, de la trésorerie et des coûts de transaction. Ce n’est pas un mode de financement adapté à toute organisation.",
+    "example": "Des investisseurs préfinancent un programme d’insertion et le payeur public rembourse selon un protocole de résultats et d’évaluation défini au contrat.",
+    "seeAlso": [
+      "mesure-impact",
+      "financement-mixte",
+      "first-loss"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; dispositif français et limites opérationnelles recoupés avec Bercy et la Cour des comptes 2025."
+  },
+  {
+    "canonicalTerm": "Social Return on Investment (SROI)",
+    "slug": "social-return-on-investment-sroi",
+    "aliases": [
+      "SROI",
+      "social return on investment",
+      "retour social sur investissement"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.avise.org/ressources/evaluer-limpact-social-avec-lapproche-sroi-application-au-secteur-de-liae",
+      "https://www.avise.org/ressources/comment-evaluer-son-impact-principes-methodologiques"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Métriques",
+    "short": "Approche qui rapporte une valeur sociale monétarisée aux ressources mobilisées, selon des hypothèses explicites.",
+    "definition": "Le Social Return on Investment, ou SROI, estime un ratio entre une valeur sociale monétarisée et les ressources engagées. Le calcul dépend notamment du périmètre, des proxys financiers, du contrefactuel, de l’attribution, de la durée et du taux de déperdition. Il doit donc présenter hypothèses, sensibilités et limites. Un SROI élevé ne constitue ni une preuve autonome de causalité ni un classement universel entre interventions différentes.",
+    "example": "Une évaluation publie son ratio avec les fourchettes de valeur, les hypothèses d’attribution et un scénario prudent plutôt qu’un chiffre isolé.",
+    "seeAlso": [
+      "mesure-impact",
+      "resultat-impact",
+      "additionalite"
+    ],
+    "relatedLessonIds": [
+      "lvp-theorie-changement",
+      "lvp-mesure-impact",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; limites méthodologiques rendues explicites conformément aux ressources de l’Avise."
+  },
+  {
+    "canonicalTerm": "Capital patient",
+    "slug": "capital-patient",
+    "aliases": [
+      "patient capital"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.impacteurope.net/insights/vp-nutshell-short-guide-tailored-financing",
+      "https://www.impacteurope.net/insights/investing-impact-toolkit"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Deal & Structuration",
+    "short": "Financement de durée longue ou aux modalités flexibles, adapté au temps nécessaire à la mission et aux flux.",
+    "definition": "Le capital patient décrit un profil économique : horizon long, remboursement ou rendement différé et tolérance à une montée en charge progressive. Il peut soutenir une organisation dont les résultats sociaux et les flux apparaissent lentement. Ce n’est pas un véhicule juridique autonome ; prêt, titre, garantie ou capital doivent être choisis selon la forme du bénéficiaire, les droits convenus et la capacité de remboursement.",
+    "example": "Un prêt de long terme avec différé accompagne une entreprise sociale dont les contrats montent progressivement en charge, après test de sa capacité de remboursement.",
+    "seeAlso": [
+      "continuum-du-capital",
+      "quasi-fonds-propres",
+      "venture-philanthropie"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-termes-financement",
+      "lvp-suivi-sortie"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; distinction explicite entre caractéristique économique et véhicule juridique."
+  },
+  {
+    "canonicalTerm": "Titre associatif",
+    "slug": "titre-associatif",
+    "aliases": [
+      "titres associatifs"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072026/LEGISCTA000006184578/",
+      "https://www.banquedesterritoires.fr/produits-services/investissement/financement-economie-inclusive"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Juridique & Fiscalité",
+    "short": "Créance de dernier rang qu’une association éligible peut émettre selon le Code monétaire et financier.",
+    "definition": "Le titre associatif est une obligation nominative de dernier rang relevant des articles L. 213-8 et suivants du Code monétaire et financier. Son remboursement obéit aux conditions du contrat et ne peut intervenir avant le délai légal minimal. L’émission suppose notamment une activité économique effective depuis au moins deux ans, ainsi que des formalités et une gouvernance adaptées. Le titre reste une créance : une association n’a pas de capital social et le porteur ne devient pas actionnaire.",
+    "example": "Une association éligible envisage une émission de long terme après examen de ses statuts, de sa procédure d’émission et de ses excédents futurs.",
+    "seeAlso": [
+      "quasi-fonds-propres",
+      "titre-participatif",
+      "capital-patient"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; droit vérifié sur les articles L. 213-8 à L. 213-21. Prochaine revue recommandée avant le 2027-07-20."
+  },
+  {
+    "canonicalTerm": "Titre participatif",
+    "slug": "titre-participatif",
+    "aliases": [
+      "titres participatifs"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037668260",
+      "https://www.banquedesterritoires.fr/produits-services/investissement/financement-economie-inclusive"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Juridique & Fiscalité",
+    "short": "Titre de créance de long terme réservé aux catégories d’émetteurs prévues par la loi.",
+    "definition": "Le titre participatif est une créance dont l’émission est ouverte aux catégories limitativement énumérées à l’article L. 213-32 du Code monétaire et financier, notamment certaines sociétés anonymes coopératives et entités publiques. Sa rémunération peut comporter une composante variable selon son régime. Il ne constitue ni une prise de participation au capital ni un instrument générique accessible à toute association.",
+    "example": "Une société coopérative vérifie qu’elle relève des catégories autorisées avant de négocier les conditions d’un titre participatif.",
+    "seeAlso": [
+      "titre-associatif",
+      "quasi-fonds-propres",
+      "capital-patient"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; droit vérifié sur l’article L. 213-32. Prochaine revue recommandée avant le 2027-07-20."
+  },
+  {
+    "canonicalTerm": "Subvention récupérable",
+    "slug": "subvention-recuperable",
+    "aliases": [
+      "recoverable grant",
+      "recoverable grants",
+      "subvention remboursable"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.impacteurope.net/glossary",
+      "https://www.banquedesterritoires.fr/produits-services/investissement/financement-economie-inclusive"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Deal & Structuration",
+    "short": "Financement philanthropique présenté comme récupérable selon des conditions contractuelles déterminées.",
+    "definition": "La subvention récupérable, souvent appelée recoverable grant, décrit un financement qui peut être reversé au financeur si des événements prévus surviennent. Aucune catégorie légale française générale et autonome portant ce nom n’a été identifiée dans les sources primaires examinées. Le montage doit donc être qualifié selon ses droits réels : don, créance, avance ou autre contrat, avec analyse juridique, fiscale et comptable. Son intitulé ne suffit pas à ouvrir le régime fiscal du mécénat.",
+    "example": "Une fondation envisage un remboursement si un projet génère des recettes ; les parties font d’abord qualifier le contrat et la capacité de chacune à l’exécuter.",
+    "seeAlso": [
+      "beyond-grants",
+      "capital-patient",
+      "quasi-fonds-propres"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; concept professionnel sourcé, avec réserve explicite sur l’absence de catégorie légale française générale identifiée."
+  },
+  {
+    "canonicalTerm": "Tranche de première perte",
+    "slug": "first-loss",
+    "aliases": [
+      "first loss",
+      "first-loss tranche",
+      "tranche junior de première perte"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.oecd.org/en/topics/sub-issues/leveraging-private-finance-for-development/blended-finance.html",
+      "https://www.impacteurope.net/stream/catalytic-capital?page=1"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Deal & Structuration",
+    "short": "Tranche subordonnée conçue pour absorber les premières pertes d’un montage jusqu’à sa limite contractuelle.",
+    "definition": "Une tranche de première perte supporte les pertes avant les tranches plus seniors, dans l’ordre et la limite fixés par les documents de l’opération. Elle peut améliorer le profil de risque des autres financeurs et contribuer à mobiliser des capitaux, mais elle ne garantit ni l’absence de pertes pour les tranches seniors ni la réalisation d’un impact. First-loss décrit une allocation économique des pertes ; les droits dépendent du véhicule, du rang et des contrats.",
+    "example": "Une tranche junior philanthropique absorbe les premières pertes d’un portefeuille, tandis que les investisseurs seniors restent exposés au-delà de son montant.",
+    "seeAlso": [
+      "capital-catalytique",
+      "financement-mixte",
+      "quasi-fonds-propres"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; définition limitée au mécanisme de partage des pertes, sans présenter la tranche comme une garantie absolue."
+  },
+  {
+    "canonicalTerm": "Quasi-fonds propres",
+    "slug": "quasi-fonds-propres",
+    "aliases": [
+      "quasi-equity",
+      "quasi equity"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.banquedesterritoires.fr/produits-services/investissement/financement-economie-inclusive",
+      "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072026/LEGISCTA000006184578/"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Deal & Structuration",
+    "short": "Qualification économique de financements longs et subordonnés proches du risque des fonds propres.",
+    "definition": "Les quasi-fonds propres regroupent, dans l’analyse financière, des ressources de long terme dont le rang, la rémunération ou le remboursement les rapprochent du risque supporté par les fonds propres. L’expression ne désigne pas un statut juridique unique. Le véhicule peut être un titre associatif, un titre participatif, un prêt subordonné ou un autre instrument compatible avec l’émetteur. Une association ne possède pas de capital social : qualifier une créance de quasi-fonds propres n’en fait pas une participation.",
+    "example": "Un financeur compare un titre associatif et un prêt subordonné, puis fait valider le véhicule autorisé pour le bénéficiaire et son propre statut.",
+    "seeAlso": [
+      "titre-associatif",
+      "titre-participatif",
+      "capital-patient",
+      "first-loss"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; distinction explicite entre catégorie économique et véhicules juridiques disponibles."
+  },
+  {
+    "canonicalTerm": "Gouvernance associative",
+    "slug": "gouvernance-associative",
+    "aliases": [
+      "gouvernance des associations",
+      "gouvernance d’association",
+      "gouvernance d’une organisation d’intérêt général",
+      "association governance"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://associations.gouv.fr/rapport-du-hcva-sur-la-gouvernance-des-associations-en-2026-propositions-pour-une-nouvelle-approche",
+      "https://associations.gouv.fr/les-dirigeants-elus-de-lassociation"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Gouvernance",
+    "short": "Répartition documentée des pouvoirs, contrôles et responsabilités entre les organes d’une association ou d’une organisation d’intérêt général.",
+    "definition": "La gouvernance associative organise les compétences de l’assemblée, du conseil, du bureau, de la direction et, selon les statuts, des membres ou comités. Son analyse compare les textes, les délégations et les pratiques : composition, quorum, décisions réservées, information reçue, prévention des conflits et contrôle. Les droits accordés à un financeur ne doivent pas lui permettre de se substituer aux organes compétents.",
+    "example": "Avant un soutien pluriannuel, le financeur vérifie que le conseil a autorisé le programme, que la délégation de signature est à jour et qu’un conflit d’intérêts lié à un prestataire a été déclaré et traité.",
+    "seeAlso": [
+      "droits-d-information-du-financeur",
+      "convention-de-financement",
+      "safeguarding",
+      "venture-philanthropie",
+      "financement-non-affecte"
+    ],
+    "relatedLessonIds": [
+      "lvp-plan-diligence",
+      "lvp-mission-gouvernance",
+      "lvp-safeguarding-risques",
+      "lvp-termes-financement",
+      "lvp-accompagnement-pouvoir",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 pour distinguer la gouvernance des associations de la gouvernance actionnariale des startups."
+  },
+  {
+    "canonicalTerm": "Convention de financement",
+    "slug": "convention-de-financement",
+    "aliases": [
+      "accord de financement",
+      "convention de subvention",
+      "convention pluriannuelle de financement",
+      "convention de soutien",
+      "funding agreement"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.impacteurope.net/insights/investing-impact-toolkit",
+      "https://www.oecd.org/en/publications/no-strings-attached-making-sense-of-flexible-financing-in-philanthropy_0264b47f-en.html"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Deal & Structuration",
+    "short": "Accord qui fixe l’objet, le montant, le calendrier, les emplois, les obligations d’information et les conditions d’adaptation ou de fin d’un soutien.",
+    "definition": "Une convention de financement traduit la décision de soutien en engagements adaptés à la nature de l’instrument et aux parties. Elle précise notamment l’objet, le budget de référence, la durée, les versements, l’affectation ou la flexibilité, les conditions préalables, les informations proportionnées, le traitement des écarts, la suspension, la restitution éventuelle, la révision et la sortie. Elle ne se confond pas avec une term sheet de capital-risque ; ses clauses doivent être validées au regard du droit, de la fiscalité, de la comptabilité et des règles relatives aux données applicables.",
+    "example": "Une convention pluriannuelle prévoit un premier versement adapté au besoin de trésorerie, des revues documentées et une procédure de rephasage avant toute suspension.",
+    "seeAlso": [
+      "gouvernance-associative",
+      "droits-d-information-du-financeur",
+      "tresorerie-mobilisable",
+      "sortie-de-partenariat",
+      "financement-non-affecte",
+      "cout-complet",
+      "subvention-recuperable"
+    ],
+    "relatedLessonIds": [
+      "lvp-comptes-cout-complet",
+      "lvp-compatibilite-remboursement",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration",
+      "lvp-suivi-sortie",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 pour distinguer la convention de soutien des term sheets de capital-risque."
+  },
+  {
+    "canonicalTerm": "Trésorerie mobilisable",
+    "slug": "tresorerie-mobilisable",
+    "aliases": [
+      "liquidité mobilisable",
+      "trésorerie effectivement mobilisable",
+      "trésorerie disponible après restrictions",
+      "ressources de trésorerie mobilisables",
+      "available cash"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.anc.gouv.fr/reglement-ndeg-2018-06-du-5-decembre-2018",
+      "https://www.avise.org/sites/default/files/media/document/Guide_Financer_son_projet_ESS_Avise_2025.pdf"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Liquidité",
+    "short": "Montant de liquidités utilisable à une date donnée après rapprochement des restrictions et des engagements, sans double compte.",
+    "definition": "La trésorerie mobilisable part du solde bancaire réconcilié, identifie chaque restriction contractuelle ou comptable, l’emploi qu’elle finance et son échéance, puis rapproche les décaissements imminents des mêmes masses. Une somme n’est soustraite qu’une fois : un décaissement déjà couvert par un fonds affecté isolé ne réduit pas une seconde fois le solde libre. Le tableau distingue au minimum le solde bancaire, la restriction, l’emploi financé, l’échéance et le montant effectivement mobilisable. Toute qualification matérielle est confirmée avec les fonctions comptable ou juridique compétentes.",
+    "example": "Sur 620 000 euros en banque, l’organisation ne conclut pas à 120 000 euros disponibles avant d’avoir établi si les 190 000 euros de décaissements proches sont ou non déjà couverts par les 310 000 euros affectés.",
+    "seeAlso": [
+      "convention-de-financement",
+      "financement-non-affecte",
+      "cout-complet"
+    ],
+    "relatedLessonIds": [
+      "lvp-comptes-cout-complet",
+      "lvp-tresorerie-reserves",
+      "lvp-previsions-scenarios",
+      "lvp-atelier-choc",
+      "lvp-compatibilite-remboursement",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; la définition impose le rapprochement des restrictions, emplois et échéances afin d’éviter le double compte."
+  },
+  {
+    "canonicalTerm": "Sortie de partenariat",
+    "slug": "sortie-de-partenariat",
+    "aliases": [
+      "fin de partenariat",
+      "fin du soutien",
+      "sortie du financeur",
+      "non-renouvellement du financement",
+      "plan de transition du partenariat",
+      "partnership exit"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.impacteurope.net/insights/practical-guide-planning-and-executing-impactful-exit",
+      "https://www.oecd.org/en/publications/no-strings-attached-making-sense-of-flexible-financing-in-philanthropy_0264b47f-en.html"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Gouvernance",
+    "short": "Processus préparé de renouvellement, réduction, non-renouvellement ou fin d’un soutien, avec transition des engagements et des services.",
+    "definition": "La sortie de partenariat organise la fin ou la modification substantielle de la relation entre un financeur et une organisation. Elle précise la décision, la date, les décaissements restants, les responsabilités, le transfert d’informations, la communication, le sort des outils, les mesures de continuité et la revue postérieure. Elle n’est pas un événement de liquidité : elle tient compte de la convention, des risques pour les personnes servies et des dépendances créées par le soutien.",
+    "example": "Six mois avant l’échéance, les parties documentent les paiements restants, la continuité des orientations en cours, le transfert des outils et les conditions d’un éventuel renouvellement.",
+    "seeAlso": [
+      "convention-de-financement",
+      "droits-d-information-du-financeur",
+      "gouvernance-associative",
+      "capital-patient",
+      "venture-philanthropie"
+    ],
+    "relatedLessonIds": [
+      "lvp-termes-financement",
+      "lvp-atelier-structuration",
+      "lvp-accompagnement-pouvoir",
+      "lvp-suivi-sortie",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 pour distinguer la fin d’un partenariat philanthropique d’un événement de liquidité."
+  },
+  {
+    "canonicalTerm": "Droits d’information du financeur",
+    "slug": "droits-d-information-du-financeur",
+    "aliases": [
+      "droits d’information du bailleur",
+      "droits d’information en philanthropie",
+      "obligations d’information envers le financeur",
+      "reporting au financeur",
+      "reporting philanthropique",
+      "funder information rights"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "Venture philanthropie"
+    ],
+    "sourcePaths": [
+      "https://www.impacteurope.net/insights/charter-investors-impact-0",
+      "https://www.cnil.fr/fr/thematiques/la-cnil-publie-un-nouveau-guide-pour-accompagner-les-associations"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Gouvernance",
+    "short": "Droits proportionnés permettant au financeur de recevoir les informations nécessaires au suivi d’un soutien sans diriger l’organisation.",
+    "definition": "Les droits d’information du financeur définissent les données, pièces, indicateurs, fréquences, formats, destinataires, protections et usages nécessaires à des décisions identifiées. Ils réutilisent autant que possible les données existantes, tiennent compte du coût de production et excluent les données personnelles non nécessaires. Ils ne confèrent aucun pouvoir de direction opérationnelle et ne remplacent pas les organes de l’organisation ; leurs modalités sont fixées dans la convention de financement.",
+    "example": "La convention prévoit un tableau trimestriel agrégé sur l’usage des fonds, la trésorerie, la qualité et les incidents matériels, sans transmission systématique de dossiers individuels.",
+    "seeAlso": [
+      "convention-de-financement",
+      "gouvernance-associative",
+      "sortie-de-partenariat",
+      "mesure-impact",
+      "safeguarding",
+      "financement-non-affecte"
+    ],
+    "relatedLessonIds": [
+      "lvp-plan-diligence",
+      "lvp-mission-gouvernance",
+      "lvp-safeguarding-risques",
+      "lvp-termes-financement",
+      "lvp-accompagnement-pouvoir",
+      "lvp-mesure-impact",
+      "lvp-suivi-sortie",
+      "lvp-recommandation-comite"
+    ],
+    "notes": "Ajout appliqué le 2026-07-20 ; les droits d’information sont limités aux besoins de suivi et à la proportionnalité des données demandées."
+  },
+  {
+    "canonicalTerm": "Ancrage",
+    "slug": "ancrage",
+    "aliases": ["anchoring", "effet d’ancrage"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Biais d’autorité",
+    "slug": "biais-d-autorite",
+    "aliases": ["biais de pedigree", "effet de halo"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Biais de confirmation",
+    "slug": "biais-de-confirmation",
+    "aliases": ["confirmation bias"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Biais de résultat",
+    "slug": "biais-de-resultat",
+    "aliases": ["biais d’issue", "outcome bias"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Coût irrécupérable",
+    "slug": "cout-irrecuperable",
+    "aliases": ["escalade d’engagement", "sunk cost", "sunk cost fallacy"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Deal heat",
+    "slug": "deal-heat",
+    "aliases": ["fear of missing out", "FOMO"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Journal de décision",
+    "slug": "journal-de-decision",
+    "aliases": ["calibration", "decision journal"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Mimétisme",
+    "slug": "mimetisme",
+    "aliases": ["cascade informationnelle", "groupthink", "herding"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Moat (avantage concurrentiel défendable)",
+    "slug": "moat",
+    "aliases": ["avantage concurrentiel", "barrière à l'entrée", "barrières à l'entrée", "défendabilité", "defensibility", "douve"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Narrative fallacy",
+    "slug": "narrative-fallacy",
+    "aliases": ["narrative bias", "sophisme narratif"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Négligence des taux de base",
+    "slug": "negligence-des-taux-de-base",
+    "aliases": ["base rate neglect", "biais du survivant", "taux de base"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Pattern matching",
+    "slug": "pattern-matching",
+    "aliases": ["reconnaissance de motifs", "représentativité"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Premortem",
+    "slug": "premortem",
+    "aliases": ["pré-mortem", "prospective hindsight"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Premortem inversé",
+    "slug": "premortem-inverse",
+    "aliases": ["inverse premortem"],
+    "status": "applied",
+    "action": "reconcile",
+    "modules": ["Glossaire final historique"],
+    "sourcePaths": ["data/glossary.json"],
+    "sourceStatus": "legacy-final-glossary",
+    "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
   }
 ]

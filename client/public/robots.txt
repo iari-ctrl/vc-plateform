@@ -1,12 +1,4 @@
 User-agent: *
-Allow: /
+Allow: /vc-plateform/
 
-Disallow: /dashboard
-Disallow: /notes
-Disallow: /journal
-Disallow: /profile
-Disallow: /profile-result
-Disallow: /search
-Disallow: /design-system
-
-Sitemap: https://vcpx.io/sitemap.xml
+Sitemap: https://iari-ctrl.github.io/vc-plateform/sitemap.xml

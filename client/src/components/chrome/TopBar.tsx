@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useLocation } from 'react-router-dom';
 import { Search, Sun, Moon, Menu, X, Compass } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
@@ -6,13 +7,23 @@ import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
 import { useUI } from '@/context/UIContext';
 import { NAVIGATION_PILLARS, isNavigationPillarActive } from '@/lib/navigation';
+import { useLayerBehavior } from '@/components/ui/layerStack';
 
 export function TopBar() {
   const { theme, toggle } = useTheme();
   const { openSearch } = useUI();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileDrawerId = useId();
+  const mobileDrawerTitleId = useId();
+  const mobileDrawerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const { pathname } = location;
+
+  const { layerProps } = useLayerBehavior({
+    open: mobileOpen,
+    onClose: () => setMobileOpen(false),
+    layerRootRef: mobileDrawerRef,
+  });
 
   useEffect(() => setMobileOpen(false), [pathname]);
 
@@ -67,14 +78,31 @@ export function TopBar() {
             Test d’orientation
           </Link>
 
-          <button onClick={() => setMobileOpen((v) => !v)} className="grid h-9 w-9 place-items-center rounded-full text-foreground lg:hidden" aria-label="Menu" aria-expanded={mobileOpen}>
+          <button
+            onClick={() => setMobileOpen((v) => !v)}
+            className="grid h-9 w-9 place-items-center rounded-full text-foreground lg:hidden"
+            aria-label="Menu"
+            aria-expanded={mobileOpen}
+            aria-controls={mobileDrawerId}
+            aria-haspopup="dialog"
+          >
             {mobileOpen ? <X size={19} /> : <Menu size={19} />}
           </button>
         </div>
       </div>
 
-      {mobileOpen && (
-        <div className="border-t border-outline-variant bg-surface lg:hidden animate-fade-in">
+      {mobileOpen && createPortal(
+        <div
+          ref={mobileDrawerRef}
+          {...layerProps}
+          id={mobileDrawerId}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={mobileDrawerTitleId}
+          tabIndex={-1}
+          className="fixed inset-x-0 bottom-0 top-[var(--topbar-h)] z-[55] overflow-y-auto border-t border-outline-variant bg-surface animate-fade-in outline-none motion-reduce:animate-none lg:hidden"
+        >
+          <h2 id={mobileDrawerTitleId} className="sr-only">Navigation mobile</h2>
           <nav className="mx-auto flex max-w-[var(--content-max)] flex-col gap-1 px-4 py-4">
             {NAVIGATION_PILLARS.map((pillar) => {
               const isActive = isNavigationPillarActive(pathname, pillar);
@@ -95,7 +123,8 @@ export function TopBar() {
               <Compass size={15} /> Test d’orientation
             </Link>
           </nav>
-        </div>
+        </div>,
+        document.body,
       )}
     </header>
   );

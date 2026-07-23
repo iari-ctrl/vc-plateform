@@ -1,5 +1,8 @@
 import { useId, useState, type ReactNode } from 'react';
+import { publicAssetUrl } from '@shared/base-url.mjs';
 import { cn } from '@/lib/utils';
+
+const NIGHT_SKY_URL = publicAssetUrl('splash/bg-sombre.webp', import.meta.env.BASE_URL);
 
 /**
  * Illustrations — the "explorer's atlas" visual language.
@@ -301,7 +304,7 @@ export function Constellation({
  * (constellation, voyage routes, seals…) keep reading on top. In light mode it
  * renders nothing, so the `map-paper` parchment shows through as before.
  *
- * Reuses the splash portal's sky (`/splash/bg-sombre.webp`). Layered at `-z-10`
+ * Reuses the splash portal's sky. Layered at `-z-10`
  * so it covers the element's own background but stays under in-flow content.
  */
 export function NightSkyBackdrop({
@@ -320,7 +323,7 @@ export function NightSkyBackdrop({
         'radial-gradient(125% 110% at 50% 42%, color-mix(in srgb, var(--background) 14%, transparent) 0%, color-mix(in srgb, var(--background) 42%, transparent) 68%, color-mix(in srgb, var(--background) 70%, transparent) 100%)';
   return (
     <div className={cn('pointer-events-none absolute inset-0 -z-10 hidden dark:block', className)} aria-hidden>
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/splash/bg-sombre.webp')" }} />
+      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url("${NIGHT_SKY_URL}")` }} />
       <div className="absolute inset-0" style={{ background: veil }} />
     </div>
   );

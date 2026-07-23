@@ -2,16 +2,17 @@
   "id": "bp-three-risks",
   "slug": "l-art-de-formuler-les-trois-risques",
   "title": "L'art de formuler les trois risques",
-  "subtitle": "La discipline qui sépare l'analyste mûr du débutant",
+  "subtitle": "Une méthode de hiérarchisation des risques avant la due diligence",
   "author": "L'équipe VC Premium",
   "date": "2026-03-30",
+  "status": "published",
   "readMin": 6,
   "category": "Méthode",
-  "excerpt": "Avant de plonger dans une due diligence, un bon investisseur écrit les trois risques qui décideront du résultat. Voici pourquoi cette contrainte est si puissante.",
+  "excerpt": "Avant d'engager une due diligence, l'investisseur peut formuler les trois risques susceptibles de déterminer le résultat afin de hiérarchiser son analyse.",
   "tags": [
     "due-diligence",
     "méthode",
     "analyse"
   ],
-  "body": "## La tentation de tout vérifier\n\nFace à un dossier, le réflexe du débutant est de tout examiner : le marché, le produit, l'équipe, les chiffres, le juridique, la concurrence. Le résultat est une analyse plate où rien n'est hiérarchisé — et souvent une décision repoussée indéfiniment.\n\n## La contrainte des trois risques\n\nLe praticien mûr commence autrement. Il écrit : *si cet investissement échoue dans cinq ans, ce sera probablement à cause de l'une de ces trois choses.* Puis il dirige son énergie de due diligence vers ces trois risques, et seulement vers eux.\n\nCette contrainte force trois disciplines : **hiérarchiser** (tous les risques ne se valent pas), **expliciter** (un risque nommé peut être traité), et **décider** (une fois les trois risques réduits autant que possible, on tranche).\n\n## Le lien avec le pre-mortem\n\nFormuler les trois risques, c'est un pre-mortem appliqué à l'analyse : imaginer l'échec pour mieux le prévenir. En comité, présenter soi-même ces trois risques — avant que les autres ne les soulèvent — est le signe d'un jugement mûr. Un mémo qui ne montre que des arguments favorables inspire la méfiance ; un mémo qui nomme ses propres faiblesses inspire la confiance.\n\n## Un exercice pour vous\n\nPrenez n'importe quelle entreprise que vous admirez. Écrivez les trois risques qui auraient pu la tuer à ses débuts. Vous venez de faire le travail le plus important d'un investisseur."
+  "body": "## La tentation de tout vérifier\n\nFace à un dossier, un examen indistinct du marché, du produit, de l'équipe, des chiffres, du juridique et de la concurrence produit une analyse peu hiérarchisée et peut retarder la décision.\n\n## La contrainte des trois risques\n\nLa méthode commence par une hypothèse : *si cet investissement échoue dans cinq ans, ce sera probablement à cause de l'une de ces trois choses.* La due diligence accorde ensuite la priorité à ces trois risques.\n\nCette contrainte impose trois disciplines : **hiérarchiser** en attribuant un poids à chaque risque, **expliciter** pour rendre le risque traitable et **décider** après les vérifications jugées nécessaires.\n\n## Le lien avec le pre-mortem\n\nFormuler les trois risques revient à appliquer un pre-mortem à l'analyse afin d'anticiper les causes d'échec. Leur présentation explicite en comité permet d'évaluer la solidité du jugement et les faiblesses du dossier.\n\n## Mise en pratique\n\nL'exercice consiste à choisir une entreprise et à formuler les trois risques qui auraient pu compromettre son développement initial."
 }

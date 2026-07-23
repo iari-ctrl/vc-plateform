@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { safeEditorialUrl } from '@shared/editorial-url.mjs';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,21 +32,7 @@ export function pluralize(n: number, singular: string, plural?: string): string 
   return `${n} ${n > 1 ? plural ?? `${singular}s` : singular}`;
 }
 
-/**
- * Returns the URL only if it uses a safe, user-navigable scheme (http/https/
- * mailto). Guards external-link fields (e.g. glossary references) so a
- * `javascript:`/`data:` URI can never reach an href. Returns undefined when the
- * value is missing or unsafe — callers treat that as "no link".
- */
+/** Return an HTTPS editorial URL, or undefined when it is missing or unsafe. */
 export function safeHttpUrl(url?: string | null): string | undefined {
-  if (!url) return undefined;
-  const trimmed = url.trim();
-  const base = typeof window !== 'undefined' ? window.location.origin : undefined;
-  try {
-    const { protocol } = new URL(trimmed, base);
-    if (protocol === 'http:' || protocol === 'https:' || protocol === 'mailto:') return trimmed;
-  } catch {
-    /* malformed URL — treat as unsafe */
-  }
-  return undefined;
+  return safeEditorialUrl(url);
 }

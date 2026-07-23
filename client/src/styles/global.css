@@ -120,7 +120,7 @@
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold text-sm
       transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0;
   }
-  .btn-foil:hover { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 10px 24px -4px rgba(197, 168, 92, 0.5); }
+  .btn-foil:not(:disabled):not([aria-disabled='true']):hover { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 10px 24px -4px rgba(197, 168, 92, 0.5); }
 
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold text-sm
@@ -131,6 +131,30 @@
   .btn-quiet {
     @apply inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium
       text-surface-variant transition-colors hover:text-foreground hover:bg-surface-container-low;
+  }
+
+  .btn-foil:disabled,
+  .btn-foil[aria-disabled='true'],
+  .btn-ghost:disabled,
+  .btn-ghost[aria-disabled='true'],
+  .btn-quiet:disabled,
+  .btn-quiet[aria-disabled='true'] {
+    cursor: not-allowed;
+    opacity: 0.52;
+    transform: none;
+    pointer-events: none;
+  }
+
+  .btn-foil:disabled,
+  .btn-foil[aria-disabled='true'] {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2), 0 0 0 transparent;
+  }
+
+  .btn-ghost:disabled,
+  .btn-ghost[aria-disabled='true'],
+  .btn-quiet:disabled,
+  .btn-quiet[aria-disabled='true'] {
+    box-shadow: none;
   }
 
   /* Running head / eyebrow */

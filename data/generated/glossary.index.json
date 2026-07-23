@@ -34,68 +34,25 @@
     ]
   },
   {
-    "id": "ai-native-startup",
-    "term": "AI-native startup",
-    "slug": "ai-native-startup",
-    "category": "Stratégie",
-    "short": "Startup construite nativement autour de l'IA dans son produit, ses coûts ou sa distribution.",
+    "id": "a16z",
+    "term": "a16z (Andreessen Horowitz)",
+    "slug": "a16z",
+    "category": "Fonds & VC",
+    "short": "Firme VC californienne connue pour son modèle platform, son contenu et ses thèses sectorielles.",
     "seeAlso": [
-      "why-now",
-      "pmf",
-      "gtm",
-      "venture-capital",
-      "power-law"
+      "portfolio-support",
+      "value-creation",
+      "scout",
+      "thesis-driven",
+      "venture-capital"
     ],
-    "relatedLessonIds": [
-      "l-founder-narrative",
-      "l-thesis-anatomy"
-    ],
+    "relatedLessonIds": [],
     "aliases": [
-      "startup AI-native",
-      "startup native IA"
-    ]
-  },
-  {
-    "id": "arr",
-    "term": "ARR (Annual Recurring Revenue)",
-    "slug": "arr",
-    "category": "Métriques",
-    "short": "Revenu récurrent annualisé des contrats actifs, hors revenus ponctuels.",
-    "seeAlso": [
-      "mrr",
-      "recurring-revenue",
-      "nrr",
-      "burn-multiple",
-      "revenue-multiple"
+      "A16Z",
+      "Andreessen Horowitz",
+      "Andreessen Horowitz LLC"
     ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics"
-    ],
-    "aliases": [
-      "Annual Recurring Revenue",
-      "ARR (Disambiguation)",
-      "ARR disambiguation",
-      "ARR SaaS",
-      "revenu récurrent annuel"
-    ]
-  },
-  {
-    "id": "arr-par-employe",
-    "term": "ARR par employé",
-    "slug": "arr-par-employe",
-    "category": "Métriques",
-    "short": "ARR divisé par le nombre d'employés, proxy d'efficacité opérationnelle.",
-    "seeAlso": [
-      "arr",
-      "capital-efficiency",
-      "gross-margin"
-    ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics"
-    ],
-    "aliases": [
-      "ARR per employee"
-    ]
+    "link": "https://a16z.com"
   },
   {
     "id": "accel",
@@ -280,6 +237,29 @@
     ]
   },
   {
+    "id": "additionalite",
+    "term": "Additionalité",
+    "slug": "additionalite",
+    "aliases": [
+      "additionalité d’impact",
+      "additionalité de l’impact",
+      "additionality"
+    ],
+    "category": "Stratégie",
+    "short": "Contribution qui produit un changement supérieur à ce qui se serait probablement produit sans l’intervention.",
+    "link": "https://www.impacteurope.net/glossary",
+    "seeAlso": [
+      "theorie-du-changement",
+      "investissement-pour-impact",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-screening-additionalite",
+      "lvp-theorie-changement",
+      "lvp-recommandation-comite"
+    ]
+  },
+  {
     "id": "advisory-board",
     "term": "Advisory board",
     "slug": "advisory-board",
@@ -330,6 +310,28 @@
     ],
     "relatedLessonIds": [
       "l-actors"
+    ]
+  },
+  {
+    "id": "ai-native-startup",
+    "term": "AI-native startup",
+    "slug": "ai-native-startup",
+    "category": "Stratégie",
+    "short": "Startup construite nativement autour de l'IA dans son produit, ses coûts ou sa distribution.",
+    "seeAlso": [
+      "why-now",
+      "pmf",
+      "gtm",
+      "venture-capital",
+      "power-law"
+    ],
+    "relatedLessonIds": [
+      "l-founder-narrative",
+      "l-thesis-anatomy"
+    ],
+    "aliases": [
+      "startup AI-native",
+      "startup native IA"
     ]
   },
   {
@@ -413,6 +415,23 @@
     ]
   },
   {
+    "id": "ancrage",
+    "term": "Ancrage",
+    "slug": "ancrage",
+    "category": "Sciences de la décision",
+    "short": "Laisser le premier chiffre rencontré gouverner tout le jugement de valeur.",
+    "seeAlso": [
+      "valuation",
+      "term-sheet",
+      "narrative-fallacy"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "anchoring",
+      "effet d’ancrage"
+    ]
+  },
+  {
     "id": "annualized-run-rate",
     "term": "Annualized run rate",
     "slug": "annualized-run-rate",
@@ -451,6 +470,48 @@
     "aliases": [
       "anti-dilution protection",
       "weighted average anti-dilution"
+    ]
+  },
+  {
+    "id": "arr",
+    "term": "ARR (Annual Recurring Revenue)",
+    "slug": "arr",
+    "category": "Métriques",
+    "short": "Revenu récurrent annualisé des contrats actifs, hors revenus ponctuels.",
+    "seeAlso": [
+      "mrr",
+      "recurring-revenue",
+      "nrr",
+      "burn-multiple",
+      "revenue-multiple"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics"
+    ],
+    "aliases": [
+      "Annual Recurring Revenue",
+      "ARR (Disambiguation)",
+      "ARR disambiguation",
+      "ARR SaaS",
+      "revenu récurrent annuel"
+    ]
+  },
+  {
+    "id": "arr-par-employe",
+    "term": "ARR par employé",
+    "slug": "arr-par-employe",
+    "category": "Métriques",
+    "short": "ARR divisé par le nombre d'employés, proxy d'efficacité opérationnelle.",
+    "seeAlso": [
+      "arr",
+      "capital-efficiency",
+      "gross-margin"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics"
+    ],
+    "aliases": [
+      "ARR per employee"
     ]
   },
   {
@@ -575,6 +636,81 @@
     ],
     "relatedLessonIds": [
       "l-fund-metrics"
+    ]
+  },
+  {
+    "id": "beyond-grants",
+    "term": "Beyond grants",
+    "slug": "beyond-grants",
+    "category": "Stratégie",
+    "short": "Approche par laquelle une fondation complète ses subventions avec des instruments remboursables ou d’investissement.",
+    "seeAlso": [
+      "venture-philanthropie",
+      "subvention-catalytique",
+      "continuum-du-capital",
+      "non-dilutive-financing",
+      "subvention-recuperable",
+      "quasi-fonds-propres"
+    ],
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement"
+    ],
+    "aliases": [
+      "au-delà des subventions",
+      "beyond grantmaking",
+      "financement au-delà des subventions"
+    ]
+  },
+  {
+    "id": "biais-d-autorite",
+    "term": "Biais d’autorité",
+    "slug": "biais-d-autorite",
+    "category": "Sciences de la décision",
+    "short": "Surpondérer les signaux de statut — diplôme, ex-grande boîte, fondateur récidiviste.",
+    "seeAlso": [
+      "pattern-matching",
+      "narrative-fallacy",
+      "venture-capital"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "biais de pedigree",
+      "effet de halo"
+    ]
+  },
+  {
+    "id": "biais-de-confirmation",
+    "term": "Biais de confirmation",
+    "slug": "biais-de-confirmation",
+    "category": "Sciences de la décision",
+    "short": "Chercher ce qui valide la thèse plutôt que ce qui la briserait.",
+    "seeAlso": [
+      "narrative-fallacy",
+      "premortem",
+      "mimetisme"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "confirmation bias"
+    ]
+  },
+  {
+    "id": "biais-de-resultat",
+    "term": "Biais de résultat",
+    "slug": "biais-de-resultat",
+    "category": "Sciences de la décision",
+    "short": "Juger la qualité d’une décision à son issue plutôt qu’au raisonnement qui l’a produite.",
+    "seeAlso": [
+      "journal-de-decision",
+      "premortem-inverse",
+      "power-law"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "biais d’issue",
+      "outcome bias"
     ]
   },
   {
@@ -992,6 +1128,31 @@
     ]
   },
   {
+    "id": "capital-catalytique",
+    "term": "Capital catalytique",
+    "slug": "capital-catalytique",
+    "category": "Deal & Structuration",
+    "short": "Capital patient, flexible ou concessionnel qui assume plus de risque pour rendre d’autres investissements possibles.",
+    "seeAlso": [
+      "subvention-catalytique",
+      "financement-mixte",
+      "continuum-du-capital",
+      "investment-strategy",
+      "additionalite",
+      "first-loss"
+    ],
+    "relatedLessonIds": [
+      "lvp-screening-additionalite",
+      "lvp-arbre-instruments",
+      "lvp-atelier-structuration"
+    ],
+    "aliases": [
+      "catalytic capital",
+      "finance catalytique",
+      "financement catalytique"
+    ]
+  },
+  {
     "id": "capital-efficiency",
     "term": "Capital efficiency",
     "slug": "capital-efficiency",
@@ -1011,6 +1172,27 @@
     "aliases": [
       "capital efficient",
       "efficacité du capital"
+    ]
+  },
+  {
+    "id": "capital-patient",
+    "term": "Capital patient",
+    "slug": "capital-patient",
+    "aliases": [
+      "patient capital"
+    ],
+    "category": "Deal & Structuration",
+    "short": "Financement de durée longue ou aux modalités flexibles, adapté au temps nécessaire à la mission et aux flux.",
+    "link": "https://www.impacteurope.net/insights/vp-nutshell-short-guide-tailored-financing",
+    "seeAlso": [
+      "continuum-du-capital",
+      "quasi-fonds-propres",
+      "venture-philanthropie"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-termes-financement",
+      "lvp-suivi-sortie"
     ]
   },
   {
@@ -1348,6 +1530,55 @@
     ]
   },
   {
+    "id": "continuum-du-capital",
+    "term": "Continuum du capital",
+    "slug": "continuum-du-capital",
+    "category": "Stratégie",
+    "short": "Spectre des financements allant du don au capital commercial, selon les objectifs d’impact, le risque et le rendement.",
+    "seeAlso": [
+      "investissement-pour-impact",
+      "capital-catalytique",
+      "financement-mixte",
+      "beyond-grants",
+      "capital-patient",
+      "subvention-recuperable",
+      "quasi-fonds-propres"
+    ],
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-arbre-instruments",
+      "lvp-atelier-structuration"
+    ],
+    "aliases": [
+      "continuum des capitaux",
+      "continuum of capital",
+      "spectre du capital"
+    ]
+  },
+  {
+    "id": "contrat-a-impact",
+    "term": "Contrat à impact",
+    "slug": "contrat-a-impact",
+    "aliases": [
+      "CIS",
+      "contrat à impact social",
+      "impact contract"
+    ],
+    "category": "Deal & Structuration",
+    "short": "Montage de financement dans lequel un payeur conditionne tout ou partie de son paiement à des résultats vérifiés.",
+    "link": "https://www.economie.gouv.fr/contrat-impact",
+    "seeAlso": [
+      "mesure-impact",
+      "financement-mixte",
+      "first-loss"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration"
+    ]
+  },
+  {
     "id": "shareholder-contribution",
     "term": "Contribution d’actionnaire",
     "slug": "shareholder-contribution",
@@ -1367,6 +1598,37 @@
     ],
     "relatedLessonIds": [
       "l-founder-instruments"
+    ]
+  },
+  {
+    "id": "convention-de-financement",
+    "term": "Convention de financement",
+    "slug": "convention-de-financement",
+    "aliases": [
+      "accord de financement",
+      "convention de soutien",
+      "convention de subvention",
+      "convention pluriannuelle de financement",
+      "funding agreement"
+    ],
+    "category": "Deal & Structuration",
+    "short": "Accord qui fixe l’objet, le montant, le calendrier, les emplois, les obligations d’information et les conditions d’adaptation ou de fin d’un soutien.",
+    "seeAlso": [
+      "gouvernance-associative",
+      "droits-d-information-du-financeur",
+      "tresorerie-mobilisable",
+      "sortie-de-partenariat",
+      "financement-non-affecte",
+      "cout-complet",
+      "subvention-recuperable"
+    ],
+    "relatedLessonIds": [
+      "lvp-comptes-cout-complet",
+      "lvp-compatibilite-remboursement",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration",
+      "lvp-suivi-sortie",
+      "lvp-recommandation-comite"
     ]
   },
   {
@@ -1478,6 +1740,47 @@
     ]
   },
   {
+    "id": "cout-complet",
+    "term": "Coût complet",
+    "slug": "cout-complet",
+    "aliases": [
+      "full cost",
+      "full-cost recovery",
+      "recouvrement du coût complet"
+    ],
+    "category": "Métriques",
+    "short": "Coût d’une activité incluant ses charges directes et une part justifiée des fonctions nécessaires à sa réalisation.",
+    "link": "https://www.avise.org/sites/default/files/media/document/Guide_Financer_son_projet_ESS_Avise_2025.pdf",
+    "seeAlso": [
+      "financement-non-affecte",
+      "tresorerie-mobilisable",
+      "convention-de-financement"
+    ],
+    "relatedLessonIds": [
+      "lvp-comptes-cout-complet",
+      "lvp-previsions-scenarios",
+      "lvp-atelier-choc"
+    ]
+  },
+  {
+    "id": "cout-irrecuperable",
+    "term": "Coût irrécupérable",
+    "slug": "cout-irrecuperable",
+    "category": "Sciences de la décision",
+    "short": "Re-financer par engagement passé des sociétés qu’on ne sourcerait jamais à froid.",
+    "seeAlso": [
+      "follow-on",
+      "mimetisme",
+      "journal-de-decision"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "escalade d’engagement",
+      "sunk cost",
+      "sunk cost fallacy"
+    ]
+  },
+  {
     "id": "fund-selection-criteria-lp",
     "term": "Critères de sélection LP",
     "slug": "fund-selection-criteria-lp",
@@ -1520,27 +1823,6 @@
     ]
   },
   {
-    "id": "customer-roi",
-    "term": "Customer ROI",
-    "slug": "customer-roi",
-    "category": "Métriques",
-    "short": "Valeur économique qu'un client obtient en utilisant le produit.",
-    "seeAlso": [
-      "pricing-methodology",
-      "buyer-persona",
-      "customer-objections",
-      "nps"
-    ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics",
-      "l-dd-process"
-    ],
-    "aliases": [
-      "retour sur investissement client",
-      "ROI client"
-    ]
-  },
-  {
     "id": "customer-objections",
     "term": "Customer objections",
     "slug": "customer-objections",
@@ -1560,6 +1842,27 @@
       "objections clients",
       "objections d’achat",
       "sales objections"
+    ]
+  },
+  {
+    "id": "customer-roi",
+    "term": "Customer ROI",
+    "slug": "customer-roi",
+    "category": "Métriques",
+    "short": "Valeur économique qu'un client obtient en utilisant le produit.",
+    "seeAlso": [
+      "pricing-methodology",
+      "buyer-persona",
+      "customer-objections",
+      "nps"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics",
+      "l-dd-process"
+    ],
+    "aliases": [
+      "retour sur investissement client",
+      "ROI client"
     ]
   },
   {
@@ -1744,6 +2047,23 @@
       "flux d'affaires",
       "flux de dossiers",
       "pipeline de deals"
+    ]
+  },
+  {
+    "id": "deal-heat",
+    "term": "Deal heat",
+    "slug": "deal-heat",
+    "category": "Sciences de la décision",
+    "short": "Pression compétitive, souvent fabriquée, qui comprime le temps de décision.",
+    "seeAlso": [
+      "mimetisme",
+      "term-sheet",
+      "premortem"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "fear of missing out",
+      "FOMO"
     ]
   },
   {
@@ -2035,8 +2355,7 @@
     ],
     "aliases": [
       "accrued dividends",
-      "cumulative dividends",
-      "Dividend Rights"
+      "cumulative dividends"
     ]
   },
   {
@@ -2119,6 +2438,39 @@
     ]
   },
   {
+    "id": "droits-d-information-du-financeur",
+    "term": "Droits d’information du financeur",
+    "slug": "droits-d-information-du-financeur",
+    "aliases": [
+      "droits d’information du bailleur",
+      "droits d’information en philanthropie",
+      "funder information rights",
+      "obligations d’information envers le financeur",
+      "reporting au financeur",
+      "reporting philanthropique"
+    ],
+    "category": "Gouvernance",
+    "short": "Droits proportionnés permettant au financeur de recevoir les informations nécessaires au suivi d’un soutien sans diriger l’organisation.",
+    "seeAlso": [
+      "convention-de-financement",
+      "gouvernance-associative",
+      "sortie-de-partenariat",
+      "mesure-impact",
+      "safeguarding",
+      "financement-non-affecte"
+    ],
+    "relatedLessonIds": [
+      "lvp-plan-diligence",
+      "lvp-mission-gouvernance",
+      "lvp-safeguarding-risques",
+      "lvp-termes-financement",
+      "lvp-accompagnement-pouvoir",
+      "lvp-mesure-impact",
+      "lvp-suivi-sortie",
+      "lvp-recommandation-comite"
+    ]
+  },
+  {
     "id": "dry-powder",
     "term": "Dry powder",
     "slug": "dry-powder",
@@ -2182,6 +2534,29 @@
     "relatedLessonIds": []
   },
   {
+    "id": "ebitda",
+    "term": "Earnings Before Interest, Taxes, Depreciation and Amortization (EBITDA)",
+    "slug": "ebitda",
+    "aliases": [
+      "BAIIA",
+      "Earnings Before Interest, Taxes, Depreciation and Amortization",
+      "EBITDA",
+      "excédent brut d’exploitation ajusté"
+    ],
+    "category": "Métriques",
+    "short": "Indicateur de résultat opérationnel avant intérêts, impôts, dépréciations et amortissements.",
+    "seeAlso": [
+      "enterprise-value",
+      "ebitda-exit-multiple",
+      "revenue-multiple",
+      "gross-margin",
+      "path-to-profitability"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics"
+    ]
+  },
+  {
     "id": "ebitda-exit-multiple",
     "term": "EBITDA exit multiple",
     "slug": "ebitda-exit-multiple",
@@ -2215,53 +2590,6 @@
     "relatedLessonIds": []
   },
   {
-    "id": "esg-assessment",
-    "term": "ESG assessment",
-    "slug": "esg-assessment",
-    "category": "Stratégie",
-    "short": "Revue des risques, pratiques et opportunités environnementales, sociales et de gouvernance.",
-    "seeAlso": [
-      "dd",
-      "data-room",
-      "investment-strategy"
-    ],
-    "relatedLessonIds": [
-      "l-dd-process"
-    ],
-    "aliases": [
-      "ESG",
-      "ESG diligence",
-      "ESG en Venture Capital",
-      "ESG in Venture Capital",
-      "ESG-by-Design",
-      "évaluation ESG",
-      "revue ESG"
-    ]
-  },
-  {
-    "id": "ebitda",
-    "term": "Earnings Before Interest, Taxes, Depreciation and Amortization (EBITDA)",
-    "slug": "ebitda",
-    "aliases": [
-      "BAIIA",
-      "Earnings Before Interest, Taxes, Depreciation and Amortization",
-      "EBITDA",
-      "excédent brut d’exploitation ajusté"
-    ],
-    "category": "Métriques",
-    "short": "Indicateur de résultat opérationnel avant intérêts, impôts, dépréciations et amortissements.",
-    "seeAlso": [
-      "enterprise-value",
-      "ebitda-exit-multiple",
-      "revenue-multiple",
-      "gross-margin",
-      "path-to-profitability"
-    ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics"
-    ]
-  },
-  {
     "id": "emerging-manager",
     "term": "Emerging manager",
     "slug": "emerging-manager",
@@ -2279,6 +2607,27 @@
     "aliases": [
       "first-time manager",
       "manager émergent"
+    ]
+  },
+  {
+    "id": "employee-equity",
+    "term": "Employee equity",
+    "slug": "employee-equity",
+    "category": "Deal & Structuration",
+    "short": "Participation ou exposition économique accordée aux salariés via options, actions ou plans similaires.",
+    "seeAlso": [
+      "esop",
+      "stock-options",
+      "rsu",
+      "vesting",
+      "founder-equity",
+      "virtual-shares",
+      "company-value-shares"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "actionnariat salarié",
+      "equity salarié"
     ]
   },
   {
@@ -2305,27 +2654,6 @@
     ]
   },
   {
-    "id": "employee-equity",
-    "term": "Employee equity",
-    "slug": "employee-equity",
-    "category": "Deal & Structuration",
-    "short": "Participation ou exposition économique accordée aux salariés via options, actions ou plans similaires.",
-    "seeAlso": [
-      "esop",
-      "stock-options",
-      "rsu",
-      "vesting",
-      "founder-equity",
-      "virtual-shares",
-      "company-value-shares"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "actionnariat salarié",
-      "equity salarié"
-    ]
-  },
-  {
     "id": "enterprise-value",
     "term": "Enterprise value",
     "slug": "enterprise-value",
@@ -2343,6 +2671,29 @@
     "aliases": [
       "EV",
       "valeur d’entreprise"
+    ]
+  },
+  {
+    "id": "entreprise-solidaire-utilite-sociale-esus",
+    "term": "Entreprise solidaire d’utilité sociale (ESUS)",
+    "slug": "entreprise-solidaire-utilite-sociale-esus",
+    "aliases": [
+      "agrément ESUS",
+      "entreprise solidaire d'utilité sociale",
+      "ESUS"
+    ],
+    "category": "Juridique & Fiscalité",
+    "short": "Agrément public français attribué à certaines entreprises de l’ESS remplissant des conditions d’utilité sociale et de gestion.",
+    "link": "https://www.economie.gouv.fr/entreprises/les-aides-et-financements-pour-developper-son-entreprise/economie-sociale-et-solidaire",
+    "seeAlso": [
+      "finance-solidaire",
+      "investissement-pour-impact",
+      "titre-associatif"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
     ]
   },
   {
@@ -2385,6 +2736,30 @@
     "aliases": [
       "valeur des capitaux propres",
       "valeur equity"
+    ]
+  },
+  {
+    "id": "esg-assessment",
+    "term": "ESG assessment",
+    "slug": "esg-assessment",
+    "category": "Stratégie",
+    "short": "Revue des risques, pratiques et opportunités environnementales, sociales et de gouvernance.",
+    "seeAlso": [
+      "dd",
+      "data-room",
+      "investment-strategy"
+    ],
+    "relatedLessonIds": [
+      "l-dd-process"
+    ],
+    "aliases": [
+      "ESG",
+      "ESG diligence",
+      "ESG en Venture Capital",
+      "ESG in Venture Capital",
+      "ESG-by-Design",
+      "évaluation ESG",
+      "revue ESG"
     ]
   },
   {
@@ -2577,25 +2952,6 @@
     ]
   },
   {
-    "id": "fp-and-a",
-    "term": "FP&A",
-    "slug": "fp-and-a",
-    "category": "Métriques",
-    "short": "Fonction finance qui pilote budgets, prévisions, reporting et analyse de performance.",
-    "seeAlso": [
-      "financial-model",
-      "model-assumptions",
-      "data-quality"
-    ],
-    "relatedLessonIds": [
-      "l-dd-process"
-    ],
-    "aliases": [
-      "Financial Planning & Analysis",
-      "planification et analyse financière"
-    ]
-  },
-  {
     "id": "family-and-friends",
     "term": "Family & friends",
     "slug": "family-and-friends",
@@ -2699,6 +3055,78 @@
     "relatedLessonIds": [
       "l-fund-lifecycle",
       "l-actors"
+    ]
+  },
+  {
+    "id": "finance-solidaire",
+    "term": "Finance solidaire",
+    "slug": "finance-solidaire",
+    "aliases": [
+      "épargne solidaire",
+      "solidarity finance"
+    ],
+    "category": "Stratégie",
+    "short": "Canaux d’épargne et de financement orientant des ressources vers des activités à utilité sociale ou environnementale.",
+    "link": "https://www.tresor.economie.gouv.fr/banque-assurance-finance/finance-sociale-et-solidaire/le-financement-de-l-economie-sociale-et-solidaire-ess",
+    "seeAlso": [
+      "entreprise-solidaire-utilite-sociale-esus",
+      "investissement-pour-impact",
+      "financement-mixte"
+    ],
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement"
+    ]
+  },
+  {
+    "id": "financement-mixte",
+    "term": "Financement mixte",
+    "slug": "financement-mixte",
+    "category": "Deal & Structuration",
+    "short": "Usage stratégique de financements de développement pour mobiliser des capitaux commerciaux additionnels.",
+    "seeAlso": [
+      "capital-catalytique",
+      "subvention-catalytique",
+      "continuum-du-capital",
+      "non-dilutive-financing",
+      "first-loss",
+      "quasi-fonds-propres"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
+    ],
+    "aliases": [
+      "blended finance",
+      "finance mixte",
+      "financements mixtes"
+    ]
+  },
+  {
+    "id": "financement-non-affecte",
+    "term": "Financement non affecté",
+    "slug": "financement-non-affecte",
+    "aliases": [
+      "core funding",
+      "core support",
+      "unrestricted financing",
+      "unrestricted funding"
+    ],
+    "category": "Deal & Structuration",
+    "short": "Financement que l’organisation peut allouer à ses priorités dans le cadre convenu, sans affectation détaillée à un projet.",
+    "link": "https://www.oecd.org/en/publications/no-strings-attached-making-sense-of-flexible-financing-in-philanthropy_0264b47f-en.html",
+    "seeAlso": [
+      "cout-complet",
+      "venture-philanthropie",
+      "tresorerie-mobilisable",
+      "convention-de-financement"
+    ],
+    "relatedLessonIds": [
+      "lvp-comptes-cout-complet",
+      "lvp-tresorerie-reserves",
+      "lvp-accompagnement-pouvoir"
     ]
   },
   {
@@ -2908,6 +3336,27 @@
     ]
   },
   {
+    "id": "fonds-de-dotation",
+    "term": "Fonds de dotation",
+    "slug": "fonds-de-dotation",
+    "aliases": [
+      "endowment fund"
+    ],
+    "category": "Juridique & Fiscalité",
+    "short": "Personne morale privée à but non lucratif qui capitalise des apports gratuits et irrévocables au service de l’intérêt général.",
+    "link": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000054334469",
+    "seeAlso": [
+      "venture-philanthropie",
+      "finance-solidaire",
+      "entreprise-solidaire-utilite-sociale-esus"
+    ],
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-plan-diligence",
+      "lvp-compatibilite-remboursement"
+    ]
+  },
+  {
     "id": "fund-of-funds",
     "term": "Fonds de fonds",
     "slug": "fund-of-funds",
@@ -3078,6 +3527,25 @@
     ]
   },
   {
+    "id": "founder-market-fit",
+    "term": "Founder-market fit",
+    "slug": "founder-market-fit",
+    "category": "Stratégie",
+    "short": "L'adéquation singulière entre un fondateur et son marché.",
+    "seeAlso": [
+      "pmf",
+      "why-now"
+    ],
+    "relatedLessonIds": [
+      "l-team-market"
+    ],
+    "aliases": [
+      "Excellence de l'équipe fondatrice",
+      "founding team excellence",
+      "qualité équipe fondatrice"
+    ]
+  },
+  {
     "id": "founder-vc-fit",
     "term": "Founder-VC fit",
     "slug": "founder-vc-fit",
@@ -3099,22 +3567,22 @@
     ]
   },
   {
-    "id": "founder-market-fit",
-    "term": "Founder-market fit",
-    "slug": "founder-market-fit",
-    "category": "Stratégie",
-    "short": "L'adéquation singulière entre un fondateur et son marché.",
+    "id": "fp-and-a",
+    "term": "FP&A",
+    "slug": "fp-and-a",
+    "category": "Métriques",
+    "short": "Fonction finance qui pilote budgets, prévisions, reporting et analyse de performance.",
     "seeAlso": [
-      "pmf",
-      "why-now"
+      "financial-model",
+      "model-assumptions",
+      "data-quality"
     ],
     "relatedLessonIds": [
-      "l-team-market"
+      "l-dd-process"
     ],
     "aliases": [
-      "Excellence de l'équipe fondatrice",
-      "founding team excellence",
-      "qualité équipe fondatrice"
+      "Financial Planning & Analysis",
+      "planification et analyse financière"
     ]
   },
   {
@@ -3278,6 +3746,34 @@
       "Good Leaver Bad Leaver",
       "grey leaver",
       "leaver event"
+    ]
+  },
+  {
+    "id": "gouvernance-associative",
+    "term": "Gouvernance associative",
+    "slug": "gouvernance-associative",
+    "aliases": [
+      "association governance",
+      "gouvernance d’association",
+      "gouvernance d’une organisation d’intérêt général",
+      "gouvernance des associations"
+    ],
+    "category": "Gouvernance",
+    "short": "Répartition documentée des pouvoirs, contrôles et responsabilités entre les organes d’une association ou d’une organisation d’intérêt général.",
+    "seeAlso": [
+      "droits-d-information-du-financeur",
+      "convention-de-financement",
+      "safeguarding",
+      "venture-philanthropie",
+      "financement-non-affecte"
+    ],
+    "relatedLessonIds": [
+      "lvp-plan-diligence",
+      "lvp-mission-gouvernance",
+      "lvp-safeguarding-risques",
+      "lvp-termes-financement",
+      "lvp-accompagnement-pouvoir",
+      "lvp-recommandation-comite"
     ]
   },
   {
@@ -3680,6 +4176,33 @@
     "relatedLessonIds": []
   },
   {
+    "id": "investissement-pour-impact",
+    "term": "Investissement pour l’impact",
+    "slug": "investissement-pour-impact",
+    "category": "Stratégie",
+    "short": "Déploiement intentionnel de capital et de ressources pour produire un impact social ou environnemental additionnel.",
+    "seeAlso": [
+      "venture-philanthropie",
+      "capital-catalytique",
+      "continuum-du-capital",
+      "esg-assessment",
+      "investment-strategy",
+      "additionalite",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-screening-additionalite",
+      "lvp-theorie-changement",
+      "lvp-mesure-impact",
+      "lvp-recommandation-comite"
+    ],
+    "aliases": [
+      "investing for impact",
+      "investir pour l’impact",
+      "investissement au service de l’impact"
+    ]
+  },
+  {
     "id": "investisseur-accredite",
     "term": "Investisseur accrédité",
     "slug": "investisseur-accredite",
@@ -3842,6 +4365,23 @@
     "aliases": [
       "courbe en J",
       "Venture Capital J-Curve"
+    ]
+  },
+  {
+    "id": "journal-de-decision",
+    "term": "Journal de décision",
+    "slug": "journal-de-decision",
+    "category": "Sciences de la décision",
+    "short": "Consigner une prédiction datée et sa confiance avant d’en connaître l’issue, pour juger le raisonnement.",
+    "seeAlso": [
+      "biais-de-resultat",
+      "premortem",
+      "power-law"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "calibration",
+      "decision journal"
     ]
   },
   {
@@ -4052,6 +4592,29 @@
     ]
   },
   {
+    "id": "limited-partnership",
+    "term": "Limited partnership",
+    "slug": "limited-partnership",
+    "category": "Fund Economics",
+    "short": "Structure de fonds séparant le GP actif des LPs investisseurs passifs.",
+    "seeAlso": [
+      "lpa",
+      "gp",
+      "lp",
+      "venture-capital-fund",
+      "carry"
+    ],
+    "relatedLessonIds": [
+      "l-actors",
+      "l-fund-lifecycle"
+    ],
+    "aliases": [
+      "LP structure",
+      "partnership limité",
+      "société en commandite"
+    ]
+  },
+  {
     "id": "lpa",
     "term": "Limited Partnership Agreement",
     "slug": "lpa",
@@ -4073,29 +4636,6 @@
       "contrat de limited partnership",
       "Limited Partnership Agreement (LPA)",
       "LPA"
-    ]
-  },
-  {
-    "id": "limited-partnership",
-    "term": "Limited partnership",
-    "slug": "limited-partnership",
-    "category": "Fund Economics",
-    "short": "Structure de fonds séparant le GP actif des LPs investisseurs passifs.",
-    "seeAlso": [
-      "lpa",
-      "gp",
-      "lp",
-      "venture-capital-fund",
-      "carry"
-    ],
-    "relatedLessonIds": [
-      "l-actors",
-      "l-fund-lifecycle"
-    ],
-    "aliases": [
-      "LP structure",
-      "partnership limité",
-      "société en commandite"
     ]
   },
   {
@@ -4396,6 +4936,32 @@
     "relatedLessonIds": []
   },
   {
+    "id": "mesure-impact",
+    "term": "Mesure et gestion de l’impact",
+    "slug": "mesure-impact",
+    "aliases": [
+      "gestion de l’impact",
+      "IMM",
+      "impact measurement & management",
+      "impact measurement and management"
+    ],
+    "category": "Métriques",
+    "short": "Processus continu qui collecte des preuves d’impact proportionnées et les utilise pour décider.",
+    "link": "https://www.impacteurope.net/knowledge-centre/publications/navigating-impact-measurement-and-management",
+    "seeAlso": [
+      "theorie-du-changement",
+      "realisation-impact",
+      "resultat-impact",
+      "social-return-on-investment-sroi",
+      "droits-d-information-du-financeur"
+    ],
+    "relatedLessonIds": [
+      "lvp-theorie-changement",
+      "lvp-mesure-impact",
+      "lvp-recommandation-comite"
+    ]
+  },
+  {
     "id": "presidio",
     "term": "Microsoft Presidio",
     "slug": "presidio",
@@ -4425,6 +4991,24 @@
       "Funding Milestones",
       "Milestone",
       "Operating Milestones"
+    ]
+  },
+  {
+    "id": "mimetisme",
+    "term": "Mimétisme",
+    "slug": "mimetisme",
+    "category": "Sciences de la décision",
+    "short": "Calquer sa décision sur celle des fonds réputés ou du consensus du comité.",
+    "seeAlso": [
+      "deal-heat",
+      "biais-de-confirmation",
+      "premortem"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "cascade informationnelle",
+      "groupthink",
+      "herding"
     ]
   },
   {
@@ -4555,6 +5139,23 @@
     ]
   },
   {
+    "id": "narrative-fallacy",
+    "term": "Narrative fallacy",
+    "slug": "narrative-fallacy",
+    "category": "Sciences de la décision",
+    "short": "Confondre la cohérence d’un récit avec la probabilité de ce qu’il raconte.",
+    "seeAlso": [
+      "biais-de-confirmation",
+      "ancrage",
+      "premortem"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "narrative bias",
+      "sophisme narratif"
+    ]
+  },
+  {
     "id": "narrow-based-weighted-average",
     "term": "Narrow-based weighted average",
     "slug": "narrow-based-weighted-average",
@@ -4592,6 +5193,24 @@
       "model documents NVCA",
       "National Venture Capital Association",
       "NVCA"
+    ]
+  },
+  {
+    "id": "negligence-des-taux-de-base",
+    "term": "Négligence des taux de base",
+    "slug": "negligence-des-taux-de-base",
+    "category": "Sciences de la décision",
+    "short": "Oublier que la majorité des startups financées ne rendent pas le capital.",
+    "seeAlso": [
+      "pattern-matching",
+      "power-law",
+      "biais-de-resultat"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "base rate neglect",
+      "biais du survivant",
+      "taux de base"
     ]
   },
   {
@@ -4894,6 +5513,23 @@
     ]
   },
   {
+    "id": "pattern-matching",
+    "term": "Pattern matching",
+    "slug": "pattern-matching",
+    "category": "Sciences de la décision",
+    "short": "Juger un fondateur par sa ressemblance à un archetype de gagnant, en ignorant les taux de base.",
+    "seeAlso": [
+      "negligence-des-taux-de-base",
+      "biais-d-autorite",
+      "power-law"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "reconnaissance de motifs",
+      "représentativité"
+    ]
+  },
+  {
     "id": "pay-to-play",
     "term": "Pay-to-play",
     "slug": "pay-to-play",
@@ -5129,8 +5765,7 @@
     ],
     "aliases": [
       "post-money valuation",
-      "pre-money valuation",
-      "Subscription Price"
+      "pre-money valuation"
     ]
   },
   {
@@ -5194,6 +5829,39 @@
       "premier meeting VC",
       "première réunion investisseur",
       "VC first meeting"
+    ]
+  },
+  {
+    "id": "premortem",
+    "term": "Premortem",
+    "slug": "premortem",
+    "category": "Sciences de la décision",
+    "short": "Supposer la décision déjà échouée pour en révéler les causes avant de décider.",
+    "seeAlso": [
+      "premortem-inverse",
+      "mimetisme",
+      "journal-de-decision"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "pré-mortem",
+      "prospective hindsight"
+    ]
+  },
+  {
+    "id": "premortem-inverse",
+    "term": "Premortem inversé",
+    "slug": "premortem-inverse",
+    "category": "Sciences de la décision",
+    "short": "Supposer qu’un deal écarté est devenu le meilleur du millésime, et expliquer pourquoi on l’a raté.",
+    "seeAlso": [
+      "premortem",
+      "power-law",
+      "biais-de-resultat"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "inverse premortem"
     ]
   },
   {
@@ -5372,6 +6040,27 @@
     ]
   },
   {
+    "id": "safeguarding",
+    "term": "Protection des personnes accompagnées",
+    "slug": "safeguarding",
+    "aliases": [
+      "protection des bénéficiaires"
+    ],
+    "category": "Gouvernance",
+    "short": "Dispositif de prévention, signalement et traitement des atteintes pouvant toucher les personnes accompagnées.",
+    "link": "https://www.unicef.org/documents/safeguarding-policy",
+    "seeAlso": [
+      "gouvernance-associative",
+      "droits-d-information-du-financeur",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-entretiens-beneficiaires",
+      "lvp-plan-diligence",
+      "lvp-safeguarding-risques"
+    ]
+  },
+  {
     "id": "protective-provisions",
     "term": "Protective provisions",
     "slug": "protective-provisions",
@@ -5390,8 +6079,7 @@
     "aliases": [
       "clauses protectrices",
       "droits de consentement",
-      "investor consent rights",
-      "Voting Rights"
+      "investor consent rights"
     ]
   },
   {
@@ -5434,25 +6122,6 @@
     "relatedLessonIds": []
   },
   {
-    "id": "qsbs",
-    "term": "Qualified Small Business Stock (QSBS)",
-    "slug": "qsbs",
-    "category": "Juridique & Fiscalité",
-    "short": "Régime fiscal américain pouvant exclure une partie du gain sur certaines actions de C-Corp.",
-    "seeAlso": [
-      "c-corporation",
-      "convertible-note",
-      "business-angel",
-      "equity"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "QSBS",
-      "Qualified Small Business Stock",
-      "Section 1202"
-    ]
-  },
-  {
     "id": "qualified-purchaser",
     "term": "Qualified purchaser",
     "slug": "qualified-purchaser",
@@ -5470,6 +6139,25 @@
     ],
     "relatedLessonIds": [
       "l-actors"
+    ]
+  },
+  {
+    "id": "qsbs",
+    "term": "Qualified Small Business Stock (QSBS)",
+    "slug": "qsbs",
+    "category": "Juridique & Fiscalité",
+    "short": "Régime fiscal américain pouvant exclure une partie du gain sur certaines actions de C-Corp.",
+    "seeAlso": [
+      "c-corporation",
+      "convertible-note",
+      "business-angel",
+      "equity"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "QSBS",
+      "Qualified Small Business Stock",
+      "Section 1202"
     ]
   },
   {
@@ -5492,6 +6180,51 @@
       "crédibilité du référent",
       "qualité de la recommandation",
       "referrer quality"
+    ]
+  },
+  {
+    "id": "quasi-fonds-propres",
+    "term": "Quasi-fonds propres",
+    "slug": "quasi-fonds-propres",
+    "aliases": [
+      "quasi equity",
+      "quasi-equity"
+    ],
+    "category": "Deal & Structuration",
+    "short": "Qualification économique de financements longs et subordonnés proches du risque des fonds propres.",
+    "link": "https://www.banquedesterritoires.fr/produits-services/investissement/financement-economie-inclusive",
+    "seeAlso": [
+      "titre-associatif",
+      "titre-participatif",
+      "capital-patient",
+      "first-loss"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
+    ]
+  },
+  {
+    "id": "realisation-impact",
+    "term": "Réalisation d’impact",
+    "slug": "realisation-impact",
+    "aliases": [
+      "output",
+      "outputs"
+    ],
+    "category": "Métriques",
+    "short": "Produit immédiat et observable d’une activité, sans présumer du changement obtenu pour les personnes.",
+    "link": "https://www.impacteurope.net/glossary",
+    "seeAlso": [
+      "resultat-impact",
+      "theorie-du-changement",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-analyse-probleme",
+      "lvp-theorie-changement",
+      "lvp-mesure-impact"
     ]
   },
   {
@@ -5619,6 +6352,27 @@
     ]
   },
   {
+    "id": "reseau-vc",
+    "term": "Réseau VC",
+    "slug": "reseau-vc",
+    "category": "Stratégie",
+    "short": "Réseau de fondateurs, investisseurs, talents, clients et acquéreurs mobilisé par un VC.",
+    "seeAlso": [
+      "deal-flow",
+      "warm-intro",
+      "portfolio-monitoring",
+      "gp"
+    ],
+    "relatedLessonIds": [
+      "l-vc-definition",
+      "l-actors"
+    ],
+    "aliases": [
+      "réseau venture",
+      "venture capital network"
+    ]
+  },
+  {
     "id": "reserve-funds",
     "term": "Reserve funds",
     "slug": "reserve-funds",
@@ -5676,6 +6430,29 @@
     "aliases": [
       "restricted stock units",
       "RSU"
+    ]
+  },
+  {
+    "id": "resultat-impact",
+    "term": "Résultat d’impact",
+    "slug": "resultat-impact",
+    "aliases": [
+      "outcome",
+      "outcomes"
+    ],
+    "category": "Métriques",
+    "short": "Changement observé pour des personnes, des organisations ou un système après une intervention.",
+    "link": "https://www.impacteurope.net/glossary",
+    "seeAlso": [
+      "realisation-impact",
+      "additionalite",
+      "theorie-du-changement",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-theorie-changement",
+      "lvp-entretiens-beneficiaires",
+      "lvp-mesure-impact"
     ]
   },
   {
@@ -5847,40 +6624,6 @@
       "cash runway",
       "piste de trésorerie"
     ]
-  },
-  {
-    "id": "reseau-vc",
-    "term": "Réseau VC",
-    "slug": "reseau-vc",
-    "category": "Stratégie",
-    "short": "Réseau de fondateurs, investisseurs, talents, clients et acquéreurs mobilisé par un VC.",
-    "seeAlso": [
-      "deal-flow",
-      "warm-intro",
-      "portfolio-monitoring",
-      "gp"
-    ],
-    "relatedLessonIds": [
-      "l-vc-definition",
-      "l-actors"
-    ],
-    "aliases": [
-      "réseau venture",
-      "venture capital network"
-    ]
-  },
-  {
-    "id": "spv",
-    "term": "SPV (Special Purpose Vehicle)",
-    "slug": "spv",
-    "category": "Deal & Structuration",
-    "short": "Une structure juridique créée pour porter un seul investissement.",
-    "seeAlso": [
-      "business-angel",
-      "cap-table",
-      "operator-investor"
-    ],
-    "relatedLessonIds": []
   },
   {
     "id": "sales-cycle",
@@ -6280,6 +7023,29 @@
     ]
   },
   {
+    "id": "social-return-on-investment-sroi",
+    "term": "Social Return on Investment (SROI)",
+    "slug": "social-return-on-investment-sroi",
+    "aliases": [
+      "retour social sur investissement",
+      "social return on investment",
+      "SROI"
+    ],
+    "category": "Métriques",
+    "short": "Approche qui rapporte une valeur sociale monétarisée aux ressources mobilisées, selon des hypothèses explicites.",
+    "link": "https://www.avise.org/ressources/evaluer-limpact-social-avec-lapproche-sroi-application-au-secteur-de-liae",
+    "seeAlso": [
+      "mesure-impact",
+      "resultat-impact",
+      "additionalite"
+    ],
+    "relatedLessonIds": [
+      "lvp-theorie-changement",
+      "lvp-mesure-impact",
+      "lvp-recommandation-comite"
+    ]
+  },
+  {
     "id": "portfolio-company",
     "term": "Société en portefeuille",
     "slug": "portfolio-company",
@@ -6325,6 +7091,35 @@
     ]
   },
   {
+    "id": "sortie-de-partenariat",
+    "term": "Sortie de partenariat",
+    "slug": "sortie-de-partenariat",
+    "aliases": [
+      "fin de partenariat",
+      "fin du soutien",
+      "non-renouvellement du financement",
+      "partnership exit",
+      "plan de transition du partenariat",
+      "sortie du financeur"
+    ],
+    "category": "Gouvernance",
+    "short": "Processus préparé de renouvellement, réduction, non-renouvellement ou fin d’un soutien, avec transition des engagements et des services.",
+    "seeAlso": [
+      "convention-de-financement",
+      "droits-d-information-du-financeur",
+      "gouvernance-associative",
+      "capital-patient",
+      "venture-philanthropie"
+    ],
+    "relatedLessonIds": [
+      "lvp-termes-financement",
+      "lvp-atelier-structuration",
+      "lvp-accompagnement-pouvoir",
+      "lvp-suivi-sortie",
+      "lvp-recommandation-comite"
+    ]
+  },
+  {
     "id": "sovereign-wealth-fund",
     "term": "Sovereign wealth fund",
     "slug": "sovereign-wealth-fund",
@@ -6344,6 +7139,19 @@
       "SWF",
       "SWFs"
     ]
+  },
+  {
+    "id": "spv",
+    "term": "SPV (Special Purpose Vehicle)",
+    "slug": "spv",
+    "category": "Deal & Structuration",
+    "short": "Une structure juridique créée pour porter un seul investissement.",
+    "seeAlso": [
+      "business-angel",
+      "cap-table",
+      "operator-investor"
+    ],
+    "relatedLessonIds": []
   },
   {
     "id": "startup",
@@ -6523,6 +7331,55 @@
     ]
   },
   {
+    "id": "subvention-catalytique",
+    "term": "Subvention catalytique",
+    "slug": "subvention-catalytique",
+    "category": "Deal & Structuration",
+    "short": "Subvention utilisée pour réduire un risque, éprouver un modèle ou débloquer des financements ultérieurs.",
+    "seeAlso": [
+      "capital-catalytique",
+      "financement-mixte",
+      "beyond-grants",
+      "non-dilutive-financing",
+      "additionalite",
+      "subvention-recuperable"
+    ],
+    "relatedLessonIds": [
+      "lvp-screening-additionalite",
+      "lvp-arbre-instruments",
+      "lvp-atelier-structuration"
+    ],
+    "aliases": [
+      "catalytic grant",
+      "catalytic grantmaking",
+      "grantmaking catalytique",
+      "octroi de subventions catalytiques"
+    ]
+  },
+  {
+    "id": "subvention-recuperable",
+    "term": "Subvention récupérable",
+    "slug": "subvention-recuperable",
+    "aliases": [
+      "recoverable grant",
+      "recoverable grants",
+      "subvention remboursable"
+    ],
+    "category": "Deal & Structuration",
+    "short": "Financement philanthropique présenté comme récupérable selon des conditions contractuelles déterminées.",
+    "link": "https://www.impacteurope.net/glossary",
+    "seeAlso": [
+      "beyond-grants",
+      "capital-patient",
+      "quasi-fonds-propres"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration"
+    ]
+  },
+  {
     "id": "sfdr",
     "term": "Sustainable Finance Disclosure Regulation (SFDR)",
     "slug": "sfdr",
@@ -6539,6 +7396,27 @@
       "règlement SFDR",
       "SFDR",
       "Sustainable Finance Disclosure Regulation"
+    ]
+  },
+  {
+    "id": "tag-along",
+    "term": "Tag-along",
+    "slug": "tag-along",
+    "category": "Deal & Structuration",
+    "short": "Droit pour des minoritaires de vendre aux côtés d’un actionnaire qui vend ses titres.",
+    "seeAlso": [
+      "drag-along",
+      "rofr",
+      "secondary"
+    ],
+    "relatedLessonIds": [
+      "l-ts-control"
+    ],
+    "aliases": [
+      "co-sale rights",
+      "droit de suite",
+      "tag-along right",
+      "tag-along rights"
     ]
   },
   {
@@ -6565,27 +7443,6 @@
       "marché adressable",
       "Market size",
       "taille de marché"
-    ]
-  },
-  {
-    "id": "tag-along",
-    "term": "Tag-along",
-    "slug": "tag-along",
-    "category": "Deal & Structuration",
-    "short": "Droit pour des minoritaires de vendre aux côtés d’un actionnaire qui vend ses titres.",
-    "seeAlso": [
-      "drag-along",
-      "rofr",
-      "secondary"
-    ],
-    "relatedLessonIds": [
-      "l-ts-control"
-    ],
-    "aliases": [
-      "co-sale rights",
-      "droit de suite",
-      "tag-along right",
-      "tag-along rights"
     ]
   },
   {
@@ -6652,6 +7509,29 @@
     ]
   },
   {
+    "id": "theorie-du-changement",
+    "term": "Théorie du changement",
+    "slug": "theorie-du-changement",
+    "aliases": [
+      "theory of change",
+      "ToC"
+    ],
+    "category": "Stratégie",
+    "short": "Hypothèse causale explicite reliant besoins, activités, réalisations, résultats et impact attendu.",
+    "link": "https://www.avise.org/ressources/comment-evaluer-son-impact-principes-methodologiques",
+    "seeAlso": [
+      "additionalite",
+      "realisation-impact",
+      "resultat-impact",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-analyse-probleme",
+      "lvp-theorie-changement",
+      "lvp-mesure-impact"
+    ]
+  },
+  {
     "id": "thesis-driven",
     "term": "Thèse d'investissement",
     "slug": "thesis-driven",
@@ -6697,6 +7577,27 @@
     ]
   },
   {
+    "id": "titre-associatif",
+    "term": "Titre associatif",
+    "slug": "titre-associatif",
+    "aliases": [
+      "titres associatifs"
+    ],
+    "category": "Juridique & Fiscalité",
+    "short": "Créance de dernier rang qu’une association éligible peut émettre selon le Code monétaire et financier.",
+    "link": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072026/LEGISCTA000006184578/",
+    "seeAlso": [
+      "quasi-fonds-propres",
+      "titre-participatif",
+      "capital-patient"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
+    ]
+  },
+  {
     "id": "titre-financier",
     "term": "Titre financier",
     "slug": "titre-financier",
@@ -6718,6 +7619,27 @@
     "relatedLessonIds": [
       "l-founder-instruments",
       "l-ts-economics"
+    ]
+  },
+  {
+    "id": "titre-participatif",
+    "term": "Titre participatif",
+    "slug": "titre-participatif",
+    "aliases": [
+      "titres participatifs"
+    ],
+    "category": "Juridique & Fiscalité",
+    "short": "Titre de créance de long terme réservé aux catégories d’émetteurs prévues par la loi.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037668260",
+    "seeAlso": [
+      "titre-associatif",
+      "quasi-fonds-propres",
+      "capital-patient"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-atelier-structuration"
     ]
   },
   {
@@ -6831,6 +7753,29 @@
     "relatedLessonIds": []
   },
   {
+    "id": "first-loss",
+    "term": "Tranche de première perte",
+    "slug": "first-loss",
+    "aliases": [
+      "first loss",
+      "first-loss tranche",
+      "tranche junior de première perte"
+    ],
+    "category": "Deal & Structuration",
+    "short": "Tranche subordonnée conçue pour absorber les premières pertes d’un montage jusqu’à sa limite contractuelle.",
+    "link": "https://www.oecd.org/en/topics/sub-issues/leveraging-private-finance-for-development/blended-finance.html",
+    "seeAlso": [
+      "capital-catalytique",
+      "financement-mixte",
+      "quasi-fonds-propres"
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration"
+    ]
+  },
+  {
     "id": "exit-transaction",
     "term": "Transaction de sortie",
     "slug": "exit-transaction",
@@ -6856,6 +7801,35 @@
     ],
     "relatedLessonIds": [
       "l-ts-economics"
+    ]
+  },
+  {
+    "id": "tresorerie-mobilisable",
+    "term": "Trésorerie mobilisable",
+    "slug": "tresorerie-mobilisable",
+    "aliases": [
+      "available cash",
+      "liquidité mobilisable",
+      "ressources de trésorerie mobilisables",
+      "trésorerie disponible après restrictions",
+      "trésorerie effectivement mobilisable"
+    ],
+    "category": "Liquidité",
+    "short": "Montant de liquidités utilisable à une date donnée après rapprochement des restrictions et des engagements, sans double compte.",
+    "seeAlso": [
+      "convention-de-financement",
+      "financement-non-affecte",
+      "cout-complet"
+    ],
+    "relatedLessonIds": [
+      "lvp-comptes-cout-complet",
+      "lvp-tresorerie-reserves",
+      "lvp-previsions-scenarios",
+      "lvp-atelier-choc",
+      "lvp-compatibilite-remboursement",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration",
+      "lvp-recommandation-comite"
     ]
   },
   {
@@ -6927,24 +7901,6 @@
       "l-founder-narrative",
       "l-founder-instruments"
     ]
-  },
-  {
-    "id": "vp-engineering",
-    "term": "VP Engineering",
-    "slug": "vp-engineering",
-    "aliases": [
-      "VP of Engineering"
-    ],
-    "category": "Acteurs",
-    "short": "Leader chargé de scaler l’exécution engineering et le management technique.",
-    "seeAlso": [
-      "management-team-scaling",
-      "executive-committee",
-      "scalability",
-      "pmf",
-      "arr-par-employe"
-    ],
-    "relatedLessonIds": []
   },
   {
     "id": "valuation",
@@ -7050,27 +8006,6 @@
     ]
   },
   {
-    "id": "venture-capital-method",
-    "term": "Venture Capital Method",
-    "slug": "venture-capital-method",
-    "category": "Valorisation",
-    "short": "Méthode qui part d'une valeur de sortie attendue et remonte à la valorisation actuelle.",
-    "seeAlso": [
-      "exit-valuation",
-      "valuation",
-      "revenue-multiple",
-      "moic"
-    ],
-    "relatedLessonIds": [
-      "l-ts-economics",
-      "l-screening"
-    ],
-    "aliases": [
-      "méthode VC",
-      "VC method"
-    ]
-  },
-  {
     "id": "venture-capital-fund",
     "term": "Venture capital fund",
     "slug": "venture-capital-fund",
@@ -7095,6 +8030,27 @@
       "fonds VC",
       "VC Fund",
       "Venture Fund"
+    ]
+  },
+  {
+    "id": "venture-capital-method",
+    "term": "Venture Capital Method",
+    "slug": "venture-capital-method",
+    "category": "Valorisation",
+    "short": "Méthode qui part d'une valeur de sortie attendue et remonte à la valorisation actuelle.",
+    "seeAlso": [
+      "exit-valuation",
+      "valuation",
+      "revenue-multiple",
+      "moic"
+    ],
+    "relatedLessonIds": [
+      "l-ts-economics",
+      "l-screening"
+    ],
+    "aliases": [
+      "méthode VC",
+      "VC method"
     ]
   },
   {
@@ -7143,6 +8099,41 @@
       "fundraising GP",
       "levée auprès des LPs",
       "levée de fonds VC"
+    ]
+  },
+  {
+    "id": "venture-philanthropie",
+    "term": "Venture philanthropie",
+    "slug": "venture-philanthropie",
+    "category": "Stratégie",
+    "short": "Approche de soutien qui combine financement adapté, accompagnement non financier, engagement suivi et gestion de l’impact.",
+    "seeAlso": [
+      "investissement-pour-impact",
+      "subvention-catalytique",
+      "beyond-grants",
+      "continuum-du-capital",
+      "additionalite",
+      "mesure-impact",
+      "capital-patient",
+      "gouvernance-associative",
+      "convention-de-financement",
+      "tresorerie-mobilisable",
+      "sortie-de-partenariat",
+      "droits-d-information-du-financeur"
+    ],
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-screening-additionalite",
+      "lvp-arbre-instruments",
+      "lvp-accompagnement-pouvoir",
+      "lvp-recommandation-comite"
+    ],
+    "aliases": [
+      "capital-risque philanthropique",
+      "philanthropie à impact",
+      "philanthropie de risque",
+      "philanthropie entrepreneuriale",
+      "venture philanthropy"
     ]
   },
   {
@@ -7223,6 +8214,24 @@
     "relatedLessonIds": [
       "l-ts-control"
     ]
+  },
+  {
+    "id": "vp-engineering",
+    "term": "VP Engineering",
+    "slug": "vp-engineering",
+    "aliases": [
+      "VP of Engineering"
+    ],
+    "category": "Acteurs",
+    "short": "Leader chargé de scaler l’exécution engineering et le management technique.",
+    "seeAlso": [
+      "management-team-scaling",
+      "executive-committee",
+      "scalability",
+      "pmf",
+      "arr-par-employe"
+    ],
+    "relatedLessonIds": []
   },
   {
     "id": "warm-intro",
@@ -7369,387 +8378,6 @@
       "firme zombie",
       "Zombie fund",
       "zombie VC"
-    ]
-  },
-  {
-    "id": "a16z",
-    "term": "a16z (Andreessen Horowitz)",
-    "slug": "a16z",
-    "category": "Fonds & VC",
-    "short": "Firme VC californienne connue pour son modèle platform, son contenu et ses thèses sectorielles.",
-    "seeAlso": [
-      "portfolio-support",
-      "value-creation",
-      "scout",
-      "thesis-driven",
-      "venture-capital"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "A16Z",
-      "Andreessen Horowitz",
-      "Andreessen Horowitz LLC"
-    ],
-    "link": "https://a16z.com"
-  },
-  {
-    "id": "biais-de-resultat",
-    "term": "Biais de résultat",
-    "slug": "biais-de-resultat",
-    "category": "Sciences de la décision",
-    "short": "Juger la qualité d’une décision à son issue plutôt qu’au raisonnement qui l’a produite.",
-    "seeAlso": [
-      "journal-de-decision",
-      "premortem-inverse",
-      "power-law"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "outcome bias",
-      "biais d’issue"
-    ]
-  },
-  {
-    "id": "pattern-matching",
-    "term": "Pattern matching",
-    "slug": "pattern-matching",
-    "category": "Sciences de la décision",
-    "short": "Juger un fondateur par sa ressemblance à un archetype de gagnant, en ignorant les taux de base.",
-    "seeAlso": [
-      "negligence-des-taux-de-base",
-      "biais-d-autorite",
-      "power-law"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "reconnaissance de motifs",
-      "représentativité"
-    ]
-  },
-  {
-    "id": "biais-d-autorite",
-    "term": "Biais d’autorité",
-    "slug": "biais-d-autorite",
-    "category": "Sciences de la décision",
-    "short": "Surpondérer les signaux de statut — diplôme, ex-grande boîte, fondateur récidiviste.",
-    "seeAlso": [
-      "pattern-matching",
-      "narrative-fallacy",
-      "venture-capital"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "biais de pedigree",
-      "effet de halo"
-    ]
-  },
-  {
-    "id": "ancrage",
-    "term": "Ancrage",
-    "slug": "ancrage",
-    "category": "Sciences de la décision",
-    "short": "Laisser le premier chiffre rencontré gouverner tout le jugement de valeur.",
-    "seeAlso": [
-      "valuation",
-      "term-sheet",
-      "narrative-fallacy"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "anchoring",
-      "effet d’ancrage"
-    ]
-  },
-  {
-    "id": "narrative-fallacy",
-    "term": "Narrative fallacy",
-    "slug": "narrative-fallacy",
-    "category": "Sciences de la décision",
-    "short": "Confondre la cohérence d’un récit avec la probabilité de ce qu’il raconte.",
-    "seeAlso": [
-      "biais-de-confirmation",
-      "ancrage",
-      "premortem"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "sophisme narratif",
-      "narrative bias"
-    ]
-  },
-  {
-    "id": "biais-de-confirmation",
-    "term": "Biais de confirmation",
-    "slug": "biais-de-confirmation",
-    "category": "Sciences de la décision",
-    "short": "Chercher ce qui valide la thèse plutôt que ce qui la briserait.",
-    "seeAlso": [
-      "narrative-fallacy",
-      "premortem",
-      "mimetisme"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "confirmation bias"
-    ]
-  },
-  {
-    "id": "deal-heat",
-    "term": "Deal heat",
-    "slug": "deal-heat",
-    "category": "Sciences de la décision",
-    "short": "Pression compétitive, souvent fabriquée, qui comprime le temps de décision.",
-    "seeAlso": [
-      "mimetisme",
-      "term-sheet",
-      "premortem"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "FOMO",
-      "fear of missing out"
-    ]
-  },
-  {
-    "id": "mimetisme",
-    "term": "Mimétisme",
-    "slug": "mimetisme",
-    "category": "Sciences de la décision",
-    "short": "Calquer sa décision sur celle des fonds réputés ou du consensus du comité.",
-    "seeAlso": [
-      "deal-heat",
-      "biais-de-confirmation",
-      "premortem"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "herding",
-      "groupthink",
-      "cascade informationnelle"
-    ]
-  },
-  {
-    "id": "negligence-des-taux-de-base",
-    "term": "Négligence des taux de base",
-    "slug": "negligence-des-taux-de-base",
-    "category": "Sciences de la décision",
-    "short": "Oublier que la majorité des startups financées ne rendent pas le capital.",
-    "seeAlso": [
-      "pattern-matching",
-      "power-law",
-      "biais-de-resultat"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "base rate neglect",
-      "taux de base",
-      "biais du survivant"
-    ]
-  },
-  {
-    "id": "cout-irrecuperable",
-    "term": "Coût irrécupérable",
-    "slug": "cout-irrecuperable",
-    "category": "Sciences de la décision",
-    "short": "Re-financer par engagement passé des sociétés qu’on ne sourcerait jamais à froid.",
-    "seeAlso": [
-      "follow-on",
-      "mimetisme",
-      "journal-de-decision"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "sunk cost",
-      "escalade d’engagement",
-      "sunk cost fallacy"
-    ]
-  },
-  {
-    "id": "premortem",
-    "term": "Premortem",
-    "slug": "premortem",
-    "category": "Sciences de la décision",
-    "short": "Supposer la décision déjà échouée pour en révéler les causes avant de décider.",
-    "seeAlso": [
-      "premortem-inverse",
-      "mimetisme",
-      "journal-de-decision"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "pré-mortem",
-      "prospective hindsight"
-    ]
-  },
-  {
-    "id": "premortem-inverse",
-    "term": "Premortem inversé",
-    "slug": "premortem-inverse",
-    "category": "Sciences de la décision",
-    "short": "Supposer qu’un deal écarté est devenu le meilleur du millésime, et expliquer pourquoi on l’a raté.",
-    "seeAlso": [
-      "premortem",
-      "power-law",
-      "biais-de-resultat"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "inverse premortem"
-    ]
-  },
-  {
-    "id": "journal-de-decision",
-    "term": "Journal de décision",
-    "slug": "journal-de-decision",
-    "category": "Sciences de la décision",
-    "short": "Consigner une prédiction datée et sa confiance avant d’en connaître l’issue, pour juger le raisonnement.",
-    "seeAlso": [
-      "biais-de-resultat",
-      "premortem",
-      "power-law"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "decision journal",
-      "calibration"
-    ]
-  },
-  {
-    "id": "venture-philanthropie",
-    "term": "Venture philanthropie",
-    "slug": "venture-philanthropie",
-    "category": "Stratégie",
-    "short": "Approche engagée qui combine financement sur mesure, accompagnement non financier et mesure de l’impact.",
-    "seeAlso": [
-      "investissement-pour-impact",
-      "subvention-catalytique",
-      "beyond-grants",
-      "continuum-du-capital",
-      "money-plus"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "venture philanthropy",
-      "philanthropie de risque",
-      "philanthropie entrepreneuriale",
-      "philanthropie à impact",
-      "capital-risque philanthropique"
-    ]
-  },
-  {
-    "id": "investissement-pour-impact",
-    "term": "Investissement pour l’impact",
-    "slug": "investissement-pour-impact",
-    "category": "Stratégie",
-    "short": "Déploiement intentionnel de capital et de ressources pour produire un impact social ou environnemental additionnel.",
-    "seeAlso": [
-      "venture-philanthropie",
-      "capital-catalytique",
-      "continuum-du-capital",
-      "esg-assessment",
-      "investment-strategy"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "investing for impact",
-      "investir pour l’impact",
-      "investissement au service de l’impact"
-    ]
-  },
-  {
-    "id": "subvention-catalytique",
-    "term": "Subvention catalytique",
-    "slug": "subvention-catalytique",
-    "category": "Deal & Structuration",
-    "short": "Subvention utilisée pour réduire un risque, éprouver un modèle ou débloquer des financements ultérieurs.",
-    "seeAlso": [
-      "capital-catalytique",
-      "financement-mixte",
-      "beyond-grants",
-      "non-dilutive-financing"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "catalytic grantmaking",
-      "catalytic grant",
-      "octroi de subventions catalytiques",
-      "grantmaking catalytique"
-    ]
-  },
-  {
-    "id": "capital-catalytique",
-    "term": "Capital catalytique",
-    "slug": "capital-catalytique",
-    "category": "Deal & Structuration",
-    "short": "Capital patient, flexible ou concessionnel qui assume plus de risque pour rendre d’autres investissements possibles.",
-    "seeAlso": [
-      "subvention-catalytique",
-      "financement-mixte",
-      "continuum-du-capital",
-      "investment-strategy"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "catalytic capital",
-      "financement catalytique",
-      "finance catalytique"
-    ]
-  },
-  {
-    "id": "beyond-grants",
-    "term": "Beyond grants",
-    "slug": "beyond-grants",
-    "category": "Stratégie",
-    "short": "Approche par laquelle une fondation complète ses subventions avec des instruments remboursables ou d’investissement.",
-    "seeAlso": [
-      "venture-philanthropie",
-      "subvention-catalytique",
-      "continuum-du-capital",
-      "non-dilutive-financing"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "au-delà des subventions",
-      "beyond grantmaking",
-      "financement au-delà des subventions"
-    ]
-  },
-  {
-    "id": "continuum-du-capital",
-    "term": "Continuum du capital",
-    "slug": "continuum-du-capital",
-    "category": "Stratégie",
-    "short": "Spectre des financements allant du don au capital commercial, selon les objectifs d’impact, le risque et le rendement.",
-    "seeAlso": [
-      "investissement-pour-impact",
-      "capital-catalytique",
-      "financement-mixte",
-      "beyond-grants"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "continuum of capital",
-      "continuum des capitaux",
-      "spectre du capital"
-    ]
-  },
-  {
-    "id": "financement-mixte",
-    "term": "Financement mixte",
-    "slug": "financement-mixte",
-    "category": "Deal & Structuration",
-    "short": "Usage stratégique de financements de développement pour mobiliser des capitaux commerciaux additionnels.",
-    "seeAlso": [
-      "capital-catalytique",
-      "subvention-catalytique",
-      "continuum-du-capital",
-      "non-dilutive-financing"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "blended finance",
-      "finance mixte",
-      "financements mixtes"
     ]
   }
 ]

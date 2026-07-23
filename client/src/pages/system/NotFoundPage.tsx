@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { CompassRose, SeaMonster, Constellation } from '@/components/ornaments/Illustrations';
-import { usePageMeta } from '@/lib/seo';
+import { NOT_FOUND_TITLE, usePageMeta } from '@/lib/seo';
 
 export default function NotFoundPage() {
-  usePageMeta('Terra Incognita');
+  usePageMeta(NOT_FOUND_TITLE, undefined, { noindex: true, canonical: false, notFound: true });
   return (
     <div className="map-paper grain relative mx-auto flex min-h-[72vh] max-w-2xl flex-col items-center justify-center overflow-hidden px-4 text-center">
       <Constellation className="pointer-events-none absolute inset-0 h-full w-full opacity-40" />

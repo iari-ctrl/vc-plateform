@@ -16,43 +16,29 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
+import { buildLessonArtifacts, serializeGeneratedJson } from './generated-content.mjs';
+
 const dataDir = fileURLToPath(new URL('../data/', import.meta.url));
 const generatedDir = `${dataDir}generated/`;
 const readJson = (p) => JSON.parse(readFileSync(`${dataDir}${p}`, 'utf8'));
 
 const library = readJson('lessons.json');
-if (!Array.isArray(library)) {
-  console.error('split-lessons: data/lessons.json is not an array');
-  process.exit(1);
-}
-
 const parcoursFiles = readdirSync(`${dataDir}parcours`)
   .filter((f) => f.endsWith('.lessons.json'))
   .sort();
-const source = [...library, ...parcoursFiles.flatMap((f) => readJson(`parcours/${f}`).lessons)];
+const parcoursRegisters = parcoursFiles.map((file) => readJson(`parcours/${file}`));
 
-const index = [];
-const bodies = {};
-const slugs = new Set();
-
-for (const lesson of source) {
-  if (slugs.has(lesson.slug)) {
-    console.error(`split-lessons: duplicate slug "${lesson.slug}" — bodies are keyed by slug`);
-    process.exit(1);
-  }
-  slugs.add(lesson.slug);
-  const { body, bodyShort, keyTakeaways, quiz, furtherReading, ...light } = lesson;
-  index.push(light);
-  if (lesson.status === 'upcoming') continue;
-  const payload = { body: body ?? '', keyTakeaways: keyTakeaways ?? [] };
-  if (bodyShort !== undefined) payload.bodyShort = bodyShort;
-  if (quiz !== undefined) payload.quiz = quiz;
-  if (furtherReading !== undefined) payload.furtherReading = furtherReading;
-  bodies[lesson.slug] = payload;
+let artifacts;
+try {
+  artifacts = buildLessonArtifacts(library, parcoursRegisters);
+} catch (error) {
+  console.error(`split-lessons: ${error.message}`);
+  process.exit(1);
 }
+const { index, bodies } = artifacts;
 
 mkdirSync(generatedDir, { recursive: true });
-writeFileSync(`${generatedDir}lessons.index.json`, JSON.stringify(index, null, 2) + '\n');
-writeFileSync(`${generatedDir}lessons.bodies.json`, JSON.stringify(bodies, null, 2) + '\n');
+writeFileSync(`${generatedDir}lessons.index.json`, serializeGeneratedJson(index));
+writeFileSync(`${generatedDir}lessons.bodies.json`, serializeGeneratedJson(bodies));
 
 console.log(`split-lessons: ${index.length} lessons (${library.length} library + ${index.length - library.length} parcours) → generated/lessons.index.json + generated/lessons.bodies.json`);

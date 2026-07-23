@@ -14,6 +14,7 @@ import { ANTI_PORTFOLIO } from './antiPortfolio';
 import { MEMOS } from './memos';
 import { ECOSYSTEMS } from './ecosystems';
 import { CERTIFICATIONS } from './certifications';
+import { CERTIFICATION_LEVELS } from './certificationLevels';
 import type { SearchHitType } from './labels';
 
 export interface SearchHit {
@@ -49,10 +50,18 @@ const PAGE_CANDIDATES: readonly SearchCandidate[] = [
     'Parcours',
     'Apprentissage',
   ]),
-  page('certifications', 'Certifications', '/certifications', 'Certifications internes évaluées de la plateforme.', [
+  page('certifications', 'Certifications', '/certifications', 'Certificats de connaissances et certifications professionnelles de la plateforme.', [
     'Certification professionnelle',
     'Certificat',
   ]),
+  page(
+    'certification-levels',
+    'Niveaux de certification',
+    '/certifications/niveaux',
+    'Vue d’ensemble des cinq niveaux, de VC Analyst à VC Principal.',
+    ['Échelle de certification'],
+    CERTIFICATION_LEVELS.flatMap((level) => [level.title, level.promise, level.audience]),
+  ),
   page('bibliotheque', 'Bibliothèque', '/bibliotheque', 'Cours, leçons et ressources classés par thème.', [
     'Bibliotheque',
     'Cours',
@@ -67,10 +76,18 @@ const PAGE_CANDIDATES: readonly SearchCandidate[] = [
   page('journal', 'Journal de décisions', '/journal', 'Prédictions et décisions à réévaluer.', ['Journal']),
 ];
 
-function page(id: string, title: string, href: string, excerpt: string, aliases: readonly string[] = []): SearchCandidate {
+function page(
+  id: string,
+  title: string,
+  href: string,
+  excerpt: string,
+  aliases: readonly string[] = [],
+  metadata: readonly string[] = [],
+): SearchCandidate {
   return {
     hit: { type: 'page', id: `page-${id}`, slug: id, title, excerpt, href },
     aliases,
+    metadata,
     boost: 20,
   };
 }
@@ -124,7 +141,7 @@ export function searchLocal(query: string): SearchHit[] {
       [course.subtitle, ...course.tags],
     );
 
-  for (const lesson of LESSONS.filter((candidate) => candidate.status !== 'upcoming'))
+  for (const lesson of LESSONS.filter((candidate) => candidate.status === 'published'))
     add(
       { type: 'lesson', id: lesson.id, slug: lesson.slug, title: lesson.title, excerpt: lesson.summary, href: `/lessons/${lesson.slug}` },
       [],
@@ -180,14 +197,17 @@ export function searchLocal(query: string): SearchHit[] {
     );
 
   for (const parcours of PARCOURS)
-    add({
-      type: 'path',
-      id: parcours.id,
-      slug: parcours.slug,
-      title: parcours.title,
-      excerpt: parcours.hook,
-      href: `/parcours/${parcours.slug}`,
-    });
+    add(
+      {
+        type: 'path',
+        id: parcours.id,
+        slug: parcours.slug,
+        title: parcours.title,
+        excerpt: parcours.hook,
+        href: `/parcours/${parcours.slug}`,
+      },
+      [parcours.slug.replace(/-/g, ' ')],
+    );
 
   for (const simulator of SIMULATORS)
     add(

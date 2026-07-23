@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 export default function AntiPortfolioPage() {
   usePageMeta(
     'Anti-portfolio — analyse des passes',
-    'Pourquoi les meilleurs fonds ont passé sur les plus grands winners : info disponible à l’époque, signal raté, contre-argument honnête. Sources publiques.',
+    'Analyse de refus d’investissement documentés : informations disponibles à l’époque, motifs, signaux manqués et contre-arguments fondés sur des sources publiques.',
   );
   const [params, setParams] = useSearchParams();
   const activePattern = params.get('pattern');
@@ -24,8 +24,8 @@ export default function AntiPortfolioPage() {
       <Reveal>
         <SectionHeading
           eyebrow="Anti-portfolio"
-          title="Les chefs-d'œuvre qu'on a laissés passer"
-          description="Bessemer tient l'anti-portfolio de ses propres erreurs ; personne ne le fait en analyse tierce. Pour chaque pass célèbre : ce qui était publiquement connaissable au moment de la décision, la raison du refus, le signal raté — et le contre-argument honnête, parce que juger ex post sans steelman n'est pas du jugement, c'est du confort."
+          title="Analyser les investissements refusés"
+          description="La série examine des refus d’investissement documentés à partir des informations publiques disponibles au moment de la décision. Chaque fiche présente le motif du refus, le signal qui n’a pas été retenu et les éléments qui rendaient la décision défendable ex ante."
         />
       </Reveal>
 
@@ -34,9 +34,8 @@ export default function AntiPortfolioPage() {
           <Scale size={16} className="mt-0.5 shrink-0 text-[color:var(--primary)]" />
           <p>
             <strong className="font-medium text-foreground">Méthode.</strong> Tout ici repose sur des sources publiques, citées en bas de chaque fiche. Les
-            citations sont reproduites telles quelles ; les chiffres de « coût du pass » sont des estimations indicatives, signalées comme telles. Et une
-            règle d'or traverse toute la série : <em>certains passes étaient les bonnes décisions</em> — on juge le raisonnement disponible à l'époque, jamais
-            le seul résultat.
+            citations sont reproduites telles quelles ; les chiffres de « coût du pass » sont des estimations indicatives, signalées comme telles. L'analyse
+            porte sur la qualité du raisonnement disponible à l'époque, y compris lorsque le refus était défendable au regard de ces informations.
           </p>
         </aside>
       </Reveal>
@@ -83,7 +82,7 @@ export default function AntiPortfolioPage() {
       {entries.length === 0 && (
         <div className="mt-10 flex flex-col items-center rounded-2xl border border-dashed border-outline-variant py-16 text-center text-sm text-surface-variant">
           <Ghost size={22} className="mb-3" />
-          Aucune fiche pour ce pattern — encore.
+          Aucune fiche ne correspond à ce motif.
         </div>
       )}
     </div>

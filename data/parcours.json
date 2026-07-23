@@ -4,8 +4,8 @@
     "slug": "le-vc-sans-bullshit",
     "family": "decouvrir",
     "roadmap": "now",
-    "title": "Le VC sans bullshit",
-    "hook": "En 1 h, comprends comment l'argent passe de l'épargne aux fondateurs — et pourquoi 9 startups sur 10 doivent mourir pour que le métier marche.",
+    "title": "Comprendre le capital-risque",
+    "hook": "En une heure, suivre la circulation du capital et comprendre les principes économiques qui structurent un fonds de venture.",
     "kanji": "発",
     "accent": "#D28236",
     "goal": "Nommer les acteurs (LP, GP, business angel), comprendre la loi de puissance et la grammaire des stades.",
@@ -46,7 +46,7 @@
           "kind": "lesson",
           "id": "ld-power-law"
         },
-        "label": "9 startups sur 10 vont mourir (la loi de puissance)",
+        "label": "La concentration des rendements (loi de puissance)",
         "status": "existant"
       },
       {
@@ -332,7 +332,7 @@
       "Aborder un café-réseau sans réseau préexistant"
     ],
     "prerequisites": [
-      "Avoir complété le parcours [Le VC sans bullshit](/parcours/le-vc-sans-bullshit)",
+      "Avoir complété le parcours [Comprendre le capital-risque](/parcours/le-vc-sans-bullshit)",
       "Avoir un profil professionnel (ex: LinkedIn) clair et à jour"
     ]
   },
@@ -578,7 +578,7 @@
       "Tenir une reco invest/pass en temps contraint"
     ],
     "prerequisites": [
-      "Avoir complété le parcours [Le VC sans bullshit](/parcours/le-vc-sans-bullshit)",
+      "Avoir complété le parcours [Comprendre le capital-risque](/parcours/le-vc-sans-bullshit)",
       "Connaître les concepts de base d’une entreprise (revenu, marge, profit)"
     ]
   },
@@ -1020,7 +1020,7 @@
           "kind": "lesson",
           "id": "lf-dataroom"
         },
-        "label": "Les erreurs mortelles de data room",
+        "label": "Les erreurs fréquentes de data room",
         "status": "existant"
       },
       {
@@ -2560,6 +2560,311 @@
     ],
     "prerequisites": [
       "Aucun pré-requis particulier."
+    ]
+  },
+  {
+    "id": "p-venture-philanthropy-foundations",
+    "slug": "venture-philanthropy-foundations",
+    "entryDiagnosticId": "diag-vp-entree",
+    "family": "maitriser",
+    "roadmap": "now",
+    "title": "Fondamentaux de la venture philanthropie",
+    "hook": "Une approche de soutien engagé qui combine financement adapté, accompagnement non financier et gestion de l’impact auprès d’organisations à finalité sociale ou environnementale.",
+    "kanji": "支",
+    "accent": "#3E7C6A",
+    "goal": "Distinguer la venture philanthropie des approches voisines, puis préparer une recommandation de soutien documentée, proportionnée au mandat du financeur et révisable au fil de la relation avec l’organisation.",
+    "forWhom": [
+      "Analystes et chargés d’investissement",
+      "Responsables de programme",
+      "Professionnels de la philanthropie"
+    ],
+    "level": "intermediaire",
+    "entryLevel": "intermediaire",
+    "time": {
+      "source": "derived",
+      "sessions": 12,
+      "cadence": "Douze séquences de lecture, production et révision, à votre rythme"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [],
+    "milestone": {
+      "type": "memo",
+      "label": "Recommandation de soutien",
+      "description": "Produire puis réviser un mémo décisionnel, une annexe financière recalculable et une présentation orale à partir du dossier Trait d’Union.",
+      "evaluation": [
+        "auto",
+        "peer",
+        "practitioner"
+      ]
+    },
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "case",
+          "id": "cs-vp-insertion-3-regions"
+        },
+        "label": "Instruire le dossier apprenant Trait d’Union",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-vp-mandat-triage"
+        },
+        "label": "Fondements, mandat et triage",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-vp-probleme-preuves"
+        },
+        "label": "Problème, preuves et bénéficiaires",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "pratique",
+        "ref": {
+          "kind": "deliverable",
+          "id": "vp-exercice-cumulatif-probleme-preuves"
+        },
+        "label": "Consolider problème, preuves et personnes concernées",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-vp-diligence-organisationnelle"
+        },
+        "label": "Diligence organisationnelle",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "coeur",
+        "ref": {
+          "kind": "deliverable",
+          "id": "vp-fiche-escalade-juridique"
+        },
+        "label": "Repérer et transmettre les sujets juridiques ou de conformité",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-vp-diligence-financiere"
+        },
+        "label": "Diligence financière et résilience",
+        "status": "existant"
+      },
+      {
+        "order": 8,
+        "type": "pratique",
+        "ref": {
+          "kind": "deliverable",
+          "id": "vp-exercice-cumulatif-diligence"
+        },
+        "label": "Consolider la diligence organisationnelle et financière",
+        "status": "existant"
+      },
+      {
+        "order": 9,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-vp-structuration-financement"
+        },
+        "label": "Structuration du financement",
+        "status": "existant"
+      },
+      {
+        "order": 10,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-vp-partenariat-portefeuille"
+        },
+        "label": "Partenariat, recommandation, suivi et sortie",
+        "status": "existant"
+      },
+      {
+        "order": 11,
+        "type": "pratique",
+        "ref": {
+          "kind": "deliverable",
+          "id": "vp-exercice-cumulatif-recommandation"
+        },
+        "label": "Consolider recommandation, financement et sortie",
+        "status": "existant"
+      },
+      {
+        "order": 12,
+        "type": "bonus",
+        "ref": {
+          "kind": "deliverable",
+          "id": "vp-atelier-perspective-financeur"
+        },
+        "label": "Atelier facultatif : perspective du financeur et du portefeuille",
+        "status": "existant"
+      },
+      {
+        "order": 13,
+        "type": "pratique",
+        "ref": {
+          "kind": "milestone",
+          "id": "vp-recommandation-soutien"
+        },
+        "label": "Produire une recommandation de soutien",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 14,
+        "type": "bonus",
+        "ref": {
+          "kind": "case",
+          "id": "cs-vp-energie-des-vallees"
+        },
+        "label": "Transférer l’analyse au cas Énergie des Vallées",
+        "status": "existant",
+        "prereqNote": "Exercice différé conseillé après la première version du jalon final."
+      }
+    ],
+    "outcomes": [
+      "Définir la venture philanthropie et la distinguer de la subvention, du capital-risque, de l’investissement pour l’impact et du financement catalytique",
+      "Traduire un mandat en critères de triage et documenter une décision initiale",
+      "Apprécier les preuves d’impact, la gouvernance et les principaux risques organisationnels",
+      "Reconstituer une situation financière et comparer des options de financement",
+      "Formuler des conditions, un accompagnement, un suivi et une sortie proportionnés",
+      "Présenter une recommandation dont les hypothèses, limites et conditions de révision sont explicites"
+    ],
+    "prerequisites": [
+      "Aucun prérequis formel n’est exigé. Une première expérience de l’analyse de dossier, de la gestion de programme ou de la lecture financière est utile."
+    ]
+  },
+  {
+    "id": "p-analyst-foundations",
+    "slug": "analyst-foundations",
+    "family": "maitriser",
+    "roadmap": "now",
+    "title": "Fondamentaux de l’analyse en capital-risque",
+    "hook": "Sept séquences pour acquérir le socle d’analyse nécessaire au travail d’Analyst en capital-risque.",
+    "kanji": "析",
+    "accent": "#4C6B8A",
+    "goal": "Comprendre l’économie d’un fonds, le traitement d’une opportunité, les calculs fondamentaux et les exigences d’intégrité qui structurent le travail d’Analyst.",
+    "forWhom": [
+      "Candidats au métier d’Analyst",
+      "Analysts débutants"
+    ],
+    "level": "debutant",
+    "entryLevel": "debutant",
+    "time": {
+      "coreHours": 2.4,
+      "sessions": 7,
+      "cadence": "Sept séquences courtes, à votre rythme"
+    },
+    "timeFit": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "recommendedForProfiles": [],
+    "steps": [
+      {
+        "order": 1,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-what-is-vc"
+        },
+        "label": "Fondamentaux du capital-risque",
+        "status": "existant"
+      },
+      {
+        "order": 2,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-ecosystem"
+        },
+        "label": "Écosystème et chaîne de financement",
+        "status": "existant"
+      },
+      {
+        "order": 3,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-vc-job"
+        },
+        "label": "Fonctions et responsabilités de l’Analyst",
+        "status": "existant"
+      },
+      {
+        "order": 4,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-deal-flow"
+        },
+        "label": "Sourcing, screening et gestion du pipeline",
+        "status": "existant"
+      },
+      {
+        "order": 5,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-mathematiques-vc"
+        },
+        "label": "Mathématiques du capital-risque",
+        "status": "existant"
+      },
+      {
+        "order": 6,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "l-fact-hypothesis"
+        },
+        "label": "Qualification des faits et des hypothèses",
+        "status": "existant"
+      },
+      {
+        "order": 7,
+        "type": "coeur",
+        "ref": {
+          "kind": "course",
+          "id": "c-professional-integrity"
+        },
+        "label": "Intégrité professionnelle",
+        "status": "existant"
+      }
+    ],
+    "outcomes": [
+      "Expliquer l’économie d’un fonds de capital-risque et la logique de portefeuille",
+      "Situer les acteurs, les mandats et les stades de financement",
+      "Décrire le traitement d’une opportunité, les rôles et la tenue d’un pipeline",
+      "Exécuter les calculs fondamentaux de marché, de trésorerie, de valorisation, de dilution et de rendement",
+      "Distinguer les faits, déclarations, hypothèses et inférences, puis appliquer les règles d’intégrité professionnelle"
+    ],
+    "prerequisites": [
+      "Aucun prérequis formel. Une première familiarité avec les entreprises et les financements facilite l’entrée dans le parcours."
     ]
   }
 ]

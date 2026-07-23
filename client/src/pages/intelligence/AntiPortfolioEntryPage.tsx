@@ -8,13 +8,13 @@ import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
-import { usePageMeta } from '@/lib/seo';
+import { useResourcePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function AntiPortfolioEntryPage() {
   const { slug } = useParams();
   const entry = slug ? antiPortfolioBySlug(slug) : undefined;
-  usePageMeta(entry ? `${entry.company} — anti-portfolio` : undefined, entry?.summary, { type: 'article' });
+  useResourcePageMeta(Boolean(entry), entry ? `${entry.company} — anti-portfolio` : undefined, entry?.summary, { type: 'article' });
 
   if (!entry) return <NotFoundPage />;
 
@@ -74,7 +74,7 @@ export default function AntiPortfolioEntryPage() {
       {/* Ce qu'on savait à l'époque */}
       <section className="mt-12">
         <p className="eyebrow mb-2 flex items-center gap-2"><Eye size={14} /> Ce qu'on savait à l'époque</p>
-        <p className="mb-5 text-sm text-surface-variant">Uniquement des informations publiques et vérifiables au moment de la décision — pas de rétro-projection.</p>
+        <p className="mb-5 text-sm text-surface-variant">Les éléments ci-dessous se limitent aux informations publiques et vérifiables disponibles au moment de la décision.</p>
         <ol className="space-y-0">
           {entry.knownAtTheTime.map((k, i) => (
             <li key={i} className="relative flex gap-4 pb-5 last:pb-0">
@@ -112,7 +112,7 @@ export default function AntiPortfolioEntryPage() {
       {/* Le contre-argument honnête */}
       <section className="mt-12 rounded-2xl border border-outline-variant bg-surface-container-low/50 p-6 sm:p-7">
         <p className="eyebrow mb-2 flex items-center gap-2"><Scale size={14} /> Le contre-argument honnête</p>
-        <p className="mb-4 text-sm text-surface-variant">Pourquoi le pass était défendable ex ante. Sans steelman, l'analyse rétrospective n'est que du biais de rétrospection confortable.</p>
+        <p className="mb-4 text-sm text-surface-variant">Le steelman explicite les raisons qui rendaient le refus défendable ex ante et limite le biais de rétrospection.</p>
         <ActiveProse source={entry.steelman} sourceType="anti-portfolio" sourceId={entry.id} sourceTitle={entry.title} />
       </section>
 
@@ -129,7 +129,7 @@ export default function AntiPortfolioEntryPage() {
 
       {/* Takeaways */}
       <aside className="mt-12 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_25%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-6 sm:p-7">
-        <p className="eyebrow mb-4 flex items-center gap-2"><Sparkles size={14} /> Ce qu'il faut retenir</p>
+        <p className="eyebrow mb-4 flex items-center gap-2"><Sparkles size={14} /> Enseignements pour l’analyse</p>
         <ul className="space-y-3">
           {entry.takeaways.map((t, i) => (
             <li key={i} className="flex items-start gap-3 text-[0.95rem] font-medium">
@@ -151,7 +151,7 @@ export default function AntiPortfolioEntryPage() {
               <div>
                 <p className="font-headline text-headline-sm font-semibold leading-tight">{p.label}</p>
                 <p className="mt-1.5 text-sm leading-relaxed text-surface-variant">{p.description}</p>
-                <p className="mt-2 text-sm leading-relaxed"><strong className="font-medium" style={{ color: p.accent }}>L'antidote :</strong> {p.antidote}</p>
+                <p className="mt-2 text-sm leading-relaxed"><strong className="font-medium" style={{ color: p.accent }}>Méthode de contrôle :</strong> {p.antidote}</p>
               </div>
             </div>
           ))}
@@ -160,7 +160,7 @@ export default function AntiPortfolioEntryPage() {
 
       {relatedMemos.length > 0 && (
         <section className="mt-12">
-          <p className="eyebrow mb-4">À lire en miroir — memos annotés</p>
+          <p className="eyebrow mb-4">Memos annotés associés</p>
           <div className="space-y-3">
             {relatedMemos.map((m) => (
               <Link key={m.id} to={`/memos/${m.slug}`} className="group flex items-center justify-between gap-4 rounded-2xl border border-outline-variant p-5 transition-colors hover:border-[color-mix(in_srgb,var(--primary)_40%,transparent)] hover:bg-surface-container-low">

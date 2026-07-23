@@ -22,7 +22,7 @@ export default function MethodePage() {
         <SectionHeading
           eyebrow="Méthode"
           title="Cadres d’analyse et modèles de travail"
-          description="La méthode ne déplace pas les contenus : les cadres restent publiés comme analyses, les modèles restent des livrables. Cette salle les regroupe pour un usage direct."
+          description="Cette salle regroupe, pour un usage direct, les cadres publiés comme analyses et les modèles proposés comme livrables."
         />
       </Reveal>
 

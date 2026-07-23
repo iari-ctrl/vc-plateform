@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useLocation } from 'react-router-dom';
 import {
   Search, Sun, Moon, Menu, X, ChevronRight, type LucideIcon,
@@ -8,6 +9,7 @@ import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/context/ThemeContext';
 import { useUI } from '@/context/UIContext';
 import { cn } from '@/lib/utils';
+import { useLayerBehavior } from '@/components/ui/layerStack';
 import {
   NAVIGATION_PILLARS,
   isNavigationItemActive,
@@ -23,9 +25,10 @@ import {
  * Desktop (≥lg): the panel is parked off-screen and made `inert` while closed,
  * so its links leave the tab order *and* the accessibility tree (no focusable
  * content stranded in a hidden subtree). A small VC Premium logo plus a discreet
- * focusable "open navigation" handle stay pinned in the top-left gutter; hover,
- * click, or keyboard focus on that handle slides the full panel out as an
- * overlay (and clears `inert`, so focus can then move into it). The panel
+ * focusable "open navigation" handle stay pinned in the top-left gutter. Hover
+ * on that handle or on the viewport's left edge, click, or keyboard focus slides
+ * the full panel out as an overlay (and clears `inert`, so focus can then move
+ * into it). The panel
  * retracts as soon as the pointer leaves it (or focus moves out). A thin
  * `--sidebar-rail` gutter is reserved in MainLayout so the handle never overlaps
  * page content.
@@ -46,6 +49,16 @@ function DesktopRail() {
 
   return (
     <>
+      {/* Pointer-only hot zone along the viewport edge. It sits below the panel
+          in the stacking order, so the panel takes over hover as it slides in.
+          Keyboard users retain the visible button below. */}
+      <div
+        aria-hidden="true"
+        data-testid="desktop-nav-edge-trigger"
+        onMouseEnter={() => setOpen(true)}
+        className="fixed inset-y-0 left-0 z-40 hidden w-2 lg:block"
+      />
+
       {/* Always-visible handle: hovering/focusing it reveals the panel. No
           onMouseLeave here — moving from the handle into the panel keeps it open;
           the panel itself owns the close-on-leave. z-50 keeps the handle above
@@ -225,6 +238,15 @@ function MobileBar() {
   const { theme, toggle } = useTheme();
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
+  const mobileNavId = useId();
+  const mobileNavTitleId = useId();
+  const mobileNavRef = useRef<HTMLDivElement>(null);
+
+  const { layerProps } = useLayerBehavior({
+    open,
+    onClose: () => setOpen(false),
+    layerRootRef: mobileNavRef,
+  });
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -236,6 +258,8 @@ function MobileBar() {
           className="grid h-9 w-9 place-items-center rounded-full text-foreground"
           aria-label="Menu"
           aria-expanded={open}
+          aria-controls={mobileNavId}
+          aria-haspopup="dialog"
         >
           {open ? <X size={19} /> : <Menu size={19} />}
         </button>
@@ -250,8 +274,18 @@ function MobileBar() {
         </div>
       </header>
 
-      {open && (
-        <div className="fixed inset-x-0 bottom-0 top-14 z-30 animate-fade-in overflow-y-auto border-t border-outline-variant bg-surface lg:hidden">
+      {open && createPortal(
+        <div
+          ref={mobileNavRef}
+          {...layerProps}
+          id={mobileNavId}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={mobileNavTitleId}
+          tabIndex={-1}
+          className="fixed inset-x-0 bottom-0 top-14 z-30 animate-fade-in overflow-y-auto border-t border-outline-variant bg-surface outline-none motion-reduce:animate-none lg:hidden"
+        >
+          <h2 id={mobileNavTitleId} className="sr-only">Navigation mobile latérale</h2>
           <nav className="mx-auto flex max-w-[var(--content-max)] flex-col gap-1 px-4 py-4">
             {NAVIGATION_PILLARS.map((pillar, pillarIndex) => {
               const pillarActive = isNavigationPillarActive(pathname, pillar);
@@ -290,7 +324,8 @@ function MobileBar() {
 
             <div className="ornament-rule my-3" />
           </nav>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );

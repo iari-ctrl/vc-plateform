@@ -1,13 +1,19 @@
 import { describe, expect, it } from 'vitest';
+import lessonsSourceJson from '@data/lessons.json';
+import { CANDIDATE_CHARTERS, candidateCharterByIdVersion } from './candidateCharters';
+import { CERTIFICATION_LEVELS } from './certificationLevels';
 import { courseById } from './courses';
 import { loadLesson, lessonById } from './lessons';
+import type { Lesson } from './types';
 import {
   certificationBySlug,
   certificationDisplayTitle,
   createCertificationEnrollment,
+  isProfessionalCertification,
   lessonIdsForCertification,
   resolveCertificationCurriculum,
   resolveCertificationProgress,
+  resolveCertificationSupplement,
   resolveFinalAssessment,
   upsertCertificationEnrollment,
   type CertificationSelection,
@@ -16,11 +22,14 @@ import {
   type FundStage,
 } from './certifications';
 
-const certification = certificationBySlug('analyste-en-capital-risque');
+const analyst = certificationBySlug('analyste-en-capital-risque');
 
-if (!certification) {
-  throw new Error('La certification Analyst en capital-risque doit être publiée dans le catalogue.');
+if (!analyst || !isProfessionalCertification(analyst)) {
+  throw new Error('VC Analyst doit être publié comme certification professionnelle.');
 }
+
+const SOURCE_LESSONS = lessonsSourceJson as Lesson[];
+const sourceLessonById = (id: string) => SOURCE_LESSONS.find((lesson) => lesson.id === id);
 
 const FUND_STAGES = [undefined, 'pre-seed', 'seed', 'series-a', 'growth'] as const satisfies readonly (
   | FundStage
@@ -43,7 +52,9 @@ const SPECIALTIES = [
 
 const AXIS_ORDER = ['fundStage', 'dealRole', 'specialty'] as const;
 
-const EXPECTED_CORE_LESSON_IDS = [
+// Preserve the editorial sequence used to verify quiz-answer distribution
+// across the shared Analyst corpus.
+const ALL_35_EDITORIAL_ORDER = [
   'l-vc-definition',
   'l-power-law',
   'l-fund-lifecycle',
@@ -81,6 +92,18 @@ const EXPECTED_CORE_LESSON_IDS = [
   'l-critical-errors',
 ] as const;
 
+const COURSE_IDS_FOR_35 = [
+  'c-what-is-vc',
+  'c-ecosystem',
+  'c-vc-job',
+  'c-deal-flow',
+  'c-startup-analysis',
+  'c-mathematiques-vc',
+  'c-due-diligence',
+  'c-investment-recommendation',
+  'c-professional-integrity',
+] as const;
+
 const COMPOSITIONS: CertificationSelection[] = FUND_STAGES.flatMap((fundStage) =>
   DEAL_ROLES.flatMap((dealRole) =>
     SPECIALTIES.map((specialty) => ({ fundStage, dealRole, specialty })),
@@ -91,96 +114,117 @@ function compositionKey(selection: CertificationSelection): string {
   return [selection.fundStage ?? 'none', selection.dealRole ?? 'none', selection.specialty ?? 'none'].join('/');
 }
 
-describe('Certification professionnelle Analyst en capital-risque', () => {
-  it('déclare les neuf cours institutionnels du tronc commun dans l’ordre attendu', () => {
-    expect(certification.coreRequirements.map((requirement) => requirement.title)).toEqual([
-      'Fondamentaux du capital-risque',
-      'Écosystème et chaîne de financement',
-      "Fonctions et responsabilités de l'Analyst",
-      'Sourcing, screening et gestion du pipeline',
-      "Analyse d'une opportunité d'investissement",
-      "Dimensionnement de marché, modélisation financière et structure de l'investissement",
-      'Due diligence et gestion des risques',
-      "Recommandation d'investissement et préparation du comité",
-      "Intégrité professionnelle, confidentialité et usage déclaré de l'intelligence artificielle",
-    ]);
+describe('Corpus éditorial Analyst', () => {
+  it('retire les identifiants d’évaluation inertes des 35 leçons publiées', () => {
+    for (const lessonId of ALL_35_EDITORIAL_ORDER) {
+      const lesson = sourceLessonById(lessonId);
+      expect(lesson, lessonId).toBeDefined();
+      expect(Object.prototype.hasOwnProperty.call(lesson, 'assessmentId'), lessonId).toBe(false);
+    }
   });
 
-  it('publie un tronc commun complet de 35 leçons certifiantes', async () => {
-    const coreLessonIds = certification.coreRequirements.flatMap((requirement) => requirement.lessonIds);
+  it('conserve la qualité éditoriale, les sources et les quiz du corpus de 35 leçons', async () => {
+    const quizCorrectPositionCounts = [0, 0, 0];
+    let previousQuizCorrectPosition: number | undefined;
+    let repeatedQuizCorrectPositionCount = 0;
 
-    expect(coreLessonIds).toEqual(EXPECTED_CORE_LESSON_IDS);
-    expect(new Set(coreLessonIds).size).toBe(35);
+    for (const lessonId of ALL_35_EDITORIAL_ORDER) {
+      const sourceEntry = sourceLessonById(lessonId);
+      const entry = lessonById(lessonId);
+      expect(sourceEntry, lessonId).toBeDefined();
+      expect(entry, lessonId).toBeDefined();
+      expect(sourceEntry?.status, lessonId).not.toBe('upcoming');
+      expect(sourceEntry?.contexts, lessonId).toEqual({});
+      expect(sourceEntry?.optional, lessonId).toBe(false);
+      expect(sourceEntry?.learningOutcomes, lessonId).toHaveLength(3);
+      expect(Object.prototype.hasOwnProperty.call(sourceEntry, 'sources'), lessonId).toBe(false);
 
-    for (const requirement of certification.coreRequirements) {
-      const course = courseById(requirement.courseId);
-      expect(course, requirement.courseId).toBeDefined();
-      expect(course?.lessonIds, requirement.courseId).toEqual(requirement.lessonIds);
+      const lesson = entry ? await loadLesson(entry.slug) : undefined;
+      expect(lesson, lessonId).toBeDefined();
+      if (!lesson) continue;
 
-      let expectedDurationMin = 0;
-      for (const [courseLessonIndex, lessonId] of requirement.lessonIds.entries()) {
-        const entry = lessonById(lessonId);
-        const curriculumIndex = coreLessonIds.indexOf(lessonId);
-        const expectedPrerequisites = curriculumIndex === 0 ? [] : [coreLessonIds[curriculumIndex - 1]];
-        expect(entry, lessonId).toBeDefined();
-        expect(entry?.status, lessonId).not.toBe('upcoming');
-        expect(entry?.courseId, lessonId).toBe(requirement.courseId);
-        expect(entry?.order, lessonId).toBe(courseLessonIndex + 1);
-        expect(entry?.contexts, lessonId).toEqual({});
-        expect(entry?.optional, lessonId).toBe(false);
-        expect(entry?.learningOutcomes, lessonId).toHaveLength(3);
-        expect(entry?.prerequisiteLessonIds, lessonId).toEqual(expectedPrerequisites);
-        expect(entry?.assessmentId, lessonId).toBe(requirement.assessmentVariantId);
-        expect(Object.prototype.hasOwnProperty.call(entry, 'sources'), lessonId).toBe(false);
+      const instructionalBody = lesson.body.split('## Références')[0];
+      const instructionalWords = instructionalBody.match(/\p{L}+(?:['’.-]\p{L}+)*|\d+(?:[.,]\d+)*/gu)?.length ?? 0;
+      const totalWords = lesson.body.match(/\p{L}+(?:['’.-]\p{L}+)*|\d+(?:[.,]\d+)*/gu)?.length ?? 0;
+      const references = lesson.body.split('## Références')[1] ?? '';
+      const sourceLinks = references.match(/\[[^\]]+\]\(https?:\/\/[^)]+\)/g) ?? [];
+      const referenceLines = references.split('\n').filter((line) => line.startsWith('- ['));
 
-        const lesson = entry ? await loadLesson(entry.slug) : undefined;
-        expect(lesson, lessonId).toBeDefined();
-        if (!lesson) continue;
-
-        const instructionalBody = lesson.body.split('## Références')[0];
-        const instructionalWords = instructionalBody.match(/\p{L}+(?:['’.-]\p{L}+)*|\d+(?:[.,]\d+)*/gu)?.length ?? 0;
-        const totalWords = lesson.body.match(/\p{L}+(?:['’.-]\p{L}+)*|\d+(?:[.,]\d+)*/gu)?.length ?? 0;
-        const references = lesson.body.split('## Références')[1] ?? '';
-        const sourceLinks = references.match(/\[[^\]]+\]\(https?:\/\/[^)]+\)/g) ?? [];
-        const referenceLines = references.split('\n').filter((line) => line.startsWith('- ['));
-
-        expect(instructionalWords, `${lessonId}: longueur`).toBeGreaterThanOrEqual(900);
-        expect(instructionalWords, `${lessonId}: longueur`).toBeLessThanOrEqual(1400);
-        expect(lesson.readMin, `${lessonId}: temps de lecture`).toBe(Math.ceil(totalWords / 180));
-        expect(lesson.body, `${lessonId}: cadre`).toContain('## Cadre');
-        expect(lesson.body, `${lessonId}: méthode`).toContain('## Méthode');
-        expect(lesson.body, `${lessonId}: exemple`).toMatch(/## (?:Exemple|Cas d'application)/u);
-        expect(lesson.body, `${lessonId}: limites`).toContain('## Limites et points de contrôle');
-        expect(lesson.body, `${lessonId}: exercice`).toContain('## Mise en application');
-        expect(lesson.body.match(/## Références/gu), `${lessonId}: section de références`).toHaveLength(1);
-        expect(sourceLinks.length, `${lessonId}: sources`).toBeGreaterThanOrEqual(2);
-        expect(sourceLinks.length, `${lessonId}: sources`).toBeLessThanOrEqual(4);
-        expect(referenceLines, `${lessonId}: sources structurées`).toHaveLength(sourceLinks.length);
-        for (const referenceLine of referenceLines) {
-          expect(referenceLine, `${lessonId}: source datée`).toMatch(/(?:19|20)\d{2}/u);
-        }
-        expect(lesson.keyTakeaways.length, `${lessonId}: acquis clés`).toBeGreaterThanOrEqual(3);
-        expect(lesson.keyTakeaways.length, `${lessonId}: acquis clés`).toBeLessThanOrEqual(5);
-        expect(lesson.quiz, `${lessonId}: quiz`).toHaveLength(4);
-        for (const question of lesson.quiz ?? []) {
-          expect(question.options.filter((option) => option.correct), `${lessonId}: réponse unique`).toHaveLength(1);
-          expect(question.explanation.trim().length, `${lessonId}: explication du quiz`).toBeGreaterThan(0);
-        }
-        expectedDurationMin += lesson.readMin + 8;
+      expect(instructionalWords, `${lessonId}: longueur`).toBeGreaterThanOrEqual(900);
+      expect(instructionalWords, `${lessonId}: longueur`).toBeLessThanOrEqual(1400);
+      expect(sourceEntry?.readMin, `${lessonId}: temps de lecture`).toBe(Math.ceil(totalWords / 180));
+      expect(lesson.body, `${lessonId}: cadre`).toContain('## Cadre');
+      expect(lesson.body, `${lessonId}: méthode`).toContain('## Méthode');
+      expect(lesson.body, `${lessonId}: exemple`).toMatch(/## (?:Exemple|Cas d'application)/u);
+      expect(lesson.body, `${lessonId}: limites`).toContain('## Limites et points de contrôle');
+      expect(lesson.body, `${lessonId}: exercice`).toContain('## Mise en application');
+      expect(lesson.body.match(/## Références/gu), `${lessonId}: section de références`).toHaveLength(1);
+      expect(sourceLinks.length, `${lessonId}: sources`).toBeGreaterThanOrEqual(2);
+      expect(sourceLinks.length, `${lessonId}: sources`).toBeLessThanOrEqual(4);
+      expect(referenceLines, `${lessonId}: sources structurées`).toHaveLength(sourceLinks.length);
+      for (const referenceLine of referenceLines) {
+        expect(referenceLine, `${lessonId}: source datée`).toMatch(/(?:19|20)\d{2}/u);
       }
+      expect(lesson.keyTakeaways.length, `${lessonId}: acquis clés`).toBeGreaterThanOrEqual(3);
+      expect(lesson.keyTakeaways.length, `${lessonId}: acquis clés`).toBeLessThanOrEqual(5);
+      expect(lesson.quiz, `${lessonId}: quiz`).toHaveLength(4);
+      const lessonCorrectPositions: number[] = [];
+      for (const question of lesson.quiz ?? []) {
+        expect(question.options, `${lessonId}: trois options`).toHaveLength(3);
+        expect(question.options.filter((option) => option.correct), `${lessonId}: réponse unique`).toHaveLength(1);
+        expect(question.explanation.trim().length, `${lessonId}: explication du quiz`).toBeGreaterThan(0);
 
-      expect(course?.durationMin, `${requirement.courseId}: durée`).toBe(expectedDurationMin);
+        const correctPosition = question.options.findIndex((option) => option.correct);
+        expect(correctPosition, `${lessonId}: position de la bonne réponse`).toBeGreaterThanOrEqual(0);
+        if (correctPosition >= 0) {
+          lessonCorrectPositions.push(correctPosition);
+          quizCorrectPositionCounts[correctPosition] += 1;
+          repeatedQuizCorrectPositionCount = correctPosition === previousQuizCorrectPosition
+            ? repeatedQuizCorrectPositionCount + 1
+            : 1;
+          previousQuizCorrectPosition = correctPosition;
+          expect(repeatedQuizCorrectPositionCount, `${lessonId}: répétition de la position correcte`).toBeLessThanOrEqual(2);
+        }
+      }
+      expect(new Set(lessonCorrectPositions).size, `${lessonId}: positions des bonnes réponses`).toBeGreaterThanOrEqual(2);
     }
+
+    for (const courseId of COURSE_IDS_FOR_35) {
+      const course = courseById(courseId);
+      expect(course, courseId).toBeDefined();
+      let expectedDurationMin = 0;
+      for (const [index, lessonId] of (course?.lessonIds ?? []).entries()) {
+        const lesson = sourceLessonById(lessonId);
+        expect(lesson?.courseId, lessonId).toBe(courseId);
+        expect(lesson?.order, lessonId).toBe(index + 1);
+        expectedDurationMin += (lesson?.readMin ?? 0) + 8;
+      }
+      expect(course?.durationMin, `${courseId}: durée`).toBe(expectedDurationMin);
+    }
+
+    expect(Math.max(...quizCorrectPositionCounts) - Math.min(...quizCorrectPositionCounts)).toBeLessThanOrEqual(1);
+  });
+});
+
+describe('Certification professionnelle VC Analyst', () => {
+  it('conserve trois blocs de préparation recommandée et leurs douze leçons', () => {
+    const lessonIds = analyst.recommendedPreparation.flatMap((requirement) => requirement.lessonIds);
+
+    expect(analyst.recommendedPreparation).toHaveLength(3);
+    expect(lessonIds).toHaveLength(12);
+    expect(new Set(lessonIds).size).toBe(12);
+    expect(analyst.recommendedPreparation.find((requirement) => requirement.courseId === 'c-investment-recommendation')?.lessonIds)
+      .toEqual(['l-investment-recommendation', 'l-ic-defense']);
   });
 
   it('expose les 160 compositions facultatives attendues, dont la spécialité Impact', () => {
     expect(COMPOSITIONS).toHaveLength(5 * 4 * 8);
     expect(new Set(COMPOSITIONS.map(compositionKey)).size).toBe(160);
-    expect(certification.axes.fundStage.options.map((option) => option.id)).toEqual(FUND_STAGES.slice(1));
-    expect(certification.axes.dealRole.options.map((option) => option.id)).toEqual(DEAL_ROLES.slice(1));
-    expect(certification.axes.specialty.options.map((option) => option.id)).toEqual(SPECIALTIES.slice(1));
+    expect(analyst.axes.fundStage.options.map((option) => option.id)).toEqual(FUND_STAGES.slice(1));
+    expect(analyst.axes.dealRole.options.map((option) => option.id)).toEqual(DEAL_ROLES.slice(1));
+    expect(analyst.axes.specialty.options.map((option) => option.id)).toEqual(SPECIALTIES.slice(1));
 
-    const impact = certification.axes.specialty.options.find((option) => option.id === 'impact');
+    const impact = analyst.axes.specialty.options.find((option) => option.id === 'impact');
     expect(impact).toMatchObject({
       label: 'Impact',
       certificateLabel: 'spécialité Impact',
@@ -192,7 +236,7 @@ describe('Certification professionnelle Analyst en capital-risque', () => {
     });
     expect(impact?.requirement.summary).toMatch(/intentionnalité.*additionalité.*théorie du changement.*matérialité/i);
 
-    const optionalLessonIds = Object.values(certification.axes).flatMap((axis) =>
+    const optionalLessonIds = Object.values(analyst.axes).flatMap((axis) =>
       axis.options.flatMap((option) => option.requirement.lessonIds),
     );
     expect(optionalLessonIds).toHaveLength(28);
@@ -202,64 +246,67 @@ describe('Certification professionnelle Analyst en capital-risque', () => {
     }
   });
 
-  it('résout chaque composition avec le tronc commun puis uniquement les blocs choisis, sans doublon', () => {
-    const coreIds = certification.coreRequirements.map((requirement) => requirement.id);
+  it('résout chaque composition après la préparation recommandée, sans doublon', () => {
+    const recommendedIds = analyst.recommendedPreparation.map((requirement) => requirement.id);
 
     for (const selection of COMPOSITIONS) {
       const key = compositionKey(selection);
       const selectedOptions = AXIS_ORDER.flatMap((axisId) => {
         const selectedId = selection[axisId];
         if (!selectedId) return [];
-        const option = certification.axes[axisId].options.find((candidate) => candidate.id === selectedId);
+        const option = analyst.axes[axisId].options.find((candidate) => candidate.id === selectedId);
         expect(option, `${key}:${axisId}`).toBeDefined();
         return option ? [{ axisId, option }] : [];
       });
-      const expectedIds = [...coreIds, ...selectedOptions.map(({ option }) => option.requirement.id)];
+      const expectedIds = [...recommendedIds, ...selectedOptions.map(({ option }) => option.requirement.id)];
       const expectedSources = [
-        ...certification.coreRequirements.map(() => 'core'),
+        ...analyst.recommendedPreparation.map(() => 'recommended'),
         ...selectedOptions.map(({ axisId }) => axisId),
       ];
-      const curriculum = resolveCertificationCurriculum(certification, selection);
+      const curriculum = resolveCertificationCurriculum(analyst, selection);
 
       expect(curriculum.map((requirement) => requirement.id), key).toEqual(expectedIds);
       expect(curriculum.map((requirement) => requirement.source), key).toEqual(expectedSources);
-      expect(curriculum.slice(0, coreIds.length).map((requirement) => requirement.id), key).toEqual(coreIds);
       expect(new Set(curriculum.map((requirement) => requirement.id)).size, key).toBe(curriculum.length);
       expect(new Set(curriculum.map((requirement) => requirement.courseId)).size, key).toBe(curriculum.length);
 
       const curriculumLessonIds = curriculum.flatMap((requirement) => requirement.lessonIds);
       expect(new Set(curriculumLessonIds).size, key).toBe(curriculumLessonIds.length);
-      expect(lessonIdsForCertification(certification, selection), key).toEqual(curriculumLessonIds);
-      expect(resolveCertificationCurriculum(certification, selection).map((requirement) => requirement.id), key).toEqual(
-        expectedIds,
-      );
+      expect(lessonIdsForCertification(analyst, selection), key).toEqual(curriculumLessonIds);
     }
   });
 
-  it('construit un titre stable qui omet chaque axe non sélectionné dans les 160 compositions', () => {
+  it('conserve le titre VC Analyst et résout le supplément séparément dans les 160 compositions', () => {
     for (const selection of COMPOSITIONS) {
       const key = compositionKey(selection);
-      const selectedLabels = AXIS_ORDER.flatMap((axisId) => {
-        const selectedId = selection[axisId];
-        if (!selectedId) return [];
-        const option = certification.axes[axisId].options.find((candidate) => candidate.id === selectedId);
-        return option ? [option.certificateLabel] : [];
-      });
-      const expectedTitle = selectedLabels.length
-        ? `${certification.title} — ${selectedLabels.join(', ')}`
-        : certification.title;
+      const supplement = resolveCertificationSupplement(analyst, selection);
 
-      expect(certificationDisplayTitle(certification, selection), key).toBe(expectedTitle);
+      expect(certificationDisplayTitle(analyst, selection), key).toBe('VC Analyst');
+      for (const axisId of AXIS_ORDER) {
+        const selectedId = selection[axisId];
+        const resolved = supplement[axisId];
+        if (!selectedId) {
+          expect(resolved, `${key}:${axisId}`).toBeUndefined();
+          continue;
+        }
+        const option = analyst.axes[axisId].options.find((candidate) => candidate.id === selectedId);
+        expect(resolved, `${key}:${axisId}`).toEqual({
+          axisId,
+          optionId: selectedId,
+          label: option?.label,
+          certificateLabel: option?.certificateLabel,
+        });
+      }
     }
   });
 
-  it('adapte le cas final et sa grille avec les seules variantes sélectionnées', () => {
+  it('adapte le cas final avec les seules variantes d’axe sélectionnées', () => {
     for (const selection of COMPOSITIONS) {
-      const curriculum = resolveCertificationCurriculum(certification, selection);
+      const curriculum = resolveCertificationCurriculum(analyst, selection);
       const expectedVariantIds = curriculum
-        .filter((requirement) => requirement.source !== 'core')
+        .filter((requirement) => requirement.source !== 'recommended')
         .map((requirement) => requirement.assessmentVariantId);
-      const assessment = resolveFinalAssessment(certification, selection);
+      const assessment = resolveFinalAssessment(analyst, selection);
 
       expect(assessment.optionVariants.map((variant) => variant.id), compositionKey(selection)).toEqual(
         expectedVariantIds,
@@ -268,61 +315,81 @@ describe('Certification professionnelle Analyst en capital-risque', () => {
     }
   });
 
-  it('persiste uniquement les axes renseignés et conserve la date de création lors d’une modification', () => {
+  it('persiste uniquement les axes renseignés et conserve la date de création', () => {
     const first = createCertificationEnrollment(
-      certification.id,
+      analyst.id,
       { fundStage: 'pre-seed', dealRole: undefined, specialty: 'impact' },
       null,
       '2026-01-01T10:00:00.000Z',
     );
     const modified = createCertificationEnrollment(
-      certification.id,
+      analyst.id,
       { dealRole: 'lead' },
       first,
       '2026-02-01T10:00:00.000Z',
     );
-    const enrollments = upsertCertificationEnrollment({ [certification.id]: first }, modified);
+    const enrollments = upsertCertificationEnrollment({ [analyst.id]: first }, modified);
 
     expect(first.selection).toEqual({ fundStage: 'pre-seed', specialty: 'impact' });
     expect(modified.selection).toEqual({ dealRole: 'lead' });
     expect(modified.createdAt).toBe(first.createdAt);
     expect(modified.updatedAt).toBe('2026-02-01T10:00:00.000Z');
-    expect(enrollments[certification.id]).toEqual(modified);
+    expect(enrollments[analyst.id]).toEqual(modified);
   });
 
-  it('recalcule le dénominateur sans supprimer la progression historique des options retirées', () => {
+  it('recalcule le dénominateur sans supprimer la progression historique d’une option retirée', () => {
     const historicalProgress = {
-      'l-vc-definition': { status: 'done' as const },
+      'l-founder-analysis': { status: 'done' as const },
       'l-stage-preseed-team': { status: 'done' as const },
     };
-    const withPreSeed = resolveCertificationProgress(certification, { fundStage: 'pre-seed' }, historicalProgress);
-    const coreOnly = resolveCertificationProgress(certification, {}, historicalProgress);
-    const restoredPreSeed = resolveCertificationProgress(certification, { fundStage: 'pre-seed' }, historicalProgress);
+    const withPreSeed = resolveCertificationProgress(analyst, { fundStage: 'pre-seed' }, historicalProgress);
+    const preparationOnly = resolveCertificationProgress(analyst, {}, historicalProgress);
+    const restoredPreSeed = resolveCertificationProgress(analyst, { fundStage: 'pre-seed' }, historicalProgress);
 
-    expect(withPreSeed.requiredLessonIds).toContain('l-stage-preseed-team');
-    expect(withPreSeed.requiredLessonIds).toHaveLength(coreOnly.requiredLessonIds.length + 2);
+    expect(withPreSeed.lessonIds).toContain('l-stage-preseed-team');
+    expect(withPreSeed.lessonIds).toHaveLength(preparationOnly.lessonIds.length + 2);
     expect(withPreSeed.doneCount).toBe(2);
-    expect(coreOnly.doneCount).toBe(1);
-    expect(coreOnly.requiredLessonIds).not.toContain('l-stage-preseed-team');
+    expect(preparationOnly.doneCount).toBe(1);
+    expect(preparationOnly.lessonIds).not.toContain('l-stage-preseed-team');
     expect(restoredPreSeed.doneCount).toBe(2);
     expect(historicalProgress['l-stage-preseed-team'].status).toBe('done');
   });
+});
 
-  it.each([
-    [{}, 'Certification professionnelle Analyst en capital-risque'],
-    [
-      { fundStage: 'pre-seed' },
-      'Certification professionnelle Analyst en capital-risque — orientation Pre-seed',
-    ],
-    [
-      { dealRole: 'lead', specialty: 'impact' },
-      'Certification professionnelle Analyst en capital-risque — fonds lead, spécialité Impact',
-    ],
-    [
-      { fundStage: 'pre-seed', dealRole: 'lead', specialty: 'deeptech' },
-      'Certification professionnelle Analyst en capital-risque — orientation Pre-seed, fonds lead, spécialité Deeptech',
-    ],
-  ] satisfies [CertificationSelection, string][])('formate le supplément facultatif pour %j', (selection, expected) => {
-    expect(certificationDisplayTitle(certification, selection)).toBe(expected);
+describe('Collections canoniques de certification', () => {
+  it('publie exactement cinq promesses et n’engage rien pour les quatre niveaux supérieurs', () => {
+    expect(CERTIFICATION_LEVELS.map((level) => [level.id, level.order])).toEqual([
+      ['analyst', 1],
+      ['associate-foundations', 2],
+      ['associate', 3],
+      ['senior-associate', 4],
+      ['principal', 5],
+    ]);
+    for (const level of CERTIFICATION_LEVELS.slice(1)) {
+      expect(level.status, level.id).toBe('future');
+      expect(level.certificationId, level.id).toBeUndefined();
+      expect(Object.prototype.hasOwnProperty.call(level, 'duration'), level.id).toBe(false);
+      expect(Object.prototype.hasOwnProperty.call(level, 'durationHours'), level.id).toBe(false);
+      expect(Object.prototype.hasOwnProperty.call(level, 'passingScore'), level.id).toBe(false);
+      expect(Object.prototype.hasOwnProperty.call(level, 'courseIds'), level.id).toBe(false);
+      expect(Object.prototype.hasOwnProperty.call(level, 'courseRequirementIds'), level.id).toBe(false);
+    }
   });
+
+  it('versionne la charte et garde l’annexe de session future inactive', () => {
+    expect(CANDIDATE_CHARTERS).toHaveLength(1);
+    const charter = candidateCharterByIdVersion('candidate-charter', '1.0.0');
+    expect(charter?.status).toBe('active');
+    expect(charter?.principles.map((principle) => principle.id)).toEqual([
+      'authenticity',
+      'sources',
+      'artificial-intelligence',
+      'confidentiality',
+      'conflicts-of-interest',
+      'critical-errors',
+      'local-data-responsibility',
+    ]);
+    expect(charter?.futureSessionAnnex.status).toBe('inactive');
+  });
+
 });

@@ -16,7 +16,7 @@ export function ActiveProse({ source, sourceType, sourceId, sourceTitle, classNa
   const { addNote } = useUserData();
   const containerRef = useRef<HTMLDivElement>(null);
   const [sel, setSel] = useState<{ text: string; top: number; left: number } | null>(null);
-  const [flash, setFlash] = useState<string | null>(null);
+  const [message, setMessage] = useState<{ kind: 'success' | 'error'; text: string } | null>(null);
   const [saving, setSaving] = useState(false);
 
   const onSelect = useCallback(() => {
@@ -31,8 +31,11 @@ export function ActiveProse({ source, sourceType, sourceId, sourceTitle, classNa
       setSel(null);
       return;
     }
-    const rect = selection.getRangeAt(0).getBoundingClientRect();
+    const range = selection.getRangeAt(0);
     const cRect = container.getBoundingClientRect();
+    const rect = typeof range.getBoundingClientRect === 'function'
+      ? range.getBoundingClientRect()
+      : cRect;
     setSel({
       text,
       top: rect.top - cRect.top - 48,
@@ -46,44 +49,76 @@ export function ActiveProse({ source, sourceType, sourceId, sourceTitle, classNa
     return () => document.removeEventListener('scroll', close, true);
   }, []);
 
+  const closeSelection = useCallback(() => {
+    setSel(null);
+    window.getSelection()?.removeAllRanges();
+    containerRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (!sel) return undefined;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      closeSelection();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [closeSelection, sel]);
+
   async function save(kind: 'highlight' | 'quote') {
     if (!sel || saving) return;
     setSaving(true);
     try {
       const result = await addNote({ kind, body: sel.text, sourceType, sourceId, sourceTitle });
-      if (!result.ok) return;
-      setFlash(kind === 'quote' ? 'Citation ajoutée au carnet' : 'Passage surligné et sauvegardé');
+      if (!result.ok) {
+        setMessage({ kind: 'error', text: "Le passage n’a pas pu être enregistré localement." });
+        return;
+      }
+      setMessage({ kind: 'success', text: kind === 'quote' ? 'Citation ajoutée au carnet' : 'Passage surligné et sauvegardé' });
       setSel(null);
       window.getSelection()?.removeAllRanges();
-      setTimeout(() => setFlash(null), 2200);
+      containerRef.current?.focus();
+      setTimeout(() => setMessage(null), 2200);
     } finally {
       setSaving(false);
     }
   }
 
   return (
-    <div className="relative" ref={containerRef} onMouseUp={onSelect} onTouchEnd={onSelect}>
+    <div
+      ref={containerRef}
+      role="region"
+      aria-label="Texte annotable"
+      tabIndex={0}
+      className="relative outline-none"
+      onKeyUp={onSelect}
+      onMouseUp={onSelect}
+      onTouchEnd={onSelect}
+    >
       <Markdown source={source} className={className ?? 'prose-editorial'} glossaryPreview={sourceType === 'lesson'} />
 
       {sel && (
         <div
+          role="toolbar"
+          aria-label="Actions de sélection"
           className="absolute z-30 flex -translate-x-1/2 items-center gap-1 rounded-full border border-outline-variant bg-surface-container-lowest p-1 shadow-editorial-lg animate-scale-in"
           style={{ top: sel.top, left: sel.left }}
           onMouseDown={(e) => e.preventDefault()}
         >
-          <button onClick={() => void save('highlight')} disabled={saving} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-surface-variant transition-colors hover:bg-surface-container hover:text-foreground disabled:opacity-50">
-            <Highlighter size={14} /> Surligner
+          <button type="button" onClick={() => void save('highlight')} disabled={saving} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-surface-variant transition-colors hover:bg-surface-container hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50">
+            <Highlighter size={14} /> {saving ? 'Enregistrement…' : 'Surligner'}
           </button>
           <span className="h-4 w-px bg-outline-variant" />
-          <button onClick={() => void save('quote')} disabled={saving} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-surface-variant transition-colors hover:bg-surface-container hover:text-foreground disabled:opacity-50">
+          <button type="button" onClick={() => void save('quote')} disabled={saving} className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-surface-variant transition-colors hover:bg-surface-container hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50">
             <Quote size={14} /> Citer
           </button>
         </div>
       )}
 
-      {flash && (
-        <div role="status" aria-live="polite" className="fixed bottom-6 left-1/2 z-[80] flex -translate-x-1/2 items-center gap-2 rounded-full bg-[color:var(--secondary)] px-4 py-2.5 text-sm text-[color:var(--on-secondary)] shadow-editorial-lg animate-fade-up">
-          <Check size={15} className="text-[color:var(--primary)]" /> {flash}
+      {message && (
+        <div role={message.kind === 'error' ? 'alert' : 'status'} aria-live={message.kind === 'error' ? 'assertive' : 'polite'} className="fixed bottom-6 left-1/2 z-[80] flex -translate-x-1/2 items-center gap-2 rounded-full bg-[color:var(--secondary)] px-4 py-2.5 text-sm text-[color:var(--on-secondary)] shadow-editorial-lg animate-fade-up">
+          <Check size={15} className="text-[color:var(--primary)]" /> {message.text}
         </div>
       )}
     </div>

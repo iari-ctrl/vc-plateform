@@ -9,7 +9,6 @@
 //
 // `searchLocal` is deliberately NOT re-exported here: it references every
 // collection and is meant to be loaded lazily from `./search`.
-export * from './paths';
 export * from './courses';
 export * from './lessons';
 export * from './glossary';
@@ -24,3 +23,6 @@ export * from './memos';
 export * from './ikigai';
 export * from './labels';
 export * from './certifications';
+export * from './certificationLevels';
+export * from './diagnostics';
+export * from './learningTime';

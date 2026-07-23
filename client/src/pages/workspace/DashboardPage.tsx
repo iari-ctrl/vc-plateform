@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, NotebookPen, Bookmark, Compass, Crosshair, Play, Target } from 'lucide-react';
 import { IKIGAI } from '@/content/ikigai';
-import { LESSONS, lessonById } from '@/content/lessons';
+import { PUBLIC_LESSONS, publicLessonById, publicProgressSummary } from '@/content/lessons';
 import { courseById } from '@/content/courses';
 import { profileById } from '@/content/ikigai';
 import { PARCOURS, lessonIdsForParcours } from '@/content/parcours';
@@ -22,9 +22,9 @@ export default function DashboardPage() {
   const dueJournal = journal.filter((e) => isDue(e)).length;
 
   const learningProfile = profile ? profileById(profile.profileType) : undefined;
-  const progressList = Object.values(progress);
-  const doneCount = progressList.filter((p) => p.status === 'done').length;
-  const globalPct = LESSONS.length ? Math.round((doneCount / LESSONS.length) * 100) : 0;
+  const publicProgress = publicProgressSummary(progress);
+  const doneCount = publicProgress.doneCount;
+  const globalPct = publicProgress.percentage;
 
   // A started-but-unfinished lesson to resume; the card below falls back to a
   // "first step" prompt when nothing is in progress.
@@ -33,27 +33,27 @@ export default function DashboardPage() {
   const recPaths = learningProfile ? recommendedPaths(learningProfile, profile?.timeBudget) : PARCOURS.slice(0, 3);
   const suggestedLessons = learningProfile
     ? recPaths
-        .flatMap((p) => lessonIdsForParcours(p).map(lessonById).filter((l): l is NonNullable<ReturnType<typeof lessonById>> => !!l))
+        .flatMap((p) => lessonIdsForParcours(p).map(publicLessonById).filter((l): l is NonNullable<ReturnType<typeof publicLessonById>> => !!l))
         .filter((l) => progress[l.id]?.status !== 'done')
         .slice(0, 3)
-    : LESSONS.slice(0, 3);
+    : PUBLIC_LESSONS.slice(0, 3);
 
   return (
-    <div className="mx-auto max-w-[var(--content-max)] px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto min-w-0 max-w-[var(--content-max)] px-4 py-12 sm:px-6 lg:px-8">
       {/* Greeting */}
       <Reveal>
-        <div className="flex flex-wrap items-center justify-between gap-6">
-          <div>
+        <div className="flex min-w-0 flex-wrap items-center justify-between gap-6">
+          <div className="min-w-0">
             <p className="eyebrow mb-2">Tableau de bord</p>
             <h1 className="font-headline text-display-sm font-semibold tracking-tight">
               Bonjour.
             </h1>
             <p className="mt-2 text-surface-variant">Reprenez une lecture, poursuivez un parcours, ou revenez à votre travail de connaissance.</p>
           </div>
-          <div className="flex items-center gap-5 rounded-2xl border border-outline-variant bg-surface-container-low px-6 py-4">
+          <div className="flex min-w-0 max-w-full items-center gap-5 rounded-2xl border border-outline-variant bg-surface-container-low px-6 py-4">
             <ProgressRing value={globalPct} size={56} stroke={4} label={`${globalPct}%`} />
-            <div className="text-sm">
-              <p className="font-semibold">{doneCount} / {LESSONS.length} leçons</p>
+            <div className="min-w-0 text-sm">
+              <p className="font-semibold">{doneCount} / {publicProgress.totalCount} leçons</p>
               <p className="text-surface-variant">terminées</p>
             </div>
           </div>
@@ -63,15 +63,15 @@ export default function DashboardPage() {
       
 
       <Reveal delay={60}>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-outline-variant bg-surface-container-low/60 p-5">
+        <div className="mt-8 grid min-w-0 gap-4 md:grid-cols-2">
+          <div className="min-w-0 rounded-2xl border border-outline-variant bg-surface-container-low/60 p-5">
             <p className="eyebrow flex items-center gap-2"><BookOpen size={13} /> Voie apprentissage</p>
             <h2 className="mt-2 font-headline text-headline-sm font-semibold">Parcours, leçons et reprise</h2>
             <p className="mt-1.5 text-sm leading-relaxed text-surface-variant">
               Cette colonne sert à reprendre une progression et choisir la prochaine lecture.
             </p>
           </div>
-          <div className="rounded-2xl border border-outline-variant bg-surface-container-low/60 p-5">
+          <div className="min-w-0 rounded-2xl border border-outline-variant bg-surface-container-low/60 p-5">
             <p className="eyebrow flex items-center gap-2"><Crosshair size={13} /> Voie connaissance</p>
             <h2 className="mt-2 font-headline text-headline-sm font-semibold">Notes, favoris et décisions</h2>
             <p className="mt-1.5 text-sm leading-relaxed text-surface-variant">
@@ -81,9 +81,9 @@ export default function DashboardPage() {
         </div>
       </Reveal>
 
-      <div className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+      <div className="mt-10 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         {/* Left column */}
-        <div className="space-y-6" aria-labelledby="dashboard-learning-lane">
+        <div className="min-w-0 space-y-6" aria-labelledby="dashboard-learning-lane">
           <Reveal>
             <div className="border-b border-outline-variant pb-3">
               <h2 id="dashboard-learning-lane" className="flex items-center gap-2 font-headline text-headline-sm font-semibold text-balance">
@@ -97,7 +97,7 @@ export default function DashboardPage() {
           {/* Resume / start */}
           <Reveal>
             {resumeLesson ? (
-              <Link to={`/lessons/${resumeLesson.slug}`} className="premium-card premium-card-hover group block p-7">
+              <Link to={`/lessons/${resumeLesson.slug}`} className="premium-card premium-card-hover group block min-w-0 p-7">
                 <p className="eyebrow mb-3 flex items-center gap-2"><Play size={13} /> Reprendre la lecture</p>
                 <h3 className="font-headline text-headline-md font-semibold transition-colors group-hover:text-[color:var(--primary)]">{resumeLesson.title}</h3>
                 <p className="mt-1.5 text-sm text-surface-variant">{courseById(resumeLesson.courseId)?.title}</p>
@@ -107,7 +107,7 @@ export default function DashboardPage() {
                 </div>
               </Link>
             ) : (
-              <div className="premium-card p-7">
+              <div className="premium-card min-w-0 p-7">
                 <p className="eyebrow mb-3 flex items-center gap-2"><Compass size={13} /> Premier pas</p>
                 <h3 className="font-headline text-headline-md font-semibold">Commencez votre parcours</h3>
                 <p className="mt-1.5 text-sm text-surface-variant">{learningProfile ? `Votre profil ${learningProfile.name} vous oriente vers « ${recPaths[0]?.title ?? 'un parcours'} ».` : 'Faites le test d’orientation pour une recommandation sur-mesure, ou plongez directement.'}</p>
@@ -121,10 +121,10 @@ export default function DashboardPage() {
 
           {/* Suggested lessons */}
           <Reveal delay={80}>
-            <div className="premium-card p-7">
-              <div className="mb-4 flex items-center justify-between">
+            <div className="premium-card min-w-0 p-7">
+              <div className="mb-4 flex min-w-0 items-center justify-between gap-3">
                 <p className="eyebrow flex items-center gap-2"><BookOpen size={13} /> Suggéré pour vous</p>
-                <Link to="/parcours" className="text-xs text-surface-variant hover:text-foreground">Tous les parcours</Link>
+                <Link to="/parcours" className="shrink-0 text-xs text-surface-variant hover:text-foreground">Tous les parcours</Link>
               </div>
               <div className="-mx-2">
                 {suggestedLessons.map((l) => {
@@ -156,7 +156,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Right column */}
-        <div className="space-y-6" aria-labelledby="dashboard-knowledge-lane">
+        <div className="min-w-0 space-y-6" aria-labelledby="dashboard-knowledge-lane">
           <Reveal>
             <div className="border-b border-outline-variant pb-3">
               <h2 id="dashboard-knowledge-lane" className="flex items-center gap-2 font-headline text-headline-sm font-semibold text-balance">
@@ -169,10 +169,10 @@ export default function DashboardPage() {
 
           <Reveal>
             {learningProfile ? (
-              <div className="premium-card p-7" style={{ borderColor: `color-mix(in srgb, ${learningProfile.accent} 35%, transparent)` }}>
-                <div className="flex items-center gap-4">
+              <div className="premium-card min-w-0 p-7" style={{ borderColor: `color-mix(in srgb, ${learningProfile.accent} 35%, transparent)` }}>
+                <div className="flex min-w-0 items-center gap-4">
                   <KanjiSeal kanji={learningProfile.kanji} accent={learningProfile.accent} size={52} />
-                  <div>
+                  <div className="min-w-0">
                     <p className="font-mono text-[0.625rem] uppercase tracking-wider text-surface-variant">Votre profil</p>
                     <h3 className="font-headline text-headline-sm font-semibold" style={{ color: learningProfile.accent }}>{learningProfile.name}</h3>
                   </div>
@@ -181,7 +181,7 @@ export default function DashboardPage() {
                 <Link to="/profile-result" className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--primary)]">Voir le détail <ArrowRight size={14} /></Link>
               </div>
             ) : (
-              <div className="premium-card p-7 text-center">
+              <div className="premium-card min-w-0 p-7 text-center">
                 <Fleuron className="text-base" />
                 <h3 className="mt-2 font-headline text-headline-sm font-semibold">Révélez votre profil</h3>
                 <p className="mt-1.5 text-sm text-surface-variant">{IKIGAI.questions.length} questions pour personnaliser vos recommandations.</p>
@@ -192,13 +192,13 @@ export default function DashboardPage() {
 
           {/* Stats */}
           <Reveal delay={80}>
-            <div className="grid grid-cols-2 gap-3">
-              <Link to="/notes" className="premium-card premium-card-hover p-5">
+            <div className="grid min-w-0 grid-cols-2 gap-3">
+              <Link to="/notes" className="premium-card premium-card-hover min-w-0 p-5">
                 <NotebookPen size={18} className="text-surface-variant" />
                 <p className="mt-3 font-headline text-display-sm font-semibold leading-none">{notes.length}</p>
                 <p className="mt-1 text-xs text-surface-variant">notes & citations</p>
               </Link>
-              <Link to="/notes" className="premium-card premium-card-hover p-5">
+              <Link to="/notes" className="premium-card premium-card-hover min-w-0 p-5">
                 <Bookmark size={18} className="text-surface-variant" />
                 <p className="mt-3 font-headline text-display-sm font-semibold leading-none">{bookmarks.length}</p>
                 <p className="mt-1 text-xs text-surface-variant">favoris enregistrés</p>
@@ -226,7 +226,7 @@ export default function DashboardPage() {
 
           {/* Recent notes */}
           <Reveal delay={120}>
-            <div className="premium-card p-7">
+            <div className="premium-card min-w-0 p-7">
               <p className="eyebrow mb-4 flex items-center gap-2"><NotebookPen size={13} /> Dernières notes</p>
               {notes.length === 0 ? (
                 <p className="text-sm text-surface-variant">Surlignez un passage pendant votre lecture pour commencer votre carnet.</p>

@@ -5,13 +5,13 @@ import { simulatorBySlug, lessonById } from '@/content';
 import { SIMULATOR_COMPONENTS } from '@/components/simulators';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
-import { usePageMeta } from '@/lib/seo';
+import { useResourcePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function SimulatorPage() {
   const { slug } = useParams();
   const sim = slug ? simulatorBySlug(slug) : undefined;
-  usePageMeta(sim?.title, sim?.description);
+  useResourcePageMeta(Boolean(sim), sim?.title, sim?.description);
 
   if (!sim) return <NotFoundPage />;
   const Calculator = SIMULATOR_COMPONENTS[sim.id];

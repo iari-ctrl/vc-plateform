@@ -12,13 +12,13 @@ import { EcosystemCard, GlossaryRefList } from '@/components/cards';
 import { EcosystemFigureView } from '@/components/ecosystems/EcosystemFigures';
 import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { formatDateFr } from '@/lib/utils';
-import { usePageMeta } from '@/lib/seo';
+import { useResourcePageMeta } from '@/lib/seo';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function EcosystemPage() {
   const { slug } = useParams();
   const dossier = slug ? ecosystemBySlug(slug) : undefined;
-  usePageMeta(dossier ? `${dossier.name} — décorticage` : undefined, dossier?.summary, { type: 'article' });
+  useResourcePageMeta(Boolean(dossier), dossier ? `${dossier.name} — décorticage` : undefined, dossier?.summary, { type: 'article' });
 
   if (!dossier) return <NotFoundPage />;
 

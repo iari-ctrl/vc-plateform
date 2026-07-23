@@ -3,13 +3,17 @@
     "id": "cert-analyst-vc",
     "slug": "analyste-en-capital-risque",
     "domainId": "venture-capital",
-    "title": "Certification professionnelle Analyst en capital-risque",
-    "shortTitle": "Analyst en capital-risque",
+    "title": "VC Analyst",
+    "shortTitle": "VC Analyst",
     "certificateType": "professional",
     "status": "published",
     "availability": "in-construction",
     "issuer": "VC Premium Experience",
-    "targetRoles": ["Analyst", "Investment Analyst", "Junior Investment Professional"],
+    "targetRoles": [
+      "Analyst",
+      "Investment Analyst",
+      "Junior Investment Professional"
+    ],
     "level": "intermediaire",
     "summary": "Démontrer une analyse d'investissement structurée, fiable et défendable en fonds VC.",
     "competencies": [
@@ -22,78 +26,42 @@
       "Suivre le portefeuille et préparer les réinvestissements",
       "Garantir indépendance, confidentialité et usage déclaré de l'IA"
     ],
-    "coreRequirements": [
+    "recommendedPreparation": [
       {
-        "id": "core-foundations",
-        "courseId": "c-what-is-vc",
-        "title": "Fondamentaux du capital-risque",
-        "summary": "Classe d'actifs, loi de puissance et cycle de vie d'un fonds.",
-        "lessonIds": ["l-vc-definition", "l-power-law", "l-fund-lifecycle"],
-        "assessmentVariantId": "analyst-foundations"
-      },
-      {
-        "id": "core-ecosystem",
-        "courseId": "c-ecosystem",
-        "title": "Écosystème et chaîne de financement",
-        "summary": "Acteurs, responsabilités et articulation des stades d'investissement.",
-        "lessonIds": ["l-actors", "l-stages"],
-        "assessmentVariantId": "analyst-ecosystem"
-      },
-      {
-        "id": "core-role",
-        "courseId": "c-vc-job",
-        "title": "Fonctions et responsabilités de l'Analyst",
-        "summary": "Organisation du travail, gouvernance de la décision et suivi des participations.",
-        "lessonIds": ["l-vc-week", "l-roles", "l-portfolio-monitoring"],
-        "assessmentVariantId": "analyst-role"
-      },
-      {
-        "id": "core-pipeline",
-        "courseId": "c-deal-flow",
-        "title": "Sourcing, screening et gestion du pipeline",
-        "summary": "Origination, qualification, priorisation et tenue d'une information exploitable.",
-        "lessonIds": ["l-sourcing", "l-screening", "l-pipeline-crm"],
-        "assessmentVariantId": "analyst-pipeline"
-      },
-      {
-        "id": "core-opportunity-analysis",
+        "id": "recommended-company-analysis",
         "courseId": "c-startup-analysis",
         "title": "Analyse d'une opportunité d'investissement",
         "summary": "Équipe fondatrice, marché, produit, traction et économie unitaire.",
-        "lessonIds": ["l-founder-analysis", "l-team-market", "l-product-analysis", "l-traction-unit-economics"],
-        "assessmentVariantId": "analyst-opportunity"
+        "lessonIds": [
+          "l-founder-analysis",
+          "l-team-market",
+          "l-product-analysis",
+          "l-traction-unit-economics"
+        ]
       },
       {
-        "id": "core-modeling",
-        "courseId": "c-mathematiques-vc",
-        "title": "Dimensionnement de marché, modélisation financière et structure de l'investissement",
-        "summary": "Dimensionnement de marché, économie unitaire, trésorerie, valorisation, dilution et scénarios de rendement.",
-        "lessonIds": ["lmv-market-sizing", "lmv-unit-economics", "lmv-cash-flow-scenarios", "lmv-pre-post-ownership", "lmv-dilution-cap-table", "lmv-valuation-economic-rights", "lmv-returns-waterfall"],
-        "assessmentVariantId": "analyst-modeling"
-      },
-      {
-        "id": "core-due-diligence",
+        "id": "recommended-due-diligence",
         "courseId": "c-due-diligence",
         "title": "Due diligence et gestion des risques",
         "summary": "Plan de diligence, travaux commerciaux, produit, équipe, données financières, droit et conformité.",
-        "lessonIds": ["l-dd-process", "l-dd-commercial", "l-dd-tech-product", "l-dd-team", "l-dd-financial", "l-dd-legal"],
-        "assessmentVariantId": "analyst-due-diligence"
+        "lessonIds": [
+          "l-dd-process",
+          "l-dd-commercial",
+          "l-dd-tech-product",
+          "l-dd-team",
+          "l-dd-financial",
+          "l-dd-legal"
+        ]
       },
       {
-        "id": "core-recommendation",
+        "id": "recommended-recommendation",
         "courseId": "c-investment-recommendation",
         "title": "Recommandation d'investissement et préparation du comité",
-        "summary": "Séparation des faits et des hypothèses, memo, recommandation et défense orale.",
-        "lessonIds": ["l-fact-hypothesis", "l-investment-recommendation", "l-ic-defense"],
-        "assessmentVariantId": "analyst-recommendation"
-      },
-      {
-        "id": "core-integrity",
-        "courseId": "c-professional-integrity",
-        "title": "Intégrité professionnelle, confidentialité et usage déclaré de l'intelligence artificielle",
-        "summary": "Indépendance, conflits d'intérêts, traitement de l'information et critères critiques de fiabilité.",
-        "lessonIds": ["l-conflicts-conduct", "l-confidentiality", "l-ai-integrity", "l-critical-errors"],
-        "assessmentVariantId": "analyst-integrity"
+        "summary": "Recommandation écrite, explicitation des réserves et défense du raisonnement devant un comité.",
+        "lessonIds": [
+          "l-investment-recommendation",
+          "l-ic-defense"
+        ]
       }
     ],
     "axes": {
@@ -112,7 +80,10 @@
               "courseId": "c-analyst-stage",
               "title": "Orientation Pre-seed",
               "summary": "Équipe fondatrice, signaux précoces, information limitée et instruments d'amorçage.",
-              "lessonIds": ["l-stage-preseed-team", "l-stage-preseed-evidence"],
+              "lessonIds": [
+                "l-stage-preseed-team",
+                "l-stage-preseed-evidence"
+              ],
               "assessmentVariantId": "analyst-stage-pre-seed"
             }
           },
@@ -126,7 +97,10 @@
               "courseId": "c-analyst-stage",
               "title": "Orientation Seed",
               "summary": "Validation commerciale, rétention, ownership cible et besoins de financement.",
-              "lessonIds": ["l-stage-seed-commercial", "l-stage-seed-financing"],
+              "lessonIds": [
+                "l-stage-seed-commercial",
+                "l-stage-seed-financing"
+              ],
               "assessmentVariantId": "analyst-stage-seed"
             }
           },
@@ -140,7 +114,10 @@
               "courseId": "c-analyst-stage",
               "title": "Orientation Série A",
               "summary": "Cohorts, unit economics, répétabilité du go-to-market et structuration de l'organisation.",
-              "lessonIds": ["l-stage-series-a-cohorts", "l-stage-series-a-repeatability"],
+              "lessonIds": [
+                "l-stage-series-a-cohorts",
+                "l-stage-series-a-repeatability"
+              ],
               "assessmentVariantId": "analyst-stage-series-a"
             }
           },
@@ -154,7 +131,10 @@
               "courseId": "c-analyst-stage",
               "title": "Orientation Growth",
               "summary": "Qualité du revenu, prévisions, valorisation, dette, secondaries et scénarios de sortie.",
-              "lessonIds": ["l-stage-growth-revenue", "l-stage-growth-capital"],
+              "lessonIds": [
+                "l-stage-growth-revenue",
+                "l-stage-growth-capital"
+              ],
               "assessmentVariantId": "analyst-stage-growth"
             }
           }
@@ -175,7 +155,10 @@
               "courseId": "c-analyst-deal-role",
               "title": "Fonds lead",
               "summary": "Plan de diligence, coordination des conseils, gouvernance et préparation du closing.",
-              "lessonIds": ["l-role-lead-dd", "l-role-lead-closing"],
+              "lessonIds": [
+                "l-role-lead-dd",
+                "l-role-lead-closing"
+              ],
               "assessmentVariantId": "analyst-role-lead"
             }
           },
@@ -189,7 +172,10 @@
               "courseId": "c-analyst-deal-role",
               "title": "Fonds co-lead",
               "summary": "Répartition des diligences, alignement des positions et gouvernance partagée.",
-              "lessonIds": ["l-role-colead-workshare", "l-role-colead-governance"],
+              "lessonIds": [
+                "l-role-colead-workshare",
+                "l-role-colead-governance"
+              ],
               "assessmentVariantId": "analyst-role-co-lead"
             }
           },
@@ -203,7 +189,10 @@
               "courseId": "c-analyst-deal-role",
               "title": "Fonds follower",
               "summary": "Validation indépendante, discipline d'allocation et droits d'information.",
-              "lessonIds": ["l-role-follower-validation", "l-role-follower-rights"],
+              "lessonIds": [
+                "l-role-follower-validation",
+                "l-role-follower-rights"
+              ],
               "assessmentVariantId": "analyst-role-follower"
             }
           }
@@ -224,7 +213,10 @@
               "courseId": "c-analyst-specialties",
               "title": "Spécialité Généraliste",
               "summary": "Comparabilité multisectorielle, benchmarks et recours aux experts.",
-              "lessonIds": ["l-specialty-generalist-comparison", "l-specialty-generalist-experts"],
+              "lessonIds": [
+                "l-specialty-generalist-comparison",
+                "l-specialty-generalist-experts"
+              ],
               "assessmentVariantId": "analyst-specialty-generalist"
             }
           },
@@ -238,7 +230,10 @@
               "courseId": "c-analyst-specialties",
               "title": "Spécialité SaaS",
               "summary": "ARR, NRR, churn, CAC, LTV, payback et répétabilité commerciale.",
-              "lessonIds": ["l-specialty-saas-metrics", "l-specialty-saas-gtm"],
+              "lessonIds": [
+                "l-specialty-saas-metrics",
+                "l-specialty-saas-gtm"
+              ],
               "assessmentVariantId": "analyst-specialty-saas"
             }
           },
@@ -252,7 +247,10 @@
               "courseId": "c-analyst-specialties",
               "title": "Spécialité Deeptech",
               "summary": "TRL, propriété intellectuelle, diligence scientifique et besoins d'industrialisation.",
-              "lessonIds": ["l-specialty-deeptech-trl-ip", "l-specialty-deeptech-industrialization"],
+              "lessonIds": [
+                "l-specialty-deeptech-trl-ip",
+                "l-specialty-deeptech-industrialization"
+              ],
               "assessmentVariantId": "analyst-specialty-deeptech"
             }
           },
@@ -266,7 +264,10 @@
               "courseId": "c-analyst-specialties",
               "title": "Spécialité Climat",
               "summary": "Potentiel de réduction, techno-économie, réglementation et intensité capitalistique.",
-              "lessonIds": ["l-specialty-climate-impact", "l-specialty-climate-economics"],
+              "lessonIds": [
+                "l-specialty-climate-impact",
+                "l-specialty-climate-economics"
+              ],
               "assessmentVariantId": "analyst-specialty-climate"
             }
           },
@@ -280,7 +281,10 @@
               "courseId": "c-analyst-specialties",
               "title": "Spécialité Santé/Biotech",
               "summary": "Validation clinique, réglementation, remboursement, propriété intellectuelle et calendrier de développement.",
-              "lessonIds": ["l-specialty-health-clinical", "l-specialty-health-ip-reimbursement"],
+              "lessonIds": [
+                "l-specialty-health-clinical",
+                "l-specialty-health-ip-reimbursement"
+              ],
               "assessmentVariantId": "analyst-specialty-health-biotech"
             }
           },
@@ -294,7 +298,10 @@
               "courseId": "c-analyst-specialties",
               "title": "Spécialité Consumer/Marketplaces",
               "summary": "Rétention, liquidité, effets de réseau, take rate et unit economics.",
-              "lessonIds": ["l-specialty-consumer-retention", "l-specialty-marketplace-liquidity"],
+              "lessonIds": [
+                "l-specialty-consumer-retention",
+                "l-specialty-marketplace-liquidity"
+              ],
               "assessmentVariantId": "analyst-specialty-consumer-marketplaces"
             }
           },
@@ -308,7 +315,10 @@
               "courseId": "c-analyst-specialties",
               "title": "Spécialité Impact",
               "summary": "Intentionnalité, additionalité, théorie du changement, matérialité et indicateurs d'impact.",
-              "lessonIds": ["l-specialty-impact-intentionality", "l-specialty-impact-measurement"],
+              "lessonIds": [
+                "l-specialty-impact-intentionality",
+                "l-specialty-impact-measurement"
+              ],
               "assessmentVariantId": "analyst-specialty-impact"
             }
           }
@@ -380,103 +390,148 @@
           "axis": "fundStage",
           "optionId": "pre-seed",
           "caseAdaptation": "Le cas limite fortement l'historique disponible et exige une appréciation structurée de l'équipe, du produit et des signaux précoces.",
-          "rubricCriteria": ["Qualité du raisonnement sous information limitée", "Pertinence des preuves non financières et du plan de dérisquage"]
+          "rubricCriteria": [
+            "Qualité du raisonnement sous information limitée",
+            "Pertinence des preuves non financières et du plan de dérisquage"
+          ]
         },
         {
           "id": "analyst-stage-seed",
           "axis": "fundStage",
           "optionId": "seed",
           "caseAdaptation": "Le cas demande d'établir la réalité de la validation commerciale et la qualité des premiers signaux de rétention.",
-          "rubricCriteria": ["Lecture de la validation commerciale", "Cohérence entre traction, ownership cible et financement à venir"]
+          "rubricCriteria": [
+            "Lecture de la validation commerciale",
+            "Cohérence entre traction, ownership cible et financement à venir"
+          ]
         },
         {
           "id": "analyst-stage-series-a",
           "axis": "fundStage",
           "optionId": "series-a",
           "caseAdaptation": "Le cas inclut des cohorts et un plan de croissance afin d'évaluer la répétabilité commerciale et le changement d'échelle.",
-          "rubricCriteria": ["Analyse des cohorts", "Évaluation de la répétabilité et des conditions de passage à l'échelle"]
+          "rubricCriteria": [
+            "Analyse des cohorts",
+            "Évaluation de la répétabilité et des conditions de passage à l'échelle"
+          ]
         },
         {
           "id": "analyst-stage-growth",
           "axis": "fundStage",
           "optionId": "growth",
           "caseAdaptation": "Le cas ajoute une analyse de la qualité du revenu, des prévisions et de la structure de capital.",
-          "rubricCriteria": ["Qualité du revenu et robustesse des prévisions", "Lecture de la valorisation, de la dette et des scénarios de liquidité"]
+          "rubricCriteria": [
+            "Qualité du revenu et robustesse des prévisions",
+            "Lecture de la valorisation, de la dette et des scénarios de liquidité"
+          ]
         },
         {
           "id": "analyst-role-lead",
           "axis": "dealRole",
           "optionId": "lead",
           "caseAdaptation": "Le candidat doit proposer un plan de diligence, une position de term sheet et une séquence de closing en posture de lead.",
-          "rubricCriteria": ["Priorisation et pilotage du plan de diligence", "Cohérence de la structuration, de la gouvernance et du closing"]
+          "rubricCriteria": [
+            "Priorisation et pilotage du plan de diligence",
+            "Cohérence de la structuration, de la gouvernance et du closing"
+          ]
         },
         {
           "id": "analyst-role-co-lead",
           "axis": "dealRole",
           "optionId": "co-lead",
           "caseAdaptation": "Le candidat répartit les travaux avec un co-investisseur et formalise les points qui exigent une position commune.",
-          "rubricCriteria": ["Répartition explicite des diligences", "Gestion des divergences et de la gouvernance partagée"]
+          "rubricCriteria": [
+            "Répartition explicite des diligences",
+            "Gestion des divergences et de la gouvernance partagée"
+          ]
         },
         {
           "id": "analyst-role-follower",
           "axis": "dealRole",
           "optionId": "follower",
           "caseAdaptation": "Le candidat doit former une conviction indépendante et identifier les droits nécessaires à un investisseur follower.",
-          "rubricCriteria": ["Indépendance de la validation", "Discipline d'allocation et protection des droits d'information"]
+          "rubricCriteria": [
+            "Indépendance de la validation",
+            "Discipline d'allocation et protection des droits d'information"
+          ]
         },
         {
           "id": "analyst-specialty-generalist",
           "axis": "specialty",
           "optionId": "generalist",
           "caseAdaptation": "Le cas oblige à sélectionner des benchmarks pertinents parmi plusieurs modèles économiques et à expliciter le recours aux experts.",
-          "rubricCriteria": ["Comparabilité multisectorielle", "Choix et limites des benchmarks mobilisés"]
+          "rubricCriteria": [
+            "Comparabilité multisectorielle",
+            "Choix et limites des benchmarks mobilisés"
+          ]
         },
         {
           "id": "analyst-specialty-saas",
           "axis": "specialty",
           "optionId": "saas",
           "caseAdaptation": "Le dossier fournit ARR, NRR, churn, CAC, LTV et payback à réconcilier avec le plan commercial.",
-          "rubricCriteria": ["Calcul et interprétation des métriques SaaS", "Diagnostic de la répétabilité commerciale"]
+          "rubricCriteria": [
+            "Calcul et interprétation des métriques SaaS",
+            "Diagnostic de la répétabilité commerciale"
+          ]
         },
         {
           "id": "analyst-specialty-deeptech",
           "axis": "specialty",
           "optionId": "deeptech",
           "caseAdaptation": "Le dossier impose d'évaluer la maturité technologique, la propriété intellectuelle, les preuves scientifiques et l'industrialisation.",
-          "rubricCriteria": ["Lecture du TRL et de la diligence scientifique", "Analyse de la propriété intellectuelle et du risque d'industrialisation"]
+          "rubricCriteria": [
+            "Lecture du TRL et de la diligence scientifique",
+            "Analyse de la propriété intellectuelle et du risque d'industrialisation"
+          ]
         },
         {
           "id": "analyst-specialty-climate",
           "axis": "specialty",
           "optionId": "climate",
           "caseAdaptation": "Le dossier combine potentiel de réduction, hypothèses techno-économiques, réglementation et besoins de capital.",
-          "rubricCriteria": ["Robustesse du potentiel de réduction et de l'additionalité climatique", "Cohérence techno-économique et capitalistique"]
+          "rubricCriteria": [
+            "Robustesse du potentiel de réduction et de l'additionalité climatique",
+            "Cohérence techno-économique et capitalistique"
+          ]
         },
         {
           "id": "analyst-specialty-health-biotech",
           "axis": "specialty",
           "optionId": "health-biotech",
           "caseAdaptation": "Le dossier demande d'articuler validation clinique, parcours réglementaire, remboursement, propriété intellectuelle et calendrier de financement.",
-          "rubricCriteria": ["Lecture des preuves cliniques et réglementaires", "Analyse du remboursement, de la propriété intellectuelle et du calendrier de capital"]
+          "rubricCriteria": [
+            "Lecture des preuves cliniques et réglementaires",
+            "Analyse du remboursement, de la propriété intellectuelle et du calendrier de capital"
+          ]
         },
         {
           "id": "analyst-specialty-consumer-marketplaces",
           "axis": "specialty",
           "optionId": "consumer-marketplaces",
           "caseAdaptation": "Le dossier fournit des cohortes de rétention, des mesures de liquidité et les unit economics d'une plateforme.",
-          "rubricCriteria": ["Analyse de la rétention et des effets de réseau", "Lecture de la liquidité, du take rate et des unit economics"]
+          "rubricCriteria": [
+            "Analyse de la rétention et des effets de réseau",
+            "Lecture de la liquidité, du take rate et des unit economics"
+          ]
         },
         {
           "id": "analyst-specialty-impact",
           "axis": "specialty",
           "optionId": "impact",
           "caseAdaptation": "Le dossier exige de relier intentionnalité, additionalité, théorie du changement et indicateurs matériels à la recommandation financière.",
-          "rubricCriteria": ["Cohérence de la théorie du changement et de l'additionalité", "Articulation explicite entre performance financière, matérialité et objectifs d'impact"]
+          "rubricCriteria": [
+            "Cohérence de la théorie du changement et de l'additionalité",
+            "Articulation explicite entre performance financière, matérialité et objectifs d'impact"
+          ]
         }
       ],
       "passingScore": 70,
       "criticalCriteriaMustPass": true,
-      "evaluatorTypes": ["expert", "jury"]
+      "evaluatorTypes": [
+        "expert",
+        "jury"
+      ]
     },
     "eligibilityConditions": [
       "100 % des contenus obligatoires",

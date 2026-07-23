@@ -5,11 +5,13 @@ import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { LevelBadge, ProgressRing } from '@/components/ui/primitives';
 import { antiPortfolioPatternById } from '@/content/antiPortfolio';
 import { FAMILY_META, lessonIdsForParcours } from '@/content/parcours';
+import { formatMinutes, parcoursTimeSummary } from '@/content/learningTime';
 import { CASE_KIND_LABEL, ECOSYSTEM_KIND_LABEL } from '@/content/labels';
 import { useUserData } from '@/context/UserDataContext';
 import { formatDateFr, pluralize } from '@/lib/utils';
 import type { AntiPortfolioEntry, BlogPost, CaseStudy, Deliverable, EcosystemDossier, InvestmentMemo, Simulator } from '@/content/types';
 import type { Parcours } from '@/content/parcours';
+import { useLearningWorkspace } from '@/lib/learningWorkspace';
 
 export function ParcoursCard({
   parcours,
@@ -21,16 +23,27 @@ export function ParcoursCard({
   variant?: 'catalogue' | 'recommendation';
 }) {
   const { progress } = useUserData();
+  const workspace = useLearningWorkspace();
   const meta = FAMILY_META[parcours.family];
   const accent = parcours.accent ?? meta.accent;
   const lessonIds = lessonIdsForParcours(parcours);
   const done = lessonIds.filter((id) => progress[id]?.status === 'done').length;
   const pct = lessonIds.length ? Math.round((done / lessonIds.length) * 100) : 0;
+  const time = parcoursTimeSummary(parcours);
+  const finalStep = parcours.steps.find((step) => step.ref.kind === 'milestone');
+  const finalEntry = finalStep ? workspace.productions[finalStep.ref.id] : undefined;
+  const finalLabel = finalEntry?.declaredCompleteAt
+    ? 'Jalon terminé'
+    : finalEntry?.stage === 'revised'
+      ? 'Jalon révisé'
+      : finalEntry
+        ? 'Jalon en cours'
+        : 'Jalon à produire';
 
   return (
     <Link
       to={`/parcours/${parcours.slug}`}
-      className="premium-card premium-card-hover sheen-host group isolate flex h-full flex-col p-6"
+      className="premium-card premium-card-hover sheen-host group isolate flex h-full min-w-0 flex-col overflow-hidden p-6"
       style={{ borderTopColor: `color-mix(in srgb, ${accent} 50%, transparent)`, borderTopWidth: 2 }}
     >
       <span
@@ -50,7 +63,7 @@ export function ParcoursCard({
           />
         )}
         {pct > 0 ? (
-          <ProgressRing value={pct} size={variant === 'catalogue' ? 40 : 42} stroke={3} accent={accent} />
+          <ProgressRing value={pct} size={variant === 'catalogue' ? 40 : 42} stroke={3} accent={accent} accessibleLabel={`Leçons déclarées lues : ${done} sur ${lessonIds.length}`} />
         ) : variant === 'catalogue' ? (
           parcours.roadmap === 'now' ? (
             <span className="chip !border-[color-mix(in_srgb,var(--primary)_45%,transparent)] !text-[color:var(--primary)]">Phare</span>
@@ -71,8 +84,12 @@ export function ParcoursCard({
         {parcours.title}
       </h3>
       <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-surface-variant">{parcours.hook}</p>
-      <div className="mt-5 flex items-center justify-between text-xs text-surface-variant">
-        <span className="inline-flex items-center gap-1.5"><Clock size={13} /> ≈ {parcours.time.coreHours} h</span>
+      {finalStep && <p className="mt-3 text-xs text-surface-variant"><span className="font-medium text-foreground">{finalLabel}</span> · {done}/{lessonIds.length} leçons lues</p>}
+      <div className="mt-5 flex items-end justify-between gap-3 text-xs text-surface-variant">
+        <span className="inline-flex flex-col gap-1">
+          <span className="inline-flex items-center gap-1.5"><Clock size={13} aria-hidden /> {parcours.time.source === 'derived' ? `${formatMinutes(time.readingMinutes)} de lecture` : `≈ ${formatMinutes(time.requiredMinutes)}`}</span>
+          {parcours.time.source === 'derived' && <span>{formatMinutes(time.guidedPracticeMinutes + time.consolidationMinutes + time.finalMinutes)} de production</span>}
+        </span>
         <span className="inline-flex items-center gap-1.5 font-medium text-[color:var(--primary)]">
           {pct > 0 ? 'Reprendre' : 'Commencer'} <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
         </span>
@@ -81,8 +98,8 @@ export function ParcoursCard({
   );
 }
 
-export function LessonRow({ slug, order, title, kicker, readMin, summary, done, reading, upcoming = false }: {
-  slug: string; order: number; title: string; kicker: string; readMin: number; summary?: string; done?: boolean; reading?: boolean; upcoming?: boolean;
+export function LessonRow({ slug, order, title, kicker, readMin, practiceMin, summary, done, reading, upcoming = false }: {
+  slug: string; order: number; title: string; kicker: string; readMin: number; practiceMin?: number; summary?: string; done?: boolean; reading?: boolean; upcoming?: boolean;
 }) {
   const content = (
     <>
@@ -98,7 +115,12 @@ export function LessonRow({ slug, order, title, kicker, readMin, summary, done, 
         <span className="mt-0.5 block font-medium leading-snug transition-colors group-hover:text-[color:var(--primary)]">{title}{upcoming ? ' (à venir)' : ''}</span>
         {summary && <span className="mt-1 line-clamp-1 block text-sm text-surface-variant">{summary}</span>}
       </span>
-      {!upcoming && <span className="mt-1 shrink-0 text-xs text-surface-variant">{readMin} min</span>}
+      {!upcoming && (
+        <span className="mt-1 shrink-0 text-right text-xs text-surface-variant">
+          <span className="block">{readMin} min lecture</span>
+          {practiceMin && <span className="mt-0.5 block">{practiceMin} min pratique</span>}
+        </span>
+      )}
     </>
   );
   const className = "group flex items-start gap-4 rounded-xl border border-transparent px-3 py-3.5 transition-colors";

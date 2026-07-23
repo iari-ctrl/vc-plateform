@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Check, Clock, Sparkles, BookMarked, ArrowUpRight } from 'lucide-react';
-import { loadLesson, lessonById, courseById, lessonsForCourse, simulatorBySlug, caseById, glossaryBySlug } from '@/content';
+import { ArrowLeft, ArrowRight, Check, Clock, Sparkles, BookMarked, ArrowUpRight, FileCheck2 } from 'lucide-react';
+import { courseById } from '@/content/courses';
+import { deliverableById } from '@/content/deliverables';
+import { loadLesson, publishedLessonsForCourse } from '@/content/lessons';
 import { parcoursForLesson } from '@/content/parcours';
 import type { Lesson } from '@/content/types';
 import { ActiveProse } from '@/components/reading/ActiveProse';
@@ -12,12 +14,11 @@ import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { PageLoader } from '@/components/ui/primitives';
 import { useUserData } from '@/context/UserDataContext';
-import { usePageMeta } from '@/lib/seo';
-import { storage, STORAGE_KEYS } from '@/lib/storage';
+import { useResourcePageMeta } from '@/lib/seo';
+import { commitOnStorageSuccess, storage } from '@/lib/storage';
+import { STORAGE_CONTRACTS, type ReadingDepth } from '@/lib/storageDomains';
 import NotFoundPage from '@/pages/system/NotFoundPage';
-
-/** Reader depth for lessons that ship both an "essentiel" and a full version. */
-type ReadingDepth = 'court' | 'profond';
+import { furtherReadingHref } from './furtherReadingHref';
 
 export default function LessonPage() {
   const { slug } = useParams();
@@ -28,47 +29,61 @@ export default function LessonPage() {
   // weighing down the initial bundle.
   const [bundled, setBundled] = useState<Lesson | undefined>(undefined);
   const [bundledReady, setBundledReady] = useState(false);
+  const [bundledError, setBundledError] = useState(false);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   useEffect(() => {
     let active = true;
     setBundled(undefined);
     setBundledReady(false);
+    setBundledError(false);
     if (!slug) {
       setBundledReady(true);
       return;
     }
-    void loadLesson(slug).then((l) => {
-      if (!active) return;
-      setBundled(l);
-      setBundledReady(true);
-    });
+    void loadLesson(slug)
+      .then((l) => {
+        if (!active) return;
+        setBundled(l);
+        setBundledReady(true);
+      })
+      .catch(() => {
+        if (!active) return;
+        setBundledError(true);
+        setBundledReady(true);
+      });
     return () => {
       active = false;
     };
-  }, [slug]);
+  }, [slug, loadAttempt]);
 
   const lesson = bundled;
   const { progress, setProgress } = useUserData();
   const [readPct, setReadPct] = useState(0);
   const [completing, setCompleting] = useState(false);
   // Reader depth is a global, client-only preference; defaults to "court" everywhere.
-  const [depth, setDepth] = useState<ReadingDepth>(() => storage.get<ReadingDepth>(STORAGE_KEYS.readingDepth, 'court'));
+  const [depth, setDepth] = useState<ReadingDepth>(() => storage.getParsed(STORAGE_CONTRACTS.readingDepth));
   const changeDepth = (d: ReadingDepth) => {
-    const result = storage.set(STORAGE_KEYS.readingDepth, d);
-    if (result.ok) setDepth(d);
+    const result = storage.setParsed(STORAGE_CONTRACTS.readingDepth, d);
+    commitOnStorageSuccess(result, d, setDepth);
   };
   const articleRef = useRef<HTMLDivElement>(null);
   const lastMarkedLessonId = useRef<string | null>(null);
 
-  usePageMeta(lesson?.title, lesson?.summary, { type: 'article' });
+  useEffect(() => {
+    storage.migrate(STORAGE_CONTRACTS.readingDepth);
+  }, []);
+
+  useResourcePageMeta(!bundledReady || Boolean(lesson), lesson?.title, lesson?.summary, { type: 'article' });
 
   const course = lesson ? courseById(lesson.courseId) : undefined;
   const parcours = lesson ? parcoursForLesson(lesson.id)[0] : undefined;
-  const siblings = course ? lessonsForCourse(course.id).filter((candidate) => candidate.status !== 'upcoming') : [];
+  const siblings = course ? publishedLessonsForCourse(course.id) : [];
   const idx = lesson ? siblings.findIndex((l) => l.id === lesson.id) : -1;
   const prev = idx > 0 ? siblings[idx - 1] : undefined;
   const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : undefined;
   const entry = lesson ? progress[lesson.id] : undefined;
   const isDone = entry?.status === 'done';
+  const practiceDeliverable = lesson?.practice ? deliverableById(lesson.practice.deliverableId) : undefined;
 
   // Mark as "reading" on first view (without downgrading a completed lesson).
   useEffect(() => {
@@ -101,6 +116,19 @@ export default function LessonPage() {
 
   // Hold the loader while the lazy content chunk resolves to avoid flashing a 404.
   if (!bundledReady) return <PageLoader />;
+  if (bundledError) {
+    return (
+      <div className="mx-auto flex min-h-[50vh] max-w-xl flex-col items-center justify-center px-4 text-center">
+        <div role="alert" className="rounded-2xl border border-outline-variant bg-surface-container-low p-6">
+          <p className="font-headline text-headline-sm font-semibold">Le contenu de la leçon n’a pas pu être chargé.</p>
+          <p className="mt-2 text-sm leading-relaxed text-surface-variant">Vérifiez la connexion, puis relancez le chargement de cette ressource.</p>
+          <button type="button" onClick={() => setLoadAttempt((attempt) => attempt + 1)} className="btn-ghost mt-5">
+            Réessayer
+          </button>
+        </div>
+      </div>
+    );
+  }
   if (!lesson) return <NotFoundPage />;
 
   // "Court" (essentiel) is the default; "Profond" is the opt-in full body.
@@ -135,7 +163,14 @@ export default function LessonPage() {
   return (
     <article>
       {/* reading progress */}
-      <div className="sticky top-14 z-30 h-0.5 w-full bg-transparent lg:top-0">
+      <div
+        className="sticky top-14 z-30 h-0.5 w-full bg-transparent lg:top-0"
+        role="progressbar"
+        aria-label="Progression de lecture de la page"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={isDone ? 100 : readPct}
+      >
         <div className="h-full bg-[color:var(--primary)] transition-[width] duration-150" style={{ width: `${isDone ? 100 : readPct}%` }} />
       </div>
 
@@ -158,6 +193,7 @@ export default function LessonPage() {
           <p className="mt-4 text-lg leading-relaxed text-surface-variant text-pretty">{lesson.summary}</p>
           <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-outline-variant py-3 text-sm text-surface-variant">
             <span className="inline-flex items-center gap-1.5"><Clock size={14} /> {lesson.readMin} min de lecture</span>
+            {lesson.practice && <span className="inline-flex items-center gap-1.5"><FileCheck2 size={14} aria-hidden /> {lesson.practice.estimatedMinutes} min de contribution guidée</span>}
             <span className="inline-flex items-center gap-1.5"><BookMarked size={14} /> Lecture active : surlignez pour citer</span>
             {hasShort && (
               <div className="ml-auto flex gap-1" role="group" aria-label="Profondeur de lecture">
@@ -208,6 +244,15 @@ export default function LessonPage() {
           </div>
         )}
 
+        {lesson.practice && practiceDeliverable && (
+          <aside className="mt-10 rounded-2xl border border-outline-variant bg-surface-container-low p-5 sm:p-6">
+            <p className="eyebrow flex items-center gap-2"><FileCheck2 size={14} aria-hidden /> Contribution au dossier longitudinal</p>
+            <h2 className="mt-2 font-headline text-headline-sm font-semibold">{practiceDeliverable.title}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-surface-variant">Cette leçon alimente la section « {lesson.practice.sectionId.replaceAll('-', ' ')} ». Temps de travail estimé : {lesson.practice.estimatedMinutes} min.</p>
+            <Link to={`/livrables/${practiceDeliverable.slug}`} className="btn-ghost mt-4">Ouvrir la fiche de production <ArrowUpRight size={15} aria-hidden /></Link>
+          </aside>
+        )}
+
         {/* glossary refs + further reading */}
         <div className="mt-10 space-y-8">
           <GlossaryRefList slugs={lesson.glossaryRefs} />
@@ -216,13 +261,7 @@ export default function LessonPage() {
               <p className="eyebrow mb-3">Pour aller plus loin</p>
               <div className="space-y-2">
                 {lesson.furtherReading.map((fr, i) => {
-                  const href =
-                    fr.kind === 'simulator' ? `/simulators/${simulatorBySlug(fr.ref)?.slug ?? fr.ref}` :
-                    fr.kind === 'lesson' ? `/lessons/${lessonById(fr.ref)?.slug ?? fr.ref}` :
-                    fr.kind === 'course' ? `/courses/${courseById(fr.ref)?.slug ?? fr.ref}` :
-                    fr.kind === 'case' ? `/cases/${caseById(fr.ref)?.slug ?? fr.ref}` :
-                    fr.kind === 'glossary' ? `/glossary?term=${glossaryBySlug(fr.ref)?.slug ?? fr.ref}` :
-                    '#';
+                  const href = furtherReadingHref(fr);
                   return (
                     <Link key={i} to={href} className="flex items-center justify-between rounded-xl border border-outline-variant px-4 py-3 text-sm transition-colors hover:border-[color-mix(in_srgb,var(--primary)_50%,transparent)] hover:bg-surface-container-low">
                       <span>{fr.label}</span>
@@ -237,10 +276,10 @@ export default function LessonPage() {
 
         {/* complete CTA */}
         <div className="mt-12 flex flex-col items-center rounded-2xl border border-outline-variant bg-surface-container-low p-7 text-center">
-          <p className="font-headline text-headline-sm font-semibold">{isDone ? 'Leçon terminée' : 'Avez-vous terminé cette leçon ?'}</p>
+          <p className="font-headline text-headline-sm font-semibold">{isDone ? 'Leçon déclarée lue' : 'Avez-vous terminé la lecture de cette leçon ?'}</p>
           <p className="mt-1 text-sm text-surface-variant">{next ? `Suivant : ${next.title}` : 'Dernière leçon de ce cours.'}</p>
           <button onClick={() => void complete()} disabled={completing} className="btn-foil mt-5 disabled:opacity-50">
-            {completing ? 'Enregistrement…' : isDone ? (next ? 'Continuer' : 'Revenir au cours') : 'Marquer comme terminé'}
+            {completing ? 'Enregistrement…' : isDone ? (next ? 'Continuer' : 'Revenir au cours') : 'Déclarer la leçon lue'}
             {next ? <ArrowRight size={16} /> : <Check size={16} />}
           </button>
         </div>

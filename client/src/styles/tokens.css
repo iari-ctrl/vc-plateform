@@ -4,6 +4,8 @@
  */
 
 :root {
+  color-scheme: light;
+
   /* — Primary (gilded gold leaf) — */
   --primary: #C5A85C;
   --on-primary: #12131A;
@@ -59,6 +61,8 @@
 }
 
 .dark {
+  color-scheme: dark;
+
   /* Premium dark mode: deep ink with soft golden accents */
   --background: #0D0E12;
   --on-background: #F4F2EB;

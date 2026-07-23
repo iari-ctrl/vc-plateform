@@ -163,7 +163,7 @@ Règles de composition :
 
 ### Barre latérale (`SideNav` + `.glass-rail`)
 
-La navigation latérale desktop (`components/chrome/SideNav.tsx`) est un panneau `--sidebar-w` (16rem) garé hors écran (`-translate-x-full`) quand il est fermé. Une gouttière fixe `--sidebar-rail` (4rem) reste visible avec le logo et le bouton `Menu`; `MainLayout` réserve cette gouttière via `lg:pl-[var(--sidebar-rail)]`, donc le contenu ne bouge jamais quand le panneau glisse en overlay. `PageShell` existe bien, mais il sert seulement de route layout pour `Suspense` + `ErrorBoundary`; il ne remplace pas `MainLayout`.
+La navigation latérale desktop (`components/chrome/SideNav.tsx`) est un panneau `--sidebar-w` (16rem) garé hors écran (`-translate-x-full`) quand il est fermé. Une gouttière fixe `--sidebar-rail` (4rem) reste visible avec le logo et le bouton `Menu`; une zone de déclenchement de 0,5rem longe aussi le bord gauche du viewport sur les routes qui utilisent cette navigation. Le survol du handle ou de ce bord ouvre le panneau. `MainLayout` réserve la gouttière via `lg:pl-[var(--sidebar-rail)]`, donc le contenu ne bouge jamais quand le panneau glisse en overlay. `PageShell` existe bien, mais il sert seulement de route layout pour `Suspense` + `ErrorBoundary`; il ne remplace pas `MainLayout`.
 
 L'architecture de l'information (IA) est centralisée dans `client/src/lib/navigation.ts`. La `TopBar`, la `SideNav` et le `Footer` exposent les mêmes trois piliers : **Intelligence VC**, **Formation** et **Workspace**. Leurs entrées secondaires restent propres au contexte, mais l'état actif d'un pilier couvre aussi ses pages de détail. La V1 est française uniquement : aucun sélecteur de langue n'est prévu dans le chrome.
 
@@ -239,15 +239,32 @@ Usages :
 
 Ne pas utiliser la progression comme décoration : elle doit toujours représenter une donnée utilisateur réelle.
 
+Un parcours qui comporte une production affiche la lecture et le jalon séparément. Le pourcentage porte uniquement sur les leçons déclarées lues. Le jalon utilise un libellé d'état textuel et reste inachevé tant que l'utilisateur ne l'a pas déclaré terminé.
+
+### Espaces de production
+
+- utiliser des champs natifs correctement étiquetés pour la note, la déclaration de fichier et le journal des modifications ;
+- annoncer la réussite ou l'échec d'une sauvegarde avec une zone `aria-live` ;
+- présenter les états dans l'ordre conseillé sans désactiver les liens de navigation ;
+- rendre les grilles d'autoévaluation sous forme de groupes nommés, sans calcul de score ;
+- afficher les tables de dossier avec `caption`, `th`, `scope` et un conteneur de défilement horizontal sur petit écran ;
+- conserver un focus visible sur les boutons de révélation, d'export et de changement d'état.
+
 ### Fiches de certification
 
-Les fiches suivent une divulgation progressive en quatre étapes : **Aperçu**, **Options**, **Programme**, **Évaluation**.
+La divulgation progressive dépend de la catégorie de certification ou de parcours :
 
-- un seul panneau principal est rendu à la fois ;
-- toutes les étapes restent accessibles, sans verrouillage artificiel ;
+- `Fondamentaux de l’analyse en capital-risque` utilise la fiche de parcours standard ; il ne comporte ni étape d’évaluation ni résultat ;
+- `VC Analyst` suit cinq étapes : **Aperçu**, **Préparation**, **Options**, **Programme**, **Évaluation** ;
+- après l'enregistrement des options, le programme réunit la préparation recommandée et les blocs contextualisés avant de proposer l'évaluation professionnelle ;
+- la préparation recommandée reste visible et non bloquante ;
+- la progression du programme porte sur les leçons disponibles ; les leçons à venir sont comptées séparément ;
 - les axes d'options s'affichent un par un ;
+- le titre professionnel reste invariant et le contexte choisi apparaît dans un supplément distinct ;
 - les cours et les blocs d'évaluation sont fermés par défaut ;
 - les titres, libellés et retours d'état restent courts et orientés décision.
+
+Le parcours ne présente ni charte de candidat, ni tentative, ni score. Les quiz de ses leçons restent formatifs et la navigation reste libre.
 
 ---
 

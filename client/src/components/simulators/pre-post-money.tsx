@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
 import { GlossaryPreview } from '@/lib/markdown';
+import { calculatePrePostMoney } from '@/lib/simulators/pre-post-money';
 import { Panel, Slider, Stat } from './shared';
 
 // ── 2. Pre / Post money ────────────────────────────────────────────────────────
 export function PrePostSim({ accent }: { accent: string }) {
   const [pre, setPre] = useState(8);
   const [raise, setRaise] = useState(2);
-  const post = pre + raise;
-  const investorPct = post > 0 ? (raise / post) * 100 : 0;
+  const metrics = calculatePrePostMoney({ preMoney: pre, raise });
   return (
     <Panel
       inputs={
@@ -29,20 +29,20 @@ export function PrePostSim({ accent }: { accent: string }) {
             <p className="mt-2">L'erreur classique des fondateurs est de diviser la levée par la valorisation pre-money. En VC, la dilution se calcule toujours sur le <strong>Post-money</strong>.</p>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Stat label="Valorisation post-money" value={formatCurrency(post * 1e6)} accent={accent} hint="pre + montant levé" />
-            <Stat label="Part de l’investisseur" value={formatPercent(investorPct)} hint="montant / post-money" />
-            <Stat label="Part conservée" value={formatPercent(100 - investorPct)} hint="par les détenteurs existants" />
-            <Stat label="Multiple implicite" value={`${formatNumber(post / Math.max(pre, 0.01), { maximumFractionDigits: 2 })}×`} hint="post / pre" />
+            <Stat label="Valorisation post-money" value={formatCurrency(metrics.postMoney * 1e6)} accent={accent} hint="pre + montant levé" />
+            <Stat label="Part de l’investisseur" value={formatPercent(metrics.investorPct)} hint="montant / post-money" />
+            <Stat label="Part conservée" value={formatPercent(metrics.retainedPct)} hint="par les détenteurs existants" />
+            <Stat label="Multiple implicite" value={`${formatNumber(metrics.impliedMultiple, { maximumFractionDigits: 2 })}×`} hint="post / pre" />
           </div>
           <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-5">
             <p className="mb-3 text-xs text-surface-variant">Répartition post-money</p>
             <div className="flex h-3 overflow-hidden rounded-full">
-              <div style={{ width: `${100 - investorPct}%`, background: accent }} />
-              <div style={{ width: `${investorPct}%`, background: 'var(--surface-container-highest)' }} />
+              <div style={{ width: `${metrics.retainedPct}%`, background: accent }} />
+              <div style={{ width: `${metrics.investorPct}%`, background: 'var(--surface-container-highest)' }} />
             </div>
             <div className="mt-2 flex justify-between text-xs text-surface-variant">
-              <span>Existants {formatPercent(100 - investorPct)}</span>
-              <span>Nouvel investisseur {formatPercent(investorPct)}</span>
+              <span>Existants {formatPercent(metrics.retainedPct)}</span>
+              <span>Nouvel investisseur {formatPercent(metrics.investorPct)}</span>
             </div>
           </div>
         </>

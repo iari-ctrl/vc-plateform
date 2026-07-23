@@ -5,24 +5,24 @@
     "title": "Simulation de comité d'investissement (seed)",
     "kicker": "Livrable",
     "readMin": 7,
-    "summary": "Tu as bouclé la due diligence sur un deal seed qui divise l'équipe. Le partner te donne dix minutes en comité : écris l'ordre du jour que tu défendrais, puis confronte-le au cas modèle.",
-    "brief": "Tu viens de boucler la due diligence sur **Volta**, un deal seed qui partage l'équipe d'investissement. Le partner te donne dix minutes en comité. Il ne veut pas un résumé de la boîte — il l'a déjà lu. Il veut ta **recommandation** et la conviction qui la porte : investir ou passer, et pourquoi celui qui pense l'inverse a tort.\n\nCe livrable te fait écrire l'ordre du jour que tu défendrais à l'oral, section par section. Tu le confrontes ensuite au cas modèle, où le même deal passe réellement en comité et où la décision se prend pour de bon. L'enjeu n'est pas d'avoir raison sur la sortie — personne ne la connaît. C'est de prendre une position **falsifiable**, d'anticiper l'objection avant qu'on te la serve, et de dire à voix haute ce qui te ferait changer d'avis.",
+    "summary": "Après la due diligence d'un deal seed qui divise l'équipe, prépare l'ordre du jour que tu défendrais pendant les dix minutes accordées par le partner, puis confronte-le au cas modèle.",
+    "brief": "Tu viens de boucler la due diligence sur **Volta**, un deal seed qui partage l'équipe d'investissement. Le partner te donne dix minutes en comité. Il a déjà lu le résumé de l'entreprise et attend ta **recommandation**, la conviction qui la fonde et une réponse aux arguments contraires.\n\nCe livrable te fait écrire l'ordre du jour que tu défendrais à l'oral, section par section. Tu le confrontes ensuite au cas modèle, où le même deal est examiné en comité et fait l'objet d'une décision. La sortie demeure inconnue. L'exercice consiste à prendre une position **falsifiable**, à anticiper l'objection avant son expression en comité et à préciser ce qui te ferait changer d'avis.",
     "template": [
       {
         "heading": "La recommandation, en une phrase",
-        "prompt": "Ouvre par ta position, pas par le contexte. « Je recommande de mener à 1,2 M€ pour ~13 % » ou « je recommande de passer ». Le comité doit savoir où tu vas avant que tu expliques comment tu y es arrivé."
+        "prompt": "Énonce ta position dès l'ouverture : « Je recommande de mener à 1,2 M€ pour ~13 % » ou « je recommande de passer ». Le comité doit connaître la recommandation avant le développement du raisonnement."
       },
       {
         "heading": "La thèse : pourquoi maintenant, pourquoi eux",
-        "prompt": "En trois ou quatre phrases, le pari central. Quel changement de marché rend ce produit possible aujourd'hui et pas il y a deux ans, et pourquoi cette équipe est mieux placée que la prochaine pour le saisir. Écris une thèse, pas une description : elle doit pouvoir être démentie par un fait futur."
+        "prompt": "Formule le pari central en trois ou quatre phrases. Quel changement de marché survenu au cours des deux dernières années rend ce produit possible aujourd'hui, et pourquoi cette équipe est-elle mieux placée que la suivante pour le saisir ? La thèse doit pouvoir être démentie par un fait futur."
       },
       {
         "heading": "Ce qui doit être vrai",
-        "prompt": "Les deux ou trois hypothèses dont dépend toute la valeur — la [[traction|traction]] qui tient, le marché qui s'ouvre, l'équipe qui recrute commercial. Ce sont elles, pas la boîte, que le comité va attaquer."
+        "prompt": "Identifie les deux ou trois hypothèses dont dépend toute la valeur : la [[traction|traction]] qui tient, le marché qui s'ouvre ou l'équipe qui recrute un profil commercial. L'examen du comité portera sur ces hypothèses."
       },
       {
         "heading": "Les risques, et ta réponse",
-        "prompt": "Prends les objections les plus dures à ta propre reco et formule-les mieux que ne le ferait un sceptique. Pour chacune, dis si elle est rédhibitoire ou gérable, et ce que tu surveillerais après le chèque. Un risque que tu n'as pas nommé, c'est le comité qui le nommera pour toi."
+        "prompt": "Prends les objections substantielles à ta propre recommandation et formule-les de manière complète. Pour chacune, indique si elle est rédhibitoire ou gérable, ainsi que les éléments à surveiller après le chèque. Le comité examinera également les risques omis."
       },
       {
         "heading": "Le deal",
@@ -30,7 +30,7 @@
       },
       {
         "heading": "Ce qui me ferait changer d'avis",
-        "prompt": "Une ou deux phrases. Le signal précis — un chiffre de vente, un départ, un concurrent qui lève — qui retournerait ta conviction. C'est ce qui sépare une position d'une opinion."
+        "prompt": "En une ou deux phrases, précise le signal qui retournerait ta conviction : un chiffre de vente, un départ ou la levée d'un concurrent. Ce signal constitue ton critère de réfutation."
       }
     ],
     "rubric": [
@@ -40,11 +40,11 @@
       },
       {
         "criterion": "Thèse falsifiable",
-        "check": "Ta thèse pourrait être démentie par un fait futur — ce n'est pas une description de la boîte."
+        "check": "Ta thèse formule une prédiction susceptible d'être démentie par un fait futur."
       },
       {
         "criterion": "Objections anticipées",
-        "check": "Tu as formulé toi-même l'argument du sceptique, et mieux qu'il ne l'aurait fait."
+        "check": "Tu as formulé de manière complète l'argument du sceptique."
       },
       {
         "criterion": "Logique du prix",
@@ -58,7 +58,7 @@
     "model": {
       "kind": "case",
       "id": "cs-seed-ic",
-      "note": "Le même deal passe réellement en comité. Compare ton ordre du jour à la façon dont la décision se prend : où les options se tranchent, quelle conviction l'emporte, et comment le deal est structuré pour acheter de l'information avant d'engager tout le capital."
+      "note": "Le même deal est examiné en comité. Compare ton ordre du jour à la décision prise : traitement des options, conviction retenue et structuration du deal pour obtenir de l'information avant d'engager tout le capital."
     },
     "relatedLessonIds": [
       "l-defending-thesis",
@@ -87,42 +87,42 @@
     "title": "Écrire une thèse propriétaire (pre-seed / seed)",
     "kicker": "Livrable",
     "readMin": 8,
-    "summary": "Pour un poste de Principal, on attend de toi une conviction, pas un avis éclairé. Écris la thèse pre-seed/seed que tu défendrais — où la valeur va se déposer, et comment tu construirais le portefeuille pour la capter — puis confronte-la à un dossier d'écosystème abouti.",
-    "brief": "Un Associate trie des deals. Un Principal explique pourquoi le fonds devrait en chasser certains plutôt que d'autres. La différence tient dans un document : une **thèse propriétaire** — un pari assumé sur l'endroit où la valeur va se créer dans les trois à cinq ans, et sur la raison pour laquelle ton fonds est mieux placé qu'un autre pour la capter au pre-seed et au seed.\n\nCe livrable te fait écrire ce document en deux temps qui n'en font qu'un. D'abord la **note de thèse** : la conviction, pourquoi elle tient maintenant, et ce qui la démentirait. Ensuite le **plan de portefeuille** : comment cette conviction se traduit en tickets, en [[dilution|ownership cible]], en réserves de [[follow-on|follow-on]] et en discipline de triage. Une thèse qui n'engendre pas de portefeuille n'est qu'une opinion bien tournée ; une construction de portefeuille sans thèse n'est qu'un tableur. L'exercice consiste à les tenir ensemble.\n\nChoisis un terrain que tu connais — un secteur, une couche technologique, une géographie. L'enjeu n'est pas d'avoir le bon secteur, c'est d'écrire une thèse **réfutable** : un pari que le réel pourra contredire, daté, avec un degré d'assurance, et la liste précise des signaux que tu surveillerais pour savoir si tu te trompes.",
+    "summary": "Pour un poste de Principal, écris la thèse pre-seed/seed que tu défendrais : où la valeur va se déposer et comment construire le portefeuille pour la capter. Confronte-la ensuite à un dossier d'écosystème abouti.",
+    "brief": "Le rôle de Principal complète le tri des deals par la formulation d'une **thèse propriétaire** : un pari assumé sur l'endroit où la valeur va se créer dans les trois à cinq ans et sur l'avantage relatif du fonds pour la capter au pre-seed et au seed.\n\nCe livrable comporte deux parties complémentaires. La **note de thèse** présente la conviction, les raisons de sa validité actuelle et les éléments qui la démentiraient. Le **plan de portefeuille** traduit cette conviction en tickets, en [[dilution|ownership cible]], en réserves de [[follow-on|follow-on]] et en discipline de triage. La note de thèse fonde ainsi le plan de portefeuille, qui en traduit les convictions en paramètres d'investissement.\n\nChoisis un terrain que tu connais : un secteur, une couche technologique ou une géographie. L'évaluation porte sur le caractère **réfutable** de la thèse, soit un pari daté que le réel pourra contredire, assorti d'un degré d'assurance et d'une liste précise de signaux à surveiller.",
     "template": [
       {
         "heading": "Thèse · Où la valeur va se déposer",
-        "prompt": "Ouvre par le pari, pas par la taille du marché. La bonne question n'est pas « la technologie est-elle réelle ? » mais « *où* la valeur va-t-elle se déposer ? » — quelle couche, quel type d'acteur, quelle étape de la chaîne. En deux ou trois phrases, formule la conviction centrale de telle façon qu'un investisseur sérieux puisse être en désaccord."
+        "prompt": "Commence par localiser l'endroit où la valeur va se déposer : quelle couche, quel type d'acteur et quelle étape de la chaîne. Formule la conviction centrale en deux ou trois phrases, de telle façon qu'un investisseur sérieux puisse être en désaccord."
       },
       {
         "heading": "Thèse · Pourquoi maintenant, pourquoi ce terrain",
-        "prompt": "Deux questions liées. Quel basculement — réglementaire, technologique, de coûts, de comportement — rend ce pari juste aujourd'hui et faux il y a trois ans ? Et pourquoi ton fonds a un droit de jouer singulier ici : un accès, un réseau, une expertise qui te feront voir et gagner les deals que les généralistes manqueront. Le [[tam-sam-som|marché]] grand n'est pas un argument ; un [[moat|fossé]] que tu peux atteindre en est un."
+        "prompt": "Deux questions sont liées. Quel basculement réglementaire, technologique, de coûts ou de comportement est intervenu au cours des trois dernières années ? Quel accès, réseau ou domaine d'expertise donne au fonds un avantage pour identifier et remporter les deals concernés ? La taille du [[tam-sam-som|marché]] fournit le contexte ; le [[moat|fossé]] accessible au fonds étaye son positionnement."
       },
       {
         "heading": "Thèse · Trois convictions falsifiables",
-        "prompt": "Décline la thèse en deux ou trois affirmations datées. Chacune porte un horizon (« d'ici 2029 »), un degré d'assurance assumé (forte, moyenne, spéculative), et surtout un fait futur précis qui la démentirait. Une conviction qu'aucun chiffre ne pourrait contredire n'est pas une conviction, c'est une posture."
+        "prompt": "Décline la thèse en deux ou trois affirmations datées. Chacune porte un horizon (« d'ici 2029 »), un degré d'assurance assumé (forte, moyenne, spéculative) et un fait futur précis susceptible de la démentir."
       },
       {
         "heading": "Thèse · Ce qui me ferait changer d'avis",
-        "prompt": "Nomme les signaux que tu suivrais trimestre après trimestre pour savoir si la thèse tient — un coût qui baisse, une cohorte qui passe du pilote au contrat, un nombre d'acteurs survivants. Ce sont eux qui transforment une thèse en instrument de travail plutôt qu'en manifeste."
+        "prompt": "Nomme les signaux que tu suivrais trimestre après trimestre pour savoir si la thèse tient : un coût qui baisse, une cohorte qui passe du pilote au contrat ou un nombre d'acteurs survivants. Ces signaux font de la thèse un instrument de suivi trimestriel."
       },
       {
         "heading": "Portefeuille · La forme du fonds",
-        "prompt": "Traduis la conviction en construction. Combien de tickets de premier chèque sur la durée d'investissement, à quel ticket d'entrée, pour quelle [[dilution|part cible]] au pre-seed et au seed ? Une thèse de power-law concentrée et une thèse d'indexation large ne donnent pas le même nombre de paris — la forme du portefeuille doit *découler* de ce que tu viens d'affirmer, pas s'y ajouter."
+        "prompt": "Traduis la conviction en construction. Combien de premiers chèques sur la durée d'investissement, à quel ticket d'entrée et pour quelle [[dilution|part cible]] au pre-seed et au seed ? Le nombre de paris varie selon que la thèse de power-law est concentrée ou que la thèse d'indexation est large. La forme du portefeuille doit *découler* des convictions formulées."
       },
       {
         "heading": "Portefeuille · Réserves et triage",
-        "prompt": "Le premier chèque n'est que la moitié de la décision. Quelle part du fonds gardes-tu en réserve pour les [[follow-on|follow-on]], comment exerces-tu (ou pas) ton [[pro-rata|pro-rata]], et selon quelle règle tu décides de re-financer un gagnant naissant plutôt que de soutenir un retardataire ? C'est là que la [[portfolio-construction|construction de portefeuille]] sépare les fonds qui pensent leurs réserves de ceux qui les dépensent au fil de l'eau."
+        "prompt": "La décision inclut la politique de réserves. Quelle part du fonds gardes-tu pour les [[follow-on|follow-on]], dans quelles conditions exerces-tu ton [[pro-rata|pro-rata]] et selon quelle règle répartis-tu le refinancement entre un gagnant naissant et un retardataire ? Une règle explicite de [[portfolio-construction|construction de portefeuille]] encadre l'emploi des réserves."
       },
       {
         "heading": "Portefeuille · Comment il rend l'argent",
-        "prompt": "Termine par l'arithmétique. Combien de sorties, à quelle taille, doivent rembourser le fonds entier — et donc combien de tes paris peuvent échouer sans casser le rendement ? Assume la [[power-law|loi de puissance]] : ce n'est pas un risque à couvrir, c'est la structure que la construction doit épouser. Si tu disposes du simulateur de retours du fonds, fais tourner ta forme de portefeuille et lis le [[tvpi|TVPI]] / [[dpi|DPI]] qu'elle implique."
+        "prompt": "Termine par l'arithmétique. Combien de sorties, à quelle taille, doivent rembourser le fonds entier, et combien de paris peuvent échouer sans compromettre le rendement ? Intègre la [[power-law|loi de puissance]] comme paramètre structurant de la construction. Si tu disposes du simulateur de retours du fonds, fais tourner cette forme de portefeuille et lis le [[tvpi|TVPI]] et le [[dpi|DPI]] qu'elle implique."
       }
     ],
     "rubric": [
       {
-        "criterion": "Une thèse, pas un panorama",
-        "check": "C'est un pari réfutable sur l'endroit où la valeur se dépose, pas une description du marché ou un état des lieux du secteur."
+        "criterion": "Caractère réfutable de la thèse",
+        "check": "Le document formule un pari réfutable sur l'endroit où la valeur se dépose."
       },
       {
         "criterion": "Convictions datées et falsifiables",
@@ -130,21 +130,21 @@
       },
       {
         "criterion": "Un terrain défendable",
-        "check": "Tu expliques pourquoi cette thèse t'appartient — un accès, un edge — et pas seulement pourquoi le marché est grand."
+        "check": "Tu relies cette thèse à un accès ou à un edge propre, en complément de l'analyse de taille du marché."
       },
       {
         "criterion": "La thèse engendre le portefeuille",
-        "check": "Le nombre de tickets, l'ownership cible et la politique de réserves découlent de la conviction au lieu d'y être plaqués."
+        "check": "Le nombre de tickets, l'ownership cible et la politique de réserves découlent directement de la conviction."
       },
       {
         "criterion": "Le portefeuille tient mathématiquement",
-        "check": "Tu sais combien de sorties doivent rembourser le fonds, et la loi de puissance est assumée plutôt que subie."
+        "check": "Tu sais combien de sorties doivent rembourser le fonds et tu intègres la loi de puissance aux hypothèses de construction."
       }
     ],
     "model": {
       "kind": "ecosystem",
       "id": "eco-ia-appliquee",
-      "note": "Un dossier d'écosystème abouti est une thèse propriétaire au format long. Celui-ci pose d'emblée où la valeur se dépose — la couche application verticale, pas les modèles de fondation — date ses convictions avec un degré d'assurance, et nomme les signaux qui les démentiraient. Ne copie pas le secteur ; copie la forme : le pari central formulé pour qu'on puisse le contester, les convictions falsifiables, et le fait précis qui ferait changer d'avis."
+      "note": "Un dossier d'écosystème abouti est une thèse propriétaire au format long. Celui-ci identifie la couche application verticale comme lieu de création de valeur, date ses convictions avec un degré d'assurance et nomme les signaux qui les démentiraient. Le modèle porte sur la forme du raisonnement : un pari central contestable, des convictions falsifiables et le fait précis qui ferait changer d'avis."
     },
     "relatedLessonIds": [
       "l-thesis-anatomy",
@@ -168,6 +168,1050 @@
       "these",
       "portfolio-construction",
       "conviction"
+    ]
+  },
+  {
+    "id": "vp-exercice-cumulatif-probleme-preuves",
+    "slug": "exercice-cumulatif-probleme-preuves",
+    "title": "Exercice cumulatif : problème, preuves et personnes concernées",
+    "kicker": "Production non notée après le cours 2",
+    "readMin": 5,
+    "activityKind": "cumulative-exercise",
+    "estimatedWorkMinutes": 60,
+    "relatedCourseIds": [
+      "c-vp-mandat-triage",
+      "c-vp-probleme-preuves"
+    ],
+    "caseStudyId": "cs-vp-insertion-3-regions",
+    "summary": "Consolider les contributions des deux premiers cours dans une section réutilisable du mémo final.",
+    "brief": "À partir du dossier Trait d’Union et de vos notes de leçon, produisez une synthèse cohérente du mandat, du problème, des preuves et de la participation des personnes concernées. Le travail reste facultatif et sans note. Il sera repris dans le jalon final.",
+    "template": [
+      {
+        "heading": "Mandat et triage",
+        "prompt": "Présenter les critères, le statut initial, les limites du mandat et la contribution propre du financeur."
+      },
+      {
+        "heading": "Problème, causalité et preuves",
+        "prompt": "Décrire le problème, la théorie du changement, les preuves, leurs limites et les explications concurrentes."
+      },
+      {
+        "heading": "Personnes concernées",
+        "prompt": "Préparer participation, restitution, droit de réponse, réclamation et prise en compte des effets indésirables."
+      }
+    ],
+    "rubric": [
+      {
+        "criterion": "Mandat explicite",
+        "check": "Chaque critère de triage et chaque limite sont reliés au mandat d’Horizon Commun."
+      },
+      {
+        "criterion": "Preuves traçables",
+        "check": "Les affirmations distinguent source, statut, limite et information manquante."
+      },
+      {
+        "criterion": "Causalité prudente",
+        "check": "Les résultats observés, l’attribution et les explications concurrentes restent distincts."
+      },
+      {
+        "criterion": "Participation praticable",
+        "check": "Les modalités proposées sont accessibles et donnent un retour et une voie de réclamation aux personnes."
+      }
+    ],
+    "components": [
+      {
+        "id": "mandat-et-criteres",
+        "title": "Mandat et critères",
+        "requirements": [
+          "Formuler les critères d’éligibilité, les limites du mandat et les décisions que le financeur peut réellement prendre."
+        ]
+      },
+      {
+        "id": "triage-et-additionalite",
+        "title": "Triage et additionalité",
+        "requirements": [
+          "Consigner le statut initial, les informations manquantes et la contribution propre du financeur."
+        ]
+      },
+      {
+        "id": "probleme-et-systeme",
+        "title": "Problème et système",
+        "requirements": [
+          "Décrire les personnes touchées, les mécanismes, les acteurs et les effets indésirables possibles."
+        ]
+      },
+      {
+        "id": "theorie-du-changement-et-preuves",
+        "title": "Théorie du changement et preuves",
+        "requirements": [
+          "Distinguer activités, résultats et impact ; classer les hypothèses et les preuves externes avec leurs limites."
+        ]
+      },
+      {
+        "id": "personnes-concernees",
+        "title": "Responsabilité envers les personnes concernées",
+        "requirements": [
+          "Prévoir participation accessible, frais ou indemnisation, restitution, droit de réponse, réclamation et place de l’expérience vécue."
+        ]
+      }
+    ],
+    "evaluation": [
+      "auto"
+    ],
+    "resources": [
+      {
+        "label": "Dossier apprenant Trait d’Union",
+        "href": "/cases/insertion-3-regions",
+        "format": "page"
+      }
+    ],
+    "relatedLessonIds": [
+      "lvp-mandat-triage",
+      "lvp-screening-additionalite",
+      "lvp-analyse-probleme",
+      "lvp-theorie-changement",
+      "lvp-entretiens-beneficiaires"
+    ],
+    "glossaryRefs": [
+      "venture-philanthropie",
+      "additionalite",
+      "theorie-du-changement",
+      "safeguarding"
+    ],
+    "tags": [
+      "venture-philanthropie",
+      "exercice-cumulatif",
+      "preuves",
+      "participation"
+    ]
+  },
+  {
+    "id": "vp-exercice-cumulatif-diligence",
+    "slug": "exercice-cumulatif-diligence",
+    "title": "Exercice cumulatif : diligence organisationnelle et financière",
+    "kicker": "Production non notée après le cours 4",
+    "readMin": 6,
+    "activityKind": "cumulative-exercise",
+    "estimatedWorkMinutes": 90,
+    "relatedCourseIds": [
+      "c-vp-diligence-organisationnelle",
+      "c-vp-diligence-financiere"
+    ],
+    "caseStudyId": "cs-vp-insertion-3-regions",
+    "summary": "Réunir le registre de preuves, l’analyse organisationnelle et les modèles financiers dans une annexe réutilisable.",
+    "brief": "Instruisez les pièces Trait d’Union sans chercher une décision prématurée. Produisez un registre des preuves, une analyse des capacités, une prévision à treize semaines et un modèle à dix-huit mois. Explicitez les conventions retenues pour chaque contradiction.",
+    "template": [
+      {
+        "heading": "Registre et diligence organisationnelle",
+        "prompt": "Relier gouvernance, équipe, opérations, conflits et risques critiques aux pièces et aux décisions possibles."
+      },
+      {
+        "heading": "Rapprochement financier",
+        "prompt": "Rapprocher comptes, bilan, balance, banque, fonds affectés et coût complet."
+      },
+      {
+        "heading": "Prévision à 13 semaines",
+        "prompt": "Documenter solde d’ouverture, flux hebdomadaires, restrictions, point bas et besoins de décision."
+      },
+      {
+        "heading": "Modèle à 18 mois et scénarios",
+        "prompt": "Présenter hypothèses, scénario central, scénario prudent, chocs et contrôles de cohérence."
+      }
+    ],
+    "rubric": [
+      {
+        "criterion": "Registre exploitable",
+        "check": "Chaque question possède une source, un statut, une limite et une conséquence."
+      },
+      {
+        "criterion": "Capacité d’exécution",
+        "check": "Le calendrier tient compte des postes, charges, systèmes et dépendances."
+      },
+      {
+        "criterion": "Finance réconciliée",
+        "check": "Résultat, bilan, banque, fonds affectés et réserves ne sont pas confondus ni comptés deux fois."
+      },
+      {
+        "criterion": "Modèles recalculables",
+        "check": "Les hypothèses peuvent être modifiées et les scénarios produisent une conséquence décisionnelle."
+      }
+    ],
+    "components": [
+      {
+        "id": "plan-et-registre-de-preuves",
+        "title": "Plan et registre de preuves",
+        "requirements": [
+          "Relier chaque question à une source, un statut, une limite, un responsable et une conséquence décisionnelle."
+        ]
+      },
+      {
+        "id": "gouvernance-et-conflits",
+        "title": "Gouvernance et conflits",
+        "requirements": [
+          "Examiner pouvoirs, délégations, décisions du conseil et gestion des conflits d’intérêts."
+        ]
+      },
+      {
+        "id": "equipe-et-execution",
+        "title": "Équipe et capacité d’exécution",
+        "requirements": [
+          "Tester la charge, les fonctions centrales, le transfert des pratiques et les dépendances."
+        ]
+      },
+      {
+        "id": "safeguarding-et-risques-critiques",
+        "title": "Safeguarding et risques critiques",
+        "requirements": [
+          "Consigner les signaux, les mesures conservatoires, les autorités compétentes et les critères de reprise ou d’arrêt."
+        ]
+      },
+      {
+        "id": "comptes-et-cout-complet",
+        "title": "Comptes et coût complet",
+        "requirements": [
+          "Rapprocher résultat, bilan, coûts directs, fonctions support et coûts futurs."
+        ]
+      },
+      {
+        "id": "tresorerie-13-semaines",
+        "title": "Prévision de trésorerie à 13 semaines",
+        "requirements": [
+          "Construire les encaissements, décaissements, restrictions, solde de clôture et point bas par semaine."
+        ]
+      },
+      {
+        "id": "modele-18-mois",
+        "title": "Modèle à 18 mois",
+        "requirements": [
+          "Présenter un scénario central et un scénario prudent avec hypothèses modifiables et contrôles de cohérence."
+        ]
+      },
+      {
+        "id": "scenarios-et-stress-test",
+        "title": "Scénarios et stress test",
+        "requirements": [
+          "Tester un retard d’encaissement, une ouverture différée et un coût supérieur, puis relier chaque résultat à une décision."
+        ]
+      }
+    ],
+    "evaluation": [
+      "auto"
+    ],
+    "resources": [
+      {
+        "label": "Dossier apprenant Trait d’Union",
+        "href": "/cases/insertion-3-regions",
+        "format": "page"
+      }
+    ],
+    "relatedLessonIds": [
+      "lvp-plan-diligence",
+      "lvp-mission-gouvernance",
+      "lvp-equipe-operations",
+      "lvp-safeguarding-risques",
+      "lvp-comptes-cout-complet",
+      "lvp-tresorerie-reserves",
+      "lvp-previsions-scenarios",
+      "lvp-atelier-choc"
+    ],
+    "glossaryRefs": [
+      "gouvernance-associative",
+      "safeguarding",
+      "cout-complet",
+      "tresorerie-mobilisable"
+    ],
+    "tags": [
+      "venture-philanthropie",
+      "exercice-cumulatif",
+      "diligence",
+      "finance"
+    ]
+  },
+  {
+    "id": "vp-exercice-cumulatif-recommandation",
+    "slug": "exercice-cumulatif-recommandation-financement-sortie",
+    "title": "Exercice cumulatif : recommandation, financement et sortie",
+    "kicker": "Production non notée après le cours 6",
+    "readMin": 6,
+    "activityKind": "cumulative-exercise",
+    "estimatedWorkMinutes": 90,
+    "relatedCourseIds": [
+      "c-vp-structuration-financement",
+      "c-vp-partenariat-portefeuille"
+    ],
+    "caseStudyId": "cs-vp-insertion-3-regions",
+    "summary": "Assembler les options de financement, l’accompagnement, le suivi et la sortie avant la première version du jalon.",
+    "brief": "Appuyez-vous sur les deux premières productions cumulatives. Comparez plusieurs décisions, puis préparez les termes principaux, le plan d’accompagnement, les règles de suivi et la stratégie de sortie. Les qualifications juridiques ou réglementaires restent confiées aux professionnels compétents.",
+    "template": [
+      {
+        "heading": "Options et recommandation",
+        "prompt": "Comparer au moins trois décisions, leurs hypothèses, leurs risques et les motifs du choix proposé."
+      },
+      {
+        "heading": "Financement et termes principaux",
+        "prompt": "Relier usages, personne morale, flux prudents, instrument et termes prêts pour revue professionnelle."
+      },
+      {
+        "heading": "Accompagnement, mesure et remédiation",
+        "prompt": "Définir la contribution du financeur, les responsables, les indicateurs et les réponses aux écarts."
+      },
+      {
+        "heading": "Renouvellement et sortie",
+        "prompt": "Présenter les scénarios de transition et les faits qui modifieraient la recommandation."
+      }
+    ],
+    "rubric": [
+      {
+        "criterion": "Options comparables",
+        "check": "Chaque option présente usage, risque, hypothèse, scénario d’échec et conséquence pour la mission."
+      },
+      {
+        "criterion": "Instrument compatible",
+        "check": "La personne morale, les flux et les validations professionnelles sont identifiés."
+      },
+      {
+        "criterion": "Contribution gouvernée",
+        "check": "L’accompagnement possède budget, responsable interne, transfert et limite de pouvoir."
+      },
+      {
+        "criterion": "Sortie préparée",
+        "check": "Renouvellement, remédiation et sortie sont reliés à des preuves et à la continuité du service."
+      }
+    ],
+    "components": [
+      {
+        "id": "options-de-financement",
+        "title": "Options de financement",
+        "requirements": [
+          "Comparer usages, instruments, risques supportés, scénario d’échec et compatibilité avec la mission."
+        ]
+      },
+      {
+        "id": "capacite-de-remboursement",
+        "title": "Capacité de remboursement",
+        "requirements": [
+          "Identifier la personne morale, les flux, le rang, la marge prudente et l’effet d’un choc."
+        ]
+      },
+      {
+        "id": "termes-principaux",
+        "title": "Termes principaux prêts pour revue professionnelle",
+        "requirements": [
+          "Présenter montant, durée, usages, tranches, conditions, information, remédiation et sortie."
+        ]
+      },
+      {
+        "id": "arbitrage-et-escalades",
+        "title": "Arbitrage et escalades",
+        "requirements": [
+          "Séparer les faits économiques des qualifications à transmettre aux fonctions juridiques, fiscales, comptables ou conformité."
+        ]
+      },
+      {
+        "id": "accompagnement-et-contribution",
+        "title": "Accompagnement et contribution du financeur",
+        "requirements": [
+          "Définir besoin, responsable interne, budget, charge, choix du prestataire, transfert et limite du pouvoir du financeur."
+        ]
+      },
+      {
+        "id": "mesure-et-remediation",
+        "title": "Mesure et remédiation",
+        "requirements": [
+          "Retenir des informations décisionnelles, leurs contrôles, les effets indésirables et les réponses possibles."
+        ]
+      },
+      {
+        "id": "suivi-renouvellement-et-sortie",
+        "title": "Suivi, renouvellement et sortie",
+        "requirements": [
+          "Décrire cadence, seuils, remédiation, renouvellement, continuité et sortie."
+        ]
+      },
+      {
+        "id": "recommandation-et-defense",
+        "title": "Recommandation et défense",
+        "requirements": [
+          "Formuler la décision, le contreargument principal, les inconnues et les faits qui feraient changer d’avis."
+        ]
+      }
+    ],
+    "evaluation": [
+      "auto"
+    ],
+    "resources": [
+      {
+        "label": "Fiche d’escalade juridique et conformité",
+        "href": "/livrables/fiche-escalade-juridique-conformite",
+        "format": "page"
+      },
+      {
+        "label": "Jalon final",
+        "href": "/livrables/recommandation-de-soutien-venture-philanthropie",
+        "format": "page"
+      }
+    ],
+    "relatedLessonIds": [
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-termes-financement",
+      "lvp-atelier-structuration",
+      "lvp-accompagnement-pouvoir",
+      "lvp-mesure-impact",
+      "lvp-suivi-sortie",
+      "lvp-recommandation-comite"
+    ],
+    "glossaryRefs": [
+      "financement-non-affecte",
+      "subvention-recuperable",
+      "droits-d-information-du-financeur",
+      "sortie-de-partenariat"
+    ],
+    "tags": [
+      "venture-philanthropie",
+      "exercice-cumulatif",
+      "financement",
+      "sortie"
+    ]
+  },
+  {
+    "id": "vp-fiche-escalade-juridique",
+    "slug": "fiche-escalade-juridique-conformite",
+    "title": "Fiche d’escalade juridique et conformité",
+    "kicker": "Ressource transversale",
+    "readMin": 8,
+    "activityKind": "worksheet",
+    "estimatedWorkMinutes": 30,
+    "relatedCourseIds": [
+      "c-vp-diligence-organisationnelle",
+      "c-vp-diligence-financiere",
+      "c-vp-structuration-financement"
+    ],
+    "caseStudyId": "cs-vp-insertion-3-regions",
+    "summary": "Repérer une question, protéger l’information et obtenir la qualification d’un professionnel compétent.",
+    "brief": "Cette fiche organise l’identification et la transmission. Elle ne donne aucun avis juridique autonome. Pour chaque sujet, consignez le signal, la source, la décision affectée, l’urgence, les données à protéger, le professionnel saisi, la question posée, la réponse attendue et la conséquence en cas d’absence de réponse.",
+    "template": [
+      {
+        "heading": "Signal et source",
+        "prompt": "Décrire le fait, la pièce, la date, l’urgence et la décision susceptible d’être affectée."
+      },
+      {
+        "heading": "Transmission",
+        "prompt": "Nommer la fonction compétente, la question exacte, les données nécessaires et les protections d’accès."
+      },
+      {
+        "heading": "Réponse et conséquence",
+        "prompt": "Consigner la réponse attendue, l’échéance et l’effet d’une validation, d’une réserve ou d’une absence de réponse."
+      }
+    ],
+    "rubric": [
+      {
+        "criterion": "Périmètre respecté",
+        "check": "La fiche identifie et transmet la question sans produire elle-même la qualification."
+      },
+      {
+        "criterion": "Données protégées",
+        "check": "La collecte et l’accès sont limités aux informations nécessaires."
+      },
+      {
+        "criterion": "Question exploitable",
+        "check": "Le professionnel saisi comprend le fait, la décision attendue et l’échéance."
+      },
+      {
+        "criterion": "Conséquence explicite",
+        "check": "La recommandation précise ce qui se passe selon la réponse ou l’absence de réponse."
+      }
+    ],
+    "components": [
+      {
+        "id": "pouvoirs-eligibilite",
+        "title": "Pouvoirs et éligibilité de l’entité",
+        "requirements": [
+          "Vérifier statuts, organe compétent, délégations, objet et capacité à recevoir ou émettre l’instrument."
+        ]
+      },
+      {
+        "id": "fiscalite",
+        "title": "Fiscalité",
+        "requirements": [
+          "Transmettre les questions de traitement du don, du rendement, des contreparties et des flux intragroupe."
+        ]
+      },
+      {
+        "id": "fraude-conflits",
+        "title": "Fraude et conflits d’intérêts",
+        "requirements": [
+          "Protéger le signal, appliquer les règles internes et saisir la fonction compétente sans enquêter."
+        ]
+      },
+      {
+        "id": "sanctions-lcb-ft",
+        "title": "Sanctions et lutte contre le blanchiment",
+        "requirements": [
+          "Identifier les contrôles requis par le contexte et le statut des parties, puis transmettre à la conformité."
+        ]
+      },
+      {
+        "id": "aides-publiques",
+        "title": "Aides publiques",
+        "requirements": [
+          "Recenser les concours publics, leurs conditions et les questions de cumul ou de minimis à faire qualifier."
+        ]
+      },
+      {
+        "id": "donnees-personnelles",
+        "title": "Données personnelles",
+        "requirements": [
+          "Limiter la collecte, consigner finalité et accès, et saisir le responsable compétent pour tout traitement sensible."
+        ]
+      },
+      {
+        "id": "propriete-intellectuelle",
+        "title": "Propriété intellectuelle",
+        "requirements": [
+          "Identifier les actifs, licences, créations de prestataires et droits nécessaires à la continuité."
+        ]
+      },
+      {
+        "id": "travail-reglementation",
+        "title": "Droit du travail et réglementation sectorielle",
+        "requirements": [
+          "Repérer les autorisations, qualifications, emplois et obligations propres à l’activité."
+        ]
+      }
+    ],
+    "evaluation": [
+      "auto"
+    ],
+    "resources": [
+      {
+        "label": "Associations.gouv : dirigeants élus",
+        "href": "https://associations.gouv.fr/les-dirigeants-elus-de-lassociation",
+        "format": "web"
+      },
+      {
+        "label": "CNIL : ressources pour les associations",
+        "href": "https://www.cnil.fr/fr/mon-quotidien/associations",
+        "format": "web"
+      },
+      {
+        "label": "Agence française anticorruption : guides",
+        "href": "https://www.agence-francaise-anticorruption.gouv.fr/fr/guides-et-fiches-pratiques",
+        "format": "web"
+      },
+      {
+        "label": "Direction générale du Trésor : lutte contre le blanchiment",
+        "href": "https://www.tresor.economie.gouv.fr/tresor-international/lutte-contre-la-criminalite-financiere/lutte-contre-le-blanchiment-de-capitaux",
+        "format": "web"
+      },
+      {
+        "label": "impots.gouv.fr : associations",
+        "href": "https://www.impots.gouv.fr/professionnel/je-suis-une-association",
+        "format": "web"
+      },
+      {
+        "label": "DAJ : registre des aides de minimis",
+        "href": "https://www.economie.gouv.fr/daj/publication-du-decret-relatif-au-registre-national-sur-les-aides-de-minimis",
+        "format": "web"
+      }
+    ],
+    "relatedLessonIds": [
+      "lvp-plan-diligence",
+      "lvp-safeguarding-risques",
+      "lvp-arbre-instruments",
+      "lvp-compatibilite-remboursement",
+      "lvp-termes-financement"
+    ],
+    "glossaryRefs": [
+      "gouvernance-associative",
+      "safeguarding",
+      "convention-de-financement"
+    ],
+    "tags": [
+      "venture-philanthropie",
+      "juridique",
+      "conformite",
+      "escalade"
+    ]
+  },
+  {
+    "id": "vp-atelier-perspective-financeur",
+    "slug": "atelier-perspective-financeur-portefeuille",
+    "title": "Atelier facultatif : perspective du financeur et du portefeuille",
+    "kicker": "Atelier non noté",
+    "readMin": 6,
+    "activityKind": "workshop",
+    "estimatedWorkMinutes": 60,
+    "relatedCourseIds": [
+      "c-vp-partenariat-portefeuille"
+    ],
+    "summary": "Tester une nouvelle recommandation au regard des engagements, réserves et risques cumulés du financeur.",
+    "brief": "Reprenez une option de soutien à Trait d’Union et placez-la dans un portefeuille fictif. Documentez la capacité du financeur à tenir ses engagements, les concentrations, les réserves, les arbitrages de renouvellement et la coordination avec les cofinanceurs. L’exercice reste facultatif et n’ajoute aucun score.",
+    "template": [
+      {
+        "heading": "Engagements et réserves",
+        "prompt": "Projeter décaissements, coûts d’accompagnement, renouvellements et réserves disponibles."
+      },
+      {
+        "heading": "Concentrations et risques cumulés",
+        "prompt": "Mesurer les expositions sectorielles, géographiques, financières et les facteurs communs."
+      },
+      {
+        "heading": "Arbitrage et coordination",
+        "prompt": "Comparer nouveau soutien, renouvellement ou sortie, puis répartir les rôles entre cofinanceurs."
+      },
+      {
+        "heading": "Apprentissage",
+        "prompt": "Consigner une hypothèse invalidée, ses effets et le changement de pratique proposé."
+      }
+    ],
+    "rubric": [
+      {
+        "criterion": "Engagements couverts",
+        "check": "Les décaissements et renouvellements sont compatibles avec les réserves du financeur."
+      },
+      {
+        "criterion": "Concentrations visibles",
+        "check": "Les expositions et risques communs sont quantifiés ou explicitement qualifiés."
+      },
+      {
+        "criterion": "Arbitrage motivé",
+        "check": "La décision de nouveau soutien, renouvellement ou sortie est reliée au mandat et au portefeuille."
+      },
+      {
+        "criterion": "Apprentissage consigné",
+        "check": "Une hypothèse invalidée conduit à un changement daté de pratique ou de suivi."
+      }
+    ],
+    "components": [
+      {
+        "id": "capacite-engagement",
+        "title": "Capacité à tenir les engagements",
+        "requirements": [
+          "Projeter décaissements, coûts d’accompagnement et réserves nécessaires aux engagements pluriannuels."
+        ]
+      },
+      {
+        "id": "concentrations-risques-cumules",
+        "title": "Concentrations et risques cumulés",
+        "requirements": [
+          "Examiner concentrations sectorielle, géographique et financière, puis les facteurs communs de risque."
+        ]
+      },
+      {
+        "id": "nouveaux-soutiens-renouvellements",
+        "title": "Nouveaux soutiens et renouvellements",
+        "requirements": [
+          "Comparer les conséquences d’un nouvel engagement, d’un renouvellement ou d’une sortie."
+        ]
+      },
+      {
+        "id": "coordination-cofinanceurs",
+        "title": "Coordination des cofinanceurs",
+        "requirements": [
+          "Répartir information, décisions, conditions et coûts sans multiplier les demandes à l’organisation."
+        ]
+      },
+      {
+        "id": "apprentissage-echecs-sorties",
+        "title": "Apprentissage des échecs et des sorties",
+        "requirements": [
+          "Consigner les hypothèses invalidées, les effets pour les personnes et les changements de pratique du financeur."
+        ]
+      }
+    ],
+    "evaluation": [
+      "auto"
+    ],
+    "resources": [
+      {
+        "label": "Journal de décision",
+        "href": "/journal",
+        "format": "page"
+      }
+    ],
+    "relatedLessonIds": [
+      "lvp-accompagnement-pouvoir",
+      "lvp-mesure-impact",
+      "lvp-suivi-sortie",
+      "lvp-recommandation-comite"
+    ],
+    "glossaryRefs": [
+      "venture-philanthropie",
+      "additionalite",
+      "sortie-de-partenariat"
+    ],
+    "tags": [
+      "venture-philanthropie",
+      "portefeuille",
+      "atelier",
+      "facultatif"
+    ]
+  },
+  {
+    "id": "vp-recommandation-soutien",
+    "slug": "recommandation-de-soutien-venture-philanthropie",
+    "title": "Recommandation de soutien en venture philanthropie",
+    "kicker": "Mise en situation autoévaluée",
+    "readMin": 12,
+    "activityKind": "capstone",
+    "estimatedWorkMinutes": 360,
+    "externalReviewMinutes": 60,
+    "relatedCourseIds": [
+      "c-vp-mandat-triage",
+      "c-vp-probleme-preuves",
+      "c-vp-diligence-organisationnelle",
+      "c-vp-diligence-financiere",
+      "c-vp-structuration-financement",
+      "c-vp-partenariat-portefeuille"
+    ],
+    "caseStudyId": "cs-vp-insertion-3-regions",
+    "correctionId": "corr-vp-trait-union",
+    "summary": "Produire, faire relire puis réviser une décision sur Trait d’Union, avec annexe financière, défense orale et trace des modifications.",
+    "brief": "Travaillez sur le dossier apprenant **Trait d’Union** avant de révéler la correction commentée. Produisez un mémo décisionnel de 2 500 mots maximum, une annexe financière recalculable et une présentation orale de dix minutes. Préparez les réponses aux questions contradictoires du comité, puis formulez une décision motivée.\n\nLe mémo distingue fait, déclaration, hypothèse et inférence. Il indique les informations manquantes, les conditions qui précèdent un décaissement et ce qui ferait changer la recommandation. L’autoévaluation précède une révision explicite. Une revue externe par un pair ou un praticien peut être déclarée ; elle reste facultative et se déroule hors plateforme. Le journal des modifications explique les choix conservés ou changés. Consignez enfin deux ou trois prédictions datées dans le journal de décision.\n\nN’ajoutez aucune donnée réelle de bénéficiaire. Lorsque la qualification d’un instrument ou une obligation sectorielle dépasse les informations du cas, formulez la question à transmettre au professionnel compétent. Cette mise en situation ne produit ni score, ni résultat, ni badge, ni attestation. Elle ne constitue pas une revue humaine ni une preuve de compétence professionnelle.",
+    "components": [
+      {
+        "id": "memo-decisionnel",
+        "title": "Mémo décisionnel",
+        "requirements": [
+          "2 500 mots maximum, avec décision en ouverture, preuves traçables, conditions, risques, options et éléments qui feraient changer d’avis."
+        ]
+      },
+      {
+        "id": "annexe-financiere",
+        "title": "Annexe financière recalculable",
+        "requirements": [
+          "Prévision à treize semaines, modèle à dix-huit mois, hypothèses modifiables, scénarios et contrôles de cohérence."
+        ]
+      },
+      {
+        "id": "presentation-orale",
+        "title": "Présentation orale de 10 minutes",
+        "requirements": [
+          "Décision, deux preuves déterminantes, deux risques, conditions et demande précise au comité."
+        ]
+      },
+      {
+        "id": "questions-contradictoires",
+        "title": "Questions contradictoires du comité",
+        "requirements": [
+          "Répondre aux cartes de rôle en donnant source, limite et conséquence pour la décision."
+        ]
+      },
+      {
+        "id": "decision-motivee",
+        "title": "Décision motivée",
+        "requirements": [
+          "Consigner la décision retenue, les options écartées, les conditions, les responsabilités et la date de revue."
+        ]
+      },
+      {
+        "id": "autoevaluation",
+        "title": "Autoévaluation",
+        "requirements": [
+          "Appliquer les treize critères sans calculer de score global."
+        ]
+      },
+      {
+        "id": "journal-modifications",
+        "title": "Journal des modifications",
+        "requirements": [
+          "Comparer première version et version révisée, avec motif et preuve à l’origine de chaque changement matériel."
+        ]
+      },
+      {
+        "id": "predictions-datees",
+        "title": "Prédictions datées",
+        "requirements": [
+          "Consigner deux ou trois prédictions vérifiables, avec date d’examen et conséquence attendue."
+        ]
+      }
+    ],
+    "evaluation": [
+      "auto",
+      "peer",
+      "practitioner"
+    ],
+    "resources": [
+      {
+        "label": "Dossier apprenant Trait d’Union",
+        "href": "/cases/insertion-3-regions",
+        "format": "page"
+      },
+      {
+        "label": "Fiche de revue externe",
+        "href": "#grille-revue",
+        "format": "markdown"
+      },
+      {
+        "label": "Journal de décision prérempli",
+        "href": "/journal?sourceType=deliverable&sourceId=vp-recommandation-soutien",
+        "format": "page"
+      }
+    ],
+    "template": [
+      {
+        "heading": "Recommandation en une phrase",
+        "prompt": "Indiquer avancer, différer ou refuser, puis préciser montant, instrument, durée, rythme de déploiement et principales conditions."
+      },
+      {
+        "heading": "Compatibilité avec le mandat",
+        "prompt": "Relier la décision au mandat, à la population, à la géographie, au risque accepté et à la contribution additionnelle du financeur."
+      },
+      {
+        "heading": "Problème, système et théorie du changement",
+        "prompt": "Résumer le problème, les acteurs, la chaîne causale, les hypothèses fragiles et le niveau de preuve disponible."
+      },
+      {
+        "heading": "Registre des preuves",
+        "prompt": "Classer les assertions déterminantes en faits, déclarations, hypothèses ou inférences ; signaler les contradictions et les données absentes."
+      },
+      {
+        "heading": "Organisation et gouvernance",
+        "prompt": "Analyser conseil, direction, délégation, équipe, opérations, système de données et capacité de réplication."
+      },
+      {
+        "heading": "Protection des personnes et conformité",
+        "prompt": "Traiter le signal de safeguarding, les données personnelles, les responsabilités et les motifs éventuels de suspension ou d’escalade."
+      },
+      {
+        "heading": "Finance et scénarios",
+        "prompt": "Reconstituer les ressources mobilisables, le coût complet, la concentration, la liquidité et au moins un scénario défavorable. Inclure un tableau comportant solde bancaire, restriction contractuelle, emploi financé, échéance et trésorerie effectivement mobilisable. Démontrer qu’aucun décaissement n’est soustrait une seconde fois lorsqu’il est déjà couvert par des fonds affectés."
+      },
+      {
+        "heading": "Options de financement",
+        "prompt": "Comparer au moins trois options, expliquer le rejet des autres et identifier les vérifications juridiques, fiscales, comptables ou réglementaires."
+      },
+      {
+        "heading": "Termes principaux",
+        "prompt": "Présenter des termes principaux prêts pour revue professionnelle : montant, emploi des fonds, tranches, conditions préalables, jalons, [[droits-d-information-du-financeur|droits d’information du financeur]] et traitement du scénario défavorable."
+      },
+      {
+        "heading": "Accompagnement non financier",
+        "prompt": "Définir besoins, budget, responsable interne, intervenants, échéances, gouvernance et transfert de capacités."
+      },
+      {
+        "heading": "Mesure, suivi et remédiation",
+        "prompt": "Retenir quelques indicateurs décisionnels, leur qualité, les effets indésirables, la voix des bénéficiaires et les décisions possibles en cas d’écart."
+      },
+      {
+        "heading": "Renouvellement, sortie et changement d’avis",
+        "prompt": "Décrire les scénarios de transition et les faits précis qui conduiraient à renforcer, réduire, suspendre ou arrêter le soutien."
+      }
+    ],
+    "rubricLevels": [
+      {
+        "id": "insuffisant",
+        "label": "Insuffisant",
+        "description": "Le critère manque, repose sur une affirmation non étayée ou ne permet pas de prendre une décision."
+      },
+      {
+        "id": "acceptable",
+        "label": "Acceptable",
+        "description": "Le critère est traité avec une preuve identifiable ; une limite ou une conséquence reste peu développée."
+      },
+      {
+        "id": "solide",
+        "label": "Solide",
+        "description": "Le critère est traité par des preuves traçables, des limites explicites et une conséquence claire pour la décision."
+      },
+      {
+        "id": "non-observable",
+        "label": "Non observable",
+        "description": "La production disponible ne permet pas d’apprécier le critère ; la revue indique la pièce ou le passage nécessaire."
+      }
+    ],
+    "rubric": [
+      {
+        "id": "coherence-mandat",
+        "criterion": "Cohérence avec le mandat",
+        "description": "La décision respecte la population, la géographie, les instruments, l’horizon, les limites et l’autorité prévus par le mandat.",
+        "expectedEvidence": "Table de correspondance entre critères du mandat et caractéristiques vérifiées de Trait d’Union.",
+        "commonError": "Fonder la décision sur l’intérêt général du sujet sans vérifier les limites du financeur.",
+        "revisionQuestion": "Quel élément du mandat autorise chaque composante de votre décision ?"
+      },
+      {
+        "id": "qualite-tracabilite-preuves",
+        "criterion": "Qualité et traçabilité des preuves",
+        "description": "Chaque affirmation matérielle renvoie à une source datée, un périmètre, un statut et une limite.",
+        "expectedEvidence": "Registre distinguant fait, déclaration, hypothèse et inférence, avec renvoi aux pièces.",
+        "commonError": "Présenter une déclaration de direction ou un budget comme un fait confirmé.",
+        "revisionQuestion": "Un lecteur peut-il retrouver la source et comprendre ce qu’elle établit réellement ?"
+      },
+      {
+        "id": "traitement-incertitudes",
+        "criterion": "Traitement des incertitudes",
+        "description": "Les contradictions, données absentes et hypothèses fragiles sont visibles et reliées à un test ou à une conséquence.",
+        "expectedEvidence": "Scénarios montrant l’effet des dates de cofinancement et du calendrier d’ouverture.",
+        "commonError": "Choisir l’hypothèse centrale sans indiquer son degré de preuve ni tester une variante.",
+        "revisionQuestion": "Quelle hypothèse pourrait modifier votre décision et comment l’avez-vous testée ?"
+      },
+      {
+        "id": "probleme-causalite",
+        "criterion": "Analyse du problème et de la causalité",
+        "description": "Le problème, les personnes, les mécanismes, les résultats et les explications concurrentes sont distingués.",
+        "expectedEvidence": "Théorie du changement annotée avec hypothèses, preuves et facteurs externes.",
+        "commonError": "Traiter le taux observé chez les répondants comme une preuve d’impact attribuable.",
+        "revisionQuestion": "Quelles autres explications peuvent produire le résultat observé ?"
+      },
+      {
+        "id": "participation-personnes",
+        "criterion": "Participation des personnes concernées",
+        "description": "La méthode prévoit accessibilité, frais, restitution, droit de réponse, réclamation et participation à certaines décisions.",
+        "expectedEvidence": "Protocole précisant personnes associées, conditions pratiques, retour des conclusions et traitement des désaccords.",
+        "commonError": "Résumer quelques entretiens comme une opinion représentative des participants.",
+        "revisionQuestion": "Comment les personnes concernées peuvent-elles contester vos conclusions ou une pratique du financeur ?"
+      },
+      {
+        "id": "gouvernance-conflits",
+        "criterion": "Gouvernance et conflits",
+        "description": "Les pouvoirs, délégations, décisions du conseil, dépendances et conflits sont reliés à la décision.",
+        "expectedEvidence": "Analyse des procès-verbaux, du registre des conflits et des autorités requises pour approuver le plan.",
+        "commonError": "Assimiler l’accord de la direction à une autorisation de l’organe compétent.",
+        "revisionQuestion": "Qui peut valablement décider, signer, contrôler et traiter un conflit ?"
+      },
+      {
+        "id": "capacite-execution",
+        "criterion": "Capacité d’exécution",
+        "description": "Le calendrier tient compte des personnes, systèmes, charges, dépendances et capacités à transférer les pratiques.",
+        "expectedEvidence": "Plan de capacité avec postes, charge, séquence des ouvertures et critères de passage.",
+        "commonError": "Déduire la capacité de réplication des seuls résultats du site historique.",
+        "revisionQuestion": "Quelle fonction devient contrainte en premier dans votre scénario ?"
+      },
+      {
+        "id": "safeguarding-risques-critiques",
+        "criterion": "Safeguarding et risques critiques",
+        "description": "Les signaux de préjudice, données ou fraude suivent une procédure compétente avec mesures conservatoires et critères de reprise.",
+        "expectedEvidence": "Fiche d’escalade indiquant signal, accès, autorité saisie, décision attendue et conséquence.",
+        "commonError": "Conduire une enquête ou demander des données individuelles pour confirmer un signal.",
+        "revisionQuestion": "Quelle fonction doit agir et quelle information pouvez-vous légitimement conserver ?"
+      },
+      {
+        "id": "analyse-financiere",
+        "criterion": "Analyse financière",
+        "description": "Résultat, bilan, trésorerie, fonds affectés, coût complet et scénarios sont réconciliés sans double comptage.",
+        "expectedEvidence": "Modèles à treize semaines et dix-huit mois avec hypothèses modifiables et contrôles.",
+        "commonError": "Assimiler réserves libres, résultat annuel et solde bancaire disponible.",
+        "revisionQuestion": "Votre point bas de trésorerie reste-t-il identique si un encaissement non signé est décalé ?"
+      },
+      {
+        "id": "choix-conditions-financement",
+        "criterion": "Choix et conditions du financement",
+        "description": "L’instrument correspond à l’usage, à la personne morale, aux flux prudents et aux risques supportés.",
+        "expectedEvidence": "Comparaison de trois options et termes principaux prêts pour revue professionnelle.",
+        "commonError": "Recommander une dette à partir de recettes futures non contractualisées ou des fonds propres pour une entité qui ne peut pas en émettre.",
+        "revisionQuestion": "Quel flux rembourse l’instrument dans le scénario prudent et qui en supporte le risque ?"
+      },
+      {
+        "id": "contribution-financeur",
+        "criterion": "Contribution propre du financeur",
+        "description": "La recommandation précise la contribution financière et non financière, son utilité, son coût et ses limites de pouvoir.",
+        "expectedEvidence": "Plan d’accompagnement convenu avec responsable interne, budget, charge, transfert et sortie.",
+        "commonError": "Présenter le contrôle ou le volume de reporting comme une contribution du financeur.",
+        "revisionQuestion": "Quelle contrainte précise le financeur réduit-il et comment l’organisation conserve-t-elle la capacité ?"
+      },
+      {
+        "id": "suivi-remediation-sortie",
+        "criterion": "Suivi, remédiation et sortie",
+        "description": "Les indicateurs déclenchent des décisions proportionnées ; renouvellement, remédiation et sortie préservent la continuité du service.",
+        "expectedEvidence": "Table de suivi avec seuil, propriétaire, échéance, action, réexamen et scénarios de transition.",
+        "commonError": "Transformer tout jalon manqué en arrêt automatique ou renouveler sans nouvelle décision.",
+        "revisionQuestion": "Quelle réponse correspond à chaque type d’écart et comment ses effets sur les personnes sont-ils traités ?"
+      },
+      {
+        "id": "clarte-recommandation",
+        "criterion": "Clarté de la recommandation",
+        "description": "La décision, ses raisons, conditions, alternatives et limites sont comprises sans reconstruire l’analyse.",
+        "expectedEvidence": "Première page donnant décision, montant, instrument, durée, conditions, contreargument et prochaine revue.",
+        "commonError": "Réserver la décision à la conclusion ou employer des formulations sans conséquence opérationnelle.",
+        "revisionQuestion": "Un membre du comité peut-il résumer la décision et ses conditions après la première page ?"
+      }
+    ],
+    "roleCards": [
+      {
+        "id": "direction-programmes",
+        "title": "Direction des programmes",
+        "mandate": "Apprécier la pertinence du programme, la capacité de réplication et les effets pour les personnes concernées.",
+        "questions": [
+          "Quelle partie du programme doit rester identique et quelle partie peut être adaptée localement ?",
+          "Qui risque de perdre l’accès au service dans votre scénario ?",
+          "Quel signal conduirait à ralentir une ouverture ?"
+        ]
+      },
+      {
+        "id": "direction-financiere",
+        "title": "Direction financière",
+        "mandate": "Tester la liquidité, la soutenabilité des engagements et le choix de l’instrument.",
+        "questions": [
+          "Comment avez-vous rapproché les 390 k€ en banque et les fonds affectés ?",
+          "Quel est le point bas à treize semaines dans le scénario prudent ?",
+          "Quel flux permettrait une composante remboursable sans réduire la mission ?"
+        ]
+      },
+      {
+        "id": "specialiste-impact",
+        "title": "Spécialiste de l’impact",
+        "mandate": "Examiner causalité, qualité des données, équité et apprentissage.",
+        "questions": [
+          "Que sait-on des 250 personnes sans suivi exploitable ?",
+          "Quelle preuve externe est transférable à ces territoires ?",
+          "Comment les personnes concernées pourront-elles répondre à vos conclusions ?"
+        ]
+      },
+      {
+        "id": "membre-conseil",
+        "title": "Membre du conseil",
+        "mandate": "Contrôler la cohérence avec le mandat, la gouvernance, les conflits et les alternatives.",
+        "questions": [
+          "Quelle autorisation manque encore pour engager la réplication ?",
+          "Quel est le meilleur argument en faveur du report ou du refus ?",
+          "Dans quelles circonstances demanderiez-vous une nouvelle décision du comité ?"
+        ]
+      },
+      {
+        "id": "responsable-safeguarding",
+        "title": "Responsable safeguarding",
+        "mandate": "Vérifier que les signaux de préjudice sont protégés, transmis et traités par les responsables compétents.",
+        "questions": [
+          "Quelles informations sur le signal avez-vous conservées et pourquoi ?",
+          "Quelle mesure conservatoire et quelle autorité de reprise proposez-vous ?",
+          "Comment une personne peut-elle signaler un préjudice concernant l’organisation ou le financeur ?"
+        ]
+      }
+    ],
+    "journal": {
+      "sourceType": "deliverable",
+      "predictionMin": 2,
+      "predictionMax": 3
+    },
+    "relatedLessonIds": [
+      "lvp-screening-additionalite",
+      "lvp-plan-diligence",
+      "lvp-atelier-choc",
+      "lvp-atelier-structuration",
+      "lvp-mesure-impact",
+      "lvp-recommandation-comite"
+    ],
+    "glossaryRefs": [
+      "venture-philanthropie",
+      "additionalite",
+      "theorie-du-changement",
+      "cout-complet",
+      "safeguarding",
+      "mesure-impact",
+      "financement-non-affecte",
+      "subvention-recuperable",
+      "gouvernance-associative",
+      "convention-de-financement",
+      "tresorerie-mobilisable",
+      "sortie-de-partenariat",
+      "droits-d-information-du-financeur"
+    ],
+    "tags": [
+      "venture-philanthropie",
+      "recommandation",
+      "due-diligence",
+      "impact",
+      "capstone"
     ]
   }
 ]

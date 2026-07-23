@@ -1,4 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { appRouteUrl } from '@shared/base-url.mjs';
+
+const HOME_HREF = appRouteUrl('/', import.meta.env.BASE_URL);
 
 interface Props {
   children: ReactNode;
@@ -55,7 +58,7 @@ export class ErrorBoundary extends Component<Props, State> {
           </button>
           {/* Hard navigation (not a router Link): guaranteed to work even if the
               router tree is what failed. */}
-          <a href="/" className="btn-ghost">Retour à l’accueil</a>
+          <a href={HOME_HREF} className="btn-ghost">Retour à l’accueil</a>
         </div>
       </div>
     );

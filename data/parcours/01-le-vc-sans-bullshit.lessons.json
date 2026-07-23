@@ -1,5 +1,5 @@
 {
-  "_doc": "Registre actif du parcours « Le VC sans bullshit ». Ces leçons drop-in `ld-*`, rattachées au cours `c-decouvrir-vc`, sont référencées directement par `data/parcours.json` puis fusionnées dans les fichiers générés par `scripts/split-lessons.mjs`. L'épisode Europe réutilise le cas `cs-europe-vs-valley` et le quiz-jalon reste défini dans le parcours.",
+  "_doc": "Registre actif du parcours « Comprendre le capital-risque ». Ces leçons drop-in `ld-*`, rattachées au cours `c-decouvrir-vc`, sont référencées directement par `data/parcours.json` puis fusionnées dans les fichiers générés par `scripts/split-lessons.mjs`. La leçon consacrée à l'Europe réutilise le cas `cs-europe-vs-valley` et le quiz-jalon reste défini dans le parcours.",
   "register": "decouverte",
   "parcoursId": "p-decouvrir-vc",
   "courseId": "c-decouvrir-vc",
@@ -9,30 +9,48 @@
       "slug": "9-sur-10-vont-mourir",
       "courseId": "c-decouvrir-vc",
       "order": 1,
-      "title": "9 startups sur 10 vont mourir. C'est le plan.",
-      "kicker": "La règle du jeu",
+      "title": "Comprendre la loi de puissance",
+      "kicker": "Distribution des rendements",
       "readMin": 4,
-      "summary": "Le métier le plus contre-intuitif du monde : on accepte que la plupart des paris échouent, parce qu'un seul peut tout rembourser.",
-      "body": "## 9 sur 10 vont mourir. C'est le plan.\n\nImagine un métier où tu sais, dès le départ, que la plupart de tes paris vont échouer — et où ce n'est pas un problème.\n\nUn fonds investit dans ~30 startups. La moitié meurent (zéro). Une poignée te rendent ta mise. Et **une seule**, parfois, fait ×50 — et rapporte plus que les 29 autres réunies. C'est la **[[power-law|loi de puissance]]** : le résultat n'est pas la moyenne, c'est l'extrême. Comme une forêt où un seul arbre dépasse tous les autres de dix têtes… sauf que c'est lui qui paie la forêt entière.\n\n## La conséquence qui retourne le cerveau\n\nUn bon investisseur ne cherche pas d'abord à *éviter les pertes*. Il cherche à *ne pas rater LA ligne* qui justifie tout le fonds. Passer à côté du prochain Doctolib coûte bien plus cher que dix faillites à 0.\n\n> **Mythe démonté — « le VC, c'est trop risqué. »** Mauvais angle. Ce qui compte, c'est l'**asymétrie** : tu ne peux perdre que 1× ta mise, tu peux en gagner 50. On perd souvent, petit ; on gagne rarement, énorme.",
+      "summary": "Les rendements d’un portefeuille de venture sont généralement concentrés dans un nombre limité de participations.",
+      "status": "published",
+      "body": "## Une distribution asymétrique\n\nDans un portefeuille de capital-risque, les rendements ne sont généralement pas répartis de manière homogène. Certaines participations peuvent perdre tout ou partie du capital investi, tandis qu'un nombre limité de sorties peut contribuer à une part importante de la performance du fonds. Cette concentration est décrite par la **[[power-law|loi de puissance]]**.\n\nLa proportion exacte de pertes et le niveau des multiples varient selon le millésime, le stade, la stratégie et la qualité d'exécution. Il convient donc d'éviter les règles chiffrées présentées comme universelles.\n\n## Conséquence pour la décision\n\nL'analyse ne consiste pas uniquement à réduire la fréquence des pertes. Elle doit aussi évaluer le potentiel de rendement, les conditions nécessaires à sa réalisation et la capacité du fonds à conserver une exposition aux participations les plus performantes.\n\n> **Point de méthode —** La perte sur une ligne est bornée par le capital engagé, alors que le gain potentiel peut être supérieur. Cette asymétrie ne dispense ni de la diligence ni de la discipline de portefeuille.",
       "keyTakeaways": [
-        "La moyenne ne décide rien, l'extrême décide tout.",
-        "Le vrai risque, c'est de rater l'exceptionnel, pas de perdre.",
-        "On accepte beaucoup de morts pour une licorne."
+        "Les rendements d'un portefeuille peuvent être concentrés dans quelques participations.",
+        "Les taux de perte et les multiples observés dépendent de la stratégie et du millésime.",
+        "La recherche d'un rendement asymétrique reste compatible avec une diligence rigoureuse."
       ],
-      "glossaryRefs": ["power-law", "fund-returner", "moic"],
+      "glossaryRefs": [
+        "power-law",
+        "fund-returner",
+        "moic"
+      ],
       "quiz": [
         {
           "question": "Dans un portefeuille VC, le résultat est surtout déterminé par…",
           "options": [
-            { "text": "La meilleure ligne", "correct": true },
-            { "text": "La moyenne des lignes", "correct": false },
-            { "text": "La pire ligne", "correct": false }
+            {
+              "text": "La meilleure ligne",
+              "correct": true
+            },
+            {
+              "text": "La moyenne des lignes",
+              "correct": false
+            },
+            {
+              "text": "La pire ligne",
+              "correct": false
+            }
           ],
           "explanation": "Loi de puissance : une seule sortie exceptionnelle peut faire l'essentiel du fonds. On filtre et on réinvestit pour ne pas la rater."
         }
       ],
       "furtherReading": [
-        { "label": "Anatomie d'un portefeuille en loi de puissance", "kind": "case", "ref": "cs-power-law-portfolio" }
+        {
+          "label": "Anatomie d'un portefeuille en loi de puissance",
+          "kind": "case",
+          "ref": "cs-power-law-portfolio"
+        }
       ]
     },
     {
@@ -44,26 +62,44 @@
       "kicker": "Fondations",
       "readMin": 4,
       "summary": "Ni prêt, ni casino, ni court terme : trois choses que le venture n'est pas, et la seule qu'il est.",
+      "status": "published",
       "body": "## Ni casino, ni banque\n\nTrois choses que le venture n'est **pas** — et la seule qu'il est.\n\n**Pas un prêt.** Une banque te prête et veut être remboursée, quoi qu'il arrive. Un VC **achète une part** de ta boîte ([[equity|equity]]) : si tu coules, il perd tout ; si tu décolles, il gagne gros. Même bateau.\n\n**Pas un casino.** À la roulette, les probas sont figées et contre toi. Un VC **choisit**, **accompagne**, **ré-investit**. Le jugement change le résultat.\n\n**Pas du court terme.** Il immobilise son argent 7 à 10 ans — c'est [[illiquidite|illiquide]]. On appelle ça du capital patient, et le mot n'est pas décoratif.\n\n## En une phrase\n\nLe venture, c'est une classe d'actifs **longue, illiquide, gouvernée par la loi de puissance** — et un métier : choisir tôt, sous incertitude, des fondateurs qui bâtiront peut-être des géants.\n\n> **Mythe démonté — « les VCs parient sur des idées. »** Surtout au début, ils parient sur l'**équipe** : l'idée changera, les gens beaucoup moins.",
       "keyTakeaways": [
         "De l'equity, pas de la dette.",
         "Du jugement, pas du hasard.",
         "Dix ans, pas dix mois."
       ],
-      "glossaryRefs": ["venture-capital", "equity", "illiquidite"],
+      "glossaryRefs": [
+        "venture-capital",
+        "equity",
+        "illiquidite"
+      ],
       "quiz": [
         {
           "question": "Qu'apporte un VC à une startup ?",
           "options": [
-            { "text": "De l'equity (une part du capital)", "correct": true },
-            { "text": "Un prêt à rembourser avec intérêts", "correct": false },
-            { "text": "Une subvention sans contrepartie", "correct": false }
+            {
+              "text": "De l'equity (une part du capital)",
+              "correct": true
+            },
+            {
+              "text": "Un prêt à rembourser avec intérêts",
+              "correct": false
+            },
+            {
+              "text": "Une subvention sans contrepartie",
+              "correct": false
+            }
           ],
           "explanation": "Il devient copropriétaire : il gagne si la boîte prend de la valeur, il perd si elle coule. Même bateau que le fondateur."
         }
       ],
       "furtherReading": [
-        { "label": "Le VC européen contre le mythe de la Valley", "kind": "case", "ref": "cs-europe-vs-valley" }
+        {
+          "label": "Le VC européen contre le mythe de la Valley",
+          "kind": "case",
+          "ref": "cs-europe-vs-valley"
+        }
       ]
     },
     {
@@ -75,35 +111,65 @@
       "kicker": "Le circuit",
       "readMin": 5,
       "summary": "De ton assurance-vie au compte d'une startup : la chaîne LP → GP → fondateur, et le business angel en solo.",
+      "status": "published",
       "body": "## De ton épargne au compte d'une startup\n\nSuivons un billet de 100 € depuis une assurance-vie jusqu'à une jeune boîte. Il passe par trois mains.\n\n**Main 1 — les [[lp|LPs]].** Les vrais propriétaires de l'argent : assureurs, fonds de pension, [[family-office|family offices]], [[fund-of-funds|fonds de fonds]], et l'État via {{bpifrance|Bpifrance}} ou le {{eif|Fonds européen d'investissement}}. Ton assurance-vie en fait peut-être partie sans que tu le saches. Ils acceptent de bloquer leur argent dix ans.\n\n**Main 2 — le fonds, piloté par les [[gp|GPs]].** Les LPs ne choisissent pas les startups : ils confient l'argent à une équipe. Les GPs décident, et se rémunèrent via des [[management-fees|frais de gestion]] (~2 %/an) et une part des gains (le [[carry|carry]], ~20 %).\n\n**Main 3 — les fondateurs.** Le fonds achète une part de la startup ; l'argent finance l'équipe et la croissance.\n\nEt en solo : le [[business-angel|business angel]], un particulier qui investit son **propre** argent, souvent le premier à signer.\n\n> **À garder en tête :** le GP gère l'argent **des autres** ; l'angel gère **le sien**.",
       "keyTakeaways": [
         "LP = d'où vient l'argent.",
         "GP = qui le pilote.",
         "Angel = qui met le sien."
       ],
-      "glossaryRefs": ["lp", "gp", "business-angel", "fund-of-funds", "management-fees", "carry"],
+      "glossaryRefs": [
+        "lp",
+        "gp",
+        "business-angel",
+        "fund-of-funds",
+        "management-fees",
+        "carry"
+      ],
       "quiz": [
         {
           "question": "Qui possède réellement l'argent d'un fonds ?",
           "options": [
-            { "text": "Les LPs", "correct": true },
-            { "text": "Les GPs", "correct": false },
-            { "text": "Les fondateurs", "correct": false }
+            {
+              "text": "Les LPs",
+              "correct": true
+            },
+            {
+              "text": "Les GPs",
+              "correct": false
+            },
+            {
+              "text": "Les fondateurs",
+              "correct": false
+            }
           ],
           "explanation": "Les GPs pilotent et décident, mais l'argent vient des Limited Partners (assureurs, fonds de pension, family offices, État)."
         },
         {
           "question": "Un business angel investit…",
           "options": [
-            { "text": "Son propre argent", "correct": true },
-            { "text": "L'argent des LPs", "correct": false },
-            { "text": "L'argent de l'État", "correct": false }
+            {
+              "text": "Son propre argent",
+              "correct": true
+            },
+            {
+              "text": "L'argent des LPs",
+              "correct": false
+            },
+            {
+              "text": "L'argent de l'État",
+              "correct": false
+            }
           ],
           "explanation": "C'est ce qui le distingue d'un GP, qui gère l'argent des autres."
         }
       ],
       "furtherReading": [
-        { "label": "Limited Partner (LP)", "kind": "glossary", "ref": "lp" }
+        {
+          "label": "Limited Partner (LP)",
+          "kind": "glossary",
+          "ref": "lp"
+        }
       ]
     },
     {
@@ -115,27 +181,52 @@
       "kicker": "Le vocabulaire",
       "readMin": 5,
       "summary": "Pré-seed, seed, Série A : chaque mot dit combien de preuves la startup a déjà accumulées.",
+      "status": "published",
       "body": "## Le vocabulaire qui situe une startup en trois secondes\n\nPré-seed, seed, Série A… Ce ne sont pas des ceintures de karaté. (Bon, un peu si.) Chaque mot dit **combien de preuves** la startup a accumulées.\n\n- **[[pre-seed|Pré-seed]] (~1 à 1,5 M€).** Presque rien à montrer : une équipe, une intuition, un prototype. On parie sur les gens. Souvent un [[safe|SAFE]] ou un BSA-AIR.\n- **[[seed|Seed]] (~2,5 à 3,5 M€, valo ~12-15 M€).** Les premiers signaux de [[traction|traction]]. On creuse l'équipe *et* les chiffres.\n- **[[series-a|Série A]] (~10 à 15 M€).** La machine tourne — souvent ~2,5 M€ de revenu récurrent. On finance la mise à l'échelle.\n- **Série B, C…** On accélère, les tickets s'envolent.\n\nFun fact qui dit tout sur l'époque : **la seed d'aujourd'hui ressemble à l'ancienne Série A.** La barre des preuves monte chaque année.\n\n> **Mythe démonté — « lever = réussir. »** Non. Lever, c'est **céder une part** de ta boîte pour aller plus vite. C'est un moyen, pas un trophée.",
       "keyTakeaways": [
         "Chaque stade = un niveau de preuve.",
         "Plus tard = plus de preuves, moins de risque.",
         "Lever n'est pas un trophée, c'est un moyen."
       ],
-      "glossaryRefs": ["pre-seed", "seed", "series-a", "safe", "traction", "dilution"],
+      "glossaryRefs": [
+        "pre-seed",
+        "seed",
+        "series-a",
+        "safe",
+        "traction",
+        "dilution"
+      ],
       "quiz": [
         {
           "question": "À quel stade parie-t-on surtout sur l'équipe, faute de chiffres ?",
           "options": [
-            { "text": "Le pré-seed", "correct": true },
-            { "text": "La Série C", "correct": false },
-            { "text": "L'IPO", "correct": false }
+            {
+              "text": "Le pré-seed",
+              "correct": true
+            },
+            {
+              "text": "La Série C",
+              "correct": false
+            },
+            {
+              "text": "L'IPO",
+              "correct": false
+            }
           ],
           "explanation": "Au tout début, l'équipe est presque la seule donnée fiable : pas (encore) de traction à analyser."
         }
       ],
       "furtherReading": [
-        { "label": "Simuler la dilution", "kind": "simulator", "ref": "dilution" },
-        { "label": "Pre-money / Post-money", "kind": "simulator", "ref": "pre-post-money" }
+        {
+          "label": "Simuler la dilution",
+          "kind": "simulator",
+          "ref": "dilution"
+        },
+        {
+          "label": "Pre-money / Post-money",
+          "kind": "simulator",
+          "ref": "pre-post-money"
+        }
       ]
     },
     {
@@ -147,26 +238,44 @@
       "kicker": "Le métier",
       "readMin": 6,
       "summary": "Loin du cliché jet-set : la charge de travail, le quotidien fait de refus, et la texture très française du métier.",
+      "status": "published",
       "body": "## Le métier, sans le vernis LinkedIn\n\nOublie le cliché : le type en sweat qui signe des chèques entre deux cafés. La vraie journée ressemble à autre chose.\n\n**Le temps.** ~50 à 60 h/semaine. Pas l'enfer de la banque d'affaires (80-100 h) — les week-ends sont souvent préservés — mais pas un *lifestyle job* non plus : tu es **toujours un peu en service** (événements, dîners fondateurs, lecture le dimanche, charge mentale du portefeuille).\n\n**Ce que tu fais vraiment** (surtout junior) : du [[deal-sourcing|sourcing]], du screening, des appels fondateurs, de la recherche marché, de la [[dd|due diligence]], des mémos. Sur ~1 000 dossiers vus dans l'année, un fonds en finance **3 à 5**.\n\n> **La vérité qui pique :** ton métier, c'est surtout **dire non**. Bien, vite, avec respect — et sans rater la perle. Signer un chèque, c'est 1 % du temps.\n\n## Le feedback loop le plus lent du monde\n\nTu sauras si tu avais raison dans… 7 à 10 ans. Aucun score quotidien. Il faut aimer décider sans confirmation immédiate, accepter de **se tromper en public**, et porter seul une conviction à laquelle personne ne croit encore.\n\n## La texture française\n\nPetit écosystème : **tout le monde se connaît**, ta réputation est ton actif n°1. Très parisien — mais Lyon, Station F et les régions montent. Relationnel avant d'être transactionnel : [[warm-intro|warm intros]], dîners, culture du « tu ». Toile de fond de capital public ({{bpifrance|Bpifrance}}, {{eif|Fonds européen d'investissement}}) qui n'existe pas vraiment aux États-Unis.\n\n> **Mythe démonté — « entrer en VC, c'est une voie royale balisée. »** Faux : peu de postes, beaucoup de candidats, chemins non-linéaires. Le différenciateur : **prouver que tu penses déjà comme un investisseur** — une analyse de startup que tu as écrite toi-même vaut mille lignes de CV.",
       "keyTakeaways": [
         "~50-60 h/semaine, mais « always on ».",
         "Le métier, c'est surtout dire non — signer, c'est 1 % du temps.",
         "En France, ta réputation est ton CV."
       ],
-      "glossaryRefs": ["deal-sourcing", "dd", "warm-intro"],
+      "glossaryRefs": [
+        "deal-sourcing",
+        "dd",
+        "warm-intro"
+      ],
       "quiz": [
         {
           "question": "Au quotidien, un VC junior passe le plus clair de son temps à…",
           "options": [
-            { "text": "Chercher des boîtes et dire non", "correct": true },
-            { "text": "Signer des chèques", "correct": false },
-            { "text": "Siéger à des conseils d'administration", "correct": false }
+            {
+              "text": "Chercher des boîtes et dire non",
+              "correct": true
+            },
+            {
+              "text": "Signer des chèques",
+              "correct": false
+            },
+            {
+              "text": "Siéger à des conseils d'administration",
+              "correct": false
+            }
           ],
           "explanation": "Sur ~1 000 dossiers, 3 à 5 financés : l'essentiel du métier junior, c'est sourcer et refuser bien."
         }
       ],
       "furtherReading": [
-        { "label": "Une semaine dans la vie d'un investisseur", "kind": "lesson", "ref": "l-vc-week" }
+        {
+          "label": "Une semaine dans la vie d'un investisseur",
+          "kind": "lesson",
+          "ref": "l-vc-week"
+        }
       ]
     },
     {
@@ -178,26 +287,49 @@
       "kicker": "La hiérarchie",
       "readMin": 6,
       "summary": "Analyst, associate, senior associate, principal, partner : responsabilités, organisation et rémunération par grade.",
+      "status": "published",
       "body": "## « Un VC », ça n'existe pas\n\nEntre le stagiaire qui avale 40 decks par semaine et le partner qui signe le chèque, le mot « VC » recouvre cinq métiers. Une règle traverse l'échelle : **plus tu montes, moins tu exécutes et plus tu décides** — et plus ta rému dépend du [[carry|carry]].\n\n- **[[analyst-vc|Analyst]] (0-2 ans).** Sourcing, recherche marché, pré-[[dd|DD]], data, support. Il prépare, il ne décide pas. ~45-55 k€ base, ~70-100 k€ total. Carry rare.\n- **[[associate-vc|Associate]] (2-4 ans).** Mène le process : sourcing → calls fondateurs → DD → reco. ~60-90 k€ base. Carry parfois, modeste.\n- **Senior Associate (3-5 ans).** Pilote la DD de bout en bout, mentore les analysts, parfois [[board-seat|board observer]]. N'existe pas dans tous les fonds.\n- **[[principal-vc|Principal]] (5 ans +).** Source *et* porte des deals jusqu'au [[ic|comité]], négocie, siège au board. **Le carry devient significatif — le basculement.**\n- **Partner / GP.** Décide, lève auprès des [[lp|LPs]], pilote la stratégie du fonds. Rému = surtout carry.\n\n*Fourchettes indicatives Europe/France, très variables selon la taille du fonds (un seed fund de 30 M€ ne paie pas comme un late-stage d'1 Md€).*\n\n## L'organisation, en une image\n\nEn bas de l'échelle, on **cherche et on exécute** ; en haut, on **décide et on lève**. Analysts et associates *préparent* la conviction ; principals et partners la *tranchent* — et l'assument devant les LPs.\n\n> **Mythe démonté — « tout le monde touche le carry. »** Non : il ne devient une vraie source de revenu qu'à partir de **principal/partner**, après 7-10 ans, et seulement si le fonds performe. En VC, on s'enrichit *lentement*, pas *vite*.",
       "keyTakeaways": [
         "Plus tu montes, plus tu décides et moins tu exécutes.",
         "Le carry récompense la patience et le risque, pas l'ancienneté seule.",
         "Grades et chiffres varient énormément d'un fonds à l'autre."
       ],
-      "glossaryRefs": ["analyst-vc", "associate-vc", "principal-vc", "carry", "ic", "board-seat", "lp", "dd"],
+      "glossaryRefs": [
+        "analyst-vc",
+        "associate-vc",
+        "principal-vc",
+        "carry",
+        "ic",
+        "board-seat",
+        "lp",
+        "dd"
+      ],
       "quiz": [
         {
           "question": "Le carry (la part des plus-values) devient une vraie source de revenu à partir de…",
           "options": [
-            { "text": "Principal / partner", "correct": true },
-            { "text": "Analyst", "correct": false },
-            { "text": "Associate", "correct": false }
+            {
+              "text": "Principal / partner",
+              "correct": true
+            },
+            {
+              "text": "Analyst",
+              "correct": false
+            },
+            {
+              "text": "Associate",
+              "correct": false
+            }
           ],
           "explanation": "Les juniors vivent surtout du salaire + bonus ; le carry récompense la patience et le risque, après 7-10 ans et si le fonds performe."
         }
       ],
       "furtherReading": [
-        { "label": "Les échelons du métier : analyst → principal", "kind": "lesson", "ref": "l-career-levels" }
+        {
+          "label": "Les échelons du métier : analyst → principal",
+          "kind": "lesson",
+          "ref": "l-career-levels"
+        }
       ]
     },
     {
@@ -209,26 +341,48 @@
       "kicker": "Le véhicule",
       "readMin": 5,
       "summary": "Dix ans, courbe en J, logique de millésimes : pourquoi ton VC est à la fois pressé et incroyablement patient.",
+      "status": "published",
       "body": "## Un fonds, c'est une promesse de dix ans\n\nUn fonds n'est pas une tirelire infinie : c'est une promesse faite à ses [[lp|LPs]]. Voici comment elle se déroule.\n\n- **Années 1 à 3-4 — la [[investment-period|période d'investissement]].** Le fonds déploie l'argent et signe la plupart de ses premiers chèques.\n- **Années 3 à 7 — le suivi ([[follow-on|follow-on]]).** Le fonds garde des réserves pour ré-investir dans ses gagnantes. On muscle les stars, pas les retardataires.\n- **Années 7 à 10 — la récolte.** Les sorties (rachats, [[ipo|IPO]]) rendent l'argent aux LPs.\n\n## La courbe en J\n\nAu début, le fonds est dans le rouge (des frais, pas encore de sorties). Puis les gagnantes décollent et la [[j-curve|courbe en J]] remonte fort. D'où la patience obligatoire.\n\nConséquence maligne : tous les 2-3 ans, les GPs lèvent un **nouveau** fonds. Le venture est un métier de [[vintage|millésimes]] — comme le vin, un bon cru dépend autant du timing que du talent.\n\n> **À retenir :** dix ans, courbe en J, millésimes. Le temps long n'est pas un défaut, c'est le modèle.",
       "keyTakeaways": [
         "Un fonds vit ~10 ans : investir, suivre, récolter.",
         "La courbe en J : le rouge précède le vert.",
         "Le venture est un métier de millésimes."
       ],
-      "glossaryRefs": ["fund-lifecycle", "investment-period", "follow-on", "j-curve", "vintage", "lp", "ipo"],
+      "glossaryRefs": [
+        "fund-lifecycle",
+        "investment-period",
+        "follow-on",
+        "j-curve",
+        "vintage",
+        "lp",
+        "ipo"
+      ],
       "quiz": [
         {
           "question": "La « courbe en J » décrit…",
           "options": [
-            { "text": "Le fait qu'un fonds perde de l'argent avant d'en gagner", "correct": true },
-            { "text": "La forme d'un logo de fonds", "correct": false },
-            { "text": "La croissance d'une seule startup", "correct": false }
+            {
+              "text": "Le fait qu'un fonds perde de l'argent avant d'en gagner",
+              "correct": true
+            },
+            {
+              "text": "La forme d'un logo de fonds",
+              "correct": false
+            },
+            {
+              "text": "La croissance d'une seule startup",
+              "correct": false
+            }
           ],
           "explanation": "Frais d'abord, sorties ensuite : le rouge précède le vert. D'où la patience structurelle du métier."
         }
       ],
       "furtherReading": [
-        { "label": "Fund returns : DPI / TVPI / MOIC", "kind": "simulator", "ref": "fund-returns" }
+        {
+          "label": "Fund returns : DPI / TVPI / MOIC",
+          "kind": "simulator",
+          "ref": "fund-returns"
+        }
       ]
     }
   ]

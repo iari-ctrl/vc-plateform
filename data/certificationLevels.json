@@ -1,0 +1,91 @@
+[
+  {
+    "id": "analyst",
+    "order": 1,
+    "title": "VC Analyst",
+    "category": "professional",
+    "status": "in-construction",
+    "promise": "Produire une analyse d'investissement structurée, traçable et révisable sans reconstruction complète.",
+    "audience": "Analysts en poste et candidats capables de mobiliser le socle d’analyse du parcours.",
+    "scope": [
+      "Qualification d'une opportunité",
+      "Analyse de l'entreprise et du marché",
+      "Modélisation et lecture des risques",
+      "Recommandation écrite et défense du raisonnement"
+    ],
+    "exclusions": [
+      "Négociation et closing d'un investissement",
+      "Pilotage autonome d'une relation de gouvernance",
+      "Délivrance automatique à partir des données locales"
+    ],
+    "certificationId": "cert-analyst-vc"
+  },
+  {
+    "id": "associate-foundations",
+    "order": 2,
+    "title": "VC Associate Foundations",
+    "category": "knowledge",
+    "status": "future",
+    "promise": "Maîtriser le socle commun nécessaire pour coordonner un processus d'investissement sous supervision.",
+    "audience": "Professionnels qui se préparent à assumer des responsabilités de coordination.",
+    "scope": [
+      "Coordination des travaux d'analyse",
+      "Préparation des décisions et des étapes d'exécution"
+    ],
+    "exclusions": [
+      "Référentiel détaillé non engagé à ce stade",
+      "Cours et modalités d'évaluation non définis"
+    ]
+  },
+  {
+    "id": "associate",
+    "order": 3,
+    "title": "VC Associate",
+    "category": "professional",
+    "status": "future",
+    "promise": "Conduire un processus d'investissement de la qualification initiale au closing et au suivi.",
+    "audience": "Professionnels appelés à coordonner l'exécution d'un investissement.",
+    "scope": [
+      "Conduite de la diligence et coordination des parties",
+      "Préparation du closing et suivi de portefeuille"
+    ],
+    "exclusions": [
+      "Référentiel détaillé non engagé à ce stade",
+      "Cours et modalités d'évaluation non définis"
+    ]
+  },
+  {
+    "id": "senior-associate",
+    "order": 4,
+    "title": "VC Senior Associate",
+    "category": "professional",
+    "status": "future",
+    "promise": "Sponsoriser des investissements, organiser la gouvernance du portefeuille et contribuer à la stratégie du fonds.",
+    "audience": "Professionnels qui élargissent leur responsabilité de l'exécution vers le jugement et la gouvernance.",
+    "scope": [
+      "Sponsoring d'opportunités et arbitrage des risques",
+      "Gouvernance du portefeuille et contribution à la stratégie"
+    ],
+    "exclusions": [
+      "Référentiel détaillé non engagé à ce stade",
+      "Cours et modalités d'évaluation non définis"
+    ]
+  },
+  {
+    "id": "principal",
+    "order": 5,
+    "title": "VC Principal",
+    "category": "professional",
+    "status": "future",
+    "promise": "Développer les relations d'investissement, porter des convictions et contribuer aux choix d'allocation du fonds.",
+    "audience": "Professionnels qui assument une responsabilité élargie d'origination, de conviction et d'allocation.",
+    "scope": [
+      "Origination et développement des relations",
+      "Construction de convictions et contribution aux allocations"
+    ],
+    "exclusions": [
+      "Référentiel détaillé non engagé à ce stade",
+      "Cours et modalités d'évaluation non définis"
+    ]
+  }
+]

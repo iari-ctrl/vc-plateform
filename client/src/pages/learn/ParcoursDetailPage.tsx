@@ -4,18 +4,20 @@ import { Link } from 'react-router-dom';
 import { InlineMarkdown } from '@/lib/markdown';
 import {
   ArrowLeft, ArrowRight, Check, Clock, Users, Target, Trophy, BookOpen,
-  Briefcase, FlaskConical, BookA, Dumbbell, Heart, Lock,
+  Briefcase, FlaskConical, BookA, Dumbbell, Heart, CircleDot, ClipboardCheck, FileCheck2,
   type LucideIcon,
 } from 'lucide-react';
 import {
   parcoursBySlug, resolveStep, lessonIdsForParcours, visibleSteps,
   FAMILY_META, type ParcoursStep, type StepType, type TimeBudget,
 } from '@/content/parcours';
+import { formatMinutes, parcoursTimeSummary } from '@/content/learningTime';
 import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { ProgressBar, LevelBadge } from '@/components/ui/primitives';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useUserData } from '@/context/UserDataContext';
-import { usePageMeta } from '@/lib/seo';
+import { useResourcePageMeta } from '@/lib/seo';
+import { productionStageAtLeast, useLearningWorkspace, type ProductionStage } from '@/lib/learningWorkspace';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
 const STEP_META: Record<StepType, { label: string; icon: LucideIcon; color: string; hint: string }> = {
@@ -26,22 +28,25 @@ const STEP_META: Record<StepType, { label: string; icon: LucideIcon; color: stri
 };
 
 const KIND_ICON: Record<string, LucideIcon> = {
-  lesson: BookOpen, case: Briefcase, simulator: FlaskConical, glossary: BookA, milestone: Trophy,
+  lesson: BookOpen, case: Briefcase, simulator: FlaskConical, glossary: BookA, deliverable: FileCheck2, milestone: Trophy,
 };
 
 const TIME_BUDGETS: { id: TimeBudget; label: string; sub: string }[] = [
-  { id: 'low', label: 'L’essentiel', sub: 'Cœur seulement' },
+  { id: 'low', label: 'Essentiel', sub: 'Étapes essentielles' },
   { id: 'medium', label: 'Standard', sub: 'Cœur + pratique' },
-  { id: 'high', label: 'Immersion', sub: 'Tout débloqué' },
+  { id: 'high', label: 'Complet', sub: 'Toutes les étapes' },
 ];
+
+const HOURS_FORMATTER = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 2 });
 
 export default function ParcoursDetailPage() {
   const { slug } = useParams();
   const parcours = slug ? parcoursBySlug(slug) : undefined;
   const { progress, profile } = useUserData();
+  const workspace = useLearningWorkspace();
   const [budget, setBudget] = useState<TimeBudget>((profile?.timeBudget as TimeBudget) ?? 'high');
 
-  usePageMeta(parcours?.title, parcours?.hook);
+  useResourcePageMeta(Boolean(parcours), parcours?.title, parcours?.hook);
 
   const lessonIds = useMemo(() => (parcours ? lessonIdsForParcours(parcours) : []), [parcours]);
   const done = lessonIds.filter((id) => progress[id]?.status === 'done').length;
@@ -53,16 +58,46 @@ export default function ParcoursDetailPage() {
   const accent = parcours.accent ?? meta.accent;
   const steps = visibleSteps(parcours, budget);
   const allSteps = [...parcours.steps].sort((a, b) => a.order - b.order);
+  const timeSummary = parcoursTimeSummary(parcours);
+  const finalStep = allSteps.find((step) => step.ref.kind === 'milestone');
+  const finalEntry = finalStep ? workspace.productions[finalStep.ref.id] : undefined;
+  const finalStatus = finalEntry?.declaredCompleteAt
+    ? 'Déclaré terminé'
+    : finalEntry
+      ? ({
+          started: 'Production commencée',
+          'first-version-completed': 'Première version terminée',
+          reviewed: 'Retour effectué',
+          revised: 'Production révisée',
+        } satisfies Record<ProductionStage, string>)[finalEntry.stage]
+      : 'Non commencé';
+  const diagnosticAnswers = parcours.entryDiagnosticId
+    ? Object.keys(workspace.diagnostics[parcours.entryDiagnosticId]?.answers ?? {}).length
+    : 0;
   const isResolvedDone = (r: ReturnType<typeof resolveStep>) => {
     const ids = r.lessonIds ?? (r.lessonId ? [r.lessonId] : []);
     return ids.length > 0 && ids.every((id) => progress[id]?.status === 'done');
   };
 
   // « Reprendre où j'en étais » — first reachable step that isn't done yet.
+  const hasLearningActivity = done > 0 || allSteps.some((step) => (
+    (step.ref.kind === 'deliverable' || step.ref.kind === 'milestone') && Boolean(workspace.productions[step.ref.id])
+  ));
   const resume = allSteps
     .map((s) => ({ s, r: resolveStep(s) }))
-    .find(({ r }) => r.href && !isResolvedDone(r));
-  const resumeHref = resume?.r.href ?? allSteps.map((s) => resolveStep(s)).find((r) => r.href)?.href ?? null;
+    .find(({ s, r }) => {
+      if (!r.href) return false;
+      if (s.ref.kind === 'case') return !hasLearningActivity && s.order === allSteps[0]?.order;
+      if (s.ref.kind === 'deliverable' || s.ref.kind === 'milestone') {
+        const entry = workspace.productions[s.ref.id];
+        return s.ref.kind === 'milestone' ? !entry?.declaredCompleteAt : !productionStageAtLeast(entry?.stage, 'revised');
+      }
+      return !isResolvedDone(r);
+    });
+  const diagnosticHref = parcours.entryDiagnosticId ? `/parcours/${parcours.slug}/diagnostic` : null;
+  const resumeHref = !hasLearningActivity && diagnosticAnswers === 0 && diagnosticHref
+    ? diagnosticHref
+    : resume?.r.href ?? allSteps.map((s) => resolveStep(s)).find((r) => r.href)?.href ?? null;
 
   const hidden = parcours.steps.length - steps.length;
 
@@ -88,7 +123,14 @@ export default function ParcoursDetailPage() {
               <p className="mt-3 max-w-2xl text-[1.0625rem] font-headline italic leading-relaxed text-surface-variant text-pretty">{parcours.hook}</p>
               <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-surface-variant text-pretty">{parcours.goal}</p>
               <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-surface-variant">
-                <span className="inline-flex items-center gap-1.5"><Clock size={15} /> ≈ {parcours.time.coreHours} h{parcours.time.withBonusHours ? ` · ${parcours.time.withBonusHours} h en immersion` : ''}</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock size={15} aria-hidden />
+                  {parcours.time.source === 'derived'
+                    ? `${formatMinutes(timeSummary.readingMinutes)} de lecture · ${formatMinutes(timeSummary.guidedPracticeMinutes + timeSummary.consolidationMinutes + timeSummary.finalMinutes)} de production`
+                    : parcours.time.withBonusHours
+                      ? `≈ ${HOURS_FORMATTER.format(parcours.time.coreHours)} h pour l’essentiel · ${HOURS_FORMATTER.format(parcours.time.withBonusHours)} h pour le parcours complet`
+                      : `≈ ${HOURS_FORMATTER.format(parcours.time.coreHours)} h`}
+                </span>
                 <span className="inline-flex items-center gap-1.5"><Target size={15} /> {parcours.steps.length} étapes</span>
               </div>
               <div className="mt-7 flex flex-wrap gap-3">
@@ -102,13 +144,14 @@ export default function ParcoursDetailPage() {
             </div>
 
             <div className="space-y-5 rounded-2xl border border-outline-variant bg-surface-container-lowest p-6">
-              {pct > 0 && (
+              {lessonIds.length > 0 && (
                 <div>
                   <div className="mb-1.5 flex items-center justify-between text-sm">
-                    <span className="font-medium">Ta progression</span>
-                    <span className="text-surface-variant">{pct}%</span>
+                    <span className="font-medium">Leçons déclarées lues</span>
+                    <span className="text-surface-variant">{done}/{lessonIds.length} · {pct}%</span>
                   </div>
-                  <ProgressBar value={pct} accent={accent} />
+                  <ProgressBar value={pct} accent={accent} label="Leçons déclarées lues" />
+                  {finalStep && <p className="mt-3 text-xs text-surface-variant"><span className="font-medium text-foreground">Jalon final :</span> {finalStatus}</p>}
                 </div>
               )}
               <div>
@@ -131,7 +174,7 @@ export default function ParcoursDetailPage() {
                 </div>
               )}
               <div>
-                <p className="eyebrow mb-3">Ce que tu sauras faire</p>
+                <p className="eyebrow mb-3">Compétences visées</p>
                 <ul className="space-y-2">
                   {parcours.outcomes.map((o, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-sm text-surface-variant">
@@ -148,11 +191,36 @@ export default function ParcoursDetailPage() {
 
       {/* Spine */}
       <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+        {parcours.time.source === 'derived' && (
+          <section className="mb-8 rounded-2xl border border-outline-variant bg-surface-container-lowest p-5" aria-labelledby="parcours-time-title">
+            <p className="eyebrow">Temps estimés</p>
+            <h2 id="parcours-time-title" className="mt-2 font-headline text-headline-md font-semibold">Lecture et production</h2>
+            <dl className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div><dt className="text-xs text-surface-variant">Lecture des leçons</dt><dd className="mt-1 font-mono text-lg font-semibold">{formatMinutes(timeSummary.readingMinutes)}</dd></div>
+              <div><dt className="text-xs text-surface-variant">Contributions guidées</dt><dd className="mt-1 font-mono text-lg font-semibold">{formatMinutes(timeSummary.guidedPracticeMinutes)}</dd></div>
+              <div><dt className="text-xs text-surface-variant">Consolidation et jalon</dt><dd className="mt-1 font-mono text-lg font-semibold">{formatMinutes(timeSummary.consolidationMinutes + timeSummary.finalMinutes)}</dd></div>
+              <div><dt className="text-xs text-surface-variant">Activités facultatives</dt><dd className="mt-1 font-mono text-lg font-semibold">{formatMinutes(timeSummary.optionalMinutes)}</dd></div>
+            </dl>
+            <p className="mt-4 border-t border-outline-variant pt-4 text-sm text-surface-variant">Charge requise estimée, lecture comprise : <strong className="font-medium text-foreground">{formatMinutes(timeSummary.requiredMinutes)}</strong>. Les activités facultatives ajoutent {formatMinutes(timeSummary.optionalMinutes)}.</p>
+          </section>
+        )}
+
+        {parcours.entryDiagnosticId && (
+          <section className="mb-8 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-5 sm:p-6" aria-labelledby="entry-diagnostic-title">
+            <p className="eyebrow flex items-center gap-2"><ClipboardCheck size={14} aria-hidden /> Facultatif · sans note</p>
+            <h2 id="entry-diagnostic-title" className="mt-2 font-headline text-headline-md font-semibold">Diagnostic d’entrée</h2>
+            <p className="mt-2 text-sm leading-relaxed text-surface-variant">5 situations donnent des repères individuels et des renvois vers les contenus utiles. Le diagnostic ne bloque aucune étape.</p>
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <Link to={`/parcours/${parcours.slug}/diagnostic`} className="btn-ghost">{diagnosticAnswers > 0 ? 'Reprendre le diagnostic' : 'Faire le diagnostic'} <ArrowRight size={15} aria-hidden /></Link>
+              {diagnosticAnswers > 0 && <span className="text-xs text-surface-variant">{diagnosticAnswers}/5 réponses enregistrées</span>}
+            </div>
+          </section>
+        )}
         {/* Time cursor */}
         <div className="mb-8 rounded-2xl border border-outline-variant bg-surface-container-low/40 p-4 sm:p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm font-medium">Curseur temps <span className="font-normal text-surface-variant">— combien tu déploies</span></p>
-            <div className="flex gap-1.5" role="group" aria-label="Curseur temps">
+            <p className="text-sm font-medium">Niveau d’approfondissement</p>
+            <div className="flex gap-1.5" role="group" aria-label="Niveau d’approfondissement">
               {TIME_BUDGETS.map((b) => (
                 <button
                   key={b.id}
@@ -172,7 +240,7 @@ export default function ParcoursDetailPage() {
           </div>
           {hidden > 0 && (
             <p className="mt-2 text-xs text-surface-variant">
-              {hidden} étape{hidden > 1 ? 's' : ''} masquée{hidden > 1 ? 's' : ''} à ce rythme — passe en <em>Immersion</em> pour tout voir. Rien n’est verrouillé.
+              {hidden} étape{hidden > 1 ? 's' : ''} non affichée{hidden > 1 ? 's' : ''} avec ce réglage. Sélectionnez <em>Complet</em> pour afficher l’ensemble du parcours.
             </p>
           )}
         </div>
@@ -186,20 +254,27 @@ export default function ParcoursDetailPage() {
         {/* Milestone — the reward, not an exam */}
         {parcours.milestone && (
           <div className="mt-10 rounded-2xl border-2 border-dashed p-6 sm:p-7" style={{ borderColor: `color-mix(in srgb, ${accent} 40%, transparent)`, background: `color-mix(in srgb, ${accent} 5%, transparent)` }}>
-            <p className="eyebrow flex items-center gap-2"><Trophy size={14} style={{ color: accent }} /> Le jalon — ta récompense</p>
+            <p className="eyebrow flex items-center gap-2"><Trophy size={14} style={{ color: accent }} /> Mise en situation finale</p>
             <h3 className="mt-3 font-headline text-headline-md font-semibold">{parcours.milestone.label}</h3>
             <p className="mt-2 text-sm leading-relaxed text-surface-variant">{parcours.milestone.description}</p>
             {parcours.milestone.evaluation && parcours.milestone.evaluation.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
                 {parcours.milestone.evaluation.includes('auto') && <span className="chip">Auto-évaluation (grille)</span>}
-                {parcours.milestone.evaluation.includes('peer') && <span className="chip">Puis revue par les pairs</span>}
+                {parcours.milestone.evaluation.includes('peer') && <span className="chip">Revue facultative par un pair</span>}
+                {parcours.milestone.evaluation.includes('practitioner') && <span className="chip">Revue facultative par un praticien</span>}
+              </div>
+            )}
+            {finalStep && resolveStep(finalStep).href && (
+              <div className="mt-5 flex flex-wrap items-center gap-3">
+                <Link to={resolveStep(finalStep).href!} className="btn-foil">Ouvrir le jalon final <ArrowRight size={15} aria-hidden /></Link>
+                <span className="text-xs text-surface-variant">État : {finalStatus}</span>
               </div>
             )}
           </div>
         )}
 
         <p className="mt-8 text-center text-xs text-surface-variant">
-          Tout atome est autonome — on entre par n’importe où, on dévie quand on veut. Le parcours suggère, il n’enferme jamais.
+          Chaque ressource peut être consultée indépendamment. L’ordre proposé constitue une progression recommandée.
         </p>
       </section>
     </div>
@@ -208,12 +283,21 @@ export default function ParcoursDetailPage() {
 
 function StepRow({ step, accent }: { step: ParcoursStep; accent: string }) {
   const { progress } = useUserData();
+  const workspace = useLearningWorkspace();
   const sm = STEP_META[step.type];
   const r = resolveStep(step);
   const KindIcon = KIND_ICON[step.ref.kind] ?? BookOpen;
   const trackedLessonIds = r.lessonIds ?? (r.lessonId ? [r.lessonId] : []);
   const isDone = trackedLessonIds.length > 0 && trackedLessonIds.every((id) => progress[id]?.status === 'done');
   const isReading = trackedLessonIds.some((id) => progress[id]?.status === 'reading');
+  const production = step.ref.kind === 'deliverable' || step.ref.kind === 'milestone'
+    ? workspace.productions[step.ref.id]
+    : undefined;
+  const productionLabel = production?.declaredCompleteAt
+    ? 'terminé'
+    : production
+      ? ({ started: 'commencé', 'first-version-completed': 'version 1', reviewed: 'revu', revised: 'révisé' } satisfies Record<ProductionStage, string>)[production.stage]
+      : undefined;
 
   const inner = (
     <>
@@ -231,9 +315,10 @@ function StepRow({ step, accent }: { step: ParcoursStep; accent: string }) {
               {sm.label}
             </span>
             {step.keystone && (
-              <span className="inline-flex items-center gap-1 text-[0.6rem] font-medium text-surface-variant"><Lock size={10} /> important pour la suite</span>
+              <span className="inline-flex items-center gap-1 text-[0.6rem] font-medium text-surface-variant"><CircleDot size={10} aria-hidden /> jalon du parcours</span>
             )}
             {isReading && <span className="chip !py-0 text-[0.5625rem]">en cours</span>}
+            {productionLabel && <span className="chip !py-0 text-[0.5625rem]">{productionLabel}</span>}
             {step.status === 'a-produire' && !r.exists && <span className="chip !py-0 text-[0.5625rem]">bientôt</span>}
           </div>
           <p className="mt-1 font-medium leading-snug text-foreground">{step.label}</p>

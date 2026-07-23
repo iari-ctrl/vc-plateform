@@ -1,35 +1,12 @@
 #!/usr/bin/env node
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { NOINDEX_SEGMENTS } from '../shared/routes.mjs';
-import { cleanPath, collectRoutes } from './collect-routes.mjs';
+import { appRouteUrl, normalizeBaseUrl, resolveSiteBaseUrl } from '../shared/base-url.mjs';
+import { collectRoutes } from './collect-routes.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = join(root, 'client', 'public');
-
-const FALLBACK_SITE_URL = 'https://vcpx.io';
-
-const SITE_URL_ENV_KEYS = ['SITE_URL', 'VITE_SITE_URL', 'CLIENT_ORIGIN'];
-const configuredSiteUrl = SITE_URL_ENV_KEYS.map((key) => process.env[key]).find(Boolean);
-
-function normalizeSiteUrl(value) {
-  try {
-    const url = new URL(value);
-    return `${url.origin}${url.pathname.replace(/\/+$/, '')}`;
-  } catch {
-    throw new Error(`Invalid SITE_URL/VITE_SITE_URL value: "${value}"`);
-  }
-}
-
-const siteUrl = normalizeSiteUrl(configuredSiteUrl ?? FALLBACK_SITE_URL);
-
-if (!configuredSiteUrl) {
-  console.warn(
-    `[sitemap] SITE_URL/VITE_SITE_URL absent; fallback temporaire utilise ${FALLBACK_SITE_URL}. ` +
-      'Definir le domaine canonique avant production.',
-  );
-}
 
 function escapeXml(value) {
   return String(value)
@@ -40,19 +17,19 @@ function escapeXml(value) {
     .replace(/'/g, '&apos;');
 }
 
-function absoluteUrl(path) {
-  const relativePath = cleanPath(path).replace(/^\/+/, '');
-  return new URL(relativePath, `${siteUrl}/`).toString();
+function absoluteUrl(path, { baseUrl, siteUrl }) {
+  return new URL(appRouteUrl(path, baseUrl), new URL(siteUrl).origin).toString();
 }
 
-// The exhaustive route set (static pages + collections from data/) is shared
-// with the prerender crawl via scripts/collect-routes.mjs.
-const orderedRoutes = collectRoutes();
+/** Exact ordered route set consumed by the sitemap. */
+export function routesForSitemap() {
+  return collectRoutes();
+}
 
-function urlEntry(route) {
+function urlEntry(route, config) {
   const lines = [
     '  <url>',
-    `    <loc>${escapeXml(absoluteUrl(route.path))}</loc>`,
+    `    <loc>${escapeXml(absoluteUrl(route.path, config))}</loc>`,
   ];
   if (route.lastmod) lines.push(`    <lastmod>${escapeXml(route.lastmod)}</lastmod>`);
   lines.push(`    <changefreq>${route.changefreq}</changefreq>`);
@@ -61,32 +38,48 @@ function urlEntry(route) {
   return lines.join('\n');
 }
 
-const entries = orderedRoutes.map((route) => urlEntry(route));
+export function buildSitemapXml({ baseUrl, siteUrl, routes = routesForSitemap() }) {
+  const entries = routes.map((route) => urlEntry(route, { baseUrl, siteUrl }));
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    entries.join('\n'),
+    '</urlset>',
+    '',
+  ].join('\n');
+}
 
-const sitemap = [
-  '<?xml version="1.0" encoding="UTF-8"?>',
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  entries.join('\n'),
-  '</urlset>',
-  '',
-].join('\n');
+/**
+ * `noindex` pages remain crawlable so robots can read their HTML directive.
+ * Hosts able to set `X-Robots-Tag` may add an equivalent header policy, but a
+ * robots.txt `Disallow` must not hide the directive.
+ */
+export function buildRobotsTxt({ baseUrl, siteUrl }) {
+  return [
+    'User-agent: *',
+    `Allow: ${appRouteUrl('/', baseUrl)}`,
+    '',
+    `Sitemap: ${absoluteUrl('/sitemap.xml', { baseUrl, siteUrl })}`,
+    '',
+  ].join('\n');
+}
 
-// The noindex set is shared with the client (shared/routes.mjs): the same
-// segments that get `Disallow:` here are what usePageMeta marks `noindex`.
-const sitePath = new URL(`${siteUrl}/`).pathname.replace(/\/+$/, '');
-const disallowBlock = () => [...NOINDEX_SEGMENTS.map((segment) => `Disallow: ${sitePath}/${segment}`), ''];
+export function generateSitemap({ env = process.env, outputDirectory = publicDir } = {}) {
+  const baseUrl = normalizeBaseUrl(env.VITE_BASE_URL ?? env.BASE_URL);
+  const siteUrl = resolveSiteBaseUrl(env.VITE_SITE_URL?.trim(), baseUrl);
+  if (!siteUrl) {
+    throw new Error(
+      '[sitemap] VITE_SITE_URL est requis : aucune origine canonique de production ne peut être déduite.',
+    );
+  }
 
-const robots = [
-  'User-agent: *',
-  `Allow: ${sitePath}/`,
-  '',
-  ...disallowBlock(),
-  `Sitemap: ${absoluteUrl('/sitemap.xml')}`,
-  '',
-].join('\n');
+  const routes = routesForSitemap();
+  mkdirSync(outputDirectory, { recursive: true });
+  writeFileSync(join(outputDirectory, 'sitemap.xml'), buildSitemapXml({ baseUrl, siteUrl, routes }));
+  writeFileSync(join(outputDirectory, 'robots.txt'), buildRobotsTxt({ baseUrl, siteUrl }));
+  console.log(`[sitemap] ${routes.length} routes -> client/public/sitemap.xml`);
+  return { baseUrl, count: routes.length, siteUrl };
+}
 
-mkdirSync(publicDir, { recursive: true });
-writeFileSync(join(publicDir, 'sitemap.xml'), sitemap);
-writeFileSync(join(publicDir, 'robots.txt'), robots);
-
-console.log(`[sitemap] ${orderedRoutes.length} routes -> client/public/sitemap.xml`);
+const isMainModule = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isMainModule) generateSitemap();

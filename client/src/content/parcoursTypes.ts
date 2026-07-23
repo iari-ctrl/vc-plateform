@@ -36,6 +36,7 @@ export type StepRefKind =
   | 'case'
   | 'simulator'
   | 'glossary'
+  | 'deliverable'
   | 'milestone'; // jalon / contenu à produire (mock case, gabarit, etc.)
 
 /** Une étape ne stocke pas de contenu : elle référence un atome par id. */
@@ -59,7 +60,7 @@ export interface ParcoursMilestone {
   label: string;
   description: string;
   /** Décision n°2 : auto-évaluation d'abord, revue par les pairs ensuite. */
-  evaluation?: ('auto' | 'peer')[];
+  evaluation?: ('auto' | 'peer' | 'practitioner')[];
   rubricId?: string;
   modelAnswerId?: string;
 }
@@ -81,12 +82,21 @@ export interface Parcours {
   level: Level;
   /** Niveau d'entrée conseillé (peut différer de `level`). */
   entryLevel: Level;
-  time: {
-    coreHours: number;
-    withBonusHours?: number;
-    sessions?: number;
-    cadence?: string;
-  };
+  time:
+    | {
+        source?: 'declared';
+        coreHours: number;
+        withBonusHours?: number;
+        sessions?: number;
+        cadence?: string;
+      }
+    | {
+        source: 'derived';
+        sessions?: number;
+        cadence?: string;
+      };
+  /** Optional, ungraded entry diagnostic displayed before the recommended steps. */
+  entryDiagnosticId?: string;
   /** Budgets-temps auxquels le parcours convient. */
   timeFit: TimeBudget[];
   /** Ids de profils ikigai (cf. data/ikigai.json → profiles[].id). */

@@ -13,28 +13,23 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
+import { buildGlossaryArtifacts, serializeGeneratedJson } from './generated-content.mjs';
+
 const dataDir = fileURLToPath(new URL('../data/', import.meta.url));
 const generatedDir = `${dataDir}generated/`;
 const source = JSON.parse(readFileSync(`${dataDir}glossary.json`, 'utf8'));
 
-if (!Array.isArray(source)) {
-  console.error('split-glossary: data/glossary.json is not an array');
+let artifacts;
+try {
+  artifacts = buildGlossaryArtifacts(source);
+} catch (error) {
+  console.error(`split-glossary: ${error.message}`);
   process.exit(1);
 }
-
-const index = [];
-const defs = {};
-
-for (const term of source) {
-  const { definition, example, ...light } = term;
-  index.push(light);
-  const def = { definition: definition ?? '' };
-  if (example !== undefined) def.example = example;
-  defs[term.slug] = def;
-}
+const { index, defs } = artifacts;
 
 mkdirSync(generatedDir, { recursive: true });
-writeFileSync(`${generatedDir}glossary.index.json`, JSON.stringify(index, null, 2) + '\n');
-writeFileSync(`${generatedDir}glossary.defs.json`, JSON.stringify(defs, null, 2) + '\n');
+writeFileSync(`${generatedDir}glossary.index.json`, serializeGeneratedJson(index));
+writeFileSync(`${generatedDir}glossary.defs.json`, serializeGeneratedJson(defs));
 
 console.log(`split-glossary: ${index.length} terms → generated/glossary.index.json + generated/glossary.defs.json`);

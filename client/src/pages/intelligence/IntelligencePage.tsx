@@ -44,6 +44,7 @@ export default function IntelligencePage() {
     <div className="mx-auto max-w-[var(--content-max)] px-4 py-14 sm:px-6 lg:px-8">
       <Reveal>
         <SectionHeading
+          as="h1"
           eyebrow="Intelligence VC"
           title="Suivre les terrains, les thèses et les décisions"
           description="Cette surface rassemble les dossiers d’écosystème, les convictions datées, les analyses et les artefacts de décision. Elle sert à savoir quoi lire maintenant, quoi réviser, et où produire un raisonnement exploitable."
@@ -111,7 +112,7 @@ export default function IntelligencePage() {
               <Stat label="à réviser" value={review.length} />
             </div>
             <p className="mt-5 text-sm leading-relaxed text-surface-variant">
-              Les contenus restent à leur URL canonique. Cette page ne crée pas une nouvelle couche éditoriale ; elle rend visible le travail déjà produit.
+              Cette page rend visible le travail déjà produit tout en conservant chaque contenu à son URL canonique.
             </p>
           </div>
         </Reveal>

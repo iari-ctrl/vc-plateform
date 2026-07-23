@@ -1,15 +1,27 @@
 import { useEffect, useState } from 'react';
 
-export function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
+function readMediaQuery(query: string) {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false;
+  return window.matchMedia(query).matches;
+}
+
+export function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(() => readMediaQuery(query));
 
   useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduced(query.matches);
-    update();
-    query.addEventListener('change', update);
-    return () => query.removeEventListener('change', update);
-  }, []);
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return undefined;
 
-  return reduced;
+    const mediaQuery = window.matchMedia(query);
+    const update = () => setMatches(mediaQuery.matches);
+
+    update();
+    mediaQuery.addEventListener('change', update);
+    return () => mediaQuery.removeEventListener('change', update);
+  }, [query]);
+
+  return matches;
+}
+
+export function usePrefersReducedMotion() {
+  return useMediaQuery('(prefers-reduced-motion: reduce)');
 }

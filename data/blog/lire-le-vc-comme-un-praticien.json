@@ -5,13 +5,14 @@
   "subtitle": "Surligner, citer, relier : l'apprentissage actif au service du jugement",
   "author": "L'équipe VC Premium",
   "date": "2026-02-18",
+  "status": "published",
   "readMin": 5,
   "category": "Méthode",
-  "excerpt": "Le savoir VC n'est utile que relié. Comment transformer la lecture passive en carnet de convictions personnelles.",
+  "excerpt": "Le savoir VC gagne en utilité lorsqu'il est relié à des cas, des décisions et des notes structurées.",
   "tags": [
     "apprentissage",
     "notes",
     "knowledge-graph"
   ],
-  "body": "## Le savoir isolé ne sert à rien\n\nConnaître la définition d'une liquidation preference ne vaut rien tant qu'on ne l'a pas reliée à un cas concret, à une term sheet, à une décision. Le capital-risque est un métier de **connexions** : entre un terme et un cours, un cas et une thèse, une métrique et une décision.\n\n## L'apprentissage actif\n\nC'est pourquoi notre plateforme vous invite à lire activement. Surlignez un passage qui vous marque. Citez-le directement dans votre carnet de notes, automatiquement rattaché au cours ou au cas en cours de lecture. Reliez les termes entre eux. Chaque note devient un nœud de votre propre graphe de connaissances.\n\n## Vers un graphe de connaissances\n\nLes tags et les connexions entre contenus ne sont pas décoratifs : ils préparent une logique de knowledge graph. À mesure que vous lisez, reliez et annotez, vous construisez une carte personnelle du capital-risque — celle qui vous servira en entretien, en comité, ou face à un fondateur.\n\n## Le carnet comme outil professionnel\n\nLe *commonplace book* — le carnet de citations et de réflexions — est un outil ancien des esprits sérieux. En VC, il devient le lieu où vos convictions se forment, se confrontent et mûrissent. Lire, c'est écrire en pensant."
+  "body": "## Relier le savoir à des situations concrètes\n\nLa définition d'une liquidation preference devient utile lorsqu'elle est reliée à un cas concret, à une term sheet ou à une décision. La pratique du capital-risque mobilise ces **connexions** entre un terme et un cours, un cas et une thèse, une métrique et une décision.\n\n## L'apprentissage actif\n\nLa plateforme permet de surligner un passage, de le citer dans un carnet automatiquement rattaché au contenu en cours de lecture et de relier les termes entre eux. Chaque note contribue ainsi à un graphe de connaissances personnel.\n\n## Vers un graphe de connaissances\n\nLes tags et les connexions entre contenus structurent progressivement ce graphe. La lecture, les liens et les annotations composent une carte personnelle du capital-risque, mobilisable en entretien, en comité ou face à un fondateur.\n\n## Le carnet comme outil professionnel\n\nLe *commonplace book*, carnet de citations et de réflexions, fournit un cadre ancien pour consigner et confronter des idées. Appliqué au VC, il accompagne la formation et la révision des convictions."
 }

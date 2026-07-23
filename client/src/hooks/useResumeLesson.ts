@@ -1,4 +1,4 @@
-import { lessonById } from '@/content';
+import { publicLessonById } from '@/content/lessons';
 import { useUserData } from '@/context/UserDataContext';
 
 /**
@@ -10,7 +10,7 @@ import { useUserData } from '@/context/UserDataContext';
  */
 export function useResumeLesson() {
   const { progress } = useUserData();
-  const reading = Object.values(progress).filter((p) => p.status === 'reading');
+  const reading = Object.values(progress).filter((p) => p.status === 'reading' && publicLessonById(p.lessonId));
   if (!reading.length) return undefined;
-  return lessonById(reading[reading.length - 1].lessonId);
+  return publicLessonById(reading[reading.length - 1].lessonId);
 }

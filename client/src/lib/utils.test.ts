@@ -2,10 +2,11 @@ import { describe, it, expect } from 'vitest';
 import { safeHttpUrl } from './utils';
 
 describe('safeHttpUrl', () => {
-  it('allows http, https and mailto schemes', () => {
+  it('allows only HTTPS editorial links', () => {
     expect(safeHttpUrl('https://example.com')).toBe('https://example.com');
-    expect(safeHttpUrl('http://example.com/path')).toBe('http://example.com/path');
-    expect(safeHttpUrl('mailto:hello@example.com')).toBe('mailto:hello@example.com');
+    expect(safeHttpUrl('http://example.com/path')).toBeUndefined();
+    expect(safeHttpUrl('mailto:hello@example.com')).toBeUndefined();
+    expect(safeHttpUrl('/internal/path')).toBeUndefined();
   });
 
   it('rejects dangerous schemes', () => {

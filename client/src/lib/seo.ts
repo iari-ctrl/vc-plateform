@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { appRouteUrl, publicAssetUrl, resolveSiteBaseUrl } from '@shared/base-url.mjs';
 import { isNoindexPath, ogImageKeyForPath } from '@shared/routes.mjs';
 import { plainText } from './markdown-text';
 
 const SITE_NAME = 'VC Premium Experience';
-const FALLBACK_SITE_URL = 'https://vcpx.io';
 const DEFAULT_TITLE = `${SITE_NAME} — Intelligence VC, formation et décisions`;
+export const NOT_FOUND_TITLE = 'Terra Incognita';
 const DEFAULT_DESCRIPTION =
   "Analyser les écosystèmes, suivre des convictions, étudier des décisions et structurer sa progression dans le capital-risque.";
 
@@ -16,6 +17,8 @@ export interface PageMetaOptions {
   type?: OgType;
   image?: string;
   noindex?: boolean;
+  canonical?: boolean;
+  notFound?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
 }
@@ -23,16 +26,16 @@ export interface PageMetaOptions {
 const clean = (value: string | undefined): string => plainText(value, Infinity);
 
 const OG_IMAGE_BY_KEY: Record<OgImageKey, string> = {
-  'anti-portfolio': '/og/anti-portfolio.png',
-  blog: '/og/blog.png',
-  'case-study': '/og/case-study.png',
-  course: '/og/course.png',
-  default: '/og/default.png',
-  glossary: '/og/glossary.png',
-  lesson: '/og/lesson.png',
-  memo: '/og/memo.png',
-  path: '/og/path.png',
-  simulator: '/og/simulator.png',
+  'anti-portfolio': 'og/anti-portfolio.png',
+  blog: 'og/blog.png',
+  'case-study': 'og/case-study.png',
+  course: 'og/course.png',
+  default: 'og/default.png',
+  glossary: 'og/glossary.png',
+  lesson: 'og/lesson.png',
+  memo: 'og/memo.png',
+  path: 'og/path.png',
+  simulator: 'og/simulator.png',
 };
 
 function pageTitle(title: string | undefined): string {
@@ -46,22 +49,26 @@ function pageDescription(description: string | undefined): string {
 
 function siteUrl(): string {
   const configured = import.meta.env.VITE_SITE_URL?.trim();
-  const raw = configured || (typeof window !== 'undefined' ? window.location.origin : FALLBACK_SITE_URL);
-  try {
-    const url = new URL(raw);
-    return `${url.origin}${url.pathname.replace(/\/+$/, '')}`;
-  } catch {
-    return FALLBACK_SITE_URL;
-  }
+  const runtimeOrigin = typeof window !== 'undefined' ? window.location.origin : undefined;
+  const resolved = resolveSiteBaseUrl(configured, import.meta.env.BASE_URL, runtimeOrigin);
+  if (!resolved) throw new Error('Canonical site URL unavailable: configure VITE_SITE_URL outside the browser.');
+  return resolved;
 }
 
-function toAbsoluteUrl(pathOrUrl: string): string {
+function siteOrigin(): string {
+  return new URL(siteUrl()).origin;
+}
+
+function toAbsoluteAssetUrl(pathOrUrl: string): string {
   try {
     return new URL(pathOrUrl).toString();
   } catch {
-    const path = pathOrUrl.startsWith('/') ? pathOrUrl.slice(1) : pathOrUrl;
-    return new URL(path, `${siteUrl()}/`).toString();
+    return new URL(publicAssetUrl(pathOrUrl, import.meta.env.BASE_URL), siteOrigin()).toString();
   }
+}
+
+function toAbsoluteRouteUrl(pathname: string): string {
+  return new URL(appRouteUrl(pathname, import.meta.env.BASE_URL), siteOrigin()).toString();
 }
 
 function ogImageForPath(pathname: string): string {
@@ -69,11 +76,11 @@ function ogImageForPath(pathname: string): string {
   return key ? OG_IMAGE_BY_KEY[key] ?? OG_IMAGE_BY_KEY.default : OG_IMAGE_BY_KEY.default;
 }
 
-interface MetaModel {
+export interface MetaModel {
   title: string;
   titlePlain: string;
   description: string;
-  canonicalUrl: string;
+  canonicalUrl?: string;
   imageUrl: string;
   type: OgType;
   noindex: boolean;
@@ -81,20 +88,31 @@ interface MetaModel {
   modifiedTime?: string;
 }
 
-function buildMetaModel(pathname: string, title: string | undefined, description: string | undefined, options: PageMetaOptions): MetaModel {
-  const { type = 'website', image, noindex, publishedTime, modifiedTime } = options;
-  const imageUrl = toAbsoluteUrl(image ?? ogImageForPath(pathname));
-  
-  return {
-    title: pageTitle(title),
-    titlePlain: clean(title),
-    description: pageDescription(description),
-    canonicalUrl: toAbsoluteUrl(pathname),
-    imageUrl,
-    type,
-    noindex: noindex ?? isNoindexPath(pathname),
+export function buildMetaModel(pathname: string, title: string | undefined, description: string | undefined, options: PageMetaOptions): MetaModel {
+  const {
+    type = 'website',
+    image,
+    noindex,
+    canonical = true,
+    notFound = false,
     publishedTime,
     modifiedTime,
+  } = options;
+  const effectiveTitle = notFound ? NOT_FOUND_TITLE : title;
+  const effectiveDescription = notFound ? undefined : description;
+  const effectiveNoindex = notFound || (noindex ?? isNoindexPath(pathname));
+  const imageUrl = toAbsoluteAssetUrl(image ?? ogImageForPath(pathname));
+
+  return {
+    title: pageTitle(effectiveTitle),
+    titlePlain: clean(effectiveTitle),
+    description: pageDescription(effectiveDescription),
+    canonicalUrl: canonical && !effectiveNoindex ? toAbsoluteRouteUrl(pathname) : undefined,
+    imageUrl,
+    type: notFound ? 'website' : type,
+    noindex: effectiveNoindex,
+    publishedTime: notFound ? undefined : publishedTime,
+    modifiedTime: notFound ? undefined : modifiedTime,
   };
 }
 
@@ -104,7 +122,7 @@ interface MetaTag {
   content?: string;
 }
 
-function buildMetaTags(m: MetaModel): MetaTag[] {
+export function buildMetaTags(m: MetaModel): MetaTag[] {
   return [
     { attr: 'name', key: 'description', content: m.description },
     { attr: 'name', key: 'robots', content: m.noindex ? 'noindex,nofollow' : undefined },
@@ -137,8 +155,12 @@ function upsertMeta(attribute: 'name' | 'property', key: string, content: string
   if (!existing) document.head.appendChild(tag);
 }
 
-function upsertCanonical(href: string): void {
+function upsertCanonical(href: string | undefined): void {
   let tag = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!href) {
+    tag?.remove();
+    return;
+  }
   if (!tag) {
     tag = document.createElement('link');
     tag.setAttribute('rel', 'canonical');
@@ -155,7 +177,7 @@ function applyMetaModel(m: MetaModel): void {
 
 export function usePageMeta(title?: string, description?: string, options: PageMetaOptions = {}) {
   const { pathname } = useLocation();
-  const { type, image, noindex, publishedTime, modifiedTime } = options;
+  const { type, image, noindex, canonical, notFound, publishedTime, modifiedTime } = options;
 
   useEffect(() => {
     applyMetaModel(
@@ -163,9 +185,21 @@ export function usePageMeta(title?: string, description?: string, options: PageM
         type,
         image,
         noindex,
+        canonical,
+        notFound,
         publishedTime,
         modifiedTime,
       }),
     );
-  }, [pathname, title, description, type, image, noindex, publishedTime, modifiedTime]);
+  }, [pathname, title, description, type, image, noindex, canonical, notFound, publishedTime, modifiedTime]);
+}
+
+/** Keeps a detail page and its nested NotFoundPage on the same head policy. */
+export function useResourcePageMeta(
+  resourceExists: boolean,
+  title?: string,
+  description?: string,
+  options: PageMetaOptions = {},
+) {
+  usePageMeta(title, description, { ...options, notFound: !resourceExists });
 }

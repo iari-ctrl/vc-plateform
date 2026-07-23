@@ -18,7 +18,6 @@
       "Identifier les principales sources de rendement et de risque d'un investissement en capital-risque"
     ],
     "prerequisiteLessonIds": [],
-    "assessmentId": "analyst-foundations",
     "glossaryRefs": [
       "venture-capital",
       "equity",
@@ -46,7 +45,6 @@
     "prerequisiteLessonIds": [
       "l-vc-definition"
     ],
-    "assessmentId": "analyst-foundations",
     "glossaryRefs": [
       "power-law",
       "fund-returner",
@@ -75,7 +73,6 @@
     "prerequisiteLessonIds": [
       "l-power-law"
     ],
-    "assessmentId": "analyst-foundations",
     "glossaryRefs": [
       "lp",
       "gp",
@@ -105,7 +102,6 @@
     "prerequisiteLessonIds": [
       "l-fund-lifecycle"
     ],
-    "assessmentId": "analyst-ecosystem",
     "glossaryRefs": [
       "lp",
       "gp",
@@ -135,7 +131,6 @@
     "prerequisiteLessonIds": [
       "l-actors"
     ],
-    "assessmentId": "analyst-ecosystem",
     "glossaryRefs": [
       "pre-seed",
       "seed",
@@ -166,7 +161,6 @@
     "prerequisiteLessonIds": [
       "l-stages"
     ],
-    "assessmentId": "analyst-role",
     "glossaryRefs": [
       "deal-memo",
       "ic",
@@ -195,7 +189,6 @@
     "prerequisiteLessonIds": [
       "l-vc-week"
     ],
-    "assessmentId": "analyst-role",
     "glossaryRefs": [
       "gp",
       "ic",
@@ -209,7 +202,7 @@
     "order": 1,
     "title": "Origination et organisation du sourcing",
     "kicker": "Origination",
-    "readMin": 6,
+    "readMin": 7,
     "summary": "Structurer l'identification d'opportunités à partir du mandat du fonds, diversifier les canaux et documenter les sources afin d'améliorer la couverture sans confondre volume et qualité.",
     "status": "published",
     "level": "debutant",
@@ -223,7 +216,6 @@
     "prerequisiteLessonIds": [
       "l-portfolio-monitoring"
     ],
-    "assessmentId": "analyst-pipeline",
     "glossaryRefs": [
       "deal-flow",
       "thesis-driven",
@@ -251,7 +243,6 @@
     "prerequisiteLessonIds": [
       "l-sourcing"
     ],
-    "assessmentId": "analyst-pipeline",
     "glossaryRefs": [
       "deal-flow",
       "thesis-driven",
@@ -280,7 +271,6 @@
     "prerequisiteLessonIds": [
       "l-founder-analysis"
     ],
-    "assessmentId": "analyst-opportunity",
     "glossaryRefs": [
       "tam-sam-som",
       "why-now"
@@ -307,7 +297,6 @@
     "prerequisiteLessonIds": [
       "l-product-analysis"
     ],
-    "assessmentId": "analyst-opportunity",
     "glossaryRefs": [
       "arr",
       "nrr",
@@ -338,7 +327,6 @@
     "prerequisiteLessonIds": [
       "lmv-returns-waterfall"
     ],
-    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
       "dd",
       "deal-memo",
@@ -355,6 +343,7 @@
     "kicker": "Structure",
     "readMin": 8,
     "summary": "Une thèse articule où va le monde, pourquoi maintenant, et pourquoi vous. Falsifiable ou rien.",
+    "status": "published",
     "glossaryRefs": [
       "thesis-driven",
       "why-now"
@@ -369,6 +358,7 @@
     "kicker": "Comité",
     "readMin": 7,
     "summary": "Devant le comité, une conviction se gagne par l'anticipation du contre-argument, pas par l'enthousiasme.",
+    "status": "published",
     "glossaryRefs": [
       "ic",
       "deal-memo",
@@ -384,6 +374,7 @@
     "kicker": "Argent",
     "readMin": 10,
     "summary": "Valorisation, liquidation preference, anti-dilution, pool d'options : qui touche quoi, et quand.",
+    "status": "published",
     "glossaryRefs": [
       "term-sheet",
       "liquidation-preference",
@@ -401,6 +392,7 @@
     "kicker": "Pouvoir",
     "readMin": 8,
     "summary": "Board, droits de véto, pro-rata, vesting : la gouvernance compte parfois plus que les pourcentages.",
+    "status": "published",
     "glossaryRefs": [
       "board-seat",
       "pro-rata",
@@ -417,6 +409,7 @@
     "kicker": "Allocation",
     "readMin": 8,
     "summary": "L'argent gardé pour réinvestir vaut souvent plus que l'argent du premier chèque. Doubler sur les gagnantes.",
+    "status": "published",
     "glossaryRefs": [
       "follow-on",
       "pro-rata",
@@ -433,6 +426,7 @@
     "kicker": "Discipline",
     "readMin": 7,
     "summary": "Stars, walking dead, pertes : où mettre son temps et son capital, et où accepter de lâcher.",
+    "status": "published",
     "glossaryRefs": [
       "power-law",
       "follow-on"
@@ -447,6 +441,7 @@
     "kicker": "Power law",
     "readMin": 11,
     "summary": "Un portefeuille VC ne se comprend pas par son scénario moyen. Une poignée d'outliers déplace toute la distribution et peut masquer un scénario médian beaucoup plus fragile.",
+    "status": "published",
     "glossaryRefs": [
       "power-law",
       "fund-returner",
@@ -464,6 +459,7 @@
     "kicker": "Incertitude",
     "readMin": 12,
     "summary": "Monte Carlo ne prédit pas le futur. Il transforme une stratégie de portefeuille en milliers de futurs plausibles pour rendre visibles dispersion, downside, upside et sensibilité aux leviers du GP.",
+    "status": "published",
     "glossaryRefs": [
       "power-law",
       "portfolio-construction",
@@ -481,6 +477,7 @@
     "kicker": "Moteur",
     "readMin": 14,
     "summary": "Le simulateur lance 4 000 portefeuilles déterministes. Chaque ligne passe par un tirage échec, sortie modeste ou queue Pareto, puis le fonds applique dilution et follow-ons.",
+    "status": "published",
     "glossaryRefs": [
       "power-law",
       "follow-on",
@@ -499,6 +496,7 @@
     "kicker": "Lecture",
     "readMin": 11,
     "summary": "Les sorties du simulateur se lisent comme un diagnostic : distribution du TVPI, probabilités de seuil, concentration des retours et cohérence du fund returner.",
+    "status": "published",
     "glossaryRefs": [
       "tvpi",
       "fund-returner",
@@ -516,6 +514,7 @@
     "kicker": "2 & 20",
     "readMin": 10,
     "summary": "Comment un GP est rémunéré, et dans quel ordre l'argent revient aux LPs. La fameuse structure 2 & 20.",
+    "status": "published",
     "glossaryRefs": [
       "management-fees",
       "carry",
@@ -534,6 +533,7 @@
     "kicker": "DPI, TVPI, IRR",
     "readMin": 12,
     "summary": "Le langage par lequel on juge un GP : cash rendu, valeur latente, timing des flux et contexte de vintage.",
+    "status": "published",
     "glossaryRefs": [
       "dpi",
       "tvpi",
@@ -553,6 +553,7 @@
     "kicker": "Côté fondateur",
     "readMin": 8,
     "summary": "Lever, c'est vendre une part du futur. Construire un récit crédible que le VC peut défendre en interne.",
+    "status": "published",
     "glossaryRefs": [
       "pitch-deck",
       "why-now",
@@ -569,6 +570,7 @@
     "kicker": "Instruments",
     "readMin": 9,
     "summary": "Choisir le bon instrument et comprendre comment la dilution s'accumule sur plusieurs tours.",
+    "status": "published",
     "glossaryRefs": [
       "safe",
       "cap-table",
@@ -599,7 +601,6 @@
     "prerequisiteLessonIds": [
       "lmv-cash-flow-scenarios"
     ],
-    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "pre-money",
       "valuation",
@@ -628,7 +629,6 @@
     "prerequisiteLessonIds": [
       "lmv-pre-post-ownership"
     ],
-    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "cap-table",
       "dilution",
@@ -655,9 +655,8 @@
       "Tester la sensibilité du résultat et effectuer une contre-vérification indépendante"
     ],
     "prerequisiteLessonIds": [
-      "l-traction-unit-economics"
+      "l-pipeline-crm"
     ],
-    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "tam-sam-som",
       "arr"
@@ -684,7 +683,6 @@
     "prerequisiteLessonIds": [
       "lmv-market-sizing"
     ],
-    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "unit-economics",
       "cac",
@@ -716,7 +714,6 @@
     "prerequisiteLessonIds": [
       "lmv-valuation-economic-rights"
     ],
-    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "moic",
       "irr",
@@ -735,6 +732,7 @@
     "kicker": "Trajectoire",
     "readMin": 7,
     "summary": "Ce que chaque niveau attend réellement, et comment on progresse de l'exécution vers la décision.",
+    "status": "published",
     "glossaryRefs": [
       "carry",
       "gp",
@@ -750,6 +748,7 @@
     "kicker": "Recrutement",
     "readMin": 8,
     "summary": "Comment on entre vraiment dans le venture, et comment préparer les entretiens spécifiques au métier.",
+    "status": "published",
     "glossaryRefs": [
       "deal-memo",
       "thesis-driven",
@@ -766,6 +765,7 @@
     "kicker": "Comprendre le jeu",
     "readMin": 5,
     "summary": "Les 3-4 tours d'un process analyst et ce que chacun teste vraiment — pour ne plus jamais jouer la mauvaise partition.",
+    "status": "published",
     "glossaryRefs": [
       "deal-memo",
       "dd"
@@ -780,6 +780,7 @@
     "kicker": "Le socle",
     "readMin": 7,
     "summary": "Équipe, Marché, Produit, Traction, Moat : la seule grille que tu réutiliseras à chaque question, chaque case, chaque pitch.",
+    "status": "published",
     "glossaryRefs": [
       "founder-market-fit",
       "fund-returner",
@@ -797,6 +798,7 @@
     "kicker": "Compétence testée en direct",
     "readMin": 8,
     "summary": "Sache dérouler un market sizing au tableau, en bottom-up, hypothèses annoncées — deux exemples chiffrés à l'appui.",
+    "status": "published",
     "glossaryRefs": [
       "tam-sam-som",
       "why-now",
@@ -812,6 +814,7 @@
     "kicker": "Les chiffres qui comptent",
     "readMin": 7,
     "summary": "Du déclaratif au chiffré : les métriques qui comptent, la barre par stade, et le réflexe croissance + rétention.",
+    "status": "published",
     "glossaryRefs": [
       "nrr",
       "cac",
@@ -833,6 +836,7 @@
     "kicker": "Les calculs qui tombent",
     "readMin": 7,
     "summary": "Cap table, dilution, returns : pas de gros modèle, mais ces calculs-là tombent. Sache-les de tête.",
+    "status": "published",
     "glossaryRefs": [
       "esop",
       "dilution",
@@ -856,6 +860,7 @@
     "kicker": "Le document roi",
     "readMin": 8,
     "summary": "La synthèse écrite d'une reco d'investissement — structure attendue et un exemple modèle entièrement déroulé.",
+    "status": "published",
     "glossaryRefs": [
       "deal-memo",
       "mrr",
@@ -874,6 +879,7 @@
     "kicker": "L'épreuve reine",
     "readMin": 7,
     "summary": "Formats, méthode en 5 temps, et l'erreur fatale : ne pas trancher. On embauche des gens qui décident.",
+    "status": "published",
     "glossaryRefs": [
       "pitch-deck",
       "tam-sam-som",
@@ -889,6 +895,7 @@
     "kicker": "La question signature",
     "readMin": 6,
     "summary": "Présenter une startup que le fonds devrait financer — l'enjeu est de montrer que tu penses comme un investisseur.",
+    "status": "published",
     "glossaryRefs": [
       "thesis-driven",
       "why-now",
@@ -904,6 +911,7 @@
     "kicker": "Convaincre",
     "readMin": 7,
     "summary": "Le tour qu'on néglige et qui élimine le plus. Réponses-types, framework STAR, et ta thèse perso.",
+    "status": "published",
     "glossaryRefs": [
       "thesis-driven"
     ]
@@ -917,6 +925,7 @@
     "kicker": "Bonus",
     "readMin": 4,
     "summary": "Tes questions parlent autant que tes réponses : taillées pour ce fonds, elles révèlent un cerveau d'investisseur.",
+    "status": "published",
     "glossaryRefs": [
       "thesis-driven"
     ]
@@ -930,6 +939,7 @@
     "kicker": "Le différenciateur",
     "readMin": 6,
     "summary": "Le différenciateur n°1 au recrutement français : arriver avec une analyse de startup que tu as écrite toi-même.",
+    "status": "published",
     "glossaryRefs": [
       "pitchbook",
       "thesis-driven",
@@ -946,6 +956,7 @@
     "kicker": "Bonus",
     "readMin": 5,
     "summary": "La logistique qui évite les autogoals : préparation, comportements gagnants le jour J, et le follow-up.",
+    "status": "published",
     "glossaryRefs": [
       "pre-money",
       "tam-sam-som"
@@ -960,6 +971,7 @@
     "kicker": "Le jalon",
     "readMin": 6,
     "summary": "La répétition générale en 3 manches + la grille d'auto-évaluation. Prêt = tout en vert, chronométré, deux fois.",
+    "status": "published",
     "glossaryRefs": [
       "pre-money",
       "irr",
@@ -975,6 +987,7 @@
     "kicker": "Dilution & Option Pool",
     "readMin": 6,
     "summary": "Comprendre les mathématiques de la dilution et éviter le piège de l'option pool pre-money.",
+    "status": "published",
     "glossaryRefs": [
       "cap-table",
       "pre-money"
@@ -989,6 +1002,7 @@
     "kicker": "Instruments de levée",
     "readMin": 7,
     "summary": "Pourquoi le BSA-AIR est devenu le standard français de l'amorçage à la place des obligations convertibles.",
+    "status": "published",
     "glossaryRefs": [
       "safe"
     ]
@@ -1002,6 +1016,7 @@
     "kicker": "Conditions financières",
     "readMin": 5,
     "summary": "Comment protéger votre potentiel de gain lors de la vente de l'entreprise face à des clauses de sortie prédatrices.",
+    "status": "published",
     "glossaryRefs": [
       "liquidation-preference",
       "term-sheet"
@@ -1016,6 +1031,7 @@
     "kicker": "Contrôle & Gouvernance",
     "readMin": 6,
     "summary": "Ce que vous cédez réellement lorsque vous acceptez des sièges au board et des matières réservées dans un pacte d'actionnaires.",
+    "status": "published",
     "glossaryRefs": [
       "board-seat"
     ]
@@ -1025,10 +1041,11 @@
     "slug": "erreurs-data-room",
     "courseId": "c-founder-raise",
     "order": 7,
-    "title": "Les 5 erreurs mortelles de data room",
+    "title": "Cinq erreurs fréquentes de data room",
     "kicker": "Due Diligence",
     "readMin": 5,
-    "summary": "Comment une mauvaise préparation documentaire peut tuer votre levée de fonds avant la signature finale.",
+    "summary": "Cinq points de contrôle documentaires susceptibles de retarder ou de compromettre une opération de financement.",
+    "status": "published",
     "glossaryRefs": [
       "term-sheet"
     ]
@@ -1054,7 +1071,6 @@
     "prerequisiteLessonIds": [
       "l-dd-process"
     ],
-    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
       "tam-sam-som",
       "nrr",
@@ -1084,7 +1100,6 @@
     "prerequisiteLessonIds": [
       "l-dd-commercial"
     ],
-    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
       "gross-margin",
       "unit-economics",
@@ -1113,7 +1128,6 @@
     "prerequisiteLessonIds": [
       "l-dd-tech-product"
     ],
-    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
       "cap-table",
       "vesting",
@@ -1142,7 +1156,6 @@
     "prerequisiteLessonIds": [
       "l-dd-financial"
     ],
-    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
       "cap-table",
       "esop",
@@ -1172,7 +1185,6 @@
     "prerequisiteLessonIds": [
       "l-screening"
     ],
-    "assessmentId": "analyst-pipeline",
     "glossaryRefs": []
   },
   {
@@ -1196,7 +1208,6 @@
     "prerequisiteLessonIds": [
       "l-pipeline-crm"
     ],
-    "assessmentId": "analyst-opportunity",
     "glossaryRefs": [
       "founder-market-fit"
     ]
@@ -1222,7 +1233,6 @@
     "prerequisiteLessonIds": [
       "l-team-market"
     ],
-    "assessmentId": "analyst-opportunity",
     "glossaryRefs": [
       "pmf"
     ]
@@ -1246,9 +1256,8 @@
       "Employer un langage cohérent avec l'incertitude disponible"
     ],
     "prerequisiteLessonIds": [
-      "l-dd-legal"
+      "lmv-returns-waterfall"
     ],
-    "assessmentId": "analyst-recommendation",
     "glossaryRefs": [
       "deal-memo",
       "dd",
@@ -1274,9 +1283,9 @@
       "Intégrer la matérialité ESG sans la confondre avec une mesure d'impact"
     ],
     "prerequisiteLessonIds": [
-      "l-fact-hypothesis"
+      "l-fact-hypothesis",
+      "l-dd-legal"
     ],
-    "assessmentId": "analyst-recommendation",
     "glossaryRefs": [
       "deal-memo",
       "pre-money",
@@ -1307,7 +1316,6 @@
     "prerequisiteLessonIds": [
       "l-investment-recommendation"
     ],
-    "assessmentId": "analyst-recommendation",
     "glossaryRefs": [
       "deal-memo",
       "moic",
@@ -1336,7 +1344,6 @@
     "prerequisiteLessonIds": [
       "l-conflicts-conduct"
     ],
-    "assessmentId": "analyst-integrity",
     "glossaryRefs": [
       "dd",
       "deal-memo"
@@ -1363,7 +1370,6 @@
     "prerequisiteLessonIds": [
       "l-confidentiality"
     ],
-    "assessmentId": "analyst-integrity",
     "glossaryRefs": [
       "dd",
       "cap-table",
@@ -1391,7 +1397,6 @@
     "prerequisiteLessonIds": [
       "l-ai-integrity"
     ],
-    "assessmentId": "analyst-integrity",
     "glossaryRefs": [
       "founder-ownership",
       "moic",
@@ -1553,7 +1558,7 @@
     },
     "optional": true,
     "learningOutcomes": [
-      "Distinguer croissance founder-led et moteur répétable",
+      "Évaluer la part de la croissance encore portée par les fondateurs et le degré de répétabilité du dispositif commercial",
       "Identifier les recrutements critiques du plan"
     ],
     "prerequisiteLessonIds": [
@@ -2094,7 +2099,7 @@
     "optional": true,
     "learningOutcomes": [
       "Choisir les indicateurs de liquidité",
-      "Distinguer croissance subventionnée et effet de réseau"
+      "Estimer séparément la contribution des incitations commerciales et celle des effets de réseau à la croissance"
     ],
     "prerequisiteLessonIds": [
       "l-specialty-consumer-retention"
@@ -2177,7 +2182,6 @@
     "prerequisiteLessonIds": [
       "l-roles"
     ],
-    "assessmentId": "analyst-role",
     "glossaryRefs": [
       "follow-on",
       "reserve-funds",
@@ -2207,7 +2211,6 @@
     "prerequisiteLessonIds": [
       "lmv-unit-economics"
     ],
-    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "runway",
       "burn-rate"
@@ -2234,7 +2237,6 @@
     "prerequisiteLessonIds": [
       "lmv-dilution-cap-table"
     ],
-    "assessmentId": "analyst-modeling",
     "glossaryRefs": [
       "valuation",
       "liquidation-preference",
@@ -2263,7 +2265,6 @@
     "prerequisiteLessonIds": [
       "l-dd-team"
     ],
-    "assessmentId": "analyst-due-diligence",
     "glossaryRefs": [
       "runway",
       "burn-rate",
@@ -2290,9 +2291,8 @@
       "Documenter les mesures et escalades selon les procédures compétentes"
     ],
     "prerequisiteLessonIds": [
-      "l-ic-defense"
+      "l-fact-hypothesis"
     ],
-    "assessmentId": "analyst-integrity",
     "glossaryRefs": [
       "ic",
       "deal-flow",
@@ -2300,14 +2300,703 @@
     ]
   },
   {
+    "id": "lvp-mandat-triage",
+    "slug": "mandat-continuum-triage-venture-philanthropie",
+    "courseId": "c-vp-mandat-triage",
+    "order": 1,
+    "title": "Définir l’approche et cadrer le mandat",
+    "kicker": "Fondements et mandat",
+    "readMin": 6,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-probleme-preuves",
+      "sectionId": "mandat-et-criteres",
+      "estimatedMinutes": 45
+    },
+    "summary": "Distinguer la venture philanthropie des approches voisines, puis transformer le mandat du financeur en critères, responsabilités et étapes de décision.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Définir la venture philanthropie comme une approche de soutien et non comme un instrument",
+      "La distinguer de la subvention, du capital-risque, de l’investissement pour l’impact et du financement catalytique",
+      "Traduire l’approche retenue en mandat, limites et flux de décision"
+    ],
+    "prerequisiteLessonIds": [],
+    "glossaryRefs": [
+      "venture-philanthropie",
+      "venture-capital",
+      "investissement-pour-impact",
+      "capital-catalytique",
+      "subvention-catalytique",
+      "financement-non-affecte"
+    ]
+  },
+  {
+    "id": "lvp-screening-additionalite",
+    "slug": "screening-additionalite-venture-philanthropie",
+    "courseId": "c-vp-mandat-triage",
+    "order": 2,
+    "title": "Qualifier, différer ou refuser un dossier",
+    "kicker": "Mandat et triage",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-probleme-preuves",
+      "sectionId": "triage-et-additionalite",
+      "estimatedMinutes": 30
+    },
+    "summary": "Rendre une décision de triage proportionnée en distinguant éligibilité, potentiel, additionalité et informations manquantes.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Appliquer un triage proportionné à partir d'informations incomplètes",
+      "Formuler et tester une thèse d'additionalité financière et non financière",
+      "Motiver une décision d'avancer, de différer ou de refuser sans surinterpréter les preuves"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-mandat-triage"
+    ],
+    "glossaryRefs": [
+      "venture-philanthropie",
+      "investissement-pour-impact",
+      "capital-catalytique",
+      "additionalite"
+    ]
+  },
+  {
+    "id": "lvp-analyse-probleme",
+    "slug": "cartographier-probleme-systeme",
+    "courseId": "c-vp-probleme-preuves",
+    "order": 1,
+    "title": "Cartographier le problème et le système",
+    "kicker": "Problème et preuves",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-probleme-preuves",
+      "sectionId": "probleme-et-systeme",
+      "estimatedMinutes": 45
+    },
+    "summary": "Délimiter un problème social, ses acteurs, ses mécanismes et ses boucles afin d'orienter la diligence.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Formuler un problème social borné et vérifiable",
+      "Cartographier acteurs, flux, mécanismes et boucles utiles à la décision",
+      "Transformer les relations non étayées en questions de diligence prioritaires"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-screening-additionalite"
+    ],
+    "glossaryRefs": [
+      "venture-philanthropie",
+      "investissement-pour-impact",
+      "theorie-du-changement",
+      "realisation-impact",
+      "resultat-impact"
+    ]
+  },
+  {
+    "id": "lvp-theorie-changement",
+    "slug": "construire-challenger-theorie-changement",
+    "courseId": "c-vp-probleme-preuves",
+    "order": 2,
+    "title": "Construire et challenger une théorie du changement",
+    "kicker": "Problème et preuves",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-probleme-preuves",
+      "sectionId": "theorie-du-changement-et-preuves",
+      "estimatedMinutes": 45
+    },
+    "summary": "Formuler une chaîne causale testable, ses hypothèses, ses risques et les preuves nécessaires à la décision.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Construire une chaîne causale qui distingue activités, résultats et changements",
+      "Qualifier les hypothèses, preuves et explications concurrentes de chaque maillon",
+      "Transformer une théorie du changement en plan de diligence et de révision"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-analyse-probleme"
+    ],
+    "glossaryRefs": [
+      "investissement-pour-impact",
+      "theorie-du-changement",
+      "realisation-impact",
+      "resultat-impact"
+    ]
+  },
+  {
+    "id": "lvp-entretiens-beneficiaires",
+    "slug": "entretiens-voix-beneficiaires",
+    "courseId": "c-vp-probleme-preuves",
+    "order": 3,
+    "title": "Préparer les entretiens et intégrer la voix des bénéficiaires",
+    "kicker": "Problème et preuves",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-probleme-preuves",
+      "sectionId": "personnes-concernees",
+      "estimatedMinutes": 60
+    },
+    "summary": "Concevoir des entretiens utiles à la décision tout en protégeant les personnes, la confidentialité et la pluralité des expériences.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Relier un protocole d'entretien à une décision et à des hypothèses précises",
+      "Préparer une participation volontaire, accessible et protectrice, avec traitement des frais, restitution, droit de réponse et voie de réclamation concernant le financeur",
+      "Synthétiser des témoignages et associer des personnes ayant une expérience vécue à certaines décisions sans transformer une expérience qualitative en fréquence générale"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-theorie-changement"
+    ],
+    "glossaryRefs": [
+      "venture-philanthropie",
+      "investissement-pour-impact",
+      "resultat-impact",
+      "safeguarding"
+    ]
+  },
+  {
+    "id": "lvp-plan-diligence",
+    "slug": "construire-plan-diligence-registre-preuves",
+    "courseId": "c-vp-diligence-organisationnelle",
+    "order": 1,
+    "title": "Construire le plan de diligence et le registre de preuves",
+    "kicker": "Diligence organisationnelle",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-diligence",
+      "sectionId": "plan-et-registre-de-preuves",
+      "estimatedMinutes": 45
+    },
+    "summary": "Organiser une diligence proportionnée autour des questions de décision, des preuves attendues et des responsabilités.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Transformer les questions de décision en plan de diligence priorisé",
+      "Construire une demande de pièces proportionnée et attribuée",
+      "Tenir un registre de preuves qui sépare sources, déclarations, calculs et inférences"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-entretiens-beneficiaires"
+    ],
+    "glossaryRefs": [
+      "droits-d-information-du-financeur",
+      "gouvernance-associative",
+      "safeguarding"
+    ]
+  },
+  {
+    "id": "lvp-mission-gouvernance",
+    "slug": "analyser-mission-gouvernance-conflits",
+    "courseId": "c-vp-diligence-organisationnelle",
+    "order": 2,
+    "title": "Analyser la mission, la gouvernance et les conflits",
+    "kicker": "Diligence organisationnelle",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-diligence",
+      "sectionId": "gouvernance-et-conflits",
+      "estimatedMinutes": 60
+    },
+    "summary": "Vérifier l'alignement entre mission, décisions, pouvoirs effectifs et traitement des conflits d'intérêts.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Comparer la mission déclarée aux activités et décisions récentes",
+      "Cartographier les organes, délégations et pouvoirs effectivement exercés",
+      "Documenter un conflit d'intérêts et les mesures de traitement sans se substituer à l'expertise juridique"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-plan-diligence"
+    ],
+    "glossaryRefs": [
+      "gouvernance-associative",
+      "droits-d-information-du-financeur",
+      "venture-philanthropie"
+    ]
+  },
+  {
+    "id": "lvp-equipe-operations",
+    "slug": "evaluer-equipe-operations-replication",
+    "courseId": "c-vp-diligence-organisationnelle",
+    "order": 3,
+    "title": "Évaluer l’équipe, les opérations et la capacité de réplication",
+    "kicker": "Diligence organisationnelle",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-diligence",
+      "sectionId": "equipe-et-execution",
+      "estimatedMinutes": 60
+    },
+    "summary": "Évaluer la capacité d'exécution et les conditions de réplication sans confondre croissance, activité et impact.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Cartographier un modèle opérationnel, ses capacités et ses dépendances",
+      "Distinguer le noyau transférable des adaptations locales",
+      "Construire un scénario de réplication avec critères de passage et d'arrêt"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-mission-gouvernance"
+    ],
+    "glossaryRefs": [
+      "venture-philanthropie",
+      "gouvernance-associative"
+    ]
+  },
+  {
+    "id": "lvp-safeguarding-risques",
+    "slug": "traiter-safeguarding-risques-criteres-arret",
+    "courseId": "c-vp-diligence-organisationnelle",
+    "order": 4,
+    "title": "Traiter le safeguarding, les risques et les critères d’arrêt",
+    "kicker": "Diligence organisationnelle",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-diligence",
+      "sectionId": "safeguarding-et-risques-critiques",
+      "estimatedMinutes": 45
+    },
+    "summary": "Identifier les risques de préjudice, vérifier les mécanismes de protection et appliquer les règles d'arrêt ou d'escalade.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Cartographier les contacts et contrôles susceptibles de prévenir un préjudice",
+      "Construire un registre de risques centré sur les personnes et les voies de signalement",
+      "Appliquer un critère d'arrêt et escalader sans mener d'enquête ni collecter de données sensibles"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-equipe-operations"
+    ],
+    "glossaryRefs": [
+      "gouvernance-associative",
+      "droits-d-information-du-financeur",
+      "venture-philanthropie",
+      "safeguarding"
+    ]
+  },
+  {
+    "id": "lvp-comptes-cout-complet",
+    "slug": "reconstituer-comptes-cout-complet",
+    "courseId": "c-vp-diligence-financiere",
+    "order": 1,
+    "title": "Reconstituer les comptes et le coût complet",
+    "kicker": "Diligence financière",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-diligence",
+      "sectionId": "comptes-et-cout-complet",
+      "estimatedMinutes": 90
+    },
+    "summary": "Passer des comptes publiés à une lecture économique traçable du coût réel des activités et des besoins à financer.",
+    "status": "published",
+    "level": "intermediaire",
+    "learningOutcomes": [
+      "Réconcilier comptes approuvés, données de gestion et pièces justificatives",
+      "Reconstituer un coût complet avec des clés d'allocation explicites",
+      "Distinguer coût récurrent, investissement et besoin de trésorerie"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-safeguarding-risques"
+    ],
+    "glossaryRefs": [
+      "cout-complet",
+      "financement-non-affecte",
+      "tresorerie-mobilisable",
+      "convention-de-financement"
+    ]
+  },
+  {
+    "id": "lvp-tresorerie-reserves",
+    "slug": "analyser-tresorerie-reserves-concentration",
+    "courseId": "c-vp-diligence-financiere",
+    "order": 2,
+    "title": "Analyser la trésorerie, les réserves et la concentration",
+    "kicker": "Diligence financière",
+    "readMin": 6,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-diligence",
+      "sectionId": "tresorerie-13-semaines",
+      "estimatedMinutes": 90
+    },
+    "summary": "Évaluer la liquidité réellement disponible, les engagements proches et la dépendance envers quelques financeurs.",
+    "status": "published",
+    "level": "intermediaire",
+    "learningOutcomes": [
+      "Déterminer la liquidité réellement mobilisable à partir des restrictions et engagements",
+      "Construire un prévisionnel de trésorerie glissant fondé sur les dates",
+      "Mesurer la concentration des ressources et tester un défaut de financement"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-comptes-cout-complet"
+    ],
+    "glossaryRefs": [
+      "tresorerie-mobilisable",
+      "financement-non-affecte",
+      "convention-de-financement"
+    ]
+  },
+  {
+    "id": "lvp-previsions-scenarios",
+    "slug": "construire-prevision-scenarios",
+    "courseId": "c-vp-diligence-financiere",
+    "order": 3,
+    "title": "Construire une prévision et des scénarios",
+    "kicker": "Diligence financière",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-diligence",
+      "sectionId": "modele-18-mois",
+      "estimatedMinutes": 120
+    },
+    "summary": "Construire une prévision pilotable à partir des moteurs opérationnels, puis tester des chocs cohérents avec la mission.",
+    "status": "published",
+    "level": "intermediaire",
+    "learningOutcomes": [
+      "Transformer une stratégie en moteurs opérationnels et financiers traçables",
+      "Relier compte de résultat, calendrier opérationnel et trésorerie",
+      "Construire des scénarios causaux associés à des décisions de gestion"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-tresorerie-reserves"
+    ],
+    "glossaryRefs": [
+      "tresorerie-mobilisable",
+      "premortem",
+      "cout-complet"
+    ]
+  },
+  {
+    "id": "lvp-atelier-choc",
+    "slug": "atelier-reconstitution-scenario-choc",
+    "courseId": "c-vp-diligence-financiere",
+    "order": 4,
+    "title": "Atelier : reconstituer la situation et tester un choc",
+    "kicker": "Atelier financier",
+    "readMin": 6,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-diligence",
+      "sectionId": "scenarios-et-stress-test",
+      "estimatedMinutes": 90
+    },
+    "summary": "Assembler comptes, liquidité et scénarios dans une recommandation financière courte et contrôlable.",
+    "status": "published",
+    "level": "intermediaire",
+    "learningOutcomes": [
+      "Assembler une réconciliation financière et un prévisionnel court terme",
+      "Tester séparément un choc de calendrier et un choc structurel",
+      "Formuler une recommandation conditionnelle fondée sur le besoin maximal"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-previsions-scenarios"
+    ],
+    "glossaryRefs": [
+      "tresorerie-mobilisable",
+      "journal-de-decision",
+      "cout-complet",
+      "financement-non-affecte"
+    ]
+  },
+  {
+    "id": "lvp-arbre-instruments",
+    "slug": "choisir-instrument-financement",
+    "courseId": "c-vp-structuration-financement",
+    "order": 1,
+    "title": "Choisir l’instrument à partir du besoin",
+    "kicker": "Structuration du financement",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-recommandation",
+      "sectionId": "options-de-financement",
+      "estimatedMinutes": 45
+    },
+    "summary": "Partir de l'usage, du risque et des flux attendus pour sélectionner une famille de financement adaptée.",
+    "status": "published",
+    "level": "intermediaire",
+    "learningOutcomes": [
+      "Décomposer une demande en besoins économiques homogènes",
+      "Relier chaque besoin à une source réaliste de remboursement ou d'absorption du risque",
+      "Comparer des familles d'instruments sans confondre concept économique et véhicule juridique"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-atelier-choc"
+    ],
+    "glossaryRefs": [
+      "continuum-du-capital",
+      "beyond-grants",
+      "subvention-catalytique",
+      "capital-catalytique",
+      "subvention-recuperable",
+      "quasi-fonds-propres",
+      "first-loss",
+      "capital-patient"
+    ]
+  },
+  {
+    "id": "lvp-compatibilite-remboursement",
+    "slug": "verifier-compatibilite-capacite-remboursement",
+    "courseId": "c-vp-structuration-financement",
+    "order": 2,
+    "title": "Vérifier la compatibilité et la capacité de remboursement",
+    "kicker": "Structuration du financement",
+    "readMin": 6,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-recommandation",
+      "sectionId": "capacite-de-remboursement",
+      "estimatedMinutes": 75
+    },
+    "summary": "Contrôler l'éligibilité des parties et démontrer que le remboursement reste compatible avec la mission.",
+    "status": "published",
+    "level": "intermediaire",
+    "learningOutcomes": [
+      "Vérifier séparément la capacité juridique du bénéficiaire et celle du financeur",
+      "Distinguer les champs des titres associatifs, titres participatifs et instruments de capital",
+      "Tester un remboursement sur des flux disponibles et des scénarios adverses"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-arbre-instruments"
+    ],
+    "glossaryRefs": [
+      "tresorerie-mobilisable",
+      "convention-de-financement",
+      "entreprise-solidaire-utilite-sociale-esus",
+      "fonds-de-dotation",
+      "finance-solidaire",
+      "titre-associatif",
+      "titre-participatif"
+    ]
+  },
+  {
+    "id": "lvp-termes-financement",
+    "slug": "structurer-montant-tranches-conditions",
+    "courseId": "c-vp-structuration-financement",
+    "order": 3,
+    "title": "Structurer le montant, les tranches et les conditions",
+    "kicker": "Structuration du financement",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-recommandation",
+      "sectionId": "termes-principaux",
+      "estimatedMinutes": 60
+    },
+    "summary": "Transformer le besoin retenu en termes proportionnés, pilotables et compatibles avec l'autonomie de l'organisation.",
+    "status": "published",
+    "level": "intermediaire",
+    "learningOutcomes": [
+      "Déterminer un montant et un calendrier à partir du besoin documenté",
+      "Concevoir des tranches et conditions contrôlables sans incitation contraire à la mission",
+      "Rédiger des obligations d'information proportionnées et utiles à la décision"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-compatibilite-remboursement"
+    ],
+    "glossaryRefs": [
+      "convention-de-financement",
+      "tresorerie-mobilisable",
+      "droits-d-information-du-financeur",
+      "subvention-recuperable",
+      "first-loss"
+    ]
+  },
+  {
+    "id": "lvp-atelier-structuration",
+    "slug": "atelier-note-options-termes",
+    "courseId": "c-vp-structuration-financement",
+    "order": 4,
+    "title": "Atelier : rédiger une note d’options et des termes principaux",
+    "kicker": "Atelier de structuration",
+    "readMin": 6,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-recommandation",
+      "sectionId": "arbitrage-et-escalades",
+      "estimatedMinutes": 90
+    },
+    "summary": "Recommander une structure hybride, expliciter ses alternatives et rédiger des termes prêts pour la revue professionnelle.",
+    "status": "published",
+    "level": "intermediaire",
+    "learningOutcomes": [
+      "Comparer des options de financement sur une base économique et juridique commune",
+      "Formuler une recommandation conditionnelle avec une solution de repli",
+      "Rédiger des termes principaux et un registre d'escalade professionnelle"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-termes-financement"
+    ],
+    "glossaryRefs": [
+      "convention-de-financement",
+      "tresorerie-mobilisable",
+      "financement-mixte",
+      "journal-de-decision",
+      "contrat-a-impact",
+      "capital-catalytique"
+    ]
+  },
+  {
+    "id": "lvp-accompagnement-pouvoir",
+    "slug": "construire-accompagnement-rapports-pouvoir",
+    "courseId": "c-vp-partenariat-portefeuille",
+    "order": 1,
+    "title": "Construire l’accompagnement sans créer de dépendance",
+    "kicker": "Partenariat et portefeuille",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-recommandation",
+      "sectionId": "accompagnement-et-contribution",
+      "estimatedMinutes": 60
+    },
+    "summary": "Co-construire un accompagnement utile, gouverné par le besoin et assorti d’un transfert de capacité et d’une sortie explicite.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Diagnostiquer avec l’organisation le besoin réel d’accompagnement",
+      "Répartir les décisions, la charge et les responsabilités sans déplacer la gouvernance",
+      "Définir un transfert de capacité et une sortie vérifiables dès le lancement"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-atelier-structuration"
+    ],
+    "glossaryRefs": [
+      "venture-philanthropie",
+      "gouvernance-associative",
+      "droits-d-information-du-financeur",
+      "sortie-de-partenariat"
+    ]
+  },
+  {
+    "id": "lvp-mesure-impact",
+    "slug": "piloter-mesure-impact-proportionnee",
+    "courseId": "c-vp-partenariat-portefeuille",
+    "order": 2,
+    "title": "Piloter une mesure d’impact proportionnée",
+    "kicker": "Partenariat et portefeuille",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-recommandation",
+      "sectionId": "mesure-et-remediation",
+      "estimatedMinutes": 60
+    },
+    "summary": "Construire un dispositif de mesure limité aux informations nécessaires pour apprendre, décider et rendre compte.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Sélectionner des indicateurs à partir des décisions et hypothèses matérielles",
+      "Définir les sources, contrôles qualité, cibles et seuils d’action",
+      "Apprécier validité, biais, taille d'effet, transférabilité, coût par résultat et incertitude d'une preuve externe, puis identifier le besoin d'une évaluation indépendante"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-accompagnement-pouvoir"
+    ],
+    "glossaryRefs": [
+      "investissement-pour-impact",
+      "kpi",
+      "droits-d-information-du-financeur",
+      "mesure-impact",
+      "realisation-impact",
+      "resultat-impact",
+      "social-return-on-investment-sroi"
+    ]
+  },
+  {
+    "id": "lvp-suivi-sortie",
+    "slug": "suivre-remedier-renouveler-sortir",
+    "courseId": "c-vp-partenariat-portefeuille",
+    "order": 3,
+    "title": "Suivre, remédier, renouveler ou sortir",
+    "kicker": "Partenariat et portefeuille",
+    "readMin": 5,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-recommandation",
+      "sectionId": "suivi-renouvellement-et-sortie",
+      "estimatedMinutes": 60
+    },
+    "summary": "Transformer les revues de portefeuille en décisions explicites de poursuite, remédiation, renouvellement ou sortie.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Qualifier les écarts et construire une remédiation décisionnelle",
+      "Arbitrer entre poursuite, condition, renouvellement, suspension et sortie",
+      "Préparer une transition qui limite les effets sur les personnes et les partenaires"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-mesure-impact"
+    ],
+    "glossaryRefs": [
+      "droits-d-information-du-financeur",
+      "sortie-de-partenariat",
+      "convention-de-financement",
+      "tresorerie-mobilisable",
+      "additionalite"
+    ]
+  },
+  {
+    "id": "lvp-recommandation-comite",
+    "slug": "rediger-recommandation-defendre-comite",
+    "courseId": "c-vp-partenariat-portefeuille",
+    "order": 4,
+    "title": "Rédiger la recommandation et la défendre en comité",
+    "kicker": "Partenariat et portefeuille",
+    "readMin": 6,
+    "practice": {
+      "deliverableId": "vp-exercice-cumulatif-recommandation",
+      "sectionId": "recommandation-et-defense",
+      "estimatedMinutes": 75
+    },
+    "summary": "Formuler une recommandation décisionnelle, traçable et contestable, puis la défendre avec précision devant le comité.",
+    "status": "published",
+    "level": "intermediaire",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Rédiger une recommandation qui annonce immédiatement la décision et ses conditions",
+      "Relier chaque affirmation matérielle au registre de preuves et à ses limites",
+      "Défendre la note en traitant le meilleur contreargument et les éléments qui changeraient la conclusion"
+    ],
+    "prerequisiteLessonIds": [
+      "lvp-suivi-sortie"
+    ],
+    "glossaryRefs": [
+      "droits-d-information-du-financeur",
+      "convention-de-financement",
+      "gouvernance-associative",
+      "tresorerie-mobilisable",
+      "additionalite",
+      "mesure-impact"
+    ]
+  },
+  {
     "id": "ld-power-law",
     "slug": "9-sur-10-vont-mourir",
     "courseId": "c-decouvrir-vc",
     "order": 1,
-    "title": "9 startups sur 10 vont mourir. C'est le plan.",
-    "kicker": "La règle du jeu",
+    "title": "Comprendre la loi de puissance",
+    "kicker": "Distribution des rendements",
     "readMin": 4,
-    "summary": "Le métier le plus contre-intuitif du monde : on accepte que la plupart des paris échouent, parce qu'un seul peut tout rembourser.",
+    "summary": "Les rendements d’un portefeuille de venture sont généralement concentrés dans un nombre limité de participations.",
+    "status": "published",
     "glossaryRefs": [
       "power-law",
       "fund-returner",
@@ -2323,6 +3012,7 @@
     "kicker": "Fondations",
     "readMin": 4,
     "summary": "Ni prêt, ni casino, ni court terme : trois choses que le venture n'est pas, et la seule qu'il est.",
+    "status": "published",
     "glossaryRefs": [
       "venture-capital",
       "equity",
@@ -2338,6 +3028,7 @@
     "kicker": "Le circuit",
     "readMin": 5,
     "summary": "De ton assurance-vie au compte d'une startup : la chaîne LP → GP → fondateur, et le business angel en solo.",
+    "status": "published",
     "glossaryRefs": [
       "lp",
       "gp",
@@ -2356,6 +3047,7 @@
     "kicker": "Le vocabulaire",
     "readMin": 5,
     "summary": "Pré-seed, seed, Série A : chaque mot dit combien de preuves la startup a déjà accumulées.",
+    "status": "published",
     "glossaryRefs": [
       "pre-seed",
       "seed",
@@ -2374,6 +3066,7 @@
     "kicker": "Le métier",
     "readMin": 6,
     "summary": "Loin du cliché jet-set : la charge de travail, le quotidien fait de refus, et la texture très française du métier.",
+    "status": "published",
     "glossaryRefs": [
       "deal-sourcing",
       "dd",
@@ -2389,6 +3082,7 @@
     "kicker": "La hiérarchie",
     "readMin": 6,
     "summary": "Analyst, associate, senior associate, principal, partner : responsabilités, organisation et rémunération par grade.",
+    "status": "published",
     "glossaryRefs": [
       "analyst-vc",
       "associate-vc",
@@ -2409,6 +3103,7 @@
     "kicker": "Le véhicule",
     "readMin": 5,
     "summary": "Dix ans, courbe en J, logique de millésimes : pourquoi ton VC est à la fois pressé et incroyablement patient.",
+    "status": "published",
     "glossaryRefs": [
       "fund-lifecycle",
       "investment-period",
@@ -2428,6 +3123,7 @@
     "kicker": "Le pitch de fonds",
     "readMin": 5,
     "summary": "Pitcher un fonds de capital-risque à des LPs n'a rien à voir avec pitcher une startup. Voici ce que les investisseurs de fonds lookent réellement.",
+    "status": "published",
     "glossaryRefs": [
       "gp",
       "lp",
@@ -2445,6 +3141,7 @@
     "kicker": "La levée de fonds GP",
     "readMin": 6,
     "summary": "Les étapes clés du calendrier de levée de fonds d'un GP, de la structuration des documents à la due diligence rigoureuse des LPs.",
+    "status": "published",
     "glossaryRefs": [
       "lp",
       "gp",
@@ -2462,7 +3159,8 @@
     "title": "Trouver et convaincre des LPs en France",
     "kicker": "Cartographie & Négociation",
     "readMin": 6,
-    "summary": "La cartographie des LPs français et européens (Bpifrance, EIF, assureurs, family offices) et les secrets pour les aborder et les convaincre.",
+    "summary": "Une cartographie des principaux LPs français et européens, ainsi que des modalités usuelles de prise de contact et de discussion.",
+    "status": "published",
     "glossaryRefs": [
       "lp",
       "gp",
@@ -2481,6 +3179,7 @@
     "kicker": "Pratique française",
     "readMin": 12,
     "summary": "Décryptage clause par clause d'une term sheet selon les standards de marché français (Galion Project et France Invest) sous le régime de la SAS.",
+    "status": "published",
     "glossaryRefs": [
       "term-sheet",
       "liquidation-preference",

@@ -3,7 +3,7 @@ import {
   Check, X as XIcon, CircleSlash, Trash2, Plus, Link2, CalendarClock, AlarmClockCheck,
   Crosshair, Gauge, Search as SearchIcon,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useUserData } from '@/context/UserDataContext';
 import { SectionHeading, EmptyState } from '@/components/ui/primitives';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
@@ -15,8 +15,10 @@ import { cn, formatDateFr } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
 import type { DecisionCategory, DecisionJournalEntry, DecisionLink, DecisionOutcome } from '@/content/types';
 import type { SearchHit } from '@/content/search';
+import { loadSearchHits } from '@/content/searchLazy';
 import { SEARCH_TYPE_LABEL } from '@/content/labels';
 import type { StorageResult } from '@/lib/storage';
+import { deliverableById } from '@/content/deliverables';
 
 const CATEGORIES: { id: DecisionCategory; label: string }[] = [
   { id: 'deal', label: 'Deal' },
@@ -53,6 +55,12 @@ const OUTCOME_META: Record<DecisionOutcome, { icon: typeof Check; color: string 
 export default function DecisionJournalPage() {
   usePageMeta('Journal de décisions', 'Prédictions datées, niveau de confiance, date de revue : l’outil de calibration de votre jugement d’investisseur.');
   const { journal, addJournalEntry, resolveJournalEntry, deleteJournalEntry } = useUserData();
+  const [searchParams] = useSearchParams();
+  const initialLinks = useMemo<DecisionLink[]>(() => {
+    if (searchParams.get('sourceType') !== 'deliverable') return [];
+    const deliverable = deliverableById(searchParams.get('sourceId') ?? '');
+    return deliverable ? [{ type: 'deliverable', id: deliverable.id, title: deliverable.title, href: `/livrables/${deliverable.slug}` }] : [];
+  }, [searchParams]);
 
   const [filter, setFilter] = useState<'all' | 'due' | 'open' | 'resolved'>('all');
   const [pendingDelete, setPendingDelete] = useState<DecisionJournalEntry | null>(null);
@@ -89,7 +97,12 @@ export default function DecisionJournalPage() {
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
         {/* Left — form + entries */}
         <div>
-          <NewPredictionForm onSubmit={addJournalEntry} />
+          {initialLinks[0] && (
+            <p className="mb-3 rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 text-sm text-surface-variant">
+              Nouvelle prédiction reliée à <Link to={initialLinks[0].href} className="font-medium text-foreground underline decoration-dotted underline-offset-4">{initialLinks[0].title}</Link>.
+            </p>
+          )}
+          <NewPredictionForm onSubmit={addJournalEntry} initialLinks={initialLinks} />
 
           <div className="mb-4 mt-8 flex flex-wrap gap-2">
             {FILTERS.map((f) => (
@@ -139,16 +152,27 @@ export default function DecisionJournalPage() {
 }
 
 // ── New prediction form ───────────────────────────────────────────────────────
-function NewPredictionForm({ onSubmit }: { onSubmit: (e: Omit<DecisionJournalEntry, 'id' | 'createdAt' | 'status'>) => Promise<StorageResult> }) {
+function NewPredictionForm({ onSubmit, initialLinks }: { onSubmit: (e: Omit<DecisionJournalEntry, 'id' | 'createdAt' | 'status'>) => Promise<StorageResult>; initialLinks: DecisionLink[] }) {
   const [statement, setStatement] = useState('');
   const [rationale, setRationale] = useState('');
   const [confidence, setConfidence] = useState(70);
   const [category, setCategory] = useState<DecisionCategory>('deal');
   const [reviewDate, setReviewDate] = useState(() => dateInMonths(6));
-  const [links, setLinks] = useState<DecisionLink[]>([]);
+  const [links, setLinks] = useState<DecisionLink[]>(initialLinks);
   const [saving, setSaving] = useState(false);
 
   const canSubmit = statement.trim().length > 0 && !!reviewDate;
+
+  useEffect(() => {
+    if (initialLinks.length === 0) return;
+    setLinks((current) => {
+      const next = [...current];
+      for (const link of initialLinks) {
+        if (!next.some((candidate) => candidate.type === link.type && candidate.id === link.id)) next.push(link);
+      }
+      return next;
+    });
+  }, [initialLinks]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -270,22 +294,34 @@ function NewPredictionForm({ onSubmit }: { onSubmit: (e: Omit<DecisionJournalEnt
 function LinkPicker({ links, onChange }: { links: DecisionLink[]; onChange: (l: DecisionLink[]) => void }) {
   const [query, setQuery] = useState('');
   const [hits, setHits] = useState<SearchHit[]>([]);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+  const [searchAttempt, setSearchAttempt] = useState(0);
 
   useEffect(() => {
     let active = true;
     const q = query.trim();
     if (q.length < 2) {
       setHits([]);
+      setStatus('idle');
       return;
     }
     // Lazy: the offline search index references every collection.
-    void import('@/content/search').then(({ searchLocal }) => {
-      if (active) setHits(searchLocal(q).slice(0, 6));
-    });
+    setStatus('loading');
+    void loadSearchHits(q)
+      .then((nextHits) => {
+        if (!active) return;
+        setHits(nextHits.slice(0, 6));
+        setStatus('done');
+      })
+      .catch(() => {
+        if (!active) return;
+        setHits([]);
+        setStatus('error');
+      });
     return () => {
       active = false;
     };
-  }, [query]);
+  }, [query, searchAttempt]);
 
   function add(hit: SearchHit) {
     if (!links.some((l) => l.type === hit.type && l.id === hit.id)) {
@@ -309,6 +345,15 @@ function LinkPicker({ links, onChange }: { links: DecisionLink[]; onChange: (l: 
           aria-label="Relier à un contenu"
           className="w-full rounded-xl border border-outline-variant bg-surface-container-lowest py-2.5 pl-9 pr-4 text-sm outline-none transition-colors placeholder:text-surface-variant focus:border-[color:var(--primary)]"
         />
+        {status === 'loading' && <p role="status" className="mt-2 text-xs text-surface-variant">Recherche en cours…</p>}
+        {status === 'error' && (
+          <div role="alert" className="mt-2 rounded-xl border border-outline-variant bg-surface-container-low px-3 py-2 text-xs text-surface-variant">
+            <p className="font-medium text-foreground">La recherche n’a pas pu être chargée.</p>
+            <button type="button" onClick={() => setSearchAttempt((attempt) => attempt + 1)} className="mt-1 underline decoration-dotted underline-offset-4">
+              Réessayer
+            </button>
+          </div>
+        )}
         {hits.length > 0 && (
           <ul className="absolute inset-x-0 top-full z-20 mt-1 overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest shadow-editorial-lg">
             {hits.map((h) => (

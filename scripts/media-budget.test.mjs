@@ -1,0 +1,42 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+
+import { collectMediaBudget } from './media-budget.mjs';
+
+test('client public media budget remains deterministic', async () => {
+  const budget = await collectMediaBudget(new URL('../client/public/', import.meta.url));
+
+  assert.equal(budget.count, 46);
+  assert.equal(budget.totalBytes, 14071235);
+  assert.equal(budget.videoBytes, 9458888);
+  assert.deepEqual(budget.formats, {
+    ico: 1,
+    mp4: 4,
+    png: 13,
+    svg: 1,
+    webm: 4,
+    webp: 23,
+  });
+  assert.deepEqual(budget.largestFiles.slice(0, 5), [
+    {
+      path: 'blog/la-societe-du-spectacle-leve-des-fonds/hero.mp4',
+      bytes: 1636190,
+    },
+    {
+      path: 'blog/la-societe-du-spectacle-leve-des-fonds/hero.webm',
+      bytes: 1502630,
+    },
+    {
+      path: 'blog/la-societe-du-spectacle-leve-des-fonds/double.mp4',
+      bytes: 1313489,
+    },
+    {
+      path: 'blog/la-societe-du-spectacle-leve-des-fonds/double.webm',
+      bytes: 1249850,
+    },
+    {
+      path: 'blog/la-societe-du-spectacle-leve-des-fonds/vedette.mp4',
+      bytes: 1064451,
+    },
+  ]);
+});

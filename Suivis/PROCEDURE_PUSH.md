@@ -69,7 +69,7 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
 
 - `git status` / `git fetch` : rien d'oublié localement, et la version en ligne est connue.
 - `split:content` + `generate:sitemap` : les fichiers dérivés reflètent les derniers textes.
-- `validate:content:strict` : la structure, les relations plusieurs-à-plusieurs (`Path.courseIds`, exigences cours/leçons des certifications), les contextes et variantes certifiantes, les `glossaryRef` et les marqueurs `[[..]]` sont cohérents, sans référence vide ni doublon toléré.
+- `validate:content:strict` : la structure, les références des étapes de parcours, les exigences cours/leçons des certifications, les contextes et variantes certifiantes, les `glossaryRef` et les marqueurs `[[..]]` sont cohérents, sans référence vide ni doublon toléré.
 - `lint` : la qualité du code client.
 - `build` : le site se construit réellement (et relance au passage `split` + validation + prérendu).
 - `test` : les comportements clés (routes client, composition et persistance des certifications, profil/ikigai, simulateurs, journal de décision) ne sont pas cassés ; les contenus `upcoming` restent exclus du sitemap et du prérendu.
