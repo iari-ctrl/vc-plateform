@@ -113,7 +113,7 @@ export default function DashboardPage() {
                 <p className="mt-1.5 text-sm text-surface-variant">{learningProfile ? `Votre profil ${learningProfile.name} vous oriente vers « ${recPaths[0]?.title ?? 'un parcours'} ».` : 'Faites le test d’orientation pour une recommandation sur-mesure, ou plongez directement.'}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   {recPaths[0] && <Link to={`/parcours/${recPaths[0].slug}`} className="btn-foil !py-2.5">Commencer <ArrowRight size={15} /></Link>}
-                  {!learningProfile && <Link to="/onboarding" className="btn-ghost !py-2.5">Faire le test</Link>}
+                  {!learningProfile && <Link to="/ikigai?test=1" className="btn-ghost !py-2.5">Faire le test</Link>}
                 </div>
               </div>
             )}
@@ -185,7 +185,7 @@ export default function DashboardPage() {
                 <Fleuron className="text-base" />
                 <h3 className="mt-2 font-headline text-headline-sm font-semibold">Révélez votre profil</h3>
                 <p className="mt-1.5 text-sm text-surface-variant">{IKIGAI.questions.length} questions pour personnaliser vos recommandations.</p>
-                <Link to="/onboarding" className="btn-foil mt-4 !py-2.5"><Target size={15} /> Faire le test</Link>
+                <Link to="/ikigai?test=1" className="btn-foil mt-4 !py-2.5"><Target size={15} /> Faire le test</Link>
               </div>
             )}
           </Reveal>

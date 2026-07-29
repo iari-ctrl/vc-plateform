@@ -193,11 +193,12 @@ describe('Corpus éditorial Analyst', () => {
       const course = courseById(courseId);
       expect(course, courseId).toBeDefined();
       let expectedDurationMin = 0;
+      const practiceMinutesPerLesson = course?.durationSource === 'lesson-read-minutes' ? 0 : 8;
       for (const [index, lessonId] of (course?.lessonIds ?? []).entries()) {
         const lesson = sourceLessonById(lessonId);
         expect(lesson?.courseId, lessonId).toBe(courseId);
         expect(lesson?.order, lessonId).toBe(index + 1);
-        expectedDurationMin += (lesson?.readMin ?? 0) + 8;
+        expectedDurationMin += (lesson?.readMin ?? 0) + practiceMinutesPerLesson;
       }
       expect(course?.durationMin, `${courseId}: durée`).toBe(expectedDurationMin);
     }
@@ -241,8 +242,15 @@ describe('Certification professionnelle VC Analyst', () => {
     );
     expect(optionalLessonIds).toHaveLength(28);
     expect(new Set(optionalLessonIds).size).toBe(28);
+    // Les leçons d'axe restent des approfondissements facultatifs (`optional: true`).
+    // Leur production est progressive : toute leçon publiée doit être déclarée ici,
+    // afin qu'une publication involontaire reste détectée.
+    const publishedOptionalLessonIds = new Set(['l-specialty-deeptech-trl-ip']);
     for (const lessonId of optionalLessonIds) {
-      expect(lessonById(lessonId), lessonId).toMatchObject({ status: 'upcoming', optional: true });
+      expect(lessonById(lessonId), lessonId).toMatchObject({
+        status: publishedOptionalLessonIds.has(lessonId) ? 'published' : 'upcoming',
+        optional: true,
+      });
     }
   });
 

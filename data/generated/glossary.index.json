@@ -1255,6 +1255,26 @@
     "relatedLessonIds": []
   },
   {
+    "id": "changement-echelle-industriel",
+    "term": "Changement d'échelle industriel",
+    "slug": "changement-echelle-industriel",
+    "aliases": [
+      "scale-up industriel",
+      "passage à l'échelle industriel",
+      "industrial scale-up"
+    ],
+    "category": "Opérations",
+    "short": "Passage d'une preuve contrôlée vers une échelle, des flux et des interfaces plus proches d'une exploitation industrielle.",
+    "seeAlso": [
+      "pilote-industriel",
+      "scalability",
+      "technology-readiness-level"
+    ],
+    "relatedLessonIds": [
+      "ldt-pilote-preuve"
+    ]
+  },
+  {
     "id": "cfo",
     "term": "Chief Financial Officer (CFO)",
     "slug": "cfo",
@@ -1439,6 +1459,24 @@
     "aliases": [
       "concentration du marché",
       "market concentration"
+    ]
+  },
+  {
+    "id": "concours-scientifique",
+    "term": "Concours scientifique",
+    "slug": "concours-scientifique",
+    "category": "Juridique & Fiscalité",
+    "short": "Régime d’autorisation permettant à un fonctionnaire d’apporter son appui scientifique à une entreprise qui valorise des travaux de recherche publics.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042813347",
+    "seeAlso": [
+      "invention-d-agent-public",
+      "titularite-des-droits"
+    ],
+    "relatedLessonIds": [
+      "ldt-transfert-recherche-publique"
+    ],
+    "aliases": [
+      "apport d’un concours scientifique"
     ]
   },
   {
@@ -1695,6 +1733,26 @@
       "Convertible Loan Agreement",
       "note convertible",
       "obligation convertible startup"
+    ]
+  },
+  {
+    "id": "copropriete-de-brevet",
+    "term": "Copropriété de brevet",
+    "slug": "copropriete-de-brevet",
+    "category": "Juridique & Fiscalité",
+    "short": "Régime légal supplétif applicable lorsqu’une demande de brevet ou un brevet appartient à plusieurs titulaires.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039279761",
+    "seeAlso": [
+      "titularite-des-droits",
+      "licence-d-exploitation",
+      "invention-d-agent-public"
+    ],
+    "relatedLessonIds": [
+      "ldt-titularite-copropriete"
+    ],
+    "aliases": [
+      "copropriété d’un brevet",
+      "copropriété d’une demande de brevet"
     ]
   },
   {
@@ -4052,6 +4110,24 @@
     ]
   },
   {
+    "id": "incertitude-mesure",
+    "term": "Incertitude de mesure",
+    "slug": "incertitude-mesure",
+    "aliases": [
+      "measurement uncertainty",
+      "incertitude métrologique"
+    ],
+    "category": "Méthode",
+    "short": "Paramètre associé au résultat de mesure qui caractérise la dispersion raisonnablement attribuable au mesurande.",
+    "seeAlso": [
+      "repetabilite-mesure",
+      "reproductibilite-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
+    ]
+  },
+  {
     "id": "incubateur",
     "term": "Incubateur",
     "slug": "incubateur",
@@ -4116,6 +4192,25 @@
     ]
   },
   {
+    "id": "inscription-au-registre-national-des-brevets",
+    "term": "Inscription au Registre national des brevets",
+    "slug": "inscription-au-registre-national-des-brevets",
+    "category": "Juridique & Fiscalité",
+    "short": "Formalité qui rend opposables aux tiers les actes transmettant ou modifiant les droits attachés à une demande de brevet ou à un brevet.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000019298708",
+    "seeAlso": [
+      "licence-d-exploitation",
+      "titularite-des-droits",
+      "dd"
+    ],
+    "relatedLessonIds": [
+      "ldt-licence-redevances"
+    ],
+    "aliases": [
+      "registre national des brevets"
+    ]
+  },
+  {
     "id": "inside-sales",
     "term": "Inside sales",
     "slug": "inside-sales",
@@ -4174,6 +4269,44 @@
       "scalability"
     ],
     "relatedLessonIds": []
+  },
+  {
+    "id": "invention-de-mission",
+    "term": "Invention de mission",
+    "slug": "invention-de-mission",
+    "category": "Juridique & Fiscalité",
+    "short": "Invention faite par un salarié dans l’exécution d’une mission inventive ou d’études explicitement confiées, qui appartient à l’employeur.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039279789",
+    "seeAlso": [
+      "titularite-des-droits",
+      "invention-d-agent-public",
+      "copropriete-de-brevet"
+    ],
+    "relatedLessonIds": [
+      "ldt-titularite-copropriete"
+    ],
+    "aliases": [
+      "inventions de mission"
+    ]
+  },
+  {
+    "id": "invention-d-agent-public",
+    "term": "Invention d’agent public",
+    "slug": "invention-d-agent-public",
+    "category": "Juridique & Fiscalité",
+    "short": "Invention réalisée par un fonctionnaire ou un agent public, soumise au régime des inventions de salariés selon des modalités réglementaires propres.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006280369",
+    "seeAlso": [
+      "invention-de-mission",
+      "titularite-des-droits",
+      "concours-scientifique"
+    ],
+    "relatedLessonIds": [
+      "ldt-transfert-recherche-publique"
+    ],
+    "aliases": [
+      "invention de fonctionnaire"
+    ]
   },
   {
     "id": "investissement-pour-impact",
@@ -4492,6 +4625,26 @@
     ],
     "relatedLessonIds": [
       "l-traction-unit-economics"
+    ]
+  },
+  {
+    "id": "licence-d-exploitation",
+    "term": "Licence d’exploitation",
+    "slug": "licence-d-exploitation",
+    "category": "Juridique & Fiscalité",
+    "short": "Concession du droit d’exploiter une demande de brevet ou un brevet, exclusive ou non exclusive, en totalité ou en partie.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006279475",
+    "seeAlso": [
+      "inscription-au-registre-national-des-brevets",
+      "copropriete-de-brevet",
+      "titularite-des-droits"
+    ],
+    "relatedLessonIds": [
+      "ldt-licence-redevances"
+    ],
+    "aliases": [
+      "concession de licence d’exploitation",
+      "licence d’exploitation de brevet"
     ]
   },
   {
@@ -5569,6 +5722,26 @@
     ]
   },
   {
+    "id": "pilote-industriel",
+    "term": "Pilote industriel",
+    "slug": "pilote-industriel",
+    "aliases": [
+      "installation pilote",
+      "pilot plant",
+      "démonstrateur pilote"
+    ],
+    "category": "Opérations",
+    "short": "Essai représentatif qui expose une technologie à des contraintes d'environnement, d'intégration et d'exploitation plus proches de l'usage industriel.",
+    "seeAlso": [
+      "proof-of-concept",
+      "changement-echelle-industriel",
+      "technology-readiness-level"
+    ],
+    "relatedLessonIds": [
+      "ldt-pilote-preuve"
+    ]
+  },
+  {
     "id": "pitch",
     "term": "Pitch",
     "slug": "pitch",
@@ -6034,7 +6207,6 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
-      "pilote",
       "PoC",
       "preuve de concept"
     ]
@@ -6206,6 +6378,26 @@
     ]
   },
   {
+    "id": "reproductibilite-mesure",
+    "term": "Reproductibilité de mesure",
+    "slug": "reproductibilite-mesure",
+    "aliases": [
+      "measurement reproducibility",
+      "reproductibilité métrologique",
+      "condition de reproductibilité"
+    ],
+    "category": "Méthode",
+    "short": "Fidélité de mesure lorsque lieux, opérateurs ou systèmes de mesure diffèrent selon des conditions spécifiées.",
+    "seeAlso": [
+      "repetabilite-mesure",
+      "replicabilite-scientifique",
+      "incertitude-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
+    ]
+  },
+  {
     "id": "realisation-impact",
     "term": "Réalisation d’impact",
     "slug": "realisation-impact",
@@ -6349,6 +6541,44 @@
       "Reps and Warranties",
       "Warranties",
       "Warranty"
+    ]
+  },
+  {
+    "id": "replicabilite-scientifique",
+    "term": "Réplicabilité scientifique",
+    "slug": "replicabilite-scientifique",
+    "aliases": [
+      "replicability",
+      "réplication scientifique"
+    ],
+    "category": "Méthode",
+    "short": "Cohérence de résultats entre études visant la même question scientifique avec leurs propres données.",
+    "seeAlso": [
+      "reproductibilite-mesure",
+      "repetabilite-mesure",
+      "incertitude-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
+    ]
+  },
+  {
+    "id": "repetabilite-mesure",
+    "term": "Répétabilité de mesure",
+    "slug": "repetabilite-mesure",
+    "aliases": [
+      "measurement repeatability",
+      "répétabilité métrologique",
+      "condition de répétabilité"
+    ],
+    "category": "Méthode",
+    "short": "Fidélité obtenue lorsque les mesures sont répétées sous les mêmes conditions spécifiées.",
+    "seeAlso": [
+      "reproductibilite-mesure",
+      "incertitude-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
     ]
   },
   {
@@ -6754,6 +6984,25 @@
       "Secondary market",
       "Secondary Sale",
       "Secondary Transaction"
+    ]
+  },
+  {
+    "id": "secret-des-affaires",
+    "term": "Secret des affaires",
+    "slug": "secret-des-affaires",
+    "category": "Juridique & Fiscalité",
+    "short": "Régime protégeant une information non connue du secteur, de valeur commerciale, et tenue par des mesures de protection raisonnables.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037266553",
+    "seeAlso": [
+      "titularite-des-droits",
+      "licence-d-exploitation",
+      "dd"
+    ],
+    "relatedLessonIds": [
+      "ldt-brevet-secret"
+    ],
+    "aliases": [
+      "protection du secret des affaires"
     ]
   },
   {
@@ -7640,6 +7889,27 @@
       "lvp-arbre-instruments",
       "lvp-compatibilite-remboursement",
       "lvp-atelier-structuration"
+    ]
+  },
+  {
+    "id": "titularite-des-droits",
+    "term": "Titularité des droits",
+    "slug": "titularite-des-droits",
+    "category": "Juridique & Fiscalité",
+    "short": "Identité de la personne à qui appartient le droit sur une invention, distincte de la qualité de déposant.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006279399",
+    "seeAlso": [
+      "invention-de-mission",
+      "copropriete-de-brevet",
+      "invention-d-agent-public",
+      "dd"
+    ],
+    "relatedLessonIds": [
+      "ldt-titularite-copropriete"
+    ],
+    "aliases": [
+      "titularité d’un brevet",
+      "titularité des droits de propriété industrielle"
     ]
   },
   {

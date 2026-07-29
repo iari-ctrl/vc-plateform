@@ -82,6 +82,290 @@
     ]
   },
   {
+    "id": "lea-mock",
+    "slug": "mock-entretien-analyst",
+    "title": "Mock d'entretien Analyst VC",
+    "kicker": "Jalon final",
+    "readMin": 6,
+    "activityKind": "capstone",
+    "estimatedWorkMinutes": 150,
+    "externalReviewMinutes": 45,
+    "evaluation": [
+      "auto",
+      "peer"
+    ],
+    "summary": "Produis une note d'investissement courte sur une société réelle, défends-la oralement, recueille un retour puis révise ta version finale.",
+    "brief": "Choisis un fonds cible et une société réelle cohérente avec son mandat. Travaille exclusivement avec des sources publiques datées. Prépare une note de 500 à 700 mots hors sources, puis une présentation orale de 5 à 7 minutes. La recommandation peut être « approfondir » si les informations disponibles ne permettent pas de trancher.\n\nLa plateforme conserve localement dans le navigateur une note de suivi et les états de progression. La production complète est exportée ou tenue dans un fichier local hors plateforme. N'y inscris aucune donnée confidentielle, aucune information reçue pendant un processus de recrutement, ni aucune donnée personnelle inutile. Si tu organises une simulation avec un pair, l'enregistrement est facultatif, local, et soumis au consentement explicite de toutes les personnes présentes. Les étapes et la fin du livrable sont auto-déclarées : elles ne constituent ni validation externe ni certification.\n\nUtilise le memo Shopify publié par Bessemer comme exemple historique de densité et de logique de preuve. Il ne constitue pas un format universel d'entretien et le document original fait foi.",
+    "template": [
+      {
+        "heading": "Choix du fonds, de la société et des sources",
+        "prompt": "Nomme le fonds, la société, la date de consultation et trois sources publiques. Explique pourquoi la société est pertinente pour ce fonds : stade, géographie, secteur, modèle ou thèse publique."
+      },
+      {
+        "heading": "Thèse et recommandation provisoire",
+        "prompt": "Formule la thèse en une phrase puis choisis une position : approfondir, suivre ou écarter. N'utilise pas invest/pass si les informations publiques ne suffisent pas."
+      },
+      {
+        "heading": "Faits vérifiés et hypothèses",
+        "prompt": "Liste deux à quatre faits datés et attribués. Pour chaque hypothèse, indique la donnée qui la confirmerait ou la ferait évoluer."
+      },
+      {
+        "heading": "Lecture marché, modèle et cap table",
+        "prompt": "Résume le marché adressable, le modèle économique, les signaux de traction et les points de structure financière visibles. Si une donnée manque, écris-le explicitement."
+      },
+      {
+        "heading": "Questions de diligence et risques",
+        "prompt": "Hiérarchise deux risques décisifs et trois questions de diligence. Les risques doivent pouvoir changer ta position finale."
+      },
+      {
+        "heading": "Simulation orale et révision",
+        "prompt": "Note le retour reçu après l'oral : clarté, sources, hypothèses, calculs, réponses aux objections. Décris ce que tu as modifié dans la version révisée."
+      }
+    ],
+    "rubric": [
+      {
+        "id": "adequation-fonds",
+        "criterion": "Adéquation fonds-société",
+        "description": "La société choisie est reliée au mandat public du fonds sans supposer une thèse non publiée.",
+        "expectedEvidence": "Fonds, société, stade, secteur, géographie ou thèse publique explicitement cités.",
+        "commonError": "Analyser une société intéressante mais sans lien clair avec le fonds visé.",
+        "revisionQuestion": "Quelle phrase prouve que ce fonds précis devrait lire cette note ?"
+      },
+      {
+        "id": "tracabilite",
+        "criterion": "Traçabilité des faits",
+        "description": "Les faits déterminants sont datés, attribués et séparés des hypothèses.",
+        "expectedEvidence": "Sources publiques listées, chiffres attribués, limites visibles.",
+        "commonError": "Présenter un chiffre repris en ligne sans origine claire comme une donnée certaine.",
+        "revisionQuestion": "Quel fait dois-tu supprimer ou reformuler faute de source ?"
+      },
+      {
+        "id": "these",
+        "criterion": "Thèse contestable",
+        "description": "La recommandation porte un pari clair que les faits peuvent soutenir ou fragiliser.",
+        "expectedEvidence": "Une phrase de thèse et une position provisoire proportionnée.",
+        "commonError": "Décrire le produit sans formuler de pari investissable.",
+        "revisionQuestion": "Quelle condition ferait changer ta position ?"
+      },
+      {
+        "id": "risques",
+        "criterion": "Risques hiérarchisés",
+        "description": "Les risques sont classés selon leur effet potentiel sur la décision.",
+        "expectedEvidence": "Deux risques décisifs et les diligences associées.",
+        "commonError": "Lister des risques génériques sans effet sur la conclusion.",
+        "revisionQuestion": "Quel risque invaliderait la thèse si la diligence le confirmait ?"
+      },
+      {
+        "id": "oral-revision",
+        "criterion": "Oral et révision",
+        "description": "La simulation a produit un retour exploitable et une version révisée.",
+        "expectedEvidence": "Retour noté, objections traitées, modifications explicites.",
+        "commonError": "Déclarer le mock terminé après la seule première version.",
+        "revisionQuestion": "Qu’as-tu changé après le retour ?"
+      }
+    ],
+    "rubricLevels": [
+      {
+        "id": "insuffisant",
+        "label": "Insuffisant",
+        "description": "Le critère n'est pas observable ou repose sur des affirmations non sourcées."
+      },
+      {
+        "id": "acceptable",
+        "label": "Acceptable",
+        "description": "Le critère est présent mais incomplet, peu hiérarchisé ou insuffisamment daté."
+      },
+      {
+        "id": "solide",
+        "label": "Solide",
+        "description": "Le critère est clair, vérifiable et directement utile à la décision de travail."
+      },
+      {
+        "id": "non-observable",
+        "label": "Non observable",
+        "description": "Les sources disponibles ne permettent pas de juger ce critère ; la limite est explicitement mentionnée."
+      }
+    ],
+    "model": {
+      "kind": "memo",
+      "id": "memo-shopify-bessemer",
+      "note": "Exemple historique sourcé : observe la structure du raisonnement, la densité des faits et l'explicitation des risques. Ne copie ni les chiffres ni le format comme une norme universelle."
+    },
+    "resources": [
+      {
+        "label": "Memo Shopify — Bessemer Venture Partners",
+        "href": "https://www.bvp.com/memos/shopify",
+        "format": "source publique"
+      },
+      {
+        "label": "OPM — Structured Interviews",
+        "href": "https://www.opm.gov/policy-data-oversight/assessment-and-selection/structured-interviews/",
+        "format": "référence méthodologique"
+      }
+    ],
+    "relatedLessonIds": [
+      "lea-deal-memo",
+      "lea-case-study",
+      "lea-pitch",
+      "lea-fit",
+      "lea-mock"
+    ],
+    "relatedCourseIds": [
+      "c-entretien-analyst",
+      "c-mathematiques-vc"
+    ],
+    "glossaryRefs": [
+      "deal-memo",
+      "tam-sam-som",
+      "traction",
+      "founder-market-fit",
+      "cap-table"
+    ],
+    "tags": [
+      "entretien",
+      "analyst",
+      "mock",
+      "deal-memo",
+      "sources-publiques"
+    ]
+  },
+  {
+    "id": "todo-mini-analyse-gabarit",
+    "slug": "mini-analyse-startup-candidature-vc",
+    "title": "Écrire une mini-analyse de startup",
+    "kicker": "Jalon final",
+    "readMin": 6,
+    "activityKind": "capstone",
+    "estimatedWorkMinutes": 90,
+    "evaluation": [
+      "auto"
+    ],
+    "summary": "Produis une mini-analyse d'une startup ciblée pour un fonds : une page, sources publiques, thèse explicite, risques hiérarchisés et vérifications suivantes.",
+    "brief": "Choisis une société du portefeuille d'un fonds visé, ou une société cohérente avec sa thèse si le portefeuille ne convient pas. Travaille uniquement sur des sources publiques datées : site de la société, page du fonds, annonce de financement, registre ou publication reconnue. Ne renseigne aucun chiffre que tu ne peux pas citer.\n\nTa sortie est une note de 350 à 500 mots hors sources. Elle doit tenir sur une page et pouvoir être jointe à une candidature. Le lecteur doit comprendre : pourquoi cette société intéresse ce fonds, quel pari tu formules, quels faits soutiennent le pari, quels risques restent ouverts et ce que tu vérifierais ensuite.\n\nÉcris une première version avant de consulter le modèle Shopify–Bessemer. Utilise ce modèle comme exemple de densité et de logique de preuve, pas comme banque de chiffres.",
+    "template": [
+      {
+        "heading": "Cadrage et adéquation au fonds",
+        "prompt": "En trois lignes, indique la société, le fonds ciblé, la date de consultation des sources et le lien avec la thèse du fonds. Si l'adéquation est indirecte, formule-la prudemment : segment voisin, géographie, stade ou modèle économique comparable."
+      },
+      {
+        "heading": "Thèse en une phrase",
+        "prompt": "Formule le pari central en une phrase : « Cette société mérite l'attention du fonds parce que… ». La phrase doit pouvoir être contestée par un investisseur sérieux et s'appuyer sur un fait observable."
+      },
+      {
+        "heading": "Faits déterminants",
+        "prompt": "Retiens deux ou trois faits seulement. Pour chacun, précise la source : page de l'entreprise, annonce du fonds, dépôt public, rapport ou article reconnu. Écarte les chiffres non datés, repris sans origine ou incompatibles entre sources."
+      },
+      {
+        "heading": "Interprétation et avantage possible",
+        "prompt": "Explique ce que ces faits suggèrent sur la [[traction|traction]], le marché, le [[founder-market-fit|founder-market fit]] ou la distribution. Sépare clairement le fait (« l'entreprise annonce… ») de ton interprétation (« cela peut indiquer… »)."
+      },
+      {
+        "heading": "Risques et informations manquantes",
+        "prompt": "Hiérarchise deux risques ou inconnues qui peuvent changer la conclusion : taille de marché, intensité concurrentielle, qualité de la rétention, marge, dépendance réglementaire ou données financières absentes. Ne transforme pas une information manquante en certitude."
+      },
+      {
+        "heading": "Position et vérifications suivantes",
+        "prompt": "Conclus par une position courte : à approfondir, à suivre ou à écarter. Ajoute deux questions de diligence et trois sources datées. La conclusion doit rester proportionnée aux informations publiques disponibles."
+      }
+    ],
+    "rubric": [
+      {
+        "id": "adequation-fonds",
+        "criterion": "Adéquation au fonds",
+        "description": "La note explique pourquoi cette société relève du fonds ciblé sans supposer une thèse non démontrée.",
+        "expectedEvidence": "Fonds nommé, société nommée, date de consultation et lien explicite avec portefeuille, thèse, stade ou géographie.",
+        "commonError": "Écrire une analyse générale de startup sans lien utile avec le destinataire de la candidature.",
+        "revisionQuestion": "Quel passage prouve que ce fonds, plutôt qu'un fonds quelconque, devrait lire cette note ?"
+      },
+      {
+        "id": "tracabilite-faits",
+        "criterion": "Traçabilité des faits",
+        "description": "Les faits déterminants sont datés, attribués et séparés des interprétations.",
+        "expectedEvidence": "Deux ou trois faits sourcés, avec origine identifiable et absence de chiffres non attribués.",
+        "commonError": "Mélanger annonce commerciale, opinion personnelle et donnée financière comme s'il s'agissait du même niveau de preuve.",
+        "revisionQuestion": "Quels chiffres ou affirmations dois-tu supprimer faute de source vérifiable ?"
+      },
+      {
+        "id": "these-centrale",
+        "criterion": "Thèse centrale",
+        "description": "La note porte un pari lisible et contestable, au lieu d'accumuler des informations descriptives.",
+        "expectedEvidence": "Une phrase de thèse, puis deux ou trois faits qui la soutiennent ou la limitent.",
+        "commonError": "Décrire le produit sans formuler ce qui doit devenir vrai pour créer de la valeur.",
+        "revisionQuestion": "Si le lecteur ne retenait qu'une idée, laquelle serait-elle ?"
+      },
+      {
+        "id": "risques-hierarchises",
+        "criterion": "Risques hiérarchisés",
+        "description": "Les risques et inconnues sont classés selon leur effet sur la conclusion.",
+        "expectedEvidence": "Deux risques prioritaires et les informations qui permettraient de les réduire.",
+        "commonError": "Lister des risques génériques sans dire lequel peut invalider l'analyse.",
+        "revisionQuestion": "Quel risque ferait changer ta position si la diligence le confirmait ?"
+      },
+      {
+        "id": "concision-operationnelle",
+        "criterion": "Concision opérationnelle",
+        "description": "La note tient en 350 à 500 mots hors sources et mène à une décision de travail claire.",
+        "expectedEvidence": "Position finale proportionnée, deux vérifications suivantes et trois sources datées.",
+        "commonError": "Produire un dossier long qui noie la conclusion dans la collecte d'informations.",
+        "revisionQuestion": "Que peux-tu supprimer sans affaiblir la décision proposée ?"
+      }
+    ],
+    "rubricLevels": [
+      {
+        "id": "insuffisant",
+        "label": "Insuffisant",
+        "description": "Le critère n'est pas observable ou repose sur des affirmations non sourcées."
+      },
+      {
+        "id": "acceptable",
+        "label": "Acceptable",
+        "description": "Le critère est présent, mais reste incomplet, peu hiérarchisé ou insuffisamment daté."
+      },
+      {
+        "id": "solide",
+        "label": "Solide",
+        "description": "Le critère est traité de manière claire, vérifiable et directement utile au lecteur."
+      },
+      {
+        "id": "non-observable",
+        "label": "Non observable",
+        "description": "Les sources disponibles ne permettent pas d'évaluer ce critère ; la limite est explicitement mentionnée."
+      }
+    ],
+    "model": {
+      "kind": "memo",
+      "id": "memo-shopify-bessemer",
+      "note": "Exemple sourcé : le memo Shopify publié par Bessemer Venture Partners. Observe la structure du raisonnement — thèse, faits déterminants, risque principal, verdict — et la densité de la preuve. Les extraits de la plateforme sont traduits et condensés ; le document original fait foi."
+    },
+    "resources": [
+      {
+        "label": "Memo Shopify — Bessemer Venture Partners",
+        "href": "https://www.bvp.com/memos/shopify",
+        "format": "source publique"
+      }
+    ],
+    "relatedLessonIds": [
+      "l-thesis-anatomy",
+      "l-team-market",
+      "lea-read-startup",
+      "lea-fund-research"
+    ],
+    "glossaryRefs": [
+      "thesis-driven",
+      "traction",
+      "tam-sam-som",
+      "founder-market-fit",
+      "deal-memo"
+    ],
+    "tags": [
+      "stage",
+      "candidature",
+      "analyse",
+      "startup",
+      "sources-publiques"
+    ]
+  },
+  {
     "id": "todo-these-proprietaire",
     "slug": "these-proprietaire-pre-seed-seed",
     "title": "Écrire une thèse propriétaire (pre-seed / seed)",
@@ -1212,6 +1496,658 @@
       "due-diligence",
       "impact",
       "capstone"
+    ]
+  },
+  {
+    "id": "math-vc-dossier",
+    "slug": "dossier-mathematiques-du-capital-risque",
+    "title": "Dossier Mathématiques du capital-risque",
+    "kicker": "Production cumulative non notée",
+    "readMin": 8,
+    "activityKind": "cumulative-exercise",
+    "estimatedWorkMinutes": 450,
+    "evaluation": [
+      "auto"
+    ],
+    "relatedCourseIds": [
+      "c-mathematiques-vc"
+    ],
+    "caseStudyId": "cs-mathematiques-vc-dossier",
+    "correctionId": "corr-mathematiques-vc-dossier",
+    "summary": "Construire un dossier chiffré progressif reliant marché, unit economics, trésorerie, valorisation, cap table, droits économiques et rendements.",
+    "brief": "Travaillez à partir du dossier fictif méthodologique et du classeur de départ. Produisez une version progressive, section par section, sans importer de données confidentielles ni de données personnelles. Le résultat attendu n'est pas un modèle professionnel complet : c'est une production pédagogique qui montre les conventions, les calculs, les contrôles et les limites.\n\nCommencez par une première version avant de consulter la correction commentée. La correction sert à comparer les conventions et les réconciliations ; elle ne constitue ni validation juridique, ni certification, ni recommandation d'investissement.",
+    "template": [
+      {
+        "heading": "Hypothèses et unités",
+        "prompt": "Indiquez la version du classeur, les unités monétaires, les périodes, les arrondis et les hypothèses modifiées. Toute modification doit être répercutée dans les sections dépendantes."
+      },
+      {
+        "heading": "Marché et capacité adressable",
+        "prompt": "Calculez TAM, SAM, SOM et deux sensibilités. Précisez les dénominateurs, le revenu annualisé utilisé et la limite de capacité qui fonde le SOM."
+      },
+      {
+        "heading": "Économie unitaire et LTV",
+        "prompt": "Calculez CAC, marge mensuelle, payback, LTV simplifiée et sensibilité actualisée. Séparez coût d'acquisition, coût initial et marge future."
+      },
+      {
+        "heading": "Trésorerie et runway",
+        "prompt": "Construisez trois scénarios mensuels. Distinguez le temps jusqu'à épuisement de la trésorerie et l'horizon jusqu'au seuil opérationnel minimal."
+      },
+      {
+        "heading": "Valorisation, titres et dilution",
+        "prompt": "Calculez pre-money, post-money, prix par titre, flux primaire, secondaire éventuel, complément de pool et pourcentages fully diluted."
+      },
+      {
+        "heading": "Droits économiques et waterfall",
+        "prompt": "Comparez préférence non participante, participation plafonnée et conversion sur plusieurs valeurs distribuables. La somme des paiements doit rester égale à la valeur distribuée."
+      },
+      {
+        "heading": "Rendements et synthèse",
+        "prompt": "Calculez MOIC, TRI, DPI, RVPI et TVPI en séparant société, ligne d'investissement et portefeuille. Concluez par les trois contrôles qui vous semblent les plus importants."
+      }
+    ],
+    "components": [
+      {
+        "id": "market-sizing",
+        "title": "Marché adressable et sensibilités",
+        "requirements": [
+          "données et unités indiquées",
+          "formule principale visible",
+          "résultat calculé avec arrondi explicite",
+          "contrôle indépendant ou réconciliation",
+          "interprétation limitée au cas fictif méthodologique"
+        ]
+      },
+      {
+        "id": "unit-economics",
+        "title": "Unit economics et LTV",
+        "requirements": [
+          "données et unités indiquées",
+          "formule principale visible",
+          "résultat calculé avec arrondi explicite",
+          "contrôle indépendant ou réconciliation",
+          "interprétation limitée au cas fictif méthodologique"
+        ]
+      },
+      {
+        "id": "cash-flow",
+        "title": "Trésorerie et runway",
+        "requirements": [
+          "données et unités indiquées",
+          "formule principale visible",
+          "résultat calculé avec arrondi explicite",
+          "contrôle indépendant ou réconciliation",
+          "interprétation limitée au cas fictif méthodologique"
+        ]
+      },
+      {
+        "id": "pre-post-ownership",
+        "title": "Valorisation, primaire et secondaire",
+        "requirements": [
+          "données et unités indiquées",
+          "formule principale visible",
+          "résultat calculé avec arrondi explicite",
+          "contrôle indépendant ou réconciliation",
+          "interprétation limitée au cas fictif méthodologique"
+        ]
+      },
+      {
+        "id": "cap-table",
+        "title": "Cap table fully diluted",
+        "requirements": [
+          "données et unités indiquées",
+          "formule principale visible",
+          "résultat calculé avec arrondi explicite",
+          "contrôle indépendant ou réconciliation",
+          "interprétation limitée au cas fictif méthodologique"
+        ]
+      },
+      {
+        "id": "economic-rights",
+        "title": "Droits économiques et scénarios de sortie",
+        "requirements": [
+          "données et unités indiquées",
+          "formule principale visible",
+          "résultat calculé avec arrondi explicite",
+          "contrôle indépendant ou réconciliation",
+          "interprétation limitée au cas fictif méthodologique"
+        ]
+      },
+      {
+        "id": "returns",
+        "title": "Rendements, waterfall et métriques de fonds",
+        "requirements": [
+          "données et unités indiquées",
+          "formule principale visible",
+          "résultat calculé avec arrondi explicite",
+          "contrôle indépendant ou réconciliation",
+          "interprétation limitée au cas fictif méthodologique"
+        ]
+      }
+    ],
+    "rubric": [
+      {
+        "id": "conventions",
+        "criterion": "Conventions explicites",
+        "description": "Les unités, dates, bases de capitalisation et niveaux d’analyse sont posés avant les résultats.",
+        "expectedEvidence": "Section d’hypothèses et rappels locaux dans chaque composant.",
+        "commonError": "Calculer correctement mais sans dire quelle base ou période est utilisée.",
+        "revisionQuestion": "Quelle convention manque pour qu’un autre lecteur puisse reproduire le calcul ?"
+      },
+      {
+        "id": "reconciliations",
+        "criterion": "Contrôles de réconciliation",
+        "description": "Chaque composant possède un contrôle indépendant : total à 100 %, conservation de valeur, égalité de flux ou VAN proche de zéro.",
+        "expectedEvidence": "Au moins un contrôle lisible par composant.",
+        "commonError": "Présenter seulement une valeur finale sans contrôle.",
+        "revisionQuestion": "Quel contrôle permet de détecter une erreur d’unité ou de périmètre ?"
+      },
+      {
+        "id": "separation-niveaux",
+        "criterion": "Séparation des niveaux d’analyse",
+        "description": "La société, la ligne d’investissement et le portefeuille de fonds ne sont pas confondus.",
+        "expectedEvidence": "Titres, onglets ou paragraphes distincts pour les trois niveaux.",
+        "commonError": "Utiliser DPI, RVPI ou TVPI pour conclure sur une société unique.",
+        "revisionQuestion": "À quel niveau appartient chaque métrique de rendement ?"
+      },
+      {
+        "id": "prudence-editoriale",
+        "criterion": "Prudence éditoriale",
+        "description": "Le cas reste fictif, méthodologique et sans promesse professionnelle.",
+        "expectedEvidence": "Limites, informations manquantes et absence de données confidentielles.",
+        "commonError": "Transformer les hypothèses du cas en benchmark ou recommandation.",
+        "revisionQuestion": "Quelle phrase doit être qualifiée ou retirée faute de source ?"
+      }
+    ],
+    "rubricLevels": [
+      {
+        "id": "insuffisant",
+        "label": "Insuffisant",
+        "description": "Le critère n'est pas observable ou la convention est absente."
+      },
+      {
+        "id": "acceptable",
+        "label": "Acceptable",
+        "description": "Le critère est présent mais incomplet ou insuffisamment contrôlé."
+      },
+      {
+        "id": "solide",
+        "label": "Solide",
+        "description": "Le critère est clair, vérifiable et utile à la révision."
+      },
+      {
+        "id": "non-observable",
+        "label": "Non observable",
+        "description": "Les informations disponibles ne permettent pas de juger ; la limite est explicitement indiquée."
+      }
+    ],
+    "resources": [
+      {
+        "label": "Classeur de départ — sans formules",
+        "href": "/downloads/mathematiques-vc/dossier-depart.xlsx",
+        "format": "xlsx"
+      }
+    ],
+    "relatedLessonIds": [
+      "lmv-market-sizing",
+      "lmv-unit-economics",
+      "lmv-cash-flow-scenarios",
+      "lmv-pre-post-ownership",
+      "lmv-dilution-cap-table",
+      "lmv-valuation-economic-rights",
+      "lmv-returns-waterfall"
+    ],
+    "glossaryRefs": [
+      "tam-sam-som",
+      "cac",
+      "ltv",
+      "runway",
+      "pre-money",
+      "cap-table",
+      "liquidation-preference",
+      "moic",
+      "tvpi"
+    ],
+    "tags": [
+      "mathematiques-vc",
+      "modele-financier",
+      "dossier-longitudinal"
+    ]
+  },
+  {
+    "id": "todo-attentes-serie-a",
+    "slug": "dossier-preparation-serie-a",
+    "title": "Dossier de préparation Série A",
+    "kicker": "Jalon final",
+    "readMin": 6,
+    "activityKind": "capstone",
+    "estimatedWorkMinutes": 90,
+    "externalReviewMinutes": 45,
+    "evaluation": [
+      "auto",
+      "peer",
+      "practitioner"
+    ],
+    "summary": "Produire un dossier Série A complet : décision de lever, preuves, financement, transaction, clauses, négociation, closing et premier board.",
+    "brief": "Produis un dossier de préparation à la Série A à partir d'informations publiques, de données fictives ou de tes propres fichiers conservés hors plateforme. La plateforme ne doit contenir aucune donnée confidentielle, aucune information personnelle inutile, aucun document de data room réel et aucun secret d'entreprise. Les tableaux proposés servent à structurer le raisonnement ; les fichiers financiers complets restent dans un espace de travail local ou professionnel adapté.\n\nLe dossier n'est ni un avis d'investissement, ni une validation juridique, ni une certification. Les clauses et documents définitifs doivent être relus par un conseil juridique qualifié et, le cas échéant, par les conseils financiers ou fiscaux de la société. La revue pair ou praticien indique un retour pédagogique ; elle ne remplace pas ces validations.\n\nUtilise le cas fictif AltoSuite SAS comme terrain d'entraînement et les ressources Galion, France Invest, UK Private Capital et NVCA comme supports de comparaison datés. Le document final doit distinguer faits, hypothèses, limites et décisions.",
+    "template": [
+      {
+        "heading": "Décision de lever",
+        "prompt": "Rédiger la décision de financement en une page. Indiquer la position retenue, les preuves qui la soutiennent, les risques encore ouverts, la date de réexamen et l'effet d'un retard de processus."
+      },
+      {
+        "heading": "Registre des preuves",
+        "prompt": "Lister les preuves déterminantes. Pour chacune : définition, période, source primaire, responsable interne, contrôle réalisé, limite connue et question de diligence probable."
+      },
+      {
+        "heading": "Plan de financement",
+        "prompt": "Présenter le besoin de financement, les emplois des fonds, le modèle mensuel simplifié, le scénario défavorable et le jalon que le capital doit financer."
+      },
+      {
+        "heading": "Processus et data room",
+        "prompt": "Décrire le calendrier de levée, la qualification des investisseurs, les rôles internes, la règle de divulgation et l'index de data room. Signaler les pièces non disponibles."
+      },
+      {
+        "heading": "Modélisation de la transaction",
+        "prompt": "Construire la cap table avant/après tour et comparer deux offres. Séparer primaire, secondaire, pool d'options, instruments convertibles et droits économiques."
+      },
+      {
+        "heading": "Matrice des clauses",
+        "prompt": "Compléter la matrice des clauses. Pour chaque clause : objectif, bénéficiaire, effet, risque, position de négociation et question à valider avec le conseil juridique."
+      },
+      {
+        "heading": "Brief de négociation",
+        "prompt": "Écrire le brief fondateur : priorités, concessions, limites, alternatives, interlocuteurs à consulter et journal des arbitrages pendant la simulation."
+      },
+      {
+        "heading": "Closing et premier board",
+        "prompt": "Lister les conditions de closing, responsabilités, documents, validations et flux. Préparer l'ordre du jour du premier board et le plan de suivi des 100 premiers jours."
+      },
+      {
+        "heading": "Adaptation sectorielle",
+        "prompt": "Adapter le dossier à un modèle économique : SaaS, marketplace, deeptech, industriel ou régulé. Indiquer les preuves spécifiques et les limites des comparaisons."
+      },
+      {
+        "heading": "Tour complexe",
+        "prompt": "Comparer une offre simple et une offre complexe. Décomposer secondaire, tranches, dette éventuelle, droits renforcés et validations requises avant décision."
+      }
+    ],
+    "components": [
+      {
+        "id": "decision",
+        "title": "Décision de lever",
+        "requirements": [
+          "Décision explicite : lancer, différer ou financer autrement.",
+          "Conditions de réexamen datées.",
+          "Effet sur la trésorerie et l’attention de l’équipe."
+        ],
+        "requiredInBudgets": [
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "id": "preuves",
+        "title": "Registre des preuves",
+        "requirements": [
+          "Dix à douze métriques ou preuves définies.",
+          "Source, période, responsable et limite de chaque preuve.",
+          "Questions de diligence probables."
+        ],
+        "requiredInBudgets": [
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "id": "financement",
+        "title": "Plan de financement",
+        "requirements": [
+          "Modèle mensuel et scénarios central/défavorable.",
+          "Emplois des fonds reliés à des jalons.",
+          "Marge de sécurité et conséquence d’un retard."
+        ],
+        "requiredInBudgets": [
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "id": "process",
+        "title": "Processus et data room",
+        "requirements": [
+          "Carte des investisseurs et justification du ciblage.",
+          "Calendrier, rôles internes et règle de divulgation.",
+          "Index de data room avec pièces manquantes signalées."
+        ],
+        "requiredInBudgets": [
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "id": "transaction",
+        "title": "Modélisation de la transaction",
+        "requirements": [
+          "Cap table fully diluted avant et après tour.",
+          "Deux offres comparées et trois scénarios de sortie.",
+          "Effets séparés du primaire, du secondaire, du pool et des préférences."
+        ],
+        "requiredInBudgets": [
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "id": "clauses",
+        "title": "Matrice des clauses",
+        "requirements": [
+          "Clauses économiques, gouvernance et sortie classées par objectif.",
+          "Position de négociation et risque identifié.",
+          "Questions juridiques à valider."
+        ],
+        "requiredInBudgets": [
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "id": "negociation",
+        "title": "Brief de négociation",
+        "requirements": [
+          "Priorités, concessions possibles et limites.",
+          "Alternative si l’accord ne se fait pas.",
+          "Protocole de discussion observable : rôles, séquence, points à arbitrer, concessions conditionnelles et critères d’arrêt.",
+          "Journal des arbitrages et personnes ayant validé."
+        ],
+        "requiredInBudgets": [
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "id": "closing",
+        "title": "Closing et premier board",
+        "requirements": [
+          "Checklist de closing et responsabilités.",
+          "Ordre du jour du premier board.",
+          "Indicateurs de suivi des 100 premiers jours.",
+          "Journal de révision après retour."
+        ],
+        "requiredInBudgets": [
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "id": "branche-sectorielle",
+        "title": "Adaptation sectorielle",
+        "requirements": [
+          "Modèle économique choisi et trois risques spécifiques.",
+          "Preuves adaptées à ces risques.",
+          "Limites des benchmarks utilisés."
+        ],
+        "requiredInBudgets": [
+          "high"
+        ]
+      },
+      {
+        "id": "tour-complexe",
+        "title": "Tour complexe",
+        "requirements": [
+          "Offre simple et offre complexe comparées.",
+          "Effets économiques et de contrôle séparés.",
+          "Points de validation juridique, fiscale ou financière."
+        ],
+        "requiredInBudgets": [
+          "high"
+        ]
+      }
+    ],
+    "rubric": [
+      {
+        "id": "decision-financement",
+        "criterion": "Décision de financement",
+        "description": "La décision de lever, différer ou financer autrement est explicite et reliée à des jalons.",
+        "expectedEvidence": "Note de décision, conditions de réexamen, impact trésorerie.",
+        "commonError": "Partir d’un montant ou d’une valorisation sans expliquer le besoin.",
+        "revisionQuestion": "Quelle preuve rend la décision défendable aujourd’hui ?",
+        "componentIds": [
+          "decision"
+        ]
+      },
+      {
+        "id": "tracabilite-preuves",
+        "criterion": "Traçabilité des preuves",
+        "description": "Les métriques et preuves ont une définition, une période, une source et une limite.",
+        "expectedEvidence": "Registre des preuves avec source primaire et contrôle.",
+        "commonError": "Utiliser une métrique du deck sans définition ni système source.",
+        "revisionQuestion": "Quel chiffre un investisseur pourrait-il contester immédiatement ?",
+        "componentIds": [
+          "preuves"
+        ]
+      },
+      {
+        "id": "coherence-financiere",
+        "criterion": "Cohérence financière",
+        "description": "Le montant, les emplois des fonds, le runway et les jalons se réconcilient.",
+        "expectedEvidence": "Modèle mensuel, scénarios, pont vers le prochain jalon.",
+        "commonError": "Additionner des postes sans calendrier ni scénario défavorable.",
+        "revisionQuestion": "Que se passe-t-il si le closing décale de trois mois ?",
+        "componentIds": [
+          "financement"
+        ]
+      },
+      {
+        "id": "maitrise-process-dataroom",
+        "criterion": "Maîtrise du processus et de la data room",
+        "description": "Le calendrier, le ciblage investisseurs, les rôles internes, la règle de divulgation et l’index de data room forment un processus pilotable.",
+        "expectedEvidence": "Carte investisseurs, calendrier daté, responsables, règle d’ouverture et pièces manquantes signalées.",
+        "commonError": "Lister des documents sans responsable, séquence de divulgation ni critère de priorisation des investisseurs.",
+        "revisionQuestion": "Quel élément du processus deviendrait difficile à suivre si le calendrier se décale ?",
+        "componentIds": [
+          "process"
+        ]
+      },
+      {
+        "id": "integrite-cap-table",
+        "criterion": "Intégrité de la cap table",
+        "description": "La transaction est modélisée sur une base définie et totalise correctement.",
+        "expectedEvidence": "Cap table before/after, instruments, pool, scénarios de sortie.",
+        "commonError": "Comparer des offres sans intégrer le pool ou la conversion d’instruments.",
+        "revisionQuestion": "Quel paramètre change le plus la participation finale ?",
+        "componentIds": [
+          "transaction"
+        ]
+      },
+      {
+        "id": "lecture-termes",
+        "criterion": "Lecture des termes",
+        "description": "Les clauses économiques et de gouvernance sont classées par effet et par risque.",
+        "expectedEvidence": "Matrice des clauses et questions à valider.",
+        "commonError": "Qualifier une clause sans préciser bénéficiaire, seuil ou durée.",
+        "revisionQuestion": "Quelle clause exige une validation juridique avant négociation ?",
+        "componentIds": [
+          "clauses"
+        ]
+      },
+      {
+        "id": "qualite-negociation",
+        "criterion": "Qualité de la négociation",
+        "description": "Le brief hiérarchise priorités, concessions, alternatives et limites.",
+        "expectedEvidence": "Brief de négociation et journal des arbitrages.",
+        "commonError": "Négocier clause par clause sans contrepartie ni position d’ensemble.",
+        "revisionQuestion": "Quelle concession acceptable a une contrepartie identifiée ?",
+        "componentIds": [
+          "negociation"
+        ]
+      },
+      {
+        "id": "revision",
+        "criterion": "Révision et gouvernance",
+        "description": "Le dossier final intègre le retour reçu et prépare le closing puis le premier board.",
+        "expectedEvidence": "Checklist, ordre du jour, indicateurs à 100 jours et journal de révision.",
+        "commonError": "Considérer la signature comme la fin du travail de préparation.",
+        "revisionQuestion": "Quel retour a modifié la version finale du dossier ?",
+        "componentIds": [
+          "closing"
+        ]
+      },
+      {
+        "id": "pertinence-adaptation-sectorielle",
+        "criterion": "Pertinence de l’adaptation sectorielle",
+        "description": "L’approfondissement sectoriel adapte les preuves au modèle économique retenu sans transformer ce choix en seuil universel.",
+        "expectedEvidence": "Modèle économique identifié, risques spécifiques, preuves associées et limites des comparaisons.",
+        "commonError": "Présenter un benchmark sectoriel comme une norme obligatoire pour toute Série A.",
+        "revisionQuestion": "Quelle preuve est propre au modèle choisi et laquelle reste seulement comparative ?",
+        "componentIds": [
+          "branche-sectorielle"
+        ]
+      },
+      {
+        "id": "decomposition-tour-complexe",
+        "criterion": "Décomposition d’un tour complexe",
+        "description": "L’offre complexe est décomposée par effets économiques, effets de contrôle, conditions et validations nécessaires, sans supposer qu’un tour complexe est requis.",
+        "expectedEvidence": "Comparaison d’une offre simple et d’une offre complexe, avec secondaire, tranches, dette éventuelle, droits renforcés et validations séparés.",
+        "commonError": "Mélanger dette, tranches, secondaire et droits renforcés dans une seule conclusion de dilution.",
+        "revisionQuestion": "Quel effet relève du prix économique et quel effet relève d’une validation juridique, fiscale ou financière ?",
+        "componentIds": [
+          "tour-complexe"
+        ]
+      }
+    ],
+    "rubricLevels": [
+      {
+        "id": "insuffisant",
+        "label": "Insuffisant",
+        "description": "La section est absente, non sourcée ou ne permet pas de vérifier la décision."
+      },
+      {
+        "id": "acceptable",
+        "label": "Acceptable",
+        "description": "La section est exploitable mais comporte encore des limites ou hypothèses importantes."
+      },
+      {
+        "id": "solide",
+        "label": "Solide",
+        "description": "La section est cohérente, vérifiable et révisable après retour."
+      },
+      {
+        "id": "non-observable",
+        "label": "Non observable",
+        "description": "Le critère ne peut pas être jugé avec les informations disponibles."
+      }
+    ],
+    "model": {
+      "kind": "case",
+      "id": "cs-serie-a-alto-sas",
+      "note": "Cas fictif utilisé pour s'entraîner à structurer le dossier ; il ne constitue pas une référence de marché."
+    },
+    "caseStudyId": "cs-serie-a-alto-sas",
+    "correctionId": "corr-serie-a-altosuite",
+    "relatedCourseIds": [
+      "c-serie-a-preparation"
+    ],
+    "relatedLessonIds": [
+      "lsa-decision-lever",
+      "lsa-registre-preuves",
+      "lsa-plan-financement",
+      "lsa-process-dataroom",
+      "lsa-modeliser-transaction",
+      "lsa-termes-gouvernance",
+      "lsa-negociation-dossier",
+      "lsa-closing-board",
+      "lsa-branche-sectorielle",
+      "lsa-tour-complexe"
+    ],
+    "glossaryRefs": [
+      "term-sheet",
+      "cap-table",
+      "dilution",
+      "liquidation-preference",
+      "data-room",
+      "board-seat"
+    ],
+    "resources": [
+      {
+        "label": "Galion Project — Term Sheet Série A",
+        "href": "https://www.thegalionproject.com/outils/galion-term-sheet",
+        "format": "page et PDF"
+      },
+      {
+        "label": "Galion Project — Fundraiser Guidelines, mandat et intermédiaire",
+        "href": "https://www.thegalionproject.com/outils/galion-fundraiser-guidelines",
+        "format": "page"
+      },
+      {
+        "label": "Galion Project — Guide du Board",
+        "href": "https://www.thegalionproject.com/outils/guide-du-board",
+        "format": "page"
+      },
+      {
+        "label": "France Invest — Guide du capital-innovation 2019",
+        "href": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf",
+        "format": "PDF"
+      },
+      {
+        "label": "UK Private Capital — Model documents, Royaume-Uni, usage comparatif",
+        "href": "https://www.ukprivatecapital.co.uk/policy/industry-guidance-standardised-documents/model-documents-for-early-stage-investments.html",
+        "format": "page"
+      },
+      {
+        "label": "NVCA — Model Legal Documents, États-Unis, usage comparatif",
+        "href": "https://nvca.org/model-legal-documents/",
+        "format": "bibliothèque"
+      }
+    ],
+    "roleCards": [
+      {
+        "id": "fondateur",
+        "title": "Fondateur",
+        "mandate": "Défendre la cohérence du besoin de financement et les limites de négociation.",
+        "questions": [
+          "Quelle preuve justifie le lancement du tour ?",
+          "Quelle concession reste acceptable ?",
+          "Quel point doit être validé par le board ?"
+        ]
+      },
+      {
+        "id": "investisseur",
+        "title": "Investisseur lead",
+        "mandate": "Tester la robustesse des preuves et la cohérence de la transaction.",
+        "questions": [
+          "Quel risque principal reste ouvert ?",
+          "Quel droit protège ce risque ?",
+          "Quelle donnée manque avant engagement ?"
+        ]
+      },
+      {
+        "id": "conseil-juridique",
+        "title": "Conseil juridique",
+        "mandate": "Identifier les clauses et formalités nécessitant une validation professionnelle.",
+        "questions": [
+          "Quelle clause doit être reformulée ?",
+          "Quel document porte le droit concerné ?",
+          "Quelle validation sociale est nécessaire ?"
+        ]
+      },
+      {
+        "id": "finance",
+        "title": "Responsable finance",
+        "mandate": "Vérifier les calculs de trésorerie, dilution et waterfall.",
+        "questions": [
+          "Quel total ne se réconcilie pas ?",
+          "Quelle hypothèse est la plus sensible ?",
+          "Quel scénario doit être ajouté ?"
+        ]
+      }
+    ],
+    "tags": [
+      "Série A",
+      "levée de fonds",
+      "term sheet",
+      "gouvernance",
+      "cap table"
     ]
   }
 ]

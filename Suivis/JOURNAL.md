@@ -6,6 +6,560 @@ Le journal des travaux antérieurs à la migration (passes du 2026-05-30 au 2026
 
 ---
 
+## 2026-07-27 — Correction de provenance et de rendu des deux leçons deeptech
+
+Objet : revue en lecture des deux leçons publiées le jour même, récupération de chaque source citée, puis correction des écarts constatés. Aucun objet nouveau, aucune route, aucun compteur modifié.
+
+Trois écarts corrigés, aucun contourné :
+
+- localisateur NASEM inventé. `ldt-reproductibilite` citait « chapitre 3, Conclusion 3-1 ». La récupération de `https://www.nationalacademies.org/read/25303/chapter/3` montre que cette URL sert le résumé du rapport et ne contient pas la chaîne « Conclusion 3-1 ». Le fond restait exact : le résumé porte une section `DEFINITIONS` donnant « obtaining consistent results using the same input data; computational steps, methods, and code; and conditions of analysis » et « obtaining consistent results across studies aimed at answering the same scientific question, each of which has obtained its own data ». Le localisateur devient « résumé, section Definitions » ;
+- deux spécificités RAND non soutenues. `ldt-pilote-preuve` affirmait « en Amérique du Nord » et « sur environ quinze ans ». La notice éditeur `https://www.rand.org/pubs/reports/R2569.html` n'énonce ni l'une ni l'autre ; elle établit « Detailed proprietary information on 44 process plants built by 34 oil, chemical, and mineral companies sustain the quantitative analysis ». Le PDF officiel est un fac-similé sans texte extractible, donc rien de plus n'est vérifiable par cette voie. Le paragraphe et la référence sont réécrits sur l'échantillon réellement documenté ; l'initiale « E. » attribuée à Kenneth Phillips, absente de la notice, est retirée ;
+- bloc « À retenir » dupliqué à l'écran. `LessonPage.tsx:242` rend déjà `keyTakeaways` dans un encart intitulé « À retenir ». Les deux leçons ajoutaient une section `## À retenir` dont les quatre points reprenaient les quatre `keyTakeaways`, produisant deux fois le même titre et la même matière sur la page. Aucune autre leçon du corpus n'employait ce titre. Les deux sections sont supprimées et `client/src/content/deeptechEvidenceLearning.test.ts` interdit désormais `## À retenir` dans le corps des leçons du cours.
+
+Le marqueur `[[scalability|scalability]]` est par ailleurs remplacé par `[[scalability|scalabilité du modèle économique]]`, le libellé antérieur reproduisant le slug.
+
+Vérifications :
+
+- `readMin` recalculé avec le régime exact du contrat — 618 jetons pour `ldt-reproductibilite` et 628 pour `ldt-pilote-preuve`, soit 4 et 4 minutes inchangées ; `c-dt-preuve-scientifique` conserve `durationMin: 8` et aucun garde de comptage ne bouge ;
+- sources revérifiées avant correction : les DOI `10.59161/JCGM200-2012` et `10.59161/JCGM100-2008F` résolvent vers les notices BIPM correspondantes ; le VIM en ligne confirme que 2.20 à 2.25 couvrent condition de répétabilité, répétabilité de mesure, condition et fidélité intermédiaires, condition de reproductibilité et reproductibilité de mesure, et que 2.20 énonce bien « même procédure de mesure, mêmes opérateurs, même système de mesure, mêmes conditions de fonctionnement et même lieu, ainsi que des mesurages répétés […] pendant une courte période de temps » ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build && npm run check` retourne exit 0. Le `prebuild` régénère 411 termes et 141 leçons (120 bibliothèque + 21 parcours), valide 380 marqueurs et écrit un sitemap de 681 routes ; le client transforme 1 791 modules ; le `postbuild` prérend 693/693 avec `{"mode":"strict","expected":693,"attempted":693,"written":693,"routeFailures":[],"metadataFailures":[],"browserError":null,"infrastructureError":null,"notFoundWritten":true,"notFoundFailure":null,"issues":[],"ok":true}` ;
+- le gate confirme 141 leçons, 114 corps publiés et 411 termes, contenu strict, glossaire, TypeScript, ESLint, 60 fichiers / 367 tests Vitest et 58/58 tests Node. Le chunk `lessons.bodies` s'établit à 880,64 kB avant gzip et 238,08 kB gzip.
+
+Limite de la contre-revue antérieure : la revue de provenance de la passe précédente contrôlait la présence des sources et le bornage des affirmations, non le soutien proposition par proposition dans la page citée. C'est ce qui a laissé passer un localisateur inexistant et deux spécificités absentes de la source.
+
+Limites de cette passe : la recette navigateur des deux pages de leçon doit être refaite sur l'artefact corrigé, les corps ayant changé ; la recette antérieure n'avait pas relevé la duplication du bloc « À retenir ». Aucun praticien n'a relu le contenu.
+
+Fichiers touchés : `data/lessons.json`, `client/src/content/deeptechEvidenceLearning.test.ts`, `data/generated/lessons.index.json` et `data/generated/lessons.bodies.json` régénérés par le build, `client/public/sitemap.xml` et `client/public/robots.txt` réécrits à l'identique par le `prebuild`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : aucun commit, staging, push, workflow distant ou déploiement n'a été exécuté.
+
+---
+
+## 2026-07-27 — Deeptech : preuve scientifique, reproductibilité et pilote
+
+Objet : exécuter intégralement le plan `.hermes/plans/2026-07-27_115952-deeptech-preuve-scientifique.md` après recette initiale obligatoire de `l-specialty-deeptech-trl-ip`, en ajoutant un cours deeptech publié, deux leçons sourcées et les termes de glossaire associés, sans créer de parcours, certification, cas, dossier ou livrable.
+
+Travaux :
+
+- conservation de la leçon `l-specialty-deeptech-trl-ip` dans `c-analyst-specialties` ; aucune duplication ni déplacement de cette première brique ;
+- création du cours `c-dt-preuve-scientifique` / `preuve-scientifique-deeptech`, niveau `avance`, durée dérivée `lesson-read-minutes`, 2 leçons et 8 minutes ;
+- création des leçons publiées `ldt-reproductibilite` / `reproductibilite-robustesse-deeptech` et `ldt-pilote-preuve` / `pilote-preuve-changement-echelle`, chacune à 4 minutes, avec quiz, points clés, références et limites explicites du rôle de l'Analyst ;
+- ajout de six termes source-backed, synchronisés dans `data/sources/canonical-glossary.json` et `data/glossary.json` : `repetabilite-mesure`, `reproductibilite-mesure`, `replicabilite-scientifique`, `incertitude-mesure`, `pilote-industriel`, `changement-echelle-industriel` ;
+- retrait de l'alias ambigu `pilote` de `proof-of-concept`, sans rattacher `ldt-pilote-preuve` à `scalability` ;
+- ajout du test vertical `client/src/content/deeptechEvidenceLearning.test.ts` et mise à jour des gardes de comptage réels : 114 leçons publiques, 141 leçons générées, 114 corps publiés et 411 termes.
+
+Sources inspectées et utilisées :
+
+- JCGM 200:2012, Vocabulaire international de métrologie, DOI `https://doi.org/10.59161/JCGM200-2012` — répétabilité, reproductibilité et conditions de mesure ;
+- JCGM 100:2008(F), Guide pour l'expression de l'incertitude de mesure, DOI `https://doi.org/10.59161/JCGM100-2008F` — incertitude et caractère incomplet d'un résultat sans expression de l'incertitude ;
+- National Academies, *Reproducibility and Replicability in Science*, chapitre 3, `https://www.nationalacademies.org/read/25303/chapter/3` — distinction reproductibilité computationnelle / réplicabilité scientifique ;
+- Commission européenne, Horizon 2020, annexe G TRL, `https://ec.europa.eu/research/participants/data/ref/h2020/other/wp/2018-2020/annexes/h2020-wp1820-annex-g-trl_en.pdf` — TRL 4 à 7 et environnements de preuve ;
+- RAND R-2569-DOE, `https://www.rand.org/pubs/reports/R2569.html` — 44 installations pionnières de procédés en Amérique du Nord, utilisé comme alerte méthodologique bornée et non comme benchmark universel.
+
+Vérifications :
+
+- RED ciblé : `npm run test --workspace client -- src/content/deeptechEvidenceLearning.test.ts` retourne exit 1 avant implémentation, sur l'absence du cours et sur l'alias `pilote` encore présent dans `proof-of-concept` ;
+- GREEN ciblé : la même commande retourne exit 0 — 2 tests ;
+- dérivés et validations ciblées : `npm run split:content && npm run test --workspace client -- src/content/deeptechEvidenceLearning.test.ts src/content/lessons.test.ts && npm run validate:glossary && npm run validate:content` retourne exit 0 — 411 termes, 141 leçons, 114 corps publiés, 380 marqueurs et cinq tests ciblés verts ;
+- build canonique : `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform/ npm run build` retourne exit 0 — 1 791 modules transformés, sitemap 681 routes, prérendu strict 693/693, résumé `ok: true`, aucun échec de route ou de métadonnée ;
+- gate post-build : `npm run check` retourne exit 0 — fraîcheur des générés, contenu strict, glossaire, TypeScript, ESLint, 60 fichiers / 367 tests Vitest et 58/58 tests Node ;
+- `git diff --check` ciblé sur les fichiers touchés retourne exit 0.
+
+Recette navigateur finale sous `http://127.0.0.1:4174/vc-plateform/` :
+
+- desktop 1 440 × 1 000 : le nouveau cours affiche le titre, 2 leçons, 8 minutes, les deux cartes publiées et aucun débordement horizontal ; les deux leçons affichent références, quiz, points clés et limites d'expertise ; console vide ;
+- mobile tactile 390 × 844 : le cours affiche les deux leçons `en cours`, 4 minutes chacune, sans état `à venir` ni débordement horizontal ; la zone références de la première leçon reste lisible ; console vide ;
+- non-régression TRL/PI : `/bibliotheque?type=lesson&q=TRL` expose une seule carte vers `deeptech-trl-propriete-intellectuelle`, `9 min`, `AVANCÉ`, sans `à venir` ; le cours `specialisations-sectorielles-analyst` conserve `14 leçons`, `17 min`, TRL/PI au rang 05, et l'entrée 06 industrialisation reste distincte et `à venir`.
+
+Contre-revues finales en lecture seule :
+
+- revue provenance éditoriale : 6/6 contrôles passent — sources de chaque leçon présentes, claims bornés, absence de certification/cas/dossier, rôle de l'Analyst limité à l'instruction et à la préparation d'expertise ;
+- revue intégration/publication : 6/6 contrôles passent — parité glossaire canonique/public, `sourceStatus: source-backed`, alias ambigu supprimé, `scalability` non réaffecté, nouvelles routes au sitemap et origine canonique Pages restaurée.
+
+Fichiers touchés : `data/courses.json`, `data/lessons.json`, `data/glossary.json`, `data/sources/canonical-glossary.json`, `data/generated/*`, `client/src/content/deeptechEvidenceLearning.test.ts`, `client/src/content/lessons.test.ts`, `scripts/generated-content.test.mjs`, `client/public/sitemap.xml`, `client/public/robots.txt`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : lot deeptech preuve scientifique livré localement et vérifié. Aucun commit, staging, push, workflow distant ou déploiement n'a été exécuté.
+
+---
+
+## 2026-07-27 — Publication de la leçon deeptech TRL et propriété intellectuelle
+
+Objet : produire la première brique du chantier deeptech en remplissant la coquille `l-specialty-deeptech-trl-ip`, sans créer de parcours ni de cours nouveau, et sans déplacer la leçon hors de `c-analyst-specialties`.
+
+Décision de conception : une étape de parcours accepte `kind: "lesson"` autant que `kind: "course"` — `p-analyst-foundations` référence déjà `l-fact-hypothesis`, qui appartient à un cours absent de ses étapes. Un futur parcours deeptech pourra donc référencer cette leçon directement, sans la retirer du cours de spécialisations ni dupliquer sa matière. La leçon conserve `optional: true` et `assessmentId: analyst-specialty-deeptech` : elle sert simultanément la Bibliothèque, le cours et l'axe de certification.
+
+Travaux :
+
+- rédaction du corps en six sections — cadre, méthode, cas d'application, limites et points de contrôle, mise en application, références — avec 5 points clés, 4 questions de quiz, 4 renvois de glossaire (`technology-readiness-level`, `proof-of-concept`, `deep-tech-metrics`, `dd`) et 2 renvois de lecture ; `id`, `slug`, `courseId`, `order`, `kicker`, `summary` et le prérequis `l-dd-tech-product` sont inchangés ;
+- `readMin` porté à 9 selon la convention `ceil(mots / 180)` ; `durationMin` de `c-analyst-specialties` porté de 0 à 17 selon la convention `readMin + 8` appliquée à l'unique leçon désormais publiée ;
+- mise à jour de trois gardes de comptage, corrigés et non contournés : 111 → 112 leçons publiques, `publishedLessonBodies` 111 → 112, et le garde des 28 leçons d'axe qui conserve `optional: true` pour toutes et n'impose `upcoming` qu'aux leçons non produites, via une liste explicite ;
+- régénération du sitemap après l'échec attendu de la parité collecteur / fichier versionné.
+
+Sources vérifiées par récupération avant rédaction :
+
+- annexe G des programmes de travail européens — définitions officielles des neuf niveaux TRL, de « basic principles observed » à « actual system proven in operational environment » ;
+- article L611-7 du code de la propriété intellectuelle, version en vigueur depuis le 1er janvier 2020 — mission inventive, droit d'attribution, rémunération supplémentaire, juste prix, exigence d'un écrit à peine de nullité et application aux agents publics ;
+- fiche INPI « Le secret » du 9 décembre 2024 — durée du brevet limitée à vingt ans sauf exception contre durée indéterminée du secret, absence de droit exclusif et d'action en contrefaçon, exception de possession personnelle antérieure, moyens de preuve de possession ;
+- fiche INPI sur les moyens de protection de la propriété intellectuelle, déjà employée par `l-dd-tech-product`.
+
+Vérifications :
+
+- `npm run check` sans build a d'abord échoué sur trois assertions successives : `lessons.test.ts` (111 attendu, 112 obtenu), puis `generated-content.test.mjs`, puis `collect-routes.test.mjs` sur la parité du sitemap versionné, avec un écart d'exactement une route publique — `/lessons/deeptech-trl-propriete-intellectuelle` présente au collecteur et absente du fichier ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run generate:sitemap` puis `npm run check` : exit 0 — générés à jour, contenu strict, glossaire, TypeScript, ESLint, 59 fichiers / 365 tests Vitest et 58/58 tests Node ;
+- comptage direct du fichier versionné : 672 occurrences de `<loc>`, contre 671 avant la passe ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — `prebuild` régénère 405 termes et 139 leçons, valide 372 marqueurs et écrit 672 routes au sitemap ; le client transforme 1 791 modules ; `postbuild` prérend 684/684 avec `ok: true`, `routeFailures` et `metadataFailures` vides et la 404 dédiée écrite. Les 684 artefacts se décomposent en 672 pages publiques, 9 redirections historiques non indexables et 3 corrections de cas commentées ;
+- `npm run check` après le build : exit 0 — `check:generated` confirme 139 leçons, 112 corps publiés et 405 termes ; contenu strict, glossaire, TypeScript, ESLint, 59 fichiers / 365 tests Vitest et 58/58 tests Node ;
+- le chunk `lessons.bodies` passe à 864,74 kB avant gzip et 233,80 kB gzip, contre 770,90 et 210,77 au dernier build consigné.
+
+Limites de cette passe : aucune recette navigateur n'a été conduite sur le rendu de la leçon, notamment l'affichage d'une leçon `optional: true` publiée dans la Bibliothèque et dans le cours de spécialisations ; aucun praticien n'a relu le contenu, conformément à la décision de faire de la relecture une condition de publication et non de production.
+
+Fichiers touchés : `data/lessons.json`, `data/courses.json`, `client/src/content/lessons.test.ts`, `client/src/content/certifications.test.ts`, `scripts/generated-content.test.mjs`, `client/public/sitemap.xml` et `client/public/robots.txt` régénérés, `data/generated/lessons.index.json` et `data/generated/lessons.bodies.json` régénérés, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : première brique du lot 1 deeptech livrée localement. Aucun commit, staging, push, workflow distant ou déploiement n'a été exécuté.
+
+---
+
+## 2026-07-26 — Clôture complémentaire du lot 5 Série A
+
+Objet : reprendre la finalisation interrompue du lot 5 sur l’artefact déjà construit, terminer la recette navigateur, exécuter les trois contre-revues finales en lecture seule, rejouer le gate de clôture et consolider les suivis, sans commit, staging, push, workflow distant ni déploiement.
+
+Travaux :
+
+- reprise de l’état courant sur `master`, avec worktree fortement modifié et nombreux fichiers non suivis déjà présents ; aucune attribution globale du diff n’a été faite ;
+- poursuite de la recette sur le serveur statique canonique `http://127.0.0.1:4174/vc-plateform`, qui sert `client/dist` avec le préfixe `/vc-plateform/` ; le preview Vite sur 4173 est resté identifié comme non prioritaire pour cette recette ;
+- nettoyage de la clé locale `vcpx:learning-workspace` créée pendant un essai d’interaction du livrable ; la clé préexistante `vcpx:progress` a été conservée ;
+- mise à jour de `Suivis/ETAT.md` et du présent journal après clôture vérifiée.
+
+Recette navigateur de l’artefact construit :
+
+- desktop émulé 1 440 × 1 000 : `/parcours/preparer-ma-serie-a?budget=medium` expose un seul `h1`, un seul `main`, `18 min de lecture`, `10 h 34 de production`, les liens simulateurs avec `parcours=p-serie-a&budget=medium`, le mode `Complet` disponible et aucun débordement horizontal du document ; le skip link clavier place le focus sur `#main` ;
+- cas AltoSuite : cap table fully diluted, tableau de comparaison et waterfall rendus avec captions et en-têtes `scope`; les lignes séparent fondateurs, options attribuées, réserve non attribuée, investisseurs seed, convertibles, primaire Série A préférentiel et secondaire Série A ordinaire ;
+- livrable Série A : en `medium`, 8 composants et 8 critères visibles ; en `high`, les 10 composants et les 10 critères sont visibles, avec les deux approfondissements contextualisés ; les boutons d’export de fiche, autoévaluation et grille externe apparaissent après progression locale du cycle de production ;
+- simulateurs dilution et waterfall : liens de retour, précédent/suivant et leçon « Modéliser la transaction et la cap table » conservent `parcours=p-serie-a&budget=medium`; `lsa-tour-complexe` n’est pas rattachée aux simulateurs ; le tableau dilution est sémantique et localement défilable ;
+- mobile tactile 390 × 844 : parcours, cas, livrable `medium`, simulateur dilution et simulateur waterfall restent à `scrollWidth === clientWidth === 390`; les grands tableaux débordent seulement dans des wrappers `overflow-x: auto` ; aucune erreur ni avertissement applicatif n’a été relevé dans la console.
+
+Contre-revues finales en lecture seule :
+
+- modèle VC : recalcul indépendant de la cap table pré-tour à 10 000 000 actions, offres A/B, top-up option pool, primaire, secondaire, détention fondateurs post-tour et waterfalls. Les produits de sortie bouclent pour 30/60/120 M€ ; Offre B traite le secondaire comme ordinaire et ne l’ajoute pas au bloc préférentiel ; les préférences seed restent hors modèle pédagogique ;
+- contrat budgets/exports/DOM/persistance : `medium` conserve 12 étapes et exclut `lsa-branche-sectorielle` / `lsa-tour-complexe`; `high` conserve 14 étapes ; les composants, critères et sections exportées suivent le même sous-ensemble ; les simulateurs rattachent `lsa-modeliser-transaction`; le stockage de production utilise `vcpx:learning-workspace`, enveloppe versionnée et progression monotone ;
+- pédagogie/temps/édition : les dix leçons Série A vérifient `readMin = ceil(mots / 180)`, la pratique closing vaut 52 minutes, chaque leçon contient 3 quiz et au moins 2 références HTTPS, et le contrôle éditorial ne trouve pas les formulations explicitement proscrites.
+
+Vérifications finales :
+
+- `npm run check && git diff --check` : exit 0 — générés à jour, contenu strict, glossaire, TypeScript, ESLint, 59 fichiers / 365 tests Vitest, 58/58 tests Node ; `git diff --check` ne produit aucune sortie ;
+- contrôle des ports après arrêt des serveurs de recette : 4173 et 4174 libres.
+
+Fichiers touchés par cette clôture : `Suivis/ETAT.md` et `Suivis/JOURNAL.md` uniquement. Les autres changements du worktree restent ceux déjà présents dans la session de finalisation et les travaux antérieurs.
+
+Clôture : lot 5 finalisé localement. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-26 — Finalisation locale du parcours Série A
+
+Objet : reprendre l’état courant de `p-serie-a`, finaliser le dernier lot sans rouvrir les lots précédents, vérifier le build canonique et contrôler l’artefact construit sous `/vc-plateform/`, sans commit, staging, push, workflow distant ni déploiement.
+
+Travaux :
+
+- reprise prudente : contrôle du répertoire courant, de la branche `master`, du worktree, des fichiers non suivis, des ports applicatifs et de l’absence de `Correction.md` ;
+- confirmation courte des lots déjà stabilisés par les contrats existants : intégrité documentaire Série A dans `client/src/content/serieAParcours.test.ts`, contraste dans `client/src/styles/tokens.test.ts`, suite DOM et gates complets ;
+- reproduction en recette statique d’un défaut restant : l’accès direct à `/vc-plateform/cases/altosuite-sas-dossier-serie-a/correction` répondait 404 avec un simple serveur statique ;
+- ajout d’un contrat RED puis GREEN pour distinguer routes publiques et artefacts non indexables : `collectNoindexRoutes()` émet les corrections commentées de cas pour le prérendu, sans les ajouter au sitemap ;
+- adaptation du prérendu strict pour rendre ces artefacts avec `requireNoindex` et sans canonical ;
+- consolidation de `Suivis/ETAT.md` et du présent journal après vérification finale. `Correction.md` était absent et n’a donc pas été supprimé.
+
+Preuves RED puis GREEN :
+
+- RED : `node --test scripts/collect-routes.test.mjs` retourne exit 1, `SyntaxError: The requested module './collect-routes.mjs' does not provide an export named 'collectNoindexRoutes'` ;
+- GREEN ciblé : `node --test scripts/collect-routes.test.mjs` retourne exit 0 — 14/14 tests Node ;
+- le contrat vérifie que `/cases/altosuite-sas-dossier-serie-a/correction` est un artefact `noindex` de prérendu et reste absent des routes publiques de sitemap.
+
+Vérifications finales :
+
+- `npm run split:content` : exit 0 — 405 termes et 139 leçons régénérés ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — 1 791 modules transformés, sitemap 671 routes publiques, prérendu strict 683/683, résumé `ok: true` ;
+- `npm run check` post-build : exit 0 — générés à jour, contenu strict, glossaire, TypeScript, ESLint, 59 fichiers / 351 tests Vitest et 57/57 tests Node ;
+- accès directs statiques : cas AltoSuite, simulateurs dilution/waterfall, livrable Série A et correction AltoSuite répondent tous 200 sous `/vc-plateform/` ; la correction est `robots=noindex,nofollow` et sans canonical ;
+- recette navigateur de l’artefact : mobile émulé 390 × 844 avec `window.innerWidth === 390`, absence de débordement horizontal, H1 unique, navigation nommée, thèmes clair et sombre, modes `medium`/`high`, contexte `parcours=p-serie-a&budget=…` conservé, progression après cas/dilution/waterfall et blocage du jalon final prématuré ; desktop 1 440 × 1 000 sans débordement et mode complet visible ; console sans erreur ;
+- serveur temporaire arrêté, répertoire temporaire supprimé et port de recette vérifié libre.
+- revue indépendante ciblée du diff : verdict `passed: true`, aucun risque sécurité, aucune erreur logique bloquante ; seules deux suggestions non bloquantes ont été relevées.
+
+Fichiers principaux touchés : `scripts/collect-routes.mjs`, `scripts/collect-routes.test.mjs`, `scripts/prerender.mjs`, `client/public/sitemap.xml`, les artefacts prérendus sous `client/dist`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : finalisation locale vérifiée. Le remote Git reste uniquement une sauvegarde ; aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-25 — Contre-revue consolidée de l’évaluation des parcours
+
+Objet : confronter le rapport transversal livré à quatre évaluations indépendantes en lecture seule, puis corriger les notes et remarques lorsque leur barème d’exécutabilité ou leurs preuves étaient plus précis.
+
+Travaux :
+
+- consolidation de quatre contre-revues portant chacune sur six parcours ; leur expansion recouvre exactement les 181 occurrences déjà inventoriées ;
+- recalibrage des 24 notes de parcours sur l’exécutabilité de la trajectoire complète ; pour les 90 leçons distinctes, normalisation de l’avancée et de la qualité à la médiane basse des contre-évaluations, avec une pertinence conservée par contexte ;
+- remplacement des 181 remarques de leçon par les observations circonstanciées des contre-revues et enrichissement des 24 remarques et propositions de parcours ;
+- ajout des constats transversaux vérifiés : 18 jalons descriptifs sans livrable résolu, 25 prérequis absents ou placés après leur leçon dans 14 parcours, 13 variantes courtes toutes limitées aux leçons `lea-*`, et progression calculée sur les leçons lues sans imposer cas, simulateurs ou productions ;
+- vérification arithmétique de `cs-dilution-journey` : les dilutions successives de 22 %, 20 %, 16 % et 14 % laissent 45,07776 %, et non ≈28 %.
+
+Vérifications :
+
+- contrôle de parité final : 24 sections, 24 synthèses concordantes, 181 lignes ordonnées, 181 remarques non vides et 90 leçons distinctes dont les notes d’avancée et de qualité restent stables entre parcours ;
+- absence de dérive des huit sources et consommateurs principaux pendant la consolidation, contrôlée par SHA-256 ;
+- empreinte finale du rapport : `ac8d237f1b4183456abd10815395083e21e844a7d86273bfaeb092df1415933e` ;
+- `git diff --check -- docs/reviews/2026-07-24-evaluation-parcours-lecons.md Suivis/ETAT.md Suivis/JOURNAL.md` : exit 0 ;
+- aucun gate npm ni build relancé : la contre-revue ne modifie ni code applicatif, ni données produit, ni artefact généré.
+
+Fichiers touchés : `docs/reviews/2026-07-24-evaluation-parcours-lecons.md`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Aucun commit, staging, push, workflow distant ou déploiement n'a été exécuté.
+
+---
+
+## 2026-07-24 — Évaluation transversale des parcours et des leçons
+
+Objet : établir, sur l'état local courant, une notation homogène de l'avancée, de la pertinence et de la qualité de chaque parcours et de chaque leçon qu'il contient, avec une remarque par élément et une proposition d'amélioration par parcours, sans modifier les contenus pédagogiques.
+
+Travaux :
+
+- rapprochement de `data/parcours.json`, `data/courses.json`, `data/lessons.json` et `data/parcours/*.lessons.json`, puis contrôle des cas, simulateurs, livrables, statuts de production et résolutions frontend ;
+- définition d'un barème commun de 0 à 5 séparant disponibilité et application observable, adéquation au but du parcours, précision, traçabilité, sobriété éditoriale et exploitabilité pédagogique ;
+- création de `docs/reviews/2026-07-24-evaluation-parcours-lecons.md`, avec une synthèse des 24 parcours, un tableau détaillé par parcours, 181 lignes correspondant aux occurrences de 90 leçons publiées et une proposition prioritaire pour chaque parcours ;
+- identification de trois étapes requises et quatre étapes facultatives `a-produire`, de cinq parcours portant une étape résolue vers un livrable, des écarts de durée liés au dossier mathématique et des contenus juridiques ou chiffrés à resourcer ;
+- conservation des priorités produit existantes : le rapport constitue une aide à la décision et ne vaut ni validation juridique ou financière, ni validation par un praticien.
+
+Vérifications :
+
+- probe Python de parité : 24 sections sur 24, 181 lignes sur 181 dans l'ordre exact des parcours et des cours, 24 statuts de feuille de route concordants, aucun identifiant de leçon manquant ou supplémentaire ;
+- contrôle d'inventaire : 24 parcours, 165 étapes, 90 leçons distinctes référencées, toutes publiées, dont 58 comportent au moins une URL HTTPS explicite ;
+- `git diff --check -- docs/reviews/2026-07-24-evaluation-parcours-lecons.md Suivis/ETAT.md Suivis/JOURNAL.md` : exit 0 ;
+- aucun gate npm ni build relancé : cette passe ajoute une revue et les deux suivis, sans modifier code applicatif, données produit ni artefact généré.
+
+Fichiers touchés : `docs/reviews/2026-07-24-evaluation-parcours-lecons.md`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Aucun commit, staging, push, workflow distant ou déploiement n'a été exécuté.
+
+---
+
+## 2026-07-24 — Initialisation du cadrage Spec Kit
+
+Objet : rendre Spec Kit utilisable dans le dépôt brownfield actuel, avec un contexte de reprise qui renvoie vers les autorités existantes au lieu de les dupliquer, sans créer de fonctionnalité active, branche, commit, staging, push, workflow distant ni déploiement.
+
+Travaux :
+
+- initialisation de l'infrastructure officielle Spec Kit 0.14.2 pour l'intégration Hermes Agent, avec scripts Bash, numérotation séquentielle et sans extension Git ;
+- ratification de `.specify/memory/constitution.md` en version 1.0.0 autour de sept principes : autorités brownfield, continuité produit, sources canoniques, compatibilité, preuve RED–GREEN, accessibilité et effets de bord local-first ;
+- création de `.specify/memory/project-context.md`, index de reprise qui distingue comportement implémenté, principes produit, stratégie, état vérifié, références maintenues et historique, sans recopier de photographie des travaux, compteurs, risques ou priorités ;
+- création de surcharges locales pour les modèles de spécification, plan et tâches sous `.specify/templates/overrides/`, puis adaptation ciblée de `.specify/templates/checklist-template.md`, lu directement par la compétence Hermes 0.14.2 ;
+- création de `docs/SPECKIT.md`, `specs/README.md` et `.specify/integrations/hermes-skill-contract.md`, puis référencement du workflow dans `README.md` et `CLAUDE.md` ;
+- adaptation du workflow groupé en `SDD Draft Artifacts` v1.0.1 : il produit les brouillons `specify → plan → tasks`, puis s'arrête sur un handoff vers le cycle manuel avant toute implémentation ;
+- alignement des compétences globales du profil actif : `speckit-implement` charge la spécification, bloque les checklists non résolues selon la constitution, inspecte l'installation en lecture seule par défaut et n'initialise pas génériquement le brownfield ; `speckit-tasks` suit le modèle résolu et les exigences de preuve ; `speckit-analyze` résout le contexte sans écriture et contrôle les artefacts de support ; `speckit-converge` exige toutes les tâches cochées, contrôle les artefacts et autorités du delta borné et n'autorise aucune opération Git ou distante ;
+- séparation de la convergence et de l'implémentation dans le modèle de tâches : `converge` est un handoff hors checklist, toute tâche ajoutée déclenche une nouvelle passe `implement`, les autorités durables ne sont promues qu'après convergence propre et les suivis restent conditionnels ;
+- durcissement de `setup-plan.sh` : résolution initiale sans persistance, exigence d'un dossier et d'un `spec.md` existants avant toute écriture, puis persistance du sélecteur seulement après validation ;
+- ajout de `.specify/scripts/bash/select-feature.sh`, helper borné qui valide un dossier `specs/<numéro>-<nom>` et son `spec.md`, puis modifie uniquement le sélecteur local ;
+- conservation d'un dépôt sans fonctionnalité active : le premier dossier `specs/001-<nom>/` sera créé par une future commande `/speckit-specify` portant un besoin borné.
+
+Vérifications :
+
+- contrôle structurel final : exit 0 — scripts Bash, JSON, YAML, liens, constitution, contrat des compétences, workflow et manifeste contrôlés ; deux divergences au manifeste, le modèle canonique de checklist et `setup-plan.sh`, sont adaptées et documentées ;
+- `specify self check` : `Up to date: 0.14.2` ; `specify check` : exit 0 avec Hermes Agent disponible ; `specify workflow info speckit` : workflow local v1.0.1 résolu en six étapes jusqu'au handoff manuel ;
+- premier smoke test isolé de `setup-plan.sh` et `setup-tasks.sh` : exit 1, classé comme erreur de harnais parce que le processus était lancé depuis la racine réelle et résolvait donc le projet courant sans `feature.json` ;
+- test bout en bout corrigé avec `SPECIFY_INIT_DIR` et le sélecteur officiel `feature_directory` : exit 0 — création de `specs/001-smoke`, copie des modèles locaux de plan et de tâches, disponibilité de la checklist, branche temporaire maintenue sur `master` et zéro commit ;
+- test isolé du changement de fonctionnalité : exit 0 — sélection de `specs/001-first`, rejet d'un dossier inexistant sans altération du sélecteur, branche temporaire `master` et zéro commit ;
+- test fail-closed final : exit 0 — fonctionnalité sans spécification rejetée sans dossier, plan ni sélecteur ; résolution d'analyse `--paths-only` sans persistance ; plan valide créé ensuite avec branche `master` et zéro commit ;
+- contre-revues en lecture seule : les contradictions génériques des compétences globales, la portée initialement trop étroite d'`analyze` et `converge`, le traitement des checklists, la politique conditionnelle des suivis et l'ancienne convergence auto-référentielle ont été identifiés, corrigés puis couverts par les contrôles structurels finaux ;
+- `git diff --check -- .specify docs/SPECKIT.md specs/README.md README.md CLAUDE.md Suivis/ETAT.md Suivis/JOURNAL.md` : exit 0.
+
+Aucun test npm ni build n'a été relancé : cette livraison ne modifie ni code applicatif, ni collection éditoriale, ni route, ni artefact public. Les derniers gates applicatifs restent ceux consignés dans `Suivis/ETAT.md`.
+
+Fichiers propres à cette intervention : `.specify/`, `docs/SPECKIT.md`, `specs/README.md`, les ajouts ciblés de `README.md` et `CLAUDE.md`, puis la consolidation de `Suivis/ETAT.md` et de ce journal. Les adaptations de `~/.hermes/skills/speckit-{tasks,analyze,implement,converge}/SKILL.md` vivent dans le profil actif et sont reproduites dans le contrat versionné du dépôt.
+
+Clôture : l'infrastructure, la gouvernance, le contexte de reprise et les modèles brownfield sont vérifiés. Le dépôt est prêt à ouvrir sa première fonctionnalité avec `/speckit-specify`.
+
+---
+
+## 2026-07-24 — Finalisation du parcours Mathématiques du capital-risque
+
+Objet : appliquer et finaliser localement les corrections proposées dans `revue-mathematiques-du-vc.md` pour le cours partagé `c-mathematiques-vc`, avec un ton professionnel, pédagogique et sans promesse de certification ou de modèle professionnel, sans commit, staging, push, workflow distant ni déploiement.
+
+Travaux :
+
+- corrections P0 dans `data/lessons.json` : formule de complément de pool avec `P₀`, `T₀`, `x` et `c`, distinction primaire/secondaire et cash réellement reçu, runway jusqu’à zéro versus seuil opérationnel minimal, commentaire du plafond 2x et conversion au-delà du plateau ;
+- renommage sobre du cours en « Mathématiques du capital-risque » et résumé centré sur conventions, contrôles et sensibilités ;
+- création du dossier apprenant fictif `cs-mathematiques-vc-dossier`, avec rôle `learner-dossier`, pièces documentaires minimales requises par le validateur et avertissements explicites sur le caractère méthodologique et non confidentiel du cas ;
+- création du livrable cumulatif `math-vc-dossier`, avec sept composants : marché, unit economics, trésorerie, pre/post ownership, cap table, droits économiques et rendements ;
+- création de la correction commentée `corr-mathematiques-vc-dossier`, révélable après le livrable, centrée sur conventions, contrôles, variantes recevables et erreurs fréquentes ;
+- création du classeur de départ `client/public/downloads/mathematiques-vc/dossier-depart.xlsx`, volontairement sans formule, avec huit onglets de travail et cellules d’entrée identifiées ;
+- rattachement des sept leçons du cours au livrable par `practice.deliverableId`, `practice.sectionId` et durées guidées `[45, 45, 60, 45, 75, 60, 75]`, soit 405 minutes ;
+- conservation du prérequis strict `l-pipeline-crm` pour `lmv-market-sizing`, imposé par le contrat de certification ;
+- correction de `parcoursTimeSummary` pour ne compter une pratique guidée dans un parcours que si le livrable associé appartient réellement à ce parcours. Cette règle évite de gonfler `p-entretien-analyst`, qui réutilise le cours de mathématiques sans utiliser le nouveau livrable longitudinal ;
+- mise à jour du sitemap public et du budget média déterministe pour intégrer les deux nouvelles routes publiques et le fichier `xlsx`.
+
+Preuves RED puis GREEN :
+
+- `client/src/content/mathVentureCourse.test.ts` a d’abord échoué sur le contrat longitudinal, faute de titre, dossier, livrable, correction, pratiques et classeur ; après création des données et régénération, il passe avec 5 tests ;
+- le premier `npm run validate:content:strict` a révélé deux contrats réels : `lmv-market-sizing` doit garder `l-pipeline-crm`, et tout `learner-dossier` doit porter les 13 catégories documentaires requises. Les données et le test ont été alignés sur ces contrats ;
+- le premier `npm run check` a révélé deux effets d’intégration : les pratiques du cours partagé gonflaient `p-entretien-analyst`, et un test Venture Philanthropy supposait que tous les livrables cumulatifs du dépôt étaient VP. La logique de durée et le test ont été corrigés ;
+- le deuxième `npm run check` a révélé les artefacts dérivés à mettre à jour : sitemap public et budget média. Le sitemap a été régénéré avec `VITE_BASE_URL=/vc-plateform/` et `VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform`, puis le budget média a été recalibré.
+
+Vérifications finales :
+
+- `npm run validate:content:strict` : exit 0 — 24 parcours, 27 cours, 129 leçons, 405 termes, 9 études de cas, 2 corrections commentées, 11 livrables et 369 marqueurs cohérents ;
+- `npm run check:generated` : exit 0 — 129 leçons, 101 corps publiés et 405 termes synchronisés ;
+- `npm run test --workspace client -- src/content/parcours.test.ts src/content/venturePhilanthropyLearning.test.ts src/content/mathVentureCourse.test.ts` : exit 0 — 3 fichiers / 25 tests ;
+- `npm run check` post-build : exit 0 — 51 fichiers / 323 tests Vitest et 56/56 tests Node ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — 1 789 modules transformés, sitemap 658 routes, prérendu strict 667/667 et résumé `ok: true` ;
+- vérification du classeur : fichier présent, 12 426 octets, onglets `00_Legende`, `01_Hypotheses`, `02_Marche`, `03_UnitEconomics`, `04_Tresorerie`, `05_CapTable`, `06_DroitsEconomiques`, `07_Rendements`, aucune formule ;
+- `git diff --check` : exit 0.
+
+Fichiers principaux touchés : `data/courses.json`, `data/lessons.json`, `data/caseStudies.json`, `data/caseCorrections.json`, `data/deliverables.json`, `data/generated/lessons.index.json`, `data/generated/lessons.bodies.json`, `client/src/content/mathVentureCourse.test.ts`, `client/src/content/learningTime.ts`, `client/src/content/venturePhilanthropyLearning.test.ts`, `scripts/media-budget.test.mjs`, `client/public/downloads/mathematiques-vc/dossier-depart.xlsx`, `client/public/sitemap.xml`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Limites : le classeur est un support pédagogique sans formules, pas un modèle financier professionnel. Les simulateurs n’ont pas été étendus pour gérer toutes les clauses complexes de waterfall. Les quiz numériques dans les leçons restent hors périmètre tant qu’un rendu, un type, un validateur et des tests dédiés ne sont pas créés.
+
+Clôture : implémentation locale, tests, validation stricte, build canonique et prérendu sont terminés. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-24 — Séparation Onboarding / Ikigai
+
+Objet : appliquer le plan `.hermes/plans/2026-07-24_212102-separer-onboarding-ikigai.md` en séparant l’ancien onboarding introspectif du nouvel onboarding produit, sans commit, staging, push, workflow distant ni déploiement.
+
+Travaux :
+
+- création de `client/src/pages/onboarding/IkigaiPage.tsx` à partir de l’expérience actuelle : cahier, modes de lecture, test, brouillons locaux et pinning Ikigai conservés ;
+- refonte de `client/src/pages/onboarding/OnboardingPage.tsx` en entrée courte, pratique et non bloquante vers Intelligence VC, Formation, Workspace, avec accès facultatif au cahier et au test ;
+- ajout de la route `/ikigai`, conservation de `/onboarding`, redirection des anciens liens `/onboarding?test=1...` vers `/ikigai` avec paramètres préservés ;
+- alignement des liens d’intention dans la navigation, le splash, l’accueil, le dashboard, l’atlas de parcours, les pages profil/résultat et le résumé Ikigai ;
+- mise à jour de `shared/routes.mjs`, du sitemap public, de `CLAUDE.md`, `README.md` et `docs/ARCHITECTURE_EDITION.md`.
+
+Preuves RED puis GREEN :
+
+- `client/src/pages/onboarding/onboardingAndIkigai.dom.test.tsx` a été écrit avant modification ; premier lancement ciblé : exit 1 attendu, l’ancien `/onboarding` exposant encore le cahier ;
+- après séparation : `npm run test --workspace client -- src/pages/onboarding/onboardingAndIkigai.dom.test.tsx` retourne exit 0 — 1 fichier / 4 tests. Le contrat couvre le nouvel onboarding, le cahier `/ikigai`, l’accès direct `/ikigai?test=1` et la redirection legacy.
+
+Vérifications finales :
+
+- `npm run typecheck` : exit 0 ;
+- `npm run lint` : exit 0 ;
+- `npm run test --workspace client -- src/components/ikigai/cahierLayout.dom.test.tsx` : exit 0 — 1 fichier / 2 tests ;
+- `npm run test` : exit 0 — 50 fichiers / 318 tests Vitest et 56/56 tests Node ;
+- `npm run check` après build : exit 0 — générés à jour, contenu strict, glossaire, TypeScript, ESLint, 50 fichiers / 318 tests Vitest et 56/56 tests Node ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — 1 789 modules transformés, sitemap 656 routes publiques, prérendu strict 665/665, résumé `ok: true` ;
+- `git diff --check` : exit 0.
+
+Recette navigateur sous Vite :
+
+- desktop 1 440 × 1 000 : `/onboarding` expose le titre « Choisissez votre point de départ. », trois cartes de navigation, les liens `/ikigai` et `/ikigai?test=1`, aucun débordement horizontal ; `/ikigai` expose le cahier et son titre Ikigai, aucun débordement ; `/ikigai?test=1` ouvre la question 1/9 ;
+- compatibilité : `/onboarding?test=1&q=2` redirige vers `/ikigai?test=1&q=2` et affiche la question 3/9 ;
+- mobile tactile 390 × 844 : `/onboarding`, `/ikigai` et `/ikigai?test=1` restent sans débordement horizontal ; le thème clair a été contrôlé sur `/onboarding`, puis le thème sombre restauré ;
+- console : aucun blocage JavaScript ; seul demeure l’avertissement préexistant sur sept champs sans `id` ou `name`.
+
+Clôture : implémentation et validation locale terminées. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-24 — Campagne documentaire spécialisée pour l’entretien Analyst
+
+Objet : remplacer, dans les six leçons encore dépendantes de DGAFP/OPM du parcours `p-entretien-analyst`, les références généralistes par des sources VC, PE et private markets contextualisées, puis faire contre-revoir et valider l’état régénéré sans modifier les 13 IDs ou URLs, sans commit, staging, push, workflow distant ni déploiement.
+
+Recherche et rôle des sources :
+
+- France Invest fournit une rubrique métier française — signalée « en cours de construction » — et le témoignage particulier de la DRH de 123 Investment Managers ; ses métadonnées WordPress indiquent une publication en 2023 et une modification en 2025. Le témoignage n’est pas une norme de recrutement sectorielle ;
+- l’enquête 2025 Venture Forward/NVCA/Deloitte décrit 250 sociétés de capital-risque participantes basées aux États-Unis, plus de 4 700 salariés à temps plein basés aux États-Unis et 601 Md$ d’actifs sous gestion. Elle distingue types de postes et canaux de vivier, mais ne décrit pas la succession des entretiens ou la fréquence des cas ;
+- le syllabus 2025 de CFA Institute sert de taxonomie de compétences private markets ; il ne constitue pas une grille de recrutement et ses contenus LBO, dette de take-private ou fiscalité ne sont pas transposés par défaut au seed ;
+- UK Private Capital documente une formation britannique fondée sur des cas PE/VC ; ILPA DDQ 2.0 décrit la diligence d’un LP sur un GP ; Diversity VC propose un dispositif d’évaluation de maturité et de certification du fonds. Aucun de ces cadres n’est traité comme barème candidat ;
+- Gompers et al. apporte des axes d’analyse de startups dans une enquête VC américaine ; GoingVC fournit des guides candidats commerciaux à audience internationale produits par un organisme établi aux États-Unis. GoingVC ne publie ni échantillon ni géographie des pratiques décrites.
+
+Transposition dans les six leçons :
+
+- `lea-process` relie les formats possibles aux activités observables et refuse tout tunnel universel ;
+- `lea-grille` part du travail d’investissement et sépare faits, interprétations et diligence ;
+- `lea-case-study` borne la trame en cinq parties à l’exercice du parcours et distingue early-stage, growth, buyout et LBO ;
+- `lea-fit` relie les réponses au rôle, au mandat et à des preuves, sans hiérarchie universelle ni test de personnalité ;
+- `lea-reverse-questions` transpose seulement des rubriques générales du DDQ et exclut les demandes détaillées ou nominatives ;
+- `lea-jour-j` présente le cas d’une heure, le cas sans préparation et le cas préparé à l’avance comme exemples, jamais comme standards.
+
+Contre-revues intégrées :
+
+- l’audit France Invest/Venture Forward/GoingVC a corrigé dates, séquence, tâches attribuées, échantillon, canaux, géographie et traduction de *on the spot* ;
+- l’audit CFA/UK Private Capital a confirmé les compétences citées et borné les éléments buyout/LBO ;
+- l’audit ILPA/Diversity VC a restitué les catégories complètes du DDQ, ses vingt rubriques, sa finalité LP-GP et la nature exacte de The Standard ;
+- la revue éditoriale générale a conduit à contrôler aussi résumés, points clés, quiz, explications, options et libellés, à référencer France Invest dans `lea-grille`, à corriger deux distracteurs et à retirer les formulations générales restantes.
+
+Preuves RED puis GREEN :
+
+- `client/src/content/parcours.test.ts` a été renforcé avant les dernières corrections : absence des sources généralistes dans tous les champs publiés, URL spécialisées par leçon, libellés qualifiés par origine/géographie, segment et type, limites GoingVC et interdiction des affirmations invalidées ;
+- premier lancement ciblé après ce durcissement : exit 1 attendu ;
+- après correction de `data/lessons.json` : même commande, 13/13 tests, exit 0 ;
+- le premier `npm run check` a ensuite révélé un unique avertissement ESLint sur une variable de test devenue inutilisée ; la variable a été retirée avant relance complète.
+
+Vérifications finales sur l’état régénéré :
+
+- `npm run split:lessons` : exit 0 — 129 leçons, dont 118 bibliothèque et 11 parcours ;
+- `npm run check:generated` : exit 0 — 129 leçons, 101 corps publiés et 405 termes synchronisés ;
+- `npm run validate:content:strict` : exit 0 — 24 parcours, 19 relations, 27 cours, 129 leçons, 10 livrables et 369 marqueurs ;
+- contrôle HTTP des 11 URL spécialisées finales : toutes répondent en `200` ou `206` ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — 1 788 modules transformés, sitemap de 655 routes et prérendu strict 664/664 ;
+- second `npm run check`, après le build : exit 0 — générés, contenu strict, glossaire, TypeScript, ESLint, 48 fichiers / 312 tests Vitest et 56/56 tests Node ;
+- `git diff --check`, après consolidation de la matrice et des suivis : exit 0.
+
+Fichiers propres à cette campagne : `data/lessons.json`, `data/generated/lessons.index.json`, `data/generated/lessons.bodies.json`, `client/src/content/parcours.test.ts` et `.hermes/plans/2026-07-24_001520-reussir-entretien-analyst-evidence.md`. `Suivis/ETAT.md` et ce journal ont été consolidés après les gates.
+
+Limite : la traçabilité documentaire et les validations locales sont closes. Une revue par un praticien du recrutement VC early-stage France/Europe reste nécessaire pour valider le réalisme métier, le niveau attendu et la charge du mock final.
+
+Clôture : aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-24 — Finalisation vérifiée du parcours entretien Analyst
+
+Objet : finaliser localement `p-entretien-analyst` / `reussir-l-entretien-analyst` après audit éditorial, pédagogique, technique et visuel, sans modifier les IDs ni les URLs des 13 leçons, sans commit, push, workflow distant ni déploiement.
+
+Travaux de contenu et de pédagogie :
+
+- réécriture sourcée des versions approfondies et courtes des 13 leçons de `c-entretien-analyst` ; retrait ou contextualisation des fréquences, seuils, durées et pratiques de recrutement présentés sans preuve comme universels ; correction du calcul 18 clients × 8 k€ d’ACV = 144 k€ d’ARR = 12 k€ de MRR ;
+- recomposition du parcours en 13 étapes : quatre leçons de méthode, `c-mathematiques-vc`, deal memo, case study, recherche sur le fonds, pitch, fit, deux bonus puis jalon final ; retrait de `cs-market-sizing-live`, `cs-seed-ic` et `cs-power-law-portfolio` ;
+- correction de `c-mathematiques-vc` à 43 minutes avec `durationSource: "lesson-read-minutes"` et qualification de l’étape en `coeur`, non en pratique déclarée sans activité structurée ;
+- transformation de `lea-mock` en livrable exécutable sur une société réelle et un fonds réel : six rubriques, sources publiques datées, faits/hypothèses/inconnues séparés, note courte, simulation, grille qualitative, retour facultatif et révision ; la vidéo reste facultative, locale et consentie ;
+- contextualisation du mémo Shopify–Bessemer comme exemple historique de densité et de logique de preuve, sans valeur de format universel ;
+- correction du contrat de persistance : le navigateur conserve la note courte et les états ; la production complète reste dans un fichier local ou un export. Les déclarations n’ont aucun effet de validation externe ou de certification.
+
+Travaux de durée, navigation et sécurité :
+
+- `parcoursTimeSummary` inclut désormais les temps de lecture des consignes de livrables. Pour l’entretien Analyst : 110 minutes de lectures/consignes, 150 minutes de production, 54 minutes facultatives, soit 260 minutes requises et 314 minutes en Complet ;
+- transport explicite de `?parcours=` et `?budget=` entre parcours, cours, leçons et livrable ; le contexte n’est accepté que si le parcours contient réellement la ressource. La page du parcours conserve le budget dans l’URL ; les retours et les leçons préparatoires du jalon le conservent également ;
+- navigation précédente/suivante calculée sur les étapes visibles : Standard masque les deux bonus, les exclut du dénominateur de progression et mène du fit directement au jalon. Une leçon dont l’ID est homonyme d’un `milestone` n’est plus confondue avec ce jalon ;
+- suppression du fallback implicite de `LessonPage` vers le premier parcours candidat, qui pouvait attribuer les leçons de mathématiques au parcours Stage ;
+- fermeture de `FurtherReading.kind` dans TypeScript et Zod, filtrage HTTPS partagé, absence de lien `#` pour une URL externe refusée et annonce accessible de l’ouverture dans un nouvel onglet ; les ressources externes du livrable passent également par `safeHttpUrl`.
+
+Contre-revues et preuves RED puis GREEN :
+
+- quatre audits indépendants en lecture seule ont relevé deux blocages principaux : `bodyShort` obsolètes affichés par défaut et perte du contexte dans `c-mathematiques-vc`. Les deux ont été reproduits, corrigés et couverts ;
+- les constats secondaires retenus ont conduit à compter les 6 minutes du brief, enseigner la recherche fonds avant le pitch et le fit, sauter les bonus en Standard, corriger la progression visible, préciser le stockage local, durcir les liens externes et conserver le contexte des leçons préparatoires du jalon ;
+- `parcours.test.ts` a été exécuté en RED sur l’ordre, la durée du brief, la qualification de l’étape et la collision milestone/leçon, puis en GREEN avec 12 tests ;
+- `parcoursContextNavigation.dom.test.tsx` a été exécuté en RED sur le budget, la progression et les liens préparatoires du jalon, puis en GREEN avec 6 tests ;
+- `furtherReadingHref.test.ts` a été exécuté en RED sur les protocoles refusés rendus comme `#`, puis en GREEN avec 6 tests ;
+- la première suite complète a révélé deux attentes transversales périmées : `certifications.test.ts` ajoutait encore 8 minutes à tout cours, même avec `durationSource: "lesson-read-minutes"`, et `venturePhilanthropyLearning.test.ts` omettait encore les lectures de consignes. Les contrats ont été alignés sur la sémantique désormais explicite avant relance complète.
+
+Vérifications finales sur l’état consolidé :
+
+- `npm run test` : exit 0 — 48 fichiers / 311 tests Vitest et 56/56 tests Node ;
+- `npm run lint` : exit 0 — client, scripts, modules partagés et hooks ESM, sans avertissement ;
+- `npm run typecheck --workspace client` : exit 0 ;
+- `npm run validate:content:strict` : exit 0 — 24 parcours, 19 relations, 27 cours, 129 leçons, 10 livrables et 369 marqueurs cohérents ;
+- `npm run check:generated` : exit 0 — 129 leçons, 101 corps publiés et 405 termes synchronisés ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — 1 788 modules transformés, sitemap de 655 routes publiques et prérendu strict 664/664, résumé `ok: true` ;
+- `git diff --check` : exit 0.
+
+Recette navigateur :
+
+- desktop : page du parcours en Complet puis Standard, 13 étapes, ordre recherche → pitch → fit, temps 1 h 50 + 2 h 30, 54 minutes facultatives, cours partagé à 43 minutes, sortie de la dernière leçon de mathématiques vers le deal memo et sortie du fit Standard vers le jalon ;
+- livrable : retour contextualisé, consignes 6 + 150 minutes, six sections, source Shopify, grille qualitative, démarrage local, note courte, case de fichier hors plateforme, export et transition de première version ;
+- mobile tactile émulé 390 × 844 : parcours et livrable sans débordement horizontal ni élément hors largeur ; les bonus sont absents en Standard, les liens conservent le budget et la console ne contient aucune erreur applicative. La barre flottante observée appartient au composant strictement `DEV` `ViewportSwitcher` et n’est pas livrée par le build de production ;
+- serveur Vite arrêté après la recette.
+
+Limite : cette clôture valide la cohérence documentaire, la structure, l’exécution locale et le rendu. Elle ne remplace pas une revue par un praticien du recrutement VC early-stage France/Europe, qui reste la prochaine vérification métier.
+
+Clôture : implémentation, contre-revue, recette et gates locaux terminés. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-23 — Mini-analyse de startup pour le parcours stage VC
+
+Objet : remplacer le placeholder `todo-mini-analyse-gabarit` de `/parcours/decrocher-un-stage-en-vc` par un livrable final vérifiable, concis et réutilisable, sans inventer de données.
+
+Condition prise en compte : le contenu factuel doit provenir de sources sûres. L’exemple retenu est donc un mémo public Shopify publié par Bessemer Venture Partners ; le livrable demande explicitement des sources publiques datées et interdit les chiffres non citables.
+
+Travaux :
+
+- ajout du livrable `todo-mini-analyse-gabarit` dans `data/deliverables.json` avec gabarit en six rubriques, note cible 350–500 mots, grille qualitative, export local et lien vers le modèle `memo-shopify-bessemer` ;
+- résolution du jalon dans `data/parcours.json` vers `/livrables/mini-analyse-startup-candidature-vc`, avec formulation plus sobre du parcours et du jalon final ;
+- bornage du validateur `capstone` : invariants communs pour tous les jalons finaux, exigences spécifiques conservées pour `vp-recommandation-soutien` ;
+- ajout de tests de non-régression dans `client/src/content/parcours.test.ts` et `client/src/lib/learningExports.test.ts` ;
+- régénération du sitemap canonique à 654 routes ;
+- mise à jour des suivis `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Preuves RED puis GREEN :
+
+- RED ciblé : `npm run test --workspace client -- src/content/parcours.test.ts` retourne exit 1 avant création du livrable, car le jalon `todo-mini-analyse-gabarit` ne résout pas un livrable existant ;
+- GREEN ciblé : `npm run test --workspace client -- src/content/parcours.test.ts src/content/venturePhilanthropyLearning.test.ts src/lib/learningExports.test.ts` retourne exit 0 — 3 fichiers / 17 tests ;
+- test d’export ajouté : la fiche Markdown contient le titre, les sources publiques, les faits déterminants et la note locale ; l’autoévaluation exportée restitue les niveaux qualitatifs sans score global.
+
+Vérifications finales :
+
+- source externe : `curl` sur `https://www.bvp.com/memos/shopify` retourne exit 0, 62 374 octets, avec `Shopify`, `Bessemer`, `Alex Ferrara` et `Memo` présents dans la page récupérée ;
+- `npm run validate:content:strict` : exit 0 — 24 parcours, 27 cours, 129 leçons, 405 termes, 9 livrables, 5 mémos annotés et 430 marqueurs contrôlés ;
+- `npm run check` : exit 0 — fraîcheur des générés, validation stricte, glossaire, TypeScript, ESLint, 47 fichiers / 295 tests Vitest et 56/56 tests Node ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — 1 788 modules transformés, sitemap 654 routes et prérendu strict 663/663, résumé `ok: true` ;
+- recette Preview : `/parcours/decrocher-un-stage-en-vc` affiche le jalon final et ouvre `/livrables/mini-analyse-startup-candidature-vc`; desktop et mobile émulé 390 × 844 affichent le gabarit, l’exemple Shopify–Bessemer, la source externe, les leçons préparatoires, les termes liés, la grille qualitative, l’export de fiche, l’export d’autoévaluation et le cycle local jusqu’à la déclaration finale. Aucune erreur console observée ; l’état de recette local a ensuite été retiré du `localStorage` de test.
+
+Clôture : implémentation et validation locale terminées. Aucun commit, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-23 — Quiz de leçon question par question
+
+Objet : rendre les quiz formatifs des leçons moins chargés visuellement, avec une seule question visible et un passage immédiat au choix d’une réponse.
+
+Travaux :
+
+- plan court consigné dans `.hermes/plans/2026-07-23_224703-quiz-lecons-question-par-question.md` avant modification du code ;
+- remplacement du rendu multi-question de `QuizBlock` par un flux séquentiel : boutons de réponse, progression, focus transféré vers la question suivante puis vers le score final ;
+- retrait du besoin de bouton « Valider » ou « Suivant » dans le quiz ;
+- conservation d’un score annoncé et d’un corrigé détaillé replié à la fin du quiz.
+
+Preuves RED puis GREEN :
+
+- `npm run test --workspace client -- src/components/reading/QuizBlock.dom.test.tsx` retourne d’abord exit 1 : la seconde question est déjà présente et les options restent des radios ;
+- la même commande retourne ensuite exit 0 — 1 fichier / 2 tests, couvrant l’affichage d’une question unique, l’avancement au choix, l’absence de bouton intermédiaire, le score final, le corrigé et le parcours clavier.
+
+Vérifications finales :
+
+- `npm run typecheck` : exit 0 ;
+- `npm run lint` : exit 0 ;
+- `npm run test` : exit 0 — 47 fichiers / 293 tests Vitest et 56/56 tests Node ;
+- `git diff --check -- client/src/components/reading/QuizBlock.tsx client/src/components/reading/QuizBlock.dom.test.tsx .hermes/plans/2026-07-23_224703-quiz-lecons-question-par-question.md` : exit 0 ;
+- recette Chromium sous Vite sur `/lessons/le-capital-risque-vraiment` : en viewport large puis en mobile émulé 390 × 844, un choix affiche la question suivante, une seule question reste présente, le score final reçoit le focus, aucun bouton « Valider » ou « Suivant » n’apparaît dans le quiz, le document mobile reste sans débordement horizontal, la console ne contient que les messages Vite/React DevTools et les requêtes répondent en 200/304. Le serveur Vite a été arrêté.
+
+Clôture : implémentation et validation locale terminées. Aucun commit, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-23 — Cartographie relationnelle contextuelle des parcours
+
+Objet : rendre explicites les rapprochements éditoriaux entre les 24 parcours sans déduire un graphe du seul niveau, conserver les positions fixes de l’atlas et exposer les relations uniquement pendant une interaction souris, clavier ou tactile.
+
+Travaux :
+
+- création de `data/parcoursRelations.json`, registre canonique clairsemé de 19 relations avec type, preuves et justification ; la première sélection de 25 arêtes a été réduite après audit plutôt que de forcer chaque parcours à avoir un voisin ;
+- distinction de deux contrats : `peer`, complément de même niveau représenté par un trait fin pointillé sans flèche, et `progression`, suite conseillée représentée par un trait continu orienté ; aucune relation ne constitue un prérequis bloquant ni une équivalence avec un palier professionnel ;
+- ajout des types et de l’accès client dans `parcoursTypes.ts` et `parcoursRelations.ts`, puis branchement du registre dans la validation stricte du contenu ;
+- ajout d’un validateur pur pour les extrémités absentes, boucles, types et preuves, niveaux incompatibles, doublons directs ou inversés et cycles de progression ;
+- ajout dans `PathAtlas` d’un calque SVG contextuel placé derrière les sceaux, d’un cartouche textuel accessible et d’états séparés pour le survol, le focus et la sélection tactile ; aucun trait n’est monté au repos ;
+- premier appui tactile : affichage du voisinage incident ; second appui sur le même sceau ou la même puce : ouverture du parcours. La souris et le clavier conservent l’ouverture directe ;
+- correction du placement radial des libellés actifs pour maintenir leurs deux lignes hors des sceaux ; sur petit écran, le cartouche quitte le calque absolu et suit la carte dans le flux afin de ne plus être rogné ni masquer les relations ;
+- durcissement post-revue : l’identifiant du marqueur de progression est dérivé de `useId()` pour cloisonner plusieurs atlas montés simultanément, et le test du registre fixe explicitement l’inventaire éditorial approuvé à 19 relations ;
+- mise à jour des textes de `/parcours`, du manuel éditorial, du design system et de la politique des parcours.
+
+Preuves RED puis GREEN :
+
+- les tests Node ont d’abord échoué en l’absence de validation des extrémités, auto-relations, niveaux, doublons et cycles, puis sont devenus verts après ajout de `validateParcoursRelations` et du branchement canonique ;
+- les tests DOM ont reproduit l’absence du rendu relationnel, puis le conflit où une sortie de survol supprimait un focus encore actif, l’échec du premier appui tactile, le contact des libellés avec les sceaux et enfin le cartouche mobile rogné ; chaque défaut a reçu une correction ciblée avant le passage au vert ;
+- `PathAtlas.dom.test.tsx` couvre finalement 8 scénarios : voisinage au survol, équivalence focus et relations entrantes, coexistence focus/survol, dégagement des libellés, disposition mobile du cartouche, double appui tactile sur puce comme sur sceau SVG et unicité du marqueur entre deux instances ; le dernier scénario a échoué avec un seul identifiant avant de passer au vert ;
+- la contre-vérification éditoriale finale approuve les 19 relations et ne relève aucune relation forte manquante. Les revues indépendantes du composant n’ont détecté aucun problème de sécurité ; leurs trois bloquants successifs — focus/survol, rognage de deux libellés puis cartouche mobile — ont été reproduits et corrigés. Les recommandations sur l’identifiant du marqueur, l’inventaire exact et les commentaires mentionnant l’activation tactile sont appliquées.
+
+Vérifications finales :
+
+- `npm run check` après le durcissement post-revue : exit 0 — générés à jour, validation stricte de 19 relations, glossaire, TypeScript, ESLint, 47 fichiers / 292 tests Vitest et 56/56 tests Node ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — 1 788 modules transformés, sitemap de 653 routes et prérendu strict 662/662, résumé `ok: true` ;
+- recette desktop de l’artefact : à 1 280 px, 24 sceaux, aucun trait au repos, quatre relations incidentes pour « Comprendre le capital-risque » — deux latérales et deux progressions —, cartouche accessible et focus restauré après survol temporaire. À 1 440 × 1 000, une sonde parcourt les 24 sceaux : aucun libellé actif ne sort du SVG ni ne recouvre son sceau ; « Comprendre le capital-risque » reste entre x=354,28 et x=503,08, « Fondamentaux de l’analyse en capital-risque » entre x=912,27 et x=1 138,72, pour un SVG compris entre x=179,5 et x=1 313,5. Le marqueur généré est correctement référencé et aucun débordement horizontal n’apparaît ;
+- recette tactile à 390 × 844 : le premier appui conserve `/parcours`, affiche quatre relations et un cartouche entièrement visible sous la carte ; le second ouvre `/parcours/le-vc-sans-bullshit`. Aucun message console, aucune requête en échec et aucun débordement horizontal ;
+- `git diff --check` passe après consolidation des suivis ; le serveur Preview final est arrêté et le port 4173 est libre.
+
+Clôture : l’implémentation et sa validation locale sont terminées. Aucun commit, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
 ## 2026-07-23 — P0 : préparation de la relecture praticien des parcours
 
 Objet : reprendre le travail après la clôture de C1–C6, préparer la relecture des deux parcours Foundations sans modifier les contenus pédagogiques et sans simuler une validation professionnelle.

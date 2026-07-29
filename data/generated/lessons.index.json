@@ -598,15 +598,18 @@
       "Déduire la valorisation implicite d’un montant et d’un objectif de détention",
       "Identifier les hypothèses de capitalisation qui limitent l’interprétation du calcul simplifié"
     ],
-    "prerequisiteLessonIds": [
-      "lmv-cash-flow-scenarios"
-    ],
+    "prerequisiteLessonIds": [],
     "glossaryRefs": [
       "pre-money",
       "valuation",
       "cap-table",
       "dilution"
-    ]
+    ],
+    "practice": {
+      "deliverableId": "math-vc-dossier",
+      "sectionId": "pre-post-ownership",
+      "estimatedMinutes": 45
+    }
   },
   {
     "id": "lmv-dilution-cap-table",
@@ -634,7 +637,12 @@
       "dilution",
       "esop",
       "pre-money"
-    ]
+    ],
+    "practice": {
+      "deliverableId": "math-vc-dossier",
+      "sectionId": "cap-table",
+      "estimatedMinutes": 75
+    }
   },
   {
     "id": "lmv-market-sizing",
@@ -660,7 +668,12 @@
     "glossaryRefs": [
       "tam-sam-som",
       "arr"
-    ]
+    ],
+    "practice": {
+      "deliverableId": "math-vc-dossier",
+      "sectionId": "market-sizing",
+      "estimatedMinutes": 45
+    }
   },
   {
     "id": "lmv-unit-economics",
@@ -680,9 +693,7 @@
       "Calculer CAC, marge contributive, payback et LTV en rendant visibles les hypothèses",
       "Évaluer la sensibilité des résultats au churn, à la marge, au canal et aux coûts de déploiement"
     ],
-    "prerequisiteLessonIds": [
-      "lmv-market-sizing"
-    ],
+    "prerequisiteLessonIds": [],
     "glossaryRefs": [
       "unit-economics",
       "cac",
@@ -691,7 +702,12 @@
       "nrr",
       "rule-of-40",
       "burn-multiple"
-    ]
+    ],
+    "practice": {
+      "deliverableId": "math-vc-dossier",
+      "sectionId": "unit-economics",
+      "estimatedMinutes": 45
+    }
   },
   {
     "id": "lmv-returns-waterfall",
@@ -721,7 +737,12 @@
       "tvpi",
       "liquidation-preference",
       "exit-waterfall"
-    ]
+    ],
+    "practice": {
+      "deliverableId": "math-vc-dossier",
+      "sectionId": "returns",
+      "estimatedMinutes": 75
+    }
   },
   {
     "id": "l-career-levels",
@@ -761,10 +782,10 @@
     "slug": "la-carte-de-l-entonnoir",
     "courseId": "c-entretien-analyst",
     "order": 1,
-    "title": "La carte de l'entonnoir",
-    "kicker": "Comprendre le jeu",
+    "title": "Cartographier le processus sans le figer",
+    "kicker": "Entretien Analyst",
     "readMin": 5,
-    "summary": "Les 3-4 tours d'un process analyst et ce que chacun teste vraiment — pour ne plus jamais jouer la mauvaise partition.",
+    "summary": "Comprendre les formats possibles d'un entretien Analyst VC sans transformer une pratique variable en règle universelle.",
     "status": "published",
     "glossaryRefs": [
       "deal-memo",
@@ -776,14 +797,13 @@
     "slug": "la-grille-de-l-investisseur",
     "courseId": "c-entretien-analyst",
     "order": 2,
-    "title": "La grille de l'investisseur",
-    "kicker": "Le socle",
+    "title": "Construire une grille d'investisseur",
+    "kicker": "Critères",
     "readMin": 7,
-    "summary": "Équipe, Marché, Produit, Traction, Moat : la seule grille que tu réutiliseras à chaque question, chaque case, chaque pitch.",
+    "summary": "Transformer équipe, marché, produit, traction et risques en critères explicites, sans prétendre qu'une pondération unique s'applique à tous les fonds.",
     "status": "published",
     "glossaryRefs": [
       "founder-market-fit",
-      "fund-returner",
       "tam-sam-som",
       "why-now",
       "pmf"
@@ -794,10 +814,10 @@
     "slug": "dimensionner-un-marche",
     "courseId": "c-entretien-analyst",
     "order": 3,
-    "title": "Dimensionner un marché (TAM / SAM / SOM)",
-    "kicker": "Compétence testée en direct",
+    "title": "Dimensionner un marché avec hypothèses traçables",
+    "kicker": "Marché",
     "readMin": 8,
-    "summary": "Sache dérouler un market sizing au tableau, en bottom-up, hypothèses annoncées — deux exemples chiffrés à l'appui.",
+    "summary": "Produire un TAM/SAM/SOM défendable comme ordre de grandeur, avec sources, hypothèses et sensibilité plutôt qu'un résultat faussement précis.",
     "status": "published",
     "glossaryRefs": [
       "tam-sam-som",
@@ -810,10 +830,10 @@
     "slug": "lire-une-startup-unit-economics",
     "courseId": "c-entretien-analyst",
     "order": 4,
-    "title": "Lire une startup + unit economics",
-    "kicker": "Les chiffres qui comptent",
+    "title": "Lire une startup avec des métriques contextualisées",
+    "kicker": "Unit economics",
     "readMin": 7,
-    "summary": "Du déclaratif au chiffré : les métriques qui comptent, la barre par stade, et le réflexe croissance + rétention.",
+    "summary": "Analyser ARR, MRR, marge, CAC, LTV, NRR et burn comme questions de qualité économique, non comme seuils universels.",
     "status": "published",
     "glossaryRefs": [
       "nrr",
@@ -832,23 +852,22 @@
     "slug": "les-questions-techniques",
     "courseId": "c-entretien-analyst",
     "order": 5,
-    "title": "Les questions techniques",
-    "kicker": "Les calculs qui tombent",
+    "title": "Répondre aux questions techniques par les hypothèses",
+    "kicker": "Finance VC",
     "readMin": 7,
-    "summary": "Cap table, dilution, returns : pas de gros modèle, mais ces calculs-là tombent. Sache-les de tête.",
+    "summary": "Traiter cap table, dilution, SAFE, retours et reporting comme des calculs d'hypothèses, avec distinction entre niveau société, investissement et fonds.",
     "status": "published",
     "glossaryRefs": [
-      "esop",
       "dilution",
       "moic",
       "irr",
       "dpi",
       "tvpi",
-      "follow-on",
       "liquidation-preference",
       "anti-dilution",
       "pro-rata",
-      "vesting"
+      "vesting",
+      "cap-table"
     ]
   },
   {
@@ -856,10 +875,10 @@
     "slug": "le-deal-memo",
     "courseId": "c-entretien-analyst",
     "order": 6,
-    "title": "Le deal memo",
-    "kicker": "Le document roi",
+    "title": "Écrire un deal memo proportionné aux preuves",
+    "kicker": "Memo",
     "readMin": 8,
-    "summary": "La synthèse écrite d'une reco d'investissement — structure attendue et un exemple modèle entièrement déroulé.",
+    "summary": "Structurer une recommandation courte : thèse, faits, risques, inconnues et prochaines vérifications, sans copier un modèle public comme norme universelle.",
     "status": "published",
     "glossaryRefs": [
       "deal-memo",
@@ -875,10 +894,10 @@
     "slug": "le-case-study",
     "courseId": "c-entretien-analyst",
     "order": 7,
-    "title": "Le case study",
-    "kicker": "L'épreuve reine",
+    "title": "Traiter un case study comme une diligence courte",
+    "kicker": "Case study",
     "readMin": 7,
-    "summary": "Formats, méthode en 5 temps, et l'erreur fatale : ne pas trancher. On embauche des gens qui décident.",
+    "summary": "Aborder le cas écrit ou oral avec une méthode de diligence : cadrage, faits, hypothèses, risques et décision proportionnée.",
     "status": "published",
     "glossaryRefs": [
       "pitch-deck",
@@ -891,10 +910,10 @@
     "slug": "pitch-me-a-company",
     "courseId": "c-entretien-analyst",
     "order": 8,
-    "title": "« Pitch me a company »",
-    "kicker": "La question signature",
+    "title": "Pitcher une société en fonction du fonds",
+    "kicker": "Pitch",
     "readMin": 6,
-    "summary": "Présenter une startup que le fonds devrait financer — l'enjeu est de montrer que tu penses comme un investisseur.",
+    "summary": "Présenter une société avec une thèse claire, des preuves limitées et un lien explicite au mandat du fonds.",
     "status": "published",
     "glossaryRefs": [
       "thesis-driven",
@@ -907,10 +926,10 @@
     "slug": "le-fit-why-vc-why-fund-why-you",
     "courseId": "c-entretien-analyst",
     "order": 9,
-    "title": "Le fit : why VC / why this fund / why you",
-    "kicker": "Convaincre",
+    "title": "Construire un fit professionnel vérifiable",
+    "kicker": "Fit",
     "readMin": 7,
-    "summary": "Le tour qu'on néglige et qui élimine le plus. Réponses-types, framework STAR, et ta thèse perso.",
+    "summary": "Répondre à why VC, why this fund et why you avec des preuves concrètes plutôt qu'une narration générale.",
     "status": "published",
     "glossaryRefs": [
       "thesis-driven"
@@ -921,10 +940,10 @@
     "slug": "tes-questions-a-poser",
     "courseId": "c-entretien-analyst",
     "order": 10,
-    "title": "Tes questions à poser",
-    "kicker": "Bonus",
+    "title": "Poser des questions utiles au recruteur",
+    "kicker": "Questions",
     "readMin": 4,
-    "summary": "Tes questions parlent autant que tes réponses : taillées pour ce fonds, elles révèlent un cerveau d'investisseur.",
+    "summary": "Préparer des questions qui clarifient le rôle, la méthode de décision, l'encadrement et la culture de travail, sans posture tactique inutile.",
     "status": "published",
     "glossaryRefs": [
       "thesis-driven"
@@ -935,10 +954,10 @@
     "slug": "faire-ses-devoirs-sur-le-fonds",
     "courseId": "c-entretien-analyst",
     "order": 11,
-    "title": "Faire ses devoirs sur le fonds",
-    "kicker": "Le différenciateur",
+    "title": "Préparer sa recherche sur le fonds sans surinterpréter",
+    "kicker": "Recherche fonds",
     "readMin": 6,
-    "summary": "Le différenciateur n°1 au recrutement français : arriver avec une analyse de startup que tu as écrite toi-même.",
+    "summary": "Préparer une recherche fonds exploitable : mandat, portefeuille, signaux publics, questions ouvertes et limites des informations disponibles.",
     "status": "published",
     "glossaryRefs": [
       "pitchbook",
@@ -952,10 +971,10 @@
     "slug": "48h-jour-j-suivi",
     "courseId": "c-entretien-analyst",
     "order": 12,
-    "title": "Les 48 h, le jour J, le suivi",
-    "kicker": "Bonus",
+    "title": "Préparer la période autour de l'entretien",
+    "kicker": "Exécution",
     "readMin": 5,
-    "summary": "La logistique qui évite les autogoals : préparation, comportements gagnants le jour J, et le follow-up.",
+    "summary": "Organiser la préparation finale, la prise de notes, le suivi et la confidentialité sans présenter des délais comme des normes universelles.",
     "status": "published",
     "glossaryRefs": [
       "pre-money",
@@ -967,15 +986,16 @@
     "slug": "le-mock-complet",
     "courseId": "c-entretien-analyst",
     "order": 13,
-    "title": "Le mock complet",
-    "kicker": "Le jalon",
+    "title": "Conduire un mock complet et réviser la note",
+    "kicker": "Simulation finale",
     "readMin": 6,
-    "summary": "La répétition générale en 3 manches + la grille d'auto-évaluation. Prêt = tout en vert, chronométré, deux fois.",
+    "summary": "Transformer la simulation finale en livrable local : sources publiques, note courte, oral, feedback et révision, sans publication imposée.",
     "status": "published",
     "glossaryRefs": [
       "pre-money",
       "irr",
-      "tam-sam-som"
+      "tam-sam-som",
+      "deal-memo"
     ]
   },
   {
@@ -1898,9 +1918,9 @@
     "order": 5,
     "title": "TRL, preuve scientifique et propriété intellectuelle",
     "kicker": "Deeptech",
-    "readMin": 0,
+    "readMin": 9,
     "summary": "Qualifier la maturité technologique, la reproductibilité des résultats et la protection de la propriété intellectuelle.",
-    "status": "upcoming",
+    "status": "published",
     "level": "avance",
     "contexts": {
       "sectors": [
@@ -1910,13 +1930,20 @@
     "optional": true,
     "learningOutcomes": [
       "Situer une technologie sur une trajectoire de maturité",
+      "Distinguer résultat, reproductibilité et robustesse, et exiger la preuve correspondante",
+      "Établir la titularité avant d'apprécier la protection",
       "Identifier les principaux risques de propriété intellectuelle"
     ],
     "prerequisiteLessonIds": [
       "l-dd-tech-product"
     ],
     "assessmentId": "analyst-specialty-deeptech",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "technology-readiness-level",
+      "proof-of-concept",
+      "deep-tech-metrics",
+      "dd"
+    ]
   },
   {
     "id": "l-specialty-deeptech-industrialization",
@@ -1944,6 +1971,202 @@
     ],
     "assessmentId": "analyst-specialty-deeptech",
     "glossaryRefs": []
+  },
+  {
+    "id": "ldt-reproductibilite",
+    "slug": "reproductibilite-robustesse-deeptech",
+    "courseId": "c-dt-preuve-scientifique",
+    "order": 1,
+    "title": "Reproductibilité, incertitude et robustesse",
+    "kicker": "Deeptech",
+    "readMin": 4,
+    "summary": "Distinguer les régimes de reproductibilité, documenter l'incertitude et formuler les questions d'expertise avant d'investir.",
+    "status": "published",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "deeptech"
+      ]
+    },
+    "optional": false,
+    "learningOutcomes": [
+      "Distinguer répétabilité de mesure, reproductibilité de mesure et réplicabilité scientifique",
+      "Identifier les artefacts nécessaires pour apprécier un résultat expérimental",
+      "Relier dispersion, incertitude et conditions opératoires à une question d'expertise",
+      "Formuler une limite d'instruction sans statuer sur la validité scientifique"
+    ],
+    "prerequisiteLessonIds": [
+      "l-specialty-deeptech-trl-ip"
+    ],
+    "glossaryRefs": [
+      "repetabilite-mesure",
+      "reproductibilite-mesure",
+      "replicabilite-scientifique",
+      "incertitude-mesure",
+      "technology-readiness-level",
+      "deep-tech-metrics"
+    ]
+  },
+  {
+    "id": "ldt-pilote-preuve",
+    "slug": "pilote-preuve-changement-echelle",
+    "courseId": "c-dt-preuve-scientifique",
+    "order": 2,
+    "title": "Du banc au pilote : ce que le changement d'échelle prouve",
+    "kicker": "Deeptech",
+    "readMin": 4,
+    "summary": "Lire un pilote comme un essai borné : environnement, hypothèse de changement d'échelle, écarts et risque résiduel.",
+    "status": "published",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "deeptech"
+      ]
+    },
+    "optional": false,
+    "learningOutcomes": [
+      "Distinguer preuve de concept, pilote industriel et changement d'échelle",
+      "Préparer les critères d'acceptation d'un essai pilote",
+      "Identifier ce qu'un pilote ne démontre pas sans preuve distincte",
+      "Utiliser RAND comme alerte méthodologique sans généralisation abusive"
+    ],
+    "prerequisiteLessonIds": [
+      "ldt-reproductibilite"
+    ],
+    "glossaryRefs": [
+      "proof-of-concept",
+      "pilote-industriel",
+      "changement-echelle-industriel",
+      "technology-readiness-level",
+      "scalability"
+    ]
+  },
+  {
+    "id": "ldt-titularite-copropriete",
+    "slug": "titularite-copropriete-brevets",
+    "courseId": "c-dt-pi-transfert",
+    "order": 1,
+    "title": "Titularité et copropriété des droits",
+    "kicker": "Deeptech",
+    "readMin": 12,
+    "summary": "Établir qui détient quoi avant d'apprécier la protection : régimes d'attribution, procédure de classement et régime supplétif de la copropriété.",
+    "status": "published",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "deeptech"
+      ]
+    },
+    "optional": false,
+    "learningOutcomes": [
+      "Distinguer la présomption attachée au dépôt de la preuve de la titularité",
+      "Rattacher une invention au régime d'attribution correspondant au statut de son auteur",
+      "Situer les délais de la procédure de classement et l'effet du silence de l'employeur",
+      "Lire une copropriété de brevet en cherchant d'abord le règlement qui y déroge"
+    ],
+    "prerequisiteLessonIds": [
+      "l-specialty-deeptech-trl-ip"
+    ],
+    "glossaryRefs": [
+      "titularite-des-droits",
+      "invention-de-mission",
+      "copropriete-de-brevet"
+    ]
+  },
+  {
+    "id": "ldt-brevet-secret",
+    "slug": "brevet-secret-arbitrage-protection",
+    "courseId": "c-dt-pi-transfert",
+    "order": 2,
+    "title": "Brevet ou secret : instruire l'arbitrage",
+    "kicker": "Deeptech",
+    "readMin": 9,
+    "summary": "Conditions de qualification du secret des affaires, contrepartie de publication du brevet, et ce que chaque voie ouvre ou ferme en contentieux.",
+    "status": "published",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "deeptech"
+      ]
+    },
+    "optional": false,
+    "learningOutcomes": [
+      "Vérifier les trois conditions cumulatives de la protection au titre du secret des affaires",
+      "Situer la contrepartie de publication qu'impose une demande de brevet",
+      "Traiter la rétro-ingénierie comme licite par défaut et en tirer les conséquences d'instruction",
+      "Distinguer ce que chaque voie ouvre réellement en contentieux"
+    ],
+    "prerequisiteLessonIds": [
+      "ldt-titularite-copropriete"
+    ],
+    "glossaryRefs": [
+      "secret-des-affaires",
+      "titularite-des-droits"
+    ]
+  },
+  {
+    "id": "ldt-licence-redevances",
+    "slug": "licence-exploitation-redevances",
+    "courseId": "c-dt-pi-transfert",
+    "order": 3,
+    "title": "Licence d'exploitation et redevances",
+    "kicker": "Deeptech",
+    "readMin": 7,
+    "summary": "Lire un contrat de licence en analyste : périmètre concédé, exigence d'écrit, opposabilité aux tiers et questions qui relèvent de la seule liberté contractuelle.",
+    "status": "published",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "deeptech"
+      ]
+    },
+    "optional": false,
+    "learningOutcomes": [
+      "Reconstituer le périmètre réellement concédé par une licence avant d'en lire les stipulations financières",
+      "Distinguer la validité d'un acte de son opposabilité aux tiers",
+      "Identifier les accords qu'une exclusivité suppose lorsque le titre est en copropriété",
+      "Formuler les questions de redevance comme des points d'instruction et non comme des règles"
+    ],
+    "prerequisiteLessonIds": [
+      "ldt-brevet-secret"
+    ],
+    "glossaryRefs": [
+      "licence-d-exploitation",
+      "inscription-au-registre-national-des-brevets",
+      "copropriete-de-brevet"
+    ]
+  },
+  {
+    "id": "ldt-transfert-recherche-publique",
+    "slug": "transfert-technologie-recherche-publique",
+    "courseId": "c-dt-pi-transfert",
+    "order": 4,
+    "title": "Transfert depuis la recherche publique",
+    "kicker": "Deeptech",
+    "readMin": 14,
+    "summary": "Instruire une société issue d'un laboratoire : titularité publique, autorisations des personnels de recherche, articulation entre publication et dépôt.",
+    "status": "published",
+    "level": "avance",
+    "contexts": {
+      "sectors": [
+        "deeptech"
+      ]
+    },
+    "optional": false,
+    "learningOutcomes": [
+      "Établir la titularité d'une invention réalisée par un agent public et les pièces qui la documentent",
+      "Rattacher chaque fondateur au régime d'autorisation qui le concerne et à son plafond propre",
+      "Comparer la date de première mise à disposition du public à la date de dépôt",
+      "Convertir les points ouverts du transfert en conditions explicites de l'opération"
+    ],
+    "prerequisiteLessonIds": [
+      "ldt-licence-redevances"
+    ],
+    "glossaryRefs": [
+      "invention-d-agent-public",
+      "concours-scientifique",
+      "titularite-des-droits"
+    ]
   },
   {
     "id": "l-specialty-climate-impact",
@@ -2208,13 +2431,16 @@
       "Calculer le runway à partir de flux variables et d’un niveau minimal de trésorerie",
       "Comparer des scénarios de financement en intégrant délais d’encaissement, jalons et marge de sécurité"
     ],
-    "prerequisiteLessonIds": [
-      "lmv-unit-economics"
-    ],
+    "prerequisiteLessonIds": [],
     "glossaryRefs": [
       "runway",
       "burn-rate"
-    ]
+    ],
+    "practice": {
+      "deliverableId": "math-vc-dossier",
+      "sectionId": "cash-flow",
+      "estimatedMinutes": 60
+    }
   },
   {
     "id": "lmv-valuation-economic-rights",
@@ -2235,14 +2461,19 @@
       "Évaluer la pertinence d’un tour récent comme point de calibration à une date ultérieure"
     ],
     "prerequisiteLessonIds": [
-      "lmv-dilution-cap-table"
+      "lmv-pre-post-ownership"
     ],
     "glossaryRefs": [
       "valuation",
       "liquidation-preference",
       "exit-waterfall",
       "dilution"
-    ]
+    ],
+    "practice": {
+      "deliverableId": "math-vc-dossier",
+      "sectionId": "economic-rights",
+      "estimatedMinutes": 60
+    }
   },
   {
     "id": "l-dd-financial",
@@ -3190,5 +3421,282 @@
       "tag-along",
       "board-seat"
     ]
+  },
+  {
+    "id": "lsa-decision-lever",
+    "slug": "serie-a-decider-de-lever-maintenant",
+    "courseId": "c-serie-a-preparation",
+    "order": 1,
+    "title": "Décider de lever maintenant",
+    "kicker": "Readiness",
+    "readMin": 3,
+    "summary": "Évaluer si la société doit lancer une Série A, différer le tour ou retenir une autre option de financement.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Distinguer stade réel, besoin de financement et calendrier de marché.",
+      "Formuler une décision de levée assortie de conditions de réexamen.",
+      "Repérer les signaux qui justifient de différer le processus."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "decision",
+      "estimatedMinutes": 42
+    },
+    "glossaryRefs": [
+      "runway",
+      "burn-rate",
+      "term-sheet"
+    ]
+  },
+  {
+    "id": "lsa-registre-preuves",
+    "slug": "serie-a-construire-le-registre-des-preuves",
+    "courseId": "c-serie-a-preparation",
+    "order": 2,
+    "title": "Construire le registre des preuves",
+    "kicker": "Métriques",
+    "readMin": 2,
+    "summary": "Transformer les métriques utilisées dans le deck en preuves datées, traçables et discutables.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Définir les métriques critiques avec source, période et responsable.",
+      "Séparer faits vérifiés, interprétations et données manquantes.",
+      "Préparer une diligence sans surcharger le dossier."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "preuves",
+      "estimatedMinutes": 62
+    },
+    "glossaryRefs": [
+      "data-room",
+      "runway"
+    ]
+  },
+  {
+    "id": "lsa-plan-financement",
+    "slug": "serie-a-relier-montant-runway-et-jalons",
+    "courseId": "c-serie-a-preparation",
+    "order": 3,
+    "title": "Relier montant, runway et jalons",
+    "kicker": "Financement",
+    "readMin": 2,
+    "summary": "Construire un besoin de financement relié à la trésorerie, aux emplois des fonds et aux jalons opérationnels.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Relier montant levé, runway et jalons vérifiables.",
+      "Comparer scénario central, scénario défavorable et retard de closing.",
+      "Justifier les emplois des fonds sans liste décorative."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "financement",
+      "estimatedMinutes": 52
+    },
+    "glossaryRefs": [
+      "runway",
+      "burn-rate",
+      "pre-money"
+    ]
+  },
+  {
+    "id": "lsa-process-dataroom",
+    "slug": "serie-a-organiser-processus-et-data-room",
+    "courseId": "c-serie-a-preparation",
+    "order": 4,
+    "title": "Organiser le processus et la data room",
+    "kicker": "Diligence",
+    "readMin": 2,
+    "summary": "Préparer une séquence investisseurs cohérente avec le mandat visé, le deck, le modèle et la data room.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Qualifier les investisseurs par mandat et capacité de lead.",
+      "Aligner deck, modèle, preuves et data room.",
+      "Organiser la divulgation progressive sans créer d'incohérence."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "process",
+      "estimatedMinutes": 52
+    },
+    "glossaryRefs": [
+      "data-room",
+      "term-sheet"
+    ]
+  },
+  {
+    "id": "lsa-modeliser-transaction",
+    "slug": "serie-a-modeliser-transaction-cap-table",
+    "courseId": "c-serie-a-preparation",
+    "order": 5,
+    "title": "Modéliser la transaction et la cap table",
+    "kicker": "Capital",
+    "readMin": 2,
+    "summary": "Simuler primaire, secondaire, instruments convertibles, pool d'options, dilution et préférences de liquidation.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Construire une cap table fully diluted avant et après le tour.",
+      "Comparer plusieurs offres avec leurs effets de dilution et de waterfall.",
+      "Identifier les clauses dont l'effet économique dépend du scénario de sortie."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "transaction",
+      "estimatedMinutes": 67
+    },
+    "glossaryRefs": [
+      "cap-table",
+      "dilution",
+      "esop",
+      "liquidation-preference",
+      "waterfall"
+    ]
+  },
+  {
+    "id": "lsa-termes-gouvernance",
+    "slug": "serie-a-termes-economiques-gouvernance",
+    "courseId": "c-serie-a-preparation",
+    "order": 6,
+    "title": "Lire les clauses économiques et de gouvernance",
+    "kicker": "Term sheet",
+    "readMin": 3,
+    "summary": "Classer les clauses de term sheet selon leur objectif, leur effet et leur niveau de validation juridique requis.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Distinguer droits économiques, droits de contrôle et clauses de liquidité.",
+      "Relier chaque clause à son effet pratique sur la société et les fondateurs.",
+      "Identifier les points à valider avec le conseil juridique."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "clauses",
+      "estimatedMinutes": 47
+    },
+    "glossaryRefs": [
+      "term-sheet",
+      "liquidation-preference",
+      "anti-dilution",
+      "pro-rata",
+      "drag-along",
+      "vesting",
+      "board-seat"
+    ]
+  },
+  {
+    "id": "lsa-negociation-dossier",
+    "slug": "serie-a-negocier-sur-dossier",
+    "courseId": "c-serie-a-preparation",
+    "order": 7,
+    "title": "Négocier sur dossier",
+    "kicker": "Négociation",
+    "readMin": 2,
+    "summary": "Préparer une négociation structurée par priorités, alternatives, concessions et limites documentées.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Traduire le dossier en priorités de négociation.",
+      "Préparer des concessions par paquets cohérents.",
+      "Consigner les arbitrages sans dégrader la relation."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "negociation",
+      "estimatedMinutes": 62
+    },
+    "glossaryRefs": [
+      "term-sheet",
+      "pro-rata",
+      "vesting"
+    ]
+  },
+  {
+    "id": "lsa-closing-board",
+    "slug": "serie-a-closing-premier-board",
+    "courseId": "c-serie-a-preparation",
+    "order": 8,
+    "title": "Clore le tour et préparer le premier board",
+    "kicker": "Post-closing",
+    "readMin": 2,
+    "summary": "Transformer la négociation en closing contrôlé, puis en gouvernance opérationnelle dès le premier board.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Identifier les conditions préalables au closing.",
+      "Préparer la gouvernance et le reporting post-tour.",
+      "Réviser le dossier après retour de pairs ou de praticiens."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "closing",
+      "estimatedMinutes": 52
+    },
+    "glossaryRefs": [
+      "board-seat",
+      "data-room",
+      "term-sheet"
+    ]
+  },
+  {
+    "id": "lsa-branche-sectorielle",
+    "slug": "serie-a-adapter-le-dossier-au-modele-economique",
+    "courseId": "c-serie-a-preparation",
+    "order": 9,
+    "title": "Adapter le dossier au modèle économique",
+    "kicker": "Approfondissement",
+    "readMin": 2,
+    "summary": "Adapter les preuves attendues à un modèle SaaS, marketplace, deeptech, industriel ou régulé.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Identifier les preuves adaptées au modèle économique.",
+      "Éviter la transposition mécanique de métriques SaaS.",
+      "Documenter les limites des comparaisons sectorielles."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "branche-sectorielle",
+      "estimatedMinutes": 52
+    },
+    "glossaryRefs": [
+      "runway",
+      "data-room"
+    ],
+    "optional": true
+  },
+  {
+    "id": "lsa-tour-complexe",
+    "slug": "serie-a-comparer-un-tour-complexe",
+    "courseId": "c-serie-a-preparation",
+    "order": 10,
+    "title": "Comparer un tour complexe",
+    "kicker": "Approfondissement",
+    "readMin": 2,
+    "summary": "Comparer une offre simple à une offre intégrant secondaire, tranches, venture debt ou droits renforcés.",
+    "status": "published",
+    "level": "avance",
+    "learningOutcomes": [
+      "Décomposer une offre complexe en effets économiques et de contrôle.",
+      "Identifier les points qui exigent une validation juridique ou financière.",
+      "Comparer une offre apparemment meilleure à une offre plus simple."
+    ],
+    "practice": {
+      "deliverableId": "todo-attentes-serie-a",
+      "sectionId": "tour-complexe",
+      "estimatedMinutes": 52
+    },
+    "glossaryRefs": [
+      "liquidation-preference",
+      "anti-dilution",
+      "pro-rata",
+      "drag-along",
+      "cap-table"
+    ],
+    "optional": true
   }
 ]

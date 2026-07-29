@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Compass as CompassIcon, LocateFixed, Minus, Plus } from 'lucide-react';
 import { IKIGAI } from '@/content/ikigai';
 import { PARCOURS, FAMILY_META, lessonIdsForParcours, type Parcours } from '@/content/parcours';
+import { otherParcoursId, relationsForParcours } from '@/content/parcoursRelations';
 import { LEVEL_LABEL } from '@/content/labels';
 import { useTheme } from '@/context/ThemeContext';
 import { useUserData } from '@/context/UserDataContext';
@@ -11,6 +12,7 @@ import { MapCartouche, SeaMonster, NightSkyBackdrop } from '@/components/ornamen
 import { legibleAccent } from '@/lib/ikigaiColor';
 import { cn } from '@/lib/utils';
 import { formatMinutes, parcoursTimeSummary } from '@/content/learningTime';
+import type { ParcoursRelation } from '@/content/parcoursTypes';
 import type { Level } from '@/content/types';
 
 /**
@@ -19,10 +21,10 @@ import type { Level } from '@/content/types';
  * The levelled parcours fan out on concentric arcs (the most welcoming territory
  * — débutant — on the outside; the citadel of fund economics at the heart). The
  * cross-cutting "tous niveaux" parcours sit apart, as outlying islands. Each port
- * is a wax seal (the parcours' kanji + family accent); hovering or focusing one
- * reveals its destination both under the seal and in the inset cartouche, and
- * clicking sets sail for it. With 20+ ports, names stay hidden until hover so the
- * chart reads clean — every parcours is also listed in the index below.
+ * is a wax seal (the parcours' kanji + family accent); hovering, focusing, or
+ * selecting one by touch reveals its destination and audited relations. Dotted coastal
+ * routes connect complementary parcours at the same level; arrowed routes show a recommended
+ * progression. With 20+ ports, both names and routes stay hidden until activation.
  */
 
 // — Map canvas geometry —
@@ -90,6 +92,42 @@ function clampView(scale: number, tx: number, ty: number): View {
 
 type Port = Parcours & { x: number; y: number; angle: number | null; r: number | null; island: boolean; pct: number; order: number; accent: string; kanji: string };
 
+function insetSegment(source: Port, target: Port, inset = 30) {
+  const dx = target.x - source.x;
+  const dy = target.y - source.y;
+  const distance = Math.hypot(dx, dy) || 1;
+  const ux = dx / distance;
+  const uy = dy / distance;
+  return {
+    start: { x: source.x + ux * inset, y: source.y + uy * inset },
+    end: { x: target.x - ux * inset, y: target.y - uy * inset },
+  };
+}
+
+function relationPath(relation: ParcoursRelation, source: Port, target: Port): string {
+  if (
+    relation.kind === 'peer'
+    && source.r !== null
+    && target.r === source.r
+    && source.angle !== null
+    && target.angle !== null
+  ) {
+    const from = Math.min(source.angle, target.angle);
+    const to = Math.max(source.angle, target.angle);
+    const angleInset = (30 / source.r) * (180 / Math.PI);
+    return arcPath(source.r, from + angleInset, to - angleInset);
+  }
+
+  const { start, end } = insetSegment(source, target);
+  const midpoint = { x: (start.x + end.x) / 2, y: (start.y + end.y) / 2 };
+  const bend = relation.kind === 'progression' ? 0.28 : 0.18;
+  const control = {
+    x: midpoint.x + (CX - midpoint.x) * bend,
+    y: midpoint.y + (CY - midpoint.y) * bend,
+  };
+  return `M ${start.x} ${start.y} Q ${control.x} ${control.y} ${end.x} ${end.y}`;
+}
+
 function atlasTimeLabel(parcours: Parcours): string {
   return parcours.time.source === 'derived'
     ? `${formatMinutes(parcoursTimeSummary(parcours).readingMinutes)} de lecture`
@@ -106,8 +144,22 @@ export function PathAtlas({
   const navigate = useNavigate();
   const { theme } = useTheme();
   const { progress } = useUserData();
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [focusedId, setFocusedId] = useState<string | null>(null);
+  const [touchedId, setTouchedId] = useState<string | null>(null);
+  const touchActivation = useRef<string | null>(null);
+  const relationDescriptionId = useId();
+  const progressionMarkerId = `path-atlas-progression-arrow-${relationDescriptionId.replace(/:/g, '')}`;
+  const activeId = collapsed ? null : hoveredId ?? focusedId ?? touchedId;
   const dark = theme === 'dark';
+
+  useEffect(() => {
+    if (!collapsed) return;
+    setHoveredId(null);
+    setFocusedId(null);
+    setTouchedId(null);
+    touchActivation.current = null;
+  }, [collapsed]);
 
   const ports = useMemo<Port[]>(() => {
     const orderOf = new Map(PARCOURS.map((p, i) => [p.id, i] as const));
@@ -145,6 +197,15 @@ export function PathAtlas({
   }, [progress]);
 
   const active = activeId ? ports.find((p) => p.id === activeId) ?? null : null;
+  const portById = useMemo(() => new Map(ports.map((port) => [port.id, port])), [ports]);
+  const activeRelations = useMemo(
+    () => (activeId ? relationsForParcours(activeId) : []),
+    [activeId],
+  );
+  const relatedIds = useMemo(
+    () => new Set(activeId ? activeRelations.map((relation) => otherParcoursId(relation, activeId)) : []),
+    [activeId, activeRelations],
+  );
   const compassRingStyles = useMemo(() => COMPASS_DIMENSIONS.map((id) => compassRingStyle(id, dark)), [dark]);
 
   // — Pan / zoom: make the chart as grabbable & navigable as the reference atlas —
@@ -267,7 +328,7 @@ export function PathAtlas({
     <div className={className}>
       <div
         className={cn(
-          "map-paper grain relative isolate flex items-center justify-center overflow-hidden transition-[max-height,border-color,opacity] duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "map-paper grain relative isolate flex flex-col items-stretch justify-start overflow-hidden transition-[max-height,border-color,opacity] duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] sm:block",
           collapsed
             ? "max-h-0 border-transparent opacity-0 pointer-events-none"
             : "max-h-[820px] rounded-2xl border border-outline-variant bg-surface-container-low/70 opacity-100"
@@ -288,6 +349,20 @@ export function PathAtlas({
           onPointerCancel={endPointer}
         >
           <title>Carte des parcours — glissez pour déplacer, molette ou +/− pour zoomer, cliquez une terre pour explorer</title>
+          <defs>
+            <marker
+              id={progressionMarkerId}
+              viewBox="0 0 8 8"
+              refX="7"
+              refY="4"
+              markerWidth="8"
+              markerHeight="8"
+              orient="auto-start-reverse"
+              markerUnits="userSpaceOnUse"
+            >
+              <path d="M 0 0 L 8 4 L 0 8 Z" fill="var(--secondary)" />
+            </marker>
+          </defs>
 
           <g
             transform={`translate(${effectiveView.tx} ${effectiveView.ty}) scale(${effectiveView.scale})`}
@@ -332,11 +407,45 @@ export function PathAtlas({
 
               {/* — island outlines for the "tous niveaux" ports — */}
               {ports.filter((p) => p.island).map((p) => (
-                <g key={`isle-${p.id}`} opacity={active && active.id !== p.id ? 0.32 : 1} className="transition-opacity duration-300">
+                <g key={`isle-${p.id}`} opacity={active && active.id !== p.id && !relatedIds.has(p.id) ? 0.32 : 1} className="transition-opacity duration-300">
                   <circle cx={p.x} cy={p.y} r="40" fill="none" stroke="var(--outline)" strokeWidth="0.8" strokeDasharray="2 5" opacity="0.4" />
                   <circle cx={p.x} cy={p.y} r="52" fill="none" stroke="var(--outline)" strokeWidth="0.5" strokeDasharray="1 9" opacity="0.25" />
                 </g>
               ))}
+
+              {/* Audited routes are mounted only for the port active by hover, focus, or touch. */}
+              {active && activeRelations.length > 0 && (
+                <g
+                  data-testid="path-atlas-relations"
+                  aria-hidden="true"
+                  pointerEvents="none"
+                >
+                  {activeRelations.map((relation) => {
+                    const source = portById.get(relation.sourceId);
+                    const target = portById.get(relation.targetId);
+                    if (!source || !target) return null;
+                    const progression = relation.kind === 'progression';
+                    return (
+                      <path
+                        key={`${relation.kind}:${relation.sourceId}:${relation.targetId}`}
+                        data-parcours-relation="true"
+                        data-source-id={relation.sourceId}
+                        data-target-id={relation.targetId}
+                        data-relation-kind={relation.kind}
+                        d={relationPath(relation, source, target)}
+                        fill="none"
+                        stroke={progression ? 'var(--secondary)' : 'var(--primary)'}
+                        strokeWidth={progression ? 2.1 : 1.6}
+                        strokeDasharray={progression ? undefined : '2 7'}
+                        strokeLinecap="round"
+                        markerEnd={progression ? `url(#${progressionMarkerId})` : undefined}
+                        opacity={progression ? 0.9 : 0.82}
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    );
+                  })}
+                </g>
+              )}
 
               {/* — cartouche (correctly sized, anchored at the top) — */}
               <g transform={`translate(${CX - 130}, 6)`}>
@@ -345,7 +454,11 @@ export function PathAtlas({
 
               {/* — ports of call — */}
               {ports.map((p) => {
-                const dim = active && active.id !== p.id;
+                const relation = activeRelations.find((candidate) => (
+                  activeId ? otherParcoursId(candidate, activeId) === p.id : false
+                ));
+                const isRelated = Boolean(relation);
+                const dim = active && active.id !== p.id && !isRelated;
                 const isActive = active?.id === p.id;
                 const sealR = isActive ? 22 : 18;
                 // label placement
@@ -355,11 +468,26 @@ export function PathAtlas({
                   ly = p.y + 64;
                   anchor = 'middle';
                 } else {
-                  const dist = p.r > 320 ? 30 : 27;
-                  lx = px(p.angle, p.r + dist);
-                  ly = py(p.angle, p.r + dist);
-                  const cosA = Math.cos(rad(p.angle));
-                  anchor = cosA > 0.34 ? 'end' : cosA < -0.34 ? 'start' : 'middle';
+                  const angleRad = rad(p.angle);
+                  const cosA = Math.cos(angleRad);
+                  const sinA = Math.sin(angleRad);
+                  // Two stacked lines sit outside the active ring. Above a seal,
+                  // the second line moves back toward its centre, hence the larger clearance.
+                  const verticalOffset = sinA < 0 ? sealR + 31 : sealR + 22;
+                  if (cosA > 0.34) {
+                    lx = p.x - sealR - 10;
+                    ly = p.y + (sinA >= 0 ? verticalOffset : -verticalOffset);
+                    anchor = 'end';
+                  } else if (cosA < -0.34) {
+                    lx = p.x + sealR + 10;
+                    ly = p.y + (sinA >= 0 ? verticalOffset : -verticalOffset);
+                    anchor = 'start';
+                  } else {
+                    const radialOffset = verticalOffset / Math.abs(sinA);
+                    lx = px(p.angle, p.r + radialOffset);
+                    ly = py(p.angle, p.r + radialOffset);
+                    anchor = 'middle';
+                  }
                 }
                 const ringR = sealR + 5;
                 const circ = 2 * Math.PI * ringR;
@@ -369,14 +497,24 @@ export function PathAtlas({
                     role="link"
                     tabIndex={0}
                     aria-label={`${p.title} — ${FAMILY_META[p.family].label}, ${LEVEL_LABEL[p.level]}, ${atlasTimeLabel(p)}`}
+                    aria-describedby={isActive && activeRelations.length > 0 ? relationDescriptionId : undefined}
                     className="cursor-pointer outline-none transition-opacity duration-300"
                     style={{ opacity: dim ? 0.26 : 1 }}
-                    onMouseEnter={() => setActiveId(p.id)}
-                    onMouseLeave={() => setActiveId(null)}
-                    onFocus={() => setActiveId(p.id)}
-                    onBlur={() => setActiveId(null)}
+                    onMouseEnter={() => setHoveredId(p.id)}
+                    onMouseLeave={() => setHoveredId((current) => (current === p.id ? null : current))}
+                    onFocus={() => setFocusedId(p.id)}
+                    onBlur={() => setFocusedId((current) => (current === p.id ? null : current))}
+                    onPointerDown={(event) => {
+                      touchActivation.current = event.pointerType === 'touch' ? p.id : null;
+                    }}
                     onClick={() => {
+                      const isTouchActivation = touchActivation.current === p.id;
+                      touchActivation.current = null;
                       if (dragged.current || collapsed) return; // ignore the click that ends a pan or when collapsed
+                      if (isTouchActivation && touchedId !== p.id) {
+                        setTouchedId(p.id);
+                        return;
+                      }
                       navigate(`/parcours/${p.slug}`);
                     }}
                     onKeyDown={(e) => {
@@ -391,6 +529,19 @@ export function PathAtlas({
                     <circle cx={p.x} cy={p.y} r={sealR + 8} fill="var(--surface-container-lowest)" opacity="0.94" />
                     {p.pct > 0 && (
                       <circle cx={p.x} cy={p.y} r={ringR} fill="none" stroke={p.accent} strokeWidth="2" strokeLinecap="round" strokeDasharray={circ} strokeDashoffset={circ - (p.pct / 100) * circ} transform={`rotate(-90 ${p.x} ${p.y})`} opacity="0.85" />
+                    )}
+                    {isRelated && (
+                      <circle
+                        cx={p.x}
+                        cy={p.y}
+                        r={sealR + 8}
+                        fill="none"
+                        stroke={relation?.kind === 'progression' ? 'var(--secondary)' : 'var(--primary)'}
+                        strokeWidth="1.2"
+                        strokeDasharray={relation?.kind === 'peer' ? '2 4' : undefined}
+                        opacity="0.72"
+                        vectorEffect="non-scaling-stroke"
+                      />
                     )}
                     <circle cx={p.x} cy={p.y} r={sealR} fill={`color-mix(in srgb, ${p.accent} 16%, var(--surface-container-lowest))`} stroke={p.accent} strokeWidth={isActive ? 2 : 1.3} className="transition-all duration-300" />
                     {isActive && (
@@ -430,14 +581,14 @@ export function PathAtlas({
               onClick={(event) => {
                 event.stopPropagation();
                 if (!collapsed) {
-                  navigate('/onboarding');
+                  navigate('/ikigai');
                 }
               }}
               onKeyDown={(event) => {
                 if (event.key !== 'Enter' && event.key !== ' ') return;
                 event.preventDefault();
                 if (!collapsed) {
-                  navigate('/onboarding');
+                  navigate('/ikigai');
                 }
               }}
             >
@@ -497,8 +648,11 @@ export function PathAtlas({
         </div>
 
         {/* — inset cartouche (reads the active port) — */}
-        <div className={cn("pointer-events-none absolute bottom-4 left-4 right-4 sm:bottom-auto sm:left-auto sm:top-4 sm:max-w-[18rem] transition-opacity duration-300", collapsed && "opacity-0 pointer-events-none")}>
-          <div className="rounded-xl border border-outline-variant bg-surface-container-lowest/90 px-4 py-3 shadow-editorial-sm backdrop-blur-sm transition-all duration-300">
+        <div className={cn("pointer-events-none relative z-10 mx-4 mb-4 transition-opacity duration-300 sm:absolute sm:bottom-4 sm:left-auto sm:right-4 sm:mx-0 sm:mb-0 sm:max-w-[18rem]", collapsed && "opacity-0 pointer-events-none")}>
+          <div
+            id={active && activeRelations.length > 0 ? relationDescriptionId : undefined}
+            className="rounded-xl border border-outline-variant bg-surface-container-lowest/90 px-4 py-3 shadow-editorial-sm backdrop-blur-sm transition-all duration-300"
+          >
             {active ? (
               <>
                 <div className="flex items-center gap-2">
@@ -507,15 +661,38 @@ export function PathAtlas({
                 </div>
                 <p className="mt-1.5 font-headline text-headline-sm font-semibold leading-tight">{active.title}</p>
                 <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-surface-variant">{active.hook}</p>
-                <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-[color:var(--primary)]">Cliquer pour mettre le cap <ArrowRight size={13} /></p>
+                {activeRelations.length > 0 && (
+                  <ul className="mt-2 space-y-1 border-t border-outline-variant/70 pt-2 text-[0.6875rem] leading-snug text-surface-variant">
+                    {activeRelations.map((relation) => {
+                      const related = portById.get(otherParcoursId(relation, active.id));
+                      if (!related) return null;
+                      const label = relation.kind === 'peer'
+                        ? 'Même niveau'
+                        : relation.sourceId === active.id ? 'Prépare la suite' : 'Socle conseillé';
+                      return (
+                        <li key={`${relation.kind}:${relation.sourceId}:${relation.targetId}`} className="flex items-start gap-2" title={relation.rationale}>
+                          <span
+                            aria-hidden="true"
+                            className={cn('mt-[0.42rem] h-0 w-4 shrink-0 border-t', relation.kind === 'peer' && 'border-dashed')}
+                            style={{ borderColor: relation.kind === 'progression' ? 'var(--secondary)' : 'var(--primary)' }}
+                          />
+                          <span><strong className="font-medium text-foreground">{label} :</strong> {related.title}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+                <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-[color:var(--primary)]">
+                  {touchedId === active.id ? 'Appuyer de nouveau pour ouvrir' : 'Activer pour ouvrir le parcours'} <ArrowRight size={13} />
+                </p>
               </>
             ) : (
               <>
                 <p className="inline-flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-surface-variant">
                   <CompassIcon size={13} className="text-[color:var(--primary)]" /> Tabula Ventura
                 </p>
-                <p className="mt-1.5 font-headline text-headline-sm font-semibold leading-tight">Survolez un parcours pour le découvrir</p>
-                <p className="mt-1 text-xs leading-relaxed text-surface-variant">Les parcours, du rivage des débutants jusqu’à la haute citadelle des fonds — et les parcours « tous niveaux » en îles. Survolez un sceau pour révéler sa destination ; cliquez pour mettre le cap. Tout reste librement explorable.</p>
+                <p className="mt-1.5 font-headline text-headline-sm font-semibold leading-tight">Pointez un parcours pour voir ses relations</p>
+                <p className="mt-1 text-xs leading-relaxed text-surface-variant">Les parcours sont disposés du rivage des débutants jusqu’à la haute citadelle des fonds, avec les parcours « tous niveaux » en îles. Pointez un sceau ou placez-y le focus pour afficher sa destination et ses relations ; sur écran tactile, un premier appui les révèle et le suivant ouvre le parcours. La navigation reste libre.</p>
               </>
             )}
           </div>
@@ -538,8 +715,22 @@ export function PathAtlas({
             <Link
               key={p.id}
               to={`/parcours/${p.slug}`}
-              onMouseEnter={() => setActiveId(p.id)}
-              onMouseLeave={() => setActiveId(null)}
+              aria-describedby={activeId === p.id && activeRelations.length > 0 ? relationDescriptionId : undefined}
+              onMouseEnter={() => setHoveredId(p.id)}
+              onMouseLeave={() => setHoveredId((current) => (current === p.id ? null : current))}
+              onFocus={() => setFocusedId(p.id)}
+              onBlur={() => setFocusedId((current) => (current === p.id ? null : current))}
+              onPointerDown={(event) => {
+                touchActivation.current = event.pointerType === 'touch' ? p.id : null;
+              }}
+              onClick={(event) => {
+                const isTouchActivation = touchActivation.current === p.id;
+                touchActivation.current = null;
+                if (isTouchActivation && touchedId !== p.id) {
+                  event.preventDefault();
+                  setTouchedId(p.id);
+                }
+              }}
               className="group inline-flex items-center gap-1.5 rounded-full border border-outline-variant bg-surface-container-low px-3 py-1.5 text-xs font-medium text-surface-variant transition-colors hover:text-foreground"
               style={activeId === p.id ? { borderColor: `color-mix(in srgb, ${accent} 55%, transparent)`, color: 'var(--on-surface)' } : undefined}
             >

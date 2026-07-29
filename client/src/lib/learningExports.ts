@@ -1,4 +1,6 @@
 import type { Deliverable, DeliverableCriterion } from '@/content/types';
+import type { TimeBudget } from '@/content/parcoursTypes';
+import { selectDeliverableComponents, selectDeliverableCriteria, selectDeliverableTemplateSections } from '@/content/deliverables';
 
 function criterionId(criterion: DeliverableCriterion, index: number): string {
   return criterion.id ?? `criterion-${index + 1}`;
@@ -8,11 +10,13 @@ export function buildWorksheetMarkdown(
   deliverable: Deliverable,
   note: string,
   externalFileProduced: boolean,
+  budget?: TimeBudget,
 ): string {
-  const sections = deliverable.template.map((section, index) => (
+  const requiredComponents = selectDeliverableComponents(deliverable, budget);
+  const sections = selectDeliverableTemplateSections(deliverable, budget).map((section, index) => (
     `## ${index + 1}. ${section.heading}\n\n${section.prompt}\n\n### Travail\n\n`
   ));
-  const components = (deliverable.components ?? []).map((component) => (
+  const components = requiredComponents.map((component) => (
     `## ${component.title}\n\n${component.requirements.map((requirement) => `- [ ] ${requirement}`).join('\n')}\n`
   ));
   return [
@@ -35,6 +39,7 @@ export function buildReviewMarkdown(
   deliverable: Deliverable,
   ratings: Record<string, string>,
   audience: 'self' | 'external',
+  budget?: TimeBudget,
 ): string {
   const levels = Object.fromEntries((deliverable.rubricLevels ?? []).map((level) => [level.id, level.label]));
   const title = audience === 'self' ? 'Autoévaluation' : 'Grille de revue externe';
@@ -47,7 +52,7 @@ export function buildReviewMarkdown(
     '',
     introduction,
     '',
-    ...(deliverable.rubric ?? []).flatMap((criterion, index) => {
+    ...selectDeliverableCriteria(deliverable, budget).flatMap((criterion, index) => {
       const id = criterionId(criterion, index);
       return [
         `## ${criterion.criterion}`,

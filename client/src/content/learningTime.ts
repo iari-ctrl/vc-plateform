@@ -4,6 +4,7 @@ import { deliverableById } from './deliverables';
 import { publicLessonById, publishedLessonsForCourse } from './lessons';
 import { resolveStep } from './parcours';
 import { caseById } from './caseStudies';
+import { SIMULATORS } from './simulators';
 
 export interface ParcoursTimeSummary {
   readingMinutes: number;
@@ -18,10 +19,6 @@ export interface ParcoursTimeSummary {
 export function courseReadingMinutes(course: Course): number {
   if (course.durationSource !== 'lesson-read-minutes') return course.durationMin;
   return publishedLessonsForCourse(course.id).reduce((sum, lesson) => sum + lesson.readMin, 0);
-}
-
-function unique<T>(values: T[]): T[] {
-  return [...new Set(values)];
 }
 
 export function parcoursTimeSummary(parcours: Parcours): ParcoursTimeSummary {
@@ -39,22 +36,63 @@ export function parcoursTimeSummary(parcours: Parcours): ParcoursTimeSummary {
     };
   }
 
-  const lessonIds = unique(parcours.steps.flatMap((step) => {
+  const requiredLessonIds = new Set<string>();
+  const optionalLessonIds = new Set<string>();
+  for (const step of parcours.steps) {
     const resolved = resolveStep(step);
-    return resolved.lessonIds ?? (resolved.lessonId ? [resolved.lessonId] : []);
-  }));
-  const lessons = lessonIds.map(publicLessonById).filter((lesson): lesson is NonNullable<typeof lesson> => Boolean(lesson));
-  const readingMinutes = lessons.reduce((sum, lesson) => sum + lesson.readMin, 0);
-  const guidedPracticeMinutes = lessons.reduce((sum, lesson) => sum + (lesson.practice?.estimatedMinutes ?? 0), 0);
+    const ids = resolved.lessonIds ?? (resolved.lessonId ? [resolved.lessonId] : []);
+    const isOptional = step.type === 'bonus' || step.type === 'respiration';
+    for (const id of ids) {
+      if (isOptional) {
+        if (!requiredLessonIds.has(id)) optionalLessonIds.add(id);
+      } else {
+        requiredLessonIds.add(id);
+        optionalLessonIds.delete(id);
+      }
+    }
+  }
+  const requiredLessons = [...requiredLessonIds]
+    .map(publicLessonById)
+    .filter((lesson): lesson is NonNullable<typeof lesson> => Boolean(lesson));
+  const optionalLessons = [...optionalLessonIds]
+    .map(publicLessonById)
+    .filter((lesson): lesson is NonNullable<typeof lesson> => Boolean(lesson));
+  const parcoursDeliverableIds = new Set(parcours.steps
+    .filter((step) => step.ref.kind === 'deliverable' || step.ref.kind === 'milestone')
+    .map((step) => step.ref.id));
+  const practiceMinutesInParcours = (lesson: NonNullable<ReturnType<typeof publicLessonById>>) => (
+    lesson.practice && parcoursDeliverableIds.has(lesson.practice.deliverableId)
+      ? lesson.practice.estimatedMinutes
+      : 0
+  );
+  let readingMinutes = requiredLessons.reduce((sum, lesson) => sum + lesson.readMin, 0);
+  const guidedPracticeMinutes = requiredLessons.reduce((sum, lesson) => sum + practiceMinutesInParcours(lesson), 0);
 
   const seenDeliverables = new Set<string>();
   let consolidationMinutes = 0;
   let finalMinutes = 0;
-  let optionalMinutes = 0;
+  let optionalMinutes = optionalLessons.reduce((sum, lesson) => (
+    sum + lesson.readMin + (lesson.practice?.estimatedMinutes ?? 0)
+  ), 0);
 
   for (const step of parcours.steps) {
-    if (step.ref.kind === 'case' && step.type === 'bonus') {
-      optionalMinutes += caseById(step.ref.id)?.estimatedWorkMinutes ?? 0;
+    if (step.ref.kind === 'case') {
+      const caseStudy = caseById(step.ref.id);
+      const caseMinutes = (caseStudy?.readMin ?? 0) + (caseStudy?.estimatedWorkMinutes ?? 0);
+      if (step.type === 'bonus' || step.type === 'respiration') {
+        optionalMinutes += caseMinutes;
+      } else {
+        consolidationMinutes += caseMinutes;
+      }
+      continue;
+    }
+    if (step.ref.kind === 'simulator') {
+      const simulatorMinutes = SIMULATORS.find((simulator) => simulator.id === step.ref.id)?.estimatedWorkMinutes ?? 0;
+      if (step.type === 'bonus' || step.type === 'respiration') {
+        optionalMinutes += simulatorMinutes;
+      } else {
+        consolidationMinutes += simulatorMinutes;
+      }
       continue;
     }
     if (step.ref.kind !== 'deliverable' && step.ref.kind !== 'milestone') continue;
@@ -62,14 +100,14 @@ export function parcoursTimeSummary(parcours: Parcours): ParcoursTimeSummary {
     seenDeliverables.add(step.ref.id);
     const deliverable = deliverableById(step.ref.id);
     if (!deliverable) continue;
-    const minutes = deliverable.estimatedWorkMinutes ?? 0;
+    const workMinutes = deliverable.estimatedWorkMinutes ?? 0;
     if (step.type === 'bonus') {
-      optionalMinutes += minutes;
+      optionalMinutes += deliverable.readMin + workMinutes;
     } else if (deliverable.activityKind === 'cumulative-exercise') {
-      consolidationMinutes += minutes;
+      readingMinutes += deliverable.readMin;
+      consolidationMinutes += workMinutes;
     } else if (deliverable.activityKind === 'capstone' || step.ref.kind === 'milestone') {
-      finalMinutes += minutes;
-      optionalMinutes += deliverable.externalReviewMinutes ?? 0;
+      finalMinutes += deliverable.readMin + workMinutes;
     }
   }
 

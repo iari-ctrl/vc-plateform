@@ -32,7 +32,7 @@ export function DimensionsSection({
         title="Ce qu'une personne passionnée de capital-risque peut y placer."
         description="Survolez le diagramme plus haut pour naviguer — ou lisez les quatre dimensions dans l'ordre."
       />
-      <div className="mt-8 divide-y divide-outline-variant lg:w-[52%]">
+      <div className="mt-8 w-full divide-y divide-outline-variant">
         {IKIGAI.dimensions.map((d, i) => {
           const items = mode === 'decouverte' ? d.itemsDecouverte ?? d.items : d.items;
           const active = activeDim === d.id;

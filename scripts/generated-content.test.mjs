@@ -150,8 +150,8 @@ test('committed generated content matches the current canonical sources', () => 
 
   assert.deepEqual(report.errors, []);
   assert.deepEqual(report.counts, {
-    lessons: 129,
-    publishedLessonBodies: 101,
-    glossaryTerms: 405,
+    lessons: 145,
+    publishedLessonBodies: 118,
+    glossaryTerms: 419,
   });
 });

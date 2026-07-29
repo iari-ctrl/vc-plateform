@@ -146,6 +146,66 @@ export function findCycleErrors(records, { collection, idOf, dependenciesOf }) {
   return errors;
 }
 
+export function validateParcoursRelations(relations, parcours) {
+  const parcoursById = new Map(parcours.map((entry) => [entry.id, entry]));
+  const errors = [];
+  const seen = new Map();
+  const progressionTargets = new Map(parcours.map((entry) => [entry.id, []]));
+
+  for (const relation of relations) {
+    const label = `parcoursRelations ${relation.sourceId} -> ${relation.targetId}`;
+    const source = parcoursById.get(relation.sourceId);
+    const target = parcoursById.get(relation.targetId);
+
+    if (!source) {
+      errors.push(`${label} : parcours source introuvable « ${relation.sourceId} ».`);
+      continue;
+    }
+    if (!target) {
+      errors.push(`${label} : parcours cible introuvable « ${relation.targetId} ».`);
+      continue;
+    }
+    if (relation.sourceId === relation.targetId) {
+      errors.push(`${label} : une relation ne peut pas viser son propre parcours.`);
+      continue;
+    }
+    if (relation.kind === 'peer' && source.level !== target.level) {
+      errors.push(`${label} : une relation « peer » doit relier deux parcours du même niveau (${source.level}, ${target.level}).`);
+      continue;
+    }
+
+    const endpoints = relation.kind === 'peer'
+      ? [relation.sourceId, relation.targetId].sort()
+      : [relation.sourceId, relation.targetId];
+    const key = `${relation.kind}:${endpoints.join('->')}`;
+    const first = seen.get(key);
+    if (first) {
+      errors.push(relation.kind === 'peer'
+        ? `${label} : relation « peer » en double avec ${first.sourceId} -> ${first.targetId}.`
+        : `${label} : relation « progression » en double.`);
+      continue;
+    }
+    seen.set(key, relation);
+
+    if (relation.kind === 'progression') progressionTargets.get(relation.sourceId).push(relation.targetId);
+  }
+
+  const progressionRecords = parcours.map((entry) => ({
+    id: entry.id,
+    targets: progressionTargets.get(entry.id),
+  }));
+  for (const message of findCycleErrors(progressionRecords, {
+    collection: 'parcoursRelations',
+    idOf: (entry) => entry.id,
+    dependenciesOf: (entry) => entry.targets,
+  })) {
+    const cycle = message.match(/cycle detected \((.*)\)\./)?.[1];
+    if (cycle) errors.push(`parcoursRelations : cycle de progression détecté (${cycle}).`);
+  }
+
+  return errors;
+}
+
 export function shouldFailValidation({ errors, warnings, strict }) {
   return errors.length > 0 || (strict && warnings.length > 0);
 }

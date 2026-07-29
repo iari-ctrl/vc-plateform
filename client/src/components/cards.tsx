@@ -98,8 +98,8 @@ export function ParcoursCard({
   );
 }
 
-export function LessonRow({ slug, order, title, kicker, readMin, practiceMin, summary, done, reading, upcoming = false }: {
-  slug: string; order: number; title: string; kicker: string; readMin: number; practiceMin?: number; summary?: string; done?: boolean; reading?: boolean; upcoming?: boolean;
+export function LessonRow({ slug, href, order, title, kicker, readMin, practiceMin, summary, done, reading, upcoming = false }: {
+  slug: string; href?: string; order: number; title: string; kicker: string; readMin: number; practiceMin?: number; summary?: string; done?: boolean; reading?: boolean; upcoming?: boolean;
 }) {
   const content = (
     <>
@@ -125,7 +125,7 @@ export function LessonRow({ slug, order, title, kicker, readMin, practiceMin, su
   );
   const className = "group flex items-start gap-4 rounded-xl border border-transparent px-3 py-3.5 transition-colors";
   if (upcoming) return <div className={`${className} opacity-70`}>{content}</div>;
-  return <Link to={`/lessons/${slug}`} className={`${className} hover:border-outline-variant hover:bg-surface-container-low`}>{content}</Link>;
+  return <Link to={href ?? `/lessons/${slug}`} className={`${className} hover:border-outline-variant hover:bg-surface-container-low`}>{content}</Link>;
 }
 
 export function CaseCard({ cs }: { cs: CaseStudy }) {

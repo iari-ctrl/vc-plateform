@@ -73,9 +73,9 @@ export function TopBar() {
             {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
           </button>
 
-          <Link to="/onboarding" className="btn-foil hidden !px-4 !py-2 sm:inline-flex">
+          <Link to="/ikigai" className="btn-foil hidden !px-4 !py-2 sm:inline-flex">
             <Compass size={15} />
-            Test d’orientation
+            Cahier Ikigai
           </Link>
 
           <button
@@ -119,8 +119,8 @@ export function TopBar() {
                 </NavLink>
               );
             })}
-            <Link to="/onboarding" className="btn-foil mt-2">
-              <Compass size={15} /> Test d’orientation
+            <Link to="/ikigai" className="btn-foil mt-2">
+              <Compass size={15} /> Cahier Ikigai
             </Link>
           </nav>
         </div>,

@@ -4,6 +4,25 @@
 
 import type { Level } from './types';
 
+/** Relation éditoriale entre deux parcours de la carte. */
+export type ParcoursRelationKind = 'peer' | 'progression';
+
+/** Nature des éléments internes utilisés pour justifier une relation. */
+export type ParcoursRelationEvidence =
+  | 'explicit-prerequisite'
+  | 'profile-route'
+  | 'shared-content'
+  | 'learning-outcomes'
+  | 'maintained-reference';
+
+export interface ParcoursRelation {
+  sourceId: string;
+  targetId: string;
+  kind: ParcoursRelationKind;
+  evidence: ParcoursRelationEvidence[];
+  rationale: string;
+}
+
 /** Perspective d'apprentissage (décision n°1 : la levée se lit des deux sièges). */
 export type Perspective = 'founder' | 'investor' | 'both';
 

@@ -77,7 +77,11 @@ describe('Venture philanthropy learning cycle', () => {
       'vp-exercice-cumulatif-recommandation',
     ]));
 
-    const cumulative = deliverables.filter((deliverable) => deliverable.activityKind === 'cumulative-exercise');
+    const cumulative = deliverables.filter((deliverable) => [
+      'vp-exercice-cumulatif-probleme-preuves',
+      'vp-exercice-cumulatif-diligence',
+      'vp-exercice-cumulatif-recommandation',
+    ].includes(deliverable.id));
     expect(cumulative.reduce((sum, deliverable) => sum + (deliverable.estimatedWorkMinutes ?? 0), 0)).toBe(240);
   });
 
@@ -163,13 +167,13 @@ describe('Venture philanthropy learning cycle', () => {
 
     if (!vpPath) return;
     expect(parcoursTimeSummary(vpPath)).toEqual({
-      readingMinutes: 111,
+      readingMinutes: 128,
       guidedPracticeMinutes: 1_350,
-      consolidationMinutes: 240,
-      finalMinutes: 360,
-      optionalMinutes: 240,
-      requiredMinutes: 2_061,
-      completeMinutes: 2_301,
+      consolidationMinutes: 270,
+      finalMinutes: 372,
+      optionalMinutes: 198,
+      requiredMinutes: 2_120,
+      completeMinutes: 2_318,
     });
   });
 });

@@ -22,7 +22,7 @@ export interface QuizQuestion {
 
 export interface FurtherReading {
   label: string;
-  kind: 'lesson' | 'simulator' | 'case' | 'glossary' | string;
+  kind: 'lesson' | 'simulator' | 'case' | 'glossary' | 'course' | 'deliverable' | 'external';
   ref: string;
 }
 
@@ -121,6 +121,40 @@ export interface CaseStudyDownload {
   note?: string;
 }
 
+export interface CaseStudySeriesAOffer {
+  id: string;
+  label: string;
+  primaryInvestmentM: number;
+  secondaryM: number;
+  preMoneyM: number;
+  poolTargetPct: number;
+  poolTiming: 'pre-money' | 'post-money';
+  convertibleTreatment: string;
+  shareClass: string;
+  liquidationPreference: {
+    multiple: number;
+    participating: boolean;
+    seniority: string;
+  };
+  governance: string;
+}
+
+export interface CaseStudyNumericScenario {
+  id: string;
+  title: string;
+  summary: string;
+  fullyDilutedSharesBefore: number;
+  founderSharesBefore: number;
+  allocatedOptionSharesBefore: number;
+  unallocatedOptionPoolSharesBefore: number;
+  seedInvestorSharesBefore: number;
+  convertibleShareEquivalents: number;
+  shareClasses: string[];
+  conventions: string[];
+  exitValuesM: number[];
+  offers: CaseStudySeriesAOffer[];
+}
+
 export interface CaseStudy {
   id: string;
   slug: string;
@@ -140,6 +174,7 @@ export interface CaseStudy {
   documents?: CaseStudyDocument[];
   decisionQuestions?: string[];
   downloads?: CaseStudyDownload[];
+  numericScenario?: CaseStudyNumericScenario;
   estimatedWorkMinutes?: number;
 }
 
@@ -226,6 +261,8 @@ export interface DeliverableCriterion {
   expectedEvidence?: string;
   commonError?: string;
   revisionQuestion?: string;
+  /** Component ids covered by this criterion. Omission keeps legacy all-component behaviour. */
+  componentIds?: string[];
 }
 
 export interface DeliverableRubricLevel {
@@ -254,6 +291,14 @@ export interface DeliverableTemplateSection {
   prompt: string;
 }
 
+export interface DeliverableComponent {
+  id: string;
+  title: string;
+  requirements: string[];
+  /** Budgets for which the component is required. Omission keeps legacy all-mode behaviour. */
+  requiredInBudgets?: ('low' | 'medium' | 'high')[];
+}
+
 export interface Deliverable {
   /** Matches the parcours step's `ref.id` (e.g. "todo-ic-simulation"). */
   id: string;
@@ -277,7 +322,7 @@ export interface Deliverable {
   relatedCourseIds?: string[];
   caseStudyId?: string;
   correctionId?: string;
-  components?: { id: string; title: string; requirements: string[] }[];
+  components?: DeliverableComponent[];
   rubricLevels?: DeliverableRubricLevel[];
   evaluation?: ('auto' | 'peer' | 'practitioner')[];
   externalReviewMinutes?: number;
@@ -564,6 +609,8 @@ export interface Simulator {
   category: string;
   accent: string;
   description: string;
+  /** Guided time spent entering, reconciling and interpreting one scenario. */
+  estimatedWorkMinutes?: number;
   relatedLessonIds: string[];
   glossaryRefs: string[];
 }

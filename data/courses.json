@@ -154,6 +154,34 @@
     ]
   },
   {
+    "id": "c-serie-a-preparation",
+    "slug": "preparer-une-serie-a",
+    "title": "Préparer une Série A",
+    "subtitle": "Dossier de preuves, transaction et gouvernance",
+    "level": "avance",
+    "durationMin": 22,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Structurer une préparation de Série A depuis la décision de lever jusqu'au closing : preuves, financement, data room, cap table, term sheet, négociation et premier board.",
+    "tags": [
+      "Série A",
+      "levée de fonds",
+      "term sheet",
+      "gouvernance"
+    ],
+    "lessonIds": [
+      "lsa-decision-lever",
+      "lsa-registre-preuves",
+      "lsa-plan-financement",
+      "lsa-process-dataroom",
+      "lsa-modeliser-transaction",
+      "lsa-termes-gouvernance",
+      "lsa-negociation-dossier",
+      "lsa-closing-board",
+      "lsa-branche-sectorielle",
+      "lsa-tour-complexe"
+    ]
+  },
+  {
     "id": "c-portfolio",
     "slug": "gerer-un-portefeuille",
     "title": "Gérer un portefeuille",
@@ -257,11 +285,12 @@
   {
     "id": "c-mathematiques-vc",
     "slug": "mathematiques-du-vc",
-    "title": "Dimensionnement de marché, modélisation financière et structure de l'investissement",
+    "title": "Mathématiques du capital-risque",
     "subtitle": "Marché, économie unitaire, trésorerie, valorisation et rendement",
     "level": "intermediaire",
-    "durationMin": 99,
-    "summary": "Construire des analyses chiffrées explicites et vérifiables sur le marché, la trésorerie, la valorisation, la dilution et les scénarios de rendement.",
+    "durationMin": 43,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Rassembler les méthodes de calcul utilisées en capital-risque, avec conventions explicites, contrôles de cohérence et analyses de sensibilité.",
     "tags": [
       "modélisation",
       "trésorerie",
@@ -305,15 +334,16 @@
     "id": "c-entretien-analyst",
     "slug": "reussir-l-entretien-analyst-modules",
     "title": "Réussir l'entretien Analyst",
-    "subtitle": "Les 13 modules, du screening au mock final",
+    "subtitle": "Les 13 modules, du cadrage du processus au mock final révisé",
     "level": "intermediaire",
-    "durationMin": 420,
-    "summary": "Le curriculum complet de l'entretien analyst : la grille de l'investisseur, le market sizing, le deal memo, le case study, le fit, et un mock chronométré. Frameworks, exemples travaillés, checklists.",
+    "durationMin": 83,
+    "summary": "Le curriculum d'entretien Analyst reprend la grille d'investisseur, le market sizing, la lecture de startup, le memo, le case study, le fit, la recherche fonds et le mock final. Les pratiques variables sont contextualisées et les exercices distinguent faits, hypothèses et sources.",
     "tags": [
       "entretien",
       "carrière",
       "deal-memo",
-      "case-study"
+      "case-study",
+      "sources"
     ],
     "lessonIds": [
       "lea-process",
@@ -329,7 +359,8 @@
       "lea-fund-research",
       "lea-jour-j",
       "lea-mock"
-    ]
+    ],
+    "durationSource": "lesson-read-minutes"
   },
   {
     "id": "c-investment-recommendation",
@@ -424,7 +455,7 @@
     "title": "Spécialisations sectorielles de l'Analyst",
     "subtitle": "Référentiels et diligences propres à chaque spécialité",
     "level": "intermediaire",
-    "durationMin": 0,
+    "durationMin": 17,
     "summary": "Approfondissements facultatifs pour une pratique généraliste ou spécialisée du capital-risque.",
     "tags": [
       "spécialisation",
@@ -449,6 +480,48 @@
       "l-specialty-marketplace-liquidity",
       "l-specialty-impact-intentionality",
       "l-specialty-impact-measurement"
+    ]
+  },
+  {
+    "id": "c-dt-preuve-scientifique",
+    "slug": "preuve-scientifique-deeptech",
+    "title": "Instruire la preuve scientifique",
+    "subtitle": "Résultats, reproductibilité, incertitude et passage au pilote",
+    "level": "avance",
+    "durationMin": 8,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Méthode d'instruction pour qualifier une preuve scientifique deeptech, préparer une expertise et borner ce qu'un pilote démontre réellement.",
+    "tags": [
+      "deeptech",
+      "preuve scientifique",
+      "diligence technique",
+      "pilote"
+    ],
+    "lessonIds": [
+      "ldt-reproductibilite",
+      "ldt-pilote-preuve"
+    ]
+  },
+  {
+    "id": "c-dt-pi-transfert",
+    "slug": "propriete-intellectuelle-transfert-deeptech",
+    "title": "Propriété intellectuelle et transfert",
+    "subtitle": "Titularité, arbitrage brevet ou secret, licence et transfert depuis la recherche publique",
+    "level": "avance",
+    "durationMin": 42,
+    "durationSource": "lesson-read-minutes",
+    "summary": "Méthode d'instruction des droits dans un dossier deeptech en droit français : établir la titularité, instruire l'arbitrage entre brevet et secret, lire une licence et ses conditions d'opposabilité, et traiter les autorisations propres à une société issue d'un laboratoire.",
+    "tags": [
+      "deeptech",
+      "propriété intellectuelle",
+      "brevet",
+      "transfert de technologie"
+    ],
+    "lessonIds": [
+      "ldt-titularite-copropriete",
+      "ldt-brevet-secret",
+      "ldt-licence-redevances",
+      "ldt-transfert-recherche-publique"
     ]
   },
   {

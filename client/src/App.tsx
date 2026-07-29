@@ -7,6 +7,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 const HomePage = lazy(() => import('@/pages/home/HomePage'));
 const OnboardingPage = lazy(() => import('@/pages/onboarding/OnboardingPage'));
+const IkigaiPage = lazy(() => import('@/pages/onboarding/IkigaiPage'));
 const ProfileResultPage = lazy(() => import('@/pages/onboarding/ProfileResultPage'));
 const DashboardPage = lazy(() => import('@/pages/workspace/DashboardPage'));
 const ParcoursPage = lazy(() => import('@/pages/learn/ParcoursPage'));
@@ -79,6 +80,7 @@ export default function App() {
         <Route element={<PageShell />}>
           <Route path="home" element={<HomePage />} />
           <Route path="onboarding" element={<OnboardingPage />} />
+          <Route path="ikigai" element={<IkigaiPage />} />
           <Route path="profile-result" element={<ProfileResultPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="parcours" element={<ParcoursPage />} />

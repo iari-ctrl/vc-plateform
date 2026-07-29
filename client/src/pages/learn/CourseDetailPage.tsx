@@ -1,9 +1,8 @@
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Award, BookOpen, Clock, FileCheck2, Route } from 'lucide-react';
 import { certificationsForCourse, courseBySlug, deliverableById, lessonsForCourse, LEVEL_LABEL } from '@/content';
 import { courseReadingMinutes, formatMinutes } from '@/content/learningTime';
-import { parcoursForCourse } from '@/content/parcours';
+import { parcoursContextHref, parcoursForCourse, type TimeBudget } from '@/content/parcours';
 import { LessonRow } from '@/components/cards';
 import { ProgressBar } from '@/components/ui/primitives';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
@@ -13,6 +12,7 @@ import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function CourseDetailPage() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
   const course = slug ? courseBySlug(slug) : undefined;
   const { progress } = useUserData();
   useResourcePageMeta(Boolean(course), course?.title, course?.summary);
@@ -22,20 +22,32 @@ export default function CourseDetailPage() {
   const lessons = lessonsForCourse(course.id);
   const publishedLessons = lessons.filter((lesson) => lesson.status === 'published');
   const associatedParcours = parcoursForCourse(course.id, lessons.map((l) => l.id));
+  const requestedParcoursId = searchParams.get('parcours');
+  const activeParcours = requestedParcoursId
+    ? associatedParcours.find((parcours) => parcours.id === requestedParcoursId)
+    : undefined;
+  const requestedBudget = searchParams.get('budget');
+  const activeBudget = activeParcours
+    && (requestedBudget === 'low' || requestedBudget === 'medium' || requestedBudget === 'high')
+    && activeParcours.timeFit.includes(requestedBudget)
+    ? requestedBudget as TimeBudget
+    : undefined;
   const certifications = certificationsForCourse(course.id).filter((certification) => certification.status === 'published');
   const done = publishedLessons.filter((l) => progress[l.id]?.status === 'done').length;
   const pct = publishedLessons.length ? Math.round((done / publishedLessons.length) * 100) : 0;
-  const accent = associatedParcours[0]?.accent ?? 'var(--primary)';
+  const accent = activeParcours?.accent ?? associatedParcours[0]?.accent ?? 'var(--primary)';
   const readingMinutes = courseReadingMinutes(course);
   const practiceMinutes = publishedLessons.reduce((sum, lesson) => sum + (lesson.practice?.estimatedMinutes ?? 0), 0);
   const practiceDeliverables = Array.from(new Set(publishedLessons.map((lesson) => lesson.practice?.deliverableId).filter((id): id is string => Boolean(id))))
     .map(deliverableById)
     .filter((deliverable): deliverable is NonNullable<typeof deliverable> => Boolean(deliverable));
-  const backLink = certifications[0]
-    ? { href: `/certifications/${certifications[0].slug}`, label: certifications[0].shortTitle }
-    : associatedParcours[0]
-      ? { href: `/parcours/${associatedParcours[0].slug}`, label: associatedParcours[0].title }
-      : { href: '/bibliotheque', label: 'Bibliothèque' };
+  const backLink = activeParcours
+    ? { href: `/parcours/${activeParcours.slug}${activeBudget ? `?budget=${activeBudget}` : ''}`, label: activeParcours.title }
+    : certifications[0]
+      ? { href: `/certifications/${certifications[0].slug}`, label: certifications[0].shortTitle }
+      : associatedParcours[0]
+        ? { href: `/parcours/${associatedParcours[0].slug}`, label: associatedParcours[0].title }
+        : { href: '/bibliotheque', label: 'Bibliothèque' };
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
@@ -114,6 +126,7 @@ export default function CourseDetailPage() {
           <LessonRow
             key={l.id}
             slug={l.slug}
+            href={activeParcours ? parcoursContextHref(`/lessons/${l.slug}`, activeParcours.id, activeBudget) : undefined}
             order={l.order}
             title={l.title}
             kicker={l.kicker}
@@ -129,7 +142,7 @@ export default function CourseDetailPage() {
 
       {publishedLessons[0] && (
         <div className="mt-8">
-          <Link to={`/lessons/${publishedLessons[0].slug}`} className="btn-foil">{pct > 0 ? 'Continuer' : 'Commencer le cours'}</Link>
+          <Link to={activeParcours ? parcoursContextHref(`/lessons/${publishedLessons[0].slug}`, activeParcours.id, activeBudget) : `/lessons/${publishedLessons[0].slug}`} className="btn-foil">{pct > 0 ? 'Continuer' : 'Commencer le cours'}</Link>
         </div>
       )}
     </div>

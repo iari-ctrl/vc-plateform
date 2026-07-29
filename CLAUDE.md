@@ -4,7 +4,7 @@ Despite its historical filename, this file is the detailed repository contract f
 
 ## What this is
 
-A fully static VC ("venture capital") intelligence and learning platform: an ikigai-style introspection onboarding, a personalized learning catalog (parcours / courses / lessons), a glossary, case studies, simulators, signed ecosystem analyses, and a blog. Editorial content is the product — most of the codebase exists to author, validate, ship, and render it.
+A fully static VC ("venture capital") intelligence and learning platform: a concise product onboarding, a dedicated Ikigai introspection workbook, a personalized learning catalog (parcours / courses / lessons), a glossary, case studies, simulators, signed ecosystem analyses, and a blog. Editorial content is the product — most of the codebase exists to author, validate, ship, and render it.
 
 npm **workspaces** monorepo (`client`), ESM everywhere (`"type": "module"`), Node ≥ 20.
 
@@ -121,6 +121,29 @@ This applies to repository editorial content — analyses, ecosystem dossiers, b
 
 The detailed version-controlled style charter lives in §4.0.c of `docs/ARCHITECTURE_EDITION.md`; `PRODUCT.md` owns the product principles and this section is its operational summary for agents. `.claude/skills/ecosystemes/SKILL.md` adds rules specific to ecosystem dossiers and may not override the transverse charter. Do not make work depend on unversioned memories. If maintained references disagree, report the drift instead of silently overriding one with another.
 
+## Spec Kit safety in this brownfield repository
+
+The application, manifests and ignore configuration already exist. During
+`/speckit-implement`, the generic “Project Setup Verification” step is read-only
+by default. It must not create or modify `.gitignore`, `.eslintignore`,
+`.prettierignore`, `.npmignore`, ESLint ignore rules, package configuration or
+another setup file unless the active `spec.md`, `plan.md` and `tasks.md` name that
+exact file as owned work and the user has explicitly approved that scope.
+
+This repository is private and is not an npm publishing package; do not create
+`.npmignore`. If setup verification finds a possible exclusion or configuration
+gap outside the feature scope, report it and record a deferred task or decision
+instead of patching it. The feature task list, not the generic command outline,
+defines executable setup work. Likewise, a generic recommendation to open a pull
+request is never permission to create a branch, commit, push or remote action.
+
+An incomplete Spec Kit checklist blocks `/speckit-analyze` and
+`/speckit-implement`; correct the affected artifacts and verify every item rather
+than using the generic bypass. Analysis and convergence must include each present
+feature artifact (`research.md`, `data-model.md`, `contracts/`, `quickstart.md`)
+and the maintained authorities it explicitly references, while remaining bounded
+to the active feature delta.
+
 ## Reference docs — where each fact lives
 
 One maintained fact should live in one place. Reference (the intended contract) is separated from state (a small replaceable snapshot) and journal (append-only). Code and data win when describing current implemented behavior; maintained product documentation governs intended direction. When they disagree, identify the drift rather than silently treating either as the target. Verify implementation against `client/`, `data/`, `shared/`, `scripts/` and `package.json`.
@@ -129,6 +152,8 @@ One maintained fact should live in one place. Reference (the intended contract) 
 - `docs/DESIGN_SYSTEM.md` — visual/interaction system: tokens, components, ornaments, motion, accessibility.
 - `docs/STRATEGIE-vc-intelligence.md` — maintained product direction and remaining strategic priorities.
 - `PRODUCT.md` (repo root) — the product contract: register, intent, brand personality, accessibility target. Direction and priorities stay in `docs/STRATEGIE-vc-intelligence.md`; report drift between the two rather than merging them silently.
+- `.specify/memory/constitution.md` — Spec Kit governance for bounded brownfield features; `.specify/memory/project-context.md` is its read-order and current-project handoff index. Neither replaces the authorities listed here.
+- `docs/SPECKIT.md` — human workflow for the Hermes Spec Kit integration. Artifacts under `specs/<number>-<name>/` describe prospective feature deltas; they are not a second current-state tracker or a substitute for maintained product documentation.
 - `docs/certifications/ARCHITECTURE-CERTIFICATIONS.md` — transverse certification contract: ontology, title categories, five-level scale, target axes, invariant professional title, candidate charter and scope boundaries.
 - `docs/parcours/ANALYST-FOUNDATIONS.md` — maintained learning contract for the 23-lesson `analyst-foundations` parcours; `docs/certifications/REFERENTIEL-VC-ANALYST.md` covers the professional certification and its future production.
 - `docs/parcours/README.md` — current parcours policies and authoring contract. Superseded drafts live under `docs/archive/parcours/`.

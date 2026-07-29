@@ -26,6 +26,7 @@ import {
   findMarkdownLinkErrors,
   shouldFailValidation,
   validateCanonicalGlossaryPublication,
+  validateParcoursRelations,
 } from './validation-core.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -137,7 +138,7 @@ const quizQuestionSchema = z.object({
 
 const furtherReadingSchema = z.object({
   label: nonEmpty,
-  kind: z.string(),
+  kind: z.enum(['lesson', 'simulator', 'case', 'glossary', 'course', 'deliverable', 'external']),
   ref: nonEmpty,
 }).strict();
 
@@ -267,6 +268,20 @@ const parcoursSchema = z.object({
   entryDiagnosticId: nonEmpty.optional(),
   steps: z.array(parcoursStepSchema).min(1),
   outcomes: z.array(nonEmpty),
+}).strict();
+
+const parcoursRelationSchema = z.object({
+  sourceId: nonEmpty,
+  targetId: nonEmpty,
+  kind: z.enum(['peer', 'progression']),
+  evidence: z.array(z.enum([
+    'explicit-prerequisite',
+    'profile-route',
+    'shared-content',
+    'learning-outcomes',
+    'maintained-reference',
+  ])).min(1),
+  rationale: nonEmpty,
 }).strict();
 
 const domainSchema = z.object({
@@ -565,6 +580,51 @@ const caseDocumentSchema = z.object({
   tables: z.array(caseTableSchema).optional(),
 }).strict();
 
+const caseNumericScenarioSchema = z.object({
+  id: nonEmpty,
+  title: nonEmpty,
+  summary: nonEmpty,
+  fullyDilutedSharesBefore: z.number().int().positive(),
+  founderSharesBefore: z.number().int().positive(),
+  allocatedOptionSharesBefore: z.number().int().nonnegative(),
+  unallocatedOptionPoolSharesBefore: z.number().int().nonnegative(),
+  seedInvestorSharesBefore: z.number().int().nonnegative(),
+  convertibleShareEquivalents: z.number().int().nonnegative(),
+  shareClasses: z.array(nonEmpty).min(1),
+  conventions: z.array(nonEmpty).min(3),
+  exitValuesM: z.array(z.number().positive()).min(1),
+  offers: z.array(z.object({
+    id: nonEmpty,
+    label: nonEmpty,
+    primaryInvestmentM: z.number().positive(),
+    secondaryM: z.number().nonnegative(),
+    preMoneyM: z.number().positive(),
+    poolTargetPct: z.number().positive().max(80),
+    poolTiming: z.enum(['pre-money', 'post-money']),
+    convertibleTreatment: nonEmpty,
+    shareClass: nonEmpty,
+    liquidationPreference: z.object({
+      multiple: z.number().positive(),
+      participating: z.boolean(),
+      seniority: nonEmpty,
+    }).strict(),
+    governance: nonEmpty,
+  }).strict()).min(2),
+}).strict().superRefine((scenario, ctx) => {
+  const componentTotal = scenario.founderSharesBefore
+    + scenario.allocatedOptionSharesBefore
+    + scenario.unallocatedOptionPoolSharesBefore
+    + scenario.seedInvestorSharesBefore
+    + scenario.convertibleShareEquivalents;
+  if (componentTotal !== scenario.fullyDilutedSharesBefore) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['fullyDilutedSharesBefore'],
+      message: `les composantes pré-tour doivent totaliser le fully diluted : fondateurs + options attribuées + réserve non attribuée + seed + convertibles = ${componentTotal}, attendu ${scenario.fullyDilutedSharesBefore}`,
+    });
+  }
+});
+
 const caseStudySchema = z.object({
   id: nonEmpty,
   slug,
@@ -579,6 +639,7 @@ const caseStudySchema = z.object({
   glossaryRefs: idList,
   learningRole: z.enum(['standard', 'learner-dossier', 'transfer']).optional(),
   estimatedWorkMinutes: z.number().int().positive().optional(),
+  numericScenario: caseNumericScenarioSchema.optional(),
   documents: z.array(caseDocumentSchema).optional(),
   decisionQuestions: z.array(nonEmpty).optional(),
   downloads: z.array(z.object({
@@ -647,6 +708,7 @@ const deliverableCriterionSchema = z.union([
     expectedEvidence: nonEmpty,
     commonError: nonEmpty,
     revisionQuestion: nonEmpty,
+    componentIds: idList.optional(),
   }).strict(),
 ]);
 
@@ -675,6 +737,7 @@ const deliverableSchema = z.object({
     id: nonEmpty,
     title: nonEmpty,
     requirements: z.array(nonEmpty).min(1),
+    requiredInBudgets: z.array(z.enum(['low', 'medium', 'high'])).min(1).optional(),
   }).strict()).optional(),
   rubricLevels: z.array(z.object({
     id: z.enum(['insuffisant', 'acceptable', 'solide', 'non-observable']),
@@ -701,7 +764,36 @@ const deliverableSchema = z.object({
   relatedLessonIds: idList.optional(),
   glossaryRefs: idList.optional(),
   tags: z.array(z.string()).optional(),
-}).strict();
+}).strict().superRefine((deliverable, ctx) => {
+  const components = deliverable.components ?? [];
+  const componentIds = new Set(components.map((component) => component.id));
+  const criteriaWithComponents = deliverable.rubric.filter((criterion) => Array.isArray(criterion.componentIds));
+
+  for (const [criterionIndex, criterion] of deliverable.rubric.entries()) {
+    for (const componentId of criterion.componentIds ?? []) {
+      if (!componentIds.has(componentId)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['rubric', criterionIndex, 'componentIds'],
+          message: `composant introuvable pour le critère "${criterion.id ?? criterion.criterion}" : ${componentId}`,
+        });
+      }
+    }
+  }
+
+  if (criteriaWithComponents.length > 0) {
+    for (const [componentIndex, component] of components.entries()) {
+      const covered = criteriaWithComponents.some((criterion) => criterion.componentIds.includes(component.id));
+      if (!covered) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['components', componentIndex, 'id'],
+          message: `aucun critère rattaché au composant "${component.id}"`,
+        });
+      }
+    }
+  }
+});
 
 const blogSchema = z.object({
   id: nonEmpty,
@@ -851,6 +943,7 @@ const simulatorSchema = z.object({
   category: z.string(),
   accent: z.string(),
   description: z.string(),
+  estimatedWorkMinutes: z.number().int().positive().optional(),
   relatedLessonIds: idList,
   glossaryRefs: idList,
 }).strict();
@@ -1000,6 +1093,11 @@ const certificationAssessments = check(
   readJson('certificationAssessments.json'),
 ) ?? [];
 const parcours = check('parcours.json', z.array(parcoursSchema), readJson('parcours.json')) ?? [];
+const parcoursRelations = check(
+  'parcoursRelations.json',
+  z.array(parcoursRelationSchema),
+  readJson('parcoursRelations.json'),
+) ?? [];
 const profileParcours = check('profileParcours.json', profileParcoursSchema, readJson('profileParcours.json'));
 const courses = check('courses.json', z.array(courseSchema), readJson('courses.json')) ?? [];
 const lessons = check('lessons.json', z.array(lessonSchema), readJson('lessons.json')) ?? [];
@@ -1057,6 +1155,11 @@ for (const message of findEditorialToneErrors(parcours, {
 })) {
   err(message);
 }
+for (const message of findEditorialToneErrors(parcoursRelations, {
+  collection: 'parcoursRelations',
+})) {
+  err(message);
+}
 for (const message of findEditorialToneErrors(allLessons, {
   collection: 'lessons',
 })) {
@@ -1065,6 +1168,7 @@ for (const message of findEditorialToneErrors(allLessons, {
 
 const markdownCollections = [
   ['parcours', parcours],
+  ['parcoursRelations', parcoursRelations],
   ['courses', courses],
   ['lessons', allLessons],
   ['blog', blog],
@@ -1081,6 +1185,10 @@ for (const [collection, records] of markdownCollections) {
   for (const message of findMarkdownLinkErrors(records, { collection })) {
     err(message);
   }
+}
+
+for (const message of validateParcoursRelations(parcoursRelations, parcours)) {
+  err(message);
 }
 
 // ── Uniqueness ───────────────────────────────────────────────────────────────
@@ -1240,6 +1348,7 @@ for (const l of allLessons) {
       case: (r) => caseRefs.has(r),
       glossary: isGlossary,
       deliverable: (r) => deliverableIds.has(r),
+      external: (r) => Boolean(safeEditorialUrl(r)),
     };
     const resolve = resolvers[fr.kind];
     if (!resolve) warn(`lessons/${l.id}.furtherReading — type inconnu "${fr.kind}" (réf "${fr.ref}" non vérifiée)`);
@@ -1713,6 +1822,10 @@ for (const e of antiPortfolioEntries) {
 }
 
 // Dossiers apprenants, diagnostics et corrections commentées.
+// Certains dossiers ont un inventaire documentaire propre. Ne pas appliquer
+// l'inventaire financier/organisationnel de Trait d'Union à tout nouveau cas
+// apprenant : un dossier Série A peut rester exécutable avec un corpus plus
+// ciblé, contrôlé par son livrable et ses tests dédiés.
 const requiredLearnerDocumentKinds = [
   'income-statements',
   'balance-sheets',
@@ -1728,6 +1841,10 @@ const requiredLearnerDocumentKinds = [
   'indicator-dictionary',
   'incident-risk-register',
 ];
+const requiredLearnerDocumentKindsByCaseId = new Map([
+  ['cs-vp-insertion-3-regions', requiredLearnerDocumentKinds],
+  ['cs-mathematiques-vc-dossier', requiredLearnerDocumentKinds],
+]);
 for (const caseStudy of cases) {
   const documents = caseStudy.documents ?? [];
   if (documents.length) {
@@ -1750,7 +1867,7 @@ for (const caseStudy of cases) {
   }
   if (caseStudy.learningRole === 'learner-dossier') {
     const kinds = new Set(documents.map((document) => document.kind));
-    for (const kind of requiredLearnerDocumentKinds) {
+    for (const kind of requiredLearnerDocumentKindsByCaseId.get(caseStudy.id) ?? []) {
       if (!kinds.has(kind)) err(`caseStudies/${caseStudy.id}.documents — document requis manquant : "${kind}"`);
     }
   }
@@ -1817,14 +1934,18 @@ for (const d of deliverables) {
   if (d.rubricLevels) assertUnique(`deliverables/${d.id}.rubricLevels`, d.rubricLevels, 'id');
 
   if (d.activityKind === 'capstone') {
-    if (d.components?.length !== 8)
-      err(`deliverables/${d.id}.components — 8 composants attendus pour le jalon final`);
-    if (d.rubric.length !== 13 || detailedCriteria.length !== 13)
-      err(`deliverables/${d.id}.rubric — 13 critères détaillés attendus pour le jalon final`);
-    if (d.rubricLevels?.length !== 4)
-      err(`deliverables/${d.id}.rubricLevels — 4 niveaux attendus pour le jalon final`);
-    if (d.roleCards?.length !== 5)
-      err(`deliverables/${d.id}.roleCards — 5 cartes de rôle attendues pour le jalon final`);
+    if (!d.evaluation?.includes('auto'))
+      err(`deliverables/${d.id}.evaluation — l'autoévaluation est attendue pour le jalon final`);
+    if (d.id === 'vp-recommandation-soutien') {
+      if (d.components?.length !== 8)
+        err(`deliverables/${d.id}.components — 8 composants attendus pour le jalon final`);
+      if (d.rubric.length !== 13 || detailedCriteria.length !== 13)
+        err(`deliverables/${d.id}.rubric — 13 critères détaillés attendus pour le jalon final`);
+      if (d.rubricLevels?.length !== 4)
+        err(`deliverables/${d.id}.rubricLevels — 4 niveaux attendus pour le jalon final`);
+      if (d.roleCards?.length !== 5)
+        err(`deliverables/${d.id}.roleCards — 5 cartes de rôle attendues pour le jalon final`);
+    }
   }
   if (d.journal && d.journal.predictionMin > d.journal.predictionMax) {
     err(`deliverables/${d.id}.journal — predictionMin doit être inférieur ou égal à predictionMax`);
@@ -1930,6 +2051,7 @@ const MARKER_FILES = [
   'candidateCharters.json',
   'certificationAssessments.json',
   'parcours.json',
+  'parcoursRelations.json',
   'simulators.json',
   'memos.json',
   'antiPortfolio.json',
@@ -1953,6 +2075,7 @@ for (const file of MARKER_FILES) {
 // ── Report ───────────────────────────────────────────────────────────────────
 console.log('Validation du contenu VC Premium');
 console.log(`→ ${parcours.length} parcours · ${certifications.length} certification(s) · ${certificationLevels.length} niveau(x) · ${courses.length} cours · ${allLessons.length} leçons · ${glossary.length} termes`);
+console.log(`→ ${parcoursRelations.length} relation(s) de parcours auditée(s)`);
 console.log(`→ ${candidateCharters.length} charte(s) candidat · ${certificationAssessments.length} évaluation(s) de certification`);
 console.log(`→ ${parcoursLessons.length} leçon(s) de parcours drop-in · ${parcoursLessonDocs.length} registre(s)`);
 console.log(`→ ${cases.length} études de cas · ${caseCorrections.length} correction(s) commentée(s) · ${diagnostics.length} diagnostic(s) · ${deliverables.length} livrable(s) · ${blog.length} articles · ${ecosystems.length} dossier(s) d'écosystème · ${simulators.length} simulateurs`);

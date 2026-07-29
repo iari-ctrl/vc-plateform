@@ -132,3 +132,30 @@ export function collectRoutes() {
 
   return Array.from(routes.values()).sort((a, b) => a.path.localeCompare(b.path));
 }
+
+/**
+ * Enumerate routable, non-indexable artifacts that must be prerendered for
+ * direct static access but must stay out of the sitemap and public inventory.
+ */
+export function collectNoindexRoutes() {
+  const routes = new Map();
+
+  function addNoindexRoute(path) {
+    const normalized = cleanPath(path);
+    if (routes.has(normalized) || !isNoindexPath(normalized)) return;
+    routes.set(normalized, { path: normalized, noindex: true });
+  }
+
+  const caseSlugById = new Map(
+    readJson('caseStudies.json', [])
+      .filter((row) => row?.id && row?.slug)
+      .map((row) => [row.id, row.slug]),
+  );
+
+  for (const correction of readJson('caseCorrections.json', [])) {
+    const caseSlug = caseSlugById.get(correction?.sourceCaseId);
+    if (caseSlug) addNoindexRoute(`/cases/${caseSlug}/correction`);
+  }
+
+  return Array.from(routes.values()).sort((a, b) => a.path.localeCompare(b.path));
+}

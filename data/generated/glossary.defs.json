@@ -249,6 +249,10 @@
   "cathay-innovation": {
     "definition": "VC investissant en Series A/B sur des entreprises à ambition multi-continentale, avec un positionnement de pont entre l'Europe, l'Asie et l'Afrique."
   },
+  "changement-echelle-industriel": {
+    "definition": "Le changement d'échelle industriel examine si une performance reste tenable lorsque augmentent la taille, les flux, l'intégration, la durée et les contraintes d'exploitation. Il est distinct de la scalability commerciale, qui porte sur la croissance du modèle économique.",
+    "example": "Multiplier le volume d'un réacteur peut modifier chaleur, mélange, sécurité et qualité ; l'essai doit préciser quelle hypothèse d'échelle est testée."
+  },
   "cfo": {
     "definition": "Le CFO structure la fonction finance d'une startup en croissance : reporting, FP&A, contrôle, cash, budget, data room, relation investisseurs et préparation des tours ou de l'IPO. Son arrivée devient souvent critique lorsque les exigences de reporting et de gouvernance augmentent.",
     "example": "Un CFO expérimenté peut rendre une Series B plus crédible en fiabilisant les KPIs, le modèle financier et le cash planning."
@@ -284,6 +288,10 @@
   "market-concentration": {
     "definition": "La concentration de marché mesure à quel point les financements, les rendements, les exits ou l'attention se regroupent dans un petit nombre de startups, fonds, secteurs ou géographies. Elle prolonge la logique de [[power-law|loi de puissance]] à l'échelle de l'écosystème.",
     "example": "Un marché peut concentrer la majorité des tours IA sur quelques startups très visibles et quelques fonds dominants."
+  },
+  "concours-scientifique": {
+    "definition": "L’article L531-8 du code de la recherche autorise un fonctionnaire à apporter son concours scientifique à une entreprise assurant, en exécution d’un contrat conclu avec une personne publique, une entreprise publique ou une personne morale mandatée par ces dernières, la valorisation de travaux de recherche. Une convention conclue entre l’entreprise et la personne publique fixe notamment la quotité de temps de travail que l’intéressé peut consacrer à cette activité, dans une limite fixée par voie réglementaire. L’autorisation devient caduque si le contrat de valorisation n’est pas conclu dans le délai fixé par décret.",
+    "example": "Un chercheur conserve son poste et appuie la société créée pour valoriser ses travaux : la convention et le contrat de valorisation conditionnent la validité de l’autorisation."
   },
   "conditions-de-closing": {
     "definition": "Les conditions de closing couvrent les prérequis juridiques, financiers ou opérationnels nécessaires avant le versement des fonds ou la réalisation d’une transaction. Elles influencent la certitude du deal autant que le prix affiché.",
@@ -328,6 +336,10 @@
   "convertible-note": {
     "definition": "Une convertible note finance une startup avant un priced round en reportant la négociation de valorisation. Elle porte souvent un intérêt, une maturité, un valuation cap et/ou un conversion discount, puis convertit lors d’un futur tour qualifié.",
     "example": "Un investisseur met 500 k€ en convertible note avec 20 % de discount et cap à 8 M€ avant la Series A."
+  },
+  "copropriete-de-brevet": {
+    "definition": "L’article L613-29 du code de la propriété intellectuelle règle la copropriété d’une demande de brevet ou d’un brevet : chaque copropriétaire peut exploiter l’invention à son profit sauf à indemniser équitablement ceux qui ne l’exploitent pas et n’ont pas concédé de licence, concéder seul une licence non exclusive après notification accompagnée d’une offre de cession de sa quote-part, et céder sa quote-part sous un droit de préemption de trois mois. Une licence exclusive ne peut être accordée qu’avec l’accord de tous les copropriétaires ou par autorisation de justice. L’article L613-32 rend ce régime supplétif : un règlement de copropriété peut y déroger à tout moment.",
+    "example": "Deux familles de brevets sont détenues en copropriété avec un établissement de recherche : l’exclusivité demandée par l’investisseur suppose l’accord du copropriétaire ou une autorisation de justice."
   },
   "corporate-venture-capital": {
     "definition": "Le Corporate Venture Capital désigne les investissements startup réalisés par des entreprises établies, souvent via un fonds ou une équipe dédiée. La logique peut combiner rendement financier, veille stratégique, partenariats et accès à l'innovation.",
@@ -783,6 +795,10 @@
     "definition": "Les Incentive Stock Options sont des stock options réservées aux salariés aux États-Unis, avec un régime fiscal potentiellement favorable sous conditions. Elles exigent notamment un plan approuvé, un prix d’exercice adéquat et le respect de limites réglementaires.",
     "example": "Une startup américaine peut accorder des ISOs aux salariés, mais pas aux consultants ni aux board advisors externes."
   },
+  "incertitude-mesure": {
+    "definition": "L'incertitude de mesure accompagne un résultat de mesure et caractérise la dispersion des valeurs qui pourraient raisonnablement être attribuées au mesurande. Elle peut combiner des composantes issues de séries statistiques et d'autres informations disponibles.",
+    "example": "Un rendement annoncé avec son écart-type, les hypothèses de calcul et les corrections utilisées donne une information plus exploitable qu'un chiffre seul."
+  },
   "incubateur": {
     "definition": "Un incubateur accompagne des projets ou startups très early avec mentorat, hébergement, réseau, ateliers et parfois accès à des financements. Il intervient souvent avant ou autour du [[pre-seed|pre-seed]], tandis qu’un [[accelerateur|accélérateur]] opère plus souvent sur une période courte avec un objectif de traction ou de levée.",
     "example": "Une équipe issue d’un laboratoire rejoint un incubateur deeptech pour structurer son projet avant une levée pre-seed."
@@ -795,6 +811,10 @@
     "definition": "Une IPO est une transaction dans laquelle une société privée cote ses actions sur un marché public. Pour une startup financée par VC, elle peut créer de la liquidité, une valorisation publique et une monnaie d'acquisition, mais impose aussi disclosure, gouvernance de société cotée, lock-ups et exposition au risque de marché.",
     "example": "Après une IPO, les investisseurs VC ne peuvent pas toujours vendre immédiatement leurs actions à cause des périodes de lock-up et de la volatilité du marché."
   },
+  "inscription-au-registre-national-des-brevets": {
+    "definition": "L’article L613-9 du code de la propriété intellectuelle subordonne l’opposabilité aux tiers de tout acte transmettant ou modifiant les droits attachés à une demande de brevet ou à un brevet à son inscription sur le Registre national des brevets, tenu par l’Institut national de la propriété industrielle. Avant inscription, l’acte demeure opposable au tiers qui a acquis des droits après sa date tout en en ayant connaissance lors de cette acquisition. Le licencié partie à un contrat non inscrit reste recevable à intervenir dans l’instance en contrefaçon engagée par le propriétaire du brevet, pour la réparation de son préjudice propre. Validité et opposabilité restent deux questions distinctes.",
+    "example": "Une cession antérieure non inscrite n’apparaît pas au registre : la diligence lit le registre et la chaîne d’actes, pas seulement le contrat produit par la société."
+  },
   "inside-sales": {
     "definition": "Inside sales désigne une organisation commerciale qui vend sans présence terrain systématique. Elle convient souvent à des paniers moyens plus faibles, des cycles plus rapides ou des marchés où la vente peut être industrialisée à distance.",
     "example": "Une startup SaaS mid-market peut privilégier inside sales pour réduire le CAC et accélérer la conversion."
@@ -806,6 +826,14 @@
   "international-expansion": {
     "definition": "L’international expansion consiste à étendre une startup vers de nouveaux pays ou régions. Elle peut augmenter le TAM et la croissance, mais ajoute complexité GTM, recrutement, localisation, conformité, support client et discipline opérationnelle.",
     "example": "Une startup européenne peut viser 25 à 30 % de revenus internationaux avant une Series B si son marché domestique seul ne suffit pas à soutenir l’ambition growth."
+  },
+  "invention-de-mission": {
+    "definition": "L’article L611-7 du code de la propriété intellectuelle attribue à l’employeur les inventions faites par le salarié dans l’exécution soit d’un contrat de travail comportant une mission inventive correspondant à ses fonctions effectives, soit d’études et de recherches qui lui sont explicitement confiées. Le salarié auteur d’une telle invention bénéficie d’une rémunération supplémentaire dont les conditions sont déterminées par les conventions collectives, les accords d’entreprise et les contrats individuels de travail. Toutes les autres inventions relèvent d’un régime distinct, dans lequel l’employeur dispose seulement d’un droit d’attribution encadré.",
+    "example": "Un ingénieur recruté pour développer un procédé de purification réalise une invention dans ce périmètre : le classement proposé dans sa déclaration retient l’invention de mission."
+  },
+  "invention-d-agent-public": {
+    "definition": "L’article L611-7 du code de la propriété intellectuelle s’applique aux agents de l’État, des collectivités publiques et des autres personnes morales de droit public, selon des modalités fixées par décret en Conseil d’État. L’article R611-12 attribue à la personne publique les inventions faites dans l’exécution de tâches comportant une mission inventive correspondant aux attributions de l’agent ou d’études explicitement confiées ; si cette personne publique décide de ne pas procéder à la valorisation de l’invention, l’agent qui en est l’auteur peut disposer des droits patrimoniaux qui y sont attachés, dans les conditions prévues par une convention conclue avec elle.",
+    "example": "Un chercheur d’un établissement public revendique les droits patrimoniaux d’une invention non valorisée : l’instruction demande la décision de l’établissement et la convention correspondante."
   },
   "investissement-pour-impact": {
     "definition": "L’investissement pour l’impact repose sur une intention explicite de contribuer à résoudre un problème social ou environnemental, sur la mesure et la gestion des effets produits, et sur l’additionnalité de l’intervention. Il peut employer des subventions comme des instruments remboursables. Il se distingue d’une simple intégration [[esg-assessment|ESG]], souvent centrée sur la maîtrise des risques, et peut accepter davantage de risque ou un rendement moindre pour atteindre l’impact recherché.",
@@ -866,6 +894,10 @@
   "leverage": {
     "definition": "Le levier opérationnel mesure à quel point le résultat peut progresser plus vite que le chiffre d’affaires lorsque les coûts fixes sont déjà couverts. Dans une startup, il aide à comprendre pourquoi une forte [[gross-margin|marge brute]], une base de coûts fixes et une croissance répétable peuvent améliorer la [[capital-efficiency|capital efficiency]], mais aussi amplifier la baisse si le revenu ralentit.",
     "example": "Une plateforme a déjà payé son produit et son équipe commerciale core : chaque nouveau client ajoute beaucoup de marge, donc le levier opérationnel devient positif."
+  },
+  "licence-d-exploitation": {
+    "definition": "L’article L613-8 du code de la propriété intellectuelle permet de concéder tout ou partie des droits attachés à une demande de brevet ou à un brevet sous forme de licence d’exploitation exclusive ou non exclusive. Les droits conférés par le titre peuvent être invoqués contre le licencié qui enfreint l’une des limites de sa licence, et l’acte de licence est constaté par écrit à peine de nullité. L’assiette, le déclenchement et le sort des droits en fin de contrat relèvent en revanche de la liberté contractuelle, non d’une règle légale.",
+    "example": "Une licence signée mais non inscrite au Registre national des brevets reste valable entre les parties sans être opposable au tiers qui acquiert ensuite des droits sans en avoir eu connaissance."
   },
   "unicorn": {
     "definition": "Une licorne est une [[startup|startup]] privée dont la valorisation atteint ou dépasse 1 milliard de dollars. C'est un statut de valorisation de marché privé, pas une preuve de liquidité ni de rendement réalisé pour les investisseurs.",
@@ -1074,6 +1106,10 @@
     "definition": "Peter Thiel est un entrepreneur-investisseur associé à PayPal, Palantir, Founders Fund et Zero to One. En VC, il est souvent cité pour sa thèse sur les monopoles, les marchés non évidents et l’exemple de son investissement convertible dans Facebook.",
     "example": "Le cas Facebook illustre comment une convertible note avec valuation cap peut produire un rendement extrême quand l’entreprise devient un outlier."
   },
+  "pilote-industriel": {
+    "definition": "Un pilote industriel teste une technologie au-delà d'une preuve de concept en la confrontant à des conditions plus représentatives : intrants, durée, opérateurs, intégration, instrumentation et incidents. Il ne démontre pas à lui seul la fiabilité de long terme, l'économie unitaire, la conformité ou la liberté d'exploitation.",
+    "example": "Un procédé validé en laboratoire peut passer par une installation pilote avant d'engager une première unité plus capitalistique."
+  },
   "pitch": {
     "definition": "Le pitch n'est pas seulement le deck : c'est la façon dont le fondateur rend lisibles le problème, le marché, la solution, la traction, l'équipe et l'usage du capital. Il doit permettre à l'investisseur de comprendre puis de défendre le deal en interne.",
     "example": "Un bon pitch Series A relie traction, marché, use of funds et prochain milestone plutôt que de réciter uniquement les fonctionnalités produit."
@@ -1194,6 +1230,10 @@
     "definition": "Les quasi-fonds propres regroupent, dans l’analyse financière, des ressources de long terme dont le rang, la rémunération ou le remboursement les rapprochent du risque supporté par les fonds propres. L’expression ne désigne pas un statut juridique unique. Le véhicule peut être un titre associatif, un titre participatif, un prêt subordonné ou un autre instrument compatible avec l’émetteur. Une association ne possède pas de capital social : qualifier une créance de quasi-fonds propres n’en fait pas une participation.",
     "example": "Un financeur compare un titre associatif et un prêt subordonné, puis fait valider le véhicule autorisé pour le bénéficiaire et son propre statut."
   },
+  "reproductibilite-mesure": {
+    "definition": "La reproductibilité de mesure est la fidélité obtenue sous des conditions de reproductibilité : différents lieux, opérateurs et systèmes de mesure, avec des mesures répétées sur le même objet ou des objets similaires. Elle doit être distinguée de la convention NASEM de reproductibilité computationnelle.",
+    "example": "Un matériau mesuré dans deux laboratoires avec des systèmes différents relève d'une question de reproductibilité de mesure."
+  },
   "realisation-impact": {
     "definition": "Une réalisation d’impact, ou output, décrit ce qui a été directement fourni ou produit : séances réalisées, personnes accompagnées, équipements installés ou services délivrés. Elle mesure l’exécution, non le changement qui en résulte. Une réalisation peut être nécessaire à un [[resultat-impact|résultat d’impact]] sans suffire à démontrer ce résultat, son maintien ou son attribution à l’intervention.",
     "example": "Former 300 personnes est une réalisation ; l’amélioration durable de leur accès à l’emploi est un résultat à mesurer séparément."
@@ -1221,6 +1261,14 @@
   "representations-and-warranties": {
     "definition": "Les representations and warranties sont des déclarations faites par la société, et parfois les fondateurs, sur des sujets comme capitalisation, contrats, propriété intellectuelle, fiscalité, contentieux ou conformité. Elles conditionnent souvent le closing et peuvent ouvrir des recours si elles sont fausses.",
     "example": "Une warranty de propriété intellectuelle affirme que la société détient ou licence correctement la PI nécessaire à son produit ; une exception doit être décrite dans la disclosure letter."
+  },
+  "replicabilite-scientifique": {
+    "definition": "Dans la convention NASEM, la réplicabilité scientifique consiste à obtenir des résultats cohérents entre des études qui visent la même question scientifique et collectent chacune leurs propres données. Elle ne se confond pas avec la reproductibilité de mesure du JCGM.",
+    "example": "Une seconde équipe qui collecte de nouvelles données pour tester le même effet examine la réplicabilité scientifique."
+  },
+  "repetabilite-mesure": {
+    "definition": "La répétabilité de mesure désigne la fidélité observée sous des conditions comprenant la même procédure, les mêmes opérateurs, le même système de mesure, les mêmes conditions de fonctionnement, le même lieu et des mesures répétées sur un court intervalle. Elle qualifie une condition de mesure, pas toute la validité scientifique d'un résultat.",
+    "example": "Trois séries refaites le même jour, sur le même banc et par le même opérateur testent la répétabilité de mesure."
   },
   "reseau-vc": {
     "definition": "Le réseau VC sert à sourcer des deals, vérifier une [[dd|due diligence]], aider une startup à recruter, vendre, lever en [[follow-on|follow-on]] ou préparer une sortie. Il explique pourquoi un investisseur peut valoir plus que son capital.",
@@ -1298,6 +1346,10 @@
   "secondary": {
     "definition": "Une secondary sale est la vente d’actions privées, de parts de fonds ou d’autres positions existantes à un nouvel acheteur. Elle crée une liquidité partielle avant IPO ou M&A, notamment pour salariés, founders, premiers investisseurs ou LPs.",
     "example": "Un founder vend une petite partie de ses actions lors d’un tour late-stage pour réduire son risque personnel sans quitter la société."
+  },
+  "secret-des-affaires": {
+    "definition": "L’article L151-1 du code de commerce protège l’information qui n’est pas, en elle-même ou dans la configuration exacte de ses éléments, généralement connue ou aisément accessible pour les personnes familières de ce type d’informations dans le secteur concerné, qui revêt une valeur commerciale effective ou potentielle du fait de son caractère secret, et qui fait l’objet de mesures de protection raisonnables de la part de son détenteur légitime. Ces trois conditions sont cumulatives. L’article L151-3 laisse licites la découverte ou création indépendante ainsi que l’observation, l’étude, le démontage ou le test d’un produit mis à la disposition du public ou licitement possédé, sauf stipulation contractuelle contraire. L’atteinte engage la responsabilité civile de son auteur.",
+    "example": "Un procédé tenu confidentiel, incorporé dans un produit vendu sans clause restreignant son étude, reste exposé au démontage licite prévu par l’article L151-3."
   },
   "seed": {
     "definition": "Le seed finance le passage d'une intuition ou d'un prototype vers les premières preuves commerciales : produit utilisable, premiers clients, apprentissage marché et trajectoire vers le [[pmf|product-market fit]]. En France, on parle aussi d'[[amorcage|amorçage]].",
@@ -1461,6 +1513,10 @@
   "titre-participatif": {
     "definition": "Le titre participatif est une créance dont l’émission est ouverte aux catégories limitativement énumérées à l’article L. 213-32 du Code monétaire et financier, notamment certaines sociétés anonymes coopératives et entités publiques. Sa rémunération peut comporter une composante variable selon son régime. Il ne constitue ni une prise de participation au capital ni un instrument générique accessible à toute association.",
     "example": "Une société coopérative vérifie qu’elle relève des catégories autorisées avant de négocier les conditions d’un titre participatif."
+  },
+  "titularite-des-droits": {
+    "definition": "L’article L611-6 du code de la propriété intellectuelle attribue le droit au titre à l’inventeur ou à son ayant cause ; lorsque plusieurs personnes ont réalisé l’invention indépendamment l’une de l’autre, il revient à celle qui justifie de la date de dépôt la plus ancienne. Dans la procédure devant le directeur de l’Institut national de la propriété industrielle, le demandeur est réputé avoir droit au titre : le dépôt fonde une présomption de procédure et non la preuve de la titularité. Établir celle-ci suppose de reconstituer, actif par actif, l’inventeur et son statut, l’entité déposante, la chaîne de cessions et les licences entrantes.",
+    "example": "Une société dépose en son nom une invention réalisée par un cofondateur avant sa constitution : l’instruction reconstitue la chaîne de cessions avant de tenir la titularité pour établie."
   },
   "tam": {
     "definition": "Le TAM mesure la demande totale qui existerait si un produit captait l'intégralité de son marché pertinent, toutes géographies et tous segments confondus, sans contrainte de concurrence ni de canal. C'est le plafond théorique de l'opportunité : en diligence, il sert surtout à vérifier qu'un marché est assez grand pour viser un [[fund-returner|retour de fonds]], pas à prédire un chiffre d'affaires. Un TAM gonflé par des agrégats macro ne dit presque rien de ce qu'une société peut réellement capter.",

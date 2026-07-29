@@ -376,9 +376,12 @@ La carte des parcours est **manipulable comme une vraie carte**. Tout le contenu
 Règles / garde-fous :
 
 - zoom borné `[0.6, 3]`, translation bornée (`clampView`) pour ne jamais perdre la carte hors champ ;
-- seuil de 4 px qui distingue le **clic** (navigue vers la terre) du **drag** (pan) — un drag ne déclenche jamais la navigation ;
+- seuil de 4 px qui distingue l'**activation** du **drag** (pan) — un drag ne déclenche jamais la navigation ; à la souris ou au clavier, l'activation ouvre le parcours, tandis que sur écran tactile le premier appui révèle les relations et le suivant ouvre le parcours ;
 - `touch-action: none` sur le SVG pour que pan/pinch fonctionnent ; molette en listener natif non-passif (`preventDefault`) ;
-- les interactions existantes (survol → encart cartouche, focus clavier, liste de chips en repli) sont conservées intactes.
+- le survol, le focus clavier et la sélection tactile d'un sceau produisent le même rendu relationnel, mais leurs propriétaires sont suivis séparément afin qu'une sortie de survol n'efface ni un focus ni une sélection tactile encore actifs ; les relations cartographiques ne sont jamais affichées en permanence ;
+- les compléments de même niveau suivent un trait primaire pointillé sans flèche ; les progressions conseillées utilisent un trait secondaire continu et orienté. La distinction repose donc sur la forme, l'orientation et le libellé du cartouche, pas sur la couleur seule ;
+- le groupe SVG des relations reste `aria-hidden` et `pointer-events="none"` pour ne pas intercepter le pan, le zoom ou le clic. Le cartouche fournit l'équivalent textuel et les sceaux reliés ne sont pas atténués ;
+- la liste de chips conserve le même état au survol, au focus et au premier appui tactile, comme repli mobile et clavier.
 
 ---
 

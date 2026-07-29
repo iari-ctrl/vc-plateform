@@ -217,7 +217,7 @@ export default function HomePage() {
                 <Link to="/intelligence" className="btn-foil sheen-host">
                   Ouvrir l’intelligence VC <ArrowRight size={16} />
                 </Link>
-                <Link to="/onboarding" className="btn-ghost">
+                <Link to="/ikigai?test=1" className="btn-ghost">
                   Faire le test d’orientation
                 </Link>
               </div>

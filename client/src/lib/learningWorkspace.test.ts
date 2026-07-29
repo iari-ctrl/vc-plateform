@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   EMPTY_LEARNING_WORKSPACE,
   LEARNING_WORKSPACE_LIMITS,
+  learningActivityKey,
   learningWorkspace,
   parseLearningWorkspace,
   productionStageAtLeast,
@@ -42,6 +43,19 @@ describe('learning workspace', () => {
       diagnostics: { d1: { answers: { q1: 'o1', q2: 2 }, updatedAt: '2026-07-22' } },
       productions: { p1: { stage: 'reviewed', note: 'Note', updatedAt: '2026-07-22' }, broken: { stage: 'unknown' } },
     })).toBe(EMPTY_LEARNING_WORKSPACE);
+  });
+
+  it('migre le contrat v1 sans perdre diagnostics ni productions', () => {
+    expect(parseLearningWorkspace({
+      schemaVersion: 1,
+      diagnostics: { d1: { answers: { q1: 'o1' }, updatedAt: '2026-07-22T00:00:00.000Z' } },
+      productions: { p1: { stage: 'reviewed', note: 'Note', updatedAt: '2026-07-22T00:00:00.000Z' } },
+    })).toMatchObject({
+      schemaVersion: 2,
+      diagnostics: { d1: { answers: { q1: 'o1' } } },
+      productions: { p1: { stage: 'reviewed', note: 'Note' } },
+      activities: {},
+    });
   });
 
   it('ignores malformed stored JSON without overwriting the original', () => {
@@ -98,7 +112,7 @@ describe('learning workspace', () => {
     expect(learningWorkspace.saveDiagnosticAnswer('diag-vp-entree', 'comptes', 'option-b')).toEqual({ ok: true });
     expect(localStorage.setItem).toHaveBeenCalledWith(
       'vcpx:learning-workspace',
-      expect.stringContaining('"schemaVersion":1'),
+      expect.stringContaining('"schemaVersion":2'),
     );
     learningWorkspace.reload();
     expect(learningWorkspace.getSnapshot().diagnostics['diag-vp-entree'].answers).toEqual({ comptes: 'option-b' });
@@ -124,6 +138,30 @@ describe('learning workspace', () => {
     });
   });
 
+  it('ne termine un cas ou un simulateur qu’après une action explicite bornée au parcours', () => {
+    const key = learningActivityKey('p-serie-a', 'simulator', 'dilution');
+
+    expect(learningWorkspace.getSnapshot().activities[key]).toBeUndefined();
+    expect(learningWorkspace.completeActivity('p-serie-a', 'simulator', 'dilution')).toEqual({ ok: true });
+
+    expect(learningWorkspace.getSnapshot().activities[key]).toMatchObject({
+      parcoursId: 'p-serie-a',
+      kind: 'simulator',
+      id: 'dilution',
+      completed: true,
+      completedAt: expect.any(String),
+    });
+    learningWorkspace.reload();
+    expect(learningWorkspace.getSnapshot().activities[key]?.completed).toBe(true);
+  });
+
+  it('rejette une clé d’activité trop longue sans muter le snapshot', () => {
+    const result = learningWorkspace.completeActivity('p-serie-a', 'case', 'x'.repeat(LEARNING_WORKSPACE_LIMITS.id + 1));
+
+    expect(result).toMatchObject({ ok: false, reason: 'limit', key: 'learning-workspace' });
+    expect(learningWorkspace.getSnapshot().activities).toEqual({});
+  });
+
   it('keeps production stages monotonic and reveals the correction after a first version', () => {
     expect(learningWorkspace.revealCorrection('vp-recommandation-soutien')).toMatchObject({ ok: false });
     expect(learningWorkspace.advanceProduction('vp-recommandation-soutien', 'first-version-completed')).toEqual({ ok: true });
@@ -138,10 +176,18 @@ describe('learning workspace', () => {
     });
   });
 
-  it('declares the final milestone complete only after revision', () => {
+  it('declares the final milestone complete only after revision and observable evidence', () => {
     expect(learningWorkspace.advanceProduction('vp-recommandation-soutien', 'reviewed')).toEqual({ ok: true });
     expect(learningWorkspace.declareComplete('vp-recommandation-soutien')).toMatchObject({ ok: false });
     expect(learningWorkspace.advanceProduction('vp-recommandation-soutien', 'revised')).toEqual({ ok: true });
+    expect(learningWorkspace.declareComplete('vp-recommandation-soutien')).toMatchObject({ ok: false });
+    expect(learningWorkspace.updateProduction('vp-recommandation-soutien', {
+      note: 'Version de travail produite hors plateforme.',
+      externalFileProduced: true,
+      reviewMode: 'peer',
+      rubricRatings: { mandat: 'acceptable' },
+      changeLog: 'Retour intégré et arbitrage principal corrigé.',
+    })).toEqual({ ok: true });
     expect(learningWorkspace.declareComplete('vp-recommandation-soutien')).toEqual({ ok: true });
     expect(learningWorkspace.getSnapshot().productions['vp-recommandation-soutien'].declaredCompleteAt).toEqual(
       expect.any(String),

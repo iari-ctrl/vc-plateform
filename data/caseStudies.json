@@ -171,13 +171,13 @@
   {
     "id": "cs-dilution-journey",
     "slug": "la-dilution-d-un-fondateur-du-seed-a-la-series-c",
-    "title": "La dilution d'un fondateur, du seed à la Series C",
+    "title": "La dilution d'une fondatrice, du seed à la Series C",
     "subtitle": "Évolution de la participation fondatrice sur quatre tours",
     "kind": "startup",
     "company": "SaaS B2B fictif · 4 tours",
     "year": 2026,
     "readMin": 10,
-    "summary": "Suivi du cap table d'une fondatrice sur quatre tours, de la composition de la dilution et de son effet sur la valeur finale détenue.",
+    "summary": "Suivi corrigé d'une cap table fictive sur quatre tours : la composition de 22 %, 20 %, 16 % et 14 % de dilution laisse 45,08 % de participation finale.",
     "tags": [
       "dilution",
       "cap-table",
@@ -197,11 +197,11 @@
       },
       {
         "heading": "La composition de la dilution",
-        "body": "Seed : -22 % (dont ESOP). Series A : -20 %. Series B : -16 %. Series C : -14 %. La composition de ces pourcentages sur une base décroissante laisse à la fondatrice ~28 % après la Series C."
+        "body": "Seed : -22 % (dont ESOP). Series A : -20 %. Series B : -16 %. Series C : -14 %. La composition de ces pourcentages sur une base décroissante se calcule ainsi : 100 % × 78 % × 80 % × 84 % × 86 % = 45,08 %."
       },
       {
         "heading": "Dilution et valeur détenue",
-        "body": "Dans cet exemple, la participation de 28 % porte sur une entreprise valorisée 400 M€, tandis que l'entreprise détenue à 100 % plafonne faute de financement. La dilution est favorable lorsqu'elle finance une création de valeur supérieure à la part cédée."
+        "body": "Dans cet exemple, la participation finale de 45,08 % porte sur une entreprise valorisée 400 M€, soit environ 180,3 M€ avant prise en compte de droits économiques particuliers. La dilution est favorable lorsqu'elle finance une création de valeur supérieure à la part cédée et lorsque les droits attachés aux titres restent compris."
       },
       {
         "heading": "Les leviers de contrôle de la dilution",
@@ -210,8 +210,8 @@
     ],
     "takeaways": [
       "La dilution de plusieurs tours se calcule par composition sur une base décroissante.",
-      "Une participation plus faible peut représenter une valeur supérieure après la croissance de l'entreprise.",
-      "La décision vise à optimiser la valeur finale de la participation détenue."
+      "Une participation finale de 45,08 % après les tours indiqués peut représenter une valeur supérieure si la société croît suffisamment.",
+      "La décision vise à optimiser la valeur finale et les droits associés à la participation détenue."
     ]
   },
   {
@@ -301,18 +301,62 @@
         "tables": [
           {
             "caption": "Comptes de résultat 2024 et 2025",
-            "columns": ["Poste", "2024", "2025"],
+            "columns": [
+              "Poste",
+              "2024",
+              "2025"
+            ],
             "rows": [
-              ["Subventions affectées", "1 420", "1 620"],
-              ["Dons non affectés", "470", "540"],
-              ["Prestations", "210", "240"],
-              ["Total des ressources", "2 100", "2 400"],
-              ["Personnel", "1 360", "1 560"],
-              ["Programmes et déplacements", "390", "445"],
-              ["Locaux et fonctions support", "250", "285"],
-              ["Amortissements et autres charges", "50", "70"],
-              ["Total des charges", "2 050", "2 360"],
-              ["Résultat de l’exercice", "50", "40"]
+              [
+                "Subventions affectées",
+                "1 420",
+                "1 620"
+              ],
+              [
+                "Dons non affectés",
+                "470",
+                "540"
+              ],
+              [
+                "Prestations",
+                "210",
+                "240"
+              ],
+              [
+                "Total des ressources",
+                "2 100",
+                "2 400"
+              ],
+              [
+                "Personnel",
+                "1 360",
+                "1 560"
+              ],
+              [
+                "Programmes et déplacements",
+                "390",
+                "445"
+              ],
+              [
+                "Locaux et fonctions support",
+                "250",
+                "285"
+              ],
+              [
+                "Amortissements et autres charges",
+                "50",
+                "70"
+              ],
+              [
+                "Total des charges",
+                "2 050",
+                "2 360"
+              ],
+              [
+                "Résultat de l’exercice",
+                "50",
+                "40"
+              ]
             ]
           }
         ]
@@ -325,19 +369,67 @@
         "tables": [
           {
             "caption": "Bilans simplifiés au 31 décembre",
-            "columns": ["Poste", "2024", "2025"],
+            "columns": [
+              "Poste",
+              "2024",
+              "2025"
+            ],
             "rows": [
-              ["Immobilisations nettes", "150", "160"],
-              ["Créances financeurs et clients", "420", "510"],
-              ["Charges constatées d’avance", "60", "80"],
-              ["Banques", "310", "390"],
-              ["Total actif", "940", "1 140"],
-              ["Réserves libres", "170", "210"],
-              ["Fonds dédiés ou affectés", "210", "250"],
-              ["Dettes fournisseurs", "300", "390"],
-              ["Dettes sociales et fiscales", "110", "130"],
-              ["Produits constatés d’avance", "150", "160"],
-              ["Total passif", "940", "1 140"]
+              [
+                "Immobilisations nettes",
+                "150",
+                "160"
+              ],
+              [
+                "Créances financeurs et clients",
+                "420",
+                "510"
+              ],
+              [
+                "Charges constatées d’avance",
+                "60",
+                "80"
+              ],
+              [
+                "Banques",
+                "310",
+                "390"
+              ],
+              [
+                "Total actif",
+                "940",
+                "1 140"
+              ],
+              [
+                "Réserves libres",
+                "170",
+                "210"
+              ],
+              [
+                "Fonds dédiés ou affectés",
+                "210",
+                "250"
+              ],
+              [
+                "Dettes fournisseurs",
+                "300",
+                "390"
+              ],
+              [
+                "Dettes sociales et fiscales",
+                "110",
+                "130"
+              ],
+              [
+                "Produits constatés d’avance",
+                "150",
+                "160"
+              ],
+              [
+                "Total passif",
+                "940",
+                "1 140"
+              ]
             ]
           }
         ]
@@ -350,26 +442,90 @@
         "tables": [
           {
             "caption": "Extrait de balance au 31 décembre 2025",
-            "columns": ["Compte", "Libellé", "Débit", "Crédit"],
+            "columns": [
+              "Compte",
+              "Libellé",
+              "Débit",
+              "Crédit"
+            ],
             "rows": [
-              ["512", "Banques", "390", "0"],
-              ["411", "Créances de prestations", "95", "0"],
-              ["441", "Subventions à recevoir", "415", "0"],
-              ["401", "Fournisseurs", "0", "390"],
-              ["43", "Dettes sociales", "0", "130"],
-              ["194", "Fonds dédiés", "0", "250"],
-              ["487", "Produits constatés d’avance", "0", "160"]
+              [
+                "512",
+                "Banques",
+                "390",
+                "0"
+              ],
+              [
+                "411",
+                "Créances de prestations",
+                "95",
+                "0"
+              ],
+              [
+                "441",
+                "Subventions à recevoir",
+                "415",
+                "0"
+              ],
+              [
+                "401",
+                "Fournisseurs",
+                "0",
+                "390"
+              ],
+              [
+                "43",
+                "Dettes sociales",
+                "0",
+                "130"
+              ],
+              [
+                "194",
+                "Fonds dédiés",
+                "0",
+                "250"
+              ],
+              [
+                "487",
+                "Produits constatés d’avance",
+                "0",
+                "160"
+              ]
             ]
           },
           {
             "caption": "Rapprochement du compte bancaire principal",
-            "columns": ["Élément", "Montant", "Statut"],
+            "columns": [
+              "Élément",
+              "Montant",
+              "Statut"
+            ],
             "rows": [
-              ["Solde du relevé au 31 décembre", "372", "Confirmé par relevé"],
-              ["Virement Fondation Lumen daté du 31 décembre", "30", "Visible sur le relevé ; comptabilisé le 3 janvier"],
-              ["Chèques fournisseurs non débités", "-12", "Liste fournie"],
-              ["Solde comptable annoncé", "390", "À rapprocher"],
-              ["Compte de paiement secondaire", "8", "Absent de la balance ; usage à confirmer"]
+              [
+                "Solde du relevé au 31 décembre",
+                "372",
+                "Confirmé par relevé"
+              ],
+              [
+                "Virement Fondation Lumen daté du 31 décembre",
+                "30",
+                "Visible sur le relevé ; comptabilisé le 3 janvier"
+              ],
+              [
+                "Chèques fournisseurs non débités",
+                "-12",
+                "Liste fournie"
+              ],
+              [
+                "Solde comptable annoncé",
+                "390",
+                "À rapprocher"
+              ],
+              [
+                "Compte de paiement secondaire",
+                "8",
+                "Absent de la balance ; usage à confirmer"
+              ]
             ]
           }
         ]
@@ -382,22 +538,127 @@
         "tables": [
           {
             "caption": "Échéancier des 13 premières semaines de 2026",
-            "columns": ["Date prévue", "Flux", "Encaissement", "Décaissement", "Affectation annoncée", "Niveau de preuve"],
+            "columns": [
+              "Date prévue",
+              "Flux",
+              "Encaissement",
+              "Décaissement",
+              "Affectation annoncée",
+              "Niveau de preuve"
+            ],
             "rows": [
-              ["05/01/2026", "Solde bancaire d’ouverture", "390", "0", "Voir détail des fonds", "Relevé à rapprocher"],
-              ["09/01/2026", "Loyers et assurances", "0", "25", "Fonctionnement", "Échéancier signé"],
-              ["16/01/2026", "Prestations employeurs", "55", "0", "Libre", "Factures émises"],
-              ["23/01/2026", "Achats de programme", "0", "42", "Programme A", "Commandes"],
-              ["30/01/2026", "Paie et charges", "0", "150", "Mixte", "Journal de paie"],
-              ["06/02/2026", "Don Fondation Lumen", "90", "0", "Fonctions centrales", "Convention signée"],
-              ["13/02/2026", "Acompte public Région Ouest", "180", "0", "Programme A", "Notification ; date estimée"],
-              ["20/02/2026", "Dépôt nouveau site", "0", "80", "Réplication", "Projet de bail non signé"],
-              ["27/02/2026", "Paie et charges", "0", "150", "Mixte", "Budget"],
-              ["06/03/2026", "Loyers et assurances", "0", "25", "Fonctionnement", "Échéancier"],
-              ["13/03/2026", "Prestations employeurs", "60", "0", "Libre", "Pipeline ; contrats partiels"],
-              ["20/03/2026", "Acompte public Région Sud", "240", "0", "Programme B", "Convention signée ; date contestée"],
-              ["27/03/2026", "Paie, charges et recrutements", "0", "172", "Mixte", "Budget de recrutement"],
-              ["03/04/2026", "Achats de programme", "0", "48", "Programme B", "Prévision"]
+              [
+                "05/01/2026",
+                "Solde bancaire d’ouverture",
+                "390",
+                "0",
+                "Voir détail des fonds",
+                "Relevé à rapprocher"
+              ],
+              [
+                "09/01/2026",
+                "Loyers et assurances",
+                "0",
+                "25",
+                "Fonctionnement",
+                "Échéancier signé"
+              ],
+              [
+                "16/01/2026",
+                "Prestations employeurs",
+                "55",
+                "0",
+                "Libre",
+                "Factures émises"
+              ],
+              [
+                "23/01/2026",
+                "Achats de programme",
+                "0",
+                "42",
+                "Programme A",
+                "Commandes"
+              ],
+              [
+                "30/01/2026",
+                "Paie et charges",
+                "0",
+                "150",
+                "Mixte",
+                "Journal de paie"
+              ],
+              [
+                "06/02/2026",
+                "Don Fondation Lumen",
+                "90",
+                "0",
+                "Fonctions centrales",
+                "Convention signée"
+              ],
+              [
+                "13/02/2026",
+                "Acompte public Région Ouest",
+                "180",
+                "0",
+                "Programme A",
+                "Notification ; date estimée"
+              ],
+              [
+                "20/02/2026",
+                "Dépôt nouveau site",
+                "0",
+                "80",
+                "Réplication",
+                "Projet de bail non signé"
+              ],
+              [
+                "27/02/2026",
+                "Paie et charges",
+                "0",
+                "150",
+                "Mixte",
+                "Budget"
+              ],
+              [
+                "06/03/2026",
+                "Loyers et assurances",
+                "0",
+                "25",
+                "Fonctionnement",
+                "Échéancier"
+              ],
+              [
+                "13/03/2026",
+                "Prestations employeurs",
+                "60",
+                "0",
+                "Libre",
+                "Pipeline ; contrats partiels"
+              ],
+              [
+                "20/03/2026",
+                "Acompte public Région Sud",
+                "240",
+                "0",
+                "Programme B",
+                "Convention signée ; date contestée"
+              ],
+              [
+                "27/03/2026",
+                "Paie, charges et recrutements",
+                "0",
+                "172",
+                "Mixte",
+                "Budget de recrutement"
+              ],
+              [
+                "03/04/2026",
+                "Achats de programme",
+                "0",
+                "48",
+                "Programme B",
+                "Prévision"
+              ]
             ]
           }
         ]
@@ -410,26 +671,197 @@
         "tables": [
           {
             "caption": "Hypothèses mensuelles du modèle à 18 mois, en milliers d’euros",
-            "columns": ["Mois", "Encaissements socle", "Encaissements réplication", "Personnel", "Programmes", "Fonctions centrales", "Investissements", "Commentaire"],
+            "columns": [
+              "Mois",
+              "Encaissements socle",
+              "Encaissements réplication",
+              "Personnel",
+              "Programmes",
+              "Fonctions centrales",
+              "Investissements",
+              "Commentaire"
+            ],
             "rows": [
-              ["Jan-26", "55", "90", "150", "42", "25", "0", "Ouverture non démarrée"],
-              ["Fév-26", "180", "0", "150", "38", "25", "80", "Dépôt de site envisagé"],
-              ["Mar-26", "60", "240", "172", "48", "25", "0", "Date du versement Sud à confirmer"],
-              ["Avr-26", "70", "0", "172", "46", "27", "20", "Recrutement opérations"],
-              ["Mai-26", "210", "0", "175", "50", "27", "15", "Acompte Ouest estimé"],
-              ["Juin-26", "65", "150", "185", "55", "30", "35", "Cofinancement non signé"],
-              ["Juil-26", "80", "120", "205", "78", "34", "60", "Première ouverture du budget"],
-              ["Aoû-26", "65", "0", "205", "70", "34", "10", "Activité réduite"],
-              ["Sep-26", "260", "90", "215", "85", "36", "15", "Versement conditionné aux inscriptions"],
-              ["Oct-26", "75", "0", "215", "82", "36", "0", "Prestations en prospection"],
-              ["Nov-26", "220", "0", "218", "84", "37", "0", "Solde public estimé"],
-              ["Déc-26", "90", "100", "225", "88", "38", "10", "Prime et régularisations"],
-              ["Jan-27", "70", "180", "250", "105", "42", "70", "Deuxième ouverture du budget"],
-              ["Fév-27", "230", "0", "250", "100", "42", "10", "Échéance publique variable"],
-              ["Mar-27", "85", "120", "255", "110", "44", "15", "Cofinancement conditionnel"],
-              ["Avr-27", "260", "0", "258", "108", "44", "0", "Renouvellement non voté"],
-              ["Mai-27", "90", "160", "260", "115", "45", "20", "Versement après revue"],
-              ["Juin-27", "240", "0", "265", "118", "46", "25", "Préparation troisième ouverture"]
+              [
+                "Jan-26",
+                "55",
+                "90",
+                "150",
+                "42",
+                "25",
+                "0",
+                "Ouverture non démarrée"
+              ],
+              [
+                "Fév-26",
+                "180",
+                "0",
+                "150",
+                "38",
+                "25",
+                "80",
+                "Dépôt de site envisagé"
+              ],
+              [
+                "Mar-26",
+                "60",
+                "240",
+                "172",
+                "48",
+                "25",
+                "0",
+                "Date du versement Sud à confirmer"
+              ],
+              [
+                "Avr-26",
+                "70",
+                "0",
+                "172",
+                "46",
+                "27",
+                "20",
+                "Recrutement opérations"
+              ],
+              [
+                "Mai-26",
+                "210",
+                "0",
+                "175",
+                "50",
+                "27",
+                "15",
+                "Acompte Ouest estimé"
+              ],
+              [
+                "Juin-26",
+                "65",
+                "150",
+                "185",
+                "55",
+                "30",
+                "35",
+                "Cofinancement non signé"
+              ],
+              [
+                "Juil-26",
+                "80",
+                "120",
+                "205",
+                "78",
+                "34",
+                "60",
+                "Première ouverture du budget"
+              ],
+              [
+                "Aoû-26",
+                "65",
+                "0",
+                "205",
+                "70",
+                "34",
+                "10",
+                "Activité réduite"
+              ],
+              [
+                "Sep-26",
+                "260",
+                "90",
+                "215",
+                "85",
+                "36",
+                "15",
+                "Versement conditionné aux inscriptions"
+              ],
+              [
+                "Oct-26",
+                "75",
+                "0",
+                "215",
+                "82",
+                "36",
+                "0",
+                "Prestations en prospection"
+              ],
+              [
+                "Nov-26",
+                "220",
+                "0",
+                "218",
+                "84",
+                "37",
+                "0",
+                "Solde public estimé"
+              ],
+              [
+                "Déc-26",
+                "90",
+                "100",
+                "225",
+                "88",
+                "38",
+                "10",
+                "Prime et régularisations"
+              ],
+              [
+                "Jan-27",
+                "70",
+                "180",
+                "250",
+                "105",
+                "42",
+                "70",
+                "Deuxième ouverture du budget"
+              ],
+              [
+                "Fév-27",
+                "230",
+                "0",
+                "250",
+                "100",
+                "42",
+                "10",
+                "Échéance publique variable"
+              ],
+              [
+                "Mar-27",
+                "85",
+                "120",
+                "255",
+                "110",
+                "44",
+                "15",
+                "Cofinancement conditionnel"
+              ],
+              [
+                "Avr-27",
+                "260",
+                "0",
+                "258",
+                "108",
+                "44",
+                "0",
+                "Renouvellement non voté"
+              ],
+              [
+                "Mai-27",
+                "90",
+                "160",
+                "260",
+                "115",
+                "45",
+                "20",
+                "Versement après revue"
+              ],
+              [
+                "Juin-27",
+                "240",
+                "0",
+                "265",
+                "118",
+                "46",
+                "25",
+                "Préparation troisième ouverture"
+              ]
             ]
           }
         ]
@@ -442,13 +874,55 @@
         "tables": [
           {
             "caption": "Fonds présents dans la trésorerie de clôture",
-            "columns": ["Financeur", "Solde", "Emploi", "Période", "Prochaine échéance", "Restitution"],
+            "columns": [
+              "Financeur",
+              "Solde",
+              "Emploi",
+              "Période",
+              "Prochaine échéance",
+              "Restitution"
+            ],
             "rows": [
-              ["Région Ouest", "110", "Salaires et accompagnement programme A", "Jan–juin 2026", "60 en février", "Solde non employé restituable"],
-              ["Région Sud", "75", "Actions programme B", "Jan–mars 2026", "45 en mars", "Report soumis à accord"],
-              ["Fondation Lumen", "35", "Système de données", "Avant septembre 2026", "10 en avril", "Réaffectation écrite possible"],
-              ["Fonds européen", "30", "Évaluation externe", "Avant décembre 2026", "Aucune commande", "Règles de restitution à vérifier"],
-              ["Total annoncé", "250", "", "", "", ""]
+              [
+                "Région Ouest",
+                "110",
+                "Salaires et accompagnement programme A",
+                "Jan–juin 2026",
+                "60 en février",
+                "Solde non employé restituable"
+              ],
+              [
+                "Région Sud",
+                "75",
+                "Actions programme B",
+                "Jan–mars 2026",
+                "45 en mars",
+                "Report soumis à accord"
+              ],
+              [
+                "Fondation Lumen",
+                "35",
+                "Système de données",
+                "Avant septembre 2026",
+                "10 en avril",
+                "Réaffectation écrite possible"
+              ],
+              [
+                "Fonds européen",
+                "30",
+                "Évaluation externe",
+                "Avant décembre 2026",
+                "Aucune commande",
+                "Règles de restitution à vérifier"
+              ],
+              [
+                "Total annoncé",
+                "250",
+                "",
+                "",
+                "",
+                ""
+              ]
             ]
           }
         ]
@@ -461,12 +935,42 @@
         "tables": [
           {
             "caption": "Synthèse des pièces reçues",
-            "columns": ["Contrepartie", "Montant", "Pièce", "Condition", "Date de versement"],
+            "columns": [
+              "Contrepartie",
+              "Montant",
+              "Pièce",
+              "Condition",
+              "Date de versement"
+            ],
             "rows": [
-              ["Fondation Lumen", "150", "Convention signée", "Première ouverture et rapport à six mois", "100 en juin 2026 ; 50 en janvier 2027"],
-              ["Région Nord", "300", "Lettre d’intérêt non signée", "Vote en septembre et ligne budgétaire disponible", "Budget Trait d’Union : juillet 2026"],
-              ["Agence Emploi", "120", "Courriel de discussion", "Marché à attribuer", "Aucune date ferme"],
-              ["Entreprise Solstice", "60", "Convention expirée au 31/12/2025", "Renouvellement en discussion", "Budget : mars 2026"]
+              [
+                "Fondation Lumen",
+                "150",
+                "Convention signée",
+                "Première ouverture et rapport à six mois",
+                "100 en juin 2026 ; 50 en janvier 2027"
+              ],
+              [
+                "Région Nord",
+                "300",
+                "Lettre d’intérêt non signée",
+                "Vote en septembre et ligne budgétaire disponible",
+                "Budget Trait d’Union : juillet 2026"
+              ],
+              [
+                "Agence Emploi",
+                "120",
+                "Courriel de discussion",
+                "Marché à attribuer",
+                "Aucune date ferme"
+              ],
+              [
+                "Entreprise Solstice",
+                "60",
+                "Convention expirée au 31/12/2025",
+                "Renouvellement en discussion",
+                "Budget : mars 2026"
+              ]
             ]
           }
         ]
@@ -479,12 +983,37 @@
         "tables": [
           {
             "caption": "Décisions et discussions consignées",
-            "columns": ["Date", "Sujet", "Extrait", "Pièce manquante"],
+            "columns": [
+              "Date",
+              "Sujet",
+              "Extrait",
+              "Pièce manquante"
+            ],
             "rows": [
-              ["18/06/2025", "Réplication", "Accord de principe pour préparer jusqu’à trois régions, sous réserve d’un budget complet", "Aucun vote sur le calendrier"],
-              ["12/12/2025", "Budget 2026", "Budget socle approuvé ; annexe réplication reportée", "Annexe présentée comme approuvée dans le dossier"],
-              ["12/12/2025", "Conflit d’intérêts", "Une administratrice signale un lien avec un prestataire pressenti et quitte la discussion", "Registre des conflits non transmis"],
-              ["10/01/2026", "Ouvertures", "La présidente évoque trois ouvertures avant fin 2026", "Compte rendu non approuvé"]
+              [
+                "18/06/2025",
+                "Réplication",
+                "Accord de principe pour préparer jusqu’à trois régions, sous réserve d’un budget complet",
+                "Aucun vote sur le calendrier"
+              ],
+              [
+                "12/12/2025",
+                "Budget 2026",
+                "Budget socle approuvé ; annexe réplication reportée",
+                "Annexe présentée comme approuvée dans le dossier"
+              ],
+              [
+                "12/12/2025",
+                "Conflit d’intérêts",
+                "Une administratrice signale un lien avec un prestataire pressenti et quitte la discussion",
+                "Registre des conflits non transmis"
+              ],
+              [
+                "10/01/2026",
+                "Ouvertures",
+                "La présidente évoque trois ouvertures avant fin 2026",
+                "Compte rendu non approuvé"
+              ]
             ]
           }
         ]
@@ -497,14 +1026,49 @@
         "tables": [
           {
             "caption": "Fonctions, capacité et dépendances",
-            "columns": ["Fonction", "Effectif ETP", "Responsabilité", "Observation"],
+            "columns": [
+              "Fonction",
+              "Effectif ETP",
+              "Responsabilité",
+              "Observation"
+            ],
             "rows": [
-              ["Direction générale", "1", "Stratégie, financeurs, arbitrages programme", "Délégations partielles"],
-              ["Responsables nationaux", "2", "Qualité, partenariats employeurs, supervision", "Charge déclarée à 95 %"],
-              ["Finance et administration", "2", "Comptabilité, paie, conventions", "Prévision de trésorerie trimestrielle"],
-              ["Responsables d’antenne", "4", "Équipes locales et partenaires", "Un poste vacant depuis trois mois"],
-              ["Intervenants de terrain", "22", "Accompagnement des participants", "Turnover de 34 % sur l’antenne récente"],
-              ["Données et évaluation", "0", "Exports assurés par les responsables nationaux", "Trois outils sans journal de modification"]
+              [
+                "Direction générale",
+                "1",
+                "Stratégie, financeurs, arbitrages programme",
+                "Délégations partielles"
+              ],
+              [
+                "Responsables nationaux",
+                "2",
+                "Qualité, partenariats employeurs, supervision",
+                "Charge déclarée à 95 %"
+              ],
+              [
+                "Finance et administration",
+                "2",
+                "Comptabilité, paie, conventions",
+                "Prévision de trésorerie trimestrielle"
+              ],
+              [
+                "Responsables d’antenne",
+                "4",
+                "Équipes locales et partenaires",
+                "Un poste vacant depuis trois mois"
+              ],
+              [
+                "Intervenants de terrain",
+                "22",
+                "Accompagnement des participants",
+                "Turnover de 34 % sur l’antenne récente"
+              ],
+              [
+                "Données et évaluation",
+                "0",
+                "Exports assurés par les responsables nationaux",
+                "Trois outils sans journal de modification"
+              ]
             ]
           }
         ]
@@ -517,16 +1081,52 @@
         "tables": [
           {
             "caption": "Synthèse des entretiens",
-            "columns": ["Personne", "Point exprimé", "Limite"],
+            "columns": [
+              "Personne",
+              "Point exprimé",
+              "Limite"
+            ],
             "rows": [
-              ["Participant A", "L’accompagnement a permis de reprendre confiance et d’accéder à une formation", "Programme achevé ; proposé par l’antenne"],
-              ["Participante B", "Les horaires ont entraîné des frais de garde et plusieurs absences", "Entretien interrompu ; situation à six mois inconnue"],
-              ["Ancien participant C", "Le suivi après la sortie a cessé après deux appels", "A quitté le programme avant son terme"],
-              ["Responsable d’antenne", "La méthode peut être transférée avec quatre mois de préparation", "N’a pas ouvert de nouveau site"],
-              ["Intervenante", "Les adaptations reposent encore sur l’expérience de quelques personnes", "Ancienneté de huit mois"],
-              ["Employeur partenaire", "Les candidats sont mieux préparés, mais les échanges varient selon l’antenne", "Partenaire de longue date"],
-              ["Membre du conseil", "Le calendrier doit suivre les cofinancements", "Pense que la Région Nord a déjà voté"],
-              ["Direction générale", "Trois ouvertures en dix-huit mois sont possibles avec un renforcement central", "Poste central non inscrit avant 2027"]
+              [
+                "Participant A",
+                "L’accompagnement a permis de reprendre confiance et d’accéder à une formation",
+                "Programme achevé ; proposé par l’antenne"
+              ],
+              [
+                "Participante B",
+                "Les horaires ont entraîné des frais de garde et plusieurs absences",
+                "Entretien interrompu ; situation à six mois inconnue"
+              ],
+              [
+                "Ancien participant C",
+                "Le suivi après la sortie a cessé après deux appels",
+                "A quitté le programme avant son terme"
+              ],
+              [
+                "Responsable d’antenne",
+                "La méthode peut être transférée avec quatre mois de préparation",
+                "N’a pas ouvert de nouveau site"
+              ],
+              [
+                "Intervenante",
+                "Les adaptations reposent encore sur l’expérience de quelques personnes",
+                "Ancienneté de huit mois"
+              ],
+              [
+                "Employeur partenaire",
+                "Les candidats sont mieux préparés, mais les échanges varient selon l’antenne",
+                "Partenaire de longue date"
+              ],
+              [
+                "Membre du conseil",
+                "Le calendrier doit suivre les cofinancements",
+                "Pense que la Région Nord a déjà voté"
+              ],
+              [
+                "Direction générale",
+                "Trois ouvertures en dix-huit mois sont possibles avec un renforcement central",
+                "Poste central non inscrit avant 2027"
+              ]
             ]
           }
         ]
@@ -539,13 +1139,55 @@
         "tables": [
           {
             "caption": "Cohortes 2025 par antenne",
-            "columns": ["Antenne", "Entrées", "Programme achevé", "Suivi à 6 mois", "Emploi ou formation à 6 mois", "Abandons"],
+            "columns": [
+              "Antenne",
+              "Entrées",
+              "Programme achevé",
+              "Suivi à 6 mois",
+              "Emploi ou formation à 6 mois",
+              "Abandons"
+            ],
             "rows": [
-              ["Ouest 1", "280", "252", "232", "181", "28"],
-              ["Ouest 2", "240", "205", "181", "111", "35"],
-              ["Sud 1", "250", "213", "174", "122", "37"],
-              ["Sud 2", "190", "150", "123", "96", "40"],
-              ["Total export", "960", "820", "710", "510", "140"]
+              [
+                "Ouest 1",
+                "280",
+                "252",
+                "232",
+                "181",
+                "28"
+              ],
+              [
+                "Ouest 2",
+                "240",
+                "205",
+                "181",
+                "111",
+                "35"
+              ],
+              [
+                "Sud 1",
+                "250",
+                "213",
+                "174",
+                "122",
+                "37"
+              ],
+              [
+                "Sud 2",
+                "190",
+                "150",
+                "123",
+                "96",
+                "40"
+              ],
+              [
+                "Total export",
+                "960",
+                "820",
+                "710",
+                "510",
+                "140"
+              ]
             ]
           }
         ]
@@ -558,13 +1200,43 @@
         "tables": [
           {
             "caption": "Dictionnaire abrégé",
-            "columns": ["Indicateur", "Définition", "Source", "Limite connue"],
+            "columns": [
+              "Indicateur",
+              "Définition",
+              "Source",
+              "Limite connue"
+            ],
             "rows": [
-              ["Entrée", "Premier rendez-vous validé dans l’outil", "Outil d’orientation", "Doublons possibles après transfert"],
-              ["Programme achevé", "Présence à 80 % des séquences prévues", "Feuilles de présence", "Seuil appliqué différemment sur un site"],
-              ["Suivi à 6 mois", "Réponse obtenue entre 150 et 210 jours", "Téléphone ou courriel", "Profil des non-répondants non analysé"],
-              ["Emploi ou formation", "Déclaration de la personne lors du suivi", "Questionnaire", "Durée et qualité non systématiquement documentées"],
-              ["Abandon", "Sortie avant le seuil d’achèvement", "Outil programme", "Motif absent dans 43 % des cas"]
+              [
+                "Entrée",
+                "Premier rendez-vous validé dans l’outil",
+                "Outil d’orientation",
+                "Doublons possibles après transfert"
+              ],
+              [
+                "Programme achevé",
+                "Présence à 80 % des séquences prévues",
+                "Feuilles de présence",
+                "Seuil appliqué différemment sur un site"
+              ],
+              [
+                "Suivi à 6 mois",
+                "Réponse obtenue entre 150 et 210 jours",
+                "Téléphone ou courriel",
+                "Profil des non-répondants non analysé"
+              ],
+              [
+                "Emploi ou formation",
+                "Déclaration de la personne lors du suivi",
+                "Questionnaire",
+                "Durée et qualité non systématiquement documentées"
+              ],
+              [
+                "Abandon",
+                "Sortie avant le seuil d’achèvement",
+                "Outil programme",
+                "Motif absent dans 43 % des cas"
+              ]
             ]
           }
         ]
@@ -577,25 +1249,90 @@
         "tables": [
           {
             "caption": "Extrait du registre",
-            "columns": ["Date", "Signal ou risque", "Traitement consigné", "Statut"],
+            "columns": [
+              "Date",
+              "Signal ou risque",
+              "Traitement consigné",
+              "Statut"
+            ],
             "rows": [
-              ["14/09/2025", "Propos inappropriés signalés au sujet d’un intervenant", "Transmission au responsable local", "Clôture non documentée"],
-              ["02/11/2025", "Fichier nominatif envoyé au mauvais partenaire", "Suppression demandée par courriel", "Revue données non jointe"],
-              ["18/12/2025", "Turnover de l’antenne récente", "Recrutement en cours", "Responsable vacant"],
-              ["05/01/2026", "Dépendance aux deux responsables nationaux", "Poste opérations prévu en année 2", "Mesure non financée en 2026"],
-              ["11/01/2026", "Cofinancement Région Nord présenté comme acquis", "Aucune action indiquée", "Vote annoncé pour septembre"]
+              [
+                "14/09/2025",
+                "Propos inappropriés signalés au sujet d’un intervenant",
+                "Transmission au responsable local",
+                "Clôture non documentée"
+              ],
+              [
+                "02/11/2025",
+                "Fichier nominatif envoyé au mauvais partenaire",
+                "Suppression demandée par courriel",
+                "Revue données non jointe"
+              ],
+              [
+                "18/12/2025",
+                "Turnover de l’antenne récente",
+                "Recrutement en cours",
+                "Responsable vacant"
+              ],
+              [
+                "05/01/2026",
+                "Dépendance aux deux responsables nationaux",
+                "Poste opérations prévu en année 2",
+                "Mesure non financée en 2026"
+              ],
+              [
+                "11/01/2026",
+                "Cofinancement Région Nord présenté comme acquis",
+                "Aucune action indiquée",
+                "Vote annoncé pour septembre"
+              ]
             ]
           },
           {
             "caption": "Questions à résoudre ou à modéliser",
-            "columns": ["Sujet", "Pièce A", "Pièce B", "Travail attendu"],
+            "columns": [
+              "Sujet",
+              "Pièce A",
+              "Pièce B",
+              "Travail attendu"
+            ],
             "rows": [
-              ["Rythme d’ouverture", "Budget : juillet 2026, janvier 2027, juillet 2027", "Note de direction : trois ouvertures avant fin 2026", "Choisir un scénario et tester l’autre"],
-              ["Région Nord", "Budget : 300 k€ encaissés en juillet 2026", "Lettre : vote en septembre", "Dater l’encaissement ou l’exclure"],
-              ["Admissions 2025", "Export : 960", "Tableau conseil : 982", "Documenter dénominateur et doublons"],
-              ["Banque", "Balance : 390 k€", "Relevé et éléments connus : rapprochement incomplet", "Établir le solde d’ouverture"],
-              ["Fonds européen", "30 k€ classés affectés", "Règles de restitution absentes", "Obtenir la convention ou poser une hypothèse prudente"],
-              ["Poste opérations", "Nécessaire avant l’ouverture selon les entretiens", "Inscrit seulement en 2027", "Chiffrer et dater l’option retenue"]
+              [
+                "Rythme d’ouverture",
+                "Budget : juillet 2026, janvier 2027, juillet 2027",
+                "Note de direction : trois ouvertures avant fin 2026",
+                "Choisir un scénario et tester l’autre"
+              ],
+              [
+                "Région Nord",
+                "Budget : 300 k€ encaissés en juillet 2026",
+                "Lettre : vote en septembre",
+                "Dater l’encaissement ou l’exclure"
+              ],
+              [
+                "Admissions 2025",
+                "Export : 960",
+                "Tableau conseil : 982",
+                "Documenter dénominateur et doublons"
+              ],
+              [
+                "Banque",
+                "Balance : 390 k€",
+                "Relevé et éléments connus : rapprochement incomplet",
+                "Établir le solde d’ouverture"
+              ],
+              [
+                "Fonds européen",
+                "30 k€ classés affectés",
+                "Règles de restitution absentes",
+                "Obtenir la convention ou poser une hypothèse prudente"
+              ],
+              [
+                "Poste opérations",
+                "Nécessaire avant l’ouverture selon les entretiens",
+                "Inscrit seulement en 2027",
+                "Chiffrer et dater l’option retenue"
+              ]
             ]
           }
         ]
@@ -707,25 +1444,87 @@
         "tables": [
           {
             "caption": "Sources et emplois annoncés, en milliers d’euros",
-            "columns": ["Élément", "Montant", "Statut"],
+            "columns": [
+              "Élément",
+              "Montant",
+              "Statut"
+            ],
             "rows": [
-              ["Construction et raccordement", "2 850", "Devis ; marge de 4 %"],
-              ["Développement et supervision", "310", "Budget interne"],
-              ["Réserve de contingence", "240", "7,1 % du coût total"],
-              ["Prêt bancaire", "1 800", "Offre indicative conditionnelle"],
-              ["Subvention régionale", "600", "Plafond remboursé après contrôle"],
-              ["Apports des sociétaires", "100", "Souscriptions reçues"],
-              ["Financement recherché", "900", "Prêt subordonné ou garantie" ]
+              [
+                "Construction et raccordement",
+                "2 850",
+                "Devis ; marge de 4 %"
+              ],
+              [
+                "Développement et supervision",
+                "310",
+                "Budget interne"
+              ],
+              [
+                "Réserve de contingence",
+                "240",
+                "7,1 % du coût total"
+              ],
+              [
+                "Prêt bancaire",
+                "1 800",
+                "Offre indicative conditionnelle"
+              ],
+              [
+                "Subvention régionale",
+                "600",
+                "Plafond remboursé après contrôle"
+              ],
+              [
+                "Apports des sociétaires",
+                "100",
+                "Souscriptions reçues"
+              ],
+              [
+                "Financement recherché",
+                "900",
+                "Prêt subordonné ou garantie"
+              ]
             ]
           },
           {
             "caption": "Flux annuels prévus après mise en service, en milliers d’euros",
-            "columns": ["Scénario", "Recettes", "Charges d’exploitation", "Service dette bancaire", "Flux avant instrument demandé"],
+            "columns": [
+              "Scénario",
+              "Recettes",
+              "Charges d’exploitation",
+              "Service dette bancaire",
+              "Flux avant instrument demandé"
+            ],
             "rows": [
-              ["Direction", "720", "230", "275", "215"],
-              ["Disponibilité 94 %", "665", "238", "275", "152"],
-              ["Retard de 6 mois", "360", "205", "138", "17"],
-              ["Coût +12 %", "720", "250", "315", "155"]
+              [
+                "Direction",
+                "720",
+                "230",
+                "275",
+                "215"
+              ],
+              [
+                "Disponibilité 94 %",
+                "665",
+                "238",
+                "275",
+                "152"
+              ],
+              [
+                "Retard de 6 mois",
+                "360",
+                "205",
+                "138",
+                "17"
+              ],
+              [
+                "Coût +12 %",
+                "720",
+                "250",
+                "315",
+                "155"
+              ]
             ]
           }
         ]
@@ -737,16 +1536,61 @@
         "tables": [
           {
             "caption": "État des huit sites",
-            "columns": ["Site", "Occupation", "Vente d’électricité", "Réserve"],
+            "columns": [
+              "Site",
+              "Occupation",
+              "Vente d’électricité",
+              "Réserve"
+            ],
             "rows": [
-              ["A", "Signée", "Signée", "Aucune signalée"],
-              ["B", "Signée", "Signée", "Raccordement à confirmer"],
-              ["C", "Signée", "Signée", "Aucune signalée"],
-              ["D", "Signée", "Signée", "Coût de toiture exclu"],
-              ["E", "Signée", "Projet", "Tarif à confirmer"],
-              ["F", "Vote municipal attendu", "Projet", "Calendrier électoral"],
-              ["G", "Vote municipal attendu", "Absent", "Recours possible"],
-              ["H", "Signée sous réserve", "Absent", "Diagnostic toiture incomplet"]
+              [
+                "A",
+                "Signée",
+                "Signée",
+                "Aucune signalée"
+              ],
+              [
+                "B",
+                "Signée",
+                "Signée",
+                "Raccordement à confirmer"
+              ],
+              [
+                "C",
+                "Signée",
+                "Signée",
+                "Aucune signalée"
+              ],
+              [
+                "D",
+                "Signée",
+                "Signée",
+                "Coût de toiture exclu"
+              ],
+              [
+                "E",
+                "Signée",
+                "Projet",
+                "Tarif à confirmer"
+              ],
+              [
+                "F",
+                "Vote municipal attendu",
+                "Projet",
+                "Calendrier électoral"
+              ],
+              [
+                "G",
+                "Vote municipal attendu",
+                "Absent",
+                "Recours possible"
+              ],
+              [
+                "H",
+                "Signée sous réserve",
+                "Absent",
+                "Diagnostic toiture incomplet"
+              ]
             ]
           }
         ]
@@ -758,13 +1602,37 @@
         "tables": [
           {
             "caption": "Points transmis au comité",
-            "columns": ["Sujet", "Élément disponible", "Information nécessaire"],
+            "columns": [
+              "Sujet",
+              "Élément disponible",
+              "Information nécessaire"
+            ],
             "rows": [
-              ["Conflits d’intérêts", "Déclarations de deux administrateurs", "Procédure de déport et choix des fournisseurs"],
-              ["Garantie", "Demande de 40 % du prêt", "Déclenchement, durée, plafond et recours"],
-              ["Subvention", "Plafond après contrôle", "Calendrier d’avance ou besoin de préfinancement"],
-              ["Production", "Hypothèses de 94 % et 98 %", "Étude indépendante et sensibilité"],
-              ["Participation", "Collège habitants aux statuts", "Rôle dans le fonds local et voie de réclamation"]
+              [
+                "Conflits d’intérêts",
+                "Déclarations de deux administrateurs",
+                "Procédure de déport et choix des fournisseurs"
+              ],
+              [
+                "Garantie",
+                "Demande de 40 % du prêt",
+                "Déclenchement, durée, plafond et recours"
+              ],
+              [
+                "Subvention",
+                "Plafond après contrôle",
+                "Calendrier d’avance ou besoin de préfinancement"
+              ],
+              [
+                "Production",
+                "Hypothèses de 94 % et 98 %",
+                "Étude indépendante et sensibilité"
+              ],
+              [
+                "Participation",
+                "Collège habitants aux statuts",
+                "Rôle dans le fonds local et voie de réclamation"
+              ]
             ]
           }
         ]
@@ -832,6 +1700,480 @@
       "On commence par le bottom-up (unité × prix), puis on contre-vérifie en top-down ; une convergence à ±15 % indique des hypothèses solides.",
       "Le test de la variable la plus fragile, souvent le prix, révèle si la société est venture-scale.",
       "La conclusion formule la question d’investissement à partir du chiffre et des hypothèses."
+    ]
+  },
+  {
+    "id": "cs-mathematiques-vc-dossier",
+    "slug": "dossier-methodologique-mathematiques-du-capital-risque",
+    "title": "Dossier méthodologique — Mathématiques du capital-risque",
+    "subtitle": "Cas fictif destiné à produire un modèle chiffré progressif",
+    "kind": "deal",
+    "company": "Société Alpha · cas fictif méthodologique",
+    "year": 2026,
+    "readMin": 8,
+    "learningRole": "learner-dossier",
+    "estimatedWorkMinutes": 450,
+    "summary": "Support de travail fictif pour construire, leçon après leçon, un dossier de calcul de marché, d'économie unitaire, de trésorerie, de valorisation, de cap table, de droits économiques et de rendement.",
+    "tags": [
+      "mathematiques-vc",
+      "modele-financier",
+      "dossier-longitudinal"
+    ],
+    "glossaryRefs": [
+      "tam-sam-som",
+      "cac",
+      "ltv",
+      "runway",
+      "pre-money",
+      "cap-table",
+      "liquidation-preference",
+      "moic",
+      "tvpi"
+    ],
+    "downloads": [
+      {
+        "label": "Classeur de départ — Mathématiques du capital-risque",
+        "href": "/downloads/mathematiques-vc/dossier-depart.xlsx",
+        "format": "xlsx sans formules"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Statut du cas",
+        "body": "Ce dossier est un cas fictif méthodologique. Les chiffres servent à apprendre une méthode de calcul et de réconciliation ; ils ne constituent pas des benchmarks de marché, des données sectorielles ni une recommandation d'investissement. Les hypothèses peuvent être modifiées par l'apprenant, à condition de conserver les unités, dates et contrôles de cohérence."
+      },
+      {
+        "heading": "Règles de confidentialité",
+        "body": "N’inscrivez aucune donnée confidentielle, personnelle, commerciale, financière, juridique ou issue d’un processus réel de due diligence. La plateforme conserve uniquement une note locale et des états de progression dans le navigateur ; le classeur complet reste un fichier de travail local sous votre contrôle."
+      },
+      {
+        "heading": "Hypothèses de départ",
+        "body": "Le scénario central porte sur une société B2B fictive vendant un abonnement à 2 000 € par mois, avec 75 % de marge brute, 15 000 € de CAC, 4 500 € de coût initial d'installation et 1,5 % de churn mensuel. Le marché cible, les flux de trésorerie, le tour de financement et les droits économiques sont volontairement simplifiés pour rendre les conventions visibles."
+      },
+      {
+        "heading": "Production attendue",
+        "body": "Le dossier final réunit sept composants : marché, unit economics, trésorerie, valorisation primaire et secondaire, cap table fully diluted, droits économiques et rendements. Chaque composant doit présenter les données, la formule, le résultat, un contrôle indépendant et une interprétation prudente."
+      },
+      {
+        "heading": "Séparation des niveaux d’analyse",
+        "body": "Les leçons L1 à L6 suivent principalement la même entreprise fictive. La leçon L7 distingue ensuite trois objets : la sortie de cette entreprise pour la waterfall, une ligne d'investissement pour le MOIC et le TRI, puis un portefeuille de fonds séparé pour DPI, RVPI et TVPI. Cette séparation évite de confondre société, ligne et fonds."
+      }
+    ],
+    "decisionQuestions": [
+      "Les unités, dates et périmètres de calcul sont-ils indiqués avant les résultats ?",
+      "Les flux primaires, secondaires et les mouvements de titres sont-ils séparés ?",
+      "Chaque tableau possède-t-il un contrôle de réconciliation indépendant ?",
+      "Les changements de niveau d’analyse sont-ils signalés au lecteur ?"
+    ],
+    "takeaways": [
+      "Un même dossier peut relier plusieurs calculs à condition de stabiliser les unités et conventions.",
+      "Le cas est fictif et méthodologique ; ses chiffres ne doivent pas être présentés comme des benchmarks.",
+      "La qualité du travail dépend autant des contrôles que des résultats numériques.",
+      "Les données sensibles restent hors plateforme et hors classeur partagé."
+    ],
+    "documents": [
+      {
+        "id": "math-vc-income-statements",
+        "kind": "income-statements",
+        "title": "Trajectoire de revenus et de marge",
+        "body": "Table de travail fictive pour expliciter revenu mensuel, marge brute et contribution par client. Elle remplace un compte de résultat réel et ne doit recevoir aucune donnée confidentielle."
+      },
+      {
+        "id": "math-vc-balance-sheets",
+        "kind": "balance-sheets",
+        "title": "Situation financière simplifiée",
+        "body": "Vue fictive de trésorerie, dette éventuelle et capitaux propres avant financement. Elle sert uniquement à poser les unités du cas."
+      },
+      {
+        "id": "math-vc-trial-balance",
+        "kind": "trial-balance",
+        "title": "Contrôles de cohérence des soldes",
+        "body": "Liste méthodologique des soldes à réconcilier : trésorerie d’ouverture, flux mensuels, solde de clôture et écarts éventuels."
+      },
+      {
+        "id": "math-vc-monthly-budget",
+        "kind": "monthly-budget",
+        "title": "Budget mensuel de burn",
+        "body": "Structure de budget fictif pour isoler encaissements, décaissements, burn net et seuil opérationnel minimal."
+      },
+      {
+        "id": "math-vc-cash-schedule",
+        "kind": "cash-schedule",
+        "title": "Échéancier de trésorerie",
+        "body": "Calendrier de travail pour comparer runway jusqu’à zéro et horizon jusqu’au seuil minimal de trésorerie."
+      },
+      {
+        "id": "math-vc-restricted-funds",
+        "kind": "restricted-funds",
+        "title": "Hypothèses de fonds indisponibles",
+        "body": "Pièce méthodologique indiquant que certaines ressources peuvent être exclues du cash disponible si leur usage est restreint."
+      },
+      {
+        "id": "math-vc-cofunding-agreements",
+        "kind": "cofunding-agreements",
+        "title": "Hypothèses de financement futur",
+        "body": "Support fictif pour distinguer financement signé, financement probable et financement non sécurisé."
+      },
+      {
+        "id": "math-vc-board-minutes",
+        "kind": "board-minutes",
+        "title": "Décisions de financement et de gouvernance",
+        "body": "Note de contexte fictive pour documenter les décisions supposées sur le tour, le secondaire et le pool."
+      },
+      {
+        "id": "math-vc-organisation",
+        "kind": "organisation",
+        "title": "Capacité commerciale et opérationnelle",
+        "body": "Pièce de cadrage fictive utilisée pour borner le SOM, les clients cibles et la capacité d’exécution."
+      },
+      {
+        "id": "math-vc-interviews",
+        "kind": "interviews",
+        "title": "Retours qualitatifs synthétiques",
+        "body": "Extraits anonymes fictifs servant à rappeler que les hypothèses commerciales restent à qualifier et ne constituent pas une preuve de marché."
+      },
+      {
+        "id": "math-vc-cohorts",
+        "kind": "cohorts",
+        "title": "Cohortes et churn",
+        "body": "Structure fictive pour suivre churn mensuel, rétention et sensibilité de LTV, sans cohorte réelle."
+      },
+      {
+        "id": "math-vc-indicator-dictionary",
+        "kind": "indicator-dictionary",
+        "title": "Dictionnaire des indicateurs",
+        "body": "Définitions de travail pour TAM, SAM, SOM, CAC, marge, LTV, runway, pre-money, post-money, fully diluted, MOIC, TRI, DPI, RVPI et TVPI."
+      },
+      {
+        "id": "math-vc-incident-risk-register",
+        "kind": "incident-risk-register",
+        "title": "Registre des risques de calcul",
+        "body": "Liste méthodologique des risques : confusion primaire/secondaire, base fully diluted instable, runway mal défini, préférence mal plafonnée et métriques de fonds mélangées."
+      }
+    ]
+  },
+  {
+    "id": "cs-serie-a-alto-sas",
+    "slug": "altosuite-sas-dossier-serie-a",
+    "title": "AltoSuite SAS : préparer une Série A",
+    "subtitle": "Cas fictif pour construire un dossier de levée avancée",
+    "kind": "startup",
+    "company": "AltoSuite SAS · cas fictif",
+    "year": 2026,
+    "readMin": 12,
+    "summary": "Cas fictif d'une SAS française B2B SaaS préparant une Série A : métriques, trésorerie, cap table, data room et deux offres à comparer.",
+    "tags": [
+      "Série A",
+      "SAS",
+      "cap-table",
+      "diligence"
+    ],
+    "glossaryRefs": [
+      "term-sheet",
+      "cap-table",
+      "dilution",
+      "data-room",
+      "liquidation-preference"
+    ],
+    "learningRole": "learner-dossier",
+    "estimatedWorkMinutes": 60,
+    "numericScenario": {
+      "id": "altosuite-serie-a-offres",
+      "title": "Comparaison chiffrée des offres Série A",
+      "summary": "Scénario fictif réconciliant cap table, pool, convertibles, secondaire, classe d’actions et préférence de liquidation.",
+      "fullyDilutedSharesBefore": 10000000,
+      "founderSharesBefore": 5500000,
+      "allocatedOptionSharesBefore": 700000,
+      "unallocatedOptionPoolSharesBefore": 500000,
+      "seedInvestorSharesBefore": 2400000,
+      "convertibleShareEquivalents": 900000,
+      "shareClasses": [
+        "ordinaires",
+        "préférence seed",
+        "préférence Série A"
+      ],
+      "conventions": [
+        "Les 900 000 équivalents actions convertibles sont traités comme convertis avant la Série A, sans décote ni intérêt supplémentaire dans ce cas pédagogique.",
+        "La cap table est une base fully diluted pédagogique : 700 000 options attribuées, 500 000 actions de réserve de pool non attribuée, 2 400 000 actions seed et 900 000 équivalents convertibles sont distingués avant la Série A.",
+        "Le secondaire ne finance pas la société : il transfère des actions de fondateurs à l’investisseur au même prix implicite que le primaire.",
+        "Les nouvelles actions Série A sont des actions de préférence 1x non-participating, senior aux ordinaires pour l’exercice de waterfall simplifié."
+      ],
+      "exitValuesM": [
+        30,
+        60,
+        120
+      ],
+      "offers": [
+        {
+          "id": "offre-a",
+          "label": "Offre A",
+          "primaryInvestmentM": 7,
+          "secondaryM": 0,
+          "preMoneyM": 28,
+          "poolTargetPct": 15,
+          "poolTiming": "post-money",
+          "convertibleTreatment": "as-converted pre-money",
+          "shareClass": "préférence Série A",
+          "liquidationPreference": {
+            "multiple": 1,
+            "participating": false,
+            "seniority": "senior aux ordinaires ; les préférences seed ne sont pas modélisées dans ce waterfall pédagogique"
+          },
+          "governance": "2 fondateurs, 1 seed, 1 Série A, 1 indépendant"
+        },
+        {
+          "id": "offre-b",
+          "label": "Offre B",
+          "primaryInvestmentM": 9,
+          "secondaryM": 1,
+          "preMoneyM": 32,
+          "poolTargetPct": 18,
+          "poolTiming": "pre-money",
+          "convertibleTreatment": "as-converted pre-money",
+          "shareClass": "préférence Série A",
+          "liquidationPreference": {
+            "multiple": 1,
+            "participating": false,
+            "seniority": "senior aux ordinaires ; les préférences seed ne sont pas modélisées dans ce waterfall pédagogique"
+          },
+          "governance": "2 fondateurs, 2 investisseurs, 1 indépendant"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "id": "contexte",
+        "kind": "brief",
+        "title": "Contexte",
+        "summary": "AltoSuite vend un logiciel de pilotage industriel à des PME européennes.",
+        "body": "AltoSuite SAS est une société fictive constituée en France. Elle a levé une seed 18 mois plus tôt. L'équipe prépare une Série A pour financer l'expansion commerciale, le renforcement produit et la mise en place d'un reporting de gouvernance plus structuré."
+      },
+      {
+        "id": "metriques",
+        "kind": "table",
+        "title": "Métriques opérationnelles",
+        "tables": [
+          {
+            "caption": "Données fictives, à utiliser comme support de calcul uniquement.",
+            "columns": [
+              "Indicateur",
+              "T1 2026",
+              "T2 2026",
+              "T3 2026",
+              "Limite"
+            ],
+            "rows": [
+              [
+                "ARR signé",
+                "1,62 M€",
+                "1,94 M€",
+                "2,32 M€",
+                "Contrats annuels, hors services"
+              ],
+              [
+                "Rétention nette",
+                "112 %",
+                "116 %",
+                "118 %",
+                "Cohortes clients > 12 mois"
+              ],
+              [
+                "Marge brute",
+                "71 %",
+                "73 %",
+                "74 %",
+                "Coûts cloud alloués"
+              ],
+              [
+                "Concentration top 5 clients",
+                "42 %",
+                "39 %",
+                "36 %",
+                "Base encore limitée"
+              ],
+              [
+                "Pipeline pondéré 6 mois",
+                "1,8 M€",
+                "2,4 M€",
+                "3,1 M€",
+                "Dépend du cycle industriel"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tresorerie",
+        "kind": "table",
+        "title": "Trésorerie et runway",
+        "tables": [
+          {
+            "caption": "Scénario central simplifié avant Série A.",
+            "columns": [
+              "Mois",
+              "Cash début",
+              "Encaissements",
+              "Décaissements",
+              "Cash fin"
+            ],
+            "rows": [
+              [
+                "Oct. 2026",
+                "1,80 M€",
+                "0,19 M€",
+                "0,43 M€",
+                "1,56 M€"
+              ],
+              [
+                "Nov. 2026",
+                "1,56 M€",
+                "0,21 M€",
+                "0,45 M€",
+                "1,32 M€"
+              ],
+              [
+                "Déc. 2026",
+                "1,32 M€",
+                "0,22 M€",
+                "0,47 M€",
+                "1,07 M€"
+              ],
+              [
+                "Jan. 2027",
+                "1,07 M€",
+                "0,24 M€",
+                "0,49 M€",
+                "0,82 M€"
+              ]
+            ],
+            "notes": [
+              "Le cas force à tester un closing retardé et une réduction de dépenses éventuelle."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cap-table",
+        "kind": "table",
+        "title": "Cap table simplifiée avant tour",
+        "tables": [
+          {
+            "caption": "Base fully diluted pédagogique avant Série A, non assimilable à une cap table juridique complète.",
+            "columns": [
+              "Détenteur",
+              "Actions ou équivalent",
+              "Part fully diluted"
+            ],
+            "rows": [
+              [
+                "Fondateurs",
+                5500000,
+                "55,0 %"
+              ],
+              [
+                "Options attribuées",
+                700000,
+                "7,0 %"
+              ],
+              [
+                "Réserve non attribuée",
+                500000,
+                "5,0 %"
+              ],
+              [
+                "Investisseurs seed",
+                2400000,
+                "24,0 %"
+              ],
+              [
+                "Instruments convertibles",
+                900000,
+                "9,0 %"
+              ]
+            ],
+            "notes": [
+              "Total : 10 000 000 actions ou équivalents. Les instruments convertibles doivent être explicités avant comparaison des offres ; les préférences seed ne sont pas modélisées dans la waterfall pédagogique."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "offres",
+        "kind": "table",
+        "title": "Deux offres à comparer",
+        "tables": [
+          {
+            "caption": "Offres fictives, volontairement incomplètes pour susciter des questions de diligence.",
+            "columns": [
+              "Paramètre",
+              "Offre A",
+              "Offre B"
+            ],
+            "rows": [
+              [
+                "Primaire",
+                "7,0 M€",
+                "9,0 M€"
+              ],
+              [
+                "Secondaire",
+                "0 €",
+                "1,0 M€ fondateurs"
+              ],
+              [
+                "Valorisation pre-money",
+                "28,0 M€",
+                "32,0 M€"
+              ],
+              [
+                "Pool cible",
+                "15 % post-money",
+                "18 % avant investissement"
+              ],
+              [
+                "Préférence",
+                "1x non-participating",
+                "1x non-participating"
+              ],
+              [
+                "Gouvernance",
+                "2 fondateurs, 1 seed, 1 Série A, 1 indépendant",
+                "2 fondateurs, 2 investisseurs, 1 indépendant"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dataroom",
+        "kind": "brief",
+        "title": "Index de data room",
+        "body": "Pièces disponibles : statuts, derniers comptes, cap table, contrats clients principaux, tableau de métriques, contrats de travail clés. Pièces à produire : registre détaillé des traitements de données, note de concentration client, calendrier des recrutements, justification du pool d'options."
+      }
+    ],
+    "decisionQuestions": [
+      "La société doit-elle lancer la Série A immédiatement ou différer le processus ?",
+      "Quelle offre est la plus cohérente après prise en compte du pool et de la gouvernance ?",
+      "Quelles pièces de data room doivent être produites avant l’envoi d’une term sheet signée ?"
+    ],
+    "sections": [
+      {
+        "heading": "Utilisation du cas",
+        "body": "Ce cas est fictif. Il sert à structurer un dossier de préparation, à tester les calculs de dilution et à formuler des questions de diligence. Les chiffres ne doivent pas être présentés comme des repères de marché."
+      },
+      {
+        "heading": "Décision à préparer",
+        "body": "L'équipe doit décider si elle lance la Série A, quels investisseurs cibler, quelle offre privilégier et quelles validations obtenir avant signature. Les données fournissent assez d'éléments pour raisonner, mais pas pour conclure sans hypothèses."
+      },
+      {
+        "heading": "Limites volontaires",
+        "body": "Certaines données sont incomplètes : détail de cohorte, clauses exactes des instruments convertibles, fiscalité du secondaire et validations juridiques. Ces limites doivent apparaître dans le dossier final."
+      }
+    ],
+    "takeaways": [
+      "Un cas fictif peut entraîner la méthode, mais il ne remplace jamais une source réelle.",
+      "La comparaison d'offres exige de séparer valorisation, cash société, secondaire, pool et gouvernance.",
+      "Les informations manquantes font partie du livrable lorsqu'elles conditionnent la décision."
     ]
   }
 ]

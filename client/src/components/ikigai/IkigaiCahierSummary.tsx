@@ -29,7 +29,7 @@ export function IkigaiCahierSummary({ className }: { className?: string }) {
         <p className="eyebrow flex items-center gap-2">
           <BookHeart size={14} /> Mon cahier Ikigai
         </p>
-        <Link to="/onboarding" className="btn-quiet !px-3 !py-1.5 text-xs">
+        <Link to="/ikigai" className="btn-quiet !px-3 !py-1.5 text-xs">
           <RotateCcw size={13} /> Repasser l’Ikigai
         </Link>
       </div>
@@ -40,7 +40,7 @@ export function IkigaiCahierSummary({ className }: { className?: string }) {
             Vous n’avez pas encore ouvert votre cahier. Explorez le diagramme, répondez aux sept questions, et révélez
             votre profil d’apprentissage — rien n’est définitif, c’est un point de départ.
           </p>
-          <Link to="/onboarding" className="btn-foil mt-4 !py-2.5">
+          <Link to="/ikigai" className="btn-foil mt-4 !py-2.5">
             Ouvrir le cahier <ArrowRight size={15} />
           </Link>
         </div>
@@ -110,7 +110,7 @@ export function IkigaiCahierSummary({ className }: { className?: string }) {
                 Voir le détail <ArrowRight size={15} />
               </Link>
             )}
-            <Link to="/onboarding" className="btn-quiet">
+            <Link to="/ikigai" className="btn-quiet">
               Reprendre le cahier
             </Link>
           </div>

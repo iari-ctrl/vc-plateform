@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
-import { collectRoutes } from './collect-routes.mjs';
+import { collectNoindexRoutes, collectRoutes } from './collect-routes.mjs';
 import { buildRobotsTxt, routesForSitemap } from './generate-sitemap.mjs';
 import { routesForPrerender } from './prerender.mjs';
 import { isPublishedContent } from '../shared/publication.mjs';
@@ -57,6 +57,22 @@ test('collectRoutes indexes learner cases but excludes commented corrections', (
   assert.equal(paths.has('/cases/insertion-3-regions'), true);
   assert.equal(paths.has('/cases/energie-des-vallees'), true);
   assert.equal([...paths].some((path) => path.endsWith('/correction')), false);
+});
+
+test('commented corrections are noindex prerender artifacts, not sitemap routes', () => {
+  const publicPaths = new Set(collectRoutes().map((route) => route.path));
+  const noindexRoutes = collectNoindexRoutes();
+  const noindexPaths = new Set(noindexRoutes.map((route) => route.path));
+
+  assert.equal(noindexPaths.has('/cases/insertion-3-regions/correction'), true);
+  assert.equal(noindexPaths.has('/cases/altosuite-sas-dossier-serie-a/correction'), true);
+  assert.equal(publicPaths.has('/cases/altosuite-sas-dossier-serie-a/correction'), false);
+
+  for (const route of noindexRoutes) {
+    assert.equal(route.noindex, true, `${route.path} should be tagged noindex for prerender`);
+    assert.equal(isNoindexPath(route.path), true, `${route.path} should match noindex policy`);
+    assert.equal(isPublicRoutePath(route.path), false, `${route.path} should stay out of public sitemap routes`);
+  }
 });
 
 test('collectRoutes publishes certification detail routes, but never an evaluation', () => {
@@ -115,13 +131,15 @@ test('every collected route is an executable public family and never noindex', (
   }
 });
 
-test('sitemap contains public routes while prerender also emits legacy redirects', () => {
+test('sitemap contains public routes while prerender also emits noindex artifacts and legacy redirects', () => {
   const publicRoutes = collectRoutes();
+  const noindexRoutes = collectNoindexRoutes();
   assert.deepEqual(routesForSitemap(), publicRoutes);
   assert.deepEqual(
     routesForPrerender(),
     [
       ...publicRoutes,
+      ...noindexRoutes,
       ...LEGACY_REDIRECTS.map(({ from, to }) => ({ path: from, redirectTo: to })),
     ].sort((a, b) => a.path.localeCompare(b.path)),
   );

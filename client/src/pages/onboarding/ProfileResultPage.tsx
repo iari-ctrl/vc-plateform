@@ -39,7 +39,7 @@ export default function ProfileResultPage() {
           icon={<Target size={28} />}
           title="Aucun profil pour l’instant"
           description="Faites le test d’orientation pour révéler votre profil d’apprentissage et obtenir des recommandations personnalisées."
-          action={<Button as="link" to="/onboarding">Faire le test <ArrowRight size={16} /></Button>}
+          action={<Button as="link" to="/ikigai?test=1">Faire le test <ArrowRight size={16} /></Button>}
         />
       </div>
     );
@@ -137,7 +137,7 @@ export default function ProfileResultPage() {
           </Link>
         )}
         <Link to="/dashboard" className="btn-ghost">Aller à mon tableau de bord</Link>
-        <Link to="/onboarding" className="btn-quiet"><RotateCcw size={14} /> Refaire le test</Link>
+        <Link to="/ikigai?test=1" className="btn-quiet"><RotateCcw size={14} /> Refaire le test</Link>
       </div>
     </div>
   );

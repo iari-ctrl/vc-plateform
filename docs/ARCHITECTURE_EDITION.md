@@ -28,7 +28,7 @@ vc-platform/
 │   ├── courses.json  lessons.json  glossary.json
 │   ├── caseStudies.json  deliverables.json  blog/ (un JSON par slug)
 │   ├── simulators.json  ikigai.json
-│   ├── parcours.json  profileParcours.json  diagnostics.json
+│   ├── parcours.json  parcoursRelations.json  profileParcours.json  diagnostics.json
 │   ├── caseCorrections.json      # corrections révélées volontairement, hors index
 │   ├── domains.json  certifications.json
 │   ├── certificationLevels.json  candidateCharters.json  certificationAssessments.json
@@ -163,7 +163,7 @@ L'arborescence est rangée par domaine (un sous-dossier par couche). La couche V
 - **Écosystèmes** (`pages/ecosystems/`) : **`EcosystemsPage`** (index « Décortiquer un écosystème », `/ecosystemes`) et **`EcosystemPage`** (détail d'un dossier, `/ecosystemes/:slug`) — la couche Atlas / analyse signée (cf. §4.5bis).
 - **Outils & cas** : `SimulatorsPage` / `SimulatorPage` (`/simulators`), `CaseStudyPage` (`/cases/:slug` ; l'index `/cases` redirige vers la Bibliothèque), `blog/BlogPage` / `BlogPostPage`.
 - **Formation** : **`ParcoursPage`** (catalogue, `/parcours`), **`ParcoursDetailPage`** (fiche intermédiaire, `/parcours/:slug`), **`LibraryPage`** (inventaire filtrable, `/bibliotheque`), `CourseDetailPage` (`/courses/:slug`) et `LessonPage` (`/lessons/:slug`, lecture active). Les anciennes URL `/bibliotheque/:slug` redirigent vers l'inventaire et restent hors index.
-- **Core & Infrastructure** : **`SplashPage`** (route index `/`), `HomePage` (`/home`), `OnboardingPage` (ikigai optionnel, avec `OrientationTest` + `MythCard`), `GlossaryPage`, `SearchPage`, `system/NotFoundPage`, `system/DesignSystemShowcasePage`.
+- **Core & Infrastructure** : **`SplashPage`** (route index `/`), `HomePage` (`/home`), `OnboardingPage` (`/onboarding`, entrée courte vers les espaces principaux), `IkigaiPage` (`/ikigai`, cahier introspectif avec `OrientationTest` + `MythCard`), `GlossaryPage`, `SearchPage`, `system/NotFoundPage`, `system/DesignSystemShowcasePage`.
 - **Workspace** (`pages/workspace/`) : `DashboardPage`, **`DecisionJournalPage`** (`/journal`, carnet de décision — §4.5sexies), `NotesPage`, plus `onboarding/ProfileResultPage` et `onboarding/ProfilePage`.
 
 > [!IMPORTANT]
@@ -270,6 +270,9 @@ Puis **ajoutez l'`id` de la leçon dans `lessonIds[]` du cours** (`data/courses.
 > **Pipeline d'authoring des parcours (leçons drop-in).** Les fiches de `data/parcours/*.lessons.json` sont **servies au client** : `scripts/split-lessons.mjs` fusionne `data/lessons.json` **et** `data/parcours/*.lessons.json` dans l'index/bodies générés, que `content/lessons.ts` expose (`LESSONS` + `loadLesson`) ; `lessonById`/`lessonBySlug` et le lecteur les résolvent. *(L'ancien `client/src/content/parcoursLessons.ts` a été supprimé : sa concaténation est reprise par le script de split.)*
 >
 > **Si vous ajoutez un nouveau registre drop-in :** déposez simplement le fichier `data/parcours/<nom>.lessons.json` — **le client l'auto-charge** (le split fait un glob sur `data/parcours/*.lessons.json`, aucun import manuel à ajouter). Attention aux `slug` en double : `split-lessons.mjs` échoue si deux leçons partagent un slug. Gardez ensuite les `steps` de `data/parcours.json` et les `lessonIds[]` des cours cohérents, puis lancez `npm run validate:content`.
+
+> [!NOTE]
+> **Temps de lecture opt-in Série A.** Le registre `data/parcours/05-preparer-sa-serie-a.lessons.json` applique explicitement `readMin = ceil(nombre de mots du body / 180)` avec le motif Unicode `\p{L}+(?:['’.-]\p{L}+)*|\d+(?:[.,]\d+)*`, références incluses. Cette convention calibre uniquement ce parcours à ce stade ; elle ne migre pas les corpus historiques et ne remplace pas les temps de production `practice.estimatedMinutes`, qui restent estimés séparément.
 
 #### La mini-syntaxe Markdown du `body`
 
@@ -409,6 +412,12 @@ Pour rendre une ressource visible, il faut donc modifier sa collection source et
 > - **Résolution des `ref`** (`resolveStep` dans `content/parcours.ts`) : `deliverable` et `milestone` résolvent un livrable vers `/livrables/:slug`; le fallback historique de `milestone` vers une leçon reste conservé. `lesson` → `/lessons/:slug` ; `case` → `/cases/:slug` ; `simulator` → `/simulators/:slug` ; `glossary` → `/glossary?term=`. Un `ref` non résolu (id `todo-*`) s'affiche en **« bientôt »**, sans lien — c'est le rôle de `status: "a-produire"`.
 > - **Aiguillage ikigai** : pour qu'un profil recommande ce parcours, ajoutez-le dans [`data/profileParcours.json`](../data/profileParcours.json). Les politiques transverses (progression souple, évaluation, langue V1 FR) sont dans [`docs/parcours/README.md`](parcours/README.md).
 > - **Langue** : les champs texte de parcours sont des chaînes françaises simples ; aucune surcharge EN n'est servie.
+
+#### Relations de la carte (`data/parcoursRelations.json`)
+
+La carte `/parcours` consomme un registre d'arêtes distinct du contenu des parcours. Chaque entrée déclare `sourceId`, `targetId`, `kind` (`peer|progression`), au moins une catégorie de preuve dans `evidence[]` et une `rationale` factuelle. `peer` est non orientée dans l'interface et exige deux parcours de même `level`. `progression` est orientée et décrit une suite conseillée ; elle ne verrouille rien et ne relie pas implicitement un parcours aux niveaux de `certificationLevels.json`.
+
+Le validateur refuse les identifiants absents, les boucles sur soi, les doublons — y compris un doublon `peer` inversé —, les relations `peer` entre niveaux différents et les cycles de progression. La pertinence ne peut pas être déduite du seul niveau : elle doit être appuyée par les prérequis, `profileParcours.json`, un recouvrement substantiel des ressources, les objectifs publiés ou un référentiel maintenu. Dans `PathAtlas`, les arêtes ne sont montées que pour le sceau survolé, focalisé ou sélectionné par un premier appui tactile ; un second appui ouvre le parcours.
 
 ### 4.4. Ajouter un COURS (`data/courses.json`)
 
@@ -583,7 +592,7 @@ npm run validate:content:strict  # idem mais warnings fatals
 ## 7. Choix d'UX notables (et pourquoi)
 
 - **Liberté responsable** : aucun mur d'authentification, aucun chapitre verrouillé. Toutes les sauvegardes s'effectuent localement dans le `localStorage`.
-- **Introspection d'abord** : l'onboarding ikigai précède le catalogue (*pourquoi* avant *quoi*) et oriente vers un profil d'apprentissage.
+- **Introspection disponible sans blocage** : l'onboarding `/onboarding` sert d'aiguillage court ; le cahier `/ikigai` reste le cadre de réflexion (*pourquoi* avant *quoi*) et oriente vers un profil d'apprentissage quand l'utilisateur le souhaite.
 - **Cartographier au lieu de lister** (Atlas) : un sommaire vertical devient une carte marine explorable — on choisit son port, l'ordre conseillé n'est qu'une route pointillée.
 - **Lecture active** : sélection de texte dans une leçon/étude/article → **surligner** ou **citer** dans le carnet (persisté localement).
 - **Dictionnaire vivant** : dans les leçons, **tout terme/sigle est détecté automatiquement** (popover cliquable → dictionnaire) en plus des marqueurs manuels `[[slug|libellé]]` ; page `/glossary` indexée. Détails en §4.1.
@@ -591,9 +600,9 @@ npm run validate:content:strict  # idem mais warnings fatals
 
 ---
 
-## 8. Le cahier Ikigai (`/onboarding`)
+## 8. Le cahier Ikigai (`/ikigai`)
 
-L'onboarding est un **cahier d'introspection** éditorial : masthead, sections numérotées (§01 rappel → §06 test d'orientation), diagramme à 13 zones, archétypes, questions libres, conclusion. Il **conserve** le scoring existant (le test MCQ → profil d'apprentissage) et le fonctionnement invité.
+Le cahier Ikigai est une **expérience d'introspection** éditoriale dédiée : masthead, sections numérotées (§01 rappel → §06 test d'orientation), diagramme à 13 zones, archétypes, questions libres, conclusion. Il **conserve** le scoring existant (le test MCQ → profil d'apprentissage) et le fonctionnement invité. L'onboarding produit distinct (`/onboarding`) reste court, sans stockage propre, et oriente vers Intelligence VC, Formation, Workspace ou ce cahier.
 
 **Données** — tout vit dans [data/ikigai.json](../data/ikigai.json) (bundlé côté client) :
 

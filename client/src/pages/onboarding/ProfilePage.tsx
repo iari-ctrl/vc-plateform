@@ -113,7 +113,7 @@ export default function ProfilePage() {
             <p className="mt-4 text-sm leading-relaxed text-surface-variant">{learningProfile.description}</p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Link to="/profile-result" className="btn-ghost !py-2.5">Voir le détail <ArrowRight size={15} /></Link>
-              <Link to="/onboarding" className="btn-quiet"><RotateCcw size={14} /> Refaire le test</Link>
+              <Link to="/ikigai?test=1" className="btn-quiet"><RotateCcw size={14} /> Refaire le test</Link>
             </div>
             {recPaths[0] && (
               <p className="mt-4 text-sm text-surface-variant">Parcours recommandé : <Link to={`/parcours/${recPaths[0].slug}`} className="gold-link">{recPaths[0].title}</Link></p>
@@ -124,7 +124,7 @@ export default function ProfilePage() {
             <Fleuron className="text-base" />
             <h3 className="mt-2 font-headline text-headline-sm font-semibold">Pas encore de profil</h3>
             <p className="mt-1.5 text-sm text-surface-variant">Faites le test d’orientation pour révéler votre profil d’apprentissage.</p>
-            <Link to="/onboarding" className="btn-foil mt-4 !py-2.5"><Target size={15} /> Faire le test</Link>
+            <Link to="/ikigai?test=1" className="btn-foil mt-4 !py-2.5"><Target size={15} /> Faire le test</Link>
           </div>
         )}
 

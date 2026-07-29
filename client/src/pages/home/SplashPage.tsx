@@ -220,7 +220,7 @@ function NightStars({ hostRef, revealed, transform }: { hostRef: RefObject<HTMLD
 
 function EnterCue() {
   return (
-    <Link to="/home" className="splash-enter splash-rise" style={{ '--d': '2.62s' } as CSSProperties}>
+    <Link to="/onboarding" className="splash-enter splash-rise" style={{ '--d': '2.62s' } as CSSProperties}>
       <span className="splash-enter-disc" aria-hidden>
         <span />
         <span />

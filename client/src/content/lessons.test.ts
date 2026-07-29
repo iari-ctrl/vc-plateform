@@ -12,7 +12,7 @@ import type { ProgressEntry } from './types';
 
 describe('public lesson catalogue', () => {
   it('expose une collection canonique limitée aux leçons publiées', () => {
-    expect(PUBLIC_LESSONS).toHaveLength(101);
+    expect(PUBLIC_LESSONS).toHaveLength(118);
     expect(PUBLIC_LESSONS.every(isPublishedLesson)).toBe(true);
     expect(PUBLIC_LESSONS.some((lesson) => lesson.status === 'upcoming')).toBe(false);
   });

@@ -1379,6 +1379,28 @@
     "relatedLessonIds": []
   },
   {
+    "id": "changement-echelle-industriel",
+    "term": "Changement d'échelle industriel",
+    "slug": "changement-echelle-industriel",
+    "aliases": [
+      "scale-up industriel",
+      "passage à l'échelle industriel",
+      "industrial scale-up"
+    ],
+    "category": "Opérations",
+    "short": "Passage d'une preuve contrôlée vers une échelle, des flux et des interfaces plus proches d'une exploitation industrielle.",
+    "definition": "Le changement d'échelle industriel examine si une performance reste tenable lorsque augmentent la taille, les flux, l'intégration, la durée et les contraintes d'exploitation. Il est distinct de la scalability commerciale, qui porte sur la croissance du modèle économique.",
+    "example": "Multiplier le volume d'un réacteur peut modifier chaleur, mélange, sécurité et qualité ; l'essai doit préciser quelle hypothèse d'échelle est testée.",
+    "seeAlso": [
+      "pilote-industriel",
+      "scalability",
+      "technology-readiness-level"
+    ],
+    "relatedLessonIds": [
+      "ldt-pilote-preuve"
+    ]
+  },
+  {
     "id": "cfo",
     "term": "Chief Financial Officer (CFO)",
     "slug": "cfo",
@@ -1581,6 +1603,26 @@
     "aliases": [
       "concentration du marché",
       "market concentration"
+    ]
+  },
+  {
+    "id": "concours-scientifique",
+    "term": "Concours scientifique",
+    "slug": "concours-scientifique",
+    "category": "Juridique & Fiscalité",
+    "short": "Régime d’autorisation permettant à un fonctionnaire d’apporter son appui scientifique à une entreprise qui valorise des travaux de recherche publics.",
+    "definition": "L’article L531-8 du code de la recherche autorise un fonctionnaire à apporter son concours scientifique à une entreprise assurant, en exécution d’un contrat conclu avec une personne publique, une entreprise publique ou une personne morale mandatée par ces dernières, la valorisation de travaux de recherche. Une convention conclue entre l’entreprise et la personne publique fixe notamment la quotité de temps de travail que l’intéressé peut consacrer à cette activité, dans une limite fixée par voie réglementaire. L’autorisation devient caduque si le contrat de valorisation n’est pas conclu dans le délai fixé par décret.",
+    "example": "Un chercheur conserve son poste et appuie la société créée pour valoriser ses travaux : la convention et le contrat de valorisation conditionnent la validité de l’autorisation.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042813347",
+    "seeAlso": [
+      "invention-d-agent-public",
+      "titularite-des-droits"
+    ],
+    "relatedLessonIds": [
+      "ldt-transfert-recherche-publique"
+    ],
+    "aliases": [
+      "apport d’un concours scientifique"
     ]
   },
   {
@@ -1859,6 +1901,28 @@
       "Convertible Loan Agreement",
       "note convertible",
       "obligation convertible startup"
+    ]
+  },
+  {
+    "id": "copropriete-de-brevet",
+    "term": "Copropriété de brevet",
+    "slug": "copropriete-de-brevet",
+    "category": "Juridique & Fiscalité",
+    "short": "Régime légal supplétif applicable lorsqu’une demande de brevet ou un brevet appartient à plusieurs titulaires.",
+    "definition": "L’article L613-29 du code de la propriété intellectuelle règle la copropriété d’une demande de brevet ou d’un brevet : chaque copropriétaire peut exploiter l’invention à son profit sauf à indemniser équitablement ceux qui ne l’exploitent pas et n’ont pas concédé de licence, concéder seul une licence non exclusive après notification accompagnée d’une offre de cession de sa quote-part, et céder sa quote-part sous un droit de préemption de trois mois. Une licence exclusive ne peut être accordée qu’avec l’accord de tous les copropriétaires ou par autorisation de justice. L’article L613-32 rend ce régime supplétif : un règlement de copropriété peut y déroger à tout moment.",
+    "example": "Deux familles de brevets sont détenues en copropriété avec un établissement de recherche : l’exclusivité demandée par l’investisseur suppose l’accord du copropriétaire ou une autorisation de justice.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039279761",
+    "seeAlso": [
+      "titularite-des-droits",
+      "licence-d-exploitation",
+      "invention-d-agent-public"
+    ],
+    "relatedLessonIds": [
+      "ldt-titularite-copropriete"
+    ],
+    "aliases": [
+      "copropriété d’un brevet",
+      "copropriété d’une demande de brevet"
     ]
   },
   {
@@ -4438,6 +4502,26 @@
     ]
   },
   {
+    "id": "incertitude-mesure",
+    "term": "Incertitude de mesure",
+    "slug": "incertitude-mesure",
+    "aliases": [
+      "measurement uncertainty",
+      "incertitude métrologique"
+    ],
+    "category": "Méthode",
+    "short": "Paramètre associé au résultat de mesure qui caractérise la dispersion raisonnablement attribuable au mesurande.",
+    "definition": "L'incertitude de mesure accompagne un résultat de mesure et caractérise la dispersion des valeurs qui pourraient raisonnablement être attribuées au mesurande. Elle peut combiner des composantes issues de séries statistiques et d'autres informations disponibles.",
+    "example": "Un rendement annoncé avec son écart-type, les hypothèses de calcul et les corrections utilisées donne une information plus exploitable qu'un chiffre seul.",
+    "seeAlso": [
+      "repetabilite-mesure",
+      "reproductibilite-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
+    ]
+  },
+  {
     "id": "incubateur",
     "term": "Incubateur",
     "slug": "incubateur",
@@ -4508,6 +4592,27 @@
     "example": "Après une IPO, les investisseurs VC ne peuvent pas toujours vendre immédiatement leurs actions à cause des périodes de lock-up et de la volatilité du marché."
   },
   {
+    "id": "inscription-au-registre-national-des-brevets",
+    "term": "Inscription au Registre national des brevets",
+    "slug": "inscription-au-registre-national-des-brevets",
+    "category": "Juridique & Fiscalité",
+    "short": "Formalité qui rend opposables aux tiers les actes transmettant ou modifiant les droits attachés à une demande de brevet ou à un brevet.",
+    "definition": "L’article L613-9 du code de la propriété intellectuelle subordonne l’opposabilité aux tiers de tout acte transmettant ou modifiant les droits attachés à une demande de brevet ou à un brevet à son inscription sur le Registre national des brevets, tenu par l’Institut national de la propriété industrielle. Avant inscription, l’acte demeure opposable au tiers qui a acquis des droits après sa date tout en en ayant connaissance lors de cette acquisition. Le licencié partie à un contrat non inscrit reste recevable à intervenir dans l’instance en contrefaçon engagée par le propriétaire du brevet, pour la réparation de son préjudice propre. Validité et opposabilité restent deux questions distinctes.",
+    "example": "Une cession antérieure non inscrite n’apparaît pas au registre : la diligence lit le registre et la chaîne d’actes, pas seulement le contrat produit par la société.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000019298708",
+    "seeAlso": [
+      "licence-d-exploitation",
+      "titularite-des-droits",
+      "dd"
+    ],
+    "relatedLessonIds": [
+      "ldt-licence-redevances"
+    ],
+    "aliases": [
+      "registre national des brevets"
+    ]
+  },
+  {
     "id": "inside-sales",
     "term": "Inside sales",
     "slug": "inside-sales",
@@ -4572,6 +4677,48 @@
       "scalability"
     ],
     "relatedLessonIds": []
+  },
+  {
+    "id": "invention-de-mission",
+    "term": "Invention de mission",
+    "slug": "invention-de-mission",
+    "category": "Juridique & Fiscalité",
+    "short": "Invention faite par un salarié dans l’exécution d’une mission inventive ou d’études explicitement confiées, qui appartient à l’employeur.",
+    "definition": "L’article L611-7 du code de la propriété intellectuelle attribue à l’employeur les inventions faites par le salarié dans l’exécution soit d’un contrat de travail comportant une mission inventive correspondant à ses fonctions effectives, soit d’études et de recherches qui lui sont explicitement confiées. Le salarié auteur d’une telle invention bénéficie d’une rémunération supplémentaire dont les conditions sont déterminées par les conventions collectives, les accords d’entreprise et les contrats individuels de travail. Toutes les autres inventions relèvent d’un régime distinct, dans lequel l’employeur dispose seulement d’un droit d’attribution encadré.",
+    "example": "Un ingénieur recruté pour développer un procédé de purification réalise une invention dans ce périmètre : le classement proposé dans sa déclaration retient l’invention de mission.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039279789",
+    "seeAlso": [
+      "titularite-des-droits",
+      "invention-d-agent-public",
+      "copropriete-de-brevet"
+    ],
+    "relatedLessonIds": [
+      "ldt-titularite-copropriete"
+    ],
+    "aliases": [
+      "inventions de mission"
+    ]
+  },
+  {
+    "id": "invention-d-agent-public",
+    "term": "Invention d’agent public",
+    "slug": "invention-d-agent-public",
+    "category": "Juridique & Fiscalité",
+    "short": "Invention réalisée par un fonctionnaire ou un agent public, soumise au régime des inventions de salariés selon des modalités réglementaires propres.",
+    "definition": "L’article L611-7 du code de la propriété intellectuelle s’applique aux agents de l’État, des collectivités publiques et des autres personnes morales de droit public, selon des modalités fixées par décret en Conseil d’État. L’article R611-12 attribue à la personne publique les inventions faites dans l’exécution de tâches comportant une mission inventive correspondant aux attributions de l’agent ou d’études explicitement confiées ; si cette personne publique décide de ne pas procéder à la valorisation de l’invention, l’agent qui en est l’auteur peut disposer des droits patrimoniaux qui y sont attachés, dans les conditions prévues par une convention conclue avec elle.",
+    "example": "Un chercheur d’un établissement public revendique les droits patrimoniaux d’une invention non valorisée : l’instruction demande la décision de l’établissement et la convention correspondante.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006280369",
+    "seeAlso": [
+      "invention-de-mission",
+      "titularite-des-droits",
+      "concours-scientifique"
+    ],
+    "relatedLessonIds": [
+      "ldt-transfert-recherche-publique"
+    ],
+    "aliases": [
+      "invention de fonctionnaire"
+    ]
   },
   {
     "id": "investissement-pour-impact",
@@ -4920,6 +5067,28 @@
     ],
     "relatedLessonIds": [
       "l-traction-unit-economics"
+    ]
+  },
+  {
+    "id": "licence-d-exploitation",
+    "term": "Licence d’exploitation",
+    "slug": "licence-d-exploitation",
+    "category": "Juridique & Fiscalité",
+    "short": "Concession du droit d’exploiter une demande de brevet ou un brevet, exclusive ou non exclusive, en totalité ou en partie.",
+    "definition": "L’article L613-8 du code de la propriété intellectuelle permet de concéder tout ou partie des droits attachés à une demande de brevet ou à un brevet sous forme de licence d’exploitation exclusive ou non exclusive. Les droits conférés par le titre peuvent être invoqués contre le licencié qui enfreint l’une des limites de sa licence, et l’acte de licence est constaté par écrit à peine de nullité. L’assiette, le déclenchement et le sort des droits en fin de contrat relèvent en revanche de la liberté contractuelle, non d’une règle légale.",
+    "example": "Une licence signée mais non inscrite au Registre national des brevets reste valable entre les parties sans être opposable au tiers qui acquiert ensuite des droits sans en avoir eu connaissance.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006279475",
+    "seeAlso": [
+      "inscription-au-registre-national-des-brevets",
+      "copropriete-de-brevet",
+      "titularite-des-droits"
+    ],
+    "relatedLessonIds": [
+      "ldt-licence-redevances"
+    ],
+    "aliases": [
+      "concession de licence d’exploitation",
+      "licence d’exploitation de brevet"
     ]
   },
   {
@@ -6100,6 +6269,28 @@
     ]
   },
   {
+    "id": "pilote-industriel",
+    "term": "Pilote industriel",
+    "slug": "pilote-industriel",
+    "aliases": [
+      "installation pilote",
+      "pilot plant",
+      "démonstrateur pilote"
+    ],
+    "category": "Opérations",
+    "short": "Essai représentatif qui expose une technologie à des contraintes d'environnement, d'intégration et d'exploitation plus proches de l'usage industriel.",
+    "definition": "Un pilote industriel teste une technologie au-delà d'une preuve de concept en la confrontant à des conditions plus représentatives : intrants, durée, opérateurs, intégration, instrumentation et incidents. Il ne démontre pas à lui seul la fiabilité de long terme, l'économie unitaire, la conformité ou la liberté d'exploitation.",
+    "example": "Un procédé validé en laboratoire peut passer par une installation pilote avant d'engager une première unité plus capitalistique.",
+    "seeAlso": [
+      "proof-of-concept",
+      "changement-echelle-industriel",
+      "technology-readiness-level"
+    ],
+    "relatedLessonIds": [
+      "ldt-pilote-preuve"
+    ]
+  },
+  {
     "id": "pitch",
     "term": "Pitch",
     "slug": "pitch",
@@ -6607,7 +6798,6 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
-      "pilote",
       "PoC",
       "preuve de concept"
     ]
@@ -6795,6 +6985,28 @@
     ]
   },
   {
+    "id": "reproductibilite-mesure",
+    "term": "Reproductibilité de mesure",
+    "slug": "reproductibilite-mesure",
+    "aliases": [
+      "measurement reproducibility",
+      "reproductibilité métrologique",
+      "condition de reproductibilité"
+    ],
+    "category": "Méthode",
+    "short": "Fidélité de mesure lorsque lieux, opérateurs ou systèmes de mesure diffèrent selon des conditions spécifiées.",
+    "definition": "La reproductibilité de mesure est la fidélité obtenue sous des conditions de reproductibilité : différents lieux, opérateurs et systèmes de mesure, avec des mesures répétées sur le même objet ou des objets similaires. Elle doit être distinguée de la convention NASEM de reproductibilité computationnelle.",
+    "example": "Un matériau mesuré dans deux laboratoires avec des systèmes différents relève d'une question de reproductibilité de mesure.",
+    "seeAlso": [
+      "repetabilite-mesure",
+      "replicabilite-scientifique",
+      "incertitude-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
+    ]
+  },
+  {
     "id": "realisation-impact",
     "term": "Réalisation d’impact",
     "slug": "realisation-impact",
@@ -6952,6 +7164,48 @@
       "Reps and Warranties",
       "Warranties",
       "Warranty"
+    ]
+  },
+  {
+    "id": "replicabilite-scientifique",
+    "term": "Réplicabilité scientifique",
+    "slug": "replicabilite-scientifique",
+    "aliases": [
+      "replicability",
+      "réplication scientifique"
+    ],
+    "category": "Méthode",
+    "short": "Cohérence de résultats entre études visant la même question scientifique avec leurs propres données.",
+    "definition": "Dans la convention NASEM, la réplicabilité scientifique consiste à obtenir des résultats cohérents entre des études qui visent la même question scientifique et collectent chacune leurs propres données. Elle ne se confond pas avec la reproductibilité de mesure du JCGM.",
+    "example": "Une seconde équipe qui collecte de nouvelles données pour tester le même effet examine la réplicabilité scientifique.",
+    "seeAlso": [
+      "reproductibilite-mesure",
+      "repetabilite-mesure",
+      "incertitude-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
+    ]
+  },
+  {
+    "id": "repetabilite-mesure",
+    "term": "Répétabilité de mesure",
+    "slug": "repetabilite-mesure",
+    "aliases": [
+      "measurement repeatability",
+      "répétabilité métrologique",
+      "condition de répétabilité"
+    ],
+    "category": "Méthode",
+    "short": "Fidélité obtenue lorsque les mesures sont répétées sous les mêmes conditions spécifiées.",
+    "definition": "La répétabilité de mesure désigne la fidélité observée sous des conditions comprenant la même procédure, les mêmes opérateurs, le même système de mesure, les mêmes conditions de fonctionnement, le même lieu et des mesures répétées sur un court intervalle. Elle qualifie une condition de mesure, pas toute la validité scientifique d'un résultat.",
+    "example": "Trois séries refaites le même jour, sur le même banc et par le même opérateur testent la répétabilité de mesure.",
+    "seeAlso": [
+      "reproductibilite-mesure",
+      "incertitude-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
     ]
   },
   {
@@ -7395,6 +7649,27 @@
       "Secondary Transaction"
     ],
     "example": "Un founder vend une petite partie de ses actions lors d’un tour late-stage pour réduire son risque personnel sans quitter la société."
+  },
+  {
+    "id": "secret-des-affaires",
+    "term": "Secret des affaires",
+    "slug": "secret-des-affaires",
+    "category": "Juridique & Fiscalité",
+    "short": "Régime protégeant une information non connue du secteur, de valeur commerciale, et tenue par des mesures de protection raisonnables.",
+    "definition": "L’article L151-1 du code de commerce protège l’information qui n’est pas, en elle-même ou dans la configuration exacte de ses éléments, généralement connue ou aisément accessible pour les personnes familières de ce type d’informations dans le secteur concerné, qui revêt une valeur commerciale effective ou potentielle du fait de son caractère secret, et qui fait l’objet de mesures de protection raisonnables de la part de son détenteur légitime. Ces trois conditions sont cumulatives. L’article L151-3 laisse licites la découverte ou création indépendante ainsi que l’observation, l’étude, le démontage ou le test d’un produit mis à la disposition du public ou licitement possédé, sauf stipulation contractuelle contraire. L’atteinte engage la responsabilité civile de son auteur.",
+    "example": "Un procédé tenu confidentiel, incorporé dans un produit vendu sans clause restreignant son étude, reste exposé au démontage licite prévu par l’article L151-3.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037266553",
+    "seeAlso": [
+      "titularite-des-droits",
+      "licence-d-exploitation",
+      "dd"
+    ],
+    "relatedLessonIds": [
+      "ldt-brevet-secret"
+    ],
+    "aliases": [
+      "protection du secret des affaires"
+    ]
   },
   {
     "id": "seed",
@@ -8361,6 +8636,29 @@
       "lvp-arbre-instruments",
       "lvp-compatibilite-remboursement",
       "lvp-atelier-structuration"
+    ]
+  },
+  {
+    "id": "titularite-des-droits",
+    "term": "Titularité des droits",
+    "slug": "titularite-des-droits",
+    "category": "Juridique & Fiscalité",
+    "short": "Identité de la personne à qui appartient le droit sur une invention, distincte de la qualité de déposant.",
+    "definition": "L’article L611-6 du code de la propriété intellectuelle attribue le droit au titre à l’inventeur ou à son ayant cause ; lorsque plusieurs personnes ont réalisé l’invention indépendamment l’une de l’autre, il revient à celle qui justifie de la date de dépôt la plus ancienne. Dans la procédure devant le directeur de l’Institut national de la propriété industrielle, le demandeur est réputé avoir droit au titre : le dépôt fonde une présomption de procédure et non la preuve de la titularité. Établir celle-ci suppose de reconstituer, actif par actif, l’inventeur et son statut, l’entité déposante, la chaîne de cessions et les licences entrantes.",
+    "example": "Une société dépose en son nom une invention réalisée par un cofondateur avant sa constitution : l’instruction reconstitue la chaîne de cessions avant de tenir la titularité pour établie.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006279399",
+    "seeAlso": [
+      "invention-de-mission",
+      "copropriete-de-brevet",
+      "invention-d-agent-public",
+      "dd"
+    ],
+    "relatedLessonIds": [
+      "ldt-titularite-copropriete"
+    ],
+    "aliases": [
+      "titularité d’un brevet",
+      "titularité des droits de propriété industrielle"
     ]
   },
   {

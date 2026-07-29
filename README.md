@@ -13,6 +13,7 @@ Une plateforme **statique** d'intelligence VC, enrichie par une couche de format
 - [`AGENTS.md`](AGENTS.md) est le point d'entrée portable des agents de code ; il impose à Codex, Claude Code et aux autres agents la lecture du contrat détaillé partagé [`CLAUDE.md`](CLAUDE.md).
 - [`PRODUCT.md`](PRODUCT.md) fixe le contrat produit : registre, intention, anti-références, principes et cible d'accessibilité.
 - `docs/` porte la documentation **de référence maintenue** : [`ARCHITECTURE_EDITION.md`](docs/ARCHITECTURE_EDITION.md), [`DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md), [`STRATEGIE-vc-intelligence.md`](docs/STRATEGIE-vc-intelligence.md) et [`parcours/README.md`](docs/parcours/README.md). Les documents supersédés sont isolés sous `docs/archive/`.
+- [`docs/SPECKIT.md`](docs/SPECKIT.md) décrit le cycle de spécification brownfield ; la constitution et le contexte de reprise vivent sous [`.specify/memory/`](.specify/memory/), et chaque changement prospectif borné sous [`specs/`](specs/).
 - `Suivis/` porte le **suivi vivant** : [`ETAT.md`](Suivis/ETAT.md) (état vérifié, compteurs, risques, priorités), [`JOURNAL.md`](Suivis/JOURNAL.md) (journal daté) et [`PROCEDURE_PUSH.md`](Suivis/PROCEDURE_PUSH.md) (procédure de sauvegarde Git ; la publication est reportée).
 - En cas de doute, l'état réel se vérifie dans `client/`, `data/`, `shared/routes.mjs` et les scripts du `package.json`.
 
@@ -21,7 +22,7 @@ Une plateforme **statique** d'intelligence VC, enrichie par une couche de format
 ## ✦ Principes fondateurs
 
 - **Liberté responsable.** Aucun chapitre n'est bloqué, aucune progression n'est imposée. On peut tout explorer en invité.
-- **Intelligence d'abord, formation en soutien.** La première lecture du produit passe par les dossiers, convictions, analyses, décisions et méthodes. L'onboarding ikigai reste disponible pour personnaliser les parcours.
+- **Intelligence d'abord, formation en soutien.** La première lecture du produit passe par les dossiers, convictions, analyses, décisions et méthodes. L'onboarding reste une entrée courte vers les espaces principaux ; le cahier Ikigai dédié reste disponible pour personnaliser les parcours.
 - **Premium éditorial.** Entre école privée, memo d'investissement, knowledge base et carnet personnel — jamais un dashboard SaaS générique.
 - **Style sobre et naturel.** Toute rédaction du site suit une **charte de style transverse non négociable** : prose fluide, registre d'analyste, pas de tics d'IA ni de survente. Source canonique détaillée : [`docs/ARCHITECTURE_EDITION.md` §4.0.c](docs/ARCHITECTURE_EDITION.md) ; `PRODUCT.md` porte les principes produit et le skill `.claude/skills/ecosystemes/SKILL.md` complète le contrat pour les dossiers d'écosystème.
 - **V1 française assumée.** Le site sert des routes non localisées (`/`, `/home`, `/blog/...`). La traduction EN et les anciens préfixes de langue sont retirés du périmètre de lancement.

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpenCheck, ChevronDown, Clock, Eye, ShieldCheck, Sparkles } from 'lucide-react';
 import { caseBySlug } from '@/content/caseStudies';
 import { DELIVERABLES } from '@/content/deliverables';
 import { loadCaseCorrectionBySourceCaseId } from '@/content/caseCorrections';
+import { parcoursContextForStep, parcoursContextHref } from '@/content/parcours';
 import type { CaseCorrection } from '@/content/types';
 import { Markdown } from '@/lib/markdown';
 import { learningWorkspace, productionStageAtLeast, useLearningWorkspace } from '@/lib/learningWorkspace';
@@ -13,6 +14,7 @@ import NotFoundPage from '@/pages/system/NotFoundPage';
 
 export default function CaseCorrectionPage() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
   const caseStudy = slug ? caseBySlug(slug) : undefined;
   const deliverable = caseStudy
     ? DELIVERABLES.find((candidate) => candidate.caseStudyId === caseStudy.id && candidate.correctionId)
@@ -58,6 +60,10 @@ export default function CaseCorrectionPage() {
 
   if (!caseStudy || caseStudy.learningRole !== 'learner-dossier' || !deliverable) return <NotFoundPage />;
   const deliverableId = deliverable.id;
+  const context = parcoursContextForStep('deliverable', deliverableId, searchParams.get('parcours'), searchParams.get('budget'))
+    ?? parcoursContextForStep('milestone', deliverableId, searchParams.get('parcours'), searchParams.get('budget'));
+  const caseHref = context ? parcoursContextHref(`/cases/${caseStudy.slug}`, context.parcours.id, context.budget) : `/cases/${caseStudy.slug}`;
+  const deliverableHref = context ? parcoursContextHref(`/livrables/${deliverable.slug}`, context.parcours.id, context.budget) : `/livrables/${deliverable.slug}`;
 
   function reveal() {
     const result = learningWorkspace.revealCorrection(deliverableId);
@@ -68,7 +74,7 @@ export default function CaseCorrectionPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      <Link to={`/cases/${caseStudy.slug}`} className="btn-quiet mb-6 -ml-3">
+      <Link to={caseHref} className="btn-quiet mb-6 -ml-3">
         <ArrowLeft size={15} aria-hidden /> {caseStudy.title}
       </Link>
 
@@ -79,7 +85,7 @@ export default function CaseCorrectionPage() {
           <p className="mt-4 max-w-2xl leading-relaxed text-surface-variant">
             Déclarez la première version du jalon final terminée pour choisir ensuite de révéler la correction. Tous les contenus du parcours restent accessibles pendant votre production.
           </p>
-          <Link to={`/livrables/${deliverable.slug}`} className="btn-foil mt-6">
+          <Link to={deliverableHref} className="btn-foil mt-6">
             Ouvrir le jalon final <ArrowRight size={15} aria-hidden />
           </Link>
         </section>
@@ -165,8 +171,8 @@ export default function CaseCorrectionPage() {
           )}
 
           <div className="mt-10 flex flex-wrap gap-3">
-            <Link to={`/livrables/${deliverable.slug}`} className="btn-foil">Réviser ma production <ArrowRight size={15} aria-hidden /></Link>
-            <Link to={`/cases/${caseStudy.slug}`} className="btn-ghost">Revoir le dossier apprenant</Link>
+            <Link to={deliverableHref} className="btn-foil">Réviser ma production <ArrowRight size={15} aria-hidden /></Link>
+            <Link to={caseHref} className="btn-ghost">Revoir le dossier apprenant</Link>
           </div>
         </article>
       )}

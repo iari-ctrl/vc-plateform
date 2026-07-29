@@ -7,7 +7,8 @@
     "category": "Cap table",
     "accent": "#9A6A3C",
     "description": "Ajoutez des tours de financement et observez comment la part des fondateurs se dilue, tour après tour, ESOP compris. Le résultat présente la composition de la dilution au fil des tours.",
-    "relatedLessonIds": ["l-founder-instruments", "l-stages"],
+    "estimatedWorkMinutes": 15,
+    "relatedLessonIds": ["lsa-modeliser-transaction", "l-founder-instruments", "l-stages"],
     "glossaryRefs": ["dilution", "cap-table", "esop", "pre-money"]
   },
   {
@@ -40,7 +41,8 @@
     "category": "Deal",
     "accent": "#1E2D38",
     "description": "Modélisez une liquidation preference (multiple, participating ou non) et un produit de sortie, puis voyez la répartition entre l'investisseur préférentiel et les actions ordinaires.",
-    "relatedLessonIds": ["l-ts-economics"],
+    "estimatedWorkMinutes": 15,
+    "relatedLessonIds": ["lsa-modeliser-transaction", "l-ts-economics"],
     "glossaryRefs": ["liquidation-preference", "waterfall", "term-sheet"]
   },
   {

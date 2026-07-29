@@ -14,6 +14,7 @@ import {
   shouldFailValidation,
   validateAssessmentPublication,
   validateCanonicalGlossaryPublication,
+  validateParcoursRelations,
 } from './validation-core.mjs';
 
 test('publication is fail-closed when status is absent or invalid', () => {
@@ -72,6 +73,74 @@ test('pure duplicate, reference and cycle checks report invalid fixtures', () =>
     ),
     ['lessons: cycle detected (a -> b -> a).'],
   );
+});
+
+test('parcours relations reject missing endpoints, self-links and cross-level peers', () => {
+  const parcours = [
+    { id: 'p-debutant', level: 'debutant' },
+    { id: 'p-intermediaire', level: 'intermediaire' },
+  ];
+
+  assert.deepEqual(
+    validateParcoursRelations(
+      [
+        { sourceId: 'p-inconnu', targetId: 'p-debutant', kind: 'progression' },
+        { sourceId: 'p-debutant', targetId: 'p-inconnu', kind: 'progression' },
+        { sourceId: 'p-debutant', targetId: 'p-debutant', kind: 'peer' },
+        { sourceId: 'p-debutant', targetId: 'p-intermediaire', kind: 'peer' },
+      ],
+      parcours,
+    ),
+    [
+      'parcoursRelations p-inconnu -> p-debutant : parcours source introuvable « p-inconnu ».',
+      'parcoursRelations p-debutant -> p-inconnu : parcours cible introuvable « p-inconnu ».',
+      'parcoursRelations p-debutant -> p-debutant : une relation ne peut pas viser son propre parcours.',
+      'parcoursRelations p-debutant -> p-intermediaire : une relation « peer » doit relier deux parcours du même niveau (debutant, intermediaire).',
+    ],
+  );
+});
+
+test('parcours relations reject duplicate edges and progression cycles', () => {
+  const parcours = [
+    { id: 'p-a', level: 'avance' },
+    { id: 'p-b', level: 'avance' },
+    { id: 'p-c', level: 'avance' },
+  ];
+
+  assert.deepEqual(
+    validateParcoursRelations(
+      [
+        { sourceId: 'p-a', targetId: 'p-b', kind: 'peer' },
+        { sourceId: 'p-b', targetId: 'p-a', kind: 'peer' },
+        { sourceId: 'p-a', targetId: 'p-b', kind: 'progression' },
+        { sourceId: 'p-a', targetId: 'p-b', kind: 'progression' },
+        { sourceId: 'p-b', targetId: 'p-c', kind: 'progression' },
+        { sourceId: 'p-c', targetId: 'p-a', kind: 'progression' },
+      ],
+      parcours,
+    ),
+    [
+      'parcoursRelations p-b -> p-a : relation « peer » en double avec p-a -> p-b.',
+      'parcoursRelations p-a -> p-b : relation « progression » en double.',
+      'parcoursRelations : cycle de progression détecté (p-a -> p-b -> p-c -> p-a).',
+    ],
+  );
+});
+
+test('content validation wires the canonical parcours relation registry', () => {
+  const validatorSource = readFileSync(new URL('./validate-content.mjs', import.meta.url), 'utf8');
+
+  assert.match(validatorSource, /parcoursRelations\.json/);
+  assert.match(validatorSource, /parcoursRelationSchema/);
+  assert.match(validatorSource, /validateParcoursRelations\(parcoursRelations, parcours\)/);
+});
+
+test('content validation wires deliverable criterion component coverage', () => {
+  const validatorSource = readFileSync(new URL('./validate-content.mjs', import.meta.url), 'utf8');
+
+  assert.match(validatorSource, /componentIds:\s*idList\.optional\(\)/);
+  assert.match(validatorSource, /composant introuvable pour le critère/);
+  assert.match(validatorSource, /aucun critère rattaché au composant/);
 });
 
 test('strict mode promotes warnings to a failing validation result', () => {

@@ -30,13 +30,15 @@ export function MainLayout() {
   // full header; every other page uses the lateral, hover-expanding SideNav.
   const isSplash = pathname === '/' || pathname === '';
   const isHome = pathname === `/home`;
-  const hasSideNav = !isSplash && !isHome;
+  const isOnboarding = pathname === '/onboarding';
+  const hasTopBar = isHome || isOnboarding;
+  const hasSideNav = !isSplash && !hasTopBar;
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <a href="#main" className="skip-link">Aller au contenu principal</a>
 
-      {isSplash ? null : isHome ? <TopBar /> : <SideNav />}
+      {isSplash ? null : hasTopBar ? <TopBar /> : <SideNav />}
 
       <div className={cn('flex flex-1 flex-col', hasSideNav && 'lg:pl-[var(--sidebar-rail)]')}>
         <main ref={mainRef} id="main" className={cn('flex-1 outline-none', hasSideNav && 'pt-14 lg:pt-0')} tabIndex={-1}>

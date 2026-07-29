@@ -26,7 +26,7 @@ export function PresqueSection({
         title="Le piège des trois-sur-quatre."
         description="Trois dimensions convergent — de l'extérieur, ça ressemble à une vie réussie. Mais une seule manque, et c'est précisément celle qu'on met le plus longtemps à nommer."
       />
-      <div className="mt-8 divide-y divide-outline-variant lg:w-[52%]">
+      <div className="mt-8 w-full divide-y divide-outline-variant">
         {IKIGAI.presqueIkigai.map((p, i) => {
           const description = mode === 'decouverte' ? p.descriptionDecouverte ?? p.description : p.description;
           const trap = mode === 'decouverte' ? p.trapDecouverte ?? p.trap : p.trap;

@@ -224,10 +224,10 @@
     "family": "entretien",
     "roadmap": "next",
     "title": "Décrocher un stage en VC",
-    "hook": "Construis la candidature ciblée + la mini-analyse de startup qui te font sortir de la pile.",
+    "hook": "Construis une candidature ciblée et une mini-analyse de startup vérifiable pour un fonds précis.",
     "kanji": "門",
     "accent": "#5A4FA0",
-    "goal": "Une candidature ciblée sur un fonds + une analyse de startup auto-produite — le différenciateur au recrutement.",
+    "goal": "Une candidature ciblée sur un fonds et une analyse de startup auto-produite, concise et sourcée.",
     "forWhom": [
       "Étudiants Bac+4/5",
       "Reconvertis"
@@ -250,9 +250,12 @@
       "debutant-curieux"
     ],
     "milestone": {
-      "type": "analysis",
+      "type": "memo",
       "label": "Mini-analyse de startup",
-      "description": "Une analyse d'1 page d'une startup du portefeuille d'un fonds cible, à joindre à ta candidature."
+      "description": "Une analyse d'une page, fondée sur des sources publiques datées, pour présenter une startup pertinente à un fonds cible.",
+      "evaluation": [
+        "auto"
+      ]
     },
     "steps": [
       {
@@ -303,7 +306,8 @@
           "id": "todo-mini-analyse-gabarit"
         },
         "label": "Écrire ta mini-analyse (gabarit + exemple)",
-        "status": "a-produire"
+        "status": "existant",
+        "keystone": true
       },
       {
         "order": 6,
@@ -342,10 +346,10 @@
     "family": "entretien",
     "roadmap": "now",
     "title": "Réussir l'entretien Analyst",
-    "hook": "Passe le case study et le deal memo : une reco invest/pass claire, défendable, en temps contraint.",
+    "hook": "Prépare un entretien Analyst VC avec des réponses sourcées, des calculs explicites et un mock final révisé.",
     "kanji": "観",
     "accent": "#4C6B8A",
-    "goal": "Produire un deal memo (1 page ou 4 slides) avec recommandation et risques hiérarchisés.",
+    "goal": "Une grille d'entretien, une méthode de case study, une note courte et une simulation finale fondées sur des sources publiques et des hypothèses visibles.",
     "forWhom": [
       "Candidats analyst",
       "Étudiants en process"
@@ -353,10 +357,9 @@
     "level": "intermediaire",
     "entryLevel": "intermediaire",
     "time": {
-      "coreHours": 7,
-      "withBonusHours": 10,
-      "sessions": 15,
-      "cadence": "Sur 3 à 5 semaines"
+      "source": "derived",
+      "sessions": 8,
+      "cadence": "Sur 2 à 4 semaines"
     },
     "timeFit": [
       "medium",
@@ -366,14 +369,13 @@
       "futur-analyste"
     ],
     "milestone": {
-      "type": "deal-memo",
-      "label": "Deal memo + mock complet",
-      "description": "Un mock en 3 manches (fit · case study chronométré · pitch & technique) qui aboutit à un deal memo d'1 page : reco invest/pass, marché en bottom-up, 3 risques hiérarchisés. Conseil intégré : parler à 2–3 personnes du secteur avant de conclure, comme en vraie DD.",
+      "type": "memo",
+      "label": "Mock d'entretien Analyst VC",
+      "description": "Une note d'investissement courte sur une société réelle, défendue oralement puis révisée après retour.",
       "evaluation": [
         "auto",
         "peer"
-      ],
-      "rubricId": "rubric-mock-analyst"
+      ]
     },
     "steps": [
       {
@@ -383,7 +385,7 @@
           "kind": "lesson",
           "id": "lea-process"
         },
-        "label": "La carte de l'entonnoir",
+        "label": "Cartographier le processus d'entretien",
         "status": "existant"
       },
       {
@@ -393,7 +395,7 @@
           "kind": "lesson",
           "id": "lea-grille"
         },
-        "label": "La grille de l'investisseur : équipe · marché · produit · traction · moat",
+        "label": "Construire la grille d'investisseur",
         "status": "existant",
         "keystone": true
       },
@@ -404,69 +406,71 @@
           "kind": "lesson",
           "id": "lea-market-sizing"
         },
-        "label": "Dimensionner un marché (TAM / SAM / SOM)",
+        "label": "Dimensionner un marché avec hypothèses",
         "status": "existant",
         "keystone": true
       },
       {
         "order": 4,
-        "type": "pratique",
+        "type": "coeur",
         "ref": {
-          "kind": "case",
-          "id": "cs-market-sizing-live"
+          "kind": "lesson",
+          "id": "lea-read-startup"
         },
-        "label": "Cas : un market sizing déroulé en direct",
+        "label": "Lire une startup et ses métriques",
         "status": "existant"
       },
       {
         "order": 5,
         "type": "coeur",
         "ref": {
-          "kind": "lesson",
-          "id": "lea-read-startup"
+          "kind": "course",
+          "id": "c-mathematiques-vc"
         },
-        "label": "Lire une startup + unit economics",
-        "status": "existant"
+        "label": "Réviser les mathématiques du VC",
+        "status": "existant",
+        "keystone": true,
+        "prereqNote": "À faire avant les calculs de cap table, dilution et retours."
       },
       {
         "order": 6,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
-          "id": "lea-technical"
+          "id": "lea-deal-memo"
         },
-        "label": "Les questions techniques : cap table, dilution, returns",
-        "status": "existant"
-      },
-      {
-        "order": 7,
-        "type": "pratique",
-        "ref": {
-          "kind": "course",
-          "id": "c-mathematiques-vc"
-        },
-        "label": "Réviser les mathématiques du VC",
+        "label": "Écrire une recommandation courte",
         "status": "existant",
         "keystone": true
       },
       {
-        "order": 8,
-        "type": "pratique",
+        "order": 7,
+        "type": "coeur",
         "ref": {
-          "kind": "simulator",
-          "id": "pre-post-money"
+          "kind": "lesson",
+          "id": "lea-case-study"
         },
-        "label": "Simuler pre/post-money",
+        "label": "Traiter le case study comme une diligence courte",
+        "status": "existant"
+      },
+      {
+        "order": 8,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lea-fund-research"
+        },
+        "label": "Préparer sa recherche sur le fonds",
         "status": "existant"
       },
       {
         "order": 9,
-        "type": "pratique",
+        "type": "coeur",
         "ref": {
-          "kind": "simulator",
-          "id": "dilution"
+          "kind": "lesson",
+          "id": "lea-pitch"
         },
-        "label": "Simuler la dilution",
+        "label": "Pitcher une société en fonction du fonds",
         "status": "existant"
       },
       {
@@ -474,112 +478,53 @@
         "type": "coeur",
         "ref": {
           "kind": "lesson",
-          "id": "lea-deal-memo"
+          "id": "lea-fit"
         },
-        "label": "Le deal memo : structure d'une reco",
-        "status": "existant",
-        "keystone": true
+        "label": "Préparer why VC / why this fund / why you",
+        "status": "existant"
       },
       {
         "order": 11,
-        "type": "pratique",
-        "ref": {
-          "kind": "lesson",
-          "id": "lea-case-study"
-        },
-        "label": "Le case study : la méthode en 5 temps",
-        "status": "existant"
-      },
-      {
-        "order": 12,
-        "type": "pratique",
-        "ref": {
-          "kind": "case",
-          "id": "cs-seed-ic"
-        },
-        "label": "Cas : la décision de comité (Volta au seed)",
-        "status": "existant"
-      },
-      {
-        "order": 13,
-        "type": "coeur",
-        "ref": {
-          "kind": "lesson",
-          "id": "lea-pitch"
-        },
-        "label": "« Pitch me a company »",
-        "status": "existant"
-      },
-      {
-        "order": 14,
-        "type": "coeur",
-        "ref": {
-          "kind": "lesson",
-          "id": "lea-fit"
-        },
-        "label": "Le fit : why VC / why this fund / why you",
-        "status": "existant"
-      },
-      {
-        "order": 15,
         "type": "bonus",
         "ref": {
           "kind": "lesson",
           "id": "lea-reverse-questions"
         },
-        "label": "Tes questions à poser",
+        "label": "Préparer tes questions au recruteur",
         "status": "existant"
       },
       {
-        "order": 16,
-        "type": "coeur",
-        "ref": {
-          "kind": "lesson",
-          "id": "lea-fund-research"
-        },
-        "label": "Faire ses devoirs sur le fonds",
-        "status": "existant"
-      },
-      {
-        "order": 17,
+        "order": 12,
         "type": "bonus",
         "ref": {
           "kind": "lesson",
           "id": "lea-jour-j"
         },
-        "label": "Les 48 h, le jour J, le suivi",
+        "label": "Stabiliser la préparation autour de l'entretien",
         "status": "existant"
       },
       {
-        "order": 18,
-        "type": "respiration",
-        "ref": {
-          "kind": "case",
-          "id": "cs-power-law-portfolio"
-        },
-        "label": "Cas : anatomie d'un portefeuille power-law",
-        "status": "existant"
-      },
-      {
-        "order": 19,
+        "order": 13,
         "type": "pratique",
         "ref": {
           "kind": "milestone",
           "id": "lea-mock"
         },
-        "label": "Le mock complet (jalon)",
+        "label": "Produire et réviser le mock final",
         "status": "existant",
-        "keystone": true
+        "keystone": true,
+        "prereqNote": "Après la note courte, effectuer une simulation orale puis réviser."
       }
     ],
     "outcomes": [
-      "Dimensionner un marché en top-down et bottom-up",
-      "Structurer un deal memo défendable",
-      "Tenir une reco invest/pass en temps contraint"
+      "Identifier le critère évalué derrière chaque format d'entretien.",
+      "Analyser une startup avec sources, hypothèses, métriques et risques hiérarchisés.",
+      "Produire une note courte et une simulation orale révisées sans information confidentielle."
     ],
     "prerequisites": [
-      "Avoir complété le parcours [Comprendre le capital-risque](/parcours/le-vc-sans-bullshit)",
-      "Connaître les concepts de base d’une entreprise (revenu, marge, profit)"
+      "Avoir une compréhension de base du métier VC et des stades d'investissement.",
+      "Savoir utiliser un tableur ou une calculatrice pour des ordres de grandeur simples.",
+      "Préparer un fonds cible réel avant le jalon final."
     ]
   },
   {
@@ -1100,127 +1045,203 @@
     "roadmap": "next",
     "title": "Préparer ma Série A",
     "perspective": "both",
-    "hook": "« La seed d'aujourd'hui ressemble à l'ancienne Série A. » ARR ~2,5 M€, board, et une term sheet qui se négocie ligne à ligne.",
+    "hook": "Une Série A se prépare en reliant preuves opérationnelles, besoin de financement, structure du capital, droits négociés et gouvernance future.",
     "kanji": "階",
     "accent": "#B5544E",
-    "goal": "Négocier une term sheet ligne à ligne et maîtriser une cap table multi-tours.",
+    "goal": "Produire et défendre un dossier de préparation à la Série A comprenant diagnostic, preuves, plan de financement, cap table, matrice de clauses, négociation et premier board.",
     "forWhom": [
-      "Fondateurs en croissance",
-      "CEO en préparation de Série A"
+      "Fondateurs préparant un tour institutionnel",
+      "CEO et responsables finance en préparation de Série A",
+      "Investisseurs souhaitant comprendre le dossier côté fondateur"
     ],
     "level": "avance",
     "entryLevel": "avance",
     "time": {
-      "coreHours": 8,
-      "withBonusHours": 10,
+      "source": "derived",
       "sessions": 8,
-      "cadence": "Sur 4 à 6 semaines"
+      "cadence": "Sur 4 à 6 semaines, avec deux approfondissements facultatifs"
     },
     "timeFit": [
       "medium",
       "high"
+    ],
+    "prerequisites": [
+      "Avoir préparé une seed ou disposer d’une expérience équivalente de levée.",
+      "Savoir lire un plan de trésorerie mensuel.",
+      "Maîtriser pre-money, post-money, dilution et lecture fully diluted.",
+      "Savoir identifier les principales rubriques d’une term sheet.",
+      "Avoir parcouru les bases de cap table et de term sheet ou disposer d’un niveau équivalent."
     ],
     "recommendedForProfiles": [
       "entrepreneur-levee",
       "associate-progression"
     ],
     "milestone": {
-      "type": "negotiation",
-      "label": "Négo simulée + cap table multi-tours",
-      "description": "Une négociation de term sheet simulée et une cap table sur plusieurs tours."
+      "type": "dossier",
+      "label": "Dossier Série A + négociation simulée",
+      "description": "Un dossier de préparation à la Série A, une term sheet annotée et un journal de négociation révisés après retour.",
+      "evaluation": [
+        "auto",
+        "peer",
+        "practitioner"
+      ],
+      "rubricId": "todo-attentes-serie-a"
     },
     "steps": [
       {
         "order": 1,
         "type": "coeur",
         "ref": {
-          "kind": "milestone",
-          "id": "todo-attentes-serie-a"
+          "kind": "lesson",
+          "id": "lsa-decision-lever"
         },
-        "label": "Les attentes en Série A : métriques, board",
-        "status": "a-produire"
+        "label": "Décider de lever maintenant",
+        "status": "existant"
       },
       {
         "order": 2,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
-          "id": "l-ts-economics"
+          "id": "lsa-registre-preuves"
         },
-        "label": "Term sheet : économie",
+        "label": "Construire le registre des preuves",
         "status": "existant",
-        "keystone": true,
-        "prereqNote": "Clé pour la négociation qui suit."
+        "keystone": true
       },
       {
         "order": 3,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
-          "id": "l-ts-control"
+          "id": "lsa-plan-financement"
         },
-        "label": "Term sheet : contrôle",
+        "label": "Relier montant, runway et jalons",
         "status": "existant"
       },
       {
         "order": 4,
-        "type": "pratique",
+        "type": "coeur",
         "ref": {
-          "kind": "simulator",
-          "id": "waterfall"
+          "kind": "lesson",
+          "id": "lsa-process-dataroom"
         },
-        "label": "Waterfall & liquidation pref",
+        "label": "Organiser le processus et la data room",
         "status": "existant"
       },
       {
         "order": 5,
         "type": "pratique",
         "ref": {
+          "kind": "case",
+          "id": "cs-serie-a-alto-sas"
+        },
+        "label": "Cas AltoSuite : les données avant la modélisation",
+        "status": "existant",
+        "note": "Cas fictif servant de support chiffré aux sections suivantes du dossier."
+      },
+      {
+        "order": 6,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lsa-modeliser-transaction"
+        },
+        "label": "Modéliser la transaction et la cap table",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 7,
+        "type": "pratique",
+        "ref": {
           "kind": "simulator",
           "id": "dilution"
         },
         "label": "Dilution multi-tours",
-        "status": "existant"
-      },
-      {
-        "order": 6,
-        "type": "respiration",
-        "ref": {
-          "kind": "case",
-          "id": "cs-dilution-journey"
-        },
-        "label": "Cas : dilution seed→C",
-        "status": "existant"
-      },
-      {
-        "order": 7,
-        "type": "coeur",
-        "ref": {
-          "kind": "lesson",
-          "id": "l-founder-narrative"
-        },
-        "label": "Négocier sans casser la relation",
         "status": "existant",
-        "note": "Compléter avec des tactiques de négociation."
+        "note": "Rejouer une cap table avant et après le tour, pool compris."
       },
       {
         "order": 8,
+        "type": "pratique",
+        "ref": {
+          "kind": "simulator",
+          "id": "waterfall"
+        },
+        "label": "Waterfall et préférence de liquidation",
+        "status": "existant",
+        "note": "Comparer deux offres sur trois scénarios de sortie."
+      },
+      {
+        "order": 9,
         "type": "coeur",
         "ref": {
           "kind": "lesson",
-          "id": "lf-board"
+          "id": "lsa-termes-gouvernance"
         },
-        "label": "Le board, la gouvernance et le contrôle en SAS",
+        "label": "Lire les clauses économiques et de gouvernance",
         "status": "existant"
+      },
+      {
+        "order": 10,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lsa-negociation-dossier"
+        },
+        "label": "Négocier sur dossier",
+        "status": "existant",
+        "keystone": true
+      },
+      {
+        "order": 11,
+        "type": "coeur",
+        "ref": {
+          "kind": "lesson",
+          "id": "lsa-closing-board"
+        },
+        "label": "Clore le tour et préparer le premier board",
+        "status": "existant"
+      },
+      {
+        "order": 12,
+        "type": "bonus",
+        "ref": {
+          "kind": "lesson",
+          "id": "lsa-branche-sectorielle"
+        },
+        "label": "Adapter le dossier au modèle économique",
+        "status": "existant"
+      },
+      {
+        "order": 13,
+        "type": "bonus",
+        "ref": {
+          "kind": "lesson",
+          "id": "lsa-tour-complexe"
+        },
+        "label": "Comparer un tour complexe",
+        "status": "existant"
+      },
+      {
+        "order": 14,
+        "type": "pratique",
+        "ref": {
+          "kind": "milestone",
+          "id": "todo-attentes-serie-a"
+        },
+        "label": "Assembler le dossier Série A et simuler la négociation",
+        "status": "existant",
+        "keystone": true,
+        "prereqNote": "Finaliser après les huit séquences cœur."
       }
     ],
     "outcomes": [
-      "Négocier une term sheet économie + contrôle",
-      "Modéliser une cap table multi-tours",
-      "Aborder la gouvernance de board"
-    ],
-    "prerequisites": [
-      "Aucun pré-requis particulier."
+      "Décider si la société doit lancer, différer ou financer autrement sa Série A.",
+      "Construire un registre de preuves vérifiables et un plan de financement cohérent.",
+      "Comparer des offres à partir de la cap table, des droits économiques et de la gouvernance.",
+      "Préparer une négociation et un closing sans confondre retour pédagogique et validation juridique."
     ]
   },
   {
@@ -2166,7 +2187,7 @@
           "kind": "case",
           "id": "cs-dilution-journey"
         },
-        "label": "Cas : 100 % deviennent 28 %",
+        "label": "Cas : 100 % deviennent 45,08 %",
         "status": "existant"
       }
     ],

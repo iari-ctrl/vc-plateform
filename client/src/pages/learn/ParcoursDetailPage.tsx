@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { InlineMarkdown } from '@/lib/markdown';
 import {
@@ -8,7 +8,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import {
-  parcoursBySlug, resolveStep, lessonIdsForParcours, visibleSteps,
+  parcoursBySlug, parcoursContextHref, resolveStep, visibleSteps,
   FAMILY_META, type ParcoursStep, type StepType, type TimeBudget,
 } from '@/content/parcours';
 import { formatMinutes, parcoursTimeSummary } from '@/content/learningTime';
@@ -17,7 +17,8 @@ import { ProgressBar, LevelBadge } from '@/components/ui/primitives';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useUserData } from '@/context/UserDataContext';
 import { useResourcePageMeta } from '@/lib/seo';
-import { productionStageAtLeast, useLearningWorkspace, type ProductionStage } from '@/lib/learningWorkspace';
+import { useLearningWorkspace, type ProductionStage } from '@/lib/learningWorkspace';
+import { buildParcoursProgressSummary, isParcoursStepComplete } from '@/lib/parcoursProgress';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
 const STEP_META: Record<StepType, { label: string; icon: LucideIcon; color: string; hint: string }> = {
@@ -41,23 +42,29 @@ const HOURS_FORMATTER = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 
 
 export default function ParcoursDetailPage() {
   const { slug } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const parcours = slug ? parcoursBySlug(slug) : undefined;
   const { progress, profile } = useUserData();
   const workspace = useLearningWorkspace();
-  const [budget, setBudget] = useState<TimeBudget>((profile?.timeBudget as TimeBudget) ?? 'high');
+  const [budget, setBudget] = useState<TimeBudget | null>(null);
 
   useResourcePageMeta(Boolean(parcours), parcours?.title, parcours?.hook);
-
-  const lessonIds = useMemo(() => (parcours ? lessonIdsForParcours(parcours) : []), [parcours]);
-  const done = lessonIds.filter((id) => progress[id]?.status === 'done').length;
-  const pct = lessonIds.length ? Math.round((done / lessonIds.length) * 100) : 0;
 
   if (!parcours) return <NotFoundPage />;
 
   const meta = FAMILY_META[parcours.family];
   const accent = parcours.accent ?? meta.accent;
-  const steps = visibleSteps(parcours, budget);
+  const availableBudgets = TIME_BUDGETS.filter((item) => parcours.timeFit.includes(item.id));
+  const profileBudget = TIME_BUDGETS.some((item) => item.id === profile?.timeBudget)
+    ? profile?.timeBudget as TimeBudget
+    : undefined;
+  const budgetParam = searchParams.get('budget');
+  const urlBudget = TIME_BUDGETS.some((item) => item.id === budgetParam) ? budgetParam as TimeBudget : undefined;
+  const requestedBudget = budget ?? urlBudget ?? profileBudget ?? 'high';
+  const effectiveBudget = parcours.timeFit.includes(requestedBudget) ? requestedBudget : (availableBudgets[0]?.id ?? 'high');
+  const steps = visibleSteps(parcours, effectiveBudget);
   const allSteps = [...parcours.steps].sort((a, b) => a.order - b.order);
+  const progressSummary = buildParcoursProgressSummary(parcours, effectiveBudget, progress, workspace);
   const timeSummary = parcoursTimeSummary(parcours);
   const finalStep = allSteps.find((step) => step.ref.kind === 'milestone');
   const finalEntry = finalStep ? workspace.productions[finalStep.ref.id] : undefined;
@@ -74,30 +81,23 @@ export default function ParcoursDetailPage() {
   const diagnosticAnswers = parcours.entryDiagnosticId
     ? Object.keys(workspace.diagnostics[parcours.entryDiagnosticId]?.answers ?? {}).length
     : 0;
-  const isResolvedDone = (r: ReturnType<typeof resolveStep>) => {
-    const ids = r.lessonIds ?? (r.lessonId ? [r.lessonId] : []);
-    return ids.length > 0 && ids.every((id) => progress[id]?.status === 'done');
-  };
 
-  // « Reprendre où j'en étais » — first reachable step that isn't done yet.
-  const hasLearningActivity = done > 0 || allSteps.some((step) => (
-    (step.ref.kind === 'deliverable' || step.ref.kind === 'milestone') && Boolean(workspace.productions[step.ref.id])
-  ));
-  const resume = allSteps
-    .map((s) => ({ s, r: resolveStep(s) }))
-    .find(({ s, r }) => {
-      if (!r.href) return false;
-      if (s.ref.kind === 'case') return !hasLearningActivity && s.order === allSteps[0]?.order;
-      if (s.ref.kind === 'deliverable' || s.ref.kind === 'milestone') {
-        const entry = workspace.productions[s.ref.id];
-        return s.ref.kind === 'milestone' ? !entry?.declaredCompleteAt : !productionStageAtLeast(entry?.stage, 'revised');
-      }
-      return !isResolvedDone(r);
-    });
+  // « Reprendre où j'en étais » — first reachable visible step that isn't done yet.
+  const visibleLessonIds = progressSummary.steps.flatMap((item) => {
+    const resolved = resolveStep(item.step);
+    return resolved.lessonIds ?? (resolved.lessonId ? [resolved.lessonId] : []);
+  });
+  const hasLearningActivity = progressSummary.completedSteps > 0
+    || visibleLessonIds.some((id) => progress[id]?.status === 'reading')
+    || steps.some((step) => (
+      (step.ref.kind === 'deliverable' || step.ref.kind === 'milestone') && Boolean(workspace.productions[step.ref.id])
+    ));
   const diagnosticHref = parcours.entryDiagnosticId ? `/parcours/${parcours.slug}/diagnostic` : null;
   const resumeHref = !hasLearningActivity && diagnosticAnswers === 0 && diagnosticHref
     ? diagnosticHref
-    : resume?.r.href ?? allSteps.map((s) => resolveStep(s)).find((r) => r.href)?.href ?? null;
+    : progressSummary.resumeHref
+      ? parcoursContextHref(progressSummary.resumeHref, parcours.id, effectiveBudget)
+      : null;
 
   const hidden = parcours.steps.length - steps.length;
 
@@ -136,7 +136,7 @@ export default function ParcoursDetailPage() {
               <div className="mt-7 flex flex-wrap gap-3">
                 {resumeHref && (
                   <Link to={resumeHref} className="btn-foil">
-                    {pct > 0 ? 'Reprendre où j’en étais' : 'Commencer le parcours'}
+                    {progressSummary.completedSteps > 0 ? 'Reprendre où j’en étais' : 'Commencer le parcours'}
                   </Link>
                 )}
                 <BookmarkButton variant="labelled" item={{ itemType: 'parcours', itemId: parcours.id, title: parcours.title, href: `/parcours/${parcours.slug}` }} />
@@ -144,13 +144,13 @@ export default function ParcoursDetailPage() {
             </div>
 
             <div className="space-y-5 rounded-2xl border border-outline-variant bg-surface-container-lowest p-6">
-              {lessonIds.length > 0 && (
+              {progressSummary.totalSteps > 0 && (
                 <div>
                   <div className="mb-1.5 flex items-center justify-between text-sm">
-                    <span className="font-medium">Leçons déclarées lues</span>
-                    <span className="text-surface-variant">{done}/{lessonIds.length} · {pct}%</span>
+                    <span className="font-medium">Étapes effectuées</span>
+                    <span className="text-surface-variant">{progressSummary.completedSteps}/{progressSummary.totalSteps} · {progressSummary.percent}%</span>
                   </div>
-                  <ProgressBar value={pct} accent={accent} label="Leçons déclarées lues" />
+                  <ProgressBar value={progressSummary.percent} accent={accent} label="Étapes effectuées" />
                   {finalStep && <p className="mt-3 text-xs text-surface-variant"><span className="font-medium text-foreground">Jalon final :</span> {finalStatus}</p>}
                 </div>
               )}
@@ -196,7 +196,7 @@ export default function ParcoursDetailPage() {
             <p className="eyebrow">Temps estimés</p>
             <h2 id="parcours-time-title" className="mt-2 font-headline text-headline-md font-semibold">Lecture et production</h2>
             <dl className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <div><dt className="text-xs text-surface-variant">Lecture des leçons</dt><dd className="mt-1 font-mono text-lg font-semibold">{formatMinutes(timeSummary.readingMinutes)}</dd></div>
+              <div><dt className="text-xs text-surface-variant">Lectures et consignes</dt><dd className="mt-1 font-mono text-lg font-semibold">{formatMinutes(timeSummary.readingMinutes)}</dd></div>
               <div><dt className="text-xs text-surface-variant">Contributions guidées</dt><dd className="mt-1 font-mono text-lg font-semibold">{formatMinutes(timeSummary.guidedPracticeMinutes)}</dd></div>
               <div><dt className="text-xs text-surface-variant">Consolidation et jalon</dt><dd className="mt-1 font-mono text-lg font-semibold">{formatMinutes(timeSummary.consolidationMinutes + timeSummary.finalMinutes)}</dd></div>
               <div><dt className="text-xs text-surface-variant">Activités facultatives</dt><dd className="mt-1 font-mono text-lg font-semibold">{formatMinutes(timeSummary.optionalMinutes)}</dd></div>
@@ -221,14 +221,21 @@ export default function ParcoursDetailPage() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm font-medium">Niveau d’approfondissement</p>
             <div className="flex gap-1.5" role="group" aria-label="Niveau d’approfondissement">
-              {TIME_BUDGETS.map((b) => (
+              {availableBudgets.map((b) => (
                 <button
                   key={b.id}
-                  onClick={() => setBudget(b.id)}
-                  aria-pressed={budget === b.id}
+                  onClick={() => {
+                    setBudget(b.id);
+                    setSearchParams((current) => {
+                      const next = new URLSearchParams(current);
+                      next.set('budget', b.id);
+                      return next;
+                    }, { replace: true });
+                  }}
+                  aria-pressed={effectiveBudget === b.id}
                   title={b.sub}
                   className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-                    budget === b.id
+                    effectiveBudget === b.id
                       ? 'border-[color:var(--primary)] bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] text-foreground'
                       : 'border-outline-variant text-surface-variant hover:text-foreground'
                   }`}
@@ -247,7 +254,7 @@ export default function ParcoursDetailPage() {
 
         <ol className="relative space-y-3 border-l border-outline-variant pl-6">
           {steps.map((step) => (
-            <StepRow key={`${step.order}-${step.ref.id}`} step={step} accent={accent} />
+            <StepRow key={`${step.order}-${step.ref.id}`} step={step} accent={accent} parcoursId={parcours.id} budget={effectiveBudget} />
           ))}
         </ol>
 
@@ -266,7 +273,7 @@ export default function ParcoursDetailPage() {
             )}
             {finalStep && resolveStep(finalStep).href && (
               <div className="mt-5 flex flex-wrap items-center gap-3">
-                <Link to={resolveStep(finalStep).href!} className="btn-foil">Ouvrir le jalon final <ArrowRight size={15} aria-hidden /></Link>
+                <Link to={parcoursContextHref(resolveStep(finalStep).href!, parcours.id, effectiveBudget)} className="btn-foil">Ouvrir le jalon final <ArrowRight size={15} aria-hidden /></Link>
                 <span className="text-xs text-surface-variant">État : {finalStatus}</span>
               </div>
             )}
@@ -281,14 +288,14 @@ export default function ParcoursDetailPage() {
   );
 }
 
-function StepRow({ step, accent }: { step: ParcoursStep; accent: string }) {
+function StepRow({ step, accent, parcoursId, budget }: { step: ParcoursStep; accent: string; parcoursId: string; budget: TimeBudget }) {
   const { progress } = useUserData();
   const workspace = useLearningWorkspace();
   const sm = STEP_META[step.type];
   const r = resolveStep(step);
   const KindIcon = KIND_ICON[step.ref.kind] ?? BookOpen;
   const trackedLessonIds = r.lessonIds ?? (r.lessonId ? [r.lessonId] : []);
-  const isDone = trackedLessonIds.length > 0 && trackedLessonIds.every((id) => progress[id]?.status === 'done');
+  const isDone = isParcoursStepComplete(parcoursId, step, progress, workspace);
   const isReading = trackedLessonIds.some((id) => progress[id]?.status === 'reading');
   const production = step.ref.kind === 'deliverable' || step.ref.kind === 'milestone'
     ? workspace.productions[step.ref.id]
@@ -337,7 +344,7 @@ function StepRow({ step, accent }: { step: ParcoursStep; accent: string }) {
   if (r.href) {
     return (
       <li>
-        <Link to={r.href} className={`${base} border-transparent hover:border-outline-variant hover:bg-surface-container-low`}>
+        <Link to={parcoursContextHref(r.href, parcoursId, budget)} className={`${base} border-transparent hover:border-outline-variant hover:bg-surface-container-low`}>
           {inner}
         </Link>
       </li>

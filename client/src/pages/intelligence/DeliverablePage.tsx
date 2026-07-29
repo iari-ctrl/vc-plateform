@@ -1,11 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { publicAssetUrl } from '@shared/base-url.mjs';
 import {
   ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Check, CheckCircle2, Clock,
   Download, FileCheck2, FileText, History, MessageSquareText, Sparkles, Target, Users,
 } from 'lucide-react';
 import { deliverableBySlug, caseById, ecosystemById, memoById, lessonById } from '@/content';
+import {
+  isDeliverableComponentOptionalInDirectAccess,
+  selectDeliverableComponents,
+  selectDeliverableCriteria,
+  selectDeliverableTemplateSections,
+} from '@/content/deliverables';
+import { parcoursById, parcoursContextHref, parcoursNavigationForLesson } from '@/content/parcours';
+import type { TimeBudget } from '@/content/parcoursTypes';
 import type { Deliverable, DeliverableCriterion, DeliverableModelRef, DeliverableResource } from '@/content/types';
 import { Markdown } from '@/lib/markdown';
 import { downloadMarkdown } from '@/lib/downloads';
@@ -18,6 +26,7 @@ import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useUserData } from '@/context/UserDataContext';
 import { useResourcePageMeta } from '@/lib/seo';
+import { safeHttpUrl } from '@/lib/utils';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 
 const STAGE_LABEL: Record<ProductionStage, string> = {
@@ -45,16 +54,30 @@ function DeliverableResourceLink({ resource }: { resource: DeliverableResource }
     </>
   );
 
-  if (format === 'page' && resource.href.startsWith('/') && !resource.href.startsWith('//')) {
+  const isInternal = resource.href.startsWith('/') && !resource.href.startsWith('//');
+  if (format === 'page' && isInternal) {
     return <Link to={resource.href} className={RESOURCE_LINK_CLASS}>{content}</Link>;
   }
 
   const isDownload = DOWNLOAD_FORMATS.has(format);
-  const href = resource.href.startsWith('/') && !resource.href.startsWith('//')
+  const href = isInternal
     ? publicAssetUrl(resource.href, import.meta.env.BASE_URL)
-    : resource.href;
+    : safeHttpUrl(resource.href);
+  if (!href) {
+    return <span className={RESOURCE_LINK_CLASS} aria-disabled="true">{content}</span>;
+  }
 
-  return <a href={href} download={isDownload || undefined} className={RESOURCE_LINK_CLASS}>{content}</a>;
+  return (
+    <a
+      href={href}
+      download={isDownload || undefined}
+      target={isInternal ? undefined : '_blank'}
+      rel={isInternal ? undefined : 'noopener noreferrer'}
+      className={RESOURCE_LINK_CLASS}
+    >
+      {content}
+    </a>
+  );
 }
 
 /** Resolve a legacy model exemplar to an in-app route and label. */
@@ -87,21 +110,55 @@ function criterionId(criterion: DeliverableCriterion, index: number): string {
 
 export default function DeliverablePage() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
   const deliverable = slug ? deliverableBySlug(slug) : undefined;
+  const requestedParcours = parcoursById(searchParams.get('parcours') ?? '');
+  const requestedBudget = searchParams.get('budget');
+  const returnBudget = requestedParcours
+    && (requestedBudget === 'low' || requestedBudget === 'medium' || requestedBudget === 'high')
+    && requestedParcours.timeFit.includes(requestedBudget)
+    ? requestedBudget
+    : undefined;
+  const returnParcours = deliverable && requestedParcours?.steps.some((step) => (
+    (step.ref.kind === 'deliverable' || step.ref.kind === 'milestone') && step.ref.id === deliverable.id
+  ))
+    ? requestedParcours
+    : undefined;
+  const relatedLessonHref = (lessonId: string, lessonSlug: string) => {
+    const canonicalHref = `/lessons/${lessonSlug}`;
+    if (!returnParcours) return canonicalHref;
+    const navigation = parcoursNavigationForLesson(lessonId, returnParcours.id, returnBudget);
+    return navigation
+      ? parcoursContextHref(canonicalHref, returnParcours.id, returnBudget)
+      : canonicalHref;
+  };
   useResourcePageMeta(Boolean(deliverable), deliverable?.title, deliverable?.summary, { type: 'article' });
 
   if (!deliverable) return <NotFoundPage />;
 
   const model = deliverable.model && !deliverable.correctionId ? resolveModel(deliverable.model) : null;
   const caseStudy = deliverable.caseStudyId ? caseById(deliverable.caseStudyId) : undefined;
+  const caseStudyHref = caseStudy
+    ? (returnParcours
+      ? parcoursContextHref(`/cases/${caseStudy.slug}`, returnParcours.id, returnBudget)
+      : `/cases/${caseStudy.slug}`)
+    : undefined;
+  const caseCorrectionHref = caseStudy
+    ? (returnParcours
+      ? parcoursContextHref(`/cases/${caseStudy.slug}/correction`, returnParcours.id, returnBudget)
+      : `/cases/${caseStudy.slug}/correction`)
+    : undefined;
   const relatedLessons = (deliverable.relatedLessonIds ?? [])
     .map((id) => lessonById(id))
     .filter((lesson): lesson is NonNullable<typeof lesson> => Boolean(lesson));
   const hasWorkspace = Boolean(deliverable.activityKind);
+  const selectedComponents = selectDeliverableComponents(deliverable, returnBudget);
+  const selectedTemplateSections = selectDeliverableTemplateSections(deliverable, returnBudget);
+  const selectedCriteria = selectDeliverableCriteria(deliverable, returnBudget);
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <Link to="/parcours" className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} aria-hidden /> Parcours</Link>
+      <Link to={returnParcours ? `/parcours/${returnParcours.slug}${returnBudget ? `?budget=${returnBudget}` : ''}` : '/parcours'} className="btn-quiet mb-6 -ml-3"><ArrowLeft size={15} aria-hidden /> {returnParcours?.title ?? 'Parcours'}</Link>
 
       <header>
         <div className="flex items-center justify-between gap-3">
@@ -122,8 +179,8 @@ export default function DeliverablePage() {
         <Markdown source={deliverable.brief} className="prose-editorial" />
       </section>
 
-      {caseStudy && (
-        <Link to={`/cases/${caseStudy.slug}`} className="group mt-8 flex items-start gap-4 rounded-2xl border border-outline-variant p-5 transition-colors hover:border-[color-mix(in_srgb,var(--primary)_50%,transparent)] hover:bg-surface-container-low">
+      {caseStudy && caseStudyHref && (
+        <Link to={caseStudyHref} className="group mt-8 flex items-start gap-4 rounded-2xl border border-outline-variant p-5 transition-colors hover:border-[color-mix(in_srgb,var(--primary)_50%,transparent)] hover:bg-surface-container-low">
           <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[color-mix(in_srgb,var(--primary)_12%,transparent)] text-[color:var(--primary)]"><FileText size={16} aria-hidden /></span>
           <span className="min-w-0 flex-1">
             <span className="eyebrow">Dossier longitudinal</span>
@@ -134,14 +191,19 @@ export default function DeliverablePage() {
         </Link>
       )}
 
-      {deliverable.components && deliverable.components.length > 0 && (
+      {selectedComponents.length > 0 && (
         <section className="mt-12" aria-labelledby="deliverable-components-title">
           <p className="eyebrow flex items-center gap-2"><FileCheck2 size={14} aria-hidden /> Production attendue</p>
           <h2 id="deliverable-components-title" className="mt-2 font-headline text-headline-lg font-semibold">Composants à réunir</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            {deliverable.components.map((component) => (
+            {selectedComponents.map((component) => (
               <div key={component.id} className="rounded-2xl border border-outline-variant bg-surface-container-low/40 p-5">
-                <h3 className="font-headline text-headline-sm font-semibold">{component.title}</h3>
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                  <h3 className="font-headline text-headline-sm font-semibold">{component.title}</h3>
+                  {isDeliverableComponentOptionalInDirectAccess(component, returnBudget) && (
+                    <span className="chip">Facultatif en accès direct</span>
+                  )}
+                </div>
                 <ul className="mt-3 space-y-2 text-sm leading-relaxed text-surface-variant">
                   {component.requirements.map((requirement) => <li key={requirement} className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[color:var(--primary)]" aria-hidden /><span>{requirement}</span></li>)}
                 </ul>
@@ -155,7 +217,7 @@ export default function DeliverablePage() {
         <p className="eyebrow mb-5 flex items-center gap-2"><Target size={14} aria-hidden /> Fiche de travail</p>
         <h2 id="deliverable-template-title" className="sr-only">Gabarit du livrable</h2>
         <ol className="space-y-7">
-          {deliverable.template.map((section, index) => (
+          {selectedTemplateSections.map((section, index) => (
             <li key={section.heading}>
               <div className="flex items-center gap-3">
                 <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[color-mix(in_srgb,var(--primary)_15%,transparent)] font-mono text-[0.625rem] text-[color:var(--primary)]">{index + 1}</span>
@@ -167,10 +229,10 @@ export default function DeliverablePage() {
         </ol>
       </section>
 
-      {hasWorkspace && <ProductionWorkspace deliverable={deliverable} caseStudySlug={caseStudy?.slug} />}
+      {hasWorkspace && <ProductionWorkspace deliverable={deliverable} criteria={selectedCriteria} budget={returnBudget} caseCorrectionHref={caseCorrectionHref} />}
 
-      {deliverable.rubric.length > 0 && (
-        <RubricReference deliverable={deliverable} />
+      {selectedCriteria.length > 0 && (
+        <RubricReference deliverable={deliverable} criteria={selectedCriteria} />
       )}
 
       {deliverable.roleCards && deliverable.roleCards.length > 0 && (
@@ -221,7 +283,7 @@ export default function DeliverablePage() {
           <ul className="space-y-2">
             {relatedLessons.map((lesson) => (
               <li key={lesson.id}>
-                <Link to={`/lessons/${lesson.slug}`} className="inline-flex items-center gap-2 text-[0.95rem] font-medium text-foreground underline decoration-dotted decoration-primary/60 underline-offset-[3px] transition-colors hover:text-[color:var(--primary)]">
+                <Link to={relatedLessonHref(lesson.id, lesson.slug)} className="inline-flex items-center gap-2 text-[0.95rem] font-medium text-foreground underline decoration-dotted decoration-primary/60 underline-offset-[3px] transition-colors hover:text-[color:var(--primary)]">
                   <BookOpen size={14} className="text-surface-variant" aria-hidden /> {lesson.title}
                 </Link>
               </li>
@@ -235,7 +297,17 @@ export default function DeliverablePage() {
   );
 }
 
-function ProductionWorkspace({ deliverable, caseStudySlug }: { deliverable: Deliverable; caseStudySlug?: string }) {
+function ProductionWorkspace({
+  deliverable,
+  criteria,
+  budget,
+  caseCorrectionHref,
+}: {
+  deliverable: Deliverable;
+  criteria: DeliverableCriterion[];
+  budget?: TimeBudget;
+  caseCorrectionHref?: string;
+}) {
   const workspace = useLearningWorkspace();
   const { journal } = useUserData();
   const entry = workspace.productions[deliverable.id];
@@ -260,6 +332,15 @@ function ProductionWorkspace({ deliverable, caseStudySlug }: { deliverable: Deli
     journalEntry.links.some((link) => link.type === 'deliverable' && link.id === deliverable.id)
   )).length, [deliverable.id, journal]);
   const availableReviewModes: ReviewMode[] = (deliverable.evaluation ?? ['auto']).map((mode) => mode === 'auto' ? 'self' : mode);
+  const hasRubricRating = Boolean(entry?.rubricRatings && Object.keys(entry.rubricRatings).length > 0);
+  const completionMissing = [
+    entry?.note?.trim() ? null : 'une note de travail ou l’emplacement du fichier',
+    entry?.externalFileProduced ? null : 'la confirmation qu’un fichier a été produit hors plateforme',
+    entry?.reviewMode ? null : 'un mode de retour enregistré',
+    hasRubricRating ? null : 'au moins une appréciation de la grille',
+    entry?.changeLog?.trim() ? null : 'un journal des modifications après retour',
+  ].filter((item): item is string => Boolean(item));
+  const canDeclareComplete = completionMissing.length === 0;
 
   function announce(ok: boolean, success: string) {
     setAnnouncement(ok ? success : 'La modification n’a pas pu être enregistrée.');
@@ -296,6 +377,10 @@ function ProductionWorkspace({ deliverable, caseStudySlug }: { deliverable: Deli
   }
 
   function declareComplete() {
+    if (!canDeclareComplete) {
+      setAnnouncement('Le jalon reste bloqué : production, revue, autoévaluation et révision doivent être observables.');
+      return;
+    }
     const result = learningWorkspace.declareComplete(deliverable.id);
     announce(result.ok, 'Jalon final déclaré terminé.');
   }
@@ -346,7 +431,7 @@ function ProductionWorkspace({ deliverable, caseStudySlug }: { deliverable: Deli
             </label>
             <div className="mt-4 flex flex-wrap gap-3">
               <button type="button" onClick={saveWork} className="btn-ghost">Enregistrer la note</button>
-              <button type="button" onClick={() => downloadMarkdown(`${deliverable.title} - fiche de travail`, buildWorksheetMarkdown(deliverable, note, externalFileProduced))} className="btn-quiet"><Download size={15} aria-hidden /> Exporter la fiche</button>
+              <button type="button" onClick={() => downloadMarkdown(`${deliverable.title} - fiche de travail`, buildWorksheetMarkdown(deliverable, note, externalFileProduced, budget))} className="btn-quiet"><Download size={15} aria-hidden /> Exporter la fiche</button>
             </div>
           </div>
 
@@ -357,13 +442,13 @@ function ProductionWorkspace({ deliverable, caseStudySlug }: { deliverable: Deli
             </div>
           )}
 
-          {firstVersionComplete && deliverable.rubric.length > 0 && (
+          {firstVersionComplete && criteria.length > 0 && (
             <fieldset className="border-t border-outline-variant pt-5">
               <legend className="font-headline text-headline-sm font-semibold">Appréciation critère par critère</legend>
               <p className="mt-1 text-sm text-surface-variant">Les niveaux ne sont pas agrégés en score.</p>
               {deliverable.rubricLevels && deliverable.rubricLevels.length > 0 && (
                 <div className="mt-4 space-y-4">
-                  {deliverable.rubric.map((criterion, index) => {
+                  {criteria.map((criterion, index) => {
                   const id = criterionId(criterion, index);
                   return (
                     <div key={id} className="rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
@@ -392,8 +477,8 @@ function ProductionWorkspace({ deliverable, caseStudySlug }: { deliverable: Deli
               </div>
 
               <div className="mt-4 flex flex-wrap gap-3">
-                <button type="button" onClick={() => downloadMarkdown(`${deliverable.title} - autoevaluation`, buildReviewMarkdown(deliverable, entry.rubricRatings ?? {}, 'self'))} className="btn-ghost"><Download size={15} aria-hidden /> Exporter l’autoévaluation</button>
-                {availableReviewModes.length > 1 && <button type="button" onClick={() => downloadMarkdown(`${deliverable.title} - grille de revue externe`, buildReviewMarkdown(deliverable, entry.rubricRatings ?? {}, 'external'))} className="btn-ghost"><Download size={15} aria-hidden /> Exporter la grille externe</button>}
+                <button type="button" onClick={() => downloadMarkdown(`${deliverable.title} - autoevaluation`, buildReviewMarkdown(deliverable, entry.rubricRatings ?? {}, 'self', budget))} className="btn-ghost"><Download size={15} aria-hidden /> Exporter l’autoévaluation</button>
+                {availableReviewModes.length > 1 && <button type="button" onClick={() => downloadMarkdown(`${deliverable.title} - grille de revue externe`, buildReviewMarkdown(deliverable, entry.rubricRatings ?? {}, 'external', budget))} className="btn-ghost"><Download size={15} aria-hidden /> Exporter la grille externe</button>}
                 {!reviewed && <button type="button" onClick={() => advance('reviewed')} className="btn-foil">Déclarer le retour effectué <MessageSquareText size={15} aria-hidden /></button>}
               </div>
             </fieldset>
@@ -411,20 +496,28 @@ function ProductionWorkspace({ deliverable, caseStudySlug }: { deliverable: Deli
             </div>
           )}
 
-          {firstVersionComplete && deliverable.correctionId && caseStudySlug && (
+          {firstVersionComplete && deliverable.correctionId && caseCorrectionHref && (
             <div className="border-t border-outline-variant pt-5">
-              <Link to={`/cases/${caseStudySlug}/correction`} className="btn-ghost">{entry.correctionRevealedAt ? 'Revoir la correction commentée' : 'Choisir de révéler la correction'} <ArrowRight size={15} aria-hidden /></Link>
+              <Link to={caseCorrectionHref} className="btn-ghost">{entry.correctionRevealedAt ? 'Revoir la correction commentée' : 'Choisir de révéler la correction'} <ArrowRight size={15} aria-hidden /></Link>
             </div>
           )}
 
           {revised && deliverable.activityKind === 'capstone' && (
             <div className="rounded-xl border border-[color-mix(in_srgb,var(--primary)_35%,transparent)] bg-surface-container-lowest p-5">
               <p className="font-medium">Jalon final</p>
-              <p className="mt-1 text-sm leading-relaxed text-surface-variant">La révision est enregistrée. Déclarez explicitement le jalon terminé lorsque votre dossier est prêt.</p>
+              <p className="mt-1 text-sm leading-relaxed text-surface-variant">La révision est enregistrée. Le jalon ne peut être déclaré terminé que si la production, la revue, l’autoévaluation et le journal de révision sont observables.</p>
+              {completionMissing.length > 0 && (
+                <div className="mt-4 rounded-lg border border-outline-variant bg-surface-container-low p-3 text-xs leading-relaxed text-surface-variant">
+                  <p className="font-medium text-foreground">Éléments encore requis avant complétion :</p>
+                  <ul className="mt-2 space-y-1">
+                    {completionMissing.map((item) => <li key={item}>• {item}</li>)}
+                  </ul>
+                </div>
+              )}
               {entry.declaredCompleteAt ? (
                 <p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--success)]"><CheckCircle2 size={16} aria-hidden /> Jalon déclaré terminé</p>
               ) : (
-                <button type="button" onClick={declareComplete} className="btn-foil mt-4">Déclarer le jalon terminé <Check size={15} aria-hidden /></button>
+                <button type="button" onClick={declareComplete} disabled={!canDeclareComplete} aria-disabled={!canDeclareComplete} className="btn-foil mt-4 disabled:cursor-not-allowed disabled:opacity-60">Déclarer le jalon terminé <Check size={15} aria-hidden /></button>
               )}
             </div>
           )}
@@ -446,7 +539,7 @@ function ProductionWorkspace({ deliverable, caseStudySlug }: { deliverable: Deli
   );
 }
 
-function RubricReference({ deliverable }: { deliverable: Deliverable }) {
+function RubricReference({ deliverable, criteria }: { deliverable: Deliverable; criteria: DeliverableCriterion[] }) {
   return (
     <aside id="grille-revue" className="mt-12 scroll-mt-24 rounded-2xl border border-[color-mix(in_srgb,var(--primary)_25%,transparent)] bg-[color-mix(in_srgb,var(--primary)_5%,transparent)] p-6 sm:p-7" aria-labelledby="rubric-title">
       <p className="eyebrow flex items-center gap-2"><CheckCircle2 size={14} aria-hidden /> Grille de revue</p>
@@ -457,7 +550,7 @@ function RubricReference({ deliverable }: { deliverable: Deliverable }) {
         </ul>
       )}
       <div className="mt-6 space-y-4">
-        {deliverable.rubric.map((criterion, index) => (
+        {criteria.map((criterion, index) => (
           <details key={criterionId(criterion, index)} className="rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
             <summary className="cursor-pointer font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--primary)]">{criterion.criterion}</summary>
             <dl className="mt-4 grid gap-4 text-sm sm:grid-cols-2">

@@ -10,20 +10,23 @@ import {
   type StorageResult,
 } from './storage';
 
-export const LEARNING_WORKSPACE_SCHEMA_VERSION = 1 as const;
+export const LEARNING_WORKSPACE_SCHEMA_VERSION = 2 as const;
 
 export const LEARNING_WORKSPACE_LIMITS = Object.freeze({
   id: 200,
+  activityKey: 640,
   freeText: 20_000,
   shortText: 500,
   diagnostics: 100,
   productions: 200,
+  activities: 500,
   answersPerDiagnostic: 100,
   ratingsPerProduction: 100,
 });
 
 export type ProductionStage = 'started' | 'first-version-completed' | 'reviewed' | 'revised';
 export type ReviewMode = 'self' | 'peer' | 'practitioner';
+export type LearningActivityKind = 'case' | 'simulator';
 
 export interface DiagnosticWorkspaceEntry {
   answers: Record<string, string>;
@@ -42,16 +45,27 @@ export interface ProductionWorkspaceEntry {
   updatedAt: string;
 }
 
+export interface LearningActivityEntry {
+  parcoursId: string;
+  kind: LearningActivityKind;
+  id: string;
+  completed: true;
+  completedAt: string;
+  updatedAt: string;
+}
+
 export interface LearningWorkspaceState {
   schemaVersion: typeof LEARNING_WORKSPACE_SCHEMA_VERSION;
   diagnostics: Record<string, DiagnosticWorkspaceEntry>;
   productions: Record<string, ProductionWorkspaceEntry>;
+  activities: Record<string, LearningActivityEntry>;
 }
 
 export const EMPTY_LEARNING_WORKSPACE: LearningWorkspaceState = Object.freeze({
   schemaVersion: LEARNING_WORKSPACE_SCHEMA_VERSION,
   diagnostics: {},
   productions: {},
+  activities: {},
 });
 
 const STAGE_ORDER: Record<ProductionStage, number> = {
@@ -71,6 +85,10 @@ function isStage(value: unknown): value is ProductionStage {
 
 function isReviewMode(value: unknown): value is ReviewMode {
   return value === 'self' || value === 'peer' || value === 'practitioner';
+}
+
+function isLearningActivityKind(value: unknown): value is LearningActivityKind {
+  return value === 'case' || value === 'simulator';
 }
 
 function failure<T>(reason: StorageParseFailureReason): StorageParseResult<T> {
@@ -107,19 +125,23 @@ function stringRecordReason(
   return null;
 }
 
-function parseLearningWorkspaceResult(value: unknown): StorageParseResult<LearningWorkspaceState> {
-  if (
-    !isRecord(value)
-    || value.schemaVersion !== LEARNING_WORKSPACE_SCHEMA_VERSION
-    || !isRecord(value.diagnostics)
-    || !isRecord(value.productions)
-  ) return failure('validation');
+export function learningActivityKey(parcoursId: string, kind: LearningActivityKind, id: string): string {
+  return `${parcoursId}:${kind}:${id}`;
+}
 
-  if (Object.keys(value.diagnostics).length > LEARNING_WORKSPACE_LIMITS.diagnostics) return failure('limit');
-  if (Object.keys(value.productions).length > LEARNING_WORKSPACE_LIMITS.productions) return failure('limit');
+function inputActivityReason(parcoursId: string, kind: LearningActivityKind, id: string): StorageParseFailureReason | null {
+  return stringReason(parcoursId, LEARNING_WORKSPACE_LIMITS.id)
+    ?? (isLearningActivityKind(kind) ? null : 'validation')
+    ?? stringReason(id, LEARNING_WORKSPACE_LIMITS.id)
+    ?? stringReason(learningActivityKey(parcoursId, kind, id), LEARNING_WORKSPACE_LIMITS.activityKey);
+}
+
+function parseDiagnostics(value: unknown): StorageParseResult<Record<string, DiagnosticWorkspaceEntry>> {
+  if (!isRecord(value)) return failure('validation');
+  if (Object.keys(value).length > LEARNING_WORKSPACE_LIMITS.diagnostics) return failure('limit');
 
   const diagnostics: Record<string, DiagnosticWorkspaceEntry> = {};
-  for (const [id, entry] of Object.entries(value.diagnostics)) {
+  for (const [id, entry] of Object.entries(value)) {
     if (!isRecord(entry)) return failure('validation');
     const reason = stringReason(id, LEARNING_WORKSPACE_LIMITS.id)
       ?? stringRecordReason(
@@ -134,9 +156,15 @@ function parseLearningWorkspaceResult(value: unknown): StorageParseResult<Learni
       updatedAt: entry.updatedAt as string,
     };
   }
+  return { ok: true, value: diagnostics };
+}
+
+function parseProductions(value: unknown): StorageParseResult<Record<string, ProductionWorkspaceEntry>> {
+  if (!isRecord(value)) return failure('validation');
+  if (Object.keys(value).length > LEARNING_WORKSPACE_LIMITS.productions) return failure('limit');
 
   const productions: Record<string, ProductionWorkspaceEntry> = {};
-  for (const [id, entry] of Object.entries(value.productions)) {
+  for (const [id, entry] of Object.entries(value)) {
     if (!isRecord(entry) || !isStage(entry.stage)) return failure('validation');
     const reason = stringReason(id, LEARNING_WORKSPACE_LIMITS.id)
       ?? optionalStringReason(entry.note, LEARNING_WORKSPACE_LIMITS.freeText)
@@ -168,10 +196,56 @@ function parseLearningWorkspaceResult(value: unknown): StorageParseResult<Learni
       updatedAt: entry.updatedAt as string,
     };
   }
+  return { ok: true, value: productions };
+}
+
+function parseActivities(value: unknown): StorageParseResult<Record<string, LearningActivityEntry>> {
+  if (!isRecord(value)) return failure('validation');
+  if (Object.keys(value).length > LEARNING_WORKSPACE_LIMITS.activities) return failure('limit');
+
+  const activities: Record<string, LearningActivityEntry> = {};
+  for (const [key, entry] of Object.entries(value)) {
+    if (!isRecord(entry) || !isLearningActivityKind(entry.kind) || entry.completed !== true) return failure('validation');
+    const reason = stringReason(key, LEARNING_WORKSPACE_LIMITS.activityKey)
+      ?? inputActivityReason(entry.parcoursId as string, entry.kind, entry.id as string)
+      ?? dateReason(entry.completedAt)
+      ?? dateReason(entry.updatedAt);
+    if (reason) return failure(reason);
+    if (key !== learningActivityKey(entry.parcoursId as string, entry.kind, entry.id as string)) return failure('validation');
+    activities[key] = {
+      parcoursId: entry.parcoursId as string,
+      kind: entry.kind,
+      id: entry.id as string,
+      completed: true,
+      completedAt: entry.completedAt as string,
+      updatedAt: entry.updatedAt as string,
+    };
+  }
+  return { ok: true, value: activities };
+}
+
+function parseLearningWorkspaceResult(value: unknown): StorageParseResult<LearningWorkspaceState> {
+  if (!isRecord(value) || (value.schemaVersion !== 1 && value.schemaVersion !== LEARNING_WORKSPACE_SCHEMA_VERSION)) {
+    return failure('validation');
+  }
+
+  const diagnostics = parseDiagnostics(value.diagnostics);
+  if (!diagnostics.ok) return diagnostics;
+  const productions = parseProductions(value.productions);
+  if (!productions.ok) return productions;
+  const activities = value.schemaVersion === 1
+    ? { ok: true as const, value: {} as Record<string, LearningActivityEntry> }
+    : parseActivities(value.activities);
+  if (!activities.ok) return activities;
 
   return {
     ok: true,
-    value: { schemaVersion: LEARNING_WORKSPACE_SCHEMA_VERSION, diagnostics, productions },
+    value: {
+      schemaVersion: LEARNING_WORKSPACE_SCHEMA_VERSION,
+      diagnostics: diagnostics.value,
+      productions: productions.value,
+      activities: activities.value,
+    },
   };
 }
 
@@ -182,10 +256,10 @@ export function parseLearningWorkspace(value: unknown): LearningWorkspaceState {
 
 export const LEARNING_WORKSPACE_CONTRACT: StorageContract<LearningWorkspaceState> = {
   key: STORAGE_KEYS.learningWorkspace,
-  version: 1,
+  version: 2,
   fallback: EMPTY_LEARNING_WORKSPACE,
   maxBytes: 4_000_000,
-  migrations: { 0: (value) => value },
+  migrations: { 0: (value) => value, 1: (value) => value },
   parse: parseLearningWorkspaceResult,
 };
 
@@ -241,6 +315,28 @@ export const learningWorkspace = {
     delete diagnostics[diagnosticId];
     return persist({ ...current, diagnostics });
   },
+  completeActivity(parcoursId: string, kind: LearningActivityKind, id: string): StorageResult {
+    const reason = inputActivityReason(parcoursId, kind, id);
+    if (reason) return { ok: false, reason, operation: 'write', key: STORAGE_KEYS.learningWorkspace, occurredAt: now() };
+    const current = readSnapshot();
+    const key = learningActivityKey(parcoursId, kind, id);
+    const previous = current.activities[key];
+    const timestamp = now();
+    return persist({
+      ...current,
+      activities: {
+        ...current.activities,
+        [key]: {
+          parcoursId,
+          kind,
+          id,
+          completed: true,
+          completedAt: previous?.completedAt ?? timestamp,
+          updatedAt: timestamp,
+        },
+      },
+    });
+  },
   updateProduction(
     deliverableId: string,
     patch: Partial<Pick<ProductionWorkspaceEntry, 'note' | 'externalFileProduced' | 'reviewMode' | 'rubricRatings' | 'changeLog'>>,
@@ -290,7 +386,15 @@ export const learningWorkspace = {
   declareComplete(deliverableId: string): StorageResult {
     const current = readSnapshot();
     const previous = current.productions[deliverableId];
-    if (!previous || previous.stage !== 'revised') {
+    const hasRequiredEvidence = Boolean(
+      previous?.note?.trim()
+      && previous.externalFileProduced
+      && previous.reviewMode
+      && previous.changeLog?.trim()
+      && previous.rubricRatings
+      && Object.keys(previous.rubricRatings).length > 0,
+    );
+    if (!previous || previous.stage !== 'revised' || !hasRequiredEvidence) {
       return { ok: false, reason: 'unavailable', operation: 'write', key: STORAGE_KEYS.learningWorkspace, occurredAt: now() };
     }
     return persist({
@@ -321,6 +425,15 @@ export function useLearningWorkspace(): LearningWorkspaceState {
 
 export function productionStageAtLeast(stage: ProductionStage | undefined, minimum: ProductionStage): boolean {
   return stage ? STAGE_ORDER[stage] >= STAGE_ORDER[minimum] : false;
+}
+
+export function isLearningActivityComplete(
+  workspace: LearningWorkspaceState,
+  parcoursId: string,
+  kind: LearningActivityKind,
+  id: string,
+): boolean {
+  return workspace.activities[learningActivityKey(parcoursId, kind, id)]?.completed === true;
 }
 
 if (typeof window !== 'undefined') {

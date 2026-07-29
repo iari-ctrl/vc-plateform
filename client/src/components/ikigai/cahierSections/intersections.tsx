@@ -26,7 +26,7 @@ export function IntersectionsSection({
         title="Quatre demi-chemins, et leur zone d'ombre."
         description="Chaque intersection est une combinaison séduisante mais incomplète : elle ressemble à l'ikigai vue de loin, et s'en éloigne dès qu'on la regarde de près."
       />
-      <div className="mt-8 divide-y divide-outline-variant lg:w-[52%]">
+      <div className="mt-8 w-full divide-y divide-outline-variant">
         {IKIGAI.intersections.map((it, i) => {
           const example = mode === 'decouverte' ? it.exampleDecouverte ?? it.example : it.example;
           const active = activeId === it.id;

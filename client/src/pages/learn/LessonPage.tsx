@@ -1,27 +1,62 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Clock, Sparkles, BookMarked, ArrowUpRight, FileCheck2 } from 'lucide-react';
 import { courseById } from '@/content/courses';
 import { deliverableById } from '@/content/deliverables';
 import { loadLesson, publishedLessonsForCourse } from '@/content/lessons';
-import { parcoursForLesson } from '@/content/parcours';
-import type { Lesson } from '@/content/types';
+import { parcoursContextHref, parcoursNavigationForLesson, type TimeBudget } from '@/content/parcours';
+import type { FurtherReading, Lesson } from '@/content/types';
 import { ActiveProse } from '@/components/reading/ActiveProse';
 import { QuizBlock } from '@/components/reading/QuizBlock';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { PageLoader } from '@/components/ui/primitives';
 import { useUserData } from '@/context/UserDataContext';
+import { Markdown } from '@/lib/markdown';
 import { useResourcePageMeta } from '@/lib/seo';
 import { commitOnStorageSuccess, storage } from '@/lib/storage';
 import { STORAGE_CONTRACTS, type ReadingDepth } from '@/lib/storageDomains';
 import NotFoundPage from '@/pages/system/NotFoundPage';
 import { furtherReadingHref } from './furtherReadingHref';
 
+const REFERENCES_HEADING_RE = /^##\s+Références\s*$/i;
+const SECTION_HEADING_RE = /^##\s+/;
+
+function splitMarkdownReferences(source: string): { body: string; references?: string } {
+  const lines = source.split('\n');
+  const start = lines.findIndex((line) => REFERENCES_HEADING_RE.test(line.trim()));
+  if (start === -1) return { body: source };
+
+  const nextSection = lines.findIndex((line, index) => index > start && SECTION_HEADING_RE.test(line.trim()));
+  const end = nextSection === -1 ? lines.length : nextSection;
+  const references = lines.slice(start + 1, end).join('\n').trim();
+  const body = [...lines.slice(0, start), ...lines.slice(end)].join('\n').trim();
+
+  return { body, references: references || undefined };
+}
+
+function collectMarkdownReferences(...sources: Array<string | undefined>): string | undefined {
+  const seenSources = new Set<string>();
+  const references: string[] = [];
+  for (const source of sources) {
+    if (!source || seenSources.has(source)) continue;
+    seenSources.add(source);
+    const section = splitMarkdownReferences(source).references;
+    if (section && !references.includes(section)) references.push(section);
+  }
+  return references.length > 0 ? references.join('\n\n') : undefined;
+}
+
+function resolveFurtherReadings(readings: FurtherReading[] | undefined) {
+  return (readings ?? []).flatMap((reading) => {
+    const href = furtherReadingHref(reading);
+    return href ? [{ reading, href, isExternal: reading.kind === 'external' }] : [];
+  });
+}
+
 export default function LessonPage() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   // The bundled lesson resolves lazily: the reader payload (body/quiz) lives
@@ -60,6 +95,7 @@ export default function LessonPage() {
   const { progress, setProgress } = useUserData();
   const [readPct, setReadPct] = useState(0);
   const [completing, setCompleting] = useState(false);
+  const [referencesOpen, setReferencesOpen] = useState(false);
   // Reader depth is a global, client-only preference; defaults to "court" everywhere.
   const [depth, setDepth] = useState<ReadingDepth>(() => storage.getParsed(STORAGE_CONTRACTS.readingDepth));
   const changeDepth = (d: ReadingDepth) => {
@@ -76,11 +112,26 @@ export default function LessonPage() {
   useResourcePageMeta(!bundledReady || Boolean(lesson), lesson?.title, lesson?.summary, { type: 'article' });
 
   const course = lesson ? courseById(lesson.courseId) : undefined;
-  const parcours = lesson ? parcoursForLesson(lesson.id)[0] : undefined;
+  const requestedParcoursId = searchParams.get('parcours') ?? undefined;
+  const requestedBudgetParam = searchParams.get('budget');
+  const requestedBudget = requestedBudgetParam === 'low' || requestedBudgetParam === 'medium' || requestedBudgetParam === 'high'
+    ? requestedBudgetParam as TimeBudget
+    : undefined;
+  const parcoursNavigation = lesson && requestedParcoursId
+    ? parcoursNavigationForLesson(lesson.id, requestedParcoursId, requestedBudget)
+    : null;
+  const parcours = parcoursNavigation?.parcours;
   const siblings = course ? publishedLessonsForCourse(course.id) : [];
   const idx = lesson ? siblings.findIndex((l) => l.id === lesson.id) : -1;
   const prev = idx > 0 ? siblings[idx - 1] : undefined;
   const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : undefined;
+  const contextualHref = (href: string | undefined) => (
+    href && parcoursNavigation ? parcoursContextHref(href, parcoursNavigation.parcours.id, requestedBudget) : href
+  );
+  const prevHref = contextualHref(parcoursNavigation?.prev?.href ?? (prev ? `/lessons/${prev.slug}` : undefined));
+  const prevTitle = parcoursNavigation?.prev?.title ?? prev?.title;
+  const nextHref = contextualHref(parcoursNavigation?.next?.href ?? (next ? `/lessons/${next.slug}` : undefined));
+  const nextTitle = parcoursNavigation?.next?.title ?? next?.title;
   const entry = lesson ? progress[lesson.id] : undefined;
   const isDone = entry?.status === 'done';
   const practiceDeliverable = lesson?.practice ? deliverableById(lesson.practice.deliverableId) : undefined;
@@ -90,13 +141,14 @@ export default function LessonPage() {
     if (!lesson || lastMarkedLessonId.current === lesson.id) return;
     lastMarkedLessonId.current = lesson.id;
     if (progress[lesson.id]?.status !== 'done') {
-      void setProgress({ lessonId: lesson.id, courseId: lesson.courseId, pathId: parcours?.id, status: 'reading', percent: Math.max(progress[lesson.id]?.percent ?? 0, 5) });
+      void setProgress({ lessonId: lesson.id, courseId: lesson.courseId, pathId: parcoursNavigation?.parcours.id ?? parcours?.id, status: 'reading', percent: Math.max(progress[lesson.id]?.percent ?? 0, 5) });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lesson?.id]);
 
   useEffect(() => {
     setReadPct(0);
+    setReferencesOpen(false);
   }, [slug]);
 
   // Track reading progress for the top bar.
@@ -134,25 +186,82 @@ export default function LessonPage() {
   // "Court" (essentiel) is the default; "Profond" is the opt-in full body.
   const hasShort = typeof lesson.bodyShort === 'string' && lesson.bodyShort.length > 0;
   const bodySource = hasShort && depth === 'court' ? (lesson.bodyShort as string) : lesson.body;
+  const splitBody = splitMarkdownReferences(bodySource);
+  const markdownReferences = collectMarkdownReferences(bodySource, lesson.bodyShort, lesson.body);
+  const resolvedFurtherReadings = resolveFurtherReadings(lesson.furtherReading);
+  const hasReferences = Boolean(markdownReferences) || resolvedFurtherReadings.length > 0;
+  const referencesPanelId = `lesson-references-${lesson.id}`;
+  const referencesSection = hasReferences ? (
+    <section className="mt-10 rounded-2xl border border-outline-variant bg-surface-container-low p-4 sm:p-5">
+      <button
+        type="button"
+        aria-expanded={referencesOpen}
+        aria-controls={referencesPanelId}
+        onClick={() => setReferencesOpen((open) => !open)}
+        className="flex w-full items-center justify-between gap-4 text-left"
+      >
+        <span>
+          <span className="eyebrow block">Références</span>
+          <span className="mt-1 block font-headline text-headline-xs font-semibold text-foreground">
+            {referencesOpen ? 'Masquer les références' : 'Afficher les références'}
+          </span>
+        </span>
+        <ArrowUpRight size={16} className="shrink-0 text-surface-variant" aria-hidden />
+      </button>
+
+      {referencesOpen && (
+        <div id={referencesPanelId} className="mt-5 border-t border-outline-variant pt-5">
+          <h2 className="font-headline text-headline-sm font-semibold">Références</h2>
+          {markdownReferences && (
+            <Markdown source={markdownReferences} className="prose-editorial mt-4" />
+          )}
+          {resolvedFurtherReadings.length > 0 && (
+            <div className={markdownReferences ? 'mt-5' : 'mt-4'}>
+              <p className="eyebrow mb-3">Pour aller plus loin</p>
+              <div className="space-y-2">
+                {resolvedFurtherReadings.map(({ reading, href, isExternal }, i) => {
+                  const className = 'flex items-center justify-between rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm transition-colors hover:border-[color-mix(in_srgb,var(--primary)_50%,transparent)] hover:bg-surface-container-low';
+                  if (isExternal) {
+                    return (
+                      <a key={i} href={href} target="_blank" rel="noopener noreferrer" className={className}>
+                        <span>{reading.label}<span className="sr-only"> (s’ouvre dans un nouvel onglet)</span></span>
+                        <ArrowUpRight size={15} className="text-surface-variant" aria-hidden />
+                      </a>
+                    );
+                  }
+                  return (
+                    <Link key={i} to={href} className={className}>
+                      <span>{reading.label}</span>
+                      <ArrowUpRight size={15} className="text-surface-variant" aria-hidden />
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  ) : null;
 
   async function complete() {
     if (!lesson) return;
     if (isDone) {
-      if (next) {
-        navigate(`/lessons/${next.slug}`);
+      if (nextHref) {
+        navigate(nextHref);
       } else if (course) {
-        navigate(`/courses/${course.slug}`);
+        navigate(contextualHref(`/courses/${course.slug}`) ?? `/courses/${course.slug}`);
       }
       return;
     }
     setCompleting(true);
     try {
-      const result = await setProgress({ lessonId: lesson.id, courseId: lesson.courseId, pathId: parcours?.id, status: 'done', percent: 100 });
+      const result = await setProgress({ lessonId: lesson.id, courseId: lesson.courseId, pathId: parcoursNavigation?.parcours.id ?? parcours?.id, status: 'done', percent: 100 });
       if (result.ok) {
-        if (next) {
-          navigate(`/lessons/${next.slug}`);
+        if (nextHref) {
+          navigate(nextHref);
         } else if (course) {
-          navigate(`/courses/${course.slug}`);
+          navigate(contextualHref(`/courses/${course.slug}`) ?? `/courses/${course.slug}`);
         }
       }
     } finally {
@@ -177,8 +286,8 @@ export default function LessonPage() {
       <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
         {/* breadcrumb */}
         <nav className="mb-6 flex flex-wrap items-center gap-1.5 text-xs text-surface-variant">
-          {parcours && <Link to={`/parcours/${parcours.slug}`} className="hover:text-foreground">{parcours.title}</Link>}
-          {course && <><span>/</span><Link to={`/courses/${course.slug}`} className="hover:text-foreground">{course.title}</Link></>}
+          {parcours && <Link to={`/parcours/${parcours.slug}${requestedBudget ? `?budget=${requestedBudget}` : ''}`} className="hover:text-foreground">{parcours.title}</Link>}
+          {course && <><span>/</span><Link to={contextualHref(`/courses/${course.slug}`) ?? `/courses/${course.slug}`} className="hover:text-foreground">{course.title}</Link></>}
         </nav>
 
         <header>
@@ -219,7 +328,7 @@ export default function LessonPage() {
 
         {/* body */}
         <div ref={articleRef} className="mt-8">
-          <ActiveProse source={bodySource} sourceType="lesson" sourceId={lesson.id} sourceTitle={lesson.title} />
+          <ActiveProse source={splitBody.body} sourceType="lesson" sourceId={lesson.id} sourceTitle={lesson.title} />
         </div>
 
         {/* key takeaways */}
@@ -237,6 +346,8 @@ export default function LessonPage() {
           </aside>
         )}
 
+        {referencesSection}
+
         {/* quiz */}
         {lesson.quiz && lesson.quiz.length > 0 && (
           <div className="mt-10">
@@ -253,48 +364,32 @@ export default function LessonPage() {
           </aside>
         )}
 
-        {/* glossary refs + further reading */}
-        <div className="mt-10 space-y-8">
+        {/* glossary refs */}
+        <div className="mt-10">
           <GlossaryRefList slugs={lesson.glossaryRefs} />
-          {lesson.furtherReading && lesson.furtherReading.length > 0 && (
-            <div>
-              <p className="eyebrow mb-3">Pour aller plus loin</p>
-              <div className="space-y-2">
-                {lesson.furtherReading.map((fr, i) => {
-                  const href = furtherReadingHref(fr);
-                  return (
-                    <Link key={i} to={href} className="flex items-center justify-between rounded-xl border border-outline-variant px-4 py-3 text-sm transition-colors hover:border-[color-mix(in_srgb,var(--primary)_50%,transparent)] hover:bg-surface-container-low">
-                      <span>{fr.label}</span>
-                      <ArrowUpRight size={15} className="text-surface-variant" />
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          )}
         </div>
 
         {/* complete CTA */}
         <div className="mt-12 flex flex-col items-center rounded-2xl border border-outline-variant bg-surface-container-low p-7 text-center">
           <p className="font-headline text-headline-sm font-semibold">{isDone ? 'Leçon déclarée lue' : 'Avez-vous terminé la lecture de cette leçon ?'}</p>
-          <p className="mt-1 text-sm text-surface-variant">{next ? `Suivant : ${next.title}` : 'Dernière leçon de ce cours.'}</p>
+          <p className="mt-1 text-sm text-surface-variant">{nextTitle ? `Suivant : ${nextTitle}` : 'Dernière leçon de ce cours.'}</p>
           <button onClick={() => void complete()} disabled={completing} className="btn-foil mt-5 disabled:opacity-50">
-            {completing ? 'Enregistrement…' : isDone ? (next ? 'Continuer' : 'Revenir au cours') : 'Déclarer la leçon lue'}
-            {next ? <ArrowRight size={16} /> : <Check size={16} />}
+            {completing ? 'Enregistrement…' : isDone ? (nextHref ? 'Continuer' : 'Revenir au cours') : 'Déclarer la leçon lue'}
+            {nextHref ? <ArrowRight size={16} /> : <Check size={16} />}
           </button>
         </div>
 
         {/* prev / next */}
         <nav className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {prev ? (
-            <Link to={`/lessons/${prev.slug}`} className="group flex min-w-0 items-center gap-3 rounded-xl border border-outline-variant px-4 py-3 transition-colors hover:bg-surface-container-low">
+          {prevHref && prevTitle ? (
+            <Link to={prevHref} className="group flex min-w-0 items-center gap-3 rounded-xl border border-outline-variant px-4 py-3 transition-colors hover:bg-surface-container-low">
               <ArrowLeft size={16} className="shrink-0 text-surface-variant" />
-              <span className="min-w-0"><span className="block text-[0.625rem] uppercase tracking-wider text-surface-variant">Précédent</span><span className="block truncate text-sm font-medium">{prev.title}</span></span>
+              <span className="min-w-0"><span className="block text-[0.625rem] uppercase tracking-wider text-surface-variant">Précédent</span><span className="block truncate text-sm font-medium">{prevTitle}</span></span>
             </Link>
           ) : <span />}
-          {next && (
-            <Link to={`/lessons/${next.slug}`} className="group flex min-w-0 items-center justify-end gap-3 rounded-xl border border-outline-variant px-4 py-3 text-right transition-colors hover:bg-surface-container-low">
-              <span className="min-w-0"><span className="block text-[0.625rem] uppercase tracking-wider text-surface-variant">Suivant</span><span className="block truncate text-sm font-medium">{next.title}</span></span>
+          {nextHref && nextTitle && (
+            <Link to={nextHref} className="group flex min-w-0 items-center justify-end gap-3 rounded-xl border border-outline-variant px-4 py-3 text-right transition-colors hover:bg-surface-container-low">
+              <span className="min-w-0"><span className="block text-[0.625rem] uppercase tracking-wider text-surface-variant">Suivant</span><span className="block truncate text-sm font-medium">{nextTitle}</span></span>
               <ArrowRight size={16} className="shrink-0 text-surface-variant" />
             </Link>
           )}

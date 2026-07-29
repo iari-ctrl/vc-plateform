@@ -85,6 +85,19 @@ export interface ResolvedStep {
   readMin?: number;
 }
 
+export interface ParcoursNavigationItem {
+  href: string;
+  title: string;
+  kind: ParcoursStep['ref']['kind'];
+  id: string;
+}
+
+export interface ParcoursLessonNavigation {
+  parcours: Parcours;
+  prev?: ParcoursNavigationItem;
+  next?: ParcoursNavigationItem;
+}
+
 /**
  * Resolve a step's `ref` to a concrete route. Milestone steps resolve, in order,
  * to a produced deliverable (`/livrables/...`), then to a written lesson (e.g.
@@ -129,6 +142,120 @@ export const lessonIdsForParcours = (p: Parcours): string[] =>
 
 export const parcoursForLesson = (lessonId: string): Parcours[] =>
   PARCOURS.filter((p) => lessonIdsForParcours(p).includes(lessonId));
+
+/** Preserve the active parcours across internal resource links without changing canonical routes. */
+export function parcoursContextHref(href: string, parcoursId: string, budget?: TimeBudget): string {
+  if (!href.startsWith('/') || href.startsWith('//')) return href;
+  const hashIndex = href.indexOf('#');
+  const beforeHash = hashIndex >= 0 ? href.slice(0, hashIndex) : href;
+  const hash = hashIndex >= 0 ? href.slice(hashIndex) : '';
+  const queryIndex = beforeHash.indexOf('?');
+  const pathname = queryIndex >= 0 ? beforeHash.slice(0, queryIndex) : beforeHash;
+  const params = new URLSearchParams(queryIndex >= 0 ? beforeHash.slice(queryIndex + 1) : '');
+  params.set('parcours', parcoursId);
+  if (budget) params.set('budget', budget);
+  return `${pathname}?${params.toString()}${hash}`;
+}
+
+export function isTimeBudget(value: unknown): value is TimeBudget {
+  return value === 'low' || value === 'medium' || value === 'high';
+}
+
+export function parcoursContextForStep(
+  kind: ParcoursStep['ref']['kind'],
+  id: string,
+  preferredParcoursId?: string | null,
+  budget?: string | null,
+): { parcours: Parcours; budget: TimeBudget } | null {
+  if (!preferredParcoursId || !isTimeBudget(budget)) return null;
+  const parcours = parcoursById(preferredParcoursId);
+  if (!parcours || !parcours.timeFit.includes(budget)) return null;
+  const visible = visibleSteps(parcours, budget);
+  return visible.some((step) => step.ref.kind === kind && step.ref.id === id)
+    ? { parcours, budget }
+    : null;
+}
+
+function navigationItemForStep(step: ParcoursStep): ParcoursNavigationItem | undefined {
+  const resolved = resolveStep(step);
+  if (!resolved.href) return undefined;
+  return { href: resolved.href, title: step.label, kind: step.ref.kind, id: step.ref.id };
+}
+
+function previousStepItem(steps: ParcoursStep[], fromIndex: number): ParcoursNavigationItem | undefined {
+  for (let index = fromIndex - 1; index >= 0; index -= 1) {
+    const item = navigationItemForStep(steps[index]);
+    if (item) return item;
+  }
+  return undefined;
+}
+
+function nextStepItem(steps: ParcoursStep[], fromIndex: number): ParcoursNavigationItem | undefined {
+  for (let index = fromIndex + 1; index < steps.length; index += 1) {
+    const item = navigationItemForStep(steps[index]);
+    if (item) return item;
+  }
+  return undefined;
+}
+
+function lessonNavigationItem(lesson: ReturnType<typeof publicLessonById>): ParcoursNavigationItem | undefined {
+  if (!lesson) return undefined;
+  return { href: `/lessons/${lesson.slug}`, title: lesson.title, kind: 'lesson', id: lesson.id };
+}
+
+/**
+ * Navigation for a lesson when it is read inside a parcours. Direct lesson steps
+ * follow the parcours spine; lessons embedded in a course step navigate within
+ * that course, then return to the next parcours step at the course boundary.
+ */
+export function parcoursNavigationForLesson(
+  lessonId: string,
+  preferredParcoursId?: string,
+  budget?: TimeBudget,
+): ParcoursLessonNavigation | null {
+  const containsLesson = (p: Parcours) => p.steps.some((step) => {
+    if (step.ref.kind === 'lesson' && step.ref.id === lessonId) return true;
+    if (step.ref.kind !== 'course') return false;
+    return publishedLessonsForCourse(step.ref.id).some((lesson) => lesson.id === lessonId);
+  });
+
+  const candidates = PARCOURS.filter(containsLesson);
+  const parcours = preferredParcoursId
+    ? candidates.find((candidate) => candidate.id === preferredParcoursId)
+    : candidates[0];
+  if (!parcours) return null;
+
+  if (budget && !parcours.timeFit.includes(budget)) return null;
+
+  const steps = budget && parcours.timeFit.includes(budget)
+    ? visibleSteps(parcours, budget)
+    : [...parcours.steps].sort((a, b) => a.order - b.order);
+  const directIndex = steps.findIndex((step) => (
+    step.ref.kind === 'lesson' && step.ref.id === lessonId
+  ));
+  if (directIndex >= 0) {
+    return {
+      parcours,
+      prev: previousStepItem(steps, directIndex),
+      next: nextStepItem(steps, directIndex),
+    };
+  }
+
+  const courseIndex = steps.findIndex((step) => (
+    step.ref.kind === 'course'
+    && publishedLessonsForCourse(step.ref.id).some((lesson) => lesson.id === lessonId)
+  ));
+  if (courseIndex < 0) return null;
+  const courseLessons = publishedLessonsForCourse(steps[courseIndex].ref.id);
+  const lessonIndex = courseLessons.findIndex((lesson) => lesson.id === lessonId);
+  return {
+    parcours,
+    prev: lessonIndex > 0 ? lessonNavigationItem(courseLessons[lessonIndex - 1]) : previousStepItem(steps, courseIndex),
+    next: lessonIndex >= 0 && lessonIndex < courseLessons.length - 1
+      ? lessonNavigationItem(courseLessons[lessonIndex + 1])
+      : nextStepItem(steps, courseIndex),
+  };
+}
 
 export const parcoursForCase = (caseId: string): Parcours[] =>
   PARCOURS.filter((p) => p.steps.some((s) => s.ref.kind === 'case' && s.ref.id === caseId));

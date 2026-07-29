@@ -6,8 +6,8 @@ import { collectMediaBudget } from './media-budget.mjs';
 test('client public media budget remains deterministic', async () => {
   const budget = await collectMediaBudget(new URL('../client/public/', import.meta.url));
 
-  assert.equal(budget.count, 46);
-  assert.equal(budget.totalBytes, 14071235);
+  assert.equal(budget.count, 47);
+  assert.equal(budget.totalBytes, 14083661);
   assert.equal(budget.videoBytes, 9458888);
   assert.deepEqual(budget.formats, {
     ico: 1,
@@ -16,6 +16,7 @@ test('client public media budget remains deterministic', async () => {
     svg: 1,
     webm: 4,
     webp: 23,
+    xlsx: 1,
   });
   assert.deepEqual(budget.largestFiles.slice(0, 5), [
     {

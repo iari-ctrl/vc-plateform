@@ -1,0 +1,1034 @@
+{
+  "_doc": "Registre autonome du parcours « Préparer ma Série A ». Les leçons lsa-* alimentent le cours c-serie-a-preparation et le livrable todo-attentes-serie-a.",
+  "parcoursId": "p-serie-a",
+  "courseId": "c-serie-a-preparation",
+  "lessons": [
+    {
+      "id": "lsa-decision-lever",
+      "slug": "serie-a-decider-de-lever-maintenant",
+      "courseId": "c-serie-a-preparation",
+      "order": 1,
+      "title": "Décider de lever maintenant",
+      "kicker": "Readiness",
+      "readMin": 3,
+      "summary": "Évaluer si la société doit lancer une Série A, différer le tour ou retenir une autre option de financement.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Distinguer stade réel, besoin de financement et calendrier de marché.",
+        "Formuler une décision de levée assortie de conditions de réexamen.",
+        "Repérer les signaux qui justifient de différer le processus."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "decision",
+        "estimatedMinutes": 42
+      },
+      "body": "## Situation professionnelle\n\nLa société a dépassé la phase d'exploration mais n'a pas encore transformé tous ses signaux en preuves institutionnelles. L'équipe doit décider si elle lance une Série A, si elle prolonge la période d'exécution ou si elle privilégie une source de financement moins dilutive. Cette décision n'est pas une question de prestige. Elle engage l'attention des dirigeants, la trésorerie disponible, la relation avec les investisseurs existants et la crédibilité du prochain jalon.\n\nLe premier livrable de ce parcours est donc une note de décision. Elle décrit le stade observé, les risques encore ouverts, les preuves disponibles et l'usage précis du capital recherché. Les comparaisons de marché peuvent donner un contexte, mais elles ne remplacent jamais l'analyse de la société concernée. Une entreprise SaaS, une marketplace, une société deeptech ou un acteur industriel n'apportent pas les mêmes preuves au même moment.\n\n## Méthode de travail\n\nCommencer par trois questions. Premièrement, quels jalons la société doit-elle financer dans les 18 à 24 prochains mois ? Deuxièmement, quelles preuves sont déjà vérifiables par un investisseur externe ? Troisièmement, que se passe-t-il si le processus prend trois mois de plus que prévu ? L'horizon de 18 à 24 mois et le retard de trois mois sont des hypothèses de travail de ce parcours, à ajuster selon le stade, le secteur et la structure de coûts de la société. La réponse doit être écrite avec des hypothèses explicites : horizon de trésorerie, recrutement critique, évolution du pipeline, capacité de l'équipe à supporter la diligence et disponibilité des administrateurs ou conseils.\n\nLa décision doit aussi documenter les alternatives. Un tour bridge, une extension seed, une dette non dilutive ou un ralentissement volontaire peuvent être rationnels si le dossier n'est pas prêt. À l'inverse, attendre peut coûter cher si la société dispose déjà de preuves fortes et d'une fenêtre de financement cohérente. Le point de contrôle n'est donc pas « peut-on obtenir des rendez-vous ? », mais « peut-on soutenir un examen contradictoire du dossier ? ».\n\n## Points de contrôle\n\nLa note est recevable si elle expose une décision, deux risques qui pourraient l'infirmer et une date de réexamen. Elle doit éviter les seuils génériques. Un chiffre d'affaires, un ARR ou un nombre de clients ne devient pertinent qu'avec son modèle économique, son rythme de croissance, sa marge, sa qualité de rétention et sa concentration.\n\n## Production attendue\n\nRédiger une page intitulée « Décision de lever ». Elle conclut par l'une des trois positions suivantes : lancer le processus, différer le processus, ou retenir une option de financement alternative. Chaque position doit être reliée à une preuve déjà disponible, à une preuve manquante et à une conséquence sur la trésorerie.\n\n## Références\n\n- [France Invest — Guide du capital-innovation, préparation et processus, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)\n- [State of European Tech — contexte macro européen, rapport 2025](https://www.stateofeuropeantech.com/)",
+      "keyTakeaways": [
+        "La Série A n'est pas définie par un seuil unique : elle relie preuves, risques ouverts et jalons à financer.",
+        "Une décision de levée doit inclure l'option de ne pas lever immédiatement.",
+        "Le dossier commence par une thèse de financement, pas par une valorisation souhaitée."
+      ],
+      "glossaryRefs": [
+        "runway",
+        "burn-rate",
+        "term-sheet"
+      ],
+      "quiz": [
+        {
+          "question": "Quel est le premier livrable de ce parcours avant de bâtir la data room ?",
+          "options": [
+            {
+              "text": "Une fourchette de valorisation cible, qui cadrera ensuite le reste du dossier",
+              "correct": false
+            },
+            {
+              "text": "Une note de décision indiquant pourquoi lever maintenant ou pourquoi différer.",
+              "correct": true
+            },
+            {
+              "text": "Une liste de fonds à contacter, la note de cadrage venant après les premiers retours",
+              "correct": false
+            }
+          ],
+          "explanation": "Dans la méthode locale du parcours, la note de décision fixe le besoin, les jalons à financer et les conditions de réexamen. Sans elle, la fourchette de valorisation et la liste d'investisseurs reposent sur une intention non formulée, et la data room documente un dossier dont l'objet n'est pas arrêté."
+        },
+        {
+          "question": "Pourquoi faut-il éviter un seuil ARR universel ?",
+          "options": [
+            {
+              "text": "Parce que le niveau de revenu compte moins que la taille du marché adressable",
+              "correct": false
+            },
+            {
+              "text": "Parce que la préparation dépend du modèle, des preuves et des risques ouverts.",
+              "correct": true
+            },
+            {
+              "text": "Parce qu’un seuil publié dans un rapport ne vaut que pour une seule géographie",
+              "correct": false
+            }
+          ],
+          "explanation": "Le même niveau d'ARR n'a pas la même signification selon la marge, la rétention, la concentration et le cycle de vente. La restriction géographique est une limite réelle, mais secondaire : un seuil isolé ne dit ni quel risque reste ouvert, ni quelles preuves sont disponibles."
+        },
+        {
+          "question": "Quel signal justifie de différer le processus ?",
+          "options": [
+            {
+              "text": "Une valorisation de marché jugée inférieure aux attentes des fondateurs",
+              "correct": false
+            },
+            {
+              "text": "Une trésorerie ou des métriques encore insuffisantes pour soutenir une diligence externe.",
+              "correct": true
+            },
+            {
+              "text": "L’absence d’un investisseur existant prêt à réinvestir au tour",
+              "correct": false
+            }
+          ],
+          "explanation": "Le critère est la capacité à soutenir un examen contradictoire, non le niveau de valorisation espéré ni la composition du tour de table. Différer se justifie lorsque le temps restant permet de produire les preuves manquantes ; l'option disparaît lorsque la trésorerie ne le permet plus."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "France Invest — Guide du capital-innovation, préparation et processus, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        },
+        {
+          "label": "State of European Tech — contexte macro européen, rapport 2025",
+          "kind": "external",
+          "ref": "https://www.stateofeuropeantech.com/"
+        }
+      ]
+    },
+    {
+      "id": "lsa-registre-preuves",
+      "slug": "serie-a-construire-le-registre-des-preuves",
+      "courseId": "c-serie-a-preparation",
+      "order": 2,
+      "title": "Construire le registre des preuves",
+      "kicker": "Métriques",
+      "readMin": 2,
+      "summary": "Transformer les métriques utilisées dans le deck en preuves datées, traçables et discutables.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Définir les métriques critiques avec source, période et responsable.",
+        "Séparer faits vérifiés, interprétations et données manquantes.",
+        "Préparer une diligence sans surcharger le dossier."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "preuves",
+        "estimatedMinutes": 62
+      },
+      "body": "## Situation professionnelle\n\nUne Série A met sous tension les métriques présentées jusque-là dans le deck. Les mêmes chiffres seront relus par plusieurs interlocuteurs : équipe d'investissement, finance, juridique, parfois expert métier. Le registre des preuves évite que la société défende oralement des chiffres dont la définition change selon les pages.\n\nLe registre n'est pas une base de données complète. C'est une table de contrôle. Chaque ligne relie une métrique à sa définition, sa période, sa source primaire, son responsable interne, son mode de calcul et sa limite connue. Une métrique de rétention, par exemple, ne signifie rien sans cohorte, période, périmètre client et traitement des expansions ou contractions.\n\n## Méthode de travail\n\nReprendre les dix chiffres qui soutiennent l'histoire du tour : revenus, croissance, marge, rétention, acquisition, usage produit, concentration client, pipeline, trésorerie et productivité commerciale. Pour chacun, écrire la formule et la source de vérité. La source peut être comptable, CRM, produit ou financière, mais elle doit être nommée. Lorsque deux systèmes divergent, la divergence n'est pas masquée : elle devient une question de diligence.\n\nLe registre doit aussi inclure les preuves qualitatives : références clients, lettres d'intention, concentration d'usage, dépendance à un canal d'acquisition, sécurité ou conformité. Une preuve qualitative répond à une autre catégorie de risque qu'une métrique et appelle un mode de contrôle adapté. Elle doit rester datée et attribuable.\n\n## Points de contrôle\n\nLe dossier est robuste si un lecteur externe peut refaire le chemin du chiffre au système source. Les termes comme « traction forte », « excellente rétention » ou « pipeline solide » doivent être accompagnés d'un dénominateur, d'une période et d'une limite. Si l'information manque, l'écrire explicitement vaut mieux qu'une approximation.\n\n## Production attendue\n\nCréer le « Registre des preuves ». Limiter la première version à douze lignes. Pour chaque ligne : nom de la preuve, définition, période, source, responsable, contrôle effectué, limite connue et question de diligence probable.\n\n## Références\n\n- [France Invest — Guide du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)\n- [State of European Tech — contexte macro européen, rapport 2025](https://www.stateofeuropeantech.com/)",
+      "keyTakeaways": [
+        "Une métrique utile est définie avant d'être commentée.",
+        "La diligence teste autant la qualité des données que le niveau des chiffres.",
+        "Les limites connues renforcent le dossier lorsqu'elles sont explicites."
+      ],
+      "glossaryRefs": [
+        "data-room",
+        "runway"
+      ],
+      "quiz": [
+        {
+          "question": "Quelle information manque dans une métrique non définie ?",
+          "options": [
+            {
+              "text": "Son évolution sur les douze derniers mois",
+              "correct": false
+            },
+            {
+              "text": "Le périmètre, la période, la source et la méthode de calcul.",
+              "correct": true
+            },
+            {
+              "text": "Le commentaire qui l’accompagne dans le deck",
+              "correct": false
+            }
+          ],
+          "explanation": "Une métrique n'est discutable qu'à partir du moment où sa construction est explicite. L'historique et le commentaire ajoutent du contexte, mais ne permettent ni de refaire le calcul, ni de savoir ce que le chiffre recouvre."
+        },
+        {
+          "question": "Comment traiter deux systèmes qui ne réconcilient pas le même chiffre ?",
+          "options": [
+            {
+              "text": "Conserver le chiffre le plus favorable",
+              "correct": false
+            },
+            {
+              "text": "Documenter l’écart et la source retenue plutôt que masquer la divergence.",
+              "correct": true
+            },
+            {
+              "text": "Attendre la réconciliation des deux systèmes avant d’inscrire la métrique au registre",
+              "correct": false
+            }
+          ],
+          "explanation": "Un écart entre deux systèmes est une question de diligence à investiguer, non une anomalie à masquer. Le documenter permet de désigner une source de vérité et d'expliquer la différence. Attendre la réconciliation retarde le dossier sans réduire le risque ; retenir le chiffre le plus favorable transforme une question technique en problème de crédibilité."
+        },
+        {
+          "question": "Une preuve qualitative doit-elle disparaître du dossier ?",
+          "options": [
+            {
+              "text": "Oui, car elle ne résiste pas à une diligence externe",
+              "correct": false
+            },
+            {
+              "text": "Non, mais elle doit être datée, attribuée et contrôlable.",
+              "correct": true
+            },
+            {
+              "text": "Non, et elle échappe au contrôle documentaire puisqu’elle est qualitative",
+              "correct": false
+            }
+          ],
+          "explanation": "Une lettre d'intention, une référence client ou un dossier de conformité répond à un risque qu'aucune métrique ne couvre. Ce qui change n'est pas le niveau d'exigence mais le mode de vérification : la preuve doit pouvoir être rattachée à une date, à un auteur et à une pièce."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "France Invest — Guide du capital-innovation, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        },
+        {
+          "label": "State of European Tech — contexte macro européen, rapport 2025",
+          "kind": "external",
+          "ref": "https://www.stateofeuropeantech.com/"
+        }
+      ]
+    },
+    {
+      "id": "lsa-plan-financement",
+      "slug": "serie-a-relier-montant-runway-et-jalons",
+      "courseId": "c-serie-a-preparation",
+      "order": 3,
+      "title": "Relier montant, runway et jalons",
+      "kicker": "Financement",
+      "readMin": 2,
+      "summary": "Construire un besoin de financement relié à la trésorerie, aux emplois des fonds et aux jalons opérationnels.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Relier montant levé, runway et jalons vérifiables.",
+        "Comparer scénario central, scénario défavorable et retard de closing.",
+        "Justifier les emplois des fonds sans liste décorative."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "financement",
+        "estimatedMinutes": 52
+      },
+      "body": "## Situation professionnelle\n\nLe montant d'une Série A doit être relié à un plan d'exécution. Une société qui annonce seulement vouloir lever « assez pour 24 mois » ne dit pas ce que le capital doit prouver. À l'inverse, une société qui lie chaque emploi des fonds à une étape mesurable rend la discussion plus claire : recrutements, extension commerciale, produit, conformité, internationalisation ou industrialisation.\n\nLe modèle n'a pas besoin d'être sophistiqué pour être utile. Il doit surtout être mensuel, contrôlable et capable d'intégrer un retard de closing. La trésorerie disponible au lancement du processus, les coûts engagés, les embauches critiques et les recettes déjà sécurisées doivent être visibles.\n\n## Méthode de travail\n\nConstruire trois vues. La première est le scénario central, avec les hypothèses que l'équipe juge raisonnables. La deuxième est le scénario défavorable, qui teste un retard commercial, un closing plus long ou un recrutement différé. La troisième est le pont vers la prochaine décision de financement : quelles preuves devront exister lorsque la société réévaluera son besoin de capital ?\n\nLes emplois des fonds doivent être regroupés par décision : équipe, produit, go-to-market, opérations, conformité, marge de sécurité. Pour chaque catégorie, ajouter la conséquence attendue et le mois auquel elle doit être observable. Les frais de transaction et la marge de sécurité doivent apparaître séparément pour éviter de réduire implicitement le runway utile.\n\n## Points de contrôle\n\nLe montant est défendable si le modèle permet d'expliquer trois éléments : combien de mois la société peut fonctionner, quelles preuves seront financées et quelle décision sera possible à la fin de l'horizon. Un investisseur peut contester la valorisation ; il doit néanmoins comprendre la logique du besoin.\n\n## Production attendue\n\nProduire le « Plan de financement ». Inclure un tableau mensuel simplifié, les emplois des fonds, deux scénarios et une phrase reliant le montant demandé au jalon suivant. Signaler toute hypothèse non confirmée.\n\n## Références\n\n- [France Invest — Guide du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)\n- [Galion Project — Term Sheet Série A, frais et conditions, 2019](https://www.thegalionproject.com/outils/galion-term-sheet)",
+      "keyTakeaways": [
+        "Le montant recherché doit financer des preuves, pas seulement prolonger la durée de vie.",
+        "Un modèle mensuel simple vaut mieux qu'une prévision annuelle impossible à auditer.",
+        "Le scénario défavorable est une discipline de décision, pas un signe de faiblesse."
+      ],
+      "glossaryRefs": [
+        "runway",
+        "burn-rate",
+        "pre-money"
+      ],
+      "quiz": [
+        {
+          "question": "Quel est le rôle du scénario défavorable ?",
+          "options": [
+            {
+              "text": "Présenter à l’investisseur une hypothèse de croissance volontairement prudente",
+              "correct": false
+            },
+            {
+              "text": "Tester la robustesse du besoin de financement et les conséquences d’un retard.",
+              "correct": true
+            },
+            {
+              "text": "Servir de base à la négociation de la valorisation",
+              "correct": false
+            }
+          ],
+          "explanation": "Le scénario défavorable sert d'abord à l'équipe : il indique à partir de quand un retard de closing ou de recrutement devient une contrainte de trésorerie, donc quelle marge de sécurité le montant doit couvrir. Son usage en négociation est secondaire."
+        },
+        {
+          "question": "Quel emploi des fonds doit être séparé des autres postes ?",
+          "options": [
+            {
+              "text": "Les recrutements commerciaux, isolés du reste des embauches",
+              "correct": false
+            },
+            {
+              "text": "La marge de sécurité et les frais de transaction.",
+              "correct": true
+            },
+            {
+              "text": "Les dépenses produit, réparties mois par mois",
+              "correct": false
+            }
+          ],
+          "explanation": "Les frais de transaction et la marge de sécurité ne financent aucun jalon opérationnel. Fondus dans les autres postes, ils font apparaître un runway utile supérieur à la réalité. Le détail des recrutements ou des dépenses produit relève du modèle, pas de cette séparation."
+        },
+        {
+          "question": "Un montant recherché est défendable lorsqu’il finance quoi ?",
+          "options": [
+            {
+              "text": "Le maintien de la dilution sous un seuil fixé à l’avance",
+              "correct": false
+            },
+            {
+              "text": "Des jalons et preuves observables dans un horizon donné.",
+              "correct": true
+            },
+            {
+              "text": "La durée la plus longue possible avant le prochain tour",
+              "correct": false
+            }
+          ],
+          "explanation": "Le montant se justifie par ce qu'il permet de démontrer, non par la durée qu'il achète ni par la dilution qu'il évite. Un runway allongé sans jalon financé reporte la même question au tour suivant, avec une trésorerie consommée."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "France Invest — Guide du capital-innovation, financement et processus, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        },
+        {
+          "label": "Galion Project — Term Sheet Série A, frais et conditions, 2019",
+          "kind": "external",
+          "ref": "https://www.thegalionproject.com/outils/galion-term-sheet"
+        }
+      ]
+    },
+    {
+      "id": "lsa-process-dataroom",
+      "slug": "serie-a-organiser-processus-et-data-room",
+      "courseId": "c-serie-a-preparation",
+      "order": 4,
+      "title": "Organiser le processus et la data room",
+      "kicker": "Diligence",
+      "readMin": 2,
+      "summary": "Préparer une séquence investisseurs cohérente avec le mandat visé, le deck, le modèle et la data room.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Qualifier les investisseurs par mandat et capacité de lead.",
+        "Aligner deck, modèle, preuves et data room.",
+        "Organiser la divulgation progressive sans créer d'incohérence."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "process",
+        "estimatedMinutes": 52
+      },
+      "body": "## Situation professionnelle\n\nLe processus Série A devient difficile à piloter lorsque les interlocuteurs, le calendrier et les pièces ne sont pas alignés. Une liste d'investisseurs ne suffit pas. Elle doit indiquer le mandat, la géographie, le stade, la taille habituelle de ticket, la capacité de mener le tour, les sociétés comparables et les conflits éventuels.\n\nLa data room se prépare à l'avance. Selon l'avancement de la discussion, la sensibilité des pièces et l'existence d'un accord de confidentialité si nécessaire, l'équipe peut organiser une divulgation progressive plutôt qu'un accès uniforme à toutes les pièces. Le point central reste la cohérence : le deck, le modèle et les pièces justificatives doivent raconter la même société.\n\n## Méthode de travail\n\nConstruire un plan de processus en quatre colonnes : investisseur, raison de contact, étape attendue et risque de friction. Définir ensuite les rôles internes : qui tient le modèle, qui répond aux questions commerciales, qui suit les documents juridiques, qui contrôle les versions envoyées. Chaque réponse envoyée à un investisseur doit pouvoir être retrouvée.\n\nPour la data room, partir des questions probables plutôt que d'une accumulation de fichiers. Les pièces essentielles couvrent l'identité juridique, la cap table, les documents sociaux, les contrats significatifs, les informations financières, les métriques opérationnelles, les RH clés, la propriété intellectuelle, la conformité et les éléments de marché. Une pièce manquante est notée avec une date de disponibilité prévue.\n\n## Points de contrôle\n\nUn bon processus rend les conversations comparables. Les investisseurs reçoivent un niveau d'information cohérent, les retours sont consignés, les chiffres ne divergent pas d'une version à l'autre et les demandes inhabituelles sont identifiées avant de devenir des concessions implicites.\n\n## Production attendue\n\nCompléter la section « Processus et data room ». Elle comprend la carte des investisseurs, le calendrier cible, les responsabilités internes, l'index de data room et la règle de divulgation progressive.\n\n## Références\n\n- [France Invest — Guide du capital-innovation, ciblage des investisseurs pp. 14–17, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)\n- [France Invest — Guide du capital-innovation, data room p. 17, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)",
+      "keyTakeaways": [
+        "Un processus sérieux n'est pas une campagne de volume indifférenciée.",
+        "La data room doit soutenir le récit, pas le noyer.",
+        "La cohérence entre deck, modèle et pièces est un test de diligence."
+      ],
+      "glossaryRefs": [
+        "data-room",
+        "term-sheet"
+      ],
+      "quiz": [
+        {
+          "question": "Pourquoi qualifier les investisseurs avant le lancement ?",
+          "options": [
+            {
+              "text": "Pour contacter le plus grand nombre de fonds possible en une seule vague",
+              "correct": false
+            },
+            {
+              "text": "Pour cibler les interlocuteurs capables et pertinents pour le tour.",
+              "correct": true
+            },
+            {
+              "text": "Pour obtenir une term sheet avant d’ouvrir la data room",
+              "correct": false
+            }
+          ],
+          "explanation": "Un fonds dont le mandat, le stade ou la taille de ticket ne correspondent pas au tour consommera du temps de diligence sans pouvoir mener. La qualification protège d'abord le calendrier et l'attention de l'équipe, ressources plus contraintes que le nombre de contacts."
+        },
+        {
+          "question": "Quel est le rôle d’un index de data room ?",
+          "options": [
+            {
+              "text": "Regrouper toutes les pièces dans un dossier unique ouvert dès le premier échange",
+              "correct": false
+            },
+            {
+              "text": "Relier les pièces aux questions de diligence et contrôler les versions.",
+              "correct": true
+            },
+            {
+              "text": "Attester que la société a répondu à l’ensemble des questions posées",
+              "correct": false
+            }
+          ],
+          "explanation": "L'index rend le dossier navigable et traçable : il indique quelle pièce répond à quelle question et quelle version a été transmise à qui. C'est ce contrôle de version qui évite les divergences entre interlocuteurs, qu'une ouverture en bloc peut au contraire rendre plus difficile."
+        },
+        {
+          "question": "Que faire d’une pièce manquante ?",
+          "options": [
+            {
+              "text": "Attendre qu’elle soit disponible avant d’ouvrir la data room",
+              "correct": false
+            },
+            {
+              "text": "La nommer, expliquer sa limite et indiquer une date ou une condition de disponibilité.",
+              "correct": true
+            },
+            {
+              "text": "La remplacer par une estimation interne présentée comme provisoire",
+              "correct": false
+            }
+          ],
+          "explanation": "Une absence signalée devient une question de diligence ; une absence découverte devient un doute sur le reste du dossier. Indiquer la date de disponibilité permet de poursuivre le processus sans suspendre l'ouverture ni substituer une estimation à une pièce."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "France Invest — Guide du capital-innovation, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        }
+      ]
+    },
+    {
+      "id": "lsa-modeliser-transaction",
+      "slug": "serie-a-modeliser-transaction-cap-table",
+      "courseId": "c-serie-a-preparation",
+      "order": 5,
+      "title": "Modéliser la transaction et la cap table",
+      "kicker": "Capital",
+      "readMin": 2,
+      "summary": "Simuler primaire, secondaire, instruments convertibles, pool d'options, dilution et préférences de liquidation.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Construire une cap table fully diluted avant et après le tour.",
+        "Comparer plusieurs offres avec leurs effets de dilution et de waterfall.",
+        "Identifier les clauses dont l'effet économique dépend du scénario de sortie."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "transaction",
+        "estimatedMinutes": 67
+      },
+      "body": "## Situation professionnelle\n\nDeux offres de Série A peuvent sembler proches alors qu'elles produisent des répartitions très différentes. La valorisation pre-money, le montant primaire, le secondaire éventuel, la taille du pool d'options, la conversion d'instruments existants et les droits économiques modifient la part détenue et la valeur reçue selon les scénarios de sortie.\n\nLe travail attendu n'est pas de prédire l'issue exacte. Il consiste à rendre visibles les mécanismes. Une cap table fully diluted doit préciser les détenteurs actuels, les instruments convertibles, les options attribuées, le pool non attribué, les actions émises au tour et les hypothèses de conversion.\n\n## Méthode de travail\n\nModéliser d'abord la situation avant tour. Contrôler que les pourcentages totalisent 100 % et que chaque instrument a une hypothèse explicite. Ajouter ensuite le tour proposé : montant primaire, prix implicite, pool d'options avant ou après investissement, secondaire éventuel, frais et droits économiques. Enfin, construire trois sorties : décevante, centrale et favorable.\n\nLa comparaison doit séparer dilution et valeur. Une dilution plus forte peut être acceptable si elle finance une création de valeur crédible ; elle devient problématique si elle résulte d'une clause mal comprise ou d'un besoin de financement non justifié. La waterfall permet de vérifier ce que reçoivent les détenteurs d'actions selon les droits attachés à chaque catégorie.\n\n## Points de contrôle\n\nLe modèle est utilisable si un lecteur peut modifier une hypothèse et comprendre l'effet produit. Les cellules les plus sensibles sont identifiées : valorisation, montant, pool, préférence, conversion, secondaire et scénario de sortie. Les arrondis ne doivent pas masquer une divergence de total.\n\n## Production attendue\n\nRemplir la « Modélisation de la transaction ». Inclure une cap table avant et après tour, deux offres comparées, trois scénarios de sortie et une note expliquant les hypothèses qui changent le plus la conclusion.\n\n## Références\n\n- [France Invest — Guide du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)\n- [Galion Project — Term Sheet Série A, modèle praticien français, 2019](https://www.thegalionproject.com/outils/galion-term-sheet)\n- [NVCA — Model Legal Documents, droit américain, usage comparatif, 2025–2026](https://nvca.org/model-legal-documents/)",
+      "keyTakeaways": [
+        "La valorisation n'est qu'un des paramètres économiques de l'offre.",
+        "Le calendrier du pool d'options peut déplacer une part importante de la dilution.",
+        "La préférence de liquidation doit être lue avec plusieurs scénarios de sortie."
+      ],
+      "glossaryRefs": [
+        "cap-table",
+        "dilution",
+        "esop",
+        "liquidation-preference",
+        "waterfall"
+      ],
+      "quiz": [
+        {
+          "question": "Pourquoi comparer plusieurs scénarios de sortie ?",
+          "options": [
+            {
+              "text": "Parce que la valorisation d’entrée détermine la valeur de sortie",
+              "correct": false
+            },
+            {
+              "text": "Parce que les préférences économiques peuvent produire des effets différents selon la valeur de sortie.",
+              "correct": true
+            },
+            {
+              "text": "Parce que le nombre d’actions émises varie selon le scénario retenu",
+              "correct": false
+            }
+          ],
+          "explanation": "Une préférence 1× non participating ne se voit pas dans une sortie élevée : les investisseurs convertissent et chacun reçoit sa quote-part. Elle devient déterminante en sortie basse ou moyenne, là où le produit ne couvre guère plus que la préférence. Le nombre d'actions, lui, ne dépend pas du scénario."
+        },
+        {
+          "question": "Quel élément peut déplacer la dilution avant même l’investissement ?",
+          "options": [
+            {
+              "text": "Le montant du secondaire versé aux fondateurs",
+              "correct": false
+            },
+            {
+              "text": "La création ou l’augmentation d’un pool d’options.",
+              "correct": true
+            },
+            {
+              "text": "Le nombre d’investisseurs participant au tour",
+              "correct": false
+            }
+          ],
+          "explanation": "Un pool constitué sur la base pre-money dilue les actionnaires existants avant l'entrée de l'investisseur. Le secondaire transfère des titres sans en créer : il modifie la répartition entre vendeurs et acheteurs, pas le total dilué. Le nombre de participants ne change que la répartition du même montant."
+        },
+        {
+          "question": "Que doit toujours contrôler une cap table ?",
+          "options": [
+            {
+              "text": "Le montant total investi dans la société depuis sa création",
+              "correct": false
+            },
+            {
+              "text": "La réconciliation des parts et des instruments sur une base définie.",
+              "correct": true
+            },
+            {
+              "text": "La valorisation retenue à chacun des tours précédents",
+              "correct": false
+            }
+          ],
+          "explanation": "Une cap table n'est comparable que sur une base explicite, émise ou fully diluted. Sans cette base, les pourcentages de deux offres ne se comparent pas et les instruments convertibles restent hors du total. L'historique des montants et des valorisations documente le passé, il ne contrôle pas la réconciliation."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "France Invest — Guide du capital-innovation, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        },
+        {
+          "label": "Galion Project — Term Sheet Série A, modèle praticien français, 2019",
+          "kind": "external",
+          "ref": "https://www.thegalionproject.com/outils/galion-term-sheet"
+        },
+        {
+          "label": "NVCA — Model Legal Documents, droit américain, usage comparatif, 2025–2026",
+          "kind": "external",
+          "ref": "https://nvca.org/model-legal-documents/"
+        }
+      ]
+    },
+    {
+      "id": "lsa-termes-gouvernance",
+      "slug": "serie-a-termes-economiques-gouvernance",
+      "courseId": "c-serie-a-preparation",
+      "order": 6,
+      "title": "Lire les clauses économiques et de gouvernance",
+      "kicker": "Term sheet",
+      "readMin": 3,
+      "summary": "Classer les clauses de term sheet selon leur objectif, leur effet et leur niveau de validation juridique requis.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Distinguer droits économiques, droits de contrôle et clauses de liquidité.",
+        "Relier chaque clause à son effet pratique sur la société et les fondateurs.",
+        "Identifier les points à valider avec le conseil juridique."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "clauses",
+        "estimatedMinutes": 47
+      },
+      "body": "## Situation professionnelle\n\nLa term sheet concentre des droits économiques, des droits de contrôle et des règles de gouvernance. En France, ces droits seront généralement articulés avec les statuts et le pacte d'actionnaires d'une SAS. Le parcours ne remplace pas le travail du conseil juridique. Il donne un cadre de lecture pour préparer les questions, comprendre les effets pratiques et éviter de négocier une clause sans voir sa contrepartie.\n\nLes clauses économiques couvrent notamment prix, montant, préférence de liquidation, anti-dilution, pro rata, pool d'options et secondaire. Les clauses de contrôle portent sur le board, les matières réservées, les droits d'information, les clauses de sortie, le vesting et les situations de départ. Une même clause peut être acceptable ou problématique selon son périmètre, son seuil et les droits déjà accordés.\n\n## Méthode de travail\n\nConstruire une matrice. Pour chaque clause, écrire l'objectif, le bénéficiaire, l'effet attendu, le risque pour la société, le risque pour les fondateurs, les points négociables et la question à adresser au conseil. Éviter de classer une clause comme « bonne » ou « mauvaise » sans contexte. La bonne question est : quel risque cette clause alloue-t-elle, à qui et pour combien de temps ?\n\nComparer les modèles disponibles uniquement comme supports de lecture. Le modèle Galion reste un support praticien français daté ; les documents UK Private Capital relèvent du Royaume-Uni et ne sont utilisés ici qu'à titre comparatif. Les modèles américains comme NVCA, lorsqu'ils sont cités ailleurs dans le parcours, ne se transposent pas automatiquement non plus. Ces sources aident à nommer les sujets, mais le document applicable dépend de la société, de son droit, de son pacte existant et de la négociation.\n\n## Points de contrôle\n\nLa matrice est robuste si elle permet à l'équipe de distinguer ce qu'elle comprend, ce qu'elle accepte, ce qu'elle refuse et ce qu'elle doit faire valider. Les formulations juridiques finales ne sont jamais improvisées dans le livrable.\n\n## Production attendue\n\nCompléter la « Matrice des clauses ». Renseigner au moins huit clauses, dont trois économiques, trois de gouvernance et deux de liquidité ou de sortie. Ajouter pour chacune une position de négociation et une question juridique.\n\n## Références\n\n- [Galion Project — Term Sheet Série A, modèle praticien français, 2019](https://www.thegalionproject.com/outils/galion-term-sheet)\n- [UK Private Capital — Model documents, Royaume-Uni, usage comparatif, 2025](https://www.ukprivatecapital.co.uk/policy/industry-guidance-standardised-documents/model-documents-for-early-stage-investments.html)\n- [France Invest — Guide du capital-innovation, gouvernance et lettres d’intention, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)",
+      "keyTakeaways": [
+        "Une clause se lit par objectif, bénéficiaire, effet et risque de mauvaise interprétation.",
+        "La gouvernance post-tour est une conséquence directe de la négociation.",
+        "La documentation juridique doit être validée par un professionnel qualifié."
+      ],
+      "glossaryRefs": [
+        "term-sheet",
+        "liquidation-preference",
+        "anti-dilution",
+        "pro-rata",
+        "drag-along",
+        "vesting",
+        "board-seat"
+      ],
+      "quiz": [
+        {
+          "question": "Pourquoi une matrice de clauses est-elle utile ?",
+          "options": [
+            {
+              "text": "Elle fixe la rédaction juridique qui sera reprise dans le pacte",
+              "correct": false
+            },
+            {
+              "text": "Elle relie objectif, bénéficiaire, effet et question juridique.",
+              "correct": true
+            },
+            {
+              "text": "Elle répartit les clauses entre celles à accepter et celles à refuser",
+              "correct": false
+            }
+          ],
+          "explanation": "La matrice prépare la discussion, elle ne tranche pas : une même clause change de portée selon son seuil, sa durée et les droits déjà accordés. Un classement binaire supprime précisément le contexte qui rend la négociation possible, et la rédaction relève du conseil."
+        },
+        {
+          "question": "Qui doit valider la formulation juridique finale ?",
+          "options": [
+            {
+              "text": "L’investisseur chef de file, qui pilote la rédaction de la documentation",
+              "correct": false
+            },
+            {
+              "text": "Le conseil juridique qualifié de la société.",
+              "correct": true
+            },
+            {
+              "text": "Le modèle de term sheet utilisé comme support de lecture",
+              "correct": false
+            }
+          ],
+          "explanation": "Les modèles et la documentation préparée par le chef de file servent de support, mais l'engagement porte sur les statuts et le pacte de la société. Le conseil juridique qualifié de la société doit vérifier la cohérence de l'ensemble et les conséquences propres à sa situation."
+        },
+        {
+          "question": "Pourquoi comparer des modèles étrangers avec prudence ?",
+          "options": [
+            {
+              "text": "Parce qu’ils décrivent des pratiques de marché dépassées",
+              "correct": false
+            },
+            {
+              "text": "Parce qu’ils décrivent une architecture documentaire qui dépend d’un droit et d’un marché donnés.",
+              "correct": true
+            },
+            {
+              "text": "Parce qu’ils ne traitent pas les clauses économiques",
+              "correct": false
+            }
+          ],
+          "explanation": "Un modèle NVCA ou UK Private Capital répartit les droits entre des documents sans équivalent exact en SAS. Il reste à jour et couvre les clauses économiques : ce qu'il ne dit pas, c'est où la clause doit figurer dans l'architecture française ni si elle est licite ici."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "Galion Project — Term Sheet Série A, modèle praticien français, 2019",
+          "kind": "external",
+          "ref": "https://www.thegalionproject.com/outils/galion-term-sheet"
+        },
+        {
+          "label": "UK Private Capital — Model documents, Royaume-Uni, usage comparatif, 2025",
+          "kind": "external",
+          "ref": "https://www.ukprivatecapital.co.uk/policy/industry-guidance-standardised-documents/model-documents-for-early-stage-investments.html"
+        },
+        {
+          "label": "France Invest — Guide du capital-innovation, gouvernance et lettres d’intention, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        }
+      ]
+    },
+    {
+      "id": "lsa-negociation-dossier",
+      "slug": "serie-a-negocier-sur-dossier",
+      "courseId": "c-serie-a-preparation",
+      "order": 7,
+      "title": "Négocier sur dossier",
+      "kicker": "Négociation",
+      "readMin": 2,
+      "summary": "Préparer une négociation structurée par priorités, alternatives, concessions et limites documentées.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Traduire le dossier en priorités de négociation.",
+        "Préparer des concessions par paquets cohérents.",
+        "Consigner les arbitrages sans dégrader la relation."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "negociation",
+        "estimatedMinutes": 62
+      },
+      "body": "## Situation professionnelle\n\nLa négociation Série A intervient lorsque plusieurs lignes du dossier sont déjà exposées : montant, valorisation, investisseurs, gouvernance, droits économiques et calendrier. Une équipe fondatrice qui négocie sans hiérarchie risque de céder sur un point essentiel pour gagner un point secondaire. À l'inverse, une équipe qui refuse tout sans expliquer ses contraintes peut créer une friction inutile.\n\nLa préparation doit donc distinguer priorité, préférence et limite. Une priorité protège la capacité de la société à exécuter. Une préférence améliore la transaction sans être indispensable. Une limite identifie un point au-delà duquel l'accord ne respecte plus la décision initiale.\n\n## Méthode de travail\n\nÉcrire deux briefs : fondateur et investisseur. Le brief fondateur précise l'objectif du tour, les points non négociables, les concessions possibles, les alternatives et les validations internes nécessaires. Le brief investisseur reconstruit les préoccupations probables : risque de marché, qualité des données, gouvernance, downside protection, droits d'information, liquidité et capacité de suivi.\n\nTravailler ensuite par paquets. Une concession sur la valorisation peut être discutée avec le montant, le pool, les droits de pro rata ou la gouvernance. Une matière réservée peut être acceptable si son seuil est clair et si elle protège une décision réellement structurante. Chaque arbitrage doit être consigné avec sa raison, sa contrepartie et la personne qui l'a validé.\n\n## Points de contrôle\n\nLa négociation est préparée si l'équipe peut expliquer ce qu'elle veut obtenir, ce qu'elle peut céder, ce qu'elle refuse et ce qui exige une validation juridique ou une décision de l'organe compétent selon les statuts et accords applicables. Les réponses aux investisseurs restent factuelles et cohérentes avec le registre des preuves.\n\n## Production attendue\n\nRédiger le « Brief de négociation ». Inclure priorités, concessions possibles, limites, alternative si le tour ne se fait pas, questions ouvertes et journal des décisions prises pendant la simulation.\n\n## Références\n\n- [Galion Project — Term Sheet Série A, modèle praticien français, 2019](https://www.thegalionproject.com/outils/galion-term-sheet)\n- [France Invest — Guide du capital-innovation, modèle de lettre d’intention, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)",
+      "keyTakeaways": [
+        "La négociation se prépare à partir des preuves et des contraintes, pas clause par clause isolée.",
+        "Une concession acceptable doit avoir une contrepartie ou une justification explicite.",
+        "Le journal de décision protège la mémoire collective du tour."
+      ],
+      "glossaryRefs": [
+        "term-sheet",
+        "pro-rata",
+        "vesting"
+      ],
+      "quiz": [
+        {
+          "question": "Que protège une priorité de négociation ?",
+          "options": [
+            {
+              "text": "Le niveau de valorisation annoncé en interne",
+              "correct": false
+            },
+            {
+              "text": "La capacité de la société à exécuter la décision de financement.",
+              "correct": true
+            },
+            {
+              "text": "La part détenue par les fondateurs après le tour",
+              "correct": false
+            }
+          ],
+          "explanation": "Une priorité se rattache à un effet opérationnel : recruter, décider, financer un jalon. La valorisation et le pourcentage détenu sont des résultats de la négociation ; les ériger en priorités conduit à céder sur les droits qui, eux, conditionnent l'exécution."
+        },
+        {
+          "question": "Pourquoi négocier par paquets ?",
+          "options": [
+            {
+              "text": "Pour reporter les points les plus difficiles jusqu’au closing",
+              "correct": false
+            },
+            {
+              "text": "Pour relier concessions et contreparties plutôt que traiter chaque clause isolément.",
+              "correct": true
+            },
+            {
+              "text": "Pour obtenir un accord global sans entrer dans le détail des clauses",
+              "correct": false
+            }
+          ],
+          "explanation": "Traitée seule, chaque clause se discute sur ses mérites propres et la contrepartie disparaît. Regroupée, elle s'échange : accepter une matière réservée peut se compenser sur le pool, le pro rata ou le calendrier. Le paquet précise le détail, il ne le contourne pas."
+        },
+        {
+          "question": "Quel document conserve la mémoire des arbitrages ?",
+          "options": [
+            {
+              "text": "La dernière version de la term sheet signée",
+              "correct": false
+            },
+            {
+              "text": "Le journal de décision du tour.",
+              "correct": true
+            },
+            {
+              "text": "L’échange de courriels avec l’investisseur chef de file",
+              "correct": false
+            }
+          ],
+          "explanation": "La term sheet enregistre le résultat, pas la raison ; les courriels dispersent la chronologie sans désigner qui a validé quoi. Le journal conserve ce qui a été cédé, contre quelle contrepartie et sur quelle validation — l'information utile au closing puis aux tours suivants."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "Galion Project — Term Sheet Série A, modèle praticien français, 2019",
+          "kind": "external",
+          "ref": "https://www.thegalionproject.com/outils/galion-term-sheet"
+        },
+        {
+          "label": "France Invest — Guide du capital-innovation, modèle de lettre d’intention, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        }
+      ]
+    },
+    {
+      "id": "lsa-closing-board",
+      "slug": "serie-a-closing-premier-board",
+      "courseId": "c-serie-a-preparation",
+      "order": 8,
+      "title": "Clore le tour et préparer le premier board",
+      "kicker": "Post-closing",
+      "readMin": 2,
+      "summary": "Transformer la négociation en closing contrôlé, puis en gouvernance opérationnelle dès le premier board.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Identifier les conditions préalables au closing.",
+        "Préparer la gouvernance et le reporting post-tour.",
+        "Réviser le dossier après retour de pairs ou de praticiens."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "closing",
+        "estimatedMinutes": 52
+      },
+      "body": "## Situation professionnelle\n\nAprès l'accord de principe, le tour entre dans une phase d'exécution : documentation définitive, conditions préalables, validations sociales, signatures, flux financiers et mise en place de la gouvernance. Une préparation incomplète peut créer des retards alors que la société a déjà mobilisé l'équipe et communiqué une trajectoire.\n\nLa gouvernance post-tour doit être préparée avant le premier board. Les nouveaux administrateurs ou observateurs doivent recevoir une information utile, pas une duplication de la data room. La société doit convertir son dossier de levée en cadence de pilotage : indicateurs suivis, décisions attendues, risques ouverts, recrutement, trésorerie et prochains jalons.\n\n## Méthode de travail\n\nConstruire une checklist de closing. Elle inclut les documents à finaliser, les validations internes, les conditions à lever, les signatures et la communication aux parties prenantes. Distinguer ce qui relève de l'équipe, du conseil juridique, du conseil financier éventuel et des investisseurs.\n\nPréparer ensuite le premier board : ordre du jour, synthèse de la thèse de financement, tableau de bord, décisions attendues, points de vigilance et calendrier des 100 premiers jours. Cette préparation évite que la gouvernance démarre par une simple mise à jour commerciale.\n\n## Points de contrôle\n\nLe dossier final est recevable si une personne extérieure peut comprendre ce qui a été décidé, ce qui reste à signer, ce qui doit être surveillé et comment le retour reçu a été intégré. Toute question juridique non tranchée reste signalée.\n\n## Production attendue\n\nCompléter « Closing et premier board ». Ajouter la checklist de closing, l'ordre du jour du premier board, les indicateurs suivis pendant 100 jours et le journal de révision du dossier.\n\n## Références\n\n- [Galion Project — Guide du Board, bonnes pratiques de gouvernance, 2022](https://www.thegalionproject.com/outils/guide-du-board)\n- [France Invest — Guide du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)",
+      "keyTakeaways": [
+        "Le closing n'est pas la fin du travail : il ouvre une gouvernance plus formalisée.",
+        "Le premier board doit reprendre les promesses du dossier et les convertir en cadence de suivi.",
+        "La révision finale distingue correction technique, question juridique et choix de gouvernance."
+      ],
+      "glossaryRefs": [
+        "board-seat",
+        "data-room",
+        "term-sheet"
+      ],
+      "quiz": [
+        {
+          "question": "Pourquoi préparer le premier board avant le closing ?",
+          "options": [
+            {
+              "text": "Pour obtenir l’accord des nouveaux administrateurs sur la documentation du tour",
+              "correct": false
+            },
+            {
+              "text": "Pour convertir les engagements de la levée en cadence de gouvernance.",
+              "correct": true
+            },
+            {
+              "text": "Pour présenter aux nouveaux entrants l’intégralité de la data room",
+              "correct": false
+            }
+          ],
+          "explanation": "Le dossier de levée contient déjà les jalons, les risques et les indicateurs. Les convertir en ordre du jour et en tableau de bord avant la signature évite que la gouvernance démarre sur une revue commerciale. La documentation, elle, se valide en amont avec les conseils."
+        },
+        {
+          "question": "Que doit contenir une checklist de closing ?",
+          "options": [
+            {
+              "text": "Les documents définitifs et la date de virement",
+              "correct": false
+            },
+            {
+              "text": "Documents, validations, conditions, signatures, responsabilités et flux.",
+              "correct": true
+            },
+            {
+              "text": "Les conditions suspensives, les autres points relevant des conseils",
+              "correct": false
+            }
+          ],
+          "explanation": "Le virement n'est qu'un des points à suivre : une condition non levée, une validation sociale oubliée ou un document sans responsable peuvent aussi bloquer le calendrier. Une checklist limitée aux documents ou déléguée en bloc aux conseils laisse précisément ces points sans responsable identifié."
+        },
+        {
+          "question": "Quel statut donner à une question juridique non tranchée ?",
+          "options": [
+            {
+              "text": "Elle est arbitrée par l’équipe pour ne pas retarder la signature",
+              "correct": false
+            },
+            {
+              "text": "Elle reste signalée comme question à valider.",
+              "correct": true
+            },
+            {
+              "text": "Elle est reportée au pacte, qui prévaudra sur la term sheet",
+              "correct": false
+            }
+          ],
+          "explanation": "Une question non tranchée qui disparaît du dossier réapparaît à la documentation définitive, avec moins de temps pour la traiter. La signaler permet au conseil de l'instruire pendant que le reste avance, plutôt que de l'arbitrer sans compétence ou de la reporter à un document qu'il faudra rouvrir."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "Galion Project — Guide du Board, bonnes pratiques de gouvernance, 2022",
+          "kind": "external",
+          "ref": "https://www.thegalionproject.com/outils/guide-du-board"
+        },
+        {
+          "label": "France Invest — Guide du capital-innovation, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        }
+      ]
+    },
+    {
+      "id": "lsa-branche-sectorielle",
+      "slug": "serie-a-adapter-le-dossier-au-modele-economique",
+      "courseId": "c-serie-a-preparation",
+      "order": 9,
+      "title": "Adapter le dossier au modèle économique",
+      "kicker": "Approfondissement",
+      "readMin": 2,
+      "summary": "Adapter les preuves attendues à un modèle SaaS, marketplace, deeptech, industriel ou régulé.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Identifier les preuves adaptées au modèle économique.",
+        "Éviter la transposition mécanique de métriques SaaS.",
+        "Documenter les limites des comparaisons sectorielles."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "branche-sectorielle",
+        "estimatedMinutes": 52
+      },
+      "body": "## Situation professionnelle\n\nToutes les Série A ne se ressemblent pas. Un logiciel vendu par abonnement, une marketplace, une société deeptech, un acteur industriel ou une activité régulée ne prouvent pas la même chose au même moment. Appliquer mécaniquement une grille SaaS à une société dont les cycles de vente, les marges ou les validations réglementaires sont différents produit un dossier fragile.\n\nL'approfondissement consiste à choisir une branche et à adapter le registre des preuves. Le but n'est pas de réduire l'exigence, mais de l'ajuster au risque réellement ouvert. Dans une marketplace, l'équilibre offre-demande et la liquidité peuvent compter davantage qu'un indicateur de revenus isolé. Dans une deeptech, le risque technique, industriel ou réglementaire peut être central.\n\n## Méthode de travail\n\nSélectionner un modèle principal et trois risques spécifiques. Pour chaque risque, définir la preuve la plus pertinente, la source disponible et la limite d'interprétation. Lorsque des benchmarks sont utilisés, noter leur géographie, leur période, leur population et leur dénominateur. Un chiffre externe sans contexte doit rester une information de cadrage, pas une preuve de préparation.\n\nAdapter ensuite le deck, le modèle et la data room. Certaines pièces deviennent plus importantes : essais techniques, conformité, contrats fournisseurs, métriques de liquidité, dossiers réglementaires, références clients ou analyses de marge. Les preuves absentes sont explicitées.\n\n## Points de contrôle\n\nLa branche est utile si elle change réellement le dossier. Si les mêmes métriques restent présentées dans le même ordre sans qualification, l'exercice n'a pas été fait. Le lecteur doit comprendre pourquoi ces preuves répondent aux risques de ce modèle.\n\n## Production attendue\n\nCompléter « Adaptation sectorielle ». Indiquer le modèle choisi, trois risques spécifiques, les preuves associées, les limites des benchmarks et les pièces de data room à renforcer.\n\n## Références\n\n- [State of European Tech — contexte macro européen, rapport 2025](https://www.stateofeuropeantech.com/)\n- [France Invest — Guide du capital-innovation, diligence et documents, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)",
+      "keyTakeaways": [
+        "Chaque modèle économique demande des preuves différentes.",
+        "Un benchmark ne vaut que si sa population et sa période sont connues.",
+        "L'absence d'une métrique classique peut être acceptable si une autre preuve répond au risque."
+      ],
+      "glossaryRefs": [
+        "runway",
+        "data-room"
+      ],
+      "quiz": [
+        {
+          "question": "Pourquoi adapter le dossier au modèle économique ?",
+          "options": [
+            {
+              "text": "Pour compenser des métriques inférieures aux références du marché",
+              "correct": false
+            },
+            {
+              "text": "Parce que les risques et les preuves attendues changent selon le modèle.",
+              "correct": true
+            },
+            {
+              "text": "Parce que les investisseurs spécialisés n’examinent pas les métriques financières",
+              "correct": false
+            }
+          ],
+          "explanation": "L'adaptation ajuste la preuve au risque réellement ouvert : liquidité pour une marketplace, validation technique ou réglementaire pour une deeptech. Elle ne réduit pas l'exigence financière et ne sert pas à justifier un niveau de métrique plus faible."
+        },
+        {
+          "question": "Quel élément doit accompagner un benchmark ?",
+          "options": [
+            {
+              "text": "La médiane et le quartile supérieur de l’échantillon",
+              "correct": false
+            },
+            {
+              "text": "Géographie, période, population et dénominateur.",
+              "correct": true
+            },
+            {
+              "text": "Le nom de l’organisation qui publie l’étude",
+              "correct": false
+            }
+          ],
+          "explanation": "Sans population ni dénominateur, une médiane n'indique pas à quoi la société se compare. Les quartiles et la source sont utiles mais insuffisants : ils précisent la dispersion et la provenance, pas le périmètre des entreprises retenues ni la période observée."
+        },
+        {
+          "question": "Quand la branche sectorielle est-elle utile ?",
+          "options": [
+            {
+              "text": "Quand elle ajoute un chapitre sectoriel au deck",
+              "correct": false
+            },
+            {
+              "text": "Quand elle modifie les preuves, les pièces et les questions de diligence.",
+              "correct": true
+            },
+            {
+              "text": "Quand elle permet d’écarter les métriques défavorables au modèle",
+              "correct": false
+            }
+          ],
+          "explanation": "Le test porte sur l'effet dans le dossier : si le registre des preuves et l'index de data room restent inchangés, l'exercice n'a produit qu'un commentaire. Écarter une métrique défavorable relève de la sélection, pas de l'adaptation."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "State of European Tech — contexte macro européen, rapport 2025",
+          "kind": "external",
+          "ref": "https://www.stateofeuropeantech.com/"
+        },
+        {
+          "label": "France Invest — Guide du capital-innovation, diligence et documents, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        }
+      ],
+      "optional": true
+    },
+    {
+      "id": "lsa-tour-complexe",
+      "slug": "serie-a-comparer-un-tour-complexe",
+      "courseId": "c-serie-a-preparation",
+      "order": 10,
+      "title": "Comparer un tour complexe",
+      "kicker": "Approfondissement",
+      "readMin": 2,
+      "summary": "Comparer une offre simple à une offre intégrant secondaire, tranches, venture debt ou droits renforcés.",
+      "status": "published",
+      "level": "avance",
+      "learningOutcomes": [
+        "Décomposer une offre complexe en effets économiques et de contrôle.",
+        "Identifier les points qui exigent une validation juridique ou financière.",
+        "Comparer une offre apparemment meilleure à une offre plus simple."
+      ],
+      "practice": {
+        "deliverableId": "todo-attentes-serie-a",
+        "sectionId": "tour-complexe",
+        "estimatedMinutes": 52
+      },
+      "body": "## Situation professionnelle\n\nCertaines Série A incluent des éléments qui dépassent le tour primaire simple : secondaire fondateur, investissement par tranches, conditions de gouvernance renforcées, dette associée, droits anti-dilution plus sensibles ou mécanismes de liquidité. Ces éléments ne sont pas nécessairement défavorables, mais ils doivent être séparés pour être compris.\n\nUne offre complexe peut présenter une valorisation plus élevée et produire pourtant une gouvernance plus contraignante ou une distribution moins favorable dans certains scénarios. L'analyse doit donc comparer l'ensemble de la transaction, pas seulement le prix affiché.\n\n## Méthode de travail\n\nLes documents britanniques UK Private Capital et américains NVCA cités dans cette leçon servent uniquement de comparaisons étrangères : ils aident à repérer des familles de mécanismes, sans déterminer le traitement d'une SAS française. Construire deux colonnes : offre simple et offre complexe. Pour chaque ligne, indiquer l'effet sur la trésorerie de la société, la liquidité des fondateurs, la dilution, les droits économiques, les décisions réservées, le reporting et les conditions à satisfaire. Ajouter ensuite une ligne « point à valider » pour les questions juridiques, fiscales ou comptables.\n\nModéliser séparément le primaire, le secondaire et la dette éventuelle. Si le financement est par tranches, préciser les conditions de déclenchement et les conséquences si une tranche n'est pas versée. Si des droits renforcés sont demandés, expliquer le risque protégé et la durée du droit.\n\n## Points de contrôle\n\nLa comparaison est acceptable si elle permet de dire pourquoi l'offre complexe est retenue, refusée ou renégociée. Un lecteur doit voir quels bénéfices compensent la complexité et quelles questions restent à valider.\n\n## Production attendue\n\nCompléter « Tour complexe ». Présenter deux offres, leurs effets séparés, les points de validation juridique ou financière et une conclusion proportionnée : accepter, renégocier ou écarter.\n\n## Références\n\n- [UK Private Capital — Model documents, droit britannique, usage comparatif, 2025](https://www.ukprivatecapital.co.uk/policy/industry-guidance-standardised-documents/model-documents-for-early-stage-investments.html)\n- [NVCA — Model Legal Documents, droit américain, usage comparatif, 2025–2026](https://nvca.org/model-legal-documents/)\n- [France Invest — Guide du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf)",
+      "keyTakeaways": [
+        "Une offre plus élevée peut devenir moins attractive si les droits associés déplacent trop de risque.",
+        "Secondaire, tranches et dette doivent être modélisés séparément du primaire.",
+        "La complexité n'est acceptable que si son utilité est explicitée."
+      ],
+      "glossaryRefs": [
+        "liquidation-preference",
+        "anti-dilution",
+        "pro-rata",
+        "drag-along",
+        "cap-table"
+      ],
+      "quiz": [
+        {
+          "question": "Pourquoi isoler le primaire, le secondaire et la dette ?",
+          "options": [
+            {
+              "text": "Parce qu’ils sont versés à des dates différentes",
+              "correct": false
+            },
+            {
+              "text": "Parce qu’ils n’ont pas le même effet sur la société, les fondateurs et la cap table.",
+              "correct": true
+            },
+            {
+              "text": "Parce que seul le primaire doit apparaître dans la communication du tour",
+              "correct": false
+            }
+          ],
+          "explanation": "Le primaire entre en trésorerie et dilue ; le secondaire rémunère des vendeurs sans financer la société ; la dette ne dilue pas immédiatement mais crée une charge et un rang de remboursement. Additionnés, ils font apparaître un tour plus important qu'il ne l'est pour la société."
+        },
+        {
+          "question": "Quel risque présente une valorisation plus élevée ?",
+          "options": [
+            {
+              "text": "Elle réduit mécaniquement la dilution des fondateurs",
+              "correct": false
+            },
+            {
+              "text": "Elle peut être associée à des droits ou conditions qui déplacent le risque.",
+              "correct": true
+            },
+            {
+              "text": "Elle impose un tour suivant à une valorisation supérieure",
+              "correct": false
+            }
+          ],
+          "explanation": "À montant égal, un prix plus élevé dilue effectivement moins : c'est exact, et c'est ce qui rend la comparaison trompeuse. Le prix peut être obtenu contre une préférence renforcée, un anti-dilution plus sensible ou des tranches conditionnelles dont l'effet n'apparaît qu'en scénario défavorable."
+        },
+        {
+          "question": "Quand la complexité est-elle acceptable ?",
+          "options": [
+            {
+              "text": "Lorsqu’elle est proposée par un investisseur de premier rang",
+              "correct": false
+            },
+            {
+              "text": "Lorsqu’elle a une utilité explicite et des effets compris.",
+              "correct": true
+            },
+            {
+              "text": "Lorsqu’elle permet d’annoncer une valorisation plus élevée",
+              "correct": false
+            }
+          ],
+          "explanation": "Une tranche conditionnelle ou un droit renforcé peut résoudre un désaccord réel sur le risque. La question reste la même quel que soit l'émetteur de l'offre : quel problème le mécanisme règle-t-il, et que coûte-t-il si le scénario prévu ne se réalise pas ?"
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "UK Private Capital — Model documents, droit britannique, usage comparatif, 2025",
+          "kind": "external",
+          "ref": "https://www.ukprivatecapital.co.uk/policy/industry-guidance-standardised-documents/model-documents-for-early-stage-investments.html"
+        },
+        {
+          "label": "NVCA — Model Legal Documents, droit américain, usage comparatif, 2025–2026",
+          "kind": "external",
+          "ref": "https://nvca.org/model-legal-documents/"
+        },
+        {
+          "label": "France Invest — Guide du capital-innovation, 2019",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf"
+        }
+      ],
+      "optional": true
+    }
+  ]
+}

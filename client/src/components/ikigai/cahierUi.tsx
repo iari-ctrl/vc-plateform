@@ -137,7 +137,7 @@ export function StickySubsectionHeader({ children, className }: { children: Reac
     <div
       style={{ top: 'var(--ikigai-subhead-top, 12rem)' }}
       className={cn(
-        'sticky z-20 -mx-2 rounded-lg border border-outline-variant bg-[color-mix(in_srgb,var(--surface)_92%,transparent)] px-2.5 py-2 shadow-editorial-xs backdrop-blur-xl sm:-mx-3 sm:px-3',
+        'sticky z-20 bg-[color-mix(in_srgb,var(--surface)_94%,transparent)] py-2 backdrop-blur-xl',
         className,
       )}
     >
@@ -195,7 +195,7 @@ export function ThreeModeSelector({
   return (
     <div
       role="group"
-      aria-label="Mode de parcours d'onboarding"
+      aria-label="Mode de lecture du cahier Ikigai"
       className="inline-flex w-full items-center gap-1 rounded-2xl border border-outline-variant bg-surface-container-low p-1 sm:w-auto"
     >
       {([

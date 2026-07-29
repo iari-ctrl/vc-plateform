@@ -113,7 +113,7 @@ export default function ParcoursPage() {
             )}
           >
             <p className="text-sm text-surface-variant">
-              <span className="font-medium text-foreground">La carte des parcours.</span> Chaque sceau est un parcours, placé du rivage des débutants à la haute citadelle des fonds. Survole-le pour révéler sa destination, clique pour mettre le cap — ou choisis ta route dans les étagères ci-dessous.
+              <span className="font-medium text-foreground">La carte des parcours.</span> Chaque sceau est un parcours, placé du rivage des débutants à la haute citadelle des fonds. Pointez-le ou placez-y le focus pour révéler sa destination et ses relations ; sur écran tactile, un premier appui affiche ces relations et le suivant ouvre le parcours. Les étagères ci-dessous restent disponibles pour une navigation directe.
             </p>
             <PathAtlas className="mt-3" collapsed={mapCollapsed} />
           </div>
@@ -187,7 +187,7 @@ export default function ParcoursPage() {
           Pas sûr d’où commencer ? Le test d’orientation t’aiguille vers le parcours calibré pour toi.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link to="/onboarding" className="btn-ghost">Passer le test</Link>
+          <Link to="/ikigai?test=1" className="btn-ghost">Passer le test</Link>
           <Link to="/bibliotheque" className="btn-quiet">Flâner dans la bibliothèque <ArrowRight size={15} /></Link>
         </div>
       </div>

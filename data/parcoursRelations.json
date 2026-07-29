@@ -1,0 +1,135 @@
+[
+  {
+    "sourceId": "p-decouvrir-vc",
+    "targetId": "p-semaine-vc",
+    "kind": "peer",
+    "evidence": ["profile-route", "learning-outcomes"],
+    "rationale": "Les deux parcours introduisent les acteurs et les responsabilités d’un fonds. Le second applique ces repères à l’organisation d’une semaine de travail."
+  },
+  {
+    "sourceId": "p-decouvrir-vc",
+    "targetId": "p-analyst-foundations",
+    "kind": "peer",
+    "evidence": ["learning-outcomes"],
+    "rationale": "Ils partagent les repères fondamentaux du capital-risque. Le parcours Analyst Foundations développe ces bases dans une trajectoire Analyst structurée."
+  },
+  {
+    "sourceId": "p-entretien-analyst",
+    "targetId": "p-market-sizing",
+    "kind": "peer",
+    "evidence": ["profile-route", "learning-outcomes"],
+    "rationale": "Le dimensionnement de marché est explicitement évalué dans le parcours d’entretien Analyst et constitue l’objet du parcours spécialisé."
+  },
+  {
+    "sourceId": "p-meilleur-analyst",
+    "targetId": "p-unit-economics",
+    "kind": "peer",
+    "evidence": ["profile-route", "shared-content"],
+    "rationale": "La lecture des unit economics fait partie du screening et de la diligence travaillés pour progresser comme Analyst."
+  },
+  {
+    "sourceId": "p-seed",
+    "targetId": "p-cap-table",
+    "kind": "peer",
+    "evidence": ["shared-content", "learning-outcomes"],
+    "rationale": "Préparer une seed comprend la construction d’une cap table post-tour. Le parcours spécialisé approfondit la dilution et la lecture de l’actionnariat."
+  },
+  {
+    "sourceId": "p-seed",
+    "targetId": "p-term-sheet",
+    "kind": "peer",
+    "evidence": ["shared-content", "learning-outcomes"],
+    "rationale": "Le parcours Seed demande de lire une term sheet. Le parcours spécialisé détaille ses clauses économiques, ses clauses de contrôle et leurs effets."
+  },
+  {
+    "sourceId": "p-serie-a",
+    "targetId": "p-mener-un-tour",
+    "kind": "peer",
+    "evidence": ["shared-content", "learning-outcomes"],
+    "rationale": "Ils traitent tous deux la structuration et la négociation d’un tour avancé, depuis les points de vue du fondateur et du fonds."
+  },
+  {
+    "sourceId": "p-levee-fonds-lp",
+    "targetId": "p-penser-gp",
+    "kind": "peer",
+    "evidence": ["shared-content", "learning-outcomes"],
+    "rationale": "Les deux parcours couvrent l’économie du fonds, les attentes des LP et la construction de portefeuille. L’un porte sur la levée du véhicule, l’autre sur son pilotage."
+  },
+  {
+    "sourceId": "p-carry",
+    "targetId": "p-penser-gp",
+    "kind": "peer",
+    "evidence": ["shared-content", "learning-outcomes"],
+    "rationale": "Le carry, les frais et les métriques de fonds sont des mécanismes mobilisés dans le parcours consacré au raisonnement de GP."
+  },
+  {
+    "sourceId": "p-decouvrir-vc",
+    "targetId": "p-stage",
+    "kind": "progression",
+    "evidence": ["explicit-prerequisite"],
+    "rationale": "Le parcours Stage cite Comprendre le capital-risque parmi ses prérequis conseillés avant la préparation d’une candidature."
+  },
+  {
+    "sourceId": "p-decouvrir-vc",
+    "targetId": "p-entretien-analyst",
+    "kind": "progression",
+    "evidence": ["explicit-prerequisite"],
+    "rationale": "Le parcours Entretien Analyst cite Comprendre le capital-risque parmi ses prérequis conseillés avant les exercices d’analyse et de mémo."
+  },
+  {
+    "sourceId": "p-stage",
+    "targetId": "p-entretien-analyst",
+    "kind": "progression",
+    "evidence": ["profile-route", "shared-content"],
+    "rationale": "L’aiguillage Futur Analyst place le parcours Stage avant l’entretien Analyst. Le ciblage des fonds et l’analyse courte préparent les exercices d’entretien."
+  },
+  {
+    "sourceId": "p-entretien-analyst",
+    "targetId": "p-entretien-associate",
+    "kind": "progression",
+    "evidence": ["explicit-prerequisite", "shared-content"],
+    "rationale": "Le parcours Entretien Associate cite l’entretien Analyst parmi ses prérequis conseillés et reprend ses acquis avant d’ajouter la diligence et la défense en comité."
+  },
+  {
+    "sourceId": "p-meilleur-analyst",
+    "targetId": "p-passer-associate",
+    "kind": "progression",
+    "evidence": ["profile-route", "shared-content"],
+    "rationale": "L’aiguillage Analyst en progression place ces parcours dans cet ordre. Le mémo et la diligence priorisée deviennent une conviction portée et une diligence complète."
+  },
+  {
+    "sourceId": "p-seed",
+    "targetId": "p-serie-a",
+    "kind": "progression",
+    "evidence": ["profile-route", "learning-outcomes"],
+    "rationale": "L’aiguillage Entrepreneur en levée recommande la Seed avant la Série A. Le second parcours reprend le deck, les métriques et la structuration du tour à un stade plus avancé."
+  },
+  {
+    "sourceId": "p-term-sheet",
+    "targetId": "p-mener-un-tour",
+    "kind": "progression",
+    "evidence": ["shared-content", "learning-outcomes"],
+    "rationale": "La maîtrise des clauses et de leurs effets prépare la négociation, la rédaction et la défense d’une term sheet dans le cadre d’un tour mené par le fonds."
+  },
+  {
+    "sourceId": "p-analyst-foundations",
+    "targetId": "p-meilleur-analyst",
+    "kind": "progression",
+    "evidence": ["maintained-reference", "learning-outcomes"],
+    "rationale": "Analyst Foundations pose les bases de l’analyse, des calculs et de la qualification des faits. Devenir un meilleur Analyst les mobilise dans la diligence et la rédaction d’un mémo."
+  },
+  {
+    "sourceId": "p-preseed",
+    "targetId": "p-seed",
+    "kind": "progression",
+    "evidence": ["profile-route", "shared-content"],
+    "rationale": "L’aiguillage Entrepreneur en levée recommande ces parcours dans cet ordre. Ils partagent le travail du narratif, du deck, de la cap table et du processus de levée à deux stades successifs."
+  },
+  {
+    "sourceId": "p-passer-associate",
+    "targetId": "p-passer-principal",
+    "kind": "progression",
+    "evidence": ["profile-route", "shared-content"],
+    "rationale": "L’aiguillage Associate en progression place ces parcours dans cet ordre. Le raisonnement au niveau du deal s’étend ensuite à l’allocation, au portefeuille et à la gouvernance."
+  }
+]

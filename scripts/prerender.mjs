@@ -46,7 +46,7 @@ import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer';
 import { appRouteUrl, normalizeBaseUrl, resolveSiteBaseUrl } from '../shared/base-url.mjs';
 import { LEGACY_REDIRECTS } from '../shared/routes.mjs';
-import { collectRoutes } from './collect-routes.mjs';
+import { collectNoindexRoutes, collectRoutes } from './collect-routes.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = join(root, 'client', 'dist');
@@ -325,6 +325,7 @@ function errorMessage(error) {
 export function routesForPrerender() {
   return [
     ...collectRoutes(),
+    ...collectNoindexRoutes(),
     ...LEGACY_REDIRECTS.map(({ from, to }) => ({ path: from, redirectTo: to })),
   ].sort((a, b) => a.path.localeCompare(b.path));
 }
@@ -366,7 +367,7 @@ export async function runPrerender(options, injected = {}) {
     typeof route === 'string' ? { path: route } : route
   ));
   const redirectRoutes = normalizedRoutes.filter((route) => route.redirectTo);
-  const routePaths = normalizedRoutes.filter((route) => !route.redirectTo).map((route) => route.path);
+  const renderRoutes = normalizedRoutes.filter((route) => !route.redirectTo);
   const summary = {
     mode: tolerant ? 'tolerant' : 'strict',
     expected: normalizedRoutes.length,
@@ -432,7 +433,7 @@ export async function runPrerender(options, injected = {}) {
     }
 
     if (browser) {
-      const queue = [...routePaths];
+      const queue = [...renderRoutes];
       const worker = async () => {
         let page;
         try {
@@ -444,14 +445,16 @@ export async function runPrerender(options, injected = {}) {
           }
 
           while (queue.length > 0) {
-            const urlPath = queue.shift();
+            const route = queue.shift();
+            const urlPath = route.path;
             summary.attempted += 1;
             try {
+              const routeIsNoindex = Boolean(route.noindex);
               const result = await renderRoute(page, {
-                allowCanonical: true,
+                allowCanonical: !routeIsNoindex,
                 baseUrl,
                 origin: server.origin,
-                requireNoindex: false,
+                requireNoindex: routeIsNoindex,
                 siteUrl,
                 urlPath,
               });
@@ -482,7 +485,7 @@ export async function runPrerender(options, injected = {}) {
       };
 
       const workerResults = await Promise.allSettled(Array.from(
-        { length: Math.min(Math.max(1, concurrency), Math.max(1, routePaths.length)) },
+        { length: Math.min(Math.max(1, concurrency), Math.max(1, renderRoutes.length)) },
         () => worker(),
       ));
       for (const result of workerResults) {

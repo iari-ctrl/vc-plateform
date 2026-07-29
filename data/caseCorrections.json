@@ -125,5 +125,234 @@
       "Les risques critiques et les qualifications professionnelles suivent des voies distinctes de la notation générale.",
       "La version révisée indique les changements apportés après la revue."
     ]
+  },
+  {
+    "id": "corr-mathematiques-vc-dossier",
+    "sourceCaseId": "cs-mathematiques-vc-dossier",
+    "revealAfterDeliverableId": "math-vc-dossier",
+    "title": "Correction commentée : dossier Mathématiques du capital-risque",
+    "subtitle": "Réconciliations, variantes recevables et erreurs fréquentes",
+    "readMin": 18,
+    "summary": "Correction volontairement révélée après une première version. Elle explique les conventions et contrôles attendus sans constituer une validation professionnelle, juridique ou d'investissement.",
+    "sections": [
+      {
+        "heading": "Méthode de correction",
+        "body": "Une production solide commence par les conventions : unités, dates, base fully diluted, traitement des flux et niveau d'analyse. Les résultats numériques sont ensuite contrôlés par une seconde formule, un total à 100 %, une conservation de valeur ou une égalité de flux."
+      },
+      {
+        "heading": "Marché et unit economics",
+        "body": "Le marché doit distinguer TAM, SAM et SOM sans transformer les hypothèses du cas en données sectorielles. Les unit economics doivent séparer revenu, marge, CAC, coût initial et churn. La LTV simplifiée peut être conservée si ses hypothèses sont affichées ; une sensibilité actualisée doit préciser le taux annuel, sa conversion mensuelle et le calendrier des flux."
+      },
+      {
+        "heading": "Trésorerie et financement",
+        "body": "Le runway jusqu'à zéro et l'horizon jusqu'au seuil opérationnel minimal ne portent pas le même sens. Le modèle mensuel doit vérifier que le solde de clôture égale le solde d'ouverture augmenté des encaissements et diminué des décaissements. Un financement futur reste une hypothèse datée, non une entrée certaine."
+      },
+      {
+        "heading": "Valorisation, cap table et droits économiques",
+        "body": "La composante secondaire rémunère un vendeur et ne finance pas la société. Le complément de pool se calcule avec P₀, T₀, x et c, car les titres créés augmentent le numérateur et le dénominateur. Les droits économiques doivent distinguer préférence, participation, plafond, conversion et valeur distribuable."
+      },
+      {
+        "heading": "Rendements et changement d'unité",
+        "body": "La waterfall de sortie, le rendement d'une ligne et les métriques de fonds appartiennent à trois niveaux d'analyse. Le MOIC et le TRI d'une ligne doivent préciser les dates des flux. DPI, RVPI et TVPI doivent se réconcilier au niveau du portefeuille et ne remplacent pas l'analyse d'une société donnée."
+      }
+    ],
+    "decisionBranches": [
+      {
+        "title": "Version centrale recevable",
+        "decision": "La production est recevable si chaque composant indique ses conventions, calcule le résultat attendu et fournit un contrôle indépendant.",
+        "assumptions": [
+          "Les hypothèses du cas fictif sont conservées ou modifiées explicitement.",
+          "Les unités monétaires, périodes et bases de titres sont stables dans tout le dossier."
+        ],
+        "tradeoffs": [
+          "La version centrale facilite l'apprentissage, mais ne couvre pas toutes les clauses possibles.",
+          "Elle privilégie la cohérence pédagogique sur la complexité juridique exhaustive."
+        ],
+        "evidenceLimits": [
+          "Les chiffres ne proviennent pas d’une société réelle.",
+          "La correction ne vaut pas avis juridique ni revue de juste valeur."
+        ],
+        "informationNeeded": [
+          "Pour une situation réelle : documentation juridique, registre de titres, contrats et flux bancaires.",
+          "Pour une calibration professionnelle : comparables datés et revue indépendante."
+        ]
+      },
+      {
+        "title": "Variante prudente sur encaissement et churn",
+        "decision": "Une variante est acceptable si elle décale les encaissements, augmente le churn ou baisse la marge, puis met à jour toutes les conséquences sur LTV, trésorerie et besoin de financement.",
+        "assumptions": [
+          "Les dates de facturation et de recouvrement sont distinctes.",
+          "Le churn peut être plus élevé que dans le scénario central."
+        ],
+        "tradeoffs": [
+          "La prudence rend le scénario moins favorable mais plus informatif pour la décision.",
+          "Des hypothèses trop pessimistes peuvent masquer les leviers réellement contrôlables."
+        ],
+        "evidenceLimits": [
+          "Le cas ne contient pas de cohorte réelle permettant d'estimer le churn.",
+          "Le calendrier d'encaissement reste une hypothèse de travail."
+        ],
+        "informationNeeded": [
+          "Âge des cohortes, délais réels de paiement et concentration client.",
+          "Sensibilité du runway à une baisse ou à un retard d’encaissement."
+        ]
+      },
+      {
+        "title": "Variante de structure de tour",
+        "decision": "Une variante avec secondaire, pool différent ou préférence plafonnée est recevable si elle conserve la séparation entre cash reçu, titres transférés et valeur distribuée.",
+        "assumptions": [
+          "Les flux primaires et secondaires sont isolés.",
+          "La base fully diluted est définie avant le prix par titre.",
+          "Les droits économiques sont appliqués dans l’ordre prévu."
+        ],
+        "tradeoffs": [
+          "La variante rapproche le cas de situations de négociation réelles.",
+          "Elle augmente le risque de confondre détention nominale et distribution économique."
+        ],
+        "evidenceLimits": [
+          "Les clauses restent simplifiées et ne remplacent pas les textes signés.",
+          "Les effets fiscaux, sociaux et juridiques ne sont pas modélisés."
+        ],
+        "informationNeeded": [
+          "Term sheet, statuts, pacte, registre des mouvements de titres et clauses de conversion.",
+          "Scénarios de sortie couvrant les seuils de préférence, plateau et conversion."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Les conventions précèdent les calculs.",
+      "La séparation primaire / secondaire évite de surestimer la trésorerie reçue.",
+      "Le pool se calcule sur la base initiale correctement définie.",
+      "La waterfall conserve la valeur distribuée entre catégories.",
+      "Les métriques de fonds ne décrivent pas à elles seules le rendement d’une ligne."
+    ]
+  },
+  {
+    "id": "corr-serie-a-altosuite",
+    "sourceCaseId": "cs-serie-a-alto-sas",
+    "revealAfterDeliverableId": "todo-attentes-serie-a",
+    "title": "Correction commentée : AltoSuite Série A",
+    "subtitle": "Arbitrages possibles après une première version du dossier",
+    "readMin": 20,
+    "summary": "Correction volontairement révélée après une première version. Elle explicite des arbitrages recevables sur la décision de lever, la transaction, les clauses et le protocole de négociation sans constituer un avis juridique, financier ou fiscal.",
+    "sections": [
+      {
+        "heading": "Méthode de correction",
+        "body": "Une version recevable commence par séparer faits, hypothèses et décisions. Les chiffres du cas AltoSuite sont fictifs : ils servent à vérifier que la cap table, le pool, les convertibles, le secondaire et les préférences sont traités avec des conventions stables. Les ressources publiques citées dans le parcours aident à structurer les questions ; elles ne valident pas une opération réelle."
+      },
+      {
+        "heading": "Décision de lever et preuves minimales",
+        "body": "La décision de lancer la Série A doit être reliée au jalon que le capital finance, au runway, au coût d’un retard et aux preuves disponibles. Une formulation recevable peut conclure au lancement, au report ou à un financement alternatif si elle explique le déclencheur, la condition de réexamen et le risque principal encore ouvert."
+      },
+      {
+        "heading": "Transaction et waterfall",
+        "body": "La comparaison des offres exige une base fully diluted explicite de 10 000 000 actions, le traitement as-converted des 900 000 équivalents convertibles, le calendrier du complément de pool, la séparation primaire/secondaire et une préférence 1x non-participating. Un tableau qui totalise les pourcentages sans expliquer ces conventions reste insuffisant."
+      },
+      {
+        "heading": "Clauses, gouvernance et validations professionnelles",
+        "body": "Les clauses économiques et de gouvernance doivent être décrites par objectif, bénéficiaire, seuil et effet. En droit français, les statuts, le pacte, les décisions sociales et les formalités doivent être relus par un conseil qualifié ; le parcours n’autorise pas à transformer des modèles étrangers ou des guides pratiques en preuve juridique applicable."
+      },
+      {
+        "heading": "Protocole de négociation et révision",
+        "body": "Le protocole attendu rend observables les rôles, la séquence, les points d’arbitrage, les concessions conditionnelles, les limites et les critères d’arrêt. La version finale doit indiquer ce qui a été modifié après retour, ce qui reste contesté et quelles validations externes sont nécessaires avant toute décision réelle."
+      }
+    ],
+    "decisionBranches": [
+      {
+        "title": "Lancer la Série A avec dossier prudent",
+        "decision": "Lancer le processus si le modèle prudent finance le jalon annoncé, si les preuves clés sont traçables et si les points juridiques sont traités comme questions à valider.",
+        "assumptions": [
+          "Le runway couvre le processus même avec un retard raisonnable.",
+          "Les preuves commerciales ou produit sont définies, datées et reliées à une source primaire.",
+          "Le board accepte le périmètre de divulgation et les limites de négociation."
+        ],
+        "tradeoffs": [
+          "Le lancement conserve le momentum mais impose une discipline de data room et de calendrier.",
+          "Une position prudente peut réduire l’effet narratif du deck mais améliore la diligence."
+        ],
+        "evidenceLimits": [
+          "Le cas est fictif et ne démontre aucune métrique de marché réelle.",
+          "Les modèles juridiques publics ne remplacent pas les actes signés ni une revue conseil."
+        ],
+        "informationNeeded": [
+          "Modèle mensuel, registre des preuves, décision de board et index de data room.",
+          "Revue juridique des clauses et validation des formalités applicables.",
+          "Liste des investisseurs, rôles internes et règles de divulgation."
+        ]
+      },
+      {
+        "title": "Différer la levée et préparer les preuves",
+        "decision": "Différer le processus si les métriques, la trésorerie ou la gouvernance ne permettent pas une diligence crédible ; financer alors une préparation bornée.",
+        "assumptions": [
+          "Le coût d’un report reste inférieur au coût d’un processus lancé trop tôt.",
+          "Les preuves manquantes peuvent être produites dans une période datée.",
+          "L’équipe garde une alternative de financement ou de réduction de burn."
+        ],
+        "tradeoffs": [
+          "Le report évite une négociation affaiblie mais peut retarder un jalon stratégique.",
+          "La préparation améliore la qualité du dossier mais consomme de l’attention dirigeante."
+        ],
+        "evidenceLimits": [
+          "Le cas ne permet pas d’estimer le coût réel d’opportunité du report.",
+          "Les réactions investisseurs ne sont pas observées dans le dossier."
+        ],
+        "informationNeeded": [
+          "Plan de remédiation des preuves avec responsables et dates.",
+          "Scénario de trésorerie sans closing à court terme.",
+          "Critères objectifs de reprise du processus."
+        ]
+      },
+      {
+        "title": "Accepter une offre simple sous conditions",
+        "decision": "Privilégier l’offre la plus lisible si elle finance le jalon, limite les droits complexes et laisse une gouvernance praticable.",
+        "assumptions": [
+          "La préférence 1x non-participating et les droits de gouvernance restent proportionnés au risque.",
+          "Le complément de pool est compris par les fondateurs et intégré au prix effectif.",
+          "Le secondaire est absent ou traité comme transfert entre actionnaires, sans surestimer la trésorerie société."
+        ],
+        "tradeoffs": [
+          "Une structure simple réduit le risque d’erreur et accélère la documentation.",
+          "Elle peut donner une valorisation affichée moins flatteuse qu’une offre plus complexe."
+        ],
+        "evidenceLimits": [
+          "La waterfall simplifiée ne couvre pas toutes les clauses de préférence possibles.",
+          "Les effets fiscaux et sociaux du secondaire ne sont pas modélisés."
+        ],
+        "informationNeeded": [
+          "Term sheet détaillée, projet de statuts/pacte et registre de titres.",
+          "Validation des effets de pool, conversion et secondaire par les conseils.",
+          "Scénarios de sortie alignés sur les clauses effectivement proposées."
+        ]
+      },
+      {
+        "title": "Négocier une offre plus complexe avant acceptation",
+        "decision": "Négocier lorsque la valeur apparente dépend de clauses ou flux secondaires qui déplacent le risque économique ou de contrôle.",
+        "assumptions": [
+          "Les fondateurs disposent d’une alternative crédible ou d’un calendrier suffisant.",
+          "Les concessions demandées peuvent être échangées contre des protections ou une valeur mesurable.",
+          "Chaque point de négociation a un propriétaire et une limite d’arrêt."
+        ],
+        "tradeoffs": [
+          "La négociation peut préserver l’alignement mais accroît la durée et le risque d’exécution.",
+          "Refuser une clause peut améliorer la gouvernance future mais réduire l’intérêt de certains investisseurs."
+        ],
+        "evidenceLimits": [
+          "Le cas ne contient pas de préférence réelle d’investisseur ni de term sheet signée.",
+          "Les contreparties exactes dépendent d’un contexte juridique et commercial absent du cas."
+        ],
+        "informationNeeded": [
+          "Table de concessions, non-négociables, BATNA et décision board.",
+          "Avis juridique sur les droits renforcés, seuils et formalités.",
+          "Journal des arbitrages tenu pendant la simulation."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Une décision de lever est recevable seulement si elle relie capital, jalon, preuve et risque de retard.",
+      "Le secondaire, le pool et les convertibles doivent être séparés pour éviter une cap table trompeuse.",
+      "Les guides et modèles publics servent de comparaison, pas de validation juridique d’une opération française.",
+      "Le protocole de négociation doit être observable : rôles, concessions, limites et critères d’arrêt.",
+      "La complétion finale suppose une production, une autoévaluation, un retour et une révision tracée."
+    ]
   }
 ]

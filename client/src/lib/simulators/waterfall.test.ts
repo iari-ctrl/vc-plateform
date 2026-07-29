@@ -29,4 +29,25 @@ describe('calculateWaterfall', () => {
     expect(res.common).toBe(36);
     expect(res.choseConvert).toBe(false);
   });
+
+  it('lets investor-held common shares share the residual once the preference is taken', () => {
+    // 9 de préférence, 24,3902 % en converti dont 3,125 % des ordinaires acquis hors préférence.
+    const res = calculateWaterfall(9, 1, 24.390243902439025, 30, false, 3.125);
+    expect(res.investor).toBeCloseTo(9.65625, 10);
+    expect(res.common).toBeCloseTo(20.34375, 10);
+    expect(res.choseConvert).toBe(false);
+  });
+
+  it('ignores common shares once conversion wins', () => {
+    const res = calculateWaterfall(9, 1, 24.390243902439025, 120, false, 3.125);
+    expect(res.investor).toBeCloseTo(29.268292682926827, 10);
+    expect(res.choseConvert).toBe(true);
+  });
+
+  it('defaults to the preference-only behaviour when no common shares are held', () => {
+    const withDefault = calculateWaterfall(9, 1, 24.390243902439025, 30, false);
+    const withZero = calculateWaterfall(9, 1, 24.390243902439025, 30, false, 0);
+    expect(withDefault.investor).toBe(9);
+    expect(withDefault).toEqual(withZero);
+  });
 });
