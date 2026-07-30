@@ -17,6 +17,14 @@ const sampledRoutes = [
 ];
 
 describe('App DOM contract', () => {
+  it("oriente la sortie du splash vers l'accueil home sans kanji décoratif", async () => {
+    const { container } = renderAppAt('/');
+
+    const enterLink = await screen.findByRole('link', { name: /accéder à l’accueil/i });
+    expect(enterLink).toHaveAttribute('href', '/home');
+    expect(container).not.toHaveTextContent(/[\u4E00-\u9FFF]/u);
+  });
+
   it('rend une route avec nom accessible, interaction clavier et contrôle axe ciblé', async () => {
     const user = userEvent.setup();
     const { container } = renderAppAt('/search');

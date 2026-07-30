@@ -12,7 +12,6 @@ import { MapCartouche, SeaMonster, NightSkyBackdrop } from '@/components/ornamen
 import { legibleAccent } from '@/lib/ikigaiColor';
 import { cn } from '@/lib/utils';
 import { formatMinutes, parcoursTimeSummary } from '@/content/learningTime';
-import type { ParcoursRelation } from '@/content/parcoursTypes';
 import type { Level } from '@/content/types';
 
 /**
@@ -22,9 +21,9 @@ import type { Level } from '@/content/types';
  * — débutant — on the outside; the citadel of fund economics at the heart). The
  * cross-cutting "tous niveaux" parcours sit apart, as outlying islands. Each port
  * is a wax seal (the parcours' kanji + family accent); hovering, focusing, or
- * selecting one by touch reveals its destination and audited relations. Dotted coastal
- * routes connect complementary parcours at the same level; arrowed routes show a recommended
- * progression. With 20+ ports, both names and routes stay hidden until activation.
+ * selecting one by touch reveals its destination and audited relations. Straight constellation
+ * lines connect complementary parcours; arrowed lines show a recommended progression. With 20+
+ * ports, both names and routes stay hidden until activation.
  */
 
 // — Map canvas geometry —
@@ -104,28 +103,9 @@ function insetSegment(source: Port, target: Port, inset = 30) {
   };
 }
 
-function relationPath(relation: ParcoursRelation, source: Port, target: Port): string {
-  if (
-    relation.kind === 'peer'
-    && source.r !== null
-    && target.r === source.r
-    && source.angle !== null
-    && target.angle !== null
-  ) {
-    const from = Math.min(source.angle, target.angle);
-    const to = Math.max(source.angle, target.angle);
-    const angleInset = (30 / source.r) * (180 / Math.PI);
-    return arcPath(source.r, from + angleInset, to - angleInset);
-  }
-
+function relationPath(source: Port, target: Port): string {
   const { start, end } = insetSegment(source, target);
-  const midpoint = { x: (start.x + end.x) / 2, y: (start.y + end.y) / 2 };
-  const bend = relation.kind === 'progression' ? 0.28 : 0.18;
-  const control = {
-    x: midpoint.x + (CX - midpoint.x) * bend,
-    y: midpoint.y + (CY - midpoint.y) * bend,
-  };
-  return `M ${start.x} ${start.y} Q ${control.x} ${control.y} ${end.x} ${end.y}`;
+  return `M ${start.x} ${start.y} L ${end.x} ${end.y}`;
 }
 
 function atlasTimeLabel(parcours: Parcours): string {
@@ -432,11 +412,10 @@ export function PathAtlas({
                         data-source-id={relation.sourceId}
                         data-target-id={relation.targetId}
                         data-relation-kind={relation.kind}
-                        d={relationPath(relation, source, target)}
+                        d={relationPath(source, target)}
                         fill="none"
                         stroke={progression ? 'var(--secondary)' : 'var(--primary)'}
-                        strokeWidth={progression ? 2.1 : 1.6}
-                        strokeDasharray={progression ? undefined : '2 7'}
+                        strokeWidth={progression ? 2.1 : 1.45}
                         strokeLinecap="round"
                         markerEnd={progression ? `url(#${progressionMarkerId})` : undefined}
                         opacity={progression ? 0.9 : 0.82}

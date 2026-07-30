@@ -5,6 +5,7 @@ import { UIContext } from '@/context/UIContext';
 export function UIProvider({ children }: { children: ReactNode }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const openSearch = useCallback(() => setSearchOpen(true), []);
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -18,12 +19,12 @@ export function UIProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
-  const value = useMemo(() => ({ openSearch }), [openSearch]);
+  const value = useMemo(() => ({ openSearch, closeSearch, searchOpen }), [closeSearch, openSearch, searchOpen]);
 
   return (
     <UIContext.Provider value={value}>
       {children}
-      <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <CommandPalette open={searchOpen} onClose={closeSearch} />
     </UIContext.Provider>
   );
 }

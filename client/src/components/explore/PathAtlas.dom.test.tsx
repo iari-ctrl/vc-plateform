@@ -51,8 +51,10 @@ describe('PathAtlas — relations entre parcours', () => {
 
     const peer = container.querySelector<SVGPathElement>('[data-relation-kind="peer"]');
     const progression = container.querySelector<SVGPathElement>('[data-relation-kind="progression"]');
-    expect(peer).toHaveAttribute('stroke-dasharray', '2 7');
+    expect(peer).not.toHaveAttribute('stroke-dasharray');
     expect(peer).not.toHaveAttribute('marker-end');
+    expect(peer?.getAttribute('d')).toMatch(/^M [-\d.]+ [-\d.]+ L [-\d.]+ [-\d.]+$/);
+    expect(progression?.getAttribute('d')).toMatch(/^M [-\d.]+ [-\d.]+ L [-\d.]+ [-\d.]+$/);
     expect(progression).toHaveAttribute(
       'marker-end',
       `url(#${container.querySelector('marker')?.id})`,

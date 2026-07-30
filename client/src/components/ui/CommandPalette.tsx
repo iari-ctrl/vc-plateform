@@ -1,10 +1,11 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Search, BookOpen, BookMarked, FlaskConical, Newspaper, Route, FileText, CornerDownLeft, Ghost, ScrollText, Microscope, Dumbbell, PanelTop, Award } from 'lucide-react';
 import type { SearchHit } from '@/content/search';
 import { loadSearchHits } from '@/content/searchLazy';
 import { SEARCH_TYPE_LABEL } from '@/content/labels';
 import { Modal } from '@/components/ui/Modal';
+import { cn } from '@/lib/utils';
 
 type PaletteStatus = 'idle' | 'loading' | 'done' | 'error';
 
@@ -26,6 +27,7 @@ const TYPE_ICON: Record<SearchHit['type'], typeof Search> = {
 
 export function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [q, setQ] = useState('');
   const [hits, setHits] = useState<SearchHit[]>([]);
   const [status, setStatus] = useState<PaletteStatus>('idle');
@@ -33,6 +35,9 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const titleId = useId();
+  const homeSearchSurface = pathname === '/home';
+  const trimmedQuery = q.trim();
+  const showResultPanel = !homeSearchSurface || trimmedQuery.length >= 2;
 
   useEffect(() => {
     if (open) {
@@ -100,11 +105,27 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       labelledBy={titleId}
       initialFocusRef={inputRef}
       showCloseButton={false}
-      containerClassName="z-[95] items-start pt-[12vh] sm:items-start"
-      className="max-w-xl overflow-hidden"
+      containerClassName={
+        homeSearchSurface
+          ? 'top-[var(--home-topbar-h)] z-[95] items-start px-3 pt-3 sm:items-start sm:px-6 sm:pt-3.5'
+          : 'z-[95] items-start pt-[12vh] sm:items-start'
+      }
+      backdropClassName={homeSearchSurface ? 'top-[var(--home-topbar-h)] bg-transparent backdrop-blur-none' : undefined}
+      dialogProps={
+        homeSearchSurface
+          ? {
+              'data-home-search-surface': 'true',
+            }
+          : undefined
+      }
+      className={
+        homeSearchSurface
+          ? 'max-w-[min(34rem,calc(100vw-1.5rem))] overflow-hidden rounded-[1.35rem] border-[color-mix(in_srgb,var(--surface-bright)_42%,transparent)] bg-[color-mix(in_srgb,var(--surface-container-lowest)_56%,transparent)] shadow-2xl shadow-black/30 ring-1 ring-[color-mix(in_srgb,var(--surface-bright)_16%,transparent)] backdrop-blur-[34px] backdrop-saturate-[180%]'
+          : 'max-w-xl overflow-hidden'
+      }
     >
       <h2 id={titleId} className="sr-only">Recherche globale</h2>
-        <div className="flex items-center gap-3 border-b border-outline-variant px-4">
+        <div className={cn('flex items-center gap-3 px-4', showResultPanel && 'border-b border-outline-variant/70')}>
           <Search size={18} className="text-surface-variant" aria-hidden />
           <input
             ref={inputRef}
@@ -118,19 +139,20 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             name="q"
             aria-label="Recherche globale"
             placeholder="Rechercher un cours, un terme, une étude de cas…"
-            className="w-full bg-transparent py-4 text-[0.95rem] outline-none placeholder:text-surface-variant"
+            className="w-full appearance-none border-0 bg-transparent py-4 text-[0.95rem] shadow-none outline-none placeholder:text-surface-variant focus:outline-none focus:ring-0 focus-visible:outline-none [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none"
           />
           <kbd className="hidden rounded border border-outline-variant px-1.5 py-0.5 font-mono text-[0.625rem] text-surface-variant sm:block">ESC</kbd>
         </div>
 
+        {showResultPanel && (
         <div className="max-h-[52vh] overflow-y-auto p-2">
-          {q.trim().length < 2 && (
+          {!homeSearchSurface && trimmedQuery.length < 2 && (
             <p className="px-3 py-8 text-center text-sm text-surface-variant">Tapez au moins deux caractères pour explorer toute la plateforme.</p>
           )}
-          {q.trim().length >= 2 && status === 'loading' && (
+          {trimmedQuery.length >= 2 && status === 'loading' && (
             <p role="status" aria-live="polite" className="px-3 py-8 text-center text-sm text-surface-variant">Recherche en cours…</p>
           )}
-          {q.trim().length >= 2 && status === 'error' && (
+          {trimmedQuery.length >= 2 && status === 'error' && (
             <div role="alert" className="m-2 rounded-xl border border-outline-variant bg-surface-container-low p-4 text-sm text-surface-variant">
               <p className="font-medium text-foreground">La recherche n’a pas pu être chargée.</p>
               <button type="button" onClick={() => setSearchAttempt((attempt) => attempt + 1)} className="btn-ghost mt-3">
@@ -138,7 +160,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
               </button>
             </div>
           )}
-          {q.trim().length >= 2 && status === 'done' && grouped.length === 0 && (
+          {trimmedQuery.length >= 2 && status === 'done' && grouped.length === 0 && (
             <p className="px-3 py-8 text-center text-sm text-surface-variant">Aucun résultat pour « {q} ».</p>
           )}
           {grouped.map((hit, i) => {
@@ -167,6 +189,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             );
           })}
         </div>
+        )}
     </Modal>
   );
 }

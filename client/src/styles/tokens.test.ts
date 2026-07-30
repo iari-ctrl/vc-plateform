@@ -29,6 +29,14 @@ const css = readFileSync(resolve(__dirname, 'tokens.css'), 'utf8');
 const rootVars = parseVars(css.match(/:root\s*\{([\s\S]*?)\n\}/)?.[1] ?? '');
 const darkVars = { ...rootVars, ...parseVars(css.match(/\.dark\s*\{([\s\S]*?)\n\}/)?.[1] ?? '') };
 
+function compactHomeLength(token: 'home-topbar-h' | 'home-mobile-nav-h'): [number, number] {
+  const compactRoot = css.match(/@media\s*\(max-width:\s*767px\)\s*\{\s*:root\s*\{([\s\S]*?)\n\s*\}\s*\}/)?.[1] ?? '';
+  const value = compactRoot.match(new RegExp(`--${token}:\\s*min\\(([\\d.]+)rem,\\s*([\\d.]+)svh\\)`));
+
+  expect(value, `${token} doit être redéfini dans le breakpoint compact`).not.toBeNull();
+  return [Number(value?.[1]), Number(value?.[2])];
+}
+
 describe('design tokens accessibility contrast', () => {
   it.each([
     ['light', rootVars],
@@ -52,5 +60,16 @@ describe('design tokens accessibility contrast', () => {
         `${foreground} ${vars[foreground]} on ${background} ${vars[background]}`,
       ).toBeGreaterThanOrEqual(4.5);
     }
+  });
+});
+
+describe('home responsive navigation geometry', () => {
+  it('réduit les deux barres mobiles de 25 % sans dépasser 10 % du viewport', () => {
+    const [topbarRem, topbarViewportShare] = compactHomeLength('home-topbar-h');
+    const [bottomBarRem, bottomBarViewportShare] = compactHomeLength('home-mobile-nav-h');
+
+    expect(topbarRem).toBeCloseTo(3.375 * 0.75, 5);
+    expect(bottomBarRem).toBeCloseTo(3.375 * 0.75, 5);
+    expect(topbarViewportShare + bottomBarViewportShare).toBeLessThanOrEqual(10);
   });
 });

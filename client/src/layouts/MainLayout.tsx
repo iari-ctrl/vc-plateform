@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { TopBar } from '@/components/chrome/TopBar';
 import { SideNav } from '@/components/chrome/SideNav';
 import { Footer } from '@/components/chrome/Footer';
+import { HomeIntroProvider } from '@/components/home/HomeIntro';
 import { cn } from '@/lib/utils';
 
 export function MainLayout() {
@@ -26,26 +27,37 @@ export function MainLayout() {
     mainRef.current?.focus({ preventScroll: true });
   }, [pathname]);
 
-  // The splash portal is deliberately chrome-less. The editorial home keeps the
-  // full header; every other page uses the lateral, hover-expanding SideNav.
+  // The splash portal is deliberately chrome-less. Home owns a focused,
+  // three-pole top bar and a full-viewport hero; onboarding keeps the standard
+  // top bar. Every other page uses the lateral, hover-expanding SideNav.
   const isSplash = pathname === '/' || pathname === '';
-  const isHome = pathname === `/home`;
+  const isHome = pathname === '/home';
   const isOnboarding = pathname === '/onboarding';
   const hasTopBar = isHome || isOnboarding;
   const hasSideNav = !isSplash && !hasTopBar;
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <a href="#main" className="skip-link">Aller au contenu principal</a>
+    // Sits above the shell so the post-splash entrance can suppress the home top
+    // bar and delay the hero, then hand both back once it has docked.
+    <HomeIntroProvider>
+      <div className="flex min-h-screen flex-col bg-background text-foreground">
+        <a href="#main" className="skip-link">Aller au contenu principal</a>
 
-      {isSplash ? null : hasTopBar ? <TopBar /> : <SideNav />}
+        {isSplash ? null : hasTopBar ? <TopBar /> : <SideNav />}
 
-      <div className={cn('flex flex-1 flex-col', hasSideNav && 'lg:pl-[var(--sidebar-rail)]')}>
-        <main ref={mainRef} id="main" className={cn('flex-1 outline-none', hasSideNav && 'pt-14 lg:pt-0')} tabIndex={-1}>
-          <Outlet />
-        </main>
-        {!isSplash && <Footer />}
+        <div
+          className={cn(
+            'flex flex-1 flex-col',
+            hasSideNav && 'lg:pl-[var(--sidebar-rail)]',
+            isHome && 'pb-[calc(var(--home-mobile-nav-h)+env(safe-area-inset-bottom))] md:pb-0',
+          )}
+        >
+          <main ref={mainRef} id="main" className={cn('flex-1 outline-none', hasSideNav && 'pt-14 lg:pt-0')} tabIndex={-1}>
+            <Outlet />
+          </main>
+          {!isSplash && <Footer />}
+        </div>
       </div>
-    </div>
+    </HomeIntroProvider>
   );
 }

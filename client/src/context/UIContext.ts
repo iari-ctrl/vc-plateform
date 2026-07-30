@@ -2,6 +2,8 @@ import { createContext, useContext } from 'react';
 
 export interface UIContextValue {
   openSearch: () => void;
+  closeSearch: () => void;
+  searchOpen: boolean;
 }
 
 export const UIContext = createContext<UIContextValue | null>(null);

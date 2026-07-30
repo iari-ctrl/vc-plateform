@@ -68,25 +68,21 @@ export function CompassIkigaiIntro({
   const reduced = useReducedMotion();
   const [phase, setPhase] = useState<Phase>(() => (getReducedMotion() ? 'compass' : 'enter'));
   const [introDone, setIntroDone] = useState(getReducedMotion);
-  const [kanjiOn, setKanjiOn] = useState(getReducedMotion);
   const sp = speed > 0 ? speed : 1;
 
   useEffect(() => {
     if (reduced) {
       setPhase('compass');
       setIntroDone(true);
-      setKanjiOn(true);
       return undefined;
     }
 
     setPhase('enter');
     setIntroDone(false);
-    setKanjiOn(false);
 
     const timers = [
       window.setTimeout(() => setPhase('ikigai'), 120 / sp),
       window.setTimeout(() => setPhase('compass'), 4300 / sp),
-      window.setTimeout(() => setKanjiOn(true), 5400 / sp),
       window.setTimeout(() => setIntroDone(true), 6700 / sp),
     ];
 
@@ -96,12 +92,6 @@ export function CompassIkigaiIntro({
   const duration = (introDone ? 1100 : phase === 'ikigai' ? 3000 : 2200) / sp;
   const easing = 'cubic-bezier(.5,0,.2,1)';
   const rings = POSITIONS[phase];
-  const kanji = [
-    { text: '好', x: 25, y: 30 },
-    { text: '得', x: 135, y: 30 },
-    { text: '要', x: 25, y: 140 },
-    { text: '報', x: 135, y: 140 },
-  ];
 
   return (
     <div
@@ -177,18 +167,6 @@ export function CompassIkigaiIntro({
           <circle cx="80" cy="80" r="3" fill={hue} />
         </g>
 
-        <g
-          fontFamily="Newsreader"
-          fill={hue}
-          textAnchor="middle"
-          style={{ opacity: kanjiOn ? 0.9 : 0, transition: 'opacity 900ms ease' }}
-        >
-          {kanji.map((item) => (
-            <text key={item.text} x={item.x} y={item.y} fontSize="13" fontStyle="italic">
-              {item.text}
-            </text>
-          ))}
-        </g>
       </svg>
     </div>
   );

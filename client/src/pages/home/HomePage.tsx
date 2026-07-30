@@ -1,230 +1,104 @@
+import { useState, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Compass, BookOpen, Sparkles, Lock, Unlock, Play } from 'lucide-react';
-import { PARCOURS } from '@/content/parcours';
-import { SIMULATORS } from '@/content/simulators';
-import { BLOG } from '@/content/blog';
-import { BlogCard, SimulatorCard } from '@/components/cards';
-import { SectionHeading, Reveal } from '@/components/ui/primitives';
-import { Fleuron, FleuronDivider } from '@/components/ornaments/Ornaments';
-import { CompassRose, Constellation, InkStamp, WaxSeal, DropCap, NightSkyBackdrop } from '@/components/ornaments/Illustrations';
+import { Moon, Sun } from 'lucide-react';
+import { CompassRose, NightSkyBackdrop } from '@/components/ornaments/Illustrations';
+import { Fleuron } from '@/components/ornaments/Ornaments';
+import { HomeEditorialBridge } from '@/components/home/HomeEditorialBridge';
+import { Reveal } from '@/components/ui/primitives';
+import { useTheme } from '@/context/ThemeContext';
+import { HOME_INTRO_HERO_DELAY, useHomeIntro } from '@/context/HomeIntroContext';
+import { cn } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
-import { useResumeLesson } from '@/hooks/useResumeLesson';
 
-const STEPS = [
-  { n: '01', icon: Compass, title: 'Analyser', text: 'Explorer les écosystèmes, suivre les convictions et lire les analyses comme des documents de travail.' },
-  { n: '02', icon: Sparkles, title: 'Décider', text: 'Étudier les cas, les memos et les passes pour comprendre comment un raisonnement d’investissement se construit.' },
-  { n: '03', icon: BookOpen, title: 'Apprendre', text: 'Utiliser les parcours, la bibliothèque et le dictionnaire comme rampe d’accès, sans verrouiller l’exploration.' },
-];
+const HERO_DESCRIPTION =
+  "Une plateforme d'intelligence VC pour praticiens : dossiers d'écosystème, convictions datées, décisions instruites — et la formation qui les soutient.";
 
-/** A few parcours seals drifting at the hero margins — the constellation made tangible. */
-function DriftingSeals() {
-  const seals = [
-    { p: PARCOURS.find((x) => x.id === 'p-decouvrir-vc'), cls: 'left-[5%] top-[18%]', size: 56, delay: '0s', anim: 'animate-float' },
-    { p: PARCOURS.find((x) => x.id === 'p-penser-gp'), cls: 'right-[7%] top-[14%]', size: 64, delay: '1.2s', anim: 'animate-float-slow' },
-    { p: PARCOURS.find((x) => x.id === 'p-meilleur-analyst'), cls: 'left-[11%] bottom-[16%]', size: 50, delay: '0.6s', anim: 'animate-float-x' },
-    { p: PARCOURS.find((x) => x.id === 'p-entretien-analyst'), cls: 'right-[10%] bottom-[20%]', size: 58, delay: '1.8s', anim: 'animate-float' },
-    { p: PARCOURS.find((x) => x.id === 'p-term-sheet'), cls: 'right-[20%] top-[44%]', size: 44, delay: '2.4s', anim: 'animate-float-slow' },
-  ];
-  return (
-    <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden>
-      {seals.map(
-        (s, i) =>
-          s.p && (
-            <div key={i} className={`absolute ${s.cls} ${s.anim} opacity-80`} style={{ animationDelay: s.delay }}>
-              <WaxSeal glyph={s.p.kanji ?? '◆'} accent={s.p.accent ?? 'var(--primary)'} size={s.size} />
-            </div>
-          ),
-      )}
-    </div>
-  );
-}
+const HERO_INTENT_NOTE =
+  "L'ikigai n'est pas un point fixe à atteindre. C'est un centre de gravité qui se déplace avec toi. Le capital-risque, par sa temporalité longue force précisément à se demander : où sera ce centre dans une décennie ?";
 
 export default function HomePage() {
-  usePageMeta(undefined, 'Une plateforme d’intelligence VC pour analyser des écosystèmes, suivre des convictions, étudier des décisions et structurer sa progression.');
-  const resume = useResumeLesson();
+  usePageMeta(undefined, HERO_DESCRIPTION);
+  const { theme, toggle } = useTheme();
+  const intro = useHomeIntro();
+
+  // Decided once, at mount: if the entrance curtain is up, the hero holds until
+  // the veil dissolves. The delay counts from the start of the entrance, not
+  // from this (lazily loaded) chunk's arrival, so the two stay in step.
+  const [entranceDelay] = useState(() =>
+    intro.phase === 'running' ? Math.max(0, HOME_INTRO_HERO_DELAY - (Date.now() - intro.startedAt)) : null,
+  );
 
   return (
     <>
-      {/* ── Hero ── */}
-      <section className="map-paper grain relative isolate overflow-hidden">
-        {/* Dark mode: a real starry sky behind the drawn lines (light mode keeps the parchment). */}
+      <section className="map-paper grain relative isolate flex min-h-[100svh] overflow-hidden">
         <NightSkyBackdrop variant="hero" />
-        <div
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              'radial-gradient(62% 52% at 50% 0%, color-mix(in srgb, var(--primary) 13%, transparent) 0%, transparent 72%)',
-          }}
-        />
-        <Constellation className="pointer-events-none absolute inset-x-0 top-0 h-72 w-full opacity-60 dark:opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
-        <DriftingSeals />
 
-        <div className="mx-auto max-w-[var(--content-max)] px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:px-8">
-          <Reveal>
-            <div className="mx-auto max-w-3xl text-center">
-              <CompassRose size={88} className="mx-auto mb-7 drop-shadow-[0_6px_16px_color-mix(in_srgb,var(--primary)_30%,transparent)]" />
-              <span className="inline-flex items-center gap-2 rounded-full border border-outline-variant bg-surface-container-low px-4 py-1.5 text-xs font-medium text-surface-variant">
-                <Fleuron className="text-[0.7rem]" /> Intelligence VC · formation · workspace de réflexion
-              </span>
-              <h1 className="mt-7 font-headline text-[2.6rem] font-semibold leading-[1.05] tracking-tight text-balance sm:text-[3.75rem]">
-                Analyser le capital-risque,
-                <span className="block italic text-[color:var(--primary)]">
-                  avec méthode et <span className="ink-underline">conviction.</span>
-                </span>
+        <div className="mx-auto flex w-full max-w-[var(--content-max)] flex-col items-center justify-center px-4 pb-24 pt-[calc(var(--home-topbar-h)+4rem)] text-center sm:px-6 sm:pb-28 sm:pt-[calc(var(--home-topbar-h)+5rem)] lg:px-8">
+          <Reveal delay={0}>
+            <div
+              className={cn('mx-auto max-w-5xl', entranceDelay !== null && 'home-intro-hero')}
+              style={
+                entranceDelay !== null
+                  ? ({ '--home-intro-hero-delay': `${entranceDelay}ms` } as CSSProperties)
+                  : undefined
+              }
+            >
+              <Link
+                to="/dashboard"
+                aria-label="Ouvrir le tableau de bord"
+                data-testid="home-compass"
+                className="mx-auto mb-8 block w-fit drop-shadow-[0_6px_18px_color-mix(in_srgb,var(--primary)_32%,transparent)] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--primary)] sm:mb-10"
+              >
+                <CompassRose size={96} className="sm:hidden" />
+                <CompassRose size={120} className="hidden sm:block" />
+              </Link>
+
+              <h1
+                aria-label="Documenter le raisonnement. Affûter le jugement."
+                className="font-headline text-[1.7875rem] font-semibold leading-[0.98] tracking-[-0.035em] text-balance text-foreground sm:text-[2.99rem] lg:text-[3.9rem]"
+              >
+                <span className="block">Documenter le raisonnement.</span>
+                <span className="mt-2 block italic text-[color:var(--primary)] sm:mt-3">Affûter le jugement.</span>
               </h1>
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-surface-variant text-pretty">
-                Dossiers d’écosystème, convictions datées, analyses, memos, cas et outils : une base pour transformer l’information VC en raisonnement exploitable.
-              </p>
-              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <Link to="/intelligence" className="btn-foil sheen-host w-full sm:w-auto">
-                  Ouvrir l’intelligence VC <ArrowRight size={16} />
-                </Link>
-                <Link to="/parcours" className="btn-ghost w-full sm:w-auto">
-                  Voir les parcours
-                </Link>
-              </div>
-              <p className="mt-5 text-xs text-surface-variant">Les contenus publics restent libres. Vos notes, favoris et progression sont enregistrés uniquement sur cet appareil.</p>
-              {resume && (
-                <Link
-                  to={`/lessons/${resume.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-surface-variant transition-colors hover:border-[color:var(--primary)] hover:text-foreground"
-                >
-                  <Play size={13} className="shrink-0 text-[color:var(--primary)]" />
-                  Reprendre : <span className="font-medium text-foreground">{resume.title}</span>
-                </Link>
-              )}
-            </div>
-          </Reveal>
 
-          <Reveal delay={150}>
-            <figure className="relative mx-auto mt-16 max-w-2xl rounded-2xl border border-outline-variant bg-surface-container-low/60 px-8 py-10 text-center">
-              <InkStamp className="absolute -right-3 -top-3 sm:right-4 sm:top-4" label="Accès libre" date="Aucun mur" rotate={-7} />
-              <Fleuron className="text-lg" />
-              <blockquote className="mt-4 font-headline text-xl font-medium leading-snug text-balance sm:text-2xl">
-                « L’ikigai n’est pas un point fixe à atteindre. C’est un centre de gravité qui se déplace avec toi. Le capital-risque, par sa temporalité longue — dix ans par fonds — force précisément à se demander : où sera ce centre dans une décennie ? »
-              </blockquote>
-            </figure>
+              <p className="mx-auto mt-8 max-w-3xl text-[0.65rem] leading-relaxed text-surface-variant text-pretty sm:mt-10 sm:text-[0.8125rem] sm:leading-relaxed">
+                {HERO_DESCRIPTION}
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Three steps ── */}
-      <section className="mx-auto max-w-[var(--content-max)] px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid gap-5 md:grid-cols-3">
-          {STEPS.map((s, i) => (
-            <Reveal key={s.n} delay={i * 100}>
-              <div className="premium-card sheen-host flex h-full flex-col p-7">
-                <div className="flex items-center justify-between">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] text-[color:var(--primary)]">
-                    <s.icon size={18} />
-                  </span>
-                  <span className="font-mono text-sm text-surface-variant">{s.n}</span>
-                </div>
-                <h3 className="mt-5 font-headline text-headline-sm font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-surface-variant">{s.text}</p>
-              </div>
-            </Reveal>
-          ))}
+      <HomeEditorialBridge />
+
+      <section
+        aria-labelledby="home-intent-note-title"
+        className="grain relative border-y border-outline-variant bg-[color:var(--surface-container-lowest)] px-4 py-24 text-center sm:px-6 sm:py-32 lg:px-8 lg:py-40"
+      >
+        <div className="mx-auto max-w-[var(--content-max)]">
+          <Fleuron className="text-[0.975rem]" />
+          <blockquote className="mx-auto mt-10 max-w-6xl font-headline text-[1.3rem] italic leading-snug tracking-[-0.015em] text-foreground text-balance sm:text-[1.95rem] sm:leading-snug lg:text-[2.34rem]">
+            « {HERO_INTENT_NOTE} »
+          </blockquote>
+          <p id="home-intent-note-title" className="eyebrow mt-14 text-[0.52rem] sm:text-[0.56875rem]">
+            Note d’intention
+          </p>
         </div>
       </section>
 
-      {/* ── Liberté responsable ── */}
-      <section className="mx-auto max-w-[var(--content-max)] px-4 py-12 sm:px-6 lg:px-8">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-2xl border border-outline-variant bg-[color:var(--secondary)] text-[color:var(--on-secondary)]">
-            <Constellation className="pointer-events-none absolute right-0 top-0 h-full w-1/2 opacity-30" hue="var(--primary)" />
-            <div className="relative grid gap-8 p-8 sm:p-12 md:grid-cols-2 md:items-center">
-              <div>
-                <p className="font-mono text-[0.6875rem] uppercase tracking-[0.3em] text-[color:var(--primary)]">Liberté responsable</p>
-                <h2 className="mt-4 font-headline text-display-sm font-semibold leading-tight text-balance">
-                  Jamais de mur d’authentification.
-                </h2>
-                <p className="mt-4 text-[0.95rem] leading-relaxed text-[color-mix(in_srgb,var(--on-secondary)_80%,transparent)]">
-                  Explorez les dossiers, analyses, parcours, cours, dictionnaire et simulateurs sans créer de compte. Votre progression, vos notes, citations et favoris sont enregistrés uniquement sur cet appareil.
-                </p>
-                <Link to="/blog/pourquoi-nous-ne-bloquons-aucun-chapitre" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--primary)]">
-                  Lire notre manifeste <ArrowRight size={15} />
-                </Link>
-              </div>
-              <div className="grid gap-3">
-                {[
-                  { icon: Unlock, t: 'Navigation publique', d: 'Tout le contenu principal est accessible librement.' },
-                  { icon: Compass, t: 'Recommandations, pas contraintes', d: 'La progression est un repère, jamais une condition.' },
-                  { icon: Lock, t: 'Vos données vous appartiennent', d: 'En invité, vos préférences restent sur votre appareil.' },
-                ].map((item) => (
-                  <div key={item.t} className="flex items-start gap-3 rounded-xl bg-white/5 px-4 py-3.5">
-                    <item.icon size={17} className="mt-0.5 shrink-0 text-[color:var(--primary)]" />
-                    <div>
-                      <p className="text-sm font-semibold">{item.t}</p>
-                      <p className="text-xs text-[color-mix(in_srgb,var(--on-secondary)_70%,transparent)]">{item.d}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ── Simulators ── */}
-      <section className="mx-auto max-w-[var(--content-max)] px-4 py-16 sm:px-6 lg:px-8">
-        <Reveal>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading eyebrow="Outils de décision" title="Des simulateurs, pas des slides" description="Dilution, valorisation, waterfall, fund returns : manipuler les hypothèses financières au lieu de les lire abstraitement." />
-            <Link to="/simulators" className="btn-quiet shrink-0">Tous les simulateurs <ArrowRight size={15} /></Link>
-          </div>
-        </Reveal>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SIMULATORS.slice(0, 3).map((s, i) => (
-            <Reveal key={s.id} delay={i * 80}>
-              <SimulatorCard sim={s} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Analyses ── */}
-      <section className="mx-auto max-w-[var(--content-max)] px-4 pb-8 sm:px-6 lg:px-8">
-        <FleuronDivider className="mb-12" />
-        <Reveal>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading eyebrow="Analyses & recherche" title="Lire les signaux avant d’écrire une thèse" />
-            <Link to="/blog" className="btn-quiet shrink-0">Toutes les analyses <ArrowRight size={15} /></Link>
-          </div>
-        </Reveal>
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {BLOG.slice(0, 2).map((post, i) => (
-            <Reveal key={post.id} delay={i * 80}>
-              <BlogCard post={post} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Final CTA ── */}
-      <section className="mx-auto max-w-[var(--content-max)] px-4 py-16 sm:px-6 lg:px-8">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--primary)_30%,transparent)] bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] px-8 py-14 text-center">
-            <div className="mx-auto flex max-w-2xl flex-col items-center">
-              <DropCap letter="?" size={72} className="mb-2 animate-float-slow" />
-              <h2 className="mt-2 font-headline text-display-sm font-semibold leading-tight text-balance">
-                Commencer par un terrain, puis formuler une thèse.
-              </h2>
-              <p className="mx-auto mt-4 max-w-lg text-surface-variant">
-                Ouvrez la surface Intelligence VC ou utilisez le test d’orientation si vous cherchez d’abord un parcours.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link to="/intelligence" className="btn-foil sheen-host">
-                  Ouvrir l’intelligence VC <ArrowRight size={16} />
-                </Link>
-                <Link to="/ikigai?test=1" className="btn-ghost">
-                  Faire le test d’orientation
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
+      <button
+        type="button"
+        onClick={toggle}
+        aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}
+        className="group fixed left-3 top-0 z-[70] grid h-11 w-11 place-items-center text-surface-variant opacity-60 transition-[color,opacity] hover:text-foreground hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[color:var(--primary)] md:bottom-7 md:left-7 md:top-auto"
+      >
+        <span
+          aria-hidden
+          className="absolute left-1/2 top-[calc(var(--home-topbar-h)/2)] grid h-[min(2rem,var(--home-topbar-h))] w-[min(2rem,var(--home-topbar-h))] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-outline-variant bg-[color-mix(in_srgb,var(--surface)_66%,transparent)] backdrop-blur-md transition-colors group-hover:border-[color:var(--primary)] group-focus-visible:border-[color:var(--primary)] md:top-1/2"
+        >
+          {theme === 'dark' ? <Sun size={18} aria-hidden /> : <Moon size={18} aria-hidden />}
+        </span>
+      </button>
     </>
   );
 }

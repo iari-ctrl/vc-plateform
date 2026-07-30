@@ -1,4 +1,4 @@
-import { useRef, type ReactNode, type RefObject } from 'react';
+import { useRef, type HTMLAttributes, type ReactNode, type RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -10,6 +10,8 @@ export function Modal({
   children,
   className,
   containerClassName,
+  backdropClassName,
+  dialogProps,
   labelledBy,
   describedBy,
   initialFocusRef,
@@ -21,6 +23,8 @@ export function Modal({
   children: ReactNode;
   className?: string;
   containerClassName?: string;
+  backdropClassName?: string;
+  dialogProps?: HTMLAttributes<HTMLDivElement> & { [key: `data-${string}`]: string | undefined };
   labelledBy?: string;
   describedBy?: string;
   initialFocusRef?: RefObject<HTMLElement | null>;
@@ -49,11 +53,15 @@ export function Modal({
       )}
     >
       <div
-        className="fixed inset-0 bg-[color-mix(in_srgb,var(--secondary)_30%,transparent)] backdrop-blur-sm animate-fade-in motion-reduce:animate-none"
+        className={cn(
+          'fixed inset-0 bg-[color-mix(in_srgb,var(--secondary)_30%,transparent)] backdrop-blur-sm animate-fade-in motion-reduce:animate-none',
+          backdropClassName,
+        )}
         onClick={onClose}
         aria-hidden
       />
       <div
+        {...dialogProps}
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
@@ -63,6 +71,7 @@ export function Modal({
         className={cn(
           'relative z-10 w-full max-w-lg rounded-2xl border border-outline-variant bg-surface-container-lowest shadow-editorial-lg animate-scale-in focus:outline-none motion-reduce:animate-none',
           className,
+          dialogProps?.className,
         )}
       >
         {showCloseButton && (

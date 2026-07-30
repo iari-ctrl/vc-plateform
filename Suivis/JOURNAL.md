@@ -6,6 +6,246 @@ Le journal des travaux antérieurs à la migration (passes du 2026-05-30 au 2026
 
 ---
 
+## 2026-07-30 — Correction de la géométrie des arcs éditoriaux
+
+Objet : reprendre `HomeEditorialBridge` à partir des deux captures de référence fournies : deux larges arches chevauchées sur desktop ; une arche supérieure et une arche inférieure composant un ovale ouvert autour du bloc central sous 1 024 px.
+
+Travaux et preuve RED–GREEN :
+
+- un premier contrat DOM a échoué comme attendu sur l’ancien `viewBox` desktop `0 0 1000 318`, puis passe avec un canevas 5,85:1, deux demi-ellipses de ratio mesuré ≈ 3,17:1, une tangente verticale aux extrémités et un chevauchement central de 8 % ;
+- un second contrat a échoué sur les deux anciennes courbes mobiles orientées vers le haut, puis passe avec une demi-ellipse supérieure et une demi-ellipse inférieure parcourues en sens opposés autour du bloc `Maison Sapience VC` ;
+- un troisième passage RED a verrouillé le resserrement de la composition mobile. Les marges entre l’arche supérieure, le bloc central et l’arche inférieure passent respectivement à `mt-8`, `mt-3` et `mt-3`, avec `mt-7` avant la copie Intelligence VC ;
+- les positions statiques des marqueurs sont alignées sur les nouveaux points terminaux. La direction vers le centre, le décalage de 1 s, l’invisibilité préalable du marqueur différé et le rendu sous mouvement réduit sont conservés.
+
+Vérifications finales :
+
+- test ciblé : trois cycles RED–GREEN observés, puis 24/24 tests verts ;
+- `npm run typecheck`, `npm run lint`, `npm run test` et `npm run check` : exit 0 ; suite complète à 64 fichiers / 403 tests Vitest et 58/58 tests Node ;
+- `VITE_SITE_URL=http://localhost:4173 npm run build` : exit 0, 1 796 modules, sitemap de 694 routes et prérendu strict 706/706 avec `ok: true` ;
+- recette de l’artefact construit à 1 440 × 900 clair/sombre, 1 024 × 768 sombre, 768 × 1 024 clair, 390 × 844 sombre et 375 × 812 clair, plus mouvement réduit à 390 × 844 : aucun débordement horizontal, avertissement ou erreur console, erreur de page ou échec réseau ;
+- desktop : ratio mesuré ≈ 3,2:1 par arche, chevauchement de 96 px à 1 440 px et 76,8 px à 1 024 px ; mobile/tablette : l’ovale ouvert est constitué de deux demi-ellipses distinctes, avec un ratio d’enveloppe ≈ 1,3 à 768 px et ≈ 1 à 390 px ; les marqueurs restent lisibles en clair, sombre et mouvement réduit ;
+- la dernière copie conserve 23,77 px à 390 × 844 et 23,73 px à 375 × 812 au-dessus de la navigation fixe ; preview arrêté, port 4173 libre, `robots.txt` et `sitemap.xml` restaurés.
+
+Fichiers touchés : `client/src/components/home/HomeEditorialBridge.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : correction locale vérifiée. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-30 — Clôture de la section éditoriale animée de l’accueil
+
+Objet : clore l’implémentation de `HomeEditorialBridge` sous le hero de `/home`, nettoyer les artefacts de recette et reproduire les validations automatiques et visuelles sur l’artefact construit.
+
+Travaux et preuve RED–GREEN :
+
+- les quatre scripts temporaires `.tmp-vc-home-bridge-*.mjs` ont été relus puis supprimés ; le preview résiduel sur 4173 a été arrêté avant les validations ;
+- la première recette réelle a mis en évidence deux variantes du même défaut : le marqueur Intelligence différé restait visible à l’origine du SVG pendant sa seconde d’attente sur desktop, et les arcs empilés lançaient leurs deux marqueurs sans décalage ;
+- un test DOM a d’abord échoué avec 7 animations immédiates au lieu de 4. Il exige désormais quatre départs à `0s`, quatre départs à `1s` et une opacité nulle jusqu’au déclenchement de chaque marqueur différé ;
+- `HomeEditorialBridge.tsx` associe le délai au marqueur Intelligence sur les variantes desktop et empilées. Une animation d’opacité le maintient invisible avant `begin="1s"`, puis le mouvement et l’échelle suivent le même cycle de 4 s ; le rendu statique en mouvement réduit reste inchangé.
+
+Vérifications finales :
+
+- test ciblé `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` : RED attendu 21/22, puis GREEN 22/22 ;
+- `npm run typecheck` et `npm run lint` : exit 0 ;
+- le premier `npm run test` complet a correctement signalé la dérive locale de `robots.txt`/`sitemap.xml` produite par un build précédent avec une origine locale. Après restauration des sorties versionnées, la répétition passe : 64 fichiers / 401 tests Vitest et 58/58 tests Node ;
+- `npm run check` : exit 0, contenu généré à jour, validations strictes, glossaire, TypeScript, ESLint et tests verts ;
+- `VITE_SITE_URL=http://localhost:4173 npm run build` : exit 0, 1 796 modules transformés, sitemap de 694 routes et prérendu strict 706/706 avec `ok: true`, sans échec de route, métadonnée ou infrastructure ;
+- preview de l’artefact à 1 440 × 900 clair/sombre, 1 024 × 768 sombre, 768 × 1 024 clair, 390 × 844 sombre et 375 × 812 clair, plus `prefers-reduced-motion` à 390 × 844 : aucun débordement horizontal, erreur console, erreur de page ou requête échouée. Les arcs desktop partent de côtés opposés et terminent croisés au centre ; les marqueurs sont carrés et de couleurs distinctes ; les mesures à 1 450 puis 2 450 ms confirment Formation vers la droite et Intelligence VC vers la gauche. Le marqueur différé est invisible à 450 ms et visible à 1 450 ms ;
+- la navigation mobile reste fixe et ne masque pas la dernière copie : marge mesurée de 79,77 px à 390 × 844 et 79,73 px à 375 × 812. En mouvement réduit, aucune animation SMIL n’est montée et les deux marqueurs statiques restent visibles ;
+- serveur de preview arrêté, port 4173 libre, scripts temporaires absents et sorties `robots.txt`/`sitemap.xml` restaurées après le build local.
+
+Fichiers touchés par cette clôture : `client/src/components/home/HomeEditorialBridge.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : implémentation locale vérifiée. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-30 — Superposition des menus de l’accueil
+
+Objet : placer les menus déroulants `Formation` et `Intelligence VC` au premier plan sur `/home`, de sorte que le changement de thème et la barre dev-only `Aperçu responsive` ne restent pas visibles au-dessus des panneaux.
+
+Travaux et preuve RED–GREEN :
+
+- `homeExperience.dom.test.tsx` ajoute un contrat de pile : header d’accueil au-dessus de la barre dev-only, panneau de pôle au-dessus du contrôle de thème et suppression de l’ancien `z-50` du panneau. Le premier lancement ciblé échoue sur le panneau encore en `z-50` ;
+- `TopBar.tsx` remonte la racine de la barre `/home` à `z-[75]` et le panneau à `z-[85]`. Cette correction est nécessaire parce que le panneau reste descendant du stacking context du header ;
+- `homeBar.ts` remonte de même la navigation basse mobile à `z-[75]`, afin que les panneaux ouverts depuis cette racine passent aussi devant le contrôle de thème ;
+- `ViewportSwitcher.tsx` expose `data-device` sur la barre de prévisualisation. En mode desktop, sa pile descend à `z-index: 65`, derrière le chrome produit ; en mode tablette/mobile encadré, son z-index élevé est conservé pour rester utilisable au-dessus de la scène iframe ;
+- `ViewportSwitcher.dom.test.tsx` verrouille ce contrat dev-only.
+
+Vérifications finales :
+
+- RED ciblé `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` : exit 1 attendu, 1 échec sur le contrat de pile ;
+- RED ciblé `npm run test --workspace client -- src/components/dev/ViewportSwitcher.dom.test.tsx` : exit 1 attendu, absence initiale de `data-device` et du z-index desktop abaissé ;
+- répétitions ciblées vertes : `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` retourne 19/19 ; `npm run test --workspace client -- src/components/dev/ViewportSwitcher.dom.test.tsx` retourne 1/1 ;
+- `npm run typecheck` et `npm run lint` retournent exit 0 ;
+- `npm run test` retourne exit 0 : 64 fichiers / 398 tests Vitest et 58/58 tests Node ;
+- recette navigateur Vite `http://127.0.0.1:5174/home` à 1 280 × 633 : panneau Formation ouvert, `z` mesurés header 75, panneau 85, thème 70, `Aperçu responsive` 65 ; `elementFromPoint` en bas à gauche retourne le panneau, non le bouton de thème. Panneau Intelligence VC ouvert, `elementFromPoint` au centre de la barre `Aperçu responsive` retourne le panneau, non la barre dev-only. Console sans erreur JavaScript ; serveur arrêté et port 5174 libre ;
+- `git diff --check -- client/src/components/chrome/TopBar.tsx client/src/components/chrome/homeBar.ts client/src/components/dev/ViewportSwitcher.tsx client/src/components/dev/ViewportSwitcher.dom.test.tsx client/src/pages/home/homeExperience.dom.test.tsx` ne produit aucune sortie.
+
+Fichiers touchés par cette correction : `client/src/components/chrome/TopBar.tsx`, `client/src/components/chrome/homeBar.ts`, `client/src/components/dev/ViewportSwitcher.tsx`, `client/src/components/dev/ViewportSwitcher.dom.test.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : correction locale vérifiée. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-30 — Réduction des barres de navigation de l’accueil sous 768 px
+
+Objet : réduire de 25 % la hauteur cumulée du header et de la navigation basse de `/home` aux largeurs inférieures à 768 px, avec un plafond de 10 % de la hauteur du viewport, sans modifier le chrome desktop.
+
+Contrat et travaux :
+
+- `tokens.test.ts` a d’abord exigé un media query `max-width: 767px`, deux tokens égaux à `min(2.53125rem, 5svh)`, une réduction de 25 % par rapport à 54 px et une somme plafonnée à 10svh ; le RED ciblé échoue sur l’absence de cette surcharge ;
+- `tokens.css` centralise ensuite ces deux hauteurs compactes. Les boutons de la marque et des pôles remplissent la hauteur disponible sous 768 px, tandis que les classes `md:h-auto md:min-h-11` conservent les cibles desktop existantes ;
+- la première recette réelle a mesuré 40,5 px pour le header et 41,5 px pour la barre basse : sa bordure ajoutait un pixel au budget. Elle a aussi montré que le cercle visible de 44 px du contrôle de thème dépassait le trait inférieur du header ;
+- un second RED DOM a verrouillé la hauteur extérieure de la navigation, l’inclusion de sa bordure et la séparation entre cible et cercle visible du thème. `HOME_MOBILE_NAV_SHELL` utilise désormais une boîte fixe incluant la bordure, les contrôles occupent la hauteur utile restante et le contrôle de thème conserve sa cible de 44 × 44 px autour d’un cercle visuel de 32 px contenu dans le header ;
+- `docs/DESIGN_SYSTEM.md` consigne les tokens, le breakpoint, le budget vertical et le contrat de la cible de thème.
+
+Vérifications finales :
+
+- répétition ciblée : `npm run test --workspace client -- src/styles/tokens.test.ts src/pages/home/homeExperience.dom.test.tsx` retourne exit 0, 2 fichiers / 21 tests ;
+- build canonique `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0, 1 795 modules transformés, sitemap de 694 routes et prérendu strict 706/706 avec `ok: true` ;
+- `npm run check` post-build : exit 0, contenu généré à jour, validations strictes, glossaire, TypeScript et ESLint sans erreur, 63 fichiers / 396 tests Vitest et 58/58 tests Node ;
+- recette à 390 × 844 tactile : header 40,5 px, navigation basse 40,5 px, total 81 px, réduction exacte de 25 % par rapport à 108 px et occupation de 9,597 % du viewport ; cercle de thème contenu dans le header, panneau Formation borné de 40,5 à 803,5 px, aucun débordement horizontal ni message console ;
+- recette à 390 × 667 tactile : total mesuré 66,688 px pour un plafond de 66,7 px, soit 9,998 % ; cercle de thème contenu dans le header et aucun débordement horizontal ;
+- recette à 1 440 × 1 000 : header conservé à 54 px, trois commandes desktop, aucune navigation basse, contrôle de thème à 28 px des bords gauche et inférieur, aucun débordement horizontal ;
+- serveurs temporaires arrêtés, fichier de recette supprimé et ports 4173 et 4174 libres.
+
+Fichiers touchés par cette correction : `client/src/styles/tokens.css`, `client/src/styles/tokens.test.ts`, `client/src/components/chrome/homeBar.ts`, `client/src/components/chrome/TopBar.tsx`, `client/src/pages/home/HomePage.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `docs/DESIGN_SYSTEM.md`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : correction locale vérifiée. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-30 — Rectification du contrôle de thème sur desktop
+
+Objet : appliquer la correction de contrat suivant la recette initiale : le contrôle de thème doit rester en bas à gauche sur desktop ; seul son placement mobile passe en haut à gauche.
+
+Travaux et preuve RED–GREEN :
+
+- le contrat DOM a été réécrit avant la production pour exiger `top-1 left-3` sur mobile, puis `md:bottom-7 md:left-7 md:top-auto` à partir de 768 px ; le premier lancement ciblé échoue avec 1 test sur 18, car le composant portait encore sa position sous le header ;
+- `HomePage.tsx` remplace la position desktop haute par une position fixe à 28 px des bords gauche et inférieur, sans modifier la cible de 44 px, l’opacité réduite ni la position mobile ;
+- la répétition ciblée passe ensuite avec 18/18 tests.
+
+Vérifications finales :
+
+- `npm run check` post-build et `git diff --check` : exit 0 ; 63 fichiers / 395 tests Vitest, 58/58 tests Node, TypeScript et ESLint sans erreur ;
+- build canonique : exit 0 ; 1 795 modules transformés, sitemap de 694 routes et prérendu strict 706/706 avec `ok: true` ;
+- recette de l’artefact : à 390 × 844, le contrôle reste fixé à `left: 12 px; top: 4 px` pendant le défilement ; à 1 440 × 1 000, il reste fixé à `left: 28 px; bottom: 28 px`, avant et après défilement. Aucun débordement horizontal ni message console ;
+- serveur temporaire arrêté, fichier de recette supprimé et ports 4173, 4174 et 5174 libres.
+
+Fichiers touchés par cette rectification : `client/src/pages/home/HomePage.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : correction locale vérifiée. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-30 — Navigation basse responsive de l’accueil
+
+Objet : rapprocher l’accueil du comportement mobile observé sur The Footprint Firm : conserver uniquement la marque en haut aux petites largeurs, déplacer `Formation` et `Intelligence VC` dans une navigation persistante au bas du viewport, et rendre le changement de thème moins saillant en haut de l’écran, sans modifier le contrat desktop.
+
+Référence et décisions :
+
+- la référence a été inspectée à 390 × 844 : marque seule dans l’en-tête, deux accès latéraux dans une barre fixe basse, séparateur central et panneau déployé au-dessus de cette barre ; son DOM confirme une bascule au breakpoint `md` ;
+- le contrat local adopte donc `max-width: 767px` pour la variante compacte ; à partir de 768 px, `Formation`, `Maison Sapience VC` et `Intelligence VC` restent dans la barre supérieure existante ;
+- le contrôle clair/sombre conserve une cible de 44 × 44 px, mais passe en haut à gauche avec une opacité de 0,6 au repos et 1 au survol ou au focus : dans la barre visuelle sur mobile, puis sous l’en-tête sur desktop pour ne pas concurrencer `Formation`.
+
+Travaux :
+
+- `HomeTopBar` monte une seule variante selon `matchMedia` : titre central seul et navigation `Pôles de l’accueil` fixe en bas sur petites largeurs, ou barre à trois commandes sur desktop. La navigation basse reste hors du landmark `header`, tient compte de la safe area et conserve l’ouverture au toucher, au clavier et à la souris ;
+- les panneaux mobiles occupent exactement l’espace entre la barre haute et la navigation basse. Un premier essai avec `backdrop-filter` sur la navigation créait un contenant pour ses descendants `position: fixed` et repoussait le panneau sous le viewport ; le contrat a été reproduit en échec, puis corrigé en retirant ce filtre et en renforçant légèrement l’opacité de fond ;
+- le clic extérieur considère désormais la navigation basse comme une surface interne, ce qui permet au second appui tactile de refermer le panneau ;
+- le rideau d’entrée n’affiche plus ses deux pôles latéraux sur la variante compacte, de sorte que l’assemblage temporaire et la barre finale portent le même contrat visuel ;
+- `MainLayout` réserve au bas de `/home` la hauteur de la navigation mobile afin que le contenu final ne soit pas masqué ; `--home-mobile-nav-h` centralise cette géométrie.
+
+Contrat RED–GREEN :
+
+- `homeExperience.dom.test.tsx` a d’abord échoué sur l’absence de navigation basse, la position antérieure du bouton de thème et le maintien des trois commandes dans le header ; après implémentation, il vérifie le breakpoint compact, la séparation sémantique header/navigation, la réserve basse, le panneau borné entre les deux barres et le second appui tactile ;
+- un second RED a reproduit la présence de `backdrop-blur-md` sur l’ancêtre du panneau fixe ; le correctif supprime ce nouveau contenant de positionnement ;
+- `homeIntro.dom.test.tsx` vérifie en plus que la copie temporaire n’affiche que la marque aux petites largeurs ; la répétition ciblée finale couvre 2 fichiers / 23 tests verts.
+
+Vérifications finales :
+
+- `npm run check` post-build et `git diff --check` : exit 0 ; contenu généré à jour, validations strictes, glossaire, TypeScript et ESLint sans erreur, 63 fichiers / 395 tests Vitest et 58/58 tests Node ;
+- build canonique `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 ; 1 795 modules transformés, sitemap de 694 routes et prérendu strict 706/706 avec `ok: true`, sans échec de route ou de métadonnée ;
+- recette de l’artefact sous `/vc-plateform/home` : à 390 × 844 tactile, le header ne contient que la recherche par la marque, la navigation basse mesure 390 × 55 px et reste fixe après 1 935,5 px de défilement, comme le contrôle de thème ; le panneau Formation occupe `top: 54` à `bottom: 790`, se pose au-dessus de la barre, expose ses quatre liens et se referme au second appui tactile. Aucun débordement horizontal ni message console ;
+- à 1 440 × 1 000, la navigation basse est absente, les trois commandes desktop restent dans le header, le contrôle de thème est placé à 28 × 70 px sous la barre et aucun débordement horizontal ni message console n’est relevé ;
+- les serveurs temporaires ont été arrêtés, leurs fichiers supprimés et les ports 4173, 4174 et 5174 vérifiés libres.
+
+Fichiers touchés par cette passe : `client/src/components/chrome/homeBar.ts`, `client/src/components/chrome/TopBar.tsx`, `client/src/components/home/HomeIntro.tsx`, `client/src/components/home/homeIntro.dom.test.tsx`, `client/src/layouts/MainLayout.tsx`, `client/src/pages/home/HomePage.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `client/src/styles/tokens.css`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : correction locale vérifiée. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-29 — Séquence d’entrée de l’accueil et agrandissement de la marque
+
+Objet : agrandir la marque centrale de la barre `/home` et remplacer l’apparition immédiate de l’accueil par une séquence d’entrée, en transposant la structure observée sur The Footprint Firm — un en-tête qui s’assemble au centre puis se pose en haut de page — sans reprendre sa marque, ses textes, sa palette ni ses assets.
+
+Travaux :
+
+- `client/src/components/chrome/homeBar.ts` centralise la géométrie et la typographie de la barre d’accueil ainsi que les deux piliers `Formation` et `Intelligence VC` ; la barre fixe et la copie temporaire lisent les mêmes constantes, ce qui est la condition du relais sans saut ;
+- marque centrale portée de `0,74 / 0,95 rem` à `0,82 rem` en mobile, `1,06 rem` à partir de `sm` et `1,18 rem` à partir de `lg`, avec le tracking resserré aux petites largeurs pour absorber la largeur supplémentaire ; `Sapience VC` conserve son poids 600 ;
+- `client/src/components/home/HomeIntro.tsx` monte le rideau et publie sa phase par `HomeIntroContext` : la barre fixe s’efface pendant la séquence puis revient en fondu, `HomePage` retarde la révélation de son hero ;
+- chronologie portée par `client/src/styles/home-intro.css` — voile seul jusqu’à 0,5 s, marque de 0,6 à 1,2 s, ligne fine étirée du centre de 1,4 à 1,9 s, pôles latéraux de 1,8 à 2,2 s, montée de `50svh − hauteur_barre / 2` de 2,4 à 3,2 s, révélation du titre de 3,0 à 3,8 s, fondu croisé avec la barre réelle de 3,6 à 3,8 s, démontage à 3,9 s ;
+- voile différencié par mode : en clair la photographie du splash se dissout pendant la montée, de 2,4 à 3,2 s, pour que le fond et l’en-tête arrivent d’un même geste ; en sombre le voile reprend `bg-sombre.webp`, l’image que `NightSkyBackdrop` affiche déjà, de sorte que sa disparition ne modifie rien à l’écran ;
+- déclenchement borné : la séquence joue au premier rendu sur `/home` et à l’arrivée depuis le portail, jamais lorsque l’accueil est rejoint depuis l’intérieur de l’application ; elle est entièrement neutralisée sous `prefers-reduced-motion` ;
+- le rideau est `aria-hidden` et ne contient aucun élément focusable ; la barre fixe est retirée par `visibility`, donc hors ordre de tabulation et hors arbre accessible pendant la séquence ;
+- `scripts/prerender.mjs` émule `prefers-reduced-motion: reduce` avant chaque navigation. Sans cette garde, le HTML statique de `/home` aurait figé le voile et une barre invisible ; l’artefact porte désormais la mise en page stabilisée.
+
+Contrat ajouté :
+
+- `client/src/components/home/homeIntro.dom.test.tsx` couvre le déclenchement à l’arrivée directe, l’assemblage de l’en-tête temporaire, son exclusion de l’arbre accessible, l’identité typographique entre la copie et la barre réelle, et l’absence de séquence lorsque `/home` est rejointe depuis une autre route.
+
+Vérifications :
+
+- **aucune commande n’a été exécutée dans cette session.** Le dossier du dépôt n’était pas accessible depuis l’environnement d’exécution : ni `npm run check`, ni `npm run test`, ni le build canonique, ni le prérendu strict, ni de recette navigateur n’ont pu être lancés ;
+- la revue a donc été statique : types, imports, règles ESLint applicables, comportement de `tailwind-merge` sur les classes fusionnées, et confrontation aux attentes des contrats existants `homeExperience.dom.test.tsx` et `MainLayout.dom.test.tsx` ;
+- restent à exécuter avant toute clôture : `npm run test --workspace client -- src/components/home/homeIntro.dom.test.tsx src/pages/home/homeExperience.dom.test.tsx`, puis `npm run check`, puis le build canonique avec son résumé de prérendu strict, puis une recette `/home` en 1 440 × 1 000 et 390 × 844, thèmes clair et sombre.
+
+Fichiers touchés : `client/src/components/chrome/homeBar.ts`, `client/src/components/chrome/TopBar.tsx`, `client/src/components/home/HomeIntro.tsx`, `client/src/components/home/homeIntro.dom.test.tsx`, `client/src/context/HomeIntroContext.ts`, `client/src/layouts/MainLayout.tsx`, `client/src/pages/home/HomePage.tsx`, `client/src/styles/home-intro.css`, `scripts/prerender.mjs`, `docs/DESIGN_SYSTEM.md`, `README.md`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : livraison **non vérifiée**, consignée comme telle dans `ETAT.md` sous forme de risque bloquant avant clôture. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-07-29 — Refonte minimale et interactive de l’accueil
+
+Objet : remplacer l’accueil éditorial dense par un hero plein écran servant d’aiguillage entre Formation et Intelligence VC, en adaptant les principes structurels observés sur The Footprint Firm sans reprendre sa marque, ses textes, sa palette ni ses assets.
+
+Travaux :
+
+- barre fixe propre à `/home`, limitée à `Formation`, `Maison Sapience VC` et `Intelligence VC` ; le `TopBar` standard reste utilisé sur `/onboarding` et le `SideNav` sur les autres routes ;
+- panneaux alimentés par `NAVIGATION_PILLARS`, demi-largeur sur desktop et pleine largeur sur mobile, avec ouverture au survol ou au focus, délai de grâce de 180 ms, alternance au toucher, fermeture extérieure, changement de route et `Escape` avec restitution du focus ;
+- titre central relié à la `CommandPalette` existante au survol, au clic et au clavier, sans ouverture au simple focus ; `Sapience VC` est isolé en léger gras et le titre est agrandi pour rendre la marque plus visible ;
+- recherche de l’accueil rendue comme barre glass premium sous le titre, sans texte d’aide au repos ; la fermeture se fonde sur une zone tolérante titre-corridor-barre et non sur un `pointerleave` immédiat de la surface ;
+- hero unique conservant `Documenter le raisonnement. Affûter le jugement.`, son paragraphe, `CompassRose`, `NightSkyBackdrop` et le sélecteur clair/sombre ; retrait des sections basses redondantes et du footer sur l’accueil ;
+- extension du contexte UI avec `searchOpen`, uniquement pour coordonner la fermeture et le réarmement du déclencheur central ; noms accessibles latéraux neutralisés sur `Formation` et `Intelligence VC`, l’état restant porté par `aria-expanded` et `aria-controls`.
+
+Contrat RED–GREEN et contre-revue :
+
+- création de `client/src/pages/home/homeExperience.dom.test.tsx`, dont les douze tests couvrent structure, contenus propres aux deux pôles, hover, focus, toucher, délai résiduel, clic souris, activation pointeur abandonnée, `Escape` global, recherche glass, zone titre-corridor-barre, réarmement, titre central et hero ; adaptation du test du tiroir mobile standard à `/onboarding` ;
+- une première contre-revue indépendante a signalé trois erreurs logiques : `Escape` inopérant lorsque le focus restait hors du panneau, survol de recherche non réarmé après une sortie pendant la modale et clic souris refermant immédiatement un panneau ouvert au hover ; chacune a été reproduite par un test en échec, corrigée puis vérifiée ;
+- la recette de l’artefact a révélé que la modale pouvait masquer le titre sans lui livrer de `mouseleave`. Un quatrième scénario RED suit donc la position physique du pointeur pendant l’ouverture : fermeture sous pointeur resté dans la zone sans réouverture, mais nouveau hover actif après sortie réelle ;
+- une vérification supplémentaire a remplacé les libellés d’action statiques « Ouvrir » par les noms neutres visibles des deux boutons, afin de conserver une annonce cohérente lorsque le toucher ferme au second appui.
+- une seconde contre-revue a isolé un état pointeur résiduel après `pointerdown` suivi d’un relâchement hors du bouton : le `pointerId` et le type sont désormais conservés jusqu’au clic normal ou purgés après le `pointerup` écouté au niveau du document ; le timer et le listener sont nettoyés au démontage. Le scénario a été reproduit RED puis validé GREEN, et le test tactile inclut explicitement `pointerup` avant `click`. La frame de réarmement de recherche est également annulée au démontage.
+- la contre-revue indépendante finale retourne `passed: true`, sans problème de sécurité ni erreur logique. Ses deux suggestions non bloquantes sont de rendre encore plus explicites les tests du pointeur stationnaire après fermeture de la recherche et les chemins `pointercancel`, sortie de fenêtre et démontage ; les comportements principaux correspondants sont déjà couverts par la recette réelle, les nettoyages du composant et le contrat DOM actuel.
+
+Vérifications finales :
+
+- `npm run typecheck`, `npm run lint` et `npm run test` : exit 0 ; 62 fichiers / 381 tests Vitest et 58/58 tests Node ;
+- répétition ciblée de `homeExperience.dom.test.tsx` : 20/20 exécutions réussies après la correction de la course pointeur/focus ;
+- `npm run check:generated` : exit 0 ; 145 leçons, 118 corps publiés et 419 termes ;
+- `VITE_SITE_URL=http://127.0.0.1:4173 npm run build` : exit 0 ; 1 791 modules transformés, sitemap de 694 routes et prérendu strict 706/706, `ok: true`, sans échec de route ou de métadonnée ; `sitemap.xml` et `robots.txt` ont ensuite été restaurés à leur origine canonique ;
+- recette de l’artefact construit : desktop 1 440 × 1 000 et mobile tactile 390 × 844, thèmes clair et sombre, panneaux Formation et Intelligence VC, recherche, focus, `Escape`, clic extérieur, clic souris après hover, activation pointeur abandonnée suivie d’un retour au clavier, second appui tactile, réarmement de recherche, absence de débordement horizontal et console sans erreur applicative ;
+- scan des lignes ajoutées : aucun secret en dur, `eval`, HTML non sûr, code de débogage, `TODO` ou `FIXME` ; `git diff --check` retourne exit 0 ; port 4173 fermé.
+- ajustements finaux après retours visuels : `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx`, `npm run typecheck --workspace client` et `npm run lint --workspace client` retournent exit 0 ; recette Vite locale sur `/home` confirmant la barre glass sans message d’aide, le maintien dans le corridor titre-barre, la fermeture hors zone, le titre agrandi et `Sapience VC` en poids 600 ; port 5174 fermé après recette.
+
+Fichiers touchés : `client/src/components/chrome/TopBar.tsx`, `client/src/components/chrome/mobileLayers.dom.test.tsx`, `client/src/components/ui/CommandPalette.tsx`, `client/src/components/ui/Modal.tsx`, `client/src/context/UIContext.ts`, `client/src/context/UIProvider.tsx`, `client/src/layouts/MainLayout.tsx`, `client/src/pages/home/HomePage.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Le plan local `.hermes/plans/2026-07-29_025140-accueil-minimal-aiguillage.md` reste non suivi.
+
+Clôture : réalisation locale vérifiée et contre-revue indépendante finale validée. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
 ## 2026-07-27 — Correction de provenance et de rendu des deux leçons deeptech
 
 Objet : revue en lecture des deux leçons publiées le jour même, récupération de chaque source citée, puis correction des écarts constatés. Aucun objet nouveau, aucune route, aucun compteur modifié.

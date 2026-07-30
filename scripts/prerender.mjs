@@ -210,6 +210,11 @@ async function renderOne(page, request) {
     siteUrl,
     urlPath,
   } = request;
+  // Snapshot the settled page, never a page mid-animation. The home entrance
+  // (a ~3.8s curtain over /home) and every other motion effect honour this, so
+  // the emitted HTML is the final layout rather than a frozen opening frame.
+  await page.emulateMediaFeatures?.([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+
   await page.goto(`${origin}${appRouteUrl(urlPath, baseUrl)}`, { waitUntil: 'load', timeout: 45_000 });
 
   // Detail pages (e.g. LessonPage) read their title from a lazily-imported body

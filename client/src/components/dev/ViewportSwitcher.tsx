@@ -104,7 +104,7 @@ function ViewportSwitcherHost({ children }: { children: ReactNode }) {
             </div>
           )}
 
-      <div className="vcvp-bar" role="group" aria-label="Aperçu responsive">
+      <div className="vcvp-bar" role="group" aria-label="Aperçu responsive" data-device={device}>
         {(Object.keys(LABELS) as Device[]).map((d) => (
           <button
             key={d}
@@ -165,7 +165,6 @@ const CSS = `
   position: fixed;
   right: 14px;
   bottom: 14px;
-  z-index: 2147483000;
   display: flex;
   gap: 2px;
   padding: 3px;
@@ -175,6 +174,12 @@ const CSS = `
   backdrop-filter: blur(8px);
   opacity: 0.14;
   transition: opacity 0.18s ease;
+}
+.vcvp-bar[data-device="desktop"] {
+  z-index: 65;
+}
+.vcvp-bar:not([data-device="desktop"]) {
+  z-index: 2147483000;
 }
 .vcvp-bar:hover,
 .vcvp-bar:focus-within {

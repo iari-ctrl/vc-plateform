@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Moon, Sun } from 'lucide-react';
 import { publicAssetUrl } from '@shared/base-url.mjs';
 import { CompassIkigaiIntro } from '@/components/splash/CompassIkigaiIntro';
-import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { Fleuron } from '@/components/ornaments/Ornaments';
 import { useTheme } from '@/context/ThemeContext';
 import { cn } from '@/lib/utils';
@@ -30,33 +29,6 @@ const SPLASH_PHOTO_STYLE = {
   '--splash-photo-light': `url("${publicAssetUrl('splash/bg-claire.webp', import.meta.env.BASE_URL)}")`,
   '--splash-photo-dark': `url("${publicAssetUrl('splash/bg-sombre.webp', import.meta.env.BASE_URL)}")`,
 } as CSSProperties;
-
-// ── Kanji seals — unchanged from the current splash (do not touch) ───────────
-type Seal = {
-  glyph: string;
-  accent: string;
-  pos: CSSProperties;
-  size: number;
-  motion: string;
-  delay?: string;
-  depth: number;
-};
-
-const LIGHT_SEALS: Seal[] = [
-  { glyph: '発', accent: '#D28236', pos: { left: '8%', top: '22%' }, size: 56, motion: 'splash-float', delay: '0s', depth: 26 },
-  { glyph: '業', accent: '#267A8C', pos: { right: '10%', top: '17%' }, size: 64, motion: 'splash-float-slow', delay: '1.2s', depth: 34 },
-  { glyph: '観', accent: '#4C6B8A', pos: { left: '13%', bottom: '18%' }, size: 50, motion: 'splash-float-x', delay: '0.6s', depth: 20 },
-  { glyph: '論', accent: '#7C4680', pos: { right: '12%', bottom: '20%' }, size: 58, motion: 'splash-float', delay: '1.8s', depth: 30 },
-  { glyph: '契', accent: '#9A6A3C', pos: { right: '23%', top: '40%' }, size: 42, motion: 'splash-float-slow', delay: '2.4s', depth: 16 },
-  { glyph: '報', accent: '#5A455C', pos: { left: '20%', top: '38%' }, size: 40, motion: 'splash-float', delay: '3s', depth: 14 },
-];
-
-const DARK_SEALS: Seal[] = [
-  { glyph: '発', accent: '#D28236', pos: { left: 90, top: 200 }, size: 44, motion: 'splash-float', delay: '0s', depth: 30 },
-  { glyph: '論', accent: '#A68AA9', pos: { right: 110, top: 230 }, size: 40, motion: 'splash-float-slow', delay: '0.7s', depth: 24 },
-  { glyph: '観', accent: '#3FB0C4', pos: { left: 150, bottom: 210 }, size: 38, motion: 'splash-float-x', delay: '1.4s', depth: 20 },
-  { glyph: '業', accent: '#C5A85C', pos: { right: 150, bottom: 196 }, size: 44, motion: 'splash-float', delay: '2.1s', depth: 34 },
-];
 
 // ── Constellation + scattered night stars ────────────────────────────────────
 type StarPoint = { x: number; y: number; r: number; base: number; sd: string; td: string };
@@ -173,24 +145,6 @@ function MemoCorners() {
   );
 }
 
-function DriftingSeals({ seals, variant, mx, my }: { seals: Seal[]; variant: 'light' | 'dark'; mx: number; my: number }) {
-  return (
-    <div className={cn('splash-seals', `splash-seals-${variant}`)} aria-hidden>
-      {seals.map((seal) => (
-        <div
-          key={seal.glyph}
-          className="splash-seal-parallax"
-          style={{ ...seal.pos, transform: `translate3d(${mx * seal.depth}px, ${my * seal.depth}px, 0)` } as CSSProperties}
-        >
-          <div className={seal.motion} style={{ animationDelay: seal.delay }}>
-            <WaxSeal glyph={seal.glyph} accent={seal.accent} size={seal.size} />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function NightStars({ hostRef, revealed, transform }: { hostRef: RefObject<HTMLDivElement | null>; revealed: boolean; transform: string }) {
   return (
     <div ref={hostRef} className={cn('splash-stars', revealed && 'reveal')} style={{ transform }} aria-hidden>
@@ -220,13 +174,13 @@ function NightStars({ hostRef, revealed, transform }: { hostRef: RefObject<HTMLD
 
 function EnterCue() {
   return (
-    <Link to="/onboarding" className="splash-enter splash-rise" style={{ '--d': '2.62s' } as CSSProperties}>
+    <Link to="/home" className="splash-enter splash-rise" style={{ '--d': '2.62s' } as CSSProperties}>
       <span className="splash-enter-disc" aria-hidden>
         <span />
         <span />
         <ArrowRight size={28} />
       </span>
-      <span className="splash-enter-label">Entrer dans l'atelier</span>
+      <span className="splash-enter-label">Accéder à l’accueil</span>
     </Link>
   );
 }
@@ -435,8 +389,6 @@ export default function SplashPage() {
         <NightStars hostRef={starsRef} revealed={revealed} transform={starsTransform} />
         <div ref={glowRef} className="splash-glow" aria-hidden />
 
-        <DriftingSeals seals={LIGHT_SEALS} variant="light" mx={mx} my={my} />
-        <DriftingSeals seals={DARK_SEALS} variant="dark" mx={mx} my={my} />
         <MemoCorners />
 
         <div className="splash-content">

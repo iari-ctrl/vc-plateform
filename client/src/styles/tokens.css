@@ -53,11 +53,22 @@
   /* — Layout — */
   --radius: 1.25rem;
   --topbar-h: 4.5rem;
+  --home-topbar-h: 3.375rem;
+  --home-mobile-nav-h: 3.375rem;
   --sidebar-w: 16rem;
   /* Thin left gutter reserved for the always-visible logo handle (the SideNav
      panel itself is hidden off-screen and slides over the content on hover). */
   --sidebar-rail: 4rem;
   --content-max: 75rem;
+}
+
+@media (max-width: 767px) {
+  :root {
+    /* Two fixed navigation rows share at most 10% of the small viewport.
+       2.53125rem is exactly 75% of the 3.375rem desktop home row. */
+    --home-topbar-h: min(2.53125rem, 5svh);
+    --home-mobile-nav-h: min(2.53125rem, 5svh);
+  }
 }
 
 .dark {

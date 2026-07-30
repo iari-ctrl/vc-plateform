@@ -148,6 +148,8 @@ Tokens structurants :
 | Token | Valeur | Usage |
 | --- | ---: | --- |
 | `--topbar-h` | `4.5rem` | hauteur de top bar |
+| `--home-topbar-h` | `3.375rem` ; sous 768 px `min(2.53125rem, 5svh)` | hauteur du header propre à `/home` |
+| `--home-mobile-nav-h` | sous 768 px `min(2.53125rem, 5svh)` | hauteur totale de la navigation basse de `/home`, hors safe area |
 | `--sidebar-w` | `16rem` | largeur navigation latérale |
 | `--sidebar-rail` | `4rem` | gouttière réservée au handle desktop de la navigation |
 | `--content-max` | `75rem` | largeur maximale des vues riches |
@@ -173,6 +175,22 @@ L'effet verre est piloté par l'attribut `data-open` et la classe `.glass-rail` 
 - **Ouvert** (`data-open="true"`) : panneau de **verre dépoli** qui flotte au-dessus du contenu qu'il recouvre — fond transparent, `backdrop-filter: blur(14px) saturate(165%) contrast(104%)`, bordure `outline-variant` ~52 %, ombres latérales et lisérés internes. Le flou volontairement **modéré** ne masque pas la page : les aplats de couleur et les grandes formes restent lisibles sous le rail, tout en gardant les libellés nets.
 
 Règle critique apprise : pour que le verre se lise, le panneau ouvert doit éviter un remplissage opaque proche du fond (`--surface` = `--background`) et s'appuyer sur le flou, les bordures et l'ombre. Toutes les transitions de verre sont animées (`background-color`, `box-shadow`, `border-color`, `backdrop-filter`) en parallèle de la translation. Un fallback `@supports not (backdrop-filter)` repasse en panneaux quasi-opaques pour la lisibilité.
+
+### Barre d'accueil et séquence d'entrée (`/home`)
+
+`/home` remplace la `TopBar` standard par une barre à trois colonnes (`1fr auto 1fr`) à partir de 768 px : `Formation` à gauche, la marque `Maison Sapience VC` au centre, `Intelligence VC` à droite. Sous 768 px, le header ne conserve que la marque centrale et les deux pôles forment une navigation fixe au bas du viewport, hors du landmark `header`. Sa géométrie et sa typographie ne sont pas écrites dans le composant mais dans `components/chrome/homeBar.ts` (`HOME_BAR_ROW`, `HOME_BAR_CELL`, `HOME_BAR_PILLAR`, `HOME_BAR_WORDMARK`, `HOME_BAR_WORDMARK_ACCENT`, `HOME_BAR_SHELL`, `HOME_MOBILE_NAV_SHELL`). **Cette centralisation est une contrainte, pas une commodité** : la séquence d'entrée peint une copie jetable de la barre et la fait atterrir sur la barre réelle ; deux jeux de classes divergents produiraient un saut visible au relais.
+
+Sur la variante compacte, `--home-topbar-h` et `--home-mobile-nav-h` valent chacun `min(2.53125rem, 5svh)`. Les deux barres sont ainsi réduites de 25 % par rapport aux deux hauteurs de référence de 54 px et leur somme ne dépasse pas 10 % de la hauteur du viewport. La bordure supérieure de la navigation basse est comprise dans sa boîte ; elle ne doit pas ajouter un pixel au budget. La safe area s'ajoute seulement sous cette hauteur. Le contrôle de thème conserve une cible interactive de 44 × 44 px, tandis que son cercle visible reste contenu dans le header compact.
+
+La marque est délibérément l'élément le plus grand de la barre : `1,025rem` en mobile, `1,325rem` à partir de `sm`, `1,475rem` à partir de `lg`, avec un tracking resserré aux petites largeurs pour absorber la largeur supplémentaire. `Sapience VC` garde son poids 600 face à `Maison` en 500.
+
+La séquence d'entrée (`components/home/HomeIntro.tsx` + `styles/home-intro.css`) est montée par `MainLayout` au-dessus du shell et publie sa phase via `HomeIntroContext` — la barre fixe s'efface puis revient, `HomePage` retarde son hero. Règles à conserver :
+
+- **elle joue au premier rendu sur `/home` et à l'arrivée depuis le portail, jamais en navigation interne.** Un rideau de 3,8 s entre deux clics de menu serait une nuisance ;
+- l'en-tête temporaire est positionné comme la barre finale (`top: 0; height: var(--home-topbar-h)`) puis décalé de `calc(50svh - var(--home-topbar-h) / 2)`. Animer le retour à `translateY(0)` garantit un accostage au pixel : ne pas revenir à un couple `top: 50%` / `translateY(-50%)` interpolé ;
+- **le voile diffère par mode.** En clair il porte `bg-claire.webp` et se dissout pendant la montée (2,4 s → 3,2 s), pour que le fond et l'en-tête arrivent d'un même geste. En sombre il porte `bg-sombre.webp`, l'image que `NightSkyBackdrop` affiche déjà sous le hero, avec le même dégradé de lisibilité : son retrait ne change donc rien à l'écran et peut rester à 3,0 s, hors de la fenêtre de vol ;
+- le rideau est `aria-hidden` et ne contient aucun élément focusable ; la barre réelle est retirée par `visibility`, donc hors ordre de tabulation et hors arbre accessible, jamais par `opacity` seule ;
+- sous `prefers-reduced-motion`, la séquence n'est pas montée du tout. `scripts/prerender.mjs` émule cette préférence, de sorte que le HTML statique porte la mise en page finale et non une image figée du rideau.
 
 ### Portail splash (`/`)
 
@@ -434,14 +452,18 @@ Animations existantes :
 - `draw` ;
 - `sheen` ;
 - `compass-needle` ;
-- `splash-rise`, `splash-float`, `splash-float-x`, `splash-float-slow`, `splash-compass-needle`, `splash-enter-ring`, `splash-nudge`, `splash-star-pop`, `splash-twinkle` (portail splash uniquement, dans `splash.css` ; l'effet de parallaxe est coalescé via `requestAnimationFrame`, la transition Aube via Web Animations API).
+- `splash-rise`, `splash-float`, `splash-float-x`, `splash-float-slow`, `splash-compass-needle`, `splash-enter-ring`, `splash-nudge`, `splash-star-pop`, `splash-twinkle` (portail splash uniquement, dans `splash.css` ; l'effet de parallaxe est coalescé via `requestAnimationFrame`, la transition Aube via Web Animations API) ;
+- `home-intro-fade-in`, `home-intro-rule-in`, `home-intro-rise`, `home-intro-chrome-in`, `home-intro-veil-out`, `home-intro-hero-in`, `home-intro-leave`, `home-topbar-in` (séquence d'entrée de `/home` uniquement, dans `home-intro.css`).
+
+La chronologie de l'entrée de `/home` est un contrat partagé entre CSS et React : `home-intro.css` porte les délais d'animation, `context/HomeIntroContext.ts` porte le relais (3 600 ms) et le démontage (3 900 ms). Modifier l'un sans l'autre décale le fondu croisé entre la copie et la barre réelle. Le retard du hero est passé en variable CSS inline par `HomePage`, calculé depuis le début de la séquence et non depuis l'arrivée du chunk paresseux.
 
 Règles :
 
 - motion discrète et informative ;
 - éviter l'animation continue dans les zones de lecture longue ;
-- respecter `prefers-reduced-motion` (coupé dans `tokens.css` + guard dans `splash.css` + court-circuit dans `Reveal` et `CompassIkigaiIntro`) ;
-- ne pas animer layout/height quand opacity/transform suffit.
+- respecter `prefers-reduced-motion` (coupé dans `tokens.css` + guard dans `splash.css` et `home-intro.css` + court-circuit dans `Reveal`, `CompassIkigaiIntro` et `HomeIntroProvider`, qui ne monte alors pas la séquence) ;
+- ne pas animer layout/height quand opacity/transform suffit ;
+- une séquence d'entrée bloquante ne se joue qu'à l'arrivée réelle sur la surface concernée, jamais à chaque navigation interne vers elle.
 
 ---
 

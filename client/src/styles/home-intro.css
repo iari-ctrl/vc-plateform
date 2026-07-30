@@ -1,0 +1,240 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   Home entrance — the hand-over from the splash portal to /home.
+
+   A throwaway copy of the home bar is drawn at the vertical centre of a
+   full-screen veil, assembles itself piece by piece, then flies up and docks
+   exactly where the real fixed header lives. Timeline, from mount:
+
+     0.00 → 0.50s  veil only, no text
+     0.60 → 1.20s  wordmark fades in, dead centre, no scale
+     1.40 → 1.90s  the hairline draws itself outward from the centre
+     1.80 → 2.20s  FORMATION (left) and INTELLIGENCE VC (right) appear
+     2.40 → 3.20s  the whole block rises to the top edge (~433px at 900px tall)
+                   — in light mode the photograph clears over the same window,
+                     so the flight and the reveal read as one gesture
+     3.00 → 3.50s  in dark mode the veil fades (imperceptibly: same image below)
+     3.00 → 3.80s  the final title plays its own reveal
+     3.60 → 3.80s  the real fixed header takes over, the copy leaves
+
+   Keep these numbers in sync with HomeIntroContext.ts, which drives the React
+   side (hand-over at 3600ms, unmount at 3900ms).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.home-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  isolation: isolate;
+  /* Travel of the entrance header: from the middle of the viewport up to the
+     row the fixed bar occupies. */
+  --home-intro-rise: calc(50svh - (var(--home-topbar-h) / 2));
+  /* Smooth departure, long deceleration into the dock. */
+  --home-intro-ease: cubic-bezier(0.62, 0.02, 0.16, 1);
+}
+
+.home-intro.is-leaving {
+  pointer-events: none;
+  animation: home-intro-leave 220ms ease both;
+}
+
+@keyframes home-intro-leave {
+  to {
+    opacity: 0;
+  }
+}
+
+/* ── Veil ───────────────────────────────────────────────────────────────────
+   Light: the splash photo, which dissolves to reveal the paper hero.
+   Dark: the very same night sky the hero already shows, veiled the same way —
+   so when this layer goes, nothing visibly changes. */
+.home-intro-veil {
+  position: absolute;
+  inset: 0;
+  background-color: var(--background);
+  animation: home-intro-veil-out var(--home-intro-veil-duration, 500ms) ease var(--home-intro-veil-delay, 3000ms) forwards;
+}
+
+/* Light: the photograph has to go, so it goes with the header — the paper hero
+   is already in place by the time the bar docks.
+   Dark: the layer below is the same sky, so the fade changes nothing on screen
+   and can stay where it is, out of the way of the flight. */
+.home-intro[data-mode='light'] {
+  --home-intro-veil-delay: 2400ms;
+  --home-intro-veil-duration: 800ms;
+}
+
+.home-intro-veil-photo,
+.home-intro-veil-wash {
+  position: absolute;
+  inset: 0;
+}
+
+.home-intro-veil-photo {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home-intro[data-mode='light'] .home-intro-veil-photo {
+  background-image: var(--home-intro-photo-light);
+  background-position: center top;
+}
+
+.home-intro[data-mode='dark'] .home-intro-veil-photo {
+  background-image: var(--home-intro-photo-dark);
+  background-position: center;
+}
+
+.home-intro[data-mode='dark'] .home-intro-veil-wash {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--background) 30%, transparent) 0%,
+    color-mix(in srgb, var(--background) 10%, transparent) 35%,
+    color-mix(in srgb, var(--background) 55%, transparent) 80%,
+    var(--background) 100%
+  );
+}
+
+@keyframes home-intro-veil-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* ── The travelling header ──────────────────────────────────────────────────
+   Sized and positioned as the final fixed bar, then offset downward to the
+   centre. Animating back to translateY(0) guarantees a pixel-exact dock. */
+.home-intro-header {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: var(--home-topbar-h);
+  transform: translateY(var(--home-intro-rise));
+  animation: home-intro-rise 800ms var(--home-intro-ease) 2400ms forwards;
+  will-change: transform;
+}
+
+/* The final bar remains transparent during the flight too; only the inset rule
+   docks with it so the hand-over does not introduce a frosted strip. */
+.home-intro-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: transparent;
+  opacity: 0;
+  animation: home-intro-chrome-in 800ms ease 2400ms forwards;
+}
+
+.home-intro[data-mode='light'] .home-intro-header {
+  text-shadow: 0 1px 14px rgb(255 251 242 / 0.75);
+}
+
+.home-intro[data-mode='dark'] .home-intro-header {
+  text-shadow: 0 2px 18px rgb(5 6 10 / 0.6);
+}
+
+@keyframes home-intro-rise {
+  from {
+    transform: translateY(var(--home-intro-rise));
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes home-intro-chrome-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Pieces ─────────────────────────────────────────────────────────────────*/
+.home-intro-wordmark {
+  opacity: 0;
+  animation: home-intro-fade-in 600ms ease 600ms forwards;
+}
+
+.home-intro-pillar {
+  opacity: 0;
+  animation: home-intro-fade-in 400ms ease 1800ms forwards;
+}
+
+/* Becomes the bottom border of the docked bar. */
+.home-intro-rule {
+  position: absolute;
+  right: 0.625rem;
+  bottom: 0;
+  left: 0.625rem;
+  height: 1px;
+  background: color-mix(in srgb, var(--outline-variant) 70%, transparent);
+  transform: scaleX(0);
+  transform-origin: 50% 50%;
+  animation: home-intro-rule-in 500ms cubic-bezier(0.22, 1, 0.36, 1) 1400ms forwards;
+}
+
+@keyframes home-intro-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes home-intro-rule-in {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ── The real header, on either side of the hand-over ───────────────────────
+   `visibility` (not opacity) so the suppressed bar is also out of the tab
+   order and the accessibility tree while the curtain is up. */
+.home-topbar-suppressed {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.home-topbar-arriving {
+  animation: home-topbar-in 220ms ease both;
+}
+
+@keyframes home-topbar-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Hero title micro-reveal ────────────────────────────────────────────────
+   Fires as the veil dissolves. The delay is set inline by HomePage so it stays
+   anchored to the start of the entrance, not to the page chunk's arrival. */
+.home-intro-hero {
+  animation: home-intro-hero-in 800ms cubic-bezier(0.16, 1, 0.3, 1) var(--home-intro-hero-delay, 3000ms) both;
+}
+
+@keyframes home-intro-hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro {
+    display: none;
+  }
+
+  .home-topbar-suppressed {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .home-intro-hero,
+  .home-topbar-arriving {
+    animation: none;
+  }
+}

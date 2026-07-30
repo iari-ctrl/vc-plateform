@@ -39,14 +39,14 @@ function Shell({ children }: { children: ReactNode }) {
 }
 
 const surfaces = [
-  { label: 'TopBar mobile', ui: <TopBar />, dialogName: 'Navigation mobile' },
-  { label: 'SideNav mobile', ui: <SideNav />, dialogName: 'Navigation mobile latérale' },
+  { label: 'TopBar mobile', ui: <TopBar />, dialogName: 'Navigation mobile', path: '/onboarding' },
+  { label: 'SideNav mobile', ui: <SideNav />, dialogName: 'Navigation mobile latérale', path: '/home' },
 ];
 
 describe('tiroirs de navigation mobile', () => {
-  it.each(surfaces)('$label consomme le contrat de couche commun', async ({ ui, dialogName }) => {
+  it.each(surfaces)('$label consomme le contrat de couche commun', async ({ ui, dialogName, path }) => {
     const user = userEvent.setup();
-    renderWithRouter(<Shell>{ui}</Shell>, '/home');
+    renderWithRouter(<Shell>{ui}</Shell>, path);
 
     const opener = screen.getByRole('button', { name: 'Menu' });
     await user.click(opener);
