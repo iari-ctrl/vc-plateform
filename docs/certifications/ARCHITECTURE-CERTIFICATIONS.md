@@ -147,14 +147,15 @@ Cette coexistence doit toujours être formulée comme une transition : cinq axes
 
 ## 7. Décision de transition pour Analyst
 
-L'audit des 35 leçons publiées conduit à deux ensembles distincts :
+L'audit des leçons publiées conduit à trois ensembles distincts :
 
 - **23 leçons** composent le parcours `analyst-foundations` ;
 - **12 leçons** forment une préparation recommandée à `VC Analyst`, visible mais non bloquante.
+- **6 leçons optionnelles** publient la première configuration contextuelle complète `Seed × Lead × SaaS` dans les cours `c-analyst-stage`, `c-analyst-deal-role` et `c-analyst-specialties`.
 
-Le détail par cours et par identifiant est maintenu dans le [référentiel du parcours](../parcours/ANALYST-FOUNDATIONS.md) et le [référentiel professionnel](REFERENTIEL-VC-ANALYST.md). Les 92 questions rattachées aux 23 leçons du parcours restent formatives. Aucune évaluation locale ne leur est associée.
+Le détail par cours et par identifiant est maintenu dans le [référentiel du parcours](../parcours/ANALYST-FOUNDATIONS.md) et le [référentiel professionnel](REFERENTIEL-VC-ANALYST.md). Les 92 questions rattachées aux 23 leçons du parcours restent formatives. Les quiz des six leçons optionnelles restent des supports de préparation. Aucune évaluation locale ne leur est associée.
 
-Les six leçons envisagées pour les contextes Seed, fonds lead et SaaS ne constituent pas un lot de production. Elles restent candidates et ne seront rédigées que si une épreuve future révèle un manque de préparation qui ne peut pas être couvert par un contenu existant.
+Cette première configuration contextuelle ne modifie ni le titre professionnel, ni les 160 compositions, ni le statut « en construction » de `VC Analyst`. Les autres options contextuelles restent progressives et ne sont pas promises par ce lot.
 
 La charge de **40 heures** associée à `VC Analyst` est une hypothèse interne de conception. Elle n'est ni une durée publique, ni une promesse au candidat, ni un seuil. Elle devra être mesurée sur les futures épreuves avant toute publication.
 
@@ -212,7 +213,7 @@ Restent explicitement hors périmètre :
 - la migration des données et de l'interface de trois vers cinq axes ;
 - la production du document du fonds, de la bible du cas et de M1 ;
 - la production du cas fil rouge et des autres missions professionnelles ;
-- la rédaction des six leçons candidates Seed, Lead et SaaS ;
+- la production des autres options contextuelles au-delà de `Seed × Lead × SaaS` ;
 - l'export des résultats ou livrables hors du navigateur ;
 - la délivrance humaine, le contrôle d'identité et le registre d'émission ;
 - l'activation de l'annexe de session de la charte ;

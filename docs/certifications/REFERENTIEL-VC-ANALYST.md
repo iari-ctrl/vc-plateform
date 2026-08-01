@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 > **Référence maintenue.** Ce document définit le périmètre professionnel, les contenus de préparation et les preuves futures de `VC Analyst`. L’[architecture transverse](ARCHITECTURE-CERTIFICATIONS.md) fait foi pour les catégories, le titre, les axes et les règles de délivrance.
 
-Statut au 2026-07-20 : `VC Analyst` est une certification professionnelle publiée avec une disponibilité indiquée comme « en construction ». Aucune évaluation active, aucun résultat local et aucune délivrance ne sont proposés. Le parcours [`analyst-foundations`](../parcours/ANALYST-FOUNDATIONS.md) est une formation ouverte distincte ; il ne constitue pas un prérequis certificatif.
+Statut au 2026-08-01 : `VC Analyst` est une certification professionnelle publiée avec une disponibilité indiquée comme « en construction ». Aucune évaluation active, aucun résultat local et aucune délivrance ne sont proposés. Le parcours [`analyst-foundations`](../parcours/ANALYST-FOUNDATIONS.md) est une formation ouverte distincte ; il ne constitue pas un prérequis certificatif.
 
 ## Périmètre professionnel
 
@@ -45,6 +45,8 @@ La cible documentaire distingue cinq axes. L’application conserve provisoireme
 
 L’option historique `specialty: "impact"` reste une contextualisation de la certification professionnelle. Elle ne désigne pas un parcours ni une certification distincte.
 
+La configuration `Seed × Lead × SaaS` constitue la première configuration contextuelle complète publiée. Elle ajoute six leçons optionnelles aux cours `c-analyst-stage`, `c-analyst-deal-role` et `c-analyst-specialties` : validation commerciale et financement Seed ; plan de diligence et préparation de term sheet pour un fonds lead ; suivi de syndication, gouvernance et closing sous supervision ; métriques SaaS et répétabilité go-to-market. Ces contenus restent un supplément de préparation, non une évaluation professionnelle.
+
 ## Évaluation et délivrance futures
 
 L’évaluation professionnelle reste une architecture de preuves, non un service de délivrance actif. Toute délivrance nécessiterait une évaluation finale, une vérification d’identité et une décision humaine selon le cadre de [`GOUVERNANCE-CERTIFICATIONS.md`](GOUVERNANCE-CERTIFICATIONS.md).
@@ -53,4 +55,4 @@ Le navigateur ne délivre aucun titre, certificat, badge ou résultat certifié.
 
 ## Hors périmètre
 
-Ne sont ni produits ni activés : le document du fonds, la bible et les pièces du cas, M1 et les autres missions professionnelles, les leçons contextuelles candidates, la migration vers cinq axes, l’export de résultats, le contrôle d’identité, la délivrance humaine et le registre.
+Ne sont ni produits ni activés : le document du fonds, la bible et les pièces du cas, M1 et les autres missions professionnelles, les autres options contextuelles au-delà de `Seed × Lead × SaaS`, la migration vers cinq axes, l’export de résultats, le contrôle d’identité, la délivrance humaine et le registre.

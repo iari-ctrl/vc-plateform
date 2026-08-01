@@ -25,6 +25,15 @@ const rect = (left: number, top: number, right: number, bottom: number) =>
     toJSON: () => ({}),
   }) as DOMRect;
 
+const HOME_HERO_SELECTOR = '#main > section:first-of-type';
+
+const findHomeHero = async () => {
+  await waitFor(() => {
+    expect(document.querySelector(HOME_HERO_SELECTOR)).toBeInTheDocument();
+  });
+  return document.querySelector(HOME_HERO_SELECTOR) as HTMLElement;
+};
+
 const compactHomeMatchMedia = (query: string): MediaQueryList => ({
   matches: query === '(max-width: 767px)',
   media: query,
@@ -136,32 +145,73 @@ describe('accueil — contrat éditorial et navigation', () => {
     renderAppAt('/home');
 
     const banner = await screen.findByRole('banner');
-    const hero = document.querySelector('main section') as HTMLElement;
+    const hero = await findHomeHero();
 
-    vi.spyOn(hero, 'getBoundingClientRect').mockReturnValue(rect(0, 0, 1200, 720));
-    window.dispatchEvent(new Event('scroll'));
+    vi.spyOn(banner, 'getBoundingClientRect').mockReturnValue(rect(0, 0, 1200, 54));
+    vi.spyOn(hero, 'getBoundingClientRect').mockReturnValue(rect(0, -665, 1200, 55));
+    fireEvent.scroll(window);
 
-    expect(banner).toHaveClass('bg-transparent', 'after:inset-x-2.5', 'after:h-px');
-    expect(banner).not.toHaveClass(
+    await waitFor(() => {
+      expect(banner).toHaveClass(
+        'bg-transparent',
+        'after:inset-x-2.5',
+        'after:h-px',
+        'after:bg-[color-mix(in_srgb,var(--outline-variant)_70%,transparent)]',
+      );
+    });
+    for (const className of [
       'border-b',
       'bg-[color-mix(in_srgb,var(--background)_72%,transparent)]',
       'backdrop-blur-md',
-    );
+    ]) {
+      expect(banner).not.toHaveClass(className);
+    }
   });
 
-  it('rend la barre /home opaque après dépassement du hero', async () => {
+  it('rend la barre /home opaque à la frontière du hero puis transparente au retour', async () => {
     renderAppAt('/home');
 
     const banner = await screen.findByRole('banner');
-    const hero = document.querySelector('main section') as HTMLElement;
+    const hero = await findHomeHero();
+    let heroBottom = 55;
 
-    vi.spyOn(hero, 'getBoundingClientRect').mockReturnValue(rect(0, -721, 1200, -1));
-    window.dispatchEvent(new Event('scroll'));
+    vi.spyOn(banner, 'getBoundingClientRect').mockReturnValue(rect(0, 0, 1200, 54));
+    vi.spyOn(hero, 'getBoundingClientRect').mockImplementation(() =>
+      rect(0, heroBottom - 720, 1200, heroBottom),
+    );
+    fireEvent.scroll(window);
 
     await waitFor(() => {
-      expect(banner).toHaveClass('bg-[color:var(--surface)]', 'backdrop-blur-md');
+      expect(banner).toHaveClass('bg-transparent');
     });
-    expect(banner).not.toHaveClass('bg-transparent');
+
+    heroBottom = 54;
+    fireEvent.resize(window);
+
+    await waitFor(() => {
+      expect(banner).toHaveClass(
+        'bg-[color:var(--surface)]',
+        'after:inset-x-2.5',
+        'after:h-px',
+        'after:bg-[color-mix(in_srgb,var(--outline-variant)_70%,transparent)]',
+      );
+    });
+    for (const className of [
+      'bg-transparent',
+      'border-b',
+      'backdrop-blur-md',
+      'after:bg-transparent',
+    ]) {
+      expect(banner).not.toHaveClass(className);
+    }
+
+    heroBottom = 55;
+    fireEvent.scroll(window);
+
+    await waitFor(() => {
+      expect(banner).toHaveClass('bg-transparent');
+      expect(banner).not.toHaveClass('bg-[color:var(--surface)]');
+    });
   });
 
   it('réduit la hauteur de la barre /home de 25 % et centre ses contrôles', async () => {

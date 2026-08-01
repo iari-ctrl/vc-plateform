@@ -436,14 +436,15 @@
     "term": "Annualized run rate",
     "slug": "annualized-run-rate",
     "category": "Métriques",
-    "short": "Extrapolation annuelle d'un revenu observé sur une période courte.",
+    "short": "Annualisation mécanique d'un revenu observé sur une période courte.",
     "seeAlso": [
       "arr",
       "revenue-growth",
       "recurring-revenue"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "aliases": [
       "ARR run rate",
@@ -477,7 +478,7 @@
     "term": "ARR (Annual Recurring Revenue)",
     "slug": "arr",
     "category": "Métriques",
-    "short": "Revenu récurrent annualisé des contrats actifs, hors revenus ponctuels.",
+    "short": "Revenu annuel récurrent vérifié des contrats ou abonnements actifs, hors revenus ponctuels.",
     "seeAlso": [
       "mrr",
       "recurring-revenue",
@@ -486,7 +487,9 @@
       "revenue-multiple"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-stage-seed-commercial",
+      "l-specialty-saas-metrics"
     ],
     "aliases": [
       "Annual Recurring Revenue",
@@ -664,23 +667,6 @@
     ]
   },
   {
-    "id": "biais-d-autorite",
-    "term": "Biais d’autorité",
-    "slug": "biais-d-autorite",
-    "category": "Sciences de la décision",
-    "short": "Surpondérer les signaux de statut — diplôme, ex-grande boîte, fondateur récidiviste.",
-    "seeAlso": [
-      "pattern-matching",
-      "narrative-fallacy",
-      "venture-capital"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "biais de pedigree",
-      "effet de halo"
-    ]
-  },
-  {
     "id": "biais-de-confirmation",
     "term": "Biais de confirmation",
     "slug": "biais-de-confirmation",
@@ -711,6 +697,23 @@
     "aliases": [
       "biais d’issue",
       "outcome bias"
+    ]
+  },
+  {
+    "id": "biais-d-autorite",
+    "term": "Biais d’autorité",
+    "slug": "biais-d-autorite",
+    "category": "Sciences de la décision",
+    "short": "Surpondérer les signaux de statut — diplôme, ex-grande boîte, fondateur récidiviste.",
+    "seeAlso": [
+      "pattern-matching",
+      "narrative-fallacy",
+      "venture-capital"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "biais de pedigree",
+      "effet de halo"
     ]
   },
   {
@@ -1075,7 +1078,9 @@
       "burn-rate"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics",
+      "l-specialty-saas-gtm"
     ],
     "aliases": [
       "CAC payback",
@@ -1308,7 +1313,8 @@
       "recurring-revenue"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "aliases": [
       "attrition",
@@ -1872,7 +1878,9 @@
       "gtm"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics",
+      "l-specialty-saas-gtm"
     ],
     "aliases": [
       "CAC",
@@ -3889,11 +3897,34 @@
       "leverage"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "aliases": [
       "gross profit margin",
       "marge brute"
+    ]
+  },
+  {
+    "id": "grr",
+    "term": "Gross Revenue Retention (GRR)",
+    "slug": "grr",
+    "category": "Métriques",
+    "short": "Revenu conservé auprès d’une cohorte existante avant expansions.",
+    "seeAlso": [
+      "nrr",
+      "churn-rate",
+      "arr",
+      "mrr"
+    ],
+    "relatedLessonIds": [
+      "l-specialty-saas-metrics"
+    ],
+    "aliases": [
+      "GRR",
+      "gross revenue retention",
+      "rétention brute du revenu",
+      "gross dollar retention"
     ]
   },
   {
@@ -4588,6 +4619,30 @@
     ]
   },
   {
+    "id": "qualified-lead-velocity-rate",
+    "term": "Lead Velocity Rate (LVR)",
+    "slug": "qualified-lead-velocity-rate",
+    "category": "Métriques",
+    "short": "Croissance mensuelle des leads qualifiés, selon une définition stable de qualification.",
+    "seeAlso": [
+      "qualified-lead",
+      "traction"
+    ],
+    "relatedLessonIds": [
+      "l-traction-unit-economics",
+      "l-founder-narrative",
+      "l-specialty-saas-gtm"
+    ],
+    "aliases": [
+      "LVR",
+      "Lead Velocity Rate",
+      "Qualified Lead Velocity Rate",
+      "QLVR",
+      "lead velocity rate",
+      "taux de vélocité des leads qualifiés"
+    ]
+  },
+  {
     "id": "loi",
     "term": "Letter of Intent (LOI)",
     "slug": "loi",
@@ -4681,7 +4736,8 @@
       "gross-margin"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "aliases": [
       "CLV",
@@ -4833,7 +4889,7 @@
     "term": "Loi de puissance",
     "slug": "power-law",
     "category": "Fondations",
-    "short": "Distribution où quelques investissements produisent l'essentiel des rendements.",
+    "short": "Raccourci sectoriel pour décrire des rendements très asymétriques et concentrés.",
     "seeAlso": [
       "fund-returner",
       "moic",
@@ -5349,24 +5405,6 @@
     ]
   },
   {
-    "id": "negligence-des-taux-de-base",
-    "term": "Négligence des taux de base",
-    "slug": "negligence-des-taux-de-base",
-    "category": "Sciences de la décision",
-    "short": "Oublier que la majorité des startups financées ne rendent pas le capital.",
-    "seeAlso": [
-      "pattern-matching",
-      "power-law",
-      "biais-de-resultat"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "base rate neglect",
-      "biais du survivant",
-      "taux de base"
-    ]
-  },
-  {
     "id": "net-new-arr",
     "term": "Net New ARR",
     "slug": "net-new-arr",
@@ -5408,7 +5446,7 @@
     "term": "Net Revenue Retention",
     "slug": "nrr",
     "category": "Métriques",
-    "short": "Revenu conservé auprès d'une cohorte existante après churn, contraction et expansion.",
+    "short": "Revenu conservé auprès d'une cohorte existante après churn, contractions et expansions.",
     "seeAlso": [
       "arr",
       "mrr",
@@ -5416,7 +5454,8 @@
       "ltv"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "aliases": [
       "NRR",
@@ -5481,6 +5520,24 @@
       "nonqualified options",
       "NQSO",
       "NSO"
+    ]
+  },
+  {
+    "id": "negligence-des-taux-de-base",
+    "term": "Négligence des taux de base",
+    "slug": "negligence-des-taux-de-base",
+    "category": "Sciences de la décision",
+    "short": "Oublier que la majorité des startups financées ne rendent pas le capital.",
+    "seeAlso": [
+      "pattern-matching",
+      "power-law",
+      "biais-de-resultat"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "base rate neglect",
+      "biais du survivant",
+      "taux de base"
     ]
   },
   {
@@ -6255,26 +6312,6 @@
     ]
   },
   {
-    "id": "qualified-lead-velocity-rate",
-    "term": "Qualified Lead Velocity Rate",
-    "slug": "qualified-lead-velocity-rate",
-    "category": "Métriques",
-    "short": "Croissance mensuelle des leads qualifiés, utilisée comme indicateur avancé du pipeline commercial.",
-    "seeAlso": [
-      "qualified-lead",
-      "traction"
-    ],
-    "relatedLessonIds": [
-      "l-traction-unit-economics",
-      "l-founder-narrative"
-    ],
-    "aliases": [
-      "lead velocity rate",
-      "QLVR",
-      "taux de vélocité des leads qualifiés"
-    ]
-  },
-  {
     "id": "qpo",
     "term": "Qualified Public Offering",
     "slug": "qpo",
@@ -6375,48 +6412,6 @@
       "lvp-arbre-instruments",
       "lvp-compatibilite-remboursement",
       "lvp-atelier-structuration"
-    ]
-  },
-  {
-    "id": "reproductibilite-mesure",
-    "term": "Reproductibilité de mesure",
-    "slug": "reproductibilite-mesure",
-    "aliases": [
-      "measurement reproducibility",
-      "reproductibilité métrologique",
-      "condition de reproductibilité"
-    ],
-    "category": "Méthode",
-    "short": "Fidélité de mesure lorsque lieux, opérateurs ou systèmes de mesure diffèrent selon des conditions spécifiées.",
-    "seeAlso": [
-      "repetabilite-mesure",
-      "replicabilite-scientifique",
-      "incertitude-mesure"
-    ],
-    "relatedLessonIds": [
-      "ldt-reproductibilite"
-    ]
-  },
-  {
-    "id": "realisation-impact",
-    "term": "Réalisation d’impact",
-    "slug": "realisation-impact",
-    "aliases": [
-      "output",
-      "outputs"
-    ],
-    "category": "Métriques",
-    "short": "Produit immédiat et observable d’une activité, sans présumer du changement obtenu pour les personnes.",
-    "link": "https://www.impacteurope.net/glossary",
-    "seeAlso": [
-      "resultat-impact",
-      "theorie-du-changement",
-      "mesure-impact"
-    ],
-    "relatedLessonIds": [
-      "lvp-analyse-probleme",
-      "lvp-theorie-changement",
-      "lvp-mesure-impact"
     ]
   },
   {
@@ -6544,62 +6539,23 @@
     ]
   },
   {
-    "id": "replicabilite-scientifique",
-    "term": "Réplicabilité scientifique",
-    "slug": "replicabilite-scientifique",
+    "id": "reproductibilite-mesure",
+    "term": "Reproductibilité de mesure",
+    "slug": "reproductibilite-mesure",
     "aliases": [
-      "replicability",
-      "réplication scientifique"
+      "measurement reproducibility",
+      "reproductibilité métrologique",
+      "condition de reproductibilité"
     ],
     "category": "Méthode",
-    "short": "Cohérence de résultats entre études visant la même question scientifique avec leurs propres données.",
+    "short": "Fidélité de mesure lorsque lieux, opérateurs ou systèmes de mesure diffèrent selon des conditions spécifiées.",
     "seeAlso": [
-      "reproductibilite-mesure",
       "repetabilite-mesure",
+      "replicabilite-scientifique",
       "incertitude-mesure"
     ],
     "relatedLessonIds": [
       "ldt-reproductibilite"
-    ]
-  },
-  {
-    "id": "repetabilite-mesure",
-    "term": "Répétabilité de mesure",
-    "slug": "repetabilite-mesure",
-    "aliases": [
-      "measurement repeatability",
-      "répétabilité métrologique",
-      "condition de répétabilité"
-    ],
-    "category": "Méthode",
-    "short": "Fidélité obtenue lorsque les mesures sont répétées sous les mêmes conditions spécifiées.",
-    "seeAlso": [
-      "reproductibilite-mesure",
-      "incertitude-mesure"
-    ],
-    "relatedLessonIds": [
-      "ldt-reproductibilite"
-    ]
-  },
-  {
-    "id": "reseau-vc",
-    "term": "Réseau VC",
-    "slug": "reseau-vc",
-    "category": "Stratégie",
-    "short": "Réseau de fondateurs, investisseurs, talents, clients et acquéreurs mobilisé par un VC.",
-    "seeAlso": [
-      "deal-flow",
-      "warm-intro",
-      "portfolio-monitoring",
-      "gp"
-    ],
-    "relatedLessonIds": [
-      "l-vc-definition",
-      "l-actors"
-    ],
-    "aliases": [
-      "réseau venture",
-      "venture capital network"
     ]
   },
   {
@@ -6660,29 +6616,6 @@
     "aliases": [
       "restricted stock units",
       "RSU"
-    ]
-  },
-  {
-    "id": "resultat-impact",
-    "term": "Résultat d’impact",
-    "slug": "resultat-impact",
-    "aliases": [
-      "outcome",
-      "outcomes"
-    ],
-    "category": "Métriques",
-    "short": "Changement observé pour des personnes, des organisations ou un système après une intervention.",
-    "link": "https://www.impacteurope.net/glossary",
-    "seeAlso": [
-      "realisation-impact",
-      "additionalite",
-      "theorie-du-changement",
-      "mesure-impact"
-    ],
-    "relatedLessonIds": [
-      "lvp-theorie-changement",
-      "lvp-entretiens-beneficiaires",
-      "lvp-mesure-impact"
     ]
   },
   {
@@ -6853,6 +6786,110 @@
     "aliases": [
       "cash runway",
       "piste de trésorerie"
+    ]
+  },
+  {
+    "id": "realisation-impact",
+    "term": "Réalisation d’impact",
+    "slug": "realisation-impact",
+    "aliases": [
+      "output",
+      "outputs"
+    ],
+    "category": "Métriques",
+    "short": "Produit immédiat et observable d’une activité, sans présumer du changement obtenu pour les personnes.",
+    "link": "https://www.impacteurope.net/glossary",
+    "seeAlso": [
+      "resultat-impact",
+      "theorie-du-changement",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-analyse-probleme",
+      "lvp-theorie-changement",
+      "lvp-mesure-impact"
+    ]
+  },
+  {
+    "id": "replicabilite-scientifique",
+    "term": "Réplicabilité scientifique",
+    "slug": "replicabilite-scientifique",
+    "aliases": [
+      "replicability",
+      "réplication scientifique"
+    ],
+    "category": "Méthode",
+    "short": "Cohérence de résultats entre études visant la même question scientifique avec leurs propres données.",
+    "seeAlso": [
+      "reproductibilite-mesure",
+      "repetabilite-mesure",
+      "incertitude-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
+    ]
+  },
+  {
+    "id": "repetabilite-mesure",
+    "term": "Répétabilité de mesure",
+    "slug": "repetabilite-mesure",
+    "aliases": [
+      "measurement repeatability",
+      "répétabilité métrologique",
+      "condition de répétabilité"
+    ],
+    "category": "Méthode",
+    "short": "Fidélité obtenue lorsque les mesures sont répétées sous les mêmes conditions spécifiées.",
+    "seeAlso": [
+      "reproductibilite-mesure",
+      "incertitude-mesure"
+    ],
+    "relatedLessonIds": [
+      "ldt-reproductibilite"
+    ]
+  },
+  {
+    "id": "reseau-vc",
+    "term": "Réseau VC",
+    "slug": "reseau-vc",
+    "category": "Stratégie",
+    "short": "Réseau de fondateurs, investisseurs, talents, clients et acquéreurs mobilisé par un VC.",
+    "seeAlso": [
+      "deal-flow",
+      "warm-intro",
+      "portfolio-monitoring",
+      "gp"
+    ],
+    "relatedLessonIds": [
+      "l-vc-definition",
+      "l-actors"
+    ],
+    "aliases": [
+      "réseau venture",
+      "venture capital network"
+    ]
+  },
+  {
+    "id": "resultat-impact",
+    "term": "Résultat d’impact",
+    "slug": "resultat-impact",
+    "aliases": [
+      "outcome",
+      "outcomes"
+    ],
+    "category": "Métriques",
+    "short": "Changement observé pour des personnes, des organisations ou un système après une intervention.",
+    "link": "https://www.impacteurope.net/glossary",
+    "seeAlso": [
+      "realisation-impact",
+      "additionalite",
+      "theorie-du-changement",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-theorie-changement",
+      "lvp-entretiens-beneficiaires",
+      "lvp-mesure-impact"
     ]
   },
   {
@@ -7758,29 +7795,6 @@
     ]
   },
   {
-    "id": "theorie-du-changement",
-    "term": "Théorie du changement",
-    "slug": "theorie-du-changement",
-    "aliases": [
-      "theory of change",
-      "ToC"
-    ],
-    "category": "Stratégie",
-    "short": "Hypothèse causale explicite reliant besoins, activités, réalisations, résultats et impact attendu.",
-    "link": "https://www.avise.org/ressources/comment-evaluer-son-impact-principes-methodologiques",
-    "seeAlso": [
-      "additionalite",
-      "realisation-impact",
-      "resultat-impact",
-      "mesure-impact"
-    ],
-    "relatedLessonIds": [
-      "lvp-analyse-probleme",
-      "lvp-theorie-changement",
-      "lvp-mesure-impact"
-    ]
-  },
-  {
     "id": "thesis-driven",
     "term": "Thèse d'investissement",
     "slug": "thesis-driven",
@@ -7801,6 +7815,29 @@
     "aliases": [
       "investment thesis",
       "thèse VC"
+    ]
+  },
+  {
+    "id": "theorie-du-changement",
+    "term": "Théorie du changement",
+    "slug": "theorie-du-changement",
+    "aliases": [
+      "theory of change",
+      "ToC"
+    ],
+    "category": "Stratégie",
+    "short": "Hypothèse causale explicite reliant besoins, activités, réalisations, résultats et impact attendu.",
+    "link": "https://www.avise.org/ressources/comment-evaluer-son-impact-principes-methodologiques",
+    "seeAlso": [
+      "additionalite",
+      "realisation-impact",
+      "resultat-impact",
+      "mesure-impact"
+    ],
+    "relatedLessonIds": [
+      "lvp-analyse-probleme",
+      "lvp-theorie-changement",
+      "lvp-mesure-impact"
     ]
   },
   {
@@ -8074,6 +8111,30 @@
     ]
   },
   {
+    "id": "trustee",
+    "term": "Trustee",
+    "slug": "trustee",
+    "aliases": [
+      "fiduciaire",
+      "portage fiduciaire",
+      "trust agreement",
+      "trustee structure",
+      "trusteeship"
+    ],
+    "category": "Juridique & Fiscalité",
+    "short": "Intermédiaire qui détient ou exerce des droits pour un groupe d’investisseurs.",
+    "seeAlso": [
+      "cap-table",
+      "voting-pool",
+      "protective-provisions",
+      "information-rights"
+    ],
+    "relatedLessonIds": [
+      "l-founder-instruments",
+      "l-ts-control"
+    ]
+  },
+  {
     "id": "tresorerie-mobilisable",
     "term": "Trésorerie mobilisable",
     "slug": "tresorerie-mobilisable",
@@ -8100,30 +8161,6 @@
       "lvp-termes-financement",
       "lvp-atelier-structuration",
       "lvp-recommandation-comite"
-    ]
-  },
-  {
-    "id": "trustee",
-    "term": "Trustee",
-    "slug": "trustee",
-    "aliases": [
-      "fiduciaire",
-      "portage fiduciaire",
-      "trust agreement",
-      "trustee structure",
-      "trusteeship"
-    ],
-    "category": "Juridique & Fiscalité",
-    "short": "Intermédiaire qui détient ou exerce des droits pour un groupe d’investisseurs.",
-    "seeAlso": [
-      "cap-table",
-      "voting-pool",
-      "protective-provisions",
-      "information-rights"
-    ],
-    "relatedLessonIds": [
-      "l-founder-instruments",
-      "l-ts-control"
     ]
   },
   {

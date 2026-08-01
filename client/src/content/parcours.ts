@@ -190,6 +190,16 @@ function previousStepItem(steps: ParcoursStep[], fromIndex: number): ParcoursNav
   return undefined;
 }
 
+function previousLessonStepItem(steps: ParcoursStep[], fromIndex: number): ParcoursNavigationItem | undefined {
+  for (let index = fromIndex - 1; index >= 0; index -= 1) {
+    const resolved = resolveStep(steps[index]);
+    if (!resolved.lessonId && !resolved.lessonIds?.length) continue;
+    const item = navigationItemForStep(steps[index]);
+    if (item) return item;
+  }
+  return undefined;
+}
+
 function nextStepItem(steps: ParcoursStep[], fromIndex: number): ParcoursNavigationItem | undefined {
   for (let index = fromIndex + 1; index < steps.length; index += 1) {
     const item = navigationItemForStep(steps[index]);
@@ -215,6 +225,7 @@ export function parcoursNavigationForLesson(
 ): ParcoursLessonNavigation | null {
   const containsLesson = (p: Parcours) => p.steps.some((step) => {
     if (step.ref.kind === 'lesson' && step.ref.id === lessonId) return true;
+    if (step.ref.kind === 'milestone' && resolveStep(step).lessonId === lessonId) return true;
     if (step.ref.kind !== 'course') return false;
     return publishedLessonsForCourse(step.ref.id).some((lesson) => lesson.id === lessonId);
   });
@@ -232,11 +243,15 @@ export function parcoursNavigationForLesson(
     : [...parcours.steps].sort((a, b) => a.order - b.order);
   const directIndex = steps.findIndex((step) => (
     step.ref.kind === 'lesson' && step.ref.id === lessonId
+    || step.ref.kind === 'milestone' && resolveStep(step).lessonId === lessonId
   ));
   if (directIndex >= 0) {
+    const directStep = steps[directIndex];
     return {
       parcours,
-      prev: previousStepItem(steps, directIndex),
+      prev: directStep.ref.kind === 'milestone'
+        ? previousLessonStepItem(steps, directIndex)
+        : previousStepItem(steps, directIndex),
       next: nextStepItem(steps, directIndex),
     };
   }

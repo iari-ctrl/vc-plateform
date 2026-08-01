@@ -4398,6 +4398,504 @@
     ],
     "furtherReading": []
   },
+  "seed-validation-commerciale-retention": {
+    "body": "## Cadre\n\nCette leçon traite la validation commerciale d’une société Seed : premiers revenus, usage répété, rétention courte et qualité des données commerciales. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade utilisée ici est une transposition professionnelle prudente : les sources externes décrivent des responsabilités, des documents et des pratiques, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nFrance Invest soutient une lecture de l’amorçage par validation de marché, business plan, emploi des fonds, jalons observables et besoins futurs. La hiérarchie intérêt → pilote → devis → facture → revenu → renouvellement est donc une grille pédagogique de diligence, pas une taxonomie universelle publiée par France Invest. Elle sert de convention éditoriale locale pour examiner le risque que chaque pièce réduit : besoin déclaré, usage réel, volonté d’achat, transaction, revenu récurrent, puis continuité.\n\nAu Seed, le financement sert souvent à rendre certaines preuves observables sans effacer l’incertitude. Un pilote gratuit peut confirmer l’usage mais pas le prix. Un devis peut confirmer une intention mais pas l’encaissement. Une facture peut confirmer une transaction mais pas la répétition. Un revenu et un renouvellement réduisent mieux le risque commercial, sans devenir pour autant un benchmark de marché.\n\n## Méthode\n\nLa méthode commence par un registre de preuves. Pour chaque compte, l’Analyst note la source, la date, le statut, l’unité, la période, le propriétaire de la donnée et le risque encore ouvert. Les termes [[arr|ARR]], [[mrr|MRR]] et [[nrr|NRR]] ne sont utilisés que si la cohorte, le dénominateur et les exclusions sont écrits. L’[[arr|ARR]] désigne ici un revenu annuel récurrent vérifié ; l’annualisation mécanique d’un mois isolé reste un [[annualized-run-rate|run rate annualisé]].\n\nLa grille pédagogique de diligence classe intérêt, pilote, devis, facture, revenu et renouvellement dans cet ordre seulement pour guider la revue. Elle n’impose pas la même marche à tous les secteurs. Le risque examiné doit être nommé au point d’usage : risque de problème mal qualifié, risque de non-usage, risque de non-achat, risque de non-paiement, risque de revenu ponctuel, risque de non-renouvellement ou de concentration.\n\nLes benchmarks SaaS privés servent à poser des questions, pas à conclure. ChartMogul « New Normal » décrit des tendances de NRR dans sa population privée de clients SaaS, avec une géographie non documentée dans l’extrait inspecté, et emploie ARR comme Annual Run Rate = MRR × 12 dans son glossaire. High Alpha/OpenView publie une synthèse de benchmarks privés ; le rapport détaillé est soumis à formulaire. Aucun de ces éléments ne remplace le rapprochement CRM, contrats, factures, encaissements et usage produit.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Jeu de quinze comptes fictifs C01 à C15 : C01 intérêt verbal sans budget ; C02 pilote gratuit actif ; C03 devis signé non facturé ; C04 facture de setup 8 k€ ; C05 abonnement actif 2 k€ MRR encaissé ; C06 abonnement actif 3 k€ MRR facturé non encaissé ; C07 pilote converti en contrat 1 k€ MRR ; C08 contrat annuel 24 k€ encaissé ; C09 client perdu après pilote ; C10 renouvellement signé 2 k€ MRR ; C11 expansion proposée non signée ; C12 facture de service 5 k€ ; C13 usage actif sans contrat ; C14 devis expiré ; C15 renouvellement payé 1,5 k€ MRR.\n\nLe calcul attendu isole les revenus récurrents vérifiés : C05, C07, C08, C10 et C15 représentent 8,5 k€ de MRR vérifié, soit 102 k€ d’ARR annualisé par convention locale si les contrats sont actifs à la date d’extraction. C04 et C12 restent des revenus non récurrents. C06 est facturé mais non encaissé ; il doit être présenté séparément tant que la convention de revenu vérifié exige l’encaissement ou une confirmation contractuelle plus robuste.\n\nLa synthèse attendue tient en quatre phrases : signal confirmé, limite principale, pièce suivante, point d’escalade. Elle indique que les preuves commerciales existent mais restent concentrées et jeunes. Elle ne présente ni les 102 k€ ni les comptes fictifs comme observation de marché.\n\n## Limites et points de contrôle\n\nLa qualité commerciale ne se résume pas au niveau le plus élevé atteint par un compte. Un renouvellement isolé peut masquer une concentration ; plusieurs pilotes peuvent ne rien dire du prix. La revue doit donc garder la taille d’échantillon, la durée d’usage, la concentration, la nature récurrente ou ponctuelle et la période de collecte visibles.\n\nL’Analyst peut préparer, documenter, rapprocher, recalculer, tenir les registres, signaler et escalader. Il ne valide pas seul la qualité commerciale, ne négocie pas les termes, n’engage pas le fonds et ne délivre pas de validation professionnelle. Les incertitudes matérielles restent dans la note au lieu d’être lissées par un adjectif.\n\nLa source de place française soutient les questions de validation marché, d’emploi des fonds et de jalons, mais pas l’échelle pilote → devis → facture → renouvellement comme règle obligatoire. Cette distinction doit rester visible chaque fois que la grille est utilisée.\n\nLa source est toujours attachée à la proposition qu’elle soutient. Quand France Invest est cité, la note parle de validation de marché ou d’emploi des fonds ; quand ChartMogul ou High Alpha est cité, elle parle seulement de cohortes privées et de questions de comparaison.\n\n## Mise en application\n\nÀ partir des quinze comptes C01 à C15 ci-dessus, classe chaque ligne en signal déclaratif, pilote, devis, facture, revenu récurrent vérifié, revenu non récurrent ou renouvellement. Calcule le revenu récurrent vérifié, signale les comptes à exclure et rédige une note de fragilité en cinq lignes.\n\nLa restitution comprend une table avec source, période, statut, montant, traitement retenu et risque restant. Si un compte manque d’information, l’exercice demande de formuler la donnée à obtenir plutôt que d’inventer un résultat numérique. Aucune conclusion ne doit être présentée comme validation praticienne ou juridique.\n\n## Références\n\n- [France Invest, Guide des bonnes pratiques du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf) — validation de marché, business plan, emploi des fonds, jalons et besoins futurs ; ne publie pas la grille pédagogique locale.\n- [ChartMogul, The SaaS Retention Report: The New Normal For SaaS, 2024](https://chartmogul.com/reports/saas-retention-the-new-normal/) — tendances NRR dans une population privée ChartMogul ; géographie non documentée dans l’extrait inspecté.\n- [High Alpha / OpenView, 2024 SaaS Benchmarks Report, 2024](https://www.highalpha.com/saas-benchmarks/2024) — synthèse publique d’un benchmark SaaS privé ; rapport détaillé soumis à formulaire.\n",
+    "keyTakeaways": [
+      "Un signal seed se qualifie par pièce vérifiable, pas par seuil universel.",
+      "Le revenu récurrent doit être séparé des pilotes, devis et prestations ponctuelles.",
+      "Une cohorte courte décrit une hypothèse de rétention, non une tendance durable.",
+      "Tout benchmark SaaS doit porter son échantillon, sa période et sa limite d’usage."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
+  },
+  "seed-ownership-runway-financement": {
+    "body": "## Cadre\n\nCette leçon traite le financement Seed : primaire, secondaire, runway, jalons, ownership, option pool et dilution. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade est une transposition professionnelle prudente : les sources externes décrivent des pratiques de financement et des documents, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nLe primaire finance la société ; le secondaire rémunère un vendeur et n’apporte pas de cash nouveau à la société. Aucun niveau de runway, d’option pool ou d’ownership n’est présenté comme norme universelle. La question de diligence consiste à vérifier si les données disponibles permettent un calcul mécanique, puis si ce calcul suffit à éclairer la fenêtre utile avant le prochain tour.\n\nFrance Invest soutient l’analyse du montant, de l’emploi des fonds, des besoins court et moyen terme et des futures levées. Galion est un modèle professionnel français centré sur une Series A et pas une norme Seed. IPEV est mobilisé seulement pour la juste valeur, la calibration et les limites d’un prix de transaction récent ; le prix du tour ne devient pas une juste valeur permanente.\n\n## Méthode\n\nLa convention de runway est dimensionnelle. La runway mécanique = cash post-closing disponible / burn net mensuel. Elle ne se calcule pas en soustrayant un mois de burn à une trésorerie. Le dossier doit préciser le snapshot de cash, l’unité, le signe du burn, le primaire reçu ou seulement attendu, les frais et décaissements engagés, puis la convention d’arrondi.\n\nTrois objets sont séparés. La runway mécanique jusqu’à zéro mesure le temps avant épuisement de la trésorerie si le burn reste constant. La runway jusqu’à un seuil de trésorerie exige un seuil explicite. La fenêtre utile avant lancement du prochain tour exige en plus un délai de levée, un calendrier de jalons et les décaissements déjà engagés. Si le seuil ou le délai manque, le calcul est impossible tant que ces inputs ne sont pas renseignés.\n\nPour l’ownership, post-money = pre-money + investissement primaire. Dans le cas central, 7,6 M€ de pre-money et 2,4 M€ de primaire donnent 10,0 M€ de post-money ; l’ownership avant ajustement vaut 2,4 M€ / 10,0 M€ = 24 %. La convention fully diluted retenue inclut les titres émis, options attribuées, réserve non attribuée et instruments convertibles as-converted seulement s’ils sont documentés.\n\nL’option pool ne doit pas être choisi silencieusement. Le pool pre-money et le pool post-money doivent être présentés comme deux conventions distinctes dans la même note. Si le pool est mesuré pre-money, le top-up est supporté par les détenteurs existants avant l’entrée du nouvel investisseur. Si le pool est mesuré post-money, la dilution peut être partagée après l’investissement. Le dossier distingue toujours pool attribué et réserve non attribuée.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. snapshot de cash au 2026-08-01, unité k€, cash initial 350 k€, primaire reçu au closing 2,4 M€, cash post-closing avant frais 350 k€ + 2,4 M€ = 2,75 M€, frais non déduits et décaissements engagés non renseignés, burn net mensuel de -90 k€, avec signe négatif dans le modèle et valeur absolue de 90 k€ pour le calcul. La runway mécanique est 2,75 M€ / 90 k€ = 30,555… mois, publiée à 30,6 mois avec arrondi à une décimale.\n\nLe même cas ne permet pas de calculer la runway jusqu’à un seuil de trésorerie ni la fenêtre utile avant lancement du prochain tour, car le seuil de cash minimum et le délai de levée ne sont pas fournis. Ils deviennent des questions de diligence, non des durées inventées. L’Analyst peut ajouter une hypothèse propre au cas seulement si elle est explicitement marquée comme hypothèse fictive.\n\nCap table avant/après sans top-up silencieux : avant tour, fondateurs 82 %, investisseurs existants 12 %, pool attribué 4 %, réserve non attribuée 2 %. Après primaire sans changement de pool, le nouvel investisseur détient 24 %, et la base existante est ramenée à 76 % : fondateurs 62,32 %, investisseurs existants 9,12 %, pool attribué 3,04 %, réserve non attribuée 1,52 %. Si la term sheet exige un pool total de 10 % pre-money ou post-money, les deux conventions produisent une dilution différente et doivent être escaladées.\n\n## Limites et points de contrôle\n\nUne mécanique correcte ne suffit pas à rendre le tour finançable. La runway utile dépend des frais, des embauches engagées, du seuil de trésorerie, de la saisonnalité, du délai de closing et du lancement du tour suivant. L’Analyst doit donc publier les inputs absents plutôt que compléter le modèle par intuition.\n\nLe contrôle option pool porte sur la base fully diluted, le traitement des convertibles, les titres attribués, la réserve non attribuée, les bénéficiaires du top-up et le moment de mesure. Une cap table avant/après ne vaut que si elle est datée, si les pourcentages totalisent 100 % et si elle distingue primaire, secondaire et transferts de titres.\n\nL’Analyst peut préparer, recalculer, documenter et signaler les ambiguïtés. Il ne négocie pas les termes, n’arrête pas le pool, ne choisit pas les co-investisseurs, n’engage pas le fonds, n’autorise pas les fonds et ne réalise pas le closing.\n\n## Mise en application\n\nÀ partir du scénario faible : primaire 1,8 M€, pre-money 6,2 M€, burn 80 k€ ; scénario central : primaire 2,4 M€, pre-money 7,6 M€, burn 90 k€ ; scénario élevé : primaire 3,0 M€, pre-money 9,0 M€, burn 110 k€, calcule post-money, ownership avant ajustement et runway mécanique. Ne calcule pas la runway utile tant que seuil de trésorerie et délai de levée ne sont pas renseignés.\n\nLa restitution comporte une cap table avant/après, une liste des inputs manquants et une question d’escalade sur le pool pre-money ou post-money. Aucune durée de runway n’est présentée comme benchmark.\n\n## Références\n\n- [France Invest, Guide des bonnes pratiques du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf) — business plan, usage des fonds, montant du tour et besoins de financement.\n- [The Galion Project, Galion Term Sheet actualisée et illustrée, 2019](https://cdn.prod.website-files.com/666ae58ed4f8451dd6a96db4/667b2227977c529eb3f56f7e_galion-term-sheet-illustrated.pdf) — modèle professionnel français de Series A, cap table et fully diluted ; non retenu comme norme Seed.\n- [IPEV, International Private Equity and Venture Capital Valuation Guidelines, 2022](https://www.privateequityvaluation.com/Portals/0/Documents/Guidelines/IPEV%20Valuation%20Guidelines%20-%20December%202022.pdf) — juste valeur, calibration et limites d’un prix de transaction récent.\n",
+    "keyTakeaways": [
+      "Le montant du tour se teste par runway utile, jalons vérifiables et risque résiduel.",
+      "L’ownership dépend du primaire, du post-money et du dénominateur fully diluted retenu.",
+      "Une augmentation d’option pool peut changer fortement la dilution des fondateurs.",
+      "Aucun niveau de runway ou d’ownership ne doit être présenté comme une norme universelle."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
+  },
+  "lead-plan-due-diligence-term-sheet": {
+    "body": "## Cadre\n\nCette leçon traite la préparation d’un processus lead : plan de due diligence, data room, paramètres économiques et term sheet. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade est une transposition professionnelle prudente : les sources externes décrivent la diligence, la lettre d’intention, les conditions et la qualité des sources, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nLe niveau Analyst prépare, documente, rapproche, recalcule, tient les registres, signale et escalade. Il ne dirige pas le processus d’investissement, ne négocie pas les clauses, ne valide pas juridiquement une diligence ou une condition, ne choisit pas les co-investisseurs, n’engage pas le fonds et ne délivre pas de validation professionnelle ou réglementaire.\n\nFrance Invest fournit le vocabulaire français de lettre d’intention, diligences, conditions et adaptation de la documentation. Le Standard V(A) du CFA Institute soutient la discipline de base raisonnable et de qualité des sources. L’AMF encadre notamment la diligence, la confidentialité, les conflits d’intérêts et la séparation des fonctions selon le statut applicable.\n\n## Méthode\n\nLa méthode commence par une hypothèse d’investissement et un registre de risques. Chaque ligne de [[dd|due diligence]] relie hypothèse, pièce attendue, source, responsable, échéance, statut, conclusion provisoire et point d’escalade. Une pièce ne vaut pas conclusion : le registre distingue document reçu, vérification effectuée, limite de la preuve et conséquence possible sur la [[term-sheet|term sheet]].\n\nLa préparation de term sheet reste au niveau des entrées à fournir au décideur : montant primaire, valorisation, base fully diluted, option pool, droits économiques, droits d’information, gouvernance, conditions préalables et points non résolus. L’Analyst peut préparer les scénarios et les rapprochements de [[cap-table|cap table]], mais l’Associate ou le deal lead porte la coordination, le Partner valide la position et les conseils qualifient juridiquement les clauses.\n\nLa matrice de diligence doit rester pilotable. Elle évite deux erreurs : l’inventaire documentaire sans lien avec un risque, et la conclusion juridique ou commerciale que l’Analyst n’est pas habilité à arrêter. Les sources et les dates figurent près des propositions, surtout quand une source est volontaire, internationale ou non spécifique au venture français.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Le dossier comporte trois risques : concentration de revenu, ownership demandé et dépendance à un fournisseur critique. La matrice de diligence de douze lignes contient R01 cohorte ARR, R02 contrats top clients, R03 factures et encaissements, R04 usage produit, R05 cap table émise, R06 fully diluted, R07 plan d’options, R08 convertibles, R09 contrat fournisseur, R10 propriété intellectuelle, R11 conformité données, R12 conditions de closing envisagées.\n\nPour chaque ligne, l’apprenant renseigne pièce attendue, source primaire, responsable, statut, limite et décision requise. Exemple : R05 demande registre de titres et cap table datée ; R06 demande base fully diluted et instruments as-converted ; R09 demande contrat fournisseur, durée, résiliation et dépendance opérationnelle. Si une pièce manque, la réponse attendue est une question de diligence et non une hypothèse inventée.\n\nLa sortie pédagogique est une page d’escalade : trois risques critiques, deux paramètres à intégrer à la term sheet et une phrase qui précise qui doit décider. Elle ne simule ni négociation, ni validation juridique.\n\n## Limites et points de contrôle\n\nUne data room abondante peut rester faible si les documents ne sont pas reliés aux risques. Une source tierce peut être utile sans être suffisante. Une information déclarée par le management doit être séparée d’un document signé, d’un rapprochement comptable ou d’un avis spécialisé.\n\nLe contrôle de grade est explicite. L’Analyst prépare les registres, rapproche les pièces et alerte. L’Associate coordonne et priorise selon délégation. Le Partner ou l’IC décide. Les conseils et fonctions de conformité traitent les avis spécialisés. Cette répartition n’est pas une doctrine publiée par les sources ; elle constitue une borne prudente pour éviter d’attribuer à l’Analyst une responsabilité qui dépasse le périmètre.\n\nLe contrôle de source est aussi explicite. France Invest est une source professionnelle française de place, non une règle juridique complète. CFA Institute est international et volontaire. AMF dépend du statut et des règles applicables. Les conclusions doivent donc rester proportionnées à ces portées.\n\nCette discipline protège aussi la frontière professionnelle. Une hypothèse de clause peut être préparée pour discussion, mais elle reste une entrée de travail. La note ne doit pas laisser croire qu’un Analyst qualifie seul une condition suspensive, une conformité réglementaire, une propriété intellectuelle ou une situation fiscale. Chaque sujet spécialisé garde un owner et une trace d’escalade.\n\nLe registre garde également une piste d’audit minimale : date de réception, version du document, lien avec la data room, personne ayant fourni la pièce et personne chargée de la revue. Cette granularité évite qu’une information ancienne ou remplacée serve encore de base à une hypothèse économique. Elle permet aussi de reprendre le dossier si le lead change ou si un conseil demande l’origine d’un chiffre.\n\nLa conclusion garde les mots « préparé pour revue » lorsque la preuve n’est pas définitive.\n\n## Mise en application\n\nRédige une matrice de diligence de douze lignes à partir des risques R01 à R12 ci-dessus. Pour chaque ligne, indique pièce attendue, source, owner, échéance, statut, risque réduit, risque restant et niveau d’escalade.\n\nLa restitution comprend aussi une préparation de term sheet en cinq paramètres économiques, trois points ouverts et une phrase d’escalade. Si une donnée manque, l’exercice demande de l’identifier et de dire qui doit la fournir ou la valider. Aucun résultat ne doit être présenté comme validation praticienne ou juridique.\n\n## Références\n\n- [France Invest, Guide des bonnes pratiques du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf) — lettre d’intention, due diligences, conditions et adaptation documentaire.\n- [CFA Institute, Standard V(A) Diligence and Reasonable Basis, 2024](https://www.cfainstitute.org/standards/professionals/code-ethics-standards/standards-of-practice-v-a) — base raisonnable, diligence et qualité des sources.\n- [AMF, Règlement de déontologie des sociétés de gestion intervenant dans le capital-investissement, 2013](https://www.amf-france.org/fr/reglementation/regles-professionnelles-approuvees/reglement-de-deontologie-des-societes-de-gestion-de-portefeuille-intervenant-dans-le-capital) — diligence, confidentialité, conflits d’intérêts et organisation professionnelle.\n",
+    "keyTakeaways": [
+      "L’Analyst prépare une matrice de diligence, il ne dirige pas le processus lead.",
+      "Une term sheet se prépare par paramètres, scénarios et points ouverts avant arbitrage senior.",
+      "Chaque preuve doit porter sa source, sa date, son périmètre et sa limite.",
+      "La frontière avec les conseils et les niveaux supérieurs doit rester explicite."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
+  },
+  "lead-syndication-gouvernance-closing": {
+    "body": "## Cadre\n\nCette leçon traite la préparation du closing dans un tour mené par un fonds lead : syndication, conditions, gouvernance, versions documentaires et preuves de satisfaction. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade est une transposition professionnelle prudente : les sources externes décrivent des pratiques et obligations, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nL’Analyst suit, rapproche, documente et escalade. Il ne négocie pas ou n’arrête pas les termes, ne valide pas juridiquement une condition, ne choisit pas les co-investisseurs, n’engage pas le fonds, n’autorise pas ou ne libère pas les fonds, ne réalise pas le closing et ne représente pas le fonds au board.\n\nFrance Invest soutient les notions de syndication, conditions préalables, signature, souscription, libération des fonds et gouvernance. L’AMF soutient la vigilance sur diligence, confidentialité, conflits d’intérêts et organisation professionnelle. UK Private Capital/BVCA est seulement une comparaison documentaire : sa page concerne des modèles Series A et ne constitue ni droit français ni standard seed.\n\n## Méthode\n\nLa méthode repose sur une checklist de closing. Chaque ligne précise document ou condition, source contractuelle, owner, preuve attendue, dépendance, statut, risque si retard et niveau d’escalade. Les [[conditions-de-closing|conditions de closing]] sont suivies comme des objets de preuve, pas comme une validation autonome de l’Analyst.\n\nLe registre de syndication distingue co-investisseur contacté, allocation envisagée, questions reçues, documents partagés, statut d’adhésion et points de divergence. L’Analyst peut mesurer l’effet d’un retard sur le primaire ou sur la cap table, mais il ne décide pas qui entre au tour et ne modifie pas l’allocation.\n\nLa matrice de gouvernance sépare droits économiques, droits d’information, siège, observateur, décisions réservées, reporting et conditions post-closing. Une responsabilité de board ou d’observateur ne peut pas être attribuée à l’Analyst. Il prépare la lecture des droits ; le fonds désigne les représentants habilités et les conseils qualifient les actes.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Une term sheet a été signée avec deux co-investisseurs, un nouveau pool d’options, un siège investisseur et plusieurs conditions. Un co-investisseur tarde à confirmer son allocation. La checklist de closing de douze lignes contient C01 subscription agreement, C02 shareholders agreement, C03 statuts ou articles, C04 décision sociale, C05 KYC/AML, C06 conflits d’intérêts, C07 cap table finale, C08 option pool, C09 accord co-investisseur A, C10 accord co-investisseur B, C11 confirmation funds flow, C12 registre post-closing.\n\nL’apprenant renseigne pour chaque ligne la preuve attendue, le responsable, le statut et le risque si retard. C10, par exemple, indique allocation non confirmée, effet possible sur le primaire et escalade Associate. La réponse ne consiste pas à renégocier ; elle rend le blocage visible avec ses conséquences et les décisions requises.\n\nLa sortie est une note courte : état des conditions, blocage principal, effet financier ou documentaire, owner et prochaine décision. Elle ne simule ni signature, ni libération de fonds, ni validation juridique.\n\n## Limites et points de contrôle\n\nUne checklist complète ne prouve pas que le closing est réalisé. Elle indique seulement les pièces, statuts et points d’escalade. Les conditions peuvent être satisfaites, en cours, non applicables, bloquées ou à qualifier par conseil. Le libellé doit rester descriptif.\n\nLes modèles britanniques peuvent nommer des familles documentaires utiles, mais leur propre page limite leur usage à un contexte Series A et non seed. Ils ne doivent pas être repris comme standard français. Le registre doit donc indiquer juridiction, source et limite lorsqu’une comparaison étrangère est mentionnée.\n\nLe contrôle de responsabilité reste central. L’Analyst prépare la preuve, l’Associate coordonne selon délégation, le Partner ou l’organe habilité engage le fonds, les conseils rédigent et qualifient, les fonctions finance ou conformité traitent les libérations et contrôles selon leur mandat.\n\nLa preuve de closing doit rester documentaire et datée. Une confirmation orale, une version non signée ou un courriel de principe ne reçoivent pas le même statut qu’un document signé, une résolution adoptée ou une instruction de funds flow validée par les personnes habilitées. Le registre publie donc la nature de la preuve et le niveau de confiance. Cette séparation évite de transformer un suivi administratif en affirmation que le closing est acquis. Elle aide aussi à distinguer un retard documentaire, une question commerciale et une validation juridique réservée aux conseils ou organes compétents.\n\nLe suivi de closing doit aussi séparer la condition contractuelle, la preuve de satisfaction et l’action opérationnelle suivante. Une condition peut être documentée mais attendre une signature ; une signature peut être reçue mais attendre un contrôle KYC ; un contrôle peut être validé mais ne pas autoriser la libération des fonds. Cette chaîne protège le dossier contre les raccourcis. Elle force l’Analyst à écrire le prochain blocage observable plutôt qu’à conclure que tout est prêt.\n\nLe registre conserve les versions remplacées comme historique de travail, sans les présenter comme pièces satisfaisantes. Cette mention évite une confusion entre suivi interne et preuve opposable, datée et identifiable.\n\n## Mise en application\n\nPrépare une checklist de closing de douze lignes avec les items C01 à C12 ci-dessus. Pour chaque ligne, indique document ou condition, owner, statut, preuve attendue, dépendance, risque si retard et niveau d’escalade.\n\nLa restitution comporte aussi un registre de syndication et une matrice de gouvernance. Si une information manque, l’exercice demande de formuler la question à poser et le responsable attendu, sans inventer une validation. Aucun résultat ne doit être présenté comme validation praticienne ou juridique.\n\n## Références\n\n- [France Invest, Guide des bonnes pratiques du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf) — syndication, conditions préalables, signature, souscription, libération des fonds et gouvernance.\n- [AMF, Règlement de déontologie des sociétés de gestion intervenant dans le capital-investissement, 2013](https://www.amf-france.org/fr/reglementation/regles-professionnelles-approuvees/reglement-de-deontologie-des-societes-de-gestion-de-portefeuille-intervenant-dans-le-capital) — diligence, confidentialité, conflits d’intérêts et organisation professionnelle.\n- [UK Private Capital / BVCA, Model Documents For Early Stage Investments, 2025](https://www.ukprivatecapital.co.uk/policy/industry-guidance-standardised-documents/model-documents-for-early-stage-investments.html) — familles documentaires Series A britanniques, comparaison non française et non seed.\n",
+    "keyTakeaways": [
+      "Le suivi de closing par l’Analyst est un registre de conditions, preuves et responsabilités.",
+      "Les retards de syndication se documentent et s’escaladent ; ils ne se renégocient pas au niveau Analyst.",
+      "La gouvernance doit être suivie comme un ensemble de droits et obligations, sans responsabilité de board.",
+      "Les modèles étrangers servent d’illustration documentaire, pas de règle juridique française."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
+  },
+  "saas-arr-retention-unit-economics": {
+    "body": "## Cadre\n\nCette leçon traite les métriques SaaS : ARR, MRR, NRR, GRR, churn, CAC, marge brute, LTV, payback et cohortes. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate.\n\nLes métriques SaaS ne sont pas des grandeurs comptables normalisées. Elles sont des conventions opératoires. Elles doivent donc porter numérateur, dénominateur, période, population, devise, source de données, exclusions et changements de méthode. Une comparaison privée ou un benchmark ne peut être lu qu’après ce dictionnaire.\n\nL’[[arr|ARR]] utilisé ici désigne le revenu annuel récurrent vérifié des contrats ou subscriptions actifs et se distingue de l’annualisation mécanique d’un MRR, d’un revenu ponctuel et de la reconnaissance comptable, qui reste hors périmètre. Paddle soutient une définition opérationnelle de l’ARR, mais la leçon conserve une convention locale prudente au point de calcul. ChartMogul et High Alpha/OpenView sont requalifiés : ChartMogul fournit des définitions ou tendances sur une population privée, géographie non documentée au point inspecté ; High Alpha publie une synthèse, mais le rapport détaillé reste soumis à formulaire.\n\n## Méthode\n\nLa première opération est le retraitement de l’ARR déclaré : 1,2 M€ - 120 k€ = 1,08 M€ d’ARR récurrent vérifié lorsque les 120 k€ correspondent à des services ponctuels. Le retraitement doit indiquer contrats actifs, période, devise et date d’extraction.\n\nLes formules NRR/GRR sont des conventions opératoires locales reliées au glossaire et aux prérequis : GRR = (revenu T0 - churn - contractions) / revenu T0.\n\nNRR = (revenu T0 - churn - contractions + expansions) / revenu T0. La GRR exclut les hausses de revenu et ne doit pas dépasser 100 %. Les nouveaux clients acquis après T0 sont exclus de la NRR ; les réactivations sont traitées séparément si le client n’était pas actif à T0.\n\nLe logo/customer churn mesure les clients actifs T0 devenus inactifs sur la période. Le revenue churn ou gross revenue loss rate mesure le revenu perdu par churn et contractions rapporté au revenu T0. Le [[cac|CAC]] additionne les dépenses d’acquisition attribuables sur une période cohérente avec le cycle de vente. La [[gross-margin|marge brute]] précise revenu net, COGS, hébergement, support et coûts d’usage. La LTV simplifiée publie ses hypothèses : ARPA ou revenu mensuel par client, churn retenu, marge brute, période, durée de vie conventionnelle, expansion et actualisation éventuelle.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Le jeu fourni est un pont agrégé de cohorte, pas un export client : il permet les calculs de revenu et de payback ci-dessous, mais pas l’identification des logos perdus ni une LTV numérique.\n\n| Élément | Valeur | Traitement dans GRR | Traitement dans NRR |\n| --- | --- | --- | --- |\n| période | T0 2025-08-01 à T1 2026-07-31 | Cadre de cohorte | Cadre de cohorte |\n| devise | EUR | Même devise | Même devise |\n| date d’extraction | 2026-08-01 | Trace de source | Trace de source |\n| revenu récurrent de cohorte en T0 | 1 000 k€ | Dénominateur | Dénominateur |\n| churn revenu | 50 k€ | Soustrait | Soustrait |\n| contractions | 70 k€ | Soustraites | Soustraites |\n| expansions | 180 k€ | Exclues | Ajoutées |\n| nouveaux clients après T0 | 90 k€ | Exclus | Exclus de la NRR |\n| réactivations | 20 k€ | Traitées séparément | Traitées séparément |\n\nLe gross revenue loss rate = (50 k€ + 70 k€) / 1 000 k€ = 12 %. Le calcul donne GRR = (1 000 - 50 - 70) / 1 000 = 88 % ; donc GRR = 88 %. Le calcul donne NRR = (1 000 - 50 - 70 + 180) / 1 000 = 106 % ; donc NRR = 106 %. Les 90 k€ de nouveaux clients et les 20 k€ de réactivations ne sont pas ajoutés à la cohorte T0.\n\nDonnées payback : 180 k€ de dépenses d’acquisition attribuables / 30 nouveaux clients = 6 000 € de CAC. L’onboarding initial inclus dans la convention vaut 600 € par client. Le MRR moyen par nouveau client est 1 000 €, le taux de marge brute est 55 %, donc marge brute mensuelle par client = 550 €. CAC payback = (CAC + onboarding inclus selon la convention) / marge brute mensuelle par client. Le résultat est (6 000 € + 600 €) / 550 € = 12 mois.\n\n## Limites et points de contrôle\n\nAucun seuil de NRR, GRR, churn, LTV/CAC ou payback n’est présenté comme universel. Un NRR de 106 % peut masquer une concentration ; une GRR de 88 % peut être correcte mécaniquement et insuffisante selon le segment. Un payback de douze mois n’est lisible qu’avec la marge, le churn et le canal retenus.\n\nLes sources ChartMogul de rétention portent sur des clients ou entreprises SaaS privés, avec segments et méthodes propres. ChartMogul « New Normal » soutient des tendances de NRR dans sa population, ne publie pas la formule détaillée inspectée et ne traite pas la GRR. La leçon cite donc les formules comme conventions opératoires locales, et limite les références privées aux définitions courtes, cohortes et tendances.\n\nL’Analyst prépare, recalcule, rapproche CRM, contrats, factures, comptabilité et usage, puis escalade les écarts. Il ne transforme pas une métrique en validation professionnelle, ne choisit pas seul la convention financière et ne masque pas les réactivations ou nouveaux clients.\n\nLa cohérence temporelle est contrôlée avant tout commentaire. Les revenus de cohorte, les coûts d’acquisition et les marges ne doivent pas mélanger une extraction annuelle, un mois isolé et une dépense d’un autre canal. Si les périodes diffèrent, la note limite le calcul. Le logo/customer churn reste non calculable si les nombres de logos actifs T0 et perdus manquent ; la LTV reste non calculable si les hypothèses de revenu par client, churn, marge, période et durée de vie manquent.\n\n## Mise en application\n\n**Partie A — calculs exécutables depuis le pont agrégé.** Recalcule le gross revenue loss rate, la GRR, la NRR, le CAC, la marge brute mensuelle par client et le CAC payback. Présente chaque formule, chaque exclusion et l’unité utilisée.\n\n**Partie B — contrôle de données et méthode.** Ne produis pas de logo/customer churn numérique : le logo/customer churn est non calculable depuis ce seul pont agrégé, faute de nombre de logos en T0 et de nombre de logos perdus sur la période du churn. Ne produis pas de LTV numérique : la LTV est non calculable depuis ce seul pont agrégé, faute de revenu par client, churn retenu, marge, période et hypothèse de durée de vie ou convention LTV. Aucune valeur ne doit être inventée.\n\nLa restitution comprend un bridge de revenu, un bridge d’acquisition et un schéma de collecte pour un futur export client. L’inventaire des champs à demander couvre au minimum : identifiant client stable, statut client en T0 et T1, MRR ou ARR en T0 et T1, date de début, date de churn éventuelle, contraction ou expansion, nouveau client, réactivation, nombre de logos en T0, nombre de logos perdus, période du churn, ARPA ou revenu mensuel par client, marge brute, hypothèse de durée de vie ou convention LTV. Si une donnée manque, l’exercice demande de documenter le calcul impossible, non d’inventer une valeur.\n\n## Références\n\n- [ChartMogul, SaaS metrics library, page vivante consultée 2026-08-01](https://chartmogul.com/saas-metrics/) — définitions courtes NRR/GRR et rappel que certains usages d’ARR renvoient à l’annualisation MRR × 12.\n- [ChartMogul, SaaS Retention Report 2023, page modifiée 2026-06-03 et consultée 2026-08-01](https://chartmogul.com/reports/saas-retention-report/) — rétention, cohortes, NRR/GRR et benchmarks privés ChartMogul ; géographie non documentée publiquement.\n- [Paddle, What is annual recurring revenue (ARR) and how to calculate it, publication 2023-01-23, modification sitemap 2026-05-15, consultation 2026-08-01](https://www.paddle.com/resources/annual-recurring-revenue) — définition opérationnelle ARR, sans reconnaissance comptable.\n- [Paddle, How to calculate and reduce payback period, publication 2022-02-01, modification 2025-09-30, consultation 2026-08-01](https://www.paddle.com/resources/payback-period) — temps de récupération du CAC et limites de calcul.",
+    "keyTakeaways": [
+      "Une métrique SaaS doit porter numérateur, dénominateur, période, population et exclusions.",
+      "NRR et GRR partent d’une cohorte existante mais traitent différemment l’expansion.",
+      "CAC, marge brute, LTV et payback deviennent trompeurs si les coûts inclus changent.",
+      "Les benchmarks privés guident les questions, pas une norme universelle."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
+  },
+  "saas-repetabilite-go-to-market": {
+    "body": "## Cadre\n\nCette leçon traite la répétabilité du go-to-market SaaS : segment, canal, cycle, conversion, pricing, expansion et dépendance au founder-led sales. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade est une transposition professionnelle prudente : les sources externes décrivent des métriques commerciales, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nUn canal n’est pas supérieur en soi. La question est de savoir s’il peut être répété par une équipe avec volume de leads, conversion, cycle, panier signé, revenu encaissé, marge et rétention observables. Une hausse de leads peut être utile sans prouver le revenu futur. Une conversion forte peut venir d’un segment étroit. Une vente founder-led peut révéler la demande sans démontrer une organisation transférable.\n\nLa source Geckoboard nomme la métrique Lead Velocity Rate (LVR), calculée sur les leads qualifiés. Elle n’emploie pas le nom canonique Qualified Lead Velocity Rate. Pour conserver la compatibilité du glossaire, le slug `qualified-lead-velocity-rate` reste inchangé ; QLVR est seulement un alias local clairement qualifié.\n\n## Méthode\n\nLe dictionnaire commercial fixe d’abord les étapes. Dans ce cas, MQL désigne un lead marketing qualifié selon secteur, taille et besoin déclaré ; SQL désigne un lead accepté par sales avec sponsor identifié, problème actif et prochaine étape datée. La définition doit rester stable entre deux périodes, sinon la comparaison est invalide.\n\nLa formule LVR = (leads qualifiés période courante - leads qualifiés période précédente) / leads qualifiés période précédente. La période est mensuelle dans l’exercice. Si le dénominateur nul apparaît, le taux n’est pas calculé ; la note publie le volume courant et la convention de redémarrage. Cette métrique porte une absence de pouvoir prédictif garanti : elle peut précéder le revenu, mais ne garantit ni conversion, ni cycle, ni panier, ni signature.\n\nLes deux conversions demandées utilisent des numérateurs et dénominateurs explicites. MQL → SQL = SQL issus des MQL de la cohorte / MQL de la cohorte. SQL → won = opportunités signées / opportunités SQL closes, les opportunités ouvertes étant exclues du ratio clos et suivies séparément. La convention de médiane du cycle retient les jours entre création SQL et signature pour les deals gagnés. Le panier signé est la moyenne d’ACV signé hors opportunités perdues et ouvertes.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Les trente opportunités fictives O01 à O30 se résument ainsi : 24 MQL, 18 SQL, 9 won, 6 lost et 3 open ; O01 à O09 sont signées pour 10 k€, 12 k€, 14 k€, 16 k€, 18 k€, 20 k€, 24 k€, 26 k€ et 40 k€ ; leurs cycles sont 32, 41, 45, 47, 53, 55, 64, 70 et 88 jours ; O10 à O15 sont perdues ; O16 à O18 restent ouvertes ; O19 à O30 n’ont pas atteint SQL. Le mois précédent compte 40 leads qualifiés et le mois courant 50.\n\nLe LVR vaut (50 - 40) / 40 = 25 %. MQL → SQL = 18 / 24 = 75 %. SQL → won = 9 / (9 + 6) = 60 %, avec opportunités ouvertes exclues du dénominateur clos. La médiane du cycle est 53 jours. Le panier signé moyen est 180 k€ / 9 = 20 k€. Sept des neuf ventes signées proviennent encore du founder-led sales ; la note signale donc une dépendance opérationnelle avant de parler de répétabilité.\n\nLe calcul est exécutable à partir des données fournies, mais la conclusion reste conditionnelle. Le volume de leads, la conversion, le cycle, le panier, le revenu signé et la rétention des cohortes doivent être lus ensemble. Une hausse de LVR avec un panier en baisse ou un cycle plus long peut réduire la qualité du plan.\n\n## Limites et points de contrôle\n\nChartMogul « Startups become what they hunt » porte sur 1 043 clients ChartMogul SaaS et AI ayant atteint 10 k$ de MRR au plus tard le 2023-05-01 et encore en activité. Le rapport est utile pour discuter segment initial et trajectoire, mais il comporte des biais de sélection et de survivance et ne représente pas tout le SaaS.\n\nHigh Alpha/OpenView publie une synthèse de benchmarks privés ; le rapport détaillé est soumis à formulaire. Geckoboard fournit la formule LVR et la rattache aux leads qualifiés, mais son vocabulaire prédictif doit être borné : un indicateur avancé n’est pas une garantie de revenu. Paddle soutient la formule du CAC et les coûts à inclure, sans définir un seuil universel.\n\nL’Analyst peut préparer les bridges, recalculer les conversions, tenir le registre de pipeline et alerter sur founder-led sales. Il ne choisit pas seul le canal, ne valide pas le plan commercial, ne promet pas un revenu futur et ne transforme pas un benchmark privé en norme.\n\nLes conversions doivent être cohérentes avec l’étape CRM retenue. Un SQL perdu entre dans le dénominateur d’un ratio de closing clos, tandis qu’une opportunité ouverte reste suivie hors ratio. La dépendance aux fondateurs est traitée comme un risque de répétabilité, pas comme une preuve négative automatique.\n\nLe canal est lu avec la même prudence. Un volume plus élevé peut venir d’une campagne ponctuelle, d’un changement de qualification ou d’un segment moins rentable. Le suivi indique donc la source du lead, le propriétaire de l’étape commerciale et la part encore portée par les fondateurs.\n\n## Mise en application\n\nÀ partir des trente opportunités fictives O01 à O30 ci-dessus, calcule LVR, MQL → SQL, SQL → won, médiane du cycle, panier signé et dépendance founder-led. Indique le traitement des opportunités ouvertes et perdues.\n\nLa restitution comprend une table de calcul, une phrase de conclusion et trois questions à poser au management : stabilité de la qualification SQL, capacité de vente non fondatrice et qualité de la cohorte signée. Si une étape CRM manque, l’exercice devient une demande de données à obtenir, pas un calcul inventé.\n\n## Références\n\n- [ChartMogul, Startups become what they hunt, rapport 2026, données au 2026-05-01](https://chartmogul.com/reports/saas-startups-become-what-they-hunt/) — premiers segments clients ; population privée ChartMogul avec biais de sélection et de survivance.\n- [High Alpha / OpenView, 2024 SaaS Benchmarks Report by High Alpha and OpenView, synthèse publique consultée 2026-08-01](https://www.highalpha.com/saas-benchmarks/2024) — benchmark SaaS privé ; rapport détaillé soumis à formulaire.\n- [Geckoboard, Lead Velocity Rate | KPI examples | Geckoboard, aucune date de publication affichée, modification HTTP 2026-07-30, consultation 2026-08-01](https://www.geckoboard.com/resources/kpi-examples/lead-velocity-rate/) — formule Lead Velocity Rate sur leads qualifiés ; pas de garantie prédictive.\n- [Paddle, Customer acquisition cost (CAC): Calculate and reduce it, publication 2023-01-23, modification sitemap 2026-04-21, consultation 2026-08-01](https://www.paddle.com/resources/customer-acquisition-cost) — formule CAC et coûts d’acquisition à documenter.\n",
+    "keyTakeaways": [
+      "La répétabilité GTM dépend du segment, du canal, du cycle, du pricing et de la rétention.",
+      "Un canal founder-led peut signaler une demande sans prouver une organisation commerciale répétable.",
+      "Les conversions et vélocités n’ont de sens qu’avec des étapes et critères stables.",
+      "Le choix d’un segment relie valeur contractuelle, coût de vente, onboarding et expansion possible."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
+  },
   "deeptech-trl-propriete-intellectuelle": {
     "body": "## Cadre\n\nLa qualification d'une opportunité deeptech ne peut pas s'appuyer sur la traction commerciale : au moment de la décision, il n'existe le plus souvent ni revenu significatif, ni cohorte exploitable. La preuve porte alors sur deux objets distincts — ce que la technologie démontre, et ce que l'entreprise maîtrise juridiquement. Confondre les deux conduit à surévaluer un dossier techniquement avancé dont les droits appartiennent partiellement à un tiers, ou à écarter un dossier bien structuré dont la maturité est simplement précoce.\n\nL'échelle de maturité la plus employée en Europe est celle des [[technology-readiness-level|Technology Readiness Levels]]. Ses neuf niveaux vont de « basic principles observed » (TRL 1) à « actual system proven in operational environment » (TRL 9), avec deux paliers structurants : la validation en laboratoire (TRL 4) et la démonstration en environnement pertinent (TRL 6). Ces définitions sont fixées par la Commission européenne pour cadrer ses appels à propositions ; elles n'ont pas été conçues comme un instrument d'évaluation d'investissement et ne disent rien du marché, de la demande ni du coût.\n\nLa leçon décrit une méthode d'instruction. Elle ne constitue ni un avis juridique en propriété industrielle, ni une expertise scientifique. La qualification d'un titre, d'une titularité ou d'une liberté d'exploitation relève d'un conseil en propriété industrielle ou d'un avocat spécialisé.\n\n## Méthode\n\nUn TRL annoncé est une auto-déclaration. L'instruction consiste à demander, pour le niveau revendiqué, l'objet testé, l'environnement du test, les conditions opératoires, la personne qui a conduit la mesure et la date. L'écart le plus fréquent se situe entre TRL 4 et TRL 6 : un résultat obtenu sur un banc de laboratoire, avec un intrant purifié et un opérateur expert, ne préjuge pas du comportement en environnement représentatif. L'échelle est également mal adaptée aux procédés continus et au logiciel, où le franchissement d'un palier ne correspond à aucun objet physique qualifiable ; dans ces cas, décrire les jalons propres au projet vaut mieux que forcer une notation.\n\nRésultat, reproductibilité et robustesse appellent des preuves différentes. Un résultat unique établit une possibilité. La reproductibilité suppose que le même protocole, exécuté à d'autres moments et par d'autres opérateurs, produise des valeurs comparables dans une dispersion connue. La robustesse ajoute une tolérance aux variations d'entrée. Les preuves correspondantes sont respectivement un cahier de laboratoire, une série de mesures avec sa dispersion, et des essais en conditions dégradées. Une [[proof-of-concept|preuve de concept]] réussie relève du premier niveau.\n\nL'équipe d'investissement n'a pas vocation à juger la science. Elle commande une revue à un expert dont l'indépendance et le domaine sont vérifiés, formule des questions falsifiables plutôt que des demandes d'appréciation générale, et conserve le périmètre de l'avis rendu. Un expert valide un mécanisme physique ou biologique ; il ne valide ni l'échelle industrielle, ni la demande.\n\nSur les droits, l'ordre d'examen importe : la titularité précède la protection. Un portefeuille solide portant sur des inventions dont l'entreprise n'est pas titulaire ne protège pas l'entreprise. Le dossier doit établir, actif par actif, l'inventeur et son statut au moment de l'invention, l'entité déposante, la chaîne de cessions et les licences entrantes. En droit français, l'article L611-7 du code de la propriété intellectuelle attribue à l'employeur les inventions faites par un salarié dans l'exécution d'un contrat comportant une mission inventive correspondant à ses fonctions effectives, ou d'études et recherches qui lui sont explicitement confiées. Les autres inventions appartiennent au salarié ; l'employeur dispose toutefois, dans des conditions et délais fixés par décret en Conseil d'État, d'un droit de se faire attribuer la propriété ou la jouissance des droits lorsque l'invention a été faite dans le cours des fonctions, dans le domaine d'activité de l'entreprise, ou grâce à ses techniques, moyens ou données. Le salarié obtient selon le cas une rémunération supplémentaire ou un juste prix, et tout accord entre les parties portant sur une invention de salarié doit être constaté par écrit à peine de nullité. Le même article s'applique aux agents de l'État et des autres personnes morales de droit public selon des modalités réglementaires — point déterminant pour une société issue d'un laboratoire public.\n\nL'arbitrage entre brevet et secret se juge, non se présume. Le brevet confère un monopole d'exploitation dont la durée ne peut dépasser vingt ans sauf exception, en contrepartie d'une description suffisante pour que la personne du métier puisse mettre l'invention en œuvre, donc d'une publication. Le secret n'a pas de durée déterminée et n'exige aucune formalité, mais il ne confère aucun droit exclusif : un concurrent parvenant au même procédé peut l'exploiter, et l'action en contrefaçon n'est pas ouverte. Le régime du secret des affaires suppose par ailleurs des mesures raisonnables de protection. Les deux voies peuvent se combiner. Le choix dépend de la facilité de rétro-ingénierie, du rythme de renouvellement des produits et de la capacité réelle de l'entreprise à tenir un dispositif de confidentialité. L'INPI décrit les moyens de preuve de possession — enveloppe e-Soleau, entiercement, cahiers de laboratoire — ainsi que l'exception de possession personnelle antérieure, qui permet à celui qui détenait de bonne foi l'invention avant le dépôt d'un tiers de continuer à l'exploiter.\n\nEnfin, la liberté d'exploitation se vérifie séparément. Détenir un brevet n'autorise pas à exploiter : un titre antérieur détenu par un tiers peut bloquer la commercialisation. Cet examen est distinct de celui de la brevetabilité et se conduit sur les marchés visés.\n\n## Cas d'application\n\nUne société issue d'un laboratoire public annonce un procédé validé « TRL 5 » et trois familles de brevets. L'instruction établit que les résultats proviennent d'un banc unique, avec un intrant de pureté supérieure à celle des flux industriels disponibles, et que la dispersion entre séries n'est pas documentée. Deux des trois familles sont en copropriété avec l'établissement de recherche, sans contrat de licence d'exploitation signé ; les taux de redevance et les conditions de retour en cas de cessation d'activité restent ouverts. L'un des inventeurs était agent public au moment des travaux.\n\nLe niveau réel est donc voisin de TRL 4, et la valeur du portefeuille reste conditionnée à un accord non conclu. La conclusion n'est pas nécessairement défavorable : la voie technique demeure crédible et l'antériorité est réelle. Elle réordonne en revanche la décision. La signature de la licence, avec ses redevances et sa clause de retour, devient une condition suspensive ; le financement doit couvrir une campagne de reproductibilité sur intrant industriel avant tout engagement d'industrialisation. Les questions de titularité et de rémunération des inventeurs sont transmises à un conseil en propriété industrielle avant recommandation.\n\n## Limites et points de contrôle\n\nLe TRL décrit une maturité, jamais une valeur. Un TRL 8 sur un marché inexistant vaut moins qu'un TRL 4 sur un besoin solvable et documenté. Les [[deep-tech-metrics|indicateurs alternatifs]] employés en l'absence de revenu — jalons de R&D, pilotes, titres déposés — sont des substituts et non des équivalents de la traction ; ils s'interprètent avec leur périmètre et leur date.\n\nUn brevet délivré prouve qu'un office a reconnu la brevetabilité dans son périmètre. Il ne prouve ni la validité en cas de contentieux, ni la liberté d'exploitation, ni la valeur économique. Le nombre de titres ne mesure rien par lui-même : une famille bien rédigée couvrant la revendication centrale vaut davantage qu'un portefeuille dispersé.\n\nUne revue décrit un état à une date. Des demandes en cours peuvent être rejetées, des annuités peuvent ne pas être payées, un cofondateur académique peut conserver des obligations envers son établissement. Le contrôle final vérifie que le niveau de maturité retenu s'appuie sur un protocole et un environnement décrits, que la dispersion des résultats est connue, que la titularité est établie actif par actif, que les licences entrantes sont signées ou converties en conditions, que la liberté d'exploitation est examinée sur les marchés visés, et que les sujets juridiques sont transmis aux conseils compétents.\n\n## Mise en application\n\nPrendre un dossier technologique et produire un tableau en deux parties. La première situe la maturité : niveau revendiqué, objet testé, environnement, opérateur, date, dispersion observée, niveau retenu après instruction et justification de l'écart. La seconde établit les droits : pour chaque actif, inventeur et statut, entité titulaire, cessions, licences entrantes, juridictions et échéances.\n\nCritères de réussite : chaque niveau retenu s'appuie sur un protocole décrit et non sur une déclaration ; les actifs dont la titularité n'est pas établie sont isolés et convertis en conditions ; l'arbitrage brevet ou secret est justifié par la facilité de rétro-ingénierie et le rythme du marché ; les questions relevant d'un conseil en propriété industrielle sont listées séparément et non tranchées dans le mémo.\n\n## Références\n\n- [Commission européenne, Horizon 2020 Work Programme 2018-2020, General Annexes, G. Technology readiness levels](https://ec.europa.eu/research/participants/data/ref/h2020/other/wp/2018-2020/annexes/h2020-wp1820-annex-g-trl_en.pdf) — définitions officielles des neuf niveaux, reprises comme référence commune dans les programmes européens.\n- [Code de la propriété intellectuelle, article L611-7, version en vigueur depuis le 1er janvier 2020](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039279789) — régime des inventions de salariés, rémunération supplémentaire, juste prix, exigence d'un écrit et application aux agents publics.\n- [INPI, Le secret, publié le 9 décembre 2024](https://www.inpi.fr/ressources/propriete-intellectuelle/secret) — arbitrage entre brevet et secret, absence de droit exclusif, exception de possession personnelle antérieure et moyens de preuve de possession.\n- [INPI, Les différents moyens de protection de la propriété intellectuelle, consultation 2026](https://www.inpi.fr/decouvrir-inpi/propriete-intellectuelle/differents-moyens-de-protection-de-propriete-intellectuelle) — information institutionnelle française ; l'analyse d'un cas requiert un conseil compétent.",
     "keyTakeaways": [
@@ -7155,271 +7653,532 @@
       }
     ]
   },
-  "9-sur-10-vont-mourir": {
-    "body": "## Une distribution asymétrique\n\nDans un portefeuille de capital-risque, les rendements ne sont généralement pas répartis de manière homogène. Certaines participations peuvent perdre tout ou partie du capital investi, tandis qu'un nombre limité de sorties peut contribuer à une part importante de la performance du fonds. Cette concentration est décrite par la **[[power-law|loi de puissance]]**.\n\nLa proportion exacte de pertes et le niveau des multiples varient selon le millésime, le stade, la stratégie et la qualité d'exécution. Il convient donc d'éviter les règles chiffrées présentées comme universelles.\n\n## Conséquence pour la décision\n\nL'analyse ne consiste pas uniquement à réduire la fréquence des pertes. Elle doit aussi évaluer le potentiel de rendement, les conditions nécessaires à sa réalisation et la capacité du fonds à conserver une exposition aux participations les plus performantes.\n\n> **Point de méthode —** La perte sur une ligne est bornée par le capital engagé, alors que le gain potentiel peut être supérieur. Cette asymétrie ne dispense ni de la diligence ni de la discipline de portefeuille.",
+  "c-est-quoi-le-vc-vraiment": {
+    "body": "## Cadre\n\nLe guide France Invest sur le capital-innovation situe cette activité dans le financement en capital de sociétés jeunes, selon leur maturité et leur développement. Dans ce cours, le capital-risque est donc présenté comme un segment du capital-investissement : il finance des sociétés non cotées dont la trajectoire reste incertaine, sans promettre un rendement ni une liquidité à date fixe.\n\nDans le périmètre juridique spécifique du règlement EuVECA, les investissements éligibles comprennent notamment des instruments de capitaux propres et de quasi-capitaux propres. Ce règlement encadre un label européen déterminé ; il ne définit pas l'ensemble des fonds de capital-risque ni toutes les formes françaises de véhicule.\n\nLa distinction avec la dette est ici économique. Une créance organise un remboursement et des protections contractuelles. Une exposition en capital dépend de la valeur des titres, des droits négociés et d'un événement de liquidité. L'absence de cotation rend cette liquidité incertaine : une estimation intermédiaire n'est pas un produit déjà distribué.\n\nLe stade, l'usage des fonds et le véhicule permettent ensuite de distinguer capital-risque, capital-développement et autres segments. Ces catégories professionnelles aident à qualifier une opération ; elles ne remplacent pas l'analyse du dossier.\n\n## Méthode\n\nUne définition utile répond à quatre questions : quelle société est financée, quel instrument est utilisé, quel risque économique est accepté et quel chemin de liquidité est envisageable. Si une réponse manque, la qualification reste provisoire.",
     "keyTakeaways": [
-      "Les rendements d'un portefeuille peuvent être concentrés dans quelques participations.",
-      "Les taux de perte et les multiples observés dépendent de la stratégie et du millésime.",
-      "La recherche d'un rendement asymétrique reste compatible avec une diligence rigoureuse."
+      "Le capital-risque finance une trajectoire incertaine, pas une créance classique.",
+      "La qualification dépend du stade, de l'instrument et des droits attachés aux titres.",
+      "Une définition prudente sépare cadre économique, véhicule juridique et promesse de rendement."
     ],
     "quiz": [
       {
-        "question": "Dans un portefeuille VC, le résultat est surtout déterminé par…",
+        "question": "Quel critère distingue d'abord le capital-risque d'une dette classique ?",
         "options": [
           {
-            "text": "La meilleure ligne",
+            "text": "Le rendement dépend de la valeur des titres et d'une liquidité future.",
             "correct": true
           },
           {
-            "text": "La moyenne des lignes",
+            "text": "Le remboursement du capital est prévu par un calendrier fixe.",
             "correct": false
           },
           {
-            "text": "La pire ligne",
+            "text": "Le risque est supprimé par la présence d'un gestionnaire professionnel.",
             "correct": false
           }
         ],
-        "explanation": "Loi de puissance : une seule sortie exceptionnelle peut faire l'essentiel du fonds. On filtre et on réinvestit pour ne pas la rater."
+        "explanation": "Le fonds détient une exposition en capital. Le remboursement automatique n'est pas le principe économique de l'opération."
       }
     ],
     "furtherReading": [
       {
-        "label": "Anatomie d'un portefeuille en loi de puissance",
-        "kind": "case",
-        "ref": "cs-power-law-portfolio"
+        "label": "France Invest — France · capital-innovation · guide professionnel (2019)",
+        "kind": "external",
+        "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
+      },
+      {
+        "label": "EUR-Lex — Union européenne · EuVECA · règlement consolidé",
+        "kind": "external",
+        "ref": "https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02013R0345-20240109"
       }
     ]
   },
-  "c-est-quoi-le-vc-vraiment": {
-    "body": "## Ni casino, ni banque\n\nTrois choses que le venture n'est **pas** — et la seule qu'il est.\n\n**Pas un prêt.** Une banque te prête et veut être remboursée, quoi qu'il arrive. Un VC **achète une part** de ta boîte ([[equity|equity]]) : si tu coules, il perd tout ; si tu décolles, il gagne gros. Même bateau.\n\n**Pas un casino.** À la roulette, les probas sont figées et contre toi. Un VC **choisit**, **accompagne**, **ré-investit**. Le jugement change le résultat.\n\n**Pas du court terme.** Il immobilise son argent 7 à 10 ans — c'est [[illiquidite|illiquide]]. On appelle ça du capital patient, et le mot n'est pas décoratif.\n\n## En une phrase\n\nLe venture, c'est une classe d'actifs **longue, illiquide, gouvernée par la loi de puissance** — et un métier : choisir tôt, sous incertitude, des fondateurs qui bâtiront peut-être des géants.\n\n> **Mythe démonté — « les VCs parient sur des idées. »** Surtout au début, ils parient sur l'**équipe** : l'idée changera, les gens beaucoup moins.",
+  "9-sur-10-vont-mourir": {
+    "body": "## Cadre\n\nCochrane, dans le NBER w8066, étudie des financements VentureOne réalisés entre 1987 et 2000, principalement aux États-Unis. Il observe des rendements très volatils et asymétriques, avec quelques résultats très élevés, de nombreux résultats modestes et des pertes. Pour les sorties observées par introduction en bourse ou acquisition, son modèle retient une distribution lognormale : cette étude ne démontre donc pas une loi de puissance universelle.\n\nOuyang, Yu et Jagannathan, dans le NBER w27690, examinent un portefeuille agrégé de 17 242 sociétés financées pour la première fois entre 1980 et 2006, puis suivies jusqu'en 2018 ou leur sortie. Dans cet échantillon, retirer les 5 % de sociétés les plus performantes rend négatif le rendement ajusté du risque. Ce résultat documente une forte concentration ; il reste propre à l'échantillon et à la méthode étudiés.\n\nDans ce parcours, l'expression « loi de puissance » est seulement un raccourci sectoriel à manier avec précaution. Les sources retenues établissent asymétrie, dispersion et dépendance à quelques résultats extrêmes, pas une loi mathématique universelle applicable à tout fonds.\n\nCette concentration conduit à raisonner en contribution au portefeuille. La valeur d'une ligne dépend de la taille du fonds, de la dilution, des réserves et du temps de sortie. Une valeur résiduelle reste une estimation tant qu'aucune cession ni distribution n'est intervenue.\n\n## Méthode\n\nDistinguer trois niveaux : perte possible par ligne, scénarios de contribution au fonds et concentration observée dans un échantillon défini. Toute proportion chiffrée doit conserver sa population, sa période et sa méthode.",
     "keyTakeaways": [
-      "De l'equity, pas de la dette.",
-      "Du jugement, pas du hasard.",
-      "Dix ans, pas dix mois."
+      "Les études retenues documentent une forte asymétrie et une concentration des rendements, pas une loi universelle.",
+      "Un résultat d'échantillon conserve sa période, sa population et sa méthode.",
+      "Une valeur estimée ne doit pas être confondue avec une distribution réalisée."
     ],
     "quiz": [
       {
-        "question": "Qu'apporte un VC à une startup ?",
+        "question": "Que signifie une distribution très asymétrique des rendements ?",
         "options": [
           {
-            "text": "De l'equity (une part du capital)",
+            "text": "Un petit nombre de sociétés peut représenter une part importante de la valeur du portefeuille.",
             "correct": true
           },
           {
-            "text": "Un prêt à rembourser avec intérêts",
+            "text": "Chaque société doit produire un rendement proche de la moyenne du portefeuille.",
             "correct": false
           },
           {
-            "text": "Une subvention sans contrepartie",
+            "text": "La diversification rend le suivi des lignes secondaires inutile.",
             "correct": false
           }
         ],
-        "explanation": "Il devient copropriétaire : il gagne si la boîte prend de la valeur, il perd si elle coule. Même bateau que le fondateur."
+        "explanation": "L'asymétrie impose de raisonner en contribution au fonds, sans annoncer de proportion universelle."
       }
     ],
     "furtherReading": [
       {
-        "label": "Le VC européen contre le mythe de la Valley",
-        "kind": "case",
-        "ref": "cs-europe-vs-valley"
+        "label": "NBER w8066 — États-Unis · rendements par investissement · étude académique",
+        "kind": "external",
+        "ref": "https://www.nber.org/papers/w8066"
+      },
+      {
+        "label": "NBER w27690 — États-Unis · portefeuille agrégé · étude académique",
+        "kind": "external",
+        "ref": "https://www.nber.org/papers/w27690"
       }
     ]
   },
   "le-voyage-de-l-argent": {
-    "body": "## De ton épargne au compte d'une startup\n\nSuivons un billet de 100 € depuis une assurance-vie jusqu'à une jeune boîte. Il passe par trois mains.\n\n**Main 1 — les [[lp|LPs]].** Les vrais propriétaires de l'argent : assureurs, fonds de pension, [[family-office|family offices]], [[fund-of-funds|fonds de fonds]], et l'État via {{bpifrance|Bpifrance}} ou le {{eif|Fonds européen d'investissement}}. Ton assurance-vie en fait peut-être partie sans que tu le saches. Ils acceptent de bloquer leur argent dix ans.\n\n**Main 2 — le fonds, piloté par les [[gp|GPs]].** Les LPs ne choisissent pas les startups : ils confient l'argent à une équipe. Les GPs décident, et se rémunèrent via des [[management-fees|frais de gestion]] (~2 %/an) et une part des gains (le [[carry|carry]], ~20 %).\n\n**Main 3 — les fondateurs.** Le fonds achète une part de la startup ; l'argent finance l'équipe et la croissance.\n\nEt en solo : le [[business-angel|business angel]], un particulier qui investit son **propre** argent, souvent le premier à signer.\n\n> **À garder en tête :** le GP gère l'argent **des autres** ; l'angel gère **le sien**.",
+    "body": "## Cadre\n\nLe guide France Invest emploie LP et GP comme vocabulaire économique pour décrire les investisseurs et le gestionnaire d'un fonds. En France, cette lecture doit rester distincte de la forme juridique : un véhicule peut notamment être géré et représenté par une société de gestion selon son règlement. Les LP prennent des engagements ; le gestionnaire applique la stratégie et appelle le capital dans les limites de la documentation du fonds.\n\nLes principes ILPA, qui constituent des recommandations internationales non contraignantes, définissent l'engagement comme l'obligation contractuelle de fournir du capital à la demande du gestionnaire, jusqu'au montant souscrit. Ils demandent aussi que les avis d'appel de capitaux et de distribution permettent aux LP de rapprocher les montants, les frais et le carried interest.\n\nLorsqu'une opération est réalisée, le fonds apporte le capital à la société et reçoit des titres et des droits. Après une cession ou une autre opération de liquidité, le produit revient au fonds, puis les distributions suivent la cascade contractuelle. Cette cascade au niveau du fonds ne doit pas être confondue avec les préférences de liquidation entre actionnaires d'une société financée.\n\nLes frais financent le fonctionnement défini par les documents du fonds. Le carried interest participe aux gains lorsque les conditions contractuelles sont réunies. Les principes ILPA recommandent transparence et alignement ; ils n'imposent ni taux universel ni formule unique.\n\n## Méthode\n\nÀ chaque montant, préciser la catégorie : engagement total, capital appelé, capital investi, capital non appelé, frais, produit reçu ou montant distribué. Cette qualification empêche de confondre capacité contractuelle et trésorerie disponible.",
     "keyTakeaways": [
-      "LP = d'où vient l'argent.",
-      "GP = qui le pilote.",
-      "Angel = qui met le sien."
+      "Les LP prennent des engagements que le fonds appelle progressivement.",
+      "Le gestionnaire administre la stratégie, mais le fonds détient les participations.",
+      "Frais, carried interest et distributions répondent à des mécanismes distincts."
     ],
     "quiz": [
       {
-        "question": "Qui possède réellement l'argent d'un fonds ?",
+        "question": "Que représente un engagement de capital d'un LP ?",
         "options": [
           {
-            "text": "Les LPs",
+            "text": "Un montant promis au fonds et appelable selon la documentation applicable.",
             "correct": true
           },
           {
-            "text": "Les GPs",
+            "text": "Une distribution déjà reçue par le fonds après une sortie.",
             "correct": false
           },
           {
-            "text": "Les fondateurs",
+            "text": "Une participation directe du LP dans chaque société du portefeuille.",
             "correct": false
           }
         ],
-        "explanation": "Les GPs pilotent et décident, mais l'argent vient des Limited Partners (assureurs, fonds de pension, family offices, État)."
-      },
-      {
-        "question": "Un business angel investit…",
-        "options": [
-          {
-            "text": "Son propre argent",
-            "correct": true
-          },
-          {
-            "text": "L'argent des LPs",
-            "correct": false
-          },
-          {
-            "text": "L'argent de l'État",
-            "correct": false
-          }
-        ],
-        "explanation": "C'est ce qui le distingue d'un GP, qui gère l'argent des autres."
+        "explanation": "L'engagement crée une capacité contractuelle. Le versement effectif dépend ensuite des appels de capitaux."
       }
     ],
     "furtherReading": [
       {
-        "label": "Limited Partner (LP)",
-        "kind": "glossary",
-        "ref": "lp"
+        "label": "France Invest — France · économie des fonds · guide professionnel (2019)",
+        "kind": "external",
+        "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
+      },
+      {
+        "label": "ILPA — International · relations LP/GP · principes non contraignants (2019)",
+        "kind": "external",
+        "ref": "https://ilpa.org/wp-content/uploads/2019/06/ILPA-Principles-3.0_2019.pdf"
       }
     ]
   },
   "la-grammaire-des-stades-decouverte": {
-    "body": "## Le vocabulaire qui situe une startup en trois secondes\n\nPré-seed, seed, Série A… Ce ne sont pas des ceintures de karaté. (Bon, un peu si.) Chaque mot dit **combien de preuves** la startup a accumulées.\n\n- **[[pre-seed|Pré-seed]] (~1 à 1,5 M€).** Presque rien à montrer : une équipe, une intuition, un prototype. On parie sur les gens. Souvent un [[safe|SAFE]] ou un BSA-AIR.\n- **[[seed|Seed]] (~2,5 à 3,5 M€, valo ~12-15 M€).** Les premiers signaux de [[traction|traction]]. On creuse l'équipe *et* les chiffres.\n- **[[series-a|Série A]] (~10 à 15 M€).** La machine tourne — souvent ~2,5 M€ de revenu récurrent. On finance la mise à l'échelle.\n- **Série B, C…** On accélère, les tickets s'envolent.\n\nFun fact qui dit tout sur l'époque : **la seed d'aujourd'hui ressemble à l'ancienne Série A.** La barre des preuves monte chaque année.\n\n> **Mythe démonté — « lever = réussir. »** Non. Lever, c'est **céder une part** de ta boîte pour aller plus vite. C'est un moyen, pas un trophée.",
+    "body": "## Cadre\n\nDans ce cours, « pre-seed » est une convention éditoriale pour désigner la phase la plus précoce : formulation du problème, concept, prototype et premiers tests. Le guide France Invest retenu ne définit pas cette catégorie sous ce nom ; il décrit notamment l'amorçage, la création, la post-création, puis des tours seed et Série A, B ou C. Il rappelle aussi que son approche professionnelle n'est ni normative ni doctrinale.\n\nL'enquête NBER w22587, menée auprès de 885 professionnels rattachés à des sociétés de capital-risque institutionnelles et composée majoritairement de répondants américains, montre que certaines pratiques et méthodes varient entre early-stage et late-stage ou growth. Elle ne propose ni taxonomie universelle des stades ni définition de pre-seed.\n\nCes régimes documentaires montrent qu'un stade est un repère de maturité, de preuves et d'usage du capital, pas un seuil universel de montant, de revenu ou de valeur d'entreprise. Un même nom de tour peut recouvrir des situations différentes selon le pays, le secteur, le cycle de marché et la stratégie du fonds.\n\nLe stade ne remplace donc pas l'analyse. Il aide à organiser la diligence et à vérifier l'adéquation entre le mandat du fonds, les preuves disponibles et les risques encore ouverts.\n\n## Méthode\n\nCommencer par les questions que le financement doit résoudre : préciser un concept, tester un marché, lancer une commercialisation, confirmer une capacité de développement ou financer une expansion. Le nom du tour vient après cette lecture et reste qualifié comme convention de travail.",
     "keyTakeaways": [
-      "Chaque stade = un niveau de preuve.",
-      "Plus tard = plus de preuves, moins de risque.",
-      "Lever n'est pas un trophée, c'est un moyen."
+      "Les stades sont des repères de maturité, pas des seuils universels.",
+      "La preuve attendue augmente avec la maturité de la société.",
+      "Le mandat du fonds doit rester cohérent avec le risque du stade."
     ],
     "quiz": [
       {
-        "question": "À quel stade parie-t-on surtout sur l'équipe, faute de chiffres ?",
+        "question": "Pourquoi le nom d'un tour ne suffit-il pas à qualifier une société ?",
         "options": [
           {
-            "text": "Le pré-seed",
+            "text": "Le même intitulé peut recouvrir des preuves et des risques différents.",
             "correct": true
           },
           {
-            "text": "La Série C",
+            "text": "Le nom du tour détermine toujours les droits attachés aux titres.",
             "correct": false
           },
           {
-            "text": "L'IPO",
+            "text": "Le stade remplace l'analyse du produit, du marché et de l'équipe.",
             "correct": false
           }
         ],
-        "explanation": "Au tout début, l'équipe est presque la seule donnée fiable : pas (encore) de traction à analyser."
+        "explanation": "La qualification doit partir des preuves observées et de l'usage du capital, pas du seul vocabulaire annoncé."
       }
     ],
     "furtherReading": [
       {
-        "label": "Simuler la dilution",
-        "kind": "simulator",
-        "ref": "dilution"
+        "label": "France Invest — France · stades du capital-innovation · guide professionnel (2019)",
+        "kind": "external",
+        "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
       },
       {
-        "label": "Pre-money / Post-money",
-        "kind": "simulator",
-        "ref": "pre-post-money"
+        "label": "NBER w22587 — Majoritairement États-Unis · pratiques par stade · enquête académique",
+        "kind": "external",
+        "ref": "https://www.nber.org/papers/w22587"
       }
     ]
   },
   "le-vrai-job-et-les-mythes": {
-    "body": "## Le métier, sans le vernis LinkedIn\n\nOublie le cliché : le type en sweat qui signe des chèques entre deux cafés. La vraie journée ressemble à autre chose.\n\n**Le temps.** ~50 à 60 h/semaine. Pas l'enfer de la banque d'affaires (80-100 h) — les week-ends sont souvent préservés — mais pas un *lifestyle job* non plus : tu es **toujours un peu en service** (événements, dîners fondateurs, lecture le dimanche, charge mentale du portefeuille).\n\n**Ce que tu fais vraiment** (surtout junior) : du [[deal-sourcing|sourcing]], du screening, des appels fondateurs, de la recherche marché, de la [[dd|due diligence]], des mémos. Sur ~1 000 dossiers vus dans l'année, un fonds en finance **3 à 5**.\n\n> **La vérité qui pique :** ton métier, c'est surtout **dire non**. Bien, vite, avec respect — et sans rater la perle. Signer un chèque, c'est 1 % du temps.\n\n## Le feedback loop le plus lent du monde\n\nTu sauras si tu avais raison dans… 7 à 10 ans. Aucun score quotidien. Il faut aimer décider sans confirmation immédiate, accepter de **se tromper en public**, et porter seul une conviction à laquelle personne ne croit encore.\n\n## La texture française\n\nPetit écosystème : **tout le monde se connaît**, ta réputation est ton actif n°1. Très parisien — mais Lyon, Station F et les régions montent. Relationnel avant d'être transactionnel : [[warm-intro|warm intros]], dîners, culture du « tu ». Toile de fond de capital public ({{bpifrance|Bpifrance}}, {{eif|Fonds européen d'investissement}}) qui n'existe pas vraiment aux États-Unis.\n\n> **Mythe démonté — « entrer en VC, c'est une voie royale balisée. »** Faux : peu de postes, beaucoup de candidats, chemins non-linéaires. Le différenciateur : **prouver que tu penses déjà comme un investisseur** — une analyse de startup que tu as écrite toi-même vaut mille lignes de CV.",
+    "body": "## Cadre\n\nL'enquête NBER w22587 porte sur 885 professionnels rattachés à 681 sociétés de capital-risque institutionnelles, avec une forte composante américaine. Elle documente plusieurs dimensions du travail : sourcing, sélection, appréciation de la valeur, structuration, contribution après investissement, sorties, organisation interne et relations avec les LP. Elle éclaire des pratiques observées ; elle ne constitue pas une norme française.\n\nLe guide France Invest décrit, pour le capital-innovation français, une première instruction allant de la sélection du dossier jusqu'à un accord de principe, puis des vérifications pouvant couvrir la documentation juridique, fiscale, comptable et économique. Il présente aussi la gouvernance, le suivi et les sorties comme des phases du processus, dans un guide didactique de bonnes pratiques.\n\nUne opportunité passe ainsi d'un premier filtre à une analyse plus approfondie. L'équipe qualifie l'adéquation au mandat, la maturité, le besoin de financement et les informations disponibles, puis documente l'équipe, le produit, le marché, les données commerciales, les finances et les risques juridiques ou opérationnels selon le dossier.\n\nL'enquête NBER w22587 observe plusieurs règles internes de décision : unanimité, consensus avec veto ou majorité selon les organisations. Il n'existe donc pas une architecture universelle de comité. Après une décision favorable viennent la négociation, la documentation, le suivi et, éventuellement, la préparation d'une sortie.\n\n## Méthode\n\nConserver une trace de l'origine du dossier, de l'hypothèse, des sources, des limites, des points de blocage et de la recommandation. Cette discipline permet d'examiner la qualité de la décision sans la confondre avec son résultat futur.",
     "keyTakeaways": [
-      "~50-60 h/semaine, mais « always on ».",
-      "Le métier, c'est surtout dire non — signer, c'est 1 % du temps.",
-      "En France, ta réputation est ton CV."
+      "Le sourcing ouvre le processus ; il ne résume pas le métier.",
+      "La diligence transforme une hypothèse en décision documentée.",
+      "Le suivi post-investissement fait partie intégrante de la responsabilité du fonds."
     ],
     "quiz": [
       {
-        "question": "Au quotidien, un VC junior passe le plus clair de son temps à…",
+        "question": "Quel enchaînement décrit le mieux le traitement d'une opportunité ?",
         "options": [
           {
-            "text": "Chercher des boîtes et dire non",
+            "text": "Sourcing, qualification, diligence, comité, investissement éventuel puis suivi.",
             "correct": true
           },
           {
-            "text": "Signer des chèques",
+            "text": "Diligence, sortie, sourcing puis définition de la thèse.",
             "correct": false
           },
           {
-            "text": "Siéger à des conseils d'administration",
+            "text": "Comité, investissement immédiat puis recherche des éléments absents.",
             "correct": false
           }
         ],
-        "explanation": "Sur ~1 000 dossiers, 3 à 5 financés : l'essentiel du métier junior, c'est sourcer et refuser bien."
+        "explanation": "Le processus doit conserver la trace des hypothèses et des sources qui soutiennent la décision."
       }
     ],
     "furtherReading": [
       {
-        "label": "Une semaine dans la vie d'un investisseur",
-        "kind": "lesson",
-        "ref": "l-vc-week"
+        "label": "NBER w22587 — Sociétés VC institutionnelles · pratiques de décision · enquête académique",
+        "kind": "external",
+        "ref": "https://www.nber.org/papers/w22587"
+      },
+      {
+        "label": "France Invest — France · processus d’investissement · guide professionnel (2019)",
+        "kind": "external",
+        "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
       }
     ]
   },
   "qui-fait-quoi-qui-gagne-quoi": {
-    "body": "## « Un VC », ça n'existe pas\n\nEntre le stagiaire qui avale 40 decks par semaine et le partner qui signe le chèque, le mot « VC » recouvre cinq métiers. Une règle traverse l'échelle : **plus tu montes, moins tu exécutes et plus tu décides** — et plus ta rému dépend du [[carry|carry]].\n\n- **[[analyst-vc|Analyst]] (0-2 ans).** Sourcing, recherche marché, pré-[[dd|DD]], data, support. Il prépare, il ne décide pas. ~45-55 k€ base, ~70-100 k€ total. Carry rare.\n- **[[associate-vc|Associate]] (2-4 ans).** Mène le process : sourcing → calls fondateurs → DD → reco. ~60-90 k€ base. Carry parfois, modeste.\n- **Senior Associate (3-5 ans).** Pilote la DD de bout en bout, mentore les analysts, parfois [[board-seat|board observer]]. N'existe pas dans tous les fonds.\n- **[[principal-vc|Principal]] (5 ans +).** Source *et* porte des deals jusqu'au [[ic|comité]], négocie, siège au board. **Le carry devient significatif — le basculement.**\n- **Partner / GP.** Décide, lève auprès des [[lp|LPs]], pilote la stratégie du fonds. Rému = surtout carry.\n\n*Fourchettes indicatives Europe/France, très variables selon la taille du fonds (un seed fund de 30 M€ ne paie pas comme un late-stage d'1 Md€).*\n\n## L'organisation, en une image\n\nEn bas de l'échelle, on **cherche et on exécute** ; en haut, on **décide et on lève**. Analysts et associates *préparent* la conviction ; principals et partners la *tranchent* — et l'assument devant les LPs.\n\n> **Mythe démonté — « tout le monde touche le carry. »** Non : il ne devient une vraie source de revenu qu'à partir de **principal/partner**, après 7-10 ans, et seulement si le fonds performe. En VC, on s'enrichit *lentement*, pas *vite*.",
+    "body": "## Cadre\n\nPour ce parcours, la répartition entre Analyst, Associate et profils seniors est une convention éditoriale destinée à rendre le travail lisible ; ce n'est pas une taxonomie universelle des fonds. Les titres et les délégations varient selon les organisations. La méthode consiste donc à distinguer qui collecte et vérifie l'information, qui porte la recommandation et qui prend la décision.\n\nL'enquête NBER w22587 décrit plus directement les partners comme profils seniors influençant les décisions, les managing partners comme responsables également d'activités de fonctionnement, et les principals ou associates comme profils généralement plus juniors. Elle ne fournit pas une fiche de poste universelle d'Analyst. Dans ce cours, les tâches attribuées à l'Analyst constituent donc un cadre pédagogique, pas une norme déduite de l'enquête.\n\nLa même enquête observe plusieurs règles de décision entre partners. Un comité ou un vote formalise le débat, mais son architecture dépend du fonds. Il faut aussi distinguer ce processus d'investissement du LPAC décrit par les principes ILPA : ce comité de LP traite notamment des conflits et de situations importantes du fonds ; il ne décide pas à la place du gestionnaire de chaque investissement.\n\nLes principes ILPA sont des recommandations internationales non contraignantes. Ils encadrent la transparence des frais, du carried interest et de la gouvernance LP/GP, sans imposer une formule universelle. Les droits et responsabilités effectifs restent définis par la documentation applicable.\n\n## Méthode\n\nPour comprendre un rôle, identifier la préparation, la recommandation, la décision et les conflits potentiels. Les intitulés viennent ensuite et ne remplacent jamais la lecture des délégations réelles.",
     "keyTakeaways": [
-      "Plus tu montes, plus tu décides et moins tu exécutes.",
-      "Le carry récompense la patience et le risque, pas l'ancienneté seule.",
-      "Grades et chiffres varient énormément d'un fonds à l'autre."
+      "Les intitulés de poste ne suffisent pas ; il faut identifier les décisions réellement portées.",
+      "Le comité formalise le débat d'investissement et les risques acceptés.",
+      "Les incitations du gestionnaire doivent être lues dans la documentation du fonds."
     ],
     "quiz": [
       {
-        "question": "Le carry (la part des plus-values) devient une vraie source de revenu à partir de…",
+        "question": "À quoi sert principalement un comité d'investissement ?",
         "options": [
           {
-            "text": "Principal / partner",
+            "text": "À débattre une décision documentée et les risques que le fonds accepte.",
             "correct": true
           },
           {
-            "text": "Analyst",
+            "text": "À garantir que la société financée atteindra ses objectifs.",
             "correct": false
           },
           {
-            "text": "Associate",
+            "text": "À remplacer la diligence lorsque l'équipe connaît déjà les fondateurs.",
             "correct": false
           }
         ],
-        "explanation": "Les juniors vivent surtout du salaire + bonus ; le carry récompense la patience et le risque, après 7-10 ans et si le fonds performe."
+        "explanation": "Le comité améliore la traçabilité de la décision. Il ne transforme pas une hypothèse en certitude."
       }
     ],
     "furtherReading": [
       {
-        "label": "Les échelons du métier : analyst → principal",
-        "kind": "lesson",
-        "ref": "l-career-levels"
+        "label": "NBER w22587 — Sociétés VC institutionnelles · organisation interne · enquête académique",
+        "kind": "external",
+        "ref": "https://www.nber.org/papers/w22587"
+      },
+      {
+        "label": "ILPA — International · gouvernance et incitations LP/GP · principes non contraignants (2019)",
+        "kind": "external",
+        "ref": "https://ilpa.org/wp-content/uploads/2019/06/ILPA-Principles-3.0_2019.pdf"
       }
     ]
   },
   "un-fonds-nait-et-meurt-aussi": {
-    "body": "## Un fonds, c'est une promesse de dix ans\n\nUn fonds n'est pas une tirelire infinie : c'est une promesse faite à ses [[lp|LPs]]. Voici comment elle se déroule.\n\n- **Années 1 à 3-4 — la [[investment-period|période d'investissement]].** Le fonds déploie l'argent et signe la plupart de ses premiers chèques.\n- **Années 3 à 7 — le suivi ([[follow-on|follow-on]]).** Le fonds garde des réserves pour ré-investir dans ses gagnantes. On muscle les stars, pas les retardataires.\n- **Années 7 à 10 — la récolte.** Les sorties (rachats, [[ipo|IPO]]) rendent l'argent aux LPs.\n\n## La courbe en J\n\nAu début, le fonds est dans le rouge (des frais, pas encore de sorties). Puis les gagnantes décollent et la [[j-curve|courbe en J]] remonte fort. D'où la patience obligatoire.\n\nConséquence maligne : tous les 2-3 ans, les GPs lèvent un **nouveau** fonds. Le venture est un métier de [[vintage|millésimes]] — comme le vin, un bon cru dépend autant du timing que du talent.\n\n> **À retenir :** dix ans, courbe en J, millésimes. Le temps long n'est pas un défaut, c'est le modèle.",
+    "body": "## Cadre\n\nLes principes ILPA, recommandations internationales non contraignantes, distinguent la période d'investissement, les appels de capitaux, les distributions, les prolongations de durée et certaines opérations menées par le gestionnaire. Ces mécanismes dépendent du contrat du fonds : leur séquence et leurs conditions ne sont pas universelles.\n\nLa phase de levée rassemble les engagements des LP. La période d'investissement permet de construire le portefeuille et d'appeler le capital conformément à la documentation. Des réserves peuvent être conservées pour accompagner certaines sociétés. Le suivi continue ensuite : financements complémentaires, cessions, arrêts ou détention plus longue appellent des arbitrages cohérents avec le mandat et la durée restante.\n\nPour les fonds français couverts, l'AMF DOC-2012-11 décrit plus précisément la pré-liquidation, la dissolution et la liquidation, ainsi que l'information des porteurs et les règles relatives aux distributions. Cette doctrine, applicable à un périmètre FCPR/FPCI et à une version déterminée, ne doit pas être généralisée à tous les fonds internationaux.\n\nEn fin de vie, le gestionnaire cherche à réaliser les actifs restants et à distribuer les produits selon la documentation. Les rapports distinguent capital distribué et valeur résiduelle estimée. Les indicateurs tels que DPI, RVPI ou TVPI restent des conventions de mesure à lire avec leur définition, leur dénominateur et la part encore non réalisée.\n\n## Méthode\n\nSituer chaque décision dans l'âge du véhicule, la période contractuelle, le capital non appelé, les réserves et les actifs restant à réaliser. Une nouvelle ligne, un réinvestissement et une vente secondaire n'ont pas la même portée à chaque phase.",
     "keyTakeaways": [
-      "Un fonds vit ~10 ans : investir, suivre, récolter.",
-      "La courbe en J : le rouge précède le vert.",
-      "Le venture est un métier de millésimes."
+      "La période d'investissement encadre la construction initiale du portefeuille.",
+      "Les réserves répondent à des arbitrages dynamiques entre les sociétés détenues.",
+      "La fin de vie du fonds distingue distributions réalisées et valeur encore estimée."
     ],
     "quiz": [
       {
-        "question": "La « courbe en J » décrit…",
+        "question": "Pourquoi l'âge du fonds compte-t-il dans une décision ?",
         "options": [
           {
-            "text": "Le fait qu'un fonds perde de l'argent avant d'en gagner",
+            "text": "Il conditionne la capacité à investir, soutenir les sociétés et organiser la liquidité.",
             "correct": true
           },
           {
-            "text": "La forme d'un logo de fonds",
+            "text": "Il remplace l'analyse de la société lorsque le fonds approche de sa fin.",
             "correct": false
           },
           {
-            "text": "La croissance d'une seule startup",
+            "text": "Il rend les indicateurs de performance définitifs dès la période d'investissement terminée.",
             "correct": false
           }
         ],
-        "explanation": "Frais d'abord, sorties ensuite : le rouge précède le vert. D'où la patience structurelle du métier."
+        "explanation": "Le même dossier n'a pas la même portée selon la durée restante, les réserves et les obligations envers les LP."
       }
     ],
     "furtherReading": [
       {
-        "label": "Fund returns : DPI / TVPI / MOIC",
-        "kind": "simulator",
-        "ref": "fund-returns"
+        "label": "ILPA — International · durée et distributions · principes non contraignants (2019)",
+        "kind": "external",
+        "ref": "https://ilpa.org/wp-content/uploads/2019/06/ILPA-Principles-3.0_2019.pdf"
+      },
+      {
+        "label": "AMF DOC-2012-11 — France · fin de vie FCPR/FPCI · doctrine (2025)",
+        "kind": "external",
+        "ref": "https://www.amf-france.org/sites/institutionnel/files/private/2025-01/doc-2012-11_fr5_guide-relatif-aux-fonds-de-capital-investissement_fin-de-vie-des-fonds-ki.pdf"
+      }
+    ]
+  },
+  "quiz-comprendre-le-capital-risque": {
+    "body": "## Objectif\n\nCe quiz vérifie la compréhension des notions centrales du parcours : investisseurs du fonds, gestionnaire, véhicule d'investissement, société financée, concentration des rendements, stades, décision collective et cycle de vie. Il ne remplace pas une analyse de dossier.\n\nLes questions sur les LP, le gestionnaire, les flux et la période d'investissement s'appuient sur le guide France Invest et les principes ILPA, ces derniers étant des recommandations internationales non contraignantes. La fin de vie renvoie aussi à l'AMF DOC-2012-11 dans son périmètre français propre aux fonds concernés.\n\nLa concentration des rendements est bornée par les échantillons de Cochrane, NBER w8066, et d'Ouyang, NBER w27690. Les stades combinent la taxonomie publiée par France Invest et les variations observées dans NBER w22587 ; pre-seed reste une convention éditoriale du cours. La question sur le comité emploie elle aussi une convention de cours : NBER w22587 documente des règles collectives variables, pas un organe universel.\n\nLes bonnes réponses privilégient ainsi la qualification, la traçabilité et la prudence sur les affirmations générales.",
+    "keyTakeaways": [
+      "Le capital circule des LP vers le fonds, puis vers la société financée selon une documentation précise.",
+      "La concentration des rendements impose un raisonnement de portefeuille sans proportion universelle.",
+      "Les stades et le comité servent à structurer l'analyse, pas à supprimer l'incertitude."
+    ],
+    "quiz": [
+      {
+        "question": "Quel acteur prend un engagement dans le fonds ?",
+        "options": [
+          {
+            "text": "LP — investisseur du fonds.",
+            "correct": true
+          },
+          {
+            "text": "La société financée par le fonds.",
+            "correct": false
+          },
+          {
+            "text": "Le comité d'investissement de la société cible.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le LP apporte un engagement au fonds. Le gestionnaire administre ensuite le véhicule selon sa documentation."
+      },
+      {
+        "question": "Quel rôle revient au gestionnaire du fonds ?",
+        "options": [
+          {
+            "text": "Appliquer la stratégie, préparer les décisions et suivre le portefeuille.",
+            "correct": true
+          },
+          {
+            "text": "Garantir un rendement déterminé à chaque LP.",
+            "correct": false
+          },
+          {
+            "text": "Recevoir chaque distribution des sociétés financées.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le gestionnaire organise le fonds et ses décisions. Il ne promet pas un résultat certain."
+      },
+      {
+        "question": "Pourquoi distinguer fonds et société financée ?",
+        "options": [
+          {
+            "text": "Le fonds détient des titres de la société, mais les deux entités ont des obligations propres.",
+            "correct": true
+          },
+          {
+            "text": "La société devient automatiquement propriétaire du fonds après l'investissement.",
+            "correct": false
+          },
+          {
+            "text": "Le fonds et la société fusionnent au moment de la décision du comité.",
+            "correct": false
+          }
+        ],
+        "explanation": "La distinction clarifie les droits, les flux et les responsabilités de chaque partie."
+      },
+      {
+        "question": "Que montre la concentration des rendements observée dans les études retenues ?",
+        "options": [
+          {
+            "text": "La valeur d'un portefeuille peut se concentrer sur un petit nombre de sociétés.",
+            "correct": true
+          },
+          {
+            "text": "Chaque investissement doit produire un rendement proche de la moyenne.",
+            "correct": false
+          },
+          {
+            "text": "La performance est connue dès le premier tour de financement.",
+            "correct": false
+          }
+        ],
+        "explanation": "L'asymétrie observée conduit à juger la contribution possible d'une ligne au fonds, sans en faire une loi universelle."
+      },
+      {
+        "question": "À quoi servent les stades comme pre-seed, seed ou Série A ?",
+        "options": [
+          {
+            "text": "À qualifier la maturité, les preuves disponibles et les risques encore ouverts.",
+            "correct": true
+          },
+          {
+            "text": "À fixer partout les mêmes montants et les mêmes droits.",
+            "correct": false
+          },
+          {
+            "text": "À supprimer la diligence lorsque le vocabulaire du tour est reconnu.",
+            "correct": false
+          }
+        ],
+        "explanation": "Les stades sont des repères méthodologiques, pas des seuils universels ; dans ce cours, pre-seed est explicitement une convention éditoriale."
+      },
+      {
+        "question": "Quel rôle joue le comité d'investissement ?",
+        "options": [
+          {
+            "text": "Il débat une recommandation documentée avant une décision du fonds.",
+            "correct": true
+          },
+          {
+            "text": "Il garantit que la société atteindra son plan.",
+            "correct": false
+          },
+          {
+            "text": "Il remplace les sources externes et les diligences.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le comité améliore la discipline de décision, sans supprimer l'incertitude."
+      },
+      {
+        "question": "Pourquoi suivre la période d'investissement du fonds ?",
+        "options": [
+          {
+            "text": "Elle encadre les nouvelles lignes, les réserves et les arbitrages de portefeuille.",
+            "correct": true
+          },
+          {
+            "text": "Elle rend inutile le suivi après chaque investissement.",
+            "correct": false
+          },
+          {
+            "text": "Elle transforme la valeur résiduelle en distribution réalisée.",
+            "correct": false
+          }
+        ],
+        "explanation": "L'âge du fonds influence la portée économique de chaque décision."
+      },
+      {
+        "question": "Quelle attitude convient face à une affirmation non sourcée sur le venture ?",
+        "options": [
+          {
+            "text": "La reformuler comme hypothèse ou la retirer tant qu'une source précise manque.",
+            "correct": true
+          },
+          {
+            "text": "La conserver si elle rend le parcours plus fluide.",
+            "correct": false
+          },
+          {
+            "text": "La généraliser à tous les fonds pour simplifier l'apprentissage.",
+            "correct": false
+          }
+        ],
+        "explanation": "La qualité du parcours dépend de propositions sourcées et de bornes formulées."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "France Invest — France · acteurs et stades du capital-innovation · guide professionnel (2019)",
+        "kind": "external",
+        "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
+      },
+      {
+        "label": "NBER w22587 — Sociétés VC principalement américaines · pratiques et décisions · enquête académique",
+        "kind": "external",
+        "ref": "https://www.nber.org/papers/w22587"
+      },
+      {
+        "label": "NBER w8066 — États-Unis · rendements par investissement · étude académique",
+        "kind": "external",
+        "ref": "https://www.nber.org/papers/w8066"
+      },
+      {
+        "label": "NBER w27690 — États-Unis · portefeuille agrégé · étude académique",
+        "kind": "external",
+        "ref": "https://www.nber.org/papers/w27690"
+      },
+      {
+        "label": "ILPA — International · relations LP/GP · principes non contraignants (2019)",
+        "kind": "external",
+        "ref": "https://ilpa.org/wp-content/uploads/2019/06/ILPA-Principles-3.0_2019.pdf"
+      },
+      {
+        "label": "AMF DOC-2012-11 — France · fin de vie FCPR/FPCI · doctrine (2025)",
+        "kind": "external",
+        "ref": "https://www.amf-france.org/sites/institutionnel/files/private/2025-01/doc-2012-11_fr5_guide-relatif-aux-fonds-de-capital-investissement_fin-de-vie-des-fonds-ki.pdf"
+      }
+    ]
+  },
+  "mythe-vc-mise": {
+    "body": "## Le mot « mise » décrit mal le métier\n\nDire qu'un investisseur en capital-risque « mise » donne une image simple, mais inexacte. Le VC accepte une incertitude élevée ; il ne joue pas une somme isolée sur une intuition. Il achète une participation minoritaire, dans un cadre défini, avec l'argent confié par des [[lp|Limited Partners]]. La décision engage donc une chaîne de responsabilités : mandat du [[venture-capital-fund|fonds]], thèse, comité, documentation, suivi et capacité à expliquer le raisonnement lorsque le résultat sera défavorable.\n\nLa différence est importante. Une mise s'évalue au moment où elle est placée. Un investissement de venture s'évalue dans le temps : avant la décision, au moment du tour, puis pendant les années de suivi. Le premier chèque fixe une exposition ; les tours suivants, les [[follow-on|réinvestissements]] et les arbitrages de réserves déterminent souvent une part décisive du résultat. Le métier consiste autant à conserver une exposition aux sociétés qui progressent qu'à accepter rapidement que d'autres ne justifient plus de capital supplémentaire.\n\n## Ce que le VC cherche réellement\n\nLe VC ne cherche pas une certitude. Elle n'existe pas au stade où l'entreprise n'a pas encore stabilisé son marché, son produit, son recrutement ou son modèle économique. Il cherche une asymétrie : un risque de perte borné par le capital investi, et un potentiel de gain suffisamment élevé pour compenser les pertes du portefeuille. Cette logique renvoie à la [[power-law|loi de puissance]] et à la [[portfolio-construction|construction de portefeuille]].\n\nPour qu'une décision soit investissable, l'incertitude doit être formulée. L'équipe peut être forte mais le marché encore étroit. La traction peut être réelle mais concentrée sur quelques clients. Le produit peut être différencié mais difficile à vendre à grande échelle. Le memo ne transforme pas ces limites en certitudes ; il indique lesquelles sont acceptées, lesquelles doivent être vérifiées et lesquelles rendraient l'investissement incohérent avec le mandat.\n\nLa discipline commence donc avant le comité : sourcing, qualification, appels fondateurs, analyse de marché, vérification des chiffres, lecture de la [[cap-table|cap table]], références, points juridiques et conditions de tour. Elle continue après l'investissement : suivi de trésorerie, recrutements, gouvernance, prochaines preuves, décisions de réserve. Le chèque est un moment visible ; le travail utile se situe autour de lui.\n\n## La version française du malentendu\n\nEn France, le mot « mise » est encore plus réducteur, car l'écosystème est structuré par des acteurs institutionnels, des règles de gestion et une proximité relationnelle. Selon la forme du véhicule et l'organisation retenue, une société de gestion peut relever d'un cadre AMF, avec procédures internes, gestion des conflits, obligations d'information et contrôles. Le VC français n'agit pas comme un particulier qui finance une préférence personnelle ; il administre une stratégie d'investissement pour compte de tiers.\n\nLe marché français ajoute aussi une texture particulière. Les fonds seed et Série A travaillent dans un écosystème où les introductions, co-investissements, entrepreneurs déjà financés, business angels, programmes publics et fonds européens peuvent compter dans l'accès aux dossiers. Cette densité ne remplace pas l'analyse. Elle rend la réputation plus importante, car une décision mal documentée circule vite, et un refus sérieux peut valoir autant qu'un accord opportuniste.\n\nLa présence de Bpifrance, de programmes européens et d'investisseurs institutionnels ne signifie pas que le risque disparaît. Elle modifie plutôt le contexte : plus de véhicules spécialisés, plus de cofinancements possibles, plus d'attentes de conformité, et parfois une attention accrue aux enjeux industriels, territoriaux ou technologiques. Dans ce cadre, « miser » n'est pas le bon verbe. Le verbe juste serait plutôt : allouer du capital rare sous incertitude, avec une méthode explicite et une responsabilité durable.\n\n**Mythe démonté — « le VC mise ».** Il prend un risque, mais ce risque est travaillé : thèse, portefeuille, diligence, gouvernance, réserves et suivi. L'intuition peut déclencher une question ; elle ne suffit pas à justifier un investissement.",
+    "keyTakeaways": [
+      "Le VC prend un risque, mais ce risque est encadré par un mandat, un portefeuille et une gouvernance.",
+      "La décision ne s'arrête pas au premier chèque : le suivi et les réinvestissements comptent autant que l'entrée.",
+      "En France, le cadre institutionnel et relationnel rend la traçabilité particulièrement importante."
+    ],
+    "quiz": [
+      {
+        "question": "Pourquoi le mot « mise » est-il insuffisant pour décrire un investissement VC ?",
+        "options": [
+          {
+            "text": "Parce que la décision s'inscrit dans un mandat, un portefeuille, une diligence et un suivi",
+            "correct": true
+          },
+          {
+            "text": "Parce qu'un fonds VC ne peut jamais perdre le capital investi",
+            "correct": false
+          },
+          {
+            "text": "Parce que la décision est prise uniquement après certitude sur le marché",
+            "correct": false
+          }
+        ],
+        "explanation": "Le capital-risque accepte l'incertitude, mais il la traite par une méthode de portefeuille, de diligence, de gouvernance et de suivi."
+      },
+      {
+        "question": "Quel point caractérise particulièrement le contexte français ?",
+        "options": [
+          {
+            "text": "Une articulation plus visible entre fonds privés, acteurs institutionnels, cadre de gestion et réputation de place",
+            "correct": true
+          },
+          {
+            "text": "L'absence de comités d'investissement dans les fonds professionnels",
+            "correct": false
+          },
+          {
+            "text": "La disparition du risque grâce aux cofinancements publics et européens",
+            "correct": false
+          }
+        ],
+        "explanation": "Le contexte français peut renforcer la traçabilité et la responsabilité, sans supprimer le risque économique propre au venture."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Organisation du travail et traitement d'une opportunité",
+        "kind": "lesson",
+        "ref": "l-vc-week"
+      },
+      {
+        "label": "Origination et organisation du sourcing",
+        "kind": "lesson",
+        "ref": "l-sourcing"
+      },
+      {
+        "label": "AMF — espace sociétés de gestion",
+        "kind": "external",
+        "ref": "https://www.amf-france.org/fr/espace-professionnels/societes-de-gestion/mon-espace-sgp"
       }
     ]
   },

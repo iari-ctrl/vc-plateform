@@ -87,16 +87,16 @@
     "example": "« Notre dernier tour était à 50 M€ » : six mois plus tard, la discussion reste arrimée à ce chiffre alors que le marché a tourné."
   },
   "annualized-run-rate": {
-    "definition": "L'annualized run rate extrapole un revenu récent sur douze mois. Il peut inclure du revenu non récurrent et reste une estimation instantanée, donc moins robuste que l'ARR contractuel d'un modèle récurrent.",
-    "example": "Un mois à 80 k€ de revenu total peut être présenté comme 960 k€ de run rate, même si une partie du revenu est one-shot."
+    "definition": "L'annualized run rate extrapole un revenu récent sur douze mois, par exemple MRR × 12. Il peut inclure un pic temporaire ou des revenus non récurrents si la convention n'est pas retraitée. Il doit donc être distingué de l'ARR récurrent vérifié et du revenu comptable.",
+    "example": "100 k€ de revenu sur un mois donnent 1,2 M€ de run rate annualisé, mais pas nécessairement 1,2 M€ d'ARR vérifié."
   },
   "anti-dilution": {
     "definition": "Clause attachée aux [[actions-de-preference|actions de préférence]] qui protège les investisseurs si la société lève un [[down-round|down round]]. Elle n'empêche pas la [[dilution|dilution]] ; elle ajuste le prix ou le ratio de conversion pour que les investisseurs protégés reçoivent davantage d'[[actions-ordinaires|actions ordinaires]] à la conversion. En pratique française et européenne, la formule weighted average est la référence de marché ; le full ratchet existe dans les documents mais reste beaucoup plus punitif pour les fondateurs.",
     "example": "Si une Series A a investi à 10 € par action et qu'une Series B se fait à 5 €, la clause anti-dilution peut augmenter le nombre d'actions reçues par la Series A à la conversion."
   },
   "arr": {
-    "definition": "L'ARR mesure la valeur annualisée des revenus récurrents actifs d'une entreprise. En SaaS, il sert à évaluer la trajectoire de croissance, la rétention, le burn multiple et les multiples de valorisation. Il ne doit pas être confondu avec un run rate annualisé basé sur un mois exceptionnel.",
-    "example": "100 k€ de MRR récurrent actif correspondent à environ 1,2 M€ d'ARR, hors setup fees et services non récurrents."
+    "definition": "L'ARR mesure le revenu annuel récurrent vérifié d'un modèle par abonnement ou contrat actif. La convention doit préciser si elle somme les valeurs contractuelles annuelles ou annualise un MRR récurrent stable. Elle exclut les services ponctuels, setup fees, revenus d'usage non engagés et contrats non commencés, et ne remplace pas la reconnaissance comptable.",
+    "example": "1,2 M€ de revenu déclaré dont 120 k€ de services ponctuels donnent 1,08 M€ d'ARR récurrent vérifié selon la convention de la leçon."
   },
   "arr-par-employe": {
     "definition": "L'ARR par employé mesure l'efficacité avec laquelle une startup transforme son headcount en revenu récurrent. Il aide à comparer des modèles SaaS, mais doit être interprété avec stade, externalisation, marge et stratégie de croissance.",
@@ -130,10 +130,6 @@
     "definition": "Beyond grants désigne l’élargissement de la boîte à outils d’une fondation au-delà des seules subventions : prêts, garanties, fonds propres, instruments hybrides, mobilisation de la dotation ou accompagnement non financier. L’approche ne remplace pas les dons. Elle consiste à choisir l’instrument en fonction des besoins de l’organisation, de sa capacité de remboursement, du risque et de l’impact recherché le long du [[continuum-du-capital|continuum du capital]].",
     "example": "Une fondation conserve ses subventions pour les actions sans modèle de revenus, tout en accordant un prêt patient à une entreprise sociale capable de le rembourser."
   },
-  "biais-d-autorite": {
-    "definition": "Le biais d’autorité conduit à accorder un poids excessif aux marqueurs de statut d’un fondateur — école, passage par une entreprise prestigieuse, expérience de fondateur récidiviste — au détriment de l’examen direct du dossier. Ces signaux ont une valeur informative réelle, mais elle est généralement déjà reflétée dans le prix et dans la concurrence sur le deal ; en faire un critère de tri revient souvent à payer cher une information publique. L’effet de halo, par lequel une qualité saillante colore l’ensemble du jugement, en est proche.",
-    "example": "Un fondateur ex-Stripe obtient une diligence plus rapide et plus indulgente qu’un autodidacte au dossier équivalent."
-  },
   "biais-de-confirmation": {
     "definition": "Le biais de confirmation conduit à rechercher, retenir et surpondérer les informations qui confirment une conviction préexistante, et à écarter celles qui la contredisent. En due diligence, il est particulièrement insidieux : le champion d’un deal, déjà convaincu, oriente involontairement la vérification vers la consolidation de sa thèse. La parade consiste à inverser la charge de la preuve — consacrer la diligence à chercher ce qui tuerait le deal — et à confier explicitement à un tiers le rôle d’avocat du diable.",
     "example": "Convaincu d’un dossier, on rassemble surtout les éléments qui le défendent en comité, en s’appuyant sur les références fournies par le fondateur."
@@ -141,6 +137,10 @@
   "biais-de-resultat": {
     "definition": "Le biais de résultat conduit à évaluer une décision d’après ce qu’elle a produit, et non d’après la qualité du raisonnement disponible au moment où elle a été prise. Dans un métier à forte variance comme le capital-risque, où la chance pèse lourd sur l’issue d’un investissement, cette confusion empêche d’apprendre : une bonne décision peut mal tourner et une mauvaise décision réussir. Annie Duke en a fait le cœur de « Thinking in Bets » ; la parade consiste à consigner le raisonnement avant de connaître le résultat.",
     "example": "Le comité passe sur une société pour des raisons de prix disciplinées ; trois ans plus tard elle vaut dix fois ce tour. Conclure « c’était une erreur » sur ce seul fait, c’est le biais de résultat."
+  },
+  "biais-d-autorite": {
+    "definition": "Le biais d’autorité conduit à accorder un poids excessif aux marqueurs de statut d’un fondateur — école, passage par une entreprise prestigieuse, expérience de fondateur récidiviste — au détriment de l’examen direct du dossier. Ces signaux ont une valeur informative réelle, mais elle est généralement déjà reflétée dans le prix et dans la concurrence sur le deal ; en faire un critère de tri revient souvent à payer cher une information publique. L’effet de halo, par lequel une qualité saillante colore l’ensemble du jugement, en est proche.",
+    "example": "Un fondateur ex-Stripe obtient une diligence plus rapide et plus indulgente qu’un autodidacte au dossier équivalent."
   },
   "board-culture-best-practices": {
     "definition": "La culture de board désigne la manière dont le board fonctionne en pratique : qualité des échanges, préparation, clarté des décisions, suivi et capacité à traiter les tensions. Un bon board aide le CEO sans devenir une charge de gouvernance inutile.",
@@ -215,8 +215,8 @@
     "example": "Une startup qui veut lever auprès de fonds américains peut se constituer ou se redomicilier en Delaware C-Corp pour émettre des preferred shares et structurer un plan d’options."
   },
   "cac-payback-period": {
-    "definition": "Le CAC payback period mesure combien de mois il faut pour récupérer le CAC grâce au revenu ajusté de la marge brute. Il relie acquisition, cash flow et scalabilité commerciale.",
-    "example": "Un payback de 10 mois est généralement plus robuste qu'un payback de 30 mois pour une startup qui brûle encore du cash."
+    "definition": "Le CAC payback period mesure le temps nécessaire pour récupérer le CAC grâce à la marge brute ou contributive générée par un client. La formule doit indiquer si l'onboarding, les coûts d'implémentation et les expansions observées sont inclus. Il n'est comparable que pour des segments, marges, canaux et périodes cohérents.",
+    "example": "Un CAC de 6 000 € avec 600 € d'onboarding et 550 € de marge brute mensuelle par client donne un payback de 12 mois."
   },
   "cap-table": {
     "definition": "Une cap table présente qui détient quoi dans une startup : founders, salariés, investisseurs, options, warrants et classes de titres. En VC, elle se lit souvent sur une base fully diluted afin de comprendre la dilution, les droits économiques et les scénarios de financement ou d’exit.",
@@ -258,8 +258,8 @@
     "example": "Un CFO expérimenté peut rendre une Series B plus crédible en fiabilisant les KPIs, le modèle financier et le cash planning."
   },
   "churn-rate": {
-    "definition": "Le churn rate mesure la perte d'une base clients ou revenu sur une période. Il est central pour les modèles récurrents : une forte croissance peut cacher un modèle fragile si les clients partent rapidement.",
-    "example": "Un SaaS qui ajoute beaucoup de nouveaux clients mais perd 5 % de sa base chaque mois peut avoir une croissance difficile à maintenir."
+    "definition": "Le churn rate mesure la perte d'une base clients ou revenu sur une période. Le logo/customer churn rapporte les clients actifs T0 perdus aux clients actifs T0. Le revenue churn ou gross revenue loss rate rapporte le revenu perdu par churn et contractions au revenu T0, sans y ajouter les expansions.",
+    "example": "Perdre 5 clients sur 100 donne 5 % de logo churn ; perdre 120 k€ de revenu sur 1 000 k€ donne 12 % de gross revenue loss rate."
   },
   "cliff-vesting": {
     "definition": "Le cliff vesting retarde l’acquisition de l’equity jusqu’à une période minimale de service. Après le cliff, une première tranche devient vested, puis le reste s’acquiert selon le calendrier prévu.",
@@ -362,8 +362,8 @@
     "example": "Un LP score un emerging manager sur sa thèse, son accès au deal flow et la cohérence de son modèle de réserves."
   },
   "cac": {
-    "definition": "Le CAC additionne les dépenses commerciales et marketing nécessaires pour acquérir un client. En VC, il ne se lit jamais seul : il doit être comparé à la marge, à la [[ltv|LTV]], au payback, au canal d'acquisition et à la répétabilité du go-to-market.",
-    "example": "Un CAC de 5 000 € peut être sain si le client génère une marge récurrente élevée et se rembourse vite."
+    "definition": "Le CAC additionne les dépenses commerciales et marketing attribuables à l'acquisition de nouveaux clients sur une période alignée avec le cycle de vente. La convention doit dire si elle inclut salaires, commissions, outils, événements, agences, part management et coûts founder-led. En VC, il se lit avec la marge, la [[ltv|LTV]], le payback, le canal et la répétabilité du go-to-market.",
+    "example": "180 k€ de dépenses d'acquisition attribuables pour 30 nouveaux clients donnent 6 000 € de CAC avant coût d'onboarding."
   },
   "customer-objections": {
     "definition": "Les customer objections révèlent les frictions de vente : budget, urgence, intégration, sécurité, confiance, ROI ou priorité interne. En diligence, leur répétition aide à distinguer un vrai problème de marché d'un simple manque de maturité commerciale.",
@@ -750,8 +750,12 @@
     "example": "Un pacte peut être soumis au droit anglais alors que la société opère en France, ce qui impose une revue de counsel local et du counsel de la juridiction choisie."
   },
   "gross-margin": {
-    "definition": "La gross margin mesure la part du revenu conservée après COGS. Elle influence la LTV, le CAC payback, la capacité à scaler et la qualité du modèle économique.",
-    "example": "Un SaaS à 85 % de marge brute a plus de levier qu'un service à 35 % si les autres métriques sont comparables."
+    "definition": "La gross margin mesure la part du revenu restant après les coûts directs de livraison : (revenu net - COGS) / revenu net. En SaaS, la convention doit préciser hébergement, support, services tiers, onboarding récurrent, coûts IA ou usage et services professionnels lorsque ces coûts affectent la livraison.",
+    "example": "1 000 € de MRR à 55 % de marge brute produisent 550 € de marge brute mensuelle par client pour le calcul de payback."
+  },
+  "grr": {
+    "definition": "La Gross Revenue Retention (GRR) mesure le revenu conservé dans une cohorte active à T0 avant expansions : (revenu T0 - churn - contractions) / revenu T0. Les expansions exclues sont traitées hors GRR, les nouveaux clients acquis après T0 ne sont pas ajoutés et le résultat ne doit pas dépasser 100 %.",
+    "example": "Une cohorte de 1 000 k€ avec 50 k€ de churn et 70 k€ de contractions affiche 88 % de GRR."
   },
   "growth-crisis": {
     "definition": "Une growth crisis apparaît quand la croissance dépasse les systèmes, managers, processus ou ressources disponibles. Elle peut se manifester par churn, retards produit, burn incontrôlé, reporting fragile, conflits de leadership ou perte de qualité d’exécution.",
@@ -887,6 +891,10 @@
     "definition": "Un lead qualifié est une startup repérée dont le stade, le marché, l'équipe, la traction ou le fit avec la thèse justifient une revue sérieuse. Il transforme le sourcing en pipeline exploitable plutôt qu'en simple accumulation de contacts.",
     "example": "Une startup IA B2B avec premiers revenus, marché aligné et introduction crédible devient un lead qualifié pour un fonds seed spécialisé enterprise."
   },
+  "qualified-lead-velocity-rate": {
+    "definition": "Le Lead Velocity Rate (LVR) est le nom utilisé par Geckoboard pour mesurer la croissance des leads qualifiés : (leads qualifiés période courante - leads qualifiés période précédente) / leads qualifiés période précédente. Le slug historique conserve QLVR comme alias local. La convention doit préciser la période, la définition du lead qualifié, le traitement d'un dénominateur nul et l'absence de pouvoir prédictif garanti.",
+    "example": "Passer de 40 à 50 leads qualifiés sur un mois donne 25 % de LVR, sans garantir les signatures ni le revenu."
+  },
   "loi": {
     "definition": "Une LOI établit l'intention des parties d'avancer vers une transaction, notamment en M&A. Elle couvre souvent prix indicatif, exclusivité, confidentialité, due diligence, conditions de closing et calendrier, avec des clauses parfois contraignantes.",
     "example": "Un acquéreur signe une LOI avec exclusivité de 60 jours avant de lancer la due diligence confirmatoire."
@@ -904,8 +912,8 @@
     "example": "Une startup peut devenir licorne lors d'une Series C très chère sans avoir encore généré de DPI pour ses investisseurs."
   },
   "ltv": {
-    "definition": "La LTV estime la valeur qu'un client générera sur sa durée de vie, souvent à partir de marge brute, rétention, expansion et durée de relation. C'est une métrique prospective : elle vaut seulement autant que les hypothèses de churn, marge et pricing qui la soutiennent.",
-    "example": "Une LTV élevée peut être trompeuse si elle suppose un churn très faible sur une cohorte encore trop jeune."
+    "definition": "La LTV estime la valeur économique attendue d'un client à partir de marge, rétention, expansion et durée de relation. Elle doit publier ses hypothèses : horizon, churn, marge brute, croissance de compte, actualisation éventuelle, segment et taille de cohorte. Avec peu d'historique, elle reste un scénario sensible plutôt qu'une mesure observée.",
+    "example": "Une LTV fondée sur un churn mensuel supposé faible est fragile si la cohorte n'a pas encore observé un cycle de renouvellement complet."
   },
   "ltv-cac": {
     "definition": "Le LTV/CAC compare ce qu'un client rapporte à ce qu'il coûte à acquérir. Il aide à juger la viabilité du moteur d'acquisition, mais peut être trompeur si LTV, marge ou churn reposent sur des hypothèses trop optimistes.",
@@ -932,8 +940,8 @@
     "example": "Deux sociétés comparables peuvent recevoir des multiples différents si l’une offre une liquidité publique immédiate et l’autre reste privée pendant plusieurs années."
   },
   "power-law": {
-    "definition": "En [[venture-capital|venture capital]], la loi de puissance signifie qu'une petite minorité de deals peut générer presque toute la valeur d'un portefeuille. Elle pousse les investisseurs à rechercher des outcomes exceptionnels plutôt que des entreprises seulement correctes.",
-    "example": "Une seule participation à 100x peut rendre un fonds entier malgré de nombreuses pertes."
+    "definition": "En [[venture-capital|venture capital]], l'expression « loi de puissance » est un raccourci sectoriel employé pour évoquer une forte asymétrie : quelques résultats peuvent peser lourd dans un portefeuille. Cette expression ne suffit pas à établir une loi mathématique universelle ; toute affirmation quantitative doit préciser l'échantillon, la période et la méthode.",
+    "example": "Dans l'échantillon agrégé du NBER w27690, quelques sociétés concentrent une part décisive du résultat ; ce constat ne se transpose pas en proportion universelle."
   },
   "loss-ratio": {
     "definition": "Le loss ratio mesure la proportion d’investissements qui échouent ou ne retournent pas significativement le capital. En VC, un loss ratio élevé peut rester compatible avec une bonne performance si quelques gagnants compensent largement les pertes.",
@@ -1030,10 +1038,6 @@
     "definition": "La NVCA est l'association professionnelle américaine du venture capital. Elle est particulièrement utile aux praticiens car ses model documents servent souvent de point de départ pour les term sheets et la documentation juridique des financements VC américains.",
     "example": "Un counsel peut comparer une term sheet à un modèle NVCA pour identifier les clauses standard et les écarts négociés."
   },
-  "negligence-des-taux-de-base": {
-    "definition": "La négligence des taux de base consiste à juger un dossier sur ses singularités apparentes en oubliant la fréquence de référence de sa catégorie — ici, le fait qu’une large majorité des sociétés financées à un stade donné ne rendront pas le capital. Chaque dossier semble échapper à la statistique qui le concerne, d’autant qu’un exemple vif et favorable, par l’heuristique de disponibilité, vient souvent le confirmer. Le biais du survivant en est un cas particulier : n’apprendre que des startups qui ont réussi, en ignorant celles qui ont fait pareil et échoué. Le check des taux de base consiste à partir de la base statistique, puis à n’en sortir que sur des éléments vérifiables.",
-    "example": "« Celui-ci est différent » : l’intuition fait écarter le taux de base au lieu de servir de point de départ."
-  },
   "net-new-arr": {
     "definition": "Net New ARR mesure l'augmentation nette d'ARR sur une période. Très utile en SaaS mais peut être trop spécifique pour le lot réduit.",
     "example": "Un mois avec 40 k€ de new ARR, 10 k€ d'expansion et 8 k€ de churn produit 42 k€ de net new ARR."
@@ -1043,8 +1047,8 @@
     "example": "Un NPS élevé est plus convaincant si les mêmes clients renouvellent, augmentent leur usage et acceptent d’être référencés."
   },
   "nrr": {
-    "definition": "La NRR mesure comment le revenu des clients existants évolue après churn, downgrades, upsell et expansion. Au-dessus de 100 %, la base existante grossit sans nouveaux clients, ce qui est un signal fort de qualité produit et de pricing.",
-    "example": "Une NRR de 120 % signifie qu'une cohorte de 1 M€ de revenu devient 1,2 M€ après pertes et expansion."
+    "definition": "La NRR mesure l'évolution du revenu d'une cohorte active à T0 : (revenu T0 - churn - contractions + expansions) / revenu T0. Les nouveaux clients acquis après T0 sont exclus ; les réactivations suivent la convention publiée et ne doivent pas être comptées deux fois.",
+    "example": "Une cohorte de 1 000 k€ avec 50 k€ de churn, 70 k€ de contractions et 180 k€ d'expansions affiche 106 % de NRR."
   },
   "no-shop": {
     "definition": "Le no-shop donne à l’investisseur une fenêtre d’exclusivité pour finaliser la due diligence et les documents juridiques après signature de la term sheet. Il augmente la certitude du deal, mais réduit le levier de négociation du fondateur.",
@@ -1057,6 +1061,10 @@
   "nonqualified-stock-options": {
     "definition": "Les Nonqualified Stock Options sont des options qui ne bénéficient pas du régime ISO mais peuvent être attribuées à un éventail plus large de bénéficiaires. Elles sont généralement imposées comme ordinary income à l’exercice aux États-Unis.",
     "example": "Un advisor externe reçoit des NSOs plutôt que des ISOs, car il n’est pas salarié de la société."
+  },
+  "negligence-des-taux-de-base": {
+    "definition": "La négligence des taux de base consiste à juger un dossier sur ses singularités apparentes en oubliant la fréquence de référence de sa catégorie — ici, le fait qu’une large majorité des sociétés financées à un stade donné ne rendront pas le capital. Chaque dossier semble échapper à la statistique qui le concerne, d’autant qu’un exemple vif et favorable, par l’heuristique de disponibilité, vient souvent le confirmer. Le biais du survivant en est un cas particulier : n’apprendre que des startups qui ont réussi, en ignorant celles qui ont fait pareil et échoué. Le check des taux de base consiste à partir de la base statistique, puis à n’en sortir que sur des éléments vérifiables.",
+    "example": "« Celui-ci est différent » : l’intuition fait écarter le taux de base au lieu de servir de point de départ."
   },
   "fundraising-target": {
     "definition": "L'objectif de fundraising doit traduire un plan en besoin de capital : recrutement, produit, go-to-market, buffer, runway et milestones du prochain tour. Il doit aussi correspondre à la taille de chèque, l'ownership cible et la stratégie de l'investisseur.",
@@ -1206,10 +1214,6 @@
     "definition": "Les protective provisions imposent l’accord de certains investisseurs ou classes de preferred avant des actions majeures : émission de titres, vente, dette importante, modification statutaire, changement de taille du board ou liquidation. Elles déplacent du contrôle sans donner la gestion quotidienne.",
     "example": "Une startup ne peut pas émettre une nouvelle classe senior sans l’approbation des détenteurs de Series A."
   },
-  "qualified-lead-velocity-rate": {
-    "definition": "Le Qualified Lead Velocity Rate mesure la progression du nombre de leads qualifiés d'un mois sur l'autre. En fundraising, il peut aider à juger si le pipeline commercial soutient le plan de croissance, surtout quand le revenu réalisé est encore en retard sur l'activité commerciale.",
-    "example": "Une hausse de 25 % des leads qualifiés mensuels peut soutenir une histoire de croissance si les taux de conversion restent crédibles."
-  },
   "qpo": {
     "definition": "Une Qualified Public Offering est une IPO qui dépasse des seuils définis dans les documents de financement, souvent en montant levé et en prix par action. Elle sert à éviter qu’une petite IPO insuffisante déclenche automatiquement les mêmes effets qu’une vraie sortie de qualité institutionnelle.",
     "example": "Une term sheet peut prévoir qu’une QPO doit lever au moins 50 M$ à un prix par action supérieur à un multiple du prix Series A."
@@ -1229,14 +1233,6 @@
   "quasi-fonds-propres": {
     "definition": "Les quasi-fonds propres regroupent, dans l’analyse financière, des ressources de long terme dont le rang, la rémunération ou le remboursement les rapprochent du risque supporté par les fonds propres. L’expression ne désigne pas un statut juridique unique. Le véhicule peut être un titre associatif, un titre participatif, un prêt subordonné ou un autre instrument compatible avec l’émetteur. Une association ne possède pas de capital social : qualifier une créance de quasi-fonds propres n’en fait pas une participation.",
     "example": "Un financeur compare un titre associatif et un prêt subordonné, puis fait valider le véhicule autorisé pour le bénéficiaire et son propre statut."
-  },
-  "reproductibilite-mesure": {
-    "definition": "La reproductibilité de mesure est la fidélité obtenue sous des conditions de reproductibilité : différents lieux, opérateurs et systèmes de mesure, avec des mesures répétées sur le même objet ou des objets similaires. Elle doit être distinguée de la convention NASEM de reproductibilité computationnelle.",
-    "example": "Un matériau mesuré dans deux laboratoires avec des systèmes différents relève d'une question de reproductibilité de mesure."
-  },
-  "realisation-impact": {
-    "definition": "Une réalisation d’impact, ou output, décrit ce qui a été directement fourni ou produit : séances réalisées, personnes accompagnées, équipements installés ou services délivrés. Elle mesure l’exécution, non le changement qui en résulte. Une réalisation peut être nécessaire à un [[resultat-impact|résultat d’impact]] sans suffire à démontrer ce résultat, son maintien ou son attribution à l’intervention.",
-    "example": "Former 300 personnes est une réalisation ; l’amélioration durable de leur accès à l’emploi est un résultat à mesurer séparément."
   },
   "recurring-revenue": {
     "definition": "Le recurring revenue provient de contrats ou usages qui se renouvellent, souvent via abonnement. Il rend les revenus plus prévisibles et permet d'analyser ARR, MRR, churn et NRR.",
@@ -1262,17 +1258,9 @@
     "definition": "Les representations and warranties sont des déclarations faites par la société, et parfois les fondateurs, sur des sujets comme capitalisation, contrats, propriété intellectuelle, fiscalité, contentieux ou conformité. Elles conditionnent souvent le closing et peuvent ouvrir des recours si elles sont fausses.",
     "example": "Une warranty de propriété intellectuelle affirme que la société détient ou licence correctement la PI nécessaire à son produit ; une exception doit être décrite dans la disclosure letter."
   },
-  "replicabilite-scientifique": {
-    "definition": "Dans la convention NASEM, la réplicabilité scientifique consiste à obtenir des résultats cohérents entre des études qui visent la même question scientifique et collectent chacune leurs propres données. Elle ne se confond pas avec la reproductibilité de mesure du JCGM.",
-    "example": "Une seconde équipe qui collecte de nouvelles données pour tester le même effet examine la réplicabilité scientifique."
-  },
-  "repetabilite-mesure": {
-    "definition": "La répétabilité de mesure désigne la fidélité observée sous des conditions comprenant la même procédure, les mêmes opérateurs, le même système de mesure, les mêmes conditions de fonctionnement, le même lieu et des mesures répétées sur un court intervalle. Elle qualifie une condition de mesure, pas toute la validité scientifique d'un résultat.",
-    "example": "Trois séries refaites le même jour, sur le même banc et par le même opérateur testent la répétabilité de mesure."
-  },
-  "reseau-vc": {
-    "definition": "Le réseau VC sert à sourcer des deals, vérifier une [[dd|due diligence]], aider une startup à recruter, vendre, lever en [[follow-on|follow-on]] ou préparer une sortie. Il explique pourquoi un investisseur peut valoir plus que son capital.",
-    "example": "Un partner ouvre son réseau de clients enterprise et de fonds Series B à une participation en portefeuille."
+  "reproductibilite-mesure": {
+    "definition": "La reproductibilité de mesure est la fidélité obtenue sous des conditions de reproductibilité : différents lieux, opérateurs et systèmes de mesure, avec des mesures répétées sur le même objet ou des objets similaires. Elle doit être distinguée de la convention NASEM de reproductibilité computationnelle.",
+    "example": "Un matériau mesuré dans deux laboratoires avec des systèmes différents relève d'une question de reproductibilité de mesure."
   },
   "reserve-funds": {
     "definition": "Les reserve funds sont la poche de capital gardée pour soutenir les sociétés existantes, surtout les gagnants potentiels. La discipline de réserves conditionne la capacité à maintenir l’ownership et à capturer la loi de puissance.",
@@ -1284,10 +1272,6 @@
   "rsu": {
     "definition": "Les RSU sont des attributions donnant droit à des actions lorsque les conditions de vesting sont satisfaites. Contrairement aux options, elles n'ont pas de strike price, ce qui les rend plus fréquentes dans les sociétés privées plus matures ou proches de la liquidité.",
     "example": "Une scale-up late-stage peut passer des options aux RSU pour rendre la rémunération equity plus lisible malgré une valorisation déjà élevée."
-  },
-  "resultat-impact": {
-    "definition": "Un résultat d’impact, ou outcome, est un changement de situation, de comportement, de capacité ou de condition pour les parties concernées. Il peut être positif ou négatif, attendu ou inattendu, immédiat ou différé. Son observation ne prouve pas automatiquement que l’intervention en est la cause : l’analyse examine la situation de référence, les autres contributions, la durée et les éventuels effets de déplacement.",
-    "example": "La part de participants conservant un emploi six mois après l’accompagnement décrit un résultat, sous réserve du périmètre, de l’attrition et des autres facteurs."
   },
   "revenue-growth": {
     "definition": "La revenue growth mesure la vitesse de croissance du chiffre d'affaires. En VC, elle doit être analysée avec sa qualité : récurrence, marge, rétention, répétabilité, saisonnalité et coût d'acquisition.",
@@ -1320,6 +1304,26 @@
   "runway": {
     "definition": "Le runway estime le nombre de mois disponibles avant de devoir lever, réduire le burn ou atteindre l'autosuffisance. Il se calcule à partir du cash disponible et du burn mensuel, mais doit intégrer les variations de revenus et de dépenses.",
     "example": "Une startup avec 18 mois de runway peut choisir de lever maintenant pour garder du levier ou attendre un milestone plus fort."
+  },
+  "realisation-impact": {
+    "definition": "Une réalisation d’impact, ou output, décrit ce qui a été directement fourni ou produit : séances réalisées, personnes accompagnées, équipements installés ou services délivrés. Elle mesure l’exécution, non le changement qui en résulte. Une réalisation peut être nécessaire à un [[resultat-impact|résultat d’impact]] sans suffire à démontrer ce résultat, son maintien ou son attribution à l’intervention.",
+    "example": "Former 300 personnes est une réalisation ; l’amélioration durable de leur accès à l’emploi est un résultat à mesurer séparément."
+  },
+  "replicabilite-scientifique": {
+    "definition": "Dans la convention NASEM, la réplicabilité scientifique consiste à obtenir des résultats cohérents entre des études qui visent la même question scientifique et collectent chacune leurs propres données. Elle ne se confond pas avec la reproductibilité de mesure du JCGM.",
+    "example": "Une seconde équipe qui collecte de nouvelles données pour tester le même effet examine la réplicabilité scientifique."
+  },
+  "repetabilite-mesure": {
+    "definition": "La répétabilité de mesure désigne la fidélité observée sous des conditions comprenant la même procédure, les mêmes opérateurs, le même système de mesure, les mêmes conditions de fonctionnement, le même lieu et des mesures répétées sur un court intervalle. Elle qualifie une condition de mesure, pas toute la validité scientifique d'un résultat.",
+    "example": "Trois séries refaites le même jour, sur le même banc et par le même opérateur testent la répétabilité de mesure."
+  },
+  "reseau-vc": {
+    "definition": "Le réseau VC sert à sourcer des deals, vérifier une [[dd|due diligence]], aider une startup à recruter, vendre, lever en [[follow-on|follow-on]] ou préparer une sortie. Il explique pourquoi un investisseur peut valoir plus que son capital.",
+    "example": "Un partner ouvre son réseau de clients enterprise et de fonds Series B à une participation en portefeuille."
+  },
+  "resultat-impact": {
+    "definition": "Un résultat d’impact, ou outcome, est un changement de situation, de comportement, de capacité ou de condition pour les parties concernées. Il peut être positif ou négatif, attendu ou inattendu, immédiat ou différé. Son observation ne prouve pas automatiquement que l’intervention en est la cause : l’analyse examine la situation de référence, les autres contributions, la durée et les éventuels effets de déplacement.",
+    "example": "La part de participants conservant un emploi six mois après l’accompagnement décrit un résultat, sous réserve du périmètre, de l’attrition et des autres facteurs."
   },
   "sales-cycle": {
     "definition": "Le sales cycle mesure le temps et le processus entre le premier contact qualifié et la signature. Il influence le besoin de cash, la prévisibilité du pipeline, le CAC payback et la capacité à scaler un modèle commercial.",
@@ -1490,13 +1494,13 @@
     "definition": "Une term sheet résume les conditions clés d’un investissement VC avant les contrats définitifs : prix, montant, [[liquidation-preference|liquidation preference]], droits de gouvernance, protections investisseur, closing conditions et clauses parfois contraignantes comme confidentialité ou exclusivité.",
     "example": "Une Series A peut être annoncée à 12 M€ pre-money, mais sa vraie économie dépend aussi de la liquidation preference, du pro-rata et des protective provisions."
   },
-  "theorie-du-changement": {
-    "definition": "Une théorie du changement décrit pourquoi et dans quelles conditions une intervention devrait conduire à des changements pour les personnes ou le système concernés. Elle relie ressources, activités, [[realisation-impact|réalisations]], [[resultat-impact|résultats]], hypothèses, facteurs externes et effets indésirables possibles. Elle organise la collecte de preuves et les décisions, mais ne constitue pas elle-même une preuve de causalité ; elle doit être confrontée aux faits et révisée.",
-    "example": "Un programme d’insertion explicite comment l’accompagnement doit améliorer les compétences puis l’accès à un emploi durable, et identifie les conditions économiques nécessaires à cette chaîne."
-  },
   "thesis-driven": {
     "definition": "Une thèse d'investissement formule une conviction sur un marché, une technologie, un timing ou un type d'entreprise. Elle guide le sourcing, filtre les dossiers et donne à la diligence une question centrale : les faits observés renforcent-ils ou invalident-ils la conviction initiale ?",
     "example": "Un fonds spécialisé climat peut tester si une startup correspond vraiment à sa thèse sur la décarbonation industrielle et non seulement à une mode sectorielle."
+  },
+  "theorie-du-changement": {
+    "definition": "Une théorie du changement décrit pourquoi et dans quelles conditions une intervention devrait conduire à des changements pour les personnes ou le système concernés. Elle relie ressources, activités, [[realisation-impact|réalisations]], [[resultat-impact|résultats]], hypothèses, facteurs externes et effets indésirables possibles. Elle organise la collecte de preuves et les décisions, mais ne constitue pas elle-même une preuve de causalité ; elle doit être confrontée aux faits et révisée.",
+    "example": "Un programme d’insertion explicite comment l’accompagnement doit améliorer les compétences puis l’accès à un emploi durable, et identifie les conditions économiques nécessaires à cette chaîne."
   },
   "timing": {
     "definition": "Le timing combine changements technologiques, réglementaires, économiques, comportementaux ou concurrentiels qui rendent une solution possible et urgente. En VC, il répond à la question : pourquoi cette entreprise peut-elle gagner maintenant plutôt qu'hier ou dans cinq ans ?",
@@ -1546,13 +1550,13 @@
     "definition": "Une transaction de sortie est une opération qui transforme l’equity des actionnaires en liquidité ou en contrepartie économique : [[ipo|IPO]], vente de titres, vente d’actifs, merger ou liquidation de société. Sa définition est importante car elle peut déclencher la [[liquidation-preference|liquidation preference]] et l’[[exit-waterfall|exit waterfall]].",
     "example": "Le pacte définit une transaction de sortie comme une IPO, une vente de plus de 50 % des titres ou une vente substantielle des actifs."
   },
-  "tresorerie-mobilisable": {
-    "definition": "La trésorerie mobilisable part du solde bancaire réconcilié, identifie chaque restriction contractuelle ou comptable, l’emploi qu’elle finance et son échéance, puis rapproche les décaissements imminents des mêmes masses. Une somme n’est soustraite qu’une fois : un décaissement déjà couvert par un fonds affecté isolé ne réduit pas une seconde fois le solde libre. Le tableau distingue au minimum le solde bancaire, la restriction, l’emploi financé, l’échéance et le montant effectivement mobilisable. Toute qualification matérielle est confirmée avec les fonctions comptable ou juridique compétentes.",
-    "example": "Sur 620 000 euros en banque, l’organisation ne conclut pas à 120 000 euros disponibles avant d’avoir établi si les 190 000 euros de décaissements proches sont ou non déjà couverts par les 310 000 euros affectés."
-  },
   "trustee": {
     "definition": "Un trustee est un intermédiaire qui peut détenir légalement des titres ou exercer des droits pour le compte de plusieurs petits investisseurs. En VC, ce type de structure sert à simplifier la [[cap-table|cap table]] : le trustee apparaît comme actionnaire unique, tandis que les bénéficiaires sont liés par un accord de trust ou de portage.",
     "example": "Une campagne avec de nombreux petits tickets regroupe les investisseurs via un trustee pour éviter cent lignes individuelles dans la cap table."
+  },
+  "tresorerie-mobilisable": {
+    "definition": "La trésorerie mobilisable part du solde bancaire réconcilié, identifie chaque restriction contractuelle ou comptable, l’emploi qu’elle finance et son échéance, puis rapproche les décaissements imminents des mêmes masses. Une somme n’est soustraite qu’une fois : un décaissement déjà couvert par un fonds affecté isolé ne réduit pas une seconde fois le solde libre. Le tableau distingue au minimum le solde bancaire, la restriction, l’emploi financé, l’échéance et le montant effectivement mobilisable. Toute qualification matérielle est confirmée avec les fonctions comptable ou juridique compétentes.",
+    "example": "Sur 620 000 euros en banque, l’organisation ne conclut pas à 120 000 euros disponibles avant d’avoir établi si les 190 000 euros de décaissements proches sont ou non déjà couverts par les 310 000 euros affectés."
   },
   "unit-economics": {
     "definition": "Les unit economics analysent si une unité de croissance crée ou détruit de la valeur. Elles combinent CAC, LTV, marge brute, payback, churn et expansion pour tester la viabilité du modèle à l'échelle.",

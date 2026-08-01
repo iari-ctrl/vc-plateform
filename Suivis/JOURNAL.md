@@ -6,6 +6,201 @@ Le journal des travaux antérieurs à la migration (passes du 2026-05-30 au 2026
 
 ---
 
+## 2026-08-01 — Correction V1c de la liste de calculs SaaS Metrics
+
+Objet : corriger le résiduel bloquant relevé par la contre-revue V1b de `l-specialty-saas-metrics`, sans élargir le périmètre du lot, modifier les documents de certification ni lancer une opération distante.
+
+Constat repris : la Partie A demandait encore de recalculer l’ARR récurrent vérifié en plus des six calculs autorisés. Le test V1b vérifiait la présence de ces six calculs, mais pas l’exclusivité de leur liste.
+
+Travaux et preuve RED–GREEN :
+
+- baseline V1c conservée hors dépôt dans `~/.hermes/cache/vc-platform/analyst-seed-lead-saas-v1c-baseline/`, avec copie et empreinte des fichiers bornés avant écriture ;
+- `client/src/content/analystSeedLeadSaas.test.ts` isole la Partie A, contrôle sa phrase de calcul exacte et y interdit ARR, logo/customer churn et LTV ;
+- RED ciblé conservé dans `~/.hermes/cache/vc-platform/analyst-seed-lead-saas-v1c-red.log` : `npm run test --workspace client -- src/content/analystSeedLeadSaas.test.ts` retourne exit 1, avec 1 test en échec et 10 réussis sur 11 ; l’échec oppose explicitement la liste attendue à la liste contenant encore ARR ;
+- correction minimale de `data/lessons.json` : retrait de l’ARR de la seule consigne de Partie A. Le retraitement `1,2 M€ - 120 k€ = 1,08 M€` reste expliqué dans le corps de la leçon ; le pont agrégé, ses calculs, la Partie B et l’inventaire des champs manquants restent inchangés ;
+- `npm run split:content` reporte uniquement ce changement de corps dans `data/generated/lessons.bodies.json` ; la comparaison avec la baseline confirme que `data/generated/lessons.index.json`, `data/courses.json` et `client/public/sitemap.xml` restent identiques ;
+- GREEN ciblé : la même commande retourne exit 0, 11/11.
+
+Recalculs indépendants : `l-specialty-saas-metrics` contient 1 121 mots avant références et 1 249 mots au total ; `readMin = ceil(1 249 / 200) = 7`. La durée dérivée de `c-analyst-specialties` reste `23`. Les résultats restent gross revenue loss rate `12 %`, GRR `88 %`, NRR `106 %`, CAC `6 000 €`, marge brute mensuelle `550 €` et payback `12 mois`.
+
+Vérifications finales :
+
+- `npm run validate:glossary` — exit 0, 420 termes ;
+- `npm run validate:content:strict` — exit 0, 24 parcours, 1 certification, 30 cours, 147 leçons, 420 termes et 373 marqueurs ;
+- `npm run check:generated` — exit 0, 147 leçons, 126 corps publiés et 420 termes ;
+- `npm run check` — exit 0, 67 fichiers / 426 tests Vitest et 58/58 tests Node ;
+- `git diff --check` — exit 0, sans sortie ;
+- build canonique `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` — exit 0, 1 796 modules transformés, sitemap 703 routes et prérendu strict 715/715 avec `ok: true` ;
+- gates post-build `npm run check:generated`, `npm run validate:content:strict`, `npm run check` et `git diff --check` — exit 0.
+
+Fichiers modifiés par V1c : `client/src/content/analystSeedLeadSaas.test.ts`, `data/lessons.json`, `data/generated/lessons.bodies.json`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Les autres changements visibles du worktree restent préexistants ou relèvent d’autres lots.
+
+Clôture locale : aucun staging, commit, push, workflow distant, déploiement ou V2.
+
+---
+
+## 2026-08-01 — Correction V1b du cas SaaS Metrics agrégé
+
+Objet : fermer le dernier écart bloquant relevé par la contre-revue V1 du lot pédagogique `Analyst Seed × Lead × SaaS`, limité à `l-specialty-saas-metrics`, sans modifier les documents de certification, sans V2 et sans opération distante.
+
+Défaut initial : le cas annonçait un « export mensuel fictif par client » alors que les données disponibles formaient seulement un pont agrégé de cohorte. Les calculs ARR, gross revenue loss rate, GRR, NRR, CAC, marge brute mensuelle et payback étaient possibles, mais le logo/customer churn et la LTV n’étaient pas calculables numériquement faute de logos T0/perdus, revenus par client, période, churn retenu et convention de durée de vie.
+
+Travaux :
+
+- renforcement préalable de `client/src/content/analystSeedLeadSaas.test.ts` : le nouveau contrat vérifie le tableau Markdown du pont agrégé, l’absence de présentation mensongère comme export client, les seules métriques numériques calculables, le classement de logo churn et LTV comme non calculables, l’inventaire des champs manquants et l’interdiction d’inventer une valeur ;
+- RED ciblé conservé hors dépôt dans `~/.hermes/cache/vc-platform/analyst-seed-lead-saas-v1b-red.log` : `npm run test --workspace client -- src/content/analystSeedLeadSaas.test.ts` retourne exit 1, 11 tests exécutés, 2 tests en échec pour le défaut sémantique attendu ;
+- correction minimale de `data/lessons.json` : le cas est désormais un pont agrégé de cohorte avec période, devise, date d’extraction, revenu T0 `1 000 k€`, churn revenu `50 k€`, contractions `70 k€`, expansions `180 k€`, nouveaux clients après T0 `90 k€` exclus de la NRR et réactivations `20 k€` traitées séparément ;
+- reformulation de l’activité en Partie A — calculs exécutables et Partie B — contrôle de données et méthode. Logo/customer churn et LTV ne sont plus demandés comme calculs numériques depuis le pont ; l’exercice demande de documenter le schéma de collecte client et les champs nécessaires, sans inventer de valeur ;
+- conservation des acquis : cas fictif explicite, définitions prudentes, absence de seuil universel, références ChartMogul et Paddle, frontière Analyst, IDs/slugs/routes/statuts et corrections Seed Financing/SaaS GTM inchangés.
+
+Recalculs indépendants : `l-specialty-saas-metrics` contient 1 124 mots avant références et 1 252 mots au total ; `readMin = ceil(1 252 / 200) = 7`. La durée dérivée du cours `c-analyst-specialties` reste `23`, donc `data/courses.json` n’est pas modifié.
+
+Vérifications et build :
+
+- GREEN ciblé : `npm run test --workspace client -- src/content/analystSeedLeadSaas.test.ts` — exit 0, 11/11 ;
+- `npm run validate:glossary` — exit 0, 420 termes ;
+- `npm run validate:content:strict` — exit 0, 24 parcours, 1 certification, 30 cours, 147 leçons, 420 termes, 373 marqueurs ;
+- `npm run split:content` — exit 0, 420 termes et 147 leçons régénérés ;
+- `npm run check:generated` — exit 0, 147 leçons, 126 corps publiés, 420 termes ;
+- `npm run check` — exit 0, 67 fichiers / 426 tests Vitest et 58/58 tests Node ;
+- `git diff --check` — exit 0, sans sortie ;
+- build canonique `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` — exit 0, 1 796 modules transformés, sitemap 703 routes, postbuild exécuté, prérendu strict 715/715 avec `ok: true` ;
+- gates post-build : `npm run check:generated`, `npm run validate:content:strict`, `npm run check` et `git diff --check` — exit 0.
+
+Contrôles post-build : les dérivés de `l-specialty-saas-metrics` correspondent aux sources canoniques ; les six routes `/lessons/seed-validation-commerciale-retention`, `/lessons/seed-ownership-runway-financement`, `/lessons/lead-plan-due-diligence-term-sheet`, `/lessons/lead-syndication-gouvernance-closing`, `/lessons/saas-arr-retention-unit-economics` et `/lessons/saas-repetabilite-go-to-market` sont présentes dans le sitemap ; `docs/certifications/REFERENTIEL-VC-ANALYST.md` et `docs/certifications/ARCHITECTURE-CERTIFICATIONS.md` conservent leurs empreintes de début de passe.
+
+Fichiers réellement modifiés par cette passe : `client/src/content/analystSeedLeadSaas.test.ts`, `data/lessons.json`, `data/generated/lessons.bodies.json`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Les autres modifications visibles du worktree sont préexistantes ou liées à des lots distincts et ne sont pas attribuées à cette correction.
+
+Clôture locale : aucun staging, commit, push, workflow distant, déploiement ou V2. La zone de staging est restée vide.
+
+---
+
+## 2026-08-01 — Correction V1 du lot « Analyst Seed × Lead × SaaS »
+
+Objet : corriger le lot pédagogique optionnel `Seed × Lead × SaaS` sur les manquements de provenance, finance et calculs, sans modifier les documents de certification ni lancer de V2.
+
+Travaux et preuve RED–GREEN :
+
+- les consignes dépôt, architecture éditoriale, référentiels de certification, test ciblé existant, six leçons et livrables de recherche `~/.hermes/cache/vc-platform/source-research/seed-lead-saas/` ont été lus ; les empreintes de départ demandées correspondaient aux fichiers de contenu/tests/référentiels/contrat avant modification ; le worktree était déjà non propre et les modifications hors lot sont restées distinctes ;
+- `client/src/content/analystSeedLeadSaas.test.ts` a été complété avant correction avec des contrôles sémantiques ciblés. Première sortie RED conservée dans `~/.hermes/cache/vc-platform/analyst-seed-lead-saas-red.log` : 11 tests exécutés, 9 échecs attendus sur sources SaaS, marquage fictif, runway, métriques SaaS, exercices, LVR/QLVR, GRR et références mutables ;
+- `data/lessons.json` publie et corrige les six leçons `l-stage-seed-commercial`, `l-stage-seed-financing`, `l-role-lead-dd`, `l-role-lead-closing`, `l-specialty-saas-metrics` et `l-specialty-saas-gtm` : cas fictifs explicites, exercices exécutables ou reformulés, frontière Analyst maintenue comme transposition professionnelle prudente, références requalifiées avec portée et limites ;
+- Seed Financing distingue primaire et secondaire, calcule `post-money = 7,6 M€ + 2,4 M€ = 10,0 M€`, ownership primaire `24 %`, runway mécanique `2,75 M€ / 90 k€ = 30,555… mois`, arrondie à `30,6 mois`, et sépare runway mécanique, runway à seuil et fenêtre utile avant prochain tour ;
+- SaaS Metrics rend reproductibles `1,2 M€ - 120 k€ = 1,08 M€`, GRR `88 %`, NRR `106 %`, CAC `6 000 €`, onboarding `600 €`, marge brute mensuelle `550 €` et payback `12 mois`, sans seuil universel ;
+- SaaS GTM aligne `qualified-lead-velocity-rate` sur la source Geckoboard « Lead Velocity Rate (LVR) », garde QLVR comme alias local, calcule LVR `25 %`, MQL→SQL `75 %`, SQL→won `60 %`, cycle médian `53 jours` et panier signé moyen `20 k€` ;
+- `data/glossary.json` et `data/sources/canonical-glossary.json` sont alignés, avec création de `grr` et reformulation des entrées ARR, annualized run rate, NRR, CAC, CAC payback, gross margin, LTV, churn et LVR ;
+- `data/courses.json` est ajusté aux durées dérivées : `c-analyst-stage` 12 min, `c-analyst-deal-role` 12 min, `c-analyst-specialties` 23 min ; les dérivés `data/generated/*` sont produits par `npm run split:content` ; `client/public/sitemap.xml` est régénéré par `generate:sitemap` avec l’origine canonique documentée ;
+- les tests de comptage devenus obsolètes par la publication des six leçons et l’ajout de `grr` sont réalignés dans `client/src/content/certifications.test.ts`, `client/src/content/lessons.test.ts` et `scripts/generated-content.test.mjs` ; les fichiers de certification sous `docs/certifications/` n’ont pas été modifiés par cette passe.
+
+Vérifications finales :
+
+- `npm run test --workspace client -- src/content/analystSeedLeadSaas.test.ts` : exit 0 — 11/11 ;
+- `npm run validate:glossary` : exit 0 — 420 termes ;
+- `npm run validate:content:strict` : exit 0 — 24 parcours, 1 certification, 30 cours, 147 leçons, 420 termes, 373 marqueurs ;
+- `npm run split:content` : exit 0 — 420 termes et 147 leçons régénérés vers `data/generated/*` ;
+- `npm run check:generated` : exit 0 — 147 leçons, 126 corps publiés, 420 termes ;
+- recalcul indépendant : readMin `6, 6, 6, 6, 7, 7`, durées de cours `12, 12, 23`, runway `30,555…`, ownership `24 %`, ARR `1,08 M€`, GRR `88 %`, NRR `106 %`, payback `12 mois`, LVR `25 %` ;
+- `npm run check` a d’abord échoué sur les tests de comptage et le sitemap versionné devenus obsolètes ; après réalignement et régénération canonique, `npm run check` retourne exit 0 — 67 fichiers / 426 tests Vitest et 58/58 tests Node ;
+- `git diff --check` : exit 0, sans sortie ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — 1 796 modules transformés, sitemap 703 routes, prérendu strict 715/715 avec `ok: true` ;
+- contrôle post-build `npm run check:generated` : exit 0 ; empreintes finales relevées pour les fichiers possédés.
+
+Fichiers touchés par cette correction : `client/src/content/analystSeedLeadSaas.test.ts`, `data/lessons.json`, `data/courses.json`, `data/glossary.json`, `data/sources/canonical-glossary.json`, les dérivés `data/generated/lessons.*.json` et `data/generated/glossary.*.json`, `client/public/sitemap.xml`, `client/src/content/certifications.test.ts`, `client/src/content/lessons.test.ts`, `scripts/generated-content.test.mjs`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture locale : aucun manquement V1 n’est laissé ouvert. Aucun commit, staging, push, workflow distant, déploiement ou lancement V2 n’a été exécuté. La contre-revue V1 indépendante doit être lancée dans une session séparée.
+
+---
+
+## 2026-08-01 — Reprise sourcée du parcours « Comprendre le capital-risque »
+
+Objet : reprendre `p-decouvrir-vc` / `c-decouvrir-vc` sans créer de cours, en conservant les sept leçons `ld-*`, leurs slugs et routes, le drop-in concurrent `lsv-vc-mise`, et le cas Europe comme respiration hors lot.
+
+Travaux et preuve RED–GREEN :
+
+- baseline du worktree sale repris avant réécriture ; les modifications préexistantes restent distinctes et aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté ;
+- deux tests RED ciblés ont été ajoutés : `client/src/content/decouvrirVcParcours.test.ts` pour l’inventaire, les sources, l’ordre et le quiz ; `client/src/pages/learn/decouvrirVcParcours.dom.test.tsx` pour le rendu du jalon, la progression et l’exécution du quiz ;
+- une matrice documentaire locale a été constituée dans `~/.hermes/cache/vc-platform/source-research/p-decouvrir-vc/evidence-matrix.md`, avec proposition, source exacte, portée et limite ; les sources retenues incluent France Invest, ILPA, EUR-Lex/EuVECA, Invest Europe, NBER et travaux académiques accessibles ;
+- `data/parcours/01-le-vc-sans-bullshit.lessons.json` a été réécrit comme registre court et institutionnel : les sept IDs `ld-*` sont conservés, `ld-decouvrir-vc-quiz` ajoute huit questions cumulatives, et chaque leçon factuelle porte au moins deux sources HTTPS qualifiées ;
+- `data/courses.json` et `data/parcours.json` sont alignés sur la durée dérivée et les neuf étapes : sept leçons, respiration `cs-europe-vs-valley`, puis milestone `ld-decouvrir-vc-quiz` ; le cas Europe n’a pas été réécrit ;
+- `client/src/pages/learn/ParcoursDetailPage.tsx` distingue désormais un milestone résolu vers une leçon d’un livrable de production, et `client/src/content/parcours.ts` reconnaît la navigation de parcours depuis ce milestone-leçon ; le compteur de quiz est rendu sous la forme `Question 1/8`.
+
+Corrections de clôture après contre-revue finale :
+
+- un test DOM RED a reproduit l’état contradictoire créé par une production homonyme persistée sous `ld-decouvrir-vc-quiz` ; `StepRow` et `hasLearningActivity` ne consultent plus `workspace.productions` lorsqu’une étape se résout vers `lessonId`, puis le scénario passe avec une progression `0 / 9`, aucun badge « commencé » et `Lecture non commencée` ;
+- les sept leçons et le quiz attribuent désormais les propositions au plus près dans la prose, en distinguant guide professionnel français, règlement européen de portée spécifique, enquêtes académiques principalement américaines, principes internationaux non contraignants et doctrine française de fin de vie des fonds ;
+- `ld-power-law`, sa question cumulative et l’entrée de glossaire `power-law` qualifient la « loi de puissance » comme raccourci sectoriel : les études NBER retenues documentent asymétrie et concentration dans des échantillons bornés, non une loi mathématique universelle ;
+- `pre-seed` est signalé comme convention éditoriale, la répartition Analyst/Associate/seniors comme convention de cours, le LPAC ILPA est distingué du comité d’investissement et LP/GP sont présentés comme fonctions économiques plutôt que comme formes juridiques françaises universelles ;
+- la référence Invest Europe directement téléchargeable, bloquée en HTTP 403 lors de la vérification finale, n’est pas conservée : la leçon sur les stades s’appuie sur le guide France Invest pour sa taxonomie publiée et sur NBER w22587, avec sa population majoritairement américaine explicitée, uniquement pour constater que les pratiques varient selon la maturité.
+
+Vérifications finales :
+
+- `npm run test --workspace client -- src/content/decouvrirVcParcours.test.ts src/pages/learn/decouvrirVcParcours.dom.test.tsx --reporter=verbose --no-color` : exit 0 — 2 fichiers / 11 tests ;
+- récupération des sept URL uniques finales France Invest, EUR-Lex/EuVECA, NBER w8066, NBER w27690, NBER w22587, ILPA et AMF : 7/7 réponses HTTP 200 ;
+- `npm run validate:content:strict` : exit 0 — 24 parcours, 30 cours, 147 leçons, 419 termes, 23 leçons de parcours drop-in, 361 marqueurs ;
+- `npm run check` : exit 0 — `check:generated` à 147 leçons / 120 corps publiés / 419 termes, contenu strict, glossaire, TypeScript, ESLint, 66 fichiers / 415 tests Vitest et 58/58 tests Node ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : exit 0 — 1 796 modules transformés, sitemap 696 routes et prérendu strict 708/708 avec `ok: true` ;
+- contrôle post-build `npm run check:generated && npm run validate:content:strict && npm run validate:glossary` : exit 0 ; `git diff --check` sans sortie ;
+- recette de l’artefact construit via Vite Preview sous `/vc-plateform/` : HEAD 200 sur le parcours, le quiz, le cas Europe et le sitemap ; desktop parcours avec 9 étapes, jalon `Lecture non commencée` et console vide ; mobile 390 × 844 avec topbar mobile, 9 étapes, cas Europe inchangé, CTA « Ouvrir le quiz final », page quiz `Question 1/8`, navigation précédente vers « Un fonds naît et meurt aussi » et console DevTools vide ; route sitemap contenant `/lessons/quiz-comprendre-le-capital-risque` et HTML prérendu présent.
+
+Fichiers touchés par cette correction : `data/parcours/01-le-vc-sans-bullshit.lessons.json`, `data/courses.json`, `data/parcours.json`, `data/glossary.json`, `data/sources/canonical-glossary.json`, les dérivés `data/generated/lessons.*.json` et `data/generated/glossary.*.json`, `client/public/sitemap.xml`, `client/src/content/parcours.ts`, `client/src/pages/learn/ParcoursDetailPage.tsx`, `client/src/components/reading/QuizBlock.tsx`, `client/src/content/lessons.test.ts`, `client/src/content/decouvrirVcParcours.test.ts`, `client/src/pages/learn/decouvrirVcParcours.dom.test.tsx`, `scripts/generated-content.test.mjs`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture locale : les deux réserves de la première contre-revue indépendante ont été corrigées, puis les tests, le check, le build canonique et les validations post-build ont été rejoués avec succès. La contre-revue de confirmation conclut `passed: true`, sans défaut logique, de sécurité, de source ou de portée et sans suggestion résiduelle. Aucune publication distante n’a été effectuée.
+
+---
+
+## 2026-07-31 — Production de la respiration finale du parcours « Une semaine dans la peau d’un VC »
+
+Objet : remplacer l’étape finale `a-produire` « Respiration — Mythe démonté : « le VC mise » » par une leçon publiée, consultable depuis le parcours et cohérente avec les cours d’introduction au métier VC.
+
+Travaux et correction :
+
+- le parcours `p-semaine-vc` a été retracé depuis `data/parcours.json`, les cours `c-decouvrir-vc` et `c-vc-job`, les leçons existantes et les résolveurs de parcours côté client, afin de corriger la donnée canonique plutôt que le rendu ;
+- un registre drop-in dédié `data/parcours/02-une-semaine-vc.lessons.json` publie la leçon `lsv-vc-mise`, slug `mythe-vc-mise`, format `Respiration`, durée 4 minutes, deux quiz, trois points clés, termes liés et références ;
+- le contenu explique pourquoi le mot « mise » est réducteur : allocation de capital sous incertitude, mandat de fonds, thèse, comité, diligence, construction de portefeuille, suivi, réinvestissements et responsabilité durable ;
+- la section française qualifie le cadre sans survente : société de gestion, contraintes AMF selon le véhicule, rôle des investisseurs institutionnels, densité relationnelle, co-investissements, Bpifrance et programmes européens comme contexte de marché plutôt que suppression du risque ;
+- l’étape finale du parcours pointe désormais vers la leçon publiée avec `courseId: c-decouvrir-vc`, au lieu du jalon `todo-myth-vc-mise`; le cours `c-decouvrir-vc` intègre cette respiration dans sa liste de leçons et sa durée passe à 23 minutes.
+
+Vérifications finales :
+
+- `npm run split:content && npm run validate:content` : exit 0 — 146 leçons, dont 22 drop-in de parcours, 419 termes et 397 marqueurs analysés ;
+- premier `npm run check` : échec attendu après l’ajout initial, car la leçon n’était pas rattachée au cours référencé et le sitemap versionné n’était pas encore régénéré ; correction du rattachement et relance avec origine canonique ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run generate:sitemap && npm run test:node` : exit 0 ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build && npm run check` : exit 0 — sitemap de 695 routes, 1 796 modules transformés, prérendu strict 707/707 avec `ok: true`, puis `check:generated` à 146 leçons / 119 corps publiés / 419 termes, validations strictes, glossaire, TypeScript, ESLint, 64 fichiers / 404 tests Vitest et 58/58 tests Node ;
+- recette Vite : `http://localhost:5173/parcours/une-semaine-dans-la-peau-d-un-vc` affiche la dernière carte en lien `RESPIRATION Mythe démonté : « le VC mise »`; `http://localhost:5173/lessons/mythe-vc-mise?parcours=p-semaine-vc&budget=high` affiche la leçon, les références, le quiz, les termes liés et la navigation de parcours ; console sans message ni erreur.
+
+Fichiers touchés par cette correction : `data/parcours.json`, `data/courses.json`, `data/parcours/02-une-semaine-vc.lessons.json`, `data/generated/lessons.index.json`, `data/generated/lessons.bodies.json`, `client/public/sitemap.xml`, `client/src/content/lessons.test.ts`, `scripts/generated-content.test.mjs`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : contenu produit et route vérifiée localement. Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté pendant cette passe.
+
+---
+
+## 2026-07-31 — Opacité de la topbar après le hero
+
+Objet : vérifier puis corriger le comportement de la topbar de `/home`, transparente au-dessus du hero et opaque une fois son bord inférieur dépassé.
+
+Constat et correction :
+
+- le suivi de `pastHero` compare correctement le bas du premier hero au bas du header fixe, au montage puis sur `scroll` et `resize`, avec nettoyage symétrique des listeners ;
+- la première recette réelle a révélé un défaut non couvert par le test initial : l’ajout conditionnel de `border-b` portait la hauteur extérieure du header de 54 à 55 px sur desktop et de 40,5 à 41,5 px sur mobile ; `backdrop-blur-md`, sans effet utile derrière un fond opaque, introduisait en outre un contexte de rendu superflu autour des descendants positionnés ;
+- le contrat DOM a été durci classe par classe. Il a échoué comme attendu sur `border-b`, puis passe après réduction de l’état scrollé au seul fond opaque `bg-[color:var(--surface)]` ; le séparateur inset de `HOME_BAR_SHELL` reste actif et la géométrie ne varie plus au franchissement du seuil.
+- une revue antérieure arrivée après la clôture a révélé que les deux tests de surface dépendaient du chargement préalable de la route : exécutés seuls, ils obtenaient un hero nul. Ils attendent désormais explicitement le sélecteur de production `#main > section:first-of-type`, simulent une topbar de 54 px, couvrent `hero.bottom = 55` (transparent), `54` (opaque via `resize`) puis le retour à `55` (transparent via `scroll`), et vérifient séparément les classes interdites ainsi que la couleur exacte du séparateur.
+
+Vérifications finales :
+
+- test ciblé `homeExperience.dom.test.tsx` : RED 24/25 sur la bordure conditionnelle, puis GREEN 25/25 ;
+- exécution filtrée des deux tests de surface : RED 0/2 avec `hero` nul avant durcissement, puis GREEN 2/2 de manière autonome ; fichier complet toujours vert à 25/25 et ESLint ciblé sans sortie ;
+- `npm run check` : exit 0, avec contenus générés à jour, validations strictes, glossaire, TypeScript, ESLint, 64 fichiers / 404 tests Vitest et 58/58 tests Node ;
+- le premier `npm run build` sans environnement canonique échoue conformément au contrat fail-closed sur l’absence de `VITE_SITE_URL`. La relance `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` passe : 1 796 modules, sitemap de 694 routes et prérendu strict 706/706 avec `ok: true` ;
+- une première tentative avec Vite Preview a confirmé qu’un serveur non configuré pour le préfixe canonique ne constitue pas une preuve valide : les assets sous `/vc-plateform/assets/` retournaient 404. Un serveur temporaire de recette, limité à l’artefact et au préfixe `/vc-plateform`, a ensuite servi la route propre sans redirection ;
+- recette de l’artefact construit à 1 280 × 800 et 390 × 844, en clair et sombre : fond transparent au-dessus du hero, fond opaque `rgb(253, 252, 247)` ou `rgb(13, 14, 18)` après le seuil, séparateur inset conservé, hauteurs stables à 54 et 40,5 px, `scrollWidth === clientWidth`, aucune erreur console, erreur de page, requête échouée ou variation de chemin ;
+- contre-revue indépendante sur les empreintes courantes de `TopBar.tsx` et `homeExperience.dom.test.tsx` : aucune erreur bloquante ; test ciblé et ESLint ciblé verts ;
+- serveur et script temporaires supprimés, ports 4174 et 4175 libérés, sorties générées inchangées et `git diff --check` sans sortie.
+
+Fichiers touchés : `client/src/components/chrome/TopBar.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture : correction locale vérifiée. Aucun nouveau commit, staging, push, workflow distant ou déploiement n’a été exécuté pendant cette passe.
+
+---
+
 ## 2026-07-30 — Correction de la géométrie des arcs éditoriaux
 
 Objet : reprendre `HomeEditorialBridge` à partir des deux captures de référence fournies : deux larges arches chevauchées sur desktop ; une arche supérieure et une arche inférieure composant un ovale ouvert autour du bloc central sous 1 024 px.

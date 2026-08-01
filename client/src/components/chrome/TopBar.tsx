@@ -234,7 +234,7 @@ function HomeTopBar() {
         className={cn(
           'fixed inset-x-0 top-0 z-[75]',
           HOME_BAR_SHELL,
-          pastHero && 'border-b border-outline-variant bg-[color:var(--surface)] backdrop-blur-md after:bg-transparent',
+          pastHero && 'bg-[color:var(--surface)]',
           introPhase === 'running' && 'home-topbar-suppressed',
           introPhase === 'handover' && 'home-topbar-arriving',
         )}

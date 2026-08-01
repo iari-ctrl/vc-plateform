@@ -1486,9 +1486,9 @@
     "order": 3,
     "title": "Validation commerciale et rétention au seed",
     "kicker": "Seed",
-    "readMin": 0,
-    "summary": "Distinguer intérêt commercial, usage répété et premiers éléments de répétabilité dans une société seed.",
-    "status": "upcoming",
+    "readMin": 6,
+    "summary": "Qualifier les premiers revenus, l’usage répété et la rétention sans transformer un signal seed en benchmark universel.",
+    "status": "published",
     "level": "intermediaire",
     "contexts": {
       "fundStages": [
@@ -1504,7 +1504,14 @@
       "l-traction-unit-economics"
     ],
     "assessmentId": "analyst-stage-seed",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "traction",
+      "recurring-revenue",
+      "arr",
+      "mrr",
+      "nrr",
+      "data-quality"
+    ]
   },
   {
     "id": "l-stage-seed-financing",
@@ -1513,9 +1520,9 @@
     "order": 4,
     "title": "Ownership, runway et besoins de financement au seed",
     "kicker": "Seed",
-    "readMin": 0,
-    "summary": "Relier l'ownership cible, le montant du tour, le runway et les jalons qui doivent être atteints avant le financement suivant.",
-    "status": "upcoming",
+    "readMin": 6,
+    "summary": "Relier ticket primaire, ownership, runway, jalons financés et dilution future sans confondre mécanique financière et norme de marché.",
+    "status": "published",
     "level": "intermediaire",
     "contexts": {
       "fundStages": [
@@ -1531,7 +1538,16 @@
       "lmv-pre-post-ownership"
     ],
     "assessmentId": "analyst-stage-seed",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "runway",
+      "burn-rate",
+      "cap-table",
+      "pre-money",
+      "dilution",
+      "use-of-funds",
+      "milestones",
+      "founder-ownership"
+    ]
   },
   {
     "id": "l-stage-series-a-cohorts",
@@ -1648,9 +1664,9 @@
     "order": 1,
     "title": "Plan de due diligence et préparation de la term sheet",
     "kicker": "Lead",
-    "readMin": 0,
-    "summary": "Définir les travaux prioritaires, répartir les responsabilités et préparer les paramètres économiques et de gouvernance.",
-    "status": "upcoming",
+    "readMin": 6,
+    "summary": "Préparer un plan de diligence pilotable et les entrées d’une term sheet sans attribuer à l’Analyst la conduite de la négociation.",
+    "status": "published",
     "level": "avance",
     "contexts": {
       "dealRoles": [
@@ -1666,7 +1682,14 @@
       "l-dd-process"
     ],
     "assessmentId": "analyst-role-lead",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "lead-investor",
+      "dd",
+      "term-sheet",
+      "data-quality",
+      "cap-table",
+      "protective-provisions"
+    ]
   },
   {
     "id": "l-role-lead-closing",
@@ -1675,9 +1698,9 @@
     "order": 2,
     "title": "Syndication, gouvernance et préparation du closing",
     "kicker": "Lead",
-    "readMin": 0,
-    "summary": "Coordonner les co-investisseurs et les conseils, sécuriser la gouvernance et suivre les conditions du closing.",
-    "status": "upcoming",
+    "readMin": 6,
+    "summary": "Suivre syndication, gouvernance, conditions et documentation de closing sous supervision, sans présenter l’Analyst comme responsable du closing.",
+    "status": "published",
     "level": "avance",
     "contexts": {
       "dealRoles": [
@@ -1693,7 +1716,15 @@
       "l-role-lead-dd"
     ],
     "assessmentId": "analyst-role-lead",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "conditions-de-closing",
+      "governance",
+      "board-seat",
+      "board-observer",
+      "investment-agreement",
+      "subscription-agreement",
+      "shareholders-agreement"
+    ]
   },
   {
     "id": "l-role-colead-workshare",
@@ -1864,9 +1895,9 @@
     "order": 3,
     "title": "ARR, rétention et unit economics SaaS",
     "kicker": "SaaS",
-    "readMin": 0,
-    "summary": "Analyser ARR, NRR, GRR, churn, CAC, LTV et payback en tenant compte de la qualité des données.",
-    "status": "upcoming",
+    "readMin": 7,
+    "summary": "Définir les principales métriques SaaS par numérateur, dénominateur, période et population avant toute comparaison.",
+    "status": "published",
     "level": "intermediaire",
     "contexts": {
       "sectors": [
@@ -1882,7 +1913,19 @@
       "lmv-unit-economics"
     ],
     "assessmentId": "analyst-specialty-saas",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "arr",
+      "mrr",
+      "annualized-run-rate",
+      "nrr",
+      "grr",
+      "churn-rate",
+      "cac",
+      "ltv",
+      "gross-margin",
+      "cac-payback-period",
+      "unit-economics"
+    ]
   },
   {
     "id": "l-specialty-saas-gtm",
@@ -1891,9 +1934,9 @@
     "order": 4,
     "title": "Répétabilité du go-to-market SaaS",
     "kicker": "SaaS",
-    "readMin": 0,
-    "summary": "Évaluer l'efficacité des canaux, la vélocité commerciale, le pricing et la capacité d'expansion.",
-    "status": "upcoming",
+    "readMin": 7,
+    "summary": "Évaluer la répétabilité du go-to-market SaaS par canal, segment, cycle, conversion, pricing et expansion, sans seuil universel.",
+    "status": "published",
     "level": "intermediaire",
     "contexts": {
       "sectors": [
@@ -1909,7 +1952,17 @@
       "l-specialty-saas-metrics"
     ],
     "assessmentId": "analyst-specialty-saas",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "gtm",
+      "sales-pipeline",
+      "sales-cycle",
+      "qualified-lead-velocity-rate",
+      "pricing-methodology",
+      "customer-success",
+      "cac",
+      "cac-payback-period",
+      "revenue-growth-repeatability"
+    ]
   },
   {
     "id": "l-specialty-deeptech-trl-ip",
@@ -3219,101 +3272,168 @@
     ]
   },
   {
-    "id": "ld-power-law",
-    "slug": "9-sur-10-vont-mourir",
-    "courseId": "c-decouvrir-vc",
-    "order": 1,
-    "title": "Comprendre la loi de puissance",
-    "kicker": "Distribution des rendements",
-    "readMin": 4,
-    "summary": "Les rendements d’un portefeuille de venture sont généralement concentrés dans un nombre limité de participations.",
-    "status": "published",
-    "glossaryRefs": [
-      "power-law",
-      "fund-returner",
-      "moic"
-    ]
-  },
-  {
     "id": "ld-what-is-vc",
     "slug": "c-est-quoi-le-vc-vraiment",
     "courseId": "c-decouvrir-vc",
-    "order": 2,
-    "title": "C'est quoi le VC, vraiment ?",
-    "kicker": "Fondations",
-    "readMin": 4,
-    "summary": "Ni prêt, ni casino, ni court terme : trois choses que le venture n'est pas, et la seule qu'il est.",
+    "order": 1,
+    "title": "Définir le capital-risque",
+    "kicker": "Fondamentaux",
+    "summary": "Situer le capital-risque comme investissement en fonds propres ou quasi-fonds propres dans des sociétés non cotées, avec une liquidité incertaine et une analyse de risque structurée.",
     "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Distinguer capital-risque, dette et autres segments du capital-investissement.",
+      "Identifier le rôle du fonds, du gestionnaire et de la société financée.",
+      "Formuler une définition prudente sans promettre de rendement."
+    ],
+    "prerequisiteLessonIds": [],
     "glossaryRefs": [
       "venture-capital",
       "equity",
-      "illiquidite"
-    ]
+      "illiquidite",
+      "venture-capital-fund"
+    ],
+    "readMin": 2
+  },
+  {
+    "id": "ld-power-law",
+    "slug": "9-sur-10-vont-mourir",
+    "courseId": "c-decouvrir-vc",
+    "order": 2,
+    "title": "Concentration des rendements et limites du raccourci « loi de puissance »",
+    "kicker": "Portefeuille",
+    "summary": "Comprendre la concentration empirique des rendements du venture et ses limites, sans transformer un résultat d'échantillon en loi mathématique universelle.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Expliquer l'asymétrie des rendements en capital-risque.",
+      "Relier une ligne d'investissement à la contribution attendue pour le fonds.",
+      "Éviter les proportions non sourcées sur les pertes et les succès."
+    ],
+    "prerequisiteLessonIds": [
+      "ld-what-is-vc"
+    ],
+    "glossaryRefs": [
+      "power-law",
+      "fund-returner",
+      "moic",
+      "portfolio-construction"
+    ],
+    "readMin": 2
   },
   {
     "id": "ld-money-flow",
     "slug": "le-voyage-de-l-argent",
     "courseId": "c-decouvrir-vc",
     "order": 3,
-    "title": "Le voyage de l'argent",
-    "kicker": "Le circuit",
-    "readMin": 5,
-    "summary": "De ton assurance-vie au compte d'une startup : la chaîne LP → GP → fondateur, et le business angel en solo.",
+    "title": "La circulation du capital entre LP, gestionnaire, fonds et société",
+    "kicker": "Chaîne du capital",
+    "summary": "Suivre la circulation des engagements depuis les investisseurs du fonds jusqu'aux sociétés financées, puis distinguer appels de capitaux, frais, distributions et valeur résiduelle.",
     "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Distinguer LP, gestionnaire, fonds et société financée.",
+      "Expliquer le rôle des engagements et des appels de capitaux.",
+      "Séparer frais, carried interest, distributions et valeur résiduelle."
+    ],
+    "prerequisiteLessonIds": [
+      "ld-what-is-vc",
+      "ld-power-law"
+    ],
     "glossaryRefs": [
       "lp",
       "gp",
-      "business-angel",
-      "fund-of-funds",
+      "venture-capital-fund",
       "management-fees",
-      "carry"
-    ]
+      "carry",
+      "fund-of-funds"
+    ],
+    "readMin": 2
   },
   {
     "id": "ld-stages",
     "slug": "la-grammaire-des-stades-decouverte",
     "courseId": "c-decouvrir-vc",
     "order": 4,
-    "title": "La grammaire des stades",
-    "kicker": "Le vocabulaire",
-    "readMin": 5,
-    "summary": "Pré-seed, seed, Série A : chaque mot dit combien de preuves la startup a déjà accumulées.",
+    "title": "Lire les stades de financement",
+    "kicker": "Stades",
+    "summary": "Utiliser les stades comme des repères de maturité et de risque, plutôt que comme des seuils de montant ou de prix applicables partout.",
     "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Situer pre-seed, seed, Série A et growth comme repères de maturité.",
+      "Relier chaque stade aux preuves disponibles et aux risques encore ouverts.",
+      "Éviter les seuils chiffrés non généralisables."
+    ],
+    "prerequisiteLessonIds": [
+      "ld-what-is-vc"
+    ],
     "glossaryRefs": [
       "pre-seed",
       "seed",
       "series-a",
-      "safe",
       "traction",
       "dilution"
-    ]
+    ],
+    "readMin": 2
   },
   {
     "id": "ld-vc-job",
     "slug": "le-vrai-job-et-les-mythes",
     "courseId": "c-decouvrir-vc",
     "order": 5,
-    "title": "Le vrai job (et les mythes qui vont avec)",
-    "kicker": "Le métier",
-    "readMin": 6,
-    "summary": "Loin du cliché jet-set : la charge de travail, le quotidien fait de refus, et la texture très française du métier.",
+    "title": "Le travail d'un fonds de venture",
+    "kicker": "Métier",
+    "summary": "Décrire le travail concret d'un fonds : sourcing, qualification, diligence, structuration, décision, accompagnement et préparation des sorties.",
     "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Identifier les grandes étapes de traitement d'une opportunité.",
+      "Comprendre que le sourcing n'est qu'une partie du métier.",
+      "Relier décision d'investissement, suivi et responsabilité documentaire."
+    ],
+    "prerequisiteLessonIds": [
+      "ld-stages"
+    ],
     "glossaryRefs": [
       "deal-sourcing",
       "dd",
-      "warm-intro"
-    ]
+      "warm-intro",
+      "ic",
+      "board-seat"
+    ],
+    "readMin": 2
   },
   {
     "id": "ld-roles",
     "slug": "qui-fait-quoi-qui-gagne-quoi",
     "courseId": "c-decouvrir-vc",
     "order": 6,
-    "title": "Qui fait quoi (et qui gagne quoi)",
-    "kicker": "La hiérarchie",
-    "readMin": 6,
-    "summary": "Analyst, associate, senior associate, principal, partner : responsabilités, organisation et rémunération par grade.",
+    "title": "Rôles, responsabilités et incitations",
+    "kicker": "Organisation",
+    "summary": "Distinguer les responsabilités de l'Analyst, des investisseurs plus seniors, du gestionnaire, du comité et des LP, ainsi que les principales incitations économiques.",
     "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Identifier les rôles usuels dans une équipe de gestion.",
+      "Comprendre la place du comité et de la documentation.",
+      "Distinguer rémunération de fonctionnement et participation aux gains."
+    ],
+    "prerequisiteLessonIds": [
+      "ld-vc-job"
+    ],
     "glossaryRefs": [
       "analyst-vc",
       "associate-vc",
@@ -3323,7 +3443,8 @@
       "board-seat",
       "lp",
       "dd"
-    ]
+    ],
+    "readMin": 2
   },
   {
     "id": "ld-fund-lifecycle",
@@ -3331,10 +3452,21 @@
     "courseId": "c-decouvrir-vc",
     "order": 7,
     "title": "Un fonds naît et meurt aussi",
-    "kicker": "Le véhicule",
-    "readMin": 5,
-    "summary": "Dix ans, courbe en J, logique de millésimes : pourquoi ton VC est à la fois pressé et incroyablement patient.",
+    "kicker": "Fonds",
+    "summary": "Comprendre la levée, la période d'investissement, les réserves, le suivi, les distributions et la fin de vie d'un fonds fermé.",
     "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Décrire les principales phases d'un fonds fermé.",
+      "Relier période d'investissement, réserves et suivi de portefeuille.",
+      "Distinguer valeur résiduelle, distributions et prolongations."
+    ],
+    "prerequisiteLessonIds": [
+      "ld-money-flow",
+      "ld-vc-job"
+    ],
     "glossaryRefs": [
       "fund-lifecycle",
       "investment-period",
@@ -3343,6 +3475,72 @@
       "vintage",
       "lp",
       "ipo"
+    ],
+    "readMin": 2
+  },
+  {
+    "id": "ld-decouvrir-vc-quiz",
+    "slug": "quiz-comprendre-le-capital-risque",
+    "courseId": "c-decouvrir-vc",
+    "order": 9,
+    "title": "Quiz final — Comprendre le capital-risque",
+    "kicker": "Synthèse",
+    "summary": "Huit questions cumulatives pour vérifier la compréhension des acteurs, du fonds, des stades, du comité et de la concentration des rendements.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": false,
+    "learningOutcomes": [
+      "Vérifier le vocabulaire central du parcours.",
+      "Identifier les relations entre acteurs et décisions.",
+      "Préparer la suite du parcours sans livrable."
+    ],
+    "prerequisiteLessonIds": [
+      "ld-fund-lifecycle"
+    ],
+    "glossaryRefs": [
+      "lp",
+      "gp",
+      "venture-capital-fund",
+      "portfolio-construction",
+      "ic",
+      "series-a",
+      "fund-lifecycle"
+    ],
+    "readMin": 1
+  },
+  {
+    "id": "lsv-vc-mise",
+    "slug": "mythe-vc-mise",
+    "courseId": "c-decouvrir-vc",
+    "order": 8,
+    "title": "Mythe démonté : « le VC mise »",
+    "kicker": "Respiration",
+    "readMin": 4,
+    "summary": "Pourquoi l'investissement VC relève d'une allocation disciplinée sous incertitude, et non d'une mise isolée sur une intuition.",
+    "status": "published",
+    "level": "debutant",
+    "contexts": {},
+    "optional": true,
+    "learningOutcomes": [
+      "Distinguer prise de risque VC et pari isolé.",
+      "Relier l'investissement à la construction de portefeuille, au suivi et aux réinvestissements.",
+      "Comprendre ce que le contexte français change dans la responsabilité d'un fonds."
+    ],
+    "prerequisiteLessonIds": [
+      "ld-what-is-vc",
+      "ld-vc-job"
+    ],
+    "glossaryRefs": [
+      "lp",
+      "venture-capital-fund",
+      "follow-on",
+      "power-law",
+      "portfolio-construction",
+      "cap-table",
+      "deal-sourcing",
+      "dd",
+      "ic"
     ]
   },
   {

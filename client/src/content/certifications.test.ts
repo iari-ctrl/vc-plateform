@@ -245,7 +245,15 @@ describe('Certification professionnelle VC Analyst', () => {
     // Les leçons d'axe restent des approfondissements facultatifs (`optional: true`).
     // Leur production est progressive : toute leçon publiée doit être déclarée ici,
     // afin qu'une publication involontaire reste détectée.
-    const publishedOptionalLessonIds = new Set(['l-specialty-deeptech-trl-ip']);
+    const publishedOptionalLessonIds = new Set([
+      'l-specialty-deeptech-trl-ip',
+      'l-stage-seed-commercial',
+      'l-stage-seed-financing',
+      'l-role-lead-dd',
+      'l-role-lead-closing',
+      'l-specialty-saas-metrics',
+      'l-specialty-saas-gtm',
+    ]);
     for (const lessonId of optionalLessonIds) {
       expect(lessonById(lessonId), lessonId).toMatchObject({
         status: publishedOptionalLessonIds.has(lessonId) ? 'published' : 'upcoming',

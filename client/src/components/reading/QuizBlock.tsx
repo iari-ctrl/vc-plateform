@@ -63,7 +63,7 @@ export function QuizBlock({ quiz }: { quiz: QuizQuestion[] }) {
         <div className="min-w-0 flex-1">
           <h3 id={titleId} className="font-headline text-headline-sm font-semibold">Vérifiez votre compréhension</h3>
           <p id={progressId} className="mt-1 text-sm text-surface-variant">
-            {completed ? 'Quiz terminé' : `Question ${activeIndex + 1} / ${quiz.length}`}
+            {completed ? 'Quiz terminé' : `Question ${activeIndex + 1}/${quiz.length}`}
           </p>
           <div
             role="progressbar"

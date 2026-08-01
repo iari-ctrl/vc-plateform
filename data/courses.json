@@ -311,9 +311,9 @@
     "id": "c-decouvrir-vc",
     "slug": "le-vc-sans-bullshit-modules",
     "title": "Comprendre le capital-risque",
-    "subtitle": "Un parcours introductif en sept leçons",
+    "subtitle": "Une introduction structurée au fonctionnement du capital-risque",
     "level": "debutant",
-    "durationMin": 60,
+    "durationMin": 19,
     "summary": "Un parcours d’entrée sur la circulation du capital, l’économie des fonds et la distribution asymétrique des rendements.",
     "tags": [
       "découverte",
@@ -321,14 +321,17 @@
       "power-law"
     ],
     "lessonIds": [
-      "ld-power-law",
       "ld-what-is-vc",
+      "ld-power-law",
       "ld-money-flow",
       "ld-stages",
       "ld-vc-job",
       "ld-roles",
-      "ld-fund-lifecycle"
-    ]
+      "ld-fund-lifecycle",
+      "lsv-vc-mise",
+      "ld-decouvrir-vc-quiz"
+    ],
+    "durationSource": "lesson-read-minutes"
   },
   {
     "id": "c-entretien-analyst",
@@ -407,7 +410,7 @@
     "title": "Analyse selon le stade d'investissement",
     "subtitle": "Adapter les preuves attendues du pre-seed au growth",
     "level": "intermediaire",
-    "durationMin": 0,
+    "durationMin": 12,
     "summary": "Approfondissements facultatifs adaptés au stade principal d'intervention du fonds.",
     "tags": [
       "pre-seed",
@@ -424,7 +427,8 @@
       "l-stage-series-a-repeatability",
       "l-stage-growth-revenue",
       "l-stage-growth-capital"
-    ]
+    ],
+    "durationSource": "lesson-read-minutes"
   },
   {
     "id": "c-analyst-deal-role",
@@ -432,7 +436,7 @@
     "title": "Rôle du fonds dans un tour d'investissement",
     "subtitle": "Lead, co-lead ou follower",
     "level": "intermediaire",
-    "durationMin": 0,
+    "durationMin": 12,
     "summary": "Approfondissements facultatifs selon la responsabilité assumée par le fonds dans le processus d'investissement.",
     "tags": [
       "lead",
@@ -447,7 +451,8 @@
       "l-role-colead-governance",
       "l-role-follower-validation",
       "l-role-follower-rights"
-    ]
+    ],
+    "durationSource": "lesson-read-minutes"
   },
   {
     "id": "c-analyst-specialties",
@@ -455,7 +460,7 @@
     "title": "Spécialisations sectorielles de l'Analyst",
     "subtitle": "Référentiels et diligences propres à chaque spécialité",
     "level": "intermediaire",
-    "durationMin": 17,
+    "durationMin": 23,
     "summary": "Approfondissements facultatifs pour une pratique généraliste ou spécialisée du capital-risque.",
     "tags": [
       "spécialisation",
@@ -480,7 +485,8 @@
       "l-specialty-marketplace-liquidity",
       "l-specialty-impact-intentionality",
       "l-specialty-impact-measurement"
-    ]
+    ],
+    "durationSource": "lesson-read-minutes"
   },
   {
     "id": "c-dt-preuve-scientifique",

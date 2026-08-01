@@ -5757,9 +5757,9 @@
     "order": 3,
     "title": "Validation commerciale et rétention au seed",
     "kicker": "Seed",
-    "readMin": 0,
-    "summary": "Distinguer intérêt commercial, usage répété et premiers éléments de répétabilité dans une société seed.",
-    "status": "upcoming",
+    "readMin": 6,
+    "summary": "Qualifier les premiers revenus, l’usage répété et la rétention sans transformer un signal seed en benchmark universel.",
+    "status": "published",
     "level": "intermediaire",
     "contexts": {
       "fundStages": [
@@ -5775,7 +5775,95 @@
       "l-traction-unit-economics"
     ],
     "assessmentId": "analyst-stage-seed",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "traction",
+      "recurring-revenue",
+      "arr",
+      "mrr",
+      "nrr",
+      "data-quality"
+    ],
+    "body": "## Cadre\n\nCette leçon traite la validation commerciale d’une société Seed : premiers revenus, usage répété, rétention courte et qualité des données commerciales. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade utilisée ici est une transposition professionnelle prudente : les sources externes décrivent des responsabilités, des documents et des pratiques, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nFrance Invest soutient une lecture de l’amorçage par validation de marché, business plan, emploi des fonds, jalons observables et besoins futurs. La hiérarchie intérêt → pilote → devis → facture → revenu → renouvellement est donc une grille pédagogique de diligence, pas une taxonomie universelle publiée par France Invest. Elle sert de convention éditoriale locale pour examiner le risque que chaque pièce réduit : besoin déclaré, usage réel, volonté d’achat, transaction, revenu récurrent, puis continuité.\n\nAu Seed, le financement sert souvent à rendre certaines preuves observables sans effacer l’incertitude. Un pilote gratuit peut confirmer l’usage mais pas le prix. Un devis peut confirmer une intention mais pas l’encaissement. Une facture peut confirmer une transaction mais pas la répétition. Un revenu et un renouvellement réduisent mieux le risque commercial, sans devenir pour autant un benchmark de marché.\n\n## Méthode\n\nLa méthode commence par un registre de preuves. Pour chaque compte, l’Analyst note la source, la date, le statut, l’unité, la période, le propriétaire de la donnée et le risque encore ouvert. Les termes [[arr|ARR]], [[mrr|MRR]] et [[nrr|NRR]] ne sont utilisés que si la cohorte, le dénominateur et les exclusions sont écrits. L’[[arr|ARR]] désigne ici un revenu annuel récurrent vérifié ; l’annualisation mécanique d’un mois isolé reste un [[annualized-run-rate|run rate annualisé]].\n\nLa grille pédagogique de diligence classe intérêt, pilote, devis, facture, revenu et renouvellement dans cet ordre seulement pour guider la revue. Elle n’impose pas la même marche à tous les secteurs. Le risque examiné doit être nommé au point d’usage : risque de problème mal qualifié, risque de non-usage, risque de non-achat, risque de non-paiement, risque de revenu ponctuel, risque de non-renouvellement ou de concentration.\n\nLes benchmarks SaaS privés servent à poser des questions, pas à conclure. ChartMogul « New Normal » décrit des tendances de NRR dans sa population privée de clients SaaS, avec une géographie non documentée dans l’extrait inspecté, et emploie ARR comme Annual Run Rate = MRR × 12 dans son glossaire. High Alpha/OpenView publie une synthèse de benchmarks privés ; le rapport détaillé est soumis à formulaire. Aucun de ces éléments ne remplace le rapprochement CRM, contrats, factures, encaissements et usage produit.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Jeu de quinze comptes fictifs C01 à C15 : C01 intérêt verbal sans budget ; C02 pilote gratuit actif ; C03 devis signé non facturé ; C04 facture de setup 8 k€ ; C05 abonnement actif 2 k€ MRR encaissé ; C06 abonnement actif 3 k€ MRR facturé non encaissé ; C07 pilote converti en contrat 1 k€ MRR ; C08 contrat annuel 24 k€ encaissé ; C09 client perdu après pilote ; C10 renouvellement signé 2 k€ MRR ; C11 expansion proposée non signée ; C12 facture de service 5 k€ ; C13 usage actif sans contrat ; C14 devis expiré ; C15 renouvellement payé 1,5 k€ MRR.\n\nLe calcul attendu isole les revenus récurrents vérifiés : C05, C07, C08, C10 et C15 représentent 8,5 k€ de MRR vérifié, soit 102 k€ d’ARR annualisé par convention locale si les contrats sont actifs à la date d’extraction. C04 et C12 restent des revenus non récurrents. C06 est facturé mais non encaissé ; il doit être présenté séparément tant que la convention de revenu vérifié exige l’encaissement ou une confirmation contractuelle plus robuste.\n\nLa synthèse attendue tient en quatre phrases : signal confirmé, limite principale, pièce suivante, point d’escalade. Elle indique que les preuves commerciales existent mais restent concentrées et jeunes. Elle ne présente ni les 102 k€ ni les comptes fictifs comme observation de marché.\n\n## Limites et points de contrôle\n\nLa qualité commerciale ne se résume pas au niveau le plus élevé atteint par un compte. Un renouvellement isolé peut masquer une concentration ; plusieurs pilotes peuvent ne rien dire du prix. La revue doit donc garder la taille d’échantillon, la durée d’usage, la concentration, la nature récurrente ou ponctuelle et la période de collecte visibles.\n\nL’Analyst peut préparer, documenter, rapprocher, recalculer, tenir les registres, signaler et escalader. Il ne valide pas seul la qualité commerciale, ne négocie pas les termes, n’engage pas le fonds et ne délivre pas de validation professionnelle. Les incertitudes matérielles restent dans la note au lieu d’être lissées par un adjectif.\n\nLa source de place française soutient les questions de validation marché, d’emploi des fonds et de jalons, mais pas l’échelle pilote → devis → facture → renouvellement comme règle obligatoire. Cette distinction doit rester visible chaque fois que la grille est utilisée.\n\nLa source est toujours attachée à la proposition qu’elle soutient. Quand France Invest est cité, la note parle de validation de marché ou d’emploi des fonds ; quand ChartMogul ou High Alpha est cité, elle parle seulement de cohortes privées et de questions de comparaison.\n\n## Mise en application\n\nÀ partir des quinze comptes C01 à C15 ci-dessus, classe chaque ligne en signal déclaratif, pilote, devis, facture, revenu récurrent vérifié, revenu non récurrent ou renouvellement. Calcule le revenu récurrent vérifié, signale les comptes à exclure et rédige une note de fragilité en cinq lignes.\n\nLa restitution comprend une table avec source, période, statut, montant, traitement retenu et risque restant. Si un compte manque d’information, l’exercice demande de formuler la donnée à obtenir plutôt que d’inventer un résultat numérique. Aucune conclusion ne doit être présentée comme validation praticienne ou juridique.\n\n## Références\n\n- [France Invest, Guide des bonnes pratiques du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf) — validation de marché, business plan, emploi des fonds, jalons et besoins futurs ; ne publie pas la grille pédagogique locale.\n- [ChartMogul, The SaaS Retention Report: The New Normal For SaaS, 2024](https://chartmogul.com/reports/saas-retention-the-new-normal/) — tendances NRR dans une population privée ChartMogul ; géographie non documentée dans l’extrait inspecté.\n- [High Alpha / OpenView, 2024 SaaS Benchmarks Report, 2024](https://www.highalpha.com/saas-benchmarks/2024) — synthèse publique d’un benchmark SaaS privé ; rapport détaillé soumis à formulaire.\n",
+    "keyTakeaways": [
+      "Un signal seed se qualifie par pièce vérifiable, pas par seuil universel.",
+      "Le revenu récurrent doit être séparé des pilotes, devis et prestations ponctuelles.",
+      "Une cohorte courte décrit une hypothèse de rétention, non une tendance durable.",
+      "Tout benchmark SaaS doit porter son échantillon, sa période et sa limite d’usage."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
   },
   {
     "id": "l-stage-seed-financing",
@@ -5784,9 +5872,9 @@
     "order": 4,
     "title": "Ownership, runway et besoins de financement au seed",
     "kicker": "Seed",
-    "readMin": 0,
-    "summary": "Relier l'ownership cible, le montant du tour, le runway et les jalons qui doivent être atteints avant le financement suivant.",
-    "status": "upcoming",
+    "readMin": 6,
+    "summary": "Relier ticket primaire, ownership, runway, jalons financés et dilution future sans confondre mécanique financière et norme de marché.",
+    "status": "published",
     "level": "intermediaire",
     "contexts": {
       "fundStages": [
@@ -5802,7 +5890,97 @@
       "lmv-pre-post-ownership"
     ],
     "assessmentId": "analyst-stage-seed",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "runway",
+      "burn-rate",
+      "cap-table",
+      "pre-money",
+      "dilution",
+      "use-of-funds",
+      "milestones",
+      "founder-ownership"
+    ],
+    "body": "## Cadre\n\nCette leçon traite le financement Seed : primaire, secondaire, runway, jalons, ownership, option pool et dilution. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade est une transposition professionnelle prudente : les sources externes décrivent des pratiques de financement et des documents, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nLe primaire finance la société ; le secondaire rémunère un vendeur et n’apporte pas de cash nouveau à la société. Aucun niveau de runway, d’option pool ou d’ownership n’est présenté comme norme universelle. La question de diligence consiste à vérifier si les données disponibles permettent un calcul mécanique, puis si ce calcul suffit à éclairer la fenêtre utile avant le prochain tour.\n\nFrance Invest soutient l’analyse du montant, de l’emploi des fonds, des besoins court et moyen terme et des futures levées. Galion est un modèle professionnel français centré sur une Series A et pas une norme Seed. IPEV est mobilisé seulement pour la juste valeur, la calibration et les limites d’un prix de transaction récent ; le prix du tour ne devient pas une juste valeur permanente.\n\n## Méthode\n\nLa convention de runway est dimensionnelle. La runway mécanique = cash post-closing disponible / burn net mensuel. Elle ne se calcule pas en soustrayant un mois de burn à une trésorerie. Le dossier doit préciser le snapshot de cash, l’unité, le signe du burn, le primaire reçu ou seulement attendu, les frais et décaissements engagés, puis la convention d’arrondi.\n\nTrois objets sont séparés. La runway mécanique jusqu’à zéro mesure le temps avant épuisement de la trésorerie si le burn reste constant. La runway jusqu’à un seuil de trésorerie exige un seuil explicite. La fenêtre utile avant lancement du prochain tour exige en plus un délai de levée, un calendrier de jalons et les décaissements déjà engagés. Si le seuil ou le délai manque, le calcul est impossible tant que ces inputs ne sont pas renseignés.\n\nPour l’ownership, post-money = pre-money + investissement primaire. Dans le cas central, 7,6 M€ de pre-money et 2,4 M€ de primaire donnent 10,0 M€ de post-money ; l’ownership avant ajustement vaut 2,4 M€ / 10,0 M€ = 24 %. La convention fully diluted retenue inclut les titres émis, options attribuées, réserve non attribuée et instruments convertibles as-converted seulement s’ils sont documentés.\n\nL’option pool ne doit pas être choisi silencieusement. Le pool pre-money et le pool post-money doivent être présentés comme deux conventions distinctes dans la même note. Si le pool est mesuré pre-money, le top-up est supporté par les détenteurs existants avant l’entrée du nouvel investisseur. Si le pool est mesuré post-money, la dilution peut être partagée après l’investissement. Le dossier distingue toujours pool attribué et réserve non attribuée.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. snapshot de cash au 2026-08-01, unité k€, cash initial 350 k€, primaire reçu au closing 2,4 M€, cash post-closing avant frais 350 k€ + 2,4 M€ = 2,75 M€, frais non déduits et décaissements engagés non renseignés, burn net mensuel de -90 k€, avec signe négatif dans le modèle et valeur absolue de 90 k€ pour le calcul. La runway mécanique est 2,75 M€ / 90 k€ = 30,555… mois, publiée à 30,6 mois avec arrondi à une décimale.\n\nLe même cas ne permet pas de calculer la runway jusqu’à un seuil de trésorerie ni la fenêtre utile avant lancement du prochain tour, car le seuil de cash minimum et le délai de levée ne sont pas fournis. Ils deviennent des questions de diligence, non des durées inventées. L’Analyst peut ajouter une hypothèse propre au cas seulement si elle est explicitement marquée comme hypothèse fictive.\n\nCap table avant/après sans top-up silencieux : avant tour, fondateurs 82 %, investisseurs existants 12 %, pool attribué 4 %, réserve non attribuée 2 %. Après primaire sans changement de pool, le nouvel investisseur détient 24 %, et la base existante est ramenée à 76 % : fondateurs 62,32 %, investisseurs existants 9,12 %, pool attribué 3,04 %, réserve non attribuée 1,52 %. Si la term sheet exige un pool total de 10 % pre-money ou post-money, les deux conventions produisent une dilution différente et doivent être escaladées.\n\n## Limites et points de contrôle\n\nUne mécanique correcte ne suffit pas à rendre le tour finançable. La runway utile dépend des frais, des embauches engagées, du seuil de trésorerie, de la saisonnalité, du délai de closing et du lancement du tour suivant. L’Analyst doit donc publier les inputs absents plutôt que compléter le modèle par intuition.\n\nLe contrôle option pool porte sur la base fully diluted, le traitement des convertibles, les titres attribués, la réserve non attribuée, les bénéficiaires du top-up et le moment de mesure. Une cap table avant/après ne vaut que si elle est datée, si les pourcentages totalisent 100 % et si elle distingue primaire, secondaire et transferts de titres.\n\nL’Analyst peut préparer, recalculer, documenter et signaler les ambiguïtés. Il ne négocie pas les termes, n’arrête pas le pool, ne choisit pas les co-investisseurs, n’engage pas le fonds, n’autorise pas les fonds et ne réalise pas le closing.\n\n## Mise en application\n\nÀ partir du scénario faible : primaire 1,8 M€, pre-money 6,2 M€, burn 80 k€ ; scénario central : primaire 2,4 M€, pre-money 7,6 M€, burn 90 k€ ; scénario élevé : primaire 3,0 M€, pre-money 9,0 M€, burn 110 k€, calcule post-money, ownership avant ajustement et runway mécanique. Ne calcule pas la runway utile tant que seuil de trésorerie et délai de levée ne sont pas renseignés.\n\nLa restitution comporte une cap table avant/après, une liste des inputs manquants et une question d’escalade sur le pool pre-money ou post-money. Aucune durée de runway n’est présentée comme benchmark.\n\n## Références\n\n- [France Invest, Guide des bonnes pratiques du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf) — business plan, usage des fonds, montant du tour et besoins de financement.\n- [The Galion Project, Galion Term Sheet actualisée et illustrée, 2019](https://cdn.prod.website-files.com/666ae58ed4f8451dd6a96db4/667b2227977c529eb3f56f7e_galion-term-sheet-illustrated.pdf) — modèle professionnel français de Series A, cap table et fully diluted ; non retenu comme norme Seed.\n- [IPEV, International Private Equity and Venture Capital Valuation Guidelines, 2022](https://www.privateequityvaluation.com/Portals/0/Documents/Guidelines/IPEV%20Valuation%20Guidelines%20-%20December%202022.pdf) — juste valeur, calibration et limites d’un prix de transaction récent.\n",
+    "keyTakeaways": [
+      "Le montant du tour se teste par runway utile, jalons vérifiables et risque résiduel.",
+      "L’ownership dépend du primaire, du post-money et du dénominateur fully diluted retenu.",
+      "Une augmentation d’option pool peut changer fortement la dilution des fondateurs.",
+      "Aucun niveau de runway ou d’ownership ne doit être présenté comme une norme universelle."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
   },
   {
     "id": "l-stage-series-a-cohorts",
@@ -5919,9 +6097,9 @@
     "order": 1,
     "title": "Plan de due diligence et préparation de la term sheet",
     "kicker": "Lead",
-    "readMin": 0,
-    "summary": "Définir les travaux prioritaires, répartir les responsabilités et préparer les paramètres économiques et de gouvernance.",
-    "status": "upcoming",
+    "readMin": 6,
+    "summary": "Préparer un plan de diligence pilotable et les entrées d’une term sheet sans attribuer à l’Analyst la conduite de la négociation.",
+    "status": "published",
     "level": "avance",
     "contexts": {
       "dealRoles": [
@@ -5937,7 +6115,95 @@
       "l-dd-process"
     ],
     "assessmentId": "analyst-role-lead",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "lead-investor",
+      "dd",
+      "term-sheet",
+      "data-quality",
+      "cap-table",
+      "protective-provisions"
+    ],
+    "body": "## Cadre\n\nCette leçon traite la préparation d’un processus lead : plan de due diligence, data room, paramètres économiques et term sheet. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade est une transposition professionnelle prudente : les sources externes décrivent la diligence, la lettre d’intention, les conditions et la qualité des sources, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nLe niveau Analyst prépare, documente, rapproche, recalcule, tient les registres, signale et escalade. Il ne dirige pas le processus d’investissement, ne négocie pas les clauses, ne valide pas juridiquement une diligence ou une condition, ne choisit pas les co-investisseurs, n’engage pas le fonds et ne délivre pas de validation professionnelle ou réglementaire.\n\nFrance Invest fournit le vocabulaire français de lettre d’intention, diligences, conditions et adaptation de la documentation. Le Standard V(A) du CFA Institute soutient la discipline de base raisonnable et de qualité des sources. L’AMF encadre notamment la diligence, la confidentialité, les conflits d’intérêts et la séparation des fonctions selon le statut applicable.\n\n## Méthode\n\nLa méthode commence par une hypothèse d’investissement et un registre de risques. Chaque ligne de [[dd|due diligence]] relie hypothèse, pièce attendue, source, responsable, échéance, statut, conclusion provisoire et point d’escalade. Une pièce ne vaut pas conclusion : le registre distingue document reçu, vérification effectuée, limite de la preuve et conséquence possible sur la [[term-sheet|term sheet]].\n\nLa préparation de term sheet reste au niveau des entrées à fournir au décideur : montant primaire, valorisation, base fully diluted, option pool, droits économiques, droits d’information, gouvernance, conditions préalables et points non résolus. L’Analyst peut préparer les scénarios et les rapprochements de [[cap-table|cap table]], mais l’Associate ou le deal lead porte la coordination, le Partner valide la position et les conseils qualifient juridiquement les clauses.\n\nLa matrice de diligence doit rester pilotable. Elle évite deux erreurs : l’inventaire documentaire sans lien avec un risque, et la conclusion juridique ou commerciale que l’Analyst n’est pas habilité à arrêter. Les sources et les dates figurent près des propositions, surtout quand une source est volontaire, internationale ou non spécifique au venture français.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Le dossier comporte trois risques : concentration de revenu, ownership demandé et dépendance à un fournisseur critique. La matrice de diligence de douze lignes contient R01 cohorte ARR, R02 contrats top clients, R03 factures et encaissements, R04 usage produit, R05 cap table émise, R06 fully diluted, R07 plan d’options, R08 convertibles, R09 contrat fournisseur, R10 propriété intellectuelle, R11 conformité données, R12 conditions de closing envisagées.\n\nPour chaque ligne, l’apprenant renseigne pièce attendue, source primaire, responsable, statut, limite et décision requise. Exemple : R05 demande registre de titres et cap table datée ; R06 demande base fully diluted et instruments as-converted ; R09 demande contrat fournisseur, durée, résiliation et dépendance opérationnelle. Si une pièce manque, la réponse attendue est une question de diligence et non une hypothèse inventée.\n\nLa sortie pédagogique est une page d’escalade : trois risques critiques, deux paramètres à intégrer à la term sheet et une phrase qui précise qui doit décider. Elle ne simule ni négociation, ni validation juridique.\n\n## Limites et points de contrôle\n\nUne data room abondante peut rester faible si les documents ne sont pas reliés aux risques. Une source tierce peut être utile sans être suffisante. Une information déclarée par le management doit être séparée d’un document signé, d’un rapprochement comptable ou d’un avis spécialisé.\n\nLe contrôle de grade est explicite. L’Analyst prépare les registres, rapproche les pièces et alerte. L’Associate coordonne et priorise selon délégation. Le Partner ou l’IC décide. Les conseils et fonctions de conformité traitent les avis spécialisés. Cette répartition n’est pas une doctrine publiée par les sources ; elle constitue une borne prudente pour éviter d’attribuer à l’Analyst une responsabilité qui dépasse le périmètre.\n\nLe contrôle de source est aussi explicite. France Invest est une source professionnelle française de place, non une règle juridique complète. CFA Institute est international et volontaire. AMF dépend du statut et des règles applicables. Les conclusions doivent donc rester proportionnées à ces portées.\n\nCette discipline protège aussi la frontière professionnelle. Une hypothèse de clause peut être préparée pour discussion, mais elle reste une entrée de travail. La note ne doit pas laisser croire qu’un Analyst qualifie seul une condition suspensive, une conformité réglementaire, une propriété intellectuelle ou une situation fiscale. Chaque sujet spécialisé garde un owner et une trace d’escalade.\n\nLe registre garde également une piste d’audit minimale : date de réception, version du document, lien avec la data room, personne ayant fourni la pièce et personne chargée de la revue. Cette granularité évite qu’une information ancienne ou remplacée serve encore de base à une hypothèse économique. Elle permet aussi de reprendre le dossier si le lead change ou si un conseil demande l’origine d’un chiffre.\n\nLa conclusion garde les mots « préparé pour revue » lorsque la preuve n’est pas définitive.\n\n## Mise en application\n\nRédige une matrice de diligence de douze lignes à partir des risques R01 à R12 ci-dessus. Pour chaque ligne, indique pièce attendue, source, owner, échéance, statut, risque réduit, risque restant et niveau d’escalade.\n\nLa restitution comprend aussi une préparation de term sheet en cinq paramètres économiques, trois points ouverts et une phrase d’escalade. Si une donnée manque, l’exercice demande de l’identifier et de dire qui doit la fournir ou la valider. Aucun résultat ne doit être présenté comme validation praticienne ou juridique.\n\n## Références\n\n- [France Invest, Guide des bonnes pratiques du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf) — lettre d’intention, due diligences, conditions et adaptation documentaire.\n- [CFA Institute, Standard V(A) Diligence and Reasonable Basis, 2024](https://www.cfainstitute.org/standards/professionals/code-ethics-standards/standards-of-practice-v-a) — base raisonnable, diligence et qualité des sources.\n- [AMF, Règlement de déontologie des sociétés de gestion intervenant dans le capital-investissement, 2013](https://www.amf-france.org/fr/reglementation/regles-professionnelles-approuvees/reglement-de-deontologie-des-societes-de-gestion-de-portefeuille-intervenant-dans-le-capital) — diligence, confidentialité, conflits d’intérêts et organisation professionnelle.\n",
+    "keyTakeaways": [
+      "L’Analyst prépare une matrice de diligence, il ne dirige pas le processus lead.",
+      "Une term sheet se prépare par paramètres, scénarios et points ouverts avant arbitrage senior.",
+      "Chaque preuve doit porter sa source, sa date, son périmètre et sa limite.",
+      "La frontière avec les conseils et les niveaux supérieurs doit rester explicite."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
   },
   {
     "id": "l-role-lead-closing",
@@ -5946,9 +6212,9 @@
     "order": 2,
     "title": "Syndication, gouvernance et préparation du closing",
     "kicker": "Lead",
-    "readMin": 0,
-    "summary": "Coordonner les co-investisseurs et les conseils, sécuriser la gouvernance et suivre les conditions du closing.",
-    "status": "upcoming",
+    "readMin": 6,
+    "summary": "Suivre syndication, gouvernance, conditions et documentation de closing sous supervision, sans présenter l’Analyst comme responsable du closing.",
+    "status": "published",
     "level": "avance",
     "contexts": {
       "dealRoles": [
@@ -5964,7 +6230,96 @@
       "l-role-lead-dd"
     ],
     "assessmentId": "analyst-role-lead",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "conditions-de-closing",
+      "governance",
+      "board-seat",
+      "board-observer",
+      "investment-agreement",
+      "subscription-agreement",
+      "shareholders-agreement"
+    ],
+    "body": "## Cadre\n\nCette leçon traite la préparation du closing dans un tour mené par un fonds lead : syndication, conditions, gouvernance, versions documentaires et preuves de satisfaction. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade est une transposition professionnelle prudente : les sources externes décrivent des pratiques et obligations, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nL’Analyst suit, rapproche, documente et escalade. Il ne négocie pas ou n’arrête pas les termes, ne valide pas juridiquement une condition, ne choisit pas les co-investisseurs, n’engage pas le fonds, n’autorise pas ou ne libère pas les fonds, ne réalise pas le closing et ne représente pas le fonds au board.\n\nFrance Invest soutient les notions de syndication, conditions préalables, signature, souscription, libération des fonds et gouvernance. L’AMF soutient la vigilance sur diligence, confidentialité, conflits d’intérêts et organisation professionnelle. UK Private Capital/BVCA est seulement une comparaison documentaire : sa page concerne des modèles Series A et ne constitue ni droit français ni standard seed.\n\n## Méthode\n\nLa méthode repose sur une checklist de closing. Chaque ligne précise document ou condition, source contractuelle, owner, preuve attendue, dépendance, statut, risque si retard et niveau d’escalade. Les [[conditions-de-closing|conditions de closing]] sont suivies comme des objets de preuve, pas comme une validation autonome de l’Analyst.\n\nLe registre de syndication distingue co-investisseur contacté, allocation envisagée, questions reçues, documents partagés, statut d’adhésion et points de divergence. L’Analyst peut mesurer l’effet d’un retard sur le primaire ou sur la cap table, mais il ne décide pas qui entre au tour et ne modifie pas l’allocation.\n\nLa matrice de gouvernance sépare droits économiques, droits d’information, siège, observateur, décisions réservées, reporting et conditions post-closing. Une responsabilité de board ou d’observateur ne peut pas être attribuée à l’Analyst. Il prépare la lecture des droits ; le fonds désigne les représentants habilités et les conseils qualifient les actes.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Une term sheet a été signée avec deux co-investisseurs, un nouveau pool d’options, un siège investisseur et plusieurs conditions. Un co-investisseur tarde à confirmer son allocation. La checklist de closing de douze lignes contient C01 subscription agreement, C02 shareholders agreement, C03 statuts ou articles, C04 décision sociale, C05 KYC/AML, C06 conflits d’intérêts, C07 cap table finale, C08 option pool, C09 accord co-investisseur A, C10 accord co-investisseur B, C11 confirmation funds flow, C12 registre post-closing.\n\nL’apprenant renseigne pour chaque ligne la preuve attendue, le responsable, le statut et le risque si retard. C10, par exemple, indique allocation non confirmée, effet possible sur le primaire et escalade Associate. La réponse ne consiste pas à renégocier ; elle rend le blocage visible avec ses conséquences et les décisions requises.\n\nLa sortie est une note courte : état des conditions, blocage principal, effet financier ou documentaire, owner et prochaine décision. Elle ne simule ni signature, ni libération de fonds, ni validation juridique.\n\n## Limites et points de contrôle\n\nUne checklist complète ne prouve pas que le closing est réalisé. Elle indique seulement les pièces, statuts et points d’escalade. Les conditions peuvent être satisfaites, en cours, non applicables, bloquées ou à qualifier par conseil. Le libellé doit rester descriptif.\n\nLes modèles britanniques peuvent nommer des familles documentaires utiles, mais leur propre page limite leur usage à un contexte Series A et non seed. Ils ne doivent pas être repris comme standard français. Le registre doit donc indiquer juridiction, source et limite lorsqu’une comparaison étrangère est mentionnée.\n\nLe contrôle de responsabilité reste central. L’Analyst prépare la preuve, l’Associate coordonne selon délégation, le Partner ou l’organe habilité engage le fonds, les conseils rédigent et qualifient, les fonctions finance ou conformité traitent les libérations et contrôles selon leur mandat.\n\nLa preuve de closing doit rester documentaire et datée. Une confirmation orale, une version non signée ou un courriel de principe ne reçoivent pas le même statut qu’un document signé, une résolution adoptée ou une instruction de funds flow validée par les personnes habilitées. Le registre publie donc la nature de la preuve et le niveau de confiance. Cette séparation évite de transformer un suivi administratif en affirmation que le closing est acquis. Elle aide aussi à distinguer un retard documentaire, une question commerciale et une validation juridique réservée aux conseils ou organes compétents.\n\nLe suivi de closing doit aussi séparer la condition contractuelle, la preuve de satisfaction et l’action opérationnelle suivante. Une condition peut être documentée mais attendre une signature ; une signature peut être reçue mais attendre un contrôle KYC ; un contrôle peut être validé mais ne pas autoriser la libération des fonds. Cette chaîne protège le dossier contre les raccourcis. Elle force l’Analyst à écrire le prochain blocage observable plutôt qu’à conclure que tout est prêt.\n\nLe registre conserve les versions remplacées comme historique de travail, sans les présenter comme pièces satisfaisantes. Cette mention évite une confusion entre suivi interne et preuve opposable, datée et identifiable.\n\n## Mise en application\n\nPrépare une checklist de closing de douze lignes avec les items C01 à C12 ci-dessus. Pour chaque ligne, indique document ou condition, owner, statut, preuve attendue, dépendance, risque si retard et niveau d’escalade.\n\nLa restitution comporte aussi un registre de syndication et une matrice de gouvernance. Si une information manque, l’exercice demande de formuler la question à poser et le responsable attendu, sans inventer une validation. Aucun résultat ne doit être présenté comme validation praticienne ou juridique.\n\n## Références\n\n- [France Invest, Guide des bonnes pratiques du capital-innovation, 2019](https://www.franceinvest.eu/wp-content/uploads/2021/12/France-Invest-Guide-du-capital-innovation-2019.pdf) — syndication, conditions préalables, signature, souscription, libération des fonds et gouvernance.\n- [AMF, Règlement de déontologie des sociétés de gestion intervenant dans le capital-investissement, 2013](https://www.amf-france.org/fr/reglementation/regles-professionnelles-approuvees/reglement-de-deontologie-des-societes-de-gestion-de-portefeuille-intervenant-dans-le-capital) — diligence, confidentialité, conflits d’intérêts et organisation professionnelle.\n- [UK Private Capital / BVCA, Model Documents For Early Stage Investments, 2025](https://www.ukprivatecapital.co.uk/policy/industry-guidance-standardised-documents/model-documents-for-early-stage-investments.html) — familles documentaires Series A britanniques, comparaison non française et non seed.\n",
+    "keyTakeaways": [
+      "Le suivi de closing par l’Analyst est un registre de conditions, preuves et responsabilités.",
+      "Les retards de syndication se documentent et s’escaladent ; ils ne se renégocient pas au niveau Analyst.",
+      "La gouvernance doit être suivie comme un ensemble de droits et obligations, sans responsabilité de board.",
+      "Les modèles étrangers servent d’illustration documentaire, pas de règle juridique française."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
   },
   {
     "id": "l-role-colead-workshare",
@@ -6135,9 +6490,9 @@
     "order": 3,
     "title": "ARR, rétention et unit economics SaaS",
     "kicker": "SaaS",
-    "readMin": 0,
-    "summary": "Analyser ARR, NRR, GRR, churn, CAC, LTV et payback en tenant compte de la qualité des données.",
-    "status": "upcoming",
+    "readMin": 7,
+    "summary": "Définir les principales métriques SaaS par numérateur, dénominateur, période et population avant toute comparaison.",
+    "status": "published",
     "level": "intermediaire",
     "contexts": {
       "sectors": [
@@ -6153,7 +6508,100 @@
       "lmv-unit-economics"
     ],
     "assessmentId": "analyst-specialty-saas",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "arr",
+      "mrr",
+      "annualized-run-rate",
+      "nrr",
+      "grr",
+      "churn-rate",
+      "cac",
+      "ltv",
+      "gross-margin",
+      "cac-payback-period",
+      "unit-economics"
+    ],
+    "body": "## Cadre\n\nCette leçon traite les métriques SaaS : ARR, MRR, NRR, GRR, churn, CAC, marge brute, LTV, payback et cohortes. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate.\n\nLes métriques SaaS ne sont pas des grandeurs comptables normalisées. Elles sont des conventions opératoires. Elles doivent donc porter numérateur, dénominateur, période, population, devise, source de données, exclusions et changements de méthode. Une comparaison privée ou un benchmark ne peut être lu qu’après ce dictionnaire.\n\nL’[[arr|ARR]] utilisé ici désigne le revenu annuel récurrent vérifié des contrats ou subscriptions actifs et se distingue de l’annualisation mécanique d’un MRR, d’un revenu ponctuel et de la reconnaissance comptable, qui reste hors périmètre. Paddle soutient une définition opérationnelle de l’ARR, mais la leçon conserve une convention locale prudente au point de calcul. ChartMogul et High Alpha/OpenView sont requalifiés : ChartMogul fournit des définitions ou tendances sur une population privée, géographie non documentée au point inspecté ; High Alpha publie une synthèse, mais le rapport détaillé reste soumis à formulaire.\n\n## Méthode\n\nLa première opération est le retraitement de l’ARR déclaré : 1,2 M€ - 120 k€ = 1,08 M€ d’ARR récurrent vérifié lorsque les 120 k€ correspondent à des services ponctuels. Le retraitement doit indiquer contrats actifs, période, devise et date d’extraction.\n\nLes formules NRR/GRR sont des conventions opératoires locales reliées au glossaire et aux prérequis : GRR = (revenu T0 - churn - contractions) / revenu T0.\n\nNRR = (revenu T0 - churn - contractions + expansions) / revenu T0. La GRR exclut les hausses de revenu et ne doit pas dépasser 100 %. Les nouveaux clients acquis après T0 sont exclus de la NRR ; les réactivations sont traitées séparément si le client n’était pas actif à T0.\n\nLe logo/customer churn mesure les clients actifs T0 devenus inactifs sur la période. Le revenue churn ou gross revenue loss rate mesure le revenu perdu par churn et contractions rapporté au revenu T0. Le [[cac|CAC]] additionne les dépenses d’acquisition attribuables sur une période cohérente avec le cycle de vente. La [[gross-margin|marge brute]] précise revenu net, COGS, hébergement, support et coûts d’usage. La LTV simplifiée publie ses hypothèses : ARPA ou revenu mensuel par client, churn retenu, marge brute, période, durée de vie conventionnelle, expansion et actualisation éventuelle.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Le jeu fourni est un pont agrégé de cohorte, pas un export client : il permet les calculs de revenu et de payback ci-dessous, mais pas l’identification des logos perdus ni une LTV numérique.\n\n| Élément | Valeur | Traitement dans GRR | Traitement dans NRR |\n| --- | --- | --- | --- |\n| période | T0 2025-08-01 à T1 2026-07-31 | Cadre de cohorte | Cadre de cohorte |\n| devise | EUR | Même devise | Même devise |\n| date d’extraction | 2026-08-01 | Trace de source | Trace de source |\n| revenu récurrent de cohorte en T0 | 1 000 k€ | Dénominateur | Dénominateur |\n| churn revenu | 50 k€ | Soustrait | Soustrait |\n| contractions | 70 k€ | Soustraites | Soustraites |\n| expansions | 180 k€ | Exclues | Ajoutées |\n| nouveaux clients après T0 | 90 k€ | Exclus | Exclus de la NRR |\n| réactivations | 20 k€ | Traitées séparément | Traitées séparément |\n\nLe gross revenue loss rate = (50 k€ + 70 k€) / 1 000 k€ = 12 %. Le calcul donne GRR = (1 000 - 50 - 70) / 1 000 = 88 % ; donc GRR = 88 %. Le calcul donne NRR = (1 000 - 50 - 70 + 180) / 1 000 = 106 % ; donc NRR = 106 %. Les 90 k€ de nouveaux clients et les 20 k€ de réactivations ne sont pas ajoutés à la cohorte T0.\n\nDonnées payback : 180 k€ de dépenses d’acquisition attribuables / 30 nouveaux clients = 6 000 € de CAC. L’onboarding initial inclus dans la convention vaut 600 € par client. Le MRR moyen par nouveau client est 1 000 €, le taux de marge brute est 55 %, donc marge brute mensuelle par client = 550 €. CAC payback = (CAC + onboarding inclus selon la convention) / marge brute mensuelle par client. Le résultat est (6 000 € + 600 €) / 550 € = 12 mois.\n\n## Limites et points de contrôle\n\nAucun seuil de NRR, GRR, churn, LTV/CAC ou payback n’est présenté comme universel. Un NRR de 106 % peut masquer une concentration ; une GRR de 88 % peut être correcte mécaniquement et insuffisante selon le segment. Un payback de douze mois n’est lisible qu’avec la marge, le churn et le canal retenus.\n\nLes sources ChartMogul de rétention portent sur des clients ou entreprises SaaS privés, avec segments et méthodes propres. ChartMogul « New Normal » soutient des tendances de NRR dans sa population, ne publie pas la formule détaillée inspectée et ne traite pas la GRR. La leçon cite donc les formules comme conventions opératoires locales, et limite les références privées aux définitions courtes, cohortes et tendances.\n\nL’Analyst prépare, recalcule, rapproche CRM, contrats, factures, comptabilité et usage, puis escalade les écarts. Il ne transforme pas une métrique en validation professionnelle, ne choisit pas seul la convention financière et ne masque pas les réactivations ou nouveaux clients.\n\nLa cohérence temporelle est contrôlée avant tout commentaire. Les revenus de cohorte, les coûts d’acquisition et les marges ne doivent pas mélanger une extraction annuelle, un mois isolé et une dépense d’un autre canal. Si les périodes diffèrent, la note limite le calcul. Le logo/customer churn reste non calculable si les nombres de logos actifs T0 et perdus manquent ; la LTV reste non calculable si les hypothèses de revenu par client, churn, marge, période et durée de vie manquent.\n\n## Mise en application\n\n**Partie A — calculs exécutables depuis le pont agrégé.** Recalcule le gross revenue loss rate, la GRR, la NRR, le CAC, la marge brute mensuelle par client et le CAC payback. Présente chaque formule, chaque exclusion et l’unité utilisée.\n\n**Partie B — contrôle de données et méthode.** Ne produis pas de logo/customer churn numérique : le logo/customer churn est non calculable depuis ce seul pont agrégé, faute de nombre de logos en T0 et de nombre de logos perdus sur la période du churn. Ne produis pas de LTV numérique : la LTV est non calculable depuis ce seul pont agrégé, faute de revenu par client, churn retenu, marge, période et hypothèse de durée de vie ou convention LTV. Aucune valeur ne doit être inventée.\n\nLa restitution comprend un bridge de revenu, un bridge d’acquisition et un schéma de collecte pour un futur export client. L’inventaire des champs à demander couvre au minimum : identifiant client stable, statut client en T0 et T1, MRR ou ARR en T0 et T1, date de début, date de churn éventuelle, contraction ou expansion, nouveau client, réactivation, nombre de logos en T0, nombre de logos perdus, période du churn, ARPA ou revenu mensuel par client, marge brute, hypothèse de durée de vie ou convention LTV. Si une donnée manque, l’exercice demande de documenter le calcul impossible, non d’inventer une valeur.\n\n## Références\n\n- [ChartMogul, SaaS metrics library, page vivante consultée 2026-08-01](https://chartmogul.com/saas-metrics/) — définitions courtes NRR/GRR et rappel que certains usages d’ARR renvoient à l’annualisation MRR × 12.\n- [ChartMogul, SaaS Retention Report 2023, page modifiée 2026-06-03 et consultée 2026-08-01](https://chartmogul.com/reports/saas-retention-report/) — rétention, cohortes, NRR/GRR et benchmarks privés ChartMogul ; géographie non documentée publiquement.\n- [Paddle, What is annual recurring revenue (ARR) and how to calculate it, publication 2023-01-23, modification sitemap 2026-05-15, consultation 2026-08-01](https://www.paddle.com/resources/annual-recurring-revenue) — définition opérationnelle ARR, sans reconnaissance comptable.\n- [Paddle, How to calculate and reduce payback period, publication 2022-02-01, modification 2025-09-30, consultation 2026-08-01](https://www.paddle.com/resources/payback-period) — temps de récupération du CAC et limites de calcul.",
+    "keyTakeaways": [
+      "Une métrique SaaS doit porter numérateur, dénominateur, période, population et exclusions.",
+      "NRR et GRR partent d’une cohorte existante mais traitent différemment l’expansion.",
+      "CAC, marge brute, LTV et payback deviennent trompeurs si les coûts inclus changent.",
+      "Les benchmarks privés guident les questions, pas une norme universelle."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
   },
   {
     "id": "l-specialty-saas-gtm",
@@ -6162,9 +6610,9 @@
     "order": 4,
     "title": "Répétabilité du go-to-market SaaS",
     "kicker": "SaaS",
-    "readMin": 0,
-    "summary": "Évaluer l'efficacité des canaux, la vélocité commerciale, le pricing et la capacité d'expansion.",
-    "status": "upcoming",
+    "readMin": 7,
+    "summary": "Évaluer la répétabilité du go-to-market SaaS par canal, segment, cycle, conversion, pricing et expansion, sans seuil universel.",
+    "status": "published",
     "level": "intermediaire",
     "contexts": {
       "sectors": [
@@ -6180,7 +6628,98 @@
       "l-specialty-saas-metrics"
     ],
     "assessmentId": "analyst-specialty-saas",
-    "glossaryRefs": []
+    "glossaryRefs": [
+      "gtm",
+      "sales-pipeline",
+      "sales-cycle",
+      "qualified-lead-velocity-rate",
+      "pricing-methodology",
+      "customer-success",
+      "cac",
+      "cac-payback-period",
+      "revenue-growth-repeatability"
+    ],
+    "body": "## Cadre\n\nCette leçon traite la répétabilité du go-to-market SaaS : segment, canal, cycle, conversion, pricing, expansion et dépendance au founder-led sales. Elle s’adresse à un Analyst qui prépare une analyse révisable par un Associate. La répartition par grade est une transposition professionnelle prudente : les sources externes décrivent des métriques commerciales, mais ne définissent pas les grades Analyst, Associate et Partner.\n\nUn canal n’est pas supérieur en soi. La question est de savoir s’il peut être répété par une équipe avec volume de leads, conversion, cycle, panier signé, revenu encaissé, marge et rétention observables. Une hausse de leads peut être utile sans prouver le revenu futur. Une conversion forte peut venir d’un segment étroit. Une vente founder-led peut révéler la demande sans démontrer une organisation transférable.\n\nLa source Geckoboard nomme la métrique Lead Velocity Rate (LVR), calculée sur les leads qualifiés. Elle n’emploie pas le nom canonique Qualified Lead Velocity Rate. Pour conserver la compatibilité du glossaire, le slug `qualified-lead-velocity-rate` reste inchangé ; QLVR est seulement un alias local clairement qualifié.\n\n## Méthode\n\nLe dictionnaire commercial fixe d’abord les étapes. Dans ce cas, MQL désigne un lead marketing qualifié selon secteur, taille et besoin déclaré ; SQL désigne un lead accepté par sales avec sponsor identifié, problème actif et prochaine étape datée. La définition doit rester stable entre deux périodes, sinon la comparaison est invalide.\n\nLa formule LVR = (leads qualifiés période courante - leads qualifiés période précédente) / leads qualifiés période précédente. La période est mensuelle dans l’exercice. Si le dénominateur nul apparaît, le taux n’est pas calculé ; la note publie le volume courant et la convention de redémarrage. Cette métrique porte une absence de pouvoir prédictif garanti : elle peut précéder le revenu, mais ne garantit ni conversion, ni cycle, ni panier, ni signature.\n\nLes deux conversions demandées utilisent des numérateurs et dénominateurs explicites. MQL → SQL = SQL issus des MQL de la cohorte / MQL de la cohorte. SQL → won = opportunités signées / opportunités SQL closes, les opportunités ouvertes étant exclues du ratio clos et suivies séparément. La convention de médiane du cycle retient les jours entre création SQL et signature pour les deals gagnés. Le panier signé est la moyenne d’ACV signé hors opportunités perdues et ouvertes.\n\n## Cas d'application\n\nCas fictif à visée exclusivement méthodologique. Les données sont inventées et ne constituent ni un benchmark ni une observation de marché. Les trente opportunités fictives O01 à O30 se résument ainsi : 24 MQL, 18 SQL, 9 won, 6 lost et 3 open ; O01 à O09 sont signées pour 10 k€, 12 k€, 14 k€, 16 k€, 18 k€, 20 k€, 24 k€, 26 k€ et 40 k€ ; leurs cycles sont 32, 41, 45, 47, 53, 55, 64, 70 et 88 jours ; O10 à O15 sont perdues ; O16 à O18 restent ouvertes ; O19 à O30 n’ont pas atteint SQL. Le mois précédent compte 40 leads qualifiés et le mois courant 50.\n\nLe LVR vaut (50 - 40) / 40 = 25 %. MQL → SQL = 18 / 24 = 75 %. SQL → won = 9 / (9 + 6) = 60 %, avec opportunités ouvertes exclues du dénominateur clos. La médiane du cycle est 53 jours. Le panier signé moyen est 180 k€ / 9 = 20 k€. Sept des neuf ventes signées proviennent encore du founder-led sales ; la note signale donc une dépendance opérationnelle avant de parler de répétabilité.\n\nLe calcul est exécutable à partir des données fournies, mais la conclusion reste conditionnelle. Le volume de leads, la conversion, le cycle, le panier, le revenu signé et la rétention des cohortes doivent être lus ensemble. Une hausse de LVR avec un panier en baisse ou un cycle plus long peut réduire la qualité du plan.\n\n## Limites et points de contrôle\n\nChartMogul « Startups become what they hunt » porte sur 1 043 clients ChartMogul SaaS et AI ayant atteint 10 k$ de MRR au plus tard le 2023-05-01 et encore en activité. Le rapport est utile pour discuter segment initial et trajectoire, mais il comporte des biais de sélection et de survivance et ne représente pas tout le SaaS.\n\nHigh Alpha/OpenView publie une synthèse de benchmarks privés ; le rapport détaillé est soumis à formulaire. Geckoboard fournit la formule LVR et la rattache aux leads qualifiés, mais son vocabulaire prédictif doit être borné : un indicateur avancé n’est pas une garantie de revenu. Paddle soutient la formule du CAC et les coûts à inclure, sans définir un seuil universel.\n\nL’Analyst peut préparer les bridges, recalculer les conversions, tenir le registre de pipeline et alerter sur founder-led sales. Il ne choisit pas seul le canal, ne valide pas le plan commercial, ne promet pas un revenu futur et ne transforme pas un benchmark privé en norme.\n\nLes conversions doivent être cohérentes avec l’étape CRM retenue. Un SQL perdu entre dans le dénominateur d’un ratio de closing clos, tandis qu’une opportunité ouverte reste suivie hors ratio. La dépendance aux fondateurs est traitée comme un risque de répétabilité, pas comme une preuve négative automatique.\n\nLe canal est lu avec la même prudence. Un volume plus élevé peut venir d’une campagne ponctuelle, d’un changement de qualification ou d’un segment moins rentable. Le suivi indique donc la source du lead, le propriétaire de l’étape commerciale et la part encore portée par les fondateurs.\n\n## Mise en application\n\nÀ partir des trente opportunités fictives O01 à O30 ci-dessus, calcule LVR, MQL → SQL, SQL → won, médiane du cycle, panier signé et dépendance founder-led. Indique le traitement des opportunités ouvertes et perdues.\n\nLa restitution comprend une table de calcul, une phrase de conclusion et trois questions à poser au management : stabilité de la qualification SQL, capacité de vente non fondatrice et qualité de la cohorte signée. Si une étape CRM manque, l’exercice devient une demande de données à obtenir, pas un calcul inventé.\n\n## Références\n\n- [ChartMogul, Startups become what they hunt, rapport 2026, données au 2026-05-01](https://chartmogul.com/reports/saas-startups-become-what-they-hunt/) — premiers segments clients ; population privée ChartMogul avec biais de sélection et de survivance.\n- [High Alpha / OpenView, 2024 SaaS Benchmarks Report by High Alpha and OpenView, synthèse publique consultée 2026-08-01](https://www.highalpha.com/saas-benchmarks/2024) — benchmark SaaS privé ; rapport détaillé soumis à formulaire.\n- [Geckoboard, Lead Velocity Rate | KPI examples | Geckoboard, aucune date de publication affichée, modification HTTP 2026-07-30, consultation 2026-08-01](https://www.geckoboard.com/resources/kpi-examples/lead-velocity-rate/) — formule Lead Velocity Rate sur leads qualifiés ; pas de garantie prédictive.\n- [Paddle, Customer acquisition cost (CAC): Calculate and reduce it, publication 2023-01-23, modification sitemap 2026-04-21, consultation 2026-08-01](https://www.paddle.com/resources/customer-acquisition-cost) — formule CAC et coûts d’acquisition à documenter.\n",
+    "keyTakeaways": [
+      "La répétabilité GTM dépend du segment, du canal, du cycle, du pricing et de la rétention.",
+      "Un canal founder-led peut signaler une demande sans prouver une organisation commerciale répétable.",
+      "Les conversions et vélocités n’ont de sens qu’avec des étapes et critères stables.",
+      "Le choix d’un segment relie valeur contractuelle, coût de vente, onboarding et expansion possible."
+    ],
+    "quiz": [
+      {
+        "question": "Quel comportement correspond au niveau Analyst ?",
+        "options": [
+          {
+            "text": "Décider seul du résultat final.",
+            "correct": false
+          },
+          {
+            "text": "Documenter les preuves, calculs, limites et points d’escalade.",
+            "correct": true
+          },
+          {
+            "text": "Présenter une hypothèse comme validation professionnelle.",
+            "correct": false
+          }
+        ],
+        "explanation": "Le niveau Analyst prépare une analyse traçable et révisable."
+      },
+      {
+        "question": "Que doit porter une valeur chiffrée ?",
+        "options": [
+          {
+            "text": "Son unité, sa période, sa source et ses exclusions.",
+            "correct": true
+          },
+          {
+            "text": "Un adjectif favorable.",
+            "correct": false
+          },
+          {
+            "text": "Uniquement le nom du fondateur.",
+            "correct": false
+          }
+        ],
+        "explanation": "Un chiffre sans convention ne permet pas la revue."
+      },
+      {
+        "question": "Comment utiliser une source privée ou étrangère ?",
+        "options": [
+          {
+            "text": "Comme norme universelle.",
+            "correct": false
+          },
+          {
+            "text": "Avec sa population, sa date et sa limite de transposition.",
+            "correct": true
+          },
+          {
+            "text": "Sans mentionner son périmètre.",
+            "correct": false
+          }
+        ],
+        "explanation": "La transférabilité doit être indiquée près de la proposition."
+      },
+      {
+        "question": "Que faire lorsqu’une preuve reste partielle ?",
+        "options": [
+          {
+            "text": "La supprimer toujours.",
+            "correct": false
+          },
+          {
+            "text": "La renforcer par une formulation absolue.",
+            "correct": false
+          },
+          {
+            "text": "La qualifier et indiquer la prochaine pièce à obtenir.",
+            "correct": true
+          }
+        ],
+        "explanation": "Une preuve partielle peut être utile si sa limite reste visible."
+      }
+    ]
   },
   {
     "id": "l-specialty-deeptech-trl-ip",

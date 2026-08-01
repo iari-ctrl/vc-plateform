@@ -674,9 +674,9 @@
     ],
     "sourceStatus": "source-backed",
     "category": "Fondations",
-    "short": "Distribution où quelques investissements produisent l'essentiel des rendements.",
-    "definition": "En venture capital, la loi de puissance signifie qu'une petite minorité de deals peut générer presque toute la valeur d'un portefeuille. Elle pousse les investisseurs à rechercher des outcomes exceptionnels plutôt que des entreprises seulement correctes.",
-    "example": "Une seule participation à 100x peut rendre un fonds entier malgré de nombreuses pertes.",
+    "short": "Raccourci sectoriel pour décrire des rendements très asymétriques et concentrés.",
+    "definition": "En venture capital, l'expression « loi de puissance » est un raccourci sectoriel employé pour évoquer une forte asymétrie : quelques résultats peuvent peser lourd dans un portefeuille. Cette expression ne suffit pas à établir une loi mathématique universelle ; toute affirmation quantitative doit préciser l'échantillon, la période et la méthode.",
+    "example": "Dans l'échantillon agrégé du NBER w27690, quelques sociétés concentrent une part décisive du résultat ; ce constat ne se transpose pas en proportion universelle.",
     "seeAlso": [
       "fund-returner",
       "moic",
@@ -3293,12 +3293,15 @@
     "notes": "Complète pitch-deck sans le dupliquer : pitch = processus/narratif, pitch deck = support."
   },
   {
-    "canonicalTerm": "Qualified Lead Velocity Rate",
+    "canonicalTerm": "Lead Velocity Rate (LVR)",
     "slug": "qualified-lead-velocity-rate",
     "aliases": [
+      "LVR",
+      "Lead Velocity Rate",
+      "Qualified Lead Velocity Rate",
       "QLVR",
-      "taux de vélocité des leads qualifiés",
-      "lead velocity rate"
+      "lead velocity rate",
+      "taux de vélocité des leads qualifiés"
     ],
     "status": "applied",
     "action": "add",
@@ -3311,18 +3314,19 @@
     ],
     "sourceStatus": "source-backed",
     "category": "Métriques",
-    "short": "Croissance mensuelle des leads qualifiés, utilisée comme indicateur avancé du pipeline commercial.",
-    "definition": "Le Qualified Lead Velocity Rate mesure la progression du nombre de leads qualifiés d'un mois sur l'autre. En fundraising, il peut aider à juger si le pipeline commercial soutient le plan de croissance, surtout quand le revenu réalisé est encore en retard sur l'activité commerciale.",
-    "example": "Une hausse de 25 % des leads qualifiés mensuels peut soutenir une histoire de croissance si les taux de conversion restent crédibles.",
+    "short": "Croissance mensuelle des leads qualifiés, selon une définition stable de qualification.",
+    "definition": "Le Lead Velocity Rate (LVR) est le nom utilisé par Geckoboard pour mesurer la croissance des leads qualifiés : (leads qualifiés période courante - leads qualifiés période précédente) / leads qualifiés période précédente. Le slug historique conserve QLVR comme alias local. La convention doit préciser la période, la définition du lead qualifié, le traitement d'un dénominateur nul et l'absence de pouvoir prédictif garanti.",
+    "example": "Passer de 40 à 50 leads qualifiés sur un mois donne 25 % de LVR, sans garantir les signatures ni le revenu.",
     "seeAlso": [
       "qualified-lead",
       "traction"
     ],
     "relatedLessonIds": [
       "l-traction-unit-economics",
-      "l-founder-narrative"
+      "l-founder-narrative",
+      "l-specialty-saas-gtm"
     ],
-    "notes": "Métrique SaaS utile pour relier qualification commerciale et traction, sans lien externe non résolu."
+    "notes": "Aligné avec le nom Geckoboard Lead Velocity Rate ; QLVR conservé comme alias local pour compatibilité du slug."
   },
   {
     "canonicalTerm": "One-liner de startup",
@@ -4815,9 +4819,9 @@
     ],
     "sourceStatus": "source-backed",
     "category": "Métriques",
-    "short": "Revenu récurrent annualisé des contrats actifs, hors revenus ponctuels.",
-    "definition": "L'ARR mesure la valeur annualisée des revenus récurrents actifs d'une entreprise. En SaaS, il sert à évaluer la trajectoire de croissance, la rétention, le burn multiple et les multiples de valorisation. Il ne doit pas être confondu avec un run rate annualisé basé sur un mois exceptionnel.",
-    "example": "100 k€ de MRR récurrent actif correspondent à environ 1,2 M€ d'ARR, hors setup fees et services non récurrents.",
+    "short": "Revenu annuel récurrent vérifié des contrats ou abonnements actifs, hors revenus ponctuels.",
+    "definition": "L'ARR mesure le revenu annuel récurrent vérifié d'un modèle par abonnement ou contrat actif. La convention doit préciser si elle somme les valeurs contractuelles annuelles ou annualise un MRR récurrent stable. Elle exclut les services ponctuels, setup fees, revenus d'usage non engagés et contrats non commencés, et ne remplace pas la reconnaissance comptable.",
+    "example": "1,2 M€ de revenu déclaré dont 120 k€ de services ponctuels donnent 1,08 M€ d'ARR récurrent vérifié selon la convention de la leçon.",
     "seeAlso": [
       "mrr",
       "recurring-revenue",
@@ -4826,7 +4830,9 @@
       "revenue-multiple"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-stage-seed-commercial",
+      "l-specialty-saas-metrics"
     ],
     "notes": "Enrichissement de l’entrée existante ; distingue ARR récurrent et annualized run rate."
   },
@@ -4911,16 +4917,17 @@
     ],
     "sourceStatus": "source-backed",
     "category": "Métriques",
-    "short": "Extrapolation annuelle d'un revenu observé sur une période courte.",
-    "definition": "L'annualized run rate extrapole un revenu récent sur douze mois. Il peut inclure du revenu non récurrent et reste une estimation instantanée, donc moins robuste que l'ARR contractuel d'un modèle récurrent.",
-    "example": "Un mois à 80 k€ de revenu total peut être présenté comme 960 k€ de run rate, même si une partie du revenu est one-shot.",
+    "short": "Annualisation mécanique d'un revenu observé sur une période courte.",
+    "definition": "L'annualized run rate extrapole un revenu récent sur douze mois, par exemple MRR × 12. Il peut inclure un pic temporaire ou des revenus non récurrents si la convention n'est pas retraitée. Il doit donc être distingué de l'ARR récurrent vérifié et du revenu comptable.",
+    "example": "100 k€ de revenu sur un mois donnent 1,2 M€ de run rate annualisé, mais pas nécessairement 1,2 M€ d'ARR vérifié.",
     "seeAlso": [
       "arr",
       "revenue-growth",
       "recurring-revenue"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "notes": "Retenu pour éviter la confusion fréquente avec ARR."
   },
@@ -5205,8 +5212,8 @@
     "sourceStatus": "source-backed",
     "category": "Métriques",
     "short": "Coût moyen nécessaire pour acquérir un nouveau client.",
-    "definition": "Le CAC additionne les dépenses commerciales et marketing nécessaires pour acquérir un client. En VC, il ne se lit jamais seul : il doit être comparé à la marge, à la [[ltv|LTV]], au payback, au canal d'acquisition et à la répétabilité du go-to-market.",
-    "example": "Un CAC de 5 000 € peut être sain si le client génère une marge récurrente élevée et se rembourse vite.",
+    "definition": "Le CAC additionne les dépenses commerciales et marketing attribuables à l'acquisition de nouveaux clients sur une période alignée avec le cycle de vente. La convention doit dire si elle inclut salaires, commissions, outils, événements, agences, part management et coûts founder-led. En VC, il se lit avec la marge, la [[ltv|LTV]], le payback, le canal et la répétabilité du go-to-market.",
+    "example": "180 k€ de dépenses d'acquisition attribuables pour 30 nouveaux clients donnent 6 000 € de CAC avant coût d'onboarding.",
     "seeAlso": [
       "ltv",
       "cac-payback-period",
@@ -5214,7 +5221,9 @@
       "gtm"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics",
+      "l-specialty-saas-gtm"
     ],
     "notes": "Enrichissement de l’entrée existante.",
     "term": "Customer Acquisition Cost (CAC)"
@@ -5240,8 +5249,8 @@
     "sourceStatus": "source-backed",
     "category": "Métriques",
     "short": "Valeur économique attendue d'un client sur toute sa relation avec l'entreprise.",
-    "definition": "La LTV estime la valeur qu'un client générera sur sa durée de vie, souvent à partir de marge brute, rétention, expansion et durée de relation. C'est une métrique prospective : elle vaut seulement autant que les hypothèses de churn, marge et pricing qui la soutiennent.",
-    "example": "Une LTV élevée peut être trompeuse si elle suppose un churn très faible sur une cohorte encore trop jeune.",
+    "definition": "La LTV estime la valeur économique attendue d'un client à partir de marge, rétention, expansion et durée de relation. Elle doit publier ses hypothèses : horizon, churn, marge brute, croissance de compte, actualisation éventuelle, segment et taille de cohorte. Avec peu d'historique, elle reste un scénario sensible plutôt qu'une mesure observée.",
+    "example": "Une LTV fondée sur un churn mensuel supposé faible est fragile si la cohorte n'a pas encore observé un cycle de renouvellement complet.",
     "seeAlso": [
       "cac",
       "ltv-cac",
@@ -5249,7 +5258,8 @@
       "gross-margin"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "notes": "Enrichissement de LTV avec alias CLV.",
     "term": "Lifetime Value (LTV)"
@@ -5308,8 +5318,8 @@
     "sourceStatus": "source-backed",
     "category": "Métriques",
     "short": "Temps nécessaire pour récupérer le coût d'acquisition d'un client via la marge générée.",
-    "definition": "Le CAC payback period mesure combien de mois il faut pour récupérer le CAC grâce au revenu ajusté de la marge brute. Il relie acquisition, cash flow et scalabilité commerciale.",
-    "example": "Un payback de 10 mois est généralement plus robuste qu'un payback de 30 mois pour une startup qui brûle encore du cash.",
+    "definition": "Le CAC payback period mesure le temps nécessaire pour récupérer le CAC grâce à la marge brute ou contributive générée par un client. La formule doit indiquer si l'onboarding, les coûts d'implémentation et les expansions observées sont inclus. Il n'est comparable que pour des segments, marges, canaux et périodes cohérents.",
+    "example": "Un CAC de 6 000 € avec 600 € d'onboarding et 550 € de marge brute mensuelle par client donne un payback de 12 mois.",
     "seeAlso": [
       "cac",
       "ltv-cac",
@@ -5317,7 +5327,9 @@
       "burn-rate"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics",
+      "l-specialty-saas-gtm"
     ],
     "notes": "Métrique SaaS centrale."
   },
@@ -5341,8 +5353,8 @@
     "sourceStatus": "source-backed",
     "category": "Métriques",
     "short": "Pourcentage de clients ou de revenu perdu sur une période.",
-    "definition": "Le churn rate mesure la perte d'une base clients ou revenu sur une période. Il est central pour les modèles récurrents : une forte croissance peut cacher un modèle fragile si les clients partent rapidement.",
-    "example": "Un SaaS qui ajoute beaucoup de nouveaux clients mais perd 5 % de sa base chaque mois peut avoir une croissance difficile à maintenir.",
+    "definition": "Le churn rate mesure la perte d'une base clients ou revenu sur une période. Le logo/customer churn rapporte les clients actifs T0 perdus aux clients actifs T0. Le revenue churn ou gross revenue loss rate rapporte le revenu perdu par churn et contractions au revenu T0, sans y ajouter les expansions.",
+    "example": "Perdre 5 clients sur 100 donne 5 % de logo churn ; perdre 120 k€ de revenu sur 1 000 k€ donne 12 % de gross revenue loss rate.",
     "seeAlso": [
       "nrr",
       "mrr",
@@ -5350,7 +5362,8 @@
       "recurring-revenue"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "notes": "Entrée canonique pour customer churn et revenue churn."
   },
@@ -5431,9 +5444,9 @@
     ],
     "sourceStatus": "source-backed",
     "category": "Métriques",
-    "short": "Revenu conservé auprès d'une cohorte existante après churn, contraction et expansion.",
-    "definition": "La NRR mesure comment le revenu des clients existants évolue après churn, downgrades, upsell et expansion. Au-dessus de 100 %, la base existante grossit sans nouveaux clients, ce qui est un signal fort de qualité produit et de pricing.",
-    "example": "Une NRR de 120 % signifie qu'une cohorte de 1 M€ de revenu devient 1,2 M€ après pertes et expansion.",
+    "short": "Revenu conservé auprès d'une cohorte existante après churn, contractions et expansions.",
+    "definition": "La NRR mesure l'évolution du revenu d'une cohorte active à T0 : (revenu T0 - churn - contractions + expansions) / revenu T0. Les nouveaux clients acquis après T0 sont exclus ; les réactivations suivent la convention publiée et ne doivent pas être comptées deux fois.",
+    "example": "Une cohorte de 1 000 k€ avec 50 k€ de churn, 70 k€ de contractions et 180 k€ d'expansions affiche 106 % de NRR.",
     "seeAlso": [
       "arr",
       "mrr",
@@ -5441,7 +5454,8 @@
       "ltv"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "notes": "Enrichissement de l’entrée existante."
   },
@@ -5693,8 +5707,8 @@
     "sourceStatus": "source-backed",
     "category": "Métriques",
     "short": "Pourcentage de revenu restant après les coûts directs de livraison.",
-    "definition": "La gross margin mesure la part du revenu conservée après COGS. Elle influence la LTV, le CAC payback, la capacité à scaler et la qualité du modèle économique.",
-    "example": "Un SaaS à 85 % de marge brute a plus de levier qu'un service à 35 % si les autres métriques sont comparables.",
+    "definition": "La gross margin mesure la part du revenu restant après les coûts directs de livraison : (revenu net - COGS) / revenu net. En SaaS, la convention doit préciser hébergement, support, services tiers, onboarding récurrent, coûts IA ou usage et services professionnels lorsque ces coûts affectent la livraison.",
+    "example": "1 000 € de MRR à 55 % de marge brute produisent 550 € de marge brute mensuelle par client pour le calcul de payback.",
     "seeAlso": [
       "cogs",
       "unit-economics",
@@ -5702,7 +5716,8 @@
       "cac-payback-period"
     ],
     "relatedLessonIds": [
-      "l-traction-unit-economics"
+      "l-traction-unit-economics",
+      "l-specialty-saas-metrics"
     ],
     "notes": "Métrique fondamentale."
   },
@@ -15549,5 +15564,39 @@
     ],
     "sourceStatus": "legacy-final-glossary",
     "notes": "Entrée historique rapprochée du registre canonique en S6 ; provenance interne explicitement conservée."
+  },
+  {
+    "canonicalTerm": "Gross Revenue Retention (GRR)",
+    "slug": "grr",
+    "aliases": [
+      "GRR",
+      "gross revenue retention",
+      "rétention brute du revenu",
+      "gross dollar retention"
+    ],
+    "status": "applied",
+    "action": "add",
+    "modules": [
+      "05 - Metrics & Valuation",
+      "05.2 Acquisition, Retention & Satisfaction"
+    ],
+    "sourcePaths": [
+      "source-research/seed-lead-saas/saas.md"
+    ],
+    "sourceStatus": "source-backed",
+    "category": "Métriques",
+    "short": "Revenu conservé auprès d’une cohorte existante avant expansions.",
+    "definition": "La Gross Revenue Retention (GRR) mesure le revenu conservé dans une cohorte active à T0 avant expansions : (revenu T0 - churn - contractions) / revenu T0. Les expansions exclues sont traitées hors GRR, les nouveaux clients acquis après T0 ne sont pas ajoutés et le résultat ne doit pas dépasser 100 %.",
+    "example": "Une cohorte de 1 000 k€ avec 50 k€ de churn et 70 k€ de contractions affiche 88 % de GRR.",
+    "seeAlso": [
+      "nrr",
+      "churn-rate",
+      "arr",
+      "mrr"
+    ],
+    "relatedLessonIds": [
+      "l-specialty-saas-metrics"
+    ],
+    "notes": "Définition soutenue par les sources ChartMogul inspectées ; formule publiée comme convention opératoire locale."
   }
 ]

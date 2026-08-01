@@ -1444,6 +1444,11 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/glossary/grr</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
     <loc>https://iari-ctrl.github.io/vc-plateform/glossary/gtm</loc>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
@@ -2939,6 +2944,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/lead-plan-due-diligence-term-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/lead-syndication-gouvernance-closing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://iari-ctrl.github.io/vc-plateform/lessons/les-echelons-du-venture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3004,6 +3019,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/mythe-vc-mise</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://iari-ctrl.github.io/vc-plateform/lessons/pilote-preuve-changement-echelle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3054,6 +3074,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/quiz-comprendre-le-capital-risque</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://iari-ctrl.github.io/vc-plateform/lessons/reconstituer-comptes-cout-complet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3084,6 +3109,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/saas-arr-retention-unit-economics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/saas-repetabilite-go-to-market</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://iari-ctrl.github.io/vc-plateform/lessons/safe-priced-round-et-dilution</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3095,6 +3130,16 @@
   </url>
   <url>
     <loc>https://iari-ctrl.github.io/vc-plateform/lessons/screening-et-filtrage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/seed-ownership-runway-financement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iari-ctrl.github.io/vc-plateform/lessons/seed-validation-commerciale-retention</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

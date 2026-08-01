@@ -1,0 +1,102 @@
+{
+  "_doc": "Registre autonome du parcours « Une semaine dans la peau d'un VC ». La leçon lsv-* complète la respiration finale du parcours et reste rattachée au cours c-decouvrir-vc.",
+  "parcoursId": "p-semaine-vc",
+  "courseId": "c-decouvrir-vc",
+  "lessons": [
+    {
+      "id": "lsv-vc-mise",
+      "slug": "mythe-vc-mise",
+      "courseId": "c-decouvrir-vc",
+      "order": 8,
+      "title": "Mythe démonté : « le VC mise »",
+      "kicker": "Respiration",
+      "readMin": 4,
+      "summary": "Pourquoi l'investissement VC relève d'une allocation disciplinée sous incertitude, et non d'une mise isolée sur une intuition.",
+      "status": "published",
+      "level": "debutant",
+      "contexts": {},
+      "optional": true,
+      "learningOutcomes": [
+        "Distinguer prise de risque VC et pari isolé.",
+        "Relier l'investissement à la construction de portefeuille, au suivi et aux réinvestissements.",
+        "Comprendre ce que le contexte français change dans la responsabilité d'un fonds."
+      ],
+      "prerequisiteLessonIds": [
+        "ld-what-is-vc",
+        "ld-vc-job"
+      ],
+      "body": "## Le mot « mise » décrit mal le métier\n\nDire qu'un investisseur en capital-risque « mise » donne une image simple, mais inexacte. Le VC accepte une incertitude élevée ; il ne joue pas une somme isolée sur une intuition. Il achète une participation minoritaire, dans un cadre défini, avec l'argent confié par des [[lp|Limited Partners]]. La décision engage donc une chaîne de responsabilités : mandat du [[venture-capital-fund|fonds]], thèse, comité, documentation, suivi et capacité à expliquer le raisonnement lorsque le résultat sera défavorable.\n\nLa différence est importante. Une mise s'évalue au moment où elle est placée. Un investissement de venture s'évalue dans le temps : avant la décision, au moment du tour, puis pendant les années de suivi. Le premier chèque fixe une exposition ; les tours suivants, les [[follow-on|réinvestissements]] et les arbitrages de réserves déterminent souvent une part décisive du résultat. Le métier consiste autant à conserver une exposition aux sociétés qui progressent qu'à accepter rapidement que d'autres ne justifient plus de capital supplémentaire.\n\n## Ce que le VC cherche réellement\n\nLe VC ne cherche pas une certitude. Elle n'existe pas au stade où l'entreprise n'a pas encore stabilisé son marché, son produit, son recrutement ou son modèle économique. Il cherche une asymétrie : un risque de perte borné par le capital investi, et un potentiel de gain suffisamment élevé pour compenser les pertes du portefeuille. Cette logique renvoie à la [[power-law|loi de puissance]] et à la [[portfolio-construction|construction de portefeuille]].\n\nPour qu'une décision soit investissable, l'incertitude doit être formulée. L'équipe peut être forte mais le marché encore étroit. La traction peut être réelle mais concentrée sur quelques clients. Le produit peut être différencié mais difficile à vendre à grande échelle. Le memo ne transforme pas ces limites en certitudes ; il indique lesquelles sont acceptées, lesquelles doivent être vérifiées et lesquelles rendraient l'investissement incohérent avec le mandat.\n\nLa discipline commence donc avant le comité : sourcing, qualification, appels fondateurs, analyse de marché, vérification des chiffres, lecture de la [[cap-table|cap table]], références, points juridiques et conditions de tour. Elle continue après l'investissement : suivi de trésorerie, recrutements, gouvernance, prochaines preuves, décisions de réserve. Le chèque est un moment visible ; le travail utile se situe autour de lui.\n\n## La version française du malentendu\n\nEn France, le mot « mise » est encore plus réducteur, car l'écosystème est structuré par des acteurs institutionnels, des règles de gestion et une proximité relationnelle. Selon la forme du véhicule et l'organisation retenue, une société de gestion peut relever d'un cadre AMF, avec procédures internes, gestion des conflits, obligations d'information et contrôles. Le VC français n'agit pas comme un particulier qui finance une préférence personnelle ; il administre une stratégie d'investissement pour compte de tiers.\n\nLe marché français ajoute aussi une texture particulière. Les fonds seed et Série A travaillent dans un écosystème où les introductions, co-investissements, entrepreneurs déjà financés, business angels, programmes publics et fonds européens peuvent compter dans l'accès aux dossiers. Cette densité ne remplace pas l'analyse. Elle rend la réputation plus importante, car une décision mal documentée circule vite, et un refus sérieux peut valoir autant qu'un accord opportuniste.\n\nLa présence de Bpifrance, de programmes européens et d'investisseurs institutionnels ne signifie pas que le risque disparaît. Elle modifie plutôt le contexte : plus de véhicules spécialisés, plus de cofinancements possibles, plus d'attentes de conformité, et parfois une attention accrue aux enjeux industriels, territoriaux ou technologiques. Dans ce cadre, « miser » n'est pas le bon verbe. Le verbe juste serait plutôt : allouer du capital rare sous incertitude, avec une méthode explicite et une responsabilité durable.\n\n**Mythe démonté — « le VC mise ».** Il prend un risque, mais ce risque est travaillé : thèse, portefeuille, diligence, gouvernance, réserves et suivi. L'intuition peut déclencher une question ; elle ne suffit pas à justifier un investissement.",
+      "keyTakeaways": [
+        "Le VC prend un risque, mais ce risque est encadré par un mandat, un portefeuille et une gouvernance.",
+        "La décision ne s'arrête pas au premier chèque : le suivi et les réinvestissements comptent autant que l'entrée.",
+        "En France, le cadre institutionnel et relationnel rend la traçabilité particulièrement importante."
+      ],
+      "glossaryRefs": [
+        "lp",
+        "venture-capital-fund",
+        "follow-on",
+        "power-law",
+        "portfolio-construction",
+        "cap-table",
+        "deal-sourcing",
+        "dd",
+        "ic"
+      ],
+      "quiz": [
+        {
+          "question": "Pourquoi le mot « mise » est-il insuffisant pour décrire un investissement VC ?",
+          "options": [
+            {
+              "text": "Parce que la décision s'inscrit dans un mandat, un portefeuille, une diligence et un suivi",
+              "correct": true
+            },
+            {
+              "text": "Parce qu'un fonds VC ne peut jamais perdre le capital investi",
+              "correct": false
+            },
+            {
+              "text": "Parce que la décision est prise uniquement après certitude sur le marché",
+              "correct": false
+            }
+          ],
+          "explanation": "Le capital-risque accepte l'incertitude, mais il la traite par une méthode de portefeuille, de diligence, de gouvernance et de suivi."
+        },
+        {
+          "question": "Quel point caractérise particulièrement le contexte français ?",
+          "options": [
+            {
+              "text": "Une articulation plus visible entre fonds privés, acteurs institutionnels, cadre de gestion et réputation de place",
+              "correct": true
+            },
+            {
+              "text": "L'absence de comités d'investissement dans les fonds professionnels",
+              "correct": false
+            },
+            {
+              "text": "La disparition du risque grâce aux cofinancements publics et européens",
+              "correct": false
+            }
+          ],
+          "explanation": "Le contexte français peut renforcer la traçabilité et la responsabilité, sans supprimer le risque économique propre au venture."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "Organisation du travail et traitement d'une opportunité",
+          "kind": "lesson",
+          "ref": "l-vc-week"
+        },
+        {
+          "label": "Origination et organisation du sourcing",
+          "kind": "lesson",
+          "ref": "l-sourcing"
+        },
+        {
+          "label": "AMF — espace sociétés de gestion",
+          "kind": "external",
+          "ref": "https://www.amf-france.org/fr/espace-professionnels/societes-de-gestion/mon-espace-sgp"
+        }
+      ]
+    }
+  ]
+}

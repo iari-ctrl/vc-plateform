@@ -5,10 +5,10 @@
     "family": "decouvrir",
     "roadmap": "now",
     "title": "Comprendre le capital-risque",
-    "hook": "En une heure, suivre la circulation du capital et comprendre les principes économiques qui structurent un fonds de venture.",
+    "hook": "Comprendre la circulation du capital, les rôles du fonds et les principes économiques qui structurent le capital-risque.",
     "kanji": "発",
     "accent": "#D28236",
-    "goal": "Nommer les acteurs (LP, GP, business angel), comprendre la loi de puissance et la grammaire des stades.",
+    "goal": "Distinguer LP, gestionnaire, fonds et société financée ; expliquer la loi de puissance ; situer les stades ; comprendre le rôle du comité.",
     "forWhom": [
       "Curieux",
       "Étudiants",
@@ -17,10 +17,9 @@
     "level": "debutant",
     "entryLevel": "debutant",
     "time": {
-      "coreHours": 1.2,
-      "withBonusHours": 1.5,
+      "source": "derived",
       "sessions": 9,
-      "cadence": "9 épisodes courts, ~1 h 20"
+      "cadence": "9 étapes courtes"
     },
     "timeFit": [
       "low",
@@ -32,8 +31,8 @@
     ],
     "milestone": {
       "type": "quiz",
-      "label": "Quiz éclair",
-      "description": "Un quiz de fin pour ancrer le vocabulaire. Pas de livrable.",
+      "label": "Quiz final",
+      "description": "Un quiz de fin pour vérifier les notions centrales du parcours. Aucun livrable n'est attendu.",
       "evaluation": [
         "auto"
       ]
@@ -44,9 +43,9 @@
         "type": "coeur",
         "ref": {
           "kind": "lesson",
-          "id": "ld-power-law"
+          "id": "ld-what-is-vc"
         },
-        "label": "La concentration des rendements (loi de puissance)",
+        "label": "Définir le capital-risque",
         "status": "existant"
       },
       {
@@ -54,9 +53,9 @@
         "type": "coeur",
         "ref": {
           "kind": "lesson",
-          "id": "ld-what-is-vc"
+          "id": "ld-power-law"
         },
-        "label": "C'est quoi le VC, vraiment",
+        "label": "Concentration des rendements et loi de puissance",
         "status": "existant"
       },
       {
@@ -66,7 +65,7 @@
           "kind": "lesson",
           "id": "ld-money-flow"
         },
-        "label": "Le voyage de l'argent : LP, GP, business angel",
+        "label": "La circulation du capital entre LP, gestionnaire, fonds et société",
         "status": "existant"
       },
       {
@@ -76,7 +75,7 @@
           "kind": "lesson",
           "id": "ld-stages"
         },
-        "label": "La grammaire des stades : pré-seed → Série C",
+        "label": "Lire les stades de financement",
         "status": "existant"
       },
       {
@@ -86,7 +85,7 @@
           "kind": "lesson",
           "id": "ld-vc-job"
         },
-        "label": "Le vrai job (et les mythes qui vont avec)",
+        "label": "Le travail d'un fonds de venture",
         "status": "existant",
         "keystone": true
       },
@@ -97,7 +96,7 @@
           "kind": "lesson",
           "id": "ld-roles"
         },
-        "label": "Qui fait quoi (et qui gagne quoi)",
+        "label": "Rôles, responsabilités et incitations",
         "status": "existant"
       },
       {
@@ -119,13 +118,23 @@
         },
         "label": "L'Europe n'est pas une Silicon Valley ratée",
         "status": "existant"
+      },
+      {
+        "order": 9,
+        "type": "coeur",
+        "ref": {
+          "kind": "milestone",
+          "id": "ld-decouvrir-vc-quiz"
+        },
+        "label": "Quiz final",
+        "status": "existant"
       }
     ],
     "outcomes": [
-      "Distinguer LP, GP et business angel",
-      "Expliquer la loi de puissance avec ses mots",
-      "Situer une startup du pré-seed à la Série C",
-      "Comprendre le quotidien d'un VC et les responsabilités par grade"
+      "Distinguer LP, gestionnaire, fonds et société financée",
+      "Expliquer la loi de puissance sans proportion mécanique",
+      "Situer une société selon ses preuves de maturité plutôt que selon le seul nom du tour",
+      "Comprendre le rôle du comité et du cycle de vie du fonds dans une décision"
     ],
     "prerequisites": [
       "Aucun pré-requis particulier."
@@ -202,12 +211,11 @@
         "order": 4,
         "type": "respiration",
         "ref": {
-          "kind": "milestone",
-          "id": "todo-myth-vc-mise"
+          "kind": "lesson",
+          "id": "lsv-vc-mise"
         },
         "label": "Mythe démonté : « le VC mise »",
-        "status": "a-produire",
-        "note": "Court épisode anti-mythe, ton fun."
+        "status": "existant"
       }
     ],
     "outcomes": [

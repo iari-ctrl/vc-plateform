@@ -67,17 +67,25 @@ export default function ParcoursDetailPage() {
   const progressSummary = buildParcoursProgressSummary(parcours, effectiveBudget, progress, workspace);
   const timeSummary = parcoursTimeSummary(parcours);
   const finalStep = allSteps.find((step) => step.ref.kind === 'milestone');
-  const finalEntry = finalStep ? workspace.productions[finalStep.ref.id] : undefined;
-  const finalStatus = finalEntry?.declaredCompleteAt
-    ? 'Déclaré terminé'
-    : finalEntry
-      ? ({
-          started: 'Production commencée',
-          'first-version-completed': 'Première version terminée',
-          reviewed: 'Retour effectué',
-          revised: 'Production révisée',
-        } satisfies Record<ProductionStage, string>)[finalEntry.stage]
-      : 'Non commencé';
+  const finalResolved = finalStep ? resolveStep(finalStep) : undefined;
+  const finalLessonStatus = finalResolved?.lessonId ? progress[finalResolved.lessonId]?.status : undefined;
+  const finalEntry = finalStep && !finalResolved?.lessonId ? workspace.productions[finalStep.ref.id] : undefined;
+  const finalStatus = finalResolved?.lessonId
+    ? finalLessonStatus === 'done'
+      ? 'Lecture terminée'
+      : finalLessonStatus === 'reading'
+        ? 'Lecture en cours'
+        : 'Lecture non commencée'
+    : finalEntry?.declaredCompleteAt
+      ? 'Déclaré terminé'
+      : finalEntry
+        ? ({
+            started: 'Production commencée',
+            'first-version-completed': 'Première version terminée',
+            reviewed: 'Retour effectué',
+            revised: 'Production révisée',
+          } satisfies Record<ProductionStage, string>)[finalEntry.stage]
+        : 'Non commencé';
   const diagnosticAnswers = parcours.entryDiagnosticId
     ? Object.keys(workspace.diagnostics[parcours.entryDiagnosticId]?.answers ?? {}).length
     : 0;
@@ -89,9 +97,12 @@ export default function ParcoursDetailPage() {
   });
   const hasLearningActivity = progressSummary.completedSteps > 0
     || visibleLessonIds.some((id) => progress[id]?.status === 'reading')
-    || steps.some((step) => (
-      (step.ref.kind === 'deliverable' || step.ref.kind === 'milestone') && Boolean(workspace.productions[step.ref.id])
-    ));
+    || steps.some((step) => {
+      const resolved = resolveStep(step);
+      return !resolved.lessonId
+        && (step.ref.kind === 'deliverable' || step.ref.kind === 'milestone')
+        && Boolean(workspace.productions[step.ref.id]);
+    });
   const diagnosticHref = parcours.entryDiagnosticId ? `/parcours/${parcours.slug}/diagnostic` : null;
   const resumeHref = !hasLearningActivity && diagnosticAnswers === 0 && diagnosticHref
     ? diagnosticHref
@@ -136,7 +147,7 @@ export default function ParcoursDetailPage() {
               <div className="mt-7 flex flex-wrap gap-3">
                 {resumeHref && (
                   <Link to={resumeHref} className="btn-foil">
-                    {progressSummary.completedSteps > 0 ? 'Reprendre où j’en étais' : 'Commencer le parcours'}
+                    {hasLearningActivity ? 'Reprendre où j’en étais' : 'Commencer le parcours'}
                   </Link>
                 )}
                 <BookmarkButton variant="labelled" item={{ itemType: 'parcours', itemId: parcours.id, title: parcours.title, href: `/parcours/${parcours.slug}` }} />
@@ -151,7 +162,7 @@ export default function ParcoursDetailPage() {
                     <span className="text-surface-variant">{progressSummary.completedSteps}/{progressSummary.totalSteps} · {progressSummary.percent}%</span>
                   </div>
                   <ProgressBar value={progressSummary.percent} accent={accent} label="Étapes effectuées" />
-                  {finalStep && <p className="mt-3 text-xs text-surface-variant"><span className="font-medium text-foreground">Jalon final :</span> {finalStatus}</p>}
+                  {finalStep && <p className="mt-3 text-xs text-surface-variant">Jalon final : {finalStatus}</p>}
                 </div>
               )}
               <div>
@@ -271,9 +282,11 @@ export default function ParcoursDetailPage() {
                 {parcours.milestone.evaluation.includes('practitioner') && <span className="chip">Revue facultative par un praticien</span>}
               </div>
             )}
-            {finalStep && resolveStep(finalStep).href && (
+            {finalStep && finalResolved?.href && (
               <div className="mt-5 flex flex-wrap items-center gap-3">
-                <Link to={parcoursContextHref(resolveStep(finalStep).href!, parcours.id, effectiveBudget)} className="btn-foil">Ouvrir le jalon final <ArrowRight size={15} aria-hidden /></Link>
+                <Link to={parcoursContextHref(finalResolved.href, parcours.id, effectiveBudget)} className="btn-foil">
+                  {finalResolved.lessonId ? 'Ouvrir le quiz final' : 'Ouvrir le jalon final'} <ArrowRight size={15} aria-hidden />
+                </Link>
                 <span className="text-xs text-surface-variant">État : {finalStatus}</span>
               </div>
             )}
@@ -297,7 +310,7 @@ function StepRow({ step, accent, parcoursId, budget }: { step: ParcoursStep; acc
   const trackedLessonIds = r.lessonIds ?? (r.lessonId ? [r.lessonId] : []);
   const isDone = isParcoursStepComplete(parcoursId, step, progress, workspace);
   const isReading = trackedLessonIds.some((id) => progress[id]?.status === 'reading');
-  const production = step.ref.kind === 'deliverable' || step.ref.kind === 'milestone'
+  const production = !r.lessonId && (step.ref.kind === 'deliverable' || step.ref.kind === 'milestone')
     ? workspace.productions[step.ref.id]
     : undefined;
   const productionLabel = production?.declaredCompleteAt

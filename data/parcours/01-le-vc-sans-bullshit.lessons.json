@@ -1,298 +1,365 @@
 {
-  "_doc": "Registre actif du parcours « Comprendre le capital-risque ». Ces leçons drop-in `ld-*`, rattachées au cours `c-decouvrir-vc`, sont référencées directement par `data/parcours.json` puis fusionnées dans les fichiers générés par `scripts/split-lessons.mjs`. La leçon consacrée à l'Europe réutilise le cas `cs-europe-vs-valley` et le quiz-jalon reste défini dans le parcours.",
-  "register": "decouverte",
   "parcoursId": "p-decouvrir-vc",
   "courseId": "c-decouvrir-vc",
   "lessons": [
     {
-      "id": "ld-power-law",
-      "slug": "9-sur-10-vont-mourir",
-      "courseId": "c-decouvrir-vc",
-      "order": 1,
-      "title": "Comprendre la loi de puissance",
-      "kicker": "Distribution des rendements",
-      "readMin": 4,
-      "summary": "Les rendements d’un portefeuille de venture sont généralement concentrés dans un nombre limité de participations.",
-      "status": "published",
-      "body": "## Une distribution asymétrique\n\nDans un portefeuille de capital-risque, les rendements ne sont généralement pas répartis de manière homogène. Certaines participations peuvent perdre tout ou partie du capital investi, tandis qu'un nombre limité de sorties peut contribuer à une part importante de la performance du fonds. Cette concentration est décrite par la **[[power-law|loi de puissance]]**.\n\nLa proportion exacte de pertes et le niveau des multiples varient selon le millésime, le stade, la stratégie et la qualité d'exécution. Il convient donc d'éviter les règles chiffrées présentées comme universelles.\n\n## Conséquence pour la décision\n\nL'analyse ne consiste pas uniquement à réduire la fréquence des pertes. Elle doit aussi évaluer le potentiel de rendement, les conditions nécessaires à sa réalisation et la capacité du fonds à conserver une exposition aux participations les plus performantes.\n\n> **Point de méthode —** La perte sur une ligne est bornée par le capital engagé, alors que le gain potentiel peut être supérieur. Cette asymétrie ne dispense ni de la diligence ni de la discipline de portefeuille.",
-      "keyTakeaways": [
-        "Les rendements d'un portefeuille peuvent être concentrés dans quelques participations.",
-        "Les taux de perte et les multiples observés dépendent de la stratégie et du millésime.",
-        "La recherche d'un rendement asymétrique reste compatible avec une diligence rigoureuse."
-      ],
-      "glossaryRefs": [
-        "power-law",
-        "fund-returner",
-        "moic"
-      ],
-      "quiz": [
-        {
-          "question": "Dans un portefeuille VC, le résultat est surtout déterminé par…",
-          "options": [
-            {
-              "text": "La meilleure ligne",
-              "correct": true
-            },
-            {
-              "text": "La moyenne des lignes",
-              "correct": false
-            },
-            {
-              "text": "La pire ligne",
-              "correct": false
-            }
-          ],
-          "explanation": "Loi de puissance : une seule sortie exceptionnelle peut faire l'essentiel du fonds. On filtre et on réinvestit pour ne pas la rater."
-        }
-      ],
-      "furtherReading": [
-        {
-          "label": "Anatomie d'un portefeuille en loi de puissance",
-          "kind": "case",
-          "ref": "cs-power-law-portfolio"
-        }
-      ]
-    },
-    {
       "id": "ld-what-is-vc",
       "slug": "c-est-quoi-le-vc-vraiment",
       "courseId": "c-decouvrir-vc",
-      "order": 2,
-      "title": "C'est quoi le VC, vraiment ?",
-      "kicker": "Fondations",
-      "readMin": 4,
-      "summary": "Ni prêt, ni casino, ni court terme : trois choses que le venture n'est pas, et la seule qu'il est.",
+      "order": 1,
+      "title": "Définir le capital-risque",
+      "kicker": "Fondamentaux",
+      "summary": "Situer le capital-risque comme investissement en fonds propres ou quasi-fonds propres dans des sociétés non cotées, avec une liquidité incertaine et une analyse de risque structurée.",
       "status": "published",
-      "body": "## Ni casino, ni banque\n\nTrois choses que le venture n'est **pas** — et la seule qu'il est.\n\n**Pas un prêt.** Une banque te prête et veut être remboursée, quoi qu'il arrive. Un VC **achète une part** de ta boîte ([[equity|equity]]) : si tu coules, il perd tout ; si tu décolles, il gagne gros. Même bateau.\n\n**Pas un casino.** À la roulette, les probas sont figées et contre toi. Un VC **choisit**, **accompagne**, **ré-investit**. Le jugement change le résultat.\n\n**Pas du court terme.** Il immobilise son argent 7 à 10 ans — c'est [[illiquidite|illiquide]]. On appelle ça du capital patient, et le mot n'est pas décoratif.\n\n## En une phrase\n\nLe venture, c'est une classe d'actifs **longue, illiquide, gouvernée par la loi de puissance** — et un métier : choisir tôt, sous incertitude, des fondateurs qui bâtiront peut-être des géants.\n\n> **Mythe démonté — « les VCs parient sur des idées. »** Surtout au début, ils parient sur l'**équipe** : l'idée changera, les gens beaucoup moins.",
+      "level": "debutant",
+      "contexts": {},
+      "optional": false,
+      "learningOutcomes": [
+        "Distinguer capital-risque, dette et autres segments du capital-investissement.",
+        "Identifier le rôle du fonds, du gestionnaire et de la société financée.",
+        "Formuler une définition prudente sans promettre de rendement."
+      ],
+      "prerequisiteLessonIds": [],
+      "body": "## Cadre\n\nLe guide France Invest sur le capital-innovation situe cette activité dans le financement en capital de sociétés jeunes, selon leur maturité et leur développement. Dans ce cours, le capital-risque est donc présenté comme un segment du capital-investissement : il finance des sociétés non cotées dont la trajectoire reste incertaine, sans promettre un rendement ni une liquidité à date fixe.\n\nDans le périmètre juridique spécifique du règlement EuVECA, les investissements éligibles comprennent notamment des instruments de capitaux propres et de quasi-capitaux propres. Ce règlement encadre un label européen déterminé ; il ne définit pas l'ensemble des fonds de capital-risque ni toutes les formes françaises de véhicule.\n\nLa distinction avec la dette est ici économique. Une créance organise un remboursement et des protections contractuelles. Une exposition en capital dépend de la valeur des titres, des droits négociés et d'un événement de liquidité. L'absence de cotation rend cette liquidité incertaine : une estimation intermédiaire n'est pas un produit déjà distribué.\n\nLe stade, l'usage des fonds et le véhicule permettent ensuite de distinguer capital-risque, capital-développement et autres segments. Ces catégories professionnelles aident à qualifier une opération ; elles ne remplacent pas l'analyse du dossier.\n\n## Méthode\n\nUne définition utile répond à quatre questions : quelle société est financée, quel instrument est utilisé, quel risque économique est accepté et quel chemin de liquidité est envisageable. Si une réponse manque, la qualification reste provisoire.",
       "keyTakeaways": [
-        "De l'equity, pas de la dette.",
-        "Du jugement, pas du hasard.",
-        "Dix ans, pas dix mois."
+        "Le capital-risque finance une trajectoire incertaine, pas une créance classique.",
+        "La qualification dépend du stade, de l'instrument et des droits attachés aux titres.",
+        "Une définition prudente sépare cadre économique, véhicule juridique et promesse de rendement."
       ],
       "glossaryRefs": [
         "venture-capital",
         "equity",
-        "illiquidite"
+        "illiquidite",
+        "venture-capital-fund"
       ],
       "quiz": [
         {
-          "question": "Qu'apporte un VC à une startup ?",
+          "question": "Quel critère distingue d'abord le capital-risque d'une dette classique ?",
           "options": [
             {
-              "text": "De l'equity (une part du capital)",
+              "text": "Le rendement dépend de la valeur des titres et d'une liquidité future.",
               "correct": true
             },
             {
-              "text": "Un prêt à rembourser avec intérêts",
+              "text": "Le remboursement du capital est prévu par un calendrier fixe.",
               "correct": false
             },
             {
-              "text": "Une subvention sans contrepartie",
+              "text": "Le risque est supprimé par la présence d'un gestionnaire professionnel.",
               "correct": false
             }
           ],
-          "explanation": "Il devient copropriétaire : il gagne si la boîte prend de la valeur, il perd si elle coule. Même bateau que le fondateur."
+          "explanation": "Le fonds détient une exposition en capital. Le remboursement automatique n'est pas le principe économique de l'opération."
         }
       ],
       "furtherReading": [
         {
-          "label": "Le VC européen contre le mythe de la Valley",
-          "kind": "case",
-          "ref": "cs-europe-vs-valley"
+          "label": "France Invest — France · capital-innovation · guide professionnel (2019)",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
+        },
+        {
+          "label": "EUR-Lex — Union européenne · EuVECA · règlement consolidé",
+          "kind": "external",
+          "ref": "https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02013R0345-20240109"
         }
-      ]
+      ],
+      "readMin": 2
+    },
+    {
+      "id": "ld-power-law",
+      "slug": "9-sur-10-vont-mourir",
+      "courseId": "c-decouvrir-vc",
+      "order": 2,
+      "title": "Concentration des rendements et limites du raccourci « loi de puissance »",
+      "kicker": "Portefeuille",
+      "summary": "Comprendre la concentration empirique des rendements du venture et ses limites, sans transformer un résultat d'échantillon en loi mathématique universelle.",
+      "status": "published",
+      "level": "debutant",
+      "contexts": {},
+      "optional": false,
+      "learningOutcomes": [
+        "Expliquer l'asymétrie des rendements en capital-risque.",
+        "Relier une ligne d'investissement à la contribution attendue pour le fonds.",
+        "Éviter les proportions non sourcées sur les pertes et les succès."
+      ],
+      "prerequisiteLessonIds": [
+        "ld-what-is-vc"
+      ],
+      "body": "## Cadre\n\nCochrane, dans le NBER w8066, étudie des financements VentureOne réalisés entre 1987 et 2000, principalement aux États-Unis. Il observe des rendements très volatils et asymétriques, avec quelques résultats très élevés, de nombreux résultats modestes et des pertes. Pour les sorties observées par introduction en bourse ou acquisition, son modèle retient une distribution lognormale : cette étude ne démontre donc pas une loi de puissance universelle.\n\nOuyang, Yu et Jagannathan, dans le NBER w27690, examinent un portefeuille agrégé de 17 242 sociétés financées pour la première fois entre 1980 et 2006, puis suivies jusqu'en 2018 ou leur sortie. Dans cet échantillon, retirer les 5 % de sociétés les plus performantes rend négatif le rendement ajusté du risque. Ce résultat documente une forte concentration ; il reste propre à l'échantillon et à la méthode étudiés.\n\nDans ce parcours, l'expression « loi de puissance » est seulement un raccourci sectoriel à manier avec précaution. Les sources retenues établissent asymétrie, dispersion et dépendance à quelques résultats extrêmes, pas une loi mathématique universelle applicable à tout fonds.\n\nCette concentration conduit à raisonner en contribution au portefeuille. La valeur d'une ligne dépend de la taille du fonds, de la dilution, des réserves et du temps de sortie. Une valeur résiduelle reste une estimation tant qu'aucune cession ni distribution n'est intervenue.\n\n## Méthode\n\nDistinguer trois niveaux : perte possible par ligne, scénarios de contribution au fonds et concentration observée dans un échantillon défini. Toute proportion chiffrée doit conserver sa population, sa période et sa méthode.",
+      "keyTakeaways": [
+        "Les études retenues documentent une forte asymétrie et une concentration des rendements, pas une loi universelle.",
+        "Un résultat d'échantillon conserve sa période, sa population et sa méthode.",
+        "Une valeur estimée ne doit pas être confondue avec une distribution réalisée."
+      ],
+      "glossaryRefs": [
+        "power-law",
+        "fund-returner",
+        "moic",
+        "portfolio-construction"
+      ],
+      "quiz": [
+        {
+          "question": "Que signifie une distribution très asymétrique des rendements ?",
+          "options": [
+            {
+              "text": "Un petit nombre de sociétés peut représenter une part importante de la valeur du portefeuille.",
+              "correct": true
+            },
+            {
+              "text": "Chaque société doit produire un rendement proche de la moyenne du portefeuille.",
+              "correct": false
+            },
+            {
+              "text": "La diversification rend le suivi des lignes secondaires inutile.",
+              "correct": false
+            }
+          ],
+          "explanation": "L'asymétrie impose de raisonner en contribution au fonds, sans annoncer de proportion universelle."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "NBER w8066 — États-Unis · rendements par investissement · étude académique",
+          "kind": "external",
+          "ref": "https://www.nber.org/papers/w8066"
+        },
+        {
+          "label": "NBER w27690 — États-Unis · portefeuille agrégé · étude académique",
+          "kind": "external",
+          "ref": "https://www.nber.org/papers/w27690"
+        }
+      ],
+      "readMin": 2
     },
     {
       "id": "ld-money-flow",
       "slug": "le-voyage-de-l-argent",
       "courseId": "c-decouvrir-vc",
       "order": 3,
-      "title": "Le voyage de l'argent",
-      "kicker": "Le circuit",
-      "readMin": 5,
-      "summary": "De ton assurance-vie au compte d'une startup : la chaîne LP → GP → fondateur, et le business angel en solo.",
+      "title": "La circulation du capital entre LP, gestionnaire, fonds et société",
+      "kicker": "Chaîne du capital",
+      "summary": "Suivre la circulation des engagements depuis les investisseurs du fonds jusqu'aux sociétés financées, puis distinguer appels de capitaux, frais, distributions et valeur résiduelle.",
       "status": "published",
-      "body": "## De ton épargne au compte d'une startup\n\nSuivons un billet de 100 € depuis une assurance-vie jusqu'à une jeune boîte. Il passe par trois mains.\n\n**Main 1 — les [[lp|LPs]].** Les vrais propriétaires de l'argent : assureurs, fonds de pension, [[family-office|family offices]], [[fund-of-funds|fonds de fonds]], et l'État via {{bpifrance|Bpifrance}} ou le {{eif|Fonds européen d'investissement}}. Ton assurance-vie en fait peut-être partie sans que tu le saches. Ils acceptent de bloquer leur argent dix ans.\n\n**Main 2 — le fonds, piloté par les [[gp|GPs]].** Les LPs ne choisissent pas les startups : ils confient l'argent à une équipe. Les GPs décident, et se rémunèrent via des [[management-fees|frais de gestion]] (~2 %/an) et une part des gains (le [[carry|carry]], ~20 %).\n\n**Main 3 — les fondateurs.** Le fonds achète une part de la startup ; l'argent finance l'équipe et la croissance.\n\nEt en solo : le [[business-angel|business angel]], un particulier qui investit son **propre** argent, souvent le premier à signer.\n\n> **À garder en tête :** le GP gère l'argent **des autres** ; l'angel gère **le sien**.",
+      "level": "debutant",
+      "contexts": {},
+      "optional": false,
+      "learningOutcomes": [
+        "Distinguer LP, gestionnaire, fonds et société financée.",
+        "Expliquer le rôle des engagements et des appels de capitaux.",
+        "Séparer frais, carried interest, distributions et valeur résiduelle."
+      ],
+      "prerequisiteLessonIds": [
+        "ld-what-is-vc",
+        "ld-power-law"
+      ],
+      "body": "## Cadre\n\nLe guide France Invest emploie LP et GP comme vocabulaire économique pour décrire les investisseurs et le gestionnaire d'un fonds. En France, cette lecture doit rester distincte de la forme juridique : un véhicule peut notamment être géré et représenté par une société de gestion selon son règlement. Les LP prennent des engagements ; le gestionnaire applique la stratégie et appelle le capital dans les limites de la documentation du fonds.\n\nLes principes ILPA, qui constituent des recommandations internationales non contraignantes, définissent l'engagement comme l'obligation contractuelle de fournir du capital à la demande du gestionnaire, jusqu'au montant souscrit. Ils demandent aussi que les avis d'appel de capitaux et de distribution permettent aux LP de rapprocher les montants, les frais et le carried interest.\n\nLorsqu'une opération est réalisée, le fonds apporte le capital à la société et reçoit des titres et des droits. Après une cession ou une autre opération de liquidité, le produit revient au fonds, puis les distributions suivent la cascade contractuelle. Cette cascade au niveau du fonds ne doit pas être confondue avec les préférences de liquidation entre actionnaires d'une société financée.\n\nLes frais financent le fonctionnement défini par les documents du fonds. Le carried interest participe aux gains lorsque les conditions contractuelles sont réunies. Les principes ILPA recommandent transparence et alignement ; ils n'imposent ni taux universel ni formule unique.\n\n## Méthode\n\nÀ chaque montant, préciser la catégorie : engagement total, capital appelé, capital investi, capital non appelé, frais, produit reçu ou montant distribué. Cette qualification empêche de confondre capacité contractuelle et trésorerie disponible.",
       "keyTakeaways": [
-        "LP = d'où vient l'argent.",
-        "GP = qui le pilote.",
-        "Angel = qui met le sien."
+        "Les LP prennent des engagements que le fonds appelle progressivement.",
+        "Le gestionnaire administre la stratégie, mais le fonds détient les participations.",
+        "Frais, carried interest et distributions répondent à des mécanismes distincts."
       ],
       "glossaryRefs": [
         "lp",
         "gp",
-        "business-angel",
-        "fund-of-funds",
+        "venture-capital-fund",
         "management-fees",
-        "carry"
+        "carry",
+        "fund-of-funds"
       ],
       "quiz": [
         {
-          "question": "Qui possède réellement l'argent d'un fonds ?",
+          "question": "Que représente un engagement de capital d'un LP ?",
           "options": [
             {
-              "text": "Les LPs",
+              "text": "Un montant promis au fonds et appelable selon la documentation applicable.",
               "correct": true
             },
             {
-              "text": "Les GPs",
+              "text": "Une distribution déjà reçue par le fonds après une sortie.",
               "correct": false
             },
             {
-              "text": "Les fondateurs",
+              "text": "Une participation directe du LP dans chaque société du portefeuille.",
               "correct": false
             }
           ],
-          "explanation": "Les GPs pilotent et décident, mais l'argent vient des Limited Partners (assureurs, fonds de pension, family offices, État)."
-        },
-        {
-          "question": "Un business angel investit…",
-          "options": [
-            {
-              "text": "Son propre argent",
-              "correct": true
-            },
-            {
-              "text": "L'argent des LPs",
-              "correct": false
-            },
-            {
-              "text": "L'argent de l'État",
-              "correct": false
-            }
-          ],
-          "explanation": "C'est ce qui le distingue d'un GP, qui gère l'argent des autres."
+          "explanation": "L'engagement crée une capacité contractuelle. Le versement effectif dépend ensuite des appels de capitaux."
         }
       ],
       "furtherReading": [
         {
-          "label": "Limited Partner (LP)",
-          "kind": "glossary",
-          "ref": "lp"
+          "label": "France Invest — France · économie des fonds · guide professionnel (2019)",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
+        },
+        {
+          "label": "ILPA — International · relations LP/GP · principes non contraignants (2019)",
+          "kind": "external",
+          "ref": "https://ilpa.org/wp-content/uploads/2019/06/ILPA-Principles-3.0_2019.pdf"
         }
-      ]
+      ],
+      "readMin": 2
     },
     {
       "id": "ld-stages",
       "slug": "la-grammaire-des-stades-decouverte",
       "courseId": "c-decouvrir-vc",
       "order": 4,
-      "title": "La grammaire des stades",
-      "kicker": "Le vocabulaire",
-      "readMin": 5,
-      "summary": "Pré-seed, seed, Série A : chaque mot dit combien de preuves la startup a déjà accumulées.",
+      "title": "Lire les stades de financement",
+      "kicker": "Stades",
+      "summary": "Utiliser les stades comme des repères de maturité et de risque, plutôt que comme des seuils de montant ou de prix applicables partout.",
       "status": "published",
-      "body": "## Le vocabulaire qui situe une startup en trois secondes\n\nPré-seed, seed, Série A… Ce ne sont pas des ceintures de karaté. (Bon, un peu si.) Chaque mot dit **combien de preuves** la startup a accumulées.\n\n- **[[pre-seed|Pré-seed]] (~1 à 1,5 M€).** Presque rien à montrer : une équipe, une intuition, un prototype. On parie sur les gens. Souvent un [[safe|SAFE]] ou un BSA-AIR.\n- **[[seed|Seed]] (~2,5 à 3,5 M€, valo ~12-15 M€).** Les premiers signaux de [[traction|traction]]. On creuse l'équipe *et* les chiffres.\n- **[[series-a|Série A]] (~10 à 15 M€).** La machine tourne — souvent ~2,5 M€ de revenu récurrent. On finance la mise à l'échelle.\n- **Série B, C…** On accélère, les tickets s'envolent.\n\nFun fact qui dit tout sur l'époque : **la seed d'aujourd'hui ressemble à l'ancienne Série A.** La barre des preuves monte chaque année.\n\n> **Mythe démonté — « lever = réussir. »** Non. Lever, c'est **céder une part** de ta boîte pour aller plus vite. C'est un moyen, pas un trophée.",
+      "level": "debutant",
+      "contexts": {},
+      "optional": false,
+      "learningOutcomes": [
+        "Situer pre-seed, seed, Série A et growth comme repères de maturité.",
+        "Relier chaque stade aux preuves disponibles et aux risques encore ouverts.",
+        "Éviter les seuils chiffrés non généralisables."
+      ],
+      "prerequisiteLessonIds": [
+        "ld-what-is-vc"
+      ],
+      "body": "## Cadre\n\nDans ce cours, « pre-seed » est une convention éditoriale pour désigner la phase la plus précoce : formulation du problème, concept, prototype et premiers tests. Le guide France Invest retenu ne définit pas cette catégorie sous ce nom ; il décrit notamment l'amorçage, la création, la post-création, puis des tours seed et Série A, B ou C. Il rappelle aussi que son approche professionnelle n'est ni normative ni doctrinale.\n\nL'enquête NBER w22587, menée auprès de 885 professionnels rattachés à des sociétés de capital-risque institutionnelles et composée majoritairement de répondants américains, montre que certaines pratiques et méthodes varient entre early-stage et late-stage ou growth. Elle ne propose ni taxonomie universelle des stades ni définition de pre-seed.\n\nCes régimes documentaires montrent qu'un stade est un repère de maturité, de preuves et d'usage du capital, pas un seuil universel de montant, de revenu ou de valeur d'entreprise. Un même nom de tour peut recouvrir des situations différentes selon le pays, le secteur, le cycle de marché et la stratégie du fonds.\n\nLe stade ne remplace donc pas l'analyse. Il aide à organiser la diligence et à vérifier l'adéquation entre le mandat du fonds, les preuves disponibles et les risques encore ouverts.\n\n## Méthode\n\nCommencer par les questions que le financement doit résoudre : préciser un concept, tester un marché, lancer une commercialisation, confirmer une capacité de développement ou financer une expansion. Le nom du tour vient après cette lecture et reste qualifié comme convention de travail.",
       "keyTakeaways": [
-        "Chaque stade = un niveau de preuve.",
-        "Plus tard = plus de preuves, moins de risque.",
-        "Lever n'est pas un trophée, c'est un moyen."
+        "Les stades sont des repères de maturité, pas des seuils universels.",
+        "La preuve attendue augmente avec la maturité de la société.",
+        "Le mandat du fonds doit rester cohérent avec le risque du stade."
       ],
       "glossaryRefs": [
         "pre-seed",
         "seed",
         "series-a",
-        "safe",
         "traction",
         "dilution"
       ],
       "quiz": [
         {
-          "question": "À quel stade parie-t-on surtout sur l'équipe, faute de chiffres ?",
+          "question": "Pourquoi le nom d'un tour ne suffit-il pas à qualifier une société ?",
           "options": [
             {
-              "text": "Le pré-seed",
+              "text": "Le même intitulé peut recouvrir des preuves et des risques différents.",
               "correct": true
             },
             {
-              "text": "La Série C",
+              "text": "Le nom du tour détermine toujours les droits attachés aux titres.",
               "correct": false
             },
             {
-              "text": "L'IPO",
+              "text": "Le stade remplace l'analyse du produit, du marché et de l'équipe.",
               "correct": false
             }
           ],
-          "explanation": "Au tout début, l'équipe est presque la seule donnée fiable : pas (encore) de traction à analyser."
+          "explanation": "La qualification doit partir des preuves observées et de l'usage du capital, pas du seul vocabulaire annoncé."
         }
       ],
       "furtherReading": [
         {
-          "label": "Simuler la dilution",
-          "kind": "simulator",
-          "ref": "dilution"
+          "label": "France Invest — France · stades du capital-innovation · guide professionnel (2019)",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
         },
         {
-          "label": "Pre-money / Post-money",
-          "kind": "simulator",
-          "ref": "pre-post-money"
+          "label": "NBER w22587 — Majoritairement États-Unis · pratiques par stade · enquête académique",
+          "kind": "external",
+          "ref": "https://www.nber.org/papers/w22587"
         }
-      ]
+      ],
+      "readMin": 2
     },
     {
       "id": "ld-vc-job",
       "slug": "le-vrai-job-et-les-mythes",
       "courseId": "c-decouvrir-vc",
       "order": 5,
-      "title": "Le vrai job (et les mythes qui vont avec)",
-      "kicker": "Le métier",
-      "readMin": 6,
-      "summary": "Loin du cliché jet-set : la charge de travail, le quotidien fait de refus, et la texture très française du métier.",
+      "title": "Le travail d'un fonds de venture",
+      "kicker": "Métier",
+      "summary": "Décrire le travail concret d'un fonds : sourcing, qualification, diligence, structuration, décision, accompagnement et préparation des sorties.",
       "status": "published",
-      "body": "## Le métier, sans le vernis LinkedIn\n\nOublie le cliché : le type en sweat qui signe des chèques entre deux cafés. La vraie journée ressemble à autre chose.\n\n**Le temps.** ~50 à 60 h/semaine. Pas l'enfer de la banque d'affaires (80-100 h) — les week-ends sont souvent préservés — mais pas un *lifestyle job* non plus : tu es **toujours un peu en service** (événements, dîners fondateurs, lecture le dimanche, charge mentale du portefeuille).\n\n**Ce que tu fais vraiment** (surtout junior) : du [[deal-sourcing|sourcing]], du screening, des appels fondateurs, de la recherche marché, de la [[dd|due diligence]], des mémos. Sur ~1 000 dossiers vus dans l'année, un fonds en finance **3 à 5**.\n\n> **La vérité qui pique :** ton métier, c'est surtout **dire non**. Bien, vite, avec respect — et sans rater la perle. Signer un chèque, c'est 1 % du temps.\n\n## Le feedback loop le plus lent du monde\n\nTu sauras si tu avais raison dans… 7 à 10 ans. Aucun score quotidien. Il faut aimer décider sans confirmation immédiate, accepter de **se tromper en public**, et porter seul une conviction à laquelle personne ne croit encore.\n\n## La texture française\n\nPetit écosystème : **tout le monde se connaît**, ta réputation est ton actif n°1. Très parisien — mais Lyon, Station F et les régions montent. Relationnel avant d'être transactionnel : [[warm-intro|warm intros]], dîners, culture du « tu ». Toile de fond de capital public ({{bpifrance|Bpifrance}}, {{eif|Fonds européen d'investissement}}) qui n'existe pas vraiment aux États-Unis.\n\n> **Mythe démonté — « entrer en VC, c'est une voie royale balisée. »** Faux : peu de postes, beaucoup de candidats, chemins non-linéaires. Le différenciateur : **prouver que tu penses déjà comme un investisseur** — une analyse de startup que tu as écrite toi-même vaut mille lignes de CV.",
+      "level": "debutant",
+      "contexts": {},
+      "optional": false,
+      "learningOutcomes": [
+        "Identifier les grandes étapes de traitement d'une opportunité.",
+        "Comprendre que le sourcing n'est qu'une partie du métier.",
+        "Relier décision d'investissement, suivi et responsabilité documentaire."
+      ],
+      "prerequisiteLessonIds": [
+        "ld-stages"
+      ],
+      "body": "## Cadre\n\nL'enquête NBER w22587 porte sur 885 professionnels rattachés à 681 sociétés de capital-risque institutionnelles, avec une forte composante américaine. Elle documente plusieurs dimensions du travail : sourcing, sélection, appréciation de la valeur, structuration, contribution après investissement, sorties, organisation interne et relations avec les LP. Elle éclaire des pratiques observées ; elle ne constitue pas une norme française.\n\nLe guide France Invest décrit, pour le capital-innovation français, une première instruction allant de la sélection du dossier jusqu'à un accord de principe, puis des vérifications pouvant couvrir la documentation juridique, fiscale, comptable et économique. Il présente aussi la gouvernance, le suivi et les sorties comme des phases du processus, dans un guide didactique de bonnes pratiques.\n\nUne opportunité passe ainsi d'un premier filtre à une analyse plus approfondie. L'équipe qualifie l'adéquation au mandat, la maturité, le besoin de financement et les informations disponibles, puis documente l'équipe, le produit, le marché, les données commerciales, les finances et les risques juridiques ou opérationnels selon le dossier.\n\nL'enquête NBER w22587 observe plusieurs règles internes de décision : unanimité, consensus avec veto ou majorité selon les organisations. Il n'existe donc pas une architecture universelle de comité. Après une décision favorable viennent la négociation, la documentation, le suivi et, éventuellement, la préparation d'une sortie.\n\n## Méthode\n\nConserver une trace de l'origine du dossier, de l'hypothèse, des sources, des limites, des points de blocage et de la recommandation. Cette discipline permet d'examiner la qualité de la décision sans la confondre avec son résultat futur.",
       "keyTakeaways": [
-        "~50-60 h/semaine, mais « always on ».",
-        "Le métier, c'est surtout dire non — signer, c'est 1 % du temps.",
-        "En France, ta réputation est ton CV."
+        "Le sourcing ouvre le processus ; il ne résume pas le métier.",
+        "La diligence transforme une hypothèse en décision documentée.",
+        "Le suivi post-investissement fait partie intégrante de la responsabilité du fonds."
       ],
       "glossaryRefs": [
         "deal-sourcing",
         "dd",
-        "warm-intro"
+        "warm-intro",
+        "ic",
+        "board-seat"
       ],
       "quiz": [
         {
-          "question": "Au quotidien, un VC junior passe le plus clair de son temps à…",
+          "question": "Quel enchaînement décrit le mieux le traitement d'une opportunité ?",
           "options": [
             {
-              "text": "Chercher des boîtes et dire non",
+              "text": "Sourcing, qualification, diligence, comité, investissement éventuel puis suivi.",
               "correct": true
             },
             {
-              "text": "Signer des chèques",
+              "text": "Diligence, sortie, sourcing puis définition de la thèse.",
               "correct": false
             },
             {
-              "text": "Siéger à des conseils d'administration",
+              "text": "Comité, investissement immédiat puis recherche des éléments absents.",
               "correct": false
             }
           ],
-          "explanation": "Sur ~1 000 dossiers, 3 à 5 financés : l'essentiel du métier junior, c'est sourcer et refuser bien."
+          "explanation": "Le processus doit conserver la trace des hypothèses et des sources qui soutiennent la décision."
         }
       ],
       "furtherReading": [
         {
-          "label": "Une semaine dans la vie d'un investisseur",
-          "kind": "lesson",
-          "ref": "l-vc-week"
+          "label": "NBER w22587 — Sociétés VC institutionnelles · pratiques de décision · enquête académique",
+          "kind": "external",
+          "ref": "https://www.nber.org/papers/w22587"
+        },
+        {
+          "label": "France Invest — France · processus d’investissement · guide professionnel (2019)",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
         }
-      ]
+      ],
+      "readMin": 2
     },
     {
       "id": "ld-roles",
       "slug": "qui-fait-quoi-qui-gagne-quoi",
       "courseId": "c-decouvrir-vc",
       "order": 6,
-      "title": "Qui fait quoi (et qui gagne quoi)",
-      "kicker": "La hiérarchie",
-      "readMin": 6,
-      "summary": "Analyst, associate, senior associate, principal, partner : responsabilités, organisation et rémunération par grade.",
+      "title": "Rôles, responsabilités et incitations",
+      "kicker": "Organisation",
+      "summary": "Distinguer les responsabilités de l'Analyst, des investisseurs plus seniors, du gestionnaire, du comité et des LP, ainsi que les principales incitations économiques.",
       "status": "published",
-      "body": "## « Un VC », ça n'existe pas\n\nEntre le stagiaire qui avale 40 decks par semaine et le partner qui signe le chèque, le mot « VC » recouvre cinq métiers. Une règle traverse l'échelle : **plus tu montes, moins tu exécutes et plus tu décides** — et plus ta rému dépend du [[carry|carry]].\n\n- **[[analyst-vc|Analyst]] (0-2 ans).** Sourcing, recherche marché, pré-[[dd|DD]], data, support. Il prépare, il ne décide pas. ~45-55 k€ base, ~70-100 k€ total. Carry rare.\n- **[[associate-vc|Associate]] (2-4 ans).** Mène le process : sourcing → calls fondateurs → DD → reco. ~60-90 k€ base. Carry parfois, modeste.\n- **Senior Associate (3-5 ans).** Pilote la DD de bout en bout, mentore les analysts, parfois [[board-seat|board observer]]. N'existe pas dans tous les fonds.\n- **[[principal-vc|Principal]] (5 ans +).** Source *et* porte des deals jusqu'au [[ic|comité]], négocie, siège au board. **Le carry devient significatif — le basculement.**\n- **Partner / GP.** Décide, lève auprès des [[lp|LPs]], pilote la stratégie du fonds. Rému = surtout carry.\n\n*Fourchettes indicatives Europe/France, très variables selon la taille du fonds (un seed fund de 30 M€ ne paie pas comme un late-stage d'1 Md€).*\n\n## L'organisation, en une image\n\nEn bas de l'échelle, on **cherche et on exécute** ; en haut, on **décide et on lève**. Analysts et associates *préparent* la conviction ; principals et partners la *tranchent* — et l'assument devant les LPs.\n\n> **Mythe démonté — « tout le monde touche le carry. »** Non : il ne devient une vraie source de revenu qu'à partir de **principal/partner**, après 7-10 ans, et seulement si le fonds performe. En VC, on s'enrichit *lentement*, pas *vite*.",
+      "level": "debutant",
+      "contexts": {},
+      "optional": false,
+      "learningOutcomes": [
+        "Identifier les rôles usuels dans une équipe de gestion.",
+        "Comprendre la place du comité et de la documentation.",
+        "Distinguer rémunération de fonctionnement et participation aux gains."
+      ],
+      "prerequisiteLessonIds": [
+        "ld-vc-job"
+      ],
+      "body": "## Cadre\n\nPour ce parcours, la répartition entre Analyst, Associate et profils seniors est une convention éditoriale destinée à rendre le travail lisible ; ce n'est pas une taxonomie universelle des fonds. Les titres et les délégations varient selon les organisations. La méthode consiste donc à distinguer qui collecte et vérifie l'information, qui porte la recommandation et qui prend la décision.\n\nL'enquête NBER w22587 décrit plus directement les partners comme profils seniors influençant les décisions, les managing partners comme responsables également d'activités de fonctionnement, et les principals ou associates comme profils généralement plus juniors. Elle ne fournit pas une fiche de poste universelle d'Analyst. Dans ce cours, les tâches attribuées à l'Analyst constituent donc un cadre pédagogique, pas une norme déduite de l'enquête.\n\nLa même enquête observe plusieurs règles de décision entre partners. Un comité ou un vote formalise le débat, mais son architecture dépend du fonds. Il faut aussi distinguer ce processus d'investissement du LPAC décrit par les principes ILPA : ce comité de LP traite notamment des conflits et de situations importantes du fonds ; il ne décide pas à la place du gestionnaire de chaque investissement.\n\nLes principes ILPA sont des recommandations internationales non contraignantes. Ils encadrent la transparence des frais, du carried interest et de la gouvernance LP/GP, sans imposer une formule universelle. Les droits et responsabilités effectifs restent définis par la documentation applicable.\n\n## Méthode\n\nPour comprendre un rôle, identifier la préparation, la recommandation, la décision et les conflits potentiels. Les intitulés viennent ensuite et ne remplacent jamais la lecture des délégations réelles.",
       "keyTakeaways": [
-        "Plus tu montes, plus tu décides et moins tu exécutes.",
-        "Le carry récompense la patience et le risque, pas l'ancienneté seule.",
-        "Grades et chiffres varient énormément d'un fonds à l'autre."
+        "Les intitulés de poste ne suffisent pas ; il faut identifier les décisions réellement portées.",
+        "Le comité formalise le débat d'investissement et les risques acceptés.",
+        "Les incitations du gestionnaire doivent être lues dans la documentation du fonds."
       ],
       "glossaryRefs": [
         "analyst-vc",
@@ -306,31 +373,37 @@
       ],
       "quiz": [
         {
-          "question": "Le carry (la part des plus-values) devient une vraie source de revenu à partir de…",
+          "question": "À quoi sert principalement un comité d'investissement ?",
           "options": [
             {
-              "text": "Principal / partner",
+              "text": "À débattre une décision documentée et les risques que le fonds accepte.",
               "correct": true
             },
             {
-              "text": "Analyst",
+              "text": "À garantir que la société financée atteindra ses objectifs.",
               "correct": false
             },
             {
-              "text": "Associate",
+              "text": "À remplacer la diligence lorsque l'équipe connaît déjà les fondateurs.",
               "correct": false
             }
           ],
-          "explanation": "Les juniors vivent surtout du salaire + bonus ; le carry récompense la patience et le risque, après 7-10 ans et si le fonds performe."
+          "explanation": "Le comité améliore la traçabilité de la décision. Il ne transforme pas une hypothèse en certitude."
         }
       ],
       "furtherReading": [
         {
-          "label": "Les échelons du métier : analyst → principal",
-          "kind": "lesson",
-          "ref": "l-career-levels"
+          "label": "NBER w22587 — Sociétés VC institutionnelles · organisation interne · enquête académique",
+          "kind": "external",
+          "ref": "https://www.nber.org/papers/w22587"
+        },
+        {
+          "label": "ILPA — International · gouvernance et incitations LP/GP · principes non contraignants (2019)",
+          "kind": "external",
+          "ref": "https://ilpa.org/wp-content/uploads/2019/06/ILPA-Principles-3.0_2019.pdf"
         }
-      ]
+      ],
+      "readMin": 2
     },
     {
       "id": "ld-fund-lifecycle",
@@ -338,15 +411,26 @@
       "courseId": "c-decouvrir-vc",
       "order": 7,
       "title": "Un fonds naît et meurt aussi",
-      "kicker": "Le véhicule",
-      "readMin": 5,
-      "summary": "Dix ans, courbe en J, logique de millésimes : pourquoi ton VC est à la fois pressé et incroyablement patient.",
+      "kicker": "Fonds",
+      "summary": "Comprendre la levée, la période d'investissement, les réserves, le suivi, les distributions et la fin de vie d'un fonds fermé.",
       "status": "published",
-      "body": "## Un fonds, c'est une promesse de dix ans\n\nUn fonds n'est pas une tirelire infinie : c'est une promesse faite à ses [[lp|LPs]]. Voici comment elle se déroule.\n\n- **Années 1 à 3-4 — la [[investment-period|période d'investissement]].** Le fonds déploie l'argent et signe la plupart de ses premiers chèques.\n- **Années 3 à 7 — le suivi ([[follow-on|follow-on]]).** Le fonds garde des réserves pour ré-investir dans ses gagnantes. On muscle les stars, pas les retardataires.\n- **Années 7 à 10 — la récolte.** Les sorties (rachats, [[ipo|IPO]]) rendent l'argent aux LPs.\n\n## La courbe en J\n\nAu début, le fonds est dans le rouge (des frais, pas encore de sorties). Puis les gagnantes décollent et la [[j-curve|courbe en J]] remonte fort. D'où la patience obligatoire.\n\nConséquence maligne : tous les 2-3 ans, les GPs lèvent un **nouveau** fonds. Le venture est un métier de [[vintage|millésimes]] — comme le vin, un bon cru dépend autant du timing que du talent.\n\n> **À retenir :** dix ans, courbe en J, millésimes. Le temps long n'est pas un défaut, c'est le modèle.",
+      "level": "debutant",
+      "contexts": {},
+      "optional": false,
+      "learningOutcomes": [
+        "Décrire les principales phases d'un fonds fermé.",
+        "Relier période d'investissement, réserves et suivi de portefeuille.",
+        "Distinguer valeur résiduelle, distributions et prolongations."
+      ],
+      "prerequisiteLessonIds": [
+        "ld-money-flow",
+        "ld-vc-job"
+      ],
+      "body": "## Cadre\n\nLes principes ILPA, recommandations internationales non contraignantes, distinguent la période d'investissement, les appels de capitaux, les distributions, les prolongations de durée et certaines opérations menées par le gestionnaire. Ces mécanismes dépendent du contrat du fonds : leur séquence et leurs conditions ne sont pas universelles.\n\nLa phase de levée rassemble les engagements des LP. La période d'investissement permet de construire le portefeuille et d'appeler le capital conformément à la documentation. Des réserves peuvent être conservées pour accompagner certaines sociétés. Le suivi continue ensuite : financements complémentaires, cessions, arrêts ou détention plus longue appellent des arbitrages cohérents avec le mandat et la durée restante.\n\nPour les fonds français couverts, l'AMF DOC-2012-11 décrit plus précisément la pré-liquidation, la dissolution et la liquidation, ainsi que l'information des porteurs et les règles relatives aux distributions. Cette doctrine, applicable à un périmètre FCPR/FPCI et à une version déterminée, ne doit pas être généralisée à tous les fonds internationaux.\n\nEn fin de vie, le gestionnaire cherche à réaliser les actifs restants et à distribuer les produits selon la documentation. Les rapports distinguent capital distribué et valeur résiduelle estimée. Les indicateurs tels que DPI, RVPI ou TVPI restent des conventions de mesure à lire avec leur définition, leur dénominateur et la part encore non réalisée.\n\n## Méthode\n\nSituer chaque décision dans l'âge du véhicule, la période contractuelle, le capital non appelé, les réserves et les actifs restant à réaliser. Une nouvelle ligne, un réinvestissement et une vente secondaire n'ont pas la même portée à chaque phase.",
       "keyTakeaways": [
-        "Un fonds vit ~10 ans : investir, suivre, récolter.",
-        "La courbe en J : le rouge précède le vert.",
-        "Le venture est un métier de millésimes."
+        "La période d'investissement encadre la construction initiale du portefeuille.",
+        "Les réserves répondent à des arbitrages dynamiques entre les sociétés détenues.",
+        "La fin de vie du fonds distingue distributions réalisées et valeur encore estimée."
       ],
       "glossaryRefs": [
         "fund-lifecycle",
@@ -359,31 +443,252 @@
       ],
       "quiz": [
         {
-          "question": "La « courbe en J » décrit…",
+          "question": "Pourquoi l'âge du fonds compte-t-il dans une décision ?",
           "options": [
             {
-              "text": "Le fait qu'un fonds perde de l'argent avant d'en gagner",
+              "text": "Il conditionne la capacité à investir, soutenir les sociétés et organiser la liquidité.",
               "correct": true
             },
             {
-              "text": "La forme d'un logo de fonds",
+              "text": "Il remplace l'analyse de la société lorsque le fonds approche de sa fin.",
               "correct": false
             },
             {
-              "text": "La croissance d'une seule startup",
+              "text": "Il rend les indicateurs de performance définitifs dès la période d'investissement terminée.",
               "correct": false
             }
           ],
-          "explanation": "Frais d'abord, sorties ensuite : le rouge précède le vert. D'où la patience structurelle du métier."
+          "explanation": "Le même dossier n'a pas la même portée selon la durée restante, les réserves et les obligations envers les LP."
         }
       ],
       "furtherReading": [
         {
-          "label": "Fund returns : DPI / TVPI / MOIC",
-          "kind": "simulator",
-          "ref": "fund-returns"
+          "label": "ILPA — International · durée et distributions · principes non contraignants (2019)",
+          "kind": "external",
+          "ref": "https://ilpa.org/wp-content/uploads/2019/06/ILPA-Principles-3.0_2019.pdf"
+        },
+        {
+          "label": "AMF DOC-2012-11 — France · fin de vie FCPR/FPCI · doctrine (2025)",
+          "kind": "external",
+          "ref": "https://www.amf-france.org/sites/institutionnel/files/private/2025-01/doc-2012-11_fr5_guide-relatif-aux-fonds-de-capital-investissement_fin-de-vie-des-fonds-ki.pdf"
         }
-      ]
+      ],
+      "readMin": 2
+    },
+    {
+      "id": "ld-decouvrir-vc-quiz",
+      "slug": "quiz-comprendre-le-capital-risque",
+      "courseId": "c-decouvrir-vc",
+      "order": 9,
+      "title": "Quiz final — Comprendre le capital-risque",
+      "kicker": "Synthèse",
+      "summary": "Huit questions cumulatives pour vérifier la compréhension des acteurs, du fonds, des stades, du comité et de la concentration des rendements.",
+      "status": "published",
+      "level": "debutant",
+      "contexts": {},
+      "optional": false,
+      "learningOutcomes": [
+        "Vérifier le vocabulaire central du parcours.",
+        "Identifier les relations entre acteurs et décisions.",
+        "Préparer la suite du parcours sans livrable."
+      ],
+      "prerequisiteLessonIds": [
+        "ld-fund-lifecycle"
+      ],
+      "body": "## Objectif\n\nCe quiz vérifie la compréhension des notions centrales du parcours : investisseurs du fonds, gestionnaire, véhicule d'investissement, société financée, concentration des rendements, stades, décision collective et cycle de vie. Il ne remplace pas une analyse de dossier.\n\nLes questions sur les LP, le gestionnaire, les flux et la période d'investissement s'appuient sur le guide France Invest et les principes ILPA, ces derniers étant des recommandations internationales non contraignantes. La fin de vie renvoie aussi à l'AMF DOC-2012-11 dans son périmètre français propre aux fonds concernés.\n\nLa concentration des rendements est bornée par les échantillons de Cochrane, NBER w8066, et d'Ouyang, NBER w27690. Les stades combinent la taxonomie publiée par France Invest et les variations observées dans NBER w22587 ; pre-seed reste une convention éditoriale du cours. La question sur le comité emploie elle aussi une convention de cours : NBER w22587 documente des règles collectives variables, pas un organe universel.\n\nLes bonnes réponses privilégient ainsi la qualification, la traçabilité et la prudence sur les affirmations générales.",
+      "keyTakeaways": [
+        "Le capital circule des LP vers le fonds, puis vers la société financée selon une documentation précise.",
+        "La concentration des rendements impose un raisonnement de portefeuille sans proportion universelle.",
+        "Les stades et le comité servent à structurer l'analyse, pas à supprimer l'incertitude."
+      ],
+      "glossaryRefs": [
+        "lp",
+        "gp",
+        "venture-capital-fund",
+        "portfolio-construction",
+        "ic",
+        "series-a",
+        "fund-lifecycle"
+      ],
+      "quiz": [
+        {
+          "question": "Quel acteur prend un engagement dans le fonds ?",
+          "options": [
+            {
+              "text": "LP — investisseur du fonds.",
+              "correct": true
+            },
+            {
+              "text": "La société financée par le fonds.",
+              "correct": false
+            },
+            {
+              "text": "Le comité d'investissement de la société cible.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le LP apporte un engagement au fonds. Le gestionnaire administre ensuite le véhicule selon sa documentation."
+        },
+        {
+          "question": "Quel rôle revient au gestionnaire du fonds ?",
+          "options": [
+            {
+              "text": "Appliquer la stratégie, préparer les décisions et suivre le portefeuille.",
+              "correct": true
+            },
+            {
+              "text": "Garantir un rendement déterminé à chaque LP.",
+              "correct": false
+            },
+            {
+              "text": "Recevoir chaque distribution des sociétés financées.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le gestionnaire organise le fonds et ses décisions. Il ne promet pas un résultat certain."
+        },
+        {
+          "question": "Pourquoi distinguer fonds et société financée ?",
+          "options": [
+            {
+              "text": "Le fonds détient des titres de la société, mais les deux entités ont des obligations propres.",
+              "correct": true
+            },
+            {
+              "text": "La société devient automatiquement propriétaire du fonds après l'investissement.",
+              "correct": false
+            },
+            {
+              "text": "Le fonds et la société fusionnent au moment de la décision du comité.",
+              "correct": false
+            }
+          ],
+          "explanation": "La distinction clarifie les droits, les flux et les responsabilités de chaque partie."
+        },
+        {
+          "question": "Que montre la concentration des rendements observée dans les études retenues ?",
+          "options": [
+            {
+              "text": "La valeur d'un portefeuille peut se concentrer sur un petit nombre de sociétés.",
+              "correct": true
+            },
+            {
+              "text": "Chaque investissement doit produire un rendement proche de la moyenne.",
+              "correct": false
+            },
+            {
+              "text": "La performance est connue dès le premier tour de financement.",
+              "correct": false
+            }
+          ],
+          "explanation": "L'asymétrie observée conduit à juger la contribution possible d'une ligne au fonds, sans en faire une loi universelle."
+        },
+        {
+          "question": "À quoi servent les stades comme pre-seed, seed ou Série A ?",
+          "options": [
+            {
+              "text": "À qualifier la maturité, les preuves disponibles et les risques encore ouverts.",
+              "correct": true
+            },
+            {
+              "text": "À fixer partout les mêmes montants et les mêmes droits.",
+              "correct": false
+            },
+            {
+              "text": "À supprimer la diligence lorsque le vocabulaire du tour est reconnu.",
+              "correct": false
+            }
+          ],
+          "explanation": "Les stades sont des repères méthodologiques, pas des seuils universels ; dans ce cours, pre-seed est explicitement une convention éditoriale."
+        },
+        {
+          "question": "Quel rôle joue le comité d'investissement ?",
+          "options": [
+            {
+              "text": "Il débat une recommandation documentée avant une décision du fonds.",
+              "correct": true
+            },
+            {
+              "text": "Il garantit que la société atteindra son plan.",
+              "correct": false
+            },
+            {
+              "text": "Il remplace les sources externes et les diligences.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le comité améliore la discipline de décision, sans supprimer l'incertitude."
+        },
+        {
+          "question": "Pourquoi suivre la période d'investissement du fonds ?",
+          "options": [
+            {
+              "text": "Elle encadre les nouvelles lignes, les réserves et les arbitrages de portefeuille.",
+              "correct": true
+            },
+            {
+              "text": "Elle rend inutile le suivi après chaque investissement.",
+              "correct": false
+            },
+            {
+              "text": "Elle transforme la valeur résiduelle en distribution réalisée.",
+              "correct": false
+            }
+          ],
+          "explanation": "L'âge du fonds influence la portée économique de chaque décision."
+        },
+        {
+          "question": "Quelle attitude convient face à une affirmation non sourcée sur le venture ?",
+          "options": [
+            {
+              "text": "La reformuler comme hypothèse ou la retirer tant qu'une source précise manque.",
+              "correct": true
+            },
+            {
+              "text": "La conserver si elle rend le parcours plus fluide.",
+              "correct": false
+            },
+            {
+              "text": "La généraliser à tous les fonds pour simplifier l'apprentissage.",
+              "correct": false
+            }
+          ],
+          "explanation": "La qualité du parcours dépend de propositions sourcées et de bornes formulées."
+        }
+      ],
+      "furtherReading": [
+        {
+          "label": "France Invest — France · acteurs et stades du capital-innovation · guide professionnel (2019)",
+          "kind": "external",
+          "ref": "https://www.franceinvest.eu/wp-content/uploads/2022/02/France-Invest-Guide-du-capital-innovation-2019-1.pdf"
+        },
+        {
+          "label": "NBER w22587 — Sociétés VC principalement américaines · pratiques et décisions · enquête académique",
+          "kind": "external",
+          "ref": "https://www.nber.org/papers/w22587"
+        },
+        {
+          "label": "NBER w8066 — États-Unis · rendements par investissement · étude académique",
+          "kind": "external",
+          "ref": "https://www.nber.org/papers/w8066"
+        },
+        {
+          "label": "NBER w27690 — États-Unis · portefeuille agrégé · étude académique",
+          "kind": "external",
+          "ref": "https://www.nber.org/papers/w27690"
+        },
+        {
+          "label": "ILPA — International · relations LP/GP · principes non contraignants (2019)",
+          "kind": "external",
+          "ref": "https://ilpa.org/wp-content/uploads/2019/06/ILPA-Principles-3.0_2019.pdf"
+        },
+        {
+          "label": "AMF DOC-2012-11 — France · fin de vie FCPR/FPCI · doctrine (2025)",
+          "kind": "external",
+          "ref": "https://www.amf-france.org/sites/institutionnel/files/private/2025-01/doc-2012-11_fr5_guide-relatif-aux-fonds-de-capital-investissement_fin-de-vie-des-fonds-ki.pdf"
+        }
+      ],
+      "readMin": 1
     }
   ]
 }
