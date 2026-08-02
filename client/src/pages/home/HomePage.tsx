@@ -90,7 +90,7 @@ export default function HomePage() {
         type="button"
         onClick={toggle}
         aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}
-        className="group fixed left-3 top-0 z-[70] grid h-11 w-11 place-items-center text-surface-variant opacity-60 transition-[color,opacity] hover:text-foreground hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[color:var(--primary)] md:bottom-7 md:left-7 md:top-auto"
+        className="group fixed left-3 top-0 z-[80] grid h-11 w-11 place-items-center text-surface-variant opacity-60 transition-[color,opacity] hover:text-foreground hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[color:var(--primary)] md:bottom-7 md:left-7 md:top-auto md:z-[70]"
       >
         <span
           aria-hidden

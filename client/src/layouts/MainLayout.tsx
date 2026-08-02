@@ -6,8 +6,11 @@ import { Footer } from '@/components/chrome/Footer';
 import { HomeIntroProvider } from '@/components/home/HomeIntro';
 import { cn } from '@/lib/utils';
 
+const normalizedPathname = (pathname: string) => pathname.replace(/\/+$/, '') || '/';
+
 export function MainLayout() {
   const { pathname } = useLocation();
+  const normalizedPath = normalizedPathname(pathname);
   const mainRef = useRef<HTMLElement>(null);
   const firstRender = useRef(true);
 
@@ -30,9 +33,9 @@ export function MainLayout() {
   // The splash portal is deliberately chrome-less. Home owns a focused,
   // three-pole top bar and a full-viewport hero; onboarding keeps the standard
   // top bar. Every other page uses the lateral, hover-expanding SideNav.
-  const isSplash = pathname === '/' || pathname === '';
-  const isHome = pathname === '/home';
-  const isOnboarding = pathname === '/onboarding';
+  const isSplash = normalizedPath === '/';
+  const isHome = normalizedPath === '/home';
+  const isOnboarding = normalizedPath === '/onboarding';
   const hasTopBar = isHome || isOnboarding;
   const hasSideNav = !isSplash && !hasTopBar;
 

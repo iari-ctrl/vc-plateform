@@ -6,6 +6,42 @@ Le journal des travaux antérieurs à la migration (passes du 2026-05-30 au 2026
 
 ---
 
+## 2026-08-02 — Stabilisation du chrome de `/home` après redirection GitHub Pages
+
+Objet : reproduire et corriger la substitution intermittente du chrome propre à l’accueil par la navigation standard après actualisation sur GitHub Pages, sous la base `/vc-plateform/`, sans commit, push ni déploiement.
+
+Diagnostic :
+
+- `https://iari-ctrl.github.io/vc-plateform/home` répond `301` vers `https://iari-ctrl.github.io/vc-plateform/home/`, qui répond `200` ;
+- le document HTML public prérendu contient une occurrence de `Rechercher depuis Maison Sapience VC`, aucune occurrence de `id="desktop-nav"` et aucun `aria-label="Menu"` : le défaut n’est pas produit par le HTML prérendu ;
+- après hydratation du bundle public, à 1 440 × 1 000 comme à 390 × 844, `Maison Sapience VC` disparaît, `#desktop-nav` est présent, les boutons `Menu` et `Ouvrir la navigation` sont montés, et la navigation basse mobile est absente ;
+- `BrowserRouter` retire correctement le basename `/vc-plateform`, mais conserve le slash final dans le pathname applicatif. Les comparaisons strictes à `/home` dans `MainLayout` et `TopBar` sélectionnaient donc respectivement le `SideNav` et la topbar standard pour `/home/` ;
+- le prérendu navigue vers la route sans slash avant d’écrire `client/dist/home/index.html`. Il capturait par conséquent le bon chrome, puis l’ancien JavaScript déployé le remplaçait au chargement sous l’URL canonique avec slash.
+
+Travaux et contrat RED–GREEN :
+
+- une copie détachée de `HEAD` a reçu uniquement le test de régression. `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` y retourne exit 1, avec 26 tests réussis et 1 échec sur 27 : `/home/` affiche `VC Premium Experience` au lieu du bouton `Rechercher depuis Maison Sapience VC` ;
+- `MainLayout.tsx` et `TopBar.tsx` retirent désormais les slashs finaux avant de classifier la route, avec conservation explicite de `/` pour le portail ;
+- `homeExperience.dom.test.tsx` paramètre `/home` et `/home/` en mode large puis compact. Pour chaque variante, il exige le bouton `Maison Sapience VC`, interdit `Menu`, `Ouvrir la navigation` et `#desktop-nav`, puis vérifie sur mobile la navigation `Pôles de l’accueil` avec `Formation` et `Intelligence VC` ;
+- la recette mobile a aussi vérifié la cible visible du contrôle de thème. `HomePage.tsx` place sa cible mobile en `z-[80]`, au-dessus de la topbar `z-[75]`, tout en conservant `md:z-[70]` sur desktop ; le test DOM contrôle cet ordre de pile.
+
+Vérifications finales :
+
+- `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` — exit 0, 30/30 ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run check` — exit 0 avant et après build : générés à jour, validations strictes, glossaire, TypeScript et ESLint sans erreur, 67 fichiers / 432 tests Vitest et 58/58 tests Node ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` — exit 0, 1 796 modules transformés, sitemap de 703 routes et prérendu strict 715/715 avec `ok: true` ;
+- `client/dist/home/index.html` existe sous le dossier `client/dist/home/`, référence `/vc-plateform/assets/index-DW2UvCeW.js`, contient une occurrence du contrôle `Maison Sapience VC`, aucune sidebar standard et aucun bouton `Menu` ;
+- Vite Preview, demandé sur 4173 puis servi sur 4174 car 4173 était déjà occupé, a été contrôlé par chargement direct de `/vc-plateform/home` et `/vc-plateform/home/` à 1 440 × 1 000 et 390 × 844. Les quatre scénarios répondent `200`, affichent exactement un contrôle `Maison Sapience VC`, n’exposent ni `#desktop-nav`, ni `Menu`, ni `Ouvrir la navigation`, conservent `scrollWidth === clientWidth` et ne produisent aucune erreur console, erreur de page ou requête échouée ;
+- sur mobile, les deux scénarios rendent `Formation` et `Intelligence VC` dans la navigation basse. Le centre visible du contrôle de thème appartient au bouton `Activer le mode clair` et un tap réel sur `/home/` bascule la classe racine de `dark` vers le mode clair ;
+- le serveur 4174 de cette passe et les scripts, rapports et captures temporaires ont été supprimés. Le serveur préexistant sur 4173 n’a pas été interrompu. Le build ne laisse aucune modification suivie sous `client/dist`, `client/public` ou `data/generated`, et `git diff --check` reste sans sortie.
+- contre-revue indépendante du diff code gelé, empreinte SHA-256 `c1874a8c84fac27ef6a7c8de0dcad77b0342caa969f81d4c10eb744f2ef2e5ba` : `passed: true`, aucune préoccupation de sécurité ni erreur logique. La centralisation future du normaliseur et des contrats supplémentaires pour `/onboarding/` sont classées comme suggestions non bloquantes hors du défaut demandé.
+
+Fichiers touchés : `client/src/layouts/MainLayout.tsx`, `client/src/components/chrome/TopBar.tsx`, `client/src/pages/home/HomePage.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+État de publication : le build local est corrigé, mais le site public hydrate toujours avec le bundle antérieur. `.github/workflows/deploy-pages.yml` reste exclusivement manuel (`workflow_dispatch`) et son job de déploiement n’est autorisé que depuis `master`. Aucun staging, commit, push, lancement de workflow ou déploiement n’a été exécuté.
+
+---
+
 ## 2026-08-01 — Correction V1c de la liste de calculs SaaS Metrics
 
 Objet : corriger le résiduel bloquant relevé par la contre-revue V1b de `l-specialty-saas-metrics`, sans élargir le périmètre du lot, modifier les documents de certification ni lancer une opération distante.

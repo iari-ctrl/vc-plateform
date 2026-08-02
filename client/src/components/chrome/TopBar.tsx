@@ -24,6 +24,8 @@ import { useLayerBehavior } from '@/components/ui/layerStack';
 import { useMediaQuery } from '@/lib/usePrefersReducedMotion';
 import { cn } from '@/lib/utils';
 
+const normalizedPathname = (pathname: string) => pathname.replace(/\/+$/, '') || '/';
+
 type HomeMenuId = typeof HOME_FORMATION.id | typeof HOME_INTELLIGENCE.id;
 
 const pointInsideRect = (x: number, y: number, rect: DOMRect, margin = 0) =>
@@ -33,7 +35,7 @@ const hasUsableRect = (rect: DOMRect | undefined) => Boolean(rect && (rect.width
 
 export function TopBar() {
   const { pathname } = useLocation();
-  return pathname === '/home' ? <HomeTopBar /> : <DefaultTopBar />;
+  return normalizedPathname(pathname) === '/home' ? <HomeTopBar /> : <DefaultTopBar />;
 }
 
 function HomeTopBar() {

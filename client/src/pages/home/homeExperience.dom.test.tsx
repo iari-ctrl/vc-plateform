@@ -141,6 +141,55 @@ describe('accueil — contrat éditorial et navigation', () => {
     }
   });
 
+  it.each(['/home', '/home/'])(
+    'conserve le chrome Maison Sapience VC après chargement direct de %s',
+    async (path) => {
+      renderAppAt(path);
+
+      const banner = await screen.findByRole('banner');
+
+      expect(within(banner).getByRole('button', { name: 'Rechercher depuis Maison Sapience VC' })).toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: 'Menu' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: 'Ouvrir la navigation' })).not.toBeInTheDocument();
+      expect(document.getElementById('desktop-nav')).not.toBeInTheDocument();
+    },
+  );
+
+  it.each(['/home', '/home/'])(
+    'conserve sur mobile le titre et les deux pôles de la home pour %s',
+    async (path) => {
+      vi.stubGlobal('matchMedia', compactHomeMatchMedia);
+      renderAppAt(path);
+
+      const banner = await screen.findByRole('banner');
+      const mobileNavigation = screen.getByRole('navigation', { name: 'Pôles de l’accueil' });
+
+      expect(within(banner).getByRole('button', { name: 'Rechercher depuis Maison Sapience VC' })).toBeInTheDocument();
+      expect(within(mobileNavigation).getByRole('button', { name: 'Formation' })).toBeInTheDocument();
+      expect(within(mobileNavigation).getByRole('button', { name: 'Intelligence VC' })).toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: 'Menu' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: 'Ouvrir la navigation' })).not.toBeInTheDocument();
+      expect(document.getElementById('desktop-nav')).not.toBeInTheDocument();
+    },
+  );
+
+  it('place la zone cliquable du thème au-dessus de la barre /home sur mobile', async () => {
+    vi.stubGlobal('matchMedia', compactHomeMatchMedia);
+    renderAppAt('/home');
+
+    const banner = await screen.findByRole('banner');
+    await screen.findByRole('heading', {
+      level: 1,
+      name: 'Documenter le raisonnement. Affûter le jugement.',
+    });
+    const themeToggle = screen.getByRole('button', { name: /Activer le mode (clair|sombre)/ });
+
+    expect(banner).toHaveClass('z-[75]');
+    expect(themeToggle).toHaveClass('z-[80]');
+    expect(themeToggle).not.toHaveClass('z-[70]');
+    expect(themeToggle).toHaveClass('md:z-[70]');
+  });
+
   it('rend la barre /home transparente avec un cadre horizontal légèrement inset tant que le hero est visible', async () => {
     renderAppAt('/home');
 
@@ -285,7 +334,8 @@ describe('accueil — contrat éditorial et navigation', () => {
     const formationPanel = (await screen.findByRole('navigation', { name: 'Menu Formation' })).parentElement;
 
     expect(banner).toHaveClass('z-[75]');
-    expect(themeToggle).toHaveClass('z-[70]');
+    expect(themeToggle).toHaveClass('z-[80]', 'md:z-[70]');
+    expect(themeToggle).not.toHaveClass('z-[70]');
     expect(formationPanel).toHaveClass('fixed', 'z-[85]');
     expect(formationPanel).not.toHaveClass('z-50');
   });
