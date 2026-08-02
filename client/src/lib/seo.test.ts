@@ -1,8 +1,12 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { buildMetaModel, buildMetaTags } from './seo';
 
 describe('SEO metadata policy', () => {
+  beforeEach(() => {
+    vi.stubEnv('VITE_BASE_URL', '/');
+  });
+
   afterEach(() => vi.unstubAllEnvs());
 
   it('keeps a canonical URL for an indexable route', () => {
@@ -12,6 +16,16 @@ describe('SEO metadata policy', () => {
     expect(model.canonicalUrl).toBe('https://example.test/home');
     expect(buildMetaTags(model).find((tag) => tag.key === 'og:url')?.content)
       .toBe('https://example.test/home');
+  });
+
+  it('keeps canonical metadata under the configured deployment base', () => {
+    vi.stubEnv('VITE_BASE_URL', '/vc-plateform/');
+    vi.stubEnv('VITE_SITE_URL', 'https://example.test/vc-plateform');
+
+    const model = buildMetaModel('/home', 'Accueil', 'Description', {});
+    expect(model.canonicalUrl).toBe('https://example.test/vc-plateform/home');
+    expect(buildMetaTags(model).find((tag) => tag.key === 'og:url')?.content)
+      .toBe('https://example.test/vc-plateform/home');
   });
 
   it('marks a not-found document noindex without a self-referencing canonical', () => {

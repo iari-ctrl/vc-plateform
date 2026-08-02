@@ -47,10 +47,14 @@ function pageDescription(description: string | undefined): string {
   return clean(description) || DEFAULT_DESCRIPTION;
 }
 
+function deploymentBaseUrl(): string {
+  return import.meta.env.VITE_BASE_URL ?? import.meta.env.BASE_URL;
+}
+
 function siteUrl(): string {
   const configured = import.meta.env.VITE_SITE_URL?.trim();
   const runtimeOrigin = typeof window !== 'undefined' ? window.location.origin : undefined;
-  const resolved = resolveSiteBaseUrl(configured, import.meta.env.BASE_URL, runtimeOrigin);
+  const resolved = resolveSiteBaseUrl(configured, deploymentBaseUrl(), runtimeOrigin);
   if (!resolved) throw new Error('Canonical site URL unavailable: configure VITE_SITE_URL outside the browser.');
   return resolved;
 }
@@ -63,12 +67,12 @@ function toAbsoluteAssetUrl(pathOrUrl: string): string {
   try {
     return new URL(pathOrUrl).toString();
   } catch {
-    return new URL(publicAssetUrl(pathOrUrl, import.meta.env.BASE_URL), siteOrigin()).toString();
+    return new URL(publicAssetUrl(pathOrUrl, deploymentBaseUrl()), siteOrigin()).toString();
   }
 }
 
 function toAbsoluteRouteUrl(pathname: string): string {
-  return new URL(appRouteUrl(pathname, import.meta.env.BASE_URL), siteOrigin()).toString();
+  return new URL(appRouteUrl(pathname, deploymentBaseUrl()), siteOrigin()).toString();
 }
 
 function ogImageForPath(pathname: string): string {
