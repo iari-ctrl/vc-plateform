@@ -264,10 +264,10 @@
   /* Faint topographic contour lines + meridians, like aged map paper. */
   .map-paper {
     background-image:
-      repeating-radial-gradient(circle at 18% 8%, transparent 0 38px, color-mix(in srgb, var(--primary) 5%, transparent) 38px 39px),
-      repeating-radial-gradient(circle at 88% 92%, transparent 0 46px, color-mix(in srgb, var(--secondary) 5%, transparent) 46px 47px),
-      linear-gradient(transparent 0 31px, color-mix(in srgb, var(--outline-variant) 18%, transparent) 31px 32px),
-      linear-gradient(90deg, transparent 0 31px, color-mix(in srgb, var(--outline-variant) 18%, transparent) 31px 32px);
+      repeating-radial-gradient(circle at 18% 8%, transparent 0 38px, color-mix(in srgb, var(--primary) 10%, transparent) 38px 39px),
+      repeating-radial-gradient(circle at 88% 92%, transparent 0 46px, color-mix(in srgb, var(--secondary) 10%, transparent) 46px 47px),
+      linear-gradient(transparent 0 31px, color-mix(in srgb, var(--outline-variant) 25%, transparent) 31px 32px),
+      linear-gradient(90deg, transparent 0 31px, color-mix(in srgb, var(--outline-variant) 25%, transparent) 31px 32px);
     background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
   }
 
