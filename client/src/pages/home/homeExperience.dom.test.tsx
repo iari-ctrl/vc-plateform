@@ -127,6 +127,10 @@ describe('accueil — contrat éditorial et navigation', () => {
     expect(controls).toHaveLength(2);
     expect(controls[0]).toHaveAccessibleName('Formation');
     expect(controls[1]).toHaveAccessibleName('Intelligence VC');
+    expect(controls[0].firstElementChild?.tagName.toLowerCase()).toBe('svg');
+    expect(controls[0].lastElementChild).toHaveTextContent('Formation');
+    expect(controls[1].firstElementChild).toHaveTextContent('Intelligence VC');
+    expect(controls[1].lastElementChild?.tagName.toLowerCase()).toBe('svg');
     expect(within(banner).getByRole('button', { name: 'Rechercher depuis Maison Sapience VC' })).toHaveClass(
       'h-full',
       'min-h-0',

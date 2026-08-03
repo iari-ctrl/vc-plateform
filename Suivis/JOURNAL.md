@@ -6,6 +6,34 @@ Le journal des travaux antérieurs à la migration (passes du 2026-05-30 au 2026
 
 ---
 
+## 2026-08-03 — Flèche Formation à gauche sur la navigation mobile de l’accueil
+
+Objet : placer la flèche du menu `Formation` à gauche de son libellé dans la barre basse mobile de `/home`, sans modifier le positionnement du menu `Intelligence VC`.
+
+Travaux :
+
+- `HomePillarMenu` calcule désormais le seul cas `Formation` en navigation compacte et rend l’icône avant le libellé dans ce cas ;
+- `Intelligence VC` conserve l’ordre libellé puis flèche à droite ;
+- la logique d’ouverture, fermeture, survol, focus, toucher et panneaux n’est pas modifiée.
+
+Contrat RED–GREEN :
+
+- le test DOM de la navigation compacte exige maintenant l’ordre visuel `svg, span` pour `Formation` et `span, svg` pour `Intelligence VC` ;
+- premier lancement ciblé : `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx -t "retire les deux pôles"` échoue avec 1 test en échec, l’ancien premier enfant de `Formation` étant `span` ;
+- après correction, le même test ciblé passe, puis le fichier complet `homeExperience.dom.test.tsx` passe 30/30.
+
+Vérifications finales :
+
+- `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` — exit 0, 30/30 ;
+- `npm run typecheck --workspace client` — exit 0 ;
+- `npm run lint --workspace client` — exit 0 ;
+- recette Vite Dev sur `http://127.0.0.1:5174/home` en émulation mobile tactile 390 × 844 : largeur réelle 390 px, `Formation` rend les enfants `svg, span` avec la flèche à gauche du libellé, `Intelligence VC` rend `span, svg` avec la flèche à droite, `scrollWidth === clientWidth` et console vide ;
+- le serveur Vite Dev ouvert sur le port 5174 a été arrêté et le port est libre.
+
+Fichiers touchés par cette correction : `client/src/components/chrome/TopBar.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
+
+---
+
 ## 2026-08-03 — Flèche d’ouverture à gauche sur le glossaire mobile
 
 Objet : placer la flèche d’ouverture des entrées à gauche des mots sur mobile seulement, avec un léger décalage du contenu, sans modifier la disposition desktop.
