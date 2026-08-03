@@ -24,6 +24,10 @@ describe('matchesGlossaryQuery', () => {
     expect(matchesGlossaryQuery(term, 'PREF')).toBe(true);
   });
 
+  it('ignores accents in the query and indexed labels', () => {
+    expect(matchesGlossaryQuery(term, 'preference de liquidation')).toBe(true);
+  });
+
   it('does not match fields outside the title and aliases', () => {
     expect(matchesGlossaryQuery(term, 'Praeferentia')).toBe(false);
     expect(matchesGlossaryQuery(term, 'Structuration')).toBe(false);

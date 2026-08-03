@@ -6,6 +6,100 @@ Le journal des travaux antérieurs à la migration (passes du 2026-05-30 au 2026
 
 ---
 
+## 2026-08-03 — Flèche d’ouverture à gauche sur le glossaire mobile
+
+Objet : placer la flèche d’ouverture des entrées à gauche des mots sur mobile seulement, avec un léger décalage du contenu, sans modifier la disposition desktop.
+
+Travaux :
+
+- la grille mobile des lignes de glossaire passe de `minmax(0,1fr) 2.75rem` à `2.75rem minmax(0,1fr)` ;
+- le titre, la catégorie et le résumé commencent désormais en deuxième colonne sous `md`, après la cible de flèche de 44 px ;
+- le contrôle d’ouverture porte un repère DOM ciblé et reste à droite à partir de `md` grâce aux classes de grille desktop existantes ;
+- aucune logique de recherche, filtrage, synchronisation URL ou chargement différé n’a été modifiée.
+
+Contrat RED–GREEN :
+
+- le test DOM ciblé exige la flèche en première colonne mobile, le terme et le résumé en deuxième colonne, et le maintien de la grille desktop à douze colonnes ; le premier lancement échoue sur l’ancienne grille mobile avec flèche à droite ;
+- après correction, le test ciblé filtré puis `npm run test --workspace client -- src/pages/glossary/GlossaryPage.lazy.dom.test.tsx` passent, avec 8/8 tests pour le fichier.
+
+Vérifications finales :
+
+- `npm run typecheck` — exit 0 ;
+- `npm run lint` — exit 0 ;
+- `npm run check` — exit 0 : générés à jour, contenu strict, glossaire, TypeScript, ESLint, 67 fichiers / 440 tests Vitest et 58/58 tests Node ;
+- premier `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` : le build Vite passe, puis le prérendu strict échoue sur un timeout Chromium transitoire de `/glossary/presidio` ; le prérendu relancé avec les mêmes variables passe ensuite 715/715 ;
+- second build canonique complet avec les mêmes variables — exit 0, 1 796 modules transformés, sitemap de 703 routes et prérendu strict 715/715 avec `ok: true` ;
+- `npm run check:generated && git diff --check && git status --short` — exit 0 ; seuls les fichiers déjà modifiés du glossaire et les suivis apparaissent modifiés ;
+- recette Vite Preview sur `/vc-plateform/glossary?term=daphni` : à 390 × 844, largeur réelle 390 px, `gridTemplateColumns` vaut `44px 294px`, la flèche est à gauche du titre, le titre et le résumé commencent à 76 px, `scrollWidth === clientWidth` et aucun message console ; à 1 440 × 1 000, le contrôle reste à droite du résumé et aucun débordement horizontal n’est constaté ;
+- le serveur Preview ouvert sur le port 4174 a été arrêté et le port est libre.
+
+Fichiers touchés par cette correction : `client/src/pages/glossary/GlossaryPage.tsx`, `client/src/pages/glossary/GlossaryPage.lazy.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
+
+---
+
+## 2026-08-03 — Suppression des initiales répétées dans le dictionnaire
+
+Objet : retirer la pastille qui répétait la première lettre devant chaque terme, sans modifier les repères alphabétiques de section ni le fonctionnement des définitions.
+
+Travaux :
+
+- la pastille décorative `aria-hidden` est retirée de chaque entrée ; l’attribut `data-glossary-initial`, utilisé par le suivi de section, reste en place ;
+- la grille mobile passe de `2.75rem minmax(0,1fr) 2.75rem` à `minmax(0,1fr) 2.75rem` : titre, catégorie et résumé occupent la première colonne, tandis que le contrôle d’ouverture conserve une cible de 44 × 44 px dans la seconde ;
+- la grille desktop à douze colonnes est conservée et le retrait gauche de la définition développée est supprimé afin de réaligner son contenu après le retrait de la pastille ;
+- la navigation alphabétique et la grande lettre du groupe courant ne sont pas modifiées.
+
+Contrat RED–GREEN :
+
+- le test DOM ciblé exige l’absence de l’initiale répétée, la nouvelle grille mobile et l’alignement du titre et du résumé ; le premier lancement échoue sur l’ancienne grille à trois colonnes ;
+- après la correction, `npm run test --workspace client -- src/pages/glossary/GlossaryPage.lazy.dom.test.tsx` passe 8/8.
+
+Vérifications finales :
+
+- `npm run typecheck`, `npm run lint`, `npm run test` et `npm run check` — exit 0 ; la suite complète couvre 67 fichiers / 440 tests Vitest et 58/58 tests Node ;
+- build canonique sous `VITE_BASE_URL=/vc-plateform/` et `VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform` — exit 0, 1 796 modules transformés, sitemap de 703 routes et prérendu strict 715/715 avec `ok: true` ;
+- `npm run check:generated` après build — exit 0, avec 147 leçons, 126 corps publiés et 420 termes ;
+- recette de l’artefact sur `/vc-plateform/glossary?term=daphni` à 1 440 × 1 000 et 390 × 844 : pastille absente, repère `D` conservé, grille desktop et ligne mobile alignées, contrôle mobile de 44 × 44 px, définition développée alignée à 20 px avec le titre et le résumé, `scrollWidth === clientWidth` et console vide ;
+- le serveur Vite Preview ouvert sur le port 4174 a été arrêté et le port est libre.
+
+Fichiers touchés par cette correction : `client/src/pages/glossary/GlossaryPage.tsx`, `client/src/pages/glossary/GlossaryPage.lazy.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
+
+---
+
+## 2026-08-03 — Adaptation mobile et durcissement du glossaire
+
+Objet : améliorer la lisibilité, la maniabilité tactile et la recherche du glossaire sur mobile, sans transformer l’interface en tableau de bord générique ni modifier son identité éditoriale desktop.
+
+Travaux :
+
+- le hero mobile est raccourci, le titre conserve `capital-risque.` sur une même unité typographique et les espacements desktop restent définis par les breakpoints existants ;
+- sous `lg`, le rail des domaines est remplacé par un `select` nommé et étiqueté ; le rail éditorial est conservé sur desktop ; les lettres disposent de cibles tactiles de 44 px ;
+- les résultats deviennent des lignes d’index compactes sur mobile et les définitions développées restent visuellement attachées à leur entrée ; la copie détaillée passe à 16 px et l’exemple à 14 px sur mobile, puis reviennent respectivement à 14 px et 12 px à partir de `md` ;
+- la recherche normalise les diacritiques du terme et de ses alias, de sorte que `accelerateur` trouve « Accélérateur » ; son contrôle d’effacement neutralise les décorations natives WebKit, restaure le focus et rétablit le contexte de filtrage qui précédait la recherche ;
+- ce contexte couvre le mode alphabétique ou tous les termes, la première lettre et la deuxième lettre. Une sélection explicite de domaine, un saut de lettre ou un lien « Voir aussi » invalide le snapshot de recherche afin que l’action la plus récente reste autoritaire ; l’ouverture ou la fermeture d’une définition ne le modifie pas ;
+- une région `status` annonce le nombre de résultats et l’ouverture ou fermeture d’une définition reste synchronisée avec le paramètre `?term=`.
+
+Contrat RED–GREEN et contre-revue initiale :
+
+- les tests de recherche sans accents, sélecteur mobile, cibles alphabétiques, hero compact, lignes d’index, compteur accessible, typographie responsive, restauration de filtre, focus et synchronisation URL ont été ajoutés par boucles ciblées RED–GREEN ;
+- une première contre-revue indépendante a refusé le diff initial : l’effacement forçait le filtre alphabétique sans restaurer le mode antérieur, la copie agrandie sur mobile modifiait aussi le desktop et les interactions du sélecteur, de l’effacement et de l’URL n’étaient pas suffisamment exercées ;
+- ces trois points ont été corrigés. Une auto-relecture supplémentaire a ajouté le cas de la deuxième lettre et la contre-revue finale a fait verrouiller l’ouverture puis la fermeture d’un terme pendant une recherche : le contexte est restauré après effacement, tandis que la validité reste contrôlée par `availableSecondLetters`.
+
+Vérifications finales :
+
+- tests ciblés du glossaire — exit 0, 2 fichiers / 12 tests ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run check` — exit 0 : générés à jour, contenu strict, glossaire, TypeScript et ESLint valides, 67 fichiers / 440 tests Vitest et 58/58 tests Node ;
+- build canonique avec les mêmes variables — exit 0, 1 796 modules transformés, sitemap de 703 routes et prérendu strict 715/715 avec `ok: true` ;
+- `git diff --check` — exit 0, sans sortie ; scan statique des lignes ajoutées sans secret, exécution dynamique dangereuse, HTML non sûr ni log de débogage ;
+- recette réelle à 320 × 568, 390 × 844 et 1 440 × 1 000, en clair et sombre selon les scénarios : recherche sans accents, restauration A puis 420 entrées, sélecteur Acteurs/Tous domaines, état sticky, entrée développée, focus après effacement, typographie desktop 14 px/12 px, absence de débordement et console vide ;
+- artefact final servi avec le contrat de base complet sur `/vc-plateform/glossary/` à 390 × 844 : titre et métadonnées de la définition actifs, deux entrées sous `0`, définition chargée, sélecteur « Tous domaines », aucun débordement ni message console. La variante sans slash de Vite Preview sert son fallback racine ; l’artefact prérendu canonique avec slash est conforme.
+- contre-revue indépendante finale du diff V4 applicable `/tmp/vc-glossary-review-final-v4.diff`, SHA-256 `d7f2339ea4f6b35bc611c8d7a5b3e7d39fa8260d0aa50c5e78addcc71d0be5f2` — `passed: true`, aucune préoccupation de sécurité, aucune erreur logique, aucune suggestion. Le relecteur confirme notamment la restauration de `activeLetter`, `activeSecondLetter` et `isLetterFilterActive`, la non-invalidation dans `toggleTerm`, les invalidations restantes dans `selectCategory`, `jumpToLetter` et `revealSlug`, les tailles desktop préservées, le masquage WebKit du champ `search` et la couverture des tests.
+
+Fichiers applicatifs touchés : `client/src/pages/glossary/GlossaryPage.tsx`, `client/src/pages/glossary/glossarySearch.ts`, `client/src/pages/glossary/GlossaryPage.test.ts` et `client/src/pages/glossary/GlossaryPage.lazy.dom.test.tsx`. Suivis mis à jour : `Suivis/ETAT.md` et `Suivis/JOURNAL.md`.
+
+Clôture locale : aucun staging, commit, push, workflow distant ou déploiement. Les serveurs de recette ouverts par cette passe sur 5174 et 4174 sont arrêtés ; les deux ports sont libres. Le processus préexistant sur 5173 n’a pas été interrompu.
+
+---
+
 ## 2026-08-02 — Stabilisation du chrome de `/home` après redirection GitHub Pages
 
 Objet : reproduire et corriger la substitution intermittente du chrome propre à l’accueil par la navigation standard après actualisation sur GitHub Pages, sous la base `/vc-plateform/`, sans commit, push ni déploiement.

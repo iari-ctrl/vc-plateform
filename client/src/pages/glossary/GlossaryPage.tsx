@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, ChevronDown, ChevronUp, ExternalLink, Search } from 'lucide-react';
+import { ArrowRight, BookOpen, ChevronDown, ChevronUp, ExternalLink, Search, X } from 'lucide-react';
 import { GLOSSARY, glossaryBySlug, loadGlossaryDefs } from '@/content/glossary';
 import { publicLessonById } from '@/content/lessons';
 import { Markdown } from '@/lib/markdown';
@@ -99,9 +99,15 @@ export default function GlossaryPage() {
   const [anchorOffset, setAnchorOffset] = useState(DEFAULT_ANCHOR_OFFSET);
   const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(new Set());
   const stickyRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const alphabetScrollerRef = useRef<HTMLDivElement>(null);
   const alphabetButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const scrollSpyFrame = useRef<number | null>(null);
+  const queryFilterContextRef = useRef<{
+    activeLetter: string;
+    activeSecondLetter: string;
+    isLetterFilterActive: boolean;
+  } | null>(null);
 
   // Heavy definitions load lazily for the detail view so they do not add to
   // the initial bundle.
@@ -196,12 +202,7 @@ export default function GlossaryPage() {
     };
   }, [updateAnchorOffset]);
 
-  // The second-letter refinement only makes sense within one first letter.
-  useEffect(() => {
-    setActiveSecondLetter('');
-  }, [activeLetter, isLetterFilterActive]);
-
-  // Drop the refinement if a query/category change empties its bucket.
+  // Drop the refinement when a query, category or letter change empties its bucket.
   useEffect(() => {
     if (activeSecondLetter && !availableSecondLetters.includes(activeSecondLetter)) setActiveSecondLetter('');
   }, [availableSecondLetters, activeSecondLetter]);
@@ -304,6 +305,7 @@ export default function GlossaryPage() {
   }
 
   function jumpToLetter(letter: string) {
+    queryFilterContextRef.current = null;
     setActiveLetter(letter);
     setActiveSecondLetter('');
     setIsLetterFilterActive(true);
@@ -314,12 +316,34 @@ export default function GlossaryPage() {
   }
 
   function selectCategory(category: string) {
+    queryFilterContextRef.current = null;
     setActiveCategory(category);
     setIsLetterFilterActive(false);
   }
 
+  function updateQuery(nextQuery: string) {
+    const hadQuery = Boolean(query.trim());
+    const hasQuery = Boolean(nextQuery.trim());
+
+    if (!hadQuery && hasQuery) {
+      queryFilterContextRef.current = { activeLetter, activeSecondLetter, isLetterFilterActive };
+      setIsLetterFilterActive(false);
+    } else if (hadQuery && !hasQuery) {
+      const previousContext = queryFilterContextRef.current;
+      queryFilterContextRef.current = null;
+      if (previousContext) {
+        setActiveLetter(previousContext.activeLetter);
+        setActiveSecondLetter(previousContext.activeSecondLetter);
+        setIsLetterFilterActive(previousContext.isLetterFilterActive);
+      }
+    }
+
+    setQuery(nextQuery);
+  }
+
   function revealSlug(slug: string) {
     const related = glossaryBySlug(slug);
+    queryFilterContextRef.current = null;
     setQuery('');
     setActiveCategory('Tous');
     if (related) {
@@ -332,25 +356,25 @@ export default function GlossaryPage() {
 
   return (
     <div className="pb-20" style={anchorStyle}>
-      <div className="mx-auto max-w-[1200px] px-8 py-16">
-        <div className="mb-10 flex items-center gap-4">
-          <div className="h-px flex-1 bg-[color-mix(in_srgb,var(--primary)_20%,transparent)]" />
-          <span className="font-headline text-[0.625rem] uppercase tracking-[0.45em] text-[color-mix(in_srgb,var(--primary)_72%,transparent)] italic">
+      <div className="mx-auto max-w-[1200px] px-5 py-8 sm:px-8 sm:py-12 lg:py-16">
+        <div className="mb-6 flex items-center justify-center gap-4 sm:mb-10">
+          <div className="hidden h-px flex-1 bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] sm:block" />
+          <span className="whitespace-nowrap font-headline text-[0.5625rem] uppercase tracking-[0.28em] text-[color-mix(in_srgb,var(--primary)_72%,transparent)] italic sm:text-[0.625rem] sm:tracking-[0.45em]">
             Lexicon · Editio Princeps · MMXXVI
           </span>
-          <div className="h-px flex-1 bg-[color-mix(in_srgb,var(--primary)_20%,transparent)]" />
+          <div className="hidden h-px flex-1 bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] sm:block" />
         </div>
 
-        <header className="mb-16 grid grid-cols-12 items-end gap-8">
+        <header className="mb-10 grid grid-cols-12 items-end gap-6 sm:mb-14 lg:mb-16 lg:gap-8">
           <div className="col-span-12 lg:col-span-9">
-            <p className="mb-5 font-mono text-[0.625rem] font-semibold uppercase tracking-[0.3em] text-[color:var(--secondary)] dark:text-surface-variant">
+            <p className="mb-4 font-mono text-[0.625rem] font-semibold uppercase tracking-[0.3em] text-[color:var(--secondary)] dark:text-surface-variant sm:mb-5">
               Glossaire · {fullTerms.length} entrées
             </p>
-            <h1 className="font-headline text-7xl leading-[0.95] text-foreground md:text-[5.5rem]">
+            <h1 className="font-headline text-5xl leading-[0.95] text-foreground sm:text-6xl md:text-[5.5rem]">
               <span className="font-normal italic">Lexique</span> du{' '}
-              <span className="underline-flourish text-[color:var(--primary)]">capital-risque</span>.
+              <span className="underline-flourish text-[color:var(--primary)]">capital-risque.</span>
             </h1>
-            <p className="mt-8 max-w-2xl font-body text-xl leading-relaxed text-surface-variant/90">
+            <p className="mt-5 max-w-2xl font-body text-[1.0625rem] leading-relaxed text-surface-variant/90 sm:mt-8 sm:text-xl">
               Le venture parle une langue spécifique. La voici, définie sans jargon gratuit, avec les liens utiles pour revenir aux cours qui l’expliquent.
             </p>
           </div>
@@ -374,7 +398,7 @@ export default function GlossaryPage() {
 
         <div
           ref={stickyRef}
-          className="sticky top-14 z-30 -mx-4 mb-12 rounded-xl border-y border-[color-mix(in_srgb,var(--outline)_18%,transparent)] bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] px-4 py-3 shadow-editorial-sm backdrop-blur-xl lg:-mx-2 lg:top-0 lg:px-5"
+          className="sticky top-14 z-30 -mx-5 mb-8 rounded-none border-y border-[color-mix(in_srgb,var(--outline)_18%,transparent)] bg-[color-mix(in_srgb,var(--surface)_92%,transparent)] px-5 py-2.5 shadow-editorial-sm backdrop-blur-xl sm:-mx-4 sm:mb-12 sm:rounded-xl sm:px-4 sm:py-3 lg:-mx-2 lg:top-0 lg:px-5"
         >
           <section className="border-b border-[color-mix(in_srgb,var(--outline)_12%,transparent)] pb-3" aria-label="Navigation alphabétique">
             <div ref={alphabetScrollerRef} className="-mx-1 overflow-x-auto px-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -392,7 +416,7 @@ export default function GlossaryPage() {
                       onClick={() => jumpToLetter(letter)}
                       disabled={!hasLetter}
                       aria-current={isActive ? 'true' : undefined}
-                      className={`relative flex h-9 min-w-9 items-center justify-center rounded-full border px-2 font-headline text-xl leading-none transition-all ${
+                      className={`relative flex h-11 min-w-11 items-center justify-center rounded-full border px-2 font-headline text-xl leading-none transition-all lg:h-9 lg:min-w-9 ${
                         isActive
                           ? 'border-[color-mix(in_srgb,var(--primary)_42%,transparent)] bg-[color-mix(in_srgb,var(--primary)_12%,transparent)] text-[color:var(--primary)] shadow-editorial-xs'
                           : hasLetter
@@ -410,8 +434,8 @@ export default function GlossaryPage() {
           </section>
 
           <section className="pt-3" aria-label="Filtres du dictionnaire">
-            <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-              <div className="flex min-w-0 flex-1 items-center gap-3">
+            <div className="grid grid-cols-[minmax(0,1fr)_8.75rem] gap-2 lg:flex lg:items-center lg:gap-3">
+              <div className="hidden min-w-0 flex-1 items-center gap-3 lg:flex" role="group" aria-label="Domaines">
                 <p className="shrink-0 font-headline text-[0.625rem] uppercase tracking-[0.35em] text-[color-mix(in_srgb,var(--primary)_72%,transparent)] italic">
                   Domaines
                 </p>
@@ -446,27 +470,62 @@ export default function GlossaryPage() {
                   </div>
                 </div>
               </div>
-              <div className="relative w-full shrink-0 lg:w-72">
+              <div className="relative min-w-0 lg:w-72 lg:shrink-0">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-variant" aria-hidden />
                 <input
+                  ref={searchInputRef}
                   id="glossary-search"
                   name="glossary-search"
                   aria-label="Rechercher dans le lexique"
                   type="search"
-                  placeholder="Chercher..."
+                  placeholder="Rechercher"
                   value={query}
-                  onChange={(event) => {
-                    setQuery(event.target.value);
-                    if (event.target.value.trim()) setIsLetterFilterActive(false);
-                  }}
-                  className="w-full rounded-full border border-[color-mix(in_srgb,var(--outline)_18%,transparent)] bg-[color-mix(in_srgb,var(--surface-container-lowest)_72%,transparent)] py-2 pl-9 pr-4 font-headline text-sm italic outline-none transition-colors placeholder:text-surface-variant focus:border-[color-mix(in_srgb,var(--primary)_55%,transparent)]"
+                  onChange={(event) => updateQuery(event.target.value)}
+                  className={`h-11 w-full rounded-full border border-[color-mix(in_srgb,var(--outline)_18%,transparent)] bg-[color-mix(in_srgb,var(--surface-container-lowest)_72%,transparent)] py-0 pl-9 font-headline text-sm italic outline-none transition-colors placeholder:text-surface-variant focus:border-[color-mix(in_srgb,var(--primary)_55%,transparent)] lg:h-[2.375rem] lg:py-2 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none ${
+                    query ? 'pr-11' : 'pr-3'
+                  }`}
                 />
+                {query && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      updateQuery('');
+                      searchInputRef.current?.focus();
+                    }}
+                    className="absolute right-0 top-0 flex h-11 w-11 items-center justify-center rounded-full text-surface-variant transition-colors hover:bg-surface-container hover:text-foreground lg:h-[2.375rem] lg:w-10"
+                    aria-label="Effacer la recherche"
+                  >
+                    <X className="h-4 w-4" aria-hidden />
+                  </button>
+                )}
               </div>
+              <label className="relative block lg:hidden">
+                <span className="sr-only">Filtrer par domaine</span>
+                <select
+                  id="glossary-category"
+                  name="glossary-category"
+                  aria-label="Filtrer par domaine"
+                  value={activeCategory}
+                  onChange={(event) => selectCategory(event.target.value)}
+                  className="h-11 w-full appearance-none truncate rounded-full border border-[color-mix(in_srgb,var(--outline)_18%,transparent)] bg-[color-mix(in_srgb,var(--surface-container-lowest)_72%,transparent)] pl-3 pr-8 font-headline text-sm italic text-foreground outline-none transition-colors focus:border-[color-mix(in_srgb,var(--primary)_55%,transparent)]"
+                >
+                  <option value="Tous">Tous domaines</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-variant" aria-hidden />
+              </label>
             </div>
           </section>
         </div>
 
         <section id="glossary-results" className="mb-20 scroll-mt-[var(--glossary-anchor-offset)]">
+          <p className="sr-only" role="status" aria-live="polite" aria-atomic="true" aria-label="Résultats du dictionnaire">
+            {visibleTerms.length} résultat{visibleTerms.length > 1 ? 's' : ''} dans le dictionnaire.
+          </p>
           {filteredTerms.length === 0 ? (
             <div className="py-20 text-center">
               <p className="font-headline text-2xl italic text-surface-variant">Aucune entrée trouvée.</p>
@@ -486,7 +545,7 @@ export default function GlossaryPage() {
                 </span>
                 {isLetterFilterActive && availableSecondLetters.length > 1 && (
                   <div
-                    className="flex min-w-0 flex-1 items-center justify-end gap-3 self-center"
+                    className="hidden min-w-0 flex-1 items-center justify-end gap-3 self-center lg:flex"
                     role="group"
                     aria-label="Filtrer par deuxième lettre"
                   >
@@ -535,45 +594,36 @@ export default function GlossaryPage() {
                         key={term.id}
                         id={`term-${term.slug}`}
                         data-glossary-initial={initialFor(term.term)}
-                        className={`scroll-mt-[var(--glossary-anchor-offset)] rounded-lg border-b border-[color-mix(in_srgb,var(--outline)_12%,transparent)] px-4 py-6 transition-all -mx-4 ${
+                        className={`scroll-mt-[var(--glossary-anchor-offset)] -mx-5 border-b border-[color-mix(in_srgb,var(--outline)_12%,transparent)] px-5 py-5 transition-colors sm:-mx-4 sm:rounded-lg sm:px-4 sm:py-6 ${
                           isExpanded ? 'bg-surface-container-low' : 'hover:bg-surface-container-low/70'
                         }`}
                       >
                         <button
                           type="button"
-                          className="grid w-full cursor-pointer grid-cols-12 items-start gap-6 text-left"
+                          className="grid w-full cursor-pointer grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-x-3 gap-y-3 text-left md:grid-cols-12 md:gap-6"
                           onClick={() => toggleTerm(term)}
                           aria-expanded={isExpanded}
                           aria-controls={isExpanded ? detailsId : undefined}
                         >
-                          <div className="col-span-12 flex items-start gap-4 md:col-span-4">
-                            <span
-                              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-headline text-xl font-medium italic"
-                              style={{ backgroundColor: `${color}15`, color }}
-                              aria-hidden
-                            >
-                              {initialFor(term.term)}
-                            </span>
-                            <span>
-                              <span className="block font-headline text-2xl leading-tight">{term.term}</span>
-                              {term.latin && <span className="mt-1 block font-headline text-sm italic text-surface-variant">{term.latin}</span>}
-                              <span className="mt-2 block font-mono text-[0.5625rem] uppercase tracking-[0.25em]" style={{ color }}>
-                                {term.category}
-                              </span>
+                          <div className="col-start-2 row-start-1 min-w-0 md:col-span-4 md:col-start-auto md:row-start-auto">
+                            <span className="block font-headline text-[1.375rem] leading-tight md:text-2xl">{term.term}</span>
+                            {term.latin && <span className="mt-1 block font-headline text-sm italic text-surface-variant">{term.latin}</span>}
+                            <span className="mt-1.5 block font-mono text-[0.625rem] uppercase tracking-[0.18em] md:mt-2 md:text-[0.5625rem] md:tracking-[0.25em]" style={{ color }}>
+                              {term.category}
                             </span>
                           </div>
-                          <div className="col-span-11 md:col-span-7">
-                            <p className="text-[0.95rem] leading-relaxed text-foreground/85">{term.short}</p>
-                          </div>
-                          <div className="col-span-1 flex justify-end">
-                            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--outline)_12%,transparent)] transition-colors hover:border-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-primary-foreground" aria-hidden>
+                          <p className="col-start-2 row-start-2 text-base leading-relaxed text-foreground/85 md:col-span-7 md:col-start-auto md:row-start-auto md:text-[0.95rem]">
+                            {term.short}
+                          </p>
+                          <div data-glossary-disclosure className="col-start-1 row-start-1 flex justify-start md:col-span-1 md:col-start-auto md:row-start-auto md:justify-end">
+                            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--outline)_12%,transparent)] transition-colors hover:border-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-primary-foreground md:h-9 md:w-9" aria-hidden>
                               {isExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
                             </span>
                           </div>
                         </button>
 
                         {isExpanded && (
-                          <div id={detailsId} className="mt-6 grid grid-cols-12 gap-6 md:pl-16">
+                          <div id={detailsId} className="mt-4 grid grid-cols-12 gap-5 border-t border-[color-mix(in_srgb,var(--outline)_12%,transparent)] pt-5 md:mt-6 md:gap-6 md:border-t-0 md:pt-0">
                             <div className="col-span-12 md:col-span-8">
                               <p className="mb-2 font-headline text-[0.625rem] uppercase tracking-[0.45em] text-[color-mix(in_srgb,var(--primary)_72%,transparent)] italic">
                                 Définition détaillée
@@ -582,7 +632,7 @@ export default function GlossaryPage() {
                                 <Markdown
                                   source={term.definition}
                                   glossaryPreview
-                                  className="mb-5 text-sm leading-relaxed text-surface-variant [&>p]:mb-3 [&>p:last-child]:mb-0 [&_ol]:mb-5 [&_ul]:mb-5"
+                                  className="mb-5 text-base leading-relaxed text-surface-variant md:text-sm [&>p]:mb-3 [&>p:last-child]:mb-0 [&_ol]:mb-5 [&_ul]:mb-5"
                                 />
                               ) : (
                                 <DefinitionSkeleton />
@@ -611,7 +661,7 @@ export default function GlossaryPage() {
                                   <p className="mb-2 mt-6 font-headline text-[0.625rem] uppercase tracking-[0.45em] text-[color-mix(in_srgb,var(--primary)_72%,transparent)] italic">
                                     Exemple
                                   </p>
-                                  <pre className="whitespace-pre-wrap rounded-md bg-surface-container/70 p-4 font-mono text-xs leading-relaxed text-surface-variant">
+                                  <pre className="whitespace-pre-wrap rounded-md bg-surface-container/70 p-4 font-mono text-sm leading-relaxed text-surface-variant md:text-xs">
                                     {term.example}
                                   </pre>
                                 </>
