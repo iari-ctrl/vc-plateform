@@ -1,19 +1,25 @@
 import { useEffect, useId, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { Link } from 'react-router-dom';
 
 import { HOME_BAR_WORDMARK_ACCENT, HOME_FORMATION, HOME_INTELLIGENCE } from '@/components/chrome/homeBar';
 import { cn } from '@/lib/utils';
 
-const BRIDGE_TITLE = 'Une plateforme française d’intelligence VC enrichie par une formation.';
-const FORMATION_DESCRIPTION = 'Choisir un parcours, consulter la bibliothèque, reprendre une leçon ou apprendre par thème.';
-const CENTER_DESCRIPTION =
-  "Une plateforme d'intelligence VC pour praticiens : dossiers d'écosystème, convictions datées, décisions instruites — et la formation qui les soutient.";
+const BRIDGE_TITLE = 'Deux pôles pour apprendre et analyser.';
+const FORMATION_DESCRIPTION = 'Parcours, certifications, bibliothèque et dictionnaire structurent l’apprentissage.';
 const INTELLIGENCE_DESCRIPTION =
-  'Lire les analyses, convictions, dossiers et méthodes pour comprendre les signaux avant d’entrer dans un parcours.';
+  'Analyses, dossiers, convictions et méthode structurent la lecture des marchés et des décisions.';
 
-const DESKTOP_LEFT_PATH = 'M 8 168 C 8 -56 540 -56 540 168';
-const DESKTOP_RIGHT_PATH = 'M 992 168 C 992 -56 460 -56 460 168';
-const MOBILE_LEFT_PATH = 'M 8 300 C 8 -88 992 -88 992 300';
-const MOBILE_RIGHT_PATH = 'M 992 18 C 992 405 8 405 8 18';
+// The reference arches are not ellipse halves: they use two cubic segments with
+// a 3.174:1 span-to-rise ratio and a broad, nearly flat crown. These coordinates
+// preserve that measured profile in the bridge's existing responsive viewBoxes.
+const DESKTOP_LEFT_PATH =
+  'M 8 168 C 33.30 74.81 127.09 0.40 274.00 0.40 C 420.91 0.40 517.31 74.81 540 168';
+const DESKTOP_RIGHT_PATH =
+  'M 992 168 C 969.31 74.81 872.91 0.40 726.00 0.40 C 579.09 0.40 485.30 74.81 460 168';
+const MOBILE_LEFT_PATH =
+  'M 8 300 C 54.79 127.64 228.28 -9.99 500.00 -9.99 C 771.72 -9.99 950.02 127.64 992 300';
+const MOBILE_RIGHT_PATH =
+  'M 992 18 C 950.02 190.36 771.72 327.99 500.00 327.99 C 228.28 327.99 54.79 190.36 8 18';
 
 const EASING = '.76 0 .24 1';
 
@@ -76,35 +82,36 @@ function Wordmark({ className }: { className?: string }) {
   );
 }
 
+function PillarLink({ className, label, to }: { className?: string; label: string; to: string }) {
+  return (
+    <Link
+      to={to}
+      className={cn(
+        'inline-flex w-fit font-mono text-[0.68rem] font-medium uppercase tracking-[0.24em] transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--primary)]',
+        className,
+      )}
+    >
+      {label}
+    </Link>
+  );
+}
+
 function AnimatedMarker({
   pathId,
   marker,
   markerSize,
-  begin = '0s',
 }: {
   pathId: string;
   marker: ArcMarker;
   markerSize: number;
-  begin?: string;
 }) {
   const offset = -markerSize / 2;
-  const delayed = begin !== '0s';
 
   return (
-    <g opacity={delayed ? 0 : undefined}>
-      {delayed ? (
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          keyTimes="0;1"
-          dur="0.001s"
-          begin={begin}
-          fill="freeze"
-        />
-      ) : null}
+    <g>
       <animateMotion
         dur="4s"
-        begin={begin}
+        begin="0s"
         repeatCount="indefinite"
         calcMode="spline"
         keyTimes="0;1"
@@ -117,7 +124,7 @@ function AnimatedMarker({
           attributeName="transform"
           type="scale"
           dur="4s"
-          begin={begin}
+          begin="0s"
           repeatCount="indefinite"
           calcMode="spline"
           values="0;1.15;1;1;0"
@@ -207,14 +214,9 @@ function ArcDiagram({
         </>
       ) : (
         <>
-          <AnimatedMarker
-            begin={leftMarker === 'intelligence' ? '1s' : '0s'}
-            marker={leftMarker}
-            markerSize={markerSize}
-            pathId={leftPathId}
-          />
+          <AnimatedMarker marker={leftMarker} markerSize={markerSize} pathId={leftPathId} />
           {rightPathId ? (
-            <AnimatedMarker begin="1s" marker="intelligence" markerSize={markerSize} pathId={rightPathId} />
+            <AnimatedMarker marker="intelligence" markerSize={markerSize} pathId={rightPathId} />
           ) : null}
         </>
       )}
@@ -335,9 +337,7 @@ export function HomeEditorialBridge() {
 
         <div className="mt-14 lg:hidden">
           <div className="max-w-[35rem]">
-            <p className="font-mono text-[0.68rem] font-medium uppercase tracking-[0.24em] text-[color:var(--primary)]">
-              {HOME_FORMATION.label}
-            </p>
+            <PillarLink className="text-[color:var(--primary)]" label={HOME_FORMATION.label} to={HOME_FORMATION.to} />
             <p className="mt-4 text-sm leading-relaxed text-surface-variant text-pretty sm:text-base">
               {FORMATION_DESCRIPTION}
             </p>
@@ -354,9 +354,6 @@ export function HomeEditorialBridge() {
 
           <div className="mx-auto mt-3 max-w-[36rem] text-center">
             <Wordmark className="text-[0.86rem] sm:text-[1rem]" />
-            <p className="mt-4 text-sm leading-relaxed text-surface-variant text-pretty sm:text-base">
-              {CENTER_DESCRIPTION}
-            </p>
           </div>
 
           <MobileArc
@@ -369,9 +366,7 @@ export function HomeEditorialBridge() {
           />
 
           <div className="ml-auto mt-7 max-w-[35rem] text-right">
-            <p className="font-mono text-[0.68rem] font-medium uppercase tracking-[0.24em] text-[color:var(--secondary)]">
-              {HOME_INTELLIGENCE.label}
-            </p>
+            <PillarLink className="ml-auto text-[color:var(--secondary)]" label={HOME_INTELLIGENCE.label} to={HOME_INTELLIGENCE.to} />
             <p className="mt-4 text-sm leading-relaxed text-surface-variant text-pretty sm:text-base">
               {INTELLIGENCE_DESCRIPTION}
             </p>
@@ -392,14 +387,18 @@ export function HomeEditorialBridge() {
           />
 
           <div className="mt-5 grid grid-cols-[1fr_auto_1fr] items-end gap-6 font-mono text-[0.68rem] font-medium uppercase tracking-[0.26em]">
-            <p className="text-left text-[color:var(--primary)]">{HOME_FORMATION.label}</p>
+            <PillarLink className="text-left tracking-[0.26em] text-[color:var(--primary)]" label={HOME_FORMATION.label} to={HOME_FORMATION.to} />
             <Wordmark className="text-center text-[0.9rem] tracking-[0.2em]" />
-            <p className="text-right text-[color:var(--secondary)]">{HOME_INTELLIGENCE.label}</p>
+            <PillarLink
+              className="ml-auto text-right tracking-[0.26em] text-[color:var(--secondary)]"
+              label={HOME_INTELLIGENCE.label}
+              to={HOME_INTELLIGENCE.to}
+            />
           </div>
 
-          <div className="mt-5 grid grid-cols-3 gap-8 border-t border-outline-variant pt-6 text-sm leading-relaxed text-surface-variant">
+          <div className="mt-5 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] gap-8 border-t border-outline-variant pt-6 text-sm leading-relaxed text-surface-variant">
             <p className="text-left text-pretty">{FORMATION_DESCRIPTION}</p>
-            <p className="text-center text-pretty">{CENTER_DESCRIPTION}</p>
+            <span aria-hidden="true" className="w-px bg-outline-variant" />
             <p className="text-right text-pretty">{INTELLIGENCE_DESCRIPTION}</p>
           </div>
         </div>

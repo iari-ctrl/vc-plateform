@@ -24,7 +24,7 @@ import {
  *
  * Desktop (≥lg): the panel is parked off-screen and made `inert` while closed,
  * so its links leave the tab order *and* the accessibility tree (no focusable
- * content stranded in a hidden subtree). A small VC Premium logo plus a discreet
+ * content stranded in a hidden subtree). A small Maison Sapience VC logo plus a discreet
  * focusable "open navigation" handle stay pinned in the top-left gutter. Hover
  * on that handle or on the viewport's left edge, click, or keyboard focus slides
  * the full panel out as an overlay (and clears `inert`, so focus can then move

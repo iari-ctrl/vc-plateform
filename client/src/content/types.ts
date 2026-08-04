@@ -1,3 +1,5 @@
+import type { FurtherReadingKind } from '@shared/further-reading-contract.mjs';
+
 export type Level = 'debutant' | 'intermediaire' | 'avance' | 'tous';
 
 export interface Course {
@@ -22,7 +24,7 @@ export interface QuizQuestion {
 
 export interface FurtherReading {
   label: string;
-  kind: 'lesson' | 'simulator' | 'case' | 'glossary' | 'course' | 'deliverable' | 'external';
+  kind: FurtherReadingKind;
   ref: string;
 }
 

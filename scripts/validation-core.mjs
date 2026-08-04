@@ -1,4 +1,11 @@
 import { safeEditorialUrl } from '../shared/editorial-url.mjs';
+import {
+  createFurtherReadingTargetRegistry,
+  isInternalFurtherReadingKind,
+  resolveFurtherReadingTarget,
+} from '../shared/further-reading-contract.mjs';
+
+export { FURTHER_READING_KINDS, INTERNAL_FURTHER_READING_KINDS } from '../shared/further-reading-contract.mjs';
 
 function recordId(record, index) {
   return record?.id ?? record?.slug ?? `#${index + 1}`;
@@ -107,6 +114,24 @@ export function findReferenceErrors(records, { collection, refsFor, validIds, re
       if (!validIds.has(ref)) errors.push(`${collection} ${id}: unknown ${reference} "${ref}".`);
     }
   });
+  return errors;
+}
+
+export function validateFurtherReadingReferences(records, { collection, targetRecordsByKind }) {
+  const registry = createFurtherReadingTargetRegistry(targetRecordsByKind);
+  const errors = [];
+
+  records.forEach((record, index) => {
+    const id = recordId(record, index);
+    for (const reference of record?.furtherReading ?? []) {
+      if (reference?.kind === 'external') continue;
+      if (!isInternalFurtherReadingKind(reference?.kind)) continue;
+      if (!resolveFurtherReadingTarget(registry, reference.kind, reference.ref)) {
+        errors.push(`${collection}/${id}.furtherReading — ${reference.kind} introuvable par ID : "${reference.ref}"`);
+      }
+    }
+  });
+
   return errors;
 }
 

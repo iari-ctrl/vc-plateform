@@ -3,6 +3,27 @@ import { describe, expect, it } from 'vitest';
 import { furtherReadingHref } from './furtherReadingHref';
 
 describe('furtherReadingHref', () => {
+  it('résout un simulateur depuis son ID canonique vers son slug public', () => {
+    expect(furtherReadingHref({
+      kind: 'simulator',
+      ref: 'power-law',
+      label: 'Simuler un portefeuille power law',
+    })).toBe('/simulators/power-law-portfolio');
+    expect(furtherReadingHref({
+      kind: 'simulator',
+      ref: 'pre-post-money',
+      label: 'Calculer une valorisation pré/post-money',
+    })).toBe('/simulators/valorisation-pre-post-money');
+  });
+
+  it('ne transforme pas un slug en référence interne valide', () => {
+    expect(furtherReadingHref({
+      kind: 'simulator',
+      ref: 'power-law-portfolio',
+      label: 'Slug public utilisé à tort comme référence interne',
+    })).toBeUndefined();
+  });
+
   it('résout un livrable par son identifiant canonique', () => {
     expect(furtherReadingHref({
       kind: 'deliverable',

@@ -1,5 +1,4 @@
 import { useState, type CSSProperties } from 'react';
-import { Link } from 'react-router-dom';
 import { Moon, Sun } from 'lucide-react';
 import { CompassRose, NightSkyBackdrop } from '@/components/ornaments/Illustrations';
 import { Fleuron } from '@/components/ornaments/Ornaments';
@@ -43,15 +42,14 @@ export default function HomePage() {
                   : undefined
               }
             >
-              <Link
-                to="/dashboard"
-                aria-label="Ouvrir le tableau de bord"
+              <div
+                aria-hidden="true"
                 data-testid="home-compass"
-                className="mx-auto mb-8 block w-fit drop-shadow-[0_6px_18px_color-mix(in_srgb,var(--primary)_32%,transparent)] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--primary)] sm:mb-10"
+                className="mx-auto mb-8 w-fit drop-shadow-[0_6px_18px_color-mix(in_srgb,var(--primary)_32%,transparent)] sm:mb-10"
               >
-                <CompassRose size={96} className="sm:hidden" />
-                <CompassRose size={120} className="hidden sm:block" />
-              </Link>
+                <CompassRose size={96} floating={false} className="cursor-default sm:hidden" />
+                <CompassRose size={120} floating={false} className="hidden cursor-default sm:block" />
+              </div>
 
               <h1
                 aria-label="Documenter le raisonnement. Affûter le jugement."
@@ -94,7 +92,7 @@ export default function HomePage() {
       >
         <span
           aria-hidden
-          className="absolute left-1/2 top-[calc(var(--home-topbar-h)/2)] grid h-[min(2rem,var(--home-topbar-h))] w-[min(2rem,var(--home-topbar-h))] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-outline-variant bg-[color-mix(in_srgb,var(--surface)_66%,transparent)] backdrop-blur-md transition-colors group-hover:border-[color:var(--primary)] group-focus-visible:border-[color:var(--primary)] md:top-1/2"
+          className="absolute left-1/2 top-[calc(var(--home-topbar-h)/2)] grid h-5 w-5 -translate-x-1/2 -translate-y-1/2 place-items-center md:top-1/2"
         >
           {theme === 'dark' ? <Sun size={18} aria-hidden /> : <Moon size={18} aria-hidden />}
         </span>

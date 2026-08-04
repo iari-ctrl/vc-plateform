@@ -385,7 +385,7 @@ function HomePillarMenu({
 
   const isIntelligenceHomeMenu = pillar.id === HOME_INTELLIGENCE.id;
   const isViewportBottom = placement === 'viewport-bottom';
-  const chevronLeadsCompactFormation = isViewportBottom && side === 'left';
+  const chevronLeadsFormation = side === 'left';
   const chevronIcon = (
     <ChevronDown
       size={14}
@@ -437,9 +437,9 @@ function HomePillarMenu({
           side === 'right' && 'text-right',
         )}
       >
-        {chevronLeadsCompactFormation && chevronIcon}
+        {chevronLeadsFormation && chevronIcon}
         <span className="whitespace-nowrap">{pillar.label}</span>
-        {!chevronLeadsCompactFormation && chevronIcon}
+        {!chevronLeadsFormation && chevronIcon}
       </button>
 
       {open && (

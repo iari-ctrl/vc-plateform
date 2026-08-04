@@ -22,10 +22,12 @@ import { dirname, join } from 'node:path';
 import { z } from 'zod';
 import { safeEditorialUrl } from '../shared/editorial-url.mjs';
 import {
+  FURTHER_READING_KINDS,
   findEditorialToneErrors,
   findMarkdownLinkErrors,
   shouldFailValidation,
   validateCanonicalGlossaryPublication,
+  validateFurtherReadingReferences,
   validateParcoursRelations,
 } from './validation-core.mjs';
 
@@ -138,7 +140,7 @@ const quizQuestionSchema = z.object({
 
 const furtherReadingSchema = z.object({
   label: nonEmpty,
-  kind: z.enum(['lesson', 'simulator', 'case', 'glossary', 'course', 'deliverable', 'external']),
+  kind: z.enum(FURTHER_READING_KINDS),
   ref: nonEmpty,
 }).strict();
 
@@ -1340,19 +1342,25 @@ for (const l of allLessons) {
       }
     }
   }
+}
+
+validateFurtherReadingReferences(allLessons, {
+  collection: 'lessons',
+  targetRecordsByKind: {
+    lesson: allLessons,
+    simulator: simulators,
+    case: cases,
+    glossary,
+    course: courses,
+    deliverable: deliverables,
+  },
+}).forEach(err);
+
+for (const l of allLessons) {
   for (const fr of l.furtherReading ?? []) {
-    const resolvers = {
-      lesson: (r) => lessonIds.has(r),
-      course: (r) => courseIds.has(r),
-      simulator: (r) => simRefs.has(r),
-      case: (r) => caseRefs.has(r),
-      glossary: isGlossary,
-      deliverable: (r) => deliverableIds.has(r),
-      external: (r) => Boolean(safeEditorialUrl(r)),
-    };
-    const resolve = resolvers[fr.kind];
-    if (!resolve) warn(`lessons/${l.id}.furtherReading — type inconnu "${fr.kind}" (réf "${fr.ref}" non vérifiée)`);
-    else if (!resolve(fr.ref)) err(`lessons/${l.id}.furtherReading — ${fr.kind} introuvable : "${fr.ref}"`);
+    if (fr.kind === 'external' && !safeEditorialUrl(fr.ref)) {
+      err(`lessons/${l.id}.furtherReading — external introuvable par URL sûre : "${fr.ref}"`);
+    }
   }
 }
 const validateCourseRequirement = (certificationId, requirement) => {

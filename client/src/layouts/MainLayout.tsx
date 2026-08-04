@@ -58,7 +58,7 @@ export function MainLayout() {
           <main ref={mainRef} id="main" className={cn('flex-1 outline-none', hasSideNav && 'pt-14 lg:pt-0')} tabIndex={-1}>
             <Outlet />
           </main>
-          {!isSplash && <Footer />}
+          {!isSplash && <Footer compactHome={isHome} />}
         </div>
       </div>
     </HomeIntroProvider>

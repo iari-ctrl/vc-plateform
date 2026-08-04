@@ -11,6 +11,7 @@ const HERO_COPY =
   "Une plateforme d'intelligence VC pour praticiens : dossiers d'écosystème, convictions datées, décisions instruites — et la formation qui les soutient.";
 const HERO_INTENT_NOTE =
   "L'ikigai n'est pas un point fixe à atteindre. C'est un centre de gravité qui se déplace avec toi. Le capital-risque, par sa temporalité longue force précisément à se demander : où sera ce centre dans une décennie ?";
+const BRIDGE_TITLE = 'Deux pôles pour apprendre et analyser.';
 
 const rect = (left: number, top: number, right: number, bottom: number) =>
   ({
@@ -88,6 +89,10 @@ describe('accueil — contrat éditorial et navigation', () => {
     expect(controls[0]).toHaveAccessibleName('Formation');
     expect(controls[1]).toHaveAccessibleName('Rechercher depuis Maison Sapience VC');
     expect(controls[2]).toHaveAccessibleName('Intelligence VC');
+    expect(controls[0].firstElementChild?.tagName.toLowerCase()).toBe('svg');
+    expect(controls[0].lastElementChild).toHaveTextContent('Formation');
+    expect(controls[2].firstElementChild).toHaveTextContent('Intelligence VC');
+    expect(controls[2].lastElementChild?.tagName.toLowerCase()).toBe('svg');
     expect(within(controls[1]).getByText('Sapience VC')).toHaveClass('font-semibold');
     expect(within(banner).queryByText('Workspace')).not.toBeInTheDocument();
     expect(within(banner).queryByRole('button', { name: /mode (clair|sombre)/i })).not.toBeInTheDocument();
@@ -553,7 +558,6 @@ describe('accueil — contrat éditorial et navigation', () => {
 
   it('conserve la copie du hero, puis place la note d’intention dans une section dédiée sous le hero', async () => {
     renderAppAt('/home');
-    const sections = document.querySelectorAll('main section');
 
     expect(
       await screen.findByRole('heading', {
@@ -561,8 +565,12 @@ describe('accueil — contrat éditorial et navigation', () => {
         name: 'Documenter le raisonnement. Affûter le jugement.',
       }),
     ).toBeInTheDocument();
+    const sections = document.querySelectorAll('main section');
     expect(within(sections[0] as HTMLElement).getByText(HERO_COPY)).toBeInTheDocument();
-    expect(screen.getByTestId('home-compass')).toBeInTheDocument();
+    const compass = screen.getByTestId('home-compass');
+    expect(compass).toBeInTheDocument();
+    expect(compass).not.toHaveAttribute('href');
+    expect(screen.queryByRole('link', { name: 'Ouvrir le tableau de bord' })).not.toBeInTheDocument();
     expect(sections).toHaveLength(3);
     expect(within(sections[0] as HTMLElement).queryByText(HERO_INTENT_NOTE)).not.toBeInTheDocument();
     expect(
@@ -570,8 +578,11 @@ describe('accueil — contrat éditorial et navigation', () => {
     ).toBeInTheDocument();
     expect(within(sections[2] as HTMLElement).getByText('Note d’intention')).toHaveClass('eyebrow');
     const footer = screen.getByRole('contentinfo');
-    expect(within(footer).getByText(/VC Premium Experience — une plateforme d’intelligence VC/)).toBeInTheDocument();
-    expect(within(footer).getByText('Analyser, apprendre, décider.')).toBeInTheDocument();
+    expect(within(footer).getByRole('link', { name: 'Maison Sapience VC' })).toHaveAttribute('href', '/home');
+    expect(within(footer).getByRole('link', { name: 'Formation' })).toHaveAttribute('href', '/parcours');
+    expect(within(footer).getByRole('link', { name: 'Intelligence VC' })).toHaveAttribute('href', '/intelligence');
+    expect(within(footer).queryByText('Workspace')).not.toBeInTheDocument();
+    expect(within(footer).queryByText(/VC Premium Experience/)).not.toBeInTheDocument();
     expect(screen.queryByText('Choisir d’abord le terrain de travail.')).not.toBeInTheDocument();
     expect(screen.queryByText('Les analyses publiées récemment restent disponibles.')).not.toBeInTheDocument();
   });
@@ -582,21 +593,19 @@ describe('accueil — contrat éditorial et navigation', () => {
     const sections = document.querySelectorAll('main section');
     const bridgeSection = sections[1] as HTMLElement;
 
-    expect(bridgeSection).toHaveAccessibleName('Une plateforme française d’intelligence VC enrichie par une formation.');
+    expect(bridgeSection).toHaveAccessibleName(BRIDGE_TITLE);
     expect(
       within(bridgeSection).getByRole('heading', {
         level: 2,
-        name: 'Une plateforme française d’intelligence VC enrichie par une formation.',
+        name: BRIDGE_TITLE,
       }),
     ).toBeInTheDocument();
-    expect(bridgeSection).toHaveTextContent('Formation');
+    expect(within(bridgeSection).getAllByRole('link', { name: 'Formation' })[0]).toHaveAttribute('href', '/parcours');
     expect(bridgeSection).toHaveTextContent('Maison Sapience VC');
-    expect(bridgeSection).toHaveTextContent('Intelligence VC');
-    expect(bridgeSection).toHaveTextContent('Choisir un parcours, consulter la bibliothèque, reprendre une leçon ou apprendre par thème.');
-    expect(bridgeSection).toHaveTextContent(HERO_COPY);
-    expect(bridgeSection).toHaveTextContent(
-      'Lire les analyses, convictions, dossiers et méthodes pour comprendre les signaux avant d’entrer dans un parcours.',
-    );
+    expect(within(bridgeSection).getAllByRole('link', { name: 'Intelligence VC' })[0]).toHaveAttribute('href', '/intelligence');
+    expect(bridgeSection).toHaveTextContent('Parcours, certifications, bibliothèque et dictionnaire structurent l’apprentissage.');
+    expect(bridgeSection).not.toHaveTextContent(HERO_COPY);
+    expect(bridgeSection).toHaveTextContent('Analyses, dossiers, convictions et méthode structurent la lecture des marchés et des décisions.');
     expect(bridgeSection).not.toHaveTextContent('Workspace');
 
     const decorativeSvgs = bridgeSection.querySelectorAll('svg[data-home-bridge-svg]');
@@ -611,7 +620,7 @@ describe('accueil — contrat éditorial et navigation', () => {
     expect(markerFills.filter((fill) => fill === 'var(--secondary)')).toHaveLength(4);
   });
 
-  it('dessine sur desktop deux demi-ellipses larges avec un chevauchement central', async () => {
+  it('dessine sur desktop deux arches au profil mesuré sur la référence', async () => {
     renderAppAt('/home');
 
     const bridgeSection = document.querySelectorAll('main section')[1] as HTMLElement;
@@ -621,11 +630,17 @@ describe('accueil — contrat éditorial et navigation', () => {
 
     expect(desktopSvg).toHaveAttribute('viewBox', '0 0 1000 171');
     expect(desktopSvg).toHaveClass('aspect-[5.85/1]');
-    expect(leftPath).toHaveAttribute('d', 'M 8 168 C 8 -56 540 -56 540 168');
-    expect(rightPath).toHaveAttribute('d', 'M 992 168 C 992 -56 460 -56 460 168');
+    expect(leftPath).toHaveAttribute(
+      'd',
+      'M 8 168 C 33.30 74.81 127.09 0.40 274.00 0.40 C 420.91 0.40 517.31 74.81 540 168',
+    );
+    expect(rightPath).toHaveAttribute(
+      'd',
+      'M 992 168 C 969.31 74.81 872.91 0.40 726.00 0.40 C 579.09 0.40 485.30 74.81 460 168',
+    );
   });
 
-  it('forme sur mobile un ovale ouvert avec un arc supérieur et un arc inférieur', async () => {
+  it('forme sur mobile un ovale ouvert avec le même profil d’arche', async () => {
     renderAppAt('/home');
 
     const bridgeSection = document.querySelectorAll('main section')[1] as HTMLElement;
@@ -635,12 +650,18 @@ describe('accueil — contrat éditorial et navigation', () => {
     expect(upperPaths).toHaveLength(3);
     expect(lowerPaths).toHaveLength(3);
     for (const path of upperPaths) {
-      expect(path).toHaveAttribute('d', 'M 8 300 C 8 -88 992 -88 992 300');
+      expect(path).toHaveAttribute(
+        'd',
+        'M 8 300 C 54.79 127.64 228.28 -9.99 500.00 -9.99 C 771.72 -9.99 950.02 127.64 992 300',
+      );
       expect(path.closest('svg')).toHaveAttribute('viewBox', '0 0 1000 318');
       expect(path.closest('svg')).toHaveClass('aspect-[3.15/1]');
     }
     for (const path of lowerPaths) {
-      expect(path).toHaveAttribute('d', 'M 992 18 C 992 405 8 405 8 18');
+      expect(path).toHaveAttribute(
+        'd',
+        'M 992 18 C 950.02 190.36 771.72 327.99 500.00 327.99 C 228.28 327.99 54.79 190.36 8 18',
+      );
       expect(path.closest('svg')).toHaveAttribute('viewBox', '0 0 1000 318');
       expect(path.closest('svg')).toHaveClass('aspect-[3.15/1]');
     }
@@ -651,26 +672,34 @@ describe('accueil — contrat éditorial et navigation', () => {
     expect(lowerPaths.at(-1)?.closest('svg')?.nextElementSibling).toHaveClass('mt-7');
   });
 
-  it('décale les marqueurs Intelligence sans les afficher à l’origine avant leur départ', async () => {
+  it('fait démarrer simultanément les marqueurs et les anime continuellement', async () => {
     renderAppAt('/home');
 
+    await screen.findByRole('heading', {
+      level: 2,
+      name: BRIDGE_TITLE,
+    });
+
     const bridgeSection = document.querySelectorAll('main section')[1] as HTMLElement;
-    const immediateMotions = bridgeSection.querySelectorAll('animateMotion[begin="0s"]');
-    const delayedMotions = [...bridgeSection.querySelectorAll<SVGAnimateMotionElement>('animateMotion[begin="1s"]')];
+    const motions = [...bridgeSection.querySelectorAll<SVGAnimateMotionElement>('animateMotion')];
+    const motionPaths = motions.map((motion) => motion.querySelector('mpath')?.getAttribute('href') ?? '');
 
-    expect(immediateMotions).toHaveLength(4);
-    expect(delayedMotions).toHaveLength(4);
+    expect(motions).toHaveLength(8);
+    expect(bridgeSection.querySelectorAll('animateMotion[begin="1s"]')).toHaveLength(0);
+    expect(bridgeSection.querySelectorAll('animateMotion[repeatCount="indefinite"]')).toHaveLength(8);
+    expect(bridgeSection.querySelectorAll('animateTransform[repeatCount="indefinite"]')).toHaveLength(8);
+    expect(bridgeSection.querySelectorAll('g[opacity="0"]')).toHaveLength(0);
 
-    for (const motion of delayedMotions) {
-      const markerGroup = motion.parentElement;
-      const reveal = [...(markerGroup?.querySelectorAll('animate') ?? [])].find(
-        (animation) => animation.getAttribute('attributeName') === 'opacity',
-      );
-
-      expect(markerGroup).toHaveAttribute('opacity', '0');
-      expect(reveal).toHaveAttribute('begin', '1s');
-      expect(reveal).toHaveAttribute('fill', 'freeze');
+    for (const motion of motions) {
+      expect(motion).toHaveAttribute('begin', '0s');
+      expect(motion).toHaveAttribute('repeatCount', 'indefinite');
+      expect(motion).not.toHaveAttribute('fill', 'freeze');
     }
+
+    expect(motionPaths.filter((href) => href.includes('desktop-left'))).toHaveLength(1);
+    expect(motionPaths.filter((href) => href.includes('desktop-right'))).toHaveLength(1);
+    expect(motionPaths.filter((href) => href.includes('mobile-left'))).toHaveLength(3);
+    expect(motionPaths.filter((href) => href.includes('mobile-right'))).toHaveLength(3);
   });
 
   it('rend le schéma statique quand la réduction du mouvement est demandée', async () => {
@@ -732,15 +761,18 @@ describe('accueil — contrat éditorial et navigation', () => {
       'absolute',
       'left-1/2',
       'top-[calc(var(--home-topbar-h)/2)]',
-      'h-[min(2rem,var(--home-topbar-h))]',
-      'w-[min(2rem,var(--home-topbar-h))]',
       '-translate-x-1/2',
       '-translate-y-1/2',
+      'md:top-1/2',
+    );
+    expect(themeToggle.firstElementChild).not.toHaveClass(
+      'h-[min(2rem,var(--home-topbar-h))]',
+      'w-[min(2rem,var(--home-topbar-h))]',
       'rounded-full',
       'border',
       'border-outline-variant',
+      'bg-[color-mix(in_srgb,var(--surface)_66%,transparent)]',
       'backdrop-blur-md',
-      'md:top-1/2',
     );
     expect(themeToggle).not.toHaveClass('md:top-[calc(var(--home-topbar-h)+1rem)]');
     expect(themeToggle).not.toHaveClass('bottom-5', 'sm:bottom-7');
@@ -749,14 +781,12 @@ describe('accueil — contrat éditorial et navigation', () => {
     expect(themeToggle).not.toHaveClass('sm:mt-12');
   });
 
-  it('envoie vers le tableau de bord au clic sur la boussole du hero', async () => {
-    const user = userEvent.setup();
-
+  it('conserve la boussole du hero sans action cachée vers le dashboard', async () => {
     renderAppAt('/home');
-    const compassLink = await screen.findByRole('link', { name: 'Ouvrir le tableau de bord' });
 
-    expect(compassLink).toHaveAttribute('href', '/dashboard');
-    await user.click(compassLink);
-    expect(await screen.findByRole('heading', { level: 1, name: 'Bonjour.' })).toBeInTheDocument();
+    await screen.findByRole('heading', { level: 1, name: 'Documenter le raisonnement. Affûter le jugement.' });
+    expect(screen.getByTestId('home-compass')).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Ouvrir le tableau de bord' })).not.toBeInTheDocument();
+    expect(document.querySelector('a[href="/dashboard"]')).not.toBeInTheDocument();
   });
 });

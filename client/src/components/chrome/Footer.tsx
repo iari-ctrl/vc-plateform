@@ -4,7 +4,34 @@ import { FleuronDivider } from '@/components/ornaments/Ornaments';
 import { ExLibris } from '@/components/ornaments/Illustrations';
 import { NAVIGATION_PILLARS } from '@/lib/navigation';
 
-export function Footer() {
+const HOME_FOOTER_PILLARS = [
+  NAVIGATION_PILLARS.find((pillar) => pillar.id === 'formation'),
+  NAVIGATION_PILLARS.find((pillar) => pillar.id === 'intelligence'),
+].filter((pillar): pillar is NonNullable<typeof pillar> => Boolean(pillar));
+
+export function Footer({ compactHome = false }: { compactHome?: boolean }) {
+  if (compactHome) {
+    return (
+      <footer className="border-t border-outline-variant bg-surface-container-low">
+        <div className="mx-auto flex max-w-[var(--content-max)] flex-col gap-5 px-4 py-8 text-sm text-surface-variant sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div>
+            <Logo />
+            <p className="mt-3 max-w-xl leading-relaxed">
+              Accueil public centré sur deux entrées : apprendre avec la Formation, analyser avec Intelligence VC.
+            </p>
+          </div>
+          <nav aria-label="Liens d’accueil" className="flex flex-wrap gap-3 sm:gap-4">
+            {HOME_FOOTER_PILLARS.map((pillar) => (
+              <Link key={pillar.id} to={pillar.to} className="font-mono text-xs uppercase tracking-[0.22em] transition-colors hover:text-foreground">
+                {pillar.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className="mt-24 border-t border-outline-variant bg-surface-container-low">
       <div className="mx-auto max-w-[var(--content-max)] px-4 py-16 sm:px-6 lg:px-8">

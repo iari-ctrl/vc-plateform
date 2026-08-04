@@ -11,9 +11,11 @@ import {
   findEditorialToneErrors,
   findMarkdownLinkErrors,
   findReferenceErrors,
+  INTERNAL_FURTHER_READING_KINDS,
   shouldFailValidation,
   validateAssessmentPublication,
   validateCanonicalGlossaryPublication,
+  validateFurtherReadingReferences,
   validateParcoursRelations,
 } from './validation-core.mjs';
 
@@ -72,6 +74,41 @@ test('pure duplicate, reference and cycle checks report invalid fixtures', () =>
       },
     ),
     ['lessons: cycle detected (a -> b -> a).'],
+  );
+});
+
+test('furtherReading validation uses IDs only and covers every internal kind', () => {
+  const targetRecordsByKind = {
+    lesson: [{ id: 'lesson-id', slug: 'lesson-slug' }],
+    simulator: [{ id: 'simulator-id', slug: 'simulator-slug' }],
+    case: [{ id: 'case-id', slug: 'case-slug' }],
+    glossary: [{ id: 'glossary-id', slug: 'glossary-slug' }],
+    course: [{ id: 'course-id', slug: 'course-slug' }],
+    deliverable: [{ id: 'deliverable-id', slug: 'deliverable-slug' }],
+  };
+
+  assert.deepEqual(Object.keys(targetRecordsByKind).sort(), [...INTERNAL_FURTHER_READING_KINDS].sort());
+  assert.deepEqual(
+    validateFurtherReadingReferences(
+      [
+        { id: 'valid', furtherReading: [{ kind: 'simulator', ref: 'simulator-id' }] },
+        { id: 'slug', furtherReading: [{ kind: 'simulator', ref: 'simulator-slug' }] },
+        { id: 'missing', furtherReading: [{ kind: 'lesson', ref: 'missing-lesson' }] },
+      ],
+      { targetRecordsByKind, collection: 'lessons' },
+    ),
+    [
+      'lessons/slug.furtherReading — simulator introuvable par ID : "simulator-slug"',
+      'lessons/missing.furtherReading — lesson introuvable par ID : "missing-lesson"',
+    ],
+  );
+
+  assert.throws(
+    () => validateFurtherReadingReferences([], {
+      targetRecordsByKind: { ...targetRecordsByKind, simulator: undefined },
+      collection: 'lessons',
+    }),
+    /registre furtherReading incomplet/u,
   );
 });
 

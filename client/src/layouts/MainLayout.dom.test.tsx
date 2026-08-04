@@ -52,6 +52,26 @@ describe('MainLayout', () => {
     expect(navigation).not.toHaveAttribute('inert');
   });
 
+  it('affiche la marque Maison Sapience VC sur le chrome hors accueil', async () => {
+    renderWithRouter(<DemoRoutes />, '/un');
+
+    await screen.findByRole('heading', { level: 1, name: 'Page un' });
+
+    expect(screen.queryAllByText('VC Premium')).toHaveLength(0);
+    expect(screen.queryAllByText('Experience')).toHaveLength(0);
+    for (const logoLink of screen.getAllByRole('link', { name: 'Maison Sapience VC' })) {
+      expect(logoLink).toHaveAttribute('href', '/home');
+      expect(logoLink).toHaveTextContent('Maison');
+      expect(logoLink).toHaveTextContent('Sapience VC');
+      expect(logoLink).not.toHaveTextContent('❦');
+    }
+    const compactLogo = screen.getByRole('link', { name: 'Maison Sapience VC — accueil' });
+    expect(compactLogo).toHaveAttribute('href', '/home');
+    expect(compactLogo).toHaveTextContent('Maison');
+    expect(compactLogo).toHaveTextContent('Sapience VC');
+    expect(compactLogo).not.toHaveTextContent('❦');
+  });
+
   it('déplace le focus vers le landmark principal après un changement de route', async () => {
     const user = userEvent.setup();
     renderWithRouter(<DemoRoutes />, '/un');

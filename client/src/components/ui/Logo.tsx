@@ -1,23 +1,26 @@
 import { Link } from 'react-router-dom';
-import { Fleuron } from '@/components/ornaments/Ornaments';
 import { cn } from '@/lib/utils';
 
 export function Logo({ compact = false, className, to = '/home' }: { compact?: boolean; className?: string; to?: string }) {
   return (
     <Link
       to={to}
-      className={cn('group inline-flex items-center gap-2.5', className)}
-      aria-label={compact ? 'VC Premium Experience — accueil' : undefined}
+      className={cn('group inline-flex items-center text-foreground', className)}
+      aria-label={compact ? 'Maison Sapience VC — accueil' : 'Maison Sapience VC'}
     >
-      <span className="grid h-9 w-9 place-items-center rounded-full border border-[color-mix(in_srgb,var(--primary)_40%,transparent)] bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] transition-colors group-hover:bg-[color-mix(in_srgb,var(--primary)_20%,transparent)]">
-        <Fleuron className="text-base" />
-      </span>
-      {!compact && (
-        <span className="flex flex-col leading-none">
-          <span className="font-headline text-[1.05rem] font-semibold tracking-tight">VC Premium</span>
-          <span className="font-mono text-[0.5625rem] uppercase tracking-[0.34em] text-surface-variant">Experience</span>
+      <span
+        className={cn(
+          'font-headline font-medium uppercase leading-none tracking-[0.1em] transition-colors group-hover:text-[color:var(--primary)]',
+          compact
+            ? 'flex flex-col items-center text-center text-[0.43rem] tracking-[0.08em]'
+            : 'inline-flex items-baseline gap-1 text-[0.86125rem] tracking-[0.2em] sm:text-[0.95875rem] sm:tracking-[0.24em]',
+        )}
+      >
+        <span>Maison</span>
+        <span className={cn('font-semibold', compact ? 'tracking-[0.1em]' : 'tracking-[0.22em] sm:tracking-[0.26em]')}>
+          Sapience VC
         </span>
-      )}
+      </span>
     </Link>
   );
 }

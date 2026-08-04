@@ -6,28 +6,202 @@ Le journal des travaux antérieurs à la migration (passes du 2026-05-30 au 2026
 
 ---
 
-## 2026-08-03 — Flèche Formation à gauche sur la navigation mobile de l’accueil
+## 2026-08-04 — Animation continue et note longue sur l’accueil
 
-Objet : placer la flèche du menu `Formation` à gauche de son libellé dans la barre basse mobile de `/home`, sans modifier le positionnement du menu `Intelligence VC`.
+Objet : appliquer la confirmation produit sur `/home` après le recentrage éditorial : restaurer l’animation continue sans délai des carrés d’arche, remettre l’ancienne note d’intention longue, et retirer seulement le cercle visuel du bouton clair/sombre sans changer sa position ni son accessibilité.
 
 Travaux :
 
-- `HomePillarMenu` calcule désormais le seul cas `Formation` en navigation compacte et rend l’icône avant le libellé dans ce cas ;
-- `Intelligence VC` conserve l’ordre libellé puis flèche à droite ;
-- la logique d’ouverture, fermeture, survol, focus, toucher et panneaux n’est pas modifiée.
+- `AnimatedMarker` conserve les chemins et origines existants mais repasse `animateMotion` et `animateTransform` en `repeatCount="indefinite"` ;
+- les animations restent synchronisées à `begin="0s"`, sans réintroduire le départ différé à `1s` ;
+- les animations continues ne portent plus `fill="freeze"` ;
+- la note d’intention longue précédente est restaurée dans la section dédiée sous le hero ;
+- le bouton de thème conserve son bouton fixe 44 × 44, son `aria-label` dynamique et ses positions mobile/desktop, tandis que l’enveloppe de l’icône perd le cercle, la bordure, le fond translucide et le blur.
 
 Contrat RED–GREEN :
 
-- le test DOM de la navigation compacte exige maintenant l’ordre visuel `svg, span` pour `Formation` et `span, svg` pour `Intelligence VC` ;
-- premier lancement ciblé : `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx -t "retire les deux pôles"` échoue avec 1 test en échec, l’ancien premier enfant de `Formation` étant `span` ;
-- après correction, le même test ciblé passe, puis le fichier complet `homeExperience.dom.test.tsx` passe 30/30.
+- le test DOM ciblé exige désormais la note longue exacte, 8 `animateMotion[repeatCount="indefinite"]`, 8 `animateTransform[repeatCount="indefinite"]`, aucun `animateMotion[begin="1s"]`, aucun `fill="freeze"` sur les motions, et l’absence des classes de cercle/bordure/fond/blur sur l’enveloppe de l’icône du toggle ;
+- premier lancement ciblé : `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx -t "fait démarrer simultanément|place le changement|conserve la copie"` échoue sur l’ancienne note condensée, les animations finies et le cercle du toggle ;
+- après correction, le même filtre passe, puis le fichier complet passe 30/30.
 
 Vérifications finales :
 
 - `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` — exit 0, 30/30 ;
 - `npm run typecheck --workspace client` — exit 0 ;
 - `npm run lint --workspace client` — exit 0 ;
-- recette Vite Dev sur `http://127.0.0.1:5174/home` en émulation mobile tactile 390 × 844 : largeur réelle 390 px, `Formation` rend les enfants `svg, span` avec la flèche à gauche du libellé, `Intelligence VC` rend `span, svg` avec la flèche à droite, `scrollWidth === clientWidth` et console vide ;
+- `git diff --check` — exit 0 ;
+- recette Vite Dev sur `http://127.0.0.1:5174/home` à 1 440 × 1 000 clair : `scrollWidth === clientWidth` (1 429/1 429), note longue visible, 8 motions `repeatCount="indefinite"`, aucun `fill="freeze"`, aucun lien `/dashboard`, enveloppe du toggle sans classes de cercle ;
+- même viewport en sombre après bascule du thème : `color-scheme: dark`, `scrollWidth === clientWidth`, `aria-label="Activer le mode clair"`, aucun lien `/dashboard` ;
+- émulation tactile 390 × 844 sombre : `innerWidth = clientWidth = scrollWidth = 390`, topbar limitée au wordmark/recherche, barre basse `Formation` / `Intelligence VC`, bouton thème 44 × 44 et enveloppe d’icône sans cercle ;
+- même viewport en clair après bascule du thème : `scrollWidth === clientWidth`, `aria-label="Activer le mode sombre"`, deux pôles toujours disponibles ;
+- console navigateur : aucun message d’erreur ou avertissement applicatif, seulement les messages debug Vite et l’information React DevTools ;
+- le serveur Vite Dev ouvert sur 5174 a été arrêté et le port est libre.
+
+Fichiers touchés par cette correction : `client/src/pages/home/HomePage.tsx`, `client/src/components/home/HomeEditorialBridge.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
+
+---
+
+## 2026-08-03 — Contrat ID/slug des références internes `furtherReading`
+
+Objet : supprimer l’ambiguïté ID/slug dans les références internes `furtherReading`, corriger les liens de simulateurs rendus depuis les leçons et aligner le validateur de contenu sur le même contrat que le renderer.
+
+Travaux :
+
+- ajout de `shared/further-reading-contract.mjs` et de sa déclaration TypeScript pour centraliser les types internes, la construction des registres de cibles et la résolution des routes canoniques ;
+- `client/src/pages/learn/furtherReadingHref.ts` consomme ce contrat partagé, résout les références internes par ID et construit les URL depuis les slugs canoniques des cibles ;
+- les références inconnues ne produisent plus de routes de repli fabriquées depuis `ref` ;
+- `scripts/validation-core.mjs` réutilise le contrat partagé pour contrôler `furtherReading` par ID uniquement ;
+- `scripts/validate-content.mjs` câble les registres de cibles internes réels et conserve les validations existantes de parcours, cas, simulateurs et liens externes ;
+- `client/src/content/types.ts` importe le type partagé `FurtherReadingKind`.
+
+Contrat RED–GREEN :
+
+- `client/src/pages/learn/furtherReadingHref.test.ts` couvre la résolution `power-law` → `/simulators/power-law-portfolio`, l’absence de fallback pour une référence inconnue et la couverture des six types internes ;
+- `scripts/validation-core.test.mjs` exige que la validation accepte les IDs internes, rejette les slugs lorsque `id !== slug` et couvre les six types internes ;
+- premier lancement ciblé : `npm run test --workspace client -- src/pages/learn/furtherReadingHref.test.ts` retourne exit 1 sur l’ancien comportement ;
+- premier lancement ciblé : `node --test scripts/validation-core.test.mjs` retourne exit 1 sur l’ancienne validation ID-ou-slug ;
+- après correction, les deux ciblés passent : `furtherReadingHref.test.ts` 8/8 et `validation-core.test.mjs` exit 0.
+
+Vérifications finales :
+
+- `npm run validate:content:strict` — exit 0 : 24 parcours, 30 cours, 147 leçons, 420 termes, 10 études de cas, 12 livrables, 9 simulateurs, 373 marqueurs, contenu valide en mode strict ;
+- `npm run check` — exit 0 : `check:generated`, contenu strict, glossaire, TypeScript, ESLint, 67 fichiers / 443 tests Vitest et 59/59 tests Node ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` — exit 0 : 1 797 modules transformés, sitemap de 703 routes, prérendu strict 715/715 avec `ok: true` ;
+- `npm run check` post-build — exit 0 : générés à jour, contenu strict, glossaire, TypeScript, ESLint, 67 fichiers / 443 tests Vitest et 59/59 tests Node ;
+- recette Vite Preview de l’artefact construit sur `http://127.0.0.1:4178/vc-plateform/lessons/pourquoi-utiliser-monte-carlo-en-vc/` : le panneau de références expose `Power law & construction de portefeuille` vers `/vc-plateform/simulators/power-law-portfolio` ;
+- recette Vite Preview sur `/lessons/lire-tvpi-concentration-fund-returner-math/` : le même lien `Power law & construction de portefeuille` pointe vers `/vc-plateform/simulators/power-law-portfolio` ;
+- recette Vite Preview sur `/lessons/pre-post-money-et-ownership/` : `Pre-money / Post-money` pointe vers `/vc-plateform/simulators/valorisation-pre-post-money` et `Ownership et cap table` vers `/vc-plateform/simulators/ownership` ;
+- console navigateur vide pendant la recette ;
+- le serveur Vite Preview ouvert sur 4178 a été arrêté ;
+- `npm run check:generated && git diff --check` — exit 0.
+
+Fichiers touchés par cette correction : `shared/further-reading-contract.mjs`, `shared/further-reading-contract.d.mts`, `client/src/content/types.ts`, `client/src/pages/learn/furtherReadingHref.ts`, `client/src/pages/learn/furtherReadingHref.test.ts`, `scripts/validation-core.mjs`, `scripts/validation-core.test.mjs`, `scripts/validate-content.mjs`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
+
+---
+
+## 2026-08-03 — Recentrage de l’accueil sur Formation et Intelligence VC
+
+Objet : recentrer `/home` sur les deux pôles publics `Formation` et `Intelligence VC`, supprimer l’action cachée vers `/dashboard`, retirer la copie dupliquée, condenser la note d’intention et remplacer l’animation continue des arches par un mouvement fini, sans modifier le hero, le wordmark, les deux barres mobiles ni la géométrie des arches.
+
+Travaux :
+
+- la boussole du hero reste rendue mais n’est plus un lien ni une action vers `/dashboard` ;
+- le pont éditorial expose `Formation` et `Intelligence VC` comme liens directs vers `/parcours` et `/intelligence` ;
+- la copie centrale qui répétait le paragraphe du hero est retirée du pont ;
+- les microtextes du pont sont resserrés et la note d’intention est condensée ;
+- le footer reçoit une variante compacte pour `/home`, limitée au logo, à une phrase d’orientation et aux deux liens de pôles ;
+- les marqueurs des arches conservent leurs chemins et leur départ simultané à `0s`, mais `animateMotion` et `animateTransform` passent à `repeatCount="1"` avec `fill="freeze"`.
+
+Contrat RED–GREEN :
+
+- le contrat DOM de `/home` interdit le lien `Ouvrir le tableau de bord` et tout `a[href="/dashboard"]` dans l’accueil ;
+- il exige les liens de pont `Formation` → `/parcours` et `Intelligence VC` → `/intelligence`, l’absence de `Workspace`, l’absence de la copie hero dupliquée dans le pont et le footer compact ;
+- il exige que les 8 `animateMotion` démarrent à `0s`, ne soient plus `indefinite`, portent `repeatCount="1"` et `fill="freeze"`, tout en conservant les chemins `desktop-left`, `desktop-right`, `mobile-left` et `mobile-right` ;
+- premier lancement ciblé : `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx -t "conserve la boussole|insère après le hero|fait démarrer simultanément|conserve la copie"` échoue sur l’ancien lien `/dashboard`, l’ancien titre de pont et les animations continues ;
+- après correction, le même filtre passe, puis le fichier complet passe 30/30.
+
+Vérifications finales :
+
+- `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` — exit 0, 30/30 ;
+- `npm run typecheck --workspace client` — exit 0 ;
+- `npm run lint --workspace client` — exit 0 ;
+- recette Vite Dev sur `http://127.0.0.1:5174/home` à 1 440 × 1 000 clair : `scrollWidth === clientWidth` (1 429/1 429), aucun lien `/dashboard`, liens de pont `/parcours` et `/intelligence`, footer compact `Formation` puis `Intelligence VC` ;
+- même viewport en sombre après bascule du thème : `color-scheme: dark`, `scrollWidth === clientWidth` et aucun lien `/dashboard` ;
+- émulation tactile 390 × 844 sombre : `innerWidth = clientWidth = scrollWidth = 390`, topbar limitée au wordmark/recherche, barre basse `Formation` / `Intelligence VC`, aucun lien `/dashboard` ;
+- même viewport en clair après bascule du thème : `scrollWidth === clientWidth` et les deux pôles restent disponibles ;
+- console navigateur : aucun message d’erreur ou avertissement applicatif, seulement les messages debug Vite et l’information React DevTools ;
+- le serveur Vite Dev ouvert sur 5174 a été arrêté et le port est libre.
+
+Fichiers touchés par cette correction : `client/src/pages/home/HomePage.tsx`, `client/src/components/home/HomeEditorialBridge.tsx`, `client/src/components/chrome/Footer.tsx`, `client/src/layouts/MainLayout.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
+
+---
+
+## 2026-08-03 — Départ simultané des carrés sur les arches de l’accueil
+
+Objet : corriger l’animation du pont éditorial de `/home` pour que les marqueurs carrés démarrent en même temps tout en partant de côtés distincts, en reprenant le principe observé sur The Footprint Firm sans copier ses assets ni son code.
+
+Travaux :
+
+- `AnimatedMarker` ne reçoit plus de délai de départ ;
+- chaque `animateMotion` et chaque `animateTransform` démarre explicitement à `0s` ;
+- la logique qui masquait les marqueurs différés par `opacity="0"` puis les révélait à `1s` est retirée ;
+- les chemins existants `desktop-left`, `desktop-right`, `mobile-left` et `mobile-right` conservent leurs origines opposées ou distinctes.
+
+Contrat RED–GREEN :
+
+- le test DOM du pont éditorial exige désormais 8 animations de mouvement à `begin="0s"`, aucun `animateMotion[begin="1s"]`, aucun groupe `g[opacity="0"]`, et vérifie la présence des chemins desktop gauche/droite et mobile haut/bas ;
+- un premier lancement ciblé a signalé que le test devait attendre le rendu asynchrone de la section ; l’attente du titre H2 a été ajoutée ;
+- le lancement ciblé suivant échoue sur l’ancien comportement avec 4 animations différées à `begin="1s"` ;
+- après correction, le test ciblé passe.
+
+Vérifications finales :
+
+- `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx -t "fait démarrer simultanément"` — exit 0 ;
+- `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` — exit 0, 30/30 ;
+- `npm run typecheck --workspace client` — exit 0 ;
+- `npm run lint --workspace client` — exit 0 ;
+- recette Vite Dev sur `http://127.0.0.1:5174/home` en aperçu desktop 1 280 × 633 : un seul SVG desktop rendu, motions `desktop-left` et `desktop-right`, 8 motions `begin="0s"` dans la section, aucun départ `1s`, aucun `g[opacity="0"]`, aucun débordement horizontal, console vide ;
+- recette Vite Dev en aperçu mobile 388 × 842 : deux SVG compacts rendus, motions `mobile-left` et `mobile-right`, aucun départ différé, aucun débordement horizontal ;
+- le serveur Vite Dev ouvert sur 5174 a été arrêté et le port est libre.
+
+Fichiers touchés par cette correction : `client/src/components/home/HomeEditorialBridge.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
+
+---
+
+## 2026-08-03 — Logo Maison Sapience VC dans le chrome hors accueil
+
+Objet : remplacer le wordmark `VC Premium Experience` visible dans le chrome des pages hors `/home` par le seul logo typographique `Maison Sapience VC`, sans rond doré, fleuron ni autre élément graphique adjacent, et sans modifier le chrome dédié de l’accueil.
+
+Travaux :
+
+- `Logo` ne rend plus le fleuron, le rond doré ni aucun pictogramme de marque ;
+- le composant affiche uniquement `Maison` et `Sapience VC` en `font-headline`, avec l’accent typographique sur `Sapience VC` ;
+- les noms accessibles deviennent `Maison Sapience VC` en mode complet et `Maison Sapience VC — accueil` en mode compact ;
+- le commentaire de `SideNav` est réaligné sur ce nom de marque ;
+- le chrome `/home`, qui utilise son propre titre central, n’est pas modifié.
+
+Contrat RED–GREEN :
+
+- un test DOM `MainLayout` couvre une route hors accueil, interdit `VC Premium`, `Experience` et le fleuron `❦` dans les liens de logo, puis exige les liens de logo `Maison Sapience VC` et `Maison Sapience VC — accueil` vers `/home` ;
+- le premier lancement ciblé échoue sur l’ancien rendu avec deux occurrences visibles de `VC Premium` ;
+- après durcissement du test, le lancement ciblé échoue aussi sur le fleuron résiduel dans les liens de logo ;
+- après correction, `npm run test --workspace client -- src/layouts/MainLayout.dom.test.tsx` passe 3/3.
+
+Vérifications finales :
+
+- `npm run typecheck` — exit 0 ;
+- `npm run lint` — exit 0 ;
+- `npm run test` — exit 0, 67 fichiers / 441 tests Vitest et 58/58 tests Node ;
+- recette Vite Dev sur `http://localhost:5173/certifications` en aperçu mobile : topbar hors accueil avec le seul wordmark texte `Maison Sapience VC`, sans rond doré, fleuron ou symbole de marque, aucune occurrence `VC Premium`/`Premium Experience` dans le header, `scrollWidth === clientWidth`, aucune erreur JavaScript ;
+- le serveur Vite Dev ouvert sur 5173 a été arrêté et le port est libre.
+
+Fichiers touchés par cette correction : `client/src/components/ui/Logo.tsx`, `client/src/components/chrome/SideNav.tsx`, `client/src/layouts/MainLayout.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
+
+---
+
+## 2026-08-03 — Flèche Formation avant le libellé sur l’accueil
+
+Objet : placer la flèche du menu `Formation` avant son libellé sur `/home`, en desktop comme dans la barre basse mobile, sans modifier le positionnement du menu `Intelligence VC`.
+
+Travaux :
+
+- `HomePillarMenu` rend désormais l’icône avant le libellé pour le pôle gauche `Formation`, quel que soit le mode d’affichage ;
+- `Intelligence VC` conserve l’ordre libellé puis flèche à droite ;
+- la logique d’ouverture, fermeture, survol, focus, toucher et panneaux n’est pas modifiée.
+
+Contrat RED–GREEN :
+
+- le test DOM desktop exige maintenant l’ordre visuel `svg, span` pour `Formation` et `span, svg` pour `Intelligence VC`, en complément du contrat mobile déjà ajouté ;
+- premier lancement ciblé desktop : `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx -t "limite la barre supérieure"` échoue avec 1 test en échec, l’ancien premier enfant de `Formation` étant `span` ;
+- après correction, les ciblés desktop et mobile passent, puis le fichier complet `homeExperience.dom.test.tsx` passe 30/30.
+
+Vérifications finales :
+
+- `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` — exit 0, 30/30 ;
+- `npm run typecheck --workspace client` — exit 0 ;
+- `npm run lint --workspace client` — exit 0 ;
+- recette Vite Dev sur `http://127.0.0.1:5174/home` à 1 440 × 900 : `Formation` rend `svg, span` avec la flèche à gauche du libellé, `Intelligence VC` rend `span, svg`, `scrollWidth === clientWidth` ;
+- même recette en émulation mobile tactile 390 × 844 : largeur réelle 390 px, mêmes ordres `svg, span` et `span, svg`, `scrollWidth === clientWidth` et console vide ;
 - le serveur Vite Dev ouvert sur le port 5174 a été arrêté et le port est libre.
 
 Fichiers touchés par cette correction : `client/src/components/chrome/TopBar.tsx`, `client/src/pages/home/homeExperience.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
