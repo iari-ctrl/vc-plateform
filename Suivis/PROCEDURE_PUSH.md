@@ -11,7 +11,7 @@ Cette procédure vise une exécution manuelle, sans assistance, et suppose un te
 
 Le travail est d'abord enregistré sur l'ordinateur par des `commits` Git. Un `push` en copie ensuite l'historique sur GitHub comme sauvegarde du code, sans rendre l'application publique et sans lancer GitHub Pages. La branche `master` reste la référence du code sauvegardé ; elle n'est pas, dans cette phase, un signal de publication.
 
-Le piège propre à ce projet : certains fichiers de `data/` sont *fabriqués automatiquement* à partir des textes (glossaire, leçons), et le plan du site (`sitemap.xml`) l'est aussi. Un working tree « propre » ne garantit pas que ces fichiers dérivés sont à jour : la procédure relance donc leur fabrication avant la sauvegarde.
+Le piège propre à ce projet : certains fichiers de `data/` sont *fabriqués automatiquement* à partir des textes (glossaire, leçons), les trois HTML du simulateur de note sont assemblés depuis `nouveau simu/src/`, et le plan du site (`sitemap.xml`) est lui aussi généré. Un working tree « propre » ne garantit pas que ces fichiers dérivés sont à jour : la procédure relance donc leur fabrication avant la sauvegarde.
 
 ## Étapes
 
@@ -32,11 +32,12 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
 
 3. **Re-fabriquer les fichiers générés et le plan du site.**
    ```bash
+   npm run build:memo
    npm run split:content
    npm run generate:sitemap
    git status --short
    ```
-   Si `git status` révèle des fichiers modifiés (`data/generated/*.index.json`, `data/generated/*.bodies.json`, `data/generated/glossary.defs.json`, ou `client/public/sitemap.xml`), c'est qu'une édition n'avait pas été propagée. Les enregistrer :
+   Si `git status` révèle des fichiers modifiés (`data/generated/`, `client/public/sitemap.xml`, `client/public/tools/simulateur-memo.html` ou les deux distributions sous `nouveau simu/`), une édition n’avait pas été propagée. Examiner ces sorties, puis les enregistrer :
    ```bash
    git add -A
    git commit -m "chore: régénère fichiers générés + sitemap"
@@ -45,11 +46,16 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
 
 4. **Passer les contrôles de cohérence en local.**
    ```bash
-   npm run check
-   npm run build
+   PUPPETEER_EXECUTABLE_PATH="/chemin/absolu/vers/Chromium" npm run check
+   PUPPETEER_EXECUTABLE_PATH="/chemin/absolu/vers/Chromium" \
+     VITE_BASE_URL=/vc-plateform/ \
+     VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform \
+     npm run build
+   npm run check:memo
+   npm run check:generated
    git diff --check
    ```
-   Chaque commande doit se terminer sans erreur. Le lint refuse aussi les avertissements. En cas d'échec, corriger puis reprendre à l'étape 3. Le build recrée `client/dist`, qui reste un artefact local et ne doit pas être traité comme source.
+   Remplacer le chemin d’exemple par l’exécutable Chromium réellement utilisé. Chaque commande doit se terminer sans erreur. Le lint refuse aussi les avertissements. En cas d'échec, corriger puis reprendre à l'étape 3. Le build recrée `client/dist`, qui reste un artefact local et ne doit pas être traité comme source. Les deux contrôles placés après le build confirment qu’il n’a laissé aucune sortie dérivée obsolète.
 
 5. **Amener le travail dans la branche de sauvegarde et l'envoyer, uniquement sur demande.**
    ```bash
@@ -68,11 +74,13 @@ Toutes les commandes se lancent à la racine du dépôt, depuis la branche de tr
 ## Ce que garantit chaque contrôle
 
 - `git status` / `git fetch` : rien d'oublié localement, et la version en ligne est connue.
-- `split:content` + `generate:sitemap` : les fichiers dérivés reflètent les derniers textes.
+- `build:memo` : les trois HTML du simulateur reflètent `nouveau simu/src/`.
+- `split:content` + `generate:sitemap` : les index, corps publiés, définitions et routes reflètent les dernières sources.
+- `check:memo` + `check:generated` : les sorties dérivées sont encore à jour après le build, sans réécriture silencieuse.
 - `validate:content:strict` : la structure, les références des étapes de parcours, les exigences cours/leçons des certifications, les contextes et variantes certifiantes, les `glossaryRef` et les marqueurs `[[..]]` sont cohérents, sans référence vide ni doublon toléré.
-- `lint` : la qualité du code client.
-- `build` : le site se construit réellement (et relance au passage `split` + validation + prérendu).
-- `test` : les comportements clés (routes client, composition et persistance des certifications, profil/ikigai, simulateurs, journal de décision) ne sont pas cassés ; les contenus `upcoming` restent exclus du sitemap et du prérendu.
+- `lint` : le code client, les scripts, les modules partagés et les hooks contrôlés ne produisent ni erreur ni avertissement.
+- `build` : le site se construit avec la base et l’origine de publication, puis passe le prérendu strict.
+- `test` : les comportements clés (routes client, composition et persistance des certifications, profil/ikigai, simulateurs, journal de décision) restent couverts ; les contenus `upcoming` restent exclus du sitemap et du prérendu.
 
 ## En cas de besoin d'annulation
 

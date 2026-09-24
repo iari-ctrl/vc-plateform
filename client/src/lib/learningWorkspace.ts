@@ -1,3 +1,4 @@
+import { localDataChanges } from './localDataChanges';
 import { useEffect, useSyncExternalStore } from 'react';
 import {
   commitOnStorageSuccess,
@@ -443,3 +444,8 @@ if (typeof window !== 'undefined') {
     emit();
   });
 }
+
+localDataChanges.subscribe(values => {
+  snapshot = storage.parseStored(LEARNING_WORKSPACE_CONTRACT, values[STORAGE_PREFIX + LEARNING_WORKSPACE_CONTRACT.key] ?? null);
+  emit();
+});

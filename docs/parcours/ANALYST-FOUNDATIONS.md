@@ -42,4 +42,4 @@ Les exercices utilisent des informations pédagogiques. Ils ne doivent pas condu
 
 Toute évolution doit préserver l’alignement entre le parcours, les sept séquences et les 23 leçons. Le cours `c-investment-recommendation` ne contribue au parcours que par `l-fact-hypothesis`. Les données exécutables décrivent le comportement de l’application ; toute divergence avec le présent référentiel doit être corrigée dans le même changement.
 
-[`REFERENTIEL-ANALYST.md`](../certifications/REFERENTIEL-ANALYST.md) conserve le contrat de certification antérieur comme archive historique. La certification professionnelle `VC Analyst` est décrite dans [`REFERENTIEL-VC-ANALYST.md`](../certifications/REFERENTIEL-VC-ANALYST.md).
+[`REFERENTIEL-ANALYST.md`](../archive/certifications/REFERENTIEL-ANALYST.md) conserve le contrat de certification antérieur comme archive historique. La certification professionnelle `VC Analyst` est décrite dans [`REFERENTIEL-VC-ANALYST.md`](../certifications/REFERENTIEL-VC-ANALYST.md).

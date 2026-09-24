@@ -22,6 +22,7 @@ vi.mock('@/content/glossary', async (importOriginal) => {
 
 const term = GLOSSARY[0];
 if (!term) throw new Error('Fixture de glossaire absente.');
+const initiallyVisibleTerm = GLOSSARY.find((entry) => entry.term === 'a16z (Andreessen Horowitz)') ?? term;
 
 function LocationProbe() {
   const location = useLocation();
@@ -40,6 +41,22 @@ function renderGlossaryPage(path = `/glossary?term=${term.slug}`) {
 describe('GlossaryPage lazy definitions recovery', () => {
   beforeEach(() => {
     mocks.loadGlossaryDefs.mockReset();
+  });
+
+  it('ne charge pas les définitions lors d’une simple visite avant le premier dépliage', async () => {
+    mocks.loadGlossaryDefs.mockResolvedValue({
+      [initiallyVisibleTerm.slug]: { definition: 'Définition chargée seulement après ouverture.' },
+    });
+
+    renderGlossaryPage('/glossary');
+
+    expect(screen.getByText(initiallyVisibleTerm.term)).toBeVisible();
+    expect(mocks.loadGlossaryDefs).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByText(initiallyVisibleTerm.term).closest('button')!);
+
+    expect(await screen.findByText('Définition chargée seulement après ouverture.')).toBeVisible();
+    expect(mocks.loadGlossaryDefs).toHaveBeenCalledTimes(1);
   });
 
   it('annonce un échec des définitions différées puis recharge la définition active', async () => {

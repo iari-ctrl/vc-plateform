@@ -71,12 +71,8 @@ describe('accueil — contrat éditorial et navigation', () => {
       'sm:text-[0.8125rem]',
     );
 
-    expect(screen.getByText((_, element) => element?.textContent === `« ${HERO_INTENT_NOTE} »`)).toHaveClass(
-      'text-[1.3rem]',
-      'sm:text-[1.95rem]',
-      'lg:text-[2.34rem]',
-    );
-    expect(screen.getByText('Note d’intention')).toHaveClass('text-[0.52rem]', 'sm:text-[0.56875rem]');
+    expect(screen.queryByText((_, element) => element?.textContent === `« ${HERO_INTENT_NOTE} »`)).not.toBeInTheDocument();
+    expect(screen.queryByText('Note d’intention')).not.toBeInTheDocument();
   });
 
   it('limite la barre supérieure aux deux pôles et au titre central', async () => {
@@ -556,7 +552,7 @@ describe('accueil — contrat éditorial et navigation', () => {
     expect(await screen.findByRole('dialog', { name: 'Recherche globale' })).toBeInTheDocument();
   });
 
-  it('conserve la copie du hero, puis place la note d’intention dans une section dédiée sous le hero', async () => {
+  it('conserve la copie du hero et retire la note d’intention ikigai de l’accueil', async () => {
     renderAppAt('/home');
 
     expect(
@@ -571,12 +567,10 @@ describe('accueil — contrat éditorial et navigation', () => {
     expect(compass).toBeInTheDocument();
     expect(compass).not.toHaveAttribute('href');
     expect(screen.queryByRole('link', { name: 'Ouvrir le tableau de bord' })).not.toBeInTheDocument();
-    expect(sections).toHaveLength(3);
+    expect(sections).toHaveLength(2);
     expect(within(sections[0] as HTMLElement).queryByText(HERO_INTENT_NOTE)).not.toBeInTheDocument();
-    expect(
-      within(sections[2] as HTMLElement).getByText((_, element) => element?.textContent === `« ${HERO_INTENT_NOTE} »`),
-    ).toBeInTheDocument();
-    expect(within(sections[2] as HTMLElement).getByText('Note d’intention')).toHaveClass('eyebrow');
+    expect(screen.queryByText((_, element) => element?.textContent === `« ${HERO_INTENT_NOTE} »`)).not.toBeInTheDocument();
+    expect(screen.queryByText('Note d’intention')).not.toBeInTheDocument();
     const footer = screen.getByRole('contentinfo');
     expect(within(footer).getByRole('link', { name: 'Maison Sapience VC' })).toHaveAttribute('href', '/home');
     expect(within(footer).getByRole('link', { name: 'Formation' })).toHaveAttribute('href', '/parcours');
@@ -785,7 +779,9 @@ describe('accueil — contrat éditorial et navigation', () => {
     renderAppAt('/home');
 
     await screen.findByRole('heading', { level: 1, name: 'Documenter le raisonnement. Affûter le jugement.' });
-    expect(screen.getByTestId('home-compass')).toBeInTheDocument();
+    const compass = screen.getByTestId('home-compass');
+    expect(compass).toBeInTheDocument();
+    expect(compass.querySelector('.home-hero-halo')).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'Ouvrir le tableau de bord' })).not.toBeInTheDocument();
     expect(document.querySelector('a[href="/dashboard"]')).not.toBeInTheDocument();
   });

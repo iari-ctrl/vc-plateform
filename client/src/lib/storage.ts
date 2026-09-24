@@ -140,7 +140,8 @@ function parseVersionedValue<T>(
     return { ok: false, reason: 'validation' };
   }
 
-  const parsed = contract.parse(value);
+  let parsed: StorageParseResult<T>;
+  try { parsed = contract.parse(value); } catch { return { ok: false, reason: 'validation' }; }
   if (!parsed.ok) return parsed;
   return {
     ok: true,
@@ -152,7 +153,8 @@ function parseVersionedValue<T>(
   };
 }
 
-function parseStoredRaw<T>(contract: StorageContract<T>, raw: string): StoredValueResult<T> {
+/** Pure preparation shared by reads and backup imports; never writes or publishes errors. */
+export function prepareStoredRaw<T>(contract: StorageContract<T>, raw: string): StoredValueResult<T> {
   if (byteLength(raw) > contract.maxBytes) return { ok: false, reason: 'limit' };
 
   let decoded: unknown;
@@ -162,6 +164,9 @@ function parseStoredRaw<T>(contract: StorageContract<T>, raw: string): StoredVal
     return { ok: false, reason: 'unreadable' };
   }
 
+  if (isRecord(decoded) && Object.hasOwn(decoded, 'storageVersion') && !hasStoredEnvelope(decoded)) {
+    return { ok: false, reason: 'version' };
+  }
   return hasStoredEnvelope(decoded)
     ? parseVersionedValue(contract, decoded.value, decoded.storageVersion)
     : parseVersionedValue(contract, decoded, 0);
@@ -283,7 +288,7 @@ export const storage = {
       return legacyStoredValue(contract)?.parsed.value ?? contract.fallback;
     }
 
-    const result = parseStoredRaw(contract, current.raw);
+    const result = prepareStoredRaw(contract, current.raw);
     if (!result.ok) {
       failure(result.reason, 'read', contract.key);
       return contract.fallback;
@@ -292,7 +297,7 @@ export const storage = {
   },
   parseStored<T>(contract: StorageContract<T>, raw: string | null): T {
     if (raw === null) return contract.fallback;
-    const result = parseStoredRaw(contract, raw);
+    const result = prepareStoredRaw(contract, raw);
     if (!result.ok) {
       failure(result.reason, 'read', contract.key);
       return contract.fallback;
@@ -324,7 +329,7 @@ export const storage = {
     if (!current.ok) return lastStorageFailure!;
 
     if (current.raw !== null) {
-      const result = parseStoredRaw(contract, current.raw);
+      const result = prepareStoredRaw(contract, current.raw);
       if (!result.ok) return failure(result.reason, 'read', contract.key);
       if (!result.parsed.needsMigration) return STORAGE_SUCCESS;
 

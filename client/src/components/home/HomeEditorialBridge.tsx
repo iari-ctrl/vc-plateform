@@ -386,11 +386,11 @@ export function HomeEditorialBridge() {
             rightStaticPosition={{ x: 460, y: 168 }}
           />
 
-          <div className="mt-5 grid grid-cols-[1fr_auto_1fr] items-end gap-6 font-mono text-[0.68rem] font-medium uppercase tracking-[0.26em]">
-            <PillarLink className="text-left tracking-[0.26em] text-[color:var(--primary)]" label={HOME_FORMATION.label} to={HOME_FORMATION.to} />
+          <div className="mt-5 grid grid-cols-[1fr_auto_1fr] items-end gap-6 font-medium">
+            <PillarLink className="tracking-[0.26em] text-[color:var(--primary)]" label={HOME_FORMATION.label} to={HOME_FORMATION.to} />
             <Wordmark className="text-center text-[0.9rem] tracking-[0.2em]" />
             <PillarLink
-              className="ml-auto text-right tracking-[0.26em] text-[color:var(--secondary)]"
+              className="ml-auto tracking-[0.26em] text-[color:var(--secondary)]"
               label={HOME_INTELLIGENCE.label}
               to={HOME_INTELLIGENCE.to}
             />

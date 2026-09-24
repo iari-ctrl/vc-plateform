@@ -23,6 +23,7 @@ import { z } from 'zod';
 import { safeEditorialUrl } from '../shared/editorial-url.mjs';
 import {
   FURTHER_READING_KINDS,
+  INTERNAL_FURTHER_READING_KINDS,
   findEditorialToneErrors,
   findMarkdownLinkErrors,
   shouldFailValidation,
@@ -215,7 +216,7 @@ const parcoursRoadmap = z.enum(['now', 'next', 'later']);
 const perspective = z.enum(['founder', 'investor', 'both']);
 const timeBudget = z.enum(['low', 'medium', 'high']);
 const stepType = z.enum(['coeur', 'bonus', 'pratique', 'respiration']);
-const stepRefKind = z.enum(['lesson', 'course', 'case', 'simulator', 'glossary', 'deliverable', 'milestone']);
+const stepRefKind = z.enum([...INTERNAL_FURTHER_READING_KINDS, 'milestone']);
 
 const parcoursStepSchema = z.object({
   order: z.number().int().positive(),
@@ -1356,13 +1357,6 @@ validateFurtherReadingReferences(allLessons, {
   },
 }).forEach(err);
 
-for (const l of allLessons) {
-  for (const fr of l.furtherReading ?? []) {
-    if (fr.kind === 'external' && !safeEditorialUrl(fr.ref)) {
-      err(`lessons/${l.id}.furtherReading — external introuvable par URL sûre : "${fr.ref}"`);
-    }
-  }
-}
 const validateCourseRequirement = (certificationId, requirement) => {
   if (!courseIds.has(requirement.courseId))
     err(`certifications/${certificationId}/${requirement.id}.courseId — cours introuvable : "${requirement.courseId}"`);

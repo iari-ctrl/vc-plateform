@@ -1,15 +1,31 @@
-# Manuel d'Architecture et d'Édition — vc-platform
+# Architecture et édition — Maison Sapience VC
 
 > [!IMPORTANT]
-> **Référence maintenue.** Ce document doit rester vrai. Il décrit l'architecture de l'application **statique**, le cycle de vie du contenu (de la source canonique JSON jusqu'à l'écran) et le guide d'édition pas-à-pas pour ajouter du contenu, modifier le design ou faire évoluer le code. Pour les routes, scripts et compteurs, la source fait foi : `client/src/App.tsx`, `shared/routes.mjs`, `package.json`, `data/`. Les compteurs courants vivent dans `Suivis/ETAT.md`, pas ici.
+> **Référence maintenue.** Ce manuel porte l'architecture éditoriale, les conventions d'édition et la charte rédactionnelle (§4.0.c). Le code, les schémas et les scripts décrivent le comportement implémenté ; [PRODUCT.md](../PRODUCT.md) porte les principes produit. Les compteurs, vérifications datées et risques ouverts restent dans [Suivis/ETAT.md](../Suivis/ETAT.md).
 
 > [!TIP]
-> Les collections éditoriales structurées ont leur source canonique dans les JSON de `/data` (`data/*.json`, `data/blog/*.json` et registres spécialisés). Les textes d'interface et les instructions exécutables des simulateurs vivent dans `client/src`. Il faut modifier la source propriétaire du fait, jamais un fichier dérivé sous `data/generated/`.
+> Modifier la source propriétaire, jamais une projection sous `data/generated/` ni un HTML assemblé du simulateur de note. Les collections structurées vivent dans `data/`, les interfaces dans `client/src`, et les sources du simulateur de note dans `nouveau simu/src/` (§4.6).
 
-> [!IMPORTANT]
-> **Positionnement.** D'une plateforme de formation VC, le projet est devenu une **VC Intelligence Platform**. La couche VC Intelligence est **livrée pour l'essentiel** : hub `/intelligence`, dossiers d'écosystème `/ecosystemes`, convictions `/convictions`, mémos annotés `/memos`, anti-portfolio `/anti-portfolio`, carnet de décision `/decisions` + `/journal`, méthode `/methode`, livrables `/livrables`. La formation reste un socle d'entrée précieux (aspirants, juniors, CVC, reconversions) mais ne domine plus l'identité produit. Voir §1bis pour la cartographie « cible initiale → livré ».
+## Accès par section
+
+Lire la section utile, pas le manuel entier à chaque intervention.
+
+| Tâche | Sections |
+| --- | --- |
+| Comprendre le socle et le périmètre | [Architecture](#architecture), [positionnement et ontologie](#positionnement) |
+| Modifier une source ou une projection | [Cycle du contenu](#cycle-contenu), [validation](#validation) |
+| Préparer la consolidation Formation | [Distinctions et diagnostic](#preparation-formation), [contrat Parcours](parcours/README.md) |
+| Modifier l'application ou la persistance | [État, stockage et routes](#application) |
+| Choisir un identifiant ou rédiger | [ID/slug](#ids-slugs), [charte éditoriale §4.0.c](#style-editorial) |
+| Éditer une ressource de formation | [Leçon](#lecons), [glossaire](#glossaire), [bibliothèque](#bibliotheque), [parcours](#parcours), [cours](#cours) |
+| Éditer une autre collection | [Cas et analyses](#cas-analyses), [écosystèmes](#ecosystemes), [livrables](#livrables), [mémos](#memos), [anti-portfolio](#anti-portfolio), [convictions](#convictions), [certifications](#certifications), [simulateurs](#simulateurs) |
+| Modifier l'interface | [Design](#design), [choix d'UX](#ux), [cahier Ikigai](#ikigai) |
+| Construire ou préparer un hébergement | [Workflow](#workflow), [prérendu et hébergement](#hebergement) |
+| Lire les priorités | [Suivi](#suivi) |
 
 ---
+
+<a id="architecture"></a>
 
 ## 1. Architecture globale et technologies
 
@@ -17,8 +33,8 @@ Le projet est une **Single Page Application statique** sans backend applicatif. 
 
 | Couche | Technologies |
 | --- | --- |
-| **Front-end** (`client/`) | React 19 · Vite 6 · TypeScript · Tailwind CSS v3 · React Router 7 · lucide-react |
-| **Stockage utilisateur** | `localStorage` sous contrats `vcpx:` versionnés, validés et migrés côté client |
+| **Front-end** (`client/`) | React · Vite · TypeScript · Tailwind CSS · React Router ; versions dans [client/package.json](../client/package.json) |
+| **Stockage utilisateur** | Local au navigateur ; contrats et exceptions en [§3.2](#persistance) |
 | **Contenu** (`data/`) | JSON source des collections éditoriales, bundlé par le client |
 | **Typographie** | Newsreader (titres) · Plus Jakarta Sans (corps) · JetBrains Mono (mono) |
 
@@ -57,64 +73,50 @@ vc-platform/
 │       ├── components/        # ui · chrome · ornaments · explore · cards · reading · ikigai · simulators · ErrorBoundary
 │       ├── pages/             # pages lazy-loadées, regroupées par domaine
 │       └── styles/            # tokens.css (design tokens, dont --error/--success) + global.css
-└── .github/workflows/deploy-pages.yml   # déploiement GitHub Pages (build client + publication gh-pages)
+└── .github/workflows/deploy-pages.yml   # workflow manuel : artefact statique puis job Pages
 ```
 
 > [!NOTE]
 > Le client lit `data/` via l'alias Vite **`@data`** (ex. `import coursesJson from '@data/courses.json'` dans `client/src/content/courses.ts`). Chaque collection a son module afin que Rollup découpe le contenu par chunks.
 >
-> **Collections scindées (glossaire & leçons).** Pour alléger le hot path, `glossary.json` et `lessons.json` (+ `data/parcours/*.lessons.json`) sont **dérivés** par `scripts/split-glossary.mjs` et `scripts/split-lessons.mjs` (câblés dans `predev`/`prebuild` via `npm run split:content`) en deux fichiers chacun, écrits sous `data/generated/` : un **index léger** (`generated/*.index.json`, importé en eager pour popovers / recherche / liens) et un **chunk lourd lazy** (`generated/glossary.defs.json` / `generated/lessons.bodies.json`, chargé à l'ouverture d'une définition / leçon). Ces fichiers sont commités pour que les imports soient résolus dès le clone, mais restent **strictement générés** : ne jamais les éditer à la main. `npm run check:generated`, inclus dans le gate racine, compare les quatre sorties à leurs sources sans les réécrire.
+> **Collections scindées.** Les index légers du glossaire et des leçons sont importés immédiatement ; définitions et corps sont chargés à la demande par leurs modules de contenu. Les quatre fichiers sous `data/generated/` sont versionnés mais strictement dérivés. Voir le [cycle de régénération](#cycle-contenu).
 
 > [!IMPORTANT]
 > `AGENTS.md` est l'entrée portable des agents de code et renvoie vers `CLAUDE.md`, contrat détaillé partagé par Codex, Claude Code et les autres agents. Les hooks `.claude/` ne s'exécutent que dans Claude Code et seulement sur les opérations prises en charge ; les autres agents doivent appliquer les interdictions et lancer les validations explicitement.
 
 ---
 
-## 1bis. Vision stratégique : cible initiale → livré
+<a id="positionnement"></a>
 
-La plateforme s'est transformée pour devenir une **VC Intelligence Platform**. Le modèle d'apprentissage reste une porte d'entrée ; la valeur principale réside dans les outils de travail de l'investisseur. Le plan stratégique initial visait huit piliers sous des routes précises. La plupart ont été livrés, mais sous d'autres noms de route — la table ci-dessous fait correspondre la cible d'origine à ce qui existe aujourd'hui dans [`client/src/App.tsx`](../client/src/App.tsx).
+## 1bis. Positionnement et ontologie
 
-| Pilier (cible initiale) | Route livrée | Surface |
-| --- | --- | --- |
-| Intelligence / Research (`/research`) | `/intelligence` + `/blog` | hub `IntelligencePage` + analyses (dont « Lectures obliques ») |
-| Thesis Lab (`/theses`) | `/convictions` + `/ecosystemes` | convictions datées (vue dérivée, §4.5sexies) + thèses falsifiables portées par les dossiers d'écosystème |
-| Atlas (`/atlas`) | `/ecosystemes` | « Décortiquer un écosystème » (§4.5bis), dossiers arborescents |
-| Cases (`/cases`) | `/cases/:slug` | études de cas décisionnelles (l'index `/cases` redirige vers la Bibliothèque) |
-| Tools (`/tools`) | `/simulators` | simulateurs de décision (§4.6) — route inchangée |
-| Library (`/library`) | `/parcours` + `/bibliotheque` | parcours par objectif (§4.3bis) + inventaire filtrable des ressources (§4.3) |
-| Glossary (`/glossary`) | `/glossary` | dictionnaire vivant et connecteur universel |
-| Workspace (`/workspace`) | `/dashboard` + `/notes` + `/journal` | tableau de bord, carnet, carnet de décision (§4.5sexies) |
+Maison Sapience VC est en construction. La présence de routes ou de collections ne prouve ni la complétude du contenu, ni la maturité professionnelle de la couche Intelligence VC. L'accueil privilégie Formation et Intelligence VC ; Workspace reste secondaire selon [PRODUCT.md](../PRODUCT.md). La [stratégie](STRATEGIE-vc-intelligence.md) décrit la cible, pas un bilan de livraison.
 
-Surfaces livrées **hors plan initial** : `/memos` (mémos d'investissement annotés, §4.5quater), `/anti-portfolio` (ratés d'investissement documentés, §4.5quinquies), `/livrables` (artefacts de parcours, §4.5ter), `/methode` (exposé de la méthode d'analyse). Les piliers `/research`, `/theses`, `/tools`, `/library`, `/workspace` n'ont **pas** été retenus comme routes : leur valeur a été absorbée par les surfaces ci-dessus.
+| Terme | Contrat |
+| --- | --- |
+| Path / Parcours | Même trajectoire de formation ordonnée par objectif ; compose des ressources existantes |
+| Cours | Conteneur réutilisable de leçons |
+| Leçon | Unité pédagogique autonome rattachée à un cours ; pas un simple chapitre ou bloc « À retenir » |
+| Bibliothèque | Inventaire filtrable, sans collection de rayons distincte |
+| Certification | Évaluation distincte du suivi de formation ; aucun résultat local ne délivre le titre professionnel `VC Analyst` |
 
-### Taxonomie de contenu (standard cible Phase 3)
-
-Pour piloter ce corpus diversifié et filtrer l'affichage (ex : masquer le contenu « founder » à un investisseur), une taxonomie stricte est visée :
-
-- **`contentKind`** : `fundamental`, `playbook`, `research-note`, `sector-note`, `thesis`, `atlas`, `case`, `framework`, `tool`, `reference`.
-- **`audience`** : `investor`, `aspiring-investor`, `junior-investor`, `cvc`, `founder-facing`, `all`.
-- **`rigor`** : `intro`, `practitioner`, `desk-reference`.
-- **`evidenceLevel`** : `conceptual`, `analytical`, `sourced`, `decision-grade`, `maintained-intelligence`.
-
-Ces champs sont le **standard cible de la Phase 3**, pas encore le schéma généralisé des collections historiques. Le validateur actuel est strict : **n'ajoutez pas ces champs** dans `courses.json`, `lessons.json`, `data/blog/*.json`, `caseStudies.json` ou `simulators.json` tant que les types et schémas Zod n'ont pas été migrés. `memos.json` et `antiPortfolio.json` disposent désormais de schémas Zod stricts, de contrôles de références et du scan de marqueurs. Toute nouvelle collection éditoriale structurée doit être ajoutée au validateur avec ces trois couches de contrôle.
+La taxonomie envisagée (`contentKind`, `audience`, `rigor`, `evidenceLevel`) n'est pas un contrat de données généralisé. N'ajouter un champ qu'après vérification ou évolution coordonnée des types, schémas et consommateurs (§4.0.b). Les statuts déjà présents conservent leurs règles propres.
 
 ---
 
-## 2. Le cycle de vie du contenu (à comprendre AVANT d'éditer)
+<a id="cycle-contenu"></a>
+
+## 2. Le cycle de vie du contenu
+
+### 2.1. Sources et consommateurs
 
 C'est le concept central de la plateforme. Le contenu suit ce chemin :
 
 ```
-data/*.json + data/blog/*.json ──(client bundle @data / import.meta.glob)──► Application statique (CSR)
+Sources JSON → import direct OU génération → modules client → pages
 ```
 
-Les pages de contenu lisent directement les fichiers JSON importés depuis `@data` (alias Vite).
-
-- Rendu côté client du contenu bundlé → l'application fonctionne sans compte ni backend applicatif. Les chunks lazy restent chargés depuis l'hôte statique tant qu'ils ne sont pas en cache.
-- Toute édition dans un fichier JSON source est reflétée presque instantanément en développement via Vite HMR.
-
-> [!TIP]
-> Le build client est découpé par routes et par collections de contenu : le vendor React est isolé et les collections lourdes (`lessons`, `glossary`, `ikigai`) restent dans des chunks séparés. Le glossaire et les leçons sont en outre **scindés index/contenu** : seul l'index léger est eager, les définitions et corps (`glossary.defs.json` / `lessons.bodies.json`) arrivent en chunks lazy.
+Les modules de `client/src/content/` consomment les collections via `@data` ; les pages ne lisent pas toutes les sources directement. Les leçons et le glossaire passent par les projections de [scripts/generated-content.mjs](../scripts/generated-content.mjs). Le lecteur charge seulement les corps de leçons publiées ; l'index peut conserver les métadonnées des leçons à venir.
 
 ### 2.2. Conséquences pratiques
 
@@ -122,26 +124,54 @@ Il n'y a ni base de données ni CMS. Tout le contenu est géré statiquement.
 
 | Vous éditez… | Ce qui se met à jour | L'action requise |
 | --- | --- | --- |
-| un fichier source (`data/*.json` ou `data/blog/<slug>.json`) | le **bundle** client (via HMR en dev) | Valider localement ; commit, push et publication restent des actions distinctes et uniquement explicites |
+| JSON importé directement | module client via Vite | Valider, puis vérifier la surface concernée |
+| `data/lessons.json`, registre `data/parcours/*.lessons.json` ou `data/glossary.json` | index et contenu différé | Relancer `npm run split:content`, puis `npm run check:generated` |
+| `data/sources/canonical-glossary.json` | registre éditorial seulement | Reporter les décisions retenues dans le glossaire publié, puis valider et régénérer |
+| `nouveau simu/src/` | HTML du simulateur de note | `npm run build:memo`, puis `npm run check:memo` |
+
+**Le HMR ne remplace pas la génération.** `predev` et `prebuild` exécutent les générateurs au lancement ; ils ne surveillent pas ensuite les sources. Commit, sauvegarde distante et publication sont des actions distinctes, uniquement sur demande.
 
 > [!IMPORTANT]
 > **Sérialiseur canonique unique.** Le format de référence est exactement la sortie de `JSON.stringify(payload, null, 2)` + `\n`. `glossary` reste trié par `term`, `caseStudies` par `title`, et le blog vit dans `data/blog/<slug>.json` avec un fichier par article.
 
 > [!IMPORTANT]
-> **Publication fermée par défaut.** Pour les collections disposant d'un statut, `shared/publication.mjs` est le contrat commun : seules les entrées explicitement `published` peuvent alimenter les surfaces publiques, la recherche, le sitemap et le prérendu. Une valeur absente ou inconnue n'est pas publiée.
+> **Publication éditoriale.** [shared/publication.mjs](../shared/publication.mjs) retient seulement `status: "published"` pour les collections concernées, notamment leçons, articles et certifications. Les collections sans statut ne bénéficient pas de ce filtre ; les métadonnées de leçons `upcoming` peuvent être exposées sans corps lisible. Ne pas confondre statut éditorial, indexabilité et déploiement. Un fichier inclus dans le client n'est jamais confidentiel.
 
 ### 2.2.b. Cas particulier : glossaire VC
 
 Le glossaire final consommé par l'app reste `data/glossary.json`, mais son chantier éditorial passe d'abord par `data/sources/canonical-glossary.json`.
 
 - `canonical-glossary.json` est le registre durable : il conserve sources, modules, décisions d'édition, aliases, `action` (`add`, `update`, `merge`, `skip`) et `status` (`draft`, `needs-review`, `approved`, `applied`).
-- `data/glossary.json` ne contient que les entrées finales consommées par l'application : `id`, `term`, `slug`, `category`, `short`, `definition`, `example`, `link`, `seeAlso`, `relatedLessonIds`.
+- `data/glossary.json` porte les fiches publiées, dont leurs `aliases`. Sa structure est définie dans `client/src/content/types.ts` et le validateur ; le split ne lit pas directement le registre canonique.
 - Le registre d'ingestion et le glossaire publié ont des responsabilités distinctes. Leurs volumes vérifiés vivent uniquement dans `Suivis/ETAT.md`.
 - Toute variante simple doit devenir un **alias** d'un terme existant plutôt qu'une fiche autonome ; une fiche finale n'est créée que si le concept a une utilité de popover ou de navigation propre.
 
-Pour clôturer une passe glossaire : mettez le registre à jour, injectez seulement les `add`/`update` retenus dans `data/glossary.json`, puis lancez `npm run validate:glossary`, `npm run validate:content` et `npm run build`.
+Pour clôturer une passe glossaire : aligner registre et fiches publiées, y compris les aliases retenus ; lancer `npm run validate:glossary`, `npm run validate:content:strict`, puis `npm run split:content` et `npm run check:generated`. Le build complet dépend de la portée du changement, selon [CLAUDE.md §7](../CLAUDE.md#7-validation-proportionnée).
 
 ---
+
+<a id="preparation-formation"></a>
+
+### 2.2.c. Préparation de Formation : contrat existant et cible
+
+Ne pas confondre quatre dimensions :
+
+| Dimension | Lecture du modèle actuel |
+| --- | --- |
+| Publication éditoriale | Statut explicite des collections raccordées à `shared/publication.mjs` ; les parcours et cours n’ont pas encore de statut éditorial propre |
+| Disponibilité pédagogique | Capacité réelle à suivre les activités promises ; ni une route existante ni une référence résolue ne suffisent à la prouver |
+| Résolution d’étape | `ParcoursStep.status` distingue `existant` et `a-produire` ; il ne porte pas la publication ou la maturité du parcours |
+| Mode de complétion | Connaissance, orientation ou production décrivent des promesses différentes ; aucun champ commun ne les impose encore aux parcours |
+
+`roadmap: now | next | later` reste un ordre de construction, pas un filtre de publication. Les `prerequisites` de parcours sont actuellement textuels ; ils ne constituent pas un registre de prérequis d’entrée par identifiant de leçon. La navigation souple ne dispense pas de vérifier la cohérence pédagogique de l’ordre proposé.
+
+Un diagnostic de préparation doit séparer les incohérences démontrables, les métadonnées non encore modélisées et les arbitrages pédagogiques. L’absence d’un contrat futur ne permet pas d’inventer un statut « exécutable » ou un mode de complétion. Les fixtures peuvent tester ces cibles sans migrer les données. Une évolution du modèle exige ensuite une décision explicite et l’alignement des types, schémas, sources et consommateurs.
+
+Les politiques pédagogiques relèvent du [contrat Parcours](parcours/README.md#preparation-formation). Le statut des travaux et des commandes réellement disponibles relève de [Suivis/ETAT.md](../Suivis/ETAT.md#consolidation-formation). Un contrôle structurel vert, un diagnostic technique et une revue professionnelle restent trois preuves distinctes.
+
+---
+
+<a id="application"></a>
 
 ## 3. Logique et composants principaux
 
@@ -151,13 +181,17 @@ Pour clôturer une passe glossaire : mettez le registre à jour, injectez seulem
 - **`UserDataProvider`** — profil, notes, favoris, progression, surlignages, entrées du carnet de décision. La persistance s'effectue exclusivement en **local** via le `localStorage`.
 - **`UIProvider`** — palette de commande (⌘K), états d'UI globaux.
 
+<a id="persistance"></a>
+
 ### 3.2. Persistance (`client/src/lib/storage.ts`)
 
-`storage.ts` fournit l'accès commun ; `storageDomains.ts` décrit les domaines, limites et validations runtime ; `storageMigrations.ts` porte les migrations non destructives. Les données produit utilisent des clés `vcpx:` et des enveloppes versionnées. Toute évolution incompatible doit ajouter une migration explicite et préserver les données valides déjà enregistrées. Les contrats exécutables priment sur une liste de clés recopiée dans ce manuel.
+`storage.ts` fournit l'accès commun ; `storageDomains.ts` décrit domaines, limites et validations ; `storageMigrations.ts` porte les migrations. Les données principales utilisent des enveloppes versionnées sous `vcpx:`. Le simulateur de note conserve son format distinct, pris en charge par `localDataLifecycle.ts` pour l'export, l'import et la purge ; `localDataRecovery.ts` gère la copie de récupération dans IndexedDB.
+
+Toute évolution incompatible exige une migration explicite et la préservation des données valides. Ces mécanismes restent locaux : ni confidentialité, ni synchronisation multi-appareil, ni garantie de sauvegarde distante. Ne pas y placer de secrets ou de dossiers d'investissement non publics.
 
 ### 3.3. Pages clés (`client/src/pages/`)
 
-L'arborescence est rangée par domaine (un sous-dossier par couche). La couche VC Intelligence est **livrée** :
+L'arborescence est rangée par domaine. Les principales surfaces implémentées sont les suivantes ; leur présence ne qualifie pas la complétude éditoriale :
 
 - **Intelligence** (`pages/intelligence/`) : **`IntelligencePage`** (hub `/intelligence`), **`MethodePage`** (`/methode`), **`ConvictionsPage`** (`/convictions`, convictions agrégées), **`DecisionsIndexPage`** (`/decisions`, présentation du carnet de décision), **`MemoLibraryPage`** / **`MemoPage`** (`/memos`, mémos annotés — §4.5quater), **`AntiPortfolioPage`** / **`AntiPortfolioEntryPage`** (`/anti-portfolio` — §4.5quinquies), **`DeliverablesPage`** / **`DeliverablePage`** (`/livrables` — §4.5ter).
 - **Écosystèmes** (`pages/ecosystems/`) : **`EcosystemsPage`** (index « Décortiquer un écosystème », `/ecosystemes`) et **`EcosystemPage`** (détail d'un dossier, `/ecosystemes/:slug`) — la couche Atlas / analyse signée (cf. §4.5bis).
@@ -167,11 +201,11 @@ L'arborescence est rangée par domaine (un sous-dossier par couche). La couche V
 - **Workspace** (`pages/workspace/`) : `DashboardPage`, **`DecisionJournalPage`** (`/journal`, carnet de décision — §4.5sexies), `NotesPage`, plus `onboarding/ProfileResultPage` et `onboarding/ProfilePage`.
 
 > [!IMPORTANT]
-> **Parcours et Bibliothèque.** La page catalogue **`/parcours`** utilise un rendu interactif en accordéon pour rétracter les familles. Un parcours possède sa fiche `/parcours/:slug`. La Bibliothèque n'est pas une seconde taxonomie : `/bibliotheque` inventorie et filtre les ressources déjà existantes.
+> **Parcours et Bibliothèque.** `/parcours` filtre par famille et niveau d'approfondissement (`?family=`, `?budget=`, synchronisés à l'URL), puis affiche des rangées comparables groupées par famille. Un emplacement de reprise ou d'orientation précède la liste. L'atlas facultatif peut être préchargé au survol ou au focus du bouton ; son ouverture exige une activation. La fiche `/parcours/:slug` hérite du `?budget=` choisi. `/bibliotheque` inventorie les ressources existantes, sans seconde taxonomie.
 
 ### 3.4. Routage V1 française
 
-La V1 est française et non localisée. `App.tsx` monte directement les routes publiques (`/`, `/home`, `/parcours`, `/bibliotheque`, `/blog/:slug`, etc.) sous `MainLayout`. Le splash reste l'accueil canonique `/` et `/home` la page d'entrée dans les trois piliers.
+La V1 est française et non localisée. [App.tsx](../client/src/App.tsx) monte les routes sous `MainLayout`. Le splash est `/` ; `/home` présente Formation et Intelligence VC. `/design-system` est réservé au développement. [shared/routes.mjs](../shared/routes.mjs) distingue familles exécutables, publiques, non indexables et redirections historiques ; l'accès direct statique relève du [§6](#hebergement).
 
 Conséquences opérationnelles :
 
@@ -185,11 +219,13 @@ Conséquences opérationnelles :
 
 > Les types généraux sont définis dans [client/src/content/types.ts](../client/src/content/types.ts) ; les types propres aux certifications vivent dans [client/src/content/certificationTypes.ts](../client/src/content/certificationTypes.ts). **Gardez le type et le schéma de validation cohérents lorsque vous ajoutez un champ.**
 
+<a id="ids-slugs"></a>
+
 ### 4.0. Conventions d'`id` et de `slug`
 
 - `slug` = identifiant d'URL (kebab-case, sans accent). Doit être **unique** par type.
-- `id` = clé interne stable. Conventions observées : **parcours/path** (`parcours.json`) → `p-*` ; cours → `c-*` ; leçons de `lessons.json` → `l-*` / `lpl-*` (Power Law) / `lmv-*` / `lea-*` (entretien analyst) / `lf-*` ; leçons **drop-in** de `data/parcours/*.lessons.json` → `ld-*` (découverte), `llp-*` (lever son fonds LP), `lts-*` (standard français) ; **glossaire → `id == slug`** ; blog → `bp-<slug>` ; études de cas → `cs-*` ; **mémos** → `memo-*` (§4.5quater) ; **anti-portfolio** → `ap-*` (§4.5quinquies) ; **livrables** → l'`id` du milestone résolu (`todo-*`, cf. §4.5ter).
-- Les relations se font **par `id`**, pas par slug (voir le graphe ci-dessous).
+- `id` = clé interne stable. Respecter les conventions de la collection et préserver les identifiants existants ; les préfixes historiques ne constituent pas une liste exhaustive. Pour le glossaire, `id === slug`.
+- Les ressources sont généralement reliées par `id` ; les marqueurs et références glossaire utilisent le `slug`. Vérifier le type et le résolveur du champ concerné, sans assimiler un ID de cours à un slug de dictionnaire.
 
 ```
 Parcours.steps[].ref ──► ressources existantes    Course.lessonIds[] ──► Lesson.id
@@ -198,18 +234,18 @@ Lesson.courseId ──► Course.id
 Lesson.glossaryRefs[] ──► Glossary.slug  Glossary.relatedLessonIds[] ──► Lesson.id
 CaseStudy.glossaryRefs[] ──► Glossary.slug   Simulator.relatedLessonIds[] ──► Lesson.id
 Deliverable.model{kind,id} ──► CaseStudy.id | EcosystemDossier.id | Memo.id | Lesson.id
-Deliverable.relatedLessonIds[] ──► Lesson.id   ParcoursStep.ref(milestone).id ──► Deliverable.id
+Deliverable.relatedLessonIds[] ──► Lesson.id   ParcoursStep.ref(milestone).id ──► Deliverable.id | Lesson.id
 KnowledgeCertification.capstoneDeliverableId? ──► Deliverable.id
 Lesson.furtherReading{kind=deliverable}.ref ──► Deliverable.id
 ```
 
 ### 4.0.b. Taxonomie et validation
 
-Le repositionnement introduit une taxonomie cible (voir §1bis) : `contentKind`, `audience`, `rigor`, `status`, `evidenceLevel`. Elle n'est **pas encore généralisée** aux schémas des collections historiques.
+Les schémas de [scripts/validate-content.mjs](../scripts/validate-content.mjs) sont stricts. Ajouter un champ exige d'aligner type, schéma, contrôles de références et consommateurs. Une nouvelle collection doit aussi entrer dans le scan des marqueurs. Ne pas confondre la taxonomie envisagée (§1bis) avec les champs déjà requis, notamment `status` pour les leçons et articles.
 
-- **N'ajoutez pas ces champs aux JSON existants** tant que `client/src/content/types.ts` et `scripts/validate-content.mjs` n'ont pas été migrés : les schémas Zod actuels sont stricts et rejetteraient des champs inconnus.
-- **Validez toujours** vos JSON locaux avec `npm run validate:content`.
-- Le script `scripts/validate-content.mjs` agit comme garde-barrière contre l'injection de données mal formées. Les schémas Zod assurent la cohérence structurelle.
+Valider depuis la racine. Les erreurs sont toujours bloquantes ; `validate:content:strict` rend aussi les warnings bloquants, sauf les `softWarnings` explicitement reconnus. Une validation structurelle ne prouve ni la justesse des faits ni la qualité pédagogique.
+
+<a id="style-editorial"></a>
 
 ### 4.0.c. Style rédactionnel — charte transverse (non négociable)
 
@@ -231,45 +267,19 @@ Le registre visé est celui d'un analyste compétent qui rédige un mémo, pas d
 > [!NOTE]
 > La charte vise les contenus VC Intelligence et **toute nouvelle production**. Des contenus historiques gardent par endroits des tournures « école » : on les aligne au fil des relectures, sans imposer de réécriture de masse.
 
+<a id="lecons"></a>
+
 ### 4.1. Ajouter une LEÇON (`data/lessons.json`)
 
-La leçon est l'unité de lecture. Le `body`, le `summary`, les `keyTakeaways` et les `quiz` suivent la **charte de style §4.0.c**. Exemple minimal :
+La leçon est une unité pédagogique autonome. Partir du type `Lesson` et de `lessonSchema` dans [le validateur](../scripts/validate-content.mjs), plutôt que d'un exemple JSON partiel.
 
-```jsonc
-{
-  "id": "l-power-law",
-  "slug": "la-loi-de-puissance",
-  "courseId": "c-what-is-vc",      // doit exister dans courses.json
-  "order": 3,                       // ordre dans le cours
-  "title": "La loi de puissance",
-  "kicker": "Fondations",          // sur-titre court
-  "readMin": 7,
-  "summary": "Pourquoi quelques investissements remboursent tout le fonds.",
-  "body": "## Un titre\n\nUn paragraphe avec un terme [[power-law|loi de puissance]] lié au dictionnaire.\n\n- point un\n- point deux",
-  "keyTakeaways": ["Idée à retenir 1", "Idée à retenir 2"],
-  "glossaryRefs": ["power-law", "tvpi"],   // slugs du glossaire (panneau « termes liés »)
-  "quiz": [
-    {
-      "question": "Qu'implique la loi de puissance ?",
-      "options": [
-        { "text": "Tous les deals rapportent autant", "correct": false },
-        { "text": "Une minorité de deals fait l'essentiel du retour", "correct": true }
-      ],
-      "explanation": "Quelques succès massifs dominent la performance du fonds."
-    }
-  ],
-  "furtherReading": [
-    { "label": "Simuler les retours d'un fonds", "kind": "simulator", "ref": "fund-returns" }
-  ]
-}
-```
+1. Attribuer un `id` stable, un `slug` unique, un `courseId` existant et un `order` cohérent.
+2. Renseigner `title`, `kicker`, `readMin`, `summary`, `glossaryRefs` et **`status`**. `published` exige `body` et `keyTakeaways` ; `upcoming` exige les métadonnées pédagogiques prévues par le schéma, sans corps accessible au lecteur.
+3. Maintenir la réciprocité entre `lesson.courseId` et `course.lessonIds`. Le lecteur sélectionne par `courseId` et trie par `order` ; aligner cette séquence avec celle du cours.
+4. Rédiger selon la [charte §4.0.c](#style-editorial). Vérifier quiz, prérequis, ressources `furtherReading` et éventuelle pratique structurée, sans confondre lecture et temps de production.
+5. Valider, régénérer les splits, contrôler leur parité, puis vérifier la leçon et son contexte de cours/parcours (§4.8).
 
-Puis **ajoutez l'`id` de la leçon dans `lessonIds[]` du cours** (`data/courses.json`) — c'est ce qui détermine l'ordre et l'appartenance.
-
-> [!NOTE]
-> **Pipeline d'authoring des parcours (leçons drop-in).** Les fiches de `data/parcours/*.lessons.json` sont **servies au client** : `scripts/split-lessons.mjs` fusionne `data/lessons.json` **et** `data/parcours/*.lessons.json` dans l'index/bodies générés, que `content/lessons.ts` expose (`LESSONS` + `loadLesson`) ; `lessonById`/`lessonBySlug` et le lecteur les résolvent. *(L'ancien `client/src/content/parcoursLessons.ts` a été supprimé : sa concaténation est reprise par le script de split.)*
->
-> **Si vous ajoutez un nouveau registre drop-in :** déposez simplement le fichier `data/parcours/<nom>.lessons.json` — **le client l'auto-charge** (le split fait un glob sur `data/parcours/*.lessons.json`, aucun import manuel à ajouter). Attention aux `slug` en double : `split-lessons.mjs` échoue si deux leçons partagent un slug. Gardez ensuite les `steps` de `data/parcours.json` et les `lessonIds[]` des cours cohérents, puis lancez `npm run validate:content`.
+**Registres drop-in.** `scripts/split-lessons.mjs` fusionne `data/lessons.json` avec les tableaux `lessons` des fichiers `data/parcours/*.lessons.json`. Aucun import client manuel n'est nécessaire, mais un nouveau registre ou une modification exige de relancer le split. Les slugs en double sont bloquants.
 
 > [!NOTE]
 > **Temps de lecture opt-in Série A.** Le registre `data/parcours/05-preparer-sa-serie-a.lessons.json` applique explicitement `readMin = ceil(nombre de mots du body / 180)` avec le motif Unicode `\p{L}+(?:['’.-]\p{L}+)*|\d+(?:[.,]\d+)*`, références incluses. Cette convention calibre uniquement ce parcours à ce stade ; elle ne migre pas les corpus historiques et ne remplace pas les temps de production `practice.estimatedMinutes`, qui restent estimés séparément.
@@ -289,72 +299,29 @@ Le rendu est assuré par [client/src/lib/markdown.tsx](../client/src/lib/markdow
 | ligne vide | nouveau paragraphe |
 
 > [!TIP]
-> `[[slug|libellé]]` et `{{slug|libellé}}` sont le cœur du « dictionnaire vivant ». Le `slug` doit exister dans `glossary.json` ; sinon le libellé s'affiche en texte simple (pas d'erreur). Dans le **cahier Ikigai**, `[[..]]` n'est révélé qu'en mode *Avancé* tandis que `{{..}}` reste actif dans les deux modes (voir §7.b). Vérifiez l'intégrité de tous les marqueurs avec `npm run validate:content`.
+> Les marqueurs `[[slug|libellé]]` et `{{slug|libellé}}` désignent le **glossaire**, jamais un cours ou une leçon. Un slug absent peut être rendu en texte simple, mais reste une erreur de validation. Pour une autre ressource, utiliser un lien Markdown vers sa route existante. Dans le [cahier Ikigai (§8)](#ikigai), `[[..]]` est interactif en mode Avancé, `{{..}}` dans les deux modes.
 
 #### Détection automatique des termes (prose des leçons)
 
-Le balisage manuel ne suffit pas à garantir la règle produit : **dans les cours, tout terme technique ou sigle doit avoir un popover + redirection vers le dictionnaire.** `markdown.tsx` applique donc une **détection automatique** quand `glossaryPreview` est actif (prose de leçon via `ActiveProse sourceType="lesson"`, et définitions de `GlossaryPage`).
+`markdown.tsx` complète le balisage par une détection automatique lorsque `glossaryPreview` est actif : prose de leçon via `ActiveProse sourceType="lesson"` et définitions de `GlossaryPage`. Elle couvre les termes et aliases éligibles du glossaire, pas tout le vocabulaire technique possible ; une relecture reste nécessaire.
 
-- Un matcher est construit une fois à partir de **tous les termes + alias** du glossaire. La **première occurrence** de chaque terme dans la page devient un popover ; les occurrences suivantes restent en texte simple. Le volume courant est consigné uniquement dans `Suivis/ETAT.md`.
+- Le matcher retient les termes et aliases du glossaire, sauf les formes minuscules trop courtes ou ambiguës. Il lie la première occurrence éligible dans le rendu ; les suivantes restent en texte simple.
 - Les **marqueurs manuels** `[[..]]` / `{{..}}` restent prioritaires : leurs slugs sont pré-amorcés, donc la détection auto ne re-lie jamais un terme déjà balisé.
 - Les **sigles** (VC, MOIC, B2B, DPI…) sont reconnus **en respectant la casse** : `VC`/`VCs` sont liés, `vc` en minuscule ou `VC` à l'intérieur d'un mot (`MVC`) ne le sont pas. Les phrases longues priment sur leurs sous-mots (« fonds VC » → `venture-capital-fund`).
 - **Contenu du popover** : terme + champ `short` uniquement. Le **panneau entier** est cliquable et redirige vers `/glossary?term=slug` (lien réel : accessible clavier, clic-milieu/nouvel onglet préservés).
 - **Portée** : leçons (toutes via `LessonPage`) + définitions du dictionnaire. Les **études de cas / blog** restent en balisage manuel uniquement (`glossaryPreview` désactivé).
 
+<a id="glossaire"></a>
+
 ### 4.2. Ajouter un TERME au dictionnaire (`data/sources/canonical-glossary.json` puis `data/glossary.json`)
 
-Commencez toujours par le registre canonique :
+1. Chercher d'abord le concept et ses variantes dans le registre et le glossaire publié ; une variante simple devient un alias, pas une nouvelle fiche.
+2. Documenter dans le registre la provenance réellement vérifiée, la décision (`add`, `update`, `merge`, `skip`) et son statut. Une URL valide ou un chemin local ne suffit pas à justifier `source-backed`.
+3. Reporter la décision retenue dans la fiche publiée : `id === slug`, titre `term`, catégorie, `short`, définition, aliases et références cohérents. Les exemples méthodologiques doivent être explicitement distingués des faits sourcés.
+4. Conserver les aliases dans **`data/glossary.json`** : la recherche et la détection ne les lisent pas directement dans le registre. `npm run aliases:merge` peut reporter les aliases approuvés ; examiner ses écritures avant validation.
+5. Exécuter les [contrôles et la régénération](#validation). Ne déclarer une entrée appliquée qu'après alignement des deux couches.
 
-```jsonc
-{
-  "canonicalTerm": "MOIC",
-  "slug": "moic",
-  "aliases": ["Multiple on Invested Capital"],
-  "status": "applied",
-  "action": "add",
-  "modules": ["Ressources externes"],
-  "sourcePaths": ["ressources/exemple.md"],
-  "sourceStatus": "source-backed",
-  "category": "Fund Economics",
-  "short": "Multiple brut sur capital investi.",
-  "definition": "Le MOIC rapporte la valeur totale…",
-  "example": "Un fonds qui rend 3× le capital appelé affiche un MOIC de 3.0x.",
-  "seeAlso": ["tvpi", "dpi"],
-  "relatedLessonIds": ["l-fund-metrics"],
-  "notes": "Décision éditoriale et provenance."
-}
-```
-
-Décision éditoriale :
-
-- **`add`** : créer une nouvelle fiche finale parce que le concept est autonome.
-- **`update`** : enrichir une fiche existante.
-- **`merge`** : ne pas créer de fiche ; ajouter les variantes utiles dans `aliases` de la fiche canonique.
-- **`skip`** : conserver la trace dans le registre, sans injection finale.
-
-Ensuite seulement, ajoutez ou mettez à jour l'entrée finale dans `data/glossary.json` :
-
-```jsonc
-{
-  "id": "moic",                 // par convention, id == slug
-  "term": "MOIC",
-  "slug": "moic",
-  "latin": "Multiple on Invested Capital",  // optionnel (affiché en italique)
-  "category": "Performance",
-  "short": "Multiple brut sur capital investi.",   // 1 phrase (infobulles)
-  "definition": "Le MOIC rapporte la valeur totale… (texte complet)",
-  "example": "Un fonds qui rend 3× le capital appelé affiche un MOIC de 3.0x.",  // optionnel
-  "link": "https://exemple.com",         // optionnel — lien externe (fonds, outils, institutions)
-  "seeAlso": ["tvpi", "dpi"],            // autres slugs du glossaire
-  "relatedLessonIds": ["l-fund-economics"]
-}
-```
-
-> [!NOTE]
-> Catégories ajoutées pour le cahier Ikigai : **Fonds & VC** (Eurazeo, Partech, Alven, Serena, Daphni, Cathay Innovation, Accel, Sequoia, a16z), **Institutions** (Bpifrance, EIF), **Outils** (Affinity, Harmonic.ai, Decile Hub, PitchBook, Microsoft Presidio). Renseignez `link` pour ces entrées : il s'affiche dans la fiche du dictionnaire **et** dans les popovers `{{..}}` du cahier.
-
-> [!IMPORTANT]
-> Après chaque lot glossaire, lancez `npm run validate:glossary`. Ce contrôle custom vérifie : slugs uniques, `id === slug`, `seeAlso` résolus, `relatedLessonIds` résolus, marqueurs `[[slug|label]]` résolus dans les champs du glossaire, et absence de collisions d'aliases.
+`validate:glossary` contrôle notamment slugs, `id === slug`, URL HTTPS, `seeAlso`, marqueurs `[[..]]` et collisions d'aliases. **Limite actuelle :** ses `relatedLessonIds` ne sont résolus que contre `data/lessons.json`, contrairement au validateur général qui connaît aussi les registres drop-in. Ne pas contourner un échec par une fausse référence ; traiter séparément l'évolution du validateur si une référence drop-in est nécessaire.
 
 #### Comportement de la page `/glossary`
 
@@ -365,51 +332,26 @@ Le dictionnaire est rendu par [GlossaryPage.tsx](../client/src/pages/glossary/Gl
 - sur mobile, alphabet et domaines sont horizontalement scrollables ;
 - tous les `scrollIntoView` respectent `prefers-reduced-motion`.
 
+<a id="bibliotheque"></a>
+
 ### 4.3. Bibliothèque : inventaire filtrable des ressources
 
 La Bibliothèque (`/bibliotheque`) n'est pas une collection éditoriale ni une taxonomie autonome. `LibraryPage` agrège les cours, les leçons explicitement publiées et les études de cas depuis leurs collections propriétaires. Les filtres d'URL portent sur le type, le niveau, la famille de parcours, la durée, le thème et la recherche textuelle.
 
 Pour rendre une ressource visible, il faut donc modifier sa collection source et ses relations existantes ; ne créez pas de « rayon » ou de regroupement parallèle. Les anciennes URL `/bibliotheque/:slug` sont conservées comme redirections non indexables vers l'inventaire et sont émises comme pages de redirection par le prérendu strict.
 
+<a id="parcours"></a>
+
 ### 4.3bis. Ajouter un PARCOURS (`data/parcours.json`)
 
-**Path = Parcours = trajectoire de formation ordonnée par objectif, composant librement des ressources existantes.** Un parcours ne stocke pas de copie du contenu : il référence les ressources par `id`, peut réutiliser un même cours, une même leçon, un cas, un simulateur, un diagnostic ou un livrable, et conserve une navigation libre. Type : [`client/src/content/parcoursTypes.ts`](../client/src/content/parcoursTypes.ts) ; loader : [`client/src/content/parcours.ts`](../client/src/content/parcours.ts). Conception complète : dossier [`docs/parcours/`](parcours/).
+**Path = Parcours = trajectoire de formation ordonnée par objectif, composant librement des ressources existantes.** Un parcours ne stocke pas de copie du contenu : il référence les ressources par `id`, peut réutiliser un même cours, une même leçon, un cas, un simulateur ou un livrable, et conserve une navigation libre. Le diagnostic d’entrée se raccorde séparément par `entryDiagnosticId`, pas par un nouveau `steps[].ref.kind`. Type : [`client/src/content/parcoursTypes.ts`](../client/src/content/parcoursTypes.ts) ; loader : [`client/src/content/parcours.ts`](../client/src/content/parcours.ts). Politiques transverses : [`docs/parcours/README.md`](parcours/README.md).
 
-```jsonc
-{
-  "id": "p-decoder-ts", "slug": "decoder-une-term-sheet",
-  "family": "maitriser",          // decouvrir|entretien|levee|grade|maitriser|express
-  "roadmap": "next",              // now|next|later (poids de tri dans l'étagère)
-  "title": "Décoder une term sheet",
-  "hook": "La promesse en une phrase, affichée avant tout sommaire.",
-  "kanji": "契", "accent": "#B0843B",
-  "goal": "Ce que tu sauras faire au bout.",
-  "forWhom": ["Analysts", "Associates"],
-  "prerequisites": ["Avoir lu le cours [[c-intro|Intro au VC]]"], // Pré-requis interactifs (Markdown supporté)
-  "perspective": "investor",      // founder|investor|both (défaut investor)
-  "level": "intermediaire", "entryLevel": "intermediaire",
-  "time": { "coreHours": 1, "withBonusHours": 1.5, "sessions": 4 },
-  // Variante calculée : { "source": "derived", "sessions": 4, "cadence": "…" }
-  "entryDiagnosticId": "diag-exemple", // facultatif, résolu dans diagnostics.json
-  "timeFit": ["low", "medium", "high"],
-  "recommendedForProfiles": ["associate-progression"],   // ids de profils ikigai
-  "milestone": { "type": "quiz", "label": "…", "description": "…", "evaluation": ["auto"] },
-  "steps": [
-    { "order": 1, "type": "coeur", "ref": { "kind": "lesson", "id": "l-ts-economics" },
-      "label": "…", "status": "existant", "keystone": true },
-    { "order": 2, "type": "pratique", "ref": { "kind": "simulator", "id": "waterfall" },
-      "label": "…", "status": "existant" }
-    // type: coeur|bonus|pratique|respiration  ·  ref.kind: lesson|course|case|simulator|glossary|deliverable|milestone
-    // status: "existant" (atome présent) | "a-produire" (placeholder → affiché « bientôt »)
-  ],
-  "outcomes": ["Objectif 1", "Objectif 2"]
-}
-```
+Définir objectif, public, niveaux, prérequis, famille, durée et jalon avant de composer `steps`. Chaque étape renseigne `order`, `type`, `ref`, `label` et `status` ; elle référence une ressource, sans en copier le contenu. Les valeurs admises et champs optionnels restent dans le type et le schéma, pas dans un modèle JSON incomplet.
 
 > [!IMPORTANT]
 > - **Le curseur temps** est implémenté par `timeFit` + le `type` des étapes : `visibleSteps(p, budget)` montre `low → coeur`, `medium → coeur+pratique`, `high → tout`. Taguez donc les étapes correctement.
-> - **Temps dérivé** : `time.source: "derived"` supprime les totaux recopiés. Le client additionne la lecture des leçons, les `Lesson.practice.estimatedMinutes` et les durées des livrables référencés.
-> - **Résolution des `ref`** (`resolveStep` dans `content/parcours.ts`) : `deliverable` et `milestone` résolvent un livrable vers `/livrables/:slug`; le fallback historique de `milestone` vers une leçon reste conservé. `lesson` → `/lessons/:slug` ; `case` → `/cases/:slug` ; `simulator` → `/simulators/:slug` ; `glossary` → `/glossary?term=`. Un `ref` non résolu (id `todo-*`) s'affiche en **« bientôt »**, sans lien — c'est le rôle de `status: "a-produire"`.
+> - **Temps dérivé** : `time.source: "derived"` supprime les totaux recopiés. [learningTime.ts](../client/src/content/learningTime.ts) calcule lecture, pratique guidée, consolidation, final et facultatif depuis les leçons et les activités référencées, dont cas, simulateurs et livrables. Vérifier les règles de contribution et de déduplication dans ce propriétaire ; une durée absente n’est pas une preuve de charge nulle.
+> - **Résolution des `ref`** : `resolveStep` dans `content/parcours.ts` résout les ressources. `milestone` vise d'abord un livrable, puis une leçon pour compatibilité. Seule l'association `ref.kind: "milestone"` + `status: "a-produire"` autorise une référence encore absente. Le préfixe `todo-*` ne dispense jamais à lui seul de résolution.
 > - **Aiguillage ikigai** : pour qu'un profil recommande ce parcours, ajoutez-le dans [`data/profileParcours.json`](../data/profileParcours.json). Les politiques transverses (progression souple, évaluation, langue V1 FR) sont dans [`docs/parcours/README.md`](parcours/README.md).
 > - **Langue** : les champs texte de parcours sont des chaînes françaises simples ; aucune surcharge EN n'est servie.
 
@@ -419,19 +361,15 @@ La carte `/parcours` consomme un registre d'arêtes distinct du contenu des parc
 
 Le validateur refuse les identifiants absents, les boucles sur soi, les doublons — y compris un doublon `peer` inversé —, les relations `peer` entre niveaux différents et les cycles de progression. La pertinence ne peut pas être déduite du seul niveau : elle doit être appuyée par les prérequis, `profileParcours.json`, un recouvrement substantiel des ressources, les objectifs publiés ou un référentiel maintenu. Dans `PathAtlas`, les arêtes ne sont montées que pour le sceau survolé, focalisé ou sélectionné par un premier appui tactile ; un second appui ouvre le parcours.
 
+<a id="cours"></a>
+
 ### 4.4. Ajouter un COURS (`data/courses.json`)
 
-```jsonc
-{
-  "id": "c-secondaries-intro", "slug": "intro-secondaire",
-  "title": "Comprendre le secondaire", "subtitle": "…",
-  "level": "avance", "durationMin": 40, "summary": "…",
-  "durationSource": "lesson-read-minutes", // facultatif ; impose la somme des readMin
-  "tags": ["liquidité", "LP"], "lessonIds": ["l-secondaries-1", "l-secondaries-2"]
-}
-```
+Renseigner identité, titre, sous-titre, niveau, résumé, tags, `durationMin` et `lessonIds` selon le type `Course`. Vérifier la réciprocité et l'ordre des leçons (§4.1). Le champ facultatif `durationSource: "lesson-read-minutes"` impose la somme de leurs `readMin` ; il n'inclut pas le temps de production.
 
-Une leçon peut contribuer à un dossier longitudinal avec `practice: { "deliverableId": "…", "sectionId": "…", "estimatedMinutes": 45 }`. Ce temps reste distinct de `readMin`.
+Une leçon peut contribuer à un dossier longitudinal via `practice`, avec `deliverableId`, `sectionId` et `estimatedMinutes`. Ce temps de production reste distinct de `readMin`.
+
+<a id="cas-analyses"></a>
 
 ### 4.5. Étude de cas (`data/caseStudies.json`) & Analyse/blog (`data/blog/*.json`)
 
@@ -440,7 +378,9 @@ Une leçon peut contribuer à un dossier longitudinal avec `practice: { "deliver
 - **Étude de cas** : `kind` ∈ `startup|fund|deal|market`, `sections[]` (`heading` + `body` markdown), `takeaways[]`, `glossaryRefs[]`. `learningRole: "learner-dossier"` ajoute des `documents[]` et des tables structurées rendues en HTML natif. `learningRole: "transfer"` signale un cas d'application différée.
 - **Correction commentée** : `data/caseCorrections.json` reste une collection distincte, chargée uniquement par `/cases/:slug/correction` après l'action de révélation. Elle n'entre ni dans la recherche, ni dans la Bibliothèque, ni dans le sitemap. Cette séparation règle un ordre pédagogique, sans créer de confidentialité dans le paquet statique.
 - **Diagnostic** : `data/diagnostics.json` porte des réponses qualitatives et des renvois vers des leçons ou livrables. `Parcours.entryDiagnosticId` active `/parcours/:slug/diagnostic`. Le schéma n'accepte aucun score ou total.
-- **Analyse (blog)** : `category`, `author`, `date` (`YYYY-MM-DD`), `excerpt`, `body` (même markdown), `tags[]`. Le `body` accepte les liens `[[slug]]`. Deux champs **optionnels** servent le format « Lecture oblique » (cf. §10.9 de `STRATEGIE-vc-intelligence.md`) : `books[]` (`title`/`author`/`year?`) affiché sur la carte et l'en-tête, et `glossaryRefs[]` qui rend le bloc « Pour aller plus loin » en fin d'article. La catégorie `"Lecture oblique"` est filtrable sur `/blog`.
+- **Analyse (blog)** : un fichier par slug, conforme à `blogSchema`, avec `status: "draft" | "published"` obligatoire. Seul `published` alimente les surfaces publiques. Le format comprend notamment auteur, date, catégorie, résumé, corps Markdown et tags. `books[]` et `glossaryRefs[]` sont optionnels ; leur rendu est porté par les pages du blog.
+
+<a id="ecosystemes"></a>
 
 ### 4.5bis. Dossier d'écosystème (`data/ecosystems.json`) — « Décortiquer un écosystème »
 
@@ -449,9 +389,11 @@ Espace d'**analyse signée** (`/ecosystemes`), **100 % client** : tout vit dans 
 - **Arbre** via `parentId` + `order` (profondeur illimitée). Un **dossier-racine** (sans `parentId`) est le **seul listé sur l'index** et **doit** porter une `these` ; un **sous-dossier** peut omettre `these`/`convictions`/`signals`/`players`/`sources` (tous optionnels). Tri des frères : `order` croissant, puis révision la plus récente d'abord.
 - **Format éditorial** : thèse falsifiable + `convictions[]` **datées, à degré d'assurance explicite** (`strength` ∈ `exploratoire|moyenne|forte`, jamais implicite) + `signals[]` directionnels (`haussier|baissier|incertain`). `kind` ∈ `geographie|secteur|these`. Dates ISO `YYYY-MM-DD`. Loader : `rootEcosystems()`, `childEcosystems(id)`, `ecosystemAncestors(d)` dans `client/src/content/ecosystems.ts`. La page de détail affiche : fil d'Ariane → thèse → sections (+ figures) → convictions → signaux → acteurs → « Approfondir » (enfants) → sources.
 - **Figures** (`section.figures[]`) : le renderer markdown maison ne gère ni image, ni HTML brut, ni tableau → les visuels sont des **figures structurées**, rendues en **SVG/HTML natif theme-aware** par `client/src/components/ecosystems/EcosystemFigures.tsx`, **sans aucun asset ni librairie de charting**. 5 types (union discriminée par `kind`) : `bars`, `line`, `matrix`, `quadrant`, `taxonomy`. **Un nouveau type de figure = 3 éditions synchronisées** : l'union dans `types.ts`, le `z.discriminatedUnion` dans `scripts/validate-content.mjs`, le renderer dans `EcosystemFigures.tsx`.
-- ⚠️ **Pièges** : (1) **jamais de marqueur `[[slug]]`/`{{slug}}` dans le texte d'une figure** — le validateur scanne tout le JSON et exigerait leur résolution → échec ; (2) `data/ecosystems.json` est un **round-trip exact** de `JSON.stringify(…, null, 2) + '\n'` → muter via un **petit script Node** jetable plutôt qu'à la main.
+- **Figures** : ne pas placer de marqueurs `[[slug]]`/`{{slug}}` dans leurs textes ; le renderer ne les interprète pas et les afficherait littéralement. Un slug inexistant échoue aussi au scan du validateur. Préserver la sérialisation JSON canonique lors des modifications.
 - **Validation** : `npm run validate:content` applique un Zod strict (parent existant, **absence de cycle**, racine ⇒ `these`, `glossaryRefs` + marqueurs `[[..]]` résolus). Si le glossaire change : `npm run split:content`.
 - **Méthodo complète** : skill projet **`.claude/skills/ecosystemes/SKILL.md`** — à lire avant tout travail sur un dossier. Il complète la charte transverse §4.0.c pour cette collection, sans la remplacer.
+
+<a id="livrables"></a>
 
 ### 4.5ter. Livrable autoévalué (`data/deliverables.json`)
 
@@ -466,6 +408,8 @@ Un **livrable** décrit un artefact produit par l'apprenant. Il peut réaliser u
 - **Découvrabilité** : penser au barrel `content/index.ts`, à la recherche `content/search.ts`, au libellé dans `content/labels.ts`, à `shared/routes.mjs` (OG `livrables: 'path'`) et à la collecte des routes dans `scripts/collect-routes.mjs`.
 - **Validation** : `scripts/validate-content.mjs` applique un Zod strict, résout `model`, `relatedLessonIds`, `glossaryRefs`, `KnowledgeCertification.capstoneDeliverableId`, les `furtherReading` de type `deliverable` et les marqueurs `[[..]]`. Un `capstoneDeliverableId` absent est admis ; un identifiant renseigné mais introuvable est bloquant.
 
+<a id="memos"></a>
+
 ### 4.5quater. Mémo d'investissement annoté (`data/memos.json`)
 
 > Prose soumise à la **charte de style §4.0.c**. Contenu **100 % client**.
@@ -478,6 +422,8 @@ Un **mémo annoté** reprend un mémo d'investissement **réellement publié** e
 - **Câblage d'une nouvelle collection** : barrel [`content/index.ts`](../client/src/content/index.ts), recherche [`content/search.ts`](../client/src/content/search.ts), SEO/sitemap [`shared/routes.mjs`](../shared/routes.mjs) et l'énumération des pages de détail dans [`scripts/collect-routes.mjs`](../scripts/collect-routes.mjs).
 - **Validation** : `scripts/validate-content.mjs` applique un schéma Zod strict, vérifie les identifiants et slugs uniques, résout les références croisées et inclut `memos.json` dans le scan des marqueurs `[[..]]` / `{{..}}`.
 
+<a id="anti-portfolio"></a>
+
 ### 4.5quinquies. Anti-portfolio (`data/antiPortfolio.json`)
 
 > Prose soumise à la **charte de style §4.0.c**. Contenu **100 % client**.
@@ -485,10 +431,12 @@ Un **mémo annoté** reprend un mémo d'investissement **réellement publié** e
 L'**anti-portfolio** documente des **refus d'investissement** devenus coûteux, sans biais rétrospectif : on reconstitue l'information publique disponible au moment de la décision, on défend honnêtement le refus, puis on nomme le signal manqué. Index `/anti-portfolio` (`AntiPortfolioPage`), détail `/anti-portfolio/:slug` (`AntiPortfolioEntryPage`).
 
 - **Schéma** : le fichier est un **objet-enveloppe** `{ "patterns": AntiPortfolioPattern[], "entries": AntiPortfolioEntry[] }`, exposé par [`content/antiPortfolio.ts`](../client/src/content/antiPortfolio.ts). `id` d'entrée → `ap-*`.
-- **`patterns[]`** : les **motifs** récurrents de refus (5 : `categorie-deja-jouee`, `marche-trop-petit`, `produit-jouet`, `trop-cher`, `risque-structurel`). Une entrée s'y rattache par `patternIds[]`.
+- **`patterns[]`** : motifs récurrents de refus ; une entrée s'y rattache par `patternIds[]`. Vérifier les identifiants dans la collection, sans recopier leur inventaire ici.
 - **`entries[]`** : `company`/`title`/`subtitle`, `passes[]`, `sector`, `summary`, `quote?`, **`knownAtTheTime[]`** (info **publique et datée** disponible à l'époque), `statedReason` + `reasonIsPublic`, `missedSignal` (markdown), **`steelman`** (markdown : le meilleur argument *en faveur* du refus, ex ante — exigé, garde anti-biais), `outcome`, `costEstimate?` (toujours une estimation), `takeaways[]`, `glossaryRefs[]`, `relatedMemoIds?`, `sources[]`.
 - **Câblage** identique à §4.5quater.
 - **Validation** : `scripts/validate-content.mjs` valide l'objet-enveloppe et ses deux collections, les identifiants et slugs uniques, les références vers motifs et mémos, les références glossaire et les marqueurs `[[..]]` / `{{..}}`.
+
+<a id="convictions"></a>
 
 ### 4.5sexies. Convictions (vue dérivée) & Carnet de décision
 
@@ -497,11 +445,13 @@ Deux surfaces de la couche Intelligence qui **ne s'éditent pas comme une collec
 - **Convictions** (`/convictions`, `ConvictionsPage`) : **aucun fichier de données propre**. [`content/convictions.ts`](../client/src/content/convictions.ts) (`allConvictions()`) **agrège** les `convictions[]` de tous les dossiers d'écosystème (statement, `horizon`, `strength` ∈ `exploratoire|moyenne|forte`, `rationale`, + provenance). Pour ajouter ou corriger une conviction, on édite le `convictions[]` du dossier concerné dans `data/ecosystems.json` (§4.5bis) — la page se recompose, triée et filtrable.
 - **Carnet de décision** (`/decisions` = présentation `DecisionsIndexPage` ; `/journal` = l'outil `DecisionJournalPage`) : ce n'est **pas du contenu éditorial**, c'est une **donnée utilisateur**, comme les notes, persistée en **`localStorage`**. Type client `DecisionJournalEntry`, calibration dans [`client/src/lib/decisionJournal.ts`](../client/src/lib/decisionJournal.ts) (testée, `decisionJournal.test.ts`). Une prédiction = énoncé falsifiable + `confidence` (50–99 %) + `reviewAt` ; résolue `correct|incorrect|void` (les `void` sont exclus du calcul de calibration). `/journal/*` appartient à `NOINDEX_ROUTE_PATTERNS` dans [`shared/routes.mjs`](../shared/routes.mjs). Un éditeur ne l'alimente pas : l'utilisateur la produit.
 
+<a id="certifications"></a>
+
 ### 4.5septies. Certification et collections associées
 
 L'[architecture transverse des certifications](certifications/ARCHITECTURE-CERTIFICATIONS.md) fait foi pour les catégories de titres, l'échelle VC, les cinq axes cibles, le titre professionnel invariant `VC Analyst`, le supplément contextualisé et les limites de la délivrance locale. Le [référentiel professionnel VC Analyst](certifications/REFERENTIEL-VC-ANALYST.md) porte la préparation et les preuves futures de la certification.
 
-`Fondamentaux de l’analyse en capital-risque` est un parcours autonome sous `/parcours/analyst-foundations`. Ses sept séquences et 23 leçons ne constituent ni une certification ni un résultat local ; son référentiel est maintenu dans [`docs/parcours/ANALYST-FOUNDATIONS.md`](parcours/ANALYST-FOUNDATIONS.md). `Fondamentaux de la venture philanthropie` est également un parcours autonome sous `/parcours/venture-philanthropy-foundations`, avec six cours, 21 leçons et une mise en situation autoévaluée ; son référentiel est maintenu dans [`docs/parcours/VENTURE-PHILANTHROPIE.md`](parcours/VENTURE-PHILANTHROPIE.md). L'option historique `specialty: "impact"` de `VC Analyst` reste une contextualisation du modèle transitoire à trois axes ; elle ne constitue ni un alias, ni un niveau, ni un prérequis de ces parcours. Leur production n'annonce aucune migration des axes.
+`Fondamentaux de l’analyse en capital-risque` et `Fondamentaux de la venture philanthropie` sont des parcours autonomes, pas des certifications. Leurs référentiels sont [ANALYST-FOUNDATIONS.md](parcours/ANALYST-FOUNDATIONS.md) et [VENTURE-PHILANTHROPIE.md](parcours/VENTURE-PHILANTHROPIE.md). L'option historique `specialty: "impact"` de `VC Analyst` ne constitue ni un alias, ni un niveau, ni un prérequis de ces parcours.
 
 Quatre collections ont des responsabilités distinctes :
 
@@ -512,7 +462,7 @@ Quatre collections ont des responsabilités distinctes :
 | `data/candidateCharters.json` | Versions de la charte du candidat et annexe de session future inactive |
 | `data/certificationAssessments.json` | Évaluations versionnées lorsqu’une certification publiée en comporte une |
 
-Le type `Certification` est une union discriminée `KnowledgeCertification | ProfessionalCertification`. Un `CourseRequirement` peut référencer un sous-ensemble ordonné d'un cours ; chaque `lessonId` doit appartenir au cours indiqué, rester unique dans l'exigence et conserver l'ordre voulu par la certification. Le champ optionnel `KnowledgeCertification.capstoneDeliverableId` relie un `Deliverable` autonome, affiché comme mise en situation autoévaluée hors score.
+Le type `Certification` est une union discriminée `KnowledgeCertification | ProfessionalCertification`. Un `CourseRequirement` peut référencer un sous-ensemble de leçons du cours indiqué, sans doublon et **dans l'ordre canonique de `course.lessonIds`**. Le champ optionnel `KnowledgeCertification.capstoneDeliverableId` relie un `Deliverable` autonome, affiché comme mise en situation autoévaluée hors score.
 
 Règles d'édition :
 
@@ -528,87 +478,108 @@ Règles d'édition :
 
 La production future des épreuves professionnelles suit [`PROTOCOLE-PRODUCTION-ANALYST.md`](certifications/PROTOCOLE-PRODUCTION-ANALYST.md). Le cadre humain futur reste inactif et borné dans [`GOUVERNANCE-CERTIFICATIONS.md`](certifications/GOUVERNANCE-CERTIFICATIONS.md).
 
+<a id="simulateurs"></a>
+
 ### 4.6. Simulateur (`data/simulators.json`)
 
 Le JSON ne décrit que la **fiche** (titre, `category`, `accent`, `description`, `relatedLessonIds`). **La logique de calcul est du code**, enregistrée par slug dans [client/src/components/simulators/index.ts](../client/src/components/simulators/index.ts). Ajouter un *nouveau* simulateur = ajouter la fiche JSON **et** brancher son composant dans ce registre.
 
+**Exception du simulateur de note d'investissement.** Son composant React intègre un outil embarqué ; ses sources propriétaires sont dans [nouveau simu/src/](../nouveau%20simu/src/). [scripts/build-investment-memo.mjs](../scripts/build-investment-memo.mjs) assemble les trois HTML de distribution. Ne pas les éditer directement : lancer `npm run build:memo`, puis `npm run check:memo`. Cette exception concerne aussi les textes d'interface de cet outil.
+
 ### 4.7. Édition (sans CMS)
 
-Le projet n'utilise **pas de CMS**. Les collections structurées s'éditent dans leurs JSON sources sous `/data`; les textes d'interface et les instructions exécutables des simulateurs s'éditent dans `client/src`. Les validations de contenu sont lancées depuis la racine (`npm run validate:content`, `npm run validate:glossary`) et complétées par les contrôles de code lorsque la logique ou l'interface change.
+Le projet n'utilise pas de CMS. Éditer le JSON source ou le code propriétaire, avec l'exception du simulateur de note décrite au §4.6. Lancer les validations depuis la racine ; les compléter par les tests de code et de rendu lorsque la logique ou l'interface change.
 
-### 4.8. ✅ Checklist « j'ai ajouté du contenu en JSON »
+<a id="validation"></a>
 
-1. JSON valide ? (virgules, guillemets).
-2. `id` et `slug` **uniques** ; relations (`courseId`, `lessonIds`, `glossaryRefs`, étapes de parcours et références des certifications) pointant vers des entrées **existantes**.
-3. Champs cohérents avec `types.ts`.
-4. Lancer `npm run validate:content` pour vérifier l'intégrité des liens croisés et du glossaire.
-5. Vérifier la page (`/ecosystemes/<slug>`, `/memos/<slug>`…) dans l'app ; le HMR Vite rafraîchit la page instantanément.
+### 4.8. Checklist après édition de contenu
+
+1. Vérifier forme JSON, champs admis, statut, unicité des ID/slugs et résolution des relations ; vérifier aussi les faits et leurs sources.
+2. Lancer `npm run validate:content:strict` ; ajouter `npm run validate:glossary` si le glossaire change, en tenant compte de sa limite décrite au §4.2.
+3. Pour les leçons ou le glossaire : `npm run split:content`, puis `npm run check:generated`. Pour le simulateur de note : `npm run build:memo`, puis `npm run check:memo`.
+4. Vérifier le rendu, les liens, le statut public et les surfaces de découverte concernées. Le HMR intervient après la génération, pas à sa place.
+5. Appliquer les contrôles supplémentaires proportionnés de [CLAUDE.md §7](../CLAUDE.md#7-validation-proportionnée). Ne consigner que les commandes réellement exécutées.
+
+---
+
+<a id="design"></a>
+
+## 5. Guide d'édition — graphisme et interface
+
+Le [design system](DESIGN_SYSTEM.md) porte les règles visuelles, responsive, motion et accessibilité. Les valeurs courantes appartiennent à [tokens.css](../client/src/styles/tokens.css), les classes à [global.css](../client/src/styles/global.css), l'échelle Tailwind à [tailwind.config.ts](../client/tailwind.config.ts). Partir des composants existants avant d'introduire une variante ; vérifier les modes clair/sombre, le clavier, le mobile et le mouvement réduit.
 
 ---
 
-## 5. Guide d'édition — GRAPHISME, design & UI
-
-> Le système visuel complet — tokens de couleur, typographie, layout, composants, ornements atlas, motion, accessibilité — est documenté dans [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md). Ne pas le redupliquer ici. Cette section ne garde que les points d'entrée d'édition et les pièges non évidents.
-
-**Où éditer.** L'ambiance globale passe par les variables CSS de [`client/src/styles/tokens.css`](../client/src/styles/tokens.css) (`:root` clair, `.dark` sombre : `--primary` = or `#C5A85C`, `--secondary` marine, `--tertiary` prune, surfaces parchemin, `--radius`). L'échelle typographique, les ombres `editorial-*` et les couleurs nommées Tailwind sont dans [`client/tailwind.config.ts`](../client/tailwind.config.ts). Le langage cartographique (`CompassRose`, `WaxSeal`, `MapCartouche`, `NightSkyBackdrop`, `DropCap`…) est centralisé dans [`client/src/components/ornaments/`](../client/src/components/ornaments/) ; les textures CSS (`.map-paper`, `.contour-field`, `.ink-underline`…) dans [`global.css`](../client/src/styles/global.css). La carte interactive se règle dans [`client/src/components/explore/PathAtlas.tsx`](../client/src/components/explore/PathAtlas.tsx) (elle est **générée depuis `PARCOURS`**, pas dessinée à la main).
-
-> [!WARNING]
-> **Piège Tailwind v3 + couleurs en variable CSS.** Les modificateurs d'opacité **ne fonctionnent pas** sur une couleur-variable : `bg-[color:var(--primary)]/10` ne produit **aucun** style, et `@apply …/90` casse le build. Utilisez partout `color-mix(in srgb, var(--primary) 10%, transparent)`.
-
-> [!CAUTION]
-> Un `<svg>` imbriqué dans un autre SVG **doit fixer `height`** (et `width`), sinon il occupe 100 % du parent et se recentre. C'est le bug qui plaçait `MapCartouche` au milieu de la carte.
-
-> [!TIP]
-> Un composant qui pose un `-z-*` (ex. `NightSkyBackdrop`) dans un conteneur à fond semi-opaque exige `isolate` sur le conteneur hôte, sinon le fond masque la couche en dessous.
-
----
+<a id="workflow"></a>
 
 ## 6. Workflow développeur (commandes & environnement)
 
-```bash
-npm install            # installe le workspace client
-npm run dev            # serveur Vite local (HMR) : http://localhost:5173 (predev → split:content)
+Les commandes partent de la racine ; [package.json](../package.json) et [client/package.json](../client/package.json) font foi. Le [README](../README.md#démarrage-local) couvre l'installation. Effets à connaître :
 
-npm run split:content  # régénère les index/contenus scindés (glossaire + leçons)
-npm run check:generated # vérifie leur parité avec les sources, sans écriture
-npm run build          # exige VITE_SITE_URL ; prebuild (split → validate → sitemap) · build client · postbuild = prérendu strict
-npm run typecheck      # TypeScript client
-npm run lint           # ESLint client + scripts/shared/hooks ESM, sans avertissement toléré
-npm run test           # Vitest client + tests Node scripts/*.test.mjs et shared/*.test.mjs
-npm run check          # fraîcheur des générés + validation stricte + glossaire + TypeScript + lint + tests
-npm run validate:glossary        # contrôle custom du glossaire final
-npm run validate:content         # shape + références croisées + marqueurs [[..]]/{{..}}
-npm run validate:content:strict  # idem mais warnings fatals
+| Commande | Effet |
+| --- | --- |
+| `npm run dev` | `predev` : `build:memo` puis `split:content` ; ensuite Vite client |
+| `npm run build` | `prebuild` : `build:memo` → `split:content` → `validate:content` → `generate:sitemap` ; build TypeScript/Vite ; `postbuild` : `prerender:strict` |
+| `npm run check` | `check:generated` → `validate:content:strict` → `validate:glossary` → `typecheck` → `lint` → `test` |
+| `npm run check:memo` | Contrôle complémentaire sans écriture des HTML de note d'investissement |
+| `npm run prerender:tolerant` | Diagnostic local explicite ; ne qualifie pas une publication |
+
+Le build écrit des artefacts et ne remplace pas le contrôle strict du contenu. `check` ne comprend pas le script `check:memo`. Après une génération, examiner les sorties et lancer leur contrôle de parité. En lecture seule, inspecter aussi les effets des tests et du typecheck avant de les exécuter.
+
+GitHub reste une sauvegarde du code. Le [workflow Pages](../.github/workflows/deploy-pages.yml) est manuel (`workflow_dispatch`), avec un job de build puis un job de déploiement distinct. Aucun push, workflow distant ou déploiement sans demande explicite ; la [procédure de sauvegarde](../Suivis/PROCEDURE_PUSH.md) ne vaut pas accord de publication.
+
+<a id="hebergement"></a>
+
+### 6.1. Prérendu et hébergement
+
+- **Origine et base.** `VITE_SITE_URL` est requis pour sitemap et prérendu. [shared/base-url.mjs](../shared/base-url.mjs) accepte une origine seule, complétée par `VITE_BASE_URL`, ou une URL dont le chemin correspond à cette base. Aucun domaine de production n'est inventé.
+- **Jeux de routes distincts.** [collect-routes.mjs](../scripts/collect-routes.mjs) fournit les routes publiques du sitemap. Le prérendu y ajoute les corrections de cas `noindex` et les redirections de `LEGACY_REDIRECTS` ; toutes les routes fonctionnelles non indexables ne sont donc pas préconstruites.
+- **Prérendu strict.** [prerender.mjs](../scripts/prerender.mjs) pilote le navigateur avec Puppeteer, attend les métadonnées et écrit le HTML sous `client/dist`. Les échecs de navigateur, de route, de métadonnées, de compte ou de page 404 sont bloquants. Utiliser un exécutable Chromium explicite via `PUPPETEER_EXECUTABLE_PATH` pour les recettes locales.
+- **Mouvement réduit.** Le prérendu émule `prefers-reduced-motion: reduce` ; les contenus doivent rester dans leur état final sans animation d'entrée bloquante.
+- **Hébergement.** Servir les fichiers `<route>/index.html` pour les routes prérendues. Pour les URL inconnues, servir le véritable `404.html` avec statut HTTP 404, `noindex,nofollow` et sans canonical auto-référente, pas un succès SPA. L'accès direct aux autres routes fonctionnelles exige une règle d'hébergement explicite.
+- **Hors ligne.** Le manifest et les icônes ne constituent pas une garantie PWA hors ligne ; aucun service worker n'assure ce fonctionnement.
+
+Le contrat de build Pages utilise `/vc-plateform/` avec `https://iari-ctrl.github.io/vc-plateform`, sans domaine personnalisé configuré. Ces paramètres de construction ne prouvent ni une publication récente ni la conformité d'un hôte réel.
+
+### 6.2. En-têtes avant remise en ligne
+
+La politique ci-dessous est une **cible à adapter et vérifier sur l'artefact final**, pas une configuration HTTP appliquée par le dépôt. Elle reprend le prérequis d'hébergement `SEC-005` :
+
+```text
+Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'
+Referrer-Policy: strict-origin-when-cross-origin
+X-Content-Type-Options: nosniff
+Permissions-Policy: camera=(), microphone=(), geolocation=()
 ```
 
-> [!IMPORTANT]
-> **Phase local-first.** GitHub sert actuellement de sauvegarde du code. Un push ne publie rien : `.github/workflows/deploy-pages.yml` est limité à un déclenchement manuel (`workflow_dispatch`) et ne doit pas être exécuté avant le lot de remise en ligne. Les garde-fous se jouent localement avec `npm run check`, puis `npm run build` — voir `Suivis/PROCEDURE_PUSH.md`.
-
-> [!IMPORTANT]
-> Après une édition de code, de design ou de données, Vite recharge à chaud (HMR) l'application si `npm run dev` tourne. L'architecture étant 100 % statique, un seul terminal suffit.
+L'exception `style-src-attr` concerne les styles inline ; ne pas l'étendre indistinctement aux scripts. Contrôler les réponses HTTP réelles de l'accueil, d'une route prérendue, de la 404 et des outils embarqués, notamment le simulateur de note. Un hébergement ne permettant pas d'imposer et vérifier ces en-têtes ne satisfait pas ce prérequis. Ne pas les simuler par des balises HTML.
 
 ---
 
-## 7. Choix d'UX notables (et pourquoi)
+<a id="ux"></a>
 
-- **Liberté responsable** : aucun mur d'authentification, aucun chapitre verrouillé. Toutes les sauvegardes s'effectuent localement dans le `localStorage`.
+## 7. Choix d'UX
+
+- **Liberté responsable** : aucun mur d'authentification ni verrouillage pédagogique. Les données utilisateur restent locales au navigateur ; voir les mécanismes et limites de [persistance](#persistance).
 - **Introspection disponible sans blocage** : l'onboarding `/onboarding` sert d'aiguillage court ; le cahier `/ikigai` reste le cadre de réflexion (*pourquoi* avant *quoi*) et oriente vers un profil d'apprentissage quand l'utilisateur le souhaite.
-- **Cartographier au lieu de lister** (Atlas) : un sommaire vertical devient une carte marine explorable — on choisit son port, l'ordre conseillé n'est qu'une route pointillée.
+- **Comparer avant d'explorer** : l'index Parcours privilégie les rangées comparables ; la carte est facultative. Les relations recommandent des suites sans verrouiller la navigation.
 - **Lecture active** : sélection de texte dans une leçon/étude/article → **surligner** ou **citer** dans le carnet (persisté localement).
-- **Dictionnaire vivant** : dans les leçons, **tout terme/sigle est détecté automatiquement** (popover cliquable → dictionnaire) en plus des marqueurs manuels `[[slug|libellé]]` ; page `/glossary` indexée. Détails en §4.1.
-- **Simulateurs réels** : dilution, pre/post-money, ownership, waterfall, management fees, fund returns et Power Law/Monte Carlo — calcul temps réel côté client, avec bloc pédagogique explicatif, historique de calcul et dictionnaire interactif.
+- **Dictionnaire vivant** : marqueurs manuels et détection des termes éligibles dans les leçons ; ni détection universelle ni dispense de relecture (§4.1).
+- **Simulateurs** : calculs côté client et explications adaptées à l'outil ; vérifier les fonctionnalités dans leur composant propriétaire plutôt que supposer un historique ou un dictionnaire interactif commun à tous (§4.6).
 
 ---
+
+<a id="ikigai"></a>
 
 ## 8. Le cahier Ikigai (`/ikigai`)
 
-Le cahier Ikigai est une **expérience d'introspection** éditoriale dédiée : masthead, sections numérotées (§01 rappel → §06 test d'orientation), diagramme à 13 zones, archétypes, questions libres, conclusion. Il **conserve** le scoring existant (le test MCQ → profil d'apprentissage) et le fonctionnement invité. L'onboarding produit distinct (`/onboarding`) reste court, sans stockage propre, et oriente vers Intelligence VC, Formation, Workspace ou ce cahier.
+Le cahier Ikigai est une surface d'introspection facultative, distincte de l'aiguillage court `/onboarding`. Il associe dimensions, intersections, archétypes, questions libres et test d'orientation vers un profil d'apprentissage, sans conditionner l'accès au contenu.
 
 **Données** — tout vit dans [data/ikigai.json](../data/ikigai.json) (bundlé côté client) :
 
 - `dimensions` / `intersections` / `presqueIkigai` : chaque entrée a une variante **Découverte** (`itemsDecouverte`, `exampleDecouverte`, `descriptionDecouverte`, `trapDecouverte`) en langage clair, et une variante **Avancé** (`items`, `example`, `description`, `trap`) avec marqueurs glossaire.
-- `archetypes` : les 3 archétypes incarnés (Architecte de Thèse, Bâtisseur d'Infrastructure, Opérateur-Investisseur). Chacun porte positionnement / semaine type / valeur / signaux / métriques en deux modes, plus ses `profileIds`. Les recommandations de parcours vivent dans `profileParcours.json`, sans seconde liste recopiée dans Ikigai.
-- `reflection` : `{ decouverte: [7], avance: [7] }` questions libres (sans scoring).
+- `archetypes` : positionnement, exemples et `profileIds` en deux modes. Les recommandations de parcours vivent dans `profileParcours.json`, sans seconde liste recopiée dans Ikigai.
+- `reflection` : questions libres en modes découverte et avancé, sans scoring.
 - `questions` : le test scoré qui alimente `computeProfile` ; `profiles` : les profils d'apprentissage cibles (reliés aux archétypes et aux parcours via `profileParcours.json`).
 - `myths` : idées reçues sur le VC, déboulonnées par `onboarding/MythCard.tsx`. Le test d'orientation est porté par `onboarding/OrientationTest.tsx`.
 
@@ -628,6 +599,8 @@ Le cahier Ikigai est une **expérience d'introspection** éditoriale dédiée : 
 
 ---
 
+<a id="suivi"></a>
+
 ## 9. Gestion des risques et feuille de route
 
 La direction produit et les priorités stratégiques durables sont documentées dans [`docs/STRATEGIE-vc-intelligence.md`](STRATEGIE-vc-intelligence.md). L'état courant, les risques et les priorités opérationnelles vivent dans [`Suivis/ETAT.md`](../Suivis/ETAT.md).
@@ -636,11 +609,11 @@ La direction produit et les priorités stratégiques durables sont documentées 
 > **Garde-fous d'édition à tenir :**
 > - **Périmètre local** : avant toute modification structurante, vérifier les sources et exécuter les validations adaptées au sous-système touché.
 > - **Validation** : ne jamais ajouter une collection sans schéma Zod, contrôles de références et scan de marqueurs dans `validate-content.mjs`. `memos.json` et `antiPortfolio.json` suivent désormais ce standard.
-> - **Fausse intelligence** : ne pas publier de tableaux de bord vides ou de chiffres non sourcés. Si l'information n'est pas « decision-grade », on ne publie pas.
+> - **Qualité éditoriale** : ne pas simuler une maturité professionnelle par des tableaux de bord vides ou des chiffres non sourcés ; distinguer faits, hypothèses et exemples méthodologiques.
 > - **Découvrabilité** : toute nouvelle collection doit refaire le câblage recherche + SEO + sitemap (`content/search.ts`, `shared/routes.mjs`, `scripts/collect-routes.mjs`), sans briser les routes canoniques (`/parcours/:slug`, `/bibliotheque`) ni la redirection `/cases` → Bibliothèque. `/bibliotheque/:slug` est réservé aux redirections historiques non indexables.
 > - **Langue** : garder une V1 FR cohérente ; ne pas réintroduire de routes localisées sans décision produit explicite.
 
 ---
 
 > [!TIP]
-> Pour bien démarrer une contribution : (1) lisez `types.ts` pour le type que vous touchez, (2) éditez le JSON source concerné (`data/blog/<slug>.json` pour une analyse), (3) vérifiez dans l'application avec le rechargement à chaud. Pour le design, partez toujours de `tokens.css` et des composants `ornaments/` plutôt que de coder des couleurs en dur.
+> Pour contribuer : lire le type, le schéma et le consommateur concernés ; éditer la source propriétaire ; régénérer si nécessaire ; appliquer la [checklist](#validation). Pour l'interface, consulter le [design system](DESIGN_SYSTEM.md).

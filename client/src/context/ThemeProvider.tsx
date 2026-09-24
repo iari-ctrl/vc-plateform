@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { commitOnStorageSuccess, storage } from '@/lib/storage';
+import { commitOnStorageSuccess, storage, STORAGE_PREFIX } from '@/lib/storage';
+import { localDataChanges } from '@/lib/localDataChanges';
 import { STORAGE_CONTRACTS } from '@/lib/storageDomains';
 import { ThemeContext, type Theme } from '@/context/ThemeContext';
 
-function getInitialTheme(): Theme {
-  const saved = storage.getParsed(STORAGE_CONTRACTS.theme);
+function resolveTheme(saved: Theme | null): Theme {
   if (saved === 'light' || saved === 'dark') return saved;
   if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
   return 'light';
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [theme, setTheme] = useState<Theme>(() => resolveTheme(storage.getParsed(STORAGE_CONTRACTS.theme)));
 
   useEffect(() => {
     const root = document.documentElement;
@@ -22,6 +22,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     storage.migrate(STORAGE_CONTRACTS.theme);
   }, []);
+
+  useEffect(() => localDataChanges.subscribe(snapshot => {
+    setTheme(resolveTheme(storage.parseStored(STORAGE_CONTRACTS.theme, snapshot[STORAGE_PREFIX + STORAGE_CONTRACTS.theme.key] ?? null)));
+  }), []);
 
   const toggle = useCallback(() => {
     const next = theme === 'dark' ? 'light' : 'dark';

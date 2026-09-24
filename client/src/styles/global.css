@@ -428,3 +428,31 @@
   0% { transform: translateX(-150%) skewX(-18deg); }
   100% { transform: translateX(360%) skewX(-18deg); }
 }
+
+/* ── Transitions de vue ───────────────────────────────────────────────────────
+   Ouvrir un parcours — depuis une carte du catalogue ou depuis un port de la
+   planche — emporte son sceau jusqu'à l'en-tête de la fiche. Seul l'élément
+   activé porte un `view-transition-name` (voir `ParcoursPage` et `PathAtlas`) :
+   un même nom présent deux fois dans le document annulerait la transition.
+   Les navigations sans sceau nommé se contentent du fondu de racine.
+
+   Ces pseudo-éléments ne sont pas atteints par la règle `*` de `tokens.css`,
+   d'où la coupure explicite en mouvement réduit. */
+::view-transition-group(*) {
+  animation-duration: 460ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 240ms;
+  animation-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}

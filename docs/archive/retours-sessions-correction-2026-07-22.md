@@ -1,6 +1,6 @@
 # Retours d’expérience — session de correction
 
-> **Archive historique — 22 juillet 2026.** Cette rétrospective rassemble les difficultés et apprentissages de S1 à S6. Les règles transversales sont maintenues dans `CLAUDE.md`, section « Session workflow », et les conventions propres au cycle C1–C6 dans `.hermes/plans/2026-07-22_134627-correction-amelioration-vc-platform.md` ; le présent fichier ne fait plus partie des lectures ordinaires de session.
+> **Archive historique — 22 juillet 2026.** Cette rétrospective rassemble les difficultés et apprentissages de S1 à S6. Les règles transversales sont maintenues dans `CLAUDE.md`, section « Session workflow » ; les anciennes conventions propres au cycle C1–C6 sont conservées dans `docs/archive/hermes-plans/2026-07-22_134627-correction-amelioration-vc-platform.md` comme archive non normative. Le présent fichier ne fait plus partie des lectures ordinaires de session.
 
 ## Ce qui aurait pu rendre la session plus fluide
 

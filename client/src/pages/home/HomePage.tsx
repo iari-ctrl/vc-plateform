@@ -1,88 +1,88 @@
-import { useState, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { CompassRose, NightSkyBackdrop } from '@/components/ornaments/Illustrations';
-import { Fleuron } from '@/components/ornaments/Ornaments';
 import { HomeEditorialBridge } from '@/components/home/HomeEditorialBridge';
-import { Reveal } from '@/components/ui/primitives';
 import { useTheme } from '@/context/ThemeContext';
 import { HOME_INTRO_HERO_DELAY, useHomeIntro } from '@/context/HomeIntroContext';
-import { cn } from '@/lib/utils';
 import { usePageMeta } from '@/lib/seo';
+import '@/styles/home-hero.css';
 
 const HERO_DESCRIPTION =
   "Une plateforme d'intelligence VC pour praticiens : dossiers d'écosystème, convictions datées, décisions instruites — et la formation qui les soutient.";
-
-const HERO_INTENT_NOTE =
-  "L'ikigai n'est pas un point fixe à atteindre. C'est un centre de gravité qui se déplace avec toi. Le capital-risque, par sa temporalité longue force précisément à se demander : où sera ce centre dans une décennie ?";
 
 export default function HomePage() {
   usePageMeta(undefined, HERO_DESCRIPTION);
   const { theme, toggle } = useTheme();
   const intro = useHomeIntro();
+  const heroRef = useRef<HTMLElement | null>(null);
 
   // Decided once, at mount: if the entrance curtain is up, the hero holds until
   // the veil dissolves. The delay counts from the start of the entrance, not
-  // from this (lazily loaded) chunk's arrival, so the two stay in step.
-  const [entranceDelay] = useState(() =>
-    intro.phase === 'running' ? Math.max(0, HOME_INTRO_HERO_DELAY - (Date.now() - intro.startedAt)) : null,
+  // from this (lazily loaded) chunk's arrival, so the two stay in step. On an
+  // ordinary visit there is no curtain and the inking starts immediately.
+  const [inkStart] = useState(() =>
+    intro.phase === 'running' ? Math.max(0, HOME_INTRO_HERO_DELAY - (Date.now() - intro.startedAt)) : 0,
   );
+
+  // The drifting needle and the sky are the only loops the hero leaves running;
+  // they stop as soon as it is out of the viewport. It
+  // starts live so a late observer callback can never stall the entrance.
+  const [ambientLive, setAmbientLive] = useState(true);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero || typeof IntersectionObserver === 'undefined') return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => setAmbientLive(entries.some((entry) => entry.isIntersecting)),
+      { threshold: 0 },
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
-      <section className="map-paper grain relative isolate flex min-h-[100svh] overflow-hidden">
-        <NightSkyBackdrop variant="hero" />
+      <section
+        ref={heroRef}
+        data-home-hero-live={ambientLive ? 'true' : 'false'}
+        style={{ '--home-hero-t0': `${inkStart}ms` } as CSSProperties}
+        className="home-hero map-paper grain relative isolate flex min-h-[100svh] overflow-hidden"
+      >
+        <NightSkyBackdrop variant="hero" className="home-hero-sky" />
 
         <div className="mx-auto flex w-full max-w-[var(--content-max)] flex-col items-center justify-center px-4 pb-24 pt-[calc(var(--home-topbar-h)+4rem)] text-center sm:px-6 sm:pb-28 sm:pt-[calc(var(--home-topbar-h)+5rem)] lg:px-8">
-          <Reveal delay={0}>
+          <div className="mx-auto max-w-5xl">
             <div
-              className={cn('mx-auto max-w-5xl', entranceDelay !== null && 'home-intro-hero')}
-              style={
-                entranceDelay !== null
-                  ? ({ '--home-intro-hero-delay': `${entranceDelay}ms` } as CSSProperties)
-                  : undefined
-              }
+              aria-hidden="true"
+              data-testid="home-compass"
+              className="home-hero-rose relative mx-auto mb-8 w-fit drop-shadow-[0_6px_18px_color-mix(in_srgb,var(--primary)_32%,transparent)] sm:mb-10"
             >
-              <div
-                aria-hidden="true"
-                data-testid="home-compass"
-                className="mx-auto mb-8 w-fit drop-shadow-[0_6px_18px_color-mix(in_srgb,var(--primary)_32%,transparent)] sm:mb-10"
-              >
-                <CompassRose size={96} floating={false} className="cursor-default sm:hidden" />
-                <CompassRose size={120} floating={false} className="hidden cursor-default sm:block" />
-              </div>
-
-              <h1
-                aria-label="Documenter le raisonnement. Affûter le jugement."
-                className="font-headline text-[1.7875rem] font-semibold leading-[0.98] tracking-[-0.035em] text-balance text-foreground sm:text-[2.99rem] lg:text-[3.9rem]"
-              >
-                <span className="block">Documenter le raisonnement.</span>
-                <span className="mt-2 block italic text-[color:var(--primary)] sm:mt-3">Affûter le jugement.</span>
-              </h1>
-
-              <p className="mx-auto mt-8 max-w-3xl text-[0.65rem] leading-relaxed text-surface-variant text-pretty sm:mt-10 sm:text-[0.8125rem] sm:leading-relaxed">
-                {HERO_DESCRIPTION}
-              </p>
+              {/* Une seule instance, redimensionnée en CSS par home-hero.css.
+                  Deux instances `hidden`/`sm:block` rejoueraient leur tracé au
+                  franchissement du point de rupture — et, sur le chemin rideau,
+                  la rose disparaîtrait 2,6 s avant de se redessiner. */}
+              <CompassRose size={120} className="cursor-default" />
             </div>
-          </Reveal>
+
+            <h1
+              aria-label="Documenter le raisonnement. Affûter le jugement."
+              className="font-headline text-[1.7875rem] font-semibold leading-[0.98] tracking-[-0.035em] text-balance text-foreground sm:text-[2.99rem] lg:text-[3.9rem]"
+            >
+              <span className="home-hero-line block">Documenter le raisonnement.</span>
+              <span className="home-hero-line mt-2 block italic text-[color:var(--primary)] sm:mt-3">
+                Affûter le jugement.
+              </span>
+            </h1>
+
+            <p className="home-hero-lede mx-auto mt-8 max-w-3xl text-[0.65rem] leading-relaxed text-surface-variant text-pretty sm:mt-10 sm:text-[0.8125rem] sm:leading-relaxed">
+              {HERO_DESCRIPTION}
+            </p>
+          </div>
         </div>
       </section>
 
       <HomeEditorialBridge />
-
-      <section
-        aria-labelledby="home-intent-note-title"
-        className="grain relative border-y border-outline-variant bg-[color:var(--surface-container-lowest)] px-4 py-24 text-center sm:px-6 sm:py-32 lg:px-8 lg:py-40"
-      >
-        <div className="mx-auto max-w-[var(--content-max)]">
-          <Fleuron className="text-[0.975rem]" />
-          <blockquote className="mx-auto mt-10 max-w-6xl font-headline text-[1.3rem] italic leading-snug tracking-[-0.015em] text-foreground text-balance sm:text-[1.95rem] sm:leading-snug lg:text-[2.34rem]">
-            « {HERO_INTENT_NOTE} »
-          </blockquote>
-          <p id="home-intent-note-title" className="eyebrow mt-14 text-[0.52rem] sm:text-[0.56875rem]">
-            Note d’intention
-          </p>
-        </div>
-      </section>
 
       <button
         type="button"

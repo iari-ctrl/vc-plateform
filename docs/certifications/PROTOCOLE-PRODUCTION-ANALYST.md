@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 > **Règle de travail.** Ce protocole encadre la production future des épreuves professionnelles Analyst. Il n'autorise pas la production du fonds, de la bible du cas ou de M1 dans le lot actuel.
 
-Le protocole combine une conception à rebours par compétences et preuves avec une production verticale par situation professionnelle. Le [référentiel Analyst](REFERENTIEL-ANALYST.md) fixe les compétences ; le présent document fixe l'ordre de production et les contrôles.
+Le protocole combine une conception à rebours par compétences et preuves avec une production verticale par situation professionnelle. Le [référentiel VC Analyst](REFERENTIEL-VC-ANALYST.md) fixe les compétences ; le présent document fixe l'ordre de production et les contrôles.
 
 ## 1. Principes
 

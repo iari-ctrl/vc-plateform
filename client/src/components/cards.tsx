@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, BookOpen, Clock, FlaskConical, Layers } from 'lucide-react';
 import { WaxSeal } from '@/components/ornaments/Illustrations';
@@ -8,19 +9,25 @@ import { FAMILY_META, lessonIdsForParcours } from '@/content/parcours';
 import { formatMinutes, parcoursTimeSummary } from '@/content/learningTime';
 import { CASE_KIND_LABEL, ECOSYSTEM_KIND_LABEL } from '@/content/labels';
 import { useUserData } from '@/context/UserDataContext';
-import { formatDateFr, pluralize } from '@/lib/utils';
+import { parcoursSealName } from '@/lib/parcoursMorph';
+import { cn, formatDateFr, pluralize } from '@/lib/utils';
 import type { AntiPortfolioEntry, BlogPost, CaseStudy, Deliverable, EcosystemDossier, InvestmentMemo, Simulator } from '@/content/types';
 import type { Parcours } from '@/content/parcours';
+import type { ParcoursProgressSummary } from '@/lib/parcoursProgress';
 import { useLearningWorkspace } from '@/lib/learningWorkspace';
 
+/**
+ * La carte de recommandation — tableau de bord, résultat de profil.
+ *
+ * L'index `/parcours` ne l'utilise plus : il compare vingt-quatre parcours, ce
+ * qu'une grille de cartes rend impossible. Voir `ParcoursRow`.
+ */
 export function ParcoursCard({
   parcours,
   index = 0,
-  variant = 'recommendation',
 }: {
   parcours: Parcours;
   index?: number;
-  variant?: 'catalogue' | 'recommendation';
 }) {
   const { progress } = useUserData();
   const workspace = useLearningWorkspace();
@@ -52,33 +59,21 @@ export function ParcoursCard({
         style={{ '--contour': accent } as React.CSSProperties}
       />
       <div className="flex items-start justify-between gap-4">
-        {variant === 'catalogue' ? (
-          <KanjiSeal kanji={parcours.kanji ?? meta.kanji} accent={accent} size={46} />
-        ) : (
-          <WaxSeal
-            glyph={parcours.kanji ?? meta.kanji}
-            accent={accent}
-            size={48}
-            className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-rotate-6 group-hover:scale-105"
-          />
-        )}
+        <WaxSeal
+          glyph={parcours.kanji ?? meta.kanji}
+          accent={accent}
+          size={48}
+          className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-rotate-6 group-hover:scale-105"
+        />
         {pct > 0 ? (
-          <ProgressRing value={pct} size={variant === 'catalogue' ? 40 : 42} stroke={3} accent={accent} accessibleLabel={`Leçons déclarées lues : ${done} sur ${lessonIds.length}`} />
-        ) : variant === 'catalogue' ? (
-          parcours.roadmap === 'now' ? (
-            <span className="chip !border-[color-mix(in_srgb,var(--primary)_45%,transparent)] !text-[color:var(--primary)]">Phare</span>
-          ) : null
+          <ProgressRing value={pct} size={42} stroke={3} accent={accent} accessibleLabel={`Progression : ${done} leçons lues sur ${lessonIds.length}`} />
         ) : (
           <span className="font-mono text-xs text-surface-variant">{String(index + 1).padStart(2, '0')}</span>
         )}
       </div>
       <div className="mt-5 flex flex-wrap items-center gap-2">
         <LevelBadge level={parcours.level} accent={accent} />
-        {variant === 'catalogue' ? (
-          parcours.perspective === 'both' && <span className="chip">Les deux sièges</span>
-        ) : (
-          <span className="chip">{meta.label}</span>
-        )}
+        <span className="chip">{meta.label}</span>
       </div>
       <h3 className="mt-3 font-headline text-headline-md font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">
         {parcours.title}
@@ -87,7 +82,7 @@ export function ParcoursCard({
       {finalStep && <p className="mt-3 text-xs text-surface-variant"><span className="font-medium text-foreground">{finalLabel}</span> · {done}/{lessonIds.length} leçons lues</p>}
       <div className="mt-5 flex items-end justify-between gap-3 text-xs text-surface-variant">
         <span className="inline-flex flex-col gap-1">
-          <span className="inline-flex items-center gap-1.5"><Clock size={13} aria-hidden /> {parcours.time.source === 'derived' ? `${formatMinutes(time.readingMinutes)} de lecture` : `≈ ${formatMinutes(time.requiredMinutes)}`}</span>
+          <span className="inline-flex items-center gap-1.5"><Clock size={13} aria-hidden /> {parcours.time.source === 'derived' ? `${formatMinutes(time.readingMinutes)} de lecture` : `≈ ${formatMinutes(time.requiredMinutes)} au total`}</span>
           {parcours.time.source === 'derived' && <span>{formatMinutes(time.guidedPracticeMinutes + time.consolidationMinutes + time.finalMinutes)} de production</span>}
         </span>
         <span className="inline-flex items-center gap-1.5 font-medium text-[color:var(--primary)]">
@@ -95,6 +90,140 @@ export function ParcoursCard({
         </span>
       </div>
     </Link>
+  );
+}
+
+/**
+ * Un fait de la bande méta, séparateur compris.
+ *
+ * Le point est solidaire de l'élément qu'il précède : posé en enfant flex
+ * autonome, il resterait orphelin en fin de ligne dès que la bande passe à la
+ * ligne — ce qui arrive à 390 px.
+ */
+function MetaItem({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <span className={cn('inline-flex items-center gap-2.5', className)}>
+      <span aria-hidden className="text-outline-variant">·</span>
+      {children}
+    </span>
+  );
+}
+
+/**
+ * L'unité de l'index `/parcours` : une rangée comparable, pas une carte.
+ *
+ * Vingt-quatre parcours en grille de cartes empêchent la seule chose que le
+ * lecteur veut faire — les comparer. La rangée aligne les faits qui décident
+ * réellement du choix : le temps requis, le nombre de séances, le niveau et la
+ * nature du jalon. Le tout sur une seule ligne de lecture, et une seule cible
+ * cliquable par parcours.
+ *
+ * La progression vient d'en haut : la page calcule les vingt-quatre résumés en
+ * une passe mémoïsée et les distribue, plutôt que chaque rangée recalculant le
+ * sien.
+ */
+export function ParcoursRow({ parcours, summary, href, morph = false, onOpen }: {
+  parcours: Parcours;
+  summary: ParcoursProgressSummary;
+  href: string;
+  /** Vrai pour la seule rangée dont le sceau est emporté dans la transition. */
+  morph?: boolean;
+  /**
+   * Prend la main sur un clic gauche simple pour piloter la transition du sceau.
+   * Les clics modifiés — nouvel onglet, nouvelle fenêtre — restent au navigateur.
+   */
+  onOpen?: () => void;
+}) {
+  const workspace = useLearningWorkspace();
+  const meta = FAMILY_META[parcours.family];
+  const accent = parcours.accent ?? meta.accent;
+  const time = parcoursTimeSummary(parcours);
+
+  // Le jalon se lit sur l'objet `milestone`, pas sur la présence d'une étape :
+  // quatorze parcours en déclarent un sans étape correspondante et n'affichaient
+  // donc aucun signal. L'état, lui, reste réservé aux dix qui portent une
+  // production traçable — un état sans donnée utilisateur serait une décoration.
+  const milestone = parcours.milestone && parcours.milestone.type !== 'none' ? parcours.milestone : undefined;
+  const milestoneStep = parcours.steps.find((step) => step.ref.kind === 'milestone');
+  const production = milestoneStep ? workspace.productions[milestoneStep.ref.id] : undefined;
+  const milestoneLabel = !milestone
+    ? undefined
+    : production?.declaredCompleteAt
+      ? 'Jalon terminé'
+      : production?.stage === 'revised'
+        ? 'Jalon révisé'
+        : production
+          ? 'Jalon en cours'
+          : `Jalon : ${milestone.label}`;
+
+
+  return (
+    <li>
+      <Link
+        to={href}
+        onClick={(event) => {
+          if (!onOpen || event.defaultPrevented) return;
+          if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          onOpen();
+        }}
+        className="group -mx-3 flex items-start gap-4 rounded-xl px-3 py-4 transition-colors duration-200 hover:bg-surface-container-low/60 sm:gap-5"
+      >
+        <KanjiSeal
+          kanji={parcours.kanji ?? meta.kanji}
+          accent={accent}
+          size={40}
+          className="mt-0.5"
+          morphName={morph ? parcoursSealName(parcours.slug) : undefined}
+        />
+
+        <div className="min-w-0 flex-1">
+          <div className="flex items-baseline gap-2">
+            <h3 className="font-headline text-headline-sm font-semibold leading-snug transition-colors group-hover:text-[color:var(--primary)]">
+              {parcours.title}
+            </h3>
+            <ArrowRight
+              size={14}
+              aria-hidden
+              className="shrink-0 self-center text-surface-variant transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[color:var(--primary)]"
+            />
+          </div>
+          <p className="mt-1 line-clamp-2 max-w-[58ch] text-sm leading-relaxed text-surface-variant">
+            {parcours.hook}
+          </p>
+          <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xs text-surface-variant">
+            <span className="inline-flex items-center gap-1.5">
+              <Clock size={13} aria-hidden /> {formatMinutes(time.requiredMinutes)}
+            </span>
+            <MetaItem>{pluralize(parcours.steps.length, 'étape')}</MetaItem>
+            <MetaItem><LevelBadge level={parcours.level} accent={accent} /></MetaItem>
+            {milestoneLabel && (
+              <MetaItem className="min-w-0"><span className="truncate">{milestoneLabel}</span></MetaItem>
+            )}
+          </div>
+        </div>
+
+        {/* Une seule colonne d'état, à hauteur du titre : l'anneau quand il y a
+            une progression réelle, sinon la mise en avant éditoriale. Le libellé
+            « Commencer » a été retiré — répété vingt-quatre fois, il n'informait
+            plus, et déplaçait la colonne de lecture d'une rangée à l'autre. */}
+        <div className="shrink-0 pt-0.5">
+          {summary.percent > 0 ? (
+            <ProgressRing
+              value={summary.percent}
+              size={34}
+              stroke={3}
+              accent={accent}
+              accessibleLabel={`Progression : ${summary.completedSteps} étapes effectuées sur ${summary.totalSteps}`}
+            />
+          ) : parcours.roadmap === 'now' ? (
+            <span className="chip !border-[color-mix(in_srgb,var(--primary)_45%,transparent)] !text-[color:var(--primary)]">
+              Phare
+            </span>
+          ) : null}
+        </div>
+      </Link>
+    </li>
   );
 }
 

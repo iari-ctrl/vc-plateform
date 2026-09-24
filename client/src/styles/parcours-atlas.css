@@ -1,0 +1,180 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   /parcours — « la planche s'encre ».
+
+   La carte n'est pas montée avant d'être demandée : c'est une décision produit,
+   la liste mène aux mêmes parcours sans elle. Mais quand on la demande, elle ne
+   glisse pas — elle se dessine, dans l'ordre où un cartographe encre une
+   planche.
+
+   Le papier se déroule d'abord (l'enveloppe `max-height`, 560 ms, portée par
+   `ParcoursPage` et par le panneau lui-même ; le module est préchargé au survol
+   du bouton, et le premier rendu se fait replié puis bascule à la frame
+   suivante, sans quoi montage et ouverture atterriraient dans le même commit et
+   la planche n'aurait pas à reculer). Puis, depuis la barre — la rose
+   des vents au centre de la planche —, l'encre gagne le papier : le graticule,
+   les arcs de niveau et les noms de territoires apparaissent dans le sillage
+   d'un front qui s'élargit. Les 24 sceaux se tamponnent ensuite, du cœur vers
+   le large, chacun arrivant trop grand avant de se poser. Le cartouche sèche,
+   et les léviathans des marges diffusent en dernier.
+
+   Chronologie, à partir de `--atlas-t0` (400 ms après l'ouverture : le panneau
+   a atteint sa hauteur vers 190 ms et la planche a fini de reculer vers 420 ms
+   — deux gestes qui se suivent, jamais deux gestes simultanés) :
+
+     0    →  950 ms   le front d'encre s'élargit depuis la barre, précédé de
+                      sa ligne humide
+     0    →  620 ms   la rose des vents éclot au centre
+     200  → 1350 ms   les 24 sceaux se tamponnent (30 ms d'écart, du centre
+                      vers le large : Haute Citadelle, Mare Analytica,
+                      les îles, puis Terra Prima)
+     740  → 1160 ms   le cartouche se pose et sèche
+     900  → 1420 ms   les léviathans diffusent dans les marges
+
+   Contrat identique à celui de `home-hero.css` : l'état au repos de chaque
+   pièce est son état FINAL. Toutes les animations partent d'un `from` et
+   remplissent en `both` — couper l'animation (mouvement réduit, prerender)
+   laisse directement la planche complète, jamais du contenu en attente. La
+   classe `.atlas-ink` n'est portée que carte ouverte, si bien que replier puis
+   rouvrir rejoue la séquence sans remonter le composant — lequel, une fois
+   monté à la première ouverture, n'est plus jamais démonté, précisément pour
+   que ce contrat tienne.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.atlas-ink {
+  --atlas-t0: 400ms;
+  /* Même décélération que le hero : l'encre arrive vite puis se pose. */
+  --atlas-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Le front, lui, doit rester lisible : une course quasi régulière qui ne se
+     pose qu'à la fin, sans quoi il atteint le bord avant qu'on l'ait vu
+     partir. */
+  --atlas-front-ease: cubic-bezier(0.3, 0.25, 0.35, 1);
+  --atlas-front-duration: 950ms;
+}
+
+/* ── Le front d'encre ────────────────────────────────────────────────────────
+   Un masque de luminance : un disque à bord fondu, centré sur la barre, dont
+   le rayon s'ouvre. Tout ce qu'il découvre — graticule pointillé, arcs de
+   niveau tiretés, noms de territoires, contours des îles — apparaît dans son
+   sillage. Un seul geste plutôt qu'un tracé par élément : les traits de la
+   planche sont pointillés, les redessiner un à un les rendrait pleins.
+
+   Le graticule est volontairement ténu ; découvert seul, le geste ne se verrait
+   pas. La ligne humide — le cercle doré qui court sur la frontière opaque du
+   masque, à 0,74 de son rayon — lui donne son porteur visible, puis s'efface :
+   la planche sèche derrière elle. */
+.atlas-ink .atlas-ink-front {
+  animation: atlas-ink-spread var(--atlas-front-duration) var(--atlas-front-ease) var(--atlas-t0) both;
+}
+
+@keyframes atlas-ink-spread {
+  from {
+    r: 0px;
+  }
+}
+
+.atlas-ink .atlas-ink-edge {
+  animation: atlas-ink-edge var(--atlas-front-duration) var(--atlas-front-ease) var(--atlas-t0) both;
+}
+
+@keyframes atlas-ink-edge {
+  from {
+    r: 0px;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.46;
+  }
+  64% {
+    opacity: 0.34;
+  }
+  to {
+    r: 578px;
+    opacity: 0;
+  }
+}
+
+/* ── La barre ────────────────────────────────────────────────────────────────
+   L'origine du geste : l'instrument est posé avant que l'encre ne parte. Le
+   groupe interne existe pour porter cette transformation — le groupe externe
+   a déjà un attribut `transform` que le CSS écraserait. */
+.atlas-ink .atlas-ink-helm {
+  transform-box: view-box;
+  transform-origin: 0px 0px;
+  animation: atlas-ink-helm 620ms var(--atlas-ease) var(--atlas-t0) both;
+}
+
+@keyframes atlas-ink-helm {
+  from {
+    opacity: 0;
+    transform: scale(0.52);
+  }
+}
+
+/* ── Les sceaux ──────────────────────────────────────────────────────────────
+   Un tampon : la cire descend vers le papier, donc arrive trop grande et se
+   pose. `--ink-i` est le rang du port par distance à la barre, calculé dans
+   `PathAtlas` — la cascade suit le front d'encre vers le large.
+
+   L'amorti exponentiel du reste de la maison ferait apparaître chaque sceau
+   d'un bloc : à 24 pièces, la cascade ne se lirait plus. D'où une courbe plus
+   tenue, qui laisse voir chaque descente. */
+.atlas-ink .atlas-ink-seal {
+  transform-box: view-box;
+  animation: atlas-ink-stamp 460ms cubic-bezier(0.28, 0.62, 0.24, 1) both;
+  animation-delay: calc(var(--atlas-t0) + 200ms + var(--ink-i, 0) * 30ms);
+}
+
+@keyframes atlas-ink-stamp {
+  from {
+    opacity: 0;
+    transform: scale(1.62);
+  }
+}
+
+/* ── Le cartouche ────────────────────────────────────────────────────────────
+   Il ne monte ni ne glisse : il apparaît humide et sèche sur place. */
+.atlas-ink .atlas-ink-cartouche {
+  animation: atlas-ink-dry 420ms var(--atlas-ease) calc(var(--atlas-t0) + 740ms) both;
+}
+
+@keyframes atlas-ink-dry {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+  64% {
+    filter: blur(0);
+  }
+}
+
+/* ── Les marges ──────────────────────────────────────────────────────────────
+   Les léviathans sont la dernière chose qu'un cartographe ajoute, quand la
+   planche est établie et qu'il reste du vide à peupler. */
+.atlas-ink .atlas-ink-marginalia {
+  animation: atlas-ink-bleed 520ms var(--atlas-ease) calc(var(--atlas-t0) + 900ms) both;
+}
+
+@keyframes atlas-ink-bleed {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  60% {
+    filter: blur(0);
+  }
+}
+
+/* ── Mouvement réduit ────────────────────────────────────────────────────────
+   `tokens.css` écrase déjà toutes les durées ; on coupe explicitement les
+   animations pour que la planche soit servie complète, sans le moindre pas
+   intermédiaire. */
+@media (prefers-reduced-motion: reduce) {
+  .atlas-ink .atlas-ink-front,
+  .atlas-ink .atlas-ink-edge,
+  .atlas-ink .atlas-ink-helm,
+  .atlas-ink .atlas-ink-seal,
+  .atlas-ink .atlas-ink-cartouche,
+  .atlas-ink .atlas-ink-marginalia {
+    animation: none;
+  }
+}

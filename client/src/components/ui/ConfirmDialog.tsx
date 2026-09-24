@@ -16,6 +16,7 @@ export function ConfirmDialog({
   confirmLabel = 'Supprimer',
   cancelLabel = 'Annuler',
   destructive = true,
+  focusCancel = false,
 }: {
   open: boolean;
   onClose: () => void;
@@ -25,9 +26,11 @@ export function ConfirmDialog({
   confirmLabel?: string;
   cancelLabel?: string;
   destructive?: boolean;
+  focusCancel?: boolean;
 }) {
   const titleId = useId();
   const bodyId = useId();
+  const cancelRef = useRef<HTMLButtonElement>(null);
   const confirmRef = useRef<HTMLButtonElement>(null);
 
   return (
@@ -36,7 +39,7 @@ export function ConfirmDialog({
       onClose={onClose}
       labelledBy={titleId}
       describedBy={body ? bodyId : undefined}
-      initialFocusRef={confirmRef}
+      initialFocusRef={focusCancel ? cancelRef : confirmRef}
       className="max-w-md"
     >
       <div className="p-7">
@@ -52,7 +55,7 @@ export function ConfirmDialog({
           </div>
         </div>
         <div className="mt-7 flex justify-end gap-2">
-          <button onClick={onClose} className="btn-quiet">{cancelLabel}</button>
+          <button ref={cancelRef} onClick={onClose} className="btn-quiet">{cancelLabel}</button>
           <button
             ref={confirmRef}
             onClick={() => {

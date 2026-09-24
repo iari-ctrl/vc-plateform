@@ -1,15 +1,26 @@
-# Design System — vc-platform
+# Design system — Maison Sapience VC
 
 > [!IMPORTANT]
-> **Référence maintenue.** Ce document doit rester vrai. Il décrit le système visuel et interactionnel : tokens, composants, motion, accessibilité et patterns UI. En cas de doute sur un détail d'implémentation, la source fait foi : `client/src/styles/`, `client/src/components/` et les pages qui consomment ces primitives.
+> **Référence maintenue.** Ce document porte les règles visuelles et interactionnelles. [PRODUCT.md](../PRODUCT.md) fixe la marque et les principes produit. Les valeurs, dimensions, délais et API courants appartiennent au code ; les liens ci-dessous permettent de les consulter sans en maintenir une seconde copie.
 
-Objet : formaliser le système visuel et interactionnel de `vc-platform` afin de garder une expérience cohérente pendant le travail éditorial, pédagogique et produit (V1 française, auto-détection pédagogique, rail latéral off-screen, portail splash single-stage).
+**Mode de lecture.** Les prescriptions décrivent le contrat à préserver, pas une conformité déjà démontrée. Les paragraphes « Implémentation » indiquent où vérifier le comportement actuel. Les risques et résultats datés restent dans [Suivis/ETAT.md](../Suivis/ETAT.md), l'historique dans [Suivis/JOURNAL.md](../Suivis/JOURNAL.md).
+
+| Besoin | Section |
+| --- | --- |
+| Marque et fichiers propriétaires | [Positionnement](#positionnement), [sources](#sources) |
+| Couleurs, texte, composition | [Tokens](#couleurs), [typographie](#typographie), [layout](#layout) |
+| Primitives et contenu | [Composants](#composants), [lecture](#lecture) |
+| Surfaces spécifiques | [Atlas](#atlas), [splash](#splash) |
+| Interactions et validation | [États UI](#etats), [motion](#motion), [accessibilité](#accessibilite), [création](#creation) |
+| Paramètres techniques et suivi | [Maintenance](#maintenance) |
 
 ---
 
+<a id="positionnement"></a>
+
 ## 1. Positionnement
 
-VC Premium Platform doit se lire comme un atelier éditorial premium : carnet d'apprentissage, atlas d'exploration, dictionnaire vivant et memo d'investissement.
+Maison Sapience VC associe lecture éditoriale, carnet d'apprentissage, atlas d'exploration et mémo d'investissement. La marque visible est le **mot-symbole typographique Maison Sapience VC**, avec l'accent porté sur Sapience VC. Ne pas lui adjoindre le fleuron ou le rond doré hérités ; les ornements de séparation restent distincts du logo.
 
 Le design ne doit pas ressembler à un dashboard SaaS générique. Il doit soutenir trois gestes :
 
@@ -27,43 +38,50 @@ Mots-clés de direction artistique :
 
 ---
 
+<a id="sources"></a>
+
 ## 2. Sources techniques du design system
 
-Les primitives actuelles sont distribuées dans plusieurs fichiers :
+**Implémentation.** Consulter seulement les sources de la surface modifiée :
 
 | Zone | Fichier |
 | --- | --- |
-| Tokens CSS | `client/src/styles/tokens.css` |
-| Styles globaux et classes composants | `client/src/styles/global.css` |
-| Configuration Tailwind | `client/tailwind.config.ts` |
-| Styles portail splash | `client/src/styles/splash.css` |
-| Primitives UI | `client/src/components/ui/primitives.tsx` |
-| Cartes éditoriales | `client/src/components/cards.tsx` |
-| Ornements / langage atlas | `client/src/components/ornaments/*` |
-| Splash / boussole animée | `client/src/components/splash/CompassIkigaiIntro.tsx` |
-| Lecture active | `client/src/components/reading/*` |
-| Showcase interne | `client/src/pages/system/DesignSystemShowcasePage.tsx` (`/design-system`) |
-| Découpage front | `client/src/content/*.ts` + `client/vite.config.ts` |
+| Valeurs de couleur et de layout | [tokens.css](../client/src/styles/tokens.css) |
+| Classes communes et faces typographiques importées | [global.css](../client/src/styles/global.css) |
+| Échelles, ombres, couleurs Tailwind et animations communes | [tailwind.config.ts](../client/tailwind.config.ts) |
+| Barre d'accueil et copie d'introduction | [homeBar.ts](../client/src/components/chrome/homeBar.ts) |
+| Layout et sélection du chrome | [MainLayout.tsx](../client/src/layouts/MainLayout.tsx) |
+| Portail splash | [SplashPage.tsx](../client/src/pages/home/SplashPage.tsx), [splash.css](../client/src/styles/splash.css) |
+| Intro et hero d'accueil | [HomeIntro.tsx](../client/src/components/home/HomeIntro.tsx), [HomeIntroContext.ts](../client/src/context/HomeIntroContext.ts), [home-intro.css](../client/src/styles/home-intro.css), [home-hero.css](../client/src/styles/home-hero.css) |
+| Primitives UI et cartes | [primitives.tsx](../client/src/components/ui/primitives.tsx), [cards.tsx](../client/src/components/cards.tsx) |
+| Ornements | [Illustrations.tsx](../client/src/components/ornaments/Illustrations.tsx), [Ornaments.tsx](../client/src/components/ornaments/Ornaments.tsx) |
+| Atlas | [PathAtlas.tsx](../client/src/components/explore/PathAtlas.tsx), [parcours-atlas.css](../client/src/styles/parcours-atlas.css) |
+| Lecture active | [components/reading/](../client/src/components/reading/) |
+| Showcase interne, développement uniquement | [DesignSystemShowcasePage.tsx](../client/src/pages/system/DesignSystemShowcasePage.tsx), route `/design-system` |
 
 Le projet utilise Tailwind CSS v3 avec tokens CSS sémantiques. La règle de base : utiliser les tokens existants avant d'ajouter une couleur, une taille ou une ombre.
 
-Les collections JSON de contenu sont séparées par modules (`paths.ts`, `courses.ts`, `lessons.ts`, etc.) et le vendor React est isolé dans le build. Les surfaces visuelles chargées tôt doivent donc importer la collection exacte dont elles ont besoin, pas le barrel complet `@/content`. Le glossaire et les leçons vont plus loin : seul l'**index léger** (`GLOSSARY`, `LESSONS`) est eager ; les définitions et corps complets se chargent à la demande (`loadGlossaryDefs`, `loadLesson`) — n'importez le contenu lourd que sur la page qui le rend réellement (lecteur de leçon, fiche de dictionnaire).
+Les surfaces chargées tôt doivent importer le module de contenu nécessaire, pas le barrel complet `@/content`. Le découpage des collections et le chargement différé sont décrits dans le [cycle du contenu](ARCHITECTURE_EDITION.md#cycle-contenu).
 
 ---
 
+<a id="couleurs"></a>
+
 ## 3. Tokens de couleur
+
+**Règle durable :** choisir un rôle sémantique avant une couleur. Les valeurs claires et sombres exactes sont définies uniquement dans [tokens.css](../client/src/styles/tokens.css).
 
 ### Palette principale
 
-| Usage | Token | Valeur claire | Rôle |
-| --- | --- | ---: | --- |
-| Accent premium | `--primary` | `#C5A85C` | feuille d'or, CTA, progression, liens importants |
-| Texte sur primaire | `--on-primary` | `#12131A` | texte sur bouton doré |
-| Conteneur primaire | `--primary-container` | `#F6ECCB` | fonds doux liés à l'or |
-| Marine éditorial | `--secondary` | `#1E2D38` | profondeur, navigation, ancrage sérieux |
-| Prune velours | `--tertiary` | `#5A455C` | accent secondaire, profils, nuances premium |
-| Fond principal | `--background` | `#FDFCF7` | papier/parchemin |
-| Texte principal | `--on-background` | `#12131A` | encre principale |
+| Usage | Token | Rôle |
+| --- | --- | --- |
+| Accent principal | `--primary` | actions principales, progression, liens importants |
+| Texte sur primaire | `--on-primary` | texte sur une surface primaire pleine |
+| Conteneur primaire | `--primary-container` | fond d'accent discret |
+| Marine éditorial | `--secondary` | navigation et accent secondaire |
+| Prune | `--tertiary` | profils et nuances complémentaires |
+| Fond principal | `--background` | papier clair ou fond sombre |
+| Texte principal | `--on-background` | encre principale |
 
 ### États et retours
 
@@ -93,13 +111,13 @@ Les collections JSON de contenu sont séparées par modules (`paths.ts`, `course
 
 ### Mode sombre
 
-Le mode sombre est complet et piloté par `.dark`. Il ne doit pas inverser brutalement la marque : il doit conserver une ambiance "encre profonde + accents dorés + ciel de navigation".
+Le mode sombre est piloté par `.dark`. Il doit préserver la hiérarchie, la lisibilité et les rôles sémantiques du mode clair ; sa présence ne prouve pas que chaque surface a été qualifiée.
 
 Spécificités mode sombre :
 
 - le toggle « Choisissez votre lumière » du portail splash (`/`) pilote le `ThemeContext` global — le choix persiste sur l'accueil et dans toute l'app ;
-- sur `/home`, le hero et la carte `PathAtlas` affichent le ciel étoilé photographique (`bg-sombre.webp`) en fond via `NightSkyBackdrop`, **uniquement en sombre** (`hidden dark:block`) ;
-- le parchemin `map-paper` est conservé en mode clair ; en mode sombre, la photo passe derrière les tracés SVG (constellation dessinée, routes pointillées, sceaux, rose des vents).
+- le hero de `/home` et l'atlas facultatif de `/parcours` utilisent `NightSkyBackdrop` en sombre ; l'atlas n'est pas présent sur l'accueil ;
+- conserver la lisibilité des contenus au-dessus des textures et photographies.
 
 Règles :
 
@@ -110,13 +128,21 @@ Règles :
 
 ---
 
+<a id="typographie"></a>
+
 ## 4. Typographie
+
+Les polices sont auto-hébergées avec `@fontsource` et importées dans `client/src/styles/global.css`.
 
 | Usage | Police | Classe |
 | --- | --- | --- |
-| Titres éditoriaux | Newsreader | `font-headline` |
+| Titres éditoriaux et marque textuelle | Newsreader | `font-headline` |
 | Corps et UI | Plus Jakarta Sans | `font-body` |
-| Métadonnées, numéros, labels | JetBrains Mono | `font-mono` |
+| Métadonnées, numéros et labels compacts | JetBrains Mono | `font-mono` |
+
+### Signature typographique de `/home`
+
+La marque conserve Newsreader et l'accent typographique sur `Sapience VC` ; les deux pôles utilisent la famille mono. **Implémentation :** `HomeIntro` et `TopBar` partagent [homeBar.ts](../client/src/components/chrome/homeBar.ts). Tailles, graisses et espacements doivent rester définis à cet endroit ; vérifier les faces réellement importées avant de modifier une graisse.
 
 ### Échelle Tailwind
 
@@ -133,7 +159,7 @@ Règles :
 Règles :
 
 - les titres de page utilisent `font-headline`, `tracking-tight`, `text-balance` ;
-- aucune graisse typographique `300` n'est utilisée (retirée pour alléger le bundle) ;
+- n'ajouter une face typographique qu'après vérification de son usage et de son coût ;
 - les paragraphes longs gardent une largeur contenue (`max-w-2xl` ou `max-w-3xl`) ;
 - les labels éditoriaux utilisent `.eyebrow` ;
 - ne pas surdimensionner la typographie dans les cartes compactes ;
@@ -141,19 +167,11 @@ Règles :
 
 ---
 
+<a id="layout"></a>
+
 ## 5. Layout
 
-Tokens structurants :
-
-| Token | Valeur | Usage |
-| --- | ---: | --- |
-| `--topbar-h` | `4.5rem` | hauteur de top bar |
-| `--home-topbar-h` | `3.375rem` ; sous 768 px `min(2.53125rem, 5svh)` | hauteur du header propre à `/home` |
-| `--home-mobile-nav-h` | sous 768 px `min(2.53125rem, 5svh)` | hauteur totale de la navigation basse de `/home`, hors safe area |
-| `--sidebar-w` | `16rem` | largeur navigation latérale |
-| `--sidebar-rail` | `4rem` | gouttière réservée au handle desktop de la navigation |
-| `--content-max` | `75rem` | largeur maximale des vues riches |
-| `--radius` | `1.25rem` | rayon global historique |
+Les dimensions sont portées par `--topbar-h`, `--home-topbar-h`, `--home-mobile-nav-h`, `--sidebar-w`, `--sidebar-rail`, `--content-max` et `--radius` dans [tokens.css](../client/src/styles/tokens.css). Ne pas recopier leurs valeurs dans un composant.
 
 Règles de composition :
 
@@ -165,40 +183,33 @@ Règles de composition :
 
 ### Barre latérale (`SideNav` + `.glass-rail`)
 
-La navigation latérale desktop (`components/chrome/SideNav.tsx`) est un panneau `--sidebar-w` (16rem) garé hors écran (`-translate-x-full`) quand il est fermé. Une gouttière fixe `--sidebar-rail` (4rem) reste visible avec le logo et le bouton `Menu`; une zone de déclenchement de 0,5rem longe aussi le bord gauche du viewport sur les routes qui utilisent cette navigation. Le survol du handle ou de ce bord ouvre le panneau. `MainLayout` réserve la gouttière via `lg:pl-[var(--sidebar-rail)]`, donc le contenu ne bouge jamais quand le panneau glisse en overlay. `PageShell` existe bien, mais il sert seulement de route layout pour `Suspense` + `ErrorBoundary`; il ne remplace pas `MainLayout`.
+Sur les routes qui l'utilisent, la navigation latérale desktop s'ouvre en superposition sans déplacer le contenu. Le panneau fermé reste hors écran et `inert` ; le handle demeure accessible. Préserver un repli lisible sans `backdrop-filter`.
 
-L'architecture de l'information (IA) est centralisée dans `client/src/lib/navigation.ts`. La `TopBar`, la `SideNav` et le `Footer` exposent les mêmes trois piliers : **Intelligence VC**, **Formation** et **Workspace**. Leurs entrées secondaires restent propres au contexte, mais l'état actif d'un pilier couvre aussi ses pages de détail. La V1 est française uniquement : aucun sélecteur de langue n'est prévu dans le chrome.
-
-L'effet verre est piloté par l'attribut `data-open` et la classe `.glass-rail` (définie dans `global.css`), avec **deux états distincts** :
-
-- **Fermé** (`data-open="false"`) : le panneau complet est hors écran et `inert={!open}` ; la classe conserve une base quasi-opaque (`--surface` ~90 %), flou léger (`blur(6px)`), sans ombre, pour servir d'état de départ lisible à la transition.
-- **Ouvert** (`data-open="true"`) : panneau de **verre dépoli** qui flotte au-dessus du contenu qu'il recouvre — fond transparent, `backdrop-filter: blur(14px) saturate(165%) contrast(104%)`, bordure `outline-variant` ~52 %, ombres latérales et lisérés internes. Le flou volontairement **modéré** ne masque pas la page : les aplats de couleur et les grandes formes restent lisibles sous le rail, tout en gardant les libellés nets.
-
-Règle critique apprise : pour que le verre se lise, le panneau ouvert doit éviter un remplissage opaque proche du fond (`--surface` = `--background`) et s'appuyer sur le flou, les bordures et l'ombre. Toutes les transitions de verre sont animées (`background-color`, `box-shadow`, `border-color`, `backdrop-filter`) en parallèle de la translation. Un fallback `@supports not (backdrop-filter)` repasse en panneaux quasi-opaques pour la lisibilité.
+**Implémentation :** [SideNav.tsx](../client/src/components/chrome/SideNav.tsx), `.glass-rail` dans `global.css` et `MainLayout`. Les réglages de flou, d'opacité et de transition restent dans le CSS. [navigation.ts](../client/src/lib/navigation.ts) centralise les trois piliers, mais chaque variante de chrome choisit les entrées exposées ; l'accueil n'en met en avant que deux. La V1 n'introduit pas de sélecteur de langue.
 
 ### Barre d'accueil et séquence d'entrée (`/home`)
 
-`/home` remplace la `TopBar` standard par une barre à trois colonnes (`1fr auto 1fr`) à partir de 768 px : `Formation` à gauche, la marque `Maison Sapience VC` au centre, `Intelligence VC` à droite. Sous 768 px, le header ne conserve que la marque centrale et les deux pôles forment une navigation fixe au bas du viewport, hors du landmark `header`. Sa géométrie et sa typographie ne sont pas écrites dans le composant mais dans `components/chrome/homeBar.ts` (`HOME_BAR_ROW`, `HOME_BAR_CELL`, `HOME_BAR_PILLAR`, `HOME_BAR_WORDMARK`, `HOME_BAR_WORDMARK_ACCENT`, `HOME_BAR_SHELL`, `HOME_MOBILE_NAV_SHELL`). **Cette centralisation est une contrainte, pas une commodité** : la séquence d'entrée peint une copie jetable de la barre et la fait atterrir sur la barre réelle ; deux jeux de classes divergents produiraient un saut visible au relais.
+Contrat de `/home` et `/home/` :
 
-Sur la variante compacte, `--home-topbar-h` et `--home-mobile-nav-h` valent chacun `min(2.53125rem, 5svh)`. Les deux barres sont ainsi réduites de 25 % par rapport aux deux hauteurs de référence de 54 px et leur somme ne dépasse pas 10 % de la hauteur du viewport. La bordure supérieure de la navigation basse est comprise dans sa boîte ; elle ne doit pas ajouter un pixel au budget. La safe area s'ajoute seulement sous cette hauteur. Le contrôle de thème conserve une cible interactive de 44 × 44 px, tandis que son cercle visible reste contenu dans le header compact.
+- à partir de 768 px : Formation à gauche, mot-symbole au centre, Intelligence VC à droite ;
+- sous 768 px : marque centrale dans le header ; deux pôles dans une navigation fixe basse, hors du landmark `header`, avec safe area ;
+- contrôle de thème fixe en haut à gauche sur mobile, en bas à gauche sur desktop, discret au repos mais visible au focus ; sa cible doit rester directement cliquable au-dessus du header ;
+- Workspace reste secondaire, conformément à `PRODUCT.md` ;
+- géométrie et typographie partagées entre la barre réelle et sa copie animée, sans saut au relais.
 
-La marque est délibérément l'élément le plus grand de la barre : `1,025rem` en mobile, `1,325rem` à partir de `sm`, `1,475rem` à partir de `lg`, avec un tracking resserré aux petites largeurs pour absorber la largeur supplémentaire. `Sapience VC` garde son poids 600 face à `Maison` en 500.
+**Implémentation :** [homeBar.ts](../client/src/components/chrome/homeBar.ts), [TopBar.tsx](../client/src/components/chrome/TopBar.tsx), [HomePage.tsx](../client/src/pages/home/HomePage.tsx) et les tokens de hauteur. La safe area ne remplace pas le budget de barre ; conserver la cible interactive du thème indépendamment de son icône.
 
-La séquence d'entrée (`components/home/HomeIntro.tsx` + `styles/home-intro.css`) est montée par `MainLayout` au-dessus du shell et publie sa phase via `HomeIntroContext` — la barre fixe s'efface puis revient, `HomePage` retarde son hero. Règles à conserver :
-
-- **elle joue au premier rendu sur `/home` et à l'arrivée depuis le portail, jamais en navigation interne.** Un rideau de 3,8 s entre deux clics de menu serait une nuisance ;
-- l'en-tête temporaire est positionné comme la barre finale (`top: 0; height: var(--home-topbar-h)`) puis décalé de `calc(50svh - var(--home-topbar-h) / 2)`. Animer le retour à `translateY(0)` garantit un accostage au pixel : ne pas revenir à un couple `top: 50%` / `translateY(-50%)` interpolé ;
-- **le voile diffère par mode.** En clair il porte `bg-claire.webp` et se dissout pendant la montée (2,4 s → 3,2 s), pour que le fond et l'en-tête arrivent d'un même geste. En sombre il porte `bg-sombre.webp`, l'image que `NightSkyBackdrop` affiche déjà sous le hero, avec le même dégradé de lisibilité : son retrait ne change donc rien à l'écran et peut rester à 3,0 s, hors de la fenêtre de vol ;
-- le rideau est `aria-hidden` et ne contient aucun élément focusable ; la barre réelle est retirée par `visibility`, donc hors ordre de tabulation et hors arbre accessible, jamais par `opacity` seule ;
-- sous `prefers-reduced-motion`, la séquence n'est pas montée du tout. `scripts/prerender.mjs` émule cette préférence, de sorte que le HTML statique porte la mise en page finale et non une image figée du rideau.
+L'introduction peut jouer à l'arrivée directe sur `/home` ou depuis le portail, jamais lors d'un retour interne. Le rideau décoratif reste hors focus ; la barre réelle masquée ne doit pas conserver de contrôles accessibles par simple transparence. Sous mouvement réduit, la séquence n'est pas montée. La synchronisation et le prérendu sont décrits au [§11](#motion).
 
 ### Portail splash (`/`)
 
-La page splash est **hors chrome** (pas de TopBar ni SideNav, footer masqué). Elle remplit 100 % du viewport via `.splash-portal { height: 100svh }` et `.splash-stage { position: absolute; inset: 0 }`. La typographie du titre est fluide : `clamp(1.6rem, 2.4vw, 2.6rem)`. Des media queries couvrent le mobile portrait (≤ 760px) et le paysage court (max-height ≤ 600px).
+Le splash est hors chrome : ni TopBar, ni SideNav, ni footer. Il occupe le viewport sans mise à l'échelle d'un artboard fixe ; vérifier portrait mobile et paysage court. Voir les [règles spécifiques](#splash).
 
 ---
 
-## 6. Composants et classes de base
+<a id="composants"></a>
+
+## 6. Composants de base
 
 ### Boutons
 
@@ -222,24 +233,15 @@ Règles :
 | `.premium-card-hover` | carte cliquable |
 | `.chip` | tags, catégories, états courts |
 
-Les cartes actuelles à stabiliser :
-
-- `ParcoursCard` (variantes `catalogue` et `recommendation`) ;
-- `LessonRow` ;
-- `CaseCard` ;
-- `DeliverableCard` ;
-- `MemoCard` ;
-- `AntiPortfolioEntryCard` ;
-- `EcosystemCard` ;
-- `BlogCard` ;
-- `SimulatorCard`.
+**Implémentation :** [cards.tsx](../client/src/components/cards.tsx) porte les cartes et rangées métier ; vérifier ses exports avant d'ajouter une variante.
 
 Règles :
 
 - `ParcoursCard`, `EcosystemCard` et `SimulatorCard` peuvent utiliser une couleur d'accent dynamique ;
 - `MemoCard`, `AntiPortfolioEntryCard` et `DeliverableCard` doivent rester lisibles comme pièces d'intelligence VC, pas comme cartes marketing ;
 - `LessonRow` doit rester dense, scannable et stable ;
-- les listes de contenu doivent privilégier la comparaison rapide.
+- les listes de contenu doivent privilégier la comparaison rapide ;
+- un inventaire destiné à être comparé se rend en rangées, pas en cartes. `ParcoursRow` est la forme de référence : sceau, titre, accroche sur deux lignes au plus, puis une bande méta dont l'ordre est constant d'une rangée à l'autre (temps requis · séances · niveau · jalon). Une seule cible cliquable par rangée, séparateurs en filet, aucune boîte. `ParcoursCard` reste réservée aux emplacements où un seul parcours est mis en avant.
 
 ### Progression
 
@@ -257,7 +259,11 @@ Usages :
 
 Ne pas utiliser la progression comme décoration : elle doit toujours représenter une donnée utilisateur réelle.
 
-Un parcours qui comporte une production affiche la lecture et le jalon séparément. Le pourcentage porte uniquement sur les leçons déclarées lues. Le jalon utilise un libellé d'état textuel et reste inachevé tant que l'utilisateur ne l'a pas déclaré terminé.
+Un parcours qui comporte une production affiche la lecture et le jalon séparément. Le jalon utilise un libellé d'état textuel et reste inachevé tant que l'utilisateur ne l'a pas déclaré terminé.
+
+Le pourcentage d'un parcours se calcule **par étapes atteignables**, via `buildParcoursProgressSummary` : leçons déclarées lues, cas et simulateurs effectués, productions déclarées terminées, le tout borné par le niveau d'approfondissement actif. C'est le même dénominateur que la ligne « Étapes effectuées X/Y » de la fiche parcours ; le libellé accessible dit donc « étapes effectuées », jamais « leçons lues ». Une surface qui affiche un parcours ne recalcule pas ce ratio pour son compte.
+
+Le jalon se lit sur l'objet `milestone` du parcours, pas uniquement sur une étape de même type. Son **état** reste réservé aux parcours portant une production traçable : sans identifiant de production, on nomme le jalon sans lui prêter d'avancement.
 
 ### Espaces de production
 
@@ -270,11 +276,10 @@ Un parcours qui comporte une production affiche la lecture et le jalon séparém
 
 ### Fiches de certification
 
-La divulgation progressive dépend de la catégorie de certification ou de parcours :
+La présentation distingue parcours d'apprentissage et certification évaluée. Les étapes et catégories sont définies dans [l'architecture des certifications](certifications/ARCHITECTURE-CERTIFICATIONS.md), pas dans une seconde liste ici.
 
-- `Fondamentaux de l’analyse en capital-risque` utilise la fiche de parcours standard ; il ne comporte ni étape d’évaluation ni résultat ;
-- `VC Analyst` suit cinq étapes : **Aperçu**, **Préparation**, **Options**, **Programme**, **Évaluation** ;
-- après l'enregistrement des options, le programme réunit la préparation recommandée et les blocs contextualisés avant de proposer l'évaluation professionnelle ;
+Règles :
+
 - la préparation recommandée reste visible et non bloquante ;
 - la progression du programme porte sur les leçons disponibles ; les leçons à venir sont comptées séparément ;
 - les axes d'options s'affichent un par un ;
@@ -282,11 +287,15 @@ La divulgation progressive dépend de la catégorie de certification ou de parco
 - les cours et les blocs d'évaluation sont fermés par défaut ;
 - les titres, libellés et retours d'état restent courts et orientés décision.
 
-Le parcours ne présente ni charte de candidat, ni tentative, ni score. Les quiz de ses leçons restent formatifs et la navigation reste libre.
+Un parcours non évalué ne doit pas présenter charte de candidat, tentative ou résultat de certification. Les quiz de leçon restent formatifs ; aucun résultat local de connaissance ne délivre le titre professionnel `VC Analyst`.
 
 ---
 
+<a id="lecture"></a>
+
 ## 7. Langage éditorial
+
+La prose relève de la [charte rédactionnelle](ARCHITECTURE_EDITION.md#style-editorial). Cette section couvre seulement sa présentation.
 
 ### Lecture active
 
@@ -297,12 +306,7 @@ Le composant `ActiveProse` rend les contenus longs et permet :
 - citation vers le carnet ;
 - feedback de sauvegarde.
 
-La classe `.prose-editorial` définit le rythme de lecture :
-
-- corps en `1.0625rem` ;
-- interligne confortable ;
-- titres en Newsreader ;
-- listes avec puces dorées.
+La classe `.prose-editorial` définit le rythme de lecture : corps et interligne lisibles, titres en Newsreader, listes hiérarchisées. Ses réglages sont dans `global.css`.
 
 Règles :
 
@@ -312,20 +316,22 @@ Règles :
 
 ### Dictionnaire vivant et Détection automatique
 
-Les liens de glossaire ne sont pas décoratifs : ils sont la couche pédagogique transversale. Dans les composants de cours (`ActiveProse`), **la détection est automatique** pour tout terme ou sigle (en respectant la casse).
+Les liens de glossaire soutiennent la compréhension. Dans les leçons, l'auto-détection dépend des termes et aliases publiés, des règles de casse et d'exclusion du matcher ; elle ne reconnaît pas arbitrairement tout terme VC. **Implémentation :** [markdown.tsx](../client/src/lib/markdown.tsx).
 
 Règles :
 
 - tout terme VC important (ainsi que ses alias) doit exister dans `data/glossary.json` ;
-- la **première occurrence** d'un terme dans une leçon est auto-détectée et transformée en popover condensé (affichant uniquement le `term` et son champ `short`). Le panneau entier est cliquable et redirige vers la définition détaillée dans le glossaire ;
+- le repère inline donne accès à une définition courte puis à la fiche détaillée, sans interrompre la lecture ;
 - le texte visible doit rester naturel grâce à `[[slug|libellé]]` pour le balisage manuel (les balisages manuels priment sur l'auto-détection, et les études de cas / articles de blog restent entièrement manuels) ;
 - les `glossaryRefs` doivent lister les termes vraiment utiles à la page.
 
 ### Simulateurs et Blocs pédagogiques
 
-Les simulateurs intègrent des **explications pédagogiques interactives** à côté des paramètres. Ils remplacent les infobulles natives par des `GlossaryPreview` avec redirections cliquables, assurant une cohérence avec le dictionnaire vivant.
+Pour les aides liées au dictionnaire, réutiliser `GlossaryPreview` plutôt qu'une infobulle native isolée. Ne pas supposer que tous les simulateurs utilisent les primitives de l'application : la [note d'investissement embarquée](ARCHITECTURE_EDITION.md#simulateurs) a ses propres sources.
 
 ---
+
+<a id="atlas"></a>
 
 ## 8. Langage atlas et ornements
 
@@ -352,7 +358,7 @@ Le langage cartographique donne de la personnalité sans transformer l'app en d�
 - rend `hidden dark:block` — invisible en clair, le parchemin s'affiche normalement ;
 - se pose en `absolute inset-0 -z-10` dans le conteneur hôte ;
 - le conteneur hôte doit avoir `isolate` pour que la photo passe **au-dessus** du fond semi-opaque du conteneur mais **en dessous** du contenu in-flow ;
-- utilise `/splash/bg-sombre.webp` (~97 Ko) — ne pas l'appliquer à des dizaines de sections simultanées.
+- résout l'asset `splash/bg-sombre.webp` par `publicAssetUrl` pour respecter la base de déploiement ; limiter le nombre de fonds photographiques simultanés.
 
 ### Ornements typographiques (`ornaments/Ornaments.tsx`)
 
@@ -366,7 +372,7 @@ Le langage cartographique donne de la personnalité sans transformer l'app en d�
 | Classe | Effet |
 | --- | --- |
 | `.map-paper` | lignes de contour topographique + méridiens, papier vieilli |
-| `.grain` | bruit de grain photographique (pseudo-élément `::after`, opacity 0.035) |
+| `.grain` | grain photographique discret |
 | `.contour-field` | halo de contour teinté par `--contour` |
 | `.ink-underline` | soulignement à l'encre dorée manuscrit (SVG encodé) |
 | `.sheen-host` | reflet de lumière doré au survol |
@@ -381,7 +387,7 @@ Règles :
 
 ### Navigation de la carte `PathAtlas`
 
-La carte des parcours est **manipulable comme une vraie carte**. Tout le contenu SVG (graticule, arcs, ports, cartouche, monstres, rose des vents) est enveloppé dans un groupe `<g transform="translate(tx ty) scale(scale)">` piloté par un état `view`.
+L'atlas est une vue facultative de `/parcours`, complémentaire de la liste. **Implémentation :** [ParcoursPage.tsx](../client/src/pages/learn/ParcoursPage.tsx), [PathAtlas.tsx](../client/src/components/explore/PathAtlas.tsx) et [parcours-atlas.css](../client/src/styles/parcours-atlas.css).
 
 | Geste | Comportement |
 | --- | --- |
@@ -389,23 +395,26 @@ La carte des parcours est **manipulable comme une vraie carte**. Tout le contenu
 | Molette | zoom **centré sur le curseur** (le point survolé reste sous le curseur) |
 | Pinch (2 doigts) | zoom tactile centré sur le milieu du geste |
 | Boutons **+ / −** | zoom incrémental centré sur la carte (cluster haut-gauche, convention type Leaflet) |
-| Bouton **recentrage** | réinitialise `scale 1, tx 0, ty 0` |
+| Bouton **recentrage** | retrouve la vue initiale |
 
 Règles / garde-fous :
 
-- zoom borné `[0.6, 3]`, translation bornée (`clampView`) pour ne jamais perdre la carte hors champ ;
-- seuil de 4 px qui distingue l'**activation** du **drag** (pan) — un drag ne déclenche jamais la navigation ; à la souris ou au clavier, l'activation ouvre le parcours, tandis que sur écran tactile le premier appui révèle les relations et le suivant ouvre le parcours ;
-- `touch-action: none` sur le SVG pour que pan/pinch fonctionnent ; molette en listener natif non-passif (`preventDefault`) ;
+- borner zoom et translation pour ne pas perdre la carte hors champ ; les bornes et seuils appartiennent au composant ;
+- distinguer activation et glissement : un pan ne déclenche pas de navigation ; à la souris ou au clavier, l'activation ouvre le parcours ; au tactile, le premier appui révèle les relations et le suivant ouvre le parcours ;
 - le survol, le focus clavier et la sélection tactile d'un sceau produisent le même rendu relationnel, mais leurs propriétaires sont suivis séparément afin qu'une sortie de survol n'efface ni un focus ni une sélection tactile encore actifs ; les relations cartographiques ne sont jamais affichées en permanence ;
 - les compléments de même niveau suivent un trait primaire pointillé sans flèche ; les progressions conseillées utilisent un trait secondaire continu et orienté. La distinction repose donc sur la forme, l'orientation et le libellé du cartouche, pas sur la couleur seule ;
 - le groupe SVG des relations reste `aria-hidden` et `pointer-events="none"` pour ne pas intercepter le pan, le zoom ou le clic. Le cartouche fournit l'équivalent textuel et les sceaux reliés ne sont pas atténués ;
-- la liste de chips conserve le même état au survol, au focus et au premier appui tactile, comme repli mobile et clavier.
+- la liste de chips conserve le même état au survol, au focus et au premier appui tactile, comme repli mobile et clavier ;
+- chargement et ouverture sont distincts : le survol, le focus ou l'activation du bouton peuvent charger puis monter l'atlas replié ; seule l'activation l'ouvre. Le bouton reste libellé et porte `aria-expanded` / `aria-controls` ;
+- le montage initial replié puis l'ouverture sont séparés pour permettre la transition ; refermer la carte ne la démonte pas.
 
 ---
 
-## 9. Portail splash (`pages/home/SplashPage.tsx` + `styles/splash.css`)
+<a id="splash"></a>
 
-Le portail est une surface autonome avec son propre système de tokens piloté par `.splash-portal[data-mode='light'|'dark']`. Il ne dépend pas des classes Tailwind génériques.
+## 9. Portail splash
+
+Le portail possède des tokens locaux pilotés par `data-mode`, sans second système de préférence de thème. **Implémentation :** [SplashPage.tsx](../client/src/pages/home/SplashPage.tsx) et [splash.css](../client/src/styles/splash.css).
 
 Règles propres au portail :
 
@@ -413,11 +422,13 @@ Règles propres au portail :
 - les deux photos sont superposées dans `.splash-photos` et marquées `aria-hidden` ; la bascule ne duplique pas les contenus focusables ;
 - la transition « Aube » est pilotée par Web Animations API dans `SplashPage.tsx` (opacité photo sombre, filtre photo claire, flare d'horizon, révélation des étoiles), tandis que React garde les éléments racine stables ;
 - le toggle "Choisissez votre lumière" pilote `ThemeContext` (`useTheme().toggle`) — pas un état local ni un `localStorage` séparé ;
-- les fonds sont en WebP (`/splash/bg-claire.webp` ~21 Ko, `/splash/bg-sombre.webp` ~97 Ko) — ne pas les remplacer par des PNG ;
-- le `stage` remplit le viewport (`position: absolute; inset: 0`) — ne pas réintroduire le scaling `Math.min(w/1440, h/900)` qui cassait le mobile ;
-- la taille du titre est fluide : `clamp(1.6rem, 2.4vw, 2.6rem)`.
+- conserver des assets compressés et des URL compatibles avec la base de déploiement ;
+- le stage remplit le viewport sans scaling d'artboard fixe ;
+- la taille du titre reste fluide ; ses valeurs et media queries sont définies dans le CSS.
 
 ---
+
+<a id="etats"></a>
 
 ## 10. États UI
 
@@ -438,58 +449,64 @@ Les suppressions doivent passer par confirmation. Les champs de formulaire doive
 
 ---
 
+<a id="motion"></a>
+
 ## 11. Motion
 
-Animations existantes :
+Règles durables :
 
-- `fade-up` ;
-- `fade-in` ;
-- `scale-in` ;
-- `slide-in-right` ;
-- `pulse-glow` ;
-- `float` / `float-x` / `float-slow` ;
-- `twinkle` ;
-- `draw` ;
-- `sheen` ;
-- `compass-needle` ;
-- `splash-rise`, `splash-float`, `splash-float-x`, `splash-float-slow`, `splash-compass-needle`, `splash-enter-ring`, `splash-nudge`, `splash-star-pop`, `splash-twinkle` (portail splash uniquement, dans `splash.css` ; l'effet de parallaxe est coalescé via `requestAnimationFrame`, la transition Aube via Web Animations API) ;
-- `home-intro-fade-in`, `home-intro-rule-in`, `home-intro-rise`, `home-intro-chrome-in`, `home-intro-veil-out`, `home-intro-hero-in`, `home-intro-leave`, `home-topbar-in` (séquence d'entrée de `/home` uniquement, dans `home-intro.css`).
+- motion discrète et informative ; pas de boucle qui concurrence la lecture longue ;
+- état de repos égal à l'état final : couper une animation ne doit pas laisser le contenu invisible ;
+- privilégier `opacity` et `transform` quand une animation de layout n'est pas nécessaire ;
+- ne pas rejouer une entrée bloquante à chaque retour interne ;
+- mettre en pause les boucles hors champ et respecter la préférence de mouvement réduit ;
+- éviter les doubles instances masquées d'un même ornement animé aux différents breakpoints.
 
-La chronologie de l'entrée de `/home` est un contrat partagé entre CSS et React : `home-intro.css` porte les délais d'animation, `context/HomeIntroContext.ts` porte le relais (3 600 ms) et le démontage (3 900 ms). Modifier l'un sans l'autre décale le fondu croisé entre la copie et la barre réelle. Le retard du hero est passé en variable CSS inline par `HomePage`, calculé depuis le début de la séquence et non depuis l'arrivée du chunk paresseux.
+### Implémentation et mouvement réduit
 
-Règles :
+| Source propriétaire | Responsabilité |
+| --- | --- |
+| `tailwind.config.ts`, `global.css` | animations et transitions communes |
+| `tokens.css` | réduction globale des durées ; ce n'est pas une annulation de tous les délais ou effets |
+| `splash.css`, `SplashPage.tsx` | animations CSS du portail, parallaxe et transition Aube |
+| `home-intro.css`, `HomeIntroContext.ts` | chronologie coordonnée du rideau, du relais et du démontage |
+| `HomeIntro.tsx` | non-montage de l'introduction sous mouvement réduit |
+| `home-hero.css`, `parcours-atlas.css` | désactivation locale des effets concernés sous mouvement réduit |
 
-- motion discrète et informative ;
-- éviter l'animation continue dans les zones de lecture longue ;
-- respecter `prefers-reduced-motion` (coupé dans `tokens.css` + guard dans `splash.css` et `home-intro.css` + court-circuit dans `Reveal`, `CompassIkigaiIntro` et `HomeIntroProvider`, qui ne monte alors pas la séquence) ;
-- ne pas animer layout/height quand opacity/transform suffit ;
-- une séquence d'entrée bloquante ne se joue qu'à l'arrivée réelle sur la surface concernée, jamais à chaque navigation interne vers elle.
+Les délais CSS et les constantes React de l'intro doivent rester synchronisés. `HomePage` calcule `--home-hero-t0` depuis le début de la séquence, pas depuis l'arrivée du chunk. Le [prérendu](../scripts/prerender.mjs) émule le mouvement réduit pour capturer l'état final.
+
+### Hero de `/home`
+
+Le hero associe tracé de rose, révélation du titre et apparition de la légende. Les paramètres sont dans [home-hero.css](../client/src/styles/home-hero.css) ; conserver ces garde-fous :
+
+- une seule `CompassRose`, redimensionnée en CSS ; le bouton d'atlas de `/parcours` utilise une icône de carte, pas cette rose ;
+- masque du titre proportionné à la largeur du texte, sans rognage des accents ou jambages ;
+- points d'accroche SVG et `pathLength` de `CompassRose` conservés si le tracé les utilise ;
+- boucles du ciel et de l'aiguille mises en pause par `data-home-hero-live` hors champ.
 
 ---
+
+<a id="accessibilite"></a>
 
 ## 12. Accessibilité
 
-Déjà en place :
+Le produit **vise WCAG 2.2 AA**, conformément à `PRODUCT.md`. Cette documentation et la présence de primitives accessibles ne constituent pas une attestation de conformité.
 
-- focus visible global ;
-- focus trap et restauration dans les modales ;
-- `ConfirmDialog` pour suppressions ;
-- `aria-live` sur certains feedbacks ;
-- `role="alert"` sur erreurs d'auth ;
-- inputs de simulateurs labellisés ;
-- `prefers-reduced-motion` ;
-- `SideNav` desktop fermée : panneau complet en `inert={!open}` pour sortir ses liens du focus et de l'arbre d'accessibilité ;
-- portail splash : photos, étoiles et sceaux décoratifs en `aria-hidden`, toggle en `radiogroup`, pas de second lien « Entrer » masqué.
+Critères à vérifier sur chaque surface modifiée :
 
-Règles à maintenir :
+- navigation clavier, focus visible, absence de focus piégé hors modale et restitution du focus après fermeture ;
+- nom accessible des icônes seules, labels des champs et messages associés ;
+- statut annoncé au chargement et retour perceptible après sauvegarde ou erreur ;
+- contraste du texte et des contrôles dans les deux thèmes, notamment or sur parchemin ;
+- accès clavier/tactile aux informations de l'atlas, sans dépendance à la couleur seule ;
+- décor hors arbre accessible ; aucun contrôle focusable dans une zone `aria-hidden` ; utiliser `inert` pour un panneau fermé ;
+- état final utilisable sous mouvement réduit et contenu non masqué par les barres fixes.
 
-- toute icône seule doit avoir un nom accessible ;
-- tout état de chargement doit annoncer son statut ;
-- les contrastes or/parchemin doivent être vérifiés sur petits textes ;
-- les interactions clavier doivent rester possibles dans l'atlas, les modales, la recherche et les simulateurs ;
-- ne jamais combiner `aria-hidden` et éléments focusables sur le même nœud — utiliser `inert` à la place.
+**Repères d'implémentation :** [MainLayout.tsx](../client/src/layouts/MainLayout.tsx) pour le lien d'évitement et le focus après navigation ; [SideNav.tsx](../client/src/components/chrome/SideNav.tsx) pour le panneau inerte ; [ErrorBoundary.tsx](../client/src/components/ErrorBoundary.tsx) pour l'alerte d'erreur. L'application n'a pas d'authentification : ne pas présenter des « erreurs d'auth » comme un mécanisme existant.
 
 ---
+
+<a id="creation"></a>
 
 ## 13. Règles de création
 
@@ -516,12 +533,11 @@ Avant d'ajouter un composant :
 
 ---
 
-## 14. Gaps actuels du design system
+<a id="maintenance"></a>
 
-À formaliser plus tard, sans ouvrir une refonte :
+## 14. Maintenance
 
-- variantes de formulaire (`Input`, `Textarea`, `Select`, erreur, aide) ;
-- table of contents pour les leçons longues ;
-- composants de dashboard "journal de bord" ;
-- documentation visuelle des couleurs d'accent de parcours ;
-- extension de `NightSkyBackdrop` aux autres sections de l'accueil si un ciel continu du hero jusqu'à la carte est souhaité.
+- Changer un principe visuel ou un comportement partagé : mettre à jour la section concernée et ses consommateurs.
+- Changer une valeur, un délai, une borne ou une API : modifier la source propriétaire et les tests concernés, sans recopier le paramètre ici.
+- Documenter une vérification, une lacune ou une priorité : utiliser [Suivis/ETAT.md](../Suivis/ETAT.md) ; consigner une livraison dans [Suivis/JOURNAL.md](../Suivis/JOURNAL.md).
+- Ne pas transformer une suggestion de refonte ou un historique de réglages en règle normative.

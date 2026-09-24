@@ -16,6 +16,7 @@ import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { ProgressBar, LevelBadge } from '@/components/ui/primitives';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
 import { useUserData } from '@/context/UserDataContext';
+import { parcoursSealName } from '@/lib/parcoursMorph';
 import { useResourcePageMeta } from '@/lib/seo';
 import { useLearningWorkspace, type ProductionStage } from '@/lib/learningWorkspace';
 import { buildParcoursProgressSummary, isParcoursStepComplete } from '@/lib/parcoursProgress';
@@ -121,12 +122,19 @@ export default function ParcoursDetailPage() {
           <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:items-end">
             <div>
               <div className="flex items-center gap-4">
-                <KanjiSeal kanji={parcours.kanji ?? meta.kanji} accent={accent} size={64} />
+                {/* Destination of the seal carried over from the catalogue or
+                    the chart; the name is unique to this parcours. */}
+                <KanjiSeal
+                  kanji={parcours.kanji ?? meta.kanji}
+                  accent={accent}
+                  size={64}
+                  morphName={parcoursSealName(parcours.slug)}
+                />
                 <div>
                   <p className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-surface-variant">{meta.label}</p>
                   <div className="mt-1 flex flex-wrap items-center gap-2">
                     <LevelBadge level={parcours.level} accent={accent} />
-                    {parcours.perspective === 'both' && <span className="chip">Les deux sièges de la table</span>}
+                    {parcours.perspective === 'both' && <span className="chip">Fondateur &amp; investisseur</span>}
                   </div>
                 </div>
               </div>

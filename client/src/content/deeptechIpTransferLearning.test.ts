@@ -71,7 +71,7 @@ const LEGIFRANCE = 'https://www.legifrance.gouv.fr/codes/article_lc';
 
 /**
  * URL porteuses de la matrice de preuves
- * `.hermes/plans/2026-07-27_142409-deeptech-pi-transfert-evidence.md`.
+ * `docs/archive/hermes-plans/2026-07-27_142409-deeptech-pi-transfert-evidence.md`.
  * Un corps peut en citer davantage ; il ne peut pas en citer moins.
  */
 const SOURCE_URLS: Record<LessonId, readonly string[]> = {

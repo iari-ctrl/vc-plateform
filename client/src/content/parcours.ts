@@ -53,21 +53,17 @@ export const FAMILY_ORDER: ParcoursFamily[] = [
 ];
 
 export const FAMILY_META: Record<ParcoursFamily, { label: string; tagline: string; kanji: string; accent: string }> = {
-  decouvrir: { label: 'Découvrir', tagline: 'La porte d’entrée — comprendre le métier sans bullshit.', kanji: '発', accent: '#D28236' },
-  entretien: { label: 'Réussir un entretien', tagline: 'Du stage au poste senior — arriver prêt le jour J.', kanji: '観', accent: '#4C6B8A' },
-  levee: { label: 'Lever des fonds', tagline: 'Les deux sièges de la table — fondateur et investisseur.', kanji: '種', accent: '#3E7C6A' },
+  decouvrir: { label: 'Découvrir', tagline: 'La porte d’entrée — comprendre le métier tel qu’il s’exerce.', kanji: '発', accent: '#D28236' },
+  entretien: { label: 'Réussir un entretien', tagline: 'Du stage au poste senior — se préparer au jour J.', kanji: '観', accent: '#4C6B8A' },
+  levee: { label: 'Lever des fonds', tagline: 'Préparer sa levée côté fondateur, ou mener le tour côté investisseur.', kanji: '種', accent: '#3E7C6A' },
   grade: { label: 'Monter en grade', tagline: 'Déjà en poste — exercer le rôle, viser le cran d’après.', kanji: '理', accent: '#8A5A8A' },
-  maitriser: { label: 'Maîtriser un sujet', tagline: 'Les obsessions mono-thème, courtes et partageables.', kanji: '契', accent: '#B0843B' },
-  express: { label: 'Express', tagline: 'Tout ce qui se fait en une session — bingeable, zéro engagement.', kanji: '閃', accent: '#C2603F' },
+  maitriser: { label: 'Maîtriser un sujet', tagline: 'Un seul sujet technique, traité en profondeur.', kanji: '契', accent: '#B0843B' },
+  express: { label: 'Express', tagline: 'Le format court — l’essentiel d’un sujet en une session.', kanji: '閃', accent: '#C2603F' },
 };
 
-/** Parcours of a family, sorted by roadmap weight (now → next → later) then title. */
-export const parcoursByFamily = (family: ParcoursFamily) => {
-  const weight: Record<string, number> = { now: 0, next: 1, later: 2 };
-  return PARCOURS
-    .filter((p) => p.family === family)
-    .sort((a, b) => (weight[a.roadmap] ?? 9) - (weight[b.roadmap] ?? 9));
-};
+// Le regroupement et le tri d'un rayon vivent dans `lib/parcoursIndex.ts` : le
+// départage lit `parcoursTimeSummary`, et `content/learningTime.ts` importe déjà
+// `resolveStep` d'ici — l'import inverse fermerait un cycle.
 
 // ── Step reference resolution ─────────────────────────────────────────────────
 const caseById = (id: string) => CASE_STUDIES.find((c) => c.id === id);

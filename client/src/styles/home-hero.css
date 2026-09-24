@@ -1,0 +1,246 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   Hero /home — « la carte s'encre ».
+
+   Le hero ne se contente pas d'apparaître : il se dessine, dans l'ordre où un
+   cartographe encre une planche. La rose des vents se trace (bezel, puis
+   graduations, puis branches, puis lettres cardinales), le titre est écrit
+   ligne par ligne sous une plume qui balaie de gauche à droite — l'encre
+   arrive floue et se fixe en séchant — puis la légende se pose.
+
+   Chronologie, à partir de `--home-hero-t0` :
+
+     0    → 600 ms   les quatre cercles du bezel se tracent (60 ms d'écart)
+     170  → 570 ms   les 24 graduations sortent du bezel vers l'extérieur
+     230  → 765 ms   les branches cardinales puis intercardinales éclosent
+     380  → 780 ms   N/S/O/E et le pivot central apparaissent
+     280  → 820 ms   ligne 1 du titre : balayage de plume, flou qui se résorbe
+     400  → 940 ms   ligne 2 (italique dorée), même geste, décalé
+     520  → 940 ms   la légende monte et se cale
+     780  →          l'aiguille reprend sa dérive lente
+
+   `--home-hero-t0` vaut 0 en navigation interne et, à l'arrivée depuis le
+   portail, le reliquat de `HOME_INTRO_HERO_DELAY` (2600 ms) calculé depuis le
+   début du rideau : la séquence tient dans l'enveloppe d'entrée existante et
+   se termine avant le démontage du rideau (3900 ms). Voir `home-intro.css`.
+
+   Contrat : l'état au repos de chaque pièce est son état FINAL. Toutes les
+   animations partent d'un `from` et remplissent en `both`, si bien que couper
+   l'animation (préférence de mouvement réduit, prerender) laisse directement
+   la mise en page définitive — jamais du contenu masqué en attente.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.home-hero {
+  --home-hero-t0: 0ms;
+  /* Arrivées : décélération longue, la courbe de référence du système. */
+  --home-hero-ink: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Gestes tracés. Une décélération exponentielle écraserait le trajet sur une
+     centaine de millisecondes et le balayage se lirait comme un flash ;
+     celle-ci laisse la plume parcourir visiblement la ligne — environ 300 ms
+     de trajet sur les glyphes — avant de décélérer sur le point final. */
+  --home-hero-pen: cubic-bezier(0.38, 0.45, 0.16, 1);
+}
+
+/* Le hero ne monte qu'une rose et la dimensionne ici : basculer entre deux
+   instances `hidden`/`sm:block` relancerait le tracé à chaque franchissement
+   du point de rupture. */
+.home-hero-rose svg {
+  width: 96px;
+  height: 96px;
+}
+
+@media (min-width: 640px) {
+  .home-hero-rose svg {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* ── Rose des vents : le tracé ───────────────────────────────────────────────
+   `pathLength="1"` est porté par les cercles et les graduations de
+   `CompassRose`, ce qui rend leur longueur normalisée : un `stroke-dasharray`
+   de 1 couvre exactement le tracé, quel que soit le rayon. */
+.home-hero-rose .compass-ring,
+.home-hero-rose .compass-tick {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: home-hero-draw 440ms var(--home-hero-pen) both;
+}
+
+.home-hero-rose .compass-ring:nth-child(1) {
+  animation-delay: calc(var(--home-hero-t0) + 0ms);
+}
+.home-hero-rose .compass-ring:nth-child(2) {
+  animation-delay: calc(var(--home-hero-t0) + 60ms);
+}
+.home-hero-rose .compass-ring:nth-child(3) {
+  animation-delay: calc(var(--home-hero-t0) + 115ms);
+}
+.home-hero-rose .compass-ring:nth-child(4) {
+  animation-delay: calc(var(--home-hero-t0) + 160ms);
+}
+
+/* Les graduations partent toutes ensemble, de l'intérieur vers le bord : un
+   coup de pointe sèche, pas une énumération. */
+.home-hero-rose .compass-tick {
+  animation-duration: 400ms;
+  animation-delay: calc(var(--home-hero-t0) + 170ms);
+}
+
+@keyframes home-hero-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+/* Les branches sont pleines : elles ne se tracent pas, elles éclosent depuis
+   le pivot. `view-box` cale l'origine sur le centre du viewBox 160×160. */
+.home-hero-rose .compass-points,
+.home-hero-rose .compass-points-minor {
+  transform-box: view-box;
+  transform-origin: 80px 80px;
+  animation: home-hero-bloom 480ms var(--home-hero-ink) both;
+}
+.home-hero-rose .compass-points {
+  animation-delay: calc(var(--home-hero-t0) + 230ms);
+}
+.home-hero-rose .compass-points-minor {
+  animation-delay: calc(var(--home-hero-t0) + 285ms);
+}
+
+@keyframes home-hero-bloom {
+  from {
+    opacity: 0;
+    transform: scale(0.68);
+  }
+}
+
+.home-hero-rose .compass-letters,
+.home-hero-rose .compass-pin {
+  animation: home-hero-fade 400ms ease both;
+  animation-delay: calc(var(--home-hero-t0) + 380ms);
+}
+
+@keyframes home-hero-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* L'aiguille ne dérive qu'une fois l'instrument dessiné. `backwards` est
+   indispensable : `animate-compass-needle` n'a pas de fill-mode, l'aiguille
+   attendrait donc à 0° et sauterait de 7° au premier frame de la boucle —
+   soit environ 8 px sur la pointe, juste après la fin de la séquence. */
+.home-hero-rose .animate-compass-needle {
+  animation-delay: calc(var(--home-hero-t0) + 780ms);
+  animation-fill-mode: backwards;
+}
+
+/* ── Ciel ────────────────────────────────────────────────────────────────────
+   Une dérive de 44 s, imperceptible image par image : le ciel n'est pas fixe,
+   sans jamais devenir un fond animé. `NightSkyBackdrop` étant `hidden
+   dark:block`, la boucle ne tourne pas en mode clair. */
+.home-hero-sky {
+  animation: home-hero-sky-drift 44s ease-in-out infinite alternate;
+}
+
+@keyframes home-hero-sky-drift {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.035) translate3d(0, -0.7%, 0);
+  }
+}
+
+/* ── Titre : la plume ────────────────────────────────────────────────────────
+   Un masque glisse de la droite vers la gauche ; sa frange floue est le bord
+   d'encre, le `blur` qui se résorbe et le léger retrait vertical sont la
+   matière qui sèche.
+
+   La géométrie est contrainte, pas approximative. Pour une frange qui occupe
+   `[a, b]` de l'image, le masque doit mesurer `1/a` de la largeur de ligne :
+   à `mask-position: 0 %` le bord opaque tombe alors exactement sur le bord
+   droit de la ligne, et à `100 %` le bord transparent sur son bord gauche.
+   Avec a = 45 % et b = 55 %, il faut donc 222 %, et la course du masque est
+   utilisée en entier — un masque plus large gaspillerait la moitié de la
+   durée hors champ et le balayage redeviendrait un flash.
+
+   La hauteur de 300 %, centrée, garantit qu'aucun jambage ni accent n'est
+   rogné par un masque calé sur la boîte de ligne (interlignage 0,98). */
+.home-hero-line {
+  --home-hero-nib: linear-gradient(90deg, #000 0 45%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: var(--home-hero-nib);
+  mask-image: var(--home-hero-nib);
+  -webkit-mask-size: 222% 300%;
+  mask-size: 222% 300%;
+  -webkit-mask-position: 0% 50%;
+  mask-position: 0% 50%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: home-hero-ink 540ms var(--home-hero-pen) both;
+}
+
+.home-hero-line:nth-of-type(1) {
+  animation-delay: calc(var(--home-hero-t0) + 280ms);
+}
+.home-hero-line:nth-of-type(2) {
+  animation-delay: calc(var(--home-hero-t0) + 400ms);
+}
+
+@keyframes home-hero-ink {
+  from {
+    -webkit-mask-position: 100% 50%;
+    mask-position: 100% 50%;
+    transform: translateY(0.22em);
+    filter: blur(5px);
+  }
+  72% {
+    filter: blur(0);
+  }
+}
+
+/* ── Légende ─────────────────────────────────────────────────────────────────
+   Volontairement sobre : elle se cale, elle ne se met pas en scène. */
+.home-hero-lede {
+  animation: home-hero-settle 420ms var(--home-hero-ink) both;
+  animation-delay: calc(var(--home-hero-t0) + 520ms);
+}
+
+@keyframes home-hero-settle {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* ── Boucles d'ambiance ──────────────────────────────────────────────────────
+   Rien ne tourne sous un hero sorti du champ. */
+.home-hero[data-home-hero-live='false'] .home-hero-sky,
+.home-hero[data-home-hero-live='false'] .animate-compass-needle {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-rose .compass-ring,
+  .home-hero-rose .compass-tick,
+  .home-hero-rose .compass-points,
+  .home-hero-rose .compass-points-minor,
+  .home-hero-rose .compass-letters,
+  .home-hero-rose .compass-pin,
+  .home-hero-rose .animate-compass-needle,
+  .home-hero-sky,
+  .home-hero-line,
+  .home-hero-lede {
+    animation: none;
+  }
+
+  .home-hero-rose .compass-ring,
+  .home-hero-rose .compass-tick {
+    stroke-dasharray: none;
+  }
+
+  .home-hero-line {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}

@@ -10,7 +10,15 @@
 
 ---
 
-## 1. État courant vérifié le 31 juillet 2026
+## 0. Reprise depuis l’état courant
+
+Ce plan reste préparatoire. Le [suivi courant](../../Suivis/ETAT.md#consolidation-formation) porte le statut d’exécution de F0/S0, les commandes réellement disponibles et les observations recalculées. La passe documentaire du 23 septembre 2026 ne livre pas le gate Formation et ne valide aucun lot applicatif.
+
+Avant S0, lire `AGENTS.md` et `CLAUDE.md`, puis [l’état Formation](../../Suivis/ETAT.md#consolidation-formation), [les distinctions du manuel d’architecture](../../docs/ARCHITECTURE_EDITION.md#preparation-formation) et [les politiques Parcours](../../docs/parcours/README.md#preparation-formation). Recouper avec `package.json`, `client/src/content/parcoursTypes.ts`, `client/src/content/parcours.ts`, `client/src/content/learningTime.ts` et les schémas de `scripts/validate-content.mjs`.
+
+Les compteurs et listes du §1 sont une baseline historique, pas des attentes de test ni une liste de productions à relancer. Les quantités de prérequis et de sorties résolues doivent être recalculées avec une définition explicite ; ne pas les actualiser par simple reprise des anciens nombres. Un cours vide reste une fixture nécessaire même si aucun cours du corpus courant n’est vide.
+
+## 1. Baseline historique vérifiée le 31 juillet 2026
 
 ### Fondations déjà présentes
 
@@ -22,7 +30,7 @@
 - La validation stricte, les générateurs, les tests, le sitemap et le prérendu forment déjà une chaîne de publication solide.
 - `p-serie-a`, `p-venture-philanthropy-foundations`, `p-stage`, `p-entretien-analyst` et le cours `c-mathematiques-vc` fournissent plusieurs exemples de tranches verticales abouties.
 
-### État recalculé depuis les données actuelles
+### État recalculé depuis les données du relevé initial
 
 - 24 parcours, 30 cours, 145 leçons indexées, dont 118 publiées.
 - Aucun step déclaré `existant` ne pointe vers une ressource absente.
@@ -39,7 +47,7 @@
 - Trois parcours utilisent des temps dérivés ; vingt et un conservent des temps déclarés.
 - Trois cours liés aux axes optionnels de `VC Analyst` déclarent respectivement 8, 6 et 14 leçons, mais n’en exposent actuellement que 0, 0 et 1 comme publiées. Les deux cours vides restent présents dans l’inventaire et leurs durées déclarées sont nulles : leur traitement doit relever du contrat de disponibilité, pas d’une production éditoriale automatique.
 
-Ces nombres constituent une baseline de planification. Ils devront être recalculés par le futur gate, sans être recopiés comme constantes de produit.
+Ces nombres constituent une baseline de planification datée, conservée sans réécrire le relevé initial. Ils devront être recalculés par le futur gate, sans être recopiés comme constantes de produit. Les observations plus récentes sont dans `Suivis/ETAT.md`.
 
 ### Travail local à préserver
 
@@ -50,7 +58,7 @@ Au relevé initial, le worktree comportait quatre modifications non liées à ce
 - `client/src/components/chrome/TopBar.tsx` ;
 - `client/src/pages/home/homeExperience.dom.test.tsx`.
 
-Un audit non suivi, `docs/reviews/2026-07-31-cours-sans-lecon-publiee.md`, est apparu pendant la préparation du présent plan. Il constitue un travail parallèle et n’a pas été modifié ici. Cette liste n’est donc pas un manifeste de propriété : chaque session doit relever son propre baseline et préserver tout changement qu’elle ne possède pas explicitement.
+Un audit non suivi, archivé depuis sous `docs/archive/reviews/2026-07-31-cours-sans-lecon-publiee.md`, est apparu pendant la préparation du présent plan. Il constitue un snapshot daté et non une source d’état courant. Cette liste n’est donc pas un manifeste de propriété : chaque session doit relever son propre baseline et préserver tout changement qu’elle ne possède pas explicitement.
 
 ---
 
@@ -101,7 +109,7 @@ Formation est suffisamment consolidée pour ouvrir un prototype de base lorsque 
 
 ### À ne pas faire
 
-- Ne pas remplir les dix-huit parcours sans sortie avec dix-huit livrables automatiques.
+- Ne pas affecter automatiquement un livrable à chaque parcours sans sortie résolue.
 - Ne pas transformer `roadmap: later` en statut de publication implicite.
 - Ne pas ajouter une base, un CMS, des comptes ou une API pendant la consolidation.
 - Ne pas compléter toutes les leçons `upcoming` avant d’avoir défini leur déclencheur de production.
@@ -116,6 +124,8 @@ Formation est suffisamment consolidée pour ouvrir un prototype de base lorsque 
 
 **Objectif :** remplacer les audits ponctuels et les anciens compteurs par un contrôle déterministe rejouable.
 
+**Limite de S0 :** livrer le diagnostic sans modifier les données, la publication ou le modèle pédagogique. Les métadonnées de disponibilité, de complétion et de prérequis d’entrée non encore modélisées sont signalées comme telles ; elles ne permettent pas de déduire qu’un parcours est exécutable ou de production. Les fixtures de ces contrats futurs précèdent les décisions de S1 et leur implémentation en S2. La validation stricte actuelle ne remplace pas ce diagnostic.
+
 **Modèle conseillé :** GPT-5.5 `high` pour l’inspection ; GPT-5.5 `xhigh` uniquement si les règles révèlent une contradiction d’ontologie.
 
 **Fichiers :**
@@ -125,6 +135,7 @@ Formation est suffisamment consolidée pour ouvrir un prototype de base lorsque 
 - Modifier : `package.json`
 - Modifier si extraction nécessaire : `scripts/validation-core.mjs`
 - Tester : `scripts/validation-core.test.mjs`
+- Mettre à jour après vérification : `Suivis/ETAT.md` et `Suivis/JOURNAL.md`
 
 **Travail :**
 
@@ -150,7 +161,7 @@ npm run validate:formation
 npm run validate:content:strict
 ```
 
-**Critère de sortie :** le rapport reproduit les incohérences actuelles sans faux positif sur les références existantes ; l’exécution du gate ne modifie ni les données, ni les projections générées, ni les autres fichiers du worktree.
+**Critère de sortie :** le rapport reproduit les incohérences actuelles sans faux positif sur les références existantes, distingue constats et arbitrages encore ouverts, et ne réemploie pas les compteurs historiques comme résultats. L’exécution du gate ne modifie ni les données, ni les projections générées, ni les autres fichiers du worktree. Consigner la livraison réelle dans `Suivis/ETAT.md` et `Suivis/JOURNAL.md` ; ne promouvoir dans les autorités que les contrats effectivement stabilisés.
 
 ---
 
@@ -216,7 +227,7 @@ npm run check:generated
 
 ## Lot F2 — Résoudre la fermeture des prérequis
 
-**Objectif :** corriger les vingt-cinq dépendances actuellement absentes ou placées après leur consommation.
+**Objectif :** corriger les dépendances absentes ou placées après leur consommation, telles que recalculées par F0 ; les vingt-cinq occurrences du relevé initial ne sont pas une cible fixe.
 
 **Modèle conseillé :** GPT-5.5 `high` pour la cartographie ; GPT-5.5 `xhigh` pour les décisions d’ajout ou de retrait.
 
@@ -258,7 +269,7 @@ npm run check
 
 ---
 
-## Lot F3 — Arbitrer les six étapes `a-produire`
+## Lot F3 — Arbitrer les étapes `a-produire` restantes
 
 **Objectif :** ne conserver aucun placeholder implicite dans un parcours présenté comme exécutable.
 
@@ -266,7 +277,7 @@ npm run check
 
 **Session de décision, sans écriture :**
 
-- Pour les quatre étapes facultatives, choisir entre retrait et production. Le retrait est une décision légitime si la promesse principale reste intacte.
+- Repartir de la liste courante fournie par F0, pas des six entrées historiques du §1. Pour les étapes facultatives encore présentes, choisir entre retrait et production. Le retrait est une décision légitime si la promesse principale reste intacte.
 - Pour `todo-ecrire-memo`, choisir entre :
   - produire un livrable complet ;
   - réduire la promesse de `p-meilleur-analyst` ;
@@ -297,9 +308,9 @@ npm run check
 
 ---
 
-## Lot F4 — Qualifier les dix-huit parcours sans sortie résolue
+## Lot F4 — Qualifier les parcours sans sortie résolue
 
-**Objectif :** éviter à la fois les promesses non exécutables et la production artificielle de dix-huit livrables.
+**Objectif :** éviter à la fois les promesses non exécutables et la production artificielle de livrables ; utiliser l’inventaire actualisé par F0, pas le nombre de dix-huit du relevé initial.
 
 **Modèle conseillé :** GPT-5.5 `xhigh`, une session d’arbitrage groupée ; aucune écriture pendant cette session.
 
@@ -475,12 +486,12 @@ Un prototype Payload/Directus peut commencer si :
 
 | Session | Objet | Effort | Écriture | Dépendance |
 | --- | --- | --- | --- | --- |
-| S0 | Gate de préparation Formation | GPT-5.5 `high` | scripts/tests | aucune |
+| S0 | Gate de préparation Formation | GPT-5.5 `high` | scripts/tests, `package.json`, suivis ; sans migration de données | aucune |
 | S1 | Décision publication, disponibilité, complétion | GPT-5.5 `xhigh` | non | S0 |
 | S2 | Implémentation du contrat transverse | GPT-5.5 `high` | code/data/docs | S1 |
 | S3 | Cartographie des prérequis actuels | GPT-5.5 `high` | non | S2 |
 | S4 | Correction des prérequis approuvés | GPT-5.5 `xhigh` | data/tests | S3 |
-| S5 | Arbitrage des six placeholders | GPT-5.5 `high` | non | S2 |
+| S5 | Arbitrage des placeholders restants | GPT-5.5 `high` | non | S2 |
 | S6+ | Production ou retrait, une sortie à la fois | GPT-5.5 `xhigh` | data/tests | S5 |
 | S7 | Qualification des parcours sans sortie | GPT-5.5 `xhigh` | non | S2 |
 | S8 | Réconciliation des durées | GPT-5.5 `high` | code/data/tests | S4, S6, S7 |
@@ -504,9 +515,11 @@ Un prototype Payload/Directus peut commencer si :
 
 ## 6. Prompt de lancement réutilisable
 
-> Consolide Formation sans introduire de base de données. Commence par lire `AGENTS.md`, `CLAUDE.md`, `Suivis/ETAT.md`, `docs/ARCHITECTURE_EDITION.md`, `docs/parcours/README.md` et `.hermes/plans/2026-07-31_191055-consolidation-formation.md`.
+> Consolide Formation sans introduire de base de données. Commence par lire `AGENTS.md`, `CLAUDE.md`, la section Formation de `Suivis/ETAT.md`, `docs/ARCHITECTURE_EDITION.md` §2.2.c, §4.0.b–c et §4.3bis–4.4, `docs/parcours/README.md`, puis le §0 et le lot correspondant à la session demandée (S0 → F0) dans `.hermes/plans/2026-07-31_191055-consolidation-formation.md`, avec ses vérifications et critères de sortie, pas seulement le tableau des sessions. `PRODUCT.md` porte les principes produit ; lire les autres autorités spécialisées seulement si le lot les concerne.
 >
 > Exécute uniquement la session [Sx]. Recalcule l’état depuis les données actuelles ; ne fais pas confiance aux anciens compteurs. Préserve les modifications préexistantes du worktree et n’édite jamais `data/generated/` directement.
+>
+> Pour F0/S0, créer et tester le diagnostic seulement : ne pas migrer les statuts ou les données et ne pas ajouter `validate:formation` au gate global. Vérifier les commandes existantes dans `package.json` ; celles du plan désignées « créer » restent des livrables, pas des prérequis déjà disponibles.
 >
 > Distingue publication, disponibilité, résolution d’étape et mode de complétion. Ne crée pas un livrable uniquement parce qu’un parcours n’en possède pas : vérifie d’abord si sa promesse relève de la connaissance, de l’orientation ou de la production.
 >

@@ -1,3 +1,5 @@
+import { safeEditorialUrl } from './editorial-url.mjs';
+
 export const INTERNAL_FURTHER_READING_KINDS = Object.freeze([
   'lesson',
   'simulator',
@@ -27,12 +29,9 @@ export function isInternalFurtherReadingKind(kind) {
   return INTERNAL_KIND_SET.has(kind);
 }
 
-export function assertExactFurtherReadingTargetKinds(targetRecordsByKind) {
-  const actualKeys = Object.entries(targetRecordsByKind ?? {})
-    .filter(([, records]) => records !== undefined)
-    .map(([kind]) => kind);
+function assertExactFurtherReadingTargetKinds(targetRecordsByKind) {
   const missing = INTERNAL_FURTHER_READING_KINDS.filter((kind) => targetRecordsByKind?.[kind] === undefined);
-  const unexpected = actualKeys.filter((kind) => !INTERNAL_KIND_SET.has(kind));
+  const unexpected = Object.keys(targetRecordsByKind ?? {}).filter((kind) => !INTERNAL_KIND_SET.has(kind));
 
   if (missing.length || unexpected.length) {
     throw new Error([
@@ -48,7 +47,7 @@ export function createFurtherReadingTargetRegistry(targetRecordsByKind) {
 
   return Object.fromEntries(INTERNAL_FURTHER_READING_KINDS.map((kind) => [
     kind,
-    new Map((targetRecordsByKind[kind] ?? []).map((record) => [record.id, record])),
+    new Map(targetRecordsByKind[kind].map((record) => [record.id, record])),
   ]));
 }
 
@@ -57,7 +56,9 @@ export function resolveFurtherReadingTarget(registry, kind, ref) {
   return registry[kind]?.get(ref);
 }
 
-export function resolveInternalFurtherReadingHref(registry, kind, ref) {
+/** Resolve any furtherReading kind — internal ids become public routes, external refs stay HTTPS-only. */
+export function resolveFurtherReadingHref(registry, kind, ref) {
+  if (kind === 'external') return safeEditorialUrl(ref);
   const target = resolveFurtherReadingTarget(registry, kind, ref);
   if (!target) return undefined;
   return `${ROUTE_PREFIX_BY_KIND[kind]}${target.slug}`;

@@ -13,7 +13,8 @@
                    — in light mode the photograph clears over the same window,
                      so the flight and the reveal read as one gesture
      3.00 → 3.50s  in dark mode the veil fades (imperceptibly: same image below)
-     3.00 → 3.80s  the final title plays its own reveal
+     2.60 → 3.54s  the hero inks itself in (owned by home-hero.css, started
+                   from HOME_INTRO_HERO_DELAY)
      3.60 → 3.80s  the real fixed header takes over, the copy leaves
 
    Keep these numbers in sync with HomeIntroContext.ts, which drives the React
@@ -205,23 +206,10 @@
   }
 }
 
-/* ── Hero title micro-reveal ────────────────────────────────────────────────
-   Fires as the veil dissolves. The delay is set inline by HomePage so it stays
-   anchored to the start of the entrance, not to the page chunk's arrival. */
-.home-intro-hero {
-  animation: home-intro-hero-in 800ms cubic-bezier(0.16, 1, 0.3, 1) var(--home-intro-hero-delay, 3000ms) both;
-}
-
-@keyframes home-intro-hero-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* The hero's own reveal is owned by `home-hero.css`; this file only publishes
+   when it may start (HOME_INTRO_HERO_DELAY, passed inline by HomePage as
+   `--home-hero-t0` so it stays anchored to the start of the entrance rather
+   than to the lazy chunk's arrival). */
 
 @media (prefers-reduced-motion: reduce) {
   .home-intro {
@@ -233,7 +221,6 @@
     pointer-events: auto;
   }
 
-  .home-intro-hero,
   .home-topbar-arriving {
     animation: none;
   }

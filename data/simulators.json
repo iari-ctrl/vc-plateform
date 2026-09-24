@@ -99,5 +99,17 @@
     "description": "Comparez la vente secondaire LP-led, avec une décote sur la NAV, du DPI immédiat et un point mort entre vente et conservation, au continuation fund GP-led, avec un carry cristallisé, un second carry, les frais du nouveau véhicule et un conflit d'intérêts structurel. L'outil chiffre l'arbitrage entre vente et conservation dans un contexte de pression sur le DPI des LPs.",
     "relatedLessonIds": ["l-fund-metrics", "l-fund-lifecycle", "l-fees-carry"],
     "glossaryRefs": ["secondary", "continuation-fund", "dpi", "tvpi", "rvpi"]
+  },
+  {
+    "id": "investment-memo",
+    "slug": "simulateur-note-investissement",
+    "title": "Simulateur de note d'investissement",
+    "subtitle": "Structurer une recommandation en une page",
+    "category": "Investment memo",
+    "accent": "#8A2B22",
+    "description": "Rédigez une note courte, locale et exportable qui force la séparation entre thèse, faits observés, risques, questions ouvertes et recommandation de comité.",
+    "estimatedWorkMinutes": 30,
+    "relatedLessonIds": ["l-investment-recommendation", "l-ic-defense", "l-fact-hypothesis"],
+    "glossaryRefs": ["venture-capital", "deal-flow", "term-sheet"]
   }
 ]

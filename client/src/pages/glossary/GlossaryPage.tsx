@@ -7,7 +7,7 @@ import { GLOSSARY, glossaryBySlug, loadGlossaryDefs } from '@/content/glossary';
 import { publicLessonById } from '@/content/lessons';
 import { Markdown } from '@/lib/markdown';
 import { usePageMeta } from '@/lib/seo';
-import { safeHttpUrl } from '@/lib/utils';
+import { pluralize, safeHttpUrl, stripDiacritics } from '@/lib/utils';
 import type { GlossaryDef, GlossaryIndexEntry, GlossaryTerm } from '@/content/types';
 import { matchesGlossaryQuery } from './glossarySearch';
 
@@ -37,25 +37,13 @@ function categoryColor(category: string) {
 }
 
 function initialFor(term: string) {
-  const initial = term
-    .trim()
-    .charAt(0)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toUpperCase();
-
+  const initial = stripDiacritics(term.trim().charAt(0)).toUpperCase();
   return /^[A-Z]$/.test(initial) ? initial : '0';
 }
 
 /** Second character of the term, normalized like {@link initialFor} (non-letters → '0'). */
 function secondInitialFor(term: string) {
-  const second = term
-    .trim()
-    .charAt(1)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toUpperCase();
-
+  const second = stripDiacritics(term.trim().charAt(1)).toUpperCase();
   return /^[A-Z]$/.test(second) ? second : '0';
 }
 
@@ -89,7 +77,7 @@ export default function GlossaryPage() {
 
   const terms: GlossaryIndexEntry[] = GLOSSARY;
   const [defs, setDefs] = useState<Record<string, GlossaryDef> | null>(null);
-  const [defsStatus, setDefsStatus] = useState<'loading' | 'done' | 'error'>('loading');
+  const [defsStatus, setDefsStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [defsAttempt, setDefsAttempt] = useState(0);
   const [activeCategory, setActiveCategory] = useState('Tous');
   const [query, setQuery] = useState('');
@@ -109,9 +97,13 @@ export default function GlossaryPage() {
     isLetterFilterActive: boolean;
   } | null>(null);
 
-  // Heavy definitions load lazily for the detail view so they do not add to
-  // the initial bundle.
+  const shouldLoadDefinitions = Boolean(activeTerm) || expandedSlugs.size > 0;
+
+  // Heavy definitions load only when a detail view is actually requested, so a
+  // simple glossary visit keeps the definitions resource out of the first pass.
   useEffect(() => {
+    if (!shouldLoadDefinitions || defs) return undefined;
+
     let active = true;
     setDefsStatus('loading');
     void loadGlossaryDefs()
@@ -127,7 +119,7 @@ export default function GlossaryPage() {
     return () => {
       active = false;
     };
-  }, [defsAttempt]);
+  }, [defs, defsAttempt, shouldLoadDefinitions]);
 
   const fullTerms = useMemo<GlossaryTerm[]>(
     () =>
@@ -142,7 +134,10 @@ export default function GlossaryPage() {
     [terms, defs],
   );
 
-  const sortedTerms = useMemo(() => [...fullTerms].sort((a, b) => a.term.localeCompare(b.term, 'fr')), [fullTerms]);
+  const sortedTerms = useMemo(
+    () => [...fullTerms].sort((a, b) => a.term.localeCompare(b.term, 'fr', { sensitivity: 'base' })),
+    [fullTerms],
+  );
 
   const categories = useMemo(() => {
     return Array.from(new Set(sortedTerms.map((t) => t.category))).sort((a, b) => a.localeCompare(b, 'fr'));
@@ -170,13 +165,13 @@ export default function GlossaryPage() {
       ),
     [letterTerms],
   );
-  const visibleTerms = useMemo(() => {
-    const termsForScope = isLetterFilterActive
-      ? letterTerms.filter((term) => !activeSecondLetter || secondInitialFor(term.term) === activeSecondLetter)
-      : filteredTerms;
-
-    return [...termsForScope].sort((a, b) => a.term.localeCompare(b.term, 'fr', { sensitivity: 'base' }));
-  }, [letterTerms, filteredTerms, activeSecondLetter, isLetterFilterActive]);
+  const visibleTerms = useMemo(
+    () =>
+      isLetterFilterActive
+        ? letterTerms.filter((term) => !activeSecondLetter || secondInitialFor(term.term) === activeSecondLetter)
+        : filteredTerms,
+    [letterTerms, filteredTerms, activeSecondLetter, isLetterFilterActive],
+  );
   const anchorStyle = { '--glossary-anchor-offset': `${anchorOffset}px` } as CSSProperties;
 
   const updateAnchorOffset = useCallback(() => {
@@ -304,8 +299,12 @@ export default function GlossaryPage() {
     setParams(nextParams, { replace: true });
   }
 
-  function jumpToLetter(letter: string) {
+  function invalidateQueryContext() {
     queryFilterContextRef.current = null;
+  }
+
+  function jumpToLetter(letter: string) {
+    invalidateQueryContext();
     setActiveLetter(letter);
     setActiveSecondLetter('');
     setIsLetterFilterActive(true);
@@ -316,7 +315,7 @@ export default function GlossaryPage() {
   }
 
   function selectCategory(category: string) {
-    queryFilterContextRef.current = null;
+    invalidateQueryContext();
     setActiveCategory(category);
     setIsLetterFilterActive(false);
   }
@@ -343,7 +342,7 @@ export default function GlossaryPage() {
 
   function revealSlug(slug: string) {
     const related = glossaryBySlug(slug);
-    queryFilterContextRef.current = null;
+    invalidateQueryContext();
     setQuery('');
     setActiveCategory('Tous');
     if (related) {
@@ -524,7 +523,7 @@ export default function GlossaryPage() {
 
         <section id="glossary-results" className="mb-20 scroll-mt-[var(--glossary-anchor-offset)]">
           <p className="sr-only" role="status" aria-live="polite" aria-atomic="true" aria-label="Résultats du dictionnaire">
-            {visibleTerms.length} résultat{visibleTerms.length > 1 ? 's' : ''} dans le dictionnaire.
+            {pluralize(visibleTerms.length, 'résultat')} dans le dictionnaire.
           </p>
           {filteredTerms.length === 0 ? (
             <div className="py-20 text-center">
@@ -541,7 +540,7 @@ export default function GlossaryPage() {
                       : activeLetter}
                 </span>
                 <span className="font-headline text-[0.625rem] uppercase tracking-[0.45em] text-[color-mix(in_srgb,var(--primary)_72%,transparent)] italic">
-                  {visibleTerms.length} entrée{visibleTerms.length > 1 ? 's' : ''}
+                  {pluralize(visibleTerms.length, 'entrée')}
                 </span>
                 {isLetterFilterActive && availableSecondLetters.length > 1 && (
                   <div

@@ -38,11 +38,14 @@ export function CompassRose({
       aria-hidden
     >
       <svg viewBox="0 0 160 160" width={size} height={size} style={{ display: 'block' }}>
+        {/* Rings and ticks carry `pathLength="1"`: a no-op on their own, it
+            normalises their length so a caller can trace them with a
+            `stroke-dasharray` of 1 whatever the radius (see home-hero.css). */}
         <g stroke={hue} fill="none">
-          <circle cx="80" cy="80" r="72" strokeWidth="0.6" opacity="0.4" />
-          <circle cx="80" cy="80" r="60" strokeWidth="0.5" opacity="0.5" />
-          <circle cx="80" cy="80" r="44" strokeWidth="0.4" opacity="0.3" />
-          <circle cx="80" cy="80" r="28" strokeWidth="0.4" opacity="0.25" />
+          <circle className="compass-ring" pathLength={1} cx="80" cy="80" r="72" strokeWidth="0.6" opacity="0.4" />
+          <circle className="compass-ring" pathLength={1} cx="80" cy="80" r="60" strokeWidth="0.5" opacity="0.5" />
+          <circle className="compass-ring" pathLength={1} cx="80" cy="80" r="44" strokeWidth="0.4" opacity="0.3" />
+          <circle className="compass-ring" pathLength={1} cx="80" cy="80" r="28" strokeWidth="0.4" opacity="0.25" />
           {/* tick marks around the bezel */}
           {Array.from({ length: 24 }).map((_, i) => {
             const a = (i * 15 * Math.PI) / 180;
@@ -50,6 +53,8 @@ export function CompassRose({
             return (
               <line
                 key={i}
+                className="compass-tick"
+                pathLength={1}
                 x1={80 + Math.cos(a) * r1}
                 y1={80 + Math.sin(a) * r1}
                 x2={80 + Math.cos(a) * 72}
@@ -62,26 +67,26 @@ export function CompassRose({
         </g>
 
         {/* cardinal star */}
-        <g fill={hue}>
+        <g className="compass-points" fill={hue}>
           <path d="M80 8 L84 76 L80 80 L76 76 Z" opacity="0.9" className={floating ? 'origin-center animate-compass-needle' : undefined} style={{ transformBox: 'fill-box', transformOrigin: '50% 100%' }} />
           <path d="M80 152 L76 84 L80 80 L84 84 Z" opacity="0.45" />
           <path d="M8 80 L76 76 L80 80 L76 84 Z" opacity="0.4" />
           <path d="M152 80 L84 84 L80 80 L84 76 Z" opacity="0.4" />
         </g>
-        <g fill={hue} opacity="0.5">
+        <g className="compass-points-minor" fill={hue} opacity="0.5">
           <path d="M29 29 L74 76 L80 80 L76 74 Z" />
           <path d="M131 29 L84 76 L80 80 L84 74 Z" />
           <path d="M29 131 L74 84 L80 80 L76 86 Z" />
           <path d="M131 131 L84 84 L80 80 L84 86 Z" />
         </g>
 
-        <g fontFamily="Newsreader" fontStyle="italic" fontSize="9" fill={hue} textAnchor="middle" opacity="0.85" letterSpacing="0.12em">
+        <g className="compass-letters" fontFamily="Newsreader" fontStyle="italic" fontSize="9" fill={hue} textAnchor="middle" opacity="0.85" letterSpacing="0.12em">
           <text x="80" y="6">N</text>
           <text x="80" y="159">S</text>
           <text x="5" y="83">O</text>
           <text x="155" y="83">E</text>
         </g>
-        <circle cx="80" cy="80" r="3" fill={hue} />
+        <circle className="compass-pin" cx="80" cy="80" r="3" fill={hue} />
       </svg>
     </div>
   );

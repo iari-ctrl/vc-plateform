@@ -13,7 +13,6 @@ export const INTERNAL_FURTHER_READING_KINDS: readonly InternalFurtherReadingKind
 export const FURTHER_READING_KINDS: readonly FurtherReadingKind[];
 
 export function isInternalFurtherReadingKind(kind: string): kind is InternalFurtherReadingKind;
-export function assertExactFurtherReadingTargetKinds(targetRecordsByKind: Partial<FurtherReadingTargetRecordsByKind>): void;
 export function createFurtherReadingTargetRegistry(
   targetRecordsByKind: FurtherReadingTargetRecordsByKind,
 ): FurtherReadingTargetRegistry;
@@ -22,7 +21,7 @@ export function resolveFurtherReadingTarget(
   kind: string,
   ref: string,
 ): FurtherReadingTarget | undefined;
-export function resolveInternalFurtherReadingHref(
+export function resolveFurtherReadingHref(
   registry: FurtherReadingTargetRegistry,
   kind: string,
   ref: string,

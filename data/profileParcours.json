@@ -55,6 +55,6 @@
   "timeCalibration": {
     "low": { "show": ["coeur"], "cadence": "L'essentiel, une session courte par semaine" },
     "medium": { "show": ["coeur", "pratique"], "cadence": "Rythme standard, 4 à 6 semaines" },
-    "high": { "show": ["coeur", "bonus", "pratique", "respiration"], "cadence": "Immersion, tout débloqué" }
+    "high": { "show": ["coeur", "bonus", "pratique", "respiration"], "cadence": "Immersion, toutes les étapes incluses" }
   }
 }

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Compass as CompassIcon, LocateFixed, Minus, Plus } from 'lucide-react';
@@ -10,9 +11,11 @@ import { useTheme } from '@/context/ThemeContext';
 import { useUserData } from '@/context/UserDataContext';
 import { MapCartouche, SeaMonster, NightSkyBackdrop } from '@/components/ornaments/Illustrations';
 import { legibleAccent } from '@/lib/ikigaiColor';
+import { useParcoursMorph, parcoursSealName } from '@/lib/parcoursMorph';
 import { cn } from '@/lib/utils';
 import { formatMinutes, parcoursTimeSummary } from '@/content/learningTime';
 import type { Level } from '@/content/types';
+import '@/styles/parcours-atlas.css';
 
 /**
  * PathAtlas — the parcours drawn as an explorer's sea-chart.
@@ -24,6 +27,13 @@ import type { Level } from '@/content/types';
  * selecting one by touch reveals its destination and audited relations. Straight constellation
  * lines connect complementary parcours; arrowed lines show a recommended progression. With 20+
  * ports, both names and routes stay hidden until activation.
+ *
+ * Opening the chart is an event: the ink spreads from the helm and the seals
+ * stamp themselves outward in its wake. The choreography lives in
+ * `parcours-atlas.css`; this file only supplies the hooks it needs — the
+ * `atlas-ink` switch, the ink-front mask, and each port's rank by distance to
+ * the helm. Activating a port carries its wax seal into the parcours page
+ * header through a view transition.
  */
 
 // — Map canvas geometry —
@@ -89,7 +99,9 @@ function clampView(scale: number, tx: number, ty: number): View {
   return { scale, tx: clampNum(tx, minTx, maxTx), ty: clampNum(ty, minTy, maxTy) };
 }
 
-type Port = Parcours & { x: number; y: number; angle: number | null; r: number | null; island: boolean; pct: number; order: number; accent: string; kanji: string };
+type Port = Parcours & { x: number; y: number; angle: number | null; r: number | null; island: boolean; pct: number; order: number; accent: string; kanji: string; inkRank: number };
+
+type SealStyle = CSSProperties & { '--ink-i': number };
 
 function insetSegment(source: Port, target: Port, inset = 30) {
   const dx = target.x - source.x;
@@ -129,9 +141,27 @@ export function PathAtlas({
   const [touchedId, setTouchedId] = useState<string | null>(null);
   const touchActivation = useRef<string | null>(null);
   const relationDescriptionId = useId();
-  const progressionMarkerId = `path-atlas-progression-arrow-${relationDescriptionId.replace(/:/g, '')}`;
+  const instanceId = relationDescriptionId.replace(/:/g, '');
+  const progressionMarkerId = `path-atlas-progression-arrow-${instanceId}`;
+  const inkMaskId = `path-atlas-ink-mask-${instanceId}`;
+  const inkFrontId = `path-atlas-ink-front-${instanceId}`;
   const activeId = collapsed ? null : hoveredId ?? focusedId ?? touchedId;
   const dark = theme === 'dark';
+
+  // Activating a port carries its wax seal into the parcours header. An SVG
+  // element cannot be captured by the View Transitions API — Chrome creates no
+  // named group for it — so the seal is handed over to a plain element laid
+  // exactly over it for the length of the transition, and the drawn one steps
+  // aside. `sealBox` is measured at click time, before the state commits.
+  const { morphSlug, openParcours } = useParcoursMorph();
+  const sealBox = useRef<DOMRect | null>(null);
+
+  const openPort = useCallback((slug: string, target: SVGGElement) => {
+    // The seal itself, not the parchment punch-out behind it: the proxy has to
+    // leave at exactly the size the reader sees.
+    sealBox.current = target.querySelector('[data-port-seal]')?.getBoundingClientRect() ?? null;
+    openParcours(slug);
+  }, [openParcours]);
 
   useEffect(() => {
     if (!collapsed) return;
@@ -153,7 +183,8 @@ export function PathAtlas({
       const meta = FAMILY_META[p.family];
       return { accent: p.accent ?? meta.accent, kanji: p.kanji ?? meta.kanji, order: orderOf.get(p.id) ?? 0, pct: pctOf(p) };
     };
-    const out: Port[] = [];
+    // The ink rank is derived once every port is placed, hence the staged type.
+    const out: Omit<Port, 'inkRank'>[] = [];
     // concentric arcs, by level
     for (const lvl of ARC_LEVELS) {
       const band = BANDS[lvl]!;
@@ -173,10 +204,18 @@ export function PathAtlas({
         const spot = ISLANDS[i] ?? ISLANDS[ISLANDS.length - 1];
         out.push({ ...p, ...base(p), angle: null, r: null, island: true, x: spot.x, y: spot.y });
       });
-    return out;
+    // Rank every port by its distance to the helm, so the reveal cascade can
+    // follow the ink front outward instead of the authoring order.
+    const rank = new Map(
+      [...out]
+        .sort((a, b) => Math.hypot(a.x - CX, a.y - CY) - Math.hypot(b.x - CX, b.y - CY))
+        .map((p, i) => [p.id, i] as const),
+    );
+    return out.map((p) => ({ ...p, inkRank: rank.get(p.id) ?? 0 }));
   }, [progress]);
 
   const active = activeId ? ports.find((p) => p.id === activeId) ?? null : null;
+  const morphPort = morphSlug ? ports.find((p) => p.slug === morphSlug) ?? null : null;
   const portById = useMemo(() => new Map(ports.map((port) => [port.id, port])), [ports]);
   const activeRelations = useMemo(
     () => (activeId ? relationsForParcours(activeId) : []),
@@ -306,9 +345,37 @@ export function PathAtlas({
 
   return (
     <div className={className}>
+      {/* The travelling seal, mounted only while a port is being opened. It is
+          portalled to the body so no overflow or stacking context of the chart
+          can clip it mid-flight. */}
+      {morphPort && sealBox.current && createPortal(
+        <span
+          aria-hidden
+          style={{
+            position: 'fixed',
+            left: sealBox.current.left,
+            top: sealBox.current.top,
+            width: sealBox.current.width,
+            height: sealBox.current.height,
+            borderRadius: '50%',
+            display: 'grid',
+            placeItems: 'center',
+            fontFamily: 'Newsreader, serif',
+            fontSize: sealBox.current.width * 0.42,
+            color: morphPort.accent,
+            background: `color-mix(in srgb, ${morphPort.accent} 16%, var(--surface-container-lowest))`,
+            border: `1px solid color-mix(in srgb, ${morphPort.accent} 55%, transparent)`,
+            viewTransitionName: parcoursSealName(morphPort.slug),
+            pointerEvents: 'none',
+          }}
+        >
+          {morphPort.kanji}
+        </span>,
+        document.body,
+      )}
       <div
         className={cn(
-          "map-paper grain relative isolate flex flex-col items-stretch justify-start overflow-hidden transition-[max-height,border-color,opacity] duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] sm:block",
+          "map-paper grain relative isolate flex flex-col items-stretch justify-start overflow-hidden transition-[max-height,border-color,opacity] duration-[560ms] ease-[cubic-bezier(0.16,1,0.3,1)] sm:block",
           collapsed
             ? "max-h-0 border-transparent opacity-0 pointer-events-none"
             : "max-h-[820px] rounded-2xl border border-outline-variant bg-surface-container-low/70 opacity-100"
@@ -319,7 +386,11 @@ export function PathAtlas({
         <svg
           ref={svgRef}
           viewBox={`0 0 ${W} ${H}`}
-          className="block h-auto w-full touch-none select-none shrink-0"
+          // `atlas-ink` is only worn while the chart is open, so folding and
+          // reopening replays the inking without remounting anything. It has to
+          // sit on the <svg> itself: the ink front lives in <defs>, outside the
+          // pan/zoom group, and would otherwise never be reached.
+          className={cn("block h-auto w-full touch-none select-none shrink-0", !collapsed && "atlas-ink")}
           style={{ cursor: collapsed ? 'default' : isPanning ? 'grabbing' : 'grab' }}
           role="group"
           aria-label="Carte interactive des parcours — glissez pour déplacer, molette ou +/− pour zoomer"
@@ -328,7 +399,7 @@ export function PathAtlas({
           onPointerUp={endPointer}
           onPointerCancel={endPointer}
         >
-          <title>Carte des parcours — glissez pour déplacer, molette ou +/− pour zoomer, cliquez une terre pour explorer</title>
+          <title>Carte des parcours — glissez pour déplacer, molette ou +/− pour zoomer, cliquez un sceau pour ouvrir le parcours</title>
           <defs>
             <marker
               id={progressionMarkerId}
@@ -342,12 +413,25 @@ export function PathAtlas({
             >
               <path d="M 0 0 L 8 4 L 0 8 Z" fill="var(--secondary)" />
             </marker>
+
+            {/* The ink front: a soft-edged luminance disc centred on the helm.
+                Its radius opens on reveal (see parcours-atlas.css) and the chart
+                grid appears in its wake. At rest it covers the whole plate. */}
+            <radialGradient id={inkFrontId}>
+              <stop offset="0.74" stopColor="#fff" />
+              <stop offset="1" stopColor="#000" />
+            </radialGradient>
+            <mask id={inkMaskId} maskUnits="userSpaceOnUse" x={-W} y={-H} width={W * 3} height={H * 3}>
+              <circle className="atlas-ink-front" cx={CX} cy={CY} r={780} fill={`url(#${inkFrontId})`} />
+            </mask>
           </defs>
 
           <g
             transform={`translate(${effectiveView.tx} ${effectiveView.ty}) scale(${effectiveView.scale})`}
             style={{
-              transition: isPanning ? 'none' : 'transform 800ms cubic-bezier(0.16, 1, 0.3, 1)',
+              // Short enough that the plate has finished pulling back before the
+              // ink starts: two gestures in sequence read, two at once blur.
+              transition: isPanning ? 'none' : 'transform 420ms cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
             {/* Map elements that fade out when collapsed */}
@@ -356,42 +440,62 @@ export function PathAtlas({
               opacity={collapsed ? 0 : 1}
               style={{ pointerEvents: collapsed ? 'none' : 'auto' }}
             >
-              {/* — graticule: latitudes & meridians — */}
-              {[150, 256, 384, 512].map((r) => (
-                <circle key={`lat-${r}`} cx={CX} cy={CY} r={r} fill="none" stroke="var(--outline)" strokeWidth="0.5" strokeDasharray="1 9" opacity="0.2" />
-              ))}
-              {Array.from({ length: 9 }).map((_, i) => {
-                const a = rad(-164 + i * 19);
-                return (
-                  <line key={`mer-${i}`} x1={px(-164 + i * 19, 70)} y1={py(-164 + i * 19, 70)} x2={CX + Math.cos(a) * 540} y2={CY + Math.sin(a) * 540} stroke="var(--outline)" strokeWidth="0.5" strokeDasharray="1 12" opacity="0.14" />
-                );
-              })}
+              {/* — the plate itself: everything the ink front uncovers — */}
+              <g className="atlas-ink-wash" mask={`url(#${inkMaskId})`}>
+                {/* — graticule: latitudes & meridians — */}
+                {[150, 256, 384, 512].map((r) => (
+                  <circle key={`lat-${r}`} cx={CX} cy={CY} r={r} fill="none" stroke="var(--outline)" strokeWidth="0.5" strokeDasharray="1 9" opacity="0.2" />
+                ))}
+                {Array.from({ length: 9 }).map((_, i) => {
+                  const a = rad(-164 + i * 19);
+                  return (
+                    <line key={`mer-${i}`} x1={px(-164 + i * 19, 70)} y1={py(-164 + i * 19, 70)} x2={CX + Math.cos(a) * 540} y2={CY + Math.sin(a) * 540} stroke="var(--outline)" strokeWidth="0.5" strokeDasharray="1 12" opacity="0.14" />
+                  );
+                })}
 
-              {/* — band guide arcs + territory labels (set just outside each arc's left shoulder) — */}
-              {ARC_LEVELS.map((lvl) => {
-                const b = BANDS[lvl]!;
-                const dim = active && active.level !== lvl;
-                // territory names sit just *inside* each arc's upper-left shoulder,
-                // so they never compete with the ports' (outward) place-names.
-                const la = -128;
-                const lx = px(la, b.r - 28);
-                const ly = py(la, b.r - 28);
-                return (
-                  <g key={lvl} className="transition-opacity duration-300" opacity={dim ? 0.32 : 1}>
-                    <path d={arcPath(b.r, b.from - 4, b.to + 4)} fill="none" stroke="var(--primary)" strokeWidth="1" strokeDasharray="1 7" opacity="0.4" />
-                    <text x={lx} y={ly} textAnchor="middle" fontFamily="Newsreader" fontStyle="italic" fontSize="18" fill="var(--primary)" opacity="0.85" letterSpacing="0.04em">{b.territory}</text>
-                    <text x={lx} y={ly + 16} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8.5" fill="var(--on-surface-variant)" letterSpacing="0.24em" opacity="0.6">{b.sub.toUpperCase()}</text>
+                {/* — band guide arcs + territory labels (set just outside each arc's left shoulder) — */}
+                {ARC_LEVELS.map((lvl) => {
+                  const b = BANDS[lvl]!;
+                  const dim = active && active.level !== lvl;
+                  // territory names sit just *inside* each arc's upper-left shoulder,
+                  // so they never compete with the ports' (outward) place-names.
+                  const la = -128;
+                  const lx = px(la, b.r - 28);
+                  const ly = py(la, b.r - 28);
+                  return (
+                    <g key={lvl} className="transition-opacity duration-300" opacity={dim ? 0.32 : 1}>
+                      <path d={arcPath(b.r, b.from - 4, b.to + 4)} fill="none" stroke="var(--primary)" strokeWidth="1" strokeDasharray="1 7" opacity="0.4" />
+                      <text x={lx} y={ly} textAnchor="middle" fontFamily="Newsreader" fontStyle="italic" fontSize="18" fill="var(--primary)" opacity="0.85" letterSpacing="0.04em">{b.territory}</text>
+                      <text x={lx} y={ly + 16} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8.5" fill="var(--on-surface-variant)" letterSpacing="0.24em" opacity="0.6">{b.sub.toUpperCase()}</text>
+                    </g>
+                  );
+                })}
+
+                {/* — island outlines for the "tous niveaux" ports — */}
+                {ports.filter((p) => p.island).map((p) => (
+                  <g key={`isle-${p.id}`} opacity={active && active.id !== p.id && !relatedIds.has(p.id) ? 0.32 : 1} className="transition-opacity duration-300">
+                    <circle cx={p.x} cy={p.y} r="40" fill="none" stroke="var(--outline)" strokeWidth="0.8" strokeDasharray="2 5" opacity="0.4" />
+                    <circle cx={p.x} cy={p.y} r="52" fill="none" stroke="var(--outline)" strokeWidth="0.5" strokeDasharray="1 9" opacity="0.25" />
                   </g>
-                );
-              })}
+                ))}
+              </g>
 
-              {/* — island outlines for the "tous niveaux" ports — */}
-              {ports.filter((p) => p.island).map((p) => (
-                <g key={`isle-${p.id}`} opacity={active && active.id !== p.id && !relatedIds.has(p.id) ? 0.32 : 1} className="transition-opacity duration-300">
-                  <circle cx={p.x} cy={p.y} r="40" fill="none" stroke="var(--outline)" strokeWidth="0.8" strokeDasharray="2 5" opacity="0.4" />
-                  <circle cx={p.x} cy={p.y} r="52" fill="none" stroke="var(--outline)" strokeWidth="0.5" strokeDasharray="1 9" opacity="0.25" />
-                </g>
-              ))}
+              {/* The wet edge of that same front — the line where the ink is
+                  still spreading. It rides the mask's opaque boundary (0.74 of
+                  the mask radius) and is invisible once the plate is dry. */}
+              <circle
+                className="atlas-ink-edge"
+                cx={CX}
+                cy={CY}
+                r={578}
+                fill="none"
+                stroke="var(--primary)"
+                strokeWidth="1.5"
+                vectorEffect="non-scaling-stroke"
+                opacity="0"
+                pointerEvents="none"
+                aria-hidden="true"
+              />
 
               {/* Audited routes are mounted only for the port active by hover, focus, or touch. */}
               {active && activeRelations.length > 0 && (
@@ -427,7 +531,7 @@ export function PathAtlas({
               )}
 
               {/* — cartouche (correctly sized, anchored at the top) — */}
-              <g transform={`translate(${CX - 130}, 6)`}>
+              <g className="atlas-ink-cartouche" transform={`translate(${CX - 130}, 6)`}>
                 <MapCartouche width={260} />
               </g>
 
@@ -477,8 +581,15 @@ export function PathAtlas({
                     tabIndex={0}
                     aria-label={`${p.title} — ${FAMILY_META[p.family].label}, ${LEVEL_LABEL[p.level]}, ${atlasTimeLabel(p)}`}
                     aria-describedby={isActive && activeRelations.length > 0 ? relationDescriptionId : undefined}
-                    className="cursor-pointer outline-none transition-opacity duration-300"
-                    style={{ opacity: dim ? 0.26 : 1 }}
+                    className="atlas-ink-seal cursor-pointer outline-none transition-opacity duration-300"
+                    style={{
+                      // Hidden for the length of its own transition: the proxy
+                      // below is the piece that travels.
+                      opacity: morphSlug === p.slug ? 0 : dim ? 0.26 : 1,
+                      // The stamp presses down onto the seal's own centre.
+                      transformOrigin: `${p.x}px ${p.y}px`,
+                      '--ink-i': p.inkRank,
+                    } as SealStyle}
                     onMouseEnter={() => setHoveredId(p.id)}
                     onMouseLeave={() => setHoveredId((current) => (current === p.id ? null : current))}
                     onFocus={() => setFocusedId(p.id)}
@@ -486,7 +597,7 @@ export function PathAtlas({
                     onPointerDown={(event) => {
                       touchActivation.current = event.pointerType === 'touch' ? p.id : null;
                     }}
-                    onClick={() => {
+                    onClick={(event) => {
                       const isTouchActivation = touchActivation.current === p.id;
                       touchActivation.current = null;
                       if (dragged.current || collapsed) return; // ignore the click that ends a pan or when collapsed
@@ -494,13 +605,13 @@ export function PathAtlas({
                         setTouchedId(p.id);
                         return;
                       }
-                      navigate(`/parcours/${p.slug}`);
+                      openPort(p.slug, event.currentTarget);
                     }}
                     onKeyDown={(e) => {
                       if (collapsed) return;
                       if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
-                        navigate(`/parcours/${p.slug}`);
+                        openPort(p.slug, e.currentTarget);
                       }
                     }}
                   >
@@ -522,7 +633,7 @@ export function PathAtlas({
                         vectorEffect="non-scaling-stroke"
                       />
                     )}
-                    <circle cx={p.x} cy={p.y} r={sealR} fill={`color-mix(in srgb, ${p.accent} 16%, var(--surface-container-lowest))`} stroke={p.accent} strokeWidth={isActive ? 2 : 1.3} className="transition-all duration-300" />
+                    <circle data-port-seal cx={p.x} cy={p.y} r={sealR} fill={`color-mix(in srgb, ${p.accent} 16%, var(--surface-container-lowest))`} stroke={p.accent} strokeWidth={isActive ? 2 : 1.3} className="transition-all duration-300" />
                     {isActive && (
                       <circle cx={p.x} cy={p.y} r={sealR + 11} fill="none" stroke={p.accent} strokeWidth="1" strokeDasharray="2 4" opacity="0.6" className="animate-spin-slow" style={{ transformOrigin: `${p.x}px ${p.y}px` }} />
                     )}
@@ -539,10 +650,10 @@ export function PathAtlas({
               })}
 
               {/* — leviathans in the margins — */}
-              <g transform={`translate(${W - 170}, ${H - 142})`}>
+              <g className="atlas-ink-marginalia" transform={`translate(${W - 170}, ${H - 142})`}>
                 <SeaMonster size={120} />
               </g>
-              <g transform={`translate(46, ${H - 132}) scale(-1, 1)`}>
+              <g className="atlas-ink-marginalia" transform={`translate(46, ${H - 132}) scale(-1, 1)`}>
                 <SeaMonster size={92} />
               </g>
             </g>
@@ -554,7 +665,7 @@ export function PathAtlas({
               className="path-atlas-compass"
               role="link"
               tabIndex={0}
-              aria-label="Aller au cahier d'introspection et test d'orientation (Ikigai)"
+              aria-label="Ouvrir le cahier d'introspection Ikigai"
               onPointerDown={(event) => event.stopPropagation()}
               onMouseDown={(event) => event.preventDefault()}
               onClick={(event) => {
@@ -571,28 +682,32 @@ export function PathAtlas({
                 }
               }}
             >
-              <circle className="path-atlas-compass-focus" cx="0" cy="0" r="60" fill="none" stroke="var(--primary)" strokeWidth="1.2" strokeDasharray="3 5" vectorEffect="non-scaling-stroke" />
-              <g fill="transparent" stroke="var(--primary)">
-                <circle className="path-atlas-compass-ring path-atlas-compass-ring-1" cx="0" cy="0" r="50" strokeWidth="0.6" vectorEffect="non-scaling-stroke" style={compassRingStyles[0]} />
-                <circle className="path-atlas-compass-ring path-atlas-compass-ring-2" cx="0" cy="0" r="38" strokeWidth="0.5" vectorEffect="non-scaling-stroke" style={compassRingStyles[1]} />
-                <circle className="path-atlas-compass-ring path-atlas-compass-ring-3" cx="0" cy="0" r="26" strokeWidth="0.6" vectorEffect="non-scaling-stroke" style={compassRingStyles[2]} />
-                <circle className="path-atlas-compass-ring path-atlas-compass-ring-4" cx="0" cy="0" r="16" strokeWidth="0.6" vectorEffect="non-scaling-stroke" style={compassRingStyles[3]} />
-              </g>
-              <g className="path-atlas-compass-details">
-                <g fill="var(--primary)">
-                  <path d="M0 -46 L4.5 -5 L0 0 L-4.5 -5 Z" opacity="0.9" />
-                  <path d="M0 46 L-4.5 5 L0 0 L4.5 5 Z" opacity="0.45" />
-                  <path d="M-46 0 L-5 -4.5 L0 0 L-5 4.5 Z" opacity="0.45" />
-                  <path d="M46 0 L5 4.5 L0 0 L5 -4.5 Z" opacity="0.45" />
+              {/* The inner group carries the reveal: the outer one already has a
+                  `transform` attribute, which a CSS transform would replace. */}
+              <g className="atlas-ink-helm">
+                <circle className="path-atlas-compass-focus" cx="0" cy="0" r="60" fill="none" stroke="var(--primary)" strokeWidth="1.2" strokeDasharray="3 5" vectorEffect="non-scaling-stroke" />
+                <g fill="transparent" stroke="var(--primary)">
+                  <circle className="path-atlas-compass-ring path-atlas-compass-ring-1" cx="0" cy="0" r="50" strokeWidth="0.6" vectorEffect="non-scaling-stroke" style={compassRingStyles[0]} />
+                  <circle className="path-atlas-compass-ring path-atlas-compass-ring-2" cx="0" cy="0" r="38" strokeWidth="0.5" vectorEffect="non-scaling-stroke" style={compassRingStyles[1]} />
+                  <circle className="path-atlas-compass-ring path-atlas-compass-ring-3" cx="0" cy="0" r="26" strokeWidth="0.6" vectorEffect="non-scaling-stroke" style={compassRingStyles[2]} />
+                  <circle className="path-atlas-compass-ring path-atlas-compass-ring-4" cx="0" cy="0" r="16" strokeWidth="0.6" vectorEffect="non-scaling-stroke" style={compassRingStyles[3]} />
                 </g>
-                <g fill="var(--primary)" opacity="0.5">
-                  <path d="M-30 -30 L-5 -5 L0 0 L-5 -5 Z" />
-                  <path d="M30 -30 L5 -5 L0 0 L5 -5 Z" />
-                  <path d="M-30 30 L-5 5 L0 0 L-5 5 Z" />
-                  <path d="M30 30 L5 5 L0 0 L5 5 Z" />
+                <g className="path-atlas-compass-details">
+                  <g fill="var(--primary)">
+                    <path d="M0 -46 L4.5 -5 L0 0 L-4.5 -5 Z" opacity="0.9" />
+                    <path d="M0 46 L-4.5 5 L0 0 L4.5 5 Z" opacity="0.45" />
+                    <path d="M-46 0 L-5 -4.5 L0 0 L-5 4.5 Z" opacity="0.45" />
+                    <path d="M46 0 L5 4.5 L0 0 L5 -4.5 Z" opacity="0.45" />
+                  </g>
+                  <g fill="var(--primary)" opacity="0.5">
+                    <path d="M-30 -30 L-5 -5 L0 0 L-5 -5 Z" />
+                    <path d="M30 -30 L5 -5 L0 0 L5 -5 Z" />
+                    <path d="M-30 30 L-5 5 L0 0 L-5 5 Z" />
+                    <path d="M30 30 L5 5 L0 0 L5 5 Z" />
+                  </g>
+                  <circle r="2.4" fill="var(--primary)" />
+                  <text y="-54" textAnchor="middle" fontFamily="Newsreader" fontStyle="italic" fontSize="10" fill="var(--primary)" opacity="0.8">N</text>
                 </g>
-                <circle r="2.4" fill="var(--primary)" />
-                <text y="-54" textAnchor="middle" fontFamily="Newsreader" fontStyle="italic" fontSize="10" fill="var(--primary)" opacity="0.8">N</text>
               </g>
             </g>
           </g>
@@ -671,7 +786,7 @@ export function PathAtlas({
                   <CompassIcon size={13} className="text-[color:var(--primary)]" /> Tabula Ventura
                 </p>
                 <p className="mt-1.5 font-headline text-headline-sm font-semibold leading-tight">Pointez un parcours pour voir ses relations</p>
-                <p className="mt-1 text-xs leading-relaxed text-surface-variant">Les parcours sont disposés du rivage des débutants jusqu’à la haute citadelle des fonds, avec les parcours « tous niveaux » en îles. Pointez un sceau ou placez-y le focus pour afficher sa destination et ses relations ; sur écran tactile, un premier appui les révèle et le suivant ouvre le parcours. La navigation reste libre.</p>
+                <p className="mt-1 text-xs leading-relaxed text-surface-variant">Les parcours sont disposés du rivage des débutants jusqu’à la haute citadelle des fonds, les parcours « tous niveaux » formant des îles. Le focus clavier affiche les mêmes relations ; sur écran tactile, un premier appui les révèle et le suivant ouvre le parcours.</p>
               </>
             )}
           </div>
@@ -681,7 +796,7 @@ export function PathAtlas({
       {/* — accessible / mobile-friendly index of the same ports — */}
       <div
         className={cn(
-          "mt-4 flex flex-wrap gap-2 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden",
+          "mt-4 flex flex-wrap gap-2 transition-all duration-[560ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden",
           collapsed
             ? "max-h-0 opacity-0 pointer-events-none mt-0"
             : "max-h-[500px] opacity-100"

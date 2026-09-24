@@ -6,6 +6,361 @@ Le journal des travaux antérieurs à la migration (passes du 2026-05-30 au 2026
 
 ---
 
+## 2026-09-02 — Intégration du simulateur de note d’investissement
+
+Objet : inclure le dossier local `nouveau simu` dans le site comme nouveau simulateur, sans ouvrir de backend, de publication distante ni de redesign global.
+
+Travaux :
+
+- copie du bundle autonome `nouveau simu/embed/simulateur-memo.html` vers `client/public/tools/simulateur-memo.html` ; taille vérifiée 994 449 octets, SHA-256 `4acea45edf9c8b8443e95a8be5ffe0e174fed7d9320be508ca8ddb37f7ccab7b` ;
+- ajout de la fiche `investment-memo` dans `data/simulators.json` avec le slug public `/simulators/simulateur-note-investissement`, un temps indicatif de 30 minutes, les leçons liées `l-investment-recommendation`, `l-ic-defense`, `l-fact-hypothesis` et les termes de glossaire existants `venture-capital`, `deal-flow`, `term-sheet` ;
+- ajout du composant `client/src/components/simulators/investment-memo.tsx`, qui encadre l’outil dans les surfaces, cartes, boutons, textes et contraintes local-first du design system, puis expose l’iframe et un lien pleine page basés sur `publicAssetUrl(...)` pour respecter le `VITE_BASE_URL` ;
+- raccordement du composant dans `client/src/components/simulators/index.ts` et couverture DOM dans `client/src/components/simulators/simulators.dom.test.tsx` ;
+- régénération du sitemap canonique Pages dormant : `client/public/sitemap.xml` contient désormais `https://iari-ctrl.github.io/vc-plateform/simulators/simulateur-note-investissement`.
+
+Vérifications :
+
+- `npm run test --workspace client -- src/components/simulators/simulators.dom.test.tsx` — exit 0, 1 fichier / 3 tests ;
+- `npm run validate:content` — exit 0, 10 simulateurs, structure et références cohérentes ;
+- `npm run typecheck` — exit 0 ;
+- `npm run lint --workspace client -- src/components/simulators/investment-memo.tsx src/components/simulators/index.ts src/components/simulators/simulators.dom.test.tsx` — exit 0 ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run generate:sitemap` — exit 0, 704 routes ;
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run build` — exit 0 ; prérendu strict `716/716`, `ok: true` ;
+- `npm run validate:content:strict` — exit 0, contenu strict valide avec 10 simulateurs ;
+- preview locale Vite : `client/dist/tools/simulateur-memo.html` répond 200 ; le HTML prérendu de `/simulators/simulateur-note-investissement` contient le titre, l’iframe, le lien pleine page et l’URL `/vc-plateform/tools/simulateur-memo.html`.
+
+Limite : la recette visuelle interactive Chromium n’a pas été exécutée, car aucun Chromium local n’a été trouvé et le harness navigateur disponible demandait Google Chrome. La vérification Chrome n’a pas été poursuivie.
+
+Aucun commit, staging, stash, reset, clean, checkout destructif, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-08-08 — Clôture du fragment Markdown de l’archive Analyst
+
+Objet : corriger le lien interne résiduel de l’archive Analyst sans modifier les autorités maintenues, les données produit, les artefacts générés ni le profil Hermes `default`.
+
+Constat reproduit : `docs/archive/certifications/REFERENTIEL-ANALYST.md:20` pointait vers `ARCHITECTURE-CERTIFICATIONS.md#5-titre-canonique-et-supplement-contextualise`, alors que le titre maintenu `## 5. Titre canonique et supplément contextualisé` conserve les accents dans son ancre Markdown.
+
+Travaux :
+
+- correction séquentielle du fragment vers `#5-titre-canonique-et-supplément-contextualisé` dans `docs/archive/certifications/REFERENTIEL-ANALYST.md` ;
+- inspection du seul JSON d’archive identifié, `docs/archive/hermes-plans/2026-07-22_134627-correction-baseline.json` : `_archiveNotice` était déjà présent, donc aucun ajout JSON n’a été nécessaire ;
+- aucune modification de mémoire ou de profil `default`, faute de décision explicite demandant cette écriture.
+
+Vérifications : fragments comparés mécaniquement au titre cible, résultat `match=True` ; `_archiveNotice` relu dans le JSON d’archive ; `git diff --check -- docs/archive/certifications/REFERENTIEL-ANALYST.md docs/archive/hermes-plans/2026-07-22_134627-correction-baseline.json` : exit 0. Le build applicatif et les tests npm complets n’ont pas été relancés, la portée étant strictement documentaire et archivistique.
+
+Aucun contenu produit, donnée métier, artefact généré, commit, staging, stash, reset, clean, checkout destructif, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-08-08 — Correction post-contre-revue de l’autorité Venture Philanthropy archivée
+
+Objet : lever la contradiction d’autorité détectée après la clôture provisoire du reclassement documentaire, sans modifier les données, le parcours maintenu ni les autres archives hors périmètre.
+
+Constat reproduit : malgré leurs bannières non normatives, `docs/archive/certifications/venture-philanthropy/README.md` qualifiait encore l’ancien référentiel de « référence maintenue » et demandait d’y reporter les évolutions courantes ; `docs/archive/certifications/REFERENTIEL-VENTURE-PHILANTHROPY.md` conservait une section « Maintenance et sources de vérité » qui se désignait elle-même comme autorité.
+
+Travaux :
+
+- le `README` distingue désormais l’état historique avant déclassement, qualifie l’ancien référentiel de certification d’archive supplantée et reformule ses invariants comme contraintes historiques non applicables aux évolutions courantes ;
+- l’ancien référentiel remplace sa section de maintenance par un relevé des anciennes sources de vérité, au passé, et désigne explicitement `docs/parcours/VENTURE-PHILANTHROPIE.md` ainsi que les données exécutables comme autorités courantes ;
+- aucune donnée, documentation maintenue du parcours, autre certification ni archive hors Venture Philanthropy n’a été modifiée par cette correction.
+
+Vérifications : 14 liens locaux ciblés résolus ; aucune occurrence résiduelle des formulations contradictoires recherchées dans les deux documents ; diff exact contrôlé depuis des copies `/tmp` des fichiers non suivis ; `git diff --check` global : exit 0. Le fragment sans accents de `docs/archive/certifications/REFERENTIEL-ANALYST.md:20`, révélé par la même contre-revue, reste un défaut distinct et n’a pas été corrigé dans cette passe.
+
+Aucun test applicatif, build, générateur, staging, commit, push, workflow distant ou déploiement n’a été exécuté.
+
+---
+
+## 2026-08-08 — Reclassement des pièces jointes, plans et référentiels historiques
+
+Objet : réduire la confusion d’autorité et les lectures accidentelles en retirant du répertoire actif les pièces jointes, plans, prompts, revues et référentiels historiques, sans modifier les sources produit ni supprimer de preuve unique non préservée.
+
+Prévol : racine `/Users/iar-witness/Documents/Projets/VC SITE/vc-platform`, branche `master`, HEAD `24009d4772d1f4a29f484d467f101580cc6d22d8`, worktree sale préexistant. Empreinte normalisée initiale conservée dans `/tmp/vc-platform-doc-cleanup-baseline-1786205734.json`, SHA-256 `6f3482e9b8f8ecd57053519fa60c7adcfaf9ae6c055a8489d0a38fe9289a6552`. Plusieurs processus Claude/Node/Vite étaient ouverts dans le dépôt ; les fichiers candidats ont été hashés avant écriture et aucun changement externe n’a été détecté sur le périmètre entre l’inventaire et les déplacements.
+
+Travaux :
+
+- pièces jointes Hermes : doublon binaire confirmé entre `cartographie-commentee.md` et `cartographie-commentee-2.md` (`4aff5f2145…`) ; conservation d’une seule cartographie sous `docs/archive/repository-inventories/2026-07-25-cartographie-commentee.md`, suppression du doublon et de `inventaire-exhaustif.csv` ;
+- plans Hermes : `.hermes/plans/` ne contient plus que `2026-07-23_100955-relecture-praticien-parcours-p0.md` et `2026-07-31_191055-consolidation-formation.md` ; treize plans ou matrices de preuve sont archivés sous `docs/archive/hermes-plans/`, sept plans courts entièrement clos sont supprimés ;
+- artefacts racine : `revue-mathematiques-du-vc.md` est archivé sous `docs/archive/reviews/2026-07-24-revue-mathematiques-du-vc.md` ; `PROMPTS-SERIE-A.md` est supprimé comme paquet de prompts exécuté et supplanté ;
+- revues : `docs/reviews/2026-07-23-relecture-praticien-parcours.md` reste actif ; la restitution canonique du 24 juillet est `docs/archive/reviews/2026-07-24-evaluation-parcours-lecons-lisible.md`; la version tabulaire du 24 juillet est supprimée ; le plan de remédiation du 26 juillet et le snapshot du 31 juillet sont archivés non normativement ;
+- certifications historiques : les deux référentiels supplantés et le dossier `venture-philanthropy/` sont déplacés sous `docs/archive/certifications/`, avec liens relatifs corrigés vers les référentiels maintenus ;
+- liens maintenus corrigés dans `docs/parcours/ANALYST-FOUNDATIONS.md`, `docs/parcours/VENTURE-PHILANTHROPIE.md`, `docs/certifications/PROTOCOLE-PRODUCTION-ANALYST.md`, `client/src/content/deeptechIpTransferLearning.test.ts`, `.hermes/plans/2026-07-31_191055-consolidation-formation.md` et `docs/archive/retours-sessions-correction-2026-07-22.md`.
+
+Vérifications :
+
+- inventaire : 3 pièces jointes, 22 fichiers `.hermes/plans/` en comptant le baseline JSON, 2 artefacts racine, 5 revues et 8 documents de certification historiques ; tous les candidats supprimés ou déplacés étaient suivis par Git et présents dans l’historique ;
+- contrôle de liens Markdown locaux : exit 0, aucun lien local cassé hors placeholders littéraux documentés ; contrôle des autorités maintenues : 0 référence active vers les anciens chemins supprimés ou déplacés ;
+- `git diff --check` sur le périmètre documentaire avant mise à jour des suivis : exit 0.
+
+Résultat physique : environ 3,63 Mio retirés du worktree courant par suppressions nettes. Les tokens indiqués ne sont que des ordres de grandeur de lecture évitable : environ 926 k tokens potentiels retirés physiquement, et `.hermes/plans/` passe d’environ 103 k tokens potentiels à environ 9 k tokens potentiels. Aucun gain fixe de contexte ou de coût n’est revendiqué, car un fichier non lu ne consomme aucun token.
+
+Aucun contenu produit, donnée métier, artefact généré, commit, staging, stash, reset, clean, checkout destructif, push, workflow distant, build complet ou déploiement n’a été exécuté.
+
+---
+
+## 2026-08-08 — Compaction des autorités et du suivi courant
+
+Objet : réduire le contexte documentaire de routine sans perdre les invariants propres au dépôt, les préférences utilisateur, les décisions produit durables ni les preuves historiques.
+
+Matrice d’autorité appliquée : préférences utilisateur conservées dans le profil `vc-platform` ; principes produit et marque visible promus dans `PRODUCT.md` ; charte éditoriale détaillée maintenue dans `docs/ARCHITECTURE_EDITION.md` ; rappel opérationnel condensé dans `CLAUDE.md` ; point d’entrée portable réduit dans `AGENTS.md` ; état courant compacté dans `Suivis/ETAT.md` ; preuves datées conservées dans ce journal ; règles spécialisées gardées dans `.claude/skills/ecosystemes/SKILL.md` ; faits volatils non déplacés vers la mémoire globale.
+
+Travaux :
+
+- `AGENTS.md` ramené au rôle d’entrée portable et de rappel minimal ; `.hermes.md` reste absent.
+- `CLAUDE.md` condensé autour des autorités, commandes actuelles, séparation sources/générés, local-first, limites publiques, ontologie, sécurité du worktree et publication dormante.
+- `Suivis/ETAT.md` réécrit comme instantané courant : état vérifié, compteurs, risques ouverts, décisions non tranchées, priorités et prochaine session.
+- `.claude/skills/ecosystemes/SKILL.md` recentré sur les procédures propres aux dossiers d’écosystème, avec pointeurs vers les autorités transverses.
+- `PRODUCT.md` reçoit uniquement les décisions durables encore uniques : marque visible Maison Sapience VC et maintien secondaire de l’espace personnel tant que son socle n’est pas ouvert.
+- Profil Hermes dédié `vc-platform` : `MEMORY.md` réduit aux faits encore utiles ; `USER.md` inchangé.
+
+Résultat physique : `AGENTS.md` 1 660 → 911 caractères ; `CLAUDE.md` 23 137 → 11 995 ; `Suivis/ETAT.md` 95 556 → 12 158 ; compétence écosystèmes 9 602 → 6 713 ; `PRODUCT.md` 3 105 → 3 742 ; mémoire profil 1 744 → 185. `Suivis/JOURNAL.md` conserve les entrées historiques et reçoit seulement la présente synthèse.
+
+Vérifications :
+
+- `hermes prompt-size --json` depuis la racine : contexte projet 3 591 o avant, 2 796 o après ; profil courant `default` mesuré avec modèle `gpt-5.6-sol` hérité.
+- `hermes --profile vc-platform prompt-size --json` : système 25 465 → 23 108 o, mémoire 2 079 → 517 o, contexte projet 3 957 → 3 162 o, outils 45 941 o inchangés.
+- Contrôle mécanique : invariants requis présents, liens Markdown relatifs résolus, aucune référence active à l’intégration retirée dans le lot séparé recréée dans les documents ciblés, aucun motif de secret dans le diff documentaire.
+- `npm run check` : exit 0 — générés OK, contenu strict OK, glossaire OK, typecheck OK, lint OK, 69 fichiers / 471 tests Vitest et 59/59 tests Node.
+- `git diff --check` final : exit 0.
+
+Aucun commit, staging, stash, reset, clean, checkout destructif, push, workflow distant, build complet ou déploiement n’a été exécuté.
+
+---
+
+## 2026-08-08 — Réalignement du sitemap sur le contrat Pages dormant
+
+Objet : corriger la divergence d'origine de `client/public/sitemap.xml` sans décider d'un nouveau domaine de publication ni modifier le statut local-first du produit.
+
+Contrat retenu :
+
+- `CLAUDE.md` et `README.md` maintiennent la publication en sommeil et décrivent le workflow Pages manuel sans `CNAME` ; sa cible déjà configurée est `https://iari-ctrl.github.io/vc-plateform`, montée sous `/vc-plateform/` ;
+- `.github/workflows/deploy-pages.yml` dérive la même paire depuis le propriétaire et le nom du dépôt ; `shared/base-url.mjs` n'invente aucune origine et exige la concordance du chemin ; `scripts/generate-sitemap.mjs` requiert explicitement `VITE_SITE_URL` ;
+- cette cible qualifie les artefacts SEO d'un éventuel build manuel futur. Elle ne constitue ni une remise en ligne, ni une décision de domaine personnalisé, ni un changement de stratégie de publication.
+
+Travaux :
+
+- reproduction initiale : le contrôle collecteur–sitemap passe 13 tests sur 14 et échoue sur l'origine `https://iar-witness.github.io`, tandis que le contrat versionné attend `https://iari-ctrl.github.io` ;
+- régénération par `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform npm run generate:sitemap` : 703 routes ;
+- l'inventaire SHA-256 de tous les fichiers suivis et non suivis non ignorés, pris immédiatement avant et après la commande, ne relève que les deux sorties attendues du générateur : `client/public/sitemap.xml` et `client/public/robots.txt` ; après régénération, ces deux fichiers correspondent de nouveau à leur version canonique dans `HEAD` ;
+- aucun fichier de configuration, aucune route et aucun script n'ont été modifiés. Le suivi présent sépare explicitement ce correctif SEO/publication du retrait de Specify / Spec Kit consigné dans l'entrée suivante.
+
+Vérifications :
+
+- contrôle ciblé `node --test --test-concurrency=1 scripts/collect-routes.test.mjs` : GREEN, 14/14 ; les 703 URL portent toutes l'origine `https://iari-ctrl.github.io` et restent sous `/vc-plateform/` ;
+- `npm run check:generated` : exit 0, 147 leçons, 126 corps publiés et 420 termes ; `npm run test:node` : exit 0, 59/59 ;
+- `npm run check` : exit 0, validation stricte et glossaire valides, typecheck et lint sans erreur, 69 fichiers / 471 tests Vitest et 59 tests Node ;
+- build canonique avec les mêmes variables : exit 0 ; le prérendu strict écrit 715/715 artefacts, sans échec de route ou de métadonnée, avec `ok: true` ;
+- `git diff --check` final : exit 0. Aucun commit, staging, push, déclenchement de workflow distant ou déploiement n'a été exécuté.
+
+---
+
+## 2026-08-08 — Retrait de l'intégration Specify / Spec Kit
+
+Objet : supprimer du worktree courant l'intégration Specify / Spec Kit et ses artefacts propres, sans perdre le contenu historique utile du diagnostic d'architecture technique et sans modifier le profil Hermes global `default`.
+
+Prévol et inventaire :
+
+- racine vérifiée : `/Users/iar-witness/Documents/Projets/VC SITE/vc-platform` ; branche `master` ; HEAD `24009d4772d1f4a29f484d467f101580cc6d22d8` ; remote `https://github.com/iari-ctrl/vc-plateform.git` ;
+- empreinte initiale normalisée enregistrée avant suppression dans `/tmp/vc-platform-speckit-baseline-20260808T125008.json` : 479 fichiers suivis, 7 fichiers non suivis non ignorés, SHA-256 global `277dc0749d304c9e8c3efb34c0d5b43eff5294029a2364206f14a57672f8272c` ; une seconde empreinte courante après migration est conservée dans `/tmp/vc-platform-manifest-current.tsv` ;
+- processus concurrents : un serveur Vite (`node .../node_modules/.bin/vite`) était ouvert dans le dépôt ; aucun fichier du périmètre `.specify/`, `specs/`, `docs/SPECKIT.md`, `README.md`, `CLAUDE.md`, `Suivis/ETAT.md` ou `Suivis/JOURNAL.md` n'a changé entre l'empreinte ciblée et la suppression ; le processus n'a pas été arrêté ;
+- recherche initiale, casse ignorée, sur fichiers suivis et non suivis non ignorés, hors dépendances/builds/caches : références actives dans `.specify/`, `specs/`, `docs/SPECKIT.md`, `README.md`, `CLAUDE.md` et `Suivis/ETAT.md`; références historiques ou archivées dans `Suivis/JOURNAL.md`, `.hermes/desktop-attachments/`, `.hermes/plans/` ; aucune référence active trouvée dans `package.json`, `.claude/settings*.json`, `.claude/hooks/`, `.github/workflows/` ou `scripts/` ;
+- `specs/` ne contenait que `specs/README.md` et `specs/001-diagnostic-architecture-technique/**` ; `tasks.md` contenait 26 tâches cochées et 0 tâche ouverte.
+
+Travaux :
+
+- migration du contenu durable de `specs/001-diagnostic-architecture-technique/research.md` vers `docs/archive/audits/2026-08-03-diagnostic-architecture-technique.md`, avec bannière historique non normative, limites de snapshot, synthèse des constats durables, registre compact des risques et SHA-256 de la source `edc45b69125d5ee031567e0e38a292f0129a0ab022327014305468d1c37d615a` ;
+- suppression de `docs/SPECKIT.md` ;
+- suppression intégrale de `.specify/` : `.specify/feature.json`, `.specify/init-options.json`, `.specify/integration.json`, `.specify/integrations/hermes-skill-contract.md`, `.specify/integrations/hermes.manifest.json`, `.specify/integrations/speckit.manifest.json`, `.specify/memory/.constitution-template.json`, `.specify/memory/constitution.md`, `.specify/memory/project-context.md`, `.specify/scripts/bash/check-prerequisites.sh`, `.specify/scripts/bash/common.sh`, `.specify/scripts/bash/create-new-feature.sh`, `.specify/scripts/bash/select-feature.sh`, `.specify/scripts/bash/setup-plan.sh`, `.specify/scripts/bash/setup-tasks.sh`, `.specify/templates/checklist-template.md`, `.specify/templates/constitution-template.md`, `.specify/templates/overrides/plan-template.md`, `.specify/templates/overrides/spec-template.md`, `.specify/templates/overrides/tasks-template.md`, `.specify/templates/plan-template.md`, `.specify/templates/spec-template.md`, `.specify/templates/tasks-template.md`, `.specify/workflows/speckit/workflow.yml`, `.specify/workflows/workflow-registry.json` ;
+- suppression intégrale de `specs/` : `specs/README.md`, `specs/001-diagnostic-architecture-technique/checklists/requirements.md`, `specs/001-diagnostic-architecture-technique/contracts/diagnostic-report.md`, `specs/001-diagnostic-architecture-technique/data-model.md`, `specs/001-diagnostic-architecture-technique/plan.md`, `specs/001-diagnostic-architecture-technique/quickstart.md`, `specs/001-diagnostic-architecture-technique/research.md`, `specs/001-diagnostic-architecture-technique/spec.md`, `specs/001-diagnostic-architecture-technique/tasks.md` ;
+- retrait des références actives dans `README.md` et `CLAUDE.md` ; `AGENTS.md`, `PRODUCT.md`, `.github/workflows/`, `.claude/settings*.json`, `.claude/hooks/` et `package.json` ne portaient pas de référence active à retirer ;
+- mise à jour de `Suivis/ETAT.md` pour retirer Specify / Spec Kit de l'état courant et rétablir le processus local simple : autorités maintenues, état courant, journal append-only et plans locaux bornés si nécessaire.
+
+Profil Hermes du projet :
+
+- le profil dédié `vc-platform` existe ; seules ses configurations ont été modifiées ;
+- compétences désactivées dans ce profil : `brownfield-spec-kit`, `speckit-analyze`, `speckit-checklist`, `speckit-clarify`, `speckit-constitution`, `speckit-converge`, `speckit-implement`, `speckit-plan`, `speckit-specify`, `speckit-tasks`, `speckit-taskstoissues` ;
+- vérification : `hermes --profile vc-platform skills list --enabled-only` ne retourne aucune ligne `speckit` ni `brownfield-spec-kit` ; `hermes --profile vc-platform prompt-size --json` retourne `skills_index.bytes = 3273` et aucune entrée `speckit` / `brownfield-spec-kit` dans `skills_breakdown` ;
+- le profil `default` n'a pas été modifié : SHA-256 de `/Users/iar-witness/.hermes/config.yaml` inchangé à `fac925ca2bc97d4355177f5f5bbcdb371eeec52991eb4982522ce836eae70fcb` ; aucune compétence globale n'a été désinstallée.
+
+Recherches finales et liens :
+
+- existence : `.specify/ = absent`, `specs/ = absent`, `docs/SPECKIT.md = absent` ;
+- occurrences actives finales sur fichiers suivis et non suivis non ignorés, hors `.git`, dépendances, builds et caches : 0 fichier, 0 occurrence ;
+- liens ou chemins actifs vers `docs/SPECKIT.md`, `.specify`, `specs/` ou `specs/001-diagnostic-architecture-technique` : 0 ;
+- mentions historiques conservées : `Suivis/JOURNAL.md` (entrée append-only du 2026-07-24), `.hermes/desktop-attachments/cartographie-commentee*.md`, `.hermes/desktop-attachments/inventaire-exhaustif.csv`, `.hermes/plans/2026-07-25_220016-p-serie-a-finalisation-baseline.md` et `docs/archive/audits/2026-08-03-diagnostic-architecture-technique.md`. Elles sont conservées parce qu'elles documentent des snapshots ou archives non normatifs, non le workflow courant.
+
+Vérifications :
+
+- `npm run check` : exit 1 ; les sous-commandes `check:generated`, `validate:content:strict`, `validate:glossary`, `typecheck`, `lint` et les tests Vitest passent. Détails : `Generated content check: OK (147 lessons, 126 published bodies, 420 glossary terms)`, validation stricte OK, glossaire OK, 69 fichiers / 471 tests Vitest réussis. La suite Node passe 58/59 tests puis échoue sur le défaut préexistant de `scripts/collect-routes.test.mjs:173` : `client/public/sitemap.xml` porte `https://iar-witness.github.io` alors que le test attend `https://iari-ctrl.github.io` ; cet écart était déjà consigné hors périmètre dans l'état du 2026-08-08 ;
+- inspection du diff : 35 suppressions ciblées pour l'infrastructure et les artefacts Specify / Spec Kit, modifications bornées de `README.md`, `CLAUDE.md`, `Suivis/ETAT.md`, ajout de l'archive historique ; les autres fichiers déjà modifiés ou non suivis du worktree sont préservés hors périmètre ;
+- `git diff --check` final après écriture de la présente entrée : exit 0, aucune sortie.
+
+Aucun commit, staging, stash, reset, clean, checkout destructif, push, workflow distant ou déploiement n'a été exécuté.
+
+---
+
+## 2026-08-08 — Profil Hermes dédié `vc-platform`
+
+Objet : isoler un profil Hermes pour le développement local du dépôt et réduire son coût fixe sans modifier le profil `default`.
+
+Travaux : création du profil `vc-platform` par clonage supporté depuis `default`, sans le rendre globalement actif ; définition de `terminal.cwd` sur `/Users/iar-witness/Documents/Projets/VC SITE/vc-platform` ; réglage de l’effort sur `high` ; activation de `agent.coding_context: focus` ; désactivation locale de `tts` et `cronjob` ; retrait local du MCP `chrome-devtools`. Le changement manuel de lot règle ensuite le modèle du profil sur `gpt-5.5`, avec effort maintenu à `high`. La sélection des compétences est locale au profil : 44 compétences de développement, revue, debugging, intégrité éditoriale, persistance locale, QA DOM, analyse d’interface, recherche sourcée, Git local et administration Hermes restent activées ; 59 compétences hors projet sont désactivées, sans désinstallation du profil `default`.
+
+Vérifications : `hermes profile list`, `hermes profile create --help`, `hermes tools --help`, `hermes skills config --help`, `hermes mcp --help`, `hermes config set --help`, `hermes tools list`, `hermes mcp list`, `hermes skills list`, `hermes memory status`, `hermes prompt-size`, puis une session neuve `hermes --profile vc-platform --reasoning high chat -q ...` ont été exécutés. Après le changement manuel de modèle, les commandes `hermes --profile vc-platform config get model`, `hermes --profile vc-platform config get agent.reasoning_effort`, `hermes --profile vc-platform config get terminal.cwd`, `hermes config get model`, `hermes config get agent.reasoning_effort`, `TERMINAL_CWD=/Users/iar-witness/Documents/Projets/VC SITE/vc-platform hermes --profile vc-platform prompt-size` et `git status --porcelain=v2 -z | shasum -a 256` confirment `vc-platform = gpt-5.5`, effort `high`, cwd racine du dépôt, profil `default` inchangé (`gpt-5.6-sol`, effort `ultra`) et empreinte Git stable. Le diagnostic confirme le cwd et la racine Git attendus, la lecture fichier, le navigateur natif, la vision après rasterisation, la délégation, l’absence de `cronjob`, `text_to_speech` et MCP Chrome DevTools, ainsi que l’absence d’instructions injectées depuis `~/.codex`, `~/.claude` ou le dépôt Hermes. Mesure fixe : `default` 32 934 o système + 55 072 o outils = 88 006 o estimés ; `vc-platform` 26 482 o système + 45 941 o outils = 72 423 o estimés. L’avertissement CLI indiquant que `agent.reasoning_effort` n’est pas une clé reconnue est classé non bloquant : la valeur est bien relue à `high` et le diagnostic explicite a été lancé avec `--reasoning high`. Les empreintes du profil `default` (`config.yaml`, `.env`, `SOUL.md`, mémoires et compétences) sont inchangées. Le statut Git normalisé du dépôt est resté stable jusqu’à la clôture documentaire. Le Lot 1 est clos sans point bloquant résiduel.
+
+Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+## 2026-08-08 — Nettoyage concis du hero `/home`
+
+Objet : retirer du hero d’accueil les éléments décoratifs ou discursifs non nécessaires pour une cible d’investisseurs pressés : halo autour de la boussole, animation associée et citation ikigai.
+
+Travaux :
+
+- `HomePage.tsx` : suppression du span `.home-hero-halo`, de la constante `HERO_INTENT_NOTE`, de l’import `Fleuron` devenu inutile et de la section « Note d’intention » sous le pont éditorial. La boussole `home-compass` reste rendue et non cliquable.
+- `home-hero.css` : retrait des styles du halo, de la variante sombre, des keyframes `home-hero-bleed` / `home-hero-breathe`, et des références au halo dans la pause hors viewport et le contrat `prefers-reduced-motion`.
+- `homeExperience.dom.test.tsx` : le contrat `/home` interdit désormais la citation ikigai et le halo tout en conservant la boussole et les deux sections restantes du `main`.
+
+Vérifications :
+
+- RED ciblé : `npm run test --workspace client -- src/pages/home/homeExperience.dom.test.tsx` échoue d’abord avec 2 tests en échec, sur la citation encore présente et le span `.home-hero-halo` encore rendu.
+- GREEN ciblé : même commande, exit 0, 30/30 tests.
+- `npm run typecheck` : exit 0. `npm run lint` : exit 0.
+- `npm run test` : Vitest client vert, 69 fichiers / 471 tests ; suite Node bloquée hors périmètre, 58/59 tests, sur `collect-routes.test.mjs:178` qui attend `https://iari-ctrl.github.io` alors que le `client/public/sitemap.xml` déjà modifié dans le worktree porte `https://iar-witness.github.io`.
+- Recette Vite Dev sur `http://127.0.0.1:5173/home` : boussole présente, aucun `.home-hero-halo`, aucune citation ikigai, aucune « Note d’intention », 2 sections dans `main`, `scrollWidth === clientWidth` (1269/1269), console vide. Le serveur Vite Dev a été arrêté.
+
+Aucun commit, staging, push, workflow distant ou déploiement n’a été exécuté.
+
+## 2026-08-07 — `/parcours` distillé : une destination, un niveau, une action
+
+Objet : la page proposait deux navigations concurrentes des mêmes 24 parcours et l'écrivait elle-même (« Le catalogue ci-dessous mène aux mêmes parcours, sans la carte »), six accordéons dont l'état n'était ni partageable ni conservé, et masquait les faits qui décident du choix. La famille seule est un axe faible : le rayon `maitriser` contenait un explicatif de 45 min et un socle de 35 h. Anatomie et sort de la carte arbitrés avec l'utilisateur (rangées denses ; carte montée à la demande ; curation `roadmap` conservée).
+
+Travaux :
+
+- **Trois zones au lieu de cinq blocs.** Une zone « où en suis-je ? » à trois états exclusifs (reprise, recommandation, test d'orientation) remplace l'ancien bandeau *et* le bandeau d'appel de pied de page. Deux filtres synchronisés à l'URL (`?family=`, `?budget=`). Une liste de rangées groupées par destination sous un simple filet.
+- **Suppressions** : les six accordéons et leur plomberie `inert`/aria, le paragraphe explicatif de la carte, l'ancre `#familles` et son bouton, le bandeau CTA final, le compteur « 24 parcours · 6 familles », la seconde instance de `CompassRose` (paire `hidden`/`sm:block` que le §11 du design system interdit explicitement), la variante `catalogue` de `ParcoursCard` et `parcoursByFamily`, devenue morte.
+- **Un seul calcul de progression.** `client/src/lib/parcoursResume.ts` applique `buildParcoursProgressSummary` au catalogue en une passe mémoïsée et en tire la règle de reprise, à la place des trois ratios « leçons lues » concurrents. La récence est calculable via `LearningWorkspaceState` (`activities[].parcoursId`, `productions[].updatedAt`) et sert de couche intermédiaire entre le parcours déclaré du profil et le plus avancé.
+- **Filtrage et tri** dans `client/src/lib/parcoursIndex.ts`, logique pure. Le tri conserve `roadmap` en clé primaire, départagée par `requiredMinutes` puis `slug` — l'ancien tri n'avait aucun départage malgré sa docstring. Le tri par minutes vit hors de `content/parcours.ts` : `content/learningTime.ts` en importe déjà `resolveStep`, l'import inverse fermerait un cycle.
+- **Continuité du niveau.** Un niveau explicitement choisi suit le lecteur dans chaque lien de rangée, et `ParcoursDetailPage` l'utilise déjà comme curseur d'étapes. Le défaut implicite n'est jamais propagé, faute de quoi il écraserait le budget du profil.
+- **`PathAtlas` chargé à la demande** : `import()` manuel (et non `React.lazy`, qui imposerait une frame de repli au démarrage de l'enveloppe), préchargé au survol et au focus, monté replié puis basculé à la frame suivante pour préserver le recul de la planche, et jamais démonté ensuite. Affordance devenue un bouton libellé. La carte sort du chunk de la page : `PathAtlas` pèse désormais 27,4 ko + 1,6 ko de CSS à part, `ParcoursPage` tombe à 12,3 ko. Le HTML prérendu de `/parcours` ne contient plus aucun nœud de la carte.
+- **Corrections** : la page n'avait pas de `<h1>` ; la ligne « Jalon » était conditionnée à la présence d'une *étape* `milestone` alors que 14 parcours en déclarent un sans étape — la rangée lit désormais l'objet `milestone` (20 parcours signalés au lieu de 10) et ne montre un *état* que là où une production est traçable ; le couple `inert` + `aria-hidden`, interdit par le §12, est ramené à `inert` seul.
+- Documentation alignée dans la même livraison : `docs/DESIGN_SYSTEM.md` (§6 cartes, §6 progression, §8 carte, §11 rose, §14 dette des filtres), `docs/ARCHITECTURE_EDITION.md:170` (qui décrivait encore l'accordéon), en-tête de `client/src/styles/parcours-atlas.css`.
+
+Vérifications :
+
+- `npm run typecheck` : exit 0. `npm run lint` : exit 0.
+- `npm run test --workspace client` : exit 0, 69 fichiers / 471 tests, dont 27 nouveaux sur `parcoursIndex` et `parcoursResume`. `PathAtlas.dom.test.tsx` inchangé et vert — il monte le composant directement, jamais la page.
+- `npm run check` : un échec, **préexistant et hors périmètre** — `collect-routes.test.mjs:178` attend l'origine `https://iari-ctrl.github.io` alors que le `client/public/sitemap.xml` du worktree a été régénéré avant cette session avec `https://iar-witness.github.io`. Fichier non touché ici.
+- `npm run build` + prérendu strict : `{"expected":715,"attempted":715,"written":715,"routeFailures":[],"metadataFailures":[],"issues":[],"ok":true}`.
+- Passe navigateur (Chrome DevTools), clair et sombre, large et étroit : les trois états de la zone haute (froid, recommandé, reprise à « 3/7 étapes » avec l'étape nommée) ; chemin de clic des filtres — « Réussir un entretien » écrit `?family=entretien` (4 parcours, un seul rayon), « Essentiel » ajoute `&budget=low` (1 parcours), « Complet » **supprime** le paramètre en conservant `aria-pressed="true"`, et le retour arrière restaure le réglage précédent ; `?family=grade&budget=low` rend l'état vide et sa réinitialisation ; ouverture de la carte. Recul de la planche mesuré au style calculé : 2,2 → 1,69 → 1,15 → 1,03 → 1,0 sur les 420 ms prévus. Ordre de tabulation : bouton carte → CTA de reprise → 7 pilules destination → 3 pilules niveau → une seule halte par rangée. Aucun débordement horizontal.
+- Morph et continuité du niveau vérifiés de bout en bout : depuis `?budget=low`, un clic sur une rangée atterrit sur `/parcours/le-vc-sans-bullshit?budget=low` avec le curseur d'étapes du détail déjà sur « Essentiel », et **exactement un** élément portant un `view-transition-name` au départ comme à l'arrivée — y compris dans le cas de collision où la zone de reprise affiche le même parcours que la rangée cliquée.
+
+Un défaut trouvé et corrigé pendant cette passe : `openParcours` reconstruisait `/parcours/${slug}` et ignorait le `href`, ce qui annulait la propagation du niveau sur le chemin de clic principal (elle ne survivait qu'aux clics modifiés). `useParcoursMorph` accepte désormais une destination optionnelle ; le site d'appel de `PathAtlas` est inchangé.
+
+Restent ouverts, signalés et non traités : le même défaut de jalon subsiste dans la variante `recommendation` de `ParcoursCard` (toucherait le tableau de bord et le résultat de profil) ; `venture-philanthropy-foundations` déclare `low` dans son `timeFit` pour 2 120 min, seul enregistrement `low` au-dessus de 240 min ; `p.time.sessions` contredit la durée calculée sur les parcours `derived` (9 séances pour 13 min), d'où l'affichage du nombre d'étapes à sa place ; la pilule de filtre reste dupliquée en ligne dans une dizaine de fichiers.
+
+---
+
+## 2026-08-06 — La planche des parcours s'encre à l'ouverture
+
+Objet : donner à `/parcours` un moment d'entrée écrit sans toucher à ses décisions produit. La carte reste repliée par défaut — le catalogue mène aux mêmes parcours sans elle — mais son ouverture devient un geste, et ouvrir un parcours emporte son sceau jusqu'à l'en-tête de la fiche. Direction retenue avec l'utilisateur parmi trois : « la planche s'encre », contre un cadran de filtrage (qui aurait ajouté un contrôle produit inexistant) et une amplification du survol des cartes.
+
+Travaux :
+
+- Nouveau `client/src/styles/parcours-atlas.css`. À partir de `--atlas-t0` (400 ms, le panneau ayant atteint sa hauteur vers 190 ms et la planche fini de reculer vers 420 ms) : un front d'encre s'élargit depuis la barre pendant 950 ms, précédé d'une ligne humide dorée qui s'efface en arrivant ; la rose des vents éclot au centre ; les 24 sceaux se tamponnent avec 30 ms d'écart, ordonnés par distance à la barre, donc du cœur vers le large ; le cartouche sèche ; les léviathans diffusent en dernier. Même contrat que `home-hero.css` : chaque animation part d'un `from` et remplit en `both`, l'état au repos est l'état final.
+- `PathAtlas.tsx` : masque de luminance à bord fondu porté par les `<defs>` — le graticule est pointillé, un tracé élément par élément l'aurait rendu plein — et rang d'encrage `--ink-i` par port. La classe d'état `atlas-ink` est portée par le `<svg>` et non par le groupe pan/zoom, faute de quoi le masque, qui vit dans les `<defs>`, n'était jamais atteint. La transition du groupe pan/zoom passe de 800 à 420 ms pour que le recul de la planche précède l'encrage au lieu de le concurrencer ; l'enveloppe `max-height` passe de 800 à 560 ms ici et dans `ParcoursPage`.
+- Nouveau `client/src/lib/parcoursMorph.ts` : `useParcoursMorph` pilote `document.startViewTransition` à la main. L'application tourne sur `BrowserRouter` ; l'option `viewTransition` de React Router, qui exige un routeur de données, n'y déclenche rien — vérifié, l'API n'était jamais appelée. Seul l'élément activé porte un `view-transition-name`, un même nom présent deux fois annulant la transition. Sans l'API ou en mouvement réduit, navigation ordinaire.
+- `cards.tsx`, `Ornaments.tsx`, `ParcoursDetailPage.tsx` : la carte du catalogue prend en charge le clic gauche simple (les clics modifiés restent au navigateur) et son sceau rejoint celui de l'en-tête de destination. Règles `::view-transition-*` ajoutées à `global.css`, avec coupure explicite en mouvement réduit — ces pseudo-éléments échappent à la règle `*` de `tokens.css`.
+- Depuis la carte, un port SVG n'est pas capturable par l'API — Chrome ne crée aucun groupe nommé pour un élément SVG, constaté sur la liste des pseudo-éléments. Le sceau est donc confié le temps de la transition à un calque simple posé exactement sur lui et monté en portail sur `body`, le sceau dessiné s'effaçant.
+
+Vérifications :
+
+- `npm run typecheck` : exit 0. `npm run lint` : exit 0.
+- `npm run check` : 67 fichiers / 444 tests client verts ; **1 test node en échec**, `collect-routes` « the committed sitemap XML contains exactly the collected routes ». Hors périmètre : `client/public/sitemap.xml` et `client/public/robots.txt` ont été régénérés dans le worktree avec l'origine de cette machine (`https://iar-witness.github.io/vc-platform`) alors que le test épingle l'origine committée (`https://iari-ctrl.github.io/vc-plateform`, coquille comprise). Aucun de ces fichiers n'appartient à cette passe ; ils sont laissés en l'état.
+- `VITE_BASE_URL=/vc-platform/ VITE_SITE_URL=https://iar-witness.github.io/vc-platform npm run build` : exit 0, prérendu strict `{"expected":715,"attempted":715,"written":715,"routeFailures":[],"metadataFailures":[],"issues":[],"ok":true}`. Cette exécution reprend la preuve laissée ouverte par l'entrée précédente, dont le build échouait sur `PathAtlas.tsx` en cours de modification.
+- Puppeteer, clair et sombre, 1440 × 1000 et 390 × 844 : séquence gelée image par image via l'API Web Animations. Trois défauts corrigés en un lot après la première ronde — le front n'était pas animé (sélecteur hors portée), sa courbe était mal formée (second point de contrôle en retrait, arrivée au bord en 160 ms au lieu de 950), et la cascade des sceaux sur l'amorti exponentiel de la maison se lisait comme une apparition simultanée. Mouvement réduit simulé : front au repos, ligne humide invisible, 24 sceaux et cartouche opaques dès l'ouverture. Aucune erreur console sur les quatre passes.
+- Passe finale : replier puis rouvrir rejoue bien la séquence (classe `atlas-ink` retirée au repli, front revenu à 56 px à 520 ms de la seconde ouverture) ; après encrage, le survol reprend la main sur l'opacité laissée par `fill-mode: both` (port survolé à 1,00, voisin atténué à 0,26, relations montées). Une correction : le calque volant mesurait le cercle de découpe du parchemin (53 px) et non le sceau (39 px), soit un décollage 36 % trop grand — un marqueur `data-port-seal` cible désormais le bon cercle.
+
+Signalé, non corrigé, hors périmètre : au repos, les sceaux des ports recouvrent partiellement les noms de territoires de la carte (« Mare Analytica », « Haute Citadelle », « Terra Prima » tronqués), état antérieur à cette passe.
+
+---
+
+## 2026-08-06 — Le hero de `/home` s'encre au lieu d'apparaître
+
+Objet : donner au hero de l'accueil un moment d'entrée écrit plutôt qu'un fondu-montée générique, sans sortir du langage cartographique ni de l'enveloppe temporelle de la séquence d'entrée. Direction retenue avec l'utilisateur parmi quatre : « la carte s'encre », CSS pur, boussole réveillée après le tracé, enveloppe d'entrée inchangée.
+
+Travaux :
+
+- Nouveau `client/src/styles/home-hero.css` : la rose des vents se trace (bezel, graduations, branches, lettres cardinales), les deux lignes du titre sont écrites sous un masque de plume qui balaie de gauche à droite — encre floue qui se fixe —, la légende se pose. Séquence de ~940 ms depuis `--home-hero-t0`, donc close avant le démontage du rideau (3 900 ms). L'ancien `.home-intro-hero` / `home-intro-hero-in` est retiré de `home-intro.css`.
+- `HomePage.tsx` : le hero possède désormais sa propre révélation sur les deux chemins d'arrivée (`--home-hero-t0` = 0 en navigation interne, reliquat de `HOME_INTRO_HERO_DELAY` depuis le portail) ; `Reveal` n'y sert plus. Un `IntersectionObserver` publie `data-home-hero-live` et met en pause les trois boucles d'ambiance (aiguille, halo, ciel) hors champ.
+- `Illustrations.tsx` : `CompassRose` expose des points d'accroche inertes (`compass-ring`, `compass-tick`, `compass-points`, `compass-points-minor`, `compass-letters`, `compass-pin`) et `pathLength="1"` sur cercles et graduations, sans changer son rendu sur les quatre autres pages qui l'utilisent.
+- Deux corrections issues de la vérification navigateur : le halo de contours (`.contour-field`) se noyait sous la trame `map-paper` en clair et concurrençait le bezel en sombre — remplacé par une nappe dorée ; et le masque du titre n'exploitait que 59 % de sa course, ce qui jouait le balayage en ~140 ms et le faisait lire comme un flash — géométrie recalculée (`mask-size: 1/a`) et courbe de plume moins exponentielle.
+- Le hero ne monte plus qu'une rose, redimensionnée en CSS : les deux instances `hidden`/`sm:block` rejouaient leur tracé au franchissement du point de rupture, avec 2,6 s d'absence sur le chemin rideau.
+- `docs/DESIGN_SYSTEM.md` §11 : liste des animations mise à jour et section « Hero de `/home` » ajoutée.
+
+Vérifications :
+
+- `npm run typecheck` : exit 0.
+- `npm run test --workspace client -- homeExperience.dom.test.tsx homeIntro.dom.test.tsx` : exit 0, 2 fichiers / 35 tests.
+- `npm run check` : exit 0 — contenu strict valide, lint 0 erreur, 67 fichiers / 444 tests client, 59 tests node.
+- `VITE_BASE_URL=/vc-platform/ VITE_SITE_URL=https://iar-witness.github.io/vc-platform npm run build` : exit 0, prérendu strict `{"expected":715,"attempted":715,"written":715,"routeFailures":[],"metadataFailures":[],"issues":[],"ok":true}`. Cette preuve porte sur l'état gelé contenant toute la passe **sauf** l'ajout final d'`animation-fill-mode: backwards` sur l'aiguille (une ligne CSS, hors périmètre de `tsc`, d'ESLint et des tests DOM, vérifiée en navigateur : la transformation pendant le délai est identique au premier frame de la boucle).
+- Le build relancé après cette ligne échoue sur `client/src/components/explore/PathAtlas.tsx` (`Port` sans `inkRank`), fichier non touché par cette passe et modifié en parallèle dans le worktree pendant la session. Défaut hors périmètre, signalé et non corrigé ; la preuve de prérendu devra être reprise sur un état gelé une fois ce travail terminé.
+- Chrome DevTools, clair et sombre, 1440 × 1000 et 390 × 844 : séquence scrubée image par image, aucun débordement horizontal, boucles d'ambiance effectivement en pause hors champ. Mouvement réduit simulé : l'état au repos est identique à l'état final, aucun contenu masqué. Le HTML prérendu de `/home` porte `--home-hero-t0: 0ms` et le titre en clair.
+
+---
+
+## 2026-08-06 — Passe de clarté rédactionnelle sur `/parcours`
+
+Objet : lever les ambiguïtés de libellés du catalogue des parcours et unifier la forme d'adresse de la surface. Décision utilisateur : `/parcours` passe au **vouvoiement** (la page tutoyait, la carte vouvoyait) ; les 24 `hook` de `data/parcours.json` restent au tutoiement, écart assumé et non traité dans cette passe.
+
+Travaux :
+
+- `ParcoursPage.tsx` : eyebrow, titre, description, bannière « Votre parcours », encart d'orientation et `usePageMeta` passés au vouvoiement. La description remplace la double métaphore (« colonne vertébrale, pas un couloir », « le temps n'est qu'un curseur ») par l'énoncé factuel du mécanisme, à longueur constante.
+- Déduplication des consignes de la carte : le paragraphe d'introduction ne répète plus les instructions d'interaction, désormais portées par la seule légende de `PathAtlas` ; la mention « navigation libre », énoncée trois fois sur la page, ne l'est plus qu'une.
+- États rendus exacts : la bannière affiche « Reprendre » quand une leçon du parcours recommandé est déjà déclarée lue (même règle que `ParcoursCard`, qui l'appliquait déjà) ; le `<title>` SVG de la carte annonçait « cliquez une terre », affordance inexistante — seuls les sceaux sont activables.
+- Libellés opaques : « Phare » → « Parcours phare » ; « Les deux sièges » / « Les deux sièges de la table » unifiés en « Fondateur & investisseur » (carte et page de détail) ; durée nue « ≈ 4 h » → « ≈ 4 h au total » ; nom accessible de l'anneau de progression aligné sur le texte visible.
+- Registre : `FAMILY_META` purgé de « sans bullshit », « bingeable », « zéro engagement » et des taglines non descriptives (`maitriser`, `express`).
+- `data/profileParcours.json` : cadence `high` « Immersion, tout débloqué » → « Immersion, toutes les étapes incluses ». La formule impliquait un verrouillage de contenu que le produit n'applique pas (PRODUCT.md, principe 2) ; le mécanisme filtre des étapes, il n'en déverrouille aucune.
+- « Rétracter la carte » → « Masquer la carte » ; « Voir les familles » → « Voir tous les parcours » (avec flèche descendante, la cible étant une ancre en bas de page) ; « Passer le test » → « Passer le test d'orientation » (aligné sur `IkigaiPage`) ; « Flâner dans la bibliothèque » → « Explorer la bibliothèque ».
+
+Vérifications :
+
+- `npm run validate:content` — exit 0, 24 parcours, 373 marqueurs analysés ;
+- `npm run typecheck` — exit 0 ;
+- `npm run lint` — exit 0 ;
+- `npm run test` — exit 0, 67 fichiers / 444 tests client et 59 tests Node ;
+- passe navigateur locale (Chrome DevTools) en 1440×1000 et 390×844 : en-tête, carte dépliée et repliée, famille « Lever des fonds », encart d'orientation ; aucun débordement horizontal en 390 px.
+
+Portée collatérale : `cards.tsx` étant partagé, les libellés « Parcours phare », « Fondateur & investisseur », la durée « au total » et le nom accessible de l'anneau valent aussi pour `/dashboard` et la page de résultat de profil.
+
+## 2026-08-04 — Chargement différé des définitions du glossaire
+
+Objet : empêcher une simple visite de `/glossary` de télécharger immédiatement `data/generated/glossary.defs.json`; charger les définitions au premier slug actif ou au premier dépliage d’entrée.
+
+Travaux :
+
+- l’état des définitions démarre en `idle` au lieu de `loading` ;
+- `loadGlossaryDefs()` ne s’exécute plus tant qu’aucune entrée détaillée n’est requise ;
+- un slug actif (`?term=` ou route de détail) ou un dépliage manuel déclenche le chargement ;
+- le cache local des définitions et la reprise après erreur par `Réessayer` sont conservés.
+
+Contrat RED–GREEN :
+
+- le test DOM ciblé rend `/glossary` sans `?term`, exige que l’entrée visible soit présente et que `loadGlossaryDefs` n’ait pas été appelé, puis ouvre l’entrée et attend la définition chargée ;
+- premier lancement ciblé : `npm run test --workspace client -- src/pages/glossary/GlossaryPage.lazy.dom.test.tsx -t "simple visite"` échoue sur l’ancien appel immédiat à `loadGlossaryDefs` ;
+- après correction, le ciblé passe ; le test de reprise après erreur sur slug actif passe aussi.
+
+Vérifications finales :
+
+- `npm run test --workspace client -- src/pages/glossary/GlossaryPage.lazy.dom.test.tsx` — exit 0, 9/9 ;
+- `npm run typecheck --workspace client` — exit 0 ;
+- `npm run lint --workspace client` — exit 0 ;
+- recette Vite Dev sur `http://127.0.0.1:5173/glossary` : au chargement initial, aucune requête fetch de `glossary.defs.json` n’est émise ; seule la résolution d’URL Vite `glossary.defs.json?import&url` est présente ;
+- après ouverture de l’entrée `a16z`, une nouvelle requête `glossary.defs.json` apparaît, la définition se rend, `scrollWidth === clientWidth` et la console ne contient ni erreur ni avertissement ;
+- le serveur Vite Dev ouvert sur 5173 a été arrêté et le port est libre.
+
+Fichiers touchés par cette correction : `client/src/pages/glossary/GlossaryPage.tsx`, `client/src/pages/glossary/GlossaryPage.lazy.dom.test.tsx`, `Suivis/ETAT.md` et `Suivis/JOURNAL.md`. Aucun commit, staging, push, workflow distant ou déploiement.
+
+---
+
 ## 2026-08-04 — Animation continue et note longue sur l’accueil
 
 Objet : appliquer la confirmation produit sur `/home` après le recentrage éditorial : restaurer l’animation continue sans délai des carrés d’arche, remettre l’ancienne note d’intention longue, et retirer seulement le cercle visuel du bouton clair/sombre sans changer sa position ni son accessibilité.
@@ -2309,3 +2664,174 @@ Travaux :
 - Les fichiers pré-migration `Bilan.md` et `Report et scoring.md` sont supprimés (état historique complet dans l'historique Git).
 
 Vérifications : réorganisation documentaire uniquement, aucun fichier de code ni de contenu (`data/`, `client/`) modifié. Les références croisées entre documents ont été revérifiées après déplacement.
+
+---
+
+## 2026-09-05 — Fiabilité du simulateur de note d’investissement
+
+Objet : correction ciblée de `/simulators/simulateur-note-investissement`, sans nouveau moteur financier, backend, refonte générale ni publication. Branche `master`, worktree sale préservé. Les trois HTML d’entrée étaient identiques (994 449 octets, SHA-256 `4acea45edf9c8b8443e95a8be5ffe0e174fed7d9320be508ca8ddb37f7ccab7b`).
+
+Travaux :
+- extraction de la source unique sous `nouveau simu/src/` : `model.mjs` pour le modèle pur, `component.js` pour la logique de l’atelier, `template.html` pour le rendu et `bundle-shell.html` pour les ressources/runtime hérités ; assemblage Node standard dans `scripts/build-investment-memo.mjs`, sans dépendance nouvelle ;
+- `npm run build:memo` génère les trois HTML existants, dont `client/public/tools/simulateur-memo.html` ; `check:memo` et les tests vérifient leur parité sans écriture. Génération raccordée aux hooks racine predev/prebuild. Contrat et sources à modifier documentés dans `nouveau simu/embed/README.md` ;
+- nombres français analysés intégralement, contraintes par champ, levée obligatoire dans la post-money, ticket inclus dans le tour, dilution bornée, sortie nulle autorisée, dépendances indépendantes et erreurs locales accessibles ;
+- screening : six critères liés aux champs accessibles, sans contribution des hypothèses et overrides du mémo complet ; état complet conservé lors des changements de mode. Complétude limitée à la présence des champs et à la validité numérique ;
+- overrides invalides, incohérents ou sans hypothèses bloqués sans fallback silencieux ; activation sans arrondi caché, saisie vide encore éditable et restauration explicite. Pour changer le scénario, modifier les hypothèses. Synthèse et aperçu partagent les résultats et affichent aussi les 100 M€ du fonds ; méthode courte sur tour primaire, fonds propres, dilution cumulée et résultats bruts ;
+- tests dans `scripts/investment-memo.test.mjs` et ajout ciblé dans `simulators.dom.test.tsx`. Budget statique `scripts/media-budget.test.mjs` réconcilié avec l’artefact HTML déjà présent : 48 fichiers, dont le mémo généré ; budget hors mémo inchangé à 14 083 661 octets. Wrapper React, registre et collections éditoriales non modifiés.
+
+Preuves RED → GREEN : `node --test scripts/investment-memo.test.mjs` a reproduit `20abc → 20`, une post-money de 20 malgré une levée vide, des bornes non contrôlées, le fallback silencieux d’override invalide, l’arrondi d’activation `4.938268 → 4.9`, seulement 2 critères screening cochables sur 6, les nombres invalides comptés dans la complétude et l’absence des produits de sortie/fonds dans la synthèse. Les tests DOM ont reproduit l’absence de champs reliés à leurs explications. Les sorties RED intégrales sont conservées localement sous `/tmp/vc-memo-reliability/red-*.log` ; le harness a été corrigé séparément lorsqu’un échec venait de l’URL jsdom ou des matchers d’un document sans fenêtre.
+
+Validations finales :
+- `node --test scripts/investment-memo.test.mjs scripts/media-budget.test.mjs` : exit 0, 12 tests ;
+- `npm run test --workspace client -- src/components/simulators/simulators.dom.test.tsx` : exit 0, 4 tests ;
+- `npm run typecheck`, `npm run lint`, `npx eslint --config client/eslint.node.config.js 'nouveau simu/src/model.mjs' --max-warnings=0`, `node --check 'nouveau simu/src/component.js'` : exit 0 ;
+- build canonique avec `PUPPETEER_EXECUTABLE_PATH=/tmp/vc-memo-chromium/chromium/mac_arm-1692818/chrome-mac/Chromium.app/Contents/MacOS/Chromium`, `VITE_BASE_URL=/vc-plateform/`, `VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform` : exit 0, prérendu strict 716/716, `ok: true` ;
+- `npm run check:memo` et `npm run check:generated` après build : exit 0 ; empreintes des quatre fichiers `data/generated/`, sitemap et robots inchangées ;
+- recette Chromium réelle via `/tmp/vc-memo-reliability/browser-qa.mjs`, build servi à `http://127.0.0.1:4178/vc-plateform/simulators/simulateur-note-investissement` et fichier autonome : parsing, erreurs, dépendances, dilution hors bornes, sortie nulle, overrides, changement de mode, conservation et aperçu vérifiés. Référence rendue : **8 % ; 5,6 % ; 28 M€ ; 14× ; 0,28×**. Aucune erreur JavaScript observée. Pleine page : largeur et scrollWidth de 1440 px. Rapport et captures dans `/tmp/vc-memo-reliability/` ;
+- `npm run test` avec Chromium explicite : 69 fichiers / 473 tests client verts, 69 tests Node réussis et 1 annulé après timeout de 60 s. La reprise isolée `node --test scripts/prerender.integration.test.mjs` reproduit le timeout du test de connexion navigateur partagée. Ce gate reste non vert ; il ne remet pas en cause le build strict et la recette ciblée réussis, mais sa cause n’est pas établie dans ce lot.
+
+Écart de procédure : le premier `npm run test` a lancé le test transversal avec le défaut Puppeteer, identifié ensuite comme Google Chrome for Testing. Cet écart à la consigne Chromium a été déclaré ; ce passage n’est pas retenu comme preuve navigateur. Les builds et recettes ciblées utilisent explicitement Chromium. Le premier téléchargement de Chromium avec un buildId littéral `latest` a échoué en 404 ; la résolution de révision via `resolveBuildId` a permis son installation temporaire sans modifier le projet.
+
+Limites : runtime embarqué conservé, pas d’audit général, pas de refonte mobile, ni qualification exhaustive de l’export PDF. Aucun fichier `data/generated/` édité directement ; aucun staging, commit, push, workflow distant ou déploiement.
+
+---
+
+## 2026-09-08 — Réconciliation du suivi après intégration finale du simulateur de note
+
+Objet : remettre les documents de suivi en accord avec l’état courant du simulateur `/simulators/simulateur-note-investissement`. Cette passe est documentaire : elle ne modifie ni le code, ni les données, ni les artefacts générés.
+
+État consigné :
+
+- `data/simulators.json` déclare le simulateur sous l’identifiant `investment-memo`; `client/src/components/simulators/index.ts` l’enregistre et `InvestmentMemoSim` charge l’HTML public avec `publicAssetUrl(...)`, dans une iframe et par un lien pleine page. Le wrapper place l’atelier avant tout préambule, utilise une hauteur responsive et laisse l’en-tête hôte se contracter à largeur étroite.
+- La source reste `nouveau simu/src/model.mjs`, `component.js`, `template.html` et `bundle-shell.html`. `npm run build:memo` produit `client/public/tools/simulateur-memo.html` et les deux distributions sous `nouveau simu/`; `check:memo` les compare sans écriture.
+- La reprise locale normalise les collections persistées et les étapes invalides. Une panne de `localStorage` laisse le brouillon ouvert, affiche une alerte et empêche un effacement de simuler une réussite. Les événements `storage` synchronisent les instances de même origine ; un brouillon non sauvegardé garde la priorité jusqu’à la prochaine écriture réussie.
+- Les rails se replient en vue compacte et retirent leur contenu du parcours clavier. Les changements de section, de vue, la fermeture d’un rail et la suppression d’une ligne replacent le focus sur une cible visible. Les sélecteurs exposent leurs états, l’aperçu A4 est une région nommée utilisable au clavier et les tons secondaires clairs respectent le seuil AA couvert par les tests.
+- `Suivis/PROCEDURE_PUSH.md` régénère désormais les trois HTML avant sauvegarde, impose la base et l’origine canoniques au build et contrôle les sorties dérivées après celui-ci.
+
+Vérifications exécutées le 2026-09-08 :
+
+- `npm run check:memo` : exit 0, 3 artefacts vérifiés.
+- `node --test scripts/investment-memo.test.mjs scripts/media-budget.test.mjs` : exit 0, 31 tests.
+- `npm run test --workspace client -- src/components/simulators/simulators.dom.test.tsx` : exit 0, 1 fichier / 5 tests.
+- `npm run typecheck` et `npm run lint` : exit 0.
+- `npx eslint --config client/eslint.node.config.js 'nouveau simu/src/model.mjs' --max-warnings=0` et `node --check 'nouveau simu/src/component.js'` : exit 0.
+- `npm run validate:content:strict` : exit 0, 24 parcours, 1 certification, 5 niveaux, 30 cours, 147 leçons, 420 termes, 10 études de cas, 12 livrables, 8 articles, 31 dossiers d’écosystème, 10 simulateurs et 373 marqueurs analysés.
+- `npm run check:generated` : exit 0, 147 leçons, 126 corps publiés et 420 termes de glossaire.
+
+Le build canonique, la suite globale et la recette Chromium n’ont pas été relancés dans cette passe documentaire. Leur dernière preuve date du 2026-09-05 et précède les derniers ajustements du wrapper, de la persistance et du focus. Le timeout connu de `scripts/prerender.integration.test.mjs` reste ouvert. Aucun staging, commit, push, workflow distant ou déploiement.
+
+---
+
+## 2026-09-10 — Premier lot d’intégrité des données locales
+
+Objet : exécution des priorités S6-01, S6-03, S6-06, S6-21, S6-04, S6-02, S6-05 et S6-11 de `Suivis/AUDIT-UI-UX-PARCOURS.md`. Lecture d’`AGENTS.md`, `CLAUDE.md`, `PRODUCT.md` et de l’audit ; statut Git et empreintes des fichiers concernés conservés sous `/tmp/vc-local-data-integrity/`. Le worktree sale antérieur est préservé. Aucun fichier de données générées, source du simulateur, contenu éditorial ni configuration de publication n’a été modifié.
+
+Corrections :
+
+- `localDataLifecycle.ts` prépare et valide l’opération, compare l’aperçu à l’état courant, enregistre et relit une copie de récupération avant mutation, libère la capacité des seules clés remplacées, puis vérifie les valeurs écrites. Toute panne après mutation déclenche une restauration indépendante de chaque domaine puis une comparaison des valeurs brutes. Les restaurations non vérifiables donnent les domaines affectés et la copie exacte.
+- `localDataRecovery.ts` conserve une copie temporaire dans IndexedDB, hors du quota de `localStorage`. La réservation ne peut pas écraser une copie en attente. Le succès exige aussi le retrait vérifié de cette copie ; un échec à ce stade déclenche une restauration. Une copie persistante d’opération interrompue reste téléchargeable après rechargement.
+- L’export v2 ajoute `vcmemo.onepager.v1` et les archives de migration, dont `onboardingMode`, `vcpx:highlights` et `vcpx:onboarding-seen`. Les archives sont reconnues par leurs domaines exacts. Les clés étrangères, même sous `vcpx:`, restent exclues. Les valeurs illisibles sont conservées brutes ; les lectures impossibles sont identifiées sans `null` de substitution. Le téléchargement est précédé d’un bilan par domaine.
+- Les formats actifs `vcpx:` et celui de l’atelier restent inchangés. Le fichier d’export passe à v2 pour décrire le nouveau périmètre ; la limite de fichier passe à 64 Mo pour permettre les archives et l’échappement des valeurs brutes, sans augmenter les limites par domaine. Les sauvegardes v1 historiques restent importables et préservent explicitement la note et les archives absentes. `prepareStoredRaw` partage les migrations avec la lecture, sans écriture préparatoire. Le fichier original reste un `File` distinct, téléchargeable. Les versions inconnues bloquent tout remplacement ; les domaines valides peuvent être téléchargés séparément pour récupération.
+- `ProfilePage` utilise `LocalDataPanel`, qui annonce le remplacement de l’appareil, les ajouts/remplacements/suppressions et propose une sauvegarde préalable. Le protocole publie son état vérifié vers `UserDataProvider`, `ThemeProvider` et `learningWorkspace` avant confirmation. Les erreurs préparatoires de purge et de lecture de fichier sont capturées. Les confirmations réutilisent `ConfirmDialog` avec focus sur Annuler pour ces commandes ; le sélecteur de fichier reçoit un focus visible.
+
+Preuves RED → GREEN : `src/lib/localDataIntegrity.test.ts` reproduit d’abord 6 défauts sur le code courant : export d’une valeur illisible sous forme de `null`, ancien format migrable refusé, note/archives/héritages non purgés, exception préparatoire de purge, restauration incomplète non signalée, écriture ignorée annoncée réussie. `ProfilePage.localData.dom.test.tsx` reproduit ensuite l’absence de confirmation explicite, de bilan de remplacement et de copie brute. Sorties initiales complètes : `/tmp/vc-local-data-integrity/red-core.log` et `red-ui.log`. Les non-régressions conservent les cas, ajoutent les pannes de lecture/copie/nettoyage/actualisation, les migrations workspace, la conservation du fichier, les clés étrangères, les aperçus périmés et 100 notes avec quota calculé sur le volume des données et des clés.
+
+Validations finales :
+
+- `npm run test --workspace client` : exit 0, 71 fichiers / 509 tests.
+- `npm run typecheck` et `npm run lint` : exit 0.
+- `node --test scripts/investment-memo.test.mjs` : exit 0, 30 tests.
+- `npm run check:generated` et `npm run check:memo` : exit 0, contrôles sans écriture.
+- Vite lancé directement par `npm run dev --workspace client -- --host 127.0.0.1 --port 5178 --strictPort`, sans hook racine de génération.
+- `PUPPETEER_EXECUTABLE_PATH='/Users/iar-witness/.cache/puppeteer/chrome/mac_arm-151.0.7922.71/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing' node scripts/local-data-lifecycle.browser.mjs` : exit 0, Chrome/151.0.7922.71, contexte neuf fermé en fin de recette. Import/purge, thème, cache workspace, 100 notes, note d’investissement, archives et clés étrangères vérifiés après rechargement. Avec 100 notes de 18 000 caractères et 3 435 286 caractères de remplissage étranger au quota natif, des notes de 17 900 caractères sont importées ; des notes de 19 000 caractères provoquent une restauration exacte. La panne persistante laisse une copie exacte après rechargement. Téléchargements de l’original et de la récupération comparés octet pour octet. Réservation de deux copies concurrentes : une seule acceptée. Focus Annuler/Échap et largeur 390 px vérifiés ; aucune erreur JavaScript.
+- Rapport et capture du dernier passage : `/var/folders/94/3wqg8w_11d312wnkj5cw9hb40000gn/T/vc-local-data-browser-oidNf4/`. Logs, premiers RED et sauvegardes des fichiers initiaux : `/tmp/vc-local-data-integrity/`.
+- `git diff --check` : exit 0. Journal antérieur conservé intégralement ; inventaire des fichiers modifiés comparé au statut initial.
+
+Classement des échecs : les RED initiaux sont les défauts en périmètre, désormais couverts. Des erreurs dans les nouvelles fixtures, un indicateur de migration perdu dans l’aperçu préparé, un typage de matcher et les déclarations de globales du script navigateur ont été corrigés pendant le lot. La première recette attendait un thème clair après purge sans fixer la préférence système ; sa fixture impose désormais une préférence claire. Un timeout du test existant `onboardingAndIkigai.dom.test.tsx` est apparu sur une passe complète, puis la reprise isolée (4 tests) et la passe complète suivante sont vertes ; sa cause reste indéterminée. Le timeout antérieur du test Node de prérendu partagé, documenté avant ce lot, reste ouvert et n’a pas été relancé.
+
+Limites : qualification publique Safari/Firefox, lecteurs d’écran et appareils physiques non effectuée. Les conflits entre brouillons de plusieurs onglets restent hors lot ; les contrôles ne rendent pas `localStorage` atomique entre onglets. Une interruption brutale peut nécessiter une récupération manuelle depuis la copie persistée, sans restauration automatique au démarrage. Aucun build complet, staging, commit, push, workflow distant ni déploiement. L’inventaire, les choix de format et la recette reproductible sont maintenus dans `Suivis/RECETTE-DONNEES-LOCALES.md` ; `Suivis/ETAT.md` et l’audit sont actualisés.
+
+---
+
+## 2026-09-22 — Réconciliation du README, de l’architecture et du design system
+
+Lot documentaire, fondé sur les manifests, schémas, générateurs et consommateurs du worktree courant. Deux lectures indépendantes ont complété la vérification des collections éditoriales et du design system ; leurs écarts ont été recoupés avant correction.
+
+- `README.md` : 167 → 54 lignes ; marque actuelle, démarrage, contrôles utiles, index documentaire et limites locales. Les procédures détaillées renvoient à leur propriétaire.
+- `docs/ARCHITECTURE_EDITION.md` : accès par section ; distinction source/projection, statuts publics, ordre des leçons et certifications, aliases, portée réelle des placeholders et validateurs, sources du simulateur de note, persistance, build et hébergement. Les exemples JSON partiels ou non résolus sont remplacés par des procédures liées aux schémas.
+- `docs/DESIGN_SYSTEM.md` : principes conservés, paramètres renvoyés au code ; marque, chrome d’accueil, emplacement et chargement de l’atlas, motion et objectif d’accessibilité corrigés. Les valeurs recopiées et le backlog non normatif ne définissent plus le contrat.
+
+Contrôles exécutés : script local `check_docs.py` (liens, ancres, chemins et scripts npm) sans erreur après correction de deux renvois ; `npm run check:generated`, `npm run check:memo`, `npm run validate:content:strict`, `npm run validate:glossary` et `git diff --check` ciblé : exit 0. Les empreintes des fichiers suivis et non suivis ont été comparées au manifeste initial ; seul le périmètre documentaire et de suivi a changé. Le journal antérieur est conservé.
+
+Limites conservées : `validate:glossary` ne résout pas les leçons drop-in, contrairement au validateur général ; aucune correction de code dans ce lot. Les anciens candidats de design (primitives de formulaire, filtres partagés, sommaire de leçon, présentation du journal de bord, accents de parcours) restent des suggestions non arbitrées, pas un nouveau plan. Le prolongement du ciel d’accueil jusqu’à l’atlas est retiré, l’atlas vivant sur `/parcours`.
+
+Aucun build, test applicatif, recette navigateur, staging, commit, push, workflow distant ou déploiement. La validation documentaire ne renouvelle ni la recette applicative du 2026-09-10 ni le build du 2026-09-05.
+
+---
+
+## 2026-09-23 — Actualisation documentaire préparatoire à Formation F0/S0
+
+Périmètre : vérifier les instructions agents et les autorités ciblées par le plan `.hermes/plans/2026-07-31_191055-consolidation-formation.md`, sans exécuter son lot F0. Le statut et les empreintes des fichiers suivis/non suivis ont été relevés avant toute écriture. Le diff de session est distinct des modifications antérieures du worktree.
+
+- `docs/ARCHITECTURE_EDITION.md` : distinction publication/disponibilité/résolution/complétion, absence actuelle de métadonnées communes, diagnostic sans migration, jalon résolu en livrable ou leçon, diagnostic d’entrée séparé et contributions des durées renvoyées à leur propriétaire.
+- `docs/parcours/README.md` : grille pédagogique sans ajout de champs, contrôle des prérequis, conteneurs vides/partiels, charge et génération conditionnelle aux sources effectivement modifiées.
+- Plan Formation : baseline de juillet conservée comme historique ; objectifs et prompt de reprise ne figent plus ses quantités. S0 reste un diagnostic pur, distinct des décisions S1/S2 et du gate global.
+- `Suivis/ETAT.md` : F0 explicitement non implémenté et relevé actuel — 147 leçons dont 126 publiées, 5 placeholders (2 pratiques, 3 facultatifs), 4 parcours à durée dérivée, 20 à durée déclarée, aucun cours sans leçon publiée. Les dépendances et sorties résolues de juillet ne sont pas requalifiées.
+
+**Portion bloquée :** la confirmation d’écriture d’`AGENTS.md` et `CLAUDE.md` a expiré. Le patch protégé n’a rien écrit ; aucun nouvel essai ni contournement. Les corrections à appliquer sont conservées dans l’état courant : génération du simulateur de note, contrôle `check:memo` séparé, périmètre réel du stockage, normalisation de l’origine/base et accès ciblé aux autorités Formation. Ces deux fichiers et `PRODUCT.md` restent inchangés ; la demande complète de réconciliation des instructions n’est pas close.
+
+Contrôles exécutés :
+
+- `npm run check:generated` : exit 0, 147 leçons / 126 corps publiés / 420 termes ; `npm run check:memo` : exit 0, 3 HTML vérifiés.
+- `npm run validate:content:strict` et `npm run validate:glossary` : exit 0, sans génération. Convictions recalculées séparément : 24.
+- `python /Users/iar-witness/.hermes/cache/scratch/formation-doc-refresh-2026-09-23/check_docs.py` : exit 0, liens locaux/ancres, chemins complets, champs JSON cités et commandes npm contrôlés ; fichiers et commande F0 absents explicitement attendus. Le premier passage signalait à tort `data/profileParcours.json.timeCalibration` comme chemin de fichier : le contrôleur a été corrigé pour vérifier ce champ JSON, sans changer le produit.
+- `git diff --check` ciblé sur les documents examinés : exit 0. Empreintes comparées au manifeste initial ; seuls architecture, contrat Parcours, plan Formation et les deux suivis changent. Préfixe du journal antérieur conservé octet pour octet.
+- Contre-revue indépendante en lecture seule : aucun écart concret sur les six critères examinés ; constats recoupés avec les contrôles du parent. Elle ne qualifie ni les prérequis, ni les sorties résolues, ni une livraison applicative.
+
+Aucun code, donnée source, généré ou manifeste modifié. Aucun build, test applicatif, navigateur, staging, commit, push, workflow distant ou déploiement. La prochaine action documentaire exige une confirmation d’écriture des deux fichiers protégés ; F0/S0 reste ensuite à implémenter sur demande.
+
+---
+
+## 2026-09-23 — Clôture des instructions agents et contre-revue cumulée F0/S0
+
+Après renouvellement de l’autorisation, `AGENTS.md` et `CLAUDE.md` sont corrigés : protection des HTML assemblés du simulateur, hooks `build:memo`/`split:content`, contrôle `check:memo` distinct de `check`, périmètre réel de la persistance locale et récupération IndexedDB, contrat origine/base et accès ciblé aux autorités Formation. La distinction entre publication, disponibilité, résolution et complétion ne prête pas aux parcours de métadonnées encore absentes.
+
+La contre-revue indépendante a examiné les modifications cumulées des deux passes, notamment les 30 blocs de remplacement du candidat, à partir des copies avant session plutôt que du diff global. Aucun écart matériel dans les instructions corrigées, aucune information nécessaire supprimée ni autorité indispensable omise n’ont été identifiés. Une incohérence mineure a été confirmée : la ligne S0 ne citait que scripts/tests, malgré `package.json` et les suivis exigés par F0. Le tableau et la liste des fichiers sont alignés, sans autoriser de migration des données. Le prompt demande aussi de lire le lot correspondant (S0 → F0), ses vérifications et ses critères de sortie. Cette correction tardive a été vérifiée directement après réception de la revue.
+
+Contrôles exécutés :
+
+- `npm run check:generated`, `npm run check:memo`, `npm run validate:content:strict` et `npm run validate:glossary` : exit 0, sans génération ; inventaire inchangé.
+- `node --test shared/base-url.test.mjs` : exit 0, 6 tests, aucun échec.
+- Contrôles ponctuels hors dépôt `check_docs.py` et `check_preservation.py` : exit 0 ; liens, ancres, chemins, commandes, cohérence du périmètre S0 et préservation des invariants vérifiés. `git diff --check` ciblé : exit 0. Le contrôle sur copies inclut aussi les documents non suivis ; le code 1 normal de `git diff --no-index` pour un contenu différent est distingué d’une erreur de whitespace.
+- Comparaison des empreintes des fichiers suivis/non suivis : seuls les sept documents autorisés ont changé sur les deux passes. `PRODUCT.md` reste identique ; aucune source applicative, donnée ni projection modifiée. Préfixes du journal antérieur aux deux passes, baseline chiffrée du plan, définition de consolidation, fixtures F0, charte éditoriale et règles d’exécution conservés.
+
+`Suivis/ETAT.md` ne conserve plus le blocage d’écriture comme sujet ouvert. La réconciliation documentaire est close ; F0/S0 reste non implémenté. Les prérequis, sorties résolues et charges pédagogiques n’ont pas été recalculés exhaustivement. Aucun gate global, build, navigateur, staging, commit, push, workflow distant ou déploiement. Les preuves applicatives historiques ne sont pas redatées par cette passe.
+
+---
+
+## 2026-09-23 — Diagnostic Formation F0/S0, sans migration
+
+Périmètre : lot F0 et session S0 du plan de consolidation, après lecture d’`AGENTS.md`, `CLAUDE.md`, de l’état Formation, du §0, des huit fixtures, vérifications et critères de sortie. Baseline relevée sur `master` : 128 entrées suivies déjà modifiées ou supprimées et 25 entrées non suivies. Copies des fichiers possédés et empreintes du worktree conservées avant écriture ; aucun diff antérieur attribué à cette session.
+
+Livraison :
+
+- Création de `scripts/formation-readiness.mjs` : diagnostic pur sur sources canoniques et leçons drop-in, résumé humain et option `--json`, sans génération. Les constats n’altèrent pas le code de sortie : exit 0 signifie seulement « diagnostic exécuté » ; entrées inexploitables et arguments invalides échouent explicitement.
+- Création de `scripts/formation-readiness.test.mjs` : 18 tests, couvrant les huit familles F0, tous les types de références actuels, la priorité livrable/leçon des milestones, les slugs de glossaire admis par le résolveur, l’ordre des cours, les prérequis requis/facultatifs, les contributions temporelles, les entrées ambiguës et l’absence d’écriture. Les scénarios de futurs contrats utilisent un adaptateur de fixtures, pas de nouveaux champs canoniques.
+- `package.json` : ajout de `validate:formation` uniquement. La chaîne `check` est inchangée ; les tests de fixtures rejoignent naturellement le glob Node existant, sans transformer les constats du corpus en gate bloquant.
+- Aucun changement de `validation-core.mjs`, des propriétaires TypeScript, des sources éditoriales ou des projections générées. Publication, disponibilité, complétion et décisions pédagogiques ne sont pas migrées.
+
+Résultats recalculés : 24 parcours, 30 cours, 147 leçons dont 126 publiées ; aucune référence d’étape absente ni leçon non publiée ciblée ; 2 placeholders requis et 3 facultatifs ; 7 parcours avec sortie résolue et 17 sans. Une sortie est ici une étape requise existante résolue en milestone-livrable, milestone-leçon ou deliverable capstone, hors diagnostic d’entrée ; elle ne prouve pas à elle seule la complétion. Les 28 couples distincts leçon/prérequis non satisfaits concernent 15 parcours : 27 dans la séquence complète, 21 dans la séquence requise, avec recouvrement. La première consommation est calculée sur les étapes ordonnées puis les leçons publiées d’un cours par `courseId` et `order` ; une étape facultative ne vaut pas prérequis implicite d’entrée.
+
+Quatre parcours ont une durée dérivée, vingt une durée déclarée non auditée. Deux couvertures dérivées sont incomplètes : `estimatedWorkMinutes` manque sur `cs-europe-vs-valley` et `cs-vp-insertion-3-regions` ; `vp-fiche-escalade-juridique` est résolu mais ignoré par les branches actuelles de `learningTime.ts`. Aucun total ni contenu corrigé. Aucun cours vide ; trois sont partiellement publiés. Le rapport sépare les constats d’intégrité, les métadonnées non modélisées et les arbitrages ; aucun compteur historique n’est réutilisé comme attente du corpus dans les tests.
+
+Vérification après la correction finale :
+
+- `node --test scripts/formation-readiness.test.mjs` : exit 0, 18/18 ; `node --test scripts/validation-core.test.mjs` : exit 0, 15/15.
+- `npm run validate:formation` et `node scripts/formation-readiness.mjs --json` : exit 0. Recalcul indépendant des références, séquences, sorties et prérequis : accord exhaustif ; sortie identique lors d’une seconde exécution depuis un autre répertoire.
+- `npm run validate:content:strict`, `npm run lint:node`, `npm run check:generated` et `npm run check:memo` : exit 0, sans génération.
+- Tests client ciblés `parcours.test.ts`, `serieAParcours.test.ts` et `lessons.test.ts` : 3 fichiers / 27 tests réussis.
+- Empreintes avant/après les commandes : aucun fichier du worktree modifié par le diagnostic ou les contrôles. Comparaison du manifeste npm à sa copie initiale : ajout exclusif de `validate:formation`, sans changement de `check`.
+
+Contre-revue indépendante sur snapshot gelé : aucun défaut logique ou de sécurité bloquant. Ses deux remarques mineures sont traitées : `refKind: 'lesson'` explicite pour les incohérences cours/leçons, et commentaire distinguant l’inventaire en ordre source de la séquence consommée triée. Le rendu `undefined:missing` a d’abord été reproduit par un RED CLI, puis corrigé ; les contrôles ont été rejoués. Les premiers RED complets et les rapports restent hors dépôt dans `/Users/iar-witness/.hermes/cache/scratch/formation-s0-2026-09-23/`.
+
+F0/S0 livre un diagnostic, pas une Formation consolidée. Les contrats transverses relèvent ensuite de S1, en lecture seule et sur demande ; les corrections de données, la production des placeholders et les revues praticiennes restent séparées. Aucun gate global, build, navigateur, staging, commit, push, workflow distant ou déploiement. Les preuves applicatives historiques ne sont pas redatées.

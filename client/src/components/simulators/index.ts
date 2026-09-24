@@ -8,6 +8,7 @@ import { FundraisingSim } from './fundraising-scenario';
 import { ManagementFeesSim } from './management-fees';
 import { PowerLawSim } from './power-law';
 import { SecondariesSim } from './secondaries';
+import { InvestmentMemoSim } from './investment-memo';
 
 export const SIMULATOR_COMPONENTS: Record<string, SimulatorComponent> = {
   dilution: DilutionSim,
@@ -19,6 +20,7 @@ export const SIMULATOR_COMPONENTS: Record<string, SimulatorComponent> = {
   'management-fees': ManagementFeesSim,
   'power-law': PowerLawSim,
   secondaries: SecondariesSim,
+  'investment-memo': InvestmentMemoSim,
 };
 
 export type { SimulatorComponent } from './shared';

@@ -5,10 +5,9 @@ import { GLOSSARY } from '@/content/glossary';
 import { LESSONS } from '@/content/lessons';
 import { SIMULATORS } from '@/content/simulators';
 import type { FurtherReading } from '@/content/types';
-import { safeHttpUrl } from '@/lib/utils';
 import {
   createFurtherReadingTargetRegistry,
-  resolveInternalFurtherReadingHref,
+  resolveFurtherReadingHref,
 } from '@shared/further-reading-contract.mjs';
 
 const furtherReadingTargetRegistry = createFurtherReadingTargetRegistry({
@@ -20,8 +19,6 @@ const furtherReadingTargetRegistry = createFurtherReadingTargetRegistry({
   deliverable: DELIVERABLES,
 });
 
-export function furtherReadingHref(furtherReading: FurtherReading): string | undefined {
-  const { kind, ref } = furtherReading;
-  if (kind === 'external') return safeHttpUrl(ref);
-  return resolveInternalFurtherReadingHref(furtherReadingTargetRegistry, kind, ref);
+export function furtherReadingHref({ kind, ref }: FurtherReading): string | undefined {
+  return resolveFurtherReadingHref(furtherReadingTargetRegistry, kind, ref);
 }

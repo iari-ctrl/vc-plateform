@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-07-22T13:46:27+02:00",
+  "purpose": "Read-only snapshot of changes that predate the correction plan. It contains paths and checksums, never file contents.",
+  "repositoryRoot": "/Users/iar-witness/Documents/Projets/VC SITE/vc-platform",
+  "git": {
+    "branch": "master",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "behind": 0,
+    "head": "06dd5f11e109669e4cf1337bde8270ee58e0d432",
+    "statusCount": 107,
+    "statusCounts": {
+      " D": 1,
+      " M": 76,
+      "??": 30
+    },
+    "topLevelCounts": {
+      ".claude": 1,
+      "AGENTS.md": 1,
+      "CLAUDE.md": 1,
+      "Certifications .md": 1,
+      "Correction.md": 1,
+      "PRODUCT.md": 1,
+      "Suivis": 2,
+      "client": 59,
+      "data": 29,
+      "docs": 7,
+      "scripts": 3,
+      "shared": 1
+    },
+    "trackedWorktreeDiffSha256": "75b4e1956c8daefab8ff3340f7f682108ad4ca9628490e1f014fc3ab0e6c29f2",
+    "stagedDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "correctionSource": {
+    "path": "Correction.md",
+    "sha256": "f59afe7989e15714cbb0e2ceb2f0a2ca7f42705c4a3578daffe38ecf3cee34c2",
+    "bytes": 87929
+  },
+  "entries": [
+    {
+      "status": " M",
+      "path": ".claude/skills/ecosystemes/SKILL.md",
+      "originalPath": null,
+      "sha256": "c18b36ac38552867d43148a76df25ffa74362a22eb7429f5e8becd6131a1f67b"
+    },
+    {
+      "status": " M",
+      "path": "CLAUDE.md",
+      "originalPath": null,
+      "sha256": "2f101e4133c977139227fa57b69244f3b7f22e2e9e521ce2df17045175d099f0"
+    },
+    {
+      "status": " D",
+      "path": "Certifications .md",
+      "originalPath": null,
+      "sha256": null
+    },
+    {
+      "status": " M",
+      "path": "PRODUCT.md",
+      "originalPath": null,
+      "sha256": "8a8dea81a6be65879c6ee23dac6b413de7094ee1f70b8d67eeb011543d29bd1f"
+    },
+    {
+      "status": " M",
+      "path": "Suivis/ETAT.md",
+      "originalPath": null,
+      "sha256": "a0c5e23eec5962bbd3d7fa6c253127421547d937131445f9b35b1d312dd43461"
+    },
+    {
+      "status": " M",
+      "path": "Suivis/JOURNAL.md",
+      "originalPath": null,
+      "sha256": "7ee718ebb51a208ca7c8ccab606dff36bc4354d0117e73e4e816b26c5b7174f7"
+    },
+    {
+      "status": " M",
+      "path": "client/public/sitemap.xml",
+      "originalPath": null,
+      "sha256": "0fc537ca7d27823596739757a84719adde1da405a8dadf902760075a7355086e"
+    },
+    {
+      "status": " M",
+      "path": "client/src/App.tsx",
+      "originalPath": null,
+      "sha256": "fc60c2e522056a4c66213e2004fb730b64683336b1f1f1bde35a70256d25a704"
+    },
+    {
+      "status": " M",
+      "path": "client/src/components/cards.tsx",
+      "originalPath": null,
+      "sha256": "42950a5dcfcb969b03e34c103ca3fcdafbd28540bd48cf2fd051b557f3c211e7"
+    },
+    {
+      "status": " M",
+      "path": "client/src/components/explore/PathAtlas.tsx",
+      "originalPath": null,
+      "sha256": "b2ee7ada0cf036beea9b202e1af0ac48f304a37ee45921087503db682f4cc137"
+    },
+    {
+      "status": " M",
+      "path": "client/src/components/reading/QuizBlock.tsx",
+      "originalPath": null,
+      "sha256": "56a11e9327c36d8d8c8c0461eea3c4570b474f553dbfa23e2c49f84b2f1996a4"
+    },
+    {
+      "status": " M",
+      "path": "client/src/components/simulators/fundraising-scenario.tsx",
+      "originalPath": null,
+      "sha256": "c362c737289ffbbde96c04918979418167b9d7b3b8e9d85ea79dbf55a1ebea81"
+    },
+    {
+      "status": " M",
+      "path": "client/src/components/ui/primitives.tsx",
+      "originalPath": null,
+      "sha256": "20435ab22a327e713f1a01f90b66ce8980799a2c0288edb5ff2ef129747c3520"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/certificationTypes.ts",
+      "originalPath": null,
+      "sha256": "5a636d40cd660e6d91d44087b180538382bf414c4b210bb42252b81aa14e2d6c"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/certifications.test.ts",
+      "originalPath": null,
+      "sha256": "5652bf580ca1d66a47781c3e2ee323ea2916c1f01706809433d54ce13df1ffd9"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/certifications.ts",
+      "originalPath": null,
+      "sha256": "24482ad192982a87ebb948c37328f1a2affeaf95305333ca7d8dbb098467ec71"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/index.ts",
+      "originalPath": null,
+      "sha256": "01bb3b1c2c0c016d2676eba68edd1bc88d3b370b0bdd4abc8ac68b12408671c2"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/labels.ts",
+      "originalPath": null,
+      "sha256": "57e3da057b6dd39e4ce689f439009114aa7ae0281605ad247c5e1dda41be56df"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/parcours.ts",
+      "originalPath": null,
+      "sha256": "e04610c8cffc5acec4266dbc2e45e9da0269614772eccd905ce8b30d1379a101"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/parcoursTypes.ts",
+      "originalPath": null,
+      "sha256": "d11f74f9f2673b6ceaf9d609026526c38559886aa4ecee196b2dd970ebee5307"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/search.test.ts",
+      "originalPath": null,
+      "sha256": "cbd83a063a66e26342202ea6579b621a96032aaa55afee60257152b1084d2d50"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/search.ts",
+      "originalPath": null,
+      "sha256": "51604ea9b613dd3cf04355c9abfe565000dd17d104f1b7efcc18790b55044270"
+    },
+    {
+      "status": " M",
+      "path": "client/src/content/types.ts",
+      "originalPath": null,
+      "sha256": "337f13d4b5ef0c80ca644db22d53163eb8fb99421e46badb6749bcf3e0012ac2"
+    },
+    {
+      "status": " M",
+      "path": "client/src/lib/storage.ts",
+      "originalPath": null,
+      "sha256": "98f659125e0584d9c70cbfbcebaee9c0b10d838634b7c61d1a8cb138c99a7eec"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/blog/DebordScrollytelling.tsx",
+      "originalPath": null,
+      "sha256": "aca4e8b1de68e8685bfd337c39c74c8fd6bc33d0d02efce8a6e8c9221e6aed49"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/blog/HirschmanScrollytelling.tsx",
+      "originalPath": null,
+      "sha256": "9f2e1fa77b90a6e9c40ab12888f6c5e5cf75a75a4488c855f578b1bc4482372f"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/cases/CaseStudyPage.tsx",
+      "originalPath": null,
+      "sha256": "5d75fd1826fdce7240cd4bda25b55998bb5d28857b1c03a511e280b21502535a"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/certifications/CertificationDetailPage.tsx",
+      "originalPath": null,
+      "sha256": "6aa2706b758fb4ae6add1bf2e717c4067aaadf8e56d10281a32738c85fee19a2"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/certifications/CertificationsPage.tsx",
+      "originalPath": null,
+      "sha256": "803490b15228d362360108e1281a16f9756348a8e515cbada0ab24a23034241e"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/intelligence/AntiPortfolioEntryPage.tsx",
+      "originalPath": null,
+      "sha256": "53d4913738f5ab7522e62ebe9bba89b1fe151e687157f0b36326823aa8799d57"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/intelligence/AntiPortfolioPage.tsx",
+      "originalPath": null,
+      "sha256": "9909d62389b50b89916f2a0fb1552de290264f4d9f2a534e48e2d64906ac8d3f"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/intelligence/ConvictionsPage.tsx",
+      "originalPath": null,
+      "sha256": "145685e28426df033bd33dc0e230769fbbca28faf7ff282d4b221a604429afc2"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/intelligence/DecisionsIndexPage.tsx",
+      "originalPath": null,
+      "sha256": "6b76b074f618d59f14d278423fde27e6279310592a5c4070a495bd4c06d4991a"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/intelligence/DeliverablePage.tsx",
+      "originalPath": null,
+      "sha256": "781839a812a004d0891515aa90ccfe440f2423ffc5c2167bc93c64e25df98460"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/intelligence/IntelligencePage.tsx",
+      "originalPath": null,
+      "sha256": "7307eb3faf69b350b9b16bc1074f13c540226497953984acb016797e7a7e91e4"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/intelligence/MemoLibraryPage.tsx",
+      "originalPath": null,
+      "sha256": "b5b82c675048b853d52d16ac88a02998fada169e9849194e7cafdc8acdc04f93"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/intelligence/MemoPage.tsx",
+      "originalPath": null,
+      "sha256": "09c62f21f2e4bf171136da56beb32744f261649d3f1a55334af5db014c2c922e"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/intelligence/MethodePage.tsx",
+      "originalPath": null,
+      "sha256": "cfd429b62d1fee45d3db77dfa89d3b7395631187572927ffba10908ad4fdacf9"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/learn/CourseDetailPage.tsx",
+      "originalPath": null,
+      "sha256": "2872ff83510e32c771f6a4ea5cd2041de124a0464f08f77796c1ceff717d86ae"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/learn/LessonPage.tsx",
+      "originalPath": null,
+      "sha256": "5c78c353abfcf5510a257f5462f4275a2083300d399b2b06f5c2add9c905d60e"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/learn/ParcoursDetailPage.tsx",
+      "originalPath": null,
+      "sha256": "010a541692bd4231a0f8b5af91f90e8ef32feb48cb19bd1e692ecc4f2127b9e8"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/learn/PathDetailPage.tsx",
+      "originalPath": null,
+      "sha256": "bd8e449d254533fd31094009872db4a8e7e052fb12b72acd1d400dca58a87573"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/learn/PathsPage.tsx",
+      "originalPath": null,
+      "sha256": "5d247726110f6ceddd277f7c7fababb18d494e62e40a7c529adc87a5c8fb3cb4"
+    },
+    {
+      "status": " M",
+      "path": "client/src/pages/workspace/DecisionJournalPage.tsx",
+      "originalPath": null,
+      "sha256": "238beda48ed95d396d0241e1bfb931f7ed6852618dc98c7c42ce0429f0286de2"
+    },
+    {
+      "status": " M",
+      "path": "client/src/styles/tokens.css",
+      "originalPath": null,
+      "sha256": "c1f8db1578883c122fd305255042c8d820f7af32024dd9f5e00e886f0cc9efc1"
+    },
+    {
+      "status": " M",
+      "path": "data/antiPortfolio.json",
+      "originalPath": null,
+      "sha256": "a74babbc2483805359f36da50e10dbb54f81c15f345dbdabfe95272a96342f20"
+    },
+    {
+      "status": " M",
+      "path": "data/blog/exit-voice-loyalty-hirschman.json",
+      "originalPath": null,
+      "sha256": "6d490ab351804bcd8b94559e4add0de834409e14f6f30ee12b6231d6e53f985e"
+    },
+    {
+      "status": " M",
+      "path": "data/blog/flatland-cecite-dimensionnelle.json",
+      "originalPath": null,
+      "sha256": "1880c385db7e159ca123dc74abae1012d9406f110e8336f9ad93537075376718"
+    },
+    {
+      "status": " M",
+      "path": "data/blog/l-art-de-formuler-les-trois-risques.json",
+      "originalPath": null,
+      "sha256": "d5bbb863975ca4bb062ba78a3f6d9a2940796f38eaf9be5ff6a762e9391bc9b1"
+    },
+    {
+      "status": " M",
+      "path": "data/blog/la-societe-du-spectacle-leve-des-fonds.json",
+      "originalPath": null,
+      "sha256": "0b63e82459d83cde816df4de6c59e7daca596ca822bc14e13a13e6c719edf833"
+    },
+    {
+      "status": " M",
+      "path": "data/blog/lire-le-vc-comme-un-praticien.json",
+      "originalPath": null,
+      "sha256": "9acdce60af33299b0e6b165a43107939601d5d08108953fa912ae9cff22b964e"
+    },
+    {
+      "status": " M",
+      "path": "data/blog/ou-sera-votre-centre-de-gravite-dans-une-decennie.json",
+      "originalPath": null,
+      "sha256": "9f6dbcdd0d1e990d60144efe230a08a396e069e31437962b4d0e632c844962df"
+    },
+    {
+      "status": " M",
+      "path": "data/blog/pourquoi-nous-ne-bloquons-aucun-chapitre.json",
+      "originalPath": null,
+      "sha256": "d6e0582d0fe0676050f4f68c54db31ee09f11a7e4997ca47970b222618fd79f6"
+    },
+    {
+      "status": " M",
+      "path": "data/blog/voir-comme-un-etat.json",
+      "originalPath": null,
+      "sha256": "c9a8b7931b17c0c70ecfe732c6acf0ffbd8dc1b451747f0b608a7212a96a3006"
+    },
+    {
+      "status": " M",
+      "path": "data/caseStudies.json",
+      "originalPath": null,
+      "sha256": "e4c1aa767be2a9635affccf85096f82564bf77dc9ba6d56e2f1342af2053bab9"
+    },
+    {
+      "status": " M",
+      "path": "data/certifications.json",
+      "originalPath": null,
+      "sha256": "386e0dd5bbae2a810f959b95ff56077b1a6210eda667eac71dbda8f7e2b676d4"
+    },
+    {
+      "status": " M",
+      "path": "data/courses.json",
+      "originalPath": null,
+      "sha256": "1fffb5d75e55d038affdf68bd48b5fa7df875b7d9e035f55cec6f2ea1607e2e2"
+    },
+    {
+      "status": " M",
+      "path": "data/deliverables.json",
+      "originalPath": null,
+      "sha256": "8b3dd219070e46631e20effc307ef93cedf254de29a203a8b3fedbc1c2bd2f83"
+    },
+    {
+      "status": " M",
+      "path": "data/ecosystems.json",
+      "originalPath": null,
+      "sha256": "7149e9761345b2025b1a11064b33b0089b8dd60e10af3421c12c62454f955e41"
+    },
+    {
+      "status": " M",
+      "path": "data/generated/glossary.defs.json",
+      "originalPath": null,
+      "sha256": "c52f83c1646978d6e0b8ae2b33d109b50f8ac010374bf4d20950d92de6d65351"
+    },
+    {
+      "status": " M",
+      "path": "data/generated/glossary.index.json",
+      "originalPath": null,
+      "sha256": "010ee28540a224bfef0b0fe5e5a1c76c37f170a912265f4f5babfaac24b02d7f"
+    },
+    {
+      "status": " M",
+      "path": "data/generated/lessons.bodies.json",
+      "originalPath": null,
+      "sha256": "bf61f5015826a5ddda92d3422ac53ed05a6b90559bc4039963fcd6c5061f6b8b"
+    },
+    {
+      "status": " M",
+      "path": "data/generated/lessons.index.json",
+      "originalPath": null,
+      "sha256": "ddb3bcbfd8c4e2eb6dd883178528cf63b91157a13f02561741a4a4f91e7a54d8"
+    },
+    {
+      "status": " M",
+      "path": "data/glossary.json",
+      "originalPath": null,
+      "sha256": "bbbf54fdc808bd6f8ea5fca5e406cad699fe3f48699f8593f4511512b2876457"
+    },
+    {
+      "status": " M",
+      "path": "data/lessons.json",
+      "originalPath": null,
+      "sha256": "814f064a6743d3b690c70a5c959aeafc15561a9feaa382d81dfbeab10901b8b3"
+    },
+    {
+      "status": " M",
+      "path": "data/memos.json",
+      "originalPath": null,
+      "sha256": "ea3b5b46dd90503cbd1e46c6602498a8567c9f2cfb76326557853dd9fcfcc0bf"
+    },
+    {
+      "status": " M",
+      "path": "data/parcours.json",
+      "originalPath": null,
+      "sha256": "59362716fc62b202c4e0f56dca2715ef6df3d147e799b615e68d9c87b089085d"
+    },
+    {
+      "status": " M",
+      "path": "data/simulators.json",
+      "originalPath": null,
+      "sha256": "be714a5d2ca80dcf35b2395b49c60f64eab305ea78f492f4d55daf195bc00dc5"
+    },
+    {
+      "status": " M",
+      "path": "data/sources/canonical-glossary.json",
+      "originalPath": null,
+      "sha256": "3b343d9cbd2f4467839782fd94f09cbffa93c8a98a963b9179e6b5bcf4d4465b"
+    },
+    {
+      "status": " M",
+      "path": "docs/ARCHITECTURE_EDITION.md",
+      "originalPath": null,
+      "sha256": "bf9b05d2643bd267839270b0e6f1565780d6771df9aa99e0c8228506578bae81"
+    },
+    {
+      "status": " M",
+      "path": "docs/DESIGN_SYSTEM.md",
+      "originalPath": null,
+      "sha256": "c2d81fd0a96ab6dfaee35c281121336503d85b3f77fef1b7ea0fd55105ccd5fd"
+    },
+    {
+      "status": " M",
+      "path": "docs/STRATEGIE-vc-intelligence.md",
+      "originalPath": null,
+      "sha256": "a81d7eaa3433ee9215753106084ce4d4917ebaf3a5d2e24f55cd0ed063eefbfd"
+    },
+    {
+      "status": " M",
+      "path": "docs/parcours/README.md",
+      "originalPath": null,
+      "sha256": "e5d621ac4f9c149909bd957b19b121ae4aeca1d12a64ae5e293f25e0025f5a81"
+    },
+    {
+      "status": " M",
+      "path": "scripts/collect-routes.mjs",
+      "originalPath": null,
+      "sha256": "3df96adfbeb6209c47d9bc2e7344b646d69b3a7d1a97e1cc38a56c6d920496cd"
+    },
+    {
+      "status": " M",
+      "path": "scripts/collect-routes.test.mjs",
+      "originalPath": null,
+      "sha256": "93eb242f724dc0854c7db3e88d9916bc1526d9cdc5872dd447dea330cba71255"
+    },
+    {
+      "status": " M",
+      "path": "scripts/validate-content.mjs",
+      "originalPath": null,
+      "sha256": "eb5563a4b1a6584c0926852823e93d249990cd197b658a85b5c5379faf1f28fb"
+    },
+    {
+      "status": " M",
+      "path": "shared/routes.mjs",
+      "originalPath": null,
+      "sha256": "daa1e21b18603bf7d3499d11f37bc7c0ceb28b4c9d7ff170c5a52f088bee6be7"
+    },
+    {
+      "status": "??",
+      "path": "AGENTS.md",
+      "originalPath": null,
+      "sha256": "646c9d1e22158ea83a60318ca88b1c0fd00fb86e33621c4d4e32e99c492cda5b"
+    },
+    {
+      "status": "??",
+      "path": "Correction.md",
+      "originalPath": null,
+      "sha256": "f59afe7989e15714cbb0e2ceb2f0a2ca7f42705c4a3578daffe38ecf3cee34c2"
+    },
+    {
+      "status": "??",
+      "path": "client/src/content/candidateCharters.ts",
+      "originalPath": null,
+      "sha256": "a1af9d41bd4fcf96a8c1b51f6594fe3bec146f2d5b43fc632b6dc0ab6039d401"
+    },
+    {
+      "status": "??",
+      "path": "client/src/content/caseCorrections.ts",
+      "originalPath": null,
+      "sha256": "63493b6953995bcb6a7ad643fad3aed44bffc45f56dde545d6333eb538f3e883"
+    },
+    {
+      "status": "??",
+      "path": "client/src/content/certificationAssessments.ts",
+      "originalPath": null,
+      "sha256": "b7b745aaeb260759b54175f2da238e77fa8ae486095449528e707078d3ade9e9"
+    },
+    {
+      "status": "??",
+      "path": "client/src/content/certificationLevels.ts",
+      "originalPath": null,
+      "sha256": "bd58e131239afb164aef896707bdfbd33df43ba9ec6ec5fcfdee124e67035f14"
+    },
+    {
+      "status": "??",
+      "path": "client/src/content/diagnostics.ts",
+      "originalPath": null,
+      "sha256": "a204b76de78da746d24431f272a3f28751093f3c22cb01d0eb4eb4d94c03e858"
+    },
+    {
+      "status": "??",
+      "path": "client/src/content/learningTime.ts",
+      "originalPath": null,
+      "sha256": "b5aba9543d2356d8c4f1be5c1280459f3c8e769771a732063dfdbec729c1f2cd"
+    },
+    {
+      "status": "??",
+      "path": "client/src/content/parcours.test.ts",
+      "originalPath": null,
+      "sha256": "3aa94bd7f56c97936fe54f6bade4ea51d084120fba5134e1de267925041860dd"
+    },
+    {
+      "status": "??",
+      "path": "client/src/content/venturePhilanthropyLearning.test.ts",
+      "originalPath": null,
+      "sha256": "7d3a5d63178527bd84cbe9f9f52ce8c17bfd550970e480da7d728e190e5f511b"
+    },
+    {
+      "status": "??",
+      "path": "client/src/lib/certificationAssessment.ts",
+      "originalPath": null,
+      "sha256": "67a68788e73b67fb92b06dd9daabf57bb698c59dc06ae1687be613048ce76db7"
+    },
+    {
+      "status": "??",
+      "path": "client/src/lib/downloads.ts",
+      "originalPath": null,
+      "sha256": "0bcba461d9c5c9d4abe99200d171988f7334d16b20a769512a28eeae8bc316b1"
+    },
+    {
+      "status": "??",
+      "path": "client/src/lib/learningExports.test.ts",
+      "originalPath": null,
+      "sha256": "bb8044881ae33696f870957165993bc2f2cbb7af095fc8083c22afde850abc58"
+    },
+    {
+      "status": "??",
+      "path": "client/src/lib/learningExports.ts",
+      "originalPath": null,
+      "sha256": "a8ab8cb15ab53eb29728d221853ea65fd2167f7c650b9c2f30de3db78d17d84c"
+    },
+    {
+      "status": "??",
+      "path": "client/src/lib/learningWorkspace.test.ts",
+      "originalPath": null,
+      "sha256": "fc8534685db7f1c32ab804831fe48c6237d6bde009ef4179971dfeb35ba5171e"
+    },
+    {
+      "status": "??",
+      "path": "client/src/lib/learningWorkspace.ts",
+      "originalPath": null,
+      "sha256": "18cb34ac3615cd4b9b018866e7f6d58fcc8aaf5e0ad34ccee45fa5b1b36d632d"
+    },
+    {
+      "status": "??",
+      "path": "client/src/pages/cases/CaseCorrectionPage.tsx",
+      "originalPath": null,
+      "sha256": "1e64a633869192e530cb8a36427e227172eabbbe199e394de0143ff58e4b5196"
+    },
+    {
+      "status": "??",
+      "path": "client/src/pages/certifications/CertificationEvaluationPage.tsx",
+      "originalPath": null,
+      "sha256": "54375194083d142a5e2cbb1b09aeb9b9bf9df5d839b72a2fad72534acb9cdfb3"
+    },
+    {
+      "status": "??",
+      "path": "client/src/pages/certifications/CertificationLevelsPage.tsx",
+      "originalPath": null,
+      "sha256": "0d30ed995b0bcc6db31a7c444087fd7aeca2b30adc61241eb9b2b8d68fd84fcc"
+    },
+    {
+      "status": "??",
+      "path": "client/src/pages/learn/ParcoursDiagnosticPage.tsx",
+      "originalPath": null,
+      "sha256": "de774ed57530488d07824d4d4d4a10a7bf81451618af84b554199be99f612e46"
+    },
+    {
+      "status": "??",
+      "path": "client/src/pages/learn/furtherReadingHref.test.ts",
+      "originalPath": null,
+      "sha256": "3fff92429a01ebaf5cf2ac1bcba3d24775c3298b163195795acf1b4a22a8cb30"
+    },
+    {
+      "status": "??",
+      "path": "client/src/pages/learn/furtherReadingHref.ts",
+      "originalPath": null,
+      "sha256": "fa547a2031e55e4cbc3e7cdef01c4464a0ec2fda0c804433ec5d5171fa000d20"
+    },
+    {
+      "status": "??",
+      "path": "data/candidateCharters.json",
+      "originalPath": null,
+      "sha256": "91a2219e161fdcbac848ddbfe57ecd141424c4348580a312781b938049ebd0cf"
+    },
+    {
+      "status": "??",
+      "path": "data/caseCorrections.json",
+      "originalPath": null,
+      "sha256": "556730cd1c45ccd7f7bbad05b8329155a3fdde809b587b10cb88fd5d3e0f9711"
+    },
+    {
+      "status": "??",
+      "path": "data/certificationAssessments.json",
+      "originalPath": null,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "??",
+      "path": "data/certificationLevels.json",
+      "originalPath": null,
+      "sha256": "d7a0f072d69bc098d1ccd7f4249d711d09bfd7565a79a6c1fad1f21b67f96631"
+    },
+    {
+      "status": "??",
+      "path": "data/diagnostics.json",
+      "originalPath": null,
+      "sha256": "147acf44de5e482be3f818ef191d51a2942b45145f43860007fd1cbaf100b913"
+    },
+    {
+      "status": "??",
+      "path": "docs/certifications/",
+      "originalPath": null,
+      "sha256": null
+    },
+    {
+      "status": "??",
+      "path": "docs/parcours/ANALYST-FOUNDATIONS.md",
+      "originalPath": null,
+      "sha256": "ee1ab4b96a85a83b6341f59093647efaff4ae4483c26ed8244b5e2481d13079c"
+    },
+    {
+      "status": "??",
+      "path": "docs/parcours/VENTURE-PHILANTHROPIE.md",
+      "originalPath": null,
+      "sha256": "d5440bc698cb101663476fab99c0bbcb505233f671fd133549c06fde3c6fef51"
+    }
+  ],
+  "_archiveNotice": "Archive non normative : snapshot historique conservé pour traçabilité ; ne pas utiliser comme baseline courante sans recalcule du worktree."
+}

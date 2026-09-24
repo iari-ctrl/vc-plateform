@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { TopBar } from '@/components/chrome/TopBar';
 import { SideNav } from '@/components/chrome/SideNav';
-import { Footer } from '@/components/chrome/Footer';
+import { Footer, HomeFooter } from '@/components/chrome/Footer';
 import { HomeIntroProvider } from '@/components/home/HomeIntro';
 import { cn } from '@/lib/utils';
 
@@ -58,7 +58,7 @@ export function MainLayout() {
           <main ref={mainRef} id="main" className={cn('flex-1 outline-none', hasSideNav && 'pt-14 lg:pt-0')} tabIndex={-1}>
             <Outlet />
           </main>
-          {!isSplash && <Footer compactHome={isHome} />}
+          {isSplash ? null : isHome ? <HomeFooter /> : <Footer />}
         </div>
       </div>
     </HomeIntroProvider>

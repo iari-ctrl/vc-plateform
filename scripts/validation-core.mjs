@@ -123,11 +123,13 @@ export function validateFurtherReadingReferences(records, { collection, targetRe
 
   records.forEach((record, index) => {
     const id = recordId(record, index);
-    for (const reference of record?.furtherReading ?? []) {
-      if (reference?.kind === 'external') continue;
-      if (!isInternalFurtherReadingKind(reference?.kind)) continue;
-      if (!resolveFurtherReadingTarget(registry, reference.kind, reference.ref)) {
-        errors.push(`${collection}/${id}.furtherReading — ${reference.kind} introuvable par ID : "${reference.ref}"`);
+    for (const { kind, ref } of record?.furtherReading ?? []) {
+      if (kind === 'external') {
+        if (!safeEditorialUrl(ref)) {
+          errors.push(`${collection}/${id}.furtherReading — external introuvable par URL sûre : "${ref}"`);
+        }
+      } else if (isInternalFurtherReadingKind(kind) && !resolveFurtherReadingTarget(registry, kind, ref)) {
+        errors.push(`${collection}/${id}.furtherReading — ${kind} introuvable par ID : "${ref}"`);
       }
     }
   });

@@ -60,4 +60,4 @@ Les exercices utilisent des données fictives ou agrégées. Aucun dossier réel
 
 ## Maintenance
 
-Toute évolution doit conserver l’alignement entre le parcours, les six cours, les 21 leçons, le cas et le livrable. Les données exécutables décrivent le comportement de l’application ; toute divergence avec le présent référentiel doit être corrigée dans le même changement. Le dossier `docs/certifications/venture-philanthropy/` conserve les travaux de conception historiques et ne décrit plus l’état publié.
+Toute évolution doit conserver l’alignement entre le parcours, les six cours, les 21 leçons, le cas et le livrable. Les données exécutables décrivent le comportement de l’application ; toute divergence avec le présent référentiel doit être corrigée dans le même changement. Le dossier `docs/archive/certifications/venture-philanthropy/` conserve les travaux de conception historiques et ne décrit plus l’état publié.

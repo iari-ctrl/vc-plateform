@@ -32,6 +32,11 @@ export function pluralize(n: number, singular: string, plural?: string): string 
   return `${n} ${n > 1 ? plural ?? `${singular}s` : singular}`;
 }
 
+/** Strip combining diacritical marks so « é » and « e » compare equal. */
+export function stripDiacritics(value: string): string {
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
 /** Return an HTTPS editorial URL, or undefined when it is missing or unsafe. */
 export function safeHttpUrl(url?: string | null): string | undefined {
   return safeEditorialUrl(url);

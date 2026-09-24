@@ -1,4 +1,5 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { localDataRecovery } from './localDataRecovery';
+import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 
 import { STORAGE_PREFIX } from './storage';
 import { STORAGE_CONTRACTS } from './storageDomains';
@@ -59,7 +60,7 @@ describe('local data lifecycle', () => {
     const exported = createLocalDataExport({ now: '2026-07-22T12:00:00.000Z' });
 
     expect(exported).toMatchObject({
-      formatVersion: 1,
+      formatVersion: 2,
       origin: 'vc-platform',
       exportedAt: '2026-07-22T12:00:00.000Z',
     });
@@ -69,6 +70,7 @@ describe('local data lifecycle', () => {
   });
 
   it('previews an import without exposing free-text payload values', () => {
+    vi.stubGlobal('localStorage', localStorageStub().local);
     const exported = createLocalDataExportFromPayload({
       notes: envelope(1, [validNote]),
       profile: envelope(1, validProfile),
@@ -106,7 +108,7 @@ describe('local data lifecycle', () => {
     })))).toMatchObject({ ok: false, reason: 'validation' });
   });
 
-  it('imports atomically and rolls storage back when a write fails mid-flight', () => {
+  it('imports atomically and rolls storage back when a write fails mid-flight', async () => {
     const previousNotes = envelope(1, [validNote]);
     const previousProfile = envelope(1, validProfile);
     const nextNotes = envelope(1, [{ ...validNote, id: 'note-2', body: 'Nouvelle note.' }]);
@@ -131,13 +133,13 @@ describe('local data lifecycle', () => {
     } as Storage;
     vi.stubGlobal('localStorage', local);
 
-    expect(importLocalDataExport(serializeLocalDataExport(exported))).toMatchObject({ ok: false, reason: 'unavailable' });
+    expect(await importLocalDataExport(serializeLocalDataExport(exported))).toMatchObject({ ok: false, reason: 'unavailable' });
     expect(base.values.get(`${STORAGE_PREFIX}notes`)).toBe(previousNotes);
     expect(base.values.get(`${STORAGE_PREFIX}profile`)).toBe(previousProfile);
     expect(base.values.get('outside')).toBe('preserved');
   });
 
-  it('imports valid payloads and purges product data while preserving keys outside the namespace', () => {
+  it('imports valid payloads and purges product data while preserving keys outside the namespace', async () => {
     const exported = createLocalDataExportFromPayload({
       notes: envelope(1, [validNote]),
       profile: envelope(1, validProfile),
@@ -148,12 +150,12 @@ describe('local data lifecycle', () => {
     });
     vi.stubGlobal('localStorage', local);
 
-    expect(importLocalDataExport(serializeLocalDataExport(exported))).toEqual({ ok: true });
+    expect(await importLocalDataExport(serializeLocalDataExport(exported))).toEqual({ ok: true });
     expect(values.get(`${STORAGE_PREFIX}notes`)).toBe(envelope(1, [validNote]));
     expect(values.get(`${STORAGE_PREFIX}profile`)).toBe(envelope(1, validProfile));
     expect(values.get('outside')).toBe('preserved');
 
-    expect(purgeLocalData()).toEqual({ ok: true });
+    expect(await purgeLocalData()).toEqual({ ok: true });
     expect(values.get(`${STORAGE_PREFIX}notes`)).toBeUndefined();
     expect(values.get(`${STORAGE_PREFIX}profile`)).toBeUndefined();
     expect(values.get(`${STORAGE_PREFIX}bookmarks`)).toBeUndefined();
@@ -169,3 +171,10 @@ function createLocalDataExportFromPayload(partialPayload: Partial<Record<string,
     payload: Object.fromEntries(PRODUCT_STORAGE_KEYS.map((key) => [key, partialPayload[key] ?? null])) as Record<string, string | null>,
   };
 }
+
+vi.mock('./localDataRecovery', () => ({ localDataRecovery: { save: vi.fn(), clear: vi.fn(), read: vi.fn() } }));
+beforeEach(() => {
+  vi.mocked(localDataRecovery.read).mockResolvedValue(null);
+  vi.mocked(localDataRecovery.save).mockResolvedValue(undefined);
+  vi.mocked(localDataRecovery.clear).mockResolvedValue(undefined);
+});

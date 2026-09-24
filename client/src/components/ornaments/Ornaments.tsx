@@ -30,11 +30,18 @@ export function KanjiSeal({
   accent,
   size = 56,
   className,
+  morphName,
 }: {
   kanji: string;
   accent: string;
   size?: number;
   className?: string;
+  /**
+   * View-transition name, so the same seal can be carried from a catalogue
+   * card into the page it opens. A name must be unique in the document: pass
+   * it only to the seal that is actually being activated.
+   */
+  morphName?: string;
 }) {
   return (
     <span
@@ -46,6 +53,7 @@ export function KanjiSeal({
         background: `color-mix(in srgb, ${accent} 12%, transparent)`,
         border: `1px solid color-mix(in srgb, ${accent} 35%, transparent)`,
         fontSize: size * 0.42,
+        viewTransitionName: morphName,
       }}
       aria-hidden
     >

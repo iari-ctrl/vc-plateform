@@ -10,11 +10,13 @@ Le projet est actuellement en construction et ne cible pas encore un profil util
 
 ## Product Purpose
 
-VC Premium Experience est une plateforme française d'intelligence VC enrichie par une formation. Elle doit relier sans ambiguïté trois usages : comprendre l'écosystème et les raisonnements d'investissement, progresser dans des parcours de formation, puis structurer son propre travail dans un espace personnel local. Le succès de la phase actuelle se mesure à la clarté de l'architecture, à la solidité du socle technique et à la capacité de finaliser ensuite le contenu pédagogique sans dette structurelle.
+Maison Sapience VC — ancien nom de travail conservé dans certains héritages : VC Premium Experience — est une plateforme française d'intelligence VC enrichie par une formation. Elle doit relier sans ambiguïté trois usages : comprendre l'écosystème et les raisonnements d'investissement, progresser dans des parcours de formation, puis structurer son propre travail dans un espace personnel local. Le succès de la phase actuelle se mesure à la clarté de l'architecture, à la solidité du socle technique et à la capacité de finaliser ensuite le contenu pédagogique sans dette structurelle.
 
 ## Brand Personality
 
 Éditoriale, précise, exigeante. Le ton associe la confiance d'un cabinet d'analyse, la profondeur d'un memo d'investissement et la chaleur d'un carnet d'apprentissage. Il reste toujours correct, sobre, factuel et institutionnel. La prose est naturelle et utile. Elle exclut les formulations sensationnelles ou promotionnelles, la dramatisation, la survente, les superlatifs, l’urgence artificielle, les slogans et les appels à l’adhésion, ainsi que les tournures assimilables au marketing de réseau ou à une prose LLM stéréotypée.
+
+La marque visible dans le chrome produit est le mot-symbole typographique Maison Sapience VC, avec l'accent porté sur Sapience VC. Ne pas réintroduire le fleuron, le rond doré ou une marque héritée comme élément visible sans décision de migration dédiée.
 
 ## Anti-references
 
@@ -28,6 +30,7 @@ Le produit ne doit ressembler ni à un dashboard SaaS générique, ni à un cata
 4. **Stabiliser avant d'étendre.** Les conventions, les modèles de données et les flux critiques doivent être propres avant d'ajouter de nouvelles couches produit.
 5. **Pratiquer la précision éditoriale.** Chaque libellé, interaction et contenu doit clarifier le raisonnement plutôt que décorer l'interface.
 6. **Relier lecture et production.** Un parcours peut proposer un dossier longitudinal, une première version, un retour et une révision. Ces états restent locaux, facultatifs et distincts d'une certification.
+7. **Ne pas foregrounder l'espace personnel avant son socle.** L'accueil met d'abord en avant Formation et Intelligence VC ; Workspace/espace personnel reste secondaire tant que la consolidation Formation, le minimum viable Intelligence VC et le futur socle backend ne sont pas explicitement ouverts.
 
 ## Accessibility & Inclusion
 

@@ -3,6 +3,7 @@ import { AlertTriangle, X } from 'lucide-react';
 import type { Bookmark, DecisionJournalEntry, DecisionOutcome, Note, ProgressEntry, UserProfile } from '@/content/types';
 import { UserDataContext, type UserDataContextValue } from '@/context/UserDataContext';
 import { commitOnStorageSuccess, STORAGE_PREFIX, storage, storageErrors, type StorageFailure } from '@/lib/storage';
+import { localDataChanges } from '@/lib/localDataChanges';
 import { STORAGE_CONTRACTS } from '@/lib/storageDomains';
 
 const uid = () => typeof crypto !== 'undefined' && 'randomUUID' in crypto
@@ -77,6 +78,25 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
     storage.migrate(STORAGE_CONTRACTS.progress);
     storage.migrate(STORAGE_CONTRACTS.journal);
   }, []);
+
+  useEffect(() => localDataChanges.subscribe((snapshot) => {
+    const read = <T,>(contract: import('@/lib/storage').StorageContract<T>) =>
+      storage.parseStored(contract, snapshot[STORAGE_PREFIX + contract.key] ?? null);
+    const nextNotes = read(STORAGE_CONTRACTS.notes);
+    const nextBookmarks = read(STORAGE_CONTRACTS.bookmarks);
+    const nextProgress = read(STORAGE_CONTRACTS.progress);
+    const nextJournal = read(STORAGE_CONTRACTS.journal);
+    setProfile(read(STORAGE_CONTRACTS.profile));
+    notesRef.current = nextNotes;
+    bookmarksRef.current = nextBookmarks;
+    progressRef.current = nextProgress;
+    journalRef.current = nextJournal;
+    setNotes(nextNotes);
+    setBookmarks(nextBookmarks);
+    setProgressState(nextProgress);
+    setJournal(nextJournal);
+    setLoading(false);
+  }), []);
 
   const reloadLocalData = useCallback(() => {
     loadLocal();
