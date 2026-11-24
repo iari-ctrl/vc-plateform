@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, BookOpen, Clock, FlaskConical, Layers } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BookOpen, Clock, Layers } from 'lucide-react';
 import { WaxSeal } from '@/components/ornaments/Illustrations';
 import { KanjiSeal } from '@/components/ornaments/Ornaments';
 import { LevelBadge, ProgressRing } from '@/components/ui/primitives';
@@ -424,20 +424,18 @@ export function EcosystemCard({ dossier, childCount = 0, featured = false }: { d
 }
 
 export function SimulatorCard({ sim }: { sim: Simulator }) {
+  const titleId = `outil-${sim.slug}`;
   return (
-    <Link to={`/simulators/${sim.slug}`} className="premium-card premium-card-hover group flex flex-col p-6" style={{ borderTopColor: `color-mix(in srgb, ${sim.accent} 50%, transparent)`, borderTopWidth: 2 }}>
-      <div className="flex items-center justify-between">
-        <span className="grid h-11 w-11 place-items-center rounded-xl" style={{ color: sim.accent, background: `color-mix(in srgb, ${sim.accent} 12%, transparent)` }}>
-          <FlaskConical size={18} />
-        </span>
-        <span className="chip">{sim.category}</span>
-      </div>
-      <h3 className="mt-4 font-headline text-headline-sm font-semibold leading-tight transition-colors group-hover:text-[color:var(--primary)]">{sim.title}</h3>
-      <p className="mt-1.5 text-sm italic text-surface-variant">{sim.subtitle}</p>
-      <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-surface-variant">{sim.description}</p>
-      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--primary)]">
-        Lancer le simulateur <ArrowUpRight size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-      </span>
+    <Link
+      id={`simulateur-${sim.slug}`}
+      to={`/simulators/${sim.slug}`}
+      aria-labelledby={titleId}
+      aria-describedby={`${titleId}-resultat`}
+      className="group grid scroll-my-20 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 py-3.5 hover:bg-surface-container-low focus-visible:bg-surface-container-low sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)_auto] sm:gap-x-5 sm:px-3 sm:py-3"
+    >
+      <h3 id={titleId} className="font-headline text-headline-sm font-semibold leading-tight group-hover:text-primary">{sim.title}</h3>
+      <p id={`${titleId}-resultat`} className="col-start-1 text-sm leading-relaxed text-surface-variant sm:col-start-2 sm:row-start-1">{sim.subtitle}</p>
+      <ArrowRight size={17} aria-hidden className="col-start-2 row-start-1 row-end-3 text-primary sm:col-start-3 sm:row-end-2" />
     </Link>
   );
 }

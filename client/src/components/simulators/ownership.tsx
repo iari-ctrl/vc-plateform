@@ -37,14 +37,6 @@ export function OwnershipSim({ accent }: { accent: string }) {
       }
       results={
         <>
-          <div className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-surface-variant mb-4">
-            <p className="font-semibold text-foreground mb-1">Méthodologie (<GlossaryPreview slug="cap-table" label="Cap Table" />) :</p>
-            <p>La valeur de la participation de chaque entité se calcule simplement au prorata de ses actions :</p>
-            <ul className="list-inside list-disc space-y-1 mt-1">
-              <li><strong>Part (%)</strong> = (Nombre d'actions du détenteur) ÷ (Total des actions émises)</li>
-              <li><strong>Valeur</strong> = Part (%) × Valorisation totale de l'entreprise</li>
-            </ul>
-          </div>
           <div data-scroll-region="simulator-table" className="overflow-x-auto rounded-2xl border border-outline-variant">
             <table className="min-w-[36rem] w-full text-sm">
               <caption className="sr-only">Capitalisation par détenteur</caption>
@@ -62,13 +54,22 @@ export function OwnershipSim({ accent }: { accent: string }) {
                   );
                 })}
               </tbody>
-              <tfoot><tr className="border-t border-outline-variant bg-surface-container-low font-medium"><th scope="row" className="px-4 py-2.5 text-left">Total</th><td className="px-4 py-2.5 font-mono">{formatNumber(total)}</td><td className="px-4 py-2.5">{total > 0 ? '100 %' : '0 %'}</td><td className="px-4 py-2.5">{formatCurrency(ownership.valuation * 1e6)}</td></tr></tfoot>
+              <tfoot><tr className="border-t border-outline-variant bg-surface-container-low font-medium"><th scope="row" className="px-4 py-2.5 text-left">Total</th><td className="px-4 py-2.5 font-mono">{formatNumber(total)}</td><td className="px-4 py-2.5">{total > 0 ? '100 %' : '0 %'}</td><td className="px-4 py-2.5">{formatCurrency(total > 0 ? ownership.valuation * 1e6 : 0)}</td></tr></tfoot>
             </table>
           </div>
+          {total === 0 && <p className="text-xs text-surface-variant">Aucune action renseignée : la valorisation ne peut être répartie entre les détenteurs.</p>}
           <div className="flex h-3 overflow-hidden rounded-full">
             {rows.map((h, i) => (
               <div key={holders[i]?.id ?? h.name} style={{ width: `${h.ownershipPct}%`, background: `color-mix(in srgb, ${accent} ${100 - i * 18}%, var(--surface-container-highest))` }} title={h.name} />
             ))}
+          </div>
+          <div className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-surface-variant">
+            <p className="font-semibold text-foreground mb-1">Méthodologie (<GlossaryPreview slug="cap-table" label="Cap Table" />) :</p>
+            <p>La valeur de la participation de chaque entité se calcule simplement au prorata de ses actions :</p>
+            <ul className="list-inside list-disc space-y-1 mt-1">
+              <li><strong>Part (%)</strong> = (Nombre d'actions du détenteur) ÷ (Total des actions émises)</li>
+              <li><strong>Valeur</strong> = Part (%) × Valorisation totale de l'entreprise</li>
+            </ul>
           </div>
         </>
       }

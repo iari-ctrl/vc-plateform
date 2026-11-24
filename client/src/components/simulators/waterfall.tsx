@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
+import { formatCurrency, formatMultiple, formatPercent } from '@/lib/utils';
 import { calculateWaterfall } from '@/lib/simulators/waterfall';
 import { GlossaryPreview } from '@/lib/markdown';
 import { Field, Panel, Slider, Stat } from './shared';
@@ -32,18 +32,11 @@ export function WaterfallSim({ accent }: { accent: string }) {
       }
       results={
         <>
-          <div className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-surface-variant mb-4">
-            <p className="font-semibold text-foreground mb-1">Méthodologie (<GlossaryPreview slug="liquidation-preference" label="Liquidation Preference" />) :</p>
-            <ul className="list-inside list-disc space-y-1">
-              <li><strong>1x <GlossaryPreview slug="liquidation-preference" label="Non-Participating" /> (Standard)</strong> : Lors de la revente, l'investisseur VC a le choix. Soit il récupère sa mise initiale (la préférence), soit il convertit ses parts au prorata et prend son % de la vente totale. Il choisit toujours l'option mathématiquement la plus rentable.</li>
-              <li><strong><GlossaryPreview slug="liquidation-preference" label="Participating" /> (Double-dip)</strong> : L'investisseur récupère sa mise en priorité (la préférence) <em>puis</em> prend en plus son % au prorata sur le reste de la vente (le produit résiduel). C'est extrêmement punitif pour les fondateurs.</li>
-            </ul>
-          </div>
           <div className="grid grid-cols-2 gap-3">
             <Stat label="Investisseur préférentiel" value={formatCurrency(investor * 1e6)} accent={accent} hint={participating ? 'préférence + participation' : choseConvert ? 'convertit en ordinaire' : 'préférence exercée'} />
             <Stat label="Actions ordinaires" value={formatCurrency(common * 1e6)} hint="fondateurs & employés" />
             <Stat label="Préférence de liquidation" value={formatCurrency(pref * 1e6)} hint={`${multiple}× la mise`} />
-            <Stat label="Multiple investisseur" value={`${formatNumber(investorMultiple, { maximumFractionDigits: 2 })}×`} hint="retour sur la mise" />
+            <Stat label="Multiple investisseur" value={formatMultiple(investorMultiple)} hint="retour sur la mise" />
           </div>
           <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-5">
             <p className="mb-3 text-xs text-surface-variant">Répartition du produit de sortie</p>
@@ -52,6 +45,13 @@ export function WaterfallSim({ accent }: { accent: string }) {
               <div style={{ width: `${(common / Math.max(exit, 1)) * 100}%`, background: 'var(--surface-container-highest)' }} />
             </div>
             <div className="mt-2 flex justify-between text-xs text-surface-variant"><span>Investisseur {formatPercent((investor / Math.max(exit, 1)) * 100)}</span><span>Ordinaires {formatPercent((common / Math.max(exit, 1)) * 100)}</span></div>
+          </div>
+          <div className="rounded-xl bg-surface-container-low p-4 text-xs leading-relaxed text-surface-variant">
+            <p className="font-semibold text-foreground mb-1">Méthodologie (<GlossaryPreview slug="liquidation-preference" label="Liquidation Preference" />) :</p>
+            <ul className="list-inside list-disc space-y-1">
+              <li><strong>1x <GlossaryPreview slug="liquidation-preference" label="Non-Participating" /> (Standard)</strong> : Lors de la revente, l'investisseur VC a le choix. Soit il récupère sa mise initiale (la préférence), soit il convertit ses parts au prorata et prend son % de la vente totale. Il choisit toujours l'option mathématiquement la plus rentable.</li>
+              <li><strong><GlossaryPreview slug="liquidation-preference" label="Participating" /> (Double-dip)</strong> : L'investisseur récupère sa mise en priorité (la préférence) <em>puis</em> prend en plus son % au prorata sur le reste de la vente (le produit résiduel). C'est extrêmement punitif pour les fondateurs.</li>
+            </ul>
           </div>
         </>
       }

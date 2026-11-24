@@ -604,6 +604,7 @@ export interface InvestmentMemo {
 }
 
 export interface Simulator {
+  decision: 'financement' | 'fonds' | 'cession' | 'comite';
   id: string;
   slug: string;
   title: string;

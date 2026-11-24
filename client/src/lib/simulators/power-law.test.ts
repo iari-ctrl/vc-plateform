@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { simulatePowerLawPortfolio, type PowerLawParams } from './power-law';
+import { evaluatePowerLawDraw, simulatePowerLawPortfolio, type PowerLawParams } from './power-law';
 
 const base: PowerLawParams = {
   fundSizeM: 80,
@@ -31,9 +31,61 @@ describe('simulatePowerLawPortfolio', () => {
     expect(res.probAtLeast.x1).toBe(0);
   });
 
-  it('returns unused reserves at 1x when every line fails', () => {
+  it('returns zero on paid-in capital when every line fails, including with a reserve budget', () => {
     const res = simulatePowerLawPortfolio({ ...base, failRatePct: 1, modestRatePct: 0, reservesPct: 0.4 });
-    expect(res.percentiles.p50).toBeCloseTo(0.4, 10);
+    expect(res.percentiles.p50).toBe(0);
+  });
+
+  it('keeps follow-on decisions fixed when final exits are exchanged', () => {
+    const rounds = [
+      { hasRound: true, milestoneMet: true, priceMultiple: 2 },
+      { hasRound: true, milestoneMet: false, priceMultiple: 1 },
+      { hasRound: false, milestoneMet: true, priceMultiple: 2 },
+    ];
+    const terms = { initialCheckM: 10, reservePoolM: 12, dilutionPct: 0.4 };
+    const before = evaluatePowerLawDraw(rounds, terms, () => [0, 6, 0]);
+    const after = evaluatePowerLawDraw(rounds, terms, () => [6, 0, 0]);
+
+    expect(before.policies.allRounds.ticketsM).toEqual([6, 6, 0]);
+    expect(before.policies.milestone.ticketsM).toEqual([10, 0, 0]);
+    for (const policy of ['allRounds', 'milestone'] as const) {
+      expect(after.policies[policy].ticketsM).toEqual(before.policies[policy].ticketsM);
+      expect(after.policies[policy].tvpi).not.toBe(before.policies[policy].tvpi);
+    }
+    expect(before.policies.milestone.tvpi).toBeCloseTo(36 / 40);
+    expect(after.policies.milestone.tvpi).toBeCloseTo(66 / 40);
+    expect(before.policies.hindsight.ticketsM).toEqual([0, 10, 0]);
+    expect(after.policies.hindsight.ticketsM).toEqual([10, 0, 0]);
+  });
+
+  it('excludes uncalled reserves from both proceeds and paid-in capital', () => {
+    const rounds = [{ hasRound: false, milestoneMet: true, priceMultiple: 2 }];
+    const terms = { initialCheckM: 48, reservePoolM: 32, dilutionPct: 0 };
+    for (const exit of [0, 2]) {
+      const draw = evaluatePowerLawDraw(rounds, terms, () => [exit]);
+      for (const result of Object.values(draw.policies)) {
+        expect(result.investedReservesM).toBe(0);
+        expect(result.paidInM).toBe(48);
+        expect(result.tvpi).toBe(exit);
+      }
+    }
+  });
+
+  it('produces identical distributions for all policies at zero reserves', () => {
+    const { policies } = simulatePowerLawPortfolio({ ...base, reservesPct: 0 });
+    expect(policies.milestone).toEqual(policies.allRounds);
+    expect(policies.hindsight).toEqual(policies.allRounds);
+  });
+
+  it('preserves the requested exit mix and keeps live allocations independent of exit assumptions', () => {
+    const mixed = simulatePowerLawPortfolio(base);
+    const failed = simulatePowerLawPortfolio({ ...base, failRatePct: 1, modestRatePct: 0 });
+    for (const policy of ['allRounds', 'milestone'] as const) {
+      expect(mixed.policies[policy].meanInvestedReservesM).toBe(failed.policies[policy].meanInvestedReservesM);
+    }
+    const [failures, belowOne, belowThree] = mixed.multipleHistogram;
+    expect(Math.abs(failures.share - 0.5)).toBeLessThan(0.01);
+    expect(Math.abs(belowOne.share + belowThree.share - 0.35)).toBeLessThan(0.01);
   });
 
   it('has monotonically decreasing exceedance probabilities', () => {

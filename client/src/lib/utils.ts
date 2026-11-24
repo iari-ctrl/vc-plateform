@@ -18,6 +18,10 @@ export function formatNumber(n: number, opts: Intl.NumberFormatOptions = {}): st
   return new Intl.NumberFormat('fr-FR', opts).format(n);
 }
 
+export function formatMultiple(value: number | null): string {
+  return value === null ? 'Non calculable' : `${formatNumber(value, { maximumFractionDigits: 2 })}×`;
+}
+
 export function formatCurrency(n: number): string {
   if (Math.abs(n) >= 1_000_000) return `${formatNumber(n / 1_000_000, { maximumFractionDigits: 2 })} M€`;
   if (Math.abs(n) >= 1_000) return `${formatNumber(n / 1_000, { maximumFractionDigits: 1 })} k€`;

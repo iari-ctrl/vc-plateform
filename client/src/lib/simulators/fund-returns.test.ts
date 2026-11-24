@@ -11,8 +11,6 @@ describe('calculateFundReturns', () => {
 
   it('handles zero paid-in', () => {
     const res = calculateFundReturns(0, 0, 0);
-    expect(res.dpi).toBe(0);
-    expect(res.rvpi).toBe(0);
-    expect(res.tvpi).toBe(0);
+    expect(res).toEqual({ dpi: null, rvpi: null, tvpi: null });
   });
 });

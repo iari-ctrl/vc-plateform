@@ -475,16 +475,16 @@
     "order": 3,
     "title": "Comment le simulateur tire les portefeuilles",
     "kicker": "Moteur",
-    "readMin": 14,
-    "summary": "Le simulateur lance 4 000 portefeuilles déterministes. Chaque ligne passe par un tirage échec, sortie modeste ou queue Pareto, puis le fonds applique dilution et follow-ons.",
+    "readMin": 6,
+    "summary": "Sur 4 000 portefeuilles identiques pour les deux politiques, comparez un suivi à chaque tour ouvert au fonds et un suivi conditionné à un objectif commercial. Le TVPI brut se calcule sur le capital versé.",
     "status": "published",
     "glossaryRefs": [
       "power-law",
       "follow-on",
       "reserve-funds",
-      "pro-rata",
       "dilution",
-      "portfolio-construction"
+      "portfolio-construction",
+      "tvpi"
     ]
   },
   {

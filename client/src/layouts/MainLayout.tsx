@@ -13,10 +13,33 @@ export function MainLayout() {
   const normalizedPath = normalizedPathname(pathname);
   const mainRef = useRef<HTMLElement>(null);
   const firstRender = useRef(true);
+  const previousPath = useRef(normalizedPath);
 
   useEffect(() => {
+    const previous = previousPath.current;
+    previousPath.current = normalizedPath;
+    if (normalizedPath === '/simulators' && previous.startsWith('/simulators/') && mainRef.current) {
+      const slug = previous.slice('/simulators/'.length);
+      const main = mainRef.current;
+      const restoreRow = () => {
+        const row = document.getElementById(`simulateur-${slug}`);
+        if (!row) return false;
+        row.focus({ preventScroll: true });
+        row.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+        return true;
+      };
+      if (restoreRow()) return;
+      // A first visit from a deep link can arrive before the catalog chunk.
+      main.focus({ preventScroll: true });
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      const observer = new MutationObserver(() => {
+        if (restoreRow() || main.querySelector('h1')) observer.disconnect();
+      });
+      observer.observe(main, { childList: true, subtree: true });
+      return () => observer.disconnect();
+    }
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    window.scrollTo({ top: 0, behavior: reduce || previous === '/simulators' ? 'instant' : 'smooth' });
 
     // Move focus to the main region on client navigation so keyboard and
     // screen-reader users land on the new page's content — SPA route changes
@@ -28,7 +51,7 @@ export function MainLayout() {
       return;
     }
     mainRef.current?.focus({ preventScroll: true });
-  }, [pathname]);
+  }, [normalizedPath]);
 
   // The splash portal is deliberately chrome-less. Home owns a focused,
   // three-pole top bar and a full-viewport hero; onboarding keeps the standard
@@ -36,6 +59,7 @@ export function MainLayout() {
   const isSplash = normalizedPath === '/';
   const isHome = normalizedPath === '/home';
   const isOnboarding = normalizedPath === '/onboarding';
+  const isMemoWorkspace = normalizedPath === '/simulators/simulateur-note-investissement';
   const hasTopBar = isHome || isOnboarding;
   const hasSideNav = !isSplash && !hasTopBar;
 
@@ -58,7 +82,7 @@ export function MainLayout() {
           <main ref={mainRef} id="main" className={cn('flex-1 outline-none', hasSideNav && 'pt-14 lg:pt-0')} tabIndex={-1}>
             <Outlet />
           </main>
-          {isSplash ? null : isHome ? <HomeFooter /> : <Footer />}
+          {isSplash || isMemoWorkspace ? null : isHome ? <HomeFooter /> : <Footer />}
         </div>
       </div>
     </HomeIntroProvider>

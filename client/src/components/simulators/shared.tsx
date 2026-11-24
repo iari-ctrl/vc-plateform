@@ -1,4 +1,4 @@
-import { useId, type ReactNode } from 'react';
+import { useId, useRef, type ReactNode } from 'react';
 
 export type SimulatorComponent = ({ accent }: { accent: string }) => ReactNode;
 
@@ -79,20 +79,31 @@ export function Stat({ label, value, hint, accent }: { label: string; value: Rea
   return (
     <div className="rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
       <p className="text-[0.625rem] uppercase tracking-wider text-surface-variant">{label}</p>
-      <p className="mt-1 font-headline text-headline-md font-semibold" style={{ color: accent }}>{value}</p>
+      <p className="mt-1 font-headline text-headline-md font-semibold" style={{ color: accent && `color-mix(in srgb, ${accent} 55%, var(--on-surface))` }}>{value}</p>
       {hint && <p className="mt-0.5 text-[0.625rem] text-surface-variant">{hint}</p>}
     </div>
   );
 }
 
 export function Panel({ inputs, results }: { inputs: ReactNode; results: ReactNode }) {
+  const resultsHeading = useRef<HTMLHeadingElement>(null);
+  function showResults() {
+    resultsHeading.current?.focus({ preventScroll: true });
+    resultsHeading.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
   return (
-    <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,360px)_1fr]">
-      <div className="min-w-0 space-y-4 rounded-2xl border border-outline-variant bg-surface-container-low/50 p-6">
-        <p className="eyebrow">Paramètres</p>
+    <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]">
+      <section aria-labelledby="saisie" className="min-w-0 self-start space-y-4 rounded-xl border border-outline-variant bg-surface-container-low p-4 sm:p-5">
+        <div className="flex items-baseline justify-between gap-3">
+          <h2 id="saisie" className="font-headline text-headline-md font-semibold">Saisie</h2>
+          <button type="button" onClick={showResults} className="text-sm text-primary underline underline-offset-4 lg:hidden">Voir les résultats</button>
+        </div>
         {inputs}
-      </div>
-      <div className="min-w-0 space-y-4">{results}</div>
+      </section>
+      <section aria-labelledby="resultats" className="min-w-0 space-y-4">
+        <h2 id="resultats" ref={resultsHeading} tabIndex={-1} className="scroll-mt-20 font-headline text-headline-md font-semibold">Résultats</h2>
+        {results}
+      </section>
     </div>
   );
 }

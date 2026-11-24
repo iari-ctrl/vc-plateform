@@ -36,11 +36,12 @@ function restoreMemoSnapshot(saved, compact) {
       : Object.assign({}, blank[key][0]));
   };
   return {
+    storageStatus: storedD === saved?.d ? 'saved' : 'empty',
     lang: (saved && saved.lang) || null,
     mode: (saved && saved.mode) || 'full',
     step: (saved && Number.isInteger(saved.step) && saved.step >= 0) ? saved.step : 0,
-    leftOpen: compact ? false : !(saved && saved.leftOpen === false),
-    rightOpen: compact ? false : !(saved && saved.rightOpen === false),
+    leftOpen: !compact,
+    rightOpen: false,
     d: Object.assign({}, blank, storedD, {
       facts: rows('facts'), beliefs: rows('beliefs'),
       unknowns: rows('unknowns'), risks: rows('risks')
@@ -49,27 +50,35 @@ function restoreMemoSnapshot(saved, compact) {
 }
 
 class Component extends DCLogic {
+  lastStoredRaw = null;
   state = (() => {
     let saved = null;
     let storageError = false;
     try {
       const raw = localStorage.getItem(MEMO_STORAGE_KEY);
+      this.lastStoredRaw = raw;
       try { saved = JSON.parse(raw || 'null'); } catch (e) { saved = null; }
     } catch (e) { storageError = true; }
     const compact = typeof window !== 'undefined' && typeof window.matchMedia === 'function' &&
       window.matchMedia('(max-width: 60rem)').matches;
     return Object.assign({
       view: 'form', overflow: false, leftW: 252, rightW: 316,
-      editingOverrides: {}, storageError: storageError
-    }, restoreMemoSnapshot(saved, compact));
+      editingOverrides: {}, storageError: storageError, copyStatus: 'idle'
+    }, restoreMemoSnapshot(saved, compact), storageError ? { storageStatus: 'read-error' } : {});
   })();
 
   rootRef = React.createRef();
   pageRef = React.createRef();
   headingRef = React.createRef();
   previewRef = React.createRef();
+  copyTextRef = React.createRef();
+  copyButtonRef = React.createRef();
   compactQuery = null;
   compactListener = null;
+  previewObserver = null;
+  reviewKeyListener = event => {
+    if (event.key === 'Escape' && this.state.rightOpen) this.togglePane('right')();
+  };
   hasUnsavedDraft = false;
   storageListener = event => {
     if (!event || event.key !== MEMO_STORAGE_KEY || this.hasUnsavedDraft) return;
@@ -79,42 +88,81 @@ class Component extends DCLogic {
     }
     const compact = typeof window !== 'undefined' && typeof window.matchMedia === 'function' &&
       window.matchMedia('(max-width: 60rem)').matches;
-    this.setState(Object.assign({}, restoreMemoSnapshot(saved, compact), {
+    const restored = restoreMemoSnapshot(saved, compact);
+    this.lastStoredRaw = event.newValue;
+    this.setState(Object.assign({}, restored, {
       view: this.state.view,
       overflow: this.state.overflow,
       leftW: this.state.leftW,
       rightW: this.state.rightW,
       editingOverrides: {},
-      storageError: this.state.storageError
+      leftOpen: this.state.leftOpen,
+      rightOpen: this.state.rightOpen,
+      storageError: this.state.storageError,
+      storageStatus: this.state.storageError ? this.state.storageStatus : restored.storageStatus
     }));
   };
 
   /* ---------- persistence ---------- */
+  memoSnapshot() {
+    return {
+      lang: this.state.lang, mode: this.state.mode, step: this.state.step, d: this.state.d,
+      leftW: this.state.leftW, rightW: this.state.rightW,
+      leftOpen: this.state.leftOpen, rightOpen: this.state.rightOpen
+    };
+  }
+  copiedText = '';
+  async copyDraft() {
+    if (this.state.copyStatus === 'pending') return;
+    const text = JSON.stringify(this.memoSnapshot(), null, 2);
+    this.setState({ copyStatus: 'pending' });
+    try {
+      await navigator.clipboard.writeText(text);
+      this.copiedText = text;
+      this.setState({ copyStatus: 'copied' });
+    } catch (e) {
+      this.setState({ copyStatus: 'fallback' }, () => {
+        const field = this.copyTextRef.current;
+        if (field) { field.focus(); field.select(); }
+      });
+    }
+  }
+  closeCopy() {
+    this.setState({ copyStatus: 'idle' }, () => {
+      if (this.copyButtonRef.current) this.copyButtonRef.current.focus();
+    });
+  }
+  draftConflictsWithStorage() {
+    if (!this.hasUnsavedDraft || localStorage.getItem(MEMO_STORAGE_KEY) === this.lastStoredRaw) return false;
+    this.setState({ storageError: true, storageStatus: 'conflict' });
+    return true;
+  }
   save() {
     try {
-      localStorage.setItem(MEMO_STORAGE_KEY, JSON.stringify({
-        lang: this.state.lang, mode: this.state.mode, step: this.state.step, d: this.state.d,
-        leftW: this.state.leftW, rightW: this.state.rightW,
-        leftOpen: this.state.leftOpen, rightOpen: this.state.rightOpen
-      }));
+      if (this.draftConflictsWithStorage()) return false;
+      const raw = JSON.stringify(this.memoSnapshot());
+      localStorage.setItem(MEMO_STORAGE_KEY, raw);
+      this.lastStoredRaw = raw;
       this.hasUnsavedDraft = false;
-      if (this.state.storageError) this.setState({ storageError: false });
+      if (this.state.storageStatus !== 'saved') this.setState({ storageError: false, storageStatus: 'saved' });
       return true;
     } catch (e) {
       this.hasUnsavedDraft = true;
-      if (!this.state.storageError) this.setState({ storageError: true });
+      if (this.state.storageStatus !== 'write-error') this.setState({ storageError: true, storageStatus: 'write-error' });
       return false;
     }
   }
   clearSavedMemo() {
     try {
+      if (this.draftConflictsWithStorage()) return false;
       localStorage.removeItem(MEMO_STORAGE_KEY);
+      this.lastStoredRaw = null;
       this.hasUnsavedDraft = false;
-      if (this.state.storageError) this.setState({ storageError: false });
+      this.setState({ storageError: false, storageStatus: 'empty' });
       if (typeof window !== 'undefined') window.location.reload();
       return true;
     } catch (e) {
-      if (!this.state.storageError) this.setState({ storageError: true });
+      this.setState({ storageError: true, storageStatus: 'remove-error' });
       return false;
     }
   }
@@ -126,7 +174,17 @@ class Component extends DCLogic {
     this.setD(list, arr);
   }
   addRow(list, blank) { this.setD(list, this.state.d[list].concat([blank])); }
-  delRow(list, i) {
+  delRow(list, i, trigger) {
+    const row = this.state.d[list][i];
+    if (!row) return;
+    const blank = blankMemoData()[list][0];
+    const entered = Object.keys(row).some(key => this.filled(row[key]) && row[key] !== blank[key]);
+    if (entered && (typeof window === 'undefined' || !window.confirm(this.fr()
+      ? 'Supprimer cette ligne et les informations qu’elle contient ?'
+      : 'Delete this row and the information it contains?'))) {
+      if (trigger && trigger.focus) trigger.focus();
+      return;
+    }
     const arr = this.state.d[list].filter((_, j) => j !== i);
     const rows = arr.length ? arr : [blank2(list)];
     this.setState({ d: Object.assign({}, this.state.d, { [list]: rows }) }, () => {
@@ -147,7 +205,7 @@ class Component extends DCLogic {
   grow(el) { if (!el) return; el.style.height = 'auto'; el.style.height = (el.scrollHeight + 1) + 'px'; }
   growAll() {
     const root = this.rootRef.current; if (!root) return;
-    root.querySelectorAll('textarea').forEach(el => this.grow(el));
+    root.querySelectorAll('textarea:not([readonly])').forEach(el => this.grow(el));
   }
   togglePane(side) {
     return () => {
@@ -156,8 +214,15 @@ class Component extends DCLogic {
         side === 'left' ? { leftOpen: !wasOpen } : { rightOpen: !wasOpen },
         () => {
           this.save();
-          if (!wasOpen) return;
           const root = this.rootRef.current;
+          if (!wasOpen) {
+            const target = root && root.querySelector(side === 'right' ? '.memo-guidance-toggle' : '.memo-rail-body button[aria-current="step"]');
+            if (target) {
+              target.focus();
+              if (side === 'left' && target.scrollIntoView) target.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            }
+            return;
+          }
           const control = root && root.querySelector('[data-pane-toggle="' + side + '"]');
           if (control) control.focus();
         }
@@ -170,17 +235,27 @@ class Component extends DCLogic {
     this.measure();
     this.syncDocumentMetadata();
     if (typeof window === 'undefined') return;
+    if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'memo:ready' }, window.location.origin);
+    if (typeof document !== 'undefined') document.addEventListener('keydown', this.reviewKeyListener);
+    if (typeof ResizeObserver !== 'undefined' && this.rootRef.current) {
+      this.previewObserver = new ResizeObserver(() => this.measure());
+      this.previewObserver.observe(this.rootRef.current);
+      const header = this.rootRef.current.querySelector('.memo-header');
+      if (header) this.previewObserver.observe(header);
+    }
     if (typeof window.addEventListener === 'function') window.addEventListener('storage', this.storageListener);
     if (typeof window.matchMedia !== 'function') return;
     this.compactQuery = window.matchMedia('(max-width: 60rem)');
     this.compactListener = e => {
-      if (e.matches) this.setState({ leftOpen: false, rightOpen: false });
+      this.setState(e.matches ? { leftOpen: false, rightOpen: false } : { leftOpen: true });
     };
     if (this.compactQuery.addEventListener) this.compactQuery.addEventListener('change', this.compactListener);
     else if (this.compactQuery.addListener) this.compactQuery.addListener(this.compactListener);
   }
   componentDidUpdate() { this.growAll(); this.measure(); this.syncDocumentMetadata(); }
   componentWillUnmount() {
+    if (typeof document !== 'undefined') document.removeEventListener('keydown', this.reviewKeyListener);
+    if (this.previewObserver) this.previewObserver.disconnect();
     if (typeof window !== 'undefined' && typeof window.removeEventListener === 'function') {
       window.removeEventListener('storage', this.storageListener);
     }
@@ -189,8 +264,17 @@ class Component extends DCLogic {
     else if (this.compactQuery.removeListener) this.compactQuery.removeListener(this.compactListener);
   }
   measure() {
+    const root = this.rootRef.current;
+    const header = root && root.querySelector('.memo-header');
+    if (header) root.style.setProperty('--memo-header-height', header.offsetHeight + 'px');
     const p = this.pageRef.current;
     if (!p) { if (this.state.overflow) this.setState({ overflow: false }); return; }
+    const preview = this.previewRef.current;
+    if (preview) {
+      const style = getComputedStyle(preview);
+      const available = preview.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      p.style.zoom = String(Math.min(1, Math.max(0.1, available / (210 * 96 / 25.4))));
+    }
     const over = p.scrollHeight > 1128;
     if (over !== this.state.overflow) this.setState({ overflow: over });
   }
@@ -226,22 +310,46 @@ class Component extends DCLogic {
   T() {
     const fr = this.fr();
     const p = (a, b) => fr ? a : b;
+    const unsavedNote = p(
+      'Dernières modifications non enregistrées. Copiez votre saisie avant de quitter ou de recharger la page.',
+      'Latest changes not saved. Copy your draft before leaving or reloading the page.'
+    );
+    const conflictNote = p(
+      'Conflit de sauvegarde : la note enregistrée a changé dans un autre onglet. Copiez votre brouillon avant de recharger la page.',
+      'Save conflict: the saved memo changed in another tab. Copy your draft before reloading the page.'
+    );
+    const storageError = this.state.storageStatus === 'conflict' ? conflictNote
+      : this.state.storageStatus === 'read-error'
+      ? p('Lecture du brouillon local indisponible. Vérifiez les paramètres de stockage de ce navigateur.', 'The local draft could not be read. Check this browser’s storage settings.')
+      : this.state.storageStatus === 'remove-error'
+        ? p('Suppression du brouillon local impossible. Le formulaire n’a pas été vidé. Vérifiez les paramètres de stockage de ce navigateur.', 'The local draft could not be deleted. The form has not been cleared. Check this browser’s storage settings.')
+        : unsavedNote;
     return {
-      appKicker: p('Note d’investissement · gabarit one-pager', 'Investment memo · one-pager template'),
-      storageError: p(
-        'Enregistrement local indisponible. La saisie reste ouverte, mais sera perdue si vous rechargez la page.',
-        'Local saving is unavailable. Your draft remains open, but will be lost if you reload the page.'
-      ),
+      appKicker: p('Simulateur · Note d’investissement', 'Simulator · Investment memo'),
+      review: p('Aide à la relecture', 'Review guidance'),
+      summary: p('Sommaire', 'Contents'),
+      copyDraft: p('Copier le brouillon', 'Copy draft'),
+      copyHelp: p('Copie automatique indisponible. Copiez ce texte avec ⌘C ou Ctrl+C, puis conservez-le dans un fichier texte. Il contient toutes les saisies, y compris les champs masqués par Screening. Aucun import automatique n’est proposé ici.', 'Automatic copying unavailable. Copy this text with ⌘C or Ctrl+C, then keep it in a text file. It includes all entries, including fields hidden by Screening. Automatic import is not provided here.'),
+      copyText: p('Brouillon complet — texte JSON', 'Complete draft — JSON text'),
+      closeCopy: p('Fermer le texte de secours', 'Close recovery text'),
+      localNote: this.state.storageStatus === 'conflict' ? conflictNote : this.hasUnsavedDraft ? unsavedNote : this.state.storageError ? storageError
+        : this.state.storageStatus === 'saved'
+          ? p('Saisie enregistrée dans ce navigateur.', 'Draft saved in this browser.')
+          : p('Enregistrement automatique dans ce navigateur.', 'Automatic saving in this browser.'),
+      confidentialityNote: p('N’utilisez pas de données confidentielles.', 'Do not enter confidential information.'),
+      storageError: storageError,
       modeFull: p('Mémo complet', 'Full memo'),
       modeScreen: p('Screening', 'Screening'),
       viewForm: p('Saisie', 'Draft'),
       viewPreview: p('Aperçu', 'Preview'),
-      exportPdf: p('Export PDF', 'Export PDF'),
+      exportPdf: p('Imprimer / enregistrer en PDF', 'Print / save as PDF'),
+      printHelp: p('Le dialogue d’impression du navigateur permet de choisir une imprimante ou l’enregistrement en PDF. Aucun fichier n’est téléchargé automatiquement.', 'The browser’s print dialog lets you choose a printer or save as PDF. No file is downloaded automatically.'),
       railTitle: p('Blocs', 'Blocks'),
-      railFoot: p('Les proportions indiquées valent pour une page. Un bloc qui déborde en dit long sur ce qu’on n’a pas tranché.', 'The shares are for one page. A block that overruns tells you what has not been settled.'),
+      railFoot: p('Les proportions sont des repères de longueur pour une note d’une page.', 'The shares are length guidelines for a one-page memo.'),
       block: p('Bloc', 'Block'),
       cur: p('M€', '€M'),
       completeness: p('Complétude', 'Completeness'),
+      expectedHelp: p('« Attendu » : champ compté dans la complétude du format choisi. Un brouillon peut être relu et imprimé même incomplet.', '“Expected”: field counted towards completion of the selected format. A draft can be reviewed and printed even when incomplete.'),
       sixTitle: p('Champs de la note', 'Memo fields'),
       sixSub: p('Présence des champs et validité numérique, sans évaluation du raisonnement.', 'Field presence and numeric validity, not an assessment of reasoning.'),
       errTitle: p('Erreurs fréquentes', 'Common failures'),
@@ -250,7 +358,7 @@ class Component extends DCLogic {
       backToDraft: p('Retour à la saisie', 'Back to draft'),
       onePage: p('une page, sans réduction du corps', 'one page, body size untouched'),
       overflowOk: p('Tient sur une page.', 'Fits on one page.'),
-      overflowBad: p('Dépasse une page — coupez, ne réduisez pas.', 'Overruns one page — cut, do not shrink.'),
+      overflowBad: p('La note dépasse une page. Réduisez le texte pour conserver ce format.', 'The memo exceeds one page. Shorten the text to keep this format.'),
       pvReco: p('Recommandation', 'Recommendation'),
       /* reco */
       lblRecoWhy: p('La raison principale, en une phrase', 'The main reason, in one sentence'),
@@ -306,15 +414,16 @@ class Component extends DCLogic {
       phMitigation: p('atténuation, ou raison de l’accepter', 'mitigation, or reason to accept it'),
       addRisk: p('Ajouter un risque', 'Add a risk'),
       riskOk: p('Deux ou trois au maximum, hiérarchisés.', 'Two or three at most, ranked.'),
-      riskTooMany: p('Au-delà de trois, ce ne sont plus des risques : c’est une liste.', 'Past three, these are no longer risks: it is a list.'),
+      riskTooMany: p('Plus de trois lignes de risques ajoutées. Retenez deux ou trois risques prioritaires dans la note.', 'More than three risk rows added. Retain two or three priority risks in the memo.'),
       lblBear: p('Cas défavorable — le meilleur argument contre', 'Bear case — the best argument against'),
-      phBear: p('Deux phrases, rédigées comme les écrirait quelqu’un qui veut passer.', 'Two sentences, written as someone who wants to pass would write them.'),
-      bearNote: p('Si vous ne parvenez pas à le rendre convaincant, la diligence n’est pas terminée.', 'If you cannot make it convincing, diligence is not finished.'),
+      phBear: p('Présentez les principaux arguments qui justifieraient de ne pas investir.', 'Present the main arguments that would justify not investing.'),
+      bearNote: p('Précisez les faits ou hypothèses qui soutiennent ce cas défavorable.', 'Specify the facts or assumptions supporting this bear case.'),
       /* arithmetic */
       lblDilution: p('Dilution attendue', 'Expected dilution'),
       lblExit: p('Sortie envisagée', 'Assumed exit'),
       lblFund: p('Taille du fonds', 'Fund size'),
       computed: p('Calculé', 'Computed'),
+      missingDependencies: p('Pour calculer, renseigner les champs suivants :', 'To calculate, enter the following fields:'),
       overrideNote: p('Une saisie manuelle doit rester compatible avec les hypothèses. Pour un autre scénario, modifier les hypothèses.', 'A manual value must agree with the assumptions. For another scenario, change the assumptions.'),
       method: p('Tour primaire simple : le ticket est inclus dans la levée. La sortie est une valeur des fonds propres et la dilution est cumulée jusqu’à la sortie. Résultats bruts, hors frais, fiscalité et préférences de liquidation.', 'Simple primary round: the ticket is part of the round. Exit means equity value and dilution is cumulative through exit. Gross results, excluding fees, taxes and liquidation preferences.'),
       cOwnership: p('Ownership à l’entrée', 'Ownership at entry'),
@@ -335,23 +444,27 @@ class Component extends DCLogic {
       lblDue: p('Échéance', 'Due'),
       lblMustSettle: p('Doit trancher', 'Must settle'),
       phMustSettle: p('La question, formulée de façon à admettre une réponse.', 'The question, phrased so that it admits an answer.'),
-      mustSettleNote: p('Une intention n’est pas une étape.', 'An intention is not a step.')
+      mustSettleNote: this.state.mode === 'screen'
+        ? p('Précisez la question à résoudre avant la décision. Seule cette question est reprise dans le Screening.', 'Specify the question to resolve before the decision. Only this question is included in Screening.')
+        : p('Précisez l’action, son responsable, son échéance et la question à résoudre.', 'Specify the action, its owner, its deadline and the question to resolve.')
     };
   }
 
   blockMeta() {
     const fr = this.fr(); const p = (a, b) => fr ? a : b;
     return {
-      reco: { name: p('Recommandation', 'Recommendation'), share: '10 %', hint: p('En haut, jamais en bas. Un mémo qui fait attendre sa conclusion est lu pour la trouver, non pour l’évaluer.', 'At the top, never at the bottom. A memo that withholds its conclusion gets read to find it, not to judge it.') },
-      deal: { name: p('En-tête & opération', 'Header & deal'), share: '', hint: p('Ce qui identifie la note, et ce qui est sur la table. Rien d’autre : l’ownership se calcule seul.', 'What identifies the note, and what is on the table. Nothing else: ownership computes itself.') },
-      activity: { name: p('Activité', 'What they do'), share: '', hint: p('Ce que fait l’entreprise, pour qui, et à la place de quoi. Une phrase — si elle en demande deux, c’est que vous ne l’avez pas comprise.', 'What the company does, for whom, and instead of what. One sentence — if it takes two, you have not understood it.') },
-      thesis: { name: p('Thèse', 'Thesis'), share: '10 %', hint: p('Une thèse est un mécanisme, pas une taille de marché. Elle doit être réfutable : sans condition de réfutation, ce n’est qu’un avis.', 'A thesis is a mechanism, not a market size. It must be refutable: with no falsification condition, it is only an opinion.') },
+      reco: { name: p('Recommandation', 'Recommendation'), share: '10 %', hint: p('Choisissez une recommandation et justifiez-la en une phrase.', 'Choose a recommendation and give your main reason in one sentence.') },
+      deal: { name: p('En-tête & opération', 'Header & deal'), share: '', hint: p('Identifiez la note et renseignez les conditions de l’opération. La participation est calculée à partir des montants saisis.', 'Identify the memo and enter the deal terms. Ownership is calculated from the amounts entered.') },
+      activity: { name: p('Activité', 'What they do'), share: '', hint: p('Résumez en une phrase l’activité, les clients visés et la solution remplacée.', 'Summarise the activity, target customers and solution being replaced in one sentence.') },
+      thesis: { name: p('Thèse', 'Thesis'), share: '10 %', hint: p('Décrivez le mécanisme de création de valeur, les conditions nécessaires et ce qui invaliderait le raisonnement.', 'Describe the value-creation mechanism, its necessary conditions and what would invalidate the reasoning.') },
       facts: { name: p('Ce que nous savons', 'What we know'), share: '25 %', hint: p('Faits vérifiables, datés et sourcés. Le statut compte autant que le chiffre : vérifié auprès d’un tiers, ou déclaratif non recoupé.', 'Verifiable facts, dated and sourced. Status matters as much as the figure: third-party verified, or founder-declared and unchecked.') },
       beliefs: { name: p('Ce que nous croyons', 'What we believe'), share: '10 %', hint: p('Jugements assumés, distincts des faits. Deux d’entre eux ne sont pas optionnels : pourquoi cette équipe, et pourquoi maintenant.', 'Judgements you own, kept apart from facts. Two of them are not optional: why this team, and why now.') },
       unknowns: { name: p('Ce que nous ignorons', 'What we don’t know'), share: '15 %', hint: p('Les inconnues qui changeraient la réponse — pas celles qui la nuanceraient. Chacune se lève par une action nommée.', 'The unknowns that would change the answer — not the ones that would qualify it. Each is lifted by a named action.') },
-      risks: { name: p('Risques & cas défavorable', 'Risks & bear case'), share: '15 %', hint: p('Deux ou trois au maximum. Concurrence, exécution, recrutement ne sont pas des risques : ce sont des mots qui vont à tout dossier.', 'Two or three at most. Competition, execution, hiring are not risks: they are words that fit any deal.') },
-      arith: { name: p('Arithmétique', 'Arithmetic'), share: '5 %', hint: p('Qu’obtient-on pour ce qu’on paie. Les valeurs se calculent depuis l’opération ; on ne les remplace que si l’on sait pourquoi.', 'What we get for what we pay. Values compute from the deal; you only override them when you know why.') },
-      next: { name: p('Prochaine étape', 'Next step'), share: '10 %', hint: p('Une action, un responsable, une échéance — et la question que l’action doit trancher.', 'One action, one owner, one deadline — and the question the action must settle.') }
+      risks: { name: p('Risques & cas défavorable', 'Risks & bear case'), share: '15 %', hint: p('Sélectionnez deux ou trois risques prioritaires et décrivez leur manifestation dans cette entreprise.', 'Select two or three priority risks and describe how they could affect this company.') },
+      arith: { name: p('Arithmétique', 'Arithmetic'), share: '5 %', hint: p('Renseignez les hypothèses de sortie pour calculer les résultats bruts. Toute valeur manuelle est contrôlée par rapport à ces hypothèses.', 'Enter exit assumptions to calculate gross results. Each manual value is checked against these assumptions.') },
+      next: { name: p('Prochaine étape', 'Next step'), share: '10 %', hint: this.state.mode === 'screen'
+        ? p('Formulez la question à résoudre avant la décision. Les autres champs sont facultatifs et conservés pour le mémo complet.', 'State the question to resolve before the decision. The other fields are optional and retained for the full memo.')
+        : p('Une action, un responsable, une échéance — et la question que l’action doit trancher.', 'One action, one owner, one deadline — and the question the action must settle.') }
     };
   }
 
@@ -362,47 +475,51 @@ class Component extends DCLogic {
   }
 
   /* ---------- completion ---------- */
-  req(id) {
-    const d = this.state.d, F = v => this.filled(v), screen = this.state.mode === 'screen';
+  overrideActive(key) {
+    const raw = this.state.d[key];
+    // Match the model's override activation, without trimming the saved value.
+    return !!this.state.editingOverrides[key] || (raw != null && raw !== '');
+  }
+  requirements(id) {
+    const d = this.state.d, screen = this.state.mode === 'screen';
     const c = this.calc();
     const list = [];
-    if (id === 'reco') { list.push(F(d.reco), F(d.recoWhy)); }
-    if (id === 'deal') {
-      list.push(F(d.company), F(d.date), F(d.round), c.amt != null, c.pre != null, c.tick != null);
-      if (!screen) list.push(F(d.author));
-    }
-    if (id === 'activity') list.push(F(d.activity));
-    if (id === 'thesis') {
-      list.push(F(d.thesisIf), F(d.thesisThen));
-      list.push(F(d.thesisOutcome), F(d.falsifiedIf));
-    }
-    if (id === 'facts') {
-      for (let i = 0; i < 3; i++) {
-        const f = d.facts[i] || {};
-        list.push(F(f.text));
-        list.push(F(f.source), F(f.date));
+    const add = (key, ok = this.filled(d[key])) => list.push({ key, ok });
+    const rows = (name, count, keys) => {
+      for (let i = 0; i < count; i++) {
+        for (const key of keys) add(name + '.' + i + '.' + key, this.filled((d[name][i] || {})[key]));
       }
+    };
+    if (id === 'reco') { add('reco'); add('recoWhy'); }
+    if (id === 'deal') {
+      add('company'); add('date'); add('round');
+      add('amount', c.amt != null); add('preMoney', c.pre != null); add('ticket', c.tick != null);
+      if (!screen) add('author');
     }
-    if (id === 'beliefs') list.push(F(d.whyTeam), F(d.whyNow));
-    if (id === 'unknowns') {
-      for (let i = 0; i < 2; i++) { const u = d.unknowns[i] || {}; list.push(F(u.q), F(u.how)); }
+    if (id === 'activity') add('activity');
+    if (id === 'thesis') {
+      add('thesisIf'); add('thesisThen'); add('thesisOutcome'); add('falsifiedIf');
     }
+    if (id === 'facts') rows('facts', 3, ['text', 'source', 'date']);
+    if (id === 'beliefs') { add('whyTeam'); add('whyNow'); }
+    if (id === 'unknowns') rows('unknowns', 2, ['q', 'how']);
     if (id === 'risks') {
-      for (let i = 0; i < 2; i++) { const r = d.risks[i] || {}; list.push(F(r.text), F(r.mitigation)); }
-      list.push(F(d.bearCase));
+      rows('risks', 2, ['text', 'mitigation']);
+      add('bearCase');
     }
     if (id === 'arith') {
-      list.push(c.dil != null, c.exit != null, c.fund != null);
+      add('dilution', c.dil != null); add('exitValue', c.exit != null); add('fundSize', c.fund != null);
       for (const key of ['ovOwnership', 'ovResidual', 'ovMultiple', 'ovFraction']) {
-        if (this.filled(d[key]) || this.state.editingOverrides[key]) list.push(!c.errors[key]);
+        if (this.overrideActive(key)) add(key, !c.errors[key]);
       }
     }
     if (id === 'next') {
-      list.push(F(d.nextQuestion));
-      if (!screen) list.push(F(d.nextAction), F(d.nextOwner), F(d.nextDue));
+      add('nextQuestion');
+      if (!screen) { add('nextAction'); add('nextOwner'); add('nextDue'); }
     }
     return list;
   }
+  req(id) { return this.requirements(id).map(field => field.ok); }
 
   calc() {
     if (this.state.mode === 'screen') {
@@ -428,18 +545,30 @@ class Component extends DCLogic {
     });
   }
   goToBlock(id) { const i = this.order().indexOf(id); if (i >= 0) this.go(i); }
+  openPreview(after) {
+    this.setState({ view: 'preview' }, () => {
+      if (this.previewRef.current) {
+        this.previewRef.current.focus();
+        this.previewRef.current.scrollIntoView({ block: 'start' });
+      }
+      if (after) after();
+    });
+  }
 
   renderVals() {
     const t = this.T(), d = this.state.d, meta = this.blockMeta(), order = this.order();
     const fr = this.fr(), p = (a, b) => fr ? a : b;
     const step = Math.min(this.state.step, order.length - 1);
     const activeId = order[step];
+    const requirements = Object.fromEntries(order.map(id => [id, this.requirements(id)]));
+    const expected = Object.fromEntries(Object.keys(d).map(key => [key, '']));
+    Object.values(requirements).flat().forEach(field => { expected[field.key] = p('Attendu', 'Expected'); });
+    const marker = key => expected[key] || '';
     const c = this.calc();
     const accent = this.props.accent || '#8A2B22';
     const labels = { preMoney: t.lblPre, amount: t.lblAmount, ticket: t.lblTicket, dilution: t.lblDilution, exitValue: t.lblExit, fundSize: t.lblFund,
       ovOwnership: t.cOwnership, ovResidual: t.cResidual, ovMultiple: t.cMultiple, ovFraction: t.cFraction };
     const messages = {
-      missing: p('À renseigner pour permettre le calcul.', 'Enter a value to enable the calculation.'),
       number: p('Nombre complet attendu : 1 234,56 ou 1234.56, sans unité ni exposant.', 'Enter a complete number: 1 234,56 or 1234.56, without units or exponents.'),
       positive: p('La valeur doit être strictement positive.', 'The value must be strictly positive.'),
       nonnegative: p('La valeur doit être positive ou nulle.', 'The value must be zero or positive.'),
@@ -448,34 +577,50 @@ class Component extends DCLogic {
       dependency: p('Renseigner ou corriger les hypothèses nécessaires avant de remplacer ce résultat.', 'Enter or correct the required assumptions before replacing this result.'),
       inconsistent: p('Valeur incompatible avec les hypothèses. Corriger la saisie, modifier les hypothèses ou recalculer.', 'Value inconsistent with the assumptions. Correct it, change the assumptions or recompute.')
     };
-    const numericHelp = Object.fromEntries(Object.keys(labels).map(key => [key, {
-      invalid: !!c.errors[key], message: c.errors[key] ? messages[c.errors[key]] : ''
-    }]));
+    const numericHelp = Object.fromEntries(Object.keys(labels).map(key => {
+      const invalid = !!c.errors[key] && c.errors[key] !== 'missing';
+      return [key, { invalid, message: invalid ? messages[c.errors[key]] : '' }];
+    }));
     const ownDeps = ['preMoney', 'amount', 'ticket', 'ovOwnership'];
     const residualDeps = ownDeps.concat('dilution', 'ovResidual');
     const returnDeps = residualDeps.concat('exitValue');
-    const reason = (value, deps) => value != null ? '' : p('Indisponible — ', 'Unavailable — ') +
-      (deps.filter(key => c.errors[key]).map(key => labels[key] + ' : ' + messages[c.errors[key]]).join(' ') ||
-        p('calcul hors de la plage numérique représentable.', 'calculation outside the representable numeric range.'));
+    const reason = (value, deps) => {
+      if (value != null) return '';
+      const invalid = deps.filter(key => numericHelp[key].invalid);
+      if (invalid.length) return invalid.map(key => labels[key] + ' : ' + numericHelp[key].message).join(' ');
+      if (deps.some(key => c.errors[key] === 'missing')) return '';
+      return p('Calcul hors de la plage numérique représentable.', 'Calculation outside the representable numeric range.');
+    };
+    const dependencyKeys = activeId === 'deal' ? ownDeps : activeId === 'arith'
+      ? returnDeps.concat('fundSize', 'ovMultiple', 'ovFraction') : [];
+    const missingDependencies = ['deal', 'arith'].filter(id => order.includes(id)).map(section => {
+      const keys = requirements[section].map(field => field.key)
+        .filter(key => dependencyKeys.includes(key) && c.errors[key] === 'missing');
+      return { section, keys, name: meta[section].name, text: keys.map(key => labels[key]).join(', '), go: () => this.goToBlock(section) };
+    }).filter(group => group.keys.length);
     const showShares = this.props.showPageShares !== false;
     const dense = (this.props.density || 'comfortable') === 'compact';
 
     const recoMeta = {
-      invest: { label: p('Investir', 'Invest'), color: '#2F5A3E', sub: p('la thèse tient, le prix se défend', 'thesis holds, price defensible') },
-      pass: { label: p('Passer', 'Pass'), color: accent, sub: p('une raison, pas un faisceau', 'one reason, not a bundle') },
-      diligence: { label: p('Poursuivre la diligence', 'Keep digging'), color: '#7A550F', sub: p('une question à trancher, nommée', 'one named question to settle') }
+      invest: { label: p('Investir', 'Invest'), color: '#2F5A3E', sub: p('Thèse étayée et prix justifié', 'Supported thesis and justified price') },
+      pass: { label: p('Passer', 'Pass'), color: accent, sub: p('Motif principal de refus', 'Main reason for declining') },
+      diligence: { label: p('Poursuivre la diligence', 'Keep digging'), color: '#7A550F', sub: p('Question à résoudre avant la décision', 'Question to resolve before the decision') }
     };
 
     /* rail */
     const rail = order.map((id, i) => {
-      const r = this.req(id), done = r.filter(Boolean).length;
+      const r = requirements[id], done = r.filter(field => field.ok).length;
       const pct = r.length ? Math.round(done / r.length * 100) : 0;
+      const status = done === r.length ? p('Renseigné', 'Entered') : done ? p('En cours', 'In progress') : p('À renseigner', 'Not entered');
       const active = i === step;
       return {
+        index: i,
         num: String(i + 1).padStart(2, '0'),
         name: meta[id].name,
         share: showShares ? meta[id].share : '',
         pct: pct,
+        status: status,
+        progress: status + ' · ' + done + '/' + r.length,
         barColor: pct === 100 ? '#2F5A3E' : (pct > 0 ? accent : '#DFD9CB'),
         numColor: active ? accent : '#695F50',
         nameWeight: active ? 600 : 400,
@@ -489,7 +634,7 @@ class Component extends DCLogic {
 
     /* score */
     let done = 0, total = 0;
-    order.forEach(id => { const r = this.req(id); done += r.filter(Boolean).length; total += r.length; });
+    order.forEach(id => { const r = requirements[id]; done += r.filter(field => field.ok).length; total += r.length; });
     const score = total ? Math.round(done / total * 100) : 0;
 
     /* six questions */
@@ -502,7 +647,7 @@ class Component extends DCLogic {
       { text: p('Trois faits, sources et dates renseignés', 'Three facts, sources and dates entered'), ok: this.req('facts').every(Boolean), to: 'facts' },
       { text: p('Question bloquante renseignée', 'Blocking question entered'), ok: F(d.nextQuestion), to: 'next' }
     ] : [
-      { text: p('Pourquoi ce dossier devient-il très grand s’il réussit ?', 'Why does this become very large if it works?'), ok: F(d.thesisThen) && F(d.thesisOutcome) && c.exit != null, to: 'thesis' },
+      { text: p('Quel mécanisme de création de valeur soutient la valeur de sortie envisagée ?', 'What value-creation mechanism supports the assumed exit value?'), ok: F(d.thesisThen) && F(d.thesisOutcome) && c.exit != null, to: 'thesis' },
       { text: p('Pourquoi cette équipe ?', 'Why this team?'), ok: F(d.whyTeam), to: this.state.mode === 'screen' ? 'facts' : 'beliefs' },
       { text: p('Pourquoi maintenant ?', 'Why now?'), ok: F(d.whyNow), to: this.state.mode === 'screen' ? 'facts' : 'beliefs' },
       { text: p('Qu’est-ce qui doit être vrai pour que la thèse tienne ?', 'What must be true for the thesis to hold?'), ok: F(d.thesisIf), to: 'thesis' },
@@ -517,13 +662,13 @@ class Component extends DCLogic {
     }));
 
     const errs = fr ? [
-      'Reformuler le dossier du fondateur sans jugement propre — cela se voit dès la deuxième ligne.',
+      'Reformuler le dossier du fondateur sans formuler de jugement propre.',
       'Une taille de marché sans mécanisme : un chiffre de TAM n’est pas une thèse.',
       'Des risques génériques — concurrence, exécution, recrutement — applicables à n’importe quelle entreprise.',
       'Un raisonnement qui ménage toutes les issues et ne prend donc aucune position.',
       'La conclusion placée en dernière ligne.'
     ] : [
-      'Restating the founder’s deck with no judgement of your own — it shows by the second line.',
+      'Restating the founder’s deck without forming your own judgement.',
       'A market size with no mechanism: a TAM figure is not a thesis.',
       'Generic risks — competition, execution, hiring — that fit any company.',
       'Reasoning that hedges every outcome and therefore takes no position.',
@@ -550,6 +695,7 @@ class Component extends DCLogic {
     const facts = d.facts.map((f, i) => ({
       num: String(i + 1).padStart(2, '0'),
       text: f.text, source: f.source, date: f.date,
+      textExpected: marker('facts.' + i + '.text'), sourceExpected: marker('facts.' + i + '.source'), dateExpected: marker('facts.' + i + '.date'),
       textLabel: p('Fait ' + (i + 1), 'Fact ' + (i + 1)),
       sourceLabel: p('Source ' + (i + 1), 'Source ' + (i + 1)),
       dateLabel: p('Date du fait ' + (i + 1), 'Fact ' + (i + 1) + ' date'),
@@ -565,7 +711,7 @@ class Component extends DCLogic {
       declaredSelected: f.status !== 'verified',
       stVerified: pill(f.status === 'verified', '#2F5A3E'),
       stDeclared: pill(f.status !== 'verified', '#7A550F'),
-      remove: () => this.delRow('facts', i)
+      remove: e => this.delRow('facts', i, e && e.currentTarget)
     }));
 
     const convLevels = (val, onPick) => [
@@ -580,6 +726,7 @@ class Component extends DCLogic {
         convictionLabel: p('Niveau de conviction — équipe', 'Conviction level — team'),
         ph: p('Le jugement, et la raison qui le porte.', 'The judgement, and the reason behind it.'),
         value: d.whyTeam, onChange: this.ev('whyTeam'),
+        expected: marker('whyTeam'),
         levels: convLevels(d.whyTeamConv, k => this.setD('whyTeamConv', k))
       },
       {
@@ -587,6 +734,7 @@ class Component extends DCLogic {
         convictionLabel: p('Niveau de conviction — temporalité', 'Conviction level — timing'),
         ph: p('Ce qui rend la fenêtre ouverte aujourd’hui et pas il y a trois ans.', 'What makes the window open today and not three years ago.'),
         value: d.whyNow, onChange: this.ev('whyNow'),
+        expected: marker('whyNow'),
         levels: convLevels(d.whyNowConv, k => this.setD('whyNowConv', k))
       }
     ];
@@ -601,40 +749,43 @@ class Component extends DCLogic {
       onText: this.rowEv('beliefs', i, 'text'),
       onBecause: e => this.setRow('beliefs', i, 'because', e.target.value),
       levels: convLevels(b.conv, k => this.setRow('beliefs', i, 'conv', k)),
-      remove: () => this.delRow('beliefs', i)
+      remove: e => this.delRow('beliefs', i, e && e.currentTarget)
     }));
 
     const unknowns = d.unknowns.map((u, i) => ({
       num: String(i + 1).padStart(2, '0'),
       q: u.q, how: u.how,
+      questionExpected: marker('unknowns.' + i + '.q'), verificationExpected: marker('unknowns.' + i + '.how'),
       questionLabel: p('Question ' + (i + 1), 'Question ' + (i + 1)),
       verificationLabel: p('Action de vérification ' + (i + 1), 'Verification action ' + (i + 1)),
       removeLabel: p('Supprimer la question ' + (i + 1), 'Remove question ' + (i + 1)),
       onQ: this.rowEv('unknowns', i, 'q'),
       onHow: e => this.setRow('unknowns', i, 'how', e.target.value),
-      remove: () => this.delRow('unknowns', i)
+      remove: e => this.delRow('unknowns', i, e && e.currentTarget)
     }));
 
     const risks = d.risks.map((r, i) => ({
       num: String(i + 1).padStart(2, '0'),
       text: r.text, mitigation: r.mitigation,
+      riskExpected: marker('risks.' + i + '.text'), mitigationExpected: marker('risks.' + i + '.mitigation'),
       riskLabel: p('Risque ' + (i + 1), 'Risk ' + (i + 1)),
       mitigationLabel: p('Atténuation ' + (i + 1), 'Mitigation ' + (i + 1)),
       removeLabel: p('Supprimer le risque ' + (i + 1), 'Remove risk ' + (i + 1)),
       numColor: i > 2 ? accent : '#695F50',
       onText: this.rowEv('risks', i, 'text'),
       onMitigation: e => this.setRow('risks', i, 'mitigation', e.target.value),
-      remove: () => this.delRow('risks', i)
+      remove: e => this.delRow('risks', i, e && e.currentTarget)
     }));
 
     /* arithmetic rows */
     const mkRow = (key, label, formula, unit, value, deps) => {
       const ovKey = 'ov' + key;
-      const isOv = !!this.state.editingOverrides[ovKey] || this.filled(d[ovKey]);
+      const isOv = this.overrideActive(ovKey);
       return {
         label: label, formula: formula, unit: unit,
+        expected: marker(ovKey),
         id: 'memo-' + ovKey, helpId: 'memo-' + ovKey + '-help',
-        invalid: !!c.errors[ovKey], reason: reason(value, deps),
+        invalid: numericHelp[ovKey].invalid, reason: reason(value, deps),
         isOverridden: isOv, isComputed: !isOv,
         display: value == null ? '—' : this.fmt(value) + (unit ? ' ' + unit : ''),
         ov: d[ovKey],
@@ -763,6 +914,18 @@ class Component extends DCLogic {
       t: t, d: d, dens: dense ? '1' : '0', accent: accent,
       rootRef: this.rootRef, pageRef: this.pageRef, headingRef: this.headingRef, previewRef: this.previewRef,
       storageError: this.state.storageError ? t.storageError : '',
+      copyDraft: () => this.copyDraft(),
+      closeCopy: () => this.closeCopy(),
+      copyTextRef: this.copyTextRef, copyButtonRef: this.copyButtonRef,
+      copyBusy: this.state.copyStatus === 'pending',
+      copyFallback: this.state.copyStatus === 'fallback',
+      draftText: this.state.copyStatus === 'fallback' ? JSON.stringify(this.memoSnapshot(), null, 2) : '',
+      copyNotice: this.state.copyStatus === 'pending' ? p('Copie en cours…', 'Copying…')
+        : this.state.copyStatus === 'copied'
+          ? this.copiedText === JSON.stringify(this.memoSnapshot(), null, 2)
+            ? p('Brouillon copié.', 'Draft copied.')
+            : p('Brouillon modifié depuis la copie. Copiez-le à nouveau.', 'Draft changed since copying. Copy it again.')
+          : '',
       isForm: this.state.view === 'form', isPreview: this.state.view === 'preview',
       modeFullSelected: !screen, modeScreenSelected: screen,
       viewFormSelected: this.state.view === 'form', viewPreviewSelected: this.state.view === 'preview',
@@ -775,14 +938,8 @@ class Component extends DCLogic {
       setViewForm: () => this.setState({ view: 'form' }, () => {
         if (this.headingRef.current) this.headingRef.current.focus();
       }),
-      setViewPreview: () => this.setState({ view: 'preview' }, () => {
-        if (!this.previewRef.current) return;
-        this.previewRef.current.focus();
-        this.previewRef.current.scrollIntoView({ block: 'start' });
-      }),
-      doExport: () => {
-        this.setState({ view: 'preview' }, () => setTimeout(() => { try { window.print(); } catch (e) { } }, 420));
-      },
+      setViewPreview: () => this.openPreview(),
+      doExport: () => this.openPreview(() => setTimeout(() => { try { window.print(); } catch (e) { } }, 420)),
       reset: () => {
         if (typeof window !== 'undefined' && !window.confirm(fr ? 'Vider toute la note ?' : 'Clear the whole memo?')) return;
         this.clearSavedMemo();
@@ -790,12 +947,16 @@ class Component extends DCLogic {
       st: {
         modeFull: seg(!screen), modeScreen: seg(screen),
         viewForm: seg(this.state.view === 'form'), viewPreview: seg(this.state.view === 'preview'),
-        prevBtn: navBtn(!!prevId), nextBtn: navBtn(!!nextId)
+        prevBtn: navBtn(!!prevId), nextBtn: navBtn(true)
       },
       rail: rail,
+      stepIndex: step,
+      selectStep: e => this.go(Number(e.target.value)),
       leftOpen: this.state.leftOpen,
       rightOpen: this.state.rightOpen,
       gridCols: (this.state.leftOpen ? this.state.leftW : 0) + 'px minmax(0,1fr) ' + (this.state.rightOpen ? this.state.rightW : 0) + 'px',
+      leftToggleLabel: this.state.leftOpen ? p('Masquer le sommaire', 'Hide contents') : p('Afficher le sommaire', 'Show contents'),
+      rightToggleLabel: this.state.rightOpen ? p('Masquer l’aide à la relecture', 'Hide review guidance') : p('Afficher l’aide à la relecture', 'Show review guidance'),
       toggleLeft: this.togglePane('left'),
       toggleRight: this.togglePane('right'),
       leftCaret: this.state.leftOpen ? '◂' : '▸',
@@ -808,14 +969,16 @@ class Component extends DCLogic {
       },
       stepNum: String(step + 1).padStart(2, '0'), stepTotal: String(order.length).padStart(2, '0'),
       activeName: meta[activeId].name,
+      activeProgress: rail[step].progress,
+      expected: expected,
       activeHint: meta[activeId].hint,
-      activeShare: showShares && meta[activeId].share ? meta[activeId].share + ' ' + (fr ? 'de la page' : 'of the page') : (fr ? 'une phrase suffit' : 'one sentence is enough'),
+      activeShare: showShares && meta[activeId].share ? meta[activeId].share + ' ' + (fr ? 'de la page' : 'of the page') : '',
       goPrev: prevId ? () => this.go(step - 1) : () => {},
-      goNext: nextId ? () => this.go(step + 1) : () => {},
+      goNext: nextId ? () => this.go(step + 1) : () => this.openPreview(),
       prevDisabled: !prevId,
-      nextDisabled: !nextId,
+      nextDisabled: false,
       prevLabel: prevId ? meta[prevId].name : (fr ? 'Début' : 'Start'),
-      nextLabel: nextId ? meta[nextId].name : (fr ? 'Terminé' : 'Done'),
+      nextLabel: nextId ? meta[nextId].name : p('Relire la note', 'Review the memo'),
       set: {
         recoWhy: this.ev('recoWhy'), company: this.ev('company'), author: this.ev('author'),
         date: this.ev('date'), version: this.ev('version'), round: this.ev('round'),
@@ -838,7 +1001,7 @@ class Component extends DCLogic {
         { connector: fr ? 'Si' : 'If', label: fr ? 'condition observable' : 'observable condition', value: d.thesisIf, onChange: this.ev('thesisIf'), ph: fr ? 'ce qui doit se confirmer' : 'what must hold' },
         { connector: fr ? 'alors' : 'then', label: fr ? 'mécanisme de création de valeur' : 'value-creation mechanism', value: d.thesisThen, onChange: this.ev('thesisThen'), ph: fr ? 'par quel mécanisme la valeur se crée' : 'by what mechanism value is created' },
         { connector: fr ? 'donc' : 'so', label: fr ? 'issue' : 'outcome', value: d.thesisOutcome, onChange: this.ev('thesisOutcome'), ph: fr ? 'la position que cela donne à l’entreprise' : 'the position that gives the company' }
-      ],
+      ].map((field, i) => Object.assign(field, { expected: marker(['thesisIf', 'thesisThen', 'thesisOutcome'][i]) })),
       thesisSentence: thesisSentence,
       facts: facts, addFact: () => this.addRow('facts', { text: '', source: '', date: '', status: 'declared' }),
       pillars: pillars,
@@ -850,16 +1013,18 @@ class Component extends DCLogic {
       calc: {
         ownership: c.ownEff != null ? this.fmt(c.ownEff) + ' %' : '—',
         ownershipReason: reason(c.ownEff, ownDeps),
-        postLine: c.post != null ? 'post-money ' + this.fmt(c.post) + ' ' + cur : p('Renseigner une pre-money et une levée valides.', 'Enter valid pre-money and round size.'),
+        postLine: c.post != null ? 'post-money ' + this.fmt(c.post) + ' ' + cur : 'post-money —',
         proceeds: c.ret == null ? '—' : this.fmt(c.ret) + ' ' + cur,
         proceedsReason: reason(c.ret, returnDeps)
       },
       numericHelp: numericHelp,
+      missingDependencies: missingDependencies,
+      hasMissingDependencies: missingDependencies.length > 0,
       calcRows: calcRows,
       arithSentence: arithSentence,
       score: score,
-      scoreColor: score === 100 ? '#2F5A3E' : (score > 55 ? '#16150F' : accent),
-      scoreNote: p(done + ' champs requis valides sur ' + total + '. Ce taux ne mesure ni la véracité des faits ni la qualité du raisonnement.', done + ' valid required fields out of ' + total + '. This rate assesses neither factual accuracy nor reasoning quality.'),
+      scoreColor: score === 100 ? '#2F5A3E' : '#695F50',
+      scoreNote: p(done + ' champs attendus valides sur ' + total + '. Ce taux ne mesure ni la véracité des faits ni la qualité du raisonnement.', done + ' valid expected fields out of ' + total + '. This rate assesses neither factual accuracy nor reasoning quality.'),
       sixQuestions: q,
       commonErrors: errs.map((e, i) => ({ n: String(i + 1), text: e })),
       overflowNote: this.state.overflow ? t.overflowBad : t.overflowOk,

@@ -8,9 +8,9 @@ export interface FundraisingScenarioInput {
 export interface FundraisingScenarioResult extends FundraisingScenarioInput {
   neededM: number;
   bufferedM: number;
-  postLowM: number;
-  postHighM: number;
-  preLowM: number;
+  postLowM: number | null;
+  postHighM: number | null;
+  preLowM: number | null;
 }
 
 const nonNegativeFinite = (value: number): number => (
@@ -25,9 +25,9 @@ export function calculateFundraisingScenario(input: FundraisingScenarioInput): F
   const neededM = Math.max(monthlyBurnK * runwayMonths - currentCashK, 0) / 1000;
   const bufferedM = neededM * 1.25;
   const dilutionRatio = targetDilutionPct / 100;
-  const postLowM = dilutionRatio > 0 ? neededM / dilutionRatio : 0;
-  const postHighM = dilutionRatio > 0 ? bufferedM / dilutionRatio : 0;
-  const preLowM = Math.max(postLowM - neededM, 0);
+  const postLowM = dilutionRatio > 0 && neededM > 0 ? neededM / dilutionRatio : null;
+  const postHighM = dilutionRatio > 0 && neededM > 0 ? bufferedM / dilutionRatio : null;
+  const preLowM = postLowM === null ? null : Math.max(postLowM - neededM, 0);
 
   return {
     monthlyBurnK,

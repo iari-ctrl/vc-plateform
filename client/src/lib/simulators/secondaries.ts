@@ -1,9 +1,9 @@
 export interface SecondarySaleParams {
   /** Capital appelé (paid-in) en M€. */
   paidInM: number;
-  /** Distributions déjà versées aux LPs en M€. */
+  /** Distributions en numéraire déjà reçues par le LP vendeur, en M€. */
   distributedM: number;
-  /** Valeur résiduelle (NAV) du portefeuille en M€. */
+  /** Valeur résiduelle (NAV) de la participation du LP vendeur en M€. */
   navM: number;
   /** Part de la NAV cédée sur le marché secondaire, 0..1. */
   soldPct: number;
@@ -24,19 +24,22 @@ export interface SecondarySaleResult {
   proceedsM: number;
   /** Valeur abandonnée à la transaction (la décote en M€). */
   haircutM: number;
-  dpiBefore: number;
-  dpiAfter: number;
-  tvpiBefore: number;
-  tvpiAfter: number;
-  rvpiAfter: number;
+  /** Distributions reçues par le vendeur / capital versé par ce LP. */
+  liquidityBefore: number | null;
+  /** Distributions reçues et produit de la vente / capital versé par le vendeur. */
+  liquidityAfter: number | null;
+  valueBefore: number | null;
+  /** Valeur économique du LP vendeur après transaction / capital appelé. */
+  valueAfter: number | null;
+  retainedNavRatio: number | null;
   /** Multiple d'exit sur la NAV cédée qui rend vendre et conserver équivalents en valeur actuelle. */
-  breakEvenMultiple: number;
+  breakEvenMultiple: number | null;
   /** Valeur actuelle de la NAV cédée si on la conserve jusqu'à l'exit (M€). */
   pvHoldM: number;
   /** Valeur de la vente immédiate (M€) — le produit, déjà en valeur d'aujourd'hui. */
   pvSellM: number;
-  /** true si conserver domine vendre en valeur actuelle. */
-  holdWins: boolean;
+  /** Comparaison des valeurs actuelles sur la part cédée. */
+  comparison: 'hold' | 'sell' | 'equivalent';
 }
 
 export function calculateSecondarySale(p: SecondarySaleParams): SecondarySaleResult {
@@ -44,31 +47,33 @@ export function calculateSecondarySale(p: SecondarySaleParams): SecondarySaleRes
   const proceedsM = navSoldM * (1 - p.discountPct);
   const haircutM = navSoldM - proceedsM;
 
-  const dpiBefore = p.paidInM ? p.distributedM / p.paidInM : 0;
-  const dpiAfter = p.paidInM ? (p.distributedM + proceedsM) / p.paidInM : 0;
-  const tvpiBefore = p.paidInM ? (p.distributedM + p.navM) / p.paidInM : 0;
+  const liquidityBefore = p.paidInM > 0 ? p.distributedM / p.paidInM : null;
+  const liquidityAfter = p.paidInM > 0 ? (p.distributedM + proceedsM) / p.paidInM : null;
+  const valueBefore = p.paidInM > 0 ? (p.distributedM + p.navM) / p.paidInM : null;
   const navAfterM = p.navM - navSoldM;
-  const tvpiAfter = p.paidInM ? (p.distributedM + proceedsM + navAfterM) / p.paidInM : 0;
-  const rvpiAfter = p.paidInM ? navAfterM / p.paidInM : 0;
+  const valueAfter = p.paidInM > 0 ? (p.distributedM + proceedsM + navAfterM) / p.paidInM : null;
+  const retainedNavRatio = p.paidInM > 0 ? navAfterM / p.paidInM : null;
 
   const growth = Math.pow(1 + p.discountRate, p.yearsToLiquidity);
-  const breakEvenMultiple = (1 - p.discountPct) * growth;
+  const breakEvenMultiple = navSoldM > 0 ? (1 - p.discountPct) * growth : null;
   const pvHoldM = growth ? (navSoldM * p.exitMultiple) / growth : 0;
   const pvSellM = proceedsM;
+  const difference = pvHoldM - pvSellM;
+  const tolerance = 8 * Number.EPSILON * Math.max(pvHoldM, pvSellM);
 
   return {
     navSoldM,
     proceedsM,
     haircutM,
-    dpiBefore,
-    dpiAfter,
-    tvpiBefore,
-    tvpiAfter,
-    rvpiAfter,
+    liquidityBefore,
+    liquidityAfter,
+    valueBefore,
+    valueAfter,
+    retainedNavRatio,
     breakEvenMultiple,
     pvHoldM,
     pvSellM,
-    holdWins: pvHoldM > pvSellM,
+    comparison: Math.abs(difference) <= tolerance ? 'equivalent' : difference > 0 ? 'hold' : 'sell',
   };
 }
 
@@ -100,8 +105,8 @@ export interface ContinuationFundResult {
   netToOldLpsM: number;
   /** Cash versé aux LPs qui sortent (M€). */
   cashToSellersM: number;
-  /** Part de la NAV récupérée par un LP sortant, 0..1 (net du carry et de la décote). */
-  sellerRecoveryPct: number;
+  /** Produit net par unité de NAV pour un LP sortant, prime éventuelle comprise. */
+  sellerRecoveryPct: number | null;
   /** Montant roulé dans le continuation fund par les LPs qui restent (M€). */
   rolledM: number;
   /** Valeur de l'actif à l'exit du continuation fund (M€). */
@@ -113,7 +118,7 @@ export interface ContinuationFundResult {
   /** Valeur nette revenant au LP qui roule, à l'exit (M€). */
   rollerNetM: number;
   /** Multiple net pour le LP qui roule (sur le montant roulé). */
-  rollerNetMultiple: number;
+  rollerNetMultiple: number | null;
   /** Économics totaux du GP sur l'opération : carry 1 + carry 2 + frais (M€). */
   gpTotalTakeM: number;
 }
@@ -123,7 +128,7 @@ export function calculateContinuationFund(p: ContinuationFundParams): Continuati
   const crystallizedCarryM = Math.max(transactionPriceM - p.costBasisM, 0) * p.carryPct;
   const netToOldLpsM = transactionPriceM - crystallizedCarryM;
   const cashToSellersM = netToOldLpsM * (1 - p.rolloverPct);
-  const sellerRecoveryPct = p.assetNavM ? netToOldLpsM / p.assetNavM : 0;
+  const sellerRecoveryPct = p.assetNavM > 0 ? netToOldLpsM / p.assetNavM : null;
   const rolledM = netToOldLpsM * p.rolloverPct;
 
   const exitValueM = p.assetNavM * p.exitMultiple;
@@ -132,7 +137,7 @@ export function calculateContinuationFund(p: ContinuationFundParams): Continuati
   const netCvM = exitValueM - secondCarryM - cvFeesM;
   const rollerShare = transactionPriceM ? rolledM / transactionPriceM : 0;
   const rollerNetM = netCvM * rollerShare;
-  const rollerNetMultiple = rolledM ? rollerNetM / rolledM : 0;
+  const rollerNetMultiple = rolledM > 0 ? rollerNetM / rolledM : null;
 
   return {
     transactionPriceM,

@@ -4,7 +4,7 @@
     "term": "409A valuation",
     "slug": "409a-valuation",
     "category": "Deal & Structuration",
-    "short": "Valorisation indépendante du common stock utilisée pour fixer le prix d’exercice des options aux États-Unis.",
+    "short": "Estimation de la juste valeur des actions ordinaires pour fixer le prix d’exercice des options aux États-Unis.",
     "seeAlso": [
       "stock-options",
       "actions-ordinaires",
@@ -14,14 +14,15 @@
     "relatedLessonIds": [],
     "aliases": [
       "valorisation 409A"
-    ]
+    ],
+    "link": "https://www.govinfo.gov/content/pkg/CFR-2025-title26-vol6/pdf/CFR-2025-title26-vol6-sec1-409A-1.pdf"
   },
   {
     "id": "83b-election",
     "term": "83(b) election",
     "slug": "83b-election",
     "category": "Deal & Structuration",
-    "short": "Choix fiscal américain permettant d’être imposé dès l’attribution d’actions soumises au vesting.",
+    "short": "Option fiscale américaine permettant d’être imposé dès le transfert d’actions reçues sous condition.",
     "seeAlso": [
       "founder-shares",
       "actions-ordinaires",
@@ -31,14 +32,15 @@
     "relatedLessonIds": [],
     "aliases": [
       "élection 83(b)"
-    ]
+    ],
+    "link": "https://uscode.house.gov/us/usc/t26/s83/"
   },
   {
     "id": "a16z",
     "term": "a16z (Andreessen Horowitz)",
     "slug": "a16z",
     "category": "Fonds & VC",
-    "short": "Firme VC californienne connue pour son modèle platform, son contenu et ses thèses sectorielles.",
+    "short": "Société américaine de capital-risque qui investit dans des entreprises technologiques.",
     "seeAlso": [
       "portfolio-support",
       "value-creation",
@@ -49,17 +51,16 @@
     "relatedLessonIds": [],
     "aliases": [
       "A16Z",
-      "Andreessen Horowitz",
-      "Andreessen Horowitz LLC"
+      "Andreessen Horowitz"
     ],
-    "link": "https://a16z.com"
+    "link": "https://a16z.com/about/"
   },
   {
     "id": "accel",
     "term": "Accel",
     "slug": "accel",
     "category": "Fonds & VC",
-    "short": "Fonds américain très actif en Europe depuis Londres.",
+    "short": "Société de capital-risque américaine qui investit notamment en Europe.",
     "link": "https://www.accel.com",
     "seeAlso": [
       "scout",
@@ -74,7 +75,7 @@
     "term": "Accélérateur",
     "slug": "accelerateur",
     "category": "Acteurs",
-    "short": "Programme court qui aide une startup à structurer produit, réseau et levée early-stage.",
+    "short": "Programme court d’accompagnement de jeunes entreprises.",
     "seeAlso": [
       "pre-seed",
       "amorcage",
@@ -97,7 +98,7 @@
     "term": "Accélération du vesting",
     "slug": "acceleration-vesting",
     "category": "Deal & Structuration",
-    "short": "Clause qui fait vest plus vite des actions ou options lors d’un événement déclencheur.",
+    "short": "Clause qui avance la date à laquelle des droits sur des actions ou des options sont acquis.",
     "seeAlso": [
       "vesting",
       "founder-vesting"
@@ -105,7 +106,6 @@
     "relatedLessonIds": [],
     "aliases": [
       "Accelerated Vesting",
-      "acceleration",
       "vesting acceleration"
     ]
   },
@@ -114,7 +114,7 @@
     "term": "Acqui-hire",
     "slug": "acqui-hire",
     "category": "Liquidité",
-    "short": "Acquisition où le talent de l’équipe est l’actif principal acheté.",
+    "short": "Rachat d’une entreprise motivé principalement par le recrutement de son équipe.",
     "seeAlso": [
       "ma",
       "exit",
@@ -123,8 +123,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "acquihire",
-      "talent acquisition"
+      "acquihire"
     ]
   },
   {
@@ -152,10 +151,10 @@
   },
   {
     "id": "actions-autorisees-emises",
-    "term": "Actions autorisées vs émises",
+    "term": "Actions autorisées et actions émises",
     "slug": "actions-autorisees-emises",
     "category": "Deal & Structuration",
-    "short": "Distinction entre les actions que la société peut émettre et celles déjà détenues.",
+    "short": "Nombre maximal d’actions que la société peut émettre et nombre d’actions qu’elle a déjà émises.",
     "seeAlso": [
       "cap-table",
       "fully-diluted-shares",
@@ -164,17 +163,16 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "authorized shares",
-      "Authorized vs Issued Shares",
-      "issued shares"
-    ]
+      "Authorized vs Issued Shares"
+    ],
+    "link": "https://www.delcode.delaware.gov/title8/c001/sc05/"
   },
   {
     "id": "actions-de-preference",
     "term": "Actions de préférence",
     "slug": "actions-de-preference",
     "category": "Deal & Structuration",
-    "short": "Actions qui donnent aux investisseurs des droits économiques ou de contrôle supérieurs aux actions ordinaires.",
+    "short": "Actions assorties de droits particuliers définis par les statuts.",
     "seeAlso": [
       "equity",
       "actions-ordinaires",
@@ -191,14 +189,15 @@
       "preferred equity",
       "preferred shares",
       "preferred stock"
-    ]
+    ],
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000049720022"
   },
   {
     "id": "actions-ordinaires",
     "term": "Actions ordinaires",
     "slug": "actions-ordinaires",
     "category": "Deal & Structuration",
-    "short": "Titres d’equity généralement détenus par les founders et salariés, subordonnés au preferred stock.",
+    "short": "Actions soumises aux droits communs prévus par les statuts.",
     "seeAlso": [
       "actions-de-preference",
       "cap-table",
@@ -225,7 +224,7 @@
       "Virtual shares"
     ],
     "category": "Deal & Structuration",
-    "short": "Instrument synthétique donnant un droit économique sans action réelle.",
+    "short": "Droit à une rémunération indexée sur la valeur des actions, sans attribution de titres.",
     "seeAlso": [
       "employee-equity",
       "stock-options",
@@ -234,7 +233,8 @@
     ],
     "relatedLessonIds": [
       "l-founder-instruments"
-    ]
+    ],
+    "link": "https://www.gov.uk/hmrc-internal-manuals/employment-related-securities/ersm110020"
   },
   {
     "id": "additionalite",
@@ -246,7 +246,7 @@
       "additionality"
     ],
     "category": "Stratégie",
-    "short": "Contribution qui produit un changement supérieur à ce qui se serait probablement produit sans l’intervention.",
+    "short": "Changement attribuable à une intervention, comparé à ce qui se serait probablement produit sans elle.",
     "link": "https://www.impacteurope.net/glossary",
     "seeAlso": [
       "theorie-du-changement",
@@ -264,7 +264,7 @@
     "term": "Advisory board",
     "slug": "advisory-board",
     "category": "Gouvernance",
-    "short": "Groupe de conseillers sans pouvoirs formels de board, utile pour expertise, crédibilité et réseau.",
+    "short": "Groupe d’experts qui conseille la direction d’une entreprise.",
     "seeAlso": [
       "board-of-directors",
       "reseau-vc",
@@ -282,7 +282,7 @@
     "term": "Affinity",
     "slug": "affinity",
     "category": "Outils",
-    "short": "CRM relationnel pensé pour les fonds VC et family offices.",
+    "short": "Logiciel de gestion des contacts et des dossiers d’investissement.",
     "link": "https://www.affinity.co",
     "seeAlso": [
       "deal-flow",
@@ -317,7 +317,7 @@
     "term": "AI-native startup",
     "slug": "ai-native-startup",
     "category": "Stratégie",
-    "short": "Startup construite nativement autour de l'IA dans son produit, ses coûts ou sa distribution.",
+    "short": "Jeune entreprise dont le produit repose dès sa conception sur l’intelligence artificielle.",
     "seeAlso": [
       "why-now",
       "pmf",
@@ -339,7 +339,7 @@
     "term": "Allocation de capital LP",
     "slug": "lp-capital-allocation",
     "category": "Fund Economics",
-    "short": "Processus par lequel un LP décide combien allouer au VC, aux fonds, co-investments et secondaries.",
+    "short": "Répartition du capital qu’un investisseur prévoit d’engager entre plusieurs placements.",
     "seeAlso": [
       "lp",
       "dpi",
@@ -353,7 +353,6 @@
     ],
     "aliases": [
       "allocation LP",
-      "allocation private markets",
       "LP Capital Allocation"
     ]
   },
@@ -362,7 +361,7 @@
     "term": "Alven",
     "slug": "alven",
     "category": "Fonds & VC",
-    "short": "Fonds parisien seed / Series A, très actif sur la tech française.",
+    "short": "Société française de capital-risque qui investit dans de jeunes entreprises européennes.",
     "link": "https://www.alven.co",
     "seeAlso": [
       "amorcage",
@@ -376,7 +375,7 @@
     "term": "Amorçage",
     "slug": "amorcage",
     "category": "Stades & Tours",
-    "short": "Phase early-stage où l'on finance les premières preuves de produit, marché et équipe.",
+    "short": "Première phase de financement du développement d’une jeune entreprise.",
     "seeAlso": [
       "pre-seed",
       "seed",
@@ -395,7 +394,7 @@
     "term": "Analyst VC",
     "slug": "analyst-vc",
     "category": "Acteurs",
-    "short": "Rôle junior chargé du sourcing, de la recherche et des premières analyses.",
+    "short": "Membre junior de l’équipe d’investissement d’un fonds de capital-risque.",
     "seeAlso": [
       "deal-flow",
       "dd",
@@ -408,9 +407,7 @@
       "l-career-breaking-in"
     ],
     "aliases": [
-      "analyst",
       "analyste VC",
-      "investment analyst",
       "VC investment analyst"
     ]
   },
@@ -419,7 +416,7 @@
     "term": "Ancrage",
     "slug": "ancrage",
     "category": "Sciences de la décision",
-    "short": "Laisser le premier chiffre rencontré gouverner tout le jugement de valeur.",
+    "short": "Biais qui donne un poids excessif au premier chiffre pris comme référence.",
     "seeAlso": [
       "valuation",
       "term-sheet",
@@ -447,7 +444,6 @@
       "l-specialty-saas-metrics"
     ],
     "aliases": [
-      "ARR run rate",
       "revenue run rate",
       "run rate annualisé"
     ]
@@ -469,16 +465,16 @@
       "l-ts-economics"
     ],
     "aliases": [
-      "anti-dilution protection",
-      "weighted average anti-dilution"
-    ]
+      "anti-dilution protection"
+    ],
+    "link": "https://www.sec.gov/Archives/edgar/data/1899326/000166919123000714/certificateofincorporation.pdf"
   },
   {
     "id": "arr",
     "term": "ARR (Annual Recurring Revenue)",
     "slug": "arr",
     "category": "Métriques",
-    "short": "Revenu annuel récurrent vérifié des contrats ou abonnements actifs, hors revenus ponctuels.",
+    "short": "Revenu récurrent des contrats actifs à une date donnée, exprimé sur un an.",
     "seeAlso": [
       "mrr",
       "recurring-revenue",
@@ -493,18 +489,17 @@
     ],
     "aliases": [
       "Annual Recurring Revenue",
-      "ARR (Disambiguation)",
-      "ARR disambiguation",
       "ARR SaaS",
       "revenu récurrent annuel"
-    ]
+    ],
+    "link": "https://www.sec.gov/Archives/edgar/data/1366561/000136656124000096/smar2024ars.pdf"
   },
   {
     "id": "arr-par-employe",
     "term": "ARR par employé",
     "slug": "arr-par-employe",
     "category": "Métriques",
-    "short": "ARR divisé par le nombre d'employés, proxy d'efficacité opérationnelle.",
+    "short": "Revenu récurrent annuel rapporté à l’effectif de l’entreprise.",
     "seeAlso": [
       "arr",
       "capital-efficiency",
@@ -528,7 +523,7 @@
       "shareholders meeting"
     ],
     "category": "Gouvernance",
-    "short": "Organe réunissant les actionnaires pour adopter les décisions sociales majeures.",
+    "short": "Réunion au cours de laquelle les actionnaires votent les décisions qui relèvent de leur compétence.",
     "seeAlso": [
       "governance",
       "articles-of-association",
@@ -544,7 +539,7 @@
     "term": "Associate VC",
     "slug": "associate-vc",
     "category": "Acteurs",
-    "short": "Professionnel VC qui mène des analyses approfondies et soutient l'exécution des deals.",
+    "short": "Chargé d’investissement au sein d’une équipe de capital-risque.",
     "seeAlso": [
       "dd",
       "term-sheet",
@@ -557,7 +552,6 @@
       "l-career-breaking-in"
     ],
     "aliases": [
-      "associate",
       "VC associate"
     ]
   },
@@ -587,7 +581,7 @@
     "term": "Audit committee",
     "slug": "audit-committee",
     "category": "Gouvernance",
-    "short": "Sous-comité du board chargé du reporting financier, des contrôles, des auditeurs et des risques financiers.",
+    "short": "Comité du conseil chargé du suivi de l’information financière et de l’audit des comptes.",
     "seeAlso": [
       "board-of-directors",
       "governance",
@@ -598,14 +592,15 @@
     "relatedLessonIds": [],
     "aliases": [
       "comité d’audit"
-    ]
+    ],
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051559615"
   },
   {
     "id": "baseball-model",
     "term": "Baseball model",
     "slug": "baseball-model",
     "category": "Stratégie",
-    "short": "Analogie VC où quelques grands gagnants compensent beaucoup d'échecs.",
+    "short": "Approche du capital-risque dans laquelle quelques gains exceptionnels peuvent compenser de nombreuses pertes.",
     "seeAlso": [
       "power-law",
       "10x-return",
@@ -624,8 +619,6 @@
     "slug": "benchmark",
     "aliases": [
       "Benchmark",
-      "benchmarking de fonds",
-      "comparaison de performance",
       "fund benchmark"
     ],
     "category": "Fund Economics",
@@ -671,7 +664,7 @@
     "term": "Biais de confirmation",
     "slug": "biais-de-confirmation",
     "category": "Sciences de la décision",
-    "short": "Chercher ce qui valide la thèse plutôt que ce qui la briserait.",
+    "short": "Tendance à privilégier les informations qui confortent une conviction initiale.",
     "seeAlso": [
       "narrative-fallacy",
       "premortem",
@@ -687,7 +680,7 @@
     "term": "Biais de résultat",
     "slug": "biais-de-resultat",
     "category": "Sciences de la décision",
-    "short": "Juger la qualité d’une décision à son issue plutôt qu’au raisonnement qui l’a produite.",
+    "short": "Tendance à juger une décision sur son seul résultat.",
     "seeAlso": [
       "journal-de-decision",
       "premortem-inverse",
@@ -704,7 +697,7 @@
     "term": "Biais d’autorité",
     "slug": "biais-d-autorite",
     "category": "Sciences de la décision",
-    "short": "Surpondérer les signaux de statut — diplôme, ex-grande boîte, fondateur récidiviste.",
+    "short": "Tendance à accorder trop de poids à une opinion en raison de l’autorité de son auteur.",
     "seeAlso": [
       "pattern-matching",
       "narrative-fallacy",
@@ -712,8 +705,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "biais de pedigree",
-      "effet de halo"
+      "authority bias"
     ]
   },
   {
@@ -721,7 +713,7 @@
     "term": "Board culture and best practices",
     "slug": "board-culture-best-practices",
     "category": "Gouvernance",
-    "short": "Pratiques qui rendent un board utile : préparation, confiance, suivi, alignement et débats productifs.",
+    "short": "Habitudes de travail qui déterminent le déroulement des séances du conseil et le suivi de ses décisions.",
     "seeAlso": [
       "board-of-directors",
       "governance",
@@ -739,7 +731,7 @@
     "term": "Board observer",
     "slug": "board-observer",
     "category": "Gouvernance",
-    "short": "Droit d’assister aux réunions du board sans droit de vote formel.",
+    "short": "Personne admise à assister aux réunions du conseil sans droit de vote.",
     "seeAlso": [
       "board-seat",
       "board-of-directors",
@@ -749,7 +741,7 @@
     "relatedLessonIds": [],
     "aliases": [
       "observateur au board",
-      "observer rights"
+      "observateur au conseil"
     ]
   },
   {
@@ -757,7 +749,7 @@
     "term": "Board of Directors",
     "slug": "board-of-directors",
     "category": "Gouvernance",
-    "short": "Organe de gouvernance qui supervise la société, approuve les décisions majeures et encadre le management.",
+    "short": "Conseil d’administration chargé de superviser la direction et les orientations de la société.",
     "seeAlso": [
       "board-seat",
       "fiduciary-duty",
@@ -768,16 +760,16 @@
     "relatedLessonIds": [],
     "aliases": [
       "Board",
-      "conseil",
       "conseil d’administration"
-    ]
+    ],
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000049720576"
   },
   {
     "id": "board-representation",
     "term": "Board representation",
     "slug": "board-representation",
     "category": "Gouvernance",
-    "short": "Répartition des sièges au board entre founders, investisseurs et indépendants.",
+    "short": "Répartition des sièges au conseil d’administration.",
     "seeAlso": [
       "board-seat",
       "board-of-directors",
@@ -795,7 +787,7 @@
     "term": "Board seat",
     "slug": "board-seat",
     "category": "Gouvernance",
-    "short": "Droit ou nomination permettant de siéger au board d’une société.",
+    "short": "Siège d’administrateur au conseil d’une société.",
     "seeAlso": [
       "board-of-directors",
       "term-sheet",
@@ -812,7 +804,7 @@
     "term": "Bootstrap",
     "slug": "bootstrap",
     "category": "Fondations",
-    "short": "Construire une entreprise sans financement externe en equity.",
+    "short": "Financement d’une jeune entreprise par ses fondateurs et les recettes de son activité.",
     "seeAlso": [
       "venture-capital",
       "equity",
@@ -832,7 +824,7 @@
     "term": "Bpifrance",
     "slug": "bpifrance",
     "category": "Institutions",
-    "short": "Banque publique d'investissement, pilier du financement de l'innovation en France.",
+    "short": "Banque publique d’investissement française qui finance notamment l’innovation.",
     "link": "https://www.bpifrance.fr",
     "seeAlso": [
       "lp",
@@ -846,17 +838,14 @@
     "term": "Brad Feld",
     "slug": "brad-feld",
     "category": "Acteurs",
-    "short": "Investisseur et auteur de référence sur les venture deals, term sheets et boards.",
+    "short": "Investisseur américain en capital-risque, coauteur de Venture Deals.",
     "seeAlso": [
       "term-sheet",
       "liquidation-preference",
       "board-culture-best-practices",
       "governance"
     ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "Venture Deals"
-    ]
+    "relatedLessonIds": []
   },
   {
     "id": "break-even-point",
@@ -883,7 +872,7 @@
     "term": "Bridge financing",
     "slug": "bridge",
     "category": "Deal & Structuration",
-    "short": "Financement intermédiaire destiné à prolonger la runway jusqu’au prochain tour ou jalon.",
+    "short": "Financement temporaire couvrant les besoins de trésorerie jusqu’à une prochaine opération.",
     "seeAlso": [
       "safe",
       "convertible-note",
@@ -895,9 +884,9 @@
       "l-founder-instruments"
     ],
     "aliases": [
-      "Bridge loan",
       "bridge round",
-      "financement bridge"
+      "financement bridge",
+      "financement relais"
     ]
   },
   {
@@ -905,7 +894,7 @@
     "term": "Broad-based weighted average",
     "slug": "broad-based-weighted-average",
     "category": "Deal & Structuration",
-    "short": "Formule anti-dilution qui tient compte d’un large nombre de titres fully diluted.",
+    "short": "Protection anti-dilution calculée par moyenne pondérée sur une base élargie de titres.",
     "seeAlso": [
       "anti-dilution",
       "down-round",
@@ -916,7 +905,6 @@
       "l-ts-economics"
     ],
     "aliases": [
-      "broad-based",
       "broad-based weighted average antidilution",
       "weighted average broad-based"
     ]
@@ -926,7 +914,7 @@
     "term": "Burn multiple",
     "slug": "burn-multiple",
     "category": "Métriques",
-    "short": "Net burn divisé par le net new ARR ajouté.",
+    "short": "Trésorerie nette consommée pour chaque euro de revenu récurrent annuel supplémentaire.",
     "seeAlso": [
       "arr",
       "burn-rate",
@@ -957,9 +945,7 @@
       "l-founder-narrative"
     ],
     "aliases": [
-      "cash burn",
-      "gross burn",
-      "net burn"
+      "cash burn"
     ]
   },
   {
@@ -967,7 +953,7 @@
     "term": "Business angel",
     "slug": "business-angel",
     "category": "Acteurs",
-    "short": "Particulier qui investit son propre argent dans des startups early-stage.",
+    "short": "Particulier qui investit ses propres fonds dans de jeunes entreprises.",
     "seeAlso": [
       "pre-seed",
       "seed",
@@ -992,7 +978,7 @@
     "term": "Business model",
     "slug": "business-model",
     "category": "Stratégie",
-    "short": "Logique par laquelle une startup crée, facture et capture de la valeur.",
+    "short": "Mode de fonctionnement économique d’une entreprise.",
     "seeAlso": [
       "unit-economics",
       "gtm",
@@ -1010,7 +996,7 @@
     "term": "Buyer persona",
     "slug": "buyer-persona",
     "category": "Go-to-Market",
-    "short": "Profil du décideur ou utilisateur client qu'une startup doit convaincre d'acheter.",
+    "short": "Profil type d’une personne qui intervient dans la décision d’achat.",
     "seeAlso": [
       "gtm",
       "problem",
@@ -1023,7 +1009,6 @@
     ],
     "aliases": [
       "acheteur cible",
-      "buyer",
       "persona acheteur"
     ]
   },
@@ -1035,7 +1020,7 @@
       "profondeur du pool acheteur"
     ],
     "category": "Liquidité",
-    "short": "Nombre et qualité des acquéreurs crédibles disponibles pour un exit.",
+    "short": "Nombre d’acheteurs susceptibles d’acquérir une entreprise et capacité de ces acheteurs à conclure la transaction.",
     "seeAlso": [
       "potential-acquirers",
       "strategic-acquisition",
@@ -1050,7 +1035,7 @@
     "term": "C-Corporation",
     "slug": "c-corporation",
     "category": "Juridique & Fiscalité",
-    "short": "Structure de société américaine privilégiée par beaucoup de startups financées en VC.",
+    "short": "Société relevant aux États-Unis du régime fédéral d’imposition dit « C ».",
     "seeAlso": [
       "venture-capital",
       "startup",
@@ -1060,17 +1045,16 @@
     "relatedLessonIds": [],
     "aliases": [
       "C-Corp",
-      "C-Corps",
-      "corporation Delaware",
-      "Delaware C-Corporation"
-    ]
+      "C-Corps"
+    ],
+    "link": "https://www.irs.gov/businesses/small-businesses-self-employed/forming-a-corporation"
   },
   {
     "id": "cac-payback-period",
     "term": "CAC payback period",
     "slug": "cac-payback-period",
     "category": "Métriques",
-    "short": "Temps nécessaire pour récupérer le coût d'acquisition d'un client via la marge générée.",
+    "short": "Temps nécessaire pour récupérer le coût d’acquisition d’un client grâce à la marge qu’il génère.",
     "seeAlso": [
       "cac",
       "ltv-cac",
@@ -1092,7 +1076,7 @@
     "term": "Cap table",
     "slug": "cap-table",
     "category": "Deal & Structuration",
-    "short": "Tableau qui suit l’ownership, les classes de titres, l’option pool et la dilution d’une startup.",
+    "short": "Tableau qui indique la répartition du capital d’une société entre ses actionnaires.",
     "seeAlso": [
       "dilution",
       "fully-diluted-shares",
@@ -1115,7 +1099,7 @@
     "term": "Capital call",
     "slug": "capital-call",
     "category": "Fund Economics",
-    "short": "Demande formelle du GP aux LPs de verser une partie du capital engagé.",
+    "short": "Demande de versement d’une fraction du capital qu’un souscripteur s’est engagé à apporter au fonds.",
     "seeAlso": [
       "lp",
       "gp",
@@ -1137,7 +1121,7 @@
     "term": "Capital catalytique",
     "slug": "capital-catalytique",
     "category": "Deal & Structuration",
-    "short": "Capital patient, flexible ou concessionnel qui assume plus de risque pour rendre d’autres investissements possibles.",
+    "short": "Financement accordé à des conditions plus souples que celles du marché pour rendre un investissement à impact possible.",
     "seeAlso": [
       "subvention-catalytique",
       "financement-mixte",
@@ -1162,7 +1146,7 @@
     "term": "Capital efficiency",
     "slug": "capital-efficiency",
     "category": "Métriques",
-    "short": "Capacité à transformer le capital consommé en croissance durable.",
+    "short": "Résultats obtenus par une entreprise au regard des capitaux qu’elle a consommés.",
     "seeAlso": [
       "burn-multiple",
       "burn-rate",
@@ -1187,7 +1171,7 @@
       "patient capital"
     ],
     "category": "Deal & Structuration",
-    "short": "Financement de durée longue ou aux modalités flexibles, adapté au temps nécessaire à la mission et aux flux.",
+    "short": "Capital apporté par un investisseur disposé à attendre longtemps son remboursement ou son rendement.",
     "link": "https://www.impacteurope.net/insights/vp-nutshell-short-guide-tailored-financing",
     "seeAlso": [
       "continuum-du-capital",
@@ -1211,7 +1195,7 @@
       "share capital légal"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Capital formellement souscrit, payé et inscrit dans les documents sociaux.",
+    "short": "Somme des valeurs nominales des actions ou des parts sociales de la société.",
     "seeAlso": [
       "fully-diluted-shares",
       "articles-of-association",
@@ -1220,14 +1204,15 @@
     ],
     "relatedLessonIds": [
       "l-founder-instruments"
-    ]
+    ],
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006225027"
   },
   {
     "id": "carry",
     "term": "Carried interest",
     "slug": "carry",
     "category": "Fund Economics",
-    "short": "Part des profits du fonds revenant au GP après retour du capital et conditions LP.",
+    "short": "Part des gains d’un fonds attribuée à l’équipe de gestion selon le contrat du fonds.",
     "seeAlso": [
       "management-fees",
       "waterfall",
@@ -1242,8 +1227,7 @@
       "l-career-levels"
     ],
     "aliases": [
-      "Carry",
-      "intéressement carried"
+      "Carry"
     ]
   },
   {
@@ -1251,8 +1235,8 @@
     "term": "Cathay Innovation",
     "slug": "cathay-innovation",
     "category": "Fonds & VC",
-    "short": "Fonds global Paris–Shanghai–Nairobi, angle transfrontalier.",
-    "link": "https://cathay.vc",
+    "short": "Société internationale de capital-risque fondée à Paris.",
+    "link": "https://cathayinnovation.com/",
     "seeAlso": [
       "gp",
       "thesis-driven"
@@ -1269,7 +1253,7 @@
       "industrial scale-up"
     ],
     "category": "Opérations",
-    "short": "Passage d'une preuve contrôlée vers une échelle, des flux et des interfaces plus proches d'une exploitation industrielle.",
+    "short": "Passage d’un procédé à des volumes de production plus élevés.",
     "seeAlso": [
       "pilote-industriel",
       "scalability",
@@ -1286,11 +1270,10 @@
     "aliases": [
       "CFO",
       "Chief Financial Officer",
-      "directeur financier",
-      "Finance Team Leader"
+      "directeur financier"
     ],
     "category": "Acteurs",
-    "short": "Dirigeant finance responsable du reporting, de la planification, des contrôles et de la finance stratégique.",
+    "short": "Directeur financier d’une entreprise.",
     "seeAlso": [
       "financial-model",
       "data-room",
@@ -1305,7 +1288,7 @@
     "term": "Churn rate",
     "slug": "churn-rate",
     "category": "Métriques",
-    "short": "Pourcentage de clients ou de revenu perdu sur une période.",
+    "short": "Part des clients ou du revenu récurrent perdue au cours d’une période.",
     "seeAlso": [
       "nrr",
       "mrr",
@@ -1319,11 +1302,8 @@
     "aliases": [
       "attrition",
       "churn",
-      "churn revenu",
-      "Customer churn",
-      "logo churn",
-      "Revenue churn",
-      "taux de churn"
+      "taux de churn",
+      "taux d’attrition"
     ]
   },
   {
@@ -1331,7 +1311,7 @@
     "term": "Cliff vesting",
     "slug": "cliff-vesting",
     "category": "Deal & Structuration",
-    "short": "Période initiale avant laquelle aucune equity ne devient acquise.",
+    "short": "Période minimale à accomplir avant l’acquisition des premiers droits sur des actions ou des options.",
     "seeAlso": [
       "vesting",
       "founder-vesting",
@@ -1347,7 +1327,7 @@
     "term": "Climat de fundraising",
     "slug": "climat-fundraising",
     "category": "Stratégie",
-    "short": "Conditions de marché qui influencent disponibilité du capital, valorisations et timing.",
+    "short": "Conditions de marché dans lesquelles une entreprise ou un fonds cherche à lever des capitaux.",
     "seeAlso": [
       "series-a",
       "pre-money",
@@ -1368,7 +1348,7 @@
     "term": "Co-investment",
     "slug": "co-investment",
     "category": "Fund Economics",
-    "short": "Investissement direct d’un LP aux côtés d’un manager dans une société ou transaction.",
+    "short": "Investissement réalisé aux côtés d’un autre investisseur dans une même entreprise.",
     "seeAlso": [
       "lp",
       "gp",
@@ -1388,7 +1368,7 @@
     "term": "Comité d'investissement (IC)",
     "slug": "ic",
     "category": "Stratégie",
-    "short": "Réunion ou processus interne où un fonds décide d'approuver ou non un investissement.",
+    "short": "Instance d’un fonds chargée d’examiner les projets d’investissement et de se prononcer sur leur financement.",
     "seeAlso": [
       "deal-champion",
       "deal-memo",
@@ -1411,13 +1391,12 @@
     "slug": "remuneration-committee",
     "aliases": [
       "comité de rémunération",
-      "comité nominations et rémunérations",
       "comité rémunérations",
       "compensation committee",
       "Remuneration committee"
     ],
     "category": "Gouvernance",
-    "short": "Comité du board qui prépare les décisions de rémunération des dirigeants.",
+    "short": "Comité du conseil chargé de préparer les décisions sur la rémunération des dirigeants.",
     "seeAlso": [
       "board-of-directors",
       "governance",
@@ -1438,21 +1417,22 @@
       "CVS"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Classe autrichienne de titres orientée participation salarié dans une FlexCo.",
+    "short": "Parts d’une FlexCo autrichienne qui associent leur détenteur aux résultats de la société.",
     "seeAlso": [
       "flexco",
       "virtual-shares",
       "employee-equity",
       "stock-options"
     ],
-    "relatedLessonIds": []
+    "relatedLessonIds": [],
+    "link": "https://ris.bka.gv.at/Dokumente/Bundesnormen/NOR40258604/NOR40258604.pdf"
   },
   {
     "id": "market-concentration",
     "term": "Concentration de marché",
     "slug": "market-concentration",
     "category": "Stratégie",
-    "short": "Regroupement du capital, des rendements ou de la liquidité sur peu d'acteurs.",
+    "short": "Degré auquel les parts d’un marché sont réparties entre un nombre restreint d’entreprises.",
     "seeAlso": [
       "power-law",
       "ai-native-startup",
@@ -1490,7 +1470,7 @@
     "term": "Conditions de closing",
     "slug": "conditions-de-closing",
     "category": "Deal & Structuration",
-    "short": "Conditions à satisfaire avant qu’un investissement ou une transaction puisse être réalisé.",
+    "short": "Conditions prévues au contrat pour qu’une opération puisse être réalisée.",
     "seeAlso": [
       "term-sheet",
       "dd",
@@ -1502,12 +1482,9 @@
     "aliases": [
       "closing conditions",
       "completion preconditions",
-      "Condition precedent",
-      "Conditions precedent",
-      "conditions suspensives",
       "conditions to closing",
-      "CPs",
-      "pre-closing conditions"
+      "pre-closing conditions",
+      "conditions préalables à la réalisation"
     ]
   },
   {
@@ -1515,7 +1492,7 @@
     "term": "Confiance des investisseurs",
     "slug": "investor-confidence",
     "category": "Stratégie",
-    "short": "Degré de confiance des investisseurs dans les données, l'équipe, l'exécution et le dossier de levée.",
+    "short": "Degré de confiance qu’un investisseur accorde aux informations et aux engagements des dirigeants.",
     "seeAlso": [
       "traction",
       "fundraising-history",
@@ -1541,7 +1518,7 @@
       "Supervisory Board"
     ],
     "category": "Gouvernance",
-    "short": "Organe qui supervise la direction dans certaines structures de gouvernance.",
+    "short": "Organe auquel revient le contrôle de la gestion dans une société organisée avec un directoire.",
     "seeAlso": [
       "governance",
       "board-of-directors",
@@ -1550,14 +1527,15 @@
     ],
     "relatedLessonIds": [
       "l-ts-control"
-    ]
+    ],
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042339531"
   },
   {
     "id": "continuation-fund",
     "term": "Continuation fund",
     "slug": "continuation-fund",
     "category": "Fund Economics",
-    "short": "Véhicule GP-led qui rachète des actifs d’un fonds existant pour prolonger leur détention.",
+    "short": "Fonds qui rachète une ou plusieurs participations à un autre fonds du même gestionnaire.",
     "seeAlso": [
       "secondary",
       "gp",
@@ -1568,9 +1546,7 @@
     "relatedLessonIds": [],
     "aliases": [
       "Continuation Funds",
-      "Continuation Vehicle",
-      "GP-Led Secondaries",
-      "GP-Led Secondary"
+      "Continuation Vehicle"
     ]
   },
   {
@@ -1610,7 +1586,7 @@
     ],
     "category": "Deal & Structuration",
     "short": "Montage de financement dans lequel un payeur conditionne tout ou partie de son paiement à des résultats vérifiés.",
-    "link": "https://www.economie.gouv.fr/contrat-impact",
+    "link": "https://www.economie.gouv.fr/actualites/les-contrats-impact",
     "seeAlso": [
       "mesure-impact",
       "financement-mixte",
@@ -1627,13 +1603,11 @@
     "term": "Contribution d’actionnaire",
     "slug": "shareholder-contribution",
     "aliases": [
-      "apport complémentaire",
-      "capital contribution",
-      "contribution des actionnaires",
+      "apport complémentaire d’actionnaire",
       "Shareholder contribution"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Montant versé par un actionnaire en plus du nominal souscrit.",
+    "short": "Dans certaines levées autrichiennes, somme apportée en complément de la valeur nominale des titres.",
     "seeAlso": [
       "nominal-amount",
       "price-per-share",
@@ -1651,12 +1625,10 @@
     "aliases": [
       "accord de financement",
       "convention de soutien",
-      "convention de subvention",
-      "convention pluriannuelle de financement",
       "funding agreement"
     ],
     "category": "Deal & Structuration",
-    "short": "Accord qui fixe l’objet, le montant, le calendrier, les emplois, les obligations d’information et les conditions d’adaptation ou de fin d’un soutien.",
+    "short": "Contrat qui fixe l’objet, le montant et les conditions d’un financement.",
     "seeAlso": [
       "gouvernance-associative",
       "droits-d-information-du-financeur",
@@ -1680,7 +1652,7 @@
     "term": "Conversion discount",
     "slug": "conversion-discount",
     "category": "Deal & Structuration",
-    "short": "Décote accordée aux investisseurs convertibles lors du prochain tour d’equity.",
+    "short": "Réduction appliquée au prix par action du tour de référence lors de la conversion d’un instrument.",
     "seeAlso": [
       "safe",
       "convertible-note",
@@ -1709,7 +1681,6 @@
       "l-ts-economics"
     ],
     "aliases": [
-      "Conversion Rights",
       "ratio de conversion"
     ]
   },
@@ -1718,7 +1689,7 @@
     "term": "Convertible note",
     "slug": "convertible-note",
     "category": "Deal & Structuration",
-    "short": "Dette court terme destinée à convertir en equity lors d’un futur tour qualifié.",
+    "short": "Titre de dette convertible en actions selon des conditions convenues à l’avance.",
     "seeAlso": [
       "safe",
       "valuation-cap",
@@ -1732,13 +1703,8 @@
       "l-stages"
     ],
     "aliases": [
-      "Change of Control Preference",
-      "CLA",
-      "convertible debt",
-      "Convertible Loan",
-      "Convertible Loan Agreement",
       "note convertible",
-      "obligation convertible startup"
+      "convertible promissory note"
     ]
   },
   {
@@ -1746,7 +1712,7 @@
     "term": "Copropriété de brevet",
     "slug": "copropriete-de-brevet",
     "category": "Juridique & Fiscalité",
-    "short": "Régime légal supplétif applicable lorsqu’une demande de brevet ou un brevet appartient à plusieurs titulaires.",
+    "short": "Détention d’un brevet ou d’une demande de brevet par plusieurs titulaires.",
     "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039279761",
     "seeAlso": [
       "titularite-des-droits",
@@ -1766,7 +1732,7 @@
     "term": "Corporate Venture Capital",
     "slug": "corporate-venture-capital",
     "category": "Acteurs",
-    "short": "Activité de venture capital menée par une entreprise opérationnelle.",
+    "short": "Activité de capital-risque exercée par une entreprise qui investit dans de jeunes sociétés.",
     "seeAlso": [
       "venture-capital",
       "lp",
@@ -1776,7 +1742,6 @@
       "l-actors"
     ],
     "aliases": [
-      "corporate investors",
       "corporate VC",
       "CVC",
       "venture corporate"
@@ -1787,7 +1752,7 @@
     "term": "Cost of Goods Sold (COGS)",
     "slug": "cogs",
     "category": "Métriques",
-    "short": "Coûts directs nécessaires pour produire ou livrer le produit ou service.",
+    "short": "Coût de production ou d’achat des biens et services vendus.",
     "seeAlso": [
       "gross-margin",
       "unit-economics",
@@ -1799,8 +1764,7 @@
     "aliases": [
       "COGS",
       "Cost of Goods Sold",
-      "coût des ventes",
-      "coûts directs"
+      "coût des ventes"
     ]
   },
   {
@@ -1808,9 +1772,7 @@
     "term": "Coût complet",
     "slug": "cout-complet",
     "aliases": [
-      "full cost",
-      "full-cost recovery",
-      "recouvrement du coût complet"
+      "full cost"
     ],
     "category": "Métriques",
     "short": "Coût d’une activité incluant ses charges directes et une part justifiée des fonctions nécessaires à sa réalisation.",
@@ -1831,7 +1793,7 @@
     "term": "Coût irrécupérable",
     "slug": "cout-irrecuperable",
     "category": "Sciences de la décision",
-    "short": "Re-financer par engagement passé des sociétés qu’on ne sourcerait jamais à froid.",
+    "short": "Dépense déjà engagée dont le montant ne peut plus être récupéré.",
     "seeAlso": [
       "follow-on",
       "mimetisme",
@@ -1839,9 +1801,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "escalade d’engagement",
-      "sunk cost",
-      "sunk cost fallacy"
+      "sunk cost"
     ]
   },
   {
@@ -1849,7 +1809,7 @@
     "term": "Critères de sélection LP",
     "slug": "fund-selection-criteria-lp",
     "category": "Fund Economics",
-    "short": "Cadre utilisé par les LPs pour sélectionner et comparer des fonds VC.",
+    "short": "Critères qu’un souscripteur utilise pour comparer des fonds avant de s’engager.",
     "seeAlso": [
       "lp",
       "emerging-manager",
@@ -1915,7 +1875,7 @@
     "term": "Customer ROI",
     "slug": "customer-roi",
     "category": "Métriques",
-    "short": "Valeur économique qu'un client obtient en utilisant le produit.",
+    "short": "Gain net que procure un produit à son client, rapporté à son coût total pour ce client.",
     "seeAlso": [
       "pricing-methodology",
       "buyer-persona",
@@ -1936,11 +1896,10 @@
     "term": "Customer success",
     "slug": "customer-success",
     "aliases": [
-      "CS",
       "Customer Success Management"
     ],
     "category": "Go-to-Market",
-    "short": "Fonction qui aide les clients à obtenir de la valeur, réduire le churn et développer les comptes.",
+    "short": "Fonction chargée d’aider les clients à atteindre leurs objectifs avec le produit après la vente.",
     "seeAlso": [
       "churn-rate",
       "nrr",
@@ -1956,7 +1915,7 @@
     "term": "Cycle de vie du fonds",
     "slug": "fund-lifecycle",
     "category": "Fund Economics",
-    "short": "Séquence de levée, déploiement, gestion, sorties et distributions d’un fonds VC.",
+    "short": "Étapes de la vie d’un fonds, de sa levée à ses dernières distributions.",
     "seeAlso": [
       "venture-capital-fund",
       "investment-period",
@@ -1979,7 +1938,7 @@
     "term": "Daphni",
     "slug": "daphni",
     "category": "Fonds & VC",
-    "short": "VC parisien early-stage, thèse « digital for good ».",
+    "short": "Société française de capital-risque qui investit dans de jeunes entreprises européennes.",
     "link": "https://www.daphni.com",
     "seeAlso": [
       "deal-flow",
@@ -1992,7 +1951,7 @@
     "term": "Data quality",
     "slug": "data-quality",
     "category": "Métriques",
-    "short": "Exactitude, cohérence, granularité et pertinence des données utilisées en reporting et diligence.",
+    "short": "Fiabilité des données utilisées pour évaluer et suivre une entreprise.",
     "seeAlso": [
       "data-room",
       "investor-confidence",
@@ -2004,7 +1963,6 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
-      "data hygiene",
       "qualité des données"
     ]
   },
@@ -2013,7 +1971,7 @@
     "term": "Data room",
     "slug": "data-room",
     "category": "Stratégie",
-    "short": "Référentiel structuré de documents utilisé par les investisseurs pendant la levée et la diligence.",
+    "short": "Espace documentaire dans lequel une entreprise donne aux investisseurs accès aux pièces nécessaires à leurs vérifications.",
     "seeAlso": [
       "dd",
       "data-quality",
@@ -2035,11 +1993,10 @@
     "slug": "maturity-date",
     "aliases": [
       "date d’échéance",
-      "échéance de maturité",
       "Maturity date"
     ],
     "category": "Deal & Structuration",
-    "short": "Date à laquelle une dette convertible doit être remboursée, convertie ou renégociée.",
+    "short": "Date d’échéance prévue au contrat pour le remboursement d’une dette.",
     "seeAlso": [
       "convertible-note",
       "discount-rate",
@@ -2055,7 +2012,7 @@
     "term": "Date du dernier tour",
     "slug": "last-round-date",
     "category": "Métriques",
-    "short": "Date du dernier financement externe, utilisée pour juger les progrès depuis le capital précédent.",
+    "short": "Date à laquelle l’entreprise a conclu sa dernière levée de fonds.",
     "seeAlso": [
       "fundraising-history",
       "total-funding",
@@ -2099,7 +2056,7 @@
     "term": "Deal flow",
     "slug": "deal-flow",
     "category": "Stratégie",
-    "short": "Flux d'opportunités d'investissement qu'un fonds voit et qualifie.",
+    "short": "Ensemble des dossiers d’investissement reçus ou repérés par un fonds.",
     "seeAlso": [
       "deal-sourcing",
       "qualified-lead",
@@ -2110,9 +2067,8 @@
       "l-screening"
     ],
     "aliases": [
-      "flux d'affaires",
-      "flux de dossiers",
-      "pipeline de deals"
+      "flux d’affaires",
+      "flux de dossiers"
     ]
   },
   {
@@ -2120,17 +2076,13 @@
     "term": "Deal heat",
     "slug": "deal-heat",
     "category": "Sciences de la décision",
-    "short": "Pression compétitive, souvent fabriquée, qui comprime le temps de décision.",
+    "short": "Intensité de la concurrence entre investisseurs pour participer à une opération.",
     "seeAlso": [
       "mimetisme",
       "term-sheet",
       "premortem"
     ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "fear of missing out",
-      "FOMO"
-    ]
+    "relatedLessonIds": []
   },
   {
     "id": "deal-memo",
@@ -2177,8 +2129,8 @@
     "term": "Decile Hub",
     "slug": "decile-hub",
     "category": "Outils",
-    "short": "Plateforme tout-en-un pour emerging managers.",
-    "link": "https://www.decilegroup.com",
+    "short": "Logiciel de gestion pour les fonds de capital-risque.",
+    "link": "https://decilegroup.com/decile-hub/",
     "seeAlso": [
       "first-time-fund",
       "portfolio-monitoring"
@@ -2190,7 +2142,7 @@
     "term": "Deemed liquidation",
     "slug": "deemed-liquidation",
     "category": "Deal & Structuration",
-    "short": "Événement contractuel traité comme une liquidation pour déclencher la liquidation preference.",
+    "short": "Opération assimilée à une liquidation pour répartir le prix entre actionnaires.",
     "seeAlso": [
       "liquidation-preference",
       "ma",
@@ -2209,7 +2161,7 @@
     "term": "Deep tech metrics",
     "slug": "deep-tech-metrics",
     "category": "Métriques",
-    "short": "Indicateurs alternatifs pour évaluer une startup technologique avant revenus significatifs.",
+    "short": "Indicateurs de progrès scientifique, technique ou industriel d’une jeune entreprise.",
     "seeAlso": [
       "technology-readiness-level",
       "proof-of-concept",
@@ -2229,7 +2181,7 @@
     "term": "Diligence checklist",
     "slug": "diligence-checklist",
     "category": "Stratégie",
-    "short": "Liste structurée des domaines critiques à vérifier pendant une diligence.",
+    "short": "Liste des vérifications à effectuer avant une décision d’investissement.",
     "seeAlso": [
       "dd",
       "data-room",
@@ -2249,7 +2201,7 @@
     "term": "Diligence de l'équipe dirigeante",
     "slug": "management-team-diligence",
     "category": "Stratégie",
-    "short": "Évaluation de l'intégrité, énergie, jugement, recrutement et capacité d'exécution de l'équipe.",
+    "short": "Évaluation des compétences, de l’expérience et de l’intégrité des dirigeants avant un investissement.",
     "seeAlso": [
       "founder-fit",
       "team-problem-fit",
@@ -2271,7 +2223,7 @@
     "term": "Dilution",
     "slug": "dilution",
     "category": "Deal & Structuration",
-    "short": "Baisse du pourcentage d’ownership causée par l’émission de nouveaux titres.",
+    "short": "Diminution de la part du capital détenue par un actionnaire après l’émission d’actions nouvelles.",
     "seeAlso": [
       "cap-table",
       "pre-money",
@@ -2286,13 +2238,10 @@
     "term": "Dirigeant mandataire",
     "slug": "managing-director",
     "aliases": [
-      "gérant",
-      "Geschäftsführung",
-      "Managing Director",
       "mandataire social dirigeant"
     ],
     "category": "Gouvernance",
-    "short": "Personne qui représente la société et pilote son administration au quotidien.",
+    "short": "Dirigeant investi d’un mandat lui permettant d’agir au nom de la société.",
     "seeAlso": [
       "governance",
       "executive-committee",
@@ -2301,14 +2250,15 @@
     ],
     "relatedLessonIds": [
       "l-ts-control"
-    ]
+    ],
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006227034"
   },
   {
     "id": "disclosure-letter",
     "term": "Disclosure letter",
     "slug": "disclosure-letter",
     "category": "Juridique & Fiscalité",
-    "short": "Document listant les exceptions aux déclarations et garanties d’un deal.",
+    "short": "Lettre qui précise les exceptions aux garanties données dans un contrat d’investissement ou de cession.",
     "seeAlso": [
       "representations-and-warranties",
       "subscription-agreement",
@@ -2317,10 +2267,8 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "Disclosure Schedule",
       "lettre de divulgation",
-      "Schedule of Exceptions",
-      "Schedules of Disclosure"
+      "lettre de révélation"
     ]
   },
   {
@@ -2328,7 +2276,7 @@
     "term": "Discount rate",
     "slug": "discount-rate",
     "category": "Valorisation",
-    "short": "Taux utilisé pour convertir des cash flows futurs en valeur présente ou appliquer une décote.",
+    "short": "Taux utilisé pour calculer la valeur actuelle d’un flux de trésorerie futur.",
     "seeAlso": [
       "dcf",
       "risk-premium",
@@ -2339,7 +2287,6 @@
       "l-founder-instruments"
     ],
     "aliases": [
-      "discount",
       "taux d’actualisation"
     ]
   },
@@ -2348,7 +2295,7 @@
     "term": "Discounted Cash Flow",
     "slug": "dcf",
     "category": "Valorisation",
-    "short": "Méthode qui actualise les cash flows futurs à leur valeur présente.",
+    "short": "Méthode de valorisation par actualisation des flux de trésorerie futurs.",
     "seeAlso": [
       "discount-rate",
       "valuation",
@@ -2367,7 +2314,7 @@
     "term": "Distributions to Paid-In (DPI)",
     "slug": "dpi",
     "category": "Métriques",
-    "short": "Cash distribué aux LPs rapporté au capital appelé.",
+    "short": "Valeur cumulée des distributions reçues par les investisseurs, rapportée au capital qu’ils ont effectivement versé.",
     "seeAlso": [
       "tvpi",
       "rvpi",
@@ -2383,7 +2330,8 @@
       "Distributed to Paid-In",
       "Distributions to Paid-In",
       "DPI"
-    ]
+    ],
+    "link": "https://ilpa.org/resources-tools/private-equity-101/private-equity-glossary/"
   },
   {
     "id": "diversification",
@@ -2410,7 +2358,7 @@
     "term": "Dividendes cumulatifs",
     "slug": "dividendes-cumulatifs",
     "category": "Deal & Structuration",
-    "short": "Dividendes de preferred stock qui s’accumulent même s’ils ne sont pas distribués.",
+    "short": "Dividendes dont les montants impayés se reportent d’une période à l’autre.",
     "seeAlso": [
       "actions-de-preference",
       "liquidation-preference",
@@ -2420,7 +2368,6 @@
       "l-ts-economics"
     ],
     "aliases": [
-      "accrued dividends",
       "cumulative dividends"
     ]
   },
@@ -2429,17 +2376,11 @@
     "term": "Documentation d’augmentation de capital",
     "slug": "capital-increase-documentation",
     "aliases": [
-      "commercial register filing",
-      "déclaration de souscription",
-      "dépôt au registre du commerce",
       "documentation technique d’augmentation de capital",
-      "minutes of the general meeting",
-      "procès-verbal d’assemblée générale",
-      "subscription declaration",
       "Technical capital increase documentation"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Documents qui mettent juridiquement en œuvre l’émission de nouveaux titres.",
+    "short": "Ensemble des actes nécessaires à la réalisation d’une augmentation de capital.",
     "seeAlso": [
       "investment-agreement",
       "subscription-agreement",
@@ -2449,14 +2390,15 @@
     ],
     "relatedLessonIds": [
       "l-founder-instruments"
-    ]
+    ],
+    "link": "https://entreprendre.service-public.gouv.fr/vosdroits/F36607"
   },
   {
     "id": "double-trigger-acceleration",
     "term": "Double-trigger acceleration",
     "slug": "double-trigger-acceleration",
     "category": "Deal & Structuration",
-    "short": "Accélération du vesting exigeant deux événements, typiquement acquisition puis départ involontaire.",
+    "short": "Acquisition anticipée de droits sur des titres à la survenue de deux événements convenus.",
     "seeAlso": [
       "acceleration-vesting",
       "single-trigger-acceleration",
@@ -2472,7 +2414,7 @@
     "term": "Down round",
     "slug": "down-round",
     "category": "Valorisation",
-    "short": "Tour réalisé à une valorisation inférieure au tour précédent.",
+    "short": "Tour où le prix par action est inférieur à celui du tour précédent.",
     "seeAlso": [
       "valuation",
       "anti-dilution",
@@ -2510,13 +2452,10 @@
     "aliases": [
       "droits d’information du bailleur",
       "droits d’information en philanthropie",
-      "funder information rights",
-      "obligations d’information envers le financeur",
-      "reporting au financeur",
-      "reporting philanthropique"
+      "funder information rights"
     ],
     "category": "Gouvernance",
-    "short": "Droits proportionnés permettant au financeur de recevoir les informations nécessaires au suivi d’un soutien sans diriger l’organisation.",
+    "short": "Droits permettant au financeur de suivre l’utilisation de son soutien.",
     "seeAlso": [
       "convention-de-financement",
       "gouvernance-associative",
@@ -2541,7 +2480,7 @@
     "term": "Dry powder",
     "slug": "dry-powder",
     "category": "Fund Economics",
-    "short": "Capital engagé mais pas encore investi, disponible pour nouveaux deals ou follow-ons.",
+    "short": "Capital qu’un fonds peut encore investir.",
     "seeAlso": [
       "capital-call",
       "follow-on",
@@ -2562,7 +2501,7 @@
     "term": "Due diligence (DD)",
     "slug": "dd",
     "category": "Stratégie",
-    "short": "Processus d'investigation qui valide les faits, risques et hypothèses avant un investissement.",
+    "short": "Vérifications qu’un investisseur mène avant de décider d’investir.",
     "seeAlso": [
       "diligence-checklist",
       "data-room",
@@ -2584,13 +2523,11 @@
     "term": "Dutch auction IPO",
     "slug": "dutch-auction-ipo",
     "aliases": [
-      "enchère hollandaise",
       "IPO par enchère hollandaise",
-      "modified Dutch auction IPO",
-      "OpenIPO"
+      "introduction en bourse par enchère hollandaise"
     ],
     "category": "Liquidité",
-    "short": "IPO où le prix est déterminé par les ordres d’achat des investisseurs.",
+    "short": "Introduction en bourse dont le prix d’offre est établi à partir d’enchères.",
     "seeAlso": [
       "ipo",
       "qpo",
@@ -2606,11 +2543,10 @@
     "aliases": [
       "BAIIA",
       "Earnings Before Interest, Taxes, Depreciation and Amortization",
-      "EBITDA",
-      "excédent brut d’exploitation ajusté"
+      "EBITDA"
     ],
     "category": "Métriques",
-    "short": "Indicateur de résultat opérationnel avant intérêts, impôts, dépréciations et amortissements.",
+    "short": "Résultat avant intérêts, impôt sur les bénéfices et amortissement des actifs corporels et incorporels.",
     "seeAlso": [
       "enterprise-value",
       "ebitda-exit-multiple",
@@ -2627,7 +2563,7 @@
     "term": "EBITDA exit multiple",
     "slug": "ebitda-exit-multiple",
     "category": "Valorisation",
-    "short": "Multiple fondé sur l'EBITDA utilisé pour estimer une valeur de sortie.",
+    "short": "Coefficient appliqué à l’EBITDA prévu pour estimer la valeur d’entreprise à la sortie.",
     "seeAlso": [
       "exit-valuation",
       "relative-valuation",
@@ -2646,21 +2582,25 @@
     "term": "EIF (European Investment Fund)",
     "slug": "eif",
     "category": "Institutions",
-    "short": "Le principal LP institutionnel des fonds VC européens, basé au Luxembourg.",
-    "link": "https://www.eif.org",
+    "short": "Fonds européen d’investissement, membre du groupe Banque européenne d’investissement.",
+    "link": "https://www.eif.org/supporting-smes/access-to-finance/equity-products",
     "seeAlso": [
       "lp",
       "bpifrance",
       "first-time-fund"
     ],
-    "relatedLessonIds": []
+    "relatedLessonIds": [],
+    "aliases": [
+      "FEI",
+      "Fonds européen d’investissement"
+    ]
   },
   {
     "id": "emerging-manager",
     "term": "Emerging manager",
     "slug": "emerging-manager",
     "category": "Acteurs",
-    "short": "GP récent ou plus petit, souvent en train de lever un Fund I, II ou III.",
+    "short": "Équipe de gestion qui lève ses premiers fonds et dispose encore d’un historique collectif limité.",
     "seeAlso": [
       "first-time-fund",
       "lp-capital-allocation",
@@ -2671,8 +2611,8 @@
       "l-actors"
     ],
     "aliases": [
-      "first-time manager",
-      "manager émergent"
+      "manager émergent",
+      "gestionnaire émergent"
     ]
   },
   {
@@ -2680,7 +2620,7 @@
     "term": "Employee equity",
     "slug": "employee-equity",
     "category": "Deal & Structuration",
-    "short": "Participation ou exposition économique accordée aux salariés via options, actions ou plans similaires.",
+    "short": "Titres ou droits sur le capital qu’une entreprise attribue à ses salariés.",
     "seeAlso": [
       "esop",
       "stock-options",
@@ -2692,31 +2632,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "actionnariat salarié",
-      "equity salarié"
-    ]
-  },
-  {
-    "id": "esop",
-    "term": "Employee Stock Ownership Plan (ESOP)",
-    "slug": "esop",
-    "category": "Deal & Structuration",
-    "short": "Pool d'equity réservé aux salariés, advisors et recrutements futurs.",
-    "seeAlso": [
-      "stock-options",
-      "employee-equity",
-      "dilution",
-      "cap-table",
-      "vesting"
-    ],
-    "relatedLessonIds": [],
-    "aliases": [
-      "Employee incentives",
-      "employee option pool",
-      "Employee Stock Option Plan",
-      "ESOP",
-      "option pool",
-      "pool d’options"
+      "actionnariat salarié"
     ]
   },
   {
@@ -2724,7 +2640,7 @@
     "term": "Enterprise value",
     "slug": "enterprise-value",
     "category": "Valorisation",
-    "short": "Valeur de l'ensemble de l'entreprise, indépendamment de sa structure de capital.",
+    "short": "Valeur économique de l’activité, quelle que soit la répartition de son financement entre dette et capitaux propres.",
     "seeAlso": [
       "equity-value",
       "revenue-multiple",
@@ -2749,8 +2665,8 @@
       "ESUS"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Agrément public français attribué à certaines entreprises de l’ESS remplissant des conditions d’utilité sociale et de gestion.",
-    "link": "https://www.economie.gouv.fr/entreprises/les-aides-et-financements-pour-developper-son-entreprise/economie-sociale-et-solidaire",
+    "short": "Entreprise française de l’économie sociale et solidaire bénéficiant d’un agrément d’utilité sociale.",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000049720096",
     "seeAlso": [
       "finance-solidaire",
       "investissement-pour-impact",
@@ -2767,7 +2683,7 @@
     "term": "Equity",
     "slug": "equity",
     "category": "Fondations",
-    "short": "Part de propriété d'une entreprise, reçue en échange d'un apport en capital.",
+    "short": "Participation au capital d’une société.",
     "seeAlso": [
       "cap-table",
       "dilution",
@@ -2778,11 +2694,7 @@
       "l-vc-definition"
     ],
     "aliases": [
-      "Debt and Equity",
-      "equity financing",
-      "equity round",
-      "financement en equity",
-      "fonds propres"
+      "participation au capital"
     ]
   },
   {
@@ -2790,7 +2702,7 @@
     "term": "Equity value",
     "slug": "equity-value",
     "category": "Valorisation",
-    "short": "Valeur économique attribuable aux actionnaires après dette et cash.",
+    "short": "Valeur de l’ensemble des actions d’une société.",
     "seeAlso": [
       "enterprise-value",
       "equity",
@@ -2801,7 +2713,7 @@
     ],
     "aliases": [
       "valeur des capitaux propres",
-      "valeur equity"
+      "valeur des actions"
     ]
   },
   {
@@ -2819,11 +2731,7 @@
       "l-dd-process"
     ],
     "aliases": [
-      "ESG",
       "ESG diligence",
-      "ESG en Venture Capital",
-      "ESG in Venture Capital",
-      "ESG-by-Design",
       "évaluation ESG",
       "revue ESG"
     ]
@@ -2833,8 +2741,8 @@
     "term": "Eurazeo",
     "slug": "eurazeo",
     "category": "Fonds & VC",
-    "short": "Grande société d'investissement française cotée (~30 Md€ d'actifs).",
-    "link": "https://www.eurazeo.com",
+    "short": "Groupe d’investissement français actif en capital-risque.",
+    "link": "https://www.eurazeo.com/en/businesses/private-equity/venture-capital",
     "seeAlso": [
       "gp",
       "lp"
@@ -2846,7 +2754,7 @@
     "term": "Evergreen fund",
     "slug": "evergreen",
     "category": "Fund Economics",
-    "short": "Un fonds sans date de fin, qui peut détenir indéfiniment.",
+    "short": "Fonds d’investissement sans échéance de liquidation prédéterminée.",
     "seeAlso": [
       "vintage",
       "lp"
@@ -2877,7 +2785,7 @@
     "term": "Executive committee",
     "slug": "executive-committee",
     "category": "Gouvernance",
-    "short": "Forum de senior management chargé de coordonner l’exécution et les priorités stratégiques.",
+    "short": "Comité réunissant les principaux dirigeants opérationnels d’une entreprise.",
     "seeAlso": [
       "governance",
       "board-of-directors",
@@ -2887,7 +2795,7 @@
     "aliases": [
       "comité exécutif",
       "ExCom",
-      "Management Committee"
+      "Comex"
     ]
   },
   {
@@ -2896,11 +2804,10 @@
     "slug": "exit",
     "aliases": [
       "exit event",
-      "liquidity event",
       "sortie"
     ],
     "category": "Liquidité",
-    "short": "Événement qui transforme l’ownership privé en cash ou en titres liquides.",
+    "short": "Cession ou dénouement de tout ou partie de la participation d’un investisseur.",
     "seeAlso": [
       "ipo",
       "ma",
@@ -2923,7 +2830,7 @@
       "VC Exit Strategy"
     ],
     "category": "Liquidité",
-    "short": "Logique par laquelle une startup pourrait créer de la liquidité pour ses actionnaires.",
+    "short": "Scénario envisagé par un investisseur pour céder sa participation.",
     "seeAlso": [
       "exit",
       "potential-acquirers",
@@ -2939,10 +2846,11 @@
     "term": "Exit timing",
     "slug": "exit-timing",
     "aliases": [
-      "timing de sortie"
+      "timing de sortie",
+      "calendrier de sortie"
     ],
     "category": "Liquidité",
-    "short": "Moment attendu où une société peut créer une liquidité significative.",
+    "short": "Date ou période envisagée pour céder une participation.",
     "seeAlso": [
       "exit-strategy",
       "investor-return",
@@ -2957,7 +2865,7 @@
     "term": "Exit valuation",
     "slug": "exit-valuation",
     "category": "Valorisation",
-    "short": "Valeur estimée d'une startup au moment de la liquidité.",
+    "short": "Valeur attribuée à une entreprise au moment de la sortie.",
     "seeAlso": [
       "valuation",
       "venture-capital-method",
@@ -2978,14 +2886,11 @@
     "term": "Exit waterfall",
     "slug": "exit-waterfall",
     "aliases": [
-      "Distribution Waterfall",
       "Liquidation Waterfall",
-      "Proceeds Waterfall",
-      "Waterfall Analysis",
-      "Waterfall Diagram"
+      "Proceeds Waterfall"
     ],
     "category": "Deal & Structuration",
-    "short": "Modèle de distribution des produits d’exit entre classes de titres et actionnaires.",
+    "short": "Répartition du produit de sortie entre les détenteurs de titres de la société.",
     "seeAlso": [
       "liquidation-preference",
       "cap-table",
@@ -3001,7 +2906,7 @@
     "term": "Expertise sectorielle",
     "slug": "expertise-sectorielle",
     "category": "Stratégie",
-    "short": "Compréhension profonde d'un marché, utilisée pour sourcer et juger les deals.",
+    "short": "Connaissance d’un secteur utilisée pour identifier et évaluer des investissements.",
     "seeAlso": [
       "thesis-driven",
       "dd",
@@ -3028,7 +2933,7 @@
       "love money"
     ],
     "category": "Acteurs",
-    "short": "Premiers soutiens personnels qui financent parfois une startup très amont.",
+    "short": "Financement apporté à une jeune entreprise par les proches des fondateurs.",
     "seeAlso": [
       "pre-seed",
       "business-angel",
@@ -3045,7 +2950,7 @@
     "term": "Family office",
     "slug": "family-office",
     "category": "Acteurs",
-    "short": "Structure privée qui gère le patrimoine et les investissements d’une famille fortunée.",
+    "short": "Structure qui gère le patrimoine d’une ou plusieurs familles.",
     "seeAlso": [
       "lp",
       "co-investment",
@@ -3057,10 +2962,7 @@
     ],
     "aliases": [
       "Family Offices",
-      "MFO",
-      "multi-family office",
-      "SFO",
-      "single-family office"
+      "bureau de gestion de patrimoine familial"
     ]
   },
   {
@@ -3068,7 +2970,7 @@
     "term": "Fiduciary duty",
     "slug": "fiduciary-duty",
     "category": "Gouvernance",
-    "short": "Obligation d’agir avec prudence et loyauté envers la société, les actionnaires ou les LPs selon le rôle.",
+    "short": "Obligation de diligence et de loyauté attachée à certaines fonctions, selon le droit applicable.",
     "seeAlso": [
       "board-of-directors",
       "gp",
@@ -3080,7 +2982,8 @@
     "aliases": [
       "devoir fiduciaire",
       "fiduciary duties"
-    ]
+    ],
+    "link": "https://courts.delaware.gov/Opinions/Download.aspx?id=274890"
   },
   {
     "id": "field-sales",
@@ -3090,7 +2993,7 @@
       "vente terrain"
     ],
     "category": "Go-to-Market",
-    "short": "Modèle de vente impliquant une présence directe auprès de grands comptes ou clients complexes.",
+    "short": "Vente de terrain, menée en personne auprès des clients.",
     "seeAlso": [
       "inside-sales",
       "sales-cycle",
@@ -3110,7 +3013,7 @@
       "final closing"
     ],
     "category": "Fund Economics",
-    "short": "Date à laquelle un fonds termine définitivement sa levée auprès des LPs.",
+    "short": "Clôture des souscriptions à un fonds.",
     "seeAlso": [
       "venture-fundraising",
       "lp",
@@ -3128,7 +3031,6 @@
     "term": "Finance solidaire",
     "slug": "finance-solidaire",
     "aliases": [
-      "épargne solidaire",
       "solidarity finance"
     ],
     "category": "Stratégie",
@@ -3200,7 +3102,7 @@
     "term": "Financement non dilutif",
     "slug": "non-dilutive-financing",
     "category": "Deal & Structuration",
-    "short": "Capital obtenu sans émission immédiate de nouvelles actions.",
+    "short": "Financement qui ne réduit pas la part des actionnaires au capital.",
     "seeAlso": [
       "venture-debt",
       "dilution",
@@ -3219,9 +3121,7 @@
     "term": "Financement participatif",
     "slug": "crowdfunding",
     "aliases": [
-      "crowd equity",
       "Crowdfunding",
-      "equity crowdfunding",
       "financement par la foule"
     ],
     "category": "Stades & Tours",
@@ -3243,7 +3143,7 @@
     "term": "Financement total",
     "slug": "total-funding",
     "category": "Métriques",
-    "short": "Capital cumulé levé par une startup depuis sa création.",
+    "short": "Montant cumulé des financements levés par une entreprise.",
     "seeAlso": [
       "fundraising-history",
       "last-round-date",
@@ -3268,7 +3168,7 @@
       "acquisition financière"
     ],
     "category": "Liquidité",
-    "short": "Acquisition fondée surtout sur les revenus, les marges, le cash-flow ou la rentabilité.",
+    "short": "Rachat d’une société par un investisseur qui cherche un rendement financier.",
     "seeAlso": [
       "ma",
       "trade-sale",
@@ -3284,7 +3184,7 @@
     "term": "Financial model",
     "slug": "financial-model",
     "category": "Métriques",
-    "short": "Projection structurée des revenus, coûts, cash et drivers opérationnels.",
+    "short": "Projection chiffrée de l’activité, des résultats et de la trésorerie d’une entreprise.",
     "seeAlso": [
       "model-assumptions",
       "runway",
@@ -3296,7 +3196,6 @@
       "l-dd-process"
     ],
     "aliases": [
-      "financial forecast",
       "modèle financier"
     ]
   },
@@ -3305,7 +3204,7 @@
     "term": "First-time fund",
     "slug": "first-time-fund",
     "category": "Fund Economics",
-    "short": "Le premier fonds levé par une équipe sans track record.",
+    "short": "Premier fonds levé par une équipe de gestion sous sa propre responsabilité.",
     "seeAlso": [
       "lp",
       "vintage",
@@ -3319,7 +3218,7 @@
     "term": "Fit géographique",
     "slug": "geography-fit",
     "category": "Stratégie",
-    "short": "Alignement entre la localisation d'une startup et le mandat ou réseau d'un investisseur.",
+    "short": "Adéquation entre la présence géographique d’une entreprise et le mandat d’un investisseur.",
     "seeAlso": [
       "investor-fit",
       "vc-first-meeting",
@@ -3345,14 +3244,15 @@
       "société flexible autrichienne"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Forme sociale autrichienne pensée pour plus de flexibilité startup.",
+    "short": "Forme de société autrichienne qui permet notamment d’associer des salariés au capital.",
     "seeAlso": [
       "company-value-shares",
       "articles-of-association",
       "legal-share-capital",
       "employee-equity"
     ],
-    "relatedLessonIds": []
+    "relatedLessonIds": [],
+    "link": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20012473&Paragraf=9"
   },
   {
     "id": "follow-on",
@@ -3375,7 +3275,6 @@
     ],
     "aliases": [
       "Follow-on Investment",
-      "follow-on round",
       "réinvestissement"
     ]
   },
@@ -3384,7 +3283,7 @@
     "term": "Fondateur",
     "slug": "founder",
     "category": "Acteurs",
-    "short": "Personne qui crée et porte une startup.",
+    "short": "Personne qui crée une entreprise, seule ou avec des associés.",
     "seeAlso": [
       "startup",
       "venture-capital",
@@ -3396,18 +3295,14 @@
       "l-founder-narrative"
     ],
     "aliases": [
-      "équipe fondatrice",
-      "fondatrice",
-      "founding team"
+      "founder",
+      "fondatrice"
     ]
   },
   {
     "id": "fonds-de-dotation",
     "term": "Fonds de dotation",
     "slug": "fonds-de-dotation",
-    "aliases": [
-      "endowment fund"
-    ],
     "category": "Juridique & Fiscalité",
     "short": "Personne morale privée à but non lucratif qui capitalise des apports gratuits et irrévocables au service de l’intérêt général.",
     "link": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000054334469",
@@ -3427,7 +3322,7 @@
     "term": "Fonds de fonds",
     "slug": "fund-of-funds",
     "category": "Acteurs",
-    "short": "Véhicule qui investit dans plusieurs fonds plutôt que directement dans des startups.",
+    "short": "Fonds dont les principales participations sont des parts d’autres fonds.",
     "seeAlso": [
       "lp",
       "venture-capital-fund",
@@ -3448,12 +3343,11 @@
     "term": "Fonds privé",
     "slug": "fonds-prive",
     "aliases": [
-      "Pooled Investment Vehicle",
       "private fund",
       "véhicule d’investissement collectif privé"
     ],
     "category": "Fonds & VC",
-    "short": "Véhicule non coté qui rassemble le capital d’investisseurs privés.",
+    "short": "Fonds qui réunit les capitaux de souscripteurs dans le cadre d’un placement privé.",
     "seeAlso": [
       "venture-capital-fund",
       "limited-partnership",
@@ -3464,18 +3358,18 @@
     "relatedLessonIds": [
       "l-fund-lifecycle",
       "l-actors"
-    ]
+    ],
+    "link": "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/private-funds"
   },
   {
     "id": "founder-coaching",
     "term": "Founder coaching",
     "slug": "founder-coaching",
     "aliases": [
-      "CEO Coaching",
-      "coaching founder"
+      "accompagnement des fondateurs"
     ],
     "category": "Stratégie",
-    "short": "Accompagnement des fondateurs pour améliorer leadership, délégation et décisions de scaling.",
+    "short": "Accompagnement individuel d’un fondateur dans son rôle de dirigeant.",
     "seeAlso": [
       "management-team-scaling",
       "portfolio-support",
@@ -3490,7 +3384,7 @@
     "term": "Founder dilution",
     "slug": "founder-dilution",
     "category": "Deal & Structuration",
-    "short": "Dilution spécifique de la participation des fondateurs au fil des tours et pools d’options.",
+    "short": "Baisse de la part du capital détenue par les fondateurs à la suite d’une émission de titres.",
     "seeAlso": [
       "dilution",
       "founder-equity",
@@ -3505,7 +3399,7 @@
     "term": "Founder equity",
     "slug": "founder-equity",
     "category": "Deal & Structuration",
-    "short": "Participation économique conservée par les founders dans la société.",
+    "short": "Participation des fondateurs au capital de la société.",
     "seeAlso": [
       "founder-ownership",
       "founder-dilution",
@@ -3515,7 +3409,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "equity founder"
+      "participation des fondateurs au capital"
     ]
   },
   {
@@ -3534,8 +3428,8 @@
       "l-dd-process"
     ],
     "aliases": [
-      "fit fondateur",
-      "founder alignment"
+      "complémentarité des cofondateurs",
+      "co-founder fit"
     ]
   },
   {
@@ -3543,7 +3437,7 @@
     "term": "Founder ownership",
     "slug": "founder-ownership",
     "category": "Deal & Structuration",
-    "short": "Pourcentage de la société encore détenu par les founders.",
+    "short": "Pourcentage du capital détenu par les fondateurs.",
     "seeAlso": [
       "founder-equity",
       "founder-dilution",
@@ -3553,7 +3447,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "ownership founder"
+      "part du capital détenue par les fondateurs"
     ]
   },
   {
@@ -3561,7 +3455,7 @@
     "term": "Founder shares",
     "slug": "founder-shares",
     "category": "Deal & Structuration",
-    "short": "Actions émises aux founders, souvent à prix nominal et soumises au vesting.",
+    "short": "Actions attribuées aux fondateurs lors de la création de l’entreprise.",
     "seeAlso": [
       "actions-ordinaires",
       "vesting",
@@ -3571,7 +3465,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "actions founders",
+      "actions des fondateurs",
       "founder stock"
     ]
   },
@@ -3580,7 +3474,7 @@
     "term": "Founder vesting",
     "slug": "founder-vesting",
     "category": "Deal & Structuration",
-    "short": "Vesting appliqué aux actions founders pour assurer leur engagement futur.",
+    "short": "Acquisition progressive des droits définitifs d’un fondateur sur ses actions.",
     "seeAlso": [
       "vesting",
       "founder-shares",
@@ -3588,8 +3482,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "founder re-vesting",
-      "Re-vesting"
+      "acquisition progressive des droits des fondateurs"
     ]
   },
   {
@@ -3597,7 +3490,7 @@
     "term": "Founder-market fit",
     "slug": "founder-market-fit",
     "category": "Stratégie",
-    "short": "L'adéquation singulière entre un fondateur et son marché.",
+    "short": "Adéquation entre l’expérience des fondateurs et le marché visé.",
     "seeAlso": [
       "pmf",
       "why-now"
@@ -3606,9 +3499,7 @@
       "l-team-market"
     ],
     "aliases": [
-      "Excellence de l'équipe fondatrice",
-      "founding team excellence",
-      "qualité équipe fondatrice"
+      "adéquation entre les fondateurs et leur marché"
     ]
   },
   {
@@ -3616,7 +3507,7 @@
     "term": "Founder-VC fit",
     "slug": "founder-vc-fit",
     "category": "Stratégie",
-    "short": "Alignement relationnel et stratégique entre fondateurs et investisseurs après l'investissement.",
+    "short": "Compatibilité entre un fondateur et l’investisseur qui envisage de l’accompagner.",
     "seeAlso": [
       "investor-fit",
       "term-sheet",
@@ -3637,7 +3528,7 @@
     "term": "FP&A",
     "slug": "fp-and-a",
     "category": "Métriques",
-    "short": "Fonction finance qui pilote budgets, prévisions, reporting et analyse de performance.",
+    "short": "Fonction chargée du budget, des prévisions et de l’analyse des résultats.",
     "seeAlso": [
       "financial-model",
       "model-assumptions",
@@ -3656,7 +3547,7 @@
     "term": "Full ratchet",
     "slug": "full-ratchet",
     "category": "Deal & Structuration",
-    "short": "Protection anti-dilution qui réinitialise le prix de conversion au prix du nouveau tour plus bas.",
+    "short": "Clause anti-dilution qui ramène le prix de conversion des actions protégées au prix d’une nouvelle émission moins chère.",
     "seeAlso": [
       "anti-dilution",
       "down-round",
@@ -3699,7 +3590,7 @@
     "term": "Fund returner",
     "slug": "fund-returner",
     "category": "Stratégie",
-    "short": "Un investissement capable, à lui seul, de rembourser tout le fonds.",
+    "short": "Participation dont le produit de cession peut à lui seul égaler la taille du fonds.",
     "seeAlso": [
       "power-law",
       "moic"
@@ -3715,7 +3606,7 @@
     "term": "Fund size strategy",
     "slug": "fund-size-strategy",
     "category": "Stratégie",
-    "short": "Alignement entre taille du fonds, checks, ownership, réserves et outcomes requis.",
+    "short": "Choix du montant à lever en fonction du portefeuille que le fonds veut constituer.",
     "seeAlso": [
       "venture-capital-fund",
       "portfolio-construction",
@@ -3736,7 +3627,7 @@
     "term": "General Partner (GP)",
     "slug": "gp",
     "category": "Acteurs",
-    "short": "Gérant du fonds, responsable des investissements, du portefeuille et des distributions aux LPs.",
+    "short": "Associé commandité chargé de la gestion d’un fonds constitué en limited partnership.",
     "seeAlso": [
       "lp",
       "carry",
@@ -3753,11 +3644,9 @@
     "aliases": [
       "General Partner",
       "General Partners",
-      "gérant du fonds",
       "GP",
       "GPs",
-      "Partner VC",
-      "VC partner"
+      "associé commandité"
     ]
   },
   {
@@ -3765,20 +3654,21 @@
     "term": "Georges Doriot",
     "slug": "georges-doriot",
     "category": "Fondations",
-    "short": "Père du capital-risque institutionnel moderne (ARD, 1946).",
+    "short": "Professeur à Harvard et cofondateur de la société de capital-risque American Research and Development Corporation.",
     "seeAlso": [
       "venture-capital"
     ],
     "relatedLessonIds": [
       "l-vc-definition"
-    ]
+    ],
+    "link": "https://www.hbs.edu/entrepreneurship/founders-investors/georges-doriot"
   },
   {
     "id": "gtm",
     "term": "Go-to-Market (GTM)",
     "slug": "gtm",
     "category": "Stratégie",
-    "short": "Manière dont une startup trouve, vend, onboarde et retient ses clients.",
+    "short": "Stratégie de commercialisation d’un produit auprès d’une clientèle définie.",
     "seeAlso": [
       "sales-pipeline",
       "sales-cycle",
@@ -3789,8 +3679,9 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "go-to-market execution",
-      "GTM"
+      "GTM",
+      "stratégie de commercialisation",
+      "go-to-market strategy"
     ]
   },
   {
@@ -3798,7 +3689,7 @@
     "term": "Good leaver / bad leaver",
     "slug": "good-leaver-bad-leaver",
     "category": "Deal & Structuration",
-    "short": "Clauses déterminant le traitement des actions d’un founder ou salarié clé selon les circonstances de départ.",
+    "short": "Clauses qui déterminent le sort des titres d’un fondateur ou d’un salarié selon les circonstances de son départ.",
     "seeAlso": [
       "founder-shares",
       "founder-vesting",
@@ -3809,9 +3700,7 @@
     "aliases": [
       "bad leaver",
       "good leaver",
-      "Good Leaver Bad Leaver",
-      "grey leaver",
-      "leaver event"
+      "Good Leaver Bad Leaver"
     ]
   },
   {
@@ -3821,11 +3710,10 @@
     "aliases": [
       "association governance",
       "gouvernance d’association",
-      "gouvernance d’une organisation d’intérêt général",
       "gouvernance des associations"
     ],
     "category": "Gouvernance",
-    "short": "Répartition documentée des pouvoirs, contrôles et responsabilités entre les organes d’une association ou d’une organisation d’intérêt général.",
+    "short": "Répartition des pouvoirs de décision et de contrôle au sein d’une association.",
     "seeAlso": [
       "droits-d-information-du-financeur",
       "convention-de-financement",
@@ -3847,7 +3735,7 @@
     "term": "Governance",
     "slug": "governance",
     "category": "Gouvernance",
-    "short": "Règles, organes et pratiques utilisés pour diriger et contrôler une startup.",
+    "short": "Règles, organes et pratiques qui organisent la direction et le contrôle d’une entreprise.",
     "seeAlso": [
       "board-of-directors",
       "protective-provisions",
@@ -3870,7 +3758,7 @@
     "term": "Governing law",
     "slug": "governing-law",
     "category": "Juridique & Fiscalité",
-    "short": "Droit choisi pour régir un contrat ou une transaction.",
+    "short": "Droit applicable à l’interprétation et à l’exécution d’un contrat.",
     "seeAlso": [
       "term-sheet",
       "shareholders-agreement",
@@ -3881,14 +3769,15 @@
       "choice of law",
       "droit applicable",
       "loi applicable"
-    ]
+    ],
+    "link": "https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32008R0593"
   },
   {
     "id": "gross-margin",
     "term": "Gross margin",
     "slug": "gross-margin",
     "category": "Métriques",
-    "short": "Pourcentage de revenu restant après les coûts directs de livraison.",
+    "short": "Part du chiffre d’affaires qui reste après déduction du coût des biens ou services vendus.",
     "seeAlso": [
       "cogs",
       "unit-economics",
@@ -3910,7 +3799,7 @@
     "term": "Gross Revenue Retention (GRR)",
     "slug": "grr",
     "category": "Métriques",
-    "short": "Revenu conservé auprès d’une cohorte existante avant expansions.",
+    "short": "Part du revenu récurrent initial conservée auprès des mêmes clients, hors ventes additionnelles.",
     "seeAlso": [
       "nrr",
       "churn-rate",
@@ -3936,7 +3825,7 @@
       "Scaling Crisis"
     ],
     "category": "Stratégie",
-    "short": "Point de rupture organisationnel ou opérationnel provoqué par le scaling rapide.",
+    "short": "Difficultés de fonctionnement dues à une croissance plus rapide que les capacités de l’entreprise.",
     "seeAlso": [
       "scalability",
       "management-team-scaling",
@@ -3954,7 +3843,7 @@
       "leviers de croissance"
     ],
     "category": "Stratégie",
-    "short": "Leviers qui expliquent pourquoi et comment la croissance peut continuer.",
+    "short": "Facteurs qui expliquent ou pourraient soutenir la croissance d’une entreprise.",
     "seeAlso": [
       "revenue-growth",
       "revenue-growth-repeatability",
@@ -3969,7 +3858,7 @@
     "term": "Growth equity",
     "slug": "growth-equity",
     "category": "Stades & Tours",
-    "short": "Capital minoritaire pour entreprises de croissance plus matures.",
+    "short": "Investissement en capital destiné à financer l’expansion d’une entreprise dont le modèle commercial est déjà établi.",
     "seeAlso": [
       "venture-capital",
       "series-a",
@@ -3979,12 +3868,8 @@
     "relatedLessonIds": [],
     "aliases": [
       "capital croissance",
-      "Growth equity investment",
-      "growth investor",
-      "Growth VC",
-      "late stage",
-      "late-stage VC",
-      "Venture growth"
+      "capital de croissance",
+      "Growth equity investment"
     ]
   },
   {
@@ -3992,8 +3877,8 @@
     "term": "Harmonic.ai",
     "slug": "harmonic",
     "category": "Outils",
-    "short": "Plateforme de détection des startups en forte croissance.",
-    "link": "https://harmonic.ai",
+    "short": "Base de données sur les jeunes entreprises et leurs fondateurs.",
+    "link": "https://harmonic.ai/about",
     "seeAlso": [
       "deal-flow",
       "affinity"
@@ -4005,12 +3890,11 @@
     "term": "Head of Sales",
     "slug": "head-of-sales",
     "aliases": [
-      "Sales Leader",
-      "VP of sales",
-      "VP Sales"
+      "responsable commercial",
+      "directeur commercial"
     ],
     "category": "Acteurs",
-    "short": "Leader commercial chargé de structurer la vente et de rendre le revenu plus répétable.",
+    "short": "Responsable de l’équipe commerciale et de ses résultats.",
     "seeAlso": [
       "sales-playbook",
       "sales-pipeline",
@@ -4025,7 +3909,7 @@
     "term": "Historique de fundraising",
     "slug": "fundraising-history",
     "category": "Métriques",
-    "short": "Historique des tours, montants, investisseurs et progrès réalisés avec le capital déjà levé.",
+    "short": "Relevé des financements déjà obtenus par une entreprise.",
     "seeAlso": [
       "total-funding",
       "last-round-date",
@@ -4039,7 +3923,8 @@
     "aliases": [
       "fundraising history",
       "historique de financement",
-      "historique des tours"
+      "historique des tours",
+      "historique des levées de fonds"
     ]
   },
   {
@@ -4052,7 +3937,7 @@
       "hockey stick growth"
     ],
     "category": "Métriques",
-    "short": "Courbe de croissance plate au début puis très fortement accélérée.",
+    "short": "Courbe montrant une phase de faible croissance suivie d’une hausse rapide.",
     "seeAlso": [
       "revenue-growth",
       "revenue-growth-repeatability",
@@ -4069,7 +3954,7 @@
     "term": "Horizon d’investissement",
     "slug": "investment-horizon",
     "category": "Fund Economics",
-    "short": "Durée attendue entre un investissement et la liquidité.",
+    "short": "Durée pendant laquelle un investisseur prévoit de conserver une participation.",
     "seeAlso": [
       "fund-lifecycle",
       "investment-period",
@@ -4081,10 +3966,8 @@
       "l-fund-lifecycle"
     ],
     "aliases": [
-      "hold period",
       "Investment Horizon",
-      "investment time horizon",
-      "time horizon"
+      "investment time horizon"
     ]
   },
   {
@@ -4092,7 +3975,7 @@
     "term": "Hurdle rate",
     "slug": "hurdle-rate",
     "category": "Fund Economics",
-    "short": "Rendement minimum à verser aux LPs avant que le GP touche du carry.",
+    "short": "Seuil de rendement à atteindre avant le partage des bénéfices avec l’équipe de gestion.",
     "seeAlso": [
       "waterfall",
       "carry",
@@ -4112,7 +3995,7 @@
     "term": "Illiquidité",
     "slug": "illiquidite",
     "category": "Fondations",
-    "short": "L'impossibilité de revendre rapidement une participation.",
+    "short": "Difficulté à vendre rapidement une participation à un prix proche de sa valeur estimée.",
     "seeAlso": [
       "secondary",
       "ipo",
@@ -4127,7 +4010,7 @@
     "term": "Incentive Stock Options (ISO)",
     "slug": "incentive-stock-options-iso",
     "category": "Deal & Structuration",
-    "short": "Stock options américaines fiscalement favorables mais fortement encadrées.",
+    "short": "Options sur actions réservées aux salariés qui peuvent bénéficier d’un régime fiscal particulier aux États-Unis.",
     "seeAlso": [
       "stock-options",
       "nonqualified-stock-options",
@@ -4137,8 +4020,9 @@
     "relatedLessonIds": [],
     "aliases": [
       "ISO",
-      "qualified options"
-    ]
+      "incentive stock option"
+    ],
+    "link": "https://uscode.house.gov/us/usc/t26/s422/"
   },
   {
     "id": "incertitude-mesure",
@@ -4149,7 +4033,7 @@
       "incertitude métrologique"
     ],
     "category": "Méthode",
-    "short": "Paramètre associé au résultat de mesure qui caractérise la dispersion raisonnablement attribuable au mesurande.",
+    "short": "Estimation de la dispersion des valeurs que l’on peut attribuer à une grandeur mesurée.",
     "seeAlso": [
       "repetabilite-mesure",
       "reproductibilite-mesure"
@@ -4169,7 +4053,7 @@
       "startup incubator"
     ],
     "category": "Acteurs",
-    "short": "Structure d’accompagnement très amont pour aider une startup à se former.",
+    "short": "Structure qui accompagne la création et le démarrage d’une entreprise.",
     "seeAlso": [
       "accelerateur",
       "pre-seed",
@@ -4205,7 +4089,7 @@
     "term": "Initial Public Offering (IPO)",
     "slug": "ipo",
     "category": "Liquidité",
-    "short": "Introduction en bourse d'une société privée, créant une cotation publique et une liquidité potentielle.",
+    "short": "Première offre au public des actions d’une société.",
     "seeAlso": [
       "exit",
       "qpo",
@@ -4218,16 +4102,16 @@
     "aliases": [
       "Initial Public Offering",
       "introduction en bourse",
-      "IPO",
-      "Registration Rights"
-    ]
+      "IPO"
+    ],
+    "link": "https://www.investor.gov/introduction-investing/investing-basics/glossary/initial-public-offering-ipo"
   },
   {
     "id": "inscription-au-registre-national-des-brevets",
     "term": "Inscription au Registre national des brevets",
     "slug": "inscription-au-registre-national-des-brevets",
     "category": "Juridique & Fiscalité",
-    "short": "Formalité qui rend opposables aux tiers les actes transmettant ou modifiant les droits attachés à une demande de brevet ou à un brevet.",
+    "short": "Formalité française permettant d’opposer aux tiers une cession de brevet, une licence ou un autre acte modifiant les droits sur un brevet.",
     "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000019298708",
     "seeAlso": [
       "licence-d-exploitation",
@@ -4238,7 +4122,7 @@
       "ldt-licence-redevances"
     ],
     "aliases": [
-      "registre national des brevets"
+      "inscription au RNB"
     ]
   },
   {
@@ -4249,7 +4133,7 @@
       "vente à distance"
     ],
     "category": "Go-to-Market",
-    "short": "Modèle de vente réalisé principalement à distance, souvent par téléphone, email ou visioconférence.",
+    "short": "Vente menée principalement à distance par téléphone, courriel ou visioconférence.",
     "seeAlso": [
       "field-sales",
       "sales-cycle",
@@ -4264,7 +4148,7 @@
     "term": "Internal Rate of Return (IRR)",
     "slug": "irr",
     "category": "Métriques",
-    "short": "Rendement annualisé sensible au calendrier des cash flows.",
+    "short": "Taux de rendement qui tient compte du montant et de la date de chaque flux d’investissement.",
     "seeAlso": [
       "moic",
       "dpi",
@@ -4288,10 +4172,10 @@
     "slug": "international-expansion",
     "aliases": [
       "expansion internationale",
-      "Internationalization"
+      "développement international"
     ],
     "category": "Stratégie",
-    "short": "Extension des revenus, opérations ou équipes au-delà du marché domestique.",
+    "short": "Développement de l’activité d’une entreprise sur de nouveaux marchés étrangers.",
     "seeAlso": [
       "gtm",
       "growth-drivers",
@@ -4306,7 +4190,7 @@
     "term": "Invention de mission",
     "slug": "invention-de-mission",
     "category": "Juridique & Fiscalité",
-    "short": "Invention faite par un salarié dans l’exécution d’une mission inventive ou d’études explicitement confiées, qui appartient à l’employeur.",
+    "short": "Invention réalisée par un salarié dans le cadre d’une mission inventive ou de recherches expressément confiées.",
     "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039279789",
     "seeAlso": [
       "titularite-des-droits",
@@ -4325,7 +4209,7 @@
     "term": "Invention d’agent public",
     "slug": "invention-d-agent-public",
     "category": "Juridique & Fiscalité",
-    "short": "Invention réalisée par un fonctionnaire ou un agent public, soumise au régime des inventions de salariés selon des modalités réglementaires propres.",
+    "short": "Invention dont la propriété dépend du lien avec les fonctions ou les travaux de recherche de l’agent public.",
     "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006280369",
     "seeAlso": [
       "invention-de-mission",
@@ -4371,11 +4255,10 @@
     "term": "Investisseur accrédité",
     "slug": "investisseur-accredite",
     "aliases": [
-      "accredited investor",
-      "investisseur qualifié US"
+      "accredited investor"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Statut US permettant de participer à certaines offres privées.",
+    "short": "Personne ou entité qui remplit les critères américains d’accès à certaines offres privées.",
     "seeAlso": [
       "business-angel",
       "placement-prive",
@@ -4384,15 +4267,15 @@
     ],
     "relatedLessonIds": [
       "l-founder-instruments"
-    ]
+    ],
+    "link": "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/accredited-investors"
   },
   {
     "id": "institutional-investor",
     "term": "Investisseur institutionnel",
     "slug": "institutional-investor",
     "aliases": [
-      "institutional investor",
-      "institutionnel"
+      "institutional investor"
     ],
     "category": "Acteurs",
     "short": "Organisation qui investit des capitaux pour son propre compte ou pour des bénéficiaires.",
@@ -4412,7 +4295,7 @@
     "term": "Investment agreement",
     "slug": "investment-agreement",
     "category": "Juridique & Fiscalité",
-    "short": "Document transactionnel combinant souscription, droits investisseurs et gouvernance selon la pratique locale.",
+    "short": "Contrat qui fixe les conditions d’un investissement dans la société.",
     "seeAlso": [
       "subscription-agreement",
       "shareholders-agreement",
@@ -4423,10 +4306,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "Combined Investment Agreement",
-      "contrat d’investissement",
-      "Investment and Shareholders Agreement",
-      "ISA"
+      "contrat d’investissement"
     ]
   },
   {
@@ -4454,7 +4334,7 @@
     "term": "Investor director",
     "slug": "investor-director",
     "category": "Gouvernance",
-    "short": "Administrateur nommé ou soutenu par les investisseurs, souvent par une classe de preferred stock.",
+    "short": "Administrateur désigné au titre des droits d’un investisseur ou d’une catégorie d’actionnaires.",
     "seeAlso": [
       "board-of-directors",
       "board-seat",
@@ -4472,7 +4352,7 @@
     "term": "Investor fit",
     "slug": "investor-fit",
     "category": "Stratégie",
-    "short": "Alignement entre une startup et la stratégie, le stade, le marché et l'aide possible d'un investisseur.",
+    "short": "Adéquation entre les besoins de financement d’une startup et le mandat d’un investisseur.",
     "seeAlso": [
       "founder-vc-fit",
       "geography-fit",
@@ -4494,11 +4374,10 @@
     "term": "Investor return",
     "slug": "investor-return",
     "aliases": [
-      "return investisseur",
-      "VC return"
+      "rendement de l’investisseur"
     ],
     "category": "Métriques",
-    "short": "Rendement attendu ou réalisé d’un investisseur après ownership, dilution, valeur d’exit et timing.",
+    "short": "Performance qu’un investisseur retire de sa participation, estimée en cours de détention ou réalisée à la sortie.",
     "seeAlso": [
       "moic",
       "irr",
@@ -4536,7 +4415,7 @@
     "term": "Journal de décision",
     "slug": "journal-de-decision",
     "category": "Sciences de la décision",
-    "short": "Consigner une prédiction datée et sa confiance avant d’en connaître l’issue, pour juger le raisonnement.",
+    "short": "Registre daté des hypothèses et prévisions qui motivent une décision d’investissement.",
     "seeAlso": [
       "biais-de-resultat",
       "premortem",
@@ -4544,7 +4423,6 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "calibration",
       "decision journal"
     ]
   },
@@ -4553,7 +4431,7 @@
     "term": "Key Performance Indicator (KPI)",
     "slug": "kpi",
     "category": "Métriques",
-    "short": "Indicateur clé utilisé pour suivre une priorité opérationnelle importante.",
+    "short": "Mesure choisie pour suivre un objectif précis de la société.",
     "seeAlso": [
       "startup-metrics",
       "data-quality",
@@ -4579,11 +4457,10 @@
     "aliases": [
       "chef de file",
       "investisseur chef de file",
-      "lead",
       "lead VC"
     ],
     "category": "Acteurs",
-    "short": "Investisseur qui mène un tour et en fixe souvent les conditions clés.",
+    "short": "Investisseur qui mène les négociations d’un tour de financement.",
     "seeAlso": [
       "term-sheet",
       "series-a",
@@ -4601,7 +4478,7 @@
     "term": "Lead qualifié",
     "slug": "qualified-lead",
     "category": "Stratégie",
-    "short": "Opportunité sourcee qui remplit assez de critères pour mériter une analyse plus poussée.",
+    "short": "Prospect commercial ou dossier d’investissement qui répond aux critères de sélection retenus.",
     "seeAlso": [
       "deal-sourcing",
       "deal-flow",
@@ -4613,7 +4490,6 @@
       "l-screening"
     ],
     "aliases": [
-      "lead source qualifié",
       "opportunité qualifiée",
       "qualified lead"
     ]
@@ -4623,7 +4499,7 @@
     "term": "Lead Velocity Rate (LVR)",
     "slug": "qualified-lead-velocity-rate",
     "category": "Métriques",
-    "short": "Croissance mensuelle des leads qualifiés, selon une définition stable de qualification.",
+    "short": "Taux de croissance mensuel du nombre de nouveaux prospects commerciaux qualifiés.",
     "seeAlso": [
       "qualified-lead",
       "traction"
@@ -4647,7 +4523,7 @@
     "term": "Letter of Intent (LOI)",
     "slug": "loi",
     "category": "Deal & Structuration",
-    "short": "Document préliminaire qui cadre les grands termes d'une transaction avant les contrats définitifs.",
+    "short": "Document préliminaire qui précise les principales conditions envisagées d’une transaction.",
     "seeAlso": [
       "exclusivite",
       "term-sheet",
@@ -4666,12 +4542,11 @@
     "term": "Levier opérationnel",
     "slug": "leverage",
     "aliases": [
-      "Leverage",
       "levier d’exploitation",
       "operating leverage"
     ],
     "category": "Métriques",
-    "short": "Effet des coûts fixes sur la sensibilité du résultat à la croissance du revenu.",
+    "short": "Sensibilité du résultat d’exploitation aux variations du chiffre d’affaires du fait des coûts fixes.",
     "seeAlso": [
       "gross-margin",
       "unit-economics",
@@ -4687,7 +4562,7 @@
     "term": "Licence d’exploitation",
     "slug": "licence-d-exploitation",
     "category": "Juridique & Fiscalité",
-    "short": "Concession du droit d’exploiter une demande de brevet ou un brevet, exclusive ou non exclusive, en totalité ou en partie.",
+    "short": "Autorisation d’exploiter une invention brevetée ou en cours de brevetage dans les limites prévues au contrat.",
     "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006279475",
     "seeAlso": [
       "inscription-au-registre-national-des-brevets",
@@ -4718,6 +4593,7 @@
       "l-power-law"
     ],
     "aliases": [
+      "unicorn",
       "billion-dollar startup",
       "startup licorne",
       "unicorn startup"
@@ -4773,7 +4649,7 @@
     "term": "Limited Partner (LP)",
     "slug": "lp",
     "category": "Acteurs",
-    "short": "Investisseur qui engage du capital dans un fonds sans gérer les deals au quotidien.",
+    "short": "Associé commanditaire qui s’engage à apporter des capitaux au fonds.",
     "seeAlso": [
       "gp",
       "fund-of-funds",
@@ -4790,22 +4666,20 @@
       "l-fees-carry"
     ],
     "aliases": [
-      "allocateur de fonds",
-      "Allocateur LP",
-      "investisseur du fonds",
+      "associé commanditaire",
       "Limited Partner",
       "Limited Partners",
       "LP",
-      "LP fund allocator",
       "LPs"
-    ]
+    ],
+    "link": "https://delcode.delaware.gov/title6/c017/sc03/index.html"
   },
   {
     "id": "limited-partnership",
     "term": "Limited partnership",
     "slug": "limited-partnership",
     "category": "Fund Economics",
-    "short": "Structure de fonds séparant le GP actif des LPs investisseurs passifs.",
+    "short": "Forme juridique qui distingue les associés chargés de la gestion des investisseurs commanditaires.",
     "seeAlso": [
       "lpa",
       "gp",
@@ -4818,9 +4692,7 @@
       "l-fund-lifecycle"
     ],
     "aliases": [
-      "LP structure",
-      "partnership limité",
-      "société en commandite"
+      "LP structure"
     ]
   },
   {
@@ -4852,7 +4724,7 @@
     "term": "Liquidation preference",
     "slug": "liquidation-preference",
     "category": "Deal & Structuration",
-    "short": "Qui est payé en premier, et combien, lors d'une sortie.",
+    "short": "Droit de certains actionnaires à être payés en priorité lors d’une sortie prévue au contrat.",
     "seeAlso": [
       "term-sheet",
       "waterfall",
@@ -4863,8 +4735,9 @@
       "l-ts-economics"
     ],
     "aliases": [
-      "Liquidation Preference Overhang"
-    ]
+      "préférence de liquidation"
+    ],
+    "link": "https://www.acc.com/sites/default/files/program-materials/upload/4.27%20Term%20Sheets.pdf"
   },
   {
     "id": "liquidity-premium",
@@ -4874,7 +4747,7 @@
       "prime de liquidité"
     ],
     "category": "Valorisation",
-    "short": "Différence de valorisation liée au fait qu’un titre soit liquide plutôt qu’illiquide.",
+    "short": "Écart de prix ou de rendement entre des titres comparables, selon la facilité avec laquelle ils peuvent être revendus.",
     "seeAlso": [
       "illiquidite",
       "valuation",
@@ -4907,9 +4780,6 @@
       "power law",
       "power law of returns",
       "power-law returns",
-      "Sebastian Mallaby",
-      "The Power Law",
-      "The Power Law (book)",
       "venture power law"
     ]
   },
@@ -4918,7 +4788,7 @@
     "term": "Loss ratio",
     "slug": "loss-ratio",
     "category": "Métriques",
-    "short": "Part du portefeuille qui échoue ou retourne peu de capital.",
+    "short": "Part des participations en perte ou part du capital investi qui a été perdue, selon la convention retenue.",
     "seeAlso": [
       "power-law",
       "portfolio-construction",
@@ -4939,7 +4809,7 @@
     "term": "Management company",
     "slug": "management-company",
     "category": "Fund Economics",
-    "short": "Entité opérationnelle qui emploie l’équipe VC et gère les fonds.",
+    "short": "Société qui gère un ou plusieurs fonds de capital-risque.",
     "seeAlso": [
       "management-fees",
       "gp",
@@ -4961,7 +4831,7 @@
     "term": "Management fees",
     "slug": "management-fees",
     "category": "Fund Economics",
-    "short": "Frais récurrents payés par les LPs pour financer l’exploitation du fonds.",
+    "short": "Rémunération périodique versée à la société de gestion pour gérer le fonds.",
     "seeAlso": [
       "carry",
       "gp",
@@ -4984,7 +4854,7 @@
     "term": "Management period",
     "slug": "management-period",
     "category": "Fund Economics",
-    "short": "Phase après les nouveaux investissements, centrée sur suivi, follow-ons et sorties.",
+    "short": "Phase de suivi et de cession des participations après la période de nouveaux investissements.",
     "seeAlso": [
       "fund-lifecycle",
       "investment-period",
@@ -5010,7 +4880,7 @@
       "Top Management Scaling"
     ],
     "category": "Stratégie",
-    "short": "Passage d’une équipe founder-led à une organisation avec leaders spécialisés et managers.",
+    "short": "Élargissement de l’équipe de direction pour accompagner la croissance de la société.",
     "seeAlso": [
       "executive-committee",
       "head-of-sales",
@@ -5026,7 +4896,7 @@
     "term": "Mandatory conversion",
     "slug": "mandatory-conversion",
     "category": "Deal & Structuration",
-    "short": "Conversion forcée d’un instrument selon des événements déclencheurs prévus.",
+    "short": "Conversion d’un titre imposée par ses conditions d’émission lors d’un événement déterminé.",
     "seeAlso": [
       "convertible-note",
       "actions-de-preference",
@@ -5045,7 +4915,7 @@
     "term": "Market opportunity",
     "slug": "market-opportunity",
     "category": "Stratégie",
-    "short": "Potentiel d'un marché à produire une entreprise assez grande pour le modèle venture.",
+    "short": "Potentiel commercial du marché auquel une startup peut accéder.",
     "seeAlso": [
       "tam-sam-som",
       "market-readiness",
@@ -5066,7 +4936,7 @@
     "term": "Market readiness",
     "slug": "market-readiness",
     "category": "Stratégie",
-    "short": "Degré auquel un marché est prêt à adopter et payer une solution.",
+    "short": "Degré auquel les clients sont prêts à adopter et à payer une solution.",
     "seeAlso": [
       "pmf",
       "tam-sam-som",
@@ -5077,8 +4947,7 @@
       "l-team-market"
     ],
     "aliases": [
-      "préparation du marché",
-      "readiness marché"
+      "maturité du marché pour l’adoption"
     ]
   },
   {
@@ -5086,7 +4955,7 @@
     "term": "Market risk",
     "slug": "market-risk",
     "category": "Valorisation",
-    "short": "Risque systématique qui affecte de nombreux investissements en même temps.",
+    "short": "Risque lié aux conditions générales de marché ou, pour une startup, à une demande insuffisante.",
     "seeAlso": [
       "valuation",
       "risk-premium",
@@ -5105,7 +4974,7 @@
     "term": "Mega-seed",
     "slug": "mega-seed",
     "category": "Stades & Tours",
-    "short": "Très gros tour labellisé seed mais économiquement proche d'un stade plus avancé.",
+    "short": "Tour d’amorçage d’un montant exceptionnel pour ce stade.",
     "seeAlso": [
       "seed",
       "series-a",
@@ -5125,15 +4994,13 @@
     "term": "Mergers & Acquisitions (M&A)",
     "slug": "ma",
     "aliases": [
-      "Acquisition Exit",
       "fusion-acquisition",
+      "fusions et acquisitions",
       "M&A",
-      "M&A Exit",
-      "Mergers and Acquisitions",
-      "Startup Acquisition"
+      "Mergers and Acquisitions"
     ],
     "category": "Liquidité",
-    "short": "Fusion ou acquisition utilisée comme voie d'exit pour une startup financée par VC.",
+    "short": "Opérations qui réunissent des sociétés ou permettent à un acheteur d’en prendre le contrôle.",
     "seeAlso": [
       "exit",
       "trade-sale",
@@ -5149,13 +5016,12 @@
     "term": "Mesure et gestion de l’impact",
     "slug": "mesure-impact",
     "aliases": [
-      "gestion de l’impact",
       "IMM",
       "impact measurement & management",
       "impact measurement and management"
     ],
     "category": "Métriques",
-    "short": "Processus continu qui collecte des preuves d’impact proportionnées et les utilise pour décider.",
+    "short": "Suivi des effets sociaux ou environnementaux d’un financement pour orienter les décisions.",
     "link": "https://www.impacteurope.net/knowledge-centre/publications/navigating-impact-measurement-and-management",
     "seeAlso": [
       "theorie-du-changement",
@@ -5172,22 +5038,25 @@
   },
   {
     "id": "presidio",
-    "term": "Microsoft Presidio",
+    "term": "Presidio",
     "slug": "presidio",
     "category": "Outils",
-    "short": "Bibliothèque open-source d'anonymisation conforme au RGPD.",
-    "link": "https://microsoft.github.io/presidio",
+    "short": "Logiciel libre de détection et de masquage de données personnelles dans des textes et des images.",
+    "link": "https://presidio.dataprivacystack.org/",
     "seeAlso": [
       "pitch-deck"
     ],
-    "relatedLessonIds": []
+    "relatedLessonIds": [],
+    "aliases": [
+      "Microsoft Presidio"
+    ]
   },
   {
     "id": "milestones",
     "term": "Milestones",
     "slug": "milestones",
     "category": "Stratégie",
-    "short": "Objectifs opérationnels ou financiers qui jalonnent le chemin vers un prochain financement ou une inflexion de valeur.",
+    "short": "Résultats vérifiables attendus avant le prochain financement.",
     "seeAlso": [
       "value-inflection-point",
       "series-a-readiness",
@@ -5207,7 +5076,7 @@
     "term": "Mimétisme",
     "slug": "mimetisme",
     "category": "Sciences de la décision",
-    "short": "Calquer sa décision sur celle des fonds réputés ou du consensus du comité.",
+    "short": "Tendance à fonder sa décision d’investissement sur celle d’autres investisseurs.",
     "seeAlso": [
       "deal-heat",
       "biais-de-confirmation",
@@ -5215,8 +5084,6 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "cascade informationnelle",
-      "groupthink",
       "herding"
     ]
   },
@@ -5225,7 +5092,7 @@
     "term": "Moat (avantage concurrentiel défendable)",
     "slug": "moat",
     "category": "Stratégie",
-    "short": "Barrière durable qui protège une entreprise de ses concurrents et soutient ses marges dans le temps.",
+    "short": "Avantage durable qui protège la position d’une entreprise face à ses concurrents.",
     "seeAlso": [
       "scalability",
       "market-concentration",
@@ -5234,12 +5101,8 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "avantage concurrentiel",
-      "barrière à l'entrée",
-      "barrières à l'entrée",
-      "défendabilité",
-      "defensibility",
-      "douve"
+      "avantage concurrentiel défendable",
+      "economic moat"
     ]
   },
   {
@@ -5247,7 +5110,7 @@
     "term": "Model assumptions",
     "slug": "model-assumptions",
     "category": "Métriques",
-    "short": "Inputs explicites qui pilotent les projections financières.",
+    "short": "Valeurs retenues pour établir les projections financières de la société.",
     "seeAlso": [
       "financial-model",
       "data-quality",
@@ -5271,7 +5134,7 @@
       "capital plus support"
     ],
     "category": "Stratégie",
-    "short": "Idée qu’un VC apporte du capital plus du support, des relations, de la gouvernance et de l’expertise.",
+    "short": "Accompagnement opérationnel ou commercial qu’un investisseur ajoute à son apport en capital.",
     "seeAlso": [
       "portfolio-support",
       "value-creation",
@@ -5292,7 +5155,7 @@
       "valeur nominale"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Valeur juridique inscrite au capital, distincte du prix économique payé.",
+    "short": "Part du capital social représentée par une action ou une part sociale.",
     "seeAlso": [
       "legal-share-capital",
       "shareholder-contribution",
@@ -5308,7 +5171,7 @@
     "term": "Monthly Recurring Revenue",
     "slug": "mrr",
     "category": "Métriques",
-    "short": "Revenu récurrent prévisible généré chaque mois.",
+    "short": "Montant des abonnements actifs ramené à un mois.",
     "seeAlso": [
       "arr",
       "recurring-revenue",
@@ -5328,7 +5191,7 @@
     "term": "Multiple on Invested Capital (MOIC)",
     "slug": "moic",
     "category": "Métriques",
-    "short": "Multiple de valeur ou cash retourné par rapport au capital investi.",
+    "short": "Valeur totale d’un investissement, réalisée et résiduelle, rapportée au capital investi.",
     "seeAlso": [
       "tvpi",
       "dpi",
@@ -5341,7 +5204,6 @@
       "l-fund-metrics"
     ],
     "aliases": [
-      "cash-on-cash multiple",
       "MOIC",
       "Multiple of Invested Capital",
       "Multiple on Invested Capital"
@@ -5369,7 +5231,7 @@
     "term": "Narrow-based weighted average",
     "slug": "narrow-based-weighted-average",
     "category": "Deal & Structuration",
-    "short": "Formule anti-dilution weighted average avec un dénominateur plus étroit.",
+    "short": "Clause d’antidilution qui calcule le nouveau prix de conversion sur une base restreinte de titres.",
     "seeAlso": [
       "anti-dilution",
       "down-round",
@@ -5380,7 +5242,6 @@
       "l-ts-economics"
     ],
     "aliases": [
-      "narrow-based",
       "narrow-based antidilution",
       "weighted average narrow-based"
     ]
@@ -5390,7 +5251,7 @@
     "term": "National Venture Capital Association (NVCA)",
     "slug": "nvca",
     "category": "Institutions",
-    "short": "Association professionnelle américaine du VC, connue pour ses model legal documents.",
+    "short": "Association professionnelle américaine du capital-risque qui publie des modèles de contrats.",
     "seeAlso": [
       "term-sheet",
       "governing-law",
@@ -5399,17 +5260,17 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "model documents NVCA",
       "National Venture Capital Association",
       "NVCA"
-    ]
+    ],
+    "link": "https://nvca.org/model-legal-documents/"
   },
   {
     "id": "net-new-arr",
     "term": "Net New ARR",
     "slug": "net-new-arr",
     "category": "Métriques",
-    "short": "Nouvel ARR net ajouté après churn, contraction et expansion.",
+    "short": "Variation nette du revenu annuel récurrent sur une période.",
     "seeAlso": [
       "arr",
       "nrr",
@@ -5427,7 +5288,7 @@
     "term": "Net Promoter Score",
     "slug": "nps",
     "category": "Métriques",
-    "short": "Score de sentiment client utilisé comme proxy de satisfaction et recommandation.",
+    "short": "Score de recommandation calculé à partir des réponses des clients.",
     "seeAlso": [
       "traction",
       "nrr",
@@ -5446,7 +5307,7 @@
     "term": "Net Revenue Retention",
     "slug": "nrr",
     "category": "Métriques",
-    "short": "Revenu conservé auprès d'une cohorte existante après churn, contractions et expansions.",
+    "short": "Taux de revenu récurrent conservé auprès des clients présents au début de la période.",
     "seeAlso": [
       "arr",
       "mrr",
@@ -5467,7 +5328,7 @@
     "term": "No-shop",
     "slug": "no-shop",
     "category": "Deal & Structuration",
-    "short": "Clause qui empêche la startup de chercher ou négocier un deal concurrent pendant une période donnée.",
+    "short": "Engagement temporaire de ne pas rechercher d’offre concurrente pendant la négociation d’une opération.",
     "seeAlso": [
       "term-sheet",
       "dd",
@@ -5478,7 +5339,6 @@
     ],
     "aliases": [
       "clause de no-shop",
-      "clause de non-sollicitation",
       "no-shop clause"
     ]
   },
@@ -5499,16 +5359,16 @@
       "clause de non-concurrence",
       "NCA",
       "Non-Compete",
-      "Noncompete Agreement",
-      "Restrictive Covenant"
-    ]
+      "Noncompete Agreement"
+    ],
+    "link": "https://www.legifrance.gouv.fr/juri/id/JURITEXT000053384103"
   },
   {
     "id": "nonqualified-stock-options",
     "term": "Nonqualified Stock Options",
     "slug": "nonqualified-stock-options",
     "category": "Deal & Structuration",
-    "short": "Stock options américaines plus flexibles que les ISOs, souvent utilisées pour consultants ou advisors.",
+    "short": "Options sur actions américaines relevant du régime fiscal ordinaire des rémunérations.",
     "seeAlso": [
       "stock-options",
       "incentive-stock-options-iso",
@@ -5520,14 +5380,15 @@
       "nonqualified options",
       "NQSO",
       "NSO"
-    ]
+    ],
+    "link": "https://www.irs.gov/taxtopics/tc427"
   },
   {
     "id": "negligence-des-taux-de-base",
     "term": "Négligence des taux de base",
     "slug": "negligence-des-taux-de-base",
     "category": "Sciences de la décision",
-    "short": "Oublier que la majorité des startups financées ne rendent pas le capital.",
+    "short": "Biais qui conduit à sous-estimer la fréquence observée d’un résultat dans des situations comparables.",
     "seeAlso": [
       "pattern-matching",
       "power-law",
@@ -5535,9 +5396,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "base rate neglect",
-      "biais du survivant",
-      "taux de base"
+      "base rate neglect"
     ]
   },
   {
@@ -5545,7 +5404,7 @@
     "term": "Objectif de fundraising",
     "slug": "fundraising-target",
     "category": "Stratégie",
-    "short": "Montant qu'une startup cherche à lever et milestones que ce capital doit financer.",
+    "short": "Montant qu’une société cherche à réunir lors d’un tour de financement.",
     "seeAlso": [
       "startup-fundraising",
       "investor-fit",
@@ -5557,7 +5416,6 @@
     ],
     "aliases": [
       "fundraising target",
-      "montant de levée",
       "objectif de levée"
     ]
   },
@@ -5566,12 +5424,7 @@
     "term": "Obligations de reporting",
     "slug": "reporting-obligations",
     "aliases": [
-      "financial reporting",
-      "legal and compliance disclosures",
-      "legal/compliance disclosures",
       "obligations d’information périodique",
-      "operational updates",
-      "reporting investisseur",
       "Reporting obligations"
     ],
     "category": "Gouvernance",
@@ -5592,7 +5445,7 @@
     "term": "One-liner de startup",
     "slug": "startup-one-liner",
     "category": "Stratégie",
-    "short": "Formulation concise qui rend une startup immédiatement compréhensible et mémorable.",
+    "short": "Présentation de l’activité d’une startup en une phrase.",
     "seeAlso": [
       "pitch",
       "pitch-deck",
@@ -5613,7 +5466,7 @@
     "term": "Operator-Investor",
     "slug": "operator-investor",
     "category": "Acteurs",
-    "short": "Quelqu'un qui combine rôles opérationnels et tickets d'investissement.",
+    "short": "Investisseur qui a exercé des responsabilités opérationnelles en entreprise.",
     "seeAlso": [
       "business-angel",
       "search-fund",
@@ -5626,7 +5479,7 @@
     "term": "Pari passu",
     "slug": "pari-passu",
     "category": "Deal & Structuration",
-    "short": "Rang égal entre plusieurs classes de titres dans la distribution des proceeds.",
+    "short": "Égalité de rang entre plusieurs catégories de titres pour un paiement donné.",
     "seeAlso": [
       "seniority",
       "liquidation-preference",
@@ -5645,7 +5498,7 @@
     "term": "Partech",
     "slug": "partech",
     "category": "Fonds & VC",
-    "short": "Fonds de capital-risque mondial basé à Paris, Berlin et San Francisco.",
+    "short": "Société d’investissement qui finance des entreprises technologiques de l’amorçage à la croissance.",
     "link": "https://partechpartners.com",
     "seeAlso": [
       "gp",
@@ -5658,7 +5511,7 @@
     "term": "Participating preferred",
     "slug": "participating-preferred",
     "category": "Deal & Structuration",
-    "short": "Preferred stock qui récupère sa préférence puis participe encore au partage du reliquat.",
+    "short": "Action donnant droit à un paiement prioritaire, puis à une part du solde.",
     "seeAlso": [
       "liquidation-preference",
       "actions-de-preference",
@@ -5668,19 +5521,19 @@
       "l-ts-economics"
     ],
     "aliases": [
-      "Capped Participating Preferred",
       "double dip",
       "participating convertible preferred",
       "participating liquidation preference",
       "preferred participating"
-    ]
+    ],
+    "link": "https://www.acc.com/sites/default/files/program-materials/upload/4.27%20Term%20Sheets.pdf"
   },
   {
     "id": "passage-seed-series-a",
     "term": "Passage seed-Series A",
     "slug": "passage-seed-series-a",
     "category": "Stades & Tours",
-    "short": "Période où les preuves seed deviennent un dossier finançable en Series A.",
+    "short": "Période entre le financement d’amorçage et la levée de série A.",
     "seeAlso": [
       "seed",
       "series-a",
@@ -5715,11 +5568,7 @@
     ],
     "aliases": [
       "chemin vers la rentabilité",
-      "croissance vs rentabilité",
-      "Growth vs profitability",
-      "optionalité de rentabilité",
-      "plan de rentabilité",
-      "Profitability optionality"
+      "plan de rentabilité"
     ]
   },
   {
@@ -5727,7 +5576,7 @@
     "term": "Pattern matching",
     "slug": "pattern-matching",
     "category": "Sciences de la décision",
-    "short": "Juger un fondateur par sa ressemblance à un archetype de gagnant, en ignorant les taux de base.",
+    "short": "Comparaison d’un dossier d’investissement avec des situations déjà rencontrées.",
     "seeAlso": [
       "negligence-des-taux-de-base",
       "biais-d-autorite",
@@ -5735,8 +5584,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "reconnaissance de motifs",
-      "représentativité"
+      "reconnaissance de motifs"
     ]
   },
   {
@@ -5744,7 +5592,7 @@
     "term": "Pay-to-play",
     "slug": "pay-to-play",
     "category": "Deal & Structuration",
-    "short": "Clause qui pénalise les investisseurs existants s’ils ne participent pas aux tours suivants.",
+    "short": "Clause qui conditionne le maintien de certains droits à la participation de l’investisseur à un prochain tour.",
     "seeAlso": [
       "pro-rata",
       "anti-dilution",
@@ -5765,7 +5613,7 @@
     "term": "Peter Thiel",
     "slug": "peter-thiel",
     "category": "Acteurs",
-    "short": "Investisseur et auteur cité pour Zero to One, Founders Fund et le cas Facebook.",
+    "short": "Associé de Founders Fund et premier investisseur extérieur de Facebook.",
     "seeAlso": [
       "convertible-note",
       "valuation-cap",
@@ -5773,10 +5621,7 @@
       "power-law"
     ],
     "relatedLessonIds": [],
-    "aliases": [
-      "Founders Fund",
-      "Zero to One"
-    ]
+    "link": "https://foundersfund.com/team/peter-thiel/"
   },
   {
     "id": "pilote-industriel",
@@ -5788,7 +5633,7 @@
       "démonstrateur pilote"
     ],
     "category": "Opérations",
-    "short": "Essai représentatif qui expose une technologie à des contraintes d'environnement, d'intégration et d'exploitation plus proches de l'usage industriel.",
+    "short": "Installation intermédiaire entre l’essai en laboratoire et la production industrielle.",
     "seeAlso": [
       "proof-of-concept",
       "changement-echelle-industriel",
@@ -5803,7 +5648,7 @@
     "term": "Pitch",
     "slug": "pitch",
     "category": "Stratégie",
-    "short": "Effort structuré du fondateur pour convaincre un investisseur de financer et accompagner l'entreprise.",
+    "short": "Présentation brève d’une entreprise à des investisseurs potentiels.",
     "seeAlso": [
       "pitch-deck",
       "startup-one-liner",
@@ -5824,7 +5669,7 @@
     "term": "Pitch deck",
     "slug": "pitch-deck",
     "category": "Stratégie",
-    "short": "La présentation par laquelle un fondateur raconte son entreprise.",
+    "short": "Diapositives de présentation d’une entreprise qui lève des fonds.",
     "seeAlso": [
       "deal-memo",
       "why-now"
@@ -5839,7 +5684,7 @@
     "term": "PitchBook",
     "slug": "pitchbook",
     "category": "Outils",
-    "short": "Base de données de référence sur le private equity et le venture.",
+    "short": "Base de données sur les sociétés, les investisseurs et les opérations de capital-investissement.",
     "link": "https://pitchbook.com",
     "seeAlso": [
       "tam-sam-som",
@@ -5852,13 +5697,12 @@
     "term": "Placement privé",
     "slug": "placement-prive",
     "aliases": [
-      "exempt offering",
-      "offre exemptée",
       "offre privée",
-      "private offering"
+      "private offering",
+      "private placement"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Levée de titres hors offre publique enregistrée.",
+    "short": "Offre de titres à des investisseurs déterminés ou éligibles, selon le régime juridique applicable.",
     "seeAlso": [
       "regulation-d",
       "investisseur-accredite",
@@ -5868,14 +5712,15 @@
     ],
     "relatedLessonIds": [
       "l-founder-instruments"
-    ]
+    ],
+    "link": "https://www.sec.gov/resources-small-businesses/exempt-offerings/private-placements-rule-506b"
   },
   {
     "id": "portfolio-construction",
     "term": "Portfolio construction",
     "slug": "portfolio-construction",
     "category": "Stratégie",
-    "short": "Conception du portefeuille selon nombre de sociétés, checks, stades, ownership, réserves et risque.",
+    "short": "Choix du nombre de participations, du montant investi dans chacune et des réserves de réinvestissement.",
     "seeAlso": [
       "power-law",
       "follow-on",
@@ -5893,11 +5738,7 @@
       "l-triage"
     ],
     "aliases": [
-      "concentrated portfolio",
       "construction de portefeuille",
-      "Portfolio approach",
-      "Portfolio Theory (VC)",
-      "spray and pray",
       "Venture Portfolio Construction"
     ]
   },
@@ -5920,11 +5761,10 @@
     "term": "Portfolio operations",
     "slug": "portfolio-operations",
     "aliases": [
-      "platform team",
       "portfolio ops"
     ],
     "category": "Stratégie",
-    "short": "Fonction VC dédiée au support opérationnel des sociétés en portefeuille après investissement.",
+    "short": "Équipe d’un fonds chargée de l’accompagnement opérationnel des sociétés en portefeuille.",
     "seeAlso": [
       "portfolio-support",
       "value-creation",
@@ -5940,12 +5780,10 @@
     "slug": "portfolio-support",
     "aliases": [
       "Platform Support",
-      "Portfolio Support and Value Creation",
-      "portfolio value creation",
-      "Startup Success"
+      "accompagnement du portefeuille"
     ],
     "category": "Stratégie",
-    "short": "Aide post-investissement fournie par un fonds ou une équipe platform aux sociétés en portefeuille.",
+    "short": "Aide apportée par le fonds et son réseau aux sociétés en portefeuille.",
     "seeAlso": [
       "portfolio-operations",
       "value-creation",
@@ -5962,11 +5800,10 @@
     "term": "Potential acquirers",
     "slug": "potential-acquirers",
     "aliases": [
-      "acquéreurs potentiels",
-      "buyer map"
+      "acquéreurs potentiels"
     ],
     "category": "Liquidité",
-    "short": "Acheteurs plausibles d’une startup selon le produit, le marché, la technologie, l’équipe ou la stratégie.",
+    "short": "Acheteurs susceptibles d’acquérir une société du portefeuille.",
     "seeAlso": [
       "buyer-pool-depth",
       "strategic-acquisition",
@@ -5981,7 +5818,7 @@
     "term": "Pre-money / Post-money",
     "slug": "pre-money",
     "category": "Valorisation",
-    "short": "Valeur d'une entreprise avant et après l'argent investi dans un tour.",
+    "short": "Valeur des capitaux propres avant et après l’apport de capital neuf.",
     "seeAlso": [
       "valuation",
       "cap-table",
@@ -5996,14 +5833,15 @@
     "aliases": [
       "post-money valuation",
       "pre-money valuation"
-    ]
+    ],
+    "link": "https://www.acc.com/sites/default/files/program-materials/upload/4.27%20Term%20Sheets.pdf"
   },
   {
     "id": "pre-seed",
     "term": "Pre-seed",
     "slug": "pre-seed",
     "category": "Stades & Tours",
-    "short": "Premier stade de financement, avant un seed plus institutionnel.",
+    "short": "Financement des premières étapes de création d’une startup avant le tour d’amorçage.",
     "seeAlso": [
       "seed",
       "amorcage",
@@ -6015,7 +5853,8 @@
     ],
     "aliases": [
       "pre seed",
-      "pré-seed"
+      "pré-seed",
+      "préamorçage"
     ]
   },
   {
@@ -6023,7 +5862,7 @@
     "term": "Preferred non-participating",
     "slug": "preferred-non-participating",
     "category": "Deal & Structuration",
-    "short": "Preferred stock qui choisit entre récupérer sa préférence ou convertir en common, sans double dip.",
+    "short": "Action de préférence dont le paiement prioritaire ne se cumule pas avec une part du solde distribué.",
     "seeAlso": [
       "actions-de-preference",
       "liquidation-preference",
@@ -6044,7 +5883,7 @@
     "term": "Premier rendez-vous VC",
     "slug": "vc-first-meeting",
     "category": "Stratégie",
-    "short": "Premier filtre formel où un investisseur décide si une startup mérite une analyse plus poussée.",
+    "short": "Premier entretien entre les fondateurs et un investisseur en vue d’un financement.",
     "seeAlso": [
       "warm-intro",
       "investor-fit",
@@ -6066,7 +5905,7 @@
     "term": "Premortem",
     "slug": "premortem",
     "category": "Sciences de la décision",
-    "short": "Supposer la décision déjà échouée pour en révéler les causes avant de décider.",
+    "short": "Exercice qui consiste à supposer l’échec d’un investissement avant de le décider et à en chercher les causes.",
     "seeAlso": [
       "premortem-inverse",
       "mimetisme",
@@ -6074,8 +5913,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "pré-mortem",
-      "prospective hindsight"
+      "pré-mortem"
     ]
   },
   {
@@ -6083,7 +5921,7 @@
     "term": "Premortem inversé",
     "slug": "premortem-inverse",
     "category": "Sciences de la décision",
-    "short": "Supposer qu’un deal écarté est devenu le meilleur du millésime, et expliquer pourquoi on l’a raté.",
+    "short": "Examen d’un refus envisagé en supposant que la société a ensuite réussi.",
     "seeAlso": [
       "premortem",
       "power-law",
@@ -6099,7 +5937,7 @@
     "term": "Pricing methodology",
     "slug": "pricing-methodology",
     "category": "Go-to-Market",
-    "short": "Logique utilisée pour fixer les prix, offres et mécanismes de captation de valeur.",
+    "short": "Méthode utilisée par la société pour fixer ses tarifs.",
     "seeAlso": [
       "buyer-persona",
       "customer-objections",
@@ -6111,9 +5949,8 @@
       "l-founder-narrative"
     ],
     "aliases": [
-      "logique de prix",
-      "méthodologie pricing",
-      "pricing"
+      "méthode de tarification",
+      "logique de prix"
     ]
   },
   {
@@ -6121,7 +5958,7 @@
     "term": "Principal VC",
     "slug": "principal-vc",
     "category": "Acteurs",
-    "short": "Investisseur senior non-partner capable de porter des deals et des convictions.",
+    "short": "Professionnel expérimenté d’un fonds qui conduit des opérations d’investissement.",
     "seeAlso": [
       "board-seat",
       "term-sheet",
@@ -6133,7 +5970,6 @@
       "l-career-levels"
     ],
     "aliases": [
-      "principal",
       "VC principal"
     ]
   },
@@ -6142,7 +5978,7 @@
     "term": "Private equity",
     "slug": "private-equity",
     "category": "Fondations",
-    "short": "Investissement dans des entreprises privées plus établies, souvent via buyout.",
+    "short": "Prise de participation dans des entreprises non cotées, à différents stades de leur développement.",
     "seeAlso": [
       "venture-capital",
       "growth-equity",
@@ -6150,10 +5986,8 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "buyout",
       "PE",
-      "Private equity fund",
-      "private equity vs venture capital"
+      "capital-investissement"
     ]
   },
   {
@@ -6162,11 +5996,10 @@
     "slug": "price-per-share",
     "aliases": [
       "Price per share",
-      "prix de souscription par action",
-      "prix par part"
+      "prix de souscription par action"
     ],
     "category": "Deal & Structuration",
-    "short": "Prix économique utilisé pour convertir une valorisation en nombre de titres.",
+    "short": "Montant payé pour une action, selon la base de capital retenue lors du tour.",
     "seeAlso": [
       "pre-money",
       "valuation",
@@ -6195,13 +6028,8 @@
       "l-reserves"
     ],
     "aliases": [
-      "Participation Rights",
-      "pre-emption right",
-      "Pre-emption Rights",
-      "pre-emptive right",
       "pro rata rights",
-      "subscription right",
-      "subscription rights"
+      "droit de participation au prorata"
     ]
   },
   {
@@ -6209,7 +6037,7 @@
     "term": "Problème",
     "slug": "problem",
     "category": "Stratégie",
-    "short": "Douleur client ou marché qu'une startup cherche à résoudre.",
+    "short": "Besoin ou difficulté du client auquel répond l’offre de la startup.",
     "seeAlso": [
       "solution",
       "pmf",
@@ -6252,7 +6080,7 @@
     "term": "Proof of Concept",
     "slug": "proof-of-concept",
     "category": "Stratégie",
-    "short": "Pilote ou démonstration qui valide une technologie, un usage client ou une commercialisation précoce.",
+    "short": "Démonstration limitée de la faisabilité d’une technologie ou d’un usage.",
     "seeAlso": [
       "solution",
       "pmf",
@@ -6273,6 +6101,7 @@
     "term": "Protection des personnes accompagnées",
     "slug": "safeguarding",
     "aliases": [
+      "safeguarding",
       "protection des bénéficiaires"
     ],
     "category": "Gouvernance",
@@ -6294,7 +6123,7 @@
     "term": "Protective provisions",
     "slug": "protective-provisions",
     "category": "Deal & Structuration",
-    "short": "Droits de consentement investisseur sur certaines décisions majeures de la société.",
+    "short": "Clauses soumettant certaines décisions de la société à l’accord préalable d’investisseurs désignés.",
     "seeAlso": [
       "term-sheet",
       "actions-de-preference",
@@ -6320,7 +6149,7 @@
       "Qualified IPO"
     ],
     "category": "Deal & Structuration",
-    "short": "Seuil contractuel d’IPO qui déclenche souvent la conversion obligatoire du preferred stock.",
+    "short": "Introduction en bourse qui satisfait aux critères convenus avec les investisseurs.",
     "seeAlso": [
       "ipo",
       "mandatory-conversion",
@@ -6339,7 +6168,7 @@
       "qualified purchasers"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Catégorie d’investisseur US utilisée notamment pour certains fonds privés.",
+    "short": "Catégorie d’investisseurs définie par le droit américain pour l’accès à certains fonds privés.",
     "seeAlso": [
       "investisseur-accredite",
       "fonds-prive",
@@ -6348,14 +6177,15 @@
     ],
     "relatedLessonIds": [
       "l-actors"
-    ]
+    ],
+    "link": "https://uscode.house.gov/us/usc/t15/s80a-2/"
   },
   {
     "id": "qsbs",
     "term": "Qualified Small Business Stock (QSBS)",
     "slug": "qsbs",
     "category": "Juridique & Fiscalité",
-    "short": "Régime fiscal américain pouvant exclure une partie du gain sur certaines actions de C-Corp.",
+    "short": "Exclusion fiscale fédérale américaine sur la plus-value de cession de certaines actions, selon leur date d’acquisition et leur durée de détention.",
     "seeAlso": [
       "c-corporation",
       "convertible-note",
@@ -6367,7 +6197,8 @@
       "QSBS",
       "Qualified Small Business Stock",
       "Section 1202"
-    ]
+    ],
+    "link": "https://uscode.house.gov/us/usc/t26/s1202/"
   },
   {
     "id": "referrer-quality",
@@ -6387,7 +6218,6 @@
     ],
     "aliases": [
       "crédibilité du référent",
-      "qualité de la recommandation",
       "referrer quality"
     ]
   },
@@ -6400,7 +6230,7 @@
       "quasi-equity"
     ],
     "category": "Deal & Structuration",
-    "short": "Qualification économique de financements longs et subordonnés proches du risque des fonds propres.",
+    "short": "Financements dont les conditions les rapprochent des fonds propres dans l’analyse financière.",
     "link": "https://www.banquedesterritoires.fr/produits-services/investissement/financement-economie-inclusive",
     "seeAlso": [
       "titre-associatif",
@@ -6419,7 +6249,7 @@
     "term": "Recurring revenue",
     "slug": "recurring-revenue",
     "category": "Métriques",
-    "short": "Revenu attendu pour se répéter dans le temps.",
+    "short": "Revenu qui se répète dans le temps chez des clients existants.",
     "seeAlso": [
       "arr",
       "mrr",
@@ -6431,7 +6261,7 @@
     ],
     "aliases": [
       "revenu récurrent",
-      "subscription revenue"
+      "revenus récurrents"
     ]
   },
   {
@@ -6439,7 +6269,7 @@
     "term": "Redemption rights",
     "slug": "redemption-rights",
     "category": "Deal & Structuration",
-    "short": "Droit pour l’investisseur de demander le rachat de ses preferred shares après une période donnée.",
+    "short": "Droit de demander à la société le rachat de ses actions de préférence selon des conditions convenues.",
     "seeAlso": [
       "actions-de-preference",
       "dividendes-cumulatifs",
@@ -6458,12 +6288,10 @@
     "term": "Regulation D",
     "slug": "regulation-d",
     "aliases": [
-      "Reg D",
-      "Regulation D offering",
-      "Rule 506"
+      "Reg D"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Régime US d’exemptions utilisé pour de nombreuses levées privées.",
+    "short": "Règles américaines dispensant certaines offres de titres d’enregistrement auprès de la SEC.",
     "seeAlso": [
       "placement-prive",
       "investisseur-accredite",
@@ -6472,14 +6300,15 @@
     ],
     "relatedLessonIds": [
       "l-founder-instruments"
-    ]
+    ],
+    "link": "https://www.sec.gov/resources-small-businesses/exempt-offerings"
   },
   {
     "id": "relative-valuation",
     "term": "Relative valuation",
     "slug": "relative-valuation",
     "category": "Valorisation",
-    "short": "Méthode qui estime la valeur par comparaison avec sociétés ou transactions similaires.",
+    "short": "Méthode de valorisation par comparaison avec des entreprises ou des transactions similaires.",
     "seeAlso": [
       "revenue-multiple",
       "valuation",
@@ -6489,7 +6318,7 @@
       "l-ts-economics"
     ],
     "aliases": [
-      "comparables",
+      "méthode des comparables",
       "valorisation relative"
     ]
   },
@@ -6498,7 +6327,7 @@
     "term": "Rendement 10x",
     "slug": "10x-return",
     "category": "Métriques",
-    "short": "Objectif de rendement par deal où l'investissement vaut dix fois sa mise.",
+    "short": "Multiple de dix fois le capital investi.",
     "seeAlso": [
       "power-law",
       "fund-returner",
@@ -6519,7 +6348,7 @@
     "term": "Representations and warranties",
     "slug": "representations-and-warranties",
     "category": "Juridique & Fiscalité",
-    "short": "Déclarations contractuelles sur l’état de la société, utilisées pour allouer le risque du deal.",
+    "short": "Déclarations contractuelles par lesquelles une partie garantit l’exactitude de faits précis.",
     "seeAlso": [
       "dd",
       "data-room",
@@ -6528,14 +6357,10 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "Company Warranties",
       "déclarations et garanties",
       "R&W",
       "Representations & Warranties",
-      "Reps",
-      "Reps and Warranties",
-      "Warranties",
-      "Warranty"
+      "Reps and Warranties"
     ]
   },
   {
@@ -6544,11 +6369,10 @@
     "slug": "reproductibilite-mesure",
     "aliases": [
       "measurement reproducibility",
-      "reproductibilité métrologique",
-      "condition de reproductibilité"
+      "reproductibilité métrologique"
     ],
     "category": "Méthode",
-    "short": "Fidélité de mesure lorsque lieux, opérateurs ou systèmes de mesure diffèrent selon des conditions spécifiées.",
+    "short": "Degré d’accord entre des mesures répétées dans des conditions différentes.",
     "seeAlso": [
       "repetabilite-mesure",
       "replicabilite-scientifique",
@@ -6563,7 +6387,7 @@
     "term": "Reserve funds",
     "slug": "reserve-funds",
     "category": "Stratégie",
-    "short": "Capital conservé pour les follow-ons plutôt que déployé en checks initiaux.",
+    "short": "Part du capital d’un fonds réservée aux investissements ultérieurs dans ses participations.",
     "seeAlso": [
       "follow-on",
       "pro-rata",
@@ -6586,7 +6410,7 @@
     "term": "Residual Value to Paid-In (RVPI)",
     "slug": "rvpi",
     "category": "Métriques",
-    "short": "La part latente de la performance, non encore réalisée.",
+    "short": "Valeur résiduelle du fonds pour chaque euro versé par ses investisseurs.",
     "seeAlso": [
       "dpi",
       "tvpi"
@@ -6598,14 +6422,15 @@
       "Residual value to paid in",
       "Residual value to paid in (RVPI)",
       "RVPI"
-    ]
+    ],
+    "link": "https://ilpa.org/resources-tools/private-equity-101/private-equity-glossary/"
   },
   {
     "id": "rsu",
     "term": "Restricted Stock Units (RSU)",
     "slug": "rsu",
     "category": "Deal & Structuration",
-    "short": "Unités donnant droit à des actions après vesting, sans prix d'exercice.",
+    "short": "Droit conditionnel de recevoir des actions ou leur contre-valeur en numéraire.",
     "seeAlso": [
       "employee-equity",
       "stock-options",
@@ -6616,14 +6441,15 @@
     "aliases": [
       "restricted stock units",
       "RSU"
-    ]
+    ],
+    "link": "https://www.sec.gov/Archives/edgar/data/1326801/000132680125000098/a2025forms-8exhibit991.htm"
   },
   {
     "id": "revenue-growth",
     "term": "Revenue growth",
     "slug": "revenue-growth",
     "category": "Métriques",
-    "short": "Taux auquel le revenu d'une startup augmente sur une période donnée.",
+    "short": "Variation du chiffre d’affaires entre deux périodes comparables.",
     "seeAlso": [
       "arr",
       "mrr",
@@ -6636,10 +6462,8 @@
       "l-screening"
     ],
     "aliases": [
-      "croissance du revenu",
-      "croissance mensuelle",
-      "growth revenue",
-      "Monthly growth rate"
+      "croissance du chiffre d’affaires",
+      "taux de croissance du chiffre d’affaires"
     ]
   },
   {
@@ -6647,7 +6471,7 @@
     "term": "Revenue growth repeatability",
     "slug": "revenue-growth-repeatability",
     "category": "Métriques",
-    "short": "Capacité à reproduire la croissance du revenu sans dépendre de coups ponctuels.",
+    "short": "Capacité d’une société à renouveler les ventes qui soutiennent la croissance de son chiffre d’affaires.",
     "seeAlso": [
       "revenue-growth",
       "traction",
@@ -6669,7 +6493,7 @@
     "term": "Revenue multiple",
     "slug": "revenue-multiple",
     "category": "Valorisation",
-    "short": "Multiple de valorisation fondé sur le revenu plutôt que sur le bénéfice.",
+    "short": "Rapport entre la valeur d’une entreprise et son chiffre d’affaires sur une période donnée.",
     "seeAlso": [
       "valuation",
       "arr",
@@ -6681,9 +6505,7 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
-      "Acquisition multiple",
-      "ARR multiple",
-      "multiple d’acquisition",
+      "multiple de chiffre d’affaires",
       "multiple de revenu"
     ]
   },
@@ -6697,7 +6519,7 @@
       "ROFO"
     ],
     "category": "Deal & Structuration",
-    "short": "Droit d'être sollicité en priorité avant qu'un actionnaire vende ses titres.",
+    "short": "Droit d’être sollicité en priorité avant la mise en vente de titres auprès de tiers.",
     "seeAlso": [
       "rofr",
       "tag-along",
@@ -6706,14 +6528,15 @@
     ],
     "relatedLessonIds": [
       "l-ts-control"
-    ]
+    ],
+    "link": "https://www.sec.gov/Archives/edgar/data/909327/000162828024018426/suzanofy2023-ex32xsharetra.htm"
   },
   {
     "id": "rofr",
     "term": "Right of First Refusal (ROFR)",
     "slug": "rofr",
     "category": "Deal & Structuration",
-    "short": "Droit d'acheter en priorité des actions qu'un actionnaire souhaite vendre à un tiers.",
+    "short": "Droit d’acheter des titres en priorité aux conditions proposées par un tiers.",
     "seeAlso": [
       "secondary",
       "tag-along",
@@ -6726,14 +6549,15 @@
       "droit de premier refus",
       "Right of First Refusal",
       "ROFR"
-    ]
+    ],
+    "link": "https://www.sec.gov/Archives/edgar/data/1930002/000106299325001266/formcnew.pdf"
   },
   {
     "id": "risk-premium",
     "term": "Risk premium",
     "slug": "risk-premium",
     "category": "Valorisation",
-    "short": "Rendement supplémentaire exigé pour porter du risque au-delà d'un actif sans risque.",
+    "short": "Supplément de rendement attendu en contrepartie du risque d’un investissement.",
     "seeAlso": [
       "discount-rate",
       "market-risk",
@@ -6752,7 +6576,7 @@
     "term": "Rule of 40",
     "slug": "rule-of-40",
     "category": "Métriques",
-    "short": "Repère SaaS combinant croissance du revenu et marge de rentabilité.",
+    "short": "Repère de performance qui combine croissance et rentabilité pour une société de logiciels par abonnement.",
     "seeAlso": [
       "revenue-growth",
       "burn-rate",
@@ -6772,7 +6596,7 @@
     "term": "Runway",
     "slug": "runway",
     "category": "Métriques",
-    "short": "Durée pendant laquelle une startup peut fonctionner avant de manquer de cash.",
+    "short": "Nombre de mois avant épuisement de la trésorerie disponible.",
     "seeAlso": [
       "burn-rate",
       "fundraising-target",
@@ -6784,8 +6608,8 @@
       "l-traction-unit-economics"
     ],
     "aliases": [
-      "cash runway",
-      "piste de trésorerie"
+      "autonomie de trésorerie",
+      "cash runway"
     ]
   },
   {
@@ -6835,11 +6659,10 @@
     "slug": "repetabilite-mesure",
     "aliases": [
       "measurement repeatability",
-      "répétabilité métrologique",
-      "condition de répétabilité"
+      "répétabilité métrologique"
     ],
     "category": "Méthode",
-    "short": "Fidélité obtenue lorsque les mesures sont répétées sous les mêmes conditions spécifiées.",
+    "short": "Degré d’accord entre des mesures répétées dans les mêmes conditions.",
     "seeAlso": [
       "reproductibilite-mesure",
       "incertitude-mesure"
@@ -6853,7 +6676,7 @@
     "term": "Réseau VC",
     "slug": "reseau-vc",
     "category": "Stratégie",
-    "short": "Réseau de fondateurs, investisseurs, talents, clients et acquéreurs mobilisé par un VC.",
+    "short": "Ensemble des contacts professionnels qu’un investisseur peut mobiliser pour son fonds ou ses participations.",
     "seeAlso": [
       "deal-flow",
       "warm-intro",
@@ -6868,6 +6691,29 @@
       "réseau venture",
       "venture capital network"
     ]
+  },
+  {
+    "id": "esop",
+    "term": "Réserve d’options et Employee Stock Ownership Plan (ESOP)",
+    "slug": "esop",
+    "category": "Deal & Structuration",
+    "short": "L’option pool réserve des actions pour de futures attributions. L’ESOP américain est un régime de retraite.",
+    "seeAlso": [
+      "stock-options",
+      "employee-equity",
+      "dilution",
+      "cap-table",
+      "vesting"
+    ],
+    "relatedLessonIds": [],
+    "aliases": [
+      "employee option pool",
+      "ESOP",
+      "option pool",
+      "pool d’options",
+      "réserve d’options"
+    ],
+    "link": "https://www.cooleygo.com/negotiating-option-pool/"
   },
   {
     "id": "resultat-impact",
@@ -6897,11 +6743,10 @@
     "term": "Sales cycle",
     "slug": "sales-cycle",
     "aliases": [
-      "cycle de vente",
-      "Sales Cycle Length"
+      "cycle de vente"
     ],
     "category": "Go-to-Market",
-    "short": "Durée et étapes nécessaires pour transformer un prospect en client payé.",
+    "short": "Étapes qui séparent le premier contact commercial de la conclusion d’une vente.",
     "seeAlso": [
       "sales-pipeline",
       "cac-payback-period",
@@ -6920,7 +6765,7 @@
       "pipeline commercial"
     ],
     "category": "Go-to-Market",
-    "short": "Ensemble des opportunités commerciales suivies depuis la prospection jusqu’au closing.",
+    "short": "Ensemble des ventes potentielles qu’une entreprise suit par stade d’avancement.",
     "seeAlso": [
       "gtm",
       "sales-cycle",
@@ -6939,7 +6784,7 @@
       "Sales Process Playbook"
     ],
     "category": "Go-to-Market",
-    "short": "Méthode documentée qui rend le processus de vente plus répétable.",
+    "short": "Guide qui décrit la méthode de vente d’une entreprise.",
     "seeAlso": [
       "gtm",
       "sales-pipeline",
@@ -6955,7 +6800,7 @@
     "term": "Scalability",
     "slug": "scalability",
     "category": "Stratégie",
-    "short": "Capacité à faire croître revenus et usage plus vite que les coûts et la complexité.",
+    "short": "Capacité à faire croître l’activité sans hausse proportionnelle des ressources nécessaires.",
     "seeAlso": [
       "business-model",
       "pmf",
@@ -6969,8 +6814,7 @@
     ],
     "aliases": [
       "capacité de passage à l’échelle",
-      "scalabilité",
-      "scalable"
+      "scalabilité"
     ]
   },
   {
@@ -6978,7 +6822,7 @@
     "term": "Scout",
     "slug": "scout",
     "category": "Acteurs",
-    "short": "Une personne qui repère des deals pour un fonds, contre une part de carry.",
+    "short": "Personne qui repère de jeunes entreprises pour le compte d’un fonds.",
     "seeAlso": [
       "deal-flow",
       "business-angel",
@@ -7005,7 +6849,7 @@
     "term": "Secondary",
     "slug": "secondary",
     "category": "Liquidité",
-    "short": "Vente de titres existants avant un exit complet de la société ou du fonds.",
+    "short": "Cession de titres existants par un actionnaire ou un porteur de parts de fonds.",
     "seeAlso": [
       "exit",
       "ipo",
@@ -7015,10 +6859,9 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
+      "cession secondaire",
       "Private Secondary Sales",
       "Secondaries",
-      "Secondary Liquidity",
-      "Secondary market",
       "Secondary Sale",
       "Secondary Transaction"
     ]
@@ -7028,7 +6871,7 @@
     "term": "Secret des affaires",
     "slug": "secret-des-affaires",
     "category": "Juridique & Fiscalité",
-    "short": "Régime protégeant une information non connue du secteur, de valeur commerciale, et tenue par des mesures de protection raisonnables.",
+    "short": "Protection d’une information dont la confidentialité présente une valeur commerciale.",
     "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037266553",
     "seeAlso": [
       "titularite-des-droits",
@@ -7047,7 +6890,7 @@
     "term": "Seed",
     "slug": "seed",
     "category": "Stades & Tours",
-    "short": "Tour early-stage qui finance les premiers signaux produit et marché.",
+    "short": "Tour d’amorçage qui finance le développement du produit et sa validation auprès des premiers clients.",
     "seeAlso": [
       "amorcage",
       "pre-seed",
@@ -7078,11 +6921,8 @@
       "l-ts-economics"
     ],
     "aliases": [
-      "last in first out",
-      "last-in-first-out",
-      "LIFO",
-      "liquidation stack",
       "priorité de rang",
+      "rang de priorité",
       "séniorité"
     ]
   },
@@ -7091,7 +6931,7 @@
     "term": "Sequoia Capital",
     "slug": "sequoia",
     "category": "Fonds & VC",
-    "short": "Firme VC historique utilisée comme référence pour power law, réseaux et construction de portefeuille.",
+    "short": "Société américaine de capital-risque fondée par Don Valentine en 1972.",
     "seeAlso": [
       "power-law",
       "reseau-vc",
@@ -7099,7 +6939,7 @@
       "board-of-directors"
     ],
     "relatedLessonIds": [],
-    "link": "https://www.sequoiacap.com",
+    "link": "https://sequoiacap.com/our-history",
     "aliases": [
       "Sequoia"
     ]
@@ -7109,7 +6949,7 @@
     "term": "Serena",
     "slug": "serena",
     "category": "Fonds & VC",
-    "short": "Fonds early-stage parisien, thèse autour de la souveraineté.",
+    "short": "Société de gestion française qui investit dans de jeunes entreprises technologiques européennes.",
     "link": "https://www.serena.vc",
     "seeAlso": [
       "thesis-driven",
@@ -7122,7 +6962,7 @@
     "term": "Series A",
     "slug": "series-a",
     "category": "Stades & Tours",
-    "short": "Tour institutionnel où la startup prouve qu'elle peut commencer à scaler.",
+    "short": "Tour de financement qui suit généralement l’amorçage et finance le développement commercial.",
     "seeAlso": [
       "seed",
       "amorcage",
@@ -7148,7 +6988,7 @@
       "Series A Preparedness"
     ],
     "category": "Stades & Tours",
-    "short": "Évaluation du fait qu’une startup seed soit prête à lever une Series A crédible.",
+    "short": "Capacité d’une entreprise en amorçage à réunir les conditions d’une levée en série A.",
     "seeAlso": [
       "series-a",
       "passage-seed-series-a",
@@ -7168,7 +7008,7 @@
       "Series B Preparedness"
     ],
     "category": "Stades & Tours",
-    "short": "Évaluation du fait qu’une startup post-Series A soit prête à lever du capital de croissance.",
+    "short": "Capacité d’une société à justifier et à employer les capitaux d’une série B.",
     "seeAlso": [
       "series-b-round",
       "growth-equity",
@@ -7188,7 +7028,7 @@
       "Series B Financing"
     ],
     "category": "Stades & Tours",
-    "short": "Tour de croissance où la startup doit prouver une exécution scalable et une organisation plus mature.",
+    "short": "Tour de financement qui suit la série A et soutient l’expansion de l’entreprise.",
     "seeAlso": [
       "series-b-readiness",
       "growth-equity",
@@ -7203,7 +7043,7 @@
     "term": "Serviceable Addressable Market (SAM)",
     "slug": "sam",
     "category": "Stratégie",
-    "short": "Part du TAM réellement servable avec le modèle actuel.",
+    "short": "Part du marché que l’entreprise peut servir avec son offre actuelle.",
     "seeAlso": [
       "tam",
       "som",
@@ -7219,14 +7059,15 @@
       "marché servable adressable",
       "SAM",
       "Serviceable Addressable Market"
-    ]
+    ],
+    "link": "https://stripe.com/resources/more/tam-sam-and-som"
   },
   {
     "id": "som",
     "term": "Serviceable Obtainable Market (SOM)",
     "slug": "som",
     "category": "Stratégie",
-    "short": "Part du SAM réalistement capturable à 3-5 ans.",
+    "short": "Part du marché accessible que l’entreprise estime pouvoir conquérir sur une période donnée.",
     "seeAlso": [
       "tam",
       "sam",
@@ -7239,8 +7080,7 @@
       "l-team-market"
     ],
     "aliases": [
-      "marché servable capturable",
-      "marché servable obtenable",
+      "marché accessible visé",
       "Serviceable Obtainable Market",
       "SOM"
     ]
@@ -7273,7 +7113,7 @@
     "term": "Simple Agreement for Future Equity (SAFE)",
     "slug": "safe",
     "category": "Deal & Structuration",
-    "short": "Instrument de financement qui donne droit à de l'equity future sans être une dette classique.",
+    "short": "Contrat qui donne à un investisseur le droit de recevoir ultérieurement des actions en contrepartie d’un apport immédiat.",
     "seeAlso": [
       "convertible-note",
       "valuation-cap",
@@ -7286,18 +7126,17 @@
       "l-founder-instruments"
     ],
     "aliases": [
-      "BSA-AIR",
-      "future equity agreement",
       "SAFE",
       "Simple Agreement for Future Equity"
-    ]
+    ],
+    "link": "https://www.ycombinator.com/safe"
   },
   {
     "id": "single-trigger-acceleration",
     "term": "Single-trigger acceleration",
     "slug": "single-trigger-acceleration",
     "category": "Deal & Structuration",
-    "short": "Accélération du vesting déclenchée par un seul événement, souvent une acquisition.",
+    "short": "Clause qui avance l’acquisition de droits sur des titres dès la survenance d’un événement convenu.",
     "seeAlso": [
       "acceleration-vesting",
       "double-trigger-acceleration",
@@ -7319,7 +7158,7 @@
     ],
     "category": "Métriques",
     "short": "Approche qui rapporte une valeur sociale monétarisée aux ressources mobilisées, selon des hypothèses explicites.",
-    "link": "https://www.avise.org/ressources/evaluer-limpact-social-avec-lapproche-sroi-application-au-secteur-de-liae",
+    "link": "https://www.socialvalueint.org/guide-to-sroi",
     "seeAlso": [
       "mesure-impact",
       "resultat-impact",
@@ -7360,7 +7199,7 @@
     "term": "Solution",
     "slug": "solution",
     "category": "Stratégie",
-    "short": "Réponse produit ou service construite pour résoudre un problème validé.",
+    "short": "Produit ou service qu’une entreprise propose pour répondre à un besoin identifié.",
     "seeAlso": [
       "problem",
       "pmf",
@@ -7382,14 +7221,11 @@
     "slug": "sortie-de-partenariat",
     "aliases": [
       "fin de partenariat",
-      "fin du soutien",
-      "non-renouvellement du financement",
       "partnership exit",
-      "plan de transition du partenariat",
       "sortie du financeur"
     ],
     "category": "Gouvernance",
-    "short": "Processus préparé de renouvellement, réduction, non-renouvellement ou fin d’un soutien, avec transition des engagements et des services.",
+    "short": "Fin organisée du soutien d’un financeur à une organisation.",
     "seeAlso": [
       "convention-de-financement",
       "droits-d-information-du-financeur",
@@ -7410,7 +7246,7 @@
     "term": "Sovereign wealth fund",
     "slug": "sovereign-wealth-fund",
     "category": "Acteurs",
-    "short": "Institution d’investissement détenue par un État, parfois LP de grands fonds VC ou growth.",
+    "short": "Fonds détenu par un État qui investit une partie de ses ressources financières.",
     "seeAlso": [
       "lp",
       "co-investment",
@@ -7431,20 +7267,25 @@
     "term": "SPV (Special Purpose Vehicle)",
     "slug": "spv",
     "category": "Deal & Structuration",
-    "short": "Une structure juridique créée pour porter un seul investissement.",
+    "short": "Structure juridique créée pour une opération déterminée.",
     "seeAlso": [
       "business-angel",
       "cap-table",
       "operator-investor"
     ],
-    "relatedLessonIds": []
+    "relatedLessonIds": [],
+    "aliases": [
+      "SPV",
+      "Special Purpose Vehicle",
+      "véhicule ad hoc"
+    ]
   },
   {
     "id": "startup",
     "term": "Startup",
     "slug": "startup",
     "category": "Fondations",
-    "short": "Jeune entreprise construite pour chercher un modèle scalable sous forte incertitude.",
+    "short": "Jeune entreprise qui cherche un modèle économique susceptible de soutenir une croissance rapide.",
     "seeAlso": [
       "venture-capital",
       "pmf",
@@ -7455,8 +7296,7 @@
       "l-vc-definition"
     ],
     "aliases": [
-      "jeune pousse",
-      "startup scalable"
+      "jeune pousse"
     ]
   },
   {
@@ -7464,7 +7304,7 @@
     "term": "Startup fundraising",
     "slug": "startup-fundraising",
     "category": "Stratégie",
-    "short": "Processus par lequel une startup lève du capital externe auprès d'investisseurs.",
+    "short": "Levée de capitaux par une jeune entreprise auprès d’investisseurs.",
     "seeAlso": [
       "pitch",
       "investor-fit",
@@ -7479,12 +7319,9 @@
       "l-founder-instruments"
     ],
     "aliases": [
-      "founder fundraising preparation",
       "fundraising startup",
       "levée de fonds côté startup",
-      "levée de fonds startup",
-      "préparation de levée",
-      "Préparation du fundraising fondateur"
+      "levée de fonds startup"
     ]
   },
   {
@@ -7492,7 +7329,7 @@
     "term": "Startup metrics",
     "slug": "startup-metrics",
     "category": "Métriques",
-    "short": "Ensemble structuré des métriques opérationnelles et financières d’une startup.",
+    "short": "Indicateurs utilisés pour suivre l’activité et la situation financière d’une jeune entreprise.",
     "seeAlso": [
       "kpi",
       "arr",
@@ -7514,9 +7351,7 @@
     "term": "Statuts",
     "slug": "articles-of-association",
     "aliases": [
-      "articles",
       "Articles of association",
-      "corporate charter",
       "statuts de la société"
     ],
     "category": "Juridique & Fiscalité",
@@ -7531,14 +7366,15 @@
     "relatedLessonIds": [
       "l-ts-control",
       "l-founder-instruments"
-    ]
+    ],
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038589926"
   },
   {
     "id": "stock-options",
     "term": "Stock options",
     "slug": "stock-options",
     "category": "Deal & Structuration",
-    "short": "Droit d’acheter des actions à un prix d’exercice fixé à l’avance.",
+    "short": "Droit de souscrire ou d’acheter des actions à un prix fixé à l’avance.",
     "seeAlso": [
       "esop",
       "vesting",
@@ -7549,10 +7385,11 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "options",
+      "options sur actions",
       "options salariés",
       "Stock Option"
-    ]
+    ],
+    "link": "https://www.impots.gouv.fr/particulier/lactionnariat-salarie"
   },
   {
     "id": "strategic-acquisition",
@@ -7562,7 +7399,7 @@
       "acquisition stratégique"
     ],
     "category": "Liquidité",
-    "short": "Acquisition où l’acheteur paie pour un fit stratégique, pas seulement pour les flux financiers.",
+    "short": "Rachat motivé par la contribution de la société acquise aux activités de l’acheteur.",
     "seeAlso": [
       "ma",
       "trade-sale",
@@ -7577,7 +7414,7 @@
     "term": "Stratégie d'investissement",
     "slug": "investment-strategy",
     "category": "Stratégie",
-    "short": "Combinaison du mandat, de l'expertise, du stade, de la géographie et de la taille de fonds.",
+    "short": "Choix qui déterminent où, quand et combien un fonds investit.",
     "seeAlso": [
       "thesis-driven",
       "portfolio-construction",
@@ -7600,7 +7437,7 @@
     "term": "Subscription agreement",
     "slug": "subscription-agreement",
     "category": "Juridique & Fiscalité",
-    "short": "Contrat par lequel un investisseur souscrit les actions émises lors d’un tour.",
+    "short": "Contrat par lequel un investisseur souscrit des titres d’une société ou des parts d’un fonds.",
     "seeAlso": [
       "term-sheet",
       "shareholders-agreement",
@@ -7611,9 +7448,7 @@
     "aliases": [
       "contrat de souscription",
       "Share Subscription Agreement",
-      "SPA",
-      "SSA",
-      "Stock Purchase Agreement"
+      "SSA"
     ]
   },
   {
@@ -7636,10 +7471,7 @@
       "lvp-atelier-structuration"
     ],
     "aliases": [
-      "catalytic grant",
-      "catalytic grantmaking",
-      "grantmaking catalytique",
-      "octroi de subventions catalytiques"
+      "catalytic grant"
     ]
   },
   {
@@ -7648,12 +7480,11 @@
     "slug": "subvention-recuperable",
     "aliases": [
       "recoverable grant",
-      "recoverable grants",
-      "subvention remboursable"
+      "recoverable grants"
     ],
     "category": "Deal & Structuration",
-    "short": "Financement philanthropique présenté comme récupérable selon des conditions contractuelles déterminées.",
-    "link": "https://www.impacteurope.net/glossary",
+    "short": "Financement philanthropique dont le remboursement dépend de conditions convenues à l’avance.",
+    "link": "https://www.impacteurope.net/sites/www.evpa.ngo/files/publications/EVPA_Investing_for_Impact_Toolkit_2020.pdf",
     "seeAlso": [
       "beyond-grants",
       "capital-patient",
@@ -7670,7 +7501,7 @@
     "term": "Sustainable Finance Disclosure Regulation (SFDR)",
     "slug": "sfdr",
     "category": "Juridique & Fiscalité",
-    "short": "Réglementation européenne de disclosure durable applicable aux acteurs financiers.",
+    "short": "Règlement européen sur les informations de durabilité à publier dans le secteur financier.",
     "seeAlso": [
       "esg-assessment",
       "lp",
@@ -7682,14 +7513,15 @@
       "règlement SFDR",
       "SFDR",
       "Sustainable Finance Disclosure Regulation"
-    ]
+    ],
+    "link": "https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02019R2088-20260702"
   },
   {
     "id": "tag-along",
     "term": "Tag-along",
     "slug": "tag-along",
     "category": "Deal & Structuration",
-    "short": "Droit pour des minoritaires de vendre aux côtés d’un actionnaire qui vend ses titres.",
+    "short": "Droit de participer à la cession de titres engagée par un autre actionnaire.",
     "seeAlso": [
       "drag-along",
       "rofr",
@@ -7700,17 +7532,18 @@
     ],
     "aliases": [
       "co-sale rights",
-      "droit de suite",
+      "droit de sortie conjointe",
       "tag-along right",
       "tag-along rights"
-    ]
+    ],
+    "link": "https://www.sec.gov/Archives/edgar/data/944747/000119312506085225/dex43.htm"
   },
   {
     "id": "tam-sam-som",
     "term": "TAM / SAM / SOM",
     "slug": "tam-sam-som",
     "category": "Stratégie",
-    "short": "Le cadre des trois cercles concentriques pour dimensionner un marché : total, servable, capturable.",
+    "short": "Méthode qui distingue le marché total, le marché accessible et la part de marché visée.",
     "seeAlso": [
       "tam",
       "sam",
@@ -7725,10 +7558,7 @@
       "l-dd-process"
     ],
     "aliases": [
-      "dimensionnement de marché",
-      "marché adressable",
-      "Market size",
-      "taille de marché"
+      "méthode TAM SAM SOM"
     ]
   },
   {
@@ -7775,7 +7605,7 @@
     "term": "Term sheet",
     "slug": "term-sheet",
     "category": "Deal & Structuration",
-    "short": "Document préliminaire qui fixe les grands termes économiques et de contrôle d’un financement.",
+    "short": "Document préliminaire qui présente les principales conditions d’un investissement.",
     "seeAlso": [
       "liquidation-preference",
       "anti-dilution",
@@ -7788,10 +7618,8 @@
       "l-ts-control"
     ],
     "aliases": [
-      "deal terms",
-      "lettre d'intention de financement",
-      "term sheet VC",
-      "Valuation Sweetener"
+      "lettre d’intention de financement",
+      "term sheet VC"
     ]
   },
   {
@@ -7799,7 +7627,7 @@
     "term": "Thèse d'investissement",
     "slug": "thesis-driven",
     "category": "Stratégie",
-    "short": "Hypothèse structurée qui explique où, pourquoi et comment un fonds veut investir.",
+    "short": "Hypothèse qui motive le choix d’un investissement ou d’un ensemble d’entreprises à financer.",
     "seeAlso": [
       "deal-flow",
       "deal-sourcing",
@@ -7845,7 +7673,7 @@
     "term": "Timing",
     "slug": "timing",
     "category": "Stratégie",
-    "short": "Contexte qui rend une opportunité plus ou moins finançable maintenant.",
+    "short": "Conditions du marché qui rendent le moment plus ou moins favorable au lancement d’une offre.",
     "seeAlso": [
       "why-now",
       "market-opportunity",
@@ -7858,8 +7686,7 @@
     ],
     "aliases": [
       "market timing",
-      "timing de marché",
-      "why now marché"
+      "timing de marché"
     ]
   },
   {
@@ -7871,7 +7698,7 @@
     ],
     "category": "Juridique & Fiscalité",
     "short": "Créance de dernier rang qu’une association éligible peut émettre selon le Code monétaire et financier.",
-    "link": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072026/LEGISCTA000006184578/",
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000029321813",
     "seeAlso": [
       "quasi-fonds-propres",
       "titre-participatif",
@@ -7888,13 +7715,10 @@
     "term": "Titre financier",
     "slug": "titre-financier",
     "aliases": [
-      "securities",
-      "security",
-      "titre",
-      "valeur mobilière"
+      "titres financiers"
     ],
     "category": "Juridique & Fiscalité",
-    "short": "Instrument juridique représentant un droit financier ou de propriété.",
+    "short": "Catégorie juridique qui comprend notamment les actions, les obligations et les parts de fonds.",
     "seeAlso": [
       "equity",
       "actions-ordinaires",
@@ -7905,7 +7729,8 @@
     "relatedLessonIds": [
       "l-founder-instruments",
       "l-ts-economics"
-    ]
+    ],
+    "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032469968"
   },
   {
     "id": "titre-participatif",
@@ -7933,7 +7758,7 @@
     "term": "Titularité des droits",
     "slug": "titularite-des-droits",
     "category": "Juridique & Fiscalité",
-    "short": "Identité de la personne à qui appartient le droit sur une invention, distincte de la qualité de déposant.",
+    "short": "Qualité de la personne qui détient les droits sur une invention ou un brevet.",
     "link": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006279399",
     "seeAlso": [
       "invention-de-mission",
@@ -7954,7 +7779,7 @@
     "term": "Total Addressable Market (TAM)",
     "slug": "tam",
     "category": "Stratégie",
-    "short": "Demande totale d'un marché si on le couvrait entièrement.",
+    "short": "Chiffre d’affaires potentiel si une entreprise servait la totalité du marché défini.",
     "seeAlso": [
       "sam",
       "som",
@@ -7977,7 +7802,7 @@
     "term": "Total Value to Paid-In (TVPI)",
     "slug": "tvpi",
     "category": "Métriques",
-    "short": "Valeur totale du fonds, réalisée et résiduelle, rapportée au capital appelé.",
+    "short": "Valeur distribuée et valeur restante du fonds pour chaque euro versé par ses investisseurs.",
     "seeAlso": [
       "dpi",
       "rvpi",
@@ -7990,7 +7815,8 @@
     "aliases": [
       "Total Value to Paid-In",
       "TVPI"
-    ]
+    ],
+    "link": "https://ilpa.org/resources-tools/private-equity-101/private-equity-glossary/"
   },
   {
     "id": "funding-round",
@@ -8003,7 +7829,7 @@
       "tour de table"
     ],
     "category": "Stades & Tours",
-    "short": "Épisode structuré de levée de capital auprès d’investisseurs.",
+    "short": "Opération par laquelle une entreprise réunit des capitaux auprès d’un ou de plusieurs investisseurs.",
     "seeAlso": [
       "pre-seed",
       "seed",
@@ -8022,7 +7848,7 @@
     "term": "Traction",
     "slug": "traction",
     "category": "Métriques",
-    "short": "Preuve mesurable ou qualitative qu'une startup progresse vers une demande réelle.",
+    "short": "Signes observables de l’adoption d’un produit par ses clients.",
     "seeAlso": [
       "pmf",
       "qualified-lead-velocity-rate",
@@ -8043,12 +7869,11 @@
     "term": "Trade sale",
     "slug": "trade-sale",
     "aliases": [
-      "Acquisition Sale",
-      "Company Sale",
+      "cession industrielle",
       "Trade Sale Exit"
     ],
     "category": "Liquidité",
-    "short": "Exit par vente de la société à un acheteur corporate, financier ou stratégique.",
+    "short": "Sortie d’investissement par la vente de la société à un acquéreur industriel ou commercial.",
     "seeAlso": [
       "ma",
       "exit",
@@ -8088,16 +7913,10 @@
     "slug": "exit-transaction",
     "aliases": [
       "cession de sortie",
-      "company liquidation",
-      "exit asset sale",
-      "exit merger",
-      "exit share transfer",
-      "Exit transaction",
-      "liquidation de société",
-      "vente d’actifs de sortie"
+      "Exit transaction"
     ],
     "category": "Liquidité",
-    "short": "Opération permettant aux actionnaires de convertir leur participation en liquidité.",
+    "short": "Opération par laquelle un investisseur cède ou réalise tout ou partie de sa participation.",
     "seeAlso": [
       "exit",
       "ipo",
@@ -8114,15 +7933,8 @@
     "id": "trustee",
     "term": "Trustee",
     "slug": "trustee",
-    "aliases": [
-      "fiduciaire",
-      "portage fiduciaire",
-      "trust agreement",
-      "trustee structure",
-      "trusteeship"
-    ],
     "category": "Juridique & Fiscalité",
-    "short": "Intermédiaire qui détient ou exerce des droits pour un groupe d’investisseurs.",
+    "short": "Personne ou entité chargée de détenir et de gérer les biens d’un trust pour ses bénéficiaires.",
     "seeAlso": [
       "cap-table",
       "voting-pool",
@@ -8132,7 +7944,8 @@
     "relatedLessonIds": [
       "l-founder-instruments",
       "l-ts-control"
-    ]
+    ],
+    "link": "https://www.gov.uk/trusts-taxes"
   },
   {
     "id": "tresorerie-mobilisable",
@@ -8146,7 +7959,7 @@
       "trésorerie effectivement mobilisable"
     ],
     "category": "Liquidité",
-    "short": "Montant de liquidités utilisable à une date donnée après rapprochement des restrictions et des engagements, sans double compte.",
+    "short": "Liquidités encore disponibles après prise en compte des fonds affectés et des paiements à couvrir.",
     "seeAlso": [
       "convention-de-financement",
       "financement-non-affecte",
@@ -8168,7 +7981,7 @@
     "term": "Unit economics",
     "slug": "unit-economics",
     "category": "Métriques",
-    "short": "Économie d'une unité client, transaction ou cohorte : revenu, coût, marge et payback.",
+    "short": "Revenus et coûts attribuables à une unité d’activité, par exemple un client ou une commande.",
     "seeAlso": [
       "cac",
       "ltv",
@@ -8235,7 +8048,7 @@
     "term": "Valuation cap",
     "slug": "valuation-cap",
     "category": "Deal & Structuration",
-    "short": "Plafond de valorisation utilisé pour convertir un SAFE ou une convertible note.",
+    "short": "Plafond de valorisation contractuel utilisé pour déterminer le prix de conversion en actions.",
     "seeAlso": [
       "safe",
       "convertible-note",
@@ -8277,7 +8090,7 @@
       "point d’inflexion de valeur"
     ],
     "category": "Stratégie",
-    "short": "Milestone qui augmente nettement la valeur perçue ou le levier de financement d’une startup.",
+    "short": "Événement susceptible de modifier sensiblement la valorisation d’une jeune entreprise.",
     "seeAlso": [
       "valuation",
       "series-a-readiness",
@@ -8291,7 +8104,7 @@
     "term": "Venture Capital",
     "slug": "venture-capital",
     "category": "Fondations",
-    "short": "Financement en fonds propres de startups à fort risque et fort potentiel.",
+    "short": "Financement de jeunes entreprises non cotées présentant un risque élevé et un fort potentiel de croissance.",
     "seeAlso": [
       "equity",
       "power-law",
@@ -8305,10 +8118,8 @@
     "aliases": [
       "capital-risque",
       "VC",
-      "VCs",
       "Venture Capital (VC)",
       "venture capital financing",
-      "venture capitalists",
       "Venture-Capital"
     ]
   },
@@ -8317,7 +8128,7 @@
     "term": "Venture capital fund",
     "slug": "venture-capital-fund",
     "category": "Fund Economics",
-    "short": "Véhicule mutualisé qui investit le capital LP dans un portefeuille de startups.",
+    "short": "Fonds qui réunit des capitaux pour investir dans un portefeuille de jeunes entreprises non cotées.",
     "seeAlso": [
       "lp",
       "gp",
@@ -8365,7 +8176,7 @@
     "term": "Venture debt",
     "slug": "venture-debt",
     "category": "Deal & Structuration",
-    "short": "Dette destinée aux startups financées par VC, souvent utilisée pour prolonger la runway sans vendre immédiatement plus d’equity.",
+    "short": "Prêt accordé à une jeune entreprise, généralement déjà financée par des investisseurs en capital-risque.",
     "seeAlso": [
       "bridge",
       "non-dilutive-financing",
@@ -8385,7 +8196,7 @@
     "term": "Venture fundraising",
     "slug": "venture-fundraising",
     "category": "Fund Economics",
-    "short": "Processus par lequel un manager VC lève des commitments pour un nouveau fonds.",
+    "short": "Levée de capitaux par une équipe de gestion auprès des souscripteurs d’un fonds.",
     "seeAlso": [
       "lp",
       "gp",
@@ -8400,12 +8211,12 @@
       "l-fund-lifecycle"
     ],
     "aliases": [
+      "collecte auprès des souscripteurs",
       "fund fundraising",
-      "Fundraising auprès des LPs",
-      "Fundraising from LPs",
-      "fundraising GP",
+      "fundraising auprès des LPs",
+      "fundraising from LPs",
       "levée auprès des LPs",
-      "levée de fonds VC"
+      "levée d’un fonds de capital-risque"
     ]
   },
   {
@@ -8436,8 +8247,6 @@
       "lvp-recommandation-comite"
     ],
     "aliases": [
-      "capital-risque philanthropique",
-      "philanthropie à impact",
       "philanthropie de risque",
       "philanthropie entrepreneuriale",
       "venture philanthropy"
@@ -8448,7 +8257,7 @@
     "term": "Vesting",
     "slug": "vesting",
     "category": "Deal & Structuration",
-    "short": "Mécanisme par lequel actions ou options deviennent acquises dans le temps ou sous conditions.",
+    "short": "Acquisition de droits sur des actions ou des options selon un calendrier ou des conditions définies.",
     "seeAlso": [
       "acceleration-vesting",
       "founder-vesting",
@@ -8457,7 +8266,7 @@
     ],
     "relatedLessonIds": [],
     "aliases": [
-      "vesting schedule"
+      "acquisition progressive de droits"
     ]
   },
   {
@@ -8484,7 +8293,7 @@
     "term": "Vintage",
     "slug": "vintage",
     "category": "Fund Economics",
-    "short": "Année de lancement d’un fonds, utilisée pour comparer des fonds exposés au même cycle.",
+    "short": "Année de référence qui permet de comparer des fonds lancés à la même période.",
     "seeAlso": [
       "j-curve",
       "irr",
@@ -8506,12 +8315,10 @@
     "slug": "voting-pool",
     "aliases": [
       "convention de vote groupée",
-      "pool de vote",
-      "pooling des votes",
-      "voting agreement"
+      "pool de vote"
     ],
     "category": "Gouvernance",
-    "short": "Regroupement d’investisseurs qui votent comme un bloc coordonné.",
+    "short": "Groupe d’actionnaires qui conviennent d’exercer ensemble leurs droits de vote.",
     "seeAlso": [
       "trustee",
       "cap-table",
@@ -8520,7 +8327,8 @@
     ],
     "relatedLessonIds": [
       "l-ts-control"
-    ]
+    ],
+    "link": "https://www.delcode.delaware.gov/title8/c001/sc07/"
   },
   {
     "id": "vp-engineering",
@@ -8530,7 +8338,7 @@
       "VP of Engineering"
     ],
     "category": "Acteurs",
-    "short": "Leader chargé de scaler l’exécution engineering et le management technique.",
+    "short": "Dirigeant responsable des équipes d’ingénierie et de l’exécution des développements techniques.",
     "seeAlso": [
       "management-team-scaling",
       "executive-committee",
@@ -8545,7 +8353,7 @@
     "term": "Warm intro",
     "slug": "warm-intro",
     "category": "Stratégie",
-    "short": "Introduction via une relation de confiance qui augmente la crédibilité d'un dossier.",
+    "short": "Mise en relation par un contact commun.",
     "seeAlso": [
       "referrer-quality",
       "deal-sourcing",
@@ -8557,8 +8365,7 @@
       "l-founder-narrative"
     ],
     "aliases": [
-      "introduction chaude",
-      "introduction qualifiée",
+      "mise en relation par un contact commun",
       "warm introduction"
     ]
   },
@@ -8567,7 +8374,7 @@
     "term": "Warrant coverage",
     "slug": "warrant-coverage",
     "category": "Deal & Structuration",
-    "short": "Quantité de warrants accordée à un prêteur ou investisseur, souvent exprimée en pourcentage du principal.",
+    "short": "Montant de souscription couvert par les bons accordés au prêteur, souvent exprimé en pourcentage du prêt.",
     "seeAlso": [
       "warrants",
       "venture-debt",
@@ -8585,7 +8392,7 @@
     "term": "Warrants",
     "slug": "warrants",
     "category": "Deal & Structuration",
-    "short": "Droits d’acheter des actions à un prix d’exercice fixé avant une date d’expiration.",
+    "short": "Droits de souscrire ou d’acheter des actions à un prix convenu avant une échéance.",
     "seeAlso": [
       "venture-debt",
       "warrant-coverage",
@@ -8604,7 +8411,7 @@
     "term": "Waterfall",
     "slug": "waterfall",
     "category": "Fund Economics",
-    "short": "L'ordre de distribution de l'argent d'une sortie aux LPs et au GP.",
+    "short": "Règles de répartition des distributions du fonds entre ses souscripteurs et son équipe de gestion.",
     "seeAlso": [
       "carry",
       "hurdle-rate",
@@ -8620,7 +8427,7 @@
     "term": "Why now",
     "slug": "why-now",
     "category": "Stratégie",
-    "short": "Ce qui rend une opportunité possible aujourd'hui et pas avant.",
+    "short": "Justification du moment choisi pour lancer une offre ou investir dans une entreprise.",
     "seeAlso": [
       "thesis-driven",
       "pmf"
@@ -8636,7 +8443,7 @@
     "term": "XAnge",
     "slug": "xange",
     "category": "Fonds & VC",
-    "short": "Firme VC européenne source des blueprints Series A et Series B utilisés dans le graph.",
+    "short": "Société de capital-risque européenne qui investit dans de jeunes entreprises technologiques.",
     "seeAlso": [
       "series-a-readiness",
       "series-b-readiness",
@@ -8646,14 +8453,15 @@
     "relatedLessonIds": [],
     "aliases": [
       "XAnge VC"
-    ]
+    ],
+    "link": "https://www.xange.vc/"
   },
   {
     "id": "y-combinator",
     "term": "Y Combinator",
     "slug": "y-combinator",
     "category": "Fonds & VC",
-    "short": "Accélérateur early-stage qui a popularisé le SAFE et influencé les normes seed.",
+    "short": "Accélérateur américain de jeunes entreprises à l’origine du SAFE.",
     "seeAlso": [
       "accelerateur",
       "safe",
@@ -8663,14 +8471,15 @@
     "relatedLessonIds": [],
     "aliases": [
       "YC"
-    ]
+    ],
+    "link": "https://www.ycombinator.com/about"
   },
   {
     "id": "zombie-firm",
-    "term": "Zombie firm",
+    "term": "Zombie VC",
     "slug": "zombie-firm",
     "category": "Acteurs",
-    "short": "Firme VC encore active mais peu susceptible de lever un fonds successeur compétitif.",
+    "short": "Terme informel pour une société de capital-risque qui gère encore son portefeuille et réalise peu de nouveaux investissements.",
     "seeAlso": [
       "venture-fundraising",
       "lp-capital-allocation",
@@ -8682,9 +8491,7 @@
       "l-reserves"
     ],
     "aliases": [
-      "firme zombie",
-      "Zombie fund",
-      "zombie VC"
+      "zombie venture capital firm"
     ]
   }
 ]

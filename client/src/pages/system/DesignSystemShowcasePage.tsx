@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useTheme } from '@/context/ThemeContext';
 import { usePageMeta } from '@/lib/seo';
 import {
   Palette,
@@ -20,6 +22,7 @@ import {
   ProgressBar,
   ProgressRing,
   Spinner,
+  PageLoader,
 } from '@/components/ui/primitives';
 import {
   Fleuron,
@@ -42,47 +45,80 @@ import {
 
 export default function DesignSystemShowcasePage() {
   usePageMeta(
-    'Design System Showcase',
-    'Découvrez le système de design de la plateforme VC Premium : couleurs, typographies, composants interactifs et ornements cartographiques.',
+    'Catalogue de design',
+    'Couleurs, typographies, composants et ornements de Maison Sapience VC.',
   );
 
   // Interactive states for demonstration
   const [progressVal, setProgressVal] = useState(68);
   const [activeTab, setActiveTab] = useState<'colors' | 'typography' | 'buttons' | 'primitives' | 'cards' | 'ornaments'>('colors');
+  const { theme, toggle } = useTheme();
+  const catalogueRef = useRef<HTMLDivElement>(null);
+  const [computedValues, setComputedValues] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    // ThemeProvider updates the root class in an effect. Read on the next frame
+    // so captions reflect the styles actually applied to the selected theme.
+    let frame = 0;
+    const measure = () => {
+      const values: Record<string, string> = {};
+      const rootStyle = getComputedStyle(document.documentElement);
+      catalogueRef.current?.querySelectorAll<HTMLElement>('[data-color-token]').forEach((element) => {
+        const token = element.dataset.colorToken!;
+        values[token] = rootStyle.getPropertyValue(token).trim() || 'Non défini';
+      });
+      catalogueRef.current?.querySelectorAll<HTMLElement>('[data-type-token]').forEach((element) => {
+        const style = getComputedStyle(element);
+        values[element.dataset.typeToken!] = `Taille : ${style.fontSize} · Interligne : ${style.lineHeight} · Espacement : ${style.letterSpacing}`;
+      });
+      setComputedValues(values);
+    };
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(measure);
+    };
+    schedule();
+    window.addEventListener('resize', schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('resize', schedule);
+    };
+  }, [activeTab, theme]);
+
 
   const colorTokens = [
     {
       group: 'Palette Principale',
       description: 'L’ambiance éditoriale de la plateforme : or, marine, prune et parchemin.',
       items: [
-        { name: '--primary', val: '#C5A85C', darkVal: '#D1B875', label: 'Or Garni', desc: 'Feuille d’or pour les accents premium, les états actifs et les liens.' },
-        { name: '--on-primary', val: '#12131A', darkVal: '#0D0E12', label: 'Texte sur Or', desc: 'Couleur de contraste pour le texte posé sur un fond doré.' },
-        { name: '--secondary', val: '#1E2D38', darkVal: '#8E9FB0', label: 'Marine Profond', desc: 'Le sérieux de l’analyse, utilisé pour l’ancrage et la structure.' },
-        { name: '--tertiary', val: '#5A455C', darkVal: '#A68AA9', label: 'Prune Velours', desc: 'Nuances complémentaires pour enrichir les profils ou concepts.' },
-        { name: '--background', val: '#FDFCF7', darkVal: '#0D0E12', label: 'Papier / Fond', desc: 'Texture papier parchemin en clair, encre nuit profonde en sombre.' },
-        { name: '--on-background', val: '#12131A', darkVal: '#F4F2EB', label: 'Encre / Texte', desc: 'Contenu principal, contrasté pour une lecture prolongée.' },
+        { name: '--primary', label: 'Accent principal', desc: 'Actions principales, états actifs et liens importants.' },
+        { name: '--on-primary', label: 'Texte sur Or', desc: 'Couleur de contraste pour le texte posé sur un fond doré.' },
+        { name: '--secondary', label: 'Marine Profond', desc: 'Le sérieux de l’analyse, utilisé pour l’ancrage et la structure.' },
+        { name: '--tertiary', label: 'Prune Velours', desc: 'Nuances complémentaires pour enrichir les profils ou concepts.' },
+        { name: '--background', label: 'Papier / Fond', desc: 'Texture papier parchemin en clair, encre nuit profonde en sombre.' },
+        { name: '--on-background', label: 'Encre / Texte', desc: 'Contenu principal, contrasté pour une lecture prolongée.' },
       ],
     },
     {
       group: 'Surfaces & Conteneurs',
       description: 'Déclinaisons de teintes de fond pour hierarchiser les panneaux sans alourdir.',
       items: [
-        { name: '--surface', val: '#FDFCF7', darkVal: '#0D0E12', label: 'Surface de base', desc: 'Fond général équivalent au papier de la page.' },
-        { name: '--surface-container-lowest', val: '#FFFFFF', darkVal: '#050608', label: 'Container Très Clair', desc: 'Cartes et boutons de premier plan.' },
-        { name: '--surface-container-low', val: '#F7F5EE', darkVal: '#131419', label: 'Container Bas', desc: 'Cartes secondaires ou fond discret au hover.' },
-        { name: '--surface-container', val: '#F1EFE6', darkVal: '#1A1C22', label: 'Container Moyen', desc: 'Zones de fond secondaires et rails.' },
-        { name: '--surface-container-high', val: '#EAE6DB', darkVal: '#22242B', label: 'Container Haut', desc: 'Bordures et séparations denses.' },
-        { name: '--surface-container-highest', val: '#E0DBD0', darkVal: '#2D3039', label: 'Container Très Haut', desc: 'Surfaces d’accentuation locale.' },
+        { name: '--surface', label: 'Surface de base', desc: 'Fond général équivalent au papier de la page.' },
+        { name: '--surface-container-lowest', label: 'Container Très Clair', desc: 'Cartes et boutons de premier plan.' },
+        { name: '--surface-container-low', label: 'Container Bas', desc: 'Cartes secondaires ou fond discret au hover.' },
+        { name: '--surface-container', label: 'Container Moyen', desc: 'Zones de fond secondaires et rails.' },
+        { name: '--surface-container-high', label: 'Container Haut', desc: 'Bordures et séparations denses.' },
+        { name: '--surface-container-highest', label: 'Container Très Haut', desc: 'Surfaces d’accentuation locale.' },
       ],
     },
     {
       group: 'États Sémantiques & Contours',
       description: 'Signaux d’erreur, de réussite, de contours et séparateurs.',
       items: [
-        { name: '--success', val: '#3E7C6A', darkVal: '#7FBBA8', label: 'Succès / Validation', desc: 'Feedback positif, validation de quiz ou sauvegardes.' },
-        { name: '--error', val: '#B5544E', darkVal: '#E5928B', label: 'Erreur / Alerte', desc: 'Feedback négatif, champs invalides ou suppressions.' },
-        { name: '--outline', val: '#8B8370', darkVal: '#6E685B', label: 'Contours majeurs', desc: 'Bordures structurantes et lignes d’écriture.' },
-        { name: '--outline-variant', val: '#D9D2C2', darkVal: '#3F3C34', label: 'Séparateurs fins', desc: 'Lignes de séparation de listes, divisions éditoriales.' },
+        { name: '--success', label: 'Succès / Validation', desc: 'Feedback positif, validation de quiz ou sauvegardes.' },
+        { name: '--error', label: 'Erreur / Alerte', desc: 'Feedback négatif, champs invalides ou suppressions.' },
+        { name: '--outline', label: 'Contours majeurs', desc: 'Bordures structurantes et lignes d’écriture.' },
+        { name: '--outline-variant', label: 'Séparateurs fins', desc: 'Lignes de séparation de listes, divisions éditoriales.' },
       ],
     },
   ];
@@ -97,7 +133,7 @@ export default function DesignSystemShowcasePage() {
   ] as const;
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div ref={catalogueRef} className="min-h-screen bg-background pb-24">
       {/* Graticule Background Effect */}
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[500px]">
         <Graticule className="h-full w-full opacity-10" />
@@ -106,17 +142,20 @@ export default function DesignSystemShowcasePage() {
       <div className="mx-auto max-w-[var(--content-max)] px-4 pt-10 sm:px-6 lg:px-8">
         {/* Editorial Header */}
         <header className="relative isolate mb-12 flex flex-col items-center justify-center py-6 text-center">
+          <h1 className="sr-only">Catalogue de design</h1>
           <MapCartouche
             title="Design System"
-            sub="VC Premium Platform · MMXXVI"
+            sub="Maison Sapience VC"
             width={340}
-            className="mb-6 drop-shadow-editorial-sm"
+            className="mb-6 h-auto w-[340px] drop-shadow-editorial-sm"
           />
           <p className="max-w-2xl font-body text-base leading-relaxed text-surface-variant">
-            Ce catalogue présente les fondations visuelles et composants de la plateforme. 
-            Il matérialise l'ambiance <span className="italic">« carnet d'explorateur et atlas cartographique »</span> 
-            qui évite le rendu générique des SaaS classiques au profit d'un luxe éditorial sobre.
+            Exemples de composants et de styles appliqués. Les légendes de couleur et de typographie sont lues dans le navigateur.
+            Les boutons de démonstration sont sans effet ; les liens, le choix du thème et le curseur de progression sont utilisables.
           </p>
+          <Button variant="ghost" onClick={toggle} className="mt-5">
+            {theme === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre'}
+          </Button>
           <FleuronDivider className="mt-8" />
         </header>
 
@@ -130,7 +169,8 @@ export default function DesignSystemShowcasePage() {
                 <button
                   key={sec.id}
                   onClick={() => setActiveTab(sec.id)}
-                  aria-current={isActive ? 'page' : undefined}
+                  type="button"
+                  aria-pressed={isActive}
                   className={`flex items-center gap-2 border-b-2 px-3 py-4 font-headline text-lg font-medium transition-colors ${
                     isActive
                       ? 'border-[color:var(--primary)] text-[color:var(--primary)]'
@@ -146,7 +186,7 @@ export default function DesignSystemShowcasePage() {
         </div>
 
         {/* Dynamic Section Renderer */}
-        <div className="grid gap-12">
+        <div className="grid min-w-0 grid-cols-1 gap-12">
 
           {/* 1. COLORS SECTION */}
           {activeTab === 'colors' && (
@@ -155,7 +195,7 @@ export default function DesignSystemShowcasePage() {
                 <SectionHeading
                   eyebrow="Tons & contrastes"
                   title="Une palette inspirée du livre ancien"
-                  description="La charte s'appuie sur la feuille d'or, le marine profond des cartes marines et le parchemin. Activez le mode sombre de la barre latérale pour observer la bascule des tokens."
+                  description="La charte s'appuie sur la feuille d'or, le marine profond des cartes marines et le parchemin. Utilisez le choix du thème en haut du catalogue pour lire les valeurs appliquées."
                 />
               </div>
 
@@ -176,11 +216,9 @@ export default function DesignSystemShowcasePage() {
                           <div>
                             {/* Color Preview Block */}
                             <div
+                              data-color-token={token.name}
                               className="h-16 w-full rounded-lg border border-outline-variant shadow-editorial-xs flex items-center justify-end px-3 font-mono text-[0.65rem]"
-                              style={{
-                                backgroundColor: `var(${token.name})`,
-                                color: token.name.includes('--on-') || token.name === '--secondary' || token.name === '--tertiary' || token.name === '--error' || token.name === '--success' ? '#FFFFFF' : '#12131A'
-                              }}
+                              style={{ backgroundColor: `var(${token.name})` }}
                             >
                               <span className="rounded bg-black/40 px-1.5 py-0.5 text-white backdrop-blur-sm">
                                 {token.name}
@@ -194,9 +232,8 @@ export default function DesignSystemShowcasePage() {
                             </div>
                           </div>
 
-                          <div className="mt-4 border-t border-outline-variant/40 pt-3 flex items-center justify-between text-[0.65rem] font-mono text-surface-variant">
-                            <span>Clair: {token.val}</span>
-                            <span>Sombre: {token.darkVal}</span>
+                          <div className="mt-4 border-t border-outline-variant pt-3 flex items-center justify-between text-[0.65rem] font-mono text-surface-variant">
+                            <span>Valeur calculée ({theme === 'dark' ? 'sombre' : 'clair'}) : {computedValues[token.name] ?? 'Lecture…'}</span>
                           </div>
                         </div>
                       ))}
@@ -211,7 +248,7 @@ export default function DesignSystemShowcasePage() {
                 <div className="space-y-1">
                   <h4 className="font-headline text-sm font-semibold">Technique : Utilisation de color-mix</h4>
                   <p className="text-xs leading-relaxed text-surface-variant">
-                    Pour préserver la cohérence chromatique et autoriser la transparence, nous n'utilisons jamais les modificateurs d'opacité Tailwind par défaut (ex: <code className="bg-surface px-1">bg-primary/20</code>). Nous exploitons exclusivement la fonction CSS <code className="bg-surface px-1">color-mix(in srgb, var(--primary) 20%, transparent)</code> afin que les navigateurs calculent proprement la transparence par-dessus les parchemins et ciels étoilés.
+                    Avec les variables de couleur actuelles, les formes telles que <code className="bg-surface px-1">bg-primary/20</code> ne génèrent pas de règle dans Tailwind 3. Utilisez <code className="bg-surface px-1">color-mix(in srgb, var(--primary) 20%, transparent)</code> pour ces couleurs. Des usages historiques restent à corriger dans l'application ; vérifiez le style calculé.
                   </p>
                 </div>
               </div>
@@ -238,7 +275,7 @@ export default function DesignSystemShowcasePage() {
                     <p className="font-mono text-[0.625rem] text-surface-variant uppercase tracking-wider">Titres & Citations (`font-headline`)</p>
                   </div>
                   <p className="text-xs text-surface-variant leading-relaxed">
-                    Une police Serif à fort caractère éditorial. Ses italiques sont soignés pour marquer l'introspection ou le classicisme d'une citation. Pas de graisse 300.
+                    Newsreader est utilisée pour les titres et certains accents éditoriaux. Les faces chargées sont définies par les imports de global.css.
                   </p>
                   <div className="space-y-2 pt-2">
                     <p className="font-headline text-2xl">L'Ikigai du venture</p>
@@ -254,11 +291,11 @@ export default function DesignSystemShowcasePage() {
                     <p className="font-mono text-[0.625rem] text-surface-variant uppercase tracking-wider">Corps & Contrôles (`font-body`)</p>
                   </div>
                   <p className="text-xs text-surface-variant leading-relaxed">
-                    Une police Sans-Serif moderne et géométrique, extrêmement lisible à petite taille sur écran pour les formulaires, textes de cours et paramètres.
+                    Plus Jakarta Sans est utilisée pour le corps des textes et les commandes. La lisibilité dépend aussi de la taille, du contraste et de l’interligne.
                   </p>
                   <div className="space-y-2 pt-2">
                     <p className="font-body text-sm font-semibold">Bouton de validation</p>
-                    <p className="font-body text-sm text-surface-variant">Lisez les chapitres à votre propre rythme, sans authentification obligatoire.</p>
+                    <p className="font-body text-sm text-surface-variant">Lisez les chapitres à votre propre rythme, sans authentification.</p>
                   </div>
                 </div>
 
@@ -284,24 +321,25 @@ export default function DesignSystemShowcasePage() {
                 <div className="bg-surface-container-low px-6 py-4 border-b border-outline-variant">
                   <h3 className="font-headline text-lg font-semibold">Échelle de taille et classes d'accent</h3>
                 </div>
-                <div className="divide-y divide-outline-variant/60 overflow-x-auto">
+                <div className="divide-y divide-outline-variant overflow-x-auto">
                   {[
-                    { label: 'text-display-lg', font: 'font-headline', size: '2.6rem / 3.75rem', sample: 'Grand Héros', desc: 'Héros de page d’accueil' },
-                    { label: 'text-display-md', font: 'font-headline', size: '2.25rem', sample: 'Titre de Parcours', desc: 'Titres majeurs de sections' },
-                    { label: 'text-display-sm', font: 'font-headline', size: '1.875rem', sample: 'Titre de Leçon', desc: 'Titres de chapitres courants' },
-                    { label: 'text-headline-md', font: 'font-headline', size: '1.5rem', sample: 'Titre de carte', desc: 'Entêtes de cartes éditoriales' },
-                    { label: 'text-headline-sm', font: 'font-headline', size: '1.25rem', sample: 'Sous-section', desc: 'Sous-titres dans la prose' },
-                    { label: 'prose-editorial', font: 'font-body', size: '1.0625rem / 1.85', sample: 'Le capital-risque n’est pas seulement...', desc: 'Pour les longs textes de lecture' },
-                    { label: 'eyebrow', font: 'font-mono uppercase', size: '0.6875rem / 0.32em tracking', sample: 'Explorer la carte', desc: 'Surtitre de section' },
-                    { label: 'running-head', font: 'font-headline italic uppercase', size: '0.6875rem / 0.4em tracking', sample: 'Tabula Ventura', desc: 'Accent de coin ou en-tête' },
+                    { label: 'text-display-lg', font: 'font-headline', sample: 'Grand Héros', desc: 'Héros de page d’accueil' },
+                    { label: 'text-display-md', font: 'font-headline', sample: 'Titre de Parcours', desc: 'Titres majeurs de sections' },
+                    { label: 'text-display-sm', font: 'font-headline', sample: 'Titre de Leçon', desc: 'Titres de chapitres courants' },
+                    { label: 'text-headline-md', font: 'font-headline', sample: 'Titre de carte', desc: 'Entêtes de cartes éditoriales' },
+                    { label: 'text-headline-sm', font: 'font-headline', sample: 'Sous-section', desc: 'Sous-titres dans la prose' },
+                    { label: 'prose-editorial', font: 'font-body', sample: 'Le capital-risque finance des entreprises.', desc: 'Pour les longs textes de lecture' },
+                    { label: 'eyebrow', font: 'font-mono uppercase', sample: 'Explorer la carte', desc: 'Surtitre de section' },
+                    { label: 'running-head', font: 'font-headline italic uppercase', sample: 'Tabula Ventura', desc: 'Accent de coin ou en-tête' },
                   ].map((scale) => (
                     <div key={scale.label} className="grid grid-cols-12 gap-4 p-6 items-center min-w-[700px]">
                       <div className="col-span-3">
                         <span className="font-mono text-xs font-semibold">{scale.label}</span>
-                        <p className="text-[10px] text-surface-variant font-mono mt-1">{scale.font} ({scale.size})</p>
+                        <p className="text-[10px] text-surface-variant font-mono mt-1">{scale.font}</p>
+                        <p className="text-[10px] text-surface-variant font-mono mt-1">{computedValues[scale.label] ?? 'Lecture du style…'}</p>
                       </div>
                       <div className="col-span-6">
-                        <span className={`${scale.font} ${scale.label === 'eyebrow' ? 'eyebrow' : scale.label === 'running-head' ? 'running-head' : scale.label === 'prose-editorial' ? 'prose-editorial' : scale.label}`}>
+                        <span data-type-token={scale.label} className={`${scale.font} ${scale.label === 'eyebrow' ? 'eyebrow' : scale.label === 'running-head' ? 'running-head' : scale.label === 'prose-editorial' ? 'prose-editorial' : scale.label}`}>
                           {scale.sample}
                         </span>
                       </div>
@@ -387,7 +425,7 @@ export default function DesignSystemShowcasePage() {
                     <h3 className="font-headline text-lg font-semibold">Bouton Contraste</h3>
                     <p className="font-mono text-[0.625rem] text-surface-variant uppercase mt-1">`.btn-ghost` / variant="ghost"</p>
                     <p className="text-xs text-surface-variant mt-2 leading-relaxed">
-                      Pour les actions secondaires mais visibles (ex: voir les chapitres alternatifs, retour au dictionnaire). Bordure fine et fond semi-opaque.
+                      Pour les actions secondaires mais visibles (ex: voir les chapitres alternatifs, retour au dictionnaire). Bordure fine et fond de surface.
                     </p>
                   </div>
 
@@ -398,7 +436,7 @@ export default function DesignSystemShowcasePage() {
                   </div>
 
                   <div className="text-[10px] text-surface-variant font-mono">
-                    Hover: Transition vers fond opaque + Translation Y-0.5
+                    Survol : surface plus contrastée et léger déplacement vertical
                   </div>
                 </div>
 
@@ -474,7 +512,7 @@ export default function DesignSystemShowcasePage() {
                   </div>
 
                   <p className="text-xs text-surface-variant leading-relaxed">
-                    Les indicateurs de progression (`ProgressBar` & `ProgressRing`) acceptent une couleur d'accentuation liée au parcours thématique.
+                    Les indicateurs acceptent une couleur d’accent. Le pourcentage ci-dessous est fictif et piloté par le curseur ; il ne modifie aucune progression enregistrée.
                   </p>
 
                   <div className="space-y-4 pt-2">
@@ -564,17 +602,14 @@ export default function DesignSystemShowcasePage() {
 
                 <div className="premium-card p-6 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono text-surface-variant block mb-4">Chargement de page (`PageLoader` & `Spinner`)</span>
+                    <span className="text-[10px] font-mono text-surface-variant block mb-4">Chargement de page (`PageLoader`)</span>
                     <p className="text-xs text-surface-variant leading-relaxed mb-6">
-                      Des indicateurs de chargement non intrusifs dotés de contours à animer en CSS pour une navigation sans saccade.
+                      PageLoader annonce le chargement avec un statut nommé. Spinner est décoratif et ne fournit pas cette annonce à lui seul.
                     </p>
                   </div>
                   
                   <div className="rounded-xl border border-outline-variant bg-surface px-6 py-8 flex items-center justify-center">
-                    <div className="flex flex-col items-center gap-2">
-                      <Spinner className="h-6 w-6 text-[color:var(--primary)]" />
-                      <span className="font-mono text-[10px] text-surface-variant">Chargement du carnet de voyage...</span>
-                    </div>
+                    <PageLoader label="Chargement du catalogue…" />
                   </div>
                 </div>
               </div>
@@ -610,14 +645,14 @@ export default function DesignSystemShowcasePage() {
                       </div>
                     </div>
 
-                    <div className="premium-card premium-card-hover p-5 cursor-pointer">
-                      <h4 className="font-headline text-lg font-semibold group-hover:text-[color:var(--primary)]">Carte réactive cliquable</h4>
-                      <p className="text-sm text-surface-variant mt-1">Survolez-moi pour observer l'élévation d'encre.</p>
+                    <Link to="/parcours" className="premium-card premium-card-hover group block p-5">
+                      <h4 className="font-headline text-lg font-semibold group-hover:text-[color:var(--primary)]">Carte avec lien</h4>
+                      <p className="text-sm text-surface-variant mt-1">Ouvre l’index des parcours. Accessible au clavier.</p>
                       <div className="mt-4 flex items-center justify-between text-xs text-surface-variant">
                         <span className="text-[color:var(--primary)] font-semibold">Explorer →</span>
-                        <span>Interactif</span>
+                        <span>Lien réel</span>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </div>
 
@@ -628,9 +663,9 @@ export default function DesignSystemShowcasePage() {
                     Le rail de navigation latérale utilise du verre dépoli. Replié, il est quasi-opaque. Ouvert, il flotte en overlay avec une ombre prononcée, une arête interne lumineuse et un flou modéré (<code className="bg-surface-container px-1">blur(14px)</code>).
                   </p>
 
-                  <div className="rounded-xl border border-outline-variant bg-surface-container/30 p-6 flex flex-col justify-center items-center relative min-h-[200px] overflow-hidden">
+                  <div className="rounded-xl border border-outline-variant bg-surface-container p-6 flex flex-col justify-center items-center relative min-h-[200px] overflow-hidden">
                     {/* Simulated content behind */}
-                    <div className="text-[9px] font-mono text-surface-variant/40 space-y-1 select-none">
+                    <div className="text-[9px] font-mono text-surface-variant space-y-1 select-none">
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                       <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
@@ -638,7 +673,7 @@ export default function DesignSystemShowcasePage() {
                     </div>
 
                     {/* Simulated closed rail */}
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-32 rounded-lg border border-outline-variant/40 glass-rail shadow-none flex items-center justify-center">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-32 rounded-lg border border-outline-variant glass-rail shadow-none flex items-center justify-center">
                       <span className="text-[10px] font-mono text-surface-variant text-center">Rail</span>
                     </div>
 
@@ -648,7 +683,7 @@ export default function DesignSystemShowcasePage() {
                       data-open="true"
                     >
                       <div>
-                        <div className="h-1.5 w-8 rounded bg-primary/40 mb-2"></div>
+                        <div className="h-1.5 w-8 rounded bg-primary mb-2"></div>
                         <span className="text-[9px] font-semibold block text-foreground">Navigation</span>
                         <span className="text-[8px] text-surface-variant block">Dépoli en overlay</span>
                       </div>
@@ -667,7 +702,7 @@ export default function DesignSystemShowcasePage() {
                 <SectionHeading
                   eyebrow="Mood & boussole"
                   title="Le langage cartographique"
-                  description="Des ornements dessinés à la main en SVG, sensibles au thème clair/sombre, qui apportent l'esprit atlas à la plateforme."
+                  description="Ornements en SVG et CSS : boussole, sceaux, séparateurs et fonds cartographiques."
                 />
               </div>
 
@@ -679,7 +714,7 @@ export default function DesignSystemShowcasePage() {
                     <CompassRose size={100} />
                   </div>
                   <p className="text-xs text-surface-variant">
-                    Survolez la boussole pour qu'elle s'oriente automatiquement d'un quart de tour, imitant le comportement d'une aiguille s'alignant sur un relèvement.
+                    Le survol fait pivoter cet ornement. Le comportement et son amplitude sont définis dans CompassRose ; ce décor ne déclenche aucune action.
                   </p>
                 </div>
 
@@ -752,16 +787,14 @@ export default function DesignSystemShowcasePage() {
 
               {/* NightSkyBackdrop Demonstration */}
               <div className="premium-card overflow-hidden relative isolate p-8 min-h-[220px] flex flex-col justify-end">
-                {/* Simulated Dark Mode Backdrop inside card for demo */}
-                <div className="pointer-events-none absolute inset-0 -z-10 bg-[#0D0E12]" />
-                <NightSkyBackdrop variant="panel" className="block" />
+                <NightSkyBackdrop variant="panel" />
                 <Constellation className="pointer-events-none absolute inset-0 opacity-40" />
 
-                <div className="max-w-xl text-white">
+                <div className="max-w-xl text-foreground">
                   <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-[color:var(--primary)]">Mode Sombre Uniquement</p>
-                  <h3 className="font-headline text-2xl font-semibold mt-2 text-white">Ciel étoilé & constellations (NightSky)</h3>
-                  <p className="text-xs text-white/70 mt-2 leading-relaxed">
-                    En mode sombre, la texture parchemin est remplacée par un fond photographique étoilé (<code className="bg-white/10 px-1 text-white">bg-sombre.webp</code>) couplé à une constellation animée en SVG pour simuler le ciel nocturne de l'explorateur.
+                  <h3 className="font-headline text-2xl font-semibold mt-2">Ciel étoilé & constellations (NightSky)</h3>
+                  <p className="text-xs text-surface-variant mt-2 leading-relaxed">
+                    Le fond photographique <code className="bg-surface-container px-1">bg-sombre.webp</code> apparaît en mode sombre. La constellation est un composant distinct, ajouté ici pour la démonstration.
                   </p>
                 </div>
               </div>

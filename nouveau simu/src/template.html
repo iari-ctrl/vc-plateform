@@ -3,6 +3,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simulateur de note d’investissement</title>
+<script>
+  const memoParams = new URLSearchParams(location.search);
+  document.documentElement.dataset.embedded = String(memoParams.get('embedded') === '1');
+  document.documentElement.classList.toggle('dark', memoParams.get('theme') === 'dark' || (!memoParams.has('theme') && matchMedia('(prefers-color-scheme: dark)').matches));
+</script>
 <script src="88e0b8f0-668d-4620-86cb-7c819fb99001"></script>
 </head>
 <body>
@@ -343,19 +348,15 @@
     [data-pagenote] { display:none !important; }
   }
 </style>
+<style>__MEMO_STYLES__</style>
 </helmet>
 <div ref="{{ rootRef }}" class="memo-app" style="--accent:{{ accent }}; --dens:{{ dens }}; font-family:'Newsreader',Georgia,serif; background:#EDEAE2; color:#16150F; height:100vh; display:flex; flex-direction:column; overflow:hidden; -webkit-font-smoothing:antialiased">
 
   <header data-chrome="1" class="memo-header" style="flex:0 0 auto; display:flex; align-items:center; gap:22px; padding:0 22px; height:58px; background:#F7F5F0; border-bottom:1px solid #DCD6C8">
-    <div class="memo-brand" style="display:flex; align-items:center; gap:11px; min-width:0">
-      <div style="width:26px; height:26px; background:#16150F; color:#F7F5F0; display:grid; place-items:center; font:600 10px/1 'JetBrains Mono',monospace; letter-spacing:.02em">NI</div>
-      <div style="display:flex; flex-direction:column; gap:2px; min-width:0">
-        <span style="font:500 9px/1 'JetBrains Mono',monospace; letter-spacing:.2em; text-transform:uppercase; color:#695F50">{{ t.appKicker }}</span>
-        <span style="font:500 15px/1 'Newsreader',serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ headerTitle }}</span>
-      </div>
+    <div class="memo-brand">
+      <span class="memo-brand-label">{{ t.appKicker }}</span>
+      <p class="memo-brand-title">{{ headerTitle }}</p>
     </div>
-
-    <div class="memo-header-spacer" style="flex:1 1 auto"></div>
 
     <div class="memo-segment memo-mode-switch" style="display:flex; align-items:center; gap:3px; padding:3px; background:#EAE6DC; border:1px solid #DCD6C8">
       <button type="button" aria-pressed="{{ modeFullSelected }}" sc-camel-on-click="{{ setModeFull }}" style="{{ st.modeFull }}">{{ t.modeFull }}</button>
@@ -367,17 +368,42 @@
       <button type="button" aria-pressed="{{ viewPreviewSelected }}" sc-camel-on-click="{{ setViewPreview }}" style="{{ st.viewPreview }}">{{ t.viewPreview }}</button>
     </div>
 
+    <div id="memo-platform-actions" class="memo-platform-actions"></div>
     <button type="button" class="memo-lang" aria-label="{{ langA11y }}" sc-camel-on-click="{{ toggleLang }}" style="font:500 10px/1 'JetBrains Mono',monospace; letter-spacing:.12em; color:#4A4539; background:transparent; border:1px solid #DCD6C8; padding:8px 10px; cursor:pointer" style-hover="border-color:#16150F; color:#16150F">{{ langLabel }}</button>
 
     <button type="button" class="memo-export" sc-camel-on-click="{{ doExport }}" style="display:flex; align-items:center; gap:8px; font:500 10px/1 'JetBrains Mono',monospace; letter-spacing:.14em; text-transform:uppercase; color:#F7F5F0; background:#16150F; border:1px solid #16150F; padding:9px 14px; cursor:pointer" style-hover="background:var(--accent,#8A2B22); border-color:var(--accent,#8A2B22)">{{ t.exportPdf }}</button>
+    <div class="memo-save-bar">
+      <div class="memo-save-note">
+        <span role="status" aria-atomic="true">{{ t.localNote }}</span>
+        <span>{{ t.confidentialityNote }}</span>
+      </div>
+      <button type="button" class="memo-copy" ref="{{ copyButtonRef }}" disabled="{{ copyBusy }}" aria-busy="{{ copyBusy }}" sc-camel-on-click="{{ copyDraft }}">{{ t.copyDraft }}</button>
+      <span class="memo-copy-notice" role="status" aria-atomic="true">{{ copyNotice }}</span>
+    </div>
   </header>
 
   <sc-if value="{{ storageError }}" hint-placeholder-val="{{ false }}">
     <div data-chrome="1" class="memo-storage-alert" role="alert" style="flex:0 0 auto; padding:9px 16px; color:#63251F; background:#F2DED9; border-bottom:1px solid #C89991; font:500 12px/1.4 'Newsreader',serif">{{ storageError }}</div>
   </sc-if>
 
+  <sc-if value="{{ copyFallback }}" hint-placeholder-val="{{ false }}">
+    <section class="memo-copy-fallback" data-chrome="1" aria-labelledby="memo-copy-label">
+      <p id="memo-copy-help">{{ t.copyHelp }}</p>
+      <label for="memo-copy-text" id="memo-copy-label">{{ t.copyText }}</label>
+      <textarea id="memo-copy-text" ref="{{ copyTextRef }}" readonly="true" value="{{ draftText }}" aria-describedby="memo-copy-help" spellcheck="false"></textarea>
+      <button type="button" sc-camel-on-click="{{ closeCopy }}">{{ t.closeCopy }}</button>
+    </section>
+  </sc-if>
+
   <sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
   <div data-screen-label="Saisie" class="memo-workspace" style="flex:1 1 auto; display:grid; position:relative; grid-template-columns:{{ gridCols }}; min-height:0">
+
+    <div class="memo-step-select" data-chrome="1">
+      <label for="memo-step">{{ t.railTitle }} · {{ stepNum }} / {{ stepTotal }}</label>
+      <select id="memo-step" value="{{ stepIndex }}" sc-camel-on-change="{{ selectStep }}">
+        <sc-for list="{{ rail }}" as="b" hint-placeholder-count="10"><option value="{{ b.index }}">{{ b.num }} · {{ b.name }} — {{ b.progress }}</option></sc-for>
+      </select>
+    </div>
 
     <nav data-chrome="1" class="memo-rail" aria-label="{{ t.railTitle }}" data-open="{{ leftOpen }}" style="border-right:1px solid #DCD6C8; background:#F2EFE9; overflow:auto; padding:20px 0 40px">
       <sc-if value="{{ leftOpen }}" hint-placeholder-val="{{ true }}">
@@ -391,13 +417,14 @@
           <span style="font:500 9.5px/1 'JetBrains Mono',monospace; color:{{ b.numColor }}; padding-top:3px; min-width:16px">{{ b.num }}</span>
           <span style="flex:1 1 auto; display:flex; flex-direction:column; gap:6px; min-width:0">
             <span style="display:flex; align-items:baseline; gap:8px">
-              <span style="font:{{ b.nameWeight }} 15px/1.25 'Newsreader',serif; text-align:left">{{ b.name }}</span>
+              <span class="memo-block-name" style="font:{{ b.nameWeight }} 15px/1.25 'Newsreader',serif; text-align:left">{{ b.name }}</span>
               <span style="flex:1 1 auto"></span>
-              <span style="font:400 8.5px/1 'JetBrains Mono',monospace; color:#695F50; letter-spacing:.06em">{{ b.share }}</span>
+              <span class="memo-block-share" style="font:400 8.5px/1 'JetBrains Mono',monospace; color:#695F50; letter-spacing:.06em">{{ b.share }}</span>
             </span>
             <span style="height:2px; background:#DFD9CB; width:100%; display:block">
               <span style="display:block; height:2px; width:{{ b.pct }}%; background:{{ b.barColor }}"></span>
             </span>
+            <span class="memo-progress">{{ b.progress }}</span>
           </span>
         </button>
       </sc-for>
@@ -410,17 +437,21 @@
     <main class="memo-form" style="overflow-y:auto; padding:44px 0 90px">
 
       <div class="memo-main-toolbar" style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:0 22px; font:500 9px/1 'JetBrains Mono',monospace; letter-spacing:.2em; text-transform:uppercase; color:#695F50">
-        <button type="button" data-pane-toggle="left" aria-expanded="{{ leftOpen }}" aria-controls="memo-block-list" sc-camel-on-click="{{ toggleLeft }}" data-chrome="1" style="font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; background:transparent; border:0; border-bottom:1px dotted #DCD6C8; padding:0 0 2px; cursor:pointer" style-hover="color:#16150F; border-bottom-color:#16150F">{{ t.block }} {{ stepNum }} / {{ stepTotal }}</button>
-        <button type="button" data-pane-toggle="right" aria-expanded="{{ rightOpen }}" aria-controls="memo-guidance-content" sc-camel-on-click="{{ toggleRight }}" data-chrome="1" style="font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; background:transparent; border:0; border-bottom:1px dotted #DCD6C8; padding:0 0 2px; cursor:pointer; text-align:right" style-hover="color:#16150F; border-bottom-color:#16150F">{{ activeShare }}</button>
+        <button type="button" data-pane-toggle="left" aria-label="{{ leftToggleLabel }}" aria-expanded="{{ leftOpen }}" aria-controls="memo-block-list" sc-camel-on-click="{{ toggleLeft }}" data-chrome="1" style="font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; background:transparent; border:0; border-bottom:1px dotted #DCD6C8; padding:0 0 2px; cursor:pointer" style-hover="color:#16150F; border-bottom-color:#16150F">{{ t.summary }} · {{ stepNum }} / {{ stepTotal }}</button>
+        <button type="button" data-pane-toggle="right" aria-label="{{ rightToggleLabel }}" aria-expanded="{{ rightOpen }}" aria-controls="memo-guidance-content" sc-camel-on-click="{{ toggleRight }}" data-chrome="1" style="font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; background:transparent; border:0; border-bottom:1px dotted #DCD6C8; padding:0 0 2px; cursor:pointer; text-align:right" style-hover="color:#16150F; border-bottom-color:#16150F">{{ t.review }}</button>
+        <span class="memo-completeness">{{ t.completeness }} : {{ score }} %</span>
+        <span class="memo-share">{{ activeShare }}</span>
       </div>
 
     <div class="memo-form-inner" style="max-width:660px; margin:0 auto; padding:0 40px">
 
         <h1 ref="{{ headingRef }}" tabindex="-1" style="margin:14px 0 0; font:400 37px/1.1 'Newsreader',serif; letter-spacing:-.015em">{{ activeName }}</h1>
+        <div class="memo-progress" role="status">{{ activeProgress }}</div>
         <p style="margin:14px 0 0; max-width:56ch; font:400 15.5px/1.6 'Newsreader',serif; font-style:italic; color:#6B6558; text-wrap:pretty">{{ activeHint }}</p>
-        <div style="height:1px; background:#DCD6C8; margin:30px 0 34px"></div>
+        <div class="memo-form-rule" style="height:1px; background:#DCD6C8; margin:30px 0 34px"></div>
 
         <sc-if value="{{ at.reco }}" hint-placeholder-val="{{ true }}">
+          <span class="memo-expected">{{ expected.reco }}</span>
           <div style="display:flex; flex-direction:column; gap:34px">
             <div class="memo-reco-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px">
               <sc-for list="{{ recoOptions }}" as="o" hint-placeholder-count="3">
@@ -434,6 +465,7 @@
 
             <label style="display:flex; flex-direction:column; gap:9px">
               <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblRecoWhy }}</span>
+              <span class="memo-expected">{{ expected.recoWhy }}</span>
               <textarea rows="2" value="{{ d.recoWhy }}" sc-camel-on-change="{{ set.recoWhy }}" placeholder="{{ t.phRecoWhy }}" style="font:400 19px/1.5 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:6px 0 12px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
             </label>
           </div>
@@ -444,14 +476,17 @@
             <div class="memo-field-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:26px 30px">
               <label style="display:flex; flex-direction:column; gap:9px">
                 <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblCompany }}</span>
+                <span class="memo-expected">{{ expected.company }}</span>
                 <input value="{{ d.company }}" sc-camel-on-change="{{ set.company }}" placeholder="{{ t.phCompany }}" style="font:500 21px/1.3 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:4px 0 9px; outline:none; width:100%" style-focus="border-bottom-color:var(--accent,#8A2B22)">
               </label>
               <label style="display:flex; flex-direction:column; gap:9px">
                 <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblAuthor }}</span>
+                <span class="memo-expected">{{ expected.author }}</span>
                 <input value="{{ d.author }}" sc-camel-on-change="{{ set.author }}" placeholder="{{ t.phAuthor }}" style="font:400 17px/1.3 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:6px 0 9px; outline:none; width:100%" style-focus="border-bottom-color:var(--accent,#8A2B22)">
               </label>
               <label style="display:flex; flex-direction:column; gap:9px">
                 <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblDate }}</span>
+                <span class="memo-expected">{{ expected.date }}</span>
                 <input type="date" value="{{ d.date }}" sc-camel-on-change="{{ set.date }}" style="font:400 13px/1.3 'JetBrains Mono',monospace; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:8px 0 9px; outline:none; width:100%" style-focus="border-bottom-color:var(--accent,#8A2B22)">
               </label>
               <label style="display:flex; flex-direction:column; gap:9px">
@@ -465,6 +500,7 @@
               <div class="memo-field-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:24px 30px; padding-top:22px">
                 <label style="display:flex; flex-direction:column; gap:9px">
                   <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblRound }}</span>
+                  <span class="memo-expected">{{ expected.round }}</span>
                   <input value="{{ d.round }}" sc-camel-on-change="{{ set.round }}" placeholder="{{ t.phRound }}" style="font:400 17px/1.3 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:6px 0 9px; outline:none; width:100%" style-focus="border-bottom-color:var(--accent,#8A2B22)">
                 </label>
                 <label style="display:flex; flex-direction:column; gap:9px">
@@ -475,6 +511,7 @@
               <div class="memo-field-grid-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:30px; padding-top:24px">
                 <label style="display:flex; flex-direction:column; gap:9px">
                   <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblAmount }}</span>
+                  <span class="memo-expected">{{ expected.amount }}</span>
                   <span style="display:flex; align-items:baseline; gap:7px; border-bottom:1px solid #DCD6C8; padding:6px 0 9px">
                     <input id="memo-amount" aria-label="{{ t.lblAmount }}" aria-invalid="{{ numericHelp.amount.invalid }}" aria-describedby="memo-amount-help" inputmode="decimal" value="{{ d.amount }}" sc-camel-on-change="{{ set.amount }}" placeholder="0" style="font:400 21px/1.2 'JetBrains Mono',monospace; color:#16150F; background:transparent; border:0; outline:none; width:100%; min-width:0">
                     <span style="font:400 11px/1 'JetBrains Mono',monospace; color:#695F50">{{ t.cur }}</span>
@@ -483,6 +520,7 @@
                 </label>
                 <label style="display:flex; flex-direction:column; gap:9px">
                   <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblPre }}</span>
+                  <span class="memo-expected">{{ expected.preMoney }}</span>
                   <span style="display:flex; align-items:baseline; gap:7px; border-bottom:1px solid #DCD6C8; padding:6px 0 9px">
                     <input id="memo-preMoney" aria-label="{{ t.lblPre }}" aria-invalid="{{ numericHelp.preMoney.invalid }}" aria-describedby="memo-preMoney-help" inputmode="decimal" value="{{ d.preMoney }}" sc-camel-on-change="{{ set.preMoney }}" placeholder="0" style="font:400 21px/1.2 'JetBrains Mono',monospace; color:#16150F; background:transparent; border:0; outline:none; width:100%; min-width:0">
                     <span style="font:400 11px/1 'JetBrains Mono',monospace; color:#695F50">{{ t.cur }}</span>
@@ -491,6 +529,7 @@
                 </label>
                 <label style="display:flex; flex-direction:column; gap:9px">
                   <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblTicket }}</span>
+                  <span class="memo-expected">{{ expected.ticket }}</span>
                   <span style="display:flex; align-items:baseline; gap:7px; border-bottom:1px solid #16150F; padding:6px 0 9px">
                     <input id="memo-ticket" aria-label="{{ t.lblTicket }}" aria-invalid="{{ numericHelp.ticket.invalid }}" aria-describedby="memo-ticket-help" inputmode="decimal" value="{{ d.ticket }}" sc-camel-on-change="{{ set.ticket }}" placeholder="0" style="font:400 21px/1.2 'JetBrains Mono',monospace; color:#16150F; background:transparent; border:0; outline:none; width:100%; min-width:0">
                     <span style="font:400 11px/1 'JetBrains Mono',monospace; color:#695F50">{{ t.cur }}</span>
@@ -513,8 +552,9 @@
         <sc-if value="{{ at.activity }}" hint-placeholder-val="{{ false }}">
           <label style="display:flex; flex-direction:column; gap:9px">
             <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblActivity }}</span>
+            <span class="memo-expected">{{ expected.activity }}</span>
             <textarea rows="3" value="{{ d.activity }}" sc-camel-on-change="{{ set.activity }}" placeholder="{{ t.phActivity }}" style="font:400 19px/1.55 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:6px 0 12px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
-            <span style="font:400 11.5px/1.5 'Newsreader',serif; font-style:italic; color:#695F50; margin-top:4px">{{ t.activityCount }}</span>
+
           </label>
         </sc-if>
 
@@ -526,6 +566,7 @@
                   <span style="display:flex; align-items:baseline; gap:9px">
                     <span style="font:500 15px/1.3 'Newsreader',serif; font-style:italic; color:var(--accent,#8A2B22); min-width:52px">{{ f.connector }}</span>
                     <span style="font:500 9px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ f.label }}</span>
+                    <span class="memo-expected">{{ f.expected }}</span>
                   </span>
                   <textarea rows="1" value="{{ f.value }}" sc-camel-on-change="{{ f.onChange }}" placeholder="{{ f.ph }}" style="font:400 18px/1.5 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:4px 0 9px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
                 </label>
@@ -540,6 +581,7 @@
             <label style="display:flex; flex-direction:column; gap:9px; padding-top:6px">
               <span style="display:flex; align-items:baseline; gap:10px">
                 <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:var(--accent,#8A2B22)">{{ t.lblFalsify }}</span>
+                <span class="memo-expected">{{ expected.falsifiedIf }}</span>
                 <span style="font:400 11.5px/1.4 'Newsreader',serif; font-style:italic; color:#695F50">{{ t.falsifyNote }}</span>
               </span>
               <textarea rows="2" value="{{ d.falsifiedIf }}" sc-camel-on-change="{{ set.falsifiedIf }}" placeholder="{{ t.phFalsify }}" style="font:400 18px/1.55 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #16150F; padding:6px 0 12px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
@@ -555,15 +597,18 @@
                 <div style="display:flex; flex-direction:column; gap:14px; min-width:0">
                   <label class="memo-row-field">
                     <span class="memo-row-label">{{ f.textLabel }}</span>
+                    <span class="memo-expected">{{ f.textExpected }}</span>
                     <textarea rows="1" value="{{ f.text }}" sc-camel-on-change="{{ f.onText }}" placeholder="{{ f.ph }}" style="font:400 18px/1.5 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:4px 0 9px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
                   </label>
                   <div class="memo-row-meta" style="display:grid; grid-template-columns:minmax(0,1.5fr) 132px auto auto; gap:12px; align-items:center">
                     <label class="memo-row-field">
                       <span class="memo-row-label">{{ f.sourceLabel }}</span>
+                      <span class="memo-expected">{{ f.sourceExpected }}</span>
                       <input value="{{ f.source }}" sc-camel-on-change="{{ f.onSource }}" placeholder="{{ t.phSource }}" style="font:400 11.5px/1.3 'JetBrains Mono',monospace; color:#4A4539; background:transparent; border:0; border-bottom:1px solid #E4DFD3; padding:5px 0 6px; outline:none; width:100%" style-focus="border-bottom-color:#16150F">
                     </label>
                     <label class="memo-row-field">
                       <span class="memo-row-label">{{ f.dateLabel }}</span>
+                      <span class="memo-expected">{{ f.dateExpected }}</span>
                       <input type="date" value="{{ f.date }}" sc-camel-on-change="{{ f.onDate }}" style="font:400 11px/1.3 'JetBrains Mono',monospace; color:#4A4539; background:transparent; border:0; border-bottom:1px solid #E4DFD3; padding:5px 0 6px; outline:none; width:100%" style-focus="border-bottom-color:#16150F">
                     </label>
                     <span role="group" aria-label="{{ f.statusLabel }}" style="display:flex; gap:0; border:1px solid #E4DFD3">
@@ -588,6 +633,7 @@
               <div style="display:flex; flex-direction:column; gap:11px; padding:22px 24px; background:#F7F5F0; border-left:2px solid #16150F">
                 <label style="display:flex; flex-direction:column; gap:11px">
                   <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#16150F">{{ p.label }}</span>
+                  <span class="memo-expected">{{ p.expected }}</span>
                   <textarea rows="2" value="{{ p.value }}" sc-camel-on-change="{{ p.onChange }}" placeholder="{{ p.ph }}" style="font:400 18px/1.55 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:4px 0 10px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
                 </label>
                 <span style="display:flex; align-items:center; gap:11px; padding-top:4px">
@@ -639,11 +685,13 @@
                 <div style="display:flex; flex-direction:column; gap:13px; min-width:0">
                   <label class="memo-row-field">
                     <span class="memo-row-label">{{ u.questionLabel }}</span>
+                    <span class="memo-expected">{{ u.questionExpected }}</span>
                     <textarea rows="1" value="{{ u.q }}" sc-camel-on-change="{{ u.onQ }}" placeholder="{{ t.phUnknown }}" style="font:400 18px/1.5 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:4px 0 9px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
                   </label>
                   <div class="memo-row-meta" style="display:grid; grid-template-columns:minmax(0,1fr) auto; gap:11px; align-items:center">
                     <label class="memo-row-field">
                       <span class="memo-row-label">{{ u.verificationLabel }}</span>
+                      <span class="memo-expected">{{ u.verificationExpected }}</span>
                       <span class="memo-inline-control">
                         <span style="font:400 11px/1 'JetBrains Mono',monospace; color:#695F50; letter-spacing:.04em">{{ t.liftedBy }}</span>
                         <input value="{{ u.how }}" sc-camel-on-change="{{ u.onHow }}" placeholder="{{ t.phHow }}" style="font:400 12px/1.4 'JetBrains Mono',monospace; color:#4A4539; background:transparent; border:0; border-bottom:1px solid #E4DFD3; padding:5px 0 6px; outline:none; width:100%; min-width:0" style-focus="border-bottom-color:#16150F">
@@ -670,11 +718,13 @@
                   <div style="display:flex; flex-direction:column; gap:13px; min-width:0">
                     <label class="memo-row-field">
                       <span class="memo-row-label">{{ r.riskLabel }}</span>
+                      <span class="memo-expected">{{ r.riskExpected }}</span>
                       <textarea rows="1" value="{{ r.text }}" sc-camel-on-change="{{ r.onText }}" placeholder="{{ t.phRisk }}" style="font:400 18px/1.5 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:4px 0 9px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
                     </label>
                     <div class="memo-row-meta" style="display:grid; grid-template-columns:minmax(0,1fr) auto; gap:11px; align-items:center">
                       <label class="memo-row-field">
                         <span class="memo-row-label">{{ r.mitigationLabel }}</span>
+                        <span class="memo-expected">{{ r.mitigationExpected }}</span>
                         <span class="memo-inline-control">
                           <span style="font:400 11px/1 'JetBrains Mono',monospace; color:#695F50; letter-spacing:.04em">{{ t.mitigation }}</span>
                           <input value="{{ r.mitigation }}" sc-camel-on-change="{{ r.onMitigation }}" placeholder="{{ t.phMitigation }}" style="font:400 12px/1.4 'JetBrains Mono',monospace; color:#4A4539; background:transparent; border:0; border-bottom:1px solid #E4DFD3; padding:5px 0 6px; outline:none; width:100%; min-width:0" style-focus="border-bottom-color:#16150F">
@@ -693,6 +743,7 @@
 
             <label style="display:flex; flex-direction:column; gap:11px; padding:24px 26px; background:#16150F; color:#F0EDE5">
               <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#C9A79F">{{ t.lblBear }}</span>
+              <span class="memo-expected">{{ expected.bearCase }}</span>
               <textarea rows="3" value="{{ d.bearCase }}" sc-camel-on-change="{{ set.bearCase }}" placeholder="{{ t.phBear }}" style="font:400 18px/1.6 'Newsreader',serif; color:#F7F5F0; background:transparent; border:0; border-bottom:1px solid #4A4539; padding:4px 0 10px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:#C9A79F"></textarea>
               <span style="font:400 12px/1.55 'Newsreader',serif; font-style:italic; color:#8A8375; margin-top:4px">{{ t.bearNote }}</span>
             </label>
@@ -704,6 +755,7 @@
             <div class="memo-field-grid-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px">
               <label style="display:flex; flex-direction:column; gap:9px">
                 <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblDilution }}</span>
+                <span class="memo-expected">{{ expected.dilution }}</span>
                 <span style="display:flex; align-items:baseline; gap:7px; border-bottom:1px solid #DCD6C8; padding:6px 0 9px">
                   <input id="memo-dilution" aria-label="{{ t.lblDilution }}" aria-invalid="{{ numericHelp.dilution.invalid }}" aria-describedby="memo-dilution-help" inputmode="decimal" value="{{ d.dilution }}" sc-camel-on-change="{{ set.dilution }}" placeholder="0" style="font:400 21px/1.2 'JetBrains Mono',monospace; color:#16150F; background:transparent; border:0; outline:none; width:100%; min-width:0">
                   <span style="font:400 11px/1 'JetBrains Mono',monospace; color:#695F50">%</span>
@@ -712,6 +764,7 @@
               </label>
               <label style="display:flex; flex-direction:column; gap:9px">
                 <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblExit }}</span>
+                <span class="memo-expected">{{ expected.exitValue }}</span>
                 <span style="display:flex; align-items:baseline; gap:7px; border-bottom:1px solid #DCD6C8; padding:6px 0 9px">
                   <input id="memo-exitValue" aria-label="{{ t.lblExit }}" aria-invalid="{{ numericHelp.exitValue.invalid }}" aria-describedby="memo-exitValue-help" inputmode="decimal" value="{{ d.exitValue }}" sc-camel-on-change="{{ set.exitValue }}" placeholder="0" style="font:400 21px/1.2 'JetBrains Mono',monospace; color:#16150F; background:transparent; border:0; outline:none; width:100%; min-width:0">
                   <span style="font:400 11px/1 'JetBrains Mono',monospace; color:#695F50">{{ t.cur }}</span>
@@ -720,6 +773,7 @@
               </label>
               <label style="display:flex; flex-direction:column; gap:9px">
                 <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblFund }}</span>
+                <span class="memo-expected">{{ expected.fundSize }}</span>
                 <span style="display:flex; align-items:baseline; gap:7px; border-bottom:1px solid #DCD6C8; padding:6px 0 9px">
                   <input id="memo-fundSize" aria-label="{{ t.lblFund }}" aria-invalid="{{ numericHelp.fundSize.invalid }}" aria-describedby="memo-fundSize-help" inputmode="decimal" value="{{ d.fundSize }}" sc-camel-on-change="{{ set.fundSize }}" placeholder="0" style="font:400 21px/1.2 'JetBrains Mono',monospace; color:#16150F; background:transparent; border:0; outline:none; width:100%; min-width:0">
                   <span style="font:400 11px/1 'JetBrains Mono',monospace; color:#695F50">{{ t.cur }}</span>
@@ -738,6 +792,7 @@
                 <div class="memo-calc-row" style="display:grid; grid-template-columns:minmax(0,1fr) 128px 92px; gap:16px; align-items:center; padding:15px 0; border-top:1px solid #E4DFD3">
                   <span style="display:flex; flex-direction:column; gap:4px; min-width:0">
                     <span style="font:400 15px/1.3 'Newsreader',serif">{{ c.label }}</span>
+                    <span class="memo-expected">{{ c.expected }}</span>
                     <span style="font:400 10px/1.3 'JetBrains Mono',monospace; color:#695F50">{{ c.formula }}</span>
                   </span>
                   <sc-if value="{{ c.isOverridden }}" hint-placeholder-val="{{ false }}">
@@ -764,43 +819,62 @@
           <div style="display:flex; flex-direction:column; gap:30px">
             <label style="display:flex; flex-direction:column; gap:9px">
               <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblAction }}</span>
+              <span class="memo-expected">{{ expected.nextAction }}</span>
               <textarea rows="2" value="{{ d.nextAction }}" sc-camel-on-change="{{ set.nextAction }}" placeholder="{{ t.phAction }}" style="font:400 19px/1.5 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:6px 0 11px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
             </label>
             <div class="memo-field-grid-2" style="display:grid; grid-template-columns:minmax(0,1fr) 168px; gap:28px">
               <label style="display:flex; flex-direction:column; gap:9px">
                 <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblOwner }}</span>
+                <span class="memo-expected">{{ expected.nextOwner }}</span>
                 <input value="{{ d.nextOwner }}" sc-camel-on-change="{{ set.nextOwner }}" placeholder="{{ t.phOwner }}" style="font:400 17px/1.3 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:6px 0 9px; outline:none; width:100%" style-focus="border-bottom-color:var(--accent,#8A2B22)">
               </label>
               <label style="display:flex; flex-direction:column; gap:9px">
                 <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#695F50">{{ t.lblDue }}</span>
+                <span class="memo-expected">{{ expected.nextDue }}</span>
                 <input type="date" value="{{ d.nextDue }}" sc-camel-on-change="{{ set.nextDue }}" style="font:400 13px/1.3 'JetBrains Mono',monospace; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:8px 0 9px; outline:none; width:100%" style-focus="border-bottom-color:var(--accent,#8A2B22)">
               </label>
             </div>
             <label style="display:flex; flex-direction:column; gap:11px; padding:24px 26px; background:#F7F5F0; border-left:2px solid #16150F">
               <span style="font:500 9.5px/1 'JetBrains Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#16150F">{{ t.lblMustSettle }}</span>
+              <span class="memo-expected">{{ expected.nextQuestion }}</span>
               <textarea rows="2" value="{{ d.nextQuestion }}" sc-camel-on-change="{{ set.nextQuestion }}" placeholder="{{ t.phMustSettle }}" style="font:400 18px/1.55 'Newsreader',serif; color:#16150F; background:transparent; border:0; border-bottom:1px solid #DCD6C8; padding:4px 0 10px; resize:none; outline:none; width:100%; overflow:hidden" style-focus="border-bottom-color:var(--accent,#8A2B22)"></textarea>
               <span style="font:400 12px/1.55 'Newsreader',serif; font-style:italic; color:#695F50; margin-top:2px">{{ t.mustSettleNote }}</span>
             </label>
           </div>
         </sc-if>
 
+        <sc-if value="{{ hasMissingDependencies }}" hint-placeholder-val="{{ false }}">
+          <div class="memo-dependencies">
+            <p>{{ t.missingDependencies }}</p>
+            <sc-for list="{{ missingDependencies }}" as="group" hint-placeholder-count="2">
+              <div>
+                <button type="button" sc-camel-on-click="{{ group.go }}">{{ group.name }}</button>
+                <span>{{ group.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <p class="memo-expected-help">{{ t.expectedHelp }}</p>
         <div class="memo-step-actions" style="display:flex; align-items:center; gap:14px; margin-top:56px; padding-top:24px; border-top:1px solid #DCD6C8">
           <button type="button" aria-disabled="{{ prevDisabled }}" sc-camel-on-click="{{ goPrev }}" style="{{ st.prevBtn }}">← {{ prevLabel }}</button>
           <span style="flex:1 1 auto"></span>
           <button type="button" aria-disabled="{{ nextDisabled }}" sc-camel-on-click="{{ goNext }}" style="{{ st.nextBtn }}">{{ nextLabel }} →</button>
         </div>
 
+
       </div></main>
 
     <aside data-chrome="1" class="memo-guidance" data-open="{{ rightOpen }}" style="border-left:1px solid #DCD6C8; background:#F7F5F0; overflow:auto; padding:26px 22px 44px; display:flex; flex-direction:column; gap:30px">
       <sc-if value="{{ rightOpen }}" hint-placeholder-val="{{ true }}">
-        <button type="button" class="memo-guidance-toggle" aria-expanded="{{ rightOpen }}" aria-controls="memo-guidance-content" sc-camel-on-click="{{ toggleRight }}" style="display:flex; align-items:center; gap:7px; width:100%; background:transparent; border:0; padding:0; cursor:pointer; font:500 9px/1 'JetBrains Mono',monospace; letter-spacing:.2em; text-transform:uppercase; color:#695F50" style-hover="color:#16150F">
-          <span>{{ t.completeness }}</span>
+        <button type="button" class="memo-guidance-toggle" aria-label="{{ rightToggleLabel }}" aria-expanded="{{ rightOpen }}" aria-controls="memo-guidance-content" sc-camel-on-click="{{ toggleRight }}" style="display:flex; align-items:center; gap:7px; width:100%; background:transparent; border:0; padding:0; cursor:pointer; font:500 9px/1 'JetBrains Mono',monospace; letter-spacing:.2em; text-transform:uppercase; color:#695F50" style-hover="color:#16150F">
+          <span>{{ t.review }}</span>
           <span style="flex:1 1 auto"></span>
           <span style="font-size:8px">{{ rightCaret }}</span>
         </button>
       <div id="memo-guidance-content" class="memo-guidance-body">
       <div>
+        <div style="font:500 9px/1 'JetBrains Mono',monospace; letter-spacing:.2em; text-transform:uppercase; color:#695F50">{{ t.completeness }}</div>
         <div style="display:flex; align-items:baseline; gap:6px; margin-top:12px">
           <span style="font:500 46px/1 'JetBrains Mono',monospace; letter-spacing:-.03em; color:{{ scoreColor }}">{{ score }}</span>
           <span style="font:400 15px/1 'JetBrains Mono',monospace; color:#695F50">%</span>
@@ -856,6 +930,7 @@
       <span style="font:400 11.5px/1.4 'Newsreader',serif; font-style:italic; color:{{ overflowColor }}">{{ overflowNote }}</span>
     </div>
 
+    <p data-pagenote="1" class="memo-print-help">{{ t.printHelp }}</p>
     <div data-page="1" ref="{{ pageRef }}" style="width:210mm; min-height:297mm; background:#FFFDF9; box-shadow:0 1px 0 rgba(0,0,0,.06), 0 18px 44px rgba(30,26,16,.16); padding:15mm 16mm 14mm; display:flex; flex-direction:column; gap:0">
 
       <div style="display:flex; align-items:flex-end; gap:16px; padding-bottom:9px; border-bottom:2px solid #16150F">

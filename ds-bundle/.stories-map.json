@@ -1,0 +1,384 @@
+{
+  "global": "VCPX",
+  "pkg": "@vcpx/design-system",
+  "pkgDir": "/Users/iar-witness/Documents/Projets/VC SITE/vc-platform/.design-sync",
+  "extraEntries": [
+    "./ds-data.ts"
+  ],
+  "exported": [
+    "AntiPortfolioEntryCard",
+    "BlogCard",
+    "BookmarkButton",
+    "Button",
+    "CaseCard",
+    "Chip",
+    "CompassRose",
+    "ConfirmDialog",
+    "Constellation",
+    "DSProvider",
+    "DeliverableCard",
+    "DropCap",
+    "EcosystemCard",
+    "EmptyState",
+    "ExLibris",
+    "Fleuron",
+    "FleuronDivider",
+    "GlossaryRefList",
+    "GoldRule",
+    "Graticule",
+    "InkStamp",
+    "KanjiSeal",
+    "LessonRow",
+    "LevelBadge",
+    "Logo",
+    "MapCartouche",
+    "MemoCard",
+    "Modal",
+    "NightSkyBackdrop",
+    "PageLoader",
+    "ParcoursCard",
+    "ParcoursRow",
+    "ProgressBar",
+    "ProgressRing",
+    "Reveal",
+    "SAMPLE_ANTI_PORTFOLIO",
+    "SAMPLE_ANTI_PORTFOLIO_ALT",
+    "SAMPLE_CASE",
+    "SAMPLE_CASE_ALT",
+    "SAMPLE_DELIVERABLE",
+    "SAMPLE_ECOSYSTEM",
+    "SAMPLE_ECOSYSTEM_ALT",
+    "SAMPLE_MEMO",
+    "SAMPLE_MEMO_ALT",
+    "SAMPLE_PARCOURS",
+    "SAMPLE_PARCOURS_ALT",
+    "SAMPLE_POST",
+    "SAMPLE_POST_BOOKS",
+    "SAMPLE_PROGRESS_EMPTY",
+    "SAMPLE_PROGRESS_SUMMARY",
+    "SAMPLE_SIMULATOR",
+    "SAMPLE_SIMULATOR_ALT",
+    "SeaMonster",
+    "SectionHeading",
+    "SimulatorCard",
+    "Spinner",
+    "WaxSeal"
+  ],
+  "storybookStatic": null,
+  "keyRecipe": 7,
+  "cfgSliceGlobal": "112845bb1584ae2dd3484da70ae10a3908afe1046a53c5af3495c4365ede25a0",
+  "components": [
+    {
+      "name": "AntiPortfolioEntryCard",
+      "group": "cartes",
+      "srcSha": null,
+      "sourceKey": "c5b09faf9b1d352f",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "BlogCard",
+      "group": "cartes",
+      "srcSha": null,
+      "sourceKey": "5af26bfbc58385be",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "BookmarkButton",
+      "group": "marque-et-actions",
+      "srcSha": null,
+      "sourceKey": "96901b0a6f2d5070",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "Button",
+      "group": "primitives",
+      "srcSha": null,
+      "sourceKey": "d046e28fe6483d4c",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "CaseCard",
+      "group": "cartes",
+      "srcSha": null,
+      "sourceKey": "8ce59386d1f17a4e",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "Chip",
+      "group": "primitives",
+      "srcSha": null,
+      "sourceKey": "910c07bda341700a",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "CompassRose",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "e57a1be664e78d70",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "ConfirmDialog",
+      "group": "dialogues",
+      "srcSha": null,
+      "sourceKey": "c4c2664fa0dc3a62",
+      "cfgSlice": "44346b650718ddb69ebc5fa27a76f72e73c0cba4e4842bdb815f2a98d2797048",
+      "stories": []
+    },
+    {
+      "name": "Constellation",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "f801a0c6711bf682",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "DeliverableCard",
+      "group": "cartes",
+      "srcSha": null,
+      "sourceKey": "966cda43969d064d",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "DropCap",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "eac7172fd64b39ae",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "EcosystemCard",
+      "group": "cartes",
+      "srcSha": null,
+      "sourceKey": "dba1f7e56a8fa52f",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "EmptyState",
+      "group": "primitives",
+      "srcSha": null,
+      "sourceKey": "e3acb444ad51dda8",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "ExLibris",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "9c54a97e3aaa1bdb",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "Fleuron",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "9acecf401beeb6b0",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "FleuronDivider",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "71be02fbdb0f89a8",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "GlossaryRefList",
+      "group": "listes",
+      "srcSha": null,
+      "sourceKey": "7cd8122221213698",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "GoldRule",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "b5917ebc1c09fad1",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "Graticule",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "5c34cfe5d7647f8f",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "InkStamp",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "622c5500d773915e",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "KanjiSeal",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "45873a658a0b1f70",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "LessonRow",
+      "group": "listes",
+      "srcSha": null,
+      "sourceKey": "012151cf4405a184",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "LevelBadge",
+      "group": "primitives",
+      "srcSha": null,
+      "sourceKey": "3fc2257670c2d91c",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "Logo",
+      "group": "marque-et-actions",
+      "srcSha": null,
+      "sourceKey": "2ffd9c99fdc2b19c",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "MapCartouche",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "74856ac8f5e6f7a5",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "MemoCard",
+      "group": "cartes",
+      "srcSha": null,
+      "sourceKey": "bd1241cac1d12af2",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "Modal",
+      "group": "dialogues",
+      "srcSha": null,
+      "sourceKey": "8cf06d54e94c44e5",
+      "cfgSlice": "92a71f0620ab35c79910801ce968831eb652d8116c55fa17a3e9b841d8781a8b",
+      "stories": []
+    },
+    {
+      "name": "NightSkyBackdrop",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "5cbd9366b1f3103d",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "PageLoader",
+      "group": "progression",
+      "srcSha": null,
+      "sourceKey": "ab7c3e06ccf1d894",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "ParcoursCard",
+      "group": "cartes",
+      "srcSha": null,
+      "sourceKey": "e146414a1efeede4",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "ParcoursRow",
+      "group": "listes",
+      "srcSha": null,
+      "sourceKey": "757f2137a955ac56",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "ProgressBar",
+      "group": "progression",
+      "srcSha": null,
+      "sourceKey": "9c1b27fe3d7e6c76",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "ProgressRing",
+      "group": "progression",
+      "srcSha": null,
+      "sourceKey": "6dbe0ac21683984a",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "Reveal",
+      "group": "primitives",
+      "srcSha": null,
+      "sourceKey": "437315b98e80b3ce",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "SeaMonster",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "3cef2b33d524bc4e",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "SectionHeading",
+      "group": "primitives",
+      "srcSha": null,
+      "sourceKey": "0e121a30aa878ef6",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "SimulatorCard",
+      "group": "cartes",
+      "srcSha": null,
+      "sourceKey": "2b0ef98375e2b434",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "Spinner",
+      "group": "progression",
+      "srcSha": null,
+      "sourceKey": "a3dd8b0add03ac70",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    },
+    {
+      "name": "WaxSeal",
+      "group": "ornaments",
+      "srcSha": null,
+      "sourceKey": "fe91615e1a0ae0c1",
+      "cfgSlice": "5ff899b099eb6923833804cda955efdd69101524bec86f67dac5537cd81802e8",
+      "stories": []
+    }
+  ]
+}

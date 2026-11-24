@@ -53,7 +53,7 @@
         "Capital patient orienté Silver Economy européenne — marché démographiquement massif, chroniquement sous-financé.",
         "Couverture VC décente entre Paris, Luxembourg et Bruxelles pour le deep tech early stage.",
         "Formation des [[lp|LPs]] européens (family offices, fondations, institutionnels) aux véhicules alternatifs.",
-        "Outils sobres et RGPD-natifs pour traiter les [[pitch-deck|pitch decks]] — {{presidio|Microsoft Presidio}} en local plutôt que tout-cloud.",
+        "{{presidio|Presidio}} peut repérer et masquer localement des données personnelles dans une [[pitch-deck|présentation aux investisseurs]]. Certaines peuvent échapper à la détection automatique et rester visibles dans le document partagé.",
         "Rails d'accompagnement post-investissement ([[gtm|GTM]], hiring, [[follow-on|follow-on]]) pensés pour l'Europe, pas copiés de la Silicon Valley.",
         "Diversification des profils : plus d'[[operator-investor|operators]], moins de banquiers d'affaires reconvertis."
       ]

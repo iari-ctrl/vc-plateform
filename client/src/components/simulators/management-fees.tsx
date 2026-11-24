@@ -17,10 +17,12 @@ export function ManagementFeesSim({ accent }: { accent: string }) {
     totalFees,
     salaryCostM,
     remainingBudgetInv,
+    remainingBudgetHarvest,
     salaryPctInv,
     stepDownRate
   } = calculateManagementFees(fundSize, feeRate, teamSize, avgSalary);
 
+  const harvestDeficitEuros = Math.round(-remainingBudgetHarvest * 1e6);
   const feasibleTeamSize = Math.max(0, Math.floor((annualBudgetInv * 0.70 * 1000) / avgSalary));
   const alertLevel = salaryPctInv > 100 ? 'error' : salaryPctInv > 70 ? 'warning' : 'ok';
 
@@ -36,18 +38,9 @@ export function ManagementFeesSim({ accent }: { accent: string }) {
       }
       results={
         <>
-          <div className="rounded-xl border border-outline-variant bg-surface-container-low p-5 text-xs text-surface-variant space-y-2 mb-4">
-            <p className="font-semibold text-foreground">Méthodologie et Analyse (<GlossaryPreview slug="lp" label="IR" />) :</p>
-            <ul className="list-inside list-disc space-y-1 mb-2">
-              <li><strong>Période d'investissement (Années 1-5)</strong> : Budget = Taille du fonds × Frais (ex: 2%).</li>
-              <li><strong>Période de récolte (Années 6-10)</strong> : Application du <em><GlossaryPreview slug="management-fees" label="Step-down" /></em> (baisse typique de 0.5%), simulant la baisse d'activité d'investissement.</li>
-            </ul>
-            <p>En pratique, pour un fonds de taille modeste, le budget annuel est très serré. En comptant 70% alloué aux salaires, vous ne pouvez rémunérer que {feasibleTeamSize} personne(s) à {avgSalary} k€/an.</p>
-            <p>Lors de la période de récolte, la chute mécanique des frais force souvent l'équipe de gestion à lever rapidement un Fonds II pour pouvoir maintenir ses propres opérations à l'équilibre.</p>
-          </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <Stat label="Budget annuel (Inv.)" value={formatCurrency(annualBudgetInv * 1e6)} accent={accent} hint={`Années 1-5 (${feeRate}%)`} />
-            <Stat label="Budget annuel (Récolte)" value={formatCurrency(annualBudgetHarvest * 1e6)} hint={`Années 6-10 (${stepDownRate}%)`} />
+            <Stat label="Budget annuel (Inv.)" value={formatCurrency(annualBudgetInv * 1e6)} accent={accent} hint={`Années 1 à 5 (${formatPercent(feeRate)})`} />
+            <Stat label="Budget annuel (Récolte)" value={formatCurrency(annualBudgetHarvest * 1e6)} hint={`Années 6 à 10 (${formatPercent(stepDownRate)})`} />
             <Stat label="Frais cumulés (10 ans)" value={formatCurrency(totalFees * 1e6)} hint="Total sur la durée du fonds" />
             <Stat label="Part du budget en salaires" value={formatPercent(salaryPctInv)} accent={alertLevel === 'error' ? 'var(--error)' : alertLevel === 'warning' ? '#B0894A' : accent} hint="Sur la période d'inv. (< 70%)" />
           </div>
@@ -63,6 +56,13 @@ export function ManagementFeesSim({ accent }: { accent: string }) {
               <span>Opérations (SaaS, audits) : {formatPercent(Math.max(0, 100 - salaryPctInv))}</span>
             </div>
           </div>
+
+          {harvestDeficitEuros > 0 && (
+            <div role="alert" className="rounded-xl border border-error/30 bg-error/10 p-4 text-sm text-error">
+              <p className="font-semibold">Budget de récolte dépassé</p>
+              <p>{formatCurrency(harvestDeficitEuros)} de déficit annuel pendant les années 6 à 10. {formatCurrency(salaryCostM * 1e6)} de salaires pour {formatCurrency(annualBudgetHarvest * 1e6)} de frais.</p>
+            </div>
+          )}
 
           {alertLevel === 'error' && (
             <div className="rounded-xl border border-error/30 bg-error/10 p-4 text-sm text-error flex gap-3">
@@ -84,7 +84,7 @@ export function ManagementFeesSim({ accent }: { accent: string }) {
             </div>
           )}
 
-          {alertLevel === 'ok' && (
+          {alertLevel === 'ok' && harvestDeficitEuros <= 0 && (
             <div className="rounded-xl border border-outline-variant bg-surface-container-low/60 p-4 text-sm text-surface-variant flex gap-3">
               <span className="font-semibold text-lg leading-none text-foreground">✓</span>
               <div>
@@ -94,6 +94,15 @@ export function ManagementFeesSim({ accent }: { accent: string }) {
             </div>
           )}
 
+          <div className="rounded-xl border border-outline-variant bg-surface-container-low p-5 text-xs text-surface-variant space-y-2 mb-4">
+            <p className="font-semibold text-foreground">Méthodologie et Analyse (<GlossaryPreview slug="lp" label="IR" />) :</p>
+            <ul className="list-inside list-disc space-y-1 mb-2">
+              <li><strong>Période d'investissement (Années 1-5)</strong> : Budget = Taille du fonds × Frais (ex: 2%).</li>
+              <li><strong>Période de récolte (Années 6-10)</strong> : Application du <em><GlossaryPreview slug="management-fees" label="Step-down" /></em> (baisse typique de 0.5%), simulant la baisse d'activité d'investissement.</li>
+            </ul>
+            <p>En pratique, pour un fonds de taille modeste, le budget annuel est très serré. En comptant 70% alloué aux salaires, vous ne pouvez rémunérer que {feasibleTeamSize} personne(s) à {avgSalary} k€/an.</p>
+            <p>Lors de la période de récolte, la chute mécanique des frais force souvent l'équipe de gestion à lever rapidement un Fonds II pour pouvoir maintenir ses propres opérations à l'équilibre.</p>
+          </div>
         </>
       }
     />

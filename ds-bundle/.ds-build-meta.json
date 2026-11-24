@@ -1,0 +1,9 @@
+{
+  "namespace": "VCPX",
+  "source": "@vcpx/design-system@0.1.0",
+  "shape": "package",
+  "provider": "DSProvider",
+  "componentCount": 39,
+  "skippedStoryIds": [],
+  "runtimeFontPrefixes": []
+}

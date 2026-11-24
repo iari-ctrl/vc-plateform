@@ -44,5 +44,6 @@ test('client public media budget remains deterministic', async () => {
       path: 'blog/la-societe-du-spectacle-leve-des-fonds/vedette.mp4',
       bytes: 1064451,
     },
-  ]);
+    { path: 'tools/simulateur-memo.html', bytes: memoBytes },
+  ].sort((a, b) => b.bytes - a.bytes || a.path.localeCompare(b.path)).slice(0, 5));
 });

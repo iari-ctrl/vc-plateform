@@ -9,7 +9,7 @@ export interface PrePostMoneyResult {
   postMoney: number;
   investorPct: number;
   retainedPct: number;
-  impliedMultiple: number;
+  impliedMultiple: number | null;
 }
 
 const nonNegativeFinite = (value: number): number => (
@@ -22,7 +22,7 @@ export function calculatePrePostMoney(input: PrePostMoneyInput): PrePostMoneyRes
   const postMoney = preMoney + raise;
   const investorPct = postMoney > 0 ? (raise / postMoney) * 100 : 0;
   const retainedPct = Math.max(0, 100 - investorPct);
-  const impliedMultiple = preMoney > 0 ? postMoney / preMoney : 0;
+  const impliedMultiple = preMoney > 0 ? postMoney / preMoney : null;
 
   return {
     preMoney,

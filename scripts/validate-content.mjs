@@ -939,6 +939,7 @@ const ecosystemSchema = z.object({
 });
 
 const simulatorSchema = z.object({
+  decision: z.enum(['financement', 'fonds', 'cession', 'comite']),
   id: nonEmpty,
   slug,
   title: nonEmpty,

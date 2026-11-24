@@ -20,13 +20,13 @@ describe('calculateSecondarySale', () => {
     expect(res.haircutM).toBeCloseTo(12);
   });
 
-  it('boosts DPI but lowers TVPI at marks', () => {
+  it('raises the seller’s cumulative liquidity and reduces its total value by the discount', () => {
     const res = calculateSecondarySale(base);
-    expect(res.dpiBefore).toBeCloseTo(0.4);
-    expect(res.dpiAfter).toBeCloseTo(0.88);
-    expect(res.tvpiBefore).toBeCloseTo(1.6);
-    expect(res.tvpiAfter).toBeCloseTo(1.48); // − haircut / paid-in
-    expect(res.rvpiAfter).toBeCloseTo(0.6);
+    expect(res.liquidityBefore).toBeCloseTo(0.4);
+    expect(res.liquidityAfter).toBeCloseTo(0.88);
+    expect(res.valueBefore).toBeCloseTo(1.6);
+    expect(res.valueAfter).toBeCloseTo(1.48); // − haircut / paid-in
+    expect(res.retainedNavRatio).toBeCloseTo(0.6);
   });
 
   it('computes the break-even multiple: (1 − d) × (1 + r)^n', () => {
@@ -38,18 +38,20 @@ describe('calculateSecondarySale', () => {
     const res = calculateSecondarySale(base);
     expect(res.pvHoldM).toBeCloseTo((60 * 1.6) / Math.pow(1.12, 4), 6);
     expect(res.pvSellM).toBeCloseTo(48);
-    expect(res.holdWins).toBe(true);
+    expect(res.comparison).toBe('hold');
   });
 
   it('sell wins when the expected exit is below break-even', () => {
     const res = calculateSecondarySale({ ...base, exitMultiple: 1.0 });
-    expect(res.holdWins).toBe(false);
+    expect(res.comparison).toBe('sell');
   });
 
   it('handles zero paid-in', () => {
     const res = calculateSecondarySale({ ...base, paidInM: 0 });
-    expect(res.dpiBefore).toBe(0);
-    expect(res.tvpiAfter).toBe(0);
+    expect(res).toMatchObject({
+      liquidityBefore: null, liquidityAfter: null, valueBefore: null, valueAfter: null, retainedNavRatio: null,
+    });
+    expect(res.proceedsM).toBe(48);
   });
 });
 

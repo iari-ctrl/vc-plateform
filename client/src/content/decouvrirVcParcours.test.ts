@@ -4,7 +4,7 @@ import coursesJson from '@data/courses.json';
 import decouvrirLessonsRegister from '@data/parcours/01-le-vc-sans-bullshit.lessons.json';
 import semaineLessonsRegister from '@data/parcours/02-une-semaine-vc.lessons.json';
 import { courseById } from './courses';
-import { loadGlossaryDefs } from './glossary';
+import { glossaryBySlug, loadGlossaryDefs } from './glossary';
 import { parcoursTimeSummary } from './learningTime';
 import { loadLesson, publicLessonById, publishedLessonsForCourse } from './lessons';
 import { parcoursBySlug, resolveStep, visibleSteps } from './parcours';
@@ -212,12 +212,13 @@ describe('parcours Comprendre le capital-risque', () => {
     }
   });
 
-  it('qualifie le glossaire lié comme raccourci sectoriel plutôt que comme loi universelle', async () => {
-    const glossaryDefs = await loadGlossaryDefs();
-    expect(glossaryDefs['power-law']?.definition).toMatch(/raccourci sectoriel/u);
-    expect(glossaryDefs['power-law']?.definition).toMatch(/ne suffit pas à établir une loi mathématique universelle/u);
-    expect(glossaryDefs['power-law']?.example).toMatch(/échantillon/u);
-    expect(glossaryDefs['power-law']?.example).not.toMatch(/100x|fonds entier/iu);
+  it('distingue la concentration des gains et les conditions de vérification d’une loi statistique', async () => {
+    const entry = (await loadGlossaryDefs())['power-law'];
+    expect(glossaryBySlug('power-law')?.short).toMatch(/raccourci sectoriel/iu);
+    expect(entry?.definition).toMatch(/concentration des gains[^.]*quelques investissements/u);
+    expect(entry?.definition).toMatch(/au sens statistique[^.]*exige[^.]*échantillon[^.]*période[^.]*méthode/u);
+    expect(entry?.example).toMatch(/échantillon[^.]*ne se transpose pas en proportion universelle/u);
+    expect(entry?.example).not.toMatch(/100x|fonds entier/iu);
   });
 
   it('publie un quiz final exécutable de huit questions cumulatives', async () => {

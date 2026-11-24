@@ -1,0 +1,56 @@
+[
+  {
+    "sheet": 1,
+    "components": [
+      "AntiPortfolioEntryCard",
+      "BlogCard",
+      "BookmarkButton",
+      "Button",
+      "CaseCard",
+      "Chip",
+      "CompassRose",
+      "ConfirmDialog",
+      "Constellation",
+      "DeliverableCard",
+      "DropCap",
+      "EcosystemCard",
+      "EmptyState",
+      "ExLibris",
+      "Fleuron",
+      "FleuronDivider"
+    ]
+  },
+  {
+    "sheet": 2,
+    "components": [
+      "GlossaryRefList",
+      "GoldRule",
+      "Graticule",
+      "InkStamp",
+      "KanjiSeal",
+      "LessonRow",
+      "LevelBadge",
+      "Logo",
+      "MapCartouche",
+      "MemoCard",
+      "Modal",
+      "NightSkyBackdrop",
+      "PageLoader",
+      "ParcoursCard",
+      "ParcoursRow",
+      "ProgressBar"
+    ]
+  },
+  {
+    "sheet": 3,
+    "components": [
+      "ProgressRing",
+      "Reveal",
+      "SeaMonster",
+      "SectionHeading",
+      "SimulatorCard",
+      "Spinner",
+      "WaxSeal"
+    ]
+  }
+]

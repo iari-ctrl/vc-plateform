@@ -28,7 +28,10 @@ export interface HistogramBucket {
   share: number; // 0..1
 }
 
-export interface PowerLawResult {
+export type FollowOnPolicy = 'allRounds' | 'milestone' | 'hindsight';
+
+export interface PolicySummary {
+  meanInvestedReservesM: number;
   percentiles: { p5: number; p10: number; p25: number; p50: number; p75: number; p90: number; p99: number };
   mean: number;
   probAtLeast: { x1: number; x2: number; x3: number; x5: number };
@@ -37,6 +40,10 @@ export interface PowerLawResult {
   /** Médiane de la part du retour total apportée par les 3 meilleures lignes. */
   medianTop3Share: number;
   tvpiHistogram: HistogramBucket[];
+}
+
+export interface PowerLawResult extends PolicySummary {
+  policies: Record<FollowOnPolicy, PolicySummary>;
   multipleHistogram: HistogramBucket[];
   initialCheckM: number;
   impliedPostMoneyM: number;
@@ -97,99 +104,137 @@ function bucketize(values: number[], buckets: { label: string; max: number }[]):
   return buckets.map((b, i) => ({ label: b.label, share: counts[i] / total }));
 }
 
-export function simulatePowerLawPortfolio(params: PowerLawParams): PowerLawResult {
-  const {
-    fundSizeM,
-    portfolioSize,
-    reservesPct,
-    ownershipPct,
-    dilutionPct,
-    failRatePct,
-    alpha,
-    maxMultiple,
-    runs = 4000,
-    seed = 42,
-  } = params;
+interface FollowOnRound {
+  hasRound: boolean;
+  milestoneMet: boolean;
+  /** Post-money du tour, en multiple de la post-money initiale. */
+  priceMultiple: number;
+}
 
-  const n = Math.max(1, Math.round(portfolioSize));
-  const failRate = Math.min(Math.max(failRatePct, 0), 1);
-  const modestRate = Math.min(Math.max(params.modestRatePct, 0), 1 - failRate);
-  const reservePoolM = fundSizeM * reservesPct;
-  const initialCheckM = (fundSizeM - reservePoolM) / n;
+interface PortfolioTerms {
+  initialCheckM: number;
+  reservePoolM: number;
+  dilutionPct: number;
+}
 
-  const rng = mulberry32(seed);
-  const tvpis: number[] = [];
-  const topShares: number[] = [];
-  const top3Shares: number[] = [];
-  const allMultiples: number[] = [];
-
-  for (let r = 0; r < runs; r++) {
-    const lineMultiples: number[] = [];
-    const winners: number[] = []; // indices des lignes éligibles au follow-on (queue power law)
-
-    for (let i = 0; i < n; i++) {
-      const u = rng();
-      let m: number;
-      if (u < failRate) {
-        m = 0;
-      } else if (u < failRate + modestRate) {
-        m = 0.3 + rng() * (3 - 0.3);
-      } else {
-        // Tirage Pareto tronqué : m = xmin × (1−u)^(−1/alpha), plafonné.
-        m = Math.min(PARETO_XMIN * Math.pow(1 - rng(), -1 / alpha), maxMultiple);
-        winners.push(i);
-      }
-      lineMultiples.push(m);
-      allMultiples.push(m);
-    }
-
-    // La dilution non défendue réduit le multiple effectif du fonds sur le check initial.
-    const lineProceeds = lineMultiples.map((m) => initialCheckM * m * (1 - dilutionPct));
-
-    // Follow-ons : la réserve est déployée à parts égales dans les lignes de la queue,
-    // à mi-parcours (rendement √m), pro-rata défendu donc sans dilution.
-    let total = 0;
-    if (winners.length > 0 && reservePoolM > 0) {
-      const followOnPerWinner = reservePoolM / winners.length;
-      for (const i of winners) {
-        lineProceeds[i] += followOnPerWinner * Math.sqrt(lineMultiples[i]);
-      }
-    } else {
-      // Aucune ligne défendable : réserve non appelée, restituée à 1×.
-      total += reservePoolM;
-    }
-
-    for (const p of lineProceeds) total += p;
-    tvpis.push(total / fundSizeM);
-
-    const sorted = [...lineProceeds].sort((a, b) => b - a);
-    const safeTotal = total || 1;
-    topShares.push(sorted[0] / safeTotal);
-    top3Shares.push((sorted[0] + (sorted[1] ?? 0) + (sorted[2] ?? 0)) / safeTotal);
+export function evaluatePowerLawDraw(
+  rounds: FollowOnRound[],
+  terms: PortfolioTerms,
+  drawExits: () => number[],
+) {
+  const { initialCheckM, reservePoolM, dilutionPct } = terms;
+  function allocate(eligible: boolean[]) {
+    const count = eligible.filter(Boolean).length;
+    const ticket = count > 0 ? Math.min(initialCheckM, reservePoolM / count) : 0;
+    return eligible.map((canInvest) => canInvest ? ticket : 0);
   }
 
+  const allRounds = allocate(rounds.map((round) => round.hasRound));
+  const milestone = allocate(rounds.map((round) => round.hasRound && round.milestoneMet));
+  const exits = drawExits();
+  const hindsight = allocate(rounds.map((round, i) => round.hasRound && exits[i] >= PARETO_XMIN));
+
+  function settle(ticketsM: number[]) {
+    const investedReservesM = ticketsM.reduce((sum, ticket) => sum + ticket, 0);
+    const paidInM = initialCheckM * rounds.length + investedReservesM;
+    const proceeds = exits.map((multiple, i) => {
+      const initialProceeds = initialCheckM * (1 - dilutionPct) * multiple;
+      // Part achetée × prix de sortie. Les deux valorisations ont la même base d'entrée.
+      const followOnProceeds = ticketsM[i] * multiple / rounds[i].priceMultiple;
+      return initialProceeds + followOnProceeds;
+    });
+    const total = proceeds.reduce((sum, amount) => sum + amount, 0);
+    const sorted = proceeds.sort((a, b) => b - a);
+    return {
+      ticketsM, investedReservesM, paidInM,
+      tvpi: paidInM > 0 ? total / paidInM : 0,
+      topShare: total > 0 ? sorted[0] / total : 0,
+      top3Share: total > 0 ? ((sorted[0] ?? 0) + (sorted[1] ?? 0) + (sorted[2] ?? 0)) / total : 0,
+    };
+  }
+  return { exits, policies: { allRounds: settle(allRounds), milestone: settle(milestone), hindsight: settle(hindsight) } };
+}
+
+interface PolicySamples {
+  tvpis: number[];
+  topShares: number[];
+  top3Shares: number[];
+  investedReservesM: number;
+}
+
+function summarize({ tvpis, topShares, top3Shares, investedReservesM }: PolicySamples): PolicySummary {
   tvpis.sort((a, b) => a - b);
   topShares.sort((a, b) => a - b);
   top3Shares.sort((a, b) => a - b);
-
-  const probAtLeast = (x: number) => tvpis.filter((t) => t >= x).length / tvpis.length;
-  const ownershipAtExit = ownershipPct * (1 - dilutionPct);
+  const probAtLeast = (threshold: number) => tvpis.filter((tvpi) => tvpi >= threshold).length / tvpis.length;
 
   return {
     percentiles: {
-      p5: percentile(tvpis, 0.05),
-      p10: percentile(tvpis, 0.1),
-      p25: percentile(tvpis, 0.25),
-      p50: percentile(tvpis, 0.5),
-      p75: percentile(tvpis, 0.75),
-      p90: percentile(tvpis, 0.9),
-      p99: percentile(tvpis, 0.99),
+      p5: percentile(tvpis, 0.05), p10: percentile(tvpis, 0.1), p25: percentile(tvpis, 0.25),
+      p50: percentile(tvpis, 0.5), p75: percentile(tvpis, 0.75), p90: percentile(tvpis, 0.9), p99: percentile(tvpis, 0.99),
     },
-    mean: tvpis.reduce((s, t) => s + t, 0) / tvpis.length,
+    mean: tvpis.reduce((sum, value) => sum + value, 0) / tvpis.length,
     probAtLeast: { x1: probAtLeast(1), x2: probAtLeast(2), x3: probAtLeast(3), x5: probAtLeast(5) },
     medianTopLineShare: percentile(topShares, 0.5),
     medianTop3Share: percentile(top3Shares, 0.5),
     tvpiHistogram: bucketize(tvpis, TVPI_BUCKETS),
+    meanInvestedReservesM: investedReservesM / tvpis.length,
+  };
+}
+
+export function simulatePowerLawPortfolio(params: PowerLawParams): PowerLawResult {
+  const {
+    fundSizeM, portfolioSize, reservesPct, ownershipPct, dilutionPct, alpha, maxMultiple,
+    runs = 4000, seed = 42,
+  } = params;
+  const n = Math.max(1, Math.round(portfolioSize));
+  const failRate = Math.min(Math.max(params.failRatePct, 0), 1);
+  const modestRate = Math.min(Math.max(params.modestRatePct, 0), 1 - failRate);
+  const reservePoolM = fundSizeM * reservesPct;
+  const initialCheckM = (fundSizeM - reservePoolM) / n;
+  const rng = mulberry32(seed);
+  const allMultiples: number[] = [];
+  const newSamples = (): PolicySamples => ({ tvpis: [], topShares: [], top3Shares: [], investedReservesM: 0 });
+  const samples = { allRounds: newSamples(), milestone: newSamples(), hindsight: newSamples() };
+  const policyKeys = ['allRounds', 'milestone', 'hindsight'] as const;
+
+  function drawExit({ milestoneMet }: FollowOnRound) {
+    const a = rng();
+    const b = rng();
+    // À 50 % de jalons atteints, le mélange équiprobable de min et max est uniforme.
+    const rank = milestoneMet ? Math.max(a, b) : Math.min(a, b);
+    const u = rng();
+    if (rank < failRate) return 0;
+    if (rank < failRate + modestRate) return 0.3 + u * (3 - 0.3);
+    return Math.min(PARETO_XMIN * Math.pow(1 - u, -1 / alpha), maxMultiple);
+  }
+
+  for (let r = 0; r < runs; r++) {
+    const rounds = Array.from({ length: n }, () => {
+      const milestoneMet = rng() < 0.5;
+      return { hasRound: rng() < 0.6, milestoneMet, priceMultiple: milestoneMet ? 2 : 1 };
+    });
+    const draw = evaluatePowerLawDraw(rounds, { initialCheckM, reservePoolM, dilutionPct }, () => rounds.map(drawExit));
+    allMultiples.push(...draw.exits);
+    for (const policy of policyKeys) {
+      const result = draw.policies[policy];
+      const sample = samples[policy];
+      sample.tvpis.push(result.tvpi);
+      sample.topShares.push(result.topShare);
+      sample.top3Shares.push(result.top3Share);
+      sample.investedReservesM += result.investedReservesM;
+    }
+  }
+
+  const policies = {
+    allRounds: summarize(samples.allRounds),
+    milestone: summarize(samples.milestone),
+    hindsight: summarize(samples.hindsight),
+  };
+  const ownershipAtExit = ownershipPct * (1 - dilutionPct);
+  return {
+    ...policies.allRounds,
+    policies,
     multipleHistogram: bucketize(allMultiples, MULTIPLE_BUCKETS),
     initialCheckM,
     impliedPostMoneyM: ownershipPct > 0 ? initialCheckM / ownershipPct : 0,

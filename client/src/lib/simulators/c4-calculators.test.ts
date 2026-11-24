@@ -9,11 +9,8 @@ describe('simulateurs C4 — calculateurs purs', () => {
   it('borne aussi le calcul de dilution existant', () => {
     expect(calculateDilution([
       { pre: -6, raise: Number.POSITIVE_INFINITY, esopTarget: Number.NaN },
-      { pre: 10, raise: 5, esopTarget: 110 },
-    ])).toEqual([
-      { post: 0, investorPct: 0, esopPct: 0, founderAfter: 100 },
-      { post: 15, investorPct: 33.33333333333333, esopPct: 100, founderAfter: 0 },
-    ]);
+    ])).toEqual([{ post: 0, investorPct: 0, esopPct: 0, founderAfter: 100 }]);
+    expect(() => calculateDilution([{ pre: 10, raise: 5, esopTarget: 110 }])).toThrow(RangeError);
   });
 
   it('calcule pre/post-money sans produire de valeur négative ou non finie', () => {
@@ -32,7 +29,7 @@ describe('simulateurs C4 — calculateurs purs', () => {
       postMoney: 0,
       investorPct: 0,
       retainedPct: 100,
-      impliedMultiple: 0,
+      impliedMultiple: null,
     });
 
     expect(calculatePrePostMoney({ preMoney: 0, raise: 2.5 }).investorPct).toBe(100);
@@ -93,9 +90,9 @@ describe('simulateurs C4 — calculateurs purs', () => {
       targetDilutionPct: 0,
       neededM: 0,
       bufferedM: 0,
-      postLowM: 0,
-      postHighM: 0,
-      preLowM: 0,
+      postLowM: null,
+      postHighM: null,
+      preLowM: null,
     });
   });
 });

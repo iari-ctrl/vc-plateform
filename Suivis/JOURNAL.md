@@ -2835,3 +2835,170 @@ Vérification après la correction finale :
 Contre-revue indépendante sur snapshot gelé : aucun défaut logique ou de sécurité bloquant. Ses deux remarques mineures sont traitées : `refKind: 'lesson'` explicite pour les incohérences cours/leçons, et commentaire distinguant l’inventaire en ordre source de la séquence consommée triée. Le rendu `undefined:missing` a d’abord été reproduit par un RED CLI, puis corrigé ; les contrôles ont été rejoués. Les premiers RED complets et les rapports restent hors dépôt dans `/Users/iar-witness/.hermes/cache/scratch/formation-s0-2026-09-23/`.
 
 F0/S0 livre un diagnostic, pas une Formation consolidée. Les contrats transverses relèvent ensuite de S1, en lecture seule et sur demande ; les corrections de données, la production des placeholders et les revues praticiennes restent séparées. Aucun gate global, build, navigateur, staging, commit, push, workflow distant ou déploiement. Les preuves applicatives historiques ne sont pas redatées.
+
+---
+
+## 2026-09-24 — Présentation Parcours du simulateur de note d’investissement
+
+Objet : intégrer la variante validée `02-parcours.html` et son `brand-spec.md`, conservés hors dépôt, sur `/simulators/simulateur-note-investissement`, sans reprendre le comparateur, les données ou le stockage du prototype. Worktree propre au contrôle initial sur `master` ; un seul rédacteur du code.
+
+Livraison :
+
+- `client/src/pages/simulators/SimulatorPage.tsx` et `client/src/components/simulators/investment-memo.tsx` réunissent le moteur et les actions réelles de la plateforme dans son bandeau. Le favori et le retour restent fonctionnels, les ressources existantes sont accessibles dans la modale commune, et la pleine page reste une option. `client/src/layouts/MainLayout.tsx` conserve la navigation Maison Sapience VC et retire le pied de page général uniquement de cet espace de travail.
+- Les sources `nouveau simu/src/template.html`, `component.js` et la nouvelle feuille `parcours.css` installent le sommaire horizontal, la rédaction large, la relecture initialement fermée, le sélecteur mobile et l’aperçu A4 adapté à la largeur. Les thèmes utilisent les tokens existants ; le papier imprimable garde sa palette claire. Le focus est restitué et révélé dans la page hôte après redimensionnement. Le retour d’impression au grand écran rétablit le sommaire.
+- `scripts/build-investment-memo.mjs` embarque les tokens et les fontes d’interface locales, puis régénère les trois artefacts habituels. Aucun HTML assemblé édité à la main. `model.mjs`, les dix blocs, les champs/listes, les calculs et validations, les modes/langues et la clé `vcmemo.onepager.v1` sont conservés.
+- Régressions dans `simulators.dom.test.tsx` et `scripts/investment-memo.test.mjs` : montage des actions, disparition du double en-tête, restauration des brouillons, relecture/clavier, focus visible, retour du grand écran et mesure intrinsèque du dépassement A4. Le classement du budget média inclut désormais le bundle enrichi avec ses fontes ; les attentes sur le reste de l’inventaire ne changent pas.
+
+Vérifications :
+
+- `node --test scripts/investment-memo.test.mjs scripts/media-budget.test.mjs` : exit 0, 34 tests simulateur et 1 test média. RED observés avant correction pour le focus sous la fenêtre et le retour au grand écran.
+- Suite client complète exécutée par `npm run check` : 71 fichiers / 510 tests réussis. `npm run check:memo`, `npm run typecheck` et `npm run lint` : exit 0 après les dernières modifications ; les trois artefacts sont identiques et reproductibles.
+- `VITE_BASE_URL=/vc-plateform/ VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform PUPPETEER_EXECUTABLE_PATH=<Chromium local> npm run build` : exit 0, prérendu strict 716/716, `ok: true`. La fraîcheur des contenus et la validation stricte passent sans changement éditorial.
+- `PUPPETEER_EXECUTABLE_PATH=<Chromium local> npm run check` : sortie 1 à cause du test transversal `strict CLI and React use one real Chromium for routes, 404 and noindex metadata`, annulé après 60 s ; 110 tests Node réussis, aucun autre échec. Le timeout déjà documenté est reproduit avec `node --test scripts/prerender.integration.test.mjs` sous le même Chromium ; il n’est pas corrigé hors périmètre.
+- Recette Playwright sur Chromium 156.0.8073.0 et le build à `http://127.0.0.1:4173/vc-plateform/simulators/simulateur-note-investissement` : 1440, 820, 390 et 320 px, palettes claire/sombre, dix blocs, saisie et listes, calculs, erreur numérique, modes complet/screening, FR/EN, progression, sauvegarde/rechargement. Navigation depuis un bloc long, Tab/Échap et focus non masqué vérifiés ; favori, ressources, retour aux simulateurs, route avec slash final et pleine page synchronisée exercés.
+- Export embarqué : appel de l’impression native et événement `beforeprint` observés. PDF réellement produits par Chromium depuis le moteur autonome : A4 complet et screening d’une page chacun ; cas de dépassement de trois pages, avertissement affiché et fin du texte retrouvée après extraction. Aucune commande d’interface dans le texte des PDF. Le parcours du dialogue d’impression système reste hors automatisation.
+- Captures, PDF et rapports de recette restent hors dépôt, dans le scratch Hermes. Avertissement console préexistant `t.activityCount` conservé ; aucune nouvelle erreur JavaScript observée. Données de recette retirées du seul profil isolé et serveurs temporaires arrêtés.
+
+`Suivis/ETAT.md` actualisé après vérification. Aucun staging, commit, push, workflow distant ni déploiement ; aucune modification des autres simulateurs, des données éditoriales ou des contrats Formation.
+
+---
+
+## 2026-09-24 — Corrections après contre-revue du simulateur Parcours
+
+Après autorisation explicite, les propositions sont confrontées à `PRODUCT.md`, aux sources et à la maquette. La relecture indépendante des formulations conserve « création de valeur » et la distinction entre thèse et prix ; l’avertissement de risques décrit les lignes ajoutées, sans prétendre compter les risques renseignés. Le worktree d’intégration déjà modifié est préservé.
+
+Corrections :
+
+- `nouveau simu/src/component.js` distingue l’état initial, le brouillon effectivement enregistré et les échecs de lecture, d’écriture ou de suppression. La mention de confidentialité reste indépendante du résultat. Les consignes accusatoires ou absolues sont remplacées par des indications précises ; le calcul, les champs et la clé/structure `vcmemo.onepager.v1` ne changent pas.
+- `template.html` sépare la commande Relecture du taux de complétude, nomme explicitement le Sommaire et annonce l’ouverture/fermeture des deux panneaux ; le compteur suit les dix ou cinq blocs du mode actif.
+- `parcours.css` et `client/src/components/simulators/investment-memo.tsx` rendent l’en-tête et les blocs persistants au-dessus de 60 rem dans le défilement réel de l’hôte, avec hauteur d’en-tête mesurée et compensation du focus. Le mobile conserve le flux normal. Les tests couvrent aussi le nettoyage des abonnements au démontage. Les trois HTML sont régénérés uniquement par `build:memo`.
+
+Vérifications de cette correction :
+
+- RED puis GREEN observés pour la confirmation d’enregistrement, les noms/états des commandes, la synchronisation de défilement, la hauteur réelle de l’en-tête et le focus sous les barres persistantes.
+- `node --test scripts/investment-memo.test.mjs scripts/media-budget.test.mjs` : 38/38. Les deux suites DOM ciblées avec `--no-cache --configLoader=runner` : 14/14. `npm run typecheck`, `npm run lint`, `npm run check:memo` et `git diff --check` : exit 0.
+- Build canonique avec `VITE_BASE_URL=/vc-plateform/`, `VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform` et `PUPPETEER_EXECUTABLE_PATH` vers Chromium : exit 0, prérendu strict 716/716, sans échec de route ou de métadonnées.
+- `npm run check` exécuté après le build : contrôles de contenu, typage, lint et 71 fichiers / 512 tests client verts ; 113 tests Node réussis sur 114. Le test `strict CLI and React use one real Chromium for routes, 404 and noindex metadata` est de nouveau annulé après 60 s, comme avant cette correction. La parité du simulateur est contrôlée séparément après ce gate rouge.
+- Recette sur le build servi sous `/vc-plateform/` à `127.0.0.1:4189` : largeur de document sans débordement en 1440, 1120, 820, 390 et 320 px ; champs longs, navigation depuis le bas, focus non masqué, fermeture de relecture par Échap, thèmes clair/sombre. Succès, échec d’écriture injecté et récupération/rechargement vérifiés avec conservation de la saisie ; favoris, ressources et synchronisation pleine page exercés. Screening : cinq blocs, retour au complet : dix.
+- Export : appel de `window.print` vérifié, puis PDF réellement produit en média print par Chromium ; une page au format A4, titre et saisie présents, commandes d’édition absentes à l’extraction. Le dialogue d’impression du système n’est pas automatisé. Aucune erreur ni aucun avertissement de console sur la page de recette finale.
+
+Contre-vérification indépendante : aucun blocage de sécurité ou de logique identifié ; empreintes des six fichiers examinés inchangées au retour du verdict. Après cet avis, recette complétée en 960, 961, 1023, 1024, 1048 et 1049 px, avec en-tête sur plusieurs lignes, sommaire fermé puis rouvert et focus visible ; navigation clavier en pleine page également vérifiée depuis un bloc long, avec contrôle de la cible réellement présente sous le pointeur. Le test DOM d’attente de redimensionnement sur plusieurs trames reste une suggestion de couverture non bloquante, sans modification supplémentaire des sources.
+
+Captures, PDF et logs restent hors dépôt dans le scratch Hermes. Les clés de recette sont retirées du profil isolé et leur absence relue. Aucun staging, commit, push, workflow distant ni déploiement ; aucune correction du test transversal hors périmètre.
+
+---
+
+## 2026-09-24 — Simulateur de note : S1, protection et secours (F01/F02)
+
+Exécution du seul lot S1 demandé dans `.hermes/plans/2026-09-24_150137-simulateur-note-reevaluation-et-sessions.md`, en préservant le worktree déjà modifié. Les lots S2/S3/S4 ne sont pas engagés.
+
+- `nouveau simu/src/component.js` : confirmation avant suppression d’une ligne renseignée dans Faits, Convictions, Questions ou Risques, y compris source/date/mitigation seule et choix non par défaut ; aucune mutation ni sauvegarde à l’annulation, focus conservé. Les lignes vides restent supprimables immédiatement.
+- Copie JSON depuis le snapshot courant en mémoire, sans lecture ni écriture du stockage : valeurs brutes, champs masqués et préférences conservés, même après panne d’enregistrement. Copie en cours et copie devenue périmée distinguées ; aucune confusion avec le statut d’enregistrement. La clé et la structure `vcmemo.onepager.v1` ne changent pas.
+- `template.html` et `parcours.css` : statut, confidentialité et action de copie près des commandes, en saisie et aperçu ; si la copie échoue, texte en lecture seule étiqueté, sélectionné et focalisé, avec fermeture ramenant au bouton. Le secours est exclu de l’autohauteur des champs éditables et du chrome imprimé. Aucun import automatique ajouté.
+- `scripts/investment-memo.test.mjs` : couverture des quatre listes, annulation sans perte, copie mémoire complète, panne/reprise, presse-papiers absent/refusé, focus et copie périmée. Les trois HTML sont régénérés uniquement par `npm run build:memo` ; aucun changement du générateur dans ce lot.
+
+Vérifications :
+
+- RED ciblés conservés dans le scratch, puis GREEN : `node --test scripts/investment-memo.test.mjs scripts/media-budget.test.mjs`, 43/43. `npm run check:memo` : trois artefacts conformes. `git diff --check` : exit 0.
+- `npm run check` : contenu, typage, lint et 71 fichiers / 512 tests client verts ; 118 tests Node réussis, un annulé. Le test transversal `strict CLI and React use one real Chromium for routes, 404 and noindex metadata` dépasse à nouveau son délai de 60 s, défaut déjà documenté avant S1 et laissé hors périmètre. Aucun nouveau build complet pour ce lot.
+- Recette Chromium en intégration et pleine page : confirmation/annulation, copie réelle du marqueur uniquement en mémoire, conservation des valeurs brutes et données Screening, repli sélectionnable et retour du focus, reprise effective du stockage puis rechargement, maintien de la saisie non enregistrée face aux événements d’une autre fenêtre. Repli contrôlé visuellement sur mobile, dont 320 px en thème sombre, sans débordement global observé.
+- Contre-revue indépendante en lecture seule : aucun défaut concret identifié ; 43 tests réussis et comparaison ancien/nouveau composant confirmant la même clé et les mêmes octets JSON sauvegardés pour le scénario testé. La revue n’a pas fait de recette navigateur ; celle-ci a été réalisée séparément par l’intégrateur.
+
+`Suivis/ETAT.md` et le statut du plan sont actualisés. Preuves et captures conservées hors dépôt dans `~/.hermes/cache/scratch/memo-s1/`. Brouillon de recette supprimé du profil Chromium isolé, absence relue et navigateur fermé. Pas de qualification supplémentaire Safari/Firefox, lecteur d’écran ou dialogue système d’impression. Aucun staging, commit, push, workflow distant ni déploiement.
+
+---
+
+## 2026-09-24 — Simulateur de note : S2, progression, messages et sortie (F07/F08/F09/F12)
+
+Exécution du seul lot S2 de `.hermes/plans/2026-09-24_150137-simulateur-note-reevaluation-et-sessions.md`. Base des fichiers et statut Git relevés avant écriture ; worktree antérieur préservé. Un seul agent écrit, contre-revues indépendantes en lecture seule après gel, en parallèle des recettes Chromium. S3/S4 non engagés.
+
+- `nouveau simu/src/component.js` : contrat `requirements()` partagé avec `req()`, états textuels des sections et repères des champs attendus selon Mémo complet/Screening. Absences neutres, invalidités conservées et dépendances manquantes regroupées avec accès au bloc ; zéro reste soumis aux bornes du modèle inchangé.
+- `nouveau simu/src/template.html` : repères et états visibles, aide à la relecture distincte de « Relire la note ». L’action finale ouvre et focalise l’aperçu de tout brouillon, sans exiger sa complétude. « Imprimer / enregistrer en PDF » décrit l’impression, sans promettre de téléchargement automatique. Aides résiduelles ajustées au bloc et au format, sans refonte.
+- `nouveau simu/src/parcours.css` : ajouts limités à l’aide d’impression et à la marge de défilement de l’aperçu sous l’en-tête desktop. La recette a révélé un focus masqué en pleine page ; compensation corrigée et visibilité contrôlée ensuite par géométrie, hit-test et capture.
+- Première contre-revue : défaut F08 confirmé après restauration d’une surcharge composée d’espaces, active pour le modèle mais invisible dans les dépendances et la complétude. Correction par `overrideActive()`, commune aux exigences et à l’édition ; valeurs brutes conservées. Non-régression pour les quatre surcharges avec espace, tabulation, retour à la ligne, zéro numérique et booléen faux ; passage Screening/complet et recalcul couverts.
+- Suppression protégée, copie mémoire/repli et statuts S1 préservés. Modèle financier identique à la base et à HEAD ; aucun changement de `vcmemo.onepager.v1`. Les trois HTML sont produits uniquement par `npm run build:memo` ; ni générateur ni intégration React modifiés par S2.
+
+Vérifications :
+
+- Critères : cohérence progression/repères, neutralité initiale et distinction absence/invalidité/zéro, dépendances navigables, relecture non bloquée avec focus visible, aides adaptées et conservation S1. Cycles RED ciblés puis génération et GREEN, y compris la régression issue de la contre-revue ; traces complètes conservées.
+- État final : `node --test scripts/investment-memo.test.mjs scripts/media-budget.test.mjs` : 48/48. ESLint ciblé sur `scripts/investment-memo.test.mjs` avec configuration Node et zéro avertissement : exit 0. `npm run check:memo` après génération : trois artefacts conformes.
+- `npm run check` exécuté une seule fois : contenu, typecheck, lint et 71 fichiers / 512 tests client verts ; 122 tests Node réussis, un annulé. Le test `strict CLI and React use one real Chromium for routes, 404 and noindex metadata` (`scripts/prerender.integration.test.mjs`) atteint le timeout préexistant de 60 s. Aucune correction transverse, aucun nouveau build complet. Le script enveloppe a ensuite buté sur la variable zsh réservée `status` ; le journal du gate est complet et `check:memo` a été lancé séparément. Après corrections finales, seuls tests ciblés, lint affecté, génération/parité et scénarios concernés sont repris, pas le gate global.
+- Chromium : six cas en pleine page (vide/partiel/renseigné × deux formats) et six cas d’intégration (trois largeurs 1440/390/320 px × deux formats). Contrôle des comptes, navigation libre, dépendances, bornes du zéro, invalidité, aide/Échap, activation clavier de l’action finale, focus visible et retour à la saisie. L’appel d’impression est vérifié sans ouvrir le dialogue natif. Huit cas supplémentaires : chacune des quatre surcharges saisie avec un espace, enregistrée puis rechargée aux largeurs 1440 et 390 px ; champ éditable, complétude 3/4, dépendance visible, ignorance en Screening et recalcul effectif.
+- Contre-revue finale favorable : aucun défaut logique ou de sécurité restant identifié ; huit empreintes du gel identiques avant/après, confirmées par l’intégrateur. Sources et artefacts inchangés depuis cette revue. `git diff --check` et chemins de clôture contrôlés ; plan et `ETAT.md` actualisés en une passe, journal antérieur conservé.
+
+Preuves hors dépôt : `~/.hermes/cache/scratch/memo-s2-2026-09-24/` (base, RED/GREEN, journaux du gate, gel et diff S2, scripts/résultats/captures Chromium). Brouillon de recette retiré du profil isolé avec absence relue, navigateur fermé, serveurs arrêtés. Limites : S3/S4, timeout transversal, dialogue système d’impression, lecteurs d’écran et autres navigateurs non qualifiés par ce lot. Aucun staging, commit, push, workflow distant ni déploiement.
+
+---
+
+## 2026-09-24 — Simulateur de note : contre-revue de clôture S1/S2
+
+**S1/S2 finalisés — S3 peut commencer sur demande.** Périmètre F01/F02/F07/F08/F09/F12 ; S3 non engagé, cette passe ne constitue pas S4. Base et copies des fichiers prises avant écriture ; branche `master`, worktree sale antérieur préservé. Les anciennes preuves S1/S2 sont distinguées des nouvelles exécutions.
+
+- Deux défauts de focus reproduits puis corrigés : après Échap, la commande Aide restait sous les barres collantes en pleine page ; à la réouverture du sommaire, la dernière étape active restait tronquée horizontalement. `parcours.css` ajoute la réserve de défilement aux commandes Aide/Sommaire ; `component.js` révèle l’étape active par `scrollIntoView({block:'nearest',inline:'nearest'})` à l’ouverture du seul sommaire. RED navigateur et tests conservés, GREEN vérifiés après génération. Deux tests de régression ajoutés.
+- Modèle financier, formules, `vcmemo.onepager.v1`, template, générateur et intégration React inchangés par cette passe. Les trois HTML sont régénérés uniquement par `build:memo`. Le diff propre à la session est séparé du diff antérieur.
+- Recette Chromium 156.0.8073.0, profil isolé, un serveur local : 7 cas natifs de suppression/annulation couvrant les quatre listes et leurs champs secondaires/choix, 4 suppressions vides ; copie réelle depuis la mémoire non enregistrée, repli absent/refusé, pending/périmée, lecture/écriture/suppression indisponibles et reprise relue. Pour S2 : 12 notes vide/partielle/renseignée dans les deux formats et intégrations, 32 restaurations de surcharges (quatre champs × huit valeurs), dépendances regroupées navigables, 12 configurations de navigation pleine page/iframe à 1440/390/320 px. Quatre contrôles supplémentaires à 1120/961 px couvrent les chemins de focus corrigés. Cible active, géométrie, hit-test et captures concordent ; l’appel `window.print` est contrôlé sans qualifier le dialogue système.
+- Trois retours indépendants reçus et réconciliés : revue initiale sans défaut logique supplémentaire, conditionnée au focus vertical ; revue suivante avec réserve horizontale confirmée par le parent ; contre-vérification du dernier delta favorable. Le dernier gel `final-freeze-2.json` comporte 23 empreintes, identiques avant/après la revue et à la clôture. Les trois HTML ont le même SHA-256 : `5f87d3721bdb8dcd178cab10187b795f87709ef3ed34cac4c9660fa035576460`.
+- État final : `node --test scripts/investment-memo.test.mjs scripts/media-budget.test.mjs` exécuté une fois, **50 réussis, 0 échec, 0 annulé** ; ESLint ciblé avec zéro avertissement : exit 0 ; `npm run check:memo` : trois artefacts conformes. Pas de nouvelle suite globale, de tests DOM/typecheck ni de build complet : changements locaux sans modification React ; les preuves globales antérieures restent historiques, notamment le timeout transversal de prérendu de 60 s. Aucun correctif hors périmètre.
+
+Plan et `ETAT.md` actualisés en une passe ; anciennes entrées du journal préservées. Preuves et matrice dans `~/.hermes/cache/scratch/memo-close-s1s2-2026-09-24/` (`cloture.md`, base, RED, gels, `session-source.diff`, résultats structurés et captures). Les chemins, le diff et la conservation des changements antérieurs sont contrôlés à la clôture. Données retirées du seul profil de recette avec absence relue, navigateur fermé ; serveur 4186 arrêté et port vérifié fermé.
+
+Limites non bloquantes pour S3 : léger débordement hérité du corps d’aide à 390 px, qualification multi-navigateur/lecteur d’écran/clavier virtuel et dialogue système d’impression non réalisés. Aucun zoom, refonte mobile ou agrandissement général des libellés engagé. Aucun staging, commit, push, workflow distant ni déploiement.
+
+
+---
+
+## 2026-10-02 — Revue et correction du design system
+
+Revue demandée de la véracité de `docs/DESIGN_SYSTEM.md` et amélioration des repères pour les interventions suivantes. État Git et empreintes relevés au départ ; changements antérieurs du simulateur, du layout et des suivis conservés. Trois lectures indépendantes sans écriture, intégration unique puis contre-revue.
+
+- Les 14 sections ont été confrontées aux sources et consommateurs. Corrections : paramètres de layout effectivement utilisés, largeurs de lecture, comptage des étapes et limites des cartes/atlas, jalons, blocs de certification, annotations, aperçus du glossaire, usages des ornements, traits relationnels et coordination des animations. Les règles attendues et comportements implémentés sont explicitement distingués.
+- Ajout du mode d’emploi, des modèles de pages, des repères d’espacement/mobile et des limites des primitives. `AGENTS.md` renvoie au mode d’emploi avant une intervention sur l’interface. Le relevé `Suivis/AUDIT/2026-10-02-design-system.md` conserve la couverture des sections et les écarts applicatifs existants.
+- Le catalogue de développement remplace les légendes de couleurs et de tailles copiées par des lectures de styles calculés. Bascule de thème explicite, marque courante, carte avec lien réel, exemple `PageLoader`, prose technique rectifiée et exemples de démonstration annoncés. La recette a reproduit un débordement de la grille typographique à 390 px ; colonne bornée puis vérification aux trois largeurs. Le cartouche a été borné après inspection visuelle.
+- Cycle ciblé : 3 tests DOM rouges avant correction puis 3/3 verts à la clôture. Typecheck global et ESLint ciblé page/test : exit 0. Recette Chromium : 36 contrôles de section, 3 largeurs × 2 thèmes, styles et légendes concordants, progression au clavier, focus du lien, fond sombre conditionnel, sans erreur JavaScript ni débordement global relevés. Liens/ancres documentaires et `git diff --check` contrôlés.
+- Les premières tentatives de recette ont rencontré un lancement Chromium bloqué dans le bac à sable, puis deux erreurs du script de contrôle du focus (focus programmatique après clic et syntaxe de combinaison de touches). Relance avec navigateur isolé autorisée et script corrigé ; ces incidents ne sont pas comptés comme défauts applicatifs. Les premières traces, dont le véritable échec de débordement mobile, sont conservées dans `/tmp/vc-design-audit-20261002/`.
+
+Pas de modification des calculs métier Formation ni de correction générale des dettes de composants signalées. Pas de build complet ni de gate global pour ce lot documentaire et catalogue de développement ; aucune attestation WCAG, lecteur d’écran ou multi-navigateur. Aucun staging, commit, push, workflow distant ou déploiement.
+
+
+---
+
+<a id="simulateurs-2026-11-18"></a>
+
+## 2026-11-18 · Vérification et intégration du correctif des simulateurs
+
+Le patch transmis porte sur 9 calculateurs et le simulateur de note. Son SHA-256 correspond à celui de la transmission (`35104c357404df79dbf55066733dd9e744c633ebf3151b73e70cabbc321e0d73`). Le contrôle d’application sur le worktree a réussi. Sur une copie de cet état, les tests du correctif ont reproduit 20 échecs côté client et 1 écrasement de brouillon. Le patch brut a ensuite obtenu 63/65 sur les simulateurs et 50/50 sur le mémo. Deux tests existants attendaient encore zéro pour une division par un capital versé nul.
+
+- **Capital et levée.** À 1 M€ de pre-money et 19 M€ levés, les investisseurs détiennent 95 % et le nouvel ESOP peut recevoir jusqu’à 5 %. Avec 1 M€ de pre-money et 5 M€ levés, la limite proposée à 2 décimales est 16,66 %. L’ajout du tour suivant reprend la post-money de 6 M€ même pendant la correction du champ ESOP. Une mise nulle laisse le multiple de sortie indéfini. Une levée de 10 à 12,5 k€ reste lisible et une levée nulle laisse la valorisation indéterminée. [Convention de calcul du pool, Cooley GO](https://www.cooleygo.com/negotiating-option-pool/)
+- **Fonds.** Pour 100 M€ versés, 60 M€ distribués et 180 M€ de valeur résiduelle, le simulateur donne 0,6× de DPI, 1,8× de RVPI et 2,4× de TVPI. Le MOIC brut demande les flux d’investissement du portefeuille. Les 2 liens de leçon reprennent les indicateurs effectivement calculés. Dans le cas de cession LP-led testé, l’acheteur verse 48 M€ au vendeur. Le DPI du fonds reste identique. Le seuil de comparaison est indéfini pour une NAV cédée nulle. Le simulateur de frais annonce le déficit annuel de récolte de 300 k€ et reconnaît l’égalité entre frais et salaires à 70 k€. [Multiples du fonds, ILPA](https://ilpa.org/resources-tools/private-equity-101/private-equity-glossary/) · [Définition du MOIC brut, ILPA](https://ilpa.org/wp-content/uploads/2025/02/ILPA-Template-FAQs-2024.pdf)
+- **Mémo.** Dans 2 onglets de Chromium autonome 160.0.8170.0 (révision 1748020), un dépassement réel du quota a laissé un brouillon en mémoire dans B. L’import d’une sauvegarde v2 via le profil dans A a restauré la note enregistrée. La saisie suivante dans B a annoncé le conflit. Le contenu enregistré restait identique à celui du fichier importé. Après refus du presse-papiers, le texte JSON sélectionné dans B contenait le brouillon et sa dernière modification.
+- **Validation locale.** Les 9 calculateurs ont passé 18 scénarios navigateur à 390 × 844 et 1 365 × 900 sous Chrome for Testing 150. Les 3 HTML ont été régénérés avec `npm run build:memo` et vérifiés avec `npm run check:memo`. Les projections de leçons ont été régénérées avec `npm run split:lessons`. La dernière exécution de `npm run check` a réussi avec 535 tests client et 128 tests Node. Une première exécution en bac à sable avait bloqué les 2 tests Node de prérendu. Un essai intermédiaire avait dépassé le délai d’un test Ikigai, qui a ensuite réussi en isolation et dans la suite complète.
+
+Les résultats portent sur l’intégration locale du 18 novembre. Les traces de vérification sont dans `/private/tmp/vc-sim-verif-YwuV37`, le relevé des 18 scénarios dans `/private/tmp/vc-simulateurs-recette.defAAg` et les 4 captures du mémo dans `/private/tmp/vc-memo-ab-20261118-zDxIK7xz`.
+
+<a id="catalogue-simulateurs-2026-11-18"></a>
+
+## 2026-11-18 · Catalogue et première saisie des simulateurs
+
+Le catalogue groupe les rangées par décision. À 390 × 844, le premier écran présente 5 outils entiers, contre une carte entière auparavant. À 1 440 × 900, les 10 noms et leurs résultats sont visibles. Chaque rangée est un lien vers la fiche existante.
+
+| Choix au catalogue | Saisie et résultat observés dans Chromium |
+| --- | --- |
+| Pre-money / Post-money, part du nouvel investisseur sur un tour | 8 M€ avant le tour et 2 M€ levés donnent 20 % et une post-money de 10 M€. Les 2 montants ont été changés puis ressaisis. |
+| Simulateur de dilution, part des fondateurs après chaque tour | Seed à 6 M€ avant le tour, levée de 1,5 M€, création de 10 points de pool. Série A à 18 M€, levée de 6 M€, création de 5 points. Après retrait de la série B de l’exemple, les fondateurs détiennent 49 %. |
+| Scénario de levée, montant à lever pour la durée souhaitée | Une trésorerie de 200 k€ et des dépenses de 120 k€/mois pendant 18 mois donnent un besoin de 1,96 M€, ou 2,45 M€ avec la marge de 25 %. |
+| Fund returns, distributions et valeur encore en portefeuille | Pour 100 M€ versés, 60 M€ distribués et 180 M€ résiduels, DPI 0,6×, RVPI 1,8× et TVPI 2,4×. |
+| Note d’investissement, recommandation pour le comité | « Investir » et une justification font passer la rubrique à « Renseigné · 2/2 ». L’aperçu reprend les 2 champs et la réouverture restaure le brouillon. |
+
+Les 9 calculateurs montrent leur premier champ aux 2 formats. Le retour au catalogue restitue le focus à la rangée ouverte. L’entrée par le parcours Série A, la conservation du budget et le retour au parcours ont été vérifiés. À 390 × 844, le premier choix de la note est entièrement visible. À 320 × 667, il faut faire défiler la page.
+
+Les 2 tests ajoutés ont d’abord échoué sur le catalogue initial et les curseurs. La validation finale passe avec `npm run check` (537 tests client, 128 tests Node) et `npm run check:memo` (3 HTML conformes aux sources). La recette navigateur vérifie les destinations, les saisies et les résultats. Le taux de premier clic correct et le temps de recherche d’un outil restent à mesurer auprès de participants.
+
+<a id="power-law-2026-11-18"></a>
+
+## 2026-11-18 · Réinvestissements du simulateur Power law
+
+Les deux politiques fixent les tickets avant le tirage des sorties et partagent les mêmes tours, prix et cessions. Le fonds appelle uniquement les montants investis. La leçon du moteur décrit les hypothèses commerciales et le calcul du TVPI. Le repère rétrospectif utilise les mêmes prix et plafonds.
+
+Avec 80 M€ engagés, 25 sociétés et 32 M€ de réserves, le suivi de tous les tours ouverts investit en moyenne 28,13 M€ de réserves et donne un TVPI médian de 0,81×. Le suivi conditionné à l’objectif investit 14,39 M€ et donne 0,87×. Chromium a restitué ces résultats à 390 × 844 et 1 440 × 900, y compris après un passage à 0 % de réserves. Les vérifications ont couvert le changement de politique détaillée, la référence rétrospective et l’ouverture de la leçon depuis le simulateur.
+
+Avant la modification du moteur, 4 tests ciblés ont échoué, dont le cas de perte totale qui renvoyait 0,40×. Le test de permutation confirme désormais que l’échange de deux sorties change les rendements et conserve les tickets des deux politiques. Les projections de leçons ont été régénérées avec `npm run split:lessons`. Le premier `npm run check` a rencontré deux restrictions du bac à sable lors du prérendu. Le contrôle complet avec accès à Chromium et au serveur local a réussi avec 541 tests client et 128 tests Node.

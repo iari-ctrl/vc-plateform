@@ -36,5 +36,5 @@ export function calculateWaterfall(investment: number, multiple: number, ownersh
   const common = Math.max(exit - investor, 0);
   const choseConvert = !participating && converted > takePreference;
 
-  return { investor, common, pref, choseConvert, investorMultiple: investor / Math.max(investment, 0.01) };
+  return { investor, common, pref, choseConvert, investorMultiple: investment > 0 ? investor / investment : null };
 }

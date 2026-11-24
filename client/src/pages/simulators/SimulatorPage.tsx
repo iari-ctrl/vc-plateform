@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle2, FlaskConical } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2 } from 'lucide-react';
 import { simulatorBySlug, publicLessonById } from '@/content';
 import { SIMULATOR_COMPONENTS } from '@/components/simulators';
 import { GlossaryRefList } from '@/components/cards';
 import { BookmarkButton } from '@/components/ui/BookmarkButton';
+import { Modal } from '@/components/ui/Modal';
+import { InvestmentMemoSim } from '@/components/simulators/investment-memo';
 import { parcoursContextForStep, parcoursContextHref, parcoursNavigationForLesson } from '@/content/parcours';
 import { learningWorkspace, useLearningWorkspace, isLearningActivityComplete } from '@/lib/learningWorkspace';
 import { parcoursStepNavigation } from '@/lib/parcoursProgress';
@@ -17,10 +19,13 @@ export default function SimulatorPage() {
   const sim = slug ? simulatorBySlug(slug) : undefined;
   const workspace = useLearningWorkspace();
   const [announcement, setAnnouncement] = useState('');
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const resourcesTrigger = useRef<HTMLButtonElement>(null);
   useResourcePageMeta(Boolean(sim), sim?.title, sim?.description);
 
   if (!sim) return <NotFoundPage />;
   const simulatorId = sim.id;
+  const isMemo = simulatorId === 'investment-memo';
   const Calculator = SIMULATOR_COMPONENTS[simulatorId];
   const context = parcoursContextForStep('simulator', simulatorId, searchParams.get('parcours'), searchParams.get('budget'));
   const navigation = context ? parcoursStepNavigation(context.parcours, context.budget, 'simulator', simulatorId) : null;
@@ -34,24 +39,29 @@ export default function SimulatorPage() {
   }
 
   return (
-    <div className="mx-auto max-w-[var(--content-max)] px-4 py-12 sm:px-6 lg:px-8">
-      <Link to={context ? `/parcours/${context.parcours.slug}?budget=${context.budget}` : '/simulators'} className="btn-quiet mb-6 -ml-3">
-        <ArrowLeft size={15} aria-hidden /> {context?.parcours.title ?? 'Simulateurs'}
-      </Link>
-
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="flex min-w-0 items-start gap-4">
-          <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl" style={{ color: sim.accent, background: `color-mix(in srgb, ${sim.accent} 12%, transparent)` }}>
-            <FlaskConical size={22} aria-hidden />
-          </span>
+    <div data-memo-workspace={isMemo ? '' : undefined} className={isMemo ? 'min-w-0' : 'mx-auto max-w-[var(--content-max)] px-4 py-6 sm:px-6 sm:py-9 lg:px-8'}>
+      {isMemo ? <>
+        <h1 className="sr-only break-words">{sim.title}</h1>
+        <InvestmentMemoSim accent={sim.accent} platformActions={<>
+          <Link to={context ? `/parcours/${context.parcours.slug}?budget=${context.budget}` : '/simulators'} aria-label={context?.parcours.title ?? 'Retour aux simulateurs'} title={context?.parcours.title ?? 'Retour aux simulateurs'}><ArrowLeft size={16} aria-hidden /></Link>
+          <BookmarkButton item={{ itemType: 'simulator', itemId: sim.id, title: sim.title, href: `/simulators/${sim.slug}` }} />
+          <button type="button" ref={resourcesTrigger} aria-label="Ressources liées" title="Ressources liées" aria-haspopup="dialog" onClick={() => setResourcesOpen(true)}><BookOpen size={16} aria-hidden /></button>
+        </>} />
+      </> : <>
+        <Link to={context ? `/parcours/${context.parcours.slug}?budget=${context.budget}` : '/simulators'} className="btn-quiet mb-4 -ml-3">
+          <ArrowLeft size={15} aria-hidden /> {context?.parcours.title ?? 'Tous les simulateurs'}
+        </Link>
+        <div className="flex items-start justify-between gap-3 border-b border-outline-variant pb-5">
           <div className="min-w-0">
-            <span className="chip">{sim.category}</span>
-            <h1 className="mt-2 break-words font-headline text-display-sm font-semibold tracking-tight">{sim.title}</h1>
-            <p className="mt-1 max-w-2xl text-surface-variant">{sim.description}</p>
+            <h1 className="break-words font-headline text-display-sm font-semibold tracking-tight text-balance">{sim.title}</h1>
+            <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-surface-variant sm:text-base">{sim.subtitle}</p>
           </div>
+          <BookmarkButton item={{ itemType: 'simulator', itemId: sim.id, title: sim.title, href: `/simulators/${sim.slug}` }} />
         </div>
-        <BookmarkButton item={{ itemType: 'simulator', itemId: sim.id, title: sim.title, href: `/simulators/${sim.slug}` }} />
-      </div>
+        <div className="mt-5 sm:mt-7">
+          {Calculator ? <Calculator accent={sim.accent} /> : <p className="text-surface-variant">Simulateur indisponible.</p>}
+        </div>
+      </>}
 
       {context && (
         <section className="mt-8 rounded-2xl border border-outline-variant bg-surface-container-low/40 p-5" aria-labelledby="activity-status-title">
@@ -67,10 +77,6 @@ export default function SimulatorPage() {
           </div>
         </section>
       )}
-
-      <div className="mt-9">
-        {Calculator ? <Calculator accent={sim.accent} /> : <p className="text-surface-variant">Simulateur indisponible.</p>}
-      </div>
 
       {navigation && (
         <nav className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2" aria-label="Navigation dans le parcours">
@@ -89,7 +95,24 @@ export default function SimulatorPage() {
         </nav>
       )}
 
-      <div className="mt-12 grid gap-8 border-t border-outline-variant pt-8 md:grid-cols-2">
+      <Modal open={isMemo && resourcesOpen} onClose={() => {
+        setResourcesOpen(false);
+        requestAnimationFrame(() => resourcesTrigger.current?.focus());
+      }} labelledBy="memo-resources-title" className="max-w-3xl p-6 sm:p-8">
+        <h2 id="memo-resources-title" className="mb-6 pr-8 font-headline text-headline-md">Ressources liées</h2>
+        <SimulatorResources sim={sim} context={context} />
+      </Modal>
+      {!isMemo && <div className="mt-12 border-t border-outline-variant pt-8">
+        <SimulatorResources sim={sim} context={context} />
+      </div>}
+      <p className="sr-only" aria-live="polite" aria-atomic="true">{announcement}</p>
+    </div>
+  );
+}
+
+function SimulatorResources({ sim, context }: { sim: NonNullable<ReturnType<typeof simulatorBySlug>>; context: ReturnType<typeof parcoursContextForStep> }) {
+  return (
+      <div className="grid gap-8 md:grid-cols-2">
         <GlossaryRefList slugs={sim.glossaryRefs} />
         {sim.relatedLessonIds.length > 0 && (
           <div>
@@ -111,7 +134,5 @@ export default function SimulatorPage() {
           </div>
         )}
       </div>
-      <p className="sr-only" aria-live="polite" aria-atomic="true">{announcement}</p>
-    </div>
   );
 }

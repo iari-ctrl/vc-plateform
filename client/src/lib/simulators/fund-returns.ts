@@ -1,6 +1,7 @@
 export function calculateFundReturns(paidIn: number, distributed: number, nav: number) {
-  const dpi = paidIn ? distributed / paidIn : 0;
-  const rvpi = paidIn ? nav / paidIn : 0;
+  if (!(paidIn > 0)) return { dpi: null, rvpi: null, tvpi: null };
+  const dpi = distributed / paidIn;
+  const rvpi = nav / paidIn;
   const tvpi = dpi + rvpi;
   return { dpi, rvpi, tvpi };
 }

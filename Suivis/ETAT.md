@@ -4,17 +4,23 @@ Instantané courant et remplaçable de l’état vérifié du dépôt. Le détai
 
 ## État actuel vérifié
 
-Dernière passe documentaire : 2026-09-23, réconciliation des instructions agents et des autorités Formation F0/S0. `AGENTS.md` et `CLAUDE.md` sont corrigés après renouvellement de l’autorisation d’écriture. Le manuel d’architecture, le contrat Parcours et le plan distinguent l’implémentation actuelle de la cible ; les anciens compteurs restent historiques. `PRODUCT.md` a été relu et reste inchangé. Aucun comportement applicatif modifié ni nouvelle qualification de publication.
+Le simulateur Power law compare deux politiques de suivi sur les mêmes portefeuilles et calcule le TVPI brut sur le capital versé. La leçon du moteur explique le prix du suivi, la décision avant la sortie et le traitement des réserves non appelées. [Calculs et vérification du 18 novembre 2026](JOURNAL.md#power-law-2026-11-18)
+
+Le catalogue des simulateurs présente les 10 outils en 4 groupes de décision. Les 5 scénarios de choix et de première saisie ont été vérifiés dans Chromium à 390 × 844 et 1 440 × 900. Le contrôle global passe avec 537 tests client et 128 tests Node. [Recette du catalogue du 18 novembre 2026](JOURNAL.md#catalogue-simulateurs-2026-11-18)
+
+Le 18 novembre 2026, le correctif des 10 simulateurs a été intégré localement sur `design-sync-import` après vérification des formules et des cas limites. Le contrôle global a réussi avec 535 tests client et 128 tests Node. Les 3 HTML du mémo correspondent aux sources. [Vérification des simulateurs](JOURNAL.md#simulateurs-2026-11-18)
+
+Dernière passe documentaire : 2026-10-02, revue des 14 sections de `docs/DESIGN_SYSTEM.md` contre leurs sources et consommateurs. Descriptions corrigées, limites de progression et composants explicitées, modèles de pages et mode d’emploi ajoutés ; `AGENTS.md` renvoie désormais à ce document pour les interfaces. Le catalogue de développement lit ses couleurs et mesures typographiques depuis le rendu. [Vérifications et limites](#verification-design-system). La réconciliation documentaire Formation du 2026-09-23 reste acquise ; les contrats et calculs métier ne sont pas modifiés par cette passe.
 
 Dernière livraison d’outillage : 2026-09-23, diagnostic Formation F0/S0 et tests. `npm run validate:formation` produit un rapport humain ; `npm run validate:formation -- --json` expose les constats détaillés. Aucun raccordement du diagnostic au gate `check`, aucune migration ni modification du rendu applicatif.
 
-Dernière passe applicative vérifiée : 2026-09-10, premier lot d’intégrité des données locales. Voir [l’inventaire et la recette](RECETTE-DONNEES-LOCALES.md).
+Passe applicative du 2026-09-24, contre-revue de clôture S1/S2 du simulateur de note, F01/F02/F07/F08/F09/F12. **S1/S2 finalisés — S3 peut commencer sur demande.** Deux défauts de focus corrigés : retour d’aide masqué sous les barres desktop et étape active tronquée à la réouverture du sommaire. Suppression protégée, copie mémoire/repli, panne/reprise, progression commune, surcharges brutes et aperçu/impression non bloqués sont vérifiés. Modèle, formules et format `vcmemo.onepager.v1` inchangés. S3 non engagé ; cette passe ne constitue pas S4. Le lot d’intégrité des données locales reste décrit dans [l’inventaire et la recette](RECETTE-DONNEES-LOCALES.md).
 
-Statut local : le worktree fortement modifié par les lots antérieurs reste préservé. La passe S0 ajoute seulement `scripts/formation-readiness.mjs`, son test, une commande dans `package.json` et les deux suivis. Les sources applicatives, données, artefacts générés et autorités documentaires préparées auparavant restent inchangés. Aucun staging, commit, push, workflow distant ni déploiement.
+Statut du 2026-09-24 : worktree déjà modifié sur `master`, changements antérieurs conservés. Cette clôture ajoute seulement les corrections dans `component.js` et `parcours.css`, deux tests de régression, les trois HTML régénérés par `build:memo` et l’actualisation du plan/suivis. Intégration React, données éditoriales et contrats Formation inchangés par cette passe. Aucun staging, commit, push, workflow distant ni déploiement.
 
 Statut publication : GitHub Pages demeure dormant. Le dernier contrat connu utilise `VITE_BASE_URL=/vc-plateform/` et `VITE_SITE_URL=https://iari-ctrl.github.io/vc-plateform`. La validation locale de ce lot ne constitue pas une qualification publique multi-navigateur.
 
-Dernière livraison applicative vérifiée : 71 fichiers / 509 tests client, 30 tests Node du simulateur, typecheck et lint verts. Recette Chrome for Testing 151.0.7922.71 isolée : 100 notes, quota natif saturé, restauration, récupération après rechargement, téléchargements identiques et états visibles vérifiés. Le build canonique et la suite Node complète n’ont pas été relancés ; le timeout historique du test transversal de prérendu partagé reste non résolu.
+Vérification du 2026-09-24 : **50/50 tests Node ciblés** (simulateur et budget média), lint ciblé et parité des trois HTML verts. Recette Chromium : protection/secours et pannes/reprises S1, 12 cas de notes, 32 restaurations de surcharges et 12 configurations de navigation jusqu’à 320 px ; 4 contrôles complémentaires de focus à 1120/961 px. Contre-revues indépendantes réconciliées, dernier delta favorable ; gel final de 23 fichiers confirmé. Navigateur et serveur de recette arrêtés, données de recette retirées. Aucun nouveau gate global ni build complet, faute de changement transverse/React. La dernière exécution globale S2 reste historique : 512 tests client et 122 tests Node réussis, un timeout de prérendu de 60 s (journal). Débordement hérité du corps d’aide à 390 px réservé à S3. S3/S4, qualification publique, autres navigateurs et dialogue système d’impression restent hors de cette clôture.
 
 ## Compteurs courants
 
@@ -69,6 +75,27 @@ Relevé recalculé par le diagnostic, recoupé avec un contrôleur indépendant 
 
 ## Dernières vérifications
 
+<a id="verification-design-system"></a>
+
+### Design system et catalogue de développement, 2026-10-02
+
+- Revue des 14 sections et contre-revue indépendante ; [couverture et constats](AUDIT/2026-10-02-design-system.md). Le document distingue prescriptions, implémentation et écarts connus ; les valeurs restent dans le code.
+- Catalogue : valeurs CSS calculées, choix du thème, exemples de lien et de chargement réels, descriptions corrigées. Débordement mobile de la grille typographique reproduit puis corrigé ; cartouche borné après inspection des captures.
+- `npm run test --workspace client -- src/pages/system/DesignSystemShowcasePage.dom.test.tsx` : 3/3 réussis après trois échecs initiaux attendus. `npm run typecheck` : exit 0. ESLint ciblé sur la page et son test, zéro avertissement : exit 0.
+- Recette Chromium : 36 contrôles de section (6 onglets × 1440/390/320 px × clair/sombre), valeurs calculées comparées aux légendes, changement de thème, progression au clavier, focus du lien et visibilité du fond photographique. Aucun débordement horizontal du document ni erreur JavaScript relevés sur ces cas ; captures inspectées.
+- Chemins et ancres des documents de cette livraison contrôlés ; `git diff --check` : exit 0. Pas de build complet, de suite globale ni de qualification WCAG ou multi-navigateur. Les différences de calcul entre cartes/atlas et index/fiche, les props du bouton-lien et les suffixes d’opacité historiques restent documentés.
+- Modifications antérieures du simulateur et du layout conservées. Aucune génération de contenu, publication ou opération Git distante.
+
+### Simulateur de note — présentation Parcours — 2026-09-24
+
+- Sources propriétaires : `nouveau simu/src/template.html`, `component.js`, nouvelle feuille `parcours.css` et générateur `scripts/build-investment-memo.mjs`. Le modèle `model.mjs`, les champs, listes, calculs et le format de `vcmemo.onepager.v1` restent inchangés. Aucune donnée ou persistance de la maquette importée.
+- Enveloppe limitée à cette route : suppression des en-têtes redondants et du cadre, hauteur du document intégrée à la page, navigation Maison Sapience VC conservée. Favori, retour, ressources liées et pleine page utilisent toujours les composants et routes réels. Le focus attend le redimensionnement de l’iframe et reste visible après navigation ou ouverture/fermeture de la relecture.
+- `node --test scripts/investment-memo.test.mjs scripts/media-budget.test.mjs` : 35/35 ; suite client complète : 71 fichiers / 510 tests. `npm run check:memo`, `npm run typecheck`, `npm run lint`, fraîcheur des contenus et validation stricte : exit 0.
+- Build canonique sous `/vc-plateform/` avec Chromium explicitement sélectionné : exit 0, 716/716 routes, aucun échec de métadonnées. Le gate global conserve le timeout transversal décrit ci-dessus ; il n’est pas présenté comme réussi.
+- Recette sur le build : dix blocs parcourus aux quatre largeurs, aucun débordement horizontal du document ; saisie, listes dynamiques, validations et résultats contrôlés, modes complet/screening et FR/EN, progression, persistance après rechargement et échanges avec la pleine page. Contrôle clavier et visibilité du focus depuis des blocs longs ; ressources et favori réels exercés.
+- PDF : un A4 complet et un A4 screening d’une page chacun, plus un cas long de trois pages avec avertissement et texte final conservé. Texte extrait : aucune commande d’interface imprimée. La génération PDF automatisée qualifie le rendu Chromium, pas les dialogues natifs de tous les navigateurs.
+- Limites : timeout historique du test transversal de prérendu ; avertissement console préexistant `t.activityCount` non résolu dans le moteur, sans nouvelle erreur JavaScript observée. Pas de qualification Safari/Firefox. Brouillons/favoris/thème créés par la recette retirés uniquement du profil isolé ; serveurs de recette arrêtés.
+
 ### Diagnostic Formation F0/S0 — 2026-09-23
 
 - `node --test scripts/formation-readiness.test.mjs` : 18/18 tests ; `node --test scripts/validation-core.test.mjs` : 15/15. Les premiers RED sont conservés hors dépôt, y compris celui du rendu humain corrigé après contre-revue.
@@ -115,7 +142,7 @@ Limites : Safari, Firefox, lecteurs d’écran, appareils physiques et dialogue 
 - La publication reste manuelle et dormante ; un push n’est pas une release.
 - Le simulateur de note est maintenu dans `nouveau simu/src/`. `npm run build:memo` produit ses trois HTML ; aucun de ces artefacts ne doit être édité à la main.
 - Les archives, plans locaux et anciennes entrées de journal conservent une valeur historique, mais ne remplacent pas les autorités maintenues.
-- Les seuls plans locaux actifs sont `.hermes/plans/2026-07-23_100955-relecture-praticien-parcours-p0.md` et `.hermes/plans/2026-07-31_191055-consolidation-formation.md`. Tout autre plan ou revue datée déplacé sous `docs/archive/` est non normatif.
+- Les plans locaux actifs sont `.hermes/plans/2026-07-23_100955-relecture-praticien-parcours-p0.md`, `.hermes/plans/2026-07-31_191055-consolidation-formation.md` et `.hermes/plans/2026-09-24_150137-simulateur-note-reevaluation-et-sessions.md` (S1/S2 livrés ; S3/S4 non livrés). Tout plan ou revue datée déplacé sous `docs/archive/` est non normatif.
 
 ## Décisions non tranchées
 
@@ -140,7 +167,7 @@ Limites : Safari, Firefox, lecteurs d’écran, appareils physiques et dialogue 
 - Parcours : `docs/parcours/README.md`, puis document spécialisé du parcours si présent.
 - Certifications : `docs/certifications/ARCHITECTURE-CERTIFICATIONS.md` et documents de référentiel concernés.
 - État courant : ce fichier.
-- Plans locaux actifs : `.hermes/plans/2026-07-23_100955-relecture-praticien-parcours-p0.md` pour la revue praticien P0 et `.hermes/plans/2026-07-31_191055-consolidation-formation.md` pour la consolidation Formation. Aucun autre fichier de `.hermes/plans/` ne doit être chargé comme instruction courante.
+- Plans locaux actifs : `.hermes/plans/2026-07-23_100955-relecture-praticien-parcours-p0.md` pour la revue praticien P0, `.hermes/plans/2026-07-31_191055-consolidation-formation.md` pour la consolidation Formation et `.hermes/plans/2026-09-24_150137-simulateur-note-reevaluation-et-sessions.md` pour les lots du simulateur. Charger uniquement le plan du chantier demandé.
 - Preuve datée : rechercher dans `Suivis/JOURNAL.md` par date, titre, chemin ou commande ; ne pas charger tout le journal.
 
 ## Risques ouverts
